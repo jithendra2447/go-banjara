@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Calendar, Users, ArrowLeft, Check, ShoppingBag, CloudSnow, Wind, Thermometer, ExternalLink } from 'lucide-react';
+import { Calendar, Users, ArrowLeft, Check, ShoppingBag, CloudSnow, Wind, Thermometer } from 'lucide-react';
 import { useCart } from '@/components/providers';
 import { AmbientVibe } from '@/components/AmbientVibe';
 import { PRODUCTS } from '@/data/products';
@@ -92,14 +92,14 @@ export default function KashmirDetails() {
     setTimeout(() => setBookedSuccess(false), 3000);
   };
 
-  const handleProductAdd = (prod: any) => {
+  const handleProductAdd = (prod: typeof PRODUCTS[number]) => {
     const cartItem = {
       id: prod.id,
       name: prod.name,
       price: prod.price,
       image: prod.image,
     };
-    addToCart(cartItem, 'product', undefined, 1);
+    addToCart(cartItem, 'shop', undefined, 1);
     setProductAddedSuccess(prod.id);
     setTimeout(() => setProductAddedSuccess(null), 2500);
   };

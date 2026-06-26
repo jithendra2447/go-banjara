@@ -1,26 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-primary-dark: #1D493E; /* Dark Green */
+  --color-brand-yellow: #FFFF80; /* Lemon Yellow */
+  --color-brand-orange: #E05434; /* Tangerine Orange */
+  --color-brand-blue: #80E7ED; /* Cloud Blue */
+  --color-brand-mint: #D3FFBF; /* Mint Green */
+  --color-brand-seaweed: #01B99F; /* Seaweed Green */
+  --color-brand-lavender: #AE99FF; /* Lavender */
+  --color-brand-bright-orange: #FF623E; /* Bright Orange */
+  --color-brand-beige: #F3FFEF; /* Earthy Beige */
+  --color-brand-neon-green: #A7FF6E; /* Neon Green */
+
+  --font-serif: "Fraunces", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  
+  --animate-float: float 3s ease-in-out infinite;
+  --animate-spin-slow: spin 20s linear infinite;
+  --animate-fade-in-up: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
+:root {
+  --background: #F3FFEF; /* Earthy Beige as background */
+  --foreground: #1D493E; /* Dark Green as default text color */
+}
+
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Glassmorphism Styles */
+.glass {
+  background: rgba(243, 255, 239, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(29, 73, 62, 0.08);
+  box-shadow: 0 8px 32px 0 rgba(29, 73, 62, 0.04);
+}
+
+.glass-dark {
+  background: rgba(29, 73, 62, 0.8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.25);
+}
+
+/* Perspective for 3D elements */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F3FFEF;
+}
+::-webkit-scrollbar-thumb {
+  background: #1D493E;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #01B99F;
 }

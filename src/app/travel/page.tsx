@@ -136,7 +136,7 @@ export default function TravelHub() {
                 </Link>
               ) : currentPlace.id === 'kashmir' ? (
                 <Link
-                  href="/travel/kashmir"
+                  href="/travel/ladakh"
                   className="px-6 py-3.5 bg-brand-orange hover:bg-brand-bright-orange text-white font-extrabold text-sm rounded-xl shadow-lg shadow-brand-orange/20 hover:scale-[1.02] flex items-center justify-center gap-2 group transition-all duration-300 text-center"
                 >
                   Explore Snowy Kashmir
@@ -232,7 +232,7 @@ export default function TravelHub() {
                         } else if (place.id === 'ladakh') {
                           window.location.href = '/travel/ladakh';
                         } else if (place.id === 'kashmir') {
-                          window.location.href = '/travel/kashmir';
+                          window.location.href = '/travel/ladakh';
                         } else {
                           handleQuickBook(place);
                         }

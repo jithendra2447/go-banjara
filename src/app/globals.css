@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Outfit:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Outfit:wght@300..700&display=swap');
 
 @import "tailwindcss";
 
@@ -14,12 +14,13 @@
   --color-brand-beige: #F3FFEF; /* Earthy Beige */
   --color-brand-neon-green: #A7FF6E; /* Neon Green */
 
-  --font-serif: "Cormorant Garamond", Georgia, serif;
-  --font-sans: "Outfit", system-ui, -apple-system, sans-serif;
-  
+  --font-serif: "Fraunces", Georgia, serif;
+  --font-sans: "Faktum", "Outfit", system-ui, -apple-system, sans-serif;
+
   --animate-float: float 3s ease-in-out infinite;
   --animate-spin-slow: spin 20s linear infinite;
   --animate-fade-in-up: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-marquee: marquee 25s linear infinite;
 }
 
 @keyframes float {
@@ -36,6 +37,11 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
 }
 
 :root {
@@ -86,4 +92,14 @@ body {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #01B99F;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }

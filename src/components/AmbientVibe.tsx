@@ -26,7 +26,7 @@ interface Wave {
 }
 
 interface AmbientVibeProps {
-  effect: 'river-flow' | 'snowfall' | 'sun-breeze';
+  effect: 'river-flow' | 'snowfall' | 'sun-breeze' | 'monsoon';
   className?: string;
 }
 
@@ -72,13 +72,13 @@ export const AmbientVibe: React.FC<AmbientVibeProps> = ({
       }, 50);
     };
 
-    if (effect === 'snowfall') {
+    if (effect === 'snowfall' || effect === 'monsoon') {
       window.addEventListener('scroll', handleScrollVibe, { passive: true });
     }
 
-    // Fit canvas size to parent node dimensions (or viewport for fixed snowfall)
+    // Fit canvas size to parent node dimensions (or viewport for fixed overlays)
     const resizeCanvas = () => {
-      if (effect === 'snowfall') {
+      if (effect === 'snowfall' || effect === 'monsoon') {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
       } else {
@@ -116,6 +116,22 @@ export const AmbientVibe: React.FC<AmbientVibeProps> = ({
             color: '#FFFFFF',
             depth,
             isExtra,
+          });
+        }
+      } else if (effect === 'monsoon') {
+        // Heavy, slanted tropical rain streaks
+        const count = 100;
+        for (let i = 0; i < count; i++) {
+          const depth = Math.random() * 0.8 + 0.2; // 0.2 to 1.0
+          particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: (Math.random() * 18 + 12) * depth, // Length of rain streak
+            speedX: -(Math.random() * 2.5 + 1.5) * depth, // Slanted wind left
+            speedY: (Math.random() * 10 + 15) * depth, // Fast fall speed
+            opacity: (Math.random() * 0.22 + 0.08) * depth,
+            color: '#80E7ED', // Soft translucent cloud-blue
+            depth,
           });
         }
       } else if (effect === 'river-flow') {
@@ -173,14 +189,11 @@ export const AmbientVibe: React.FC<AmbientVibeProps> = ({
         currentScrollSpeed += (targetScrollSpeed - currentScrollSpeed) * 0.08;
 
         particles.forEach((p) => {
-          // Determine opacity based on whether it is an extra particle
           let opacity = p.opacity;
           if (p.isExtra) {
-            // Fade in from 0 as scroll speed increases
             const fadeFactor = Math.min(1, currentScrollSpeed / 10);
             opacity = p.opacity * fadeFactor;
           } else {
-            // Slightly boost base snow brightness during motion
             const fadeFactor = 1 + Math.min(0.4, currentScrollSpeed / 15);
             opacity = Math.min(1, p.opacity * fadeFactor);
           }
@@ -192,16 +205,14 @@ export const AmbientVibe: React.FC<AmbientVibeProps> = ({
             ctx.fill();
           }
 
-          // Physics updates - react to scroll speed with depth-based parallax scaling
           const particleDepth = p.depth ?? 1;
           const speedMultiplier = p.isExtra ? 1.4 : 1.0;
           const currentSpeedY = p.speedY + (currentScrollSpeed * particleDepth * 1.5 * speedMultiplier);
-          const currentSpeedX = p.speedX - (currentScrollSpeed * particleDepth * 0.25); // Elegant wind slant to the left
+          const currentSpeedX = p.speedX - (currentScrollSpeed * particleDepth * 0.25);
 
           p.x += currentSpeedX;
           p.y += currentSpeedY;
 
-          // Re-wrap falling particles
           if (p.y > canvas.height) {
             p.y = -10;
             p.x = Math.random() * canvas.width;
@@ -212,12 +223,43 @@ export const AmbientVibe: React.FC<AmbientVibeProps> = ({
             p.x = canvas.width;
           }
         });
+      } else if (effect === 'monsoon') {
+        // Smoothly interpolate current scroll speed
+        currentScrollSpeed += (targetScrollSpeed - currentScrollSpeed) * 0.08;
+
+        particles.forEach((p) => {
+          const opacity = p.opacity * (1 + Math.min(0.6, currentScrollSpeed / 10));
+
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(128, 231, 237, ${opacity})`;
+          ctx.lineWidth = (p.depth ?? 1) * 1.2;
+          ctx.lineCap = 'round';
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(p.x + p.speedX * 1.5, p.y + p.size);
+          ctx.stroke();
+
+          const particleDepth = p.depth ?? 1;
+          const currentSpeedY = p.speedY + (currentScrollSpeed * particleDepth * 2.2);
+          const currentSpeedX = p.speedX - (currentScrollSpeed * particleDepth * 0.35);
+
+          p.x += currentSpeedX;
+          p.y += currentSpeedY;
+
+          if (p.y > canvas.height) {
+            p.y = -p.size - 10;
+            p.x = Math.random() * canvas.width;
+          }
+          if (p.x < -20) {
+            p.x = canvas.width + 20;
+          } else if (p.x > canvas.width + 20) {
+            p.x = -20;
+          }
+        });
       } else if (effect === 'river-flow') {
-        // Draw river current lines
         waves.forEach((w) => {
           ctx.beginPath();
           ctx.ellipse(w.x, w.y, w.width / 2, w.height / 2, 0, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(128, 231, 237, ${w.opacity})`; // Cloud Blue ripple tint
+          ctx.fillStyle = `rgba(128, 231, 237, ${w.opacity})`;
           ctx.fill();
 
           w.x += w.speed;
@@ -227,19 +269,16 @@ export const AmbientVibe: React.FC<AmbientVibeProps> = ({
           }
         });
 
-        // Draw floating leaf particles
         particles.forEach((p) => {
           ctx.save();
           ctx.translate(p.x, p.y);
           if (p.angle !== undefined) ctx.rotate(p.angle);
           
-          // Draw leaf shape
           ctx.beginPath();
           ctx.moveTo(0, -p.size / 2);
           ctx.quadraticCurveTo(p.size / 3, 0, 0, p.size / 2);
           ctx.quadraticCurveTo(-p.size / 3, 0, 0, -p.size / 2);
           
-          // Fill using HSL or hex alpha
           ctx.fillStyle = p.color === '#1D493E' 
             ? `rgba(29, 73, 62, ${p.opacity})` 
             : `rgba(1, 185, 159, ${p.opacity})`;
@@ -252,7 +291,6 @@ export const AmbientVibe: React.FC<AmbientVibeProps> = ({
             p.angle += p.spin;
           }
 
-          // Wrap around screen boundaries
           if (p.x < -p.size) {
             p.x = canvas.width + p.size;
             p.y = Math.random() * canvas.height;
@@ -262,11 +300,11 @@ export const AmbientVibe: React.FC<AmbientVibeProps> = ({
         particles.forEach((p) => {
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(255, 255, 128, ${p.opacity})`; // Soft brand-yellow glow
+          ctx.fillStyle = `rgba(255, 255, 128, ${p.opacity})`;
           ctx.shadowBlur = 8;
           ctx.shadowColor = '#FFFF80';
           ctx.fill();
-          ctx.shadowBlur = 0; // reset
+          ctx.shadowBlur = 0;
 
           p.x += p.speedX;
           p.y += p.speedY;
@@ -290,7 +328,7 @@ export const AmbientVibe: React.FC<AmbientVibeProps> = ({
     };
   }, [effect]);
 
-  const computedClassName = effect === 'snowfall'
+  const computedClassName = (effect === 'snowfall' || effect === 'monsoon')
     ? 'fixed inset-0 w-full h-full pointer-events-none z-10'
     : className;
 

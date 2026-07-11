@@ -14,7 +14,7 @@ import { PRODUCTS as INITIAL_PRODUCTS } from '@/data/products';
 import { HOLIDAY_PACKAGES as INITIAL_HOLIDAY_PACKAGES, HolidayPackage } from '@/data/packages';
 import { Product } from '@/types';
 
-type AdminTab = 'overview' | 'destinations' | 'packages' | 'products' | 'orders' | 'bookings' | 'customers' | 'payments' | 'blogs';
+type AdminTab = 'overview' | 'destinations' | 'packages' | 'products' | 'orders' | 'bookings' | 'customers' | 'payments' | 'blogs' | 'pages';
 
 interface OrderItem {
   name: string;
@@ -240,6 +240,44 @@ export default function AdminPortal() {
     setCustomers(Array.from(customersMap.values()));
 
   }, [user]);
+
+  const [cmsContent, setCmsContent] = useState({
+    heroTitleLine1: "Hey! Let’s",
+    heroTitleLine2: "Escape from",
+    heroTitleLine3: "the Ordinary",
+    heroSubtitle: "We bridge the gap between soulful Indian travel and high end gear. curated for those who find home in the dust of the road",
+    heroShopBtn: "Shop Now",
+    heroTravelBtn: "See Travel Packages",
+    mascotText: "Hey wanderer! I'm Bonjo. Ready to hit the road?",
+    dealsTitle: "Today's best deals for you",
+    dealsSub: "A hand-picked map of the corners of India our community keeps coming back to",
+    sellingTitle: "Most Selling Products",
+    sellingSub: "A hand-picked map of the corners of India our community keeps coming back to",
+    reviewsTitle: "What people say about products",
+    blogTitle: "Travel Tales from the curious Explorer",
+    blogSub: "Follow my voices to discover unique voices, breathtaking landscapes & unforgettable experiences",
+    faqTitle: "Frequently Asked Questions",
+    faqHelpDesk: "Help Desk",
+    valuesTitle: "Built For Travelers, By Travelers",
+    valuesSub: "We focus on safety, unique slow-travel routes, handcrafted durable products, and supporting remote communities"
+  });
+
+  useEffect(() => {
+    const savedCMS = localStorage.getItem('gb_admin_page_content');
+    if (savedCMS) {
+      try {
+        setCmsContent(JSON.parse(savedCMS));
+      } catch (e) {
+        console.error('Error loading cmsContent:', e);
+      }
+    }
+  }, []);
+
+  const handleSaveCMS = (e: React.FormEvent) => {
+    e.preventDefault();
+    localStorage.setItem('gb_admin_page_content', JSON.stringify(cmsContent));
+    showToast('Website static text copy successfully updated!');
+  };
 
   // Form input states
   const [newDest, setNewDest] = useState({ name: '', sub: '', desc: '', image: '', color: 'from-amber-600 to-amber-800', season: '', attractions: '' });
@@ -584,6 +622,16 @@ export default function AdminPortal() {
           >
             <BookOpen className="w-4.5 h-4.5" />
             Manage Blogs
+          </button>
+
+          <button
+            onClick={() => { setActiveTab('pages'); setSearchQuery(''); }}
+            className={`w-full text-left px-4.5 py-3.5 rounded-2xl flex items-center gap-3 text-xs font-black uppercase tracking-wider transition ${
+              activeTab === 'pages' ? 'bg-primary-dark text-white shadow-md' : 'text-slate-500 hover:bg-slate-50'
+            }`}
+          >
+            <ShieldCheck className="w-4.5 h-4.5" />
+            Edit Website Pages
           </button>
 
           <button
@@ -1480,6 +1528,236 @@ export default function AdminPortal() {
                       ))}
                     </tbody>
                   </table>
+                </div>
+              </div>
+
+            </div>
+          )}
+
+          {/* TAB 10: EDIT WEBSITE PAGES */}
+          {activeTab === 'pages' && (
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 text-left">
+              
+              {/* Left Columns: Forms */}
+              <div className="lg:col-span-2 space-y-6">
+                <div className="bg-white border border-slate-200 rounded-[32px] p-8 shadow-sm space-y-6">
+                  <div>
+                    <h3 className="text-base font-black text-slate-800">Dynamic Page Content CMS</h3>
+                    <p className="text-xs text-slate-400 font-semibold mt-1">Change any copy or headings across the entire website instantly.</p>
+                  </div>
+                  
+                  <form onSubmit={handleSaveCMS} className="space-y-6">
+                    {/* Section: Hero */}
+                    <div className="space-y-4 border-b border-slate-100 pb-6">
+                      <h4 className="text-xs font-black text-[#FF5A36] uppercase tracking-wider">1. Hero Section Copy</h4>
+                      
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div className="space-y-1">
+                          <label className="text-[9px] font-mono font-black text-slate-400 uppercase">Title Line 1</label>
+                          <input 
+                            type="text" 
+                            value={cmsContent.heroTitleLine1} 
+                            onChange={(e) => setCmsContent(prev => ({ ...prev, heroTitleLine1: e.target.value }))}
+                            className="w-full p-2.5 rounded-xl border border-slate-200 text-xs font-semibold focus:outline-none"
+                          />
+                        </div>
+                        <div className="space-y-1">
+                          <label className="text-[9px] font-mono font-black text-slate-400 uppercase">Title Line 2</label>
+                          <input 
+                            type="text" 
+                            value={cmsContent.heroTitleLine2} 
+                            onChange={(e) => setCmsContent(prev => ({ ...prev, heroTitleLine2: e.target.value }))}
+                            className="w-full p-2.5 rounded-xl border border-slate-200 text-xs font-semibold focus:outline-none"
+                          />
+                        </div>
+                        <div className="space-y-1">
+                          <label className="text-[9px] font-mono font-black text-slate-400 uppercase">Title Line 3</label>
+                          <input 
+                            type="text" 
+                            value={cmsContent.heroTitleLine3} 
+                            onChange={(e) => setCmsContent(prev => ({ ...prev, heroTitleLine3: e.target.value }))}
+                            className="w-full p-2.5 rounded-xl border border-slate-200 text-xs font-semibold focus:outline-none"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="space-y-1">
+                        <label className="text-[9px] font-mono font-black text-slate-400 uppercase">Hero Subtitle</label>
+                        <textarea 
+                          rows={2} 
+                          value={cmsContent.heroSubtitle} 
+                          onChange={(e) => setCmsContent(prev => ({ ...prev, heroSubtitle: e.target.value }))}
+                          className="w-full p-2.5 rounded-xl border border-slate-200 text-xs font-semibold focus:outline-none resize-none"
+                        />
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="space-y-1">
+                          <label className="text-[9px] font-mono font-black text-slate-400 uppercase">Shop Button Text</label>
+                          <input 
+                            type="text" 
+                            value={cmsContent.heroShopBtn} 
+                            onChange={(e) => setCmsContent(prev => ({ ...prev, heroShopBtn: e.target.value }))}
+                            className="w-full p-2.5 rounded-xl border border-slate-200 text-xs font-semibold focus:outline-none"
+                          />
+                        </div>
+                        <div className="space-y-1">
+                          <label className="text-[9px] font-mono font-black text-slate-400 uppercase">Travel Button Text</label>
+                          <input 
+                            type="text" 
+                            value={cmsContent.heroTravelBtn} 
+                            onChange={(e) => setCmsContent(prev => ({ ...prev, heroTravelBtn: e.target.value }))}
+                            className="w-full p-2.5 rounded-xl border border-slate-200 text-xs font-semibold focus:outline-none"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Section: Mascot */}
+                    <div className="space-y-4 border-b border-slate-100 pb-6">
+                      <h4 className="text-xs font-black text-[#FF5A36] uppercase tracking-wider">2. Bonjo Mascot Speak</h4>
+                      <div className="space-y-1">
+                        <label className="text-[9px] font-mono font-black text-slate-400 uppercase">Mascot Speak Bubble Text</label>
+                        <textarea 
+                          rows={2} 
+                          value={cmsContent.mascotText} 
+                          onChange={(e) => setCmsContent(prev => ({ ...prev, mascotText: e.target.value }))}
+                          className="w-full p-2.5 rounded-xl border border-slate-200 text-xs font-semibold focus:outline-none resize-none"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Section: Deals & Selling */}
+                    <div className="space-y-4 border-b border-slate-100 pb-6">
+                      <h4 className="text-xs font-black text-[#FF5A36] uppercase tracking-wider">3. Shop Page & Deals Titles</h4>
+                      
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="space-y-1">
+                          <label className="text-[9px] font-mono font-black text-slate-400 uppercase">Deals Section Title</label>
+                          <input 
+                            type="text" 
+                            value={cmsContent.dealsTitle} 
+                            onChange={(e) => setCmsContent(prev => ({ ...prev, dealsTitle: e.target.value }))}
+                            className="w-full p-2.5 rounded-xl border border-slate-200 text-xs font-semibold focus:outline-none"
+                          />
+                        </div>
+                        <div className="space-y-1">
+                          <label className="text-[9px] font-mono font-black text-slate-400 uppercase">Selling Section Title</label>
+                          <input 
+                            type="text" 
+                            value={cmsContent.sellingTitle} 
+                            onChange={(e) => setCmsContent(prev => ({ ...prev, sellingTitle: e.target.value }))}
+                            className="w-full p-2.5 rounded-xl border border-slate-200 text-xs font-semibold focus:outline-none"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="space-y-1">
+                        <label className="text-[9px] font-mono font-black text-slate-400 uppercase">Deals Description Subtitle</label>
+                        <input 
+                          type="text" 
+                          value={cmsContent.dealsSub} 
+                          onChange={(e) => setCmsContent(prev => ({ ...prev, dealsSub: e.target.value }))}
+                          className="w-full p-2.5 rounded-xl border border-slate-200 text-xs font-semibold focus:outline-none"
+                        />
+                      </div>
+
+                      <div className="space-y-1">
+                        <label className="text-[9px] font-mono font-black text-slate-400 uppercase">Selling Description Subtitle</label>
+                        <input 
+                          type="text" 
+                          value={cmsContent.sellingSub} 
+                          onChange={(e) => setCmsContent(prev => ({ ...prev, sellingSub: e.target.value }))}
+                          className="w-full p-2.5 rounded-xl border border-slate-200 text-xs font-semibold focus:outline-none"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Section: Values & Others */}
+                    <div className="space-y-4">
+                      <h4 className="text-xs font-black text-[#FF5A36] uppercase tracking-wider">4. Core Brand Values Copy</h4>
+                      
+                      <div className="space-y-1">
+                        <label className="text-[9px] font-mono font-black text-slate-400 uppercase">Values Section Title</label>
+                        <input 
+                          type="text" 
+                          value={cmsContent.valuesTitle} 
+                          onChange={(e) => setCmsContent(prev => ({ ...prev, valuesTitle: e.target.value }))}
+                          className="w-full p-2.5 rounded-xl border border-slate-200 text-xs font-semibold focus:outline-none"
+                        />
+                      </div>
+
+                      <div className="space-y-1">
+                        <label className="text-[9px] font-mono font-black text-slate-400 uppercase">Values Description Subtitle</label>
+                        <textarea 
+                          rows={2} 
+                          value={cmsContent.valuesSub} 
+                          onChange={(e) => setCmsContent(prev => ({ ...prev, valuesSub: e.target.value }))}
+                          className="w-full p-2.5 rounded-xl border border-slate-200 text-xs font-semibold focus:outline-none resize-none"
+                        />
+                      </div>
+                    </div>
+
+                    <button 
+                      type="submit" 
+                      className="w-full py-4 bg-[#1D493E] hover:bg-brand-orange text-white rounded-2xl text-xs font-black uppercase tracking-wider transition shadow-md cursor-pointer"
+                    >
+                      Save Website Content Copy
+                    </button>
+                  </form>
+                </div>
+              </div>
+              
+              {/* Right Column: Design Guidelines */}
+              <div className="space-y-6">
+                <div className="bg-white border border-slate-200 rounded-[32px] p-8 shadow-sm space-y-6 sticky top-8">
+                  <div className="flex items-center gap-2 text-rose-500">
+                    <ShieldCheck className="w-5.5 h-5.5 text-[#FF5A36]" />
+                    <h3 className="text-sm font-black text-slate-800 uppercase tracking-wider">Layout Safety Rules</h3>
+                  </div>
+                  
+                  <p className="text-xs text-slate-500 font-semibold leading-relaxed">
+                    Follow these guidelines when adding products or packages to maintain visual symmetry and prevent UI overlap:
+                  </p>
+                  
+                  <ul className="space-y-4">
+                    <li className="flex gap-3 items-start">
+                      <span className="w-5 h-5 rounded-full bg-slate-100 text-slate-700 text-[10px] flex items-center justify-center font-black shrink-0">1</span>
+                      <div>
+                        <strong className="text-xs font-bold text-slate-700 block">Product Text Limits</strong>
+                        <p className="text-[11px] text-slate-400 font-semibold mt-0.5 leading-normal">
+                          Keep Product Names &lt; 25 characters and descriptions &lt; 120 characters to keep cards aligned.
+                        </p>
+                      </div>
+                    </li>
+                    <li className="flex gap-3 items-start">
+                      <span className="w-5 h-5 rounded-full bg-slate-100 text-slate-700 text-[10px] flex items-center justify-center font-black shrink-0">2</span>
+                      <div>
+                        <strong className="text-xs font-bold text-slate-700 block">Image Ratios</strong>
+                        <p className="text-[11px] text-slate-400 font-semibold mt-0.5 leading-normal">
+                          Use exact square images (1:1) for product thumbnails and 4:3 landscape ratio for travel packages.
+                        </p>
+                      </div>
+                    </li>
+                    <li className="flex gap-3 items-start">
+                      <span className="w-5 h-5 rounded-full bg-slate-100 text-slate-700 text-[10px] flex items-center justify-center font-black shrink-0">3</span>
+                      <div>
+                        <strong className="text-xs font-bold text-slate-700 block">Pricing Input</strong>
+                        <p className="text-[11px] text-slate-400 font-semibold mt-0.5 leading-normal">
+                          Input prices as pure numbers (e.g. 199, not ₹199). The interface automatically adds formatting.
+                        </p>
+                      </div>
+                    </li>
+                    <li className="flex gap-3 items-start">
+                      <span className="w-5 h-5 rounded-full bg-slate-100 text-slate-700 text-[10px] flex items-center justify-center font-black shrink-0">4</span>
+                      <div>
+                        <strong className="text-xs font-bold text-slate-700 block">Dynamic Package Pages</strong>
+                        <p className="text-[11px] text-slate-400 font-semibold mt-0.5 leading-normal">
+                          Any travel package you add gets its own URL instantly at <code className="text-[#FF5A36] text-[10px]">/travel/package/[id]</code> with the exact same template.
+                        </p>
+                      </div>
+                    </li>
+                  </ul>
                 </div>
               </div>
 

@@ -148,20 +148,21 @@ export const Footer: React.FC = () => {
 
           {/* Newsletter Input Box */}
           <div className="space-y-2.5">
-            <span className="block text-xs font-bold text-slate-300/80">Stay Connected by Subscribe Newsletter</span>
-            <div className="flex items-center bg-white rounded-lg p-1.5 w-full max-w-sm border border-slate-200">
+            <span className="block text-xs font-bold text-slate-200">Stay connected by subscribe newsletter</span>
+            <form onSubmit={(e) => { e.preventDefault(); alert("Subscribed to the Go Banjara newsletter!"); }} className="flex bg-white rounded-lg p-1 w-full max-w-sm border border-slate-200">
               <input
                 type="email"
-                placeholder="Email"
-                className="w-full bg-transparent px-3 py-1.5 text-slate-800 text-sm focus:outline-none placeholder-slate-400 font-sans font-medium"
+                required
+                placeholder="Enter your email address"
+                className="w-full bg-transparent px-3 py-2 text-slate-800 text-xs focus:outline-none placeholder-slate-400 font-sans font-medium"
               />
               <button
-                type="button"
-                className="bg-[#1D493E] hover:bg-[#16372f] text-white w-8 h-8 rounded-md flex items-center justify-center transition duration-300 cursor-pointer shadow-sm"
+                type="submit"
+                className="bg-[#1D493E] hover:bg-[#15342c] text-white px-5 py-2 rounded-md text-xs font-bold transition duration-300 cursor-pointer shadow-sm shrink-0"
               >
-                <span className="text-sm font-sans font-bold leading-none">↗</span>
+                Subscribe
               </button>
-            </div>
+            </form>
           </div>
         </div>
 

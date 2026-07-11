@@ -25,6 +25,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
   const id = customId || params?.id || 'pkg-kashmir-classic';
 
   const [pkg, setPkg] = useState<any>(null);
+  const [productsList, setProductsList] = useState<any[]>(PRODUCTS);
   const [bookingDate, setBookingDate] = useState('');
   const [guests, setGuests] = useState(2);
   const [bookedSuccess, setBookedSuccess] = useState(false);
@@ -49,7 +50,32 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
 
   useEffect(() => {
     try {
-      let foundPkg = HOLIDAY_PACKAGES.find((p) => p.id === id);
+      let list = HOLIDAY_PACKAGES;
+      const saved = localStorage.getItem('gb_admin_packages');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            list = parsed;
+          }
+        } catch (e) {
+          console.error('Error parsing admin packages:', e);
+        }
+      }
+      
+      const savedProds = localStorage.getItem('gb_admin_products_v3');
+      if (savedProds) {
+        try {
+          const parsedProds = JSON.parse(savedProds);
+          if (Array.isArray(parsedProds) && parsedProds.length > 0) {
+            setProductsList(parsedProds);
+          }
+        } catch (e) {
+          console.error('Error parsing admin products:', e);
+        }
+      }
+
+      let foundPkg = list.find((p) => p.id === id);
 
       if (foundPkg) {
         setPkg(foundPkg);
@@ -185,7 +211,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
 
   // Recommended products list
   const isColdPlace = ['kashmir', 'himachal'].includes((pkg.destination || '').toLowerCase());
-  const recommendedProducts = PRODUCTS.filter((p) =>
+  const recommendedProducts = productsList.filter((p) =>
     ['fur-jaden-backpack-1', 'go-passport-cover-1', 'nomad-leather-journal-1', 'banjara-luggage-tag-1'].includes(p.id)
   ).slice(0, 2);
 

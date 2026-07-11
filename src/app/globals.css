@@ -15,7 +15,7 @@
   --color-brand-neon-green: #A7FF6E; /* Neon Green */
 
   --font-serif: "Fraunces", Georgia, serif;
-  --font-sans: "Faktum", "Outfit", system-ui, -apple-system, sans-serif;
+  --font-sans: "Outfit", system-ui, -apple-system, sans-serif;
 
   --animate-float: float 3s ease-in-out infinite;
   --animate-spin-slow: spin 20s linear infinite;
@@ -79,27 +79,15 @@ body {
   perspective: 1000px;
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: #F3FFEF;
-}
-::-webkit-scrollbar-thumb {
-  background: #1D493E;
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #01B99F;
-}
 
 /* Hide scrollbar for Chrome, Safari and Opera */
-.no-scrollbar::-webkit-scrollbar {
+.no-scrollbar::-webkit-scrollbar,
+.scrollbar-none::-webkit-scrollbar {
   display: none;
 }
 /* Hide scrollbar for IE, Edge and Firefox */
-.no-scrollbar {
+.no-scrollbar,
+.scrollbar-none {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }

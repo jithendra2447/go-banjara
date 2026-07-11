@@ -733,26 +733,6 @@ export default function ProductDetailsPage() {
           </div>
         </section>
 
-        {/* Call to Action Section */}
-        <section className="bg-white py-16 text-center w-full border-t border-[#F6F3EE] animate-in fade-in duration-300 font-sans">
-          <div className="max-w-4xl mx-auto px-6 space-y-6">
-            <h2 className="text-2xl md:text-[34px] font-sans text-[#1A1A1A] leading-tight font-bold">
-              The <span className="text-[#FF623E] font-sans">best adventures</span> find their way to your inbox.
-            </h2>
-            <p className="text-xs md:text-sm text-slate-500 max-w-2xl mx-auto leading-relaxed font-sans">
-              Hidden places, exclusive trip drops, curated gear, and stories from the road delivered before anyone else hears about them.
-            </p>
-            <div className="pt-2">
-              <Link
-                href="/shop/all"
-                className="inline-flex items-center gap-2 bg-[#1D493E] hover:bg-[#16372f] text-white px-8 py-3.5 rounded-lg font-bold text-xs uppercase tracking-widest transition duration-300 shadow-sm cursor-pointer font-sans"
-              >
-                <span>Continue Shopping</span>
-                <span className="text-sm font-sans">↗</span>
-              </Link>
-            </div>
-          </div>
-        </section>
 
       </main>
     </div>

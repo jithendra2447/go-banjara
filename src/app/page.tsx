@@ -1,10 +1,11 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import { 
   MapPin, Calendar, Users, Star, ArrowRight, ShieldCheck, Compass, Heart, Sparkles, 
-  ChevronDown, ChevronUp, Check, ShoppingBag, ArrowUpRight, MessageSquare, Info, BookOpen
+  ChevronDown, ChevronUp, Check, ShoppingBag, ArrowUpRight, MessageSquare, Info, BookOpen,
+  ShoppingCart
 } from 'lucide-react';
 import { useCart } from '@/components/providers';
 import { HOLIDAY_PACKAGES } from '@/data/packages';
@@ -14,39 +15,39 @@ import { BonjoMascot } from '@/components/BonjoMascot';
 // Static Blog/Diaries list
 const BLOG_POSTS = [
   {
-    id: 'post-leh-prep',
-    title: 'Acclimatization Guide: Surviving the Srinagar-to-Leh Pass',
-    excerpt: 'Heading up to 11,500ft? Read our essential guidelines on altitude sickness, rest schedules, and local medication.',
-    image: '/travel-leh-day1.jpg',
-    readTime: '6 min read',
-    date: 'July 8, 2026',
-    author: 'Stanzin Gyatso'
-  },
-  {
-    id: 'post-kerala-monsoon',
-    title: 'Monsoon Magic: Why Kerala is Best Visited in the Rains',
-    excerpt: 'Discover the lush, misty backwaters, off-season tranquil stays, and traditional Ayurvedic wellness therapies.',
-    image: '/travel-leh-3.jpg', // Placeholder image matching existing files
-    readTime: '5 min read',
-    date: 'June 20, 2026',
-    author: 'Anjali Menon'
-  },
-  {
-    id: 'post-nomad-gear-care',
-    title: 'How to Care for Handcrafted Full-Grain Leather Journals',
-    excerpt: 'Preserve the rich patina and waterproof protection of your Nomad Journal with natural beeswax and proper drying.',
-    image: '/shop-hero-2.jpg',
-    readTime: '4 min read',
-    date: 'May 12, 2026',
-    author: 'Bonjo'
-  },
-  {
-    id: 'post-solo-travel',
-    title: 'First Time Solo on the Leh-Manali Loop: A Journey of Self-Discovery',
+    id: 'post-ladakh-guide-1',
+    title: 'Ultimate Ladakh Travel Guide: Plan Your Perfect Himalayan Adventure',
     excerpt: 'Detailed packing list, fuel planning, and safety pointers for solo adventurers tackling the high passes alone.',
-    image: '/ladakh-hero.jpg',
-    readTime: '8 min read',
-    date: 'April 29, 2026',
+    image: '/travel-leh-1.jpg',
+    readTime: '5 min read',
+    date: 'Sunday, August 12, 2023',
+    author: 'Kiran Makwan'
+  },
+  {
+    id: 'post-ladakh-guide-2',
+    title: 'Leh Ladakh Travel Guide 2026: Best Time, Places & Complete Trip Planning',
+    excerpt: 'Detailed packing list, fuel planning, and safety pointers for solo adventurers tackling the high passes alone.',
+    image: '/travel-leh-2.jpg',
+    readTime: '5 min read',
+    date: 'Sunday, August 12, 2023',
+    author: 'Kiran Makwan'
+  },
+  {
+    id: 'post-ladakh-guide-3',
+    title: 'Ladakh Bike Trip Guide: Routes, Budget & Essential Tips for Riders',
+    excerpt: 'Detailed packing list, fuel planning, and safety pointers for solo adventurers tackling the high passes alone.',
+    image: '/travel-leh-3.jpg',
+    readTime: '5 min read',
+    date: 'Sunday, August 12, 2023',
+    author: 'Kiran Makwan'
+  },
+  {
+    id: 'post-ladakh-guide-4',
+    title: '7-Day Leh Ladakh Itinerary for First-Time Travelers',
+    excerpt: 'Detailed packing list, fuel planning, and safety pointers for solo adventurers tackling the high passes alone.',
+    image: '/travel-leh-4.jpg',
+    readTime: '5 min read',
+    date: 'Sunday, August 12, 2023',
     author: 'Kiran Makwan'
   }
 ];
@@ -74,27 +75,120 @@ const FAQ_ITEMS = [
 export default function Homepage() {
   const { addToCart, setCartOpen } = useCart();
 
+  const [productsList, setProductsList] = useState<any[]>(PRODUCTS);
+  const [packagesList, setPackagesList] = useState<any[]>(HOLIDAY_PACKAGES);
+
+  const [pageContent, setPageContent] = useState({
+    heroTitleLine1: "Hey! Let’s",
+    heroTitleLine2: "Escape from",
+    heroTitleLine3: "the Ordinary",
+    heroSubtitle: "We bridge the gap between soulful Indian travel and high end gear. curated for those who find home in the dust of the road",
+    heroShopBtn: "Shop Now",
+    heroTravelBtn: "See Travel Packages",
+    mascotText: "Hey wanderer! I'm Bonjo. Ready to hit the road?",
+    dealsTitle: "Today's best deals for you",
+    dealsSub: "A hand-picked map of the corners of India our community keeps coming back to",
+    sellingTitle: "Most Selling Products",
+    sellingSub: "A hand-picked map of the corners of India our community keeps coming back to",
+    reviewsTitle: "What people say about products",
+    blogTitle: "Travel Tales from the curious Explorer",
+    blogSub: "Follow my voices to discover unique voices, breathtaking landscapes & unforgettable experiences",
+    faqTitle: "Frequently Asked Questions",
+    faqHelpDesk: "Help Desk",
+    valuesTitle: "Built For Travelers, By Travelers",
+    valuesSub: "We focus on safety, unique slow-travel routes, handcrafted durable products, and supporting remote communities"
+  });
+
+  useEffect(() => {
+    // 1. Load products
+    const savedProds = localStorage.getItem('gb_admin_products_v3');
+    if (savedProds) {
+      try {
+        const parsed = JSON.parse(savedProds);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          setProductsList(parsed);
+        }
+      } catch (e) {
+        console.error('Error loading products:', e);
+      }
+    }
+
+    // 2. Load packages
+    const savedPkgs = localStorage.getItem('gb_admin_packages');
+    if (savedPkgs) {
+      try {
+        const parsed = JSON.parse(savedPkgs);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          setPackagesList(parsed);
+        }
+      } catch (e) {
+        console.error('Error loading packages:', e);
+      }
+    }
+
+    // 3. Load dynamic page content
+    const savedContent = localStorage.getItem('gb_admin_page_content');
+    if (savedContent) {
+      try {
+        const parsed = JSON.parse(savedContent);
+        setPageContent(prev => ({ ...prev, ...parsed }));
+      } catch (e) {
+        console.error('Error loading page content:', e);
+      }
+    }
+  }, []);
+
+  const resolveProduct = (defaultId: string, fallbackName: string, fallbackCategory: string, fallbackImg: string, fallbackPrice: number, fallbackOrig: number) => {
+    const found = productsList.find(p => p.id === defaultId || p.name.toLowerCase() === fallbackName.toLowerCase());
+    if (found) {
+      return {
+        id: found.id,
+        name: found.name,
+        category: found.category,
+        image: found.image,
+        price: found.price,
+        originalPrice: found.originalPrice,
+        rating: found.rating || 5,
+        reviews: `${found.reviewsCount || 120} Reviews`,
+        boughtText: found.boughtCount || "200+ bought in past month",
+        deliveryText: "FREE delivery as soon as Thu, 9 Apr, 7 am - 10 pm"
+      };
+    }
+    return {
+      id: defaultId,
+      name: fallbackName,
+      category: fallbackCategory,
+      image: fallbackImg,
+      price: fallbackPrice,
+      originalPrice: fallbackOrig,
+      rating: 5,
+      reviews: "120 Reviews",
+      boughtText: "200+ bought in past month",
+      deliveryText: "FREE delivery as soon as Thu, 9 Apr, 7 am - 10 pm"
+    };
+  };
+
   // Selected featured products
   const badges = useMemo(() => {
-    return PRODUCTS.filter(p => p.category === 'Badges' || p.category === 'Stickers').slice(0, 3);
-  }, []);
+    return productsList.filter(p => p.category === 'Badges' || p.category === 'Stickers').slice(0, 3);
+  }, [productsList]);
 
   const featuredGear = useMemo(() => {
-    return PRODUCTS.filter(p => ['explore-more-keychain-1', 'go-banjara-tshirt-1', 'naturally-nomad-badge-1', 'banjara-blue-slides-png'].includes(p.id)).slice(0, 4);
-  }, []);
+    return productsList.filter(p => ['explore-more-keychain-1', 'go-banjara-tshirt-1', 'naturally-nomad-badge-1', 'banjara-blue-slides-png'].includes(p.id)).slice(0, 4);
+  }, [productsList]);
 
   const curatedEssentials = useMemo(() => {
-    return PRODUCTS.filter(p => ['fur-jaden-backpack-1', 'go-passport-cover-1', 'banjara-luggage-tag-1', 'wakefit-pillow-1'].includes(p.id)).slice(0, 4);
-  }, []);
+    return productsList.filter(p => ['fur-jaden-backpack-1', 'go-passport-cover-1', 'banjara-luggage-tag-1', 'wakefit-pillow-1'].includes(p.id)).slice(0, 4);
+  }, [productsList]);
 
   // Featured Packages
   const mainFeaturedPkg = useMemo(() => {
-    return HOLIDAY_PACKAGES.find(p => p.id === 'pkg-kashmir-classic') || HOLIDAY_PACKAGES[0];
-  }, []);
+    return packagesList.find(p => p.id === 'pkg-kashmir-classic') || packagesList[0];
+  }, [packagesList]);
 
   const subFeaturedPkgs = useMemo(() => {
-    return HOLIDAY_PACKAGES.filter(p => ['pkg-kashmir-gulmarg', 'pkg-kerala-4in1'].includes(p.id));
-  }, []);
+    return packagesList.filter(p => ['pkg-kashmir-gulmarg', 'pkg-kerala-4in1'].includes(p.id));
+  }, [packagesList]);
 
   // Product Add Alert state
   const [addedProductId, setAddedProductId] = useState<string | null>(null);
@@ -115,6 +209,12 @@ export default function Homepage() {
   const [mascotBubble, setMascotBubble] = useState("Hey wanderer! I'm Bonjo. Ready to hit the road?");
   const [mascotMood, setMascotMood] = useState({ goggles: true, hat: true });
 
+  useEffect(() => {
+    if (pageContent.mascotText) {
+      setMascotBubble(pageContent.mascotText);
+    }
+  }, [pageContent.mascotText]);
+
   // FAQ Accordion state
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 
@@ -127,54 +227,78 @@ export default function Homepage() {
       
       {/* 1. HERO BACKGROUND & BIKER LAYER (Direct child of root, absolute positioning) */}
       <div className="absolute inset-x-0 top-0 h-[600px] md:h-[660px] pointer-events-none z-20 overflow-visible">
-        {/* Layer 1: Background (Clipped at bottom 80px using clip-path to stay inside Hero section) */}
-        <img 
-          src="/hero-combined.png?v=2" 
-          alt="Hero Background" 
-          className="absolute inset-0 w-full h-full object-cover object-top z-10"
-          style={{ clipPath: 'inset(0 0 80px 0)' }}
-        />
+        {/* Sub-container for background overlays (z-10, overflow-visible to prevent clipping) */}
+        <div className="absolute inset-0 overflow-visible z-10">
+          {/* Layer 1: Background (Height scaled to h-[112%] to make tyres larger and fully visible) */}
+          <img 
+            src="/hero-combined.png?v=5" 
+            alt="Hero Background" 
+            className="absolute inset-x-0 top-0 w-full h-[112%] object-cover object-top brightness-[0.88] contrast-[1.05] saturate-[1.05]"
+            style={{ 
+              imageRendering: '-webkit-optimize-contrast',
+              transform: 'translateZ(0)'
+            }}
+          />
 
-        {/* Layer 2: White Gradient Fade (Positioned behind/back side of the bike, overlaying the transition) */}
-        <div 
-          className="absolute inset-x-0 bottom-0 h-20 z-20 pointer-events-none" 
-          style={{ 
-            background: 'linear-gradient(to top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%)' 
-          }}
-        />
+          {/* Layer 1.5: User's Grey Overlay Layer */}
+          <img 
+            src="/hero-overlay.png" 
+            alt="Overlay Layer" 
+            className="absolute inset-x-0 top-0 w-full h-[112%] object-cover object-top opacity-15 mix-blend-multiply"
+            style={{ 
+              imageRendering: '-webkit-optimize-contrast',
+              transform: 'translateZ(0)'
+            }}
+          />
 
-        {/* Layer 3: Biker & Buttons (Renders on top of the gradient, fully visible, bleeding past frame) */}
+          {/* Layer 1.8: User's Top Dark Gradient Layer */}
+          <img 
+            src="/hero-top-gradient.png" 
+            alt="Top Dark Gradient Layer" 
+            className="absolute inset-x-0 top-0 w-full h-[112%] object-cover object-top"
+            style={{ 
+              imageRendering: '-webkit-optimize-contrast',
+              transform: 'translateZ(0)'
+            }}
+          />
+        </div>
+
+        {/* Layer 3: Biker (Renders cleanly with 100% transparent tyres, z-30) */}
         <img 
-          src="/hero-bike.png?v=3" 
+          src="/hero-bike.png?v=5" 
           alt="Biker" 
-          className="absolute inset-0 w-full h-full object-cover object-top z-30"
+          className="absolute inset-x-0 top-0 w-full h-[112%] object-cover object-top z-30"
+          style={{ 
+            imageRendering: '-webkit-optimize-contrast',
+            transform: 'translateZ(0)'
+          }}
         />
       </div>
 
-      {/* 2. HERO CONTENT SECTION (Transparent background, relative z-30) */}
-      <section className="relative min-h-[520px] md:min-h-[580px] flex items-center z-30 bg-transparent">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 w-full grid md:grid-cols-2 gap-12 items-center relative pt-24 pb-16">
+      {/* 2. HERO CONTENT SECTION (Transparent background, relative z-40 to sit on top of everything) */}
+      <section className="relative min-h-[600px] md:min-h-[660px] flex items-center z-40 bg-transparent">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-12 w-full grid md:grid-cols-2 gap-12 items-center relative pt-24 pb-20">
           <div className="space-y-6 text-left max-w-xl">
             <h1 className="text-4xl md:text-[68px] md:leading-[1.1] tracking-tight font-black text-white font-sans">
-              Hey! Let’s <br />
-              Escape from <br />
-              the Ordinary
+              {pageContent.heroTitleLine1} <br />
+              {pageContent.heroTitleLine2} <br />
+              {pageContent.heroTitleLine3}
             </h1>
             <p className="text-sm md:text-base text-white/95 font-semibold leading-relaxed max-w-md">
-              We bridge the gap between soulful Indian travel and high end gear. curated for those who find home in the dust of the road
+              {pageContent.heroSubtitle}
             </p>
-            <div className="flex flex-wrap gap-4 pt-4">
+            <div className="flex flex-wrap items-center gap-4 pt-4">
               <Link 
                 href="/shop"
-                className="px-8 py-3 rounded-lg bg-[#1D493E] hover:bg-[#16372f] text-white font-black text-[11px] uppercase tracking-widest transition duration-300 shadow-sm cursor-pointer min-w-[140px] text-center"
+                className="px-8 py-3.5 rounded-lg bg-[#1D493E] hover:bg-[#15342c] hover:scale-[1.02] active:scale-[0.98] text-white border border-[#1D493E] font-sans font-bold text-base transition-all duration-300 cursor-pointer text-center min-w-[150px] shadow-sm"
               >
-                Shop Now
+                {pageContent.heroShopBtn}
               </Link>
               <Link 
                 href="/travel"
-                className="px-8 py-3 rounded-lg border border-[#1D493E] text-[#1D493E] hover:bg-[#1D493E]/5 font-black text-[11px] uppercase tracking-widest transition duration-300 cursor-pointer min-w-[190px] text-center"
+                className="px-8 py-3.5 rounded-lg border border-[#1D493E] bg-white hover:bg-gray-50 hover:scale-[1.02] active:scale-[0.98] text-[#1D493E] font-sans font-bold text-base transition-all duration-300 cursor-pointer text-center min-w-[210px] shadow-sm"
               >
-                See Travel Packages
+                {pageContent.heroTravelBtn}
               </Link>
             </div>
           </div>
@@ -182,8 +306,8 @@ export default function Homepage() {
       </section>
 
       {/* 2. METRICS WIDGET BAR */}
-      <section className="bg-white border-b border-gray-100 py-10 relative z-10">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-2 md:grid-cols-5 gap-y-6 md:gap-y-0 text-center md:divide-x md:divide-gray-100">
+      <section className="bg-white border-b border-gray-200 pt-32 pb-8 relative z-10">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-2 md:grid-cols-5 gap-y-6 md:gap-y-0 text-center md:divide-x md:divide-gray-200">
           <div className="flex flex-col items-center justify-center space-y-1.5 px-2">
             <h4 className="text-3xl md:text-[36px] font-bold text-[#1A1A1A] font-sans tracking-tight">10+</h4>
             <p className="text-[13px] md:text-sm text-gray-500 font-medium font-sans">Travel Packages</p>
@@ -207,340 +331,789 @@ export default function Homepage() {
         </div>
       </section>
 
-
-      {/* 5. NOMAD BADGES & STICKERS */}
-      <section className="bg-[#FAF9F6] border-t border-b border-[#1D493E]/5 py-16 text-left">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 space-y-12">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-            <div className="space-y-2">
-              <span className="text-xs font-mono text-[#E05434] uppercase font-black tracking-widest">
-                COLLECTIBLES
-              </span>
-              <h2 className="text-3xl md:text-4xl font-serif font-light text-[#1D493E]">
-                Sticker Pack & Iron-On <span className="text-[#E05434] font-serif font-normal">Badges</span>
+      {/* 3. DUAL CALL-TO-ACTIONS */}
+      <section className="max-w-7xl mx-auto px-6 md:px-12 pt-12 pb-2 relative z-35">
+        <div className="grid md:grid-cols-2 gap-8">
+          {/* Card 1 - Shop Gear (Left, Green) */}
+          <div className="bg-[#1D493E] text-white p-8 md:p-10 rounded-2xl flex flex-col justify-start space-y-6 relative overflow-hidden group shadow-md border border-white/5">
+            <div className="space-y-4 text-left">
+              <h2 className="text-2xl md:text-3xl font-bold leading-tight font-sans">
+                Shop Travel Gear for Nomads
               </h2>
-              <p className="text-gray-500 text-xs md:text-sm font-semibold leading-relaxed max-w-xl">
-                Durable, high-quality, weatherproof stickers and embroidered badges featuring our mascot Bonjo.
+              <p className="text-sm text-white/80 max-w-md font-medium leading-relaxed">
+                Explore our collection of hand-picked journals, weather-proof stickers and artisanal badges designed for the road
               </p>
             </div>
+            <div className="relative z-10">
+              <Link 
+                href="/shop" 
+                className="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-xl bg-white/10 hover:bg-white/15 text-white font-semibold text-sm transition-all duration-300 cursor-pointer text-center"
+              >
+                <span>Explore Collections</span>
+                <ArrowUpRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
+
+          {/* Card 2 - Book a Trip (Right, Orange) */}
+          <div className="bg-[#FF5A36] text-white p-8 md:p-10 rounded-2xl flex flex-col justify-start space-y-6 relative overflow-hidden group shadow-md border border-white/5">
+            <div className="space-y-4 text-left">
+              <h2 className="text-2xl md:text-3xl font-bold leading-tight font-sans">
+                Book a Trip
+              </h2>
+              <p className="text-sm text-white/90 max-w-md font-medium leading-relaxed">
+                Explore our collection of hand-picked journals, weather-proof stickers and artisanal badges designed for the road
+              </p>
+            </div>
+            <div className="relative z-10">
+              <Link 
+                href="/travel" 
+                className="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-xl bg-white/15 hover:bg-white/25 text-white font-semibold text-sm transition-all duration-300 cursor-pointer text-center"
+              >
+                <span>Find the Route</span>
+                <ArrowUpRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. DESTINATIONS SECTION */}
+      <section className="bg-white pt-2 pb-4 relative z-10">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 space-y-12 text-center">
+          
+          <div className="space-y-3">
+            <span className="inline-block text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-1 rounded-[4px] text-xs font-bold uppercase tracking-wider">
+              Destinations
+            </span>
+            <h2 className="text-3xl md:text-[38px] font-sans font-black text-[#1D493E] leading-tight">
+              Place worth the <span className="text-[#FF5A36]">detour</span>
+            </h2>
+            <p className="text-gray-500 text-sm md:text-base font-semibold leading-relaxed max-w-xl mx-auto">
+              A hand-picked map of the corners of India our community keeps coming back to
+            </p>
+          </div>
+
+          <div className="space-y-8">
+            {/* Featured Destination Card (Top) */}
+            {(() => {
+              const pkg1 = HOLIDAY_PACKAGES[0];
+              if (!pkg1) return null;
+              return (
+                <div className="bg-white rounded-2xl border border-gray-150 shadow-xs p-5 md:p-6 grid grid-cols-1 md:grid-cols-2 gap-8 items-center text-left">
+                  {/* Image */}
+                  <div className="relative h-[280px] md:h-[360px] rounded-xl overflow-hidden">
+                    <img 
+                      src={pkg1.image} 
+                      alt={pkg1.name} 
+                      className="w-full h-full object-cover" 
+                      style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
+                    />
+                  </div>
+                  {/* Details */}
+                  <div className="space-y-6">
+                    <div className="flex items-center gap-3">
+                      <span className="text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-0.5 rounded text-xs font-bold">{pkg1.category || 'Road Trip'}</span>
+                      <span className="bg-gray-100 text-gray-600 px-2.5 py-0.5 rounded text-xs font-bold">{pkg1.durationDays} days</span>
+                    </div>
+                    <div className="flex justify-between items-baseline gap-4">
+                      <h3 className="text-xl md:text-2xl font-bold text-[#1D493E]">{pkg1.name}</h3>
+                      <span className="text-lg md:text-xl font-bold text-[#1D493E] shrink-0">₹{pkg1.price.toLocaleString('en-IN')}/Person</span>
+                    </div>
+                    <p className="text-xs md:text-sm text-gray-500 font-semibold leading-relaxed">
+                      {pkg1.description}
+                    </p>
+                    {/* Details Grid */}
+                    <div className="grid grid-cols-2 gap-y-4 gap-x-6 border-t border-gray-150 pt-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-lg flex items-center justify-center shrink-0">
+                          <MapPin className="w-4 h-4 text-[#1D493E]" />
+                        </div>
+                        <span className="text-xs font-bold text-gray-600">Starts from {pkg1.startPoint || 'Srinagar'}</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-lg flex items-center justify-center shrink-0">
+                          <Users className="w-4 h-4 text-[#1D493E]" />
+                        </div>
+                        <span className="text-xs font-bold text-gray-600">{pkg1.groupType || 'Curated group Trip'}</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-lg flex items-center justify-center shrink-0">
+                          <ArrowUpRight className="w-4 h-4 text-[#1D493E]" />
+                        </div>
+                        <span className="text-xs font-bold text-gray-600">{pkg1.difficulty || 'Moderate'} Difficulty</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-lg flex items-center justify-center shrink-0">
+                          <Calendar className="w-4 h-4 text-[#1D493E]" />
+                        </div>
+                        <span className="text-xs font-bold text-gray-600">Next: {pkg1.nextDeparture || 'Aug, 2026'}</span>
+                      </div>
+                    </div>
+                    {/* Buttons */}
+                    <div className="flex gap-4 pt-2">
+                      <Link 
+                        href={`/travel/package/${pkg1.id}`} 
+                        className="flex-1 py-3 rounded-lg bg-[#1D493E] hover:bg-[#15342c] text-white text-xs font-bold text-center transition cursor-pointer"
+                      >
+                        Book Now
+                      </Link>
+                      <Link 
+                        href={pkg1.link || `/travel/package/${pkg1.id}`} 
+                        className="flex-1 py-3 rounded-lg border border-[#1D493E] text-center text-[#1D493E] hover:bg-gray-50 text-xs font-bold transition"
+                      >
+                        Get details
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              );
+            })()}
+
+            {/* Standard Grid Cards (Bottom Row) */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {HOLIDAY_PACKAGES.slice(1, 3).map((pkg) => (
+                <div key={pkg.id} className="bg-white rounded-2xl border border-gray-150 shadow-xs p-5 flex flex-col justify-between text-left">
+                  <div className="space-y-5">
+                    <div className="relative h-[200px] md:h-[240px] rounded-xl overflow-hidden">
+                      <img 
+                        src={pkg.image} 
+                        alt={pkg.name} 
+                        className="w-full h-full object-cover" 
+                        style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
+                      />
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <span className="text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-0.5 rounded text-xs font-bold">{pkg.category || 'Road Trip'}</span>
+                      <span className="bg-gray-100 text-gray-600 px-2.5 py-0.5 rounded text-xs font-bold">{pkg.durationDays} days</span>
+                    </div>
+                    <div className="flex justify-between items-baseline gap-4">
+                      <h3 className="text-lg md:text-xl font-bold text-[#1D493E]">{pkg.name}</h3>
+                      <span className="text-base md:text-lg font-bold text-[#1D493E] shrink-0">₹{pkg.price.toLocaleString('en-IN')}/Person</span>
+                    </div>
+                    <p className="text-xs text-gray-500 font-semibold leading-relaxed line-clamp-2">
+                      {pkg.description}
+                    </p>
+                    {/* Details Grid */}
+                    <div className="grid grid-cols-2 gap-y-4 gap-x-4 border-t border-gray-150 pt-4">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-lg flex items-center justify-center shrink-0">
+                          <MapPin className="w-4 h-4 text-[#1D493E]" />
+                        </div>
+                        <span className="text-xs font-bold text-gray-600 leading-tight">Starts from {pkg.startPoint || 'Srinagar'}</span>
+                      </div>
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-lg flex items-center justify-center shrink-0">
+                          <Users className="w-4 h-4 text-[#1D493E]" />
+                        </div>
+                        <span className="text-xs font-bold text-gray-600 leading-tight">{pkg.groupType || 'Curated group Trip'}</span>
+                      </div>
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-lg flex items-center justify-center shrink-0">
+                          <ArrowUpRight className="w-4 h-4 text-[#1D493E]" />
+                        </div>
+                        <span className="text-xs font-bold text-gray-600 leading-tight">{pkg.difficulty || 'Moderate'} Difficulty</span>
+                      </div>
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-lg flex items-center justify-center shrink-0">
+                          <Calendar className="w-4 h-4 text-[#1D493E]" />
+                        </div>
+                        <span className="text-xs font-bold text-gray-600 leading-tight">Next: {pkg.nextDeparture || 'Aug, 2026'}</span>
+                      </div>
+                    </div>
+                  </div>
+                  {/* Buttons */}
+                  <div className="flex gap-3 pt-6">
+                    <Link 
+                      href={`/travel/package/${pkg.id}`} 
+                      className="flex-1 py-3 rounded-lg bg-[#1D493E] hover:bg-[#15342c] text-white text-xs font-bold text-center transition cursor-pointer"
+                    >
+                      Book Now
+                    </Link>
+                    <Link 
+                      href={pkg.link || `/travel/package/${pkg.id}`} 
+                      className="flex-1 py-3 rounded-lg border border-[#1D493E] text-center text-[#1D493E] hover:bg-gray-50 text-xs font-bold transition"
+                    >
+                      Get details
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Explore all destinations footer */}
+          <div className="pt-4">
             <Link 
-              href="/shop?category=Badges"
-              className="inline-flex items-center gap-2 text-xs font-bold text-[#1D493E] hover:text-[#E05434] uppercase tracking-wider shrink-0 transition"
+              href="/travel" 
+              className="inline-flex items-center gap-1.5 text-sm font-bold text-[#1D493E] hover:text-[#FF5A36] transition-all duration-300"
             >
-              <span>View all badges</span>
+              <span>Explore all destinations</span>
               <ArrowUpRight className="w-4 h-4" />
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
-            {badges.map((prod) => (
-              <div 
-                key={prod.id} 
-                className="bg-white rounded-3xl border border-[#1D493E]/10 p-6 flex flex-col justify-between items-center text-center space-y-4 hover:shadow-xs transition duration-300"
-              >
-                <Link href={`/shop/product/${prod.id}`} className="block relative w-32 h-32 overflow-hidden hover:scale-105 transition-transform duration-300">
-                  <img src={prod.image} alt={prod.name} className="w-full h-full object-contain" />
-                </Link>
-                <div className="space-y-1">
-                  <h4 className="text-sm font-black uppercase text-[#1D493E] tracking-wider truncate max-w-[200px]">
-                    {prod.name}
-                  </h4>
-                  <span className="text-xs font-serif text-[#E05434] font-black">₹{prod.price}</span>
-                </div>
-                <button
-                  onClick={() => handleProductAdd(prod)}
-                  className="w-full py-2.5 rounded-xl bg-[#1D493E] hover:bg-[#E05434] text-white text-[10px] font-black uppercase tracking-wider transition cursor-pointer"
-                >
-                  {addedProductId === prod.id ? 'Added to Cart!' : 'Add to Cart'}
-                </button>
-              </div>
-            ))}
+        </div>
+      </section>
+
+      {/* 5. TOP PRODUCT CATEGORIES */}
+      <section className="bg-white pt-4 pb-12 text-left relative z-10">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 space-y-10">
+          
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div className="space-y-3">
+              <span className="inline-block text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-1 rounded-[4px] text-xs font-bold uppercase tracking-wider">
+                The Collection
+              </span>
+              <h2 className="text-3xl md:text-[38px] font-sans font-black text-[#1D493E] leading-tight">
+                Shop from our <span className="text-[#FF5A36]">Top Product Categories</span>
+              </h2>
+              <p className="text-gray-500 text-sm md:text-base font-semibold leading-relaxed max-w-2xl">
+                A hand-picked map of the corners of India our community keeps coming back to
+              </p>
+            </div>
+            <Link 
+              href="/shop"
+              className="inline-flex items-center gap-1.5 text-sm font-bold text-[#1D493E] hover:text-[#FF5A36] transition shrink-0"
+            >
+              <span>View all products</span>
+              <ArrowUpRight className="w-4 h-4" />
+            </Link>
           </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Category 1: Stickers */}
+            <Link href="/shop?category=Stickers" className="space-y-4 group">
+              <div className="rounded-lg aspect-[3/2] overflow-hidden bg-[#FAF9F6] border border-gray-200/50">
+                <img 
+                  src="/around_the_world_sticker.jpg" 
+                  alt="Stickers" 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                  style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
+                />
+              </div>
+              <div className="space-y-1">
+                <h4 className="text-lg font-bold text-[#1D493E]">Stickers</h4>
+                <p className="text-xs text-gray-500 font-semibold">Starts from ₹93</p>
+              </div>
+            </Link>
+
+            {/* Category 2: Badges */}
+            <Link href="/shop?category=Badges" className="space-y-4 group">
+              <div className="rounded-lg aspect-[3/2] overflow-hidden bg-[#FAF9F6] border border-gray-200/50">
+                <img 
+                  src="/around_the_world_sticker.jpg" 
+                  alt="Badges" 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
+                />
+              </div>
+              <div className="space-y-1">
+                <h4 className="text-lg font-bold text-[#1D493E]">Badges</h4>
+                <p className="text-xs text-gray-500 font-semibold">Starts from ₹199</p>
+              </div>
+            </Link>
+
+            {/* Category 3: Fridge Magnets */}
+            <Link href="/shop?category=Magnets" className="space-y-4 group">
+              <div className="rounded-lg aspect-[3/2] overflow-hidden bg-[#FAF9F6] border border-gray-200/50">
+                <img 
+                  src="/around_the_world_sticker.jpg" 
+                  alt="Fridge Magnets" 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
+                />
+              </div>
+              <div className="space-y-1">
+                <h4 className="text-lg font-bold text-[#1D493E]">Fridge Magnets</h4>
+                <p className="text-xs text-gray-500 font-semibold">Starts from ₹199</p>
+              </div>
+            </Link>
+          </div>
+
+          {/* Bottom active state indicator line */}
+          <div className="w-full h-[3px] bg-gray-200 relative rounded overflow-hidden mt-6">
+            <div className="absolute left-0 top-0 h-full w-[33.3%] bg-[#1D493E] rounded" />
+          </div>
+
         </div>
       </section>
 
       {/* 6. YELLOW HIGHLIGHT MARQUEE BANNER */}
-      <div className="bg-[#FFFF80] text-[#1D493E] border-t border-b border-[#1D493E]/15 py-3 overflow-hidden select-none relative z-10">
-        <div className="flex whitespace-nowrap gap-8 animate-marquee font-mono text-xs font-black uppercase tracking-widest">
-          <span>10% OFF FOR FIRST CUSTOMER • USE CODE Nomads10 • 10% OFF FOR FIRST CUSTOMER • USE CODE Nomads10 • 10% OFF FOR FIRST CUSTOMER • USE CODE Nomads10 • 10% OFF FOR FIRST CUSTOMER • USE CODE Nomads10</span>
+      <div className="bg-[#FFFF80] text-[#1D493E] border-t border-b border-[#1D493E]/15 py-6 overflow-hidden select-none relative z-10">
+        <div className="flex whitespace-nowrap gap-12 animate-marquee font-sans text-sm md:text-base font-extrabold uppercase tracking-widest">
+          <span>✦ BOOK YOUR NEXT TRIP ✦ SHOP TRAVEL GEAR ✦ DARE TO TRAVEL ✦ STICKERS ✦ MODERN NOMAD ✦ BADGES ✦ BOOK YOUR NEXT TRIP ✦ SHOP TRAVEL GEAR ✦ DARE TO TRAVEL ✦ STICKERS ✦ MODERN NOMAD ✦ BADGES ✦ BOOK YOUR NEXT TRIP ✦ SHOP TRAVEL GEAR ✦ DARE TO TRAVEL ✦ STICKERS ✦ MODERN NOMAD ✦ BADGES</span>
         </div>
       </div>
 
-      {/* 7. FEATURED GEAR GRID */}
-      <section className="max-w-7xl mx-auto px-6 md:px-12 py-16 space-y-12">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 text-left">
-          <div className="space-y-2">
-            <span className="text-xs font-mono text-[#E05434] uppercase font-black tracking-widest">
-              NOMAD BOUTIQUE
+      {/* 7. TODAY'S BEST DEALS FOR YOU */}
+      <section className="bg-white py-16 text-left relative z-10">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 space-y-10">
+          
+          <div className="text-center space-y-3">
+            <span className="inline-block text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-1 rounded-[4px] text-xs font-bold uppercase tracking-wider">
+              Most People Like
             </span>
-            <h2 className="text-3xl md:text-4xl font-serif font-light text-[#1D493E]">
-              Explore Our <span className="text-[#E05434] font-serif font-normal">Nomad Gear</span>
+            <h2 className="text-3xl md:text-[38px] font-sans font-black text-[#1D493E] leading-tight">
+              {pageContent.dealsTitle.includes("best deals") ? (
+                <>Today's <span className="text-[#FF5A36]">best deals</span> for you</>
+              ) : (
+                pageContent.dealsTitle
+              )}
             </h2>
-            <p className="text-gray-500 text-xs md:text-sm font-semibold leading-relaxed max-w-xl">
-              Street fashion, slides, keychains, and accessories handpicked for the traveler's soul.
+            <p className="text-gray-500 text-sm md:text-base font-semibold leading-relaxed max-w-2xl mx-auto">
+              {pageContent.dealsSub}
             </p>
           </div>
-          <Link 
-            href="/shop"
-            className="inline-flex items-center gap-2 text-xs font-bold text-[#1D493E] hover:text-[#E05434] uppercase tracking-wider shrink-0 transition"
-          >
-            <span>View all gear</span>
-            <ArrowUpRight className="w-4 h-4" />
-          </Link>
-        </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {featuredGear.map((prod) => (
-            <div 
-              key={prod.id} 
-              className="bg-white rounded-3xl border border-[#1D493E]/10 p-4 hover:border-[#1D493E]/20 transition duration-300 flex flex-col justify-between space-y-4 text-left"
-            >
-              <div className="space-y-3">
-                <Link href={`/shop/product/${prod.id}`} className="block relative aspect-square bg-[#FAF9F6] rounded-2xl overflow-hidden border border-[#1D493E]/5 hover:opacity-95 transition-opacity">
-                  <img src={prod.image} alt={prod.name} className="w-full h-full object-cover" />
-                </Link>
-                <div className="space-y-1">
-                  <div className="flex items-center justify-between gap-1">
-                    <span className="text-[8px] font-mono font-black uppercase text-gray-400 tracking-wider">
-                      {prod.category}
-                    </span>
-                    <div className="flex items-center gap-0.5 text-gray-500 text-[9px] font-bold">
-                      ★ {prod.rating.toFixed(1)}
-                    </div>
-                  </div>
-                  <Link href={`/shop/product/${prod.id}`} className="hover:text-[#E05434] transition-colors block">
-                    <h4 className="text-xs font-black uppercase text-[#1D493E] truncate">
-                      {prod.name}
-                    </h4>
-                  </Link>
-                </div>
-              </div>
-              <div className="flex justify-between items-center pt-1">
-                <span className="text-sm font-serif font-black text-[#E05434]">₹{prod.price}</span>
-                <button
-                  onClick={() => handleProductAdd(prod)}
-                  className="px-3.5 py-2 bg-[#1D493E] hover:bg-[#E05434] text-white text-[9.5px] font-black uppercase tracking-widest rounded-xl transition cursor-pointer"
-                >
-                  {addedProductId === prod.id ? 'Added' : 'Add'}
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              resolveProduct("naturally-nomad-badge-1", "Naturally Nomad", "Badges", "/naturally_nomad_badge.png", 139, 199),
+              resolveProduct("explore-more-keychain-1", "Explore more", "Key Chains", "/explore_more_keychain.png", 149, 193),
+              resolveProduct("go-banjara-tshirt-1", "Go Banjara", "T-Shirts", "/go_banjara_tshirt.jpg", 399, 599),
+              resolveProduct("prod-badge-around", "Naturally Nomad", "Badges", "/around_the_world_sticker.jpg", 139, 199)
+            ].map((deal) => {
+              // Mock product object for cart action
+              const mockProduct = {
+                id: deal.id,
+                name: deal.name,
+                price: deal.price,
+                image: deal.image,
+                category: deal.category,
+                rating: deal.rating,
+                reviewsCount: 120,
+                description: "Deal of the day product"
+              };
 
-      {/* 8. CURATED TRAVEL ESSENTIALS */}
-      <section className="bg-[#FAF9F6] py-16 border-t border-[#1D493E]/5 text-left">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 space-y-12">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-            <div className="space-y-2">
-              <span className="text-xs font-mono text-[#E05434] uppercase font-black tracking-widest">
-                TRAVEL ESSENTIALS
-              </span>
-              <h2 className="text-3xl md:text-4xl font-serif font-light text-[#1D493E]">
-                Handcrafted With Love For <span className="text-[#E05434] font-serif font-normal">The Road</span>
-              </h2>
-              <p className="text-gray-500 text-xs md:text-sm font-semibold leading-relaxed max-w-xl">
-                Functional travel gear including waterproof backpacks, leather travel notebooks, and luggage tags.
-              </p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {curatedEssentials.map((prod) => (
-              <div 
-                key={prod.id} 
-                className="bg-white rounded-3xl border border-[#1D493E]/10 p-4 hover:border-[#1D493E]/20 transition duration-300 flex flex-col justify-between space-y-4"
-              >
-                <div className="space-y-3">
-                  <Link href={`/shop/product/${prod.id}`} className="block relative aspect-square bg-[#FAF9F6] rounded-2xl overflow-hidden border border-[#1D493E]/5 hover:opacity-95 transition-opacity">
-                    <img src={prod.image} alt={prod.name} className="w-full h-full object-cover" />
-                  </Link>
-                  <div className="space-y-1">
-                    <div className="flex items-center justify-between gap-1">
-                      <span className="text-[8px] font-mono font-black uppercase text-gray-400 tracking-wider">
-                        {prod.category}
-                      </span>
-                      <div className="flex items-center gap-0.5 text-gray-500 text-[9px] font-bold">
-                        ★ {prod.rating.toFixed(1)}
+              return (
+                <div key={deal.id} className="bg-white rounded-2xl border border-gray-150 p-4 flex flex-col justify-between space-y-4 hover:shadow-xs transition duration-300">
+                  <div className="space-y-4">
+                    {/* Image Container with Dots */}
+                    <div className="relative aspect-[4/3] rounded-xl overflow-hidden">
+                      <img 
+                        src={deal.image} 
+                        alt={deal.name} 
+                        className="w-full h-full object-cover"
+                        style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
+                      />
+                      {/* Dots indicator */}
+                      <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex gap-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#1D493E]"></span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
                       </div>
                     </div>
-                    <Link href={`/shop/product/${prod.id}`} className="hover:text-[#E05434] transition-colors block">
-                      <h4 className="text-xs font-black uppercase text-[#1D493E] truncate">
-                        {prod.name}
-                      </h4>
-                    </Link>
+
+                    {/* Details */}
+                    <div className="space-y-2 text-left">
+                      <span className="inline-block text-[#FF5A36] bg-[#FF5A36]/10 px-2 py-0.5 rounded text-[10px] font-bold">
+                        {deal.category}
+                      </span>
+                      <div className="flex justify-between items-baseline gap-2">
+                        <h4 className="text-sm font-bold text-[#1D493E] truncate">{deal.name}</h4>
+                        <div className="flex items-center gap-1.5 shrink-0">
+                          <span className="text-gray-400 line-through text-xs font-semibold">₹{deal.originalPrice}</span>
+                          <span className="text-sm font-bold text-[#1D493E]">₹{deal.price}</span>
+                        </div>
+                      </div>
+
+                      {/* Rating */}
+                      <div className="flex items-center gap-1.5">
+                        <div className="flex text-amber-400 text-xs gap-0.5">
+                          <Star className="w-3 h-3 fill-current" />
+                          <Star className="w-3 h-3 fill-current" />
+                          <Star className="w-3 h-3 fill-current" />
+                          <Star className="w-3 h-3 fill-current" />
+                          <Star className="w-3 h-3 fill-current" />
+                        </div>
+                        <span className="text-[11px] text-gray-500 font-semibold">({deal.reviews})</span>
+                      </div>
+
+                      {/* Bought statistics */}
+                      <p className="text-[11px] text-gray-500 font-semibold">{deal.boughtText}</p>
+                      
+                      {/* Delivery text */}
+                      <p className="text-[10px] md:text-[11px] text-gray-400 font-medium leading-tight pt-1">
+                        {deal.deliveryText}
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <div className="flex justify-between items-center pt-1">
-                  <span className="text-sm font-serif font-black text-[#E05434]">₹{prod.price}</span>
+
+                  {/* Add to Cart Button */}
                   <button
-                    onClick={() => handleProductAdd(prod)}
-                    className="px-3.5 py-2 bg-[#1D493E] hover:bg-[#E05434] text-white text-[9.5px] font-black uppercase tracking-widest rounded-xl transition cursor-pointer"
+                    onClick={() => handleProductAdd(mockProduct)}
+                    className="w-full py-2.5 rounded-xl border border-[#1D493E] hover:bg-[#1D493E] hover:text-white text-[#1D493E] text-xs font-bold transition flex items-center justify-center gap-1.5 cursor-pointer"
                   >
-                    {addedProductId === prod.id ? 'Added' : 'Add'}
+                    <span>{addedProductId === deal.id ? 'Added to Cart!' : 'Add to cart'}</span>
+                    <ShoppingCart className="w-3.5 h-3.5" />
                   </button>
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 9. MEET BONJO MASCOT SECTION (Interactive Speech Bubble Board) */}
-      <section className="max-w-7xl mx-auto px-6 md:px-12 py-16">
-        <div className="bg-white border border-[#1D493E]/15 rounded-[36px] p-8 md:p-12 flex flex-col md:flex-row items-center gap-10 md:gap-16 shadow-xs relative overflow-hidden text-left">
-          
-          {/* Left Mascot side */}
-          <div className="relative shrink-0 flex flex-col items-center gap-4">
-            <div className="bg-[#F3FFEF] border border-[#1D493E]/15 rounded-full p-2 relative">
-              <BonjoMascot 
-                width={160} 
-                height={160} 
-                withGoggles={mascotMood.goggles} 
-                withHat={mascotMood.hat} 
-                interactive={true} 
-              />
-            </div>
-            {/* Custom Interactive Mascot controls */}
-            <div className="flex gap-2">
-              <button 
-                onClick={() => setMascotMood(prev => ({ ...prev, goggles: !prev.goggles }))}
-                className={`px-3 py-1.5 rounded-lg text-[9px] font-black uppercase tracking-wider transition ${mascotMood.goggles ? 'bg-[#1D493E] text-white' : 'bg-gray-100 text-gray-600'}`}
-              >
-                Goggles
-              </button>
-              <button 
-                onClick={() => setMascotMood(prev => ({ ...prev, hat: !prev.hat }))}
-                className={`px-3 py-1.5 rounded-lg text-[9px] font-black uppercase tracking-wider transition ${mascotMood.hat ? 'bg-[#1D493E] text-white' : 'bg-gray-100 text-gray-600'}`}
-              >
-                Hat
-              </button>
-            </div>
+              );
+            })}
           </div>
 
-          {/* Right Content side */}
-          <div className="flex-1 space-y-6">
-            <div className="space-y-2">
-              <span className="text-xs font-mono text-[#E05434] uppercase font-black tracking-widest">
-                MEET THE MASCOT
-              </span>
-              <h2 className="text-3xl md:text-4xl font-serif font-light text-[#1D493E]">
-                Talk to <span className="text-[#E05434] font-serif font-normal">Bonjo</span>
-              </h2>
-            </div>
-
-            {/* Spech bubble block */}
-            <div className="relative bg-[#F3FFEF] border border-[#1D493E]/20 p-5 rounded-2xl rounded-tl-none text-[#1D493E] font-medium text-xs leading-relaxed max-w-xl shadow-xs">
-              <div className="absolute top-0 left-0 -translate-x-[9.5px] -translate-y-[0.5px] border-[10px] border-transparent border-t-[#F3FFEF] border-r-[#F3FFEF] z-10" />
-              <p className="font-semibold text-gray-700">{mascotBubble}</p>
-            </div>
-
-            {/* Quick interactive speech triggers */}
-            <div className="space-y-2">
-              <h5 className="text-[10px] font-mono text-gray-400 uppercase font-black tracking-wider">Quick questions</h5>
-              <div className="flex flex-wrap gap-2.5">
-                <button
-                  type="button"
-                  onClick={() => setMascotBubble("Check out our double-walled thermal flask, our naturally nomad badges, and the leather journal. Waterproof backpack is my personal favourite!")}
-                  className="px-4 py-2 rounded-xl border border-[#1D493E]/15 hover:border-[#1D493E] bg-white text-[11px] font-bold text-[#1D493E] hover:bg-[#FAF9F6] transition cursor-pointer"
-                >
-                  🎒 Recommend Gear
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setMascotBubble("The Srinagar-to-Leh Highway loop is beautiful. Be sure to stay in local homestays and visit the Hemis monastery!")}
-                  className="px-4 py-2 rounded-xl border border-[#1D493E]/15 hover:border-[#1D493E] bg-white text-[11px] font-bold text-[#1D493E] hover:bg-[#FAF9F6] transition cursor-pointer"
-                >
-                  ⛰️ Best Travel Spots
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setMascotBubble("Always pack heavy fleece jackets, robust trekking boots, high SPF sunscreen, and altitude pills like Diamox if you are heading up!")}
-                  className="px-4 py-2 rounded-xl border border-[#1D493E]/15 hover:border-[#1D493E] bg-white text-[11px] font-bold text-[#1D493E] hover:bg-[#FAF9F6] transition cursor-pointer"
-                >
-                  📝 Packing Advice
-                </button>
-              </div>
-            </div>
+          {/* Bottom active state indicator line */}
+          <div className="w-full h-[4px] bg-gray-200 relative rounded-full overflow-hidden mt-6">
+            <div className="absolute left-0 top-0 h-full w-[40%] bg-[#1D493E] rounded-full" />
           </div>
-        </div>
-      </section>
 
-      {/* 10. TRAVEL DIARIES / STORIES */}
-      <section className="bg-[#FAF9F6] py-16 border-t border-b border-[#1D493E]/5 text-left">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 space-y-12">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-            <div className="space-y-2">
-              <span className="text-xs font-mono text-[#E05434] uppercase font-black tracking-widest">
-                CHRONICLES
-              </span>
-              <h2 className="text-3xl md:text-4xl font-serif font-light text-[#1D493E]">
-                Stories From <span className="text-[#E05434] font-serif font-normal">The Road</span>
-              </h2>
-              <p className="text-gray-500 text-xs md:text-sm font-semibold leading-relaxed max-w-xl">
-                Slow-travel journals, destination checklists, gear care, and diaries written by explorers.
-              </p>
-            </div>
+          {/* View all products footer */}
+          <div className="text-center pt-2">
             <Link 
-              href="/blog"
-              className="inline-flex items-center gap-2 text-xs font-bold text-[#1D493E] hover:text-[#E05434] uppercase tracking-wider shrink-0 transition"
+              href="/shop" 
+              className="inline-flex items-center gap-1.5 text-sm font-bold text-[#1D493E] hover:text-[#FF5A36] transition-all duration-300"
             >
-              <span>View all chronicles</span>
+              <span>View all products</span>
               <ArrowUpRight className="w-4 h-4" />
             </Link>
           </div>
 
-          <div className="grid md:grid-cols-4 gap-6">
-            {BLOG_POSTS.map((post) => (
-              <div 
-                key={post.id} 
-                className="bg-white rounded-3xl border border-[#1D493E]/10 overflow-hidden shadow-2xs hover:border-[#1D493E]/20 transition duration-300 flex flex-col justify-between group"
-              >
-                <div className="space-y-4">
-                  <div className="relative h-48 w-full overflow-hidden bg-slate-900">
-                    <img 
-                      src={post.image} 
-                      alt={post.title} 
-                      className="w-full h-full object-cover group-hover:scale-[1.01] transition-transform duration-500"
-                    />
-                    <span className="absolute bottom-4 left-4 bg-white/95 text-[#1D493E] font-mono text-[9px] font-black px-2.5 py-1 rounded shadow-sm">
-                      {post.readTime}
-                    </span>
+        </div>
+      </section>
+
+      {/* 8. MOST SELLING PRODUCTS */}
+      <section className="bg-white py-16 text-left relative z-10 border-t border-gray-100">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 space-y-10">
+          
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div className="space-y-3 text-left">
+              <h2 className="text-3xl md:text-[38px] font-sans font-black text-[#1D493E] leading-tight">
+                {pageContent.sellingTitle.includes("Selling Products") ? (
+                  <>Most <span className="text-[#FF5A36]">Selling Products</span></>
+                ) : (
+                  pageContent.sellingTitle
+                )}
+              </h2>
+              <p className="text-gray-500 text-sm md:text-base font-semibold leading-relaxed max-w-2xl">
+                {pageContent.sellingSub}
+              </p>
+            </div>
+            <Link 
+              href="/shop"
+              className="inline-flex items-center gap-1.5 text-sm font-bold text-[#1D493E] hover:text-[#FF5A36] transition shrink-0"
+            >
+              <span>View all products</span>
+              <ArrowUpRight className="w-4 h-4" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              resolveProduct("naturally-nomad-badge-1", "Naturally Nomad", "Badges", "/naturally_nomad_badge.png", 139, 199),
+              resolveProduct("banjara-blue-slides-png", "Blue Mavin", "Slippers", "/blue_mavin_slides.jpg", 399, 599),
+              resolveProduct("explore-more-keychain-1", "Explore more", "Key Chains", "/explore_more_keychain.png", 149, 193),
+              resolveProduct("banjara-blue-slides-png", "Blue Mavin", "Slippers", "/blue_mavin_slides.jpg", 399, 599),
+              resolveProduct("wakefit-pillow-1", "Wakefit Pillows", "Travel Pillows", "/wakefit_pillow.jpg", 139, 199),
+              resolveProduct("fur-jaden-backpack-1", "Fur Jaden C/W", "Backpacks", "/fur_jaden_backpack.jpg", 149, 193),
+              resolveProduct("go-passport-cover-1", "Go Passport Cover", "Passport Covers", "/go_passport_cover.jpg", 399, 599),
+              resolveProduct("wakefit-pillow-1", "Wakefit Pillows", "Travel Pillows", "/wakefit_pillow.jpg", 139, 199)
+            ].map((prod) => {
+              // Mock product object for cart action
+              const mockProduct = {
+                id: prod.id,
+                name: prod.name,
+                price: prod.price,
+                image: prod.image,
+                category: prod.category,
+                rating: prod.rating,
+                reviewsCount: 120,
+                description: "Best selling product"
+              };
+
+              return (
+                <div key={prod.id} className="bg-white rounded-2xl border border-gray-150 p-4 flex flex-col justify-between space-y-4 hover:shadow-xs transition duration-300">
+                  <div className="space-y-4">
+                    {/* Image Container with Dots */}
+                    <div className="relative aspect-[4/3] rounded-xl overflow-hidden">
+                      <img 
+                        src={prod.image} 
+                        alt={prod.name} 
+                        className="w-full h-full object-cover"
+                        style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
+                      />
+                      {/* Dots indicator */}
+                      <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex gap-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#1D493E]"></span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
+                      </div>
+                    </div>
+
+                    {/* Details */}
+                    <div className="space-y-2 text-left">
+                      <span className="inline-block text-[#FF5A36] bg-[#FF5A36]/10 px-2 py-0.5 rounded text-[10px] font-bold">
+                        {prod.category}
+                      </span>
+                      <div className="flex justify-between items-baseline gap-2">
+                        <h4 className="text-sm font-bold text-[#1D493E] truncate">{prod.name}</h4>
+                        <div className="flex items-center gap-1.5 shrink-0">
+                          <span className="text-gray-400 line-through text-xs font-semibold">₹{prod.originalPrice}</span>
+                          <span className="text-sm font-bold text-[#1D493E]">₹{prod.price}</span>
+                        </div>
+                      </div>
+
+                      {/* Rating */}
+                      <div className="flex items-center gap-1.5">
+                        <div className="flex text-amber-400 text-xs gap-0.5">
+                          <Star className="w-3 h-3 fill-current" />
+                          <Star className="w-3 h-3 fill-current" />
+                          <Star className="w-3 h-3 fill-current" />
+                          <Star className="w-3 h-3 fill-current" />
+                          <Star className="w-3 h-3 fill-current" />
+                        </div>
+                        <span className="text-[11px] text-gray-500 font-semibold">({prod.reviews})</span>
+                      </div>
+
+                      {/* Bought statistics */}
+                      <p className="text-[11px] text-gray-500 font-semibold">{prod.boughtText}</p>
+                      
+                      {/* Delivery text */}
+                      <p className="text-[10px] md:text-[11px] text-gray-400 font-medium leading-tight pt-1">
+                        {prod.deliveryText}
+                      </p>
+                    </div>
                   </div>
-                  <div className="p-5 space-y-2">
-                    <span className="text-[9px] font-mono font-black text-[#E05434] tracking-wider block">
-                      {post.date} • BY {post.author.toUpperCase()}
-                    </span>
-                    <h4 className="text-sm font-serif font-bold text-[#1D493E] leading-snug line-clamp-2 hover:text-[#E05434] transition">
-                      <Link href={`/blog`}>{post.title}</Link>
-                    </h4>
-                    <p className="text-[11px] text-gray-500 font-semibold leading-relaxed line-clamp-3">
-                      {post.excerpt}
-                    </p>
-                  </div>
-                </div>
-                <div className="px-5 pb-5 pt-2">
-                  <Link 
-                    href={`/blog`} 
-                    className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase text-[#1D493E] hover:text-[#E05434] tracking-wider transition"
+
+                  {/* Add to Cart Button */}
+                  <button
+                    onClick={() => handleProductAdd(mockProduct)}
+                    className="w-full py-2.5 rounded-xl border border-[#1D493E] hover:bg-[#1D493E] hover:text-white text-[#1D493E] text-xs font-bold transition flex items-center justify-center gap-1.5 cursor-pointer"
                   >
-                    <span>Read story</span>
-                    <ArrowUpRight className="w-3.5 h-3.5" />
-                  </Link>
+                    <span>{addedProductId === prod.id ? 'Added to Cart!' : 'Add to cart'}</span>
+                    <ShoppingCart className="w-3.5 h-3.5" />
+                  </button>
                 </div>
-              </div>
-            ))}
+              );
+            })}
+          </div>
+
+        </div>
+      </section>
+
+      {/* 8.5 ORANGE HIGHLIGHT MARQUEE BANNER */}
+      <div className="bg-[#FF5A36] text-white py-6 overflow-hidden select-none relative z-10">
+        <div className="flex whitespace-nowrap gap-12 animate-marquee font-sans text-sm md:text-base font-extrabold uppercase tracking-widest">
+          <span>✦ ESCAPE THE ORDINARY ✦ SHOP TRAVEL GEAR ✦ DARE TO TRAVEL ✦ ADVENTURE AWAITS ✦ MODERN NOMAD ✦ SHOP ✦ ESCAPE THE ORDINARY ✦ SHOP TRAVEL GEAR ✦ DARE TO TRAVEL ✦ ADVENTURE AWAITS ✦ MODERN NOMAD ✦ SHOP ✦ ESCAPE THE ORDINARY ✦ SHOP TRAVEL GEAR ✦ DARE TO TRAVEL ✦ ADVENTURE AWAITS ✦ MODERN NOMAD ✦ SHOP</span>
+        </div>
+      </div>
+
+      {/* 9. MEET BONJO SECTION (Brand story) */}
+      <section className="max-w-7xl mx-auto px-6 md:px-12 pt-16 pb-8 relative overflow-visible">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
+          {/* Left Column: Image with slight rotation and glow */}
+          <div className="relative">
+            {/* Soft glow background */}
+            <div className="absolute -top-10 -left-10 w-48 h-48 bg-[#FF5A36]/15 rounded-full blur-3xl" />
+            <div className="relative rounded-[32px] overflow-hidden shadow-2xl border border-gray-150 transform -rotate-2 hover:rotate-0 transition-transform duration-500 w-full aspect-square max-w-[380px] mx-auto md:mx-0 bg-gray-50">
+              <img 
+                src="/llama_mascot.png" 
+                alt="Bonjo Mascot" 
+                className="w-full h-full object-cover"
+                style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
+              />
+            </div>
+          </div>
+
+          {/* Right Column: Text & Content */}
+          <div className="space-y-6 text-left">
+            <div className="space-y-3">
+              <span className="inline-block text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-1 rounded-[4px] text-xs font-bold uppercase tracking-wider">
+                The Banjara Soul
+              </span>
+              <h2 className="text-3xl md:text-[40px] font-serif font-black text-[#1D493E] leading-tight">
+                Meet Bonjo.
+              </h2>
+            </div>
+            <div className="space-y-4 text-gray-600 text-sm md:text-base font-medium leading-relaxed">
+              <p>
+                Go Banjara was born from a frustration travel in India had become a checklist. Same cafés, same photo spots, same three-day Goa loop. We wanted something slower, closer to the ground, and honest about the places it visited.
+              </p>
+              <p>
+                So we built a hybrid platform: curated small-group journeys, a shop of honest gear made by artisans we know by name, and a community of travelers who share notes from the road instead of just photos.
+              </p>
+              <p className="font-bold text-[#1D493E]">
+                Travel. Lifestyle. Community. Commerce. Under one roof because we don't think they were ever supposed to live apart.
+              </p>
+            </div>
+            <div className="pt-2">
+              <Link 
+                href="/about" 
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-[#1D493E] hover:bg-[#15342c] text-white text-sm font-bold transition-all shadow-sm cursor-pointer"
+              >
+                <span>Our Story</span>
+                <ArrowUpRight className="w-4 h-4" />
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
+      {/* 9.5 REVIEWS SECTION (Scrollable) */}
+      <section className="bg-white pt-16 pb-8 text-left relative z-10 border-t border-gray-100">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 space-y-10">
+          
+          <div className="space-y-3">
+            <span className="inline-block text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-1 rounded-[4px] text-xs font-bold uppercase tracking-wider">
+              Real Experiences
+            </span>
+            <h2 className="text-3xl md:text-[38px] font-sans font-black text-[#1D493E] leading-tight">
+              What <span className="text-[#FF5A36]">people say</span> about products
+            </h2>
+          </div>
+
+          {/* Scrollable Reviews Row */}
+          <div className="flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory scrollbar-none -mx-4 px-4 md:mx-0 md:px-0">
+            {[
+              {
+                id: "rev-1",
+                name: "Kiran Makwan",
+                subtitle: "Verified Wanderer",
+                avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150&q=80",
+                text: "The quality of the journal is incredible. It feels like a piece of art that I can actually take on my treks. Bonjo's personality shines through the brand!",
+                stars: 5
+              },
+              {
+                id: "rev-2",
+                name: "Ananya Roy",
+                subtitle: "Himalayan Backpacker",
+                avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&h=150&q=80",
+                text: "I bought the waterproof stickers for my laptop and flask. They've survived rain, dust, and countless camping trips without peeling or fading at all!",
+                stars: 5
+              },
+              {
+                id: "rev-3",
+                name: "Rohan Sharma",
+                subtitle: "Motorcycle Nomad",
+                avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&h=150&q=80",
+                text: "The Kashmir Road Trip package was pure magic. Extremely well-planned with authentic local homestays and off-the-beaten-path trails. Will book again!",
+                stars: 5
+              },
+              {
+                id: "rev-4",
+                name: "Priyanka Sen",
+                subtitle: "Slow Traveler",
+                avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&h=150&q=80",
+                text: "The double-walled thermal flask keeps my chai steaming hot even at 14,000 feet in Ladakh. Truly premium travel gear built for real conditions.",
+                stars: 5
+              },
+              {
+                id: "rev-5",
+                name: "Arjun Mehta",
+                subtitle: "Weekend Explorer",
+                avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&h=150&q=80",
+                text: "Super clean design on the T-shirts! The fit is perfect, the fabric is extremely soft and breathable, and the graphics represent the soul of travel.",
+                stars: 5
+              }
+            ].map((review) => (
+              <div 
+                key={review.id} 
+                className="bg-white rounded-2xl border border-gray-150 p-6 flex flex-col justify-between space-y-6 min-w-[280px] md:min-w-[360px] max-w-[360px] snap-start hover:shadow-xs transition duration-300"
+              >
+                <div className="space-y-4">
+                  {/* Rating Stars */}
+                  <div className="flex text-amber-400 text-sm gap-0.5">
+                    <Star className="w-3.5 h-3.5 fill-current" />
+                    <Star className="w-3.5 h-3.5 fill-current" />
+                    <Star className="w-3.5 h-3.5 fill-current" />
+                    <Star className="w-3.5 h-3.5 fill-current" />
+                    <Star className="w-3.5 h-3.5 fill-current" />
+                  </div>
+                  {/* Review Text */}
+                  <p className="text-gray-500 font-semibold italic text-xs md:text-sm leading-relaxed text-left">
+                    “{review.text}”
+                  </p>
+                </div>
+                {/* User Info */}
+                <div className="flex items-center gap-3 border-t border-gray-100 pt-4 text-left">
+                  <img 
+                    src={review.avatar} 
+                    alt={review.name} 
+                    className="w-10 h-10 rounded-full object-cover border border-gray-100 shrink-0" 
+                    style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
+                  />
+                  <div>
+                    <h4 className="text-xs font-bold text-[#1D493E]">{review.name}</h4>
+                    <p className="text-[10px] text-gray-400 font-bold">{review.subtitle}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* 10. TRAVEL DIARIES / STORIES */}
+      <section className="bg-white pt-8 pb-8 text-left relative z-10 border-t border-gray-100">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 space-y-12">
+          
+          <div className="text-center space-y-3">
+            <span className="inline-block text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-1 rounded-[4px] text-xs font-bold uppercase tracking-wider">
+              Blogs
+            </span>
+            <h2 className="text-3xl md:text-[38px] font-sans font-black text-[#1D493E] leading-tight">
+              Travel Tales from the <span className="text-[#FF5A36]">curious Explorer</span>
+            </h2>
+            <p className="text-gray-500 text-sm md:text-base font-semibold leading-relaxed max-w-2xl mx-auto">
+              Follow my voices to discover unique voices, breathtaking landscapes & unforgettable experiences
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-x-12 md:gap-y-10">
+            {BLOG_POSTS.slice(0, 4).map((post) => (
+              <Link 
+                key={post.id} 
+                href={`/blog`}
+                className="space-y-4 group block text-left"
+              >
+                {/* Image Wrapper */}
+                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-gray-100 border border-gray-150">
+                  <img 
+                    src={post.image} 
+                    alt={post.title} 
+                    className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
+                    style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
+                  />
+                </div>
+                {/* Text Content */}
+                <div className="space-y-2">
+                  <h3 className="text-lg md:text-xl font-serif font-black text-[#1D493E] leading-snug group-hover:text-[#FF5A36] transition-colors">
+                    {post.title}
+                  </h3>
+                  <p className="text-xs md:text-sm text-gray-400 font-bold leading-none">
+                    {post.date}  •  {post.readTime}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          {/* View all footer */}
+          <div className="text-center pt-4">
+            <Link 
+              href="/blog" 
+              className="inline-flex items-center gap-1.5 text-sm font-bold text-[#1D493E] hover:text-[#FF5A36] transition-all duration-300"
+            >
+              <span>View all</span>
+              <ArrowUpRight className="w-4 h-4" />
+            </Link>
+          </div>
+
+        </div>
+      </section>
+
       {/* 11. FAQ ACCORDION SECTION */}
-      <section className="max-w-4xl mx-auto px-6 md:px-12 py-16 text-center space-y-10">
-        <div className="space-y-2">
-          <span className="text-xs font-mono text-[#E05434] uppercase font-black tracking-widest">HELP DESK</span>
-          <h2 className="text-3xl md:text-4xl font-serif font-light text-[#1D493E]">
-            Frequently Asked <span className="text-[#E05434] font-serif font-normal">Questions</span>
+      <section className="max-w-4xl mx-auto px-6 md:px-12 pt-8 pb-16 text-center space-y-10">
+        <div className="space-y-3">
+          <span className="inline-block text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-1 rounded-[4px] text-xs font-bold uppercase tracking-wider">
+            Help Desk
+          </span>
+          <h2 className="text-3xl md:text-[38px] font-sans font-black text-[#1D493E] leading-tight">
+            Frequently Asked <span className="text-[#FF5A36]">Questions</span>
           </h2>
         </div>
 
@@ -574,10 +1147,12 @@ export default function Homepage() {
       {/* 12. WHY CHOOSE GO BANJARA / VALUES */}
       <section className="bg-[#FAF9F6] py-16 border-t border-[#1D493E]/5 text-left">
         <div className="max-w-7xl mx-auto px-6 md:px-12 space-y-12">
-          <div className="text-center space-y-2 max-w-2xl mx-auto">
-            <span className="text-xs font-mono text-[#E05434] uppercase font-black tracking-widest">OUR VALUES</span>
-            <h2 className="text-3xl font-serif font-light text-[#1D493E]">
-              Built For Travelers, By <span className="text-[#E05434] font-serif font-normal">Travelers</span>
+          <div className="text-center space-y-3 max-w-2xl mx-auto">
+            <span className="inline-block text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-1 rounded-[4px] text-xs font-bold uppercase tracking-wider">
+              Our Values
+            </span>
+            <h2 className="text-3xl md:text-[38px] font-sans font-black text-[#1D493E] leading-tight">
+              Built For Travelers, By <span className="text-[#FF5A36]">Travelers</span>
             </h2>
             <p className="text-gray-500 text-xs md:text-sm font-semibold leading-relaxed">
               We focus on safety, unique slow-travel routes, handcrafted durable products, and supporting remote communities.
@@ -626,37 +1201,6 @@ export default function Homepage() {
             </div>
           </div>
         </div>
-      </section>
-
-      {/* 13. BOTTOM NEWSLETTER / CTA */}
-      <section className="bg-[#1D493E] text-white py-16 text-center border-t border-white/5 relative overflow-hidden">
-        <div className="max-w-4xl mx-auto px-6 space-y-6 relative z-10">
-          <span className="text-[10px] font-mono text-[#FFFF80] font-black uppercase tracking-widest">JOIN THE TRIBE</span>
-          <h2 className="text-3xl md:text-5xl font-serif leading-tight font-light">
-            Keep up with <span className="text-[#FFFF80] font-serif font-normal">the road</span>
-          </h2>
-          <p className="text-xs md:text-sm text-slate-200 max-w-xl mx-auto leading-relaxed font-semibold">
-            Sign up to get notified of new itineraries, off-beat destination drops, and exclusive boutique product offers.
-          </p>
-          <div className="pt-4 max-w-md mx-auto">
-            <form onSubmit={(e) => { e.preventDefault(); alert("Welcome to the Go Banjara Tribe!"); }} className="flex gap-2 bg-white/5 border border-white/10 p-1.5 rounded-2xl">
-              <input 
-                type="email" 
-                required 
-                placeholder="Enter your email address" 
-                className="flex-1 px-4 py-3 bg-transparent border-0 text-xs font-semibold placeholder-slate-400 focus:ring-0 focus:outline-none"
-              />
-              <button 
-                type="submit" 
-                className="px-6 py-3 bg-[#E05434] hover:bg-[#c94526] text-white font-bold text-xs uppercase tracking-widest rounded-xl transition cursor-pointer"
-              >
-                Join Tribe
-              </button>
-            </form>
-          </div>
-        </div>
-        <Compass className="w-48 h-48 text-white/5 absolute -bottom-10 -left-10 transform rotate-12" />
-        <ShoppingBag className="w-48 h-48 text-white/5 absolute -top-10 -right-10 transform -rotate-12" />
       </section>
     </div>
   );

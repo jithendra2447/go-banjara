@@ -198,16 +198,29 @@ export default function KashmirDetails() {
     try {
       const saved = localStorage.getItem('gb_admin_packages');
       let parsed = saved ? JSON.parse(saved) : [];
-      const hasAllFields = HOLIDAY_PACKAGES.every(hp => {
-        const found = parsed.find((p: any) => p.id === hp.id);
-        return found && found.price !== undefined && found.link && found.routeList && found.itinerary;
+      
+      // Ensure all default packages exist in parsed
+      let merged = [...parsed];
+      let needsSave = false;
+      HOLIDAY_PACKAGES.forEach(hp => {
+        const foundIdx = merged.findIndex(p => p.id === hp.id);
+        if (foundIdx === -1) {
+          merged.push(hp);
+          needsSave = true;
+        } else {
+          // If default package is missing critical fields, restore it
+          const item = merged[foundIdx];
+          if (item.price === undefined || !item.routeList || !item.itinerary) {
+            merged[foundIdx] = hp;
+            needsSave = true;
+          }
+        }
       });
-      const isStale = !saved || parsed.length !== HOLIDAY_PACKAGES.length || !hasAllFields;
 
-      if (isStale) {
-        parsed = HOLIDAY_PACKAGES;
-        localStorage.setItem('gb_admin_packages', JSON.stringify(HOLIDAY_PACKAGES));
+      if (!saved || needsSave) {
+        localStorage.setItem('gb_admin_packages', JSON.stringify(merged));
       }
+      parsed = merged;
 
       if (parsed) {
         const filtered = parsed.filter((pkg: any) => {

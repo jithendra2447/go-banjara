@@ -11,6 +11,7 @@ import { useCart } from '@/components/providers';
 export const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isTravelHovered, setIsTravelHovered] = useState(false);
+  const [isShopHovered, setIsShopHovered] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const pathname = usePathname();
   const { cartCount, setCartOpen, wishlist, setWishlistOpen, user, logout, setAuthOpen } = useCart();
@@ -35,28 +36,6 @@ export const Navbar: React.FC = () => {
 
   return (
     <header className="w-full z-50 flex flex-col sticky top-0 bg-white shadow-sm border-b border-gray-100">
-      {/* 1. TOP INFO BAR (Black background, extremely thin) */}
-      <div className="bg-black text-white py-2 px-6 border-b border-white/5 text-[10px] sm:text-[11px] font-sans font-medium tracking-wide">
-        <div className="max-w-[1440px] mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 sm:gap-0">
-          {/* Left: Contact Info */}
-          <div className="flex items-center gap-6">
-            <a href="tel:+914035688076" className="flex items-center gap-1.5 hover:text-[#FFF080] transition-colors">
-              <Phone className="w-3.5 h-3.5 text-[#FFF080]" />
-              <span>+91 40 3568 8076</span>
-            </a>
-            <a href="mailto:hello@thereformdesign.com" className="flex items-center gap-1.5 hover:text-[#FFF080] transition-colors">
-              <Mail className="w-3.5 h-3.5 text-[#FFF080]" />
-              <span>hello@thereformdesign.com</span>
-            </a>
-          </div>
-          {/* Right: Location Currency */}
-          <div className="flex items-center gap-1.5 text-white/90">
-            <MapPin className="w-3.5 h-3.5 text-[#FF5B37]" />
-            <span>INR (₹) | Madhapur, Hyd</span>
-          </div>
-        </div>
-      </div>
-
       {/* 2. MAIN NAV BAR */}
       <nav className="h-24 flex items-center bg-white">
         <div className="max-w-[1440px] mx-auto px-6 w-full flex items-center justify-between">
@@ -71,20 +50,34 @@ export const Navbar: React.FC = () => {
           </Link>
 
           {/* Desktop Menu Links */}
-          <div className="hidden xl:flex items-center gap-2">
+          <div className="hidden xl:flex items-center gap-6">
             {navLinks.map((link) => {
               const active = isActive(link.path);
               const activeClass = active
-                ? 'bg-slate-100 text-[#1D493E] px-4 py-2.5 rounded-lg font-bold text-sm transition-all'
-                : 'text-[#2D2D2D]/90 hover:text-[#1D493E] px-4 py-2.5 font-medium text-sm transition-all';
+                ? 'bg-slate-50 text-[#1D493E] px-3.5 py-2 rounded-lg font-bold text-sm transition-all font-sans'
+                : 'text-[#2D2D2D]/85 hover:text-[#1D493E] px-3.5 py-2 font-semibold text-sm transition-all font-sans';
 
               if (link.name === 'Travel Packages') {
                 return (
                   <div
                     key={link.path}
-                    className="relative py-8"
+                    className="relative h-full flex items-center"
                     onMouseEnter={() => setIsTravelHovered(true)}
                     onMouseLeave={() => setIsTravelHovered(false)}
+                  >
+                    <Link href={link.path} className={activeClass}>
+                      <span>{link.name}</span>
+                    </Link>
+                  </div>
+                );
+              }
+              if (link.name === 'Shop') {
+                return (
+                  <div
+                    key={link.path}
+                    className="relative h-full flex items-center"
+                    onMouseEnter={() => setIsShopHovered(true)}
+                    onMouseLeave={() => setIsShopHovered(false)}
                   >
                     <Link href={link.path} className={activeClass}>
                       <span>{link.name}</span>
@@ -104,14 +97,14 @@ export const Navbar: React.FC = () => {
           <div className="flex items-center gap-4 shrink-0">
             
             {/* Search Input Box */}
-            <div className="hidden md:flex items-center border rounded-lg px-3 py-1.5 w-60 bg-white border-slate-200 text-slate-700 placeholder-slate-400">
+            <div className="hidden md:flex items-center border rounded-lg px-3 py-1.5 w-64 bg-white border-slate-200 text-slate-700 placeholder-slate-400">
               <svg className="w-4 h-4 mr-2 shrink-0 text-slate-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
               <input
                 type="text"
                 placeholder="Search by products"
-                className="w-full bg-transparent text-xs focus:outline-none font-sans font-medium placeholder-slate-400 text-slate-700"
+                className="w-full bg-transparent text-sm focus:outline-none font-sans font-medium placeholder-slate-400 text-slate-700"
               />
             </div>
 
@@ -123,8 +116,8 @@ export const Navbar: React.FC = () => {
             >
               <Heart className="w-5.5 h-5.5" />
               {wishlist.length > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] px-1 bg-[#FF5B37] text-white text-[9px] font-black rounded-full flex items-center justify-center border border-white">
-                  {wishlist.length}
+                <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 bg-[#FF5A36] text-white text-[9px] font-black rounded-full flex items-center justify-center border border-white">
+                  {wishlist.length < 10 ? `0${wishlist.length}` : wishlist.length}
                 </span>
               )}
             </button>
@@ -139,8 +132,8 @@ export const Navbar: React.FC = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
               </svg>
               {cartCount > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] px-1 bg-[#FF5B37] text-white text-[9px] font-black rounded-full flex items-center justify-center border border-white">
-                  {cartCount}
+                <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 bg-[#FF5A36] text-white text-[9px] font-black rounded-full flex items-center justify-center border border-white">
+                  {cartCount < 10 ? `0${cartCount}` : cartCount}
                 </span>
               )}
             </button>
@@ -217,6 +210,136 @@ export const Navbar: React.FC = () => {
           </div>
         </div>
       </nav>
+
+      {/* Mega Dropdown for Shop */}
+      {isShopHovered && (
+        <div 
+          className="absolute top-24 left-1/2 -translate-x-1/2 w-[calc(100%-3rem)] max-w-[1440px] bg-white border border-[#1D493E]/10 rounded-[32px] p-8 shadow-2xl z-50 flex gap-12 text-[#1D493E] animate-fade-in text-left"
+          onMouseEnter={() => setIsShopHovered(true)}
+          onMouseLeave={() => setIsShopHovered(false)}
+        >
+          {/* Columns */}
+          <div className="flex-1 grid grid-cols-3 gap-8">
+             {/* Column 1: Apparel & Footwear */}
+             <div className="space-y-4">
+                <Link 
+                  href="/shop" 
+                  onClick={() => setIsShopHovered(false)}
+                  className="group block border-b border-[#1D493E]/5 pb-2"
+                >
+                  <h4 className="font-sans text-xs font-black uppercase tracking-wider text-[#FF5A36] group-hover:underline">
+                    Apparel & Footwear
+                  </h4>
+                  <span className="text-[9px] text-gray-400 block font-medium mt-0.5">Premium comfort built for the open road</span>
+                </Link>
+                <ul className="space-y-3 pl-1">
+                   <li>
+                     <Link 
+                       href="/shop" 
+                       onClick={() => setIsShopHovered(false)} 
+                       className="group block"
+                     >
+                       <span className="text-xs font-black group-hover:text-[#FF5A36] transition">Banjara T-Shirts</span>
+                       <span className="text-[10px] text-gray-400 block font-medium mt-0.5">100% organic cotton graphic tees with custom nomad art</span>
+                     </Link>
+                   </li>
+                   <li>
+                     <Link 
+                       href="/shop" 
+                       onClick={() => setIsShopHovered(false)} 
+                       className="group block"
+                     >
+                       <span className="text-xs font-black group-hover:text-[#FF5A36] transition">Adventure Slides & Sandals</span>
+                       <span className="text-[10px] text-gray-400 block font-medium mt-0.5">Waterproof, lightweight, and durable footwear</span>
+                     </Link>
+                   </li>
+                </ul>
+             </div>
+             
+             {/* Column 2: Nomad Accessories */}
+             <div className="space-y-4">
+                <Link 
+                  href="/shop" 
+                  onClick={() => setIsShopHovered(false)}
+                  className="group block border-b border-[#1D493E]/5 pb-2"
+                >
+                  <h4 className="font-sans text-xs font-black uppercase tracking-wider text-[#FF5A36] group-hover:underline">
+                    Nomad Accessories
+                  </h4>
+                  <span className="text-[9px] text-gray-400 block font-medium mt-0.5">Small details that carry the spirit of travel</span>
+                </Link>
+                <ul className="space-y-3 pl-1">
+                   <li>
+                     <Link 
+                       href="/shop" 
+                       onClick={() => setIsShopHovered(false)} 
+                       className="group block"
+                     >
+                       <span className="text-xs font-black group-hover:text-[#FF5A36] transition">Badges & Keychains</span>
+                       <span className="text-[10px] text-gray-400 block font-medium mt-0.5">Collectibles, pins, and custom keychains</span>
+                     </Link>
+                   </li>
+                   <li>
+                     <Link 
+                       href="/shop" 
+                       onClick={() => setIsShopHovered(false)} 
+                       className="group block"
+                     >
+                       <span className="text-xs font-black group-hover:text-[#FF5A36] transition">Sticker Packs</span>
+                       <span className="text-[10px] text-gray-400 block font-medium mt-0.5">Waterproof vinyl stickers for flasks, laptops, and bikes</span>
+                     </Link>
+                   </li>
+                </ul>
+             </div>
+
+             {/* Column 3: Featured Collections */}
+             <div className="space-y-4">
+                <Link 
+                  href="/shop" 
+                  onClick={() => setIsShopHovered(false)}
+                  className="group block border-b border-[#1D493E]/5 pb-2"
+                >
+                  <h4 className="font-sans text-xs font-black uppercase tracking-wider text-[#FF5A36] group-hover:underline">
+                    Featured Collections
+                  </h4>
+                  <span className="text-[9px] text-gray-400 block font-medium mt-0.5">Curated releases and seasonal selections</span>
+                </Link>
+                <ul className="space-y-3 pl-1">
+                   <li>
+                     <Link 
+                       href="/shop/travels-essentials" 
+                       onClick={() => setIsShopHovered(false)} 
+                       className="group block"
+                     >
+                       <span className="text-xs font-black group-hover:text-[#FF5A36] transition">Travel Essentials</span>
+                       <span className="text-[10px] text-gray-400 block font-medium mt-0.5">Flasks, gear, and tools built for real conditions</span>
+                     </Link>
+                   </li>
+                   <li>
+                     <Link 
+                       href="/shop/discount-sale" 
+                       onClick={() => setIsShopHovered(false)} 
+                       className="group block"
+                     >
+                       <span className="text-xs font-black group-hover:text-[#FF5A36] transition">Discount Sale</span>
+                       <span className="text-[10px] text-gray-400 block font-medium mt-0.5">Limited-time deals on community favorites</span>
+                     </Link>
+                   </li>
+                   <li>
+                     <Link 
+                       href="/shop/all" 
+                       onClick={() => setIsShopHovered(false)} 
+                       className="group block"
+                     >
+                       <span className="text-xs font-black group-hover:text-[#FF5A36] transition">View All Products</span>
+                       <span className="text-[10px] text-gray-400 block font-medium mt-0.5">Browse the complete Go Banjara travel bazaar</span>
+                     </Link>
+                   </li>
+                </ul>
+             </div>
+          </div>
+        </div>
+      )}
 
       {/* Mega Dropdown for Travel Packages */}
       {isTravelHovered && (

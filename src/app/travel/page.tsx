@@ -89,38 +89,41 @@ export default function HolidaysPortal() {
     try {
       const saved = localStorage.getItem('gb_admin_packages');
       let parsed = saved ? JSON.parse(saved) : [];
-      const hasAllFields = HOLIDAY_PACKAGES.every(hp => {
-        const found = parsed.find((p: any) => p.id === hp.id);
-        return found && found.price !== undefined && found.link && found.routeList && found.itinerary;
-      });
-      const isStale = !saved || parsed.length !== HOLIDAY_PACKAGES.length || !hasAllFields;
-
-      if (isStale) {
-        setPackages(HOLIDAY_PACKAGES);
-        localStorage.setItem('gb_admin_packages', JSON.stringify(HOLIDAY_PACKAGES));
-      } else {
-        // Force update the link and image for the Srinagar-to-Leh package
-        let linkUpdated = false;
-        const updatedParsed = parsed.map((p: any) => {
-          if (p.id === 'pkg-kashmir-classic') {
-            if (p.link !== '/travel/srinagar-to-leh') {
-              p.link = '/travel/srinagar-to-leh';
-              linkUpdated = true;
-            }
-            if (p.image !== '/travel-leh-6.jpg') {
-              p.image = '/travel-leh-6.jpg';
-              linkUpdated = true;
-            }
-          }
-          return p;
-        });
-        if (linkUpdated) {
-          setPackages(updatedParsed);
-          localStorage.setItem('gb_admin_packages', JSON.stringify(updatedParsed));
+      
+      // Ensure all default packages exist in parsed
+      let merged = [...parsed];
+      let needsSave = false;
+      HOLIDAY_PACKAGES.forEach(hp => {
+        const foundIdx = merged.findIndex(p => p.id === hp.id);
+        if (foundIdx === -1) {
+          merged.push(hp);
+          needsSave = true;
         } else {
-          setPackages(updatedParsed);
+          // If default package is missing critical fields, restore it
+          const item = merged[foundIdx];
+          if (item.price === undefined || !item.routeList || !item.itinerary) {
+            merged[foundIdx] = hp;
+            needsSave = true;
+          }
         }
+      });
+
+      // Force update the link and image for the Srinagar-to-Leh package
+      merged = merged.map((p: any) => {
+        if (p.id === 'pkg-kashmir-classic') {
+          if (p.link !== '/travel/srinagar-to-leh' || p.image !== '/travel-leh-6.jpg') {
+            p.link = '/travel/srinagar-to-leh';
+            p.image = '/travel-leh-6.jpg';
+            needsSave = true;
+          }
+        }
+        return p;
+      });
+
+      if (!saved || needsSave) {
+        localStorage.setItem('gb_admin_packages', JSON.stringify(merged));
       }
+      setPackages(merged);
     } catch (e) {
       console.error(e);
       setPackages(HOLIDAY_PACKAGES);

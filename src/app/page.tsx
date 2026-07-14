@@ -121,10 +121,18 @@ export default function Homepage() {
         if (Array.isArray(parsed) && parsed.length > 0) {
           const updated = parsed.map((p: any) => {
             if (p.id === 'pkg-kashmir-gulmarg') {
-              return { ...p, name: 'Gulmarg Winter Skiing' };
+              return { 
+                ...p, 
+                name: 'Gulmarg Winter Skiing', 
+                description: 'Ascend Asia\'s highest cable car to ski Apharwat Peak with expert coaching and cozy chalets.' 
+              };
             }
             if (p.id === 'pkg-kerala-4in1') {
-              return { ...p, name: 'KERALA COUPLE SPL' };
+              return { 
+                ...p, 
+                name: 'Kerala Couple Spl', 
+                description: 'A curated couple & family getaway exploring Munnar hills, Periyar wildlife, and Alleppey backwaters.' 
+              };
             }
             return p;
           });

@@ -245,7 +245,7 @@ export const HOLIDAY_PACKAGES: HolidayPackage[] = [
     hotelClass: '5',
     route: 'Srinagar → Gulmarg → Srinagar',
     routeList: ['Srinagar', 'Gulmarg Chalet', 'Srinagar Houseboat'],
-    description: 'Ascend the highest cable car in Asia to the pristine powder slopes of Apharwat Peak. Enjoy certified ski instruction, snug lodging in heated alpine chalets, and hot cups of local cardamom tea.',
+    description: 'Ascend Asia\'s highest cable car to ski Apharwat Peak with expert coaching and cozy chalets.',
     inclusions: ['flights', 'hotel', 'transfers', 'meals', 'sightseeing'],
     highlights: [
       'Certified ski instruction on pristine powder slopes',
@@ -392,7 +392,7 @@ export const HOLIDAY_PACKAGES: HolidayPackage[] = [
   },
   {
     id: 'pkg-kerala-4in1',
-    name: 'KERALA COUPLE SPL',
+    name: 'Kerala Couple Spl',
     price: 24999,
     originalPrice: 39999,
     duration: '5 Days / 4 Nights',
@@ -403,7 +403,7 @@ export const HOLIDAY_PACKAGES: HolidayPackage[] = [
     hotelClass: '4',
     route: 'Kochi → Munnar → Thekkady → Alleppey → Kochi',
     routeList: ['Kochi', 'Munnar', 'Thekkady', 'Alleppey'],
-    description: '4in1 Couple & Family Special Private Trip to Kerala. Experience the best of Munnar hills, Thekkady wildlife, and Alleppey backwaters in a single curated journey.',
+    description: 'A curated couple & family getaway exploring Munnar hills, Periyar wildlife, and Alleppey backwaters.',
     inclusions: ['hotel', 'transfers', 'meals', 'sightseeing'],
     highlights: [
       'Private AC Sedan transport with friendly driver',

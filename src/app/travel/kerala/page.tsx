@@ -52,7 +52,7 @@ export interface KeralaPackage {
 const KERALA_PACKAGES: KeralaPackage[] = [
   {
     id: 'pkg-kerala-4in1',
-    name: 'KERALA COUPLE SPL',
+    name: 'Kerala Couple Spl',
     tabName: '4in1 Private',
     price: 24999,
     originalPrice: 39999,

@@ -264,7 +264,7 @@ export default function Homepage() {
 
           {/* Layer 2: White Gradient Fade (Positioned behind/back side of the bike to transition to the metrics section) */}
           <div 
-            className="absolute inset-x-0 bottom-0 h-5 z-20 pointer-events-none" 
+            className="absolute inset-x-0 bottom-0 h-2 z-20 pointer-events-none" 
             style={{ 
               background: 'linear-gradient(to top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%)' 
             }}

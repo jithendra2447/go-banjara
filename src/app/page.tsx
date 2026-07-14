@@ -391,29 +391,45 @@ export default function Homepage() {
       </section>
 
       {/* 4. DESTINATIONS SECTION */}
-      <section className="bg-white pt-2 pb-4 relative z-10">
-        <div className="max-w-[1440px] mx-auto px-6 md:px-20 space-y-12 text-center">
+      <section className="bg-white py-16 relative z-10">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-20 space-y-12">
           
-          <div className="space-y-3">
-            <span className="inline-block text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-1 rounded-[4px] text-xs font-bold uppercase tracking-wider">
-              Destinations
-            </span>
-            <h2 className="text-3xl md:text-[38px] font-sans font-black text-[#1D493E] leading-tight">
-              Place worth the <span className="text-[#FF5A36]">detour</span>
-            </h2>
-            <p className="text-gray-500 text-sm md:text-base font-semibold leading-relaxed max-w-xl mx-auto">
-              A hand-picked map of the corners of India our community keeps coming back to
-            </p>
-          </div>          <div className="space-y-8">
+          {/* Header Row (Flow Horizontal, Justify space-between, Width Fill 1280px, Height Hug 134px) */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-gray-100">
+            <div className="space-y-3.5 text-left max-w-4xl">
+              <div>
+                <span className="inline-block text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-1 rounded-[4px] text-xs font-bold uppercase tracking-wider">
+                  Destinations
+                </span>
+              </div>
+              <h2 className="text-3xl md:text-[42px] font-serif font-semibold text-[#1D493E] leading-none">
+                Place worth the <span className="text-[#FF5A36]">detour</span>
+              </h2>
+              <p className="text-gray-500 text-base md:text-[24px] md:leading-8 font-medium">
+                A hand-picked map of the corners of India our community keeps coming back to
+              </p>
+            </div>
+            <div className="shrink-0 pb-1">
+              <Link 
+                href="/travel" 
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl border border-[#1D493E] text-[#1D493E] hover:bg-[#1D493E] hover:text-white text-sm font-bold transition-all duration-300 cursor-pointer"
+              >
+                <span>Explore all destinations</span>
+                <ArrowUpRight className="w-4.5 h-4.5" />
+              </Link>
+            </div>
+          </div>
+
+          <div className="space-y-8">
             {/* Featured Destination Card (Top) */}
             {(() => {
               const displayPkgs = packagesList && packagesList.length > 0 ? packagesList : HOLIDAY_PACKAGES;
               const pkg1 = displayPkgs[0];
               if (!pkg1) return null;
               return (
-                <div className="bg-white rounded-2xl shadow-xs p-5 md:p-6 grid grid-cols-1 md:grid-cols-2 gap-8 items-center text-left">
+                <div className="bg-white rounded-[4px] border border-gray-150/60 shadow-xs grid grid-cols-1 md:grid-cols-2 gap-0 max-w-[1280px] mx-auto overflow-hidden md:h-[394px] text-left">
                   {/* Image */}
-                  <div className="relative h-[280px] md:h-[360px] rounded-xl overflow-hidden">
+                  <div className="relative h-[280px] md:h-full w-full overflow-hidden">
                     <img 
                       src={pkg1.image} 
                       alt={pkg1.name} 
@@ -422,40 +438,40 @@ export default function Homepage() {
                     />
                   </div>
                   {/* Details */}
-                  <div className="space-y-6">
+                  <div className="p-6 md:p-8 flex flex-col justify-between h-full space-y-4">
                     <div className="flex items-center gap-3">
-                      <span className="text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-0.5 rounded text-xs font-bold">{pkg1.category || 'Road Trip'}</span>
-                      <span className="bg-gray-100 text-gray-600 px-2.5 py-0.5 rounded text-xs font-bold">{pkg1.durationDays} days</span>
+                      <span className="text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-0.5 rounded-[4px] text-xs font-bold">{pkg1.category || 'Road Trip'}</span>
+                      <span className="bg-gray-100 text-gray-600 px-2.5 py-0.5 rounded-[4px] text-xs font-bold">{pkg1.durationDays} days</span>
                     </div>
                     <div className="flex justify-between items-baseline gap-4">
-                      <h3 className="text-2xl md:text-[32px] font-sans font-black text-[#1D493E] leading-tight">{pkg1.name}</h3>
-                      <span className="text-xl md:text-[24px] font-sans font-black text-[#1D493E] shrink-0">₹{pkg1.price.toLocaleString('en-IN')}/Person</span>
+                      <h3 className="text-2xl md:text-[32px] font-sans font-bold text-[#1D493E] leading-tight">{pkg1.name}</h3>
+                      <span className="text-xl md:text-[24px] font-sans font-bold text-[#1D493E] shrink-0">₹{(pkg1.price ?? 0).toLocaleString('en-IN')}/Person</span>
                     </div>
-                    <p className="text-xs md:text-sm text-gray-500 font-semibold leading-relaxed">
+                    <p className="text-xs md:text-sm text-gray-500 font-semibold leading-relaxed line-clamp-2">
                       {pkg1.description}
                     </p>
                     {/* Details Grid */}
                     <div className="grid grid-cols-2 gap-y-4 gap-x-6 border-t border-gray-150 pt-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-lg flex items-center justify-center shrink-0">
+                        <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
                           <MapPin className="w-4 h-4 text-[#1D493E]" />
                         </div>
                         <span className="text-xs font-bold text-gray-600">Starts from {pkg1.startPoint || 'Srinagar'}</span>
                       </div>
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-lg flex items-center justify-center shrink-0">
+                        <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
                           <Users className="w-4 h-4 text-[#1D493E]" />
                         </div>
                         <span className="text-xs font-bold text-gray-600">{pkg1.groupType || 'Curated group Trip'}</span>
                       </div>
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-lg flex items-center justify-center shrink-0">
+                        <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
                           <ArrowUpRight className="w-4 h-4 text-[#1D493E]" />
                         </div>
                         <span className="text-xs font-bold text-gray-600">{pkg1.difficulty || 'Moderate'} Difficulty</span>
                       </div>
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-lg flex items-center justify-center shrink-0">
+                        <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
                           <Calendar className="w-4 h-4 text-[#1D493E]" />
                         </div>
                         <span className="text-xs font-bold text-gray-600">Next: {pkg1.nextDeparture || 'Aug, 2026'}</span>
@@ -465,13 +481,13 @@ export default function Homepage() {
                     <div className="flex gap-4 pt-2">
                       <Link 
                         href={`/travel/package/${pkg1.id}`} 
-                        className="flex-1 py-3 rounded-lg bg-[#1D493E] hover:bg-[#15342c] text-white text-xs font-bold text-center transition cursor-pointer"
+                        className="flex-1 py-3 rounded-[4px] bg-[#1D493E] hover:bg-[#15342c] text-white text-xs font-bold text-center transition cursor-pointer"
                       >
                         Book Now
                       </Link>
                       <Link 
                         href={pkg1.link || `/travel/package/${pkg1.id}`} 
-                        className="flex-1 py-3 rounded-lg border border-[#1D493E] text-center text-[#1D493E] hover:bg-gray-50 text-xs font-bold transition"
+                        className="flex-1 py-3 rounded-[4px] border border-[#1D493E] text-center text-[#1D493E] hover:bg-gray-50 text-xs font-bold transition"
                       >
                         Get details
                       </Link>
@@ -486,9 +502,9 @@ export default function Homepage() {
               {(() => {
                 const displayPkgs = packagesList && packagesList.length > 0 ? packagesList : HOLIDAY_PACKAGES;
                 return displayPkgs.slice(1, 3).map((pkg) => (
-                  <div key={pkg.id} className="bg-white rounded-2xl shadow-xs p-5 flex flex-col justify-between text-left">
+                  <div key={pkg.id} className="bg-white rounded-[4px] border border-gray-150/60 shadow-xs p-5 flex flex-col justify-between text-left">
                     <div className="space-y-5">
-                      <div className="relative h-[200px] md:h-[240px] rounded-xl overflow-hidden">
+                      <div className="relative h-[200px] md:h-[240px] rounded-[4px] overflow-hidden">
                         <img 
                           src={pkg.image} 
                           alt={pkg.name} 
@@ -497,12 +513,12 @@ export default function Homepage() {
                         />
                       </div>
                       <div className="flex items-center gap-3">
-                        <span className="text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-0.5 rounded text-xs font-bold">{pkg.category || 'Road Trip'}</span>
-                        <span className="bg-gray-100 text-gray-600 px-2.5 py-0.5 rounded text-xs font-bold">{pkg.durationDays} days</span>
+                        <span className="text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-0.5 rounded-[4px] text-xs font-bold">{pkg.category || 'Road Trip'}</span>
+                        <span className="bg-gray-100 text-gray-600 px-2.5 py-0.5 rounded-[4px] text-xs font-bold">{pkg.durationDays} days</span>
                       </div>
                       <div className="flex justify-between items-baseline gap-4">
-                        <h3 className="text-xl md:text-[24px] font-sans font-black text-[#1D493E] leading-tight">{pkg.name}</h3>
-                        <span className="text-lg md:text-[20px] font-sans font-black text-[#1D493E] shrink-0">₹{pkg.price.toLocaleString('en-IN')}/Person</span>
+                        <h3 className="text-xl md:text-[24px] font-sans font-bold text-[#1D493E] leading-tight">{pkg.name}</h3>
+                        <span className="text-lg md:text-[20px] font-sans font-bold text-[#1D493E] shrink-0">₹{(pkg.price ?? 0).toLocaleString('en-IN')}/Person</span>
                       </div>
                       <p className="text-xs text-gray-500 font-semibold leading-relaxed line-clamp-2">
                         {pkg.description}
@@ -510,25 +526,25 @@ export default function Homepage() {
                       {/* Details Grid */}
                       <div className="grid grid-cols-2 gap-y-4 gap-x-4 border-t border-gray-150 pt-4">
                         <div className="flex items-center gap-2.5">
-                          <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-lg flex items-center justify-center shrink-0">
+                          <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
                             <MapPin className="w-4 h-4 text-[#1D493E]" />
                           </div>
                           <span className="text-xs font-bold text-gray-600 leading-tight">Starts from {pkg.startPoint || 'Srinagar'}</span>
                         </div>
                         <div className="flex items-center gap-2.5">
-                          <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-lg flex items-center justify-center shrink-0">
+                          <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
                             <Users className="w-4 h-4 text-[#1D493E]" />
                           </div>
                           <span className="text-xs font-bold text-gray-600 leading-tight">{pkg.groupType || 'Curated group Trip'}</span>
                         </div>
                         <div className="flex items-center gap-2.5">
-                          <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-lg flex items-center justify-center shrink-0">
+                          <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
                             <ArrowUpRight className="w-4 h-4 text-[#1D493E]" />
                           </div>
                           <span className="text-xs font-bold text-gray-600 leading-tight">{pkg.difficulty || 'Moderate'} Difficulty</span>
                         </div>
                         <div className="flex items-center gap-2.5">
-                          <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-lg flex items-center justify-center shrink-0">
+                          <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
                             <Calendar className="w-4 h-4 text-[#1D493E]" />
                           </div>
                           <span className="text-xs font-bold text-gray-600 leading-tight">Next: {pkg.nextDeparture || 'Aug, 2026'}</span>
@@ -539,13 +555,13 @@ export default function Homepage() {
                     <div className="flex gap-3 pt-6">
                       <Link 
                         href={`/travel/package/${pkg.id}`} 
-                        className="flex-1 py-3 rounded-lg bg-[#1D493E] hover:bg-[#15342c] text-white text-xs font-bold text-center transition cursor-pointer"
+                        className="flex-1 py-3 rounded-[4px] bg-[#1D493E] hover:bg-[#15342c] text-white text-xs font-bold text-center transition cursor-pointer"
                       >
                         Book Now
                       </Link>
                       <Link 
                         href={pkg.link || `/travel/package/${pkg.id}`} 
-                        className="flex-1 py-3 rounded-lg border border-[#1D493E] text-center text-[#1D493E] hover:bg-gray-50 text-xs font-bold transition"
+                        className="flex-1 py-3 rounded-[4px] border border-[#1D493E] text-center text-[#1D493E] hover:bg-gray-50 text-xs font-bold transition"
                       >
                         Get details
                       </Link>
@@ -555,44 +571,35 @@ export default function Homepage() {
               })()}
             </div>
           </div>
-
-          {/* Explore all destinations footer */}
-          <div className="pt-4">
-            <Link 
-              href="/travel" 
-              className="inline-flex items-center gap-1.5 text-sm font-bold text-[#1D493E] hover:text-[#FF5A36] transition-all duration-300"
-            >
-              <span>Explore all destinations</span>
-              <ArrowUpRight className="w-4 h-4" />
-            </Link>
-          </div>
-
         </div>
       </section>
 
       {/* 5. TOP PRODUCT CATEGORIES */}
-      <section className="bg-white pt-4 pb-12 text-left relative z-10">
+      <section className="bg-white py-16 text-left relative z-10">
         <div className="max-w-[1440px] mx-auto px-6 md:px-20 space-y-10">
           
-          <div className="text-center max-w-2xl mx-auto space-y-4">
-            <div>
-              <span className="inline-block text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-1 rounded-[4px] text-xs font-bold uppercase tracking-wider">
-                The Collection
-              </span>
+          {/* Header Row (Flow Horizontal, Justify space-between, Width Fill 1280px, Height Hug 134px) */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-gray-100">
+            <div className="space-y-3.5 text-left max-w-4xl">
+              <div>
+                <span className="inline-block text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-1 rounded-[4px] text-xs font-bold uppercase tracking-wider">
+                  The Collection
+                </span>
+              </div>
+              <h2 className="text-3xl md:text-[42px] font-serif font-semibold text-[#1D493E] leading-none">
+                Shop Our <span className="text-[#FF5A36]">Top Product Categories</span>
+              </h2>
+              <p className="text-gray-500 text-base md:text-[24px] md:leading-8 font-medium">
+                A hand-picked map of the corners of India our community keeps coming back to
+              </p>
             </div>
-            <h2 className="text-3xl md:text-[38px] font-sans font-black text-[#1D493E] leading-tight">
-              Shop from our <span className="text-[#FF5A36]">Top Product Categories</span>
-            </h2>
-            <p className="text-gray-500 text-sm md:text-base font-semibold leading-relaxed">
-              A hand-picked map of the corners of India our community keeps coming back to
-            </p>
-            <div className="pt-2">
+            <div className="shrink-0 pb-1">
               <Link 
                 href="/shop"
-                className="inline-flex items-center gap-1.5 text-sm font-bold text-[#1D493E] hover:text-[#FF5A36] transition"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl border border-[#1D493E] text-[#1D493E] hover:bg-[#1D493E] hover:text-white text-sm font-bold transition-all duration-300 cursor-pointer"
               >
                 <span>View all products</span>
-                <ArrowUpRight className="w-4 h-4" />
+                <ArrowUpRight className="w-4.5 h-4.5" />
               </Link>
             </div>
           </div>

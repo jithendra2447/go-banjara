@@ -729,8 +729,8 @@ export default function Homepage() {
       </div>
 
       {/* 7. TODAY'S BEST DEALS FOR YOU */}
-      <section className="bg-white py-16 text-left relative z-10">
-        <div className="max-w-[1280px] w-full mx-auto px-6 md:px-0 flex flex-col gap-[32px]">
+      <section className="bg-white relative z-10">
+        <div className="max-w-[1440px] w-full mx-auto pt-[42px] pb-[24px] px-6 md:px-[80px] flex flex-col gap-[62px]">
           
           <div className="text-center space-y-3">
             <span className="inline-block text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-1 rounded-[4px] text-xs font-bold uppercase tracking-wider">

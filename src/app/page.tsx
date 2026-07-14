@@ -428,9 +428,9 @@ export default function Homepage() {
                     />
                   </div>
                   {/* Details */}
-                  <div className="flex-1 pt-[16px] pb-[16px] px-[24px] flex flex-col justify-between h-full">
+                  <div className="flex-1 pt-[12px] pb-[12px] px-[24px] flex flex-col justify-between h-full">
                     {/* Top Group (Width: Fill, Height: 151px, Gap: 12px) */}
-                    <div className="flex flex-col gap-3 h-[151px] shrink-0 w-full">
+                    <div className="flex flex-col gap-2 min-h-[140px] shrink-0 w-full">
                       {/* Tags Container (Width: Fill, Height: Hug 28px, Justify: space-between) */}
                       <div className="flex justify-between items-center w-full h-[28px] shrink-0">
                         <span className="text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-0.5 rounded-[4px] text-xs font-bold">{pkg1.category || 'Road Trip'}</span>
@@ -445,7 +445,7 @@ export default function Homepage() {
                       </p>
                     </div>
                     {/* Details Grid Block (Width: Fill 624px, Height: Hug 116px, Justify: space-between) */}
-                    <div className="flex flex-col md:flex-row justify-between h-auto md:h-[116px] border-t border-gray-200 pt-4 w-full shrink-0 gap-6 md:gap-0">
+                    <div className="flex flex-col md:flex-row justify-between h-auto md:h-[96px] border-t border-gray-200 pt-3 w-full shrink-0 gap-6 md:gap-0">
                       {/* Column 1 (Width: 308px, Height: 116px, Gap: 24px) */}
                       <div className="flex flex-col justify-between h-auto md:h-full w-full md:w-[308px] shrink-0 gap-6 md:gap-0">
                         <div className="flex items-center gap-2.5">
@@ -513,9 +513,9 @@ export default function Homepage() {
                       />
                     </div>
                     {/* Details block with padding */}
-                    <div className="flex-1 flex flex-col justify-between pt-[16px] pb-[16px] px-[24px]">
+                    <div className="flex-1 flex flex-col justify-between pt-[12px] pb-[12px] px-[24px]">
                       {/* Top Group (Width: Fill, Height: 151px, Gap: 12px) */}
-                      <div className="flex flex-col gap-3 h-[151px] shrink-0 w-full">
+                      <div className="flex flex-col gap-2 min-h-[140px] shrink-0 w-full">
                         {/* Tags Container (Width: Fill, Height: Hug 28px, Justify: space-between) */}
                         <div className="flex justify-between items-center w-full h-[28px] shrink-0">
                           <span className="text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-0.5 rounded-[4px] text-xs font-bold">{pkg.category || 'Road Trip'}</span>
@@ -531,7 +531,7 @@ export default function Homepage() {
                       </div>
 
                       {/* Details Grid Block (Width: Fill 624px, Height: Hug 116px, Justify: space-between) */}
-                      <div className="flex flex-col md:flex-row justify-between h-auto md:h-[116px] border-t border-gray-200 pt-4 w-full shrink-0 gap-6 md:gap-0">
+                      <div className="flex flex-col md:flex-row justify-between h-auto md:h-[96px] border-t border-gray-200 pt-3 w-full shrink-0 gap-6 md:gap-0">
                         {/* Column 1 (Width: 308px, Height: 116px, Gap: 24px) */}
                         <div className="flex flex-col justify-between h-auto md:h-full w-full md:w-[308px] shrink-0 gap-6 md:gap-0">
                           <div className="flex items-center gap-2.5">

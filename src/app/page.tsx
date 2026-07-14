@@ -490,7 +490,7 @@ export default function Homepage() {
             {(() => {
               const displayPkgs = packagesList && packagesList.length > 0 ? packagesList : HOLIDAY_PACKAGES;
               return displayPkgs.slice(1, 3).map((pkg) => (
-                <div key={pkg.id} className="bg-white rounded-[4px] border border-gray-150/60 shadow-xs p-6 md:p-8 flex flex-col justify-between text-left md:h-[778px]">
+                <div key={pkg.id} className="bg-white rounded-[4px] border border-gray-150/60 shadow-xs p-6 md:p-8 flex flex-col justify-between text-left md:min-h-[778px]">
                   {/* Image */}
                   <div className="relative h-[200px] md:h-[384px] rounded-[4px] overflow-hidden shrink-0">
                     <img 

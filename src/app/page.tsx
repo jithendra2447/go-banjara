@@ -119,7 +119,16 @@ export default function Homepage() {
       try {
         const parsed = JSON.parse(savedPkgs);
         if (Array.isArray(parsed) && parsed.length > 0) {
-          setPackagesList(parsed);
+          const updated = parsed.map((p: any) => {
+            if (p.id === 'pkg-kashmir-gulmarg') {
+              return { ...p, name: 'Gulmarg Winter Skiing' };
+            }
+            if (p.id === 'pkg-kerala-4in1') {
+              return { ...p, name: 'KERALA COUPLE SPL' };
+            }
+            return p;
+          });
+          setPackagesList(updated);
         }
       } catch (e) {
         console.error('Error loading packages:', e);
@@ -405,7 +414,7 @@ export default function Homepage() {
               Place worth the <span className="text-[#FF5A36]">detour</span>
             </h2>
             <p className="text-gray-500 text-base md:text-[24px] md:leading-8 font-medium text-center max-w-2xl mx-auto">
-              A hand-picked map of the corners of India our community keeps coming back to
+              A hand-picked map of the corners of India
             </p>
           </div>
 
@@ -616,7 +625,7 @@ export default function Homepage() {
                 Shop from our <span className="text-[#FF5A36]">Top Product Categories</span>
               </h2>
               <p className="text-gray-500 text-base md:text-[24px] md:leading-8 font-medium">
-                A hand-picked map of the corners of India our community keeps coming back to
+                A hand-picked map of the corners of India
               </p>
             </div>
             <div className="shrink-0 pb-1">

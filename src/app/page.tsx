@@ -429,7 +429,8 @@ export default function Homepage() {
                   </div>
                   {/* Details */}
                   <div className="p-[24px] flex flex-col justify-between h-full gap-6">
-                    <div className="flex items-center gap-3">
+                    {/* Tags Container (Width: Fill, Height: Hug 28px, Justify: space-between) */}
+                    <div className="flex justify-between items-center w-full h-[28px] shrink-0">
                       <span className="text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-0.5 rounded-[4px] text-xs font-bold">{pkg1.category || 'Road Trip'}</span>
                       <span className="bg-gray-100 text-gray-600 px-2.5 py-0.5 rounded-[4px] text-xs font-bold">{pkg1.durationDays} days</span>
                     </div>
@@ -509,7 +510,8 @@ export default function Homepage() {
                     {/* Details block with padding */}
                     <div className="flex-1 flex flex-col justify-between p-[24px]">
                       <div className="flex flex-col gap-4">
-                        <div className="flex items-center gap-3">
+                        {/* Tags Container (Width: Fill, Height: Hug 28px, Justify: space-between) */}
+                        <div className="flex justify-between items-center w-full h-[28px] shrink-0">
                           <span className="text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-0.5 rounded-[4px] text-xs font-bold">{pkg.category || 'Road Trip'}</span>
                           <span className="bg-gray-100 text-gray-600 px-2.5 py-0.5 rounded-[4px] text-xs font-bold">{pkg.durationDays} days</span>
                         </div>

@@ -234,7 +234,7 @@ export const HOLIDAY_PACKAGES: HolidayPackage[] = [
   },
   {
     id: 'pkg-kashmir-gulmarg',
-    name: 'Gulmarg Winter Skiing & Gondola Adventure',
+    name: 'Gulmarg Winter Skiing',
     price: 26900,
     originalPrice: 32000,
     duration: '7 Days / 6 Nights',
@@ -392,7 +392,7 @@ export const HOLIDAY_PACKAGES: HolidayPackage[] = [
   },
   {
     id: 'pkg-kerala-4in1',
-    name: '4IN1 KERALA COUPLE & FAMILY SPL – PRIVATE TRIP – 5Days/4Nights',
+    name: 'KERALA COUPLE SPL',
     price: 24999,
     originalPrice: 39999,
     duration: '5 Days / 4 Nights',

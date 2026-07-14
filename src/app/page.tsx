@@ -442,33 +442,35 @@ export default function Homepage() {
                       {pkg1.description}
                     </p>
                     {/* Details Grid Block (Width: Fill 624px, Height: Hug 116px, Justify: space-between) */}
-                    <div className="flex flex-col justify-between h-[116px] border-t border-gray-200 pt-4 w-full shrink-0">
-                      <div className="flex justify-between items-center w-full">
+                    <div className="flex flex-col md:flex-row justify-between h-auto md:h-[116px] border-t border-gray-200 pt-4 w-full shrink-0 gap-6 md:gap-0">
+                      {/* Column 1 (Width: 308px, Height: 116px, Gap: 24px) */}
+                      <div className="flex flex-col justify-between h-auto md:h-full w-full md:w-[308px] shrink-0 gap-6 md:gap-0">
                         <div className="flex items-center gap-2.5">
                           <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
                             <MapPin className="w-4 h-4 text-[#1D493E]" />
                           </div>
-                          <span className="text-xs font-bold text-gray-600">Starts from {pkg1.startPoint || 'Srinagar'}</span>
+                          <span className="font-sans font-medium text-[20px] leading-[28px] text-gray-600 align-middle">Starts from {pkg1.startPoint || 'Srinagar'}</span>
                         </div>
-                        <div className="flex items-center gap-2.5">
-                          <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
-                            <Users className="w-4 h-4 text-[#1D493E]" />
-                          </div>
-                          <span className="text-xs font-bold text-gray-600">{pkg1.groupType || 'Curated group Trip'}</span>
-                        </div>
-                      </div>
-                      <div className="flex justify-between items-center w-full">
                         <div className="flex items-center gap-2.5">
                           <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
                             <ArrowUpRight className="w-4 h-4 text-[#1D493E]" />
                           </div>
-                          <span className="text-xs font-bold text-gray-600">{pkg1.difficulty || 'Moderate'} Difficulty</span>
+                          <span className="font-sans font-medium text-[20px] leading-[28px] text-gray-600 align-middle">{pkg1.difficulty || 'Moderate'} Difficulty</span>
+                        </div>
+                      </div>
+                      {/* Column 2 (Width: 312px, Height: 116px, Gap: 24px) */}
+                      <div className="flex flex-col justify-between h-auto md:h-full w-full md:w-[312px] shrink-0 gap-6 md:gap-0">
+                        <div className="flex items-center gap-2.5">
+                          <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
+                            <Users className="w-4 h-4 text-[#1D493E]" />
+                          </div>
+                          <span className="font-sans font-medium text-[20px] leading-[28px] text-gray-600 align-middle">{pkg1.groupType || 'Curated group Trip'}</span>
                         </div>
                         <div className="flex items-center gap-2.5">
                           <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
                             <Calendar className="w-4 h-4 text-[#1D493E]" />
                           </div>
-                          <span className="text-xs font-bold text-gray-600">Next: {pkg1.nextDeparture || 'Aug, 2026'}</span>
+                          <span className="font-sans font-medium text-[20px] leading-[28px] text-gray-600 align-middle">Next: {pkg1.nextDeparture || 'Aug, 2026'}</span>
                         </div>
                       </div>
                     </div>
@@ -525,33 +527,35 @@ export default function Homepage() {
                       </div>
 
                       {/* Details Grid Block (Width: Fill 624px, Height: Hug 116px, Justify: space-between) */}
-                      <div className="flex flex-col justify-between h-[116px] border-t border-gray-200 pt-6 mt-4 w-full shrink-0">
-                        <div className="flex justify-between items-center w-full">
+                      <div className="flex flex-col md:flex-row justify-between h-auto md:h-[116px] border-t border-gray-200 pt-6 mt-4 w-full shrink-0 gap-6 md:gap-0">
+                        {/* Column 1 (Width: 308px, Height: 116px, Gap: 24px) */}
+                        <div className="flex flex-col justify-between h-auto md:h-full w-full md:w-[308px] shrink-0 gap-6 md:gap-0">
                           <div className="flex items-center gap-2.5">
                             <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
                               <MapPin className="w-4 h-4 text-[#1D493E]" />
                             </div>
-                            <span className="text-xs font-bold text-gray-600 leading-tight">Starts from {pkg.startPoint || 'Srinagar'}</span>
+                            <span className="font-sans font-medium text-[20px] leading-[28px] text-gray-600 align-middle">Starts from {pkg.startPoint || 'Srinagar'}</span>
                           </div>
-                          <div className="flex items-center gap-2.5">
-                            <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
-                              <Users className="w-4 h-4 text-[#1D493E]" />
-                            </div>
-                            <span className="text-xs font-bold text-gray-600 leading-tight">{pkg.groupType || 'Curated group Trip'}</span>
-                          </div>
-                        </div>
-                        <div className="flex justify-between items-center w-full">
                           <div className="flex items-center gap-2.5">
                             <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
                               <ArrowUpRight className="w-4 h-4 text-[#1D493E]" />
                             </div>
-                            <span className="text-xs font-bold text-gray-600 leading-tight">{pkg.difficulty || 'Moderate'} Difficulty</span>
+                            <span className="font-sans font-medium text-[20px] leading-[28px] text-gray-600 align-middle">{pkg.difficulty || 'Moderate'} Difficulty</span>
+                          </div>
+                        </div>
+                        {/* Column 2 (Width: 312px, Height: 116px, Gap: 24px) */}
+                        <div className="flex flex-col justify-between h-auto md:h-full w-full md:w-[312px] shrink-0 gap-6 md:gap-0">
+                          <div className="flex items-center gap-2.5">
+                            <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
+                              <Users className="w-4 h-4 text-[#1D493E]" />
+                            </div>
+                            <span className="font-sans font-medium text-[20px] leading-[28px] text-gray-600 align-middle">{pkg.groupType || 'Curated group Trip'}</span>
                           </div>
                           <div className="flex items-center gap-2.5">
                             <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
                               <Calendar className="w-4 h-4 text-[#1D493E]" />
                             </div>
-                            <span className="text-xs font-bold text-gray-600 leading-tight">Next: {pkg.nextDeparture || 'Aug, 2026'}</span>
+                            <span className="font-sans font-medium text-[20px] leading-[28px] text-gray-600 align-middle">Next: {pkg.nextDeparture || 'Aug, 2026'}</span>
                           </div>
                         </div>
                       </div>

@@ -392,32 +392,21 @@ export default function Homepage() {
 
       {/* 4. DESTINATIONS SECTION */}
       <section className="bg-white py-16 relative z-10">
-        <div className="max-w-[1440px] mx-auto px-6 md:px-20 space-y-12">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-20 space-y-12 text-center">
           
-          {/* Header Row (Flow Horizontal, Justify space-between, Width Fill 1280px, Height Hug 134px) */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-gray-100">
-            <div className="space-y-3.5 text-left max-w-4xl">
-              <div>
-                <span className="inline-block text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-1 rounded-[4px] text-xs font-bold uppercase tracking-wider">
-                  Destinations
-                </span>
-              </div>
-              <h2 className="text-3xl md:text-[42px] font-serif font-semibold text-[#1D493E] leading-none">
-                Place worth the <span className="text-[#FF5A36]">detour</span>
-              </h2>
-              <p className="text-gray-500 text-base md:text-[24px] md:leading-8 font-medium">
-                A hand-picked map of the corners of India our community keeps coming back to
-              </p>
+          {/* Centered Header (Figma styled: serif title 42px, sans medium subtitle 24px) */}
+          <div className="space-y-3.5 max-w-4xl mx-auto pb-4">
+            <div className="flex justify-center">
+              <span className="inline-block text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-1 rounded-[4px] text-xs font-bold uppercase tracking-wider">
+                Destinations
+              </span>
             </div>
-            <div className="shrink-0 pb-1">
-              <Link 
-                href="/travel" 
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl border border-[#1D493E] text-[#1D493E] hover:bg-[#1D493E] hover:text-white text-sm font-bold transition-all duration-300 cursor-pointer"
-              >
-                <span>Explore all destinations</span>
-                <ArrowUpRight className="w-4.5 h-4.5" />
-              </Link>
-            </div>
+            <h2 className="text-3xl md:text-[42px] font-serif font-semibold text-[#1D493E] leading-none text-center">
+              Place worth the <span className="text-[#FF5A36]">detour</span>
+            </h2>
+            <p className="text-gray-500 text-base md:text-[24px] md:leading-8 font-medium text-center max-w-2xl mx-auto">
+              A hand-picked map of the corners of India our community keeps coming back to
+            </p>
           </div>
 
           <div className="space-y-8">
@@ -571,40 +560,41 @@ export default function Homepage() {
               })()}
             </div>
           </div>
+
+          {/* Centered Destinations Footer Link */}
+          <div className="pt-4 text-center">
+            <Link 
+              href="/travel" 
+              className="inline-flex items-center gap-1.5 text-sm font-bold text-[#1D493E] hover:text-[#FF5A36] transition-all duration-300 cursor-pointer"
+            >
+              <span>Explore all destinations</span>
+              <ArrowUpRight className="w-4 h-4" />
+            </Link>
+          </div>
+
         </div>
       </section>
 
       {/* 5. TOP PRODUCT CATEGORIES */}
-      <section className="bg-white py-16 text-left relative z-10">
+      <section className="bg-white py-16 text-center relative z-10">
         <div className="max-w-[1440px] mx-auto px-6 md:px-20 space-y-10">
           
-          {/* Header Row (Flow Horizontal, Justify space-between, Width Fill 1280px, Height Hug 134px) */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-gray-100">
-            <div className="space-y-3.5 text-left max-w-4xl">
-              <div>
-                <span className="inline-block text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-1 rounded-[4px] text-xs font-bold uppercase tracking-wider">
-                  The Collection
-                </span>
-              </div>
-              <h2 className="text-3xl md:text-[42px] font-serif font-semibold text-[#1D493E] leading-none">
-                Shop Our <span className="text-[#FF5A36]">Top Product Categories</span>
-              </h2>
-              <p className="text-gray-500 text-base md:text-[24px] md:leading-8 font-medium">
-                A hand-picked map of the corners of India our community keeps coming back to
-              </p>
+          {/* Centered Header (Figma styled: serif title 42px, sans medium subtitle 24px) */}
+          <div className="space-y-3.5 max-w-4xl mx-auto pb-4 text-center">
+            <div className="flex justify-center">
+              <span className="inline-block text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-1 rounded-[4px] text-xs font-bold uppercase tracking-wider">
+                The Collection
+              </span>
             </div>
-            <div className="shrink-0 pb-1">
-              <Link 
-                href="/shop"
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl border border-[#1D493E] text-[#1D493E] hover:bg-[#1D493E] hover:text-white text-sm font-bold transition-all duration-300 cursor-pointer"
-              >
-                <span>View all products</span>
-                <ArrowUpRight className="w-4.5 h-4.5" />
-              </Link>
-            </div>
+            <h2 className="text-3xl md:text-[42px] font-serif font-semibold text-[#1D493E] leading-none text-center">
+              Shop Our <span className="text-[#FF5A36]">Top Product Categories</span>
+            </h2>
+            <p className="text-gray-500 text-base md:text-[24px] md:leading-8 font-medium text-center max-w-2xl mx-auto">
+              A hand-picked map of the corners of India our community keeps coming back to
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
             {/* Category 1: Stickers */}
             <Link href="/shop?category=Stickers" className="space-y-4 group">
               <div className="rounded-lg aspect-[3/2] overflow-hidden bg-[#FAF9F6] border border-gray-200/50">
@@ -657,6 +647,17 @@ export default function Homepage() {
           {/* Bottom active state indicator line */}
           <div className="w-full h-[3px] bg-gray-200 relative rounded overflow-hidden mt-6">
             <div className="absolute left-0 top-0 h-full w-[33.3%] bg-[#1D493E] rounded" />
+          </div>
+
+          {/* Centered View all products Footer Link */}
+          <div className="pt-4 text-center">
+            <Link 
+              href="/shop" 
+              className="inline-flex items-center gap-1.5 text-sm font-bold text-[#1D493E] hover:text-[#FF5A36] transition-all duration-300 cursor-pointer"
+            >
+              <span>View all products</span>
+              <ArrowUpRight className="w-4 h-4" />
+            </Link>
           </div>
 
         </div>

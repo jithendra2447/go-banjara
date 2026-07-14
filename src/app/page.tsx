@@ -409,169 +409,172 @@ export default function Homepage() {
             </p>
           </div>
 
-          {/* Featured Destination Card (Top) */}
-          {(() => {
-            const displayPkgs = packagesList && packagesList.length > 0 ? packagesList : HOLIDAY_PACKAGES;
-            const pkg1 = displayPkgs[0];
-            if (!pkg1) return null;
-            return (
-              <div className="bg-white rounded-[4px] shadow-xs grid grid-cols-1 md:grid-cols-2 gap-0 max-w-[1280px] mx-auto overflow-hidden md:h-[394px] text-left">
-                {/* Image */}
-                <div className="relative h-[280px] md:h-full w-full overflow-hidden">
-                  <img 
-                    src={pkg1.image} 
-                    alt={pkg1.name} 
-                    className="w-full h-full object-cover" 
-                    style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
-                  />
-                </div>
-                {/* Details */}
-                <div className="p-6 md:p-8 flex flex-col justify-between h-full space-y-4">
-                  <div className="flex items-center gap-3">
-                    <span className="text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-0.5 rounded-[4px] text-xs font-bold">{pkg1.category || 'Road Trip'}</span>
-                    <span className="bg-gray-100 text-gray-600 px-2.5 py-0.5 rounded-[4px] text-xs font-bold">{pkg1.durationDays} days</span>
-                  </div>
-                  <div className="flex justify-between items-baseline gap-4">
-                    <h3 className="text-2xl md:text-[32px] font-sans font-bold text-[#1D493E] leading-tight">{pkg1.name}</h3>
-                    <span className="text-xl md:text-[24px] font-sans font-bold text-[#1D493E] shrink-0">₹{(pkg1.price ?? 0).toLocaleString('en-IN')}/Person</span>
-                  </div>
-                  <p className="text-xs md:text-sm text-gray-500 font-semibold leading-relaxed line-clamp-2">
-                    {pkg1.description}
-                  </p>
-                  {/* Details Grid */}
-                  <div className="grid grid-cols-2 gap-y-4 gap-x-6 border-t border-gray-150 pt-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
-                        <MapPin className="w-4 h-4 text-[#1D493E]" />
-                      </div>
-                      <span className="text-xs font-bold text-gray-600">Starts from {pkg1.startPoint || 'Srinagar'}</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
-                        <Users className="w-4 h-4 text-[#1D493E]" />
-                      </div>
-                      <span className="text-xs font-bold text-gray-600">{pkg1.groupType || 'Curated group Trip'}</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
-                        <ArrowUpRight className="w-4 h-4 text-[#1D493E]" />
-                      </div>
-                      <span className="text-xs font-bold text-gray-600">{pkg1.difficulty || 'Moderate'} Difficulty</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
-                        <Calendar className="w-4 h-4 text-[#1D493E]" />
-                      </div>
-                      <span className="text-xs font-bold text-gray-600">Next: {pkg1.nextDeparture || 'Aug, 2026'}</span>
-                    </div>
-                  </div>
-                  {/* Buttons */}
-                  <div className="flex gap-4 pt-2">
-                    <Link 
-                      href={`/travel/package/${pkg1.id}`} 
-                      className="flex-1 py-3 rounded-[4px] bg-[#1D493E] hover:bg-[#15342c] text-white text-xs font-bold text-center transition cursor-pointer"
-                    >
-                      Book Now
-                    </Link>
-                    <Link 
-                      href={pkg1.link || `/travel/package/${pkg1.id}`} 
-                      className="flex-1 py-3 rounded-[4px] border border-[#1D493E] text-center text-[#1D493E] hover:bg-gray-50 text-xs font-bold transition"
-                    >
-                      Get details
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            );
-          })()}
-
-          {/* Standard Grid Cards (Bottom Row) */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[1280px] w-full mx-auto">
+          {/* Cards Vertical Flow Container (Width: 1280px, Height: Hug 1390px, Gap: 32px) */}
+          <div className="flex flex-col gap-8 max-w-[1280px] w-full mx-auto">
+            {/* Featured Destination Card (Top) */}
             {(() => {
               const displayPkgs = packagesList && packagesList.length > 0 ? packagesList : HOLIDAY_PACKAGES;
-              return displayPkgs.slice(1, 3).map((pkg) => (
-                <div key={pkg.id} className="bg-white rounded-[4px] shadow-xs p-6 md:p-8 flex flex-col gap-6 text-left md:min-h-[778px]">
+              const pkg1 = displayPkgs[0];
+              if (!pkg1) return null;
+              return (
+                <div className="bg-white rounded-[4px] shadow-xs grid grid-cols-1 md:grid-cols-2 gap-0 w-full overflow-hidden md:h-[394px] text-left">
                   {/* Image */}
-                  <div className="relative h-[200px] md:h-[394px] rounded-[4px] overflow-hidden shrink-0">
+                  <div className="relative h-[280px] md:h-full w-full overflow-hidden">
                     <img 
-                      src={pkg.image} 
-                      alt={pkg.name} 
+                      src={pkg1.image} 
+                      alt={pkg1.name} 
                       className="w-full h-full object-cover" 
                       style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
                     />
                   </div>
-                  {/* Details block */}
-                  <div className="flex-1 flex flex-col gap-4">
+                  {/* Details */}
+                  <div className="p-6 md:p-8 flex flex-col justify-between h-full space-y-4">
                     <div className="flex items-center gap-3">
-                      <span className="text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-0.5 rounded-[4px] text-xs font-bold">{pkg.category || 'Road Trip'}</span>
-                      <span className="bg-gray-100 text-gray-600 px-2.5 py-0.5 rounded-[4px] text-xs font-bold">{pkg.durationDays} days</span>
+                      <span className="text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-0.5 rounded-[4px] text-xs font-bold">{pkg1.category || 'Road Trip'}</span>
+                      <span className="bg-gray-100 text-gray-600 px-2.5 py-0.5 rounded-[4px] text-xs font-bold">{pkg1.durationDays} days</span>
                     </div>
                     <div className="flex justify-between items-baseline gap-4">
-                      <h3 className="text-xl md:text-[24px] font-sans font-bold text-[#1D493E] leading-tight">{pkg.name}</h3>
-                      <span className="text-lg md:text-[20px] font-sans font-bold text-[#1D493E] shrink-0">₹{(pkg.price ?? 0).toLocaleString('en-IN')}/Person</span>
+                      <h3 className="text-2xl md:text-[32px] font-sans font-bold text-[#1D493E] leading-tight">{pkg1.name}</h3>
+                      <span className="text-xl md:text-[24px] font-sans font-bold text-[#1D493E] shrink-0">₹{(pkg1.price ?? 0).toLocaleString('en-IN')}/Person</span>
                     </div>
-                    <p className="text-xs text-gray-500 font-semibold leading-relaxed line-clamp-2">
-                      {pkg.description}
+                    <p className="text-xs md:text-sm text-gray-500 font-semibold leading-relaxed line-clamp-2">
+                      {pkg1.description}
                     </p>
-                  </div>
-
-                  {/* Details Grid */}
-                  <div className="grid grid-cols-2 gap-y-4 gap-x-4 border-t border-gray-150 pt-6 shrink-0">
-                    <div className="flex items-center gap-2.5">
-                      <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
-                        <MapPin className="w-4 h-4 text-[#1D493E]" />
+                    {/* Details Grid */}
+                    <div className="grid grid-cols-2 gap-y-4 gap-x-6 border-t border-gray-150 pt-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
+                          <MapPin className="w-4 h-4 text-[#1D493E]" />
+                        </div>
+                        <span className="text-xs font-bold text-gray-600">Starts from {pkg1.startPoint || 'Srinagar'}</span>
                       </div>
-                      <span className="text-xs font-bold text-gray-600 leading-tight">Starts from {pkg.startPoint || 'Srinagar'}</span>
-                    </div>
-                    <div className="flex items-center gap-2.5">
-                      <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
-                        <Users className="w-4 h-4 text-[#1D493E]" />
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
+                          <Users className="w-4 h-4 text-[#1D493E]" />
+                        </div>
+                        <span className="text-xs font-bold text-gray-600">{pkg1.groupType || 'Curated group Trip'}</span>
                       </div>
-                      <span className="text-xs font-bold text-gray-600 leading-tight">{pkg.groupType || 'Curated group Trip'}</span>
-                    </div>
-                    <div className="flex items-center gap-2.5">
-                      <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
-                        <ArrowUpRight className="w-4 h-4 text-[#1D493E]" />
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
+                          <ArrowUpRight className="w-4 h-4 text-[#1D493E]" />
+                        </div>
+                        <span className="text-xs font-bold text-gray-600">{pkg1.difficulty || 'Moderate'} Difficulty</span>
                       </div>
-                      <span className="text-xs font-bold text-gray-600 leading-tight">{pkg.difficulty || 'Moderate'} Difficulty</span>
-                    </div>
-                    <div className="flex items-center gap-2.5">
-                      <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
-                        <Calendar className="w-4 h-4 text-[#1D493E]" />
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
+                          <Calendar className="w-4 h-4 text-[#1D493E]" />
+                        </div>
+                        <span className="text-xs font-bold text-gray-600">Next: {pkg1.nextDeparture || 'Aug, 2026'}</span>
                       </div>
-                      <span className="text-xs font-bold text-gray-600 leading-tight">Next: {pkg.nextDeparture || 'Aug, 2026'}</span>
                     </div>
-                  </div>
-
-                  {/* Buttons */}
-                  <div className="flex gap-3 shrink-0">
-                    <Link 
-                      href={`/travel/package/${pkg.id}`} 
-                      className="flex-1 py-3 rounded-[4px] bg-[#1D493E] hover:bg-[#15342c] text-white text-xs font-bold text-center transition cursor-pointer"
-                    >
-                      Book Now
-                    </Link>
-                    <Link 
-                      href={pkg.link || `/travel/package/${pkg.id}`} 
-                      className="flex-1 py-3 rounded-[4px] border border-[#1D493E] text-center text-[#1D493E] hover:bg-gray-50 text-xs font-bold transition"
-                    >
-                      Get details
-                    </Link>
+                    {/* Buttons */}
+                    <div className="flex gap-4 pt-2">
+                      <Link 
+                        href={`/travel/package/${pkg1.id}`} 
+                        className="flex-1 py-3 rounded-[4px] bg-[#1D493E] hover:bg-[#15342c] text-white text-xs font-bold text-center transition cursor-pointer"
+                      >
+                        Book Now
+                      </Link>
+                      <Link 
+                        href={pkg1.link || `/travel/package/${pkg1.id}`} 
+                        className="flex-1 py-3 rounded-[4px] border border-[#1D493E] text-center text-[#1D493E] hover:bg-gray-50 text-xs font-bold transition"
+                      >
+                        Get details
+                      </Link>
+                    </div>
                   </div>
                 </div>
-              ));
+              );
             })()}
-          </div>
 
-          {/* Centered Destinations Footer Link (Figma Boxed style: 331x68px, padding 18x36px, radius 4px) */}
-          <div className="flex justify-center">
-            <Link 
-              href="/travel" 
-              className="inline-flex items-center justify-center gap-2 h-[68px] w-full md:w-[331px] rounded-[4px] border border-[#1D493E] text-[#1D493E] hover:bg-[#1D493E] hover:text-white px-[36px] py-[18px] text-base font-bold transition-all duration-300 cursor-pointer"
-            >
-              <span>Explore all destinations</span>
-              <ArrowUpRight className="w-5 h-5" />
-            </Link>
+            {/* Standard Grid Cards (Bottom Row) */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
+              {(() => {
+                const displayPkgs = packagesList && packagesList.length > 0 ? packagesList : HOLIDAY_PACKAGES;
+                return displayPkgs.slice(1, 3).map((pkg) => (
+                  <div key={pkg.id} className="bg-white rounded-[4px] shadow-xs p-6 md:p-8 flex flex-col gap-6 text-left md:min-h-[778px]">
+                    {/* Image */}
+                    <div className="relative h-[200px] md:h-[394px] rounded-[4px] overflow-hidden shrink-0">
+                      <img 
+                        src={pkg.image} 
+                        alt={pkg.name} 
+                        className="w-full h-full object-cover" 
+                        style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
+                      />
+                    </div>
+                    {/* Details block */}
+                    <div className="flex-1 flex flex-col gap-4">
+                      <div className="flex items-center gap-3">
+                        <span className="text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-0.5 rounded-[4px] text-xs font-bold">{pkg.category || 'Road Trip'}</span>
+                        <span className="bg-gray-100 text-gray-600 px-2.5 py-0.5 rounded-[4px] text-xs font-bold">{pkg.durationDays} days</span>
+                      </div>
+                      <div className="flex justify-between items-baseline gap-4">
+                        <h3 className="text-xl md:text-[24px] font-sans font-bold text-[#1D493E] leading-tight">{pkg.name}</h3>
+                        <span className="text-lg md:text-[20px] font-sans font-bold text-[#1D493E] shrink-0">₹{(pkg.price ?? 0).toLocaleString('en-IN')}/Person</span>
+                      </div>
+                      <p className="text-xs text-gray-500 font-semibold leading-relaxed line-clamp-2">
+                        {pkg.description}
+                      </p>
+                    </div>
+
+                    {/* Details Grid */}
+                    <div className="grid grid-cols-2 gap-y-4 gap-x-4 border-t border-gray-150 pt-6 shrink-0">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
+                          <MapPin className="w-4 h-4 text-[#1D493E]" />
+                        </div>
+                        <span className="text-xs font-bold text-gray-600 leading-tight">Starts from {pkg.startPoint || 'Srinagar'}</span>
+                      </div>
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
+                          <Users className="w-4 h-4 text-[#1D493E]" />
+                        </div>
+                        <span className="text-xs font-bold text-gray-600 leading-tight">{pkg.groupType || 'Curated group Trip'}</span>
+                      </div>
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
+                          <ArrowUpRight className="w-4 h-4 text-[#1D493E]" />
+                        </div>
+                        <span className="text-xs font-bold text-gray-600 leading-tight">{pkg.difficulty || 'Moderate'} Difficulty</span>
+                      </div>
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
+                          <Calendar className="w-4 h-4 text-[#1D493E]" />
+                        </div>
+                        <span className="text-xs font-bold text-gray-600 leading-tight">Next: {pkg.nextDeparture || 'Aug, 2026'}</span>
+                      </div>
+                    </div>
+
+                    {/* Buttons */}
+                    <div className="flex gap-3 shrink-0">
+                      <Link 
+                        href={`/travel/package/${pkg.id}`} 
+                        className="flex-1 py-3 rounded-[4px] bg-[#1D493E] hover:bg-[#15342c] text-white text-xs font-bold text-center transition cursor-pointer"
+                      >
+                        Book Now
+                      </Link>
+                      <Link 
+                        href={pkg.link || `/travel/package/${pkg.id}`} 
+                        className="flex-1 py-3 rounded-[4px] border border-[#1D493E] text-center text-[#1D493E] hover:bg-gray-50 text-xs font-bold transition"
+                      >
+                        Get details
+                      </Link>
+                    </div>
+                  </div>
+                ));
+              })()}
+            </div>
+
+            {/* Centered Destinations Footer Link (Figma Boxed style: 331x68px, padding 18x36px, radius 4px) */}
+            <div className="flex justify-center">
+              <Link 
+                href="/travel" 
+                className="inline-flex items-center justify-center gap-2 h-[68px] w-full md:w-[331px] rounded-[4px] border border-[#1D493E] text-[#1D493E] hover:bg-[#1D493E] hover:text-white px-[36px] py-[18px] text-base font-bold transition-all duration-300 cursor-pointer"
+              >
+                <span>Explore all destinations</span>
+                <ArrowUpRight className="w-5 h-5" />
+              </Link>
+            </div>
           </div>
 
         </div>

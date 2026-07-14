@@ -300,7 +300,7 @@ export default function Homepage() {
               </Link>
               <Link 
                 href="/travel"
-                className="px-8 py-3.5 rounded-lg border border-white bg-transparent hover:bg-white hover:text-[#1D493E] hover:scale-[1.02] active:scale-[0.98] text-white font-sans font-bold text-base transition-all duration-300 cursor-pointer text-center min-w-[210px] shadow-sm"
+                className="px-8 py-3.5 rounded-lg border border-[#1D493E] bg-transparent hover:bg-[#1D493E] hover:text-white hover:scale-[1.02] active:scale-[0.98] text-[#1D493E] font-sans font-bold text-base transition-all duration-300 cursor-pointer text-center min-w-[210px] shadow-sm"
               >
                 {pageContent.heroTravelBtn}
               </Link>

@@ -417,9 +417,9 @@ export default function Homepage() {
               const pkg1 = displayPkgs[0];
               if (!pkg1) return null;
               return (
-                <div className="bg-[#F6F3EE] rounded-[4px] border border-gray-200 shadow-xs grid grid-cols-1 md:grid-cols-2 gap-0 w-full overflow-hidden md:h-[394px] text-left">
+                <div className="bg-[#F6F3EE] rounded-[4px] border border-gray-200 shadow-xs flex flex-col md:flex-row gap-0 w-full overflow-hidden md:h-[394px] text-left">
                   {/* Image */}
-                  <div className="relative h-[280px] md:h-full w-full overflow-hidden">
+                  <div className="relative h-[280px] md:h-full w-full md:w-[640px] shrink-0 overflow-hidden">
                     <img 
                       src={pkg1.image} 
                       alt={pkg1.name} 
@@ -428,19 +428,22 @@ export default function Homepage() {
                     />
                   </div>
                   {/* Details */}
-                  <div className="p-[24px] flex flex-col justify-between h-full gap-6">
-                    {/* Tags Container (Width: Fill, Height: Hug 28px, Justify: space-between) */}
-                    <div className="flex justify-between items-center w-full h-[28px] shrink-0">
-                      <span className="text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-0.5 rounded-[4px] text-xs font-bold">{pkg1.category || 'Road Trip'}</span>
-                      <span className="bg-gray-100 text-gray-600 px-2.5 py-0.5 rounded-[4px] text-xs font-bold">{pkg1.durationDays} days</span>
+                  <div className="flex-1 pt-[16px] pb-[16px] px-[24px] flex flex-col justify-between h-full">
+                    {/* Top Group (Width: Fill, Height: 151px, Gap: 12px) */}
+                    <div className="flex flex-col gap-3 h-[151px] shrink-0 w-full">
+                      {/* Tags Container (Width: Fill, Height: Hug 28px, Justify: space-between) */}
+                      <div className="flex justify-between items-center w-full h-[28px] shrink-0">
+                        <span className="text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-0.5 rounded-[4px] text-xs font-bold">{pkg1.category || 'Road Trip'}</span>
+                        <span className="bg-gray-100 text-gray-600 px-2.5 py-0.5 rounded-[4px] text-xs font-bold">{pkg1.durationDays} days</span>
+                      </div>
+                      <div className="flex justify-between items-baseline gap-4">
+                        <h3 className="text-2xl md:text-[32px] font-sans font-bold text-[#1D493E] leading-tight">{pkg1.name}</h3>
+                        <span className="text-xl md:text-[24px] font-sans font-bold text-[#1D493E] shrink-0">₹{(pkg1.price ?? 0).toLocaleString('en-IN')}/Person</span>
+                      </div>
+                      <p className="font-sans font-medium text-[20px] leading-[32px] text-[#8D8D8D] h-[64px] overflow-hidden line-clamp-2 shrink-0">
+                        {pkg1.description}
+                      </p>
                     </div>
-                    <div className="flex justify-between items-baseline gap-4">
-                      <h3 className="text-2xl md:text-[32px] font-sans font-bold text-[#1D493E] leading-tight">{pkg1.name}</h3>
-                      <span className="text-xl md:text-[24px] font-sans font-bold text-[#1D493E] shrink-0">₹{(pkg1.price ?? 0).toLocaleString('en-IN')}/Person</span>
-                    </div>
-                    <p className="font-sans font-medium text-[20px] leading-[32px] text-[#8D8D8D] h-[64px] overflow-hidden line-clamp-2 shrink-0">
-                      {pkg1.description}
-                    </p>
                     {/* Details Grid Block (Width: Fill 624px, Height: Hug 116px, Justify: space-between) */}
                     <div className="flex flex-col md:flex-row justify-between h-auto md:h-[116px] border-t border-gray-200 pt-4 w-full shrink-0 gap-6 md:gap-0">
                       {/* Column 1 (Width: 308px, Height: 116px, Gap: 24px) */}
@@ -475,7 +478,7 @@ export default function Homepage() {
                       </div>
                     </div>
                     {/* Buttons (Width: Fill 624px, Height: Hug 55px, Gap: 12px) */}
-                    <div className="flex gap-3 w-full h-[55px] shrink-0 mt-6">
+                    <div className="flex gap-3 w-full h-[55px] shrink-0 mt-0">
                       <Link 
                         href={`/travel/package/${pkg1.id}`} 
                         className="flex-1 h-[55px] flex items-center justify-center rounded-[4px] bg-[#1D493E] hover:bg-[#15342c] text-white text-xs font-bold transition cursor-pointer"
@@ -499,9 +502,9 @@ export default function Homepage() {
               {(() => {
                 const displayPkgs = packagesList && packagesList.length > 0 ? packagesList : HOLIDAY_PACKAGES;
                 return displayPkgs.slice(1, 3).map((pkg) => (
-                  <div key={pkg.id} className="bg-white rounded-[4px] border border-gray-200 shadow-xs flex flex-col text-left md:h-[964px] overflow-hidden">
+                  <div key={pkg.id} className="bg-white rounded-[4px] border border-gray-200 shadow-xs flex flex-col text-left md:h-[778px] overflow-hidden">
                     {/* Image (Flushed with top, left, and right edges) */}
-                    <div className="relative w-full h-[200px] md:h-[394px] overflow-hidden shrink-0">
+                    <div className="relative w-full h-[200px] md:h-[384px] overflow-hidden shrink-0">
                       <img 
                         src={pkg.image} 
                         alt={pkg.name} 
@@ -510,19 +513,22 @@ export default function Homepage() {
                       />
                     </div>
                     {/* Details block with padding */}
-                    <div className="flex-1 flex flex-col justify-between p-[24px] gap-6">
-                      {/* Tags Container (Width: Fill, Height: Hug 28px, Justify: space-between) */}
-                      <div className="flex justify-between items-center w-full h-[28px] shrink-0">
-                        <span className="text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-0.5 rounded-[4px] text-xs font-bold">{pkg.category || 'Road Trip'}</span>
-                        <span className="bg-gray-100 text-gray-600 px-2.5 py-0.5 rounded-[4px] text-xs font-bold">{pkg.durationDays} days</span>
+                    <div className="flex-1 flex flex-col justify-between pt-[16px] pb-[16px] px-[24px]">
+                      {/* Top Group (Width: Fill, Height: 151px, Gap: 12px) */}
+                      <div className="flex flex-col gap-3 h-[151px] shrink-0 w-full">
+                        {/* Tags Container (Width: Fill, Height: Hug 28px, Justify: space-between) */}
+                        <div className="flex justify-between items-center w-full h-[28px] shrink-0">
+                          <span className="text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-0.5 rounded-[4px] text-xs font-bold">{pkg.category || 'Road Trip'}</span>
+                          <span className="bg-gray-100 text-gray-600 px-2.5 py-0.5 rounded-[4px] text-xs font-bold">{pkg.durationDays} days</span>
+                        </div>
+                        <div className="flex justify-between items-baseline gap-4">
+                          <h3 className="text-2xl md:text-[32px] font-sans font-bold text-[#1D493E] leading-tight">{pkg.name}</h3>
+                          <span className="text-xl md:text-[24px] font-sans font-bold text-[#1D493E] shrink-0">₹{(pkg.price ?? 0).toLocaleString('en-IN')}/Person</span>
+                        </div>
+                        <p className="font-sans font-medium text-[20px] leading-[32px] text-[#8D8D8D] h-[64px] overflow-hidden line-clamp-2 shrink-0">
+                          {pkg.description}
+                        </p>
                       </div>
-                      <div className="flex justify-between items-baseline gap-4">
-                        <h3 className="text-2xl md:text-[32px] font-sans font-bold text-[#1D493E] leading-tight">{pkg.name}</h3>
-                        <span className="text-xl md:text-[24px] font-sans font-bold text-[#1D493E] shrink-0">₹{(pkg.price ?? 0).toLocaleString('en-IN')}/Person</span>
-                      </div>
-                      <p className="font-sans font-medium text-[20px] leading-[32px] text-[#8D8D8D] h-[64px] overflow-hidden line-clamp-2 shrink-0">
-                        {pkg.description}
-                      </p>
 
                       {/* Details Grid Block (Width: Fill 624px, Height: Hug 116px, Justify: space-between) */}
                       <div className="flex flex-col md:flex-row justify-between h-auto md:h-[116px] border-t border-gray-200 pt-4 w-full shrink-0 gap-6 md:gap-0">
@@ -559,7 +565,7 @@ export default function Homepage() {
                       </div>
 
                       {/* Buttons (Width: Fill 624px, Height: Hug 55px, Gap: 12px) */}
-                      <div className="flex gap-3 w-full h-[55px] shrink-0 mt-6">
+                      <div className="flex gap-3 w-full h-[55px] shrink-0 mt-0">
                         <Link 
                           href={`/travel/package/${pkg.id}`} 
                           className="flex-1 h-[55px] flex items-center justify-center rounded-[4px] bg-[#1D493E] hover:bg-[#15342c] text-white text-xs font-bold transition cursor-pointer"

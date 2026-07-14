@@ -40,57 +40,59 @@ export const Navbar: React.FC = () => {
       <nav className="h-24 flex items-center bg-white">
         <div className="max-w-[1440px] mx-auto px-6 w-full flex items-center justify-between">
           
-          {/* Logo (Direct Image from Figma Mockup) */}
-          <Link href="/" className="flex items-center group shrink-0">
-            <img
-              src="/logo.png"
-              alt="go banjāra logo"
-              className="h-10 w-auto transition-transform duration-300 group-hover:scale-102"
-            />
-          </Link>
+          <div className="flex items-center gap-10">
+            {/* Logo (Direct Image from Figma Mockup) */}
+            <Link href="/" className="flex items-center group shrink-0">
+              <img
+                src="/logo.png"
+                alt="go banjāra logo"
+                className="h-10 w-auto transition-transform duration-300 group-hover:scale-102"
+              />
+            </Link>
 
-          {/* Desktop Menu Links */}
-          <div className="hidden xl:flex items-center gap-6">
-            {navLinks.map((link) => {
-              const active = isActive(link.path);
-              const activeClass = active
-                ? 'bg-slate-50 text-[#1D493E] px-3.5 py-2 rounded-lg font-bold text-sm transition-all font-sans'
-                : 'text-[#2D2D2D]/85 hover:text-[#1D493E] px-3.5 py-2 font-semibold text-sm transition-all font-sans';
+            {/* Desktop Menu Links */}
+            <div className="hidden xl:flex items-center gap-6">
+              {navLinks.map((link) => {
+                const active = isActive(link.path);
+                const activeClass = active
+                  ? 'bg-[#1D493E]/8 text-[#1D493E] px-3.5 py-2 rounded-lg font-bold text-[20px] transition-all font-sans'
+                  : 'text-[#535352] hover:text-[#1D493E] px-3.5 py-2 font-semibold text-[20px] transition-all font-sans';
 
-              if (link.name === 'Travel Packages') {
+                if (link.name === 'Travel Packages') {
+                  return (
+                    <div
+                      key={link.path}
+                      className="relative h-full flex items-center"
+                      onMouseEnter={() => setIsTravelHovered(true)}
+                      onMouseLeave={() => setIsTravelHovered(false)}
+                    >
+                      <Link href={link.path} className={activeClass}>
+                        <span>{link.name}</span>
+                      </Link>
+                    </div>
+                  );
+                }
+                if (link.name === 'Shop') {
+                  return (
+                    <div
+                      key={link.path}
+                      className="relative h-full flex items-center"
+                      onMouseEnter={() => setIsShopHovered(true)}
+                      onMouseLeave={() => setIsShopHovered(false)}
+                    >
+                      <Link href={link.path} className={activeClass}>
+                        <span>{link.name}</span>
+                      </Link>
+                    </div>
+                  );
+                }
                 return (
-                  <div
-                    key={link.path}
-                    className="relative h-full flex items-center"
-                    onMouseEnter={() => setIsTravelHovered(true)}
-                    onMouseLeave={() => setIsTravelHovered(false)}
-                  >
-                    <Link href={link.path} className={activeClass}>
-                      <span>{link.name}</span>
-                    </Link>
-                  </div>
+                  <Link key={link.path} href={link.path} className={activeClass}>
+                    <span>{link.name}</span>
+                  </Link>
                 );
-              }
-              if (link.name === 'Shop') {
-                return (
-                  <div
-                    key={link.path}
-                    className="relative h-full flex items-center"
-                    onMouseEnter={() => setIsShopHovered(true)}
-                    onMouseLeave={() => setIsShopHovered(false)}
-                  >
-                    <Link href={link.path} className={activeClass}>
-                      <span>{link.name}</span>
-                    </Link>
-                  </div>
-                );
-              }
-              return (
-                <Link key={link.path} href={link.path} className={activeClass}>
-                  <span>{link.name}</span>
-                </Link>
-              );
-            })}
+              })}
+            </div>
           </div>
 
           {/* Right actions: Search Bar, Wishlist, Cart & Login */}
@@ -497,8 +499,8 @@ export const Navbar: React.FC = () => {
                   key={link.path}
                   href={link.path}
                   onClick={() => setIsOpen(false)}
-                  className={`text-sm font-sans font-bold tracking-wide p-2 transition-all duration-300 ${
-                    active ? 'text-[#1D493E] bg-slate-55' : 'text-[#1D493E]/65 hover:text-[#1D493E]'
+                  className={`text-[20px] font-sans font-bold tracking-wide p-2 rounded-lg transition-all duration-300 ${
+                    active ? 'text-[#1D493E] bg-[#1D493E]/8' : 'text-[#535352] hover:text-[#1D493E]'
                   }`}
                 >
                   {link.name}

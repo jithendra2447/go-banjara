@@ -36,7 +36,7 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* Social Links */}
-          <div className="flex items-center gap-3 pt-4">
+          <div className="flex items-center gap-3 pt-12">
             <span className="text-xs text-slate-300 font-bold mr-1">Follow us on:</span>
             
             {/* Facebook */}
@@ -147,7 +147,7 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* Newsletter Input Box */}
-          <div className="space-y-2.5">
+          <div className="space-y-2.5 pt-8">
             <span className="block text-xs font-bold text-slate-200">Stay connected by subscribe newsletter</span>
             <form onSubmit={(e) => { e.preventDefault(); alert("Subscribed to the Go Banjara newsletter!"); }} className="flex bg-white rounded-lg p-1 w-full max-w-sm border border-slate-200">
               <input

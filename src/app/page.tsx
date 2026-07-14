@@ -262,7 +262,13 @@ export default function Homepage() {
             }}
           />
 
-
+          {/* Layer 2: Left Side White Gradient Fade (Under buttons, fades out to the right to keep biker tyres clean) */}
+          <div 
+            className="absolute inset-x-0 bottom-0 h-36 z-20 pointer-events-none" 
+            style={{ 
+              background: 'radial-gradient(ellipse at bottom left, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.9) 25%, rgba(255, 255, 255, 0.4) 55%, rgba(255, 255, 255, 0) 80%)' 
+            }}
+          />
         </div>
       </div>
 

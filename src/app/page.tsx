@@ -486,13 +486,13 @@ export default function Homepage() {
           })()}
 
           {/* Standard Grid Cards (Bottom Row) */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[1280px] w-full mx-auto">
             {(() => {
               const displayPkgs = packagesList && packagesList.length > 0 ? packagesList : HOLIDAY_PACKAGES;
               return displayPkgs.slice(1, 3).map((pkg) => (
                 <div key={pkg.id} className="bg-white rounded-[4px] shadow-xs p-6 md:p-8 flex flex-col gap-6 text-left md:min-h-[778px]">
                   {/* Image */}
-                  <div className="relative h-[200px] md:h-[345px] rounded-[4px] overflow-hidden shrink-0">
+                  <div className="relative h-[200px] md:h-[394px] rounded-[4px] overflow-hidden shrink-0">
                     <img 
                       src={pkg.image} 
                       alt={pkg.name} 
@@ -563,14 +563,14 @@ export default function Homepage() {
             })()}
           </div>
 
-          {/* Centered Destinations Footer Link */}
-          <div className="text-center">
+          {/* Centered Destinations Footer Link (Figma Boxed style: 331x68px, padding 18x36px, radius 4px) */}
+          <div className="flex justify-center">
             <Link 
               href="/travel" 
-              className="inline-flex items-center gap-1.5 text-sm font-bold text-[#1D493E] hover:text-[#FF5A36] transition-all duration-300 cursor-pointer"
+              className="inline-flex items-center justify-center gap-2 h-[68px] w-full md:w-[331px] rounded-[4px] border border-[#1D493E] text-[#1D493E] hover:bg-[#1D493E] hover:text-white px-[36px] py-[18px] text-base font-bold transition-all duration-300 cursor-pointer"
             >
               <span>Explore all destinations</span>
-              <ArrowUpRight className="w-4.5 h-4.5" />
+              <ArrowUpRight className="w-5 h-5" />
             </Link>
           </div>
 
@@ -578,22 +578,33 @@ export default function Homepage() {
       </section>
 
       {/* 5. TOP PRODUCT CATEGORIES */}
-      <section className="bg-white py-16 text-center relative z-10">
+      <section className="bg-white py-16 relative z-10">
         <div className="max-w-[1440px] mx-auto px-6 md:px-20 space-y-10">
           
-          {/* Centered Header (Figma styled: serif title 42px, sans medium subtitle 24px) */}
-          <div className="space-y-3.5 max-w-4xl mx-auto pb-4 text-center">
-            <div className="flex justify-center">
-              <span className="inline-block text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-1 rounded-[4px] text-xs font-bold uppercase tracking-wider">
-                The Collection
-              </span>
+          {/* Header Row (Flow Horizontal, Justify space-between, Width Fill 1280px, Height Hug 134px) */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-gray-100 text-left">
+            <div className="space-y-3.5 text-left max-w-4xl">
+              <div>
+                <span className="inline-block text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-1 rounded-[4px] text-xs font-bold uppercase tracking-wider">
+                  The Collection
+                </span>
+              </div>
+              <h2 className="text-3xl md:text-[42px] font-serif font-semibold text-[#1D493E] leading-none">
+                Shop from our <span className="text-[#FF5A36]">Top Product Categories</span>
+              </h2>
+              <p className="text-gray-500 text-base md:text-[24px] md:leading-8 font-medium">
+                A hand-picked map of the corners of India our community keeps coming back to
+              </p>
             </div>
-            <h2 className="text-3xl md:text-[42px] font-serif font-semibold text-[#1D493E] leading-none text-center">
-              Shop Our <span className="text-[#FF5A36]">Top Product Categories</span>
-            </h2>
-            <p className="text-gray-500 text-base md:text-[24px] md:leading-8 font-medium text-center max-w-2xl mx-auto">
-              A hand-picked map of the corners of India our community keeps coming back to
-            </p>
+            <div className="shrink-0 pb-1">
+              <Link 
+                href="/shop"
+                className="inline-flex items-center justify-center gap-2 h-[68px] w-full md:w-[251px] rounded-[4px] border border-[#1D493E] text-[#1D493E] hover:bg-[#1D493E] hover:text-white px-[24px] py-[18px] text-base font-bold transition-all duration-300 cursor-pointer"
+              >
+                <span>View all products</span>
+                <ArrowUpRight className="w-5 h-5" />
+              </Link>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
@@ -649,17 +660,6 @@ export default function Homepage() {
           {/* Bottom active state indicator line */}
           <div className="w-full h-[3px] bg-gray-200 relative rounded overflow-hidden mt-6">
             <div className="absolute left-0 top-0 h-full w-[33.3%] bg-[#1D493E] rounded" />
-          </div>
-
-          {/* Centered View all products Footer Link */}
-          <div className="pt-4 text-center">
-            <Link 
-              href="/shop" 
-              className="inline-flex items-center gap-1.5 text-sm font-bold text-[#1D493E] hover:text-[#FF5A36] transition-all duration-300 cursor-pointer"
-            >
-              <span>View all products</span>
-              <ArrowUpRight className="w-4 h-4" />
-            </Link>
           </div>
 
         </div>

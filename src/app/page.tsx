@@ -428,7 +428,7 @@ export default function Homepage() {
                     />
                   </div>
                   {/* Details */}
-                  <div className="flex-1 pt-[12px] pb-[12px] px-[24px] flex flex-col justify-between h-full">
+                  <div className="w-full md:w-[640px] pt-[12px] pb-[12px] px-[24px] flex flex-col justify-between h-full bg-white shrink-0">
                     {/* Top Group (Width: Fill, Height: 151px, Gap: 12px) */}
                     <div className="flex flex-col gap-2 min-h-[140px] shrink-0 w-full">
                       {/* Tags Container (Width: Fill, Height: Hug 28px, Justify: space-between) */}

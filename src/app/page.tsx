@@ -262,11 +262,11 @@ export default function Homepage() {
             }}
           />
 
-          {/* Layer 2: Left Side White Gradient Fade (Under buttons, fades out to the right to keep biker tyres clean) */}
+          {/* Layer 2: White Gradient Fade (Positioned behind/back side of the bike to transition to the metrics section) */}
           <div 
-            className="absolute inset-x-0 bottom-0 h-10 z-20 pointer-events-none" 
+            className="absolute inset-x-0 bottom-0 h-32 z-20 pointer-events-none" 
             style={{ 
-              background: 'radial-gradient(ellipse at bottom left, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.9) 25%, rgba(255, 255, 255, 0.4) 55%, rgba(255, 255, 255, 0) 80%)' 
+              background: 'linear-gradient(to top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.75) 45%, rgba(255, 255, 255, 0) 100%)' 
             }}
           />
         </div>

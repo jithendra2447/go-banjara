@@ -266,7 +266,7 @@ export default function Homepage() {
           <div 
             className="absolute inset-x-0 bottom-0 h-[20px] z-20 pointer-events-none" 
             style={{ 
-              background: 'linear-gradient(to top, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 100%)' 
+              background: 'linear-gradient(to top, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0) 100%)' 
             }}
           />
         </div>

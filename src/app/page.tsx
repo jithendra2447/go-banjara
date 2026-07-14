@@ -282,7 +282,7 @@ export default function Homepage() {
       {/* 2. HERO CONTENT SECTION (Transparent background, relative z-50 to sit on top of everything) */}
       <section className="relative min-h-[600px] md:min-h-[601px] flex items-center z-50 bg-transparent">
         <div className="max-w-[1440px] mx-auto px-6 md:px-20 w-full grid md:grid-cols-2 gap-12 items-center relative pt-[110px] pb-4">
-          <div className="space-y-6 text-left max-w-xl">
+          <div className="flex flex-col gap-[52px] text-left md:max-w-[454px] w-full">
             <h1 className="text-4xl md:text-[62px] md:leading-[1.2] tracking-[-0.2px] font-semibold text-white font-sans md:max-w-[454px] md:h-[234px] w-full">
               {pageContent.heroTitleLine1} <br />
               {pageContent.heroTitleLine2} <br />
@@ -291,7 +291,7 @@ export default function Homepage() {
             <p className="text-sm md:text-[20px] md:leading-[34px] tracking-[0px] text-white/95 font-sans font-medium max-w-md md:max-w-[454px]">
               {pageContent.heroSubtitle}
             </p>
-            <div className="flex flex-wrap items-center gap-4 pt-4">
+            <div className="flex flex-wrap items-center gap-4">
               <Link 
                 href="/shop"
                 className="px-8 py-3.5 rounded-lg bg-[#1D493E] hover:bg-[#15342c] hover:scale-[1.02] active:scale-[0.98] text-white border border-[#1D493E] font-sans font-bold text-base transition-all duration-300 cursor-pointer text-center min-w-[150px] shadow-sm"

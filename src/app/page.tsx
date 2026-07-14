@@ -668,10 +668,26 @@ export default function Homepage() {
         </div>
       </section>
 
-      {/* 6. YELLOW HIGHLIGHT MARQUEE BANNER */}
-      <div className="bg-[#FFFF80] text-[#1D493E] border-t border-b border-[#1D493E]/15 py-6 overflow-hidden select-none relative z-10">
-        <div className="flex whitespace-nowrap gap-12 animate-marquee font-sans text-sm md:text-base font-extrabold uppercase tracking-widest">
-          <span>✦ BOOK YOUR NEXT TRIP ✦ SHOP TRAVEL GEAR ✦ DARE TO TRAVEL ✦ STICKERS ✦ MODERN NOMAD ✦ BADGES ✦ BOOK YOUR NEXT TRIP ✦ SHOP TRAVEL GEAR ✦ DARE TO TRAVEL ✦ STICKERS ✦ MODERN NOMAD ✦ BADGES ✦ BOOK YOUR NEXT TRIP ✦ SHOP TRAVEL GEAR ✦ DARE TO TRAVEL ✦ STICKERS ✦ MODERN NOMAD ✦ BADGES</span>
+      <div className="bg-[#FFFF80] text-[#1D493E] border-t border-b border-[#1D493E]/15 h-[78px] flex items-center overflow-hidden select-none relative z-10 py-[24px]">
+        <div className="flex items-center whitespace-nowrap gap-[10px] animate-marquee font-serif text-[24px] font-semibold uppercase leading-none tracking-[0px]">
+          <span>✦</span><span>BOOK YOUR NEXT TRIP</span>
+          <span>✦</span><span>SHOP TRAVEL GEAR</span>
+          <span>✦</span><span>DARE TO TRAVEL</span>
+          <span>✦</span><span>STICKERS</span>
+          <span>✦</span><span>MODERN NOMAD</span>
+          <span>✦</span><span>BADGES</span>
+          <span>✦</span><span>BOOK YOUR NEXT TRIP</span>
+          <span>✦</span><span>SHOP TRAVEL GEAR</span>
+          <span>✦</span><span>DARE TO TRAVEL</span>
+          <span>✦</span><span>STICKERS</span>
+          <span>✦</span><span>MODERN NOMAD</span>
+          <span>✦</span><span>BADGES</span>
+          <span>✦</span><span>BOOK YOUR NEXT TRIP</span>
+          <span>✦</span><span>SHOP TRAVEL GEAR</span>
+          <span>✦</span><span>DARE TO TRAVEL</span>
+          <span>✦</span><span>STICKERS</span>
+          <span>✦</span><span>MODERN NOMAD</span>
+          <span>✦</span><span>BADGES</span>
         </div>
       </div>
 

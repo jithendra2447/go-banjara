@@ -264,8 +264,8 @@ export default function Homepage() {
         </div>
       </div>
 
-      {/* 1.5 BIKER LAYER (z-38, sits on top of metrics bar z-35 to overlap tyres, matches background proportions exactly) */}
-      <div className="absolute inset-x-0 top-0 h-[600px] md:h-[601px] pointer-events-none z-38 overflow-visible">
+      {/* 1.5 BIKER LAYER (z-40, sits on top of metrics bar z-30 to overlap tyres, matches background proportions exactly) */}
+      <div className="absolute inset-x-0 top-0 h-[600px] md:h-[601px] pointer-events-none z-40 overflow-visible">
         <img 
           src="/hero-bike.png?v=5" 
           alt="Biker" 
@@ -279,8 +279,8 @@ export default function Homepage() {
 
 
 
-      {/* 2. HERO CONTENT SECTION (Transparent background, relative z-40 to sit on top of everything) */}
-      <section className="relative min-h-[600px] md:min-h-[601px] flex items-center z-40 bg-transparent">
+      {/* 2. HERO CONTENT SECTION (Transparent background, relative z-50 to sit on top of everything) */}
+      <section className="relative min-h-[600px] md:min-h-[601px] flex items-center z-50 bg-transparent">
         <div className="max-w-[1440px] mx-auto px-6 md:px-20 w-full grid md:grid-cols-2 gap-12 items-center relative pt-[110px] pb-4">
           <div className="space-y-6 text-left max-w-xl">
             <h1 className="text-4xl md:text-[62px] md:leading-[1.2] tracking-[-0.2px] font-semibold text-white font-sans md:max-w-[454px] md:h-[234px] w-full">
@@ -310,7 +310,7 @@ export default function Homepage() {
       </section>
 
       {/* 2. METRICS WIDGET BAR */}
-      <section className="bg-white border-b border-gray-200 md:h-[145px] pt-6 pb-6 md:py-6 relative z-35 flex items-center">
+      <section className="bg-white border-b border-gray-200 md:h-[145px] pt-6 pb-6 md:py-6 relative z-30 flex items-center">
         <div className="max-w-[1440px] mx-auto px-6 md:px-20 grid grid-cols-2 md:grid-cols-5 gap-y-6 md:gap-y-0 text-center md:divide-x md:divide-gray-200 w-full h-full items-center">
           <div className="flex flex-col items-center justify-center space-y-1.5 px-2">
             <h4 className="text-3xl md:text-[36px] font-bold text-[#1A1A1A] font-sans tracking-tight">10+</h4>

@@ -417,7 +417,7 @@ export default function Homepage() {
               const pkg1 = displayPkgs[0];
               if (!pkg1) return null;
               return (
-                <div className="bg-white rounded-[4px] border border-gray-150/60 shadow-xs grid grid-cols-1 md:grid-cols-2 gap-0 w-full overflow-hidden md:h-[394px] text-left">
+                <div className="bg-white rounded-[4px] border border-gray-200 shadow-xs grid grid-cols-1 md:grid-cols-2 gap-0 w-full overflow-hidden md:h-[394px] text-left">
                   {/* Image */}
                   <div className="relative h-[280px] md:h-full w-full overflow-hidden">
                     <img 
@@ -428,7 +428,7 @@ export default function Homepage() {
                     />
                   </div>
                   {/* Details */}
-                  <div className="p-6 md:p-8 pl-[24px] md:pl-[24px] flex flex-col justify-between h-full gap-6">
+                  <div className="p-[24px] flex flex-col justify-between h-full gap-6">
                     <div className="flex items-center gap-3">
                       <span className="text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-0.5 rounded-[4px] text-xs font-bold">{pkg1.category || 'Road Trip'}</span>
                       <span className="bg-gray-100 text-gray-600 px-2.5 py-0.5 rounded-[4px] text-xs font-bold">{pkg1.durationDays} days</span>
@@ -441,7 +441,7 @@ export default function Homepage() {
                       {pkg1.description}
                     </p>
                     {/* Details Grid Block (Width: Fill 624px, Height: Hug 116px, Justify: space-between) */}
-                    <div className="flex flex-col justify-between h-[116px] border-t border-gray-150 pt-4 w-full shrink-0">
+                    <div className="flex flex-col justify-between h-[116px] border-t border-gray-200 pt-4 w-full shrink-0">
                       <div className="flex justify-between items-center w-full">
                         <div className="flex items-center gap-2.5">
                           <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
@@ -496,7 +496,7 @@ export default function Homepage() {
               {(() => {
                 const displayPkgs = packagesList && packagesList.length > 0 ? packagesList : HOLIDAY_PACKAGES;
                 return displayPkgs.slice(1, 3).map((pkg) => (
-                  <div key={pkg.id} className="bg-white rounded-[4px] border border-gray-150/60 shadow-xs flex flex-col text-left md:min-h-[778px] overflow-hidden">
+                  <div key={pkg.id} className="bg-white rounded-[4px] border border-gray-200 shadow-xs flex flex-col text-left md:min-h-[778px] overflow-hidden">
                     {/* Image (Flushed with top, left, and right edges) */}
                     <div className="relative w-full h-[200px] md:h-[394px] overflow-hidden shrink-0">
                       <img 
@@ -507,7 +507,7 @@ export default function Homepage() {
                       />
                     </div>
                     {/* Details block with padding */}
-                    <div className="flex-1 flex flex-col justify-between p-6 md:p-8 pl-[24px] md:pl-[24px]">
+                    <div className="flex-1 flex flex-col justify-between p-[24px]">
                       <div className="flex flex-col gap-4">
                         <div className="flex items-center gap-3">
                           <span className="text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-0.5 rounded-[4px] text-xs font-bold">{pkg.category || 'Road Trip'}</span>
@@ -523,7 +523,7 @@ export default function Homepage() {
                       </div>
 
                       {/* Details Grid Block (Width: Fill 624px, Height: Hug 116px, Justify: space-between) */}
-                      <div className="flex flex-col justify-between h-[116px] border-t border-gray-150 pt-6 mt-4 w-full shrink-0">
+                      <div className="flex flex-col justify-between h-[116px] border-t border-gray-200 pt-6 mt-4 w-full shrink-0">
                         <div className="flex justify-between items-center w-full">
                           <div className="flex items-center gap-2.5">
                             <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">

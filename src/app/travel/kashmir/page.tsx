@@ -61,7 +61,7 @@ const KASHMIR_PACKAGES = [
   },
   {
     id: 'pkg-kashmir-gulmarg',
-    name: 'Gulmarg Winter Skiing & Gondola Adventure',
+    name: 'Gulmarg Winter Skiing',
     tabName: 'Gulmarg Skiing',
     price: 26900,
     duration: '7 Days / 6 Nights',

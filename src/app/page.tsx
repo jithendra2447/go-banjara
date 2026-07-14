@@ -264,7 +264,7 @@ export default function Homepage() {
 
           {/* Layer 2: White Gradient Fade (Positioned behind/back side of the bike to transition to the metrics section) */}
           <div 
-            className="absolute inset-x-0 bottom-0 h-24 z-20 pointer-events-none" 
+            className="absolute inset-x-0 bottom-0 h-8 z-20 pointer-events-none" 
             style={{ 
               background: 'linear-gradient(to top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0) 100%)' 
             }}
@@ -273,11 +273,11 @@ export default function Homepage() {
       </div>
 
       {/* 1.5 BIKER LAYER (z-40, sits on top of metrics bar z-30 to overlap tyres, matches background proportions exactly) */}
-      <div className="absolute inset-x-0 top-0 h-[600px] md:h-[601px] pointer-events-none z-40 overflow-visible">
+      <div className="absolute inset-x-0 top-0 h-[672px] md:h-[673px] pointer-events-none z-40">
         <img 
           src="/hero-bike.png?v=5" 
           alt="Biker" 
-          className="absolute inset-x-0 top-0 w-full h-[112%] object-cover object-top"
+          className="absolute inset-0 w-full h-full object-cover object-top"
           style={{ 
             imageRendering: '-webkit-optimize-contrast',
             transform: 'translateZ(0)'
@@ -289,7 +289,7 @@ export default function Homepage() {
 
       {/* 2. HERO CONTENT SECTION (Transparent background, relative z-50 to sit on top of everything) */}
       <section className="relative min-h-[600px] md:min-h-[601px] flex items-center z-50 bg-transparent">
-        <div className="max-w-[1440px] mx-auto px-6 md:px-20 w-full grid md:grid-cols-2 gap-12 items-center relative pt-[52px] pb-4">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-20 w-full grid md:grid-cols-2 gap-12 items-center relative pt-[125px] pb-4">
           <div className="flex flex-col gap-[52px] text-left md:max-w-[454px] w-full">
             <h1 className="text-4xl md:text-[62px] md:leading-[1.25] tracking-[-0.2px] font-semibold text-white font-sans md:max-w-[454px] md:h-[234px] w-full">
               {pageContent.heroTitleLine1} <br />

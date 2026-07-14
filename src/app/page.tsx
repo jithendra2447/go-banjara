@@ -438,7 +438,7 @@ export default function Homepage() {
                       <h3 className="text-2xl md:text-[32px] font-sans font-bold text-[#1D493E] leading-tight">{pkg1.name}</h3>
                       <span className="text-xl md:text-[24px] font-sans font-bold text-[#1D493E] shrink-0">₹{(pkg1.price ?? 0).toLocaleString('en-IN')}/Person</span>
                     </div>
-                    <p className="text-xs md:text-sm text-gray-500 font-semibold leading-relaxed line-clamp-2">
+                    <p className="font-sans font-medium text-[20px] leading-[32px] text-[#8D8D8D] h-[64px] overflow-hidden line-clamp-2 shrink-0">
                       {pkg1.description}
                     </p>
                     {/* Details Grid Block (Width: Fill 624px, Height: Hug 116px, Justify: space-between) */}
@@ -521,7 +521,7 @@ export default function Homepage() {
                           <h3 className="text-xl md:text-[24px] font-sans font-bold text-[#1D493E] leading-tight">{pkg.name}</h3>
                           <span className="text-lg md:text-[20px] font-sans font-bold text-[#1D493E] shrink-0">₹{(pkg.price ?? 0).toLocaleString('en-IN')}/Person</span>
                         </div>
-                        <p className="text-xs text-gray-500 font-semibold leading-relaxed line-clamp-2">
+                        <p className="font-sans font-medium text-[20px] leading-[32px] text-[#8D8D8D] h-[64px] overflow-hidden line-clamp-2 shrink-0">
                           {pkg.description}
                         </p>
                       </div>

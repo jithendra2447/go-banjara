@@ -440,44 +440,48 @@ export default function Homepage() {
                     <p className="text-xs md:text-sm text-gray-500 font-semibold leading-relaxed line-clamp-2">
                       {pkg1.description}
                     </p>
-                    {/* Details Grid */}
-                    <div className="grid grid-cols-2 gap-y-4 gap-x-6 border-t border-gray-150 pt-4">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
-                          <MapPin className="w-4 h-4 text-[#1D493E]" />
+                    {/* Details Grid Block (Width: Fill 624px, Height: Hug 116px, Justify: space-between) */}
+                    <div className="flex flex-col justify-between h-[116px] border-t border-gray-150 pt-4 w-full shrink-0">
+                      <div className="flex justify-between items-center w-full">
+                        <div className="flex items-center gap-2.5">
+                          <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
+                            <MapPin className="w-4 h-4 text-[#1D493E]" />
+                          </div>
+                          <span className="text-xs font-bold text-gray-600">Starts from {pkg1.startPoint || 'Srinagar'}</span>
                         </div>
-                        <span className="text-xs font-bold text-gray-600">Starts from {pkg1.startPoint || 'Srinagar'}</span>
+                        <div className="flex items-center gap-2.5">
+                          <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
+                            <Users className="w-4 h-4 text-[#1D493E]" />
+                          </div>
+                          <span className="text-xs font-bold text-gray-600">{pkg1.groupType || 'Curated group Trip'}</span>
+                        </div>
                       </div>
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
-                          <Users className="w-4 h-4 text-[#1D493E]" />
+                      <div className="flex justify-between items-center w-full">
+                        <div className="flex items-center gap-2.5">
+                          <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
+                            <ArrowUpRight className="w-4 h-4 text-[#1D493E]" />
+                          </div>
+                          <span className="text-xs font-bold text-gray-600">{pkg1.difficulty || 'Moderate'} Difficulty</span>
                         </div>
-                        <span className="text-xs font-bold text-gray-600">{pkg1.groupType || 'Curated group Trip'}</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
-                          <ArrowUpRight className="w-4 h-4 text-[#1D493E]" />
+                        <div className="flex items-center gap-2.5">
+                          <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
+                            <Calendar className="w-4 h-4 text-[#1D493E]" />
+                          </div>
+                          <span className="text-xs font-bold text-gray-600">Next: {pkg1.nextDeparture || 'Aug, 2026'}</span>
                         </div>
-                        <span className="text-xs font-bold text-gray-600">{pkg1.difficulty || 'Moderate'} Difficulty</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
-                          <Calendar className="w-4 h-4 text-[#1D493E]" />
-                        </div>
-                        <span className="text-xs font-bold text-gray-600">Next: {pkg1.nextDeparture || 'Aug, 2026'}</span>
                       </div>
                     </div>
-                    {/* Buttons */}
-                    <div className="flex gap-4 pt-2">
+                    {/* Buttons (Width: Fill 624px, Height: Hug 55px, Gap: 12px) */}
+                    <div className="flex gap-3 w-full h-[55px] shrink-0 mt-6">
                       <Link 
                         href={`/travel/package/${pkg1.id}`} 
-                        className="flex-1 py-3 rounded-[4px] bg-[#1D493E] hover:bg-[#15342c] text-white text-xs font-bold text-center transition cursor-pointer"
+                        className="flex-1 h-[55px] flex items-center justify-center rounded-[4px] bg-[#1D493E] hover:bg-[#15342c] text-white text-xs font-bold transition cursor-pointer"
                       >
                         Book Now
                       </Link>
                       <Link 
                         href={pkg1.link || `/travel/package/${pkg1.id}`} 
-                        className="flex-1 py-3 rounded-[4px] border border-[#1D493E] text-center text-[#1D493E] hover:bg-gray-50 text-xs font-bold transition"
+                        className="flex-1 h-[55px] flex items-center justify-center rounded-[4px] border border-[#1D493E] text-center text-[#1D493E] hover:bg-gray-50 text-xs font-bold transition"
                       >
                         Get details
                       </Link>
@@ -518,45 +522,49 @@ export default function Homepage() {
                         </p>
                       </div>
 
-                      {/* Details Grid */}
-                      <div className="grid grid-cols-2 gap-y-4 gap-x-4 border-t border-gray-150 pt-6 mt-4 shrink-0">
-                        <div className="flex items-center gap-2.5">
-                          <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
-                            <MapPin className="w-4 h-4 text-[#1D493E]" />
+                      {/* Details Grid Block (Width: Fill 624px, Height: Hug 116px, Justify: space-between) */}
+                      <div className="flex flex-col justify-between h-[116px] border-t border-gray-150 pt-6 mt-4 w-full shrink-0">
+                        <div className="flex justify-between items-center w-full">
+                          <div className="flex items-center gap-2.5">
+                            <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
+                              <MapPin className="w-4 h-4 text-[#1D493E]" />
+                            </div>
+                            <span className="text-xs font-bold text-gray-600 leading-tight">Starts from {pkg.startPoint || 'Srinagar'}</span>
                           </div>
-                          <span className="text-xs font-bold text-gray-600 leading-tight">Starts from {pkg.startPoint || 'Srinagar'}</span>
+                          <div className="flex items-center gap-2.5">
+                            <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
+                              <Users className="w-4 h-4 text-[#1D493E]" />
+                            </div>
+                            <span className="text-xs font-bold text-gray-600 leading-tight">{pkg.groupType || 'Curated group Trip'}</span>
+                          </div>
                         </div>
-                        <div className="flex items-center gap-2.5">
-                          <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
-                            <Users className="w-4 h-4 text-[#1D493E]" />
+                        <div className="flex justify-between items-center w-full">
+                          <div className="flex items-center gap-2.5">
+                            <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
+                              <ArrowUpRight className="w-4 h-4 text-[#1D493E]" />
+                            </div>
+                            <span className="text-xs font-bold text-gray-600 leading-tight">{pkg.difficulty || 'Moderate'} Difficulty</span>
                           </div>
-                          <span className="text-xs font-bold text-gray-600 leading-tight">{pkg.groupType || 'Curated group Trip'}</span>
-                        </div>
-                        <div className="flex items-center gap-2.5">
-                          <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
-                            <ArrowUpRight className="w-4 h-4 text-[#1D493E]" />
+                          <div className="flex items-center gap-2.5">
+                            <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
+                              <Calendar className="w-4 h-4 text-[#1D493E]" />
+                            </div>
+                            <span className="text-xs font-bold text-gray-600 leading-tight">Next: {pkg.nextDeparture || 'Aug, 2026'}</span>
                           </div>
-                          <span className="text-xs font-bold text-gray-600 leading-tight">{pkg.difficulty || 'Moderate'} Difficulty</span>
-                        </div>
-                        <div className="flex items-center gap-2.5">
-                          <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
-                            <Calendar className="w-4 h-4 text-[#1D493E]" />
-                          </div>
-                          <span className="text-xs font-bold text-gray-600 leading-tight">Next: {pkg.nextDeparture || 'Aug, 2026'}</span>
                         </div>
                       </div>
 
-                      {/* Buttons */}
-                      <div className="flex gap-3 mt-6 shrink-0">
+                      {/* Buttons (Width: Fill 624px, Height: Hug 55px, Gap: 12px) */}
+                      <div className="flex gap-3 w-full h-[55px] shrink-0 mt-6">
                         <Link 
                           href={`/travel/package/${pkg.id}`} 
-                          className="flex-1 py-3 rounded-[4px] bg-[#1D493E] hover:bg-[#15342c] text-white text-xs font-bold text-center transition cursor-pointer"
+                          className="flex-1 h-[55px] flex items-center justify-center rounded-[4px] bg-[#1D493E] hover:bg-[#15342c] text-white text-xs font-bold transition cursor-pointer"
                         >
                           Book Now
                         </Link>
                         <Link 
                           href={pkg.link || `/travel/package/${pkg.id}`} 
-                          className="flex-1 py-3 rounded-[4px] border border-[#1D493E] text-center text-[#1D493E] hover:bg-gray-50 text-xs font-bold transition"
+                          className="flex-1 h-[55px] flex items-center justify-center rounded-[4px] border border-[#1D493E] text-center text-[#1D493E] hover:bg-gray-50 text-xs font-bold transition"
                         >
                           Get details
                         </Link>
@@ -583,8 +591,8 @@ export default function Homepage() {
       </section>
 
       {/* 5. TOP PRODUCT CATEGORIES */}
-      <section className="bg-white py-16 relative z-10">
-        <div className="max-w-[1440px] mx-auto px-6 md:px-20 space-y-10">
+      <section className="bg-white relative z-10">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-20 pt-[42px] pb-[42px] flex flex-col gap-[32px]">
           
           {/* Header Row (Flow Horizontal, Justify space-between, Width Fill 1280px, Height Hug 134px) */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-gray-100 text-left">

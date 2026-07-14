@@ -264,16 +264,16 @@ export default function Homepage() {
 
           {/* Layer 2: White Gradient Fade (Positioned behind/back side of the bike to transition to the metrics section) */}
           <div 
-            className="absolute inset-x-0 bottom-0 h-8 z-20 pointer-events-none" 
+            className="absolute inset-x-0 bottom-0 h-[20px] z-20 pointer-events-none" 
             style={{ 
-              background: 'linear-gradient(to top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0) 100%)' 
+              background: 'linear-gradient(to top, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 100%)' 
             }}
           />
         </div>
       </div>
 
       {/* 1.5 BIKER LAYER (z-40, sits on top of metrics bar z-30 to overlap tyres, matches background proportions exactly) */}
-      <div className="absolute inset-x-0 top-0 h-[672px] md:h-[673px] pointer-events-none z-40">
+      <div className="absolute inset-x-0 top-0 h-[720px] pointer-events-none z-40">
         <img 
           src="/hero-bike.png?v=5" 
           alt="Biker" 

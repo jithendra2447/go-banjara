@@ -18,15 +18,15 @@ export const Footer: React.FC = () => {
       style={{
         width: "100%",
         background: "rgba(29, 73, 62, 1)",
-        paddingTop: "42px",
-        paddingBottom: "42px",
+        paddingTop: "32px",
+        paddingBottom: "32px",
         paddingLeft: "80px",
         paddingRight: "80px",
       }}
       className="text-slate-200 border-t border-white/5 font-sans"
     >
       <div
-        style={{ width: "100%", maxWidth: "1440px", height: "606px", margin: "0 auto", display: "flex", flexDirection: "column", gap: "32px", justifyContent: "space-between" }}
+        style={{ width: "100%", maxWidth: "1440px", margin: "0 auto", display: "flex", flexDirection: "column", gap: "24px" }}
       >
         {/* Main Footer Row — 1280×290, space-between */}
         <div

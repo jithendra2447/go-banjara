@@ -799,7 +799,8 @@ export default function Homepage() {
                   <div className="w-full md:h-[349.68px] flex flex-col justify-between gap-[32px] text-left">
                     {/* Text Group (Gap: 12px) */}
                     <div className="flex flex-col gap-[12px]">
-                      <span className="inline-block self-start text-[#FF5A36] bg-[#FF5A36]/10 px-2 py-0.5 rounded text-[10px] font-bold">
+                      {/* Category Tag (Height: 28px, Radius: 4px, Padding: 4px vertical, 8px horizontal, Background: #FF623E/8, Text: #FF623E) */}
+                      <span className="inline-flex items-center justify-center h-[28px] rounded-[4px] px-[8px] py-[4px] text-[14px] font-sans font-medium text-[#FF623E] bg-[#FF623E]/8 self-start">
                         {deal.category}
                       </span>
                       {/* Title & Price Row (Width: 339px, Height: 35px, Justify: space-between, Font: Faktum 20px, Weight: 600, Color: #2B2B2B) */}
@@ -811,38 +812,38 @@ export default function Homepage() {
                         </div>
                       </div>
 
-                      {/* Rating Row (Gap: 12px, Stars: 20px, Reviews: 20px Faktum Medium) */}
-                      <div className="flex items-center gap-[12px]">
-                        <div className="flex text-amber-400 gap-0.5">
-                          <Star className="w-5 h-5 fill-current" />
-                          <Star className="w-5 h-5 fill-current" />
-                          <Star className="w-5 h-5 fill-current" />
-                          <Star className="w-5 h-5 fill-current" />
-                          <Star className="w-5 h-5 fill-current" />
+                      {/* Rating & Bought Container (Width: 296px, Height: 66.7px, Gap: 12px) */}
+                      <div className="w-full md:h-[66.7px] flex flex-col gap-[12px]">
+                        {/* Rating Row (Gap: 12px, Stars: 20px, Reviews: 20px Faktum Medium) */}
+                        <div className="flex items-center gap-[12px] h-[20px] shrink-0">
+                          <div className="flex text-amber-400 gap-0.5">
+                            <Star className="w-5 h-5 fill-current" />
+                            <Star className="w-5 h-5 fill-current" />
+                            <Star className="w-5 h-5 fill-current" />
+                            <Star className="w-5 h-5 fill-current" />
+                            <Star className="w-5 h-5 fill-current" />
+                          </div>
+                          <span className="text-[20px] font-sans font-medium text-[#2B2B2B] leading-none">({deal.reviews})</span>
                         </div>
-                        <span className="text-[20px] font-sans font-medium text-[#2B2B2B]">({deal.reviews})</span>
+                        {/* Bought statistics (Height: 25px, Font: Faktum 20px, Weight: 500, Color: #8D8D8D) */}
+                        <p className="font-sans font-medium text-[20px] leading-none text-[#8D8D8D] h-[25px] flex items-center shrink-0">{deal.boughtText}</p>
                       </div>
 
-                      {/* Bought & Delivery Block (Height: 66.7px, Gap: 12px) */}
-                      <div className="w-full md:h-[66.7px] flex flex-col gap-[12px]">
-                        {/* Bought statistics (Height: 25px, Font: Faktum 20px, Weight: 500, Color: #8D8D8D) */}
-                        <p className="font-sans font-medium text-[20px] leading-none text-[#8D8D8D] h-[25px] flex items-center">{deal.boughtText}</p>
-                        
-                        {/* Delivery text (Font: Faktum 20px, Weight: 500, Line-height: 28px, Color: #2B2B2B) */}
-                        <p className="font-sans font-medium text-[20px] leading-[28px] text-[#2B2B2B]">
-                          {deal.deliveryText}
-                        </p>
-                      </div>
+                      {/* Delivery text (Font: Faktum 20px, Weight: 500, Line-height: 28px, Color split) */}
+                      <p className="font-sans font-medium text-[20px] leading-[28px]">
+                        <span className="text-[#8D8D8D]">FREE delivery as soon as </span>
+                        <span className="text-[#2B2B2B]">Thu, 9 Apr, 7 am - 10 pm</span>
+                      </p>
                     </div>
 
-                    {/* Add to Cart Button */}
+                    {/* Add to Cart Button (Width: 296px, Height: 60px, Padding: 16px vertical, 32px horizontal, Border: 2px, Radius: 4px, Gap: 8px) */}
                     <button
                       onClick={() => handleProductAdd(mockProduct)}
-                      className="w-full py-2.5 rounded-xl border border-[#1D493E] hover:bg-[#1D493E] hover:text-white text-[#1D493E] text-xs font-bold transition flex items-center justify-center gap-1.5 cursor-pointer"
+                      className="w-full h-[60px] pt-[16px] pr-[32px] pb-[16px] pl-[32px] gap-[8px] rounded-[4px] border-2 border-[#1D493E] hover:bg-[#1D493E] hover:text-white text-[#1D493E] text-[16px] font-bold transition flex items-center justify-center cursor-pointer"
                     >
-                    <span>{addedProductId === deal.id ? 'Added to Cart!' : 'Add to cart'}</span>
-                    <ShoppingCart className="w-3.5 h-3.5" />
-                  </button>
+                      <span>{addedProductId === deal.id ? 'Added to Cart!' : 'Add to cart'}</span>
+                      <ShoppingCart className="w-[20px] h-[20px]" />
+                    </button>
                 </div>
               </div>
             );
@@ -944,7 +945,8 @@ export default function Homepage() {
                   <div className="w-full md:h-[349.68px] flex flex-col justify-between gap-[32px] text-left">
                     {/* Text Group (Gap: 12px) */}
                     <div className="flex flex-col gap-[12px]">
-                      <span className="inline-block self-start text-[#FF5A36] bg-[#FF5A36]/10 px-2 py-0.5 rounded text-[10px] font-bold">
+                      {/* Category Tag (Height: 28px, Radius: 4px, Padding: 4px vertical, 8px horizontal, Background: #FF623E/8, Text: #FF623E) */}
+                      <span className="inline-flex items-center justify-center h-[28px] rounded-[4px] px-[8px] py-[4px] text-[14px] font-sans font-medium text-[#FF623E] bg-[#FF623E]/8 self-start">
                         {prod.category}
                       </span>
                       {/* Title & Price Row (Width: 339px, Height: 35px, Justify: space-between, Font: Faktum 20px, Weight: 600, Color: #2B2B2B) */}
@@ -956,38 +958,38 @@ export default function Homepage() {
                         </div>
                       </div>
 
-                      {/* Rating Row (Gap: 12px, Stars: 20px, Reviews: 20px Faktum Medium) */}
-                      <div className="flex items-center gap-[12px]">
-                        <div className="flex text-amber-400 gap-0.5">
-                          <Star className="w-5 h-5 fill-current" />
-                          <Star className="w-5 h-5 fill-current" />
-                          <Star className="w-5 h-5 fill-current" />
-                          <Star className="w-5 h-5 fill-current" />
-                          <Star className="w-5 h-5 fill-current" />
+                      {/* Rating & Bought Container (Width: 296px, Height: 66.7px, Gap: 12px) */}
+                      <div className="w-full md:h-[66.7px] flex flex-col gap-[12px]">
+                        {/* Rating Row (Gap: 12px, Stars: 20px, Reviews: 20px Faktum Medium) */}
+                        <div className="flex items-center gap-[12px] h-[20px] shrink-0">
+                          <div className="flex text-amber-400 gap-0.5">
+                            <Star className="w-5 h-5 fill-current" />
+                            <Star className="w-5 h-5 fill-current" />
+                            <Star className="w-5 h-5 fill-current" />
+                            <Star className="w-5 h-5 fill-current" />
+                            <Star className="w-5 h-5 fill-current" />
+                          </div>
+                          <span className="text-[20px] font-sans font-medium text-[#2B2B2B] leading-none">({prod.reviews})</span>
                         </div>
-                        <span className="text-[20px] font-sans font-medium text-[#2B2B2B]">({prod.reviews})</span>
+                        {/* Bought statistics (Height: 25px, Font: Faktum 20px, Weight: 500, Color: #8D8D8D) */}
+                        <p className="font-sans font-medium text-[20px] leading-none text-[#8D8D8D] h-[25px] flex items-center shrink-0">{prod.boughtText}</p>
                       </div>
 
-                      {/* Bought & Delivery Block (Height: 66.7px, Gap: 12px) */}
-                      <div className="w-full md:h-[66.7px] flex flex-col gap-[12px]">
-                        {/* Bought statistics (Height: 25px, Font: Faktum 20px, Weight: 500, Color: #8D8D8D) */}
-                        <p className="font-sans font-medium text-[20px] leading-none text-[#8D8D8D] h-[25px] flex items-center">{prod.boughtText}</p>
-                        
-                        {/* Delivery text (Font: Faktum 20px, Weight: 500, Line-height: 28px, Color: #2B2B2B) */}
-                        <p className="font-sans font-medium text-[20px] leading-[28px] text-[#2B2B2B]">
-                          {prod.deliveryText}
-                        </p>
-                      </div>
+                      {/* Delivery text (Font: Faktum 20px, Weight: 500, Line-height: 28px, Color split) */}
+                      <p className="font-sans font-medium text-[20px] leading-[28px]">
+                        <span className="text-[#8D8D8D]">FREE delivery as soon as </span>
+                        <span className="text-[#2B2B2B]">Thu, 9 Apr, 7 am - 10 pm</span>
+                      </p>
                     </div>
 
-                    {/* Add to Cart Button */}
+                    {/* Add to Cart Button (Width: 296px, Height: 60px, Padding: 16px vertical, 32px horizontal, Border: 2px, Radius: 4px, Gap: 8px) */}
                     <button
                       onClick={() => handleProductAdd(mockProduct)}
-                      className="w-full py-2.5 rounded-xl border border-[#1D493E] hover:bg-[#1D493E] hover:text-white text-[#1D493E] text-xs font-bold transition flex items-center justify-center gap-1.5 cursor-pointer"
+                      className="w-full h-[60px] pt-[16px] pr-[32px] pb-[16px] pl-[32px] gap-[8px] rounded-[4px] border-2 border-[#1D493E] hover:bg-[#1D493E] hover:text-white text-[#1D493E] text-[16px] font-bold transition flex items-center justify-center cursor-pointer"
                     >
-                    <span>{addedProductId === prod.id ? 'Added to Cart!' : 'Add to cart'}</span>
-                    <ShoppingCart className="w-3.5 h-3.5" />
-                  </button>
+                      <span>{addedProductId === prod.id ? 'Added to Cart!' : 'Add to cart'}</span>
+                      <ShoppingCart className="w-[20px] h-[20px]" />
+                    </button>
                 </div>
               </div>
             );

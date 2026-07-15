@@ -1499,13 +1499,75 @@ export default function HolidaysPortal() {
                 { num: '03', title: 'Make a reservation', desc: 'Select the best tour package that matches your schedule and lifestyle' },
                 { num: '04', title: 'Enjoy your experience', desc: 'Select the best tour package that matches your schedule and lifestyle' }
               ].map((step) => (
-                <div key={step.num} className="flex gap-6 items-center">
-                  <div className="w-[72px] h-[72px] bg-[#FAF9F6] border border-gray-150/40 rounded-lg flex items-center justify-center text-[#1D493E] font-serif text-2xl font-normal shrink-0">
+                <div 
+                  key={step.num} 
+                  style={{
+                    width: "624px",
+                    height: "115px",
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "flex-start",
+                    gap: "24px",
+                    boxSizing: "border-box"
+                  }}
+                >
+                  <div 
+                    style={{
+                      width: "72px",
+                      height: "72px",
+                      backgroundColor: "#FAF9F6",
+                      border: "1px solid rgba(0,0,0,0.06)",
+                      borderRadius: "8px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: "#1D493E",
+                      fontFamily: "'Playfair Display', serif",
+                      fontSize: "24px",
+                      fontWeight: 400,
+                      flexShrink: 0
+                    }}
+                  >
                     {step.num}
                   </div>
-                  <div className="space-y-1">
-                    <h4 className="text-xl font-serif font-bold text-[#1D493E]">{step.title}</h4>
-                    <p className="text-xs text-gray-500 font-medium leading-relaxed">{step.desc}</p>
+                  <div 
+                    style={{
+                      width: "512px",
+                      height: "115px",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "space-between",
+                      boxSizing: "border-box"
+                    }}
+                  >
+                    <h4 
+                      style={{
+                        width: "512px",
+                        height: "39px",
+                        fontFamily: "'Fraunces', serif",
+                        fontWeight: 600,
+                        fontSize: "32px",
+                        lineHeight: "39px",
+                        color: "rgba(43, 43, 43, 1)",
+                        margin: 0,
+                      }}
+                    >
+                      {step.title}
+                    </h4>
+                    <p 
+                      style={{
+                        width: "512px",
+                        height: "64px",
+                        fontFamily: "'Faktum', 'Outfit', sans-serif",
+                        fontWeight: 500,
+                        fontSize: "20px",
+                        lineHeight: "32px",
+                        color: "rgba(43, 43, 43, 1)",
+                        margin: 0,
+                      }}
+                    >
+                      {step.desc}
+                    </p>
                   </div>
                 </div>
               ))}

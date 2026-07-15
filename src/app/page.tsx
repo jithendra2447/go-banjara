@@ -413,23 +413,23 @@ export default function Homepage() {
           style={{ paddingTop: "24px", paddingBottom: "24px", paddingLeft: "80px", paddingRight: "80px", justifyContent: "space-between" }}
         >
           <div style={{ width: "174px", height: "97px", gap: "8px", padding: "12px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
-            <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43,43,43,1)", textAlign: "center", verticalAlign: "middle" }}>10+</h4>
+            <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43,43,43,1)", textAlign: "center" }}>10+</h4>
             <p className="text-[13px] md:text-sm text-gray-500 font-medium font-sans text-center">Travel Packages</p>
           </div>
-          <div style={{ width: "174px", height: "97px", gap: "8px", padding: "12px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
-            <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43,43,43,1)", textAlign: "center", verticalAlign: "middle" }}>15k+</h4>
+          <div style={{ width: "174px", height: "97px", gap: "8px", padding: "12px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", borderLeft: "1px solid #CCCCCC" }}>
+            <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43,43,43,1)", textAlign: "center" }}>15k+</h4>
             <p className="text-[13px] md:text-sm text-gray-500 font-medium font-sans text-center">Nomads Joined</p>
           </div>
-          <div style={{ width: "174px", height: "97px", gap: "8px", padding: "12px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
-            <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43,43,43,1)", textAlign: "center", verticalAlign: "middle" }}>24/7</h4>
+          <div style={{ width: "174px", height: "97px", gap: "8px", padding: "12px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", borderLeft: "1px solid #CCCCCC" }}>
+            <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43,43,43,1)", textAlign: "center" }}>24/7</h4>
             <p className="text-[13px] md:text-sm text-gray-500 font-medium font-sans text-center">On-road Support</p>
           </div>
-          <div style={{ width: "174px", height: "97px", gap: "8px", padding: "12px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
-            <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43,43,43,1)", textAlign: "center", verticalAlign: "middle" }}>7+</h4>
+          <div style={{ width: "174px", height: "97px", gap: "8px", padding: "12px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", borderLeft: "1px solid #CCCCCC" }}>
+            <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43,43,43,1)", textAlign: "center" }}>7+</h4>
             <p className="text-[13px] md:text-sm text-gray-500 font-medium font-sans text-center">Shop Products</p>
           </div>
-          <div style={{ width: "174px", height: "97px", gap: "8px", padding: "12px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
-            <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43,43,43,1)", textAlign: "center", verticalAlign: "middle" }}>4.5+</h4>
+          <div style={{ width: "174px", height: "97px", gap: "8px", padding: "12px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", borderLeft: "1px solid #CCCCCC" }}>
+            <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43,43,43,1)", textAlign: "center" }}>4.5+</h4>
             <p className="text-[13px] md:text-sm text-gray-500 font-medium font-sans text-center">Average trip rating</p>
           </div>
         </div>

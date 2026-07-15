@@ -544,7 +544,7 @@ export const HOLIDAY_PACKAGES: HolidayPackage[] = [
     hotelClass: '3',
     route: 'Kochi → Munnar → Alleppey → Kochi',
     routeList: ['Kochi', 'Munnar', 'Alleppey'],
-    description: 'Classic 3-night private getaway covering Munnar hills and Alleppey houseboats. Perfect for couples and families looking for a short refreshing break.',
+    description: 'Classic 3-night private getaway covering Munnar hills and Alleppey houseboats.',
     inclusions: ['hotel', 'transfers', 'meals', 'sightseeing'],
     highlights: [
       'Private transport in AC sedan with local driver',
@@ -667,7 +667,7 @@ export const HOLIDAY_PACKAGES: HolidayPackage[] = [
     hotelClass: '4',
     route: 'Kochi → Munnar → Thekkady → Alleppey → Kochi',
     routeList: ['Kochi', 'Munnar', 'Thekkady', 'Alleppey'],
-    description: 'Comprehensive 6-day highlight tour of Kerala. Take in the colonial charm of Fort Kochi, tea estates of Munnar, spice gardens of Thekkady, and serene backwater houseboats.',
+    description: 'Comprehensive 6-day highlight tour of Kerala\'s tea estates and backwater houseboats.',
     inclusions: ['hotel', 'transfers', 'meals', 'sightseeing'],
     highlights: [
       'Premium accommodations with breakfast included',
@@ -811,7 +811,7 @@ export const HOLIDAY_PACKAGES: HolidayPackage[] = [
     hotelClass: '4',
     route: 'Thiruvananthapuram → Kovalam → Varkala → Alleppey',
     routeList: ['Thiruvananthapuram', 'Kovalam', 'Varkala', 'Alleppey'],
-    description: 'Soak in the southern vibes of Kerala starting from Thiruvananthapuram. Explore Kovalam and Varkala beaches and wind down in the backwaters of Alleppey.',
+    description: 'Soak in southern vibes starting from Kovalam and Varkala beaches to the backwaters of Alleppey.',
     inclusions: ['hotel', 'transfers', 'meals'],
     highlights: [
       'Beachfront resort stays in Kovalam & Varkala',
@@ -943,7 +943,7 @@ export const HOLIDAY_PACKAGES: HolidayPackage[] = [
     hotelClass: '3',
     route: 'Panaji → Candolim Beach (2N) → Palolem Beach (2N)',
     routeList: ['Panaji Heritage Walk', 'Candolim Beach (2N)', 'Palolem Beach (2N)'],
-    description: 'Immerse yourself in the old-world Portuguese charm of Panaji\'s Latin Quarter before lounging on the golden sands of Candolim and Palolem. Enjoy scuba diving, fresh seafood, and tranquil beach sunrises.',
+    description: 'A curated getaway exploring heritage churches and the beautiful beaches of Goa.',
     inclusions: ['hotel', 'transfers', 'meals'],
     highlights: [
       'Historical Latin Quarter (Fontainhas) guided walking tour',
@@ -1076,7 +1076,7 @@ export const HOLIDAY_PACKAGES: HolidayPackage[] = [
     hotelClass: '5',
     route: 'Jaipur (2N) → Jodhpur (2N) → Jaisalmer Camp (3N)',
     routeList: ['Jaipur Palace (2N)', 'Jodhpur Blue City (2N)', 'Jaisalmer Camp (3N)'],
-    description: 'Experience the grandeur of Rajput royalty. Stay in authentic heritage palace hotels, traverse the blue streets of Jodhpur, and sleep under a canopy of stars in the Thar Desert.',
+    description: 'Experience majestic forts in Jaipur and Udaipur, and enjoy sunset desert camel safaris.',
     inclusions: ['hotel', 'transfers', 'meals', 'sightseeing'],
     highlights: [
       'Private heritage palace stays & luxury desert glamping',
@@ -1239,7 +1239,7 @@ export const HOLIDAY_PACKAGES: HolidayPackage[] = [
     hotelClass: '4',
     route: 'Delhi → Shimla (2N) → Manali (3N) → Delhi',
     routeList: ['Shimla Heritage (2N)', 'Manali River View (3N)'],
-    description: 'Breath in the crisp pine-scented air of the Himalayas. Walk through old wood sanctuaries in Shimla, trek along rushing glacial rivers in Manali, and enjoy thrilling adventure sports.',
+    description: 'Escape to snowy peaks. Hike scenic mountain trails and enjoy paragliding in Solang Valley.',
     inclusions: ['hotel', 'transfers', 'meals'],
     highlights: [
       'Riverside cottage stays with snowy balcony views',
@@ -1382,7 +1382,7 @@ export const HOLIDAY_PACKAGES: HolidayPackage[] = [
     hotelClass: '5',
     route: 'Port Blair (1N) → Havelock Island (3N) → Neil Island (1N)',
     routeList: ['Port Blair (1N)', 'Havelock Island (3N)', 'Neil Island (1N)'],
-    description: 'Escape to India\'s premier tropical paradise. Swim in the turquoise waters of Radhanagar Beach, snorkel among vibrant coral reefs, and ride in private inter-island cruises.',
+    description: 'Swim in turquoise waters of Radhanagar Beach and snorkel at Elephant Beach.',
     inclusions: ['hotel', 'transfers', 'meals', 'sightseeing'],
     highlights: [
       'Premium beachfront villa stay with private deck access',

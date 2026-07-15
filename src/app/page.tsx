@@ -823,13 +823,16 @@ export default function Homepage() {
                         <span className="text-[11px] text-gray-500 font-semibold">({deal.reviews})</span>
                       </div>
 
-                      {/* Bought statistics */}
-                      <p className="text-[11px] text-gray-500 font-semibold">{deal.boughtText}</p>
-                      
-                      {/* Delivery text */}
-                      <p className="text-[10px] md:text-[11px] text-gray-400 font-medium leading-tight">
-                        {deal.deliveryText}
-                      </p>
+                      {/* Bought & Delivery Block (Width: 339px, Height: 66.7px, Gap: 12px) */}
+                      <div className="w-full md:w-[339px] md:h-[66.7px] flex flex-col gap-[12px]">
+                        {/* Bought statistics (Height: 25px, Font: Faktum 20px, Weight: 500, Color: #8D8D8D) */}
+                        <p className="font-sans font-medium text-[20px] leading-none text-[#8D8D8D] h-[25px] flex items-center">{deal.boughtText}</p>
+                        
+                        {/* Delivery text (Font: Faktum 20px, Weight: 500, Line-height: 28px, Color: #2B2B2B) */}
+                        <p className="font-sans font-medium text-[20px] leading-[28px] text-[#2B2B2B]">
+                          {deal.deliveryText}
+                        </p>
+                      </div>
                     </div>
 
                     {/* Add to Cart Button */}
@@ -965,13 +968,16 @@ export default function Homepage() {
                         <span className="text-[11px] text-gray-500 font-semibold">({prod.reviews})</span>
                       </div>
 
-                      {/* Bought statistics */}
-                      <p className="text-[11px] text-gray-500 font-semibold">{prod.boughtText}</p>
-                      
-                      {/* Delivery text */}
-                      <p className="text-[10px] md:text-[11px] text-gray-400 font-medium leading-tight">
-                        {prod.deliveryText}
-                      </p>
+                      {/* Bought & Delivery Block (Width: 339px, Height: 66.7px, Gap: 12px) */}
+                      <div className="w-full md:w-[339px] md:h-[66.7px] flex flex-col gap-[12px]">
+                        {/* Bought statistics (Height: 25px, Font: Faktum 20px, Weight: 500, Color: #8D8D8D) */}
+                        <p className="font-sans font-medium text-[20px] leading-none text-[#8D8D8D] h-[25px] flex items-center">{prod.boughtText}</p>
+                        
+                        {/* Delivery text (Font: Faktum 20px, Weight: 500, Line-height: 28px, Color: #2B2B2B) */}
+                        <p className="font-sans font-medium text-[20px] leading-[28px] text-[#2B2B2B]">
+                          {prod.deliveryText}
+                        </p>
+                      </div>
                     </div>
 
                     {/* Add to Cart Button */}

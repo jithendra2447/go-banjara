@@ -1064,11 +1064,10 @@ export default function HolidaysPortal() {
                             letterSpacing: "0px",
                             color: "rgba(43, 43, 43, 1)",
                             margin: 0,
-                            display: "flex",
-                            alignItems: "center",
                             overflow: "hidden",
                             textOverflow: "ellipsis",
                             whiteSpace: "nowrap",
+                            display: "block",
                           }}
                           title={pkg.name}
                         >

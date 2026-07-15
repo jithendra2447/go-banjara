@@ -1586,27 +1586,31 @@ export default function Homepage() {
         </div>
       </section>
 
-      {/* 13. BRAND CTA SECTION */}
-      <section className="bg-[#1D493E] text-white pt-[32px] pb-[32px] text-center relative z-10">
-        <div className="max-w-4xl mx-auto space-y-6">
-          <h2 className="text-3xl md:text-[44px] font-serif font-black tracking-tight leading-tight">
-            Escape the ordinary. Join the road.
-          </h2>
-          <p className="text-sm md:text-base text-white/85 max-w-xl mx-auto leading-relaxed font-medium">
-            Curated small-group journeys, hand-picked gear made by artisans we know by name, and a community of explorers. Ready to start your adventure?
-          </p>
-          <div className="flex flex-wrap justify-center gap-4 pt-4">
+      {/* 13. NEWSLETTER / CTA SECTION */}
+      <section className="w-full bg-white py-[42px] px-[80px]">
+        <div className="max-w-[1440px] mx-auto flex flex-col items-center gap-[32px] text-center">
+          <div className="flex flex-col items-center gap-[12px]">
+            <h2 className="font-serif font-black text-[36px] md:text-[44px] leading-tight tracking-tight text-[#2B2B2B]">
+              The{" "}
+              <span className="text-[#FF5A36]">best adventures</span>{" "}
+              find their way to your inbox.
+            </h2>
+            <p className="text-[#2B2B2B]/70 text-[16px] md:text-[18px] leading-relaxed max-w-[680px]">
+              Hidden places, exclusive trip drops, curated gear, and stories from the road delivered before anyone else hears about them.
+            </p>
+          </div>
+          <div className="flex flex-wrap justify-center gap-4">
             <Link
               href="/travel"
-              className="px-8 py-3.5 rounded-lg bg-[#FF5A36] hover:bg-[#e04f2f] text-white font-bold text-sm transition-all shadow-sm cursor-pointer"
+              className="px-8 py-3.5 rounded-lg bg-[#1D493E] hover:bg-[#163a31] text-white font-bold text-sm transition-all shadow-sm"
             >
-              Explore Packages
+              Book Now
             </Link>
             <Link
               href="/shop"
-              className="px-8 py-3.5 rounded-lg border border-white bg-transparent hover:bg-white/10 text-white font-bold text-sm transition-all cursor-pointer"
+              className="px-8 py-3.5 rounded-lg border border-[#2B2B2B] bg-transparent hover:bg-[#2B2B2B]/5 text-[#2B2B2B] font-bold text-sm transition-all"
             >
-              Shop Travel Gear
+              Explore collection
             </Link>
           </div>
         </div>

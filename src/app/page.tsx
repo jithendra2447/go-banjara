@@ -461,7 +461,7 @@ export default function Homepage() {
                     />
                   </div>
                   {/* Details */}
-                  <div className="w-full md:w-[640px] pt-[12px] pb-[12px] px-[24px] flex flex-col justify-between h-full bg-white shrink-0">
+                  <div className="w-full md:w-[640px] pt-[12px] pb-[12px] px-[12px] flex flex-col justify-between h-full bg-white shrink-0">
                     {/* Top Group (Width: Fill, Height: 151px, Gap: 12px) */}
                     <div className="flex flex-col gap-2 min-h-[140px] shrink-0 w-full">
                       {/* Tags Container (Width: Fill, Height: Hug 28px, Justify: space-between) */}
@@ -477,32 +477,32 @@ export default function Homepage() {
                         {pkg1.description}
                       </p>
                     </div>
-                    {/* Details Grid Block (Width: Fill 624px, Height: Hug 116px, Justify: space-between) */}
-                    <div className="flex flex-col md:flex-row justify-between h-auto md:h-[96px] border-t border-gray-200 pt-3 w-full shrink-0 gap-6 md:gap-0">
-                      {/* Column 1 (Width: 308px, Height: 116px, Gap: 24px) */}
-                      <div className="flex flex-col justify-between h-auto md:h-full w-full md:w-[308px] shrink-0 gap-6 md:gap-0">
-                        <div className="flex items-center gap-2.5">
+                    {/* Details Grid Block (Width: 616px, Height: 140px, Justify: space-between) */}
+                    <div className="w-full md:w-[616px] h-[140px] flex justify-between border-t border-gray-200 pt-3 shrink-0">
+                      {/* Column 1 (Width: 308px, Height: 140px, Gap: space-between) */}
+                      <div className="w-full md:w-[308px] h-full flex flex-col justify-between shrink-0">
+                        <div className="w-[308px] h-[70px] pt-[12px] pr-[12px] pb-[12px] flex items-center gap-[8px] shrink-0">
                           <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
                             <MapPin className="w-4 h-4 text-[#1D493E]" />
                           </div>
                           <span className="font-sans font-medium text-[20px] leading-[28px] text-gray-600 align-middle">Starts from {pkg1.startPoint || 'Srinagar'}</span>
                         </div>
-                        <div className="flex items-center gap-2.5">
+                        <div className="w-[308px] h-[70px] pt-[12px] pr-[12px] pb-[12px] flex items-center gap-[8px] shrink-0">
                           <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
                             <ArrowUpRight className="w-4 h-4 text-[#1D493E]" />
                           </div>
                           <span className="font-sans font-medium text-[20px] leading-[28px] text-gray-600 align-middle">{pkg1.difficulty || 'Moderate'} Difficulty</span>
                         </div>
                       </div>
-                      {/* Column 2 (Width: 312px, Height: 116px, Gap: 24px) */}
-                      <div className="flex flex-col justify-between h-auto md:h-full w-full md:w-[312px] shrink-0 gap-6 md:gap-0">
-                        <div className="flex items-center gap-2.5">
+                      {/* Column 2 (Width: 308px, Height: 140px, Gap: space-between) */}
+                      <div className="w-full md:w-[308px] h-full flex flex-col justify-between shrink-0">
+                        <div className="w-[308px] h-[70px] pt-[12px] pr-[12px] pb-[12px] flex items-center gap-[8px] shrink-0">
                           <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
                             <Users className="w-4 h-4 text-[#1D493E]" />
                           </div>
                           <span className="font-sans font-medium text-[20px] leading-[28px] text-gray-600 align-middle">{pkg1.groupType || 'Curated group Trip'}</span>
                         </div>
-                        <div className="flex items-center gap-2.5">
+                        <div className="w-[308px] h-[70px] pt-[12px] pr-[12px] pb-[12px] flex items-center gap-[8px] shrink-0">
                           <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
                             <Calendar className="w-4 h-4 text-[#1D493E]" />
                           </div>
@@ -546,7 +546,7 @@ export default function Homepage() {
                       />
                     </div>
                     {/* Details block with padding */}
-                    <div className="flex-1 flex flex-col justify-between pt-[12px] pb-[12px] px-[24px]">
+                    <div className="flex-1 flex flex-col justify-between pt-[12px] pb-[12px] px-[12px]">
                       {/* Top Group (Width: Fill, Height: 151px, Gap: 12px) */}
                       <div className="flex flex-col gap-2 min-h-[140px] shrink-0 w-full">
                         {/* Tags Container (Width: Fill, Height: Hug 28px, Justify: space-between) */}
@@ -563,32 +563,32 @@ export default function Homepage() {
                         </p>
                       </div>
 
-                      {/* Details Grid Block (Width: Fill 624px, Height: Hug 116px, Justify: space-between) */}
-                      <div className="flex flex-col md:flex-row justify-between h-auto md:h-[96px] border-t border-gray-200 pt-3 w-full shrink-0 gap-6 md:gap-0">
-                        {/* Column 1 (Width: 308px, Height: 116px, Gap: 24px) */}
-                        <div className="flex flex-col justify-between h-auto md:h-full w-full md:w-[308px] shrink-0 gap-6 md:gap-0">
-                          <div className="flex items-center gap-2.5">
+                      {/* Details Grid Block (Width: 616px, Height: 140px, Justify: space-between) */}
+                      <div className="w-full md:w-[616px] h-[140px] flex justify-between border-t border-gray-200 pt-3 shrink-0">
+                        {/* Column 1 (Width: 308px, Height: 140px, Gap: space-between) */}
+                        <div className="w-full md:w-[308px] h-full flex flex-col justify-between shrink-0">
+                          <div className="w-[308px] h-[70px] pt-[12px] pr-[12px] pb-[12px] flex items-center gap-[8px] shrink-0">
                             <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
                               <MapPin className="w-4 h-4 text-[#1D493E]" />
                             </div>
                             <span className="font-sans font-medium text-[20px] leading-[28px] text-gray-600 align-middle">Starts from {pkg.startPoint || 'Srinagar'}</span>
                           </div>
-                          <div className="flex items-center gap-2.5">
+                          <div className="w-[308px] h-[70px] pt-[12px] pr-[12px] pb-[12px] flex items-center gap-[8px] shrink-0">
                             <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
                               <ArrowUpRight className="w-4 h-4 text-[#1D493E]" />
                             </div>
                             <span className="font-sans font-medium text-[20px] leading-[28px] text-gray-600 align-middle">{pkg.difficulty || 'Moderate'} Difficulty</span>
                           </div>
                         </div>
-                        {/* Column 2 (Width: 312px, Height: 116px, Gap: 24px) */}
-                        <div className="flex flex-col justify-between h-auto md:h-full w-full md:w-[312px] shrink-0 gap-6 md:gap-0">
-                          <div className="flex items-center gap-2.5">
+                        {/* Column 2 (Width: 308px, Height: 140px, Gap: space-between) */}
+                        <div className="w-full md:w-[308px] h-full flex flex-col justify-between shrink-0">
+                          <div className="w-[308px] h-[70px] pt-[12px] pr-[12px] pb-[12px] flex items-center gap-[8px] shrink-0">
                             <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
                               <Users className="w-4 h-4 text-[#1D493E]" />
                             </div>
                             <span className="font-sans font-medium text-[20px] leading-[28px] text-gray-600 align-middle">{pkg.groupType || 'Curated group Trip'}</span>
                           </div>
-                          <div className="flex items-center gap-2.5">
+                          <div className="w-[308px] h-[70px] pt-[12px] pr-[12px] pb-[12px] flex items-center gap-[8px] shrink-0">
                             <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
                               <Calendar className="w-4 h-4 text-[#1D493E]" />
                             </div>

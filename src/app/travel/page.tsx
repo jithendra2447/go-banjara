@@ -1591,24 +1591,121 @@ export default function HolidaysPortal() {
         </div>
       </section>
 
-      {/* 3. CAPTURED MEMORIES TESTIMONIALS SECTION (max-w-[1440px]) */}
-      <section className="bg-white border-t border-gray-200 py-24 relative z-10">
-        <div className="max-w-[1440px] mx-auto px-5 md:px-[80px] space-y-16">
+      {/* 3. CAPTURED MEMORIES TESTIMONIALS SECTION (1440x912.5px) */}
+      <section 
+        style={{
+          width: "100%",
+          maxWidth: "1440px",
+          height: "912.5px",
+          paddingTop: "42px",
+          paddingRight: "80px",
+          paddingBottom: "42px",
+          paddingLeft: "80px",
+          display: "flex",
+          flexDirection: "column",
+          gap: "32px",
+          backgroundColor: "rgba(255, 255, 255, 1)",
+          boxSizing: "border-box",
+          margin: "0 auto",
+          position: "relative",
+          zIndex: 10
+        }}
+      >
+        <div 
+          style={{
+            width: "100%",
+            maxWidth: "1280px",
+            height: "100%",
+            margin: "0 auto",
+            display: "flex",
+            flexDirection: "column",
+            gap: "32px",
+            boxSizing: "border-box"
+          }}
+        >
           
-          <div className="text-center space-y-3">
-            <span className="inline-block text-[#FF623E] font-bold text-xs uppercase tracking-widest">
+          {/* Header block (1280x134px, space-between) */}
+          <div 
+            style={{
+              width: "100%",
+              maxWidth: "1280px",
+              height: "134px",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              alignItems: "center",
+              margin: "0 auto",
+              boxSizing: "border-box"
+            }}
+          >
+            <span 
+              style={{
+                width: "176px",
+                height: "18px",
+                fontFamily: "'Faktum', 'Outfit', sans-serif",
+                color: "rgba(255, 98, 62, 1)",
+                fontWeight: 600,
+                fontSize: "14px",
+                lineHeight: "18px",
+                textTransform: "uppercase",
+                letterSpacing: "1.2px",
+                textAlign: "center",
+                margin: 0,
+                display: "block",
+                boxSizing: "border-box"
+              }}
+            >
               Captured Memories
             </span>
-            <h2 className="text-4xl md:text-5xl font-serif font-light text-[#1D493E]">
-              Capture your adventurous travel <span className="text-[#FF623E] font-serif font-normal">Forever</span>
+            <h2 
+              style={{
+                width: "100%",
+                maxWidth: "1280px",
+                height: "52px",
+                fontFamily: "'Fraunces', serif",
+                fontWeight: 600,
+                fontSize: "42px",
+                lineHeight: "52px",
+                letterSpacing: "0px",
+                color: "#1D493E",
+                textAlign: "center",
+                margin: 0,
+                boxSizing: "border-box"
+              }}
+            >
+              Capture your adventurous travel <span style={{ color: "rgba(255, 98, 62, 1)", fontWeight: 600 }}>Forever</span>
             </h2>
-            <p className="text-sm text-gray-500 max-w-2xl mx-auto font-semibold">
+            <p 
+              style={{
+                width: "100%",
+                maxWidth: "1280px",
+                height: "32px",
+                fontFamily: "'Faktum', 'Outfit', sans-serif",
+                fontSize: "24px",
+                lineHeight: "32px",
+                color: "rgba(43, 43, 43, 1)",
+                margin: 0,
+                fontWeight: 500,
+                textAlign: "center",
+                boxSizing: "border-box"
+              }}
+            >
               Curated journeys for the modern nomad, designed to push boundaries and discover India's hidden heart
             </p>
           </div>
 
           {/* Testimonial grid (Increased text sizes) */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div 
+            style={{
+              width: "100%",
+              maxWidth: "1280px",
+              height: "662.5px",
+              display: "grid",
+              gridTemplateColumns: "repeat(3, 1fr)",
+              gap: "32px",
+              boxSizing: "border-box"
+            }}
+          >
             
             {/* Column 1 (Faded) */}
             <div className="space-y-8 md:opacity-40 hover:opacity-100 transition duration-300">

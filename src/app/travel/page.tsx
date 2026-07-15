@@ -1413,24 +1413,86 @@ export default function HolidaysPortal() {
                 Best Seller
               </div>
 
-              {/* Card overlay details with bottom container matching Figma */}
-              <div className="absolute bottom-0 left-0 right-0 bg-black/60 backdrop-blur-sm p-6 space-y-2 text-left">
-                <div className="flex justify-between items-center text-white">
-                  <h3 className="text-xl font-sans font-black tracking-wide">
+               {/* Card overlay details with bottom container matching Figma */}
+              <div 
+                style={{
+                  position: "absolute",
+                  bottom: "16px",
+                  left: "16px",
+                  width: "592px",
+                  height: "135px",
+                  background: "rgba(255, 255, 255, 0.1)",
+                  backdropFilter: "blur(12px)",
+                  WebkitBackdropFilter: "blur(12px)",
+                  borderRadius: "4px",
+                  padding: "12px",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "10px",
+                  border: "1px solid rgba(255, 255, 255, 0.2)",
+                  boxSizing: "border-box",
+                  textShadow: "0 1px 2px rgba(0, 0, 0, 0.4)",
+                }}
+                className="text-left"
+              >
+                <div 
+                  style={{ 
+                    display: "flex", 
+                    justifyContent: "space-between", 
+                    alignItems: "center", 
+                    color: "#FFFFFF",
+                  }}
+                >
+                  <h3 
+                    style={{
+                      fontFamily: "'Faktum', 'Outfit', sans-serif",
+                      fontWeight: 600,
+                      fontSize: "24px",
+                      lineHeight: "1",
+                      margin: 0,
+                    }}
+                  >
                     Srinagar to Leh
                   </h3>
-                  <span className="text-xl font-sans font-black">
+                  <span 
+                    style={{
+                      fontFamily: "'Faktum', 'Outfit', sans-serif",
+                      fontWeight: 600,
+                      fontSize: "24px",
+                      lineHeight: "1",
+                    }}
+                  >
                     ₹22,900/Person
                   </span>
                 </div>
-                <p className="text-xs text-slate-300 font-semibold leading-relaxed">
+                <p 
+                  style={{
+                    fontFamily: "'Faktum', 'Outfit', sans-serif",
+                    fontWeight: 500,
+                    fontSize: "18px",
+                    lineHeight: "26px",
+                    color: "#FFFFFF",
+                    margin: 0,
+                  }}
+                >
                   Experience the iconic highway journey crossing high mountain passes and sapphire lakes.
                 </p>
               </div>
             </Link>
 
             {/* Right side: 4 step list matching Figma */}
-            <div className="space-y-8 text-left">
+            <div 
+              style={{
+                width: "100%",
+                maxWidth: "624px",
+                height: "556px",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                boxSizing: "border-box"
+              }}
+              className="text-left"
+            >
               {[
                 { num: '01', title: 'Choose a package', desc: 'Select the best tour package that matches your schedule and lifestyle' },
                 { num: '02', title: 'Check availability', desc: 'Select the best tour package that matches your schedule and lifestyle' },

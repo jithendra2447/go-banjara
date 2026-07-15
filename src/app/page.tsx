@@ -1063,20 +1063,20 @@ export default function Homepage() {
       </section>
 
       {/* 8.5 ORANGE HIGHLIGHT MARQUEE BANNER */}
-      <div className="bg-[#FF5A36] text-white py-6 overflow-hidden select-none relative z-10">
-        <div className="flex whitespace-nowrap gap-12 animate-marquee font-sans text-sm md:text-base font-extrabold uppercase tracking-widest">
-          <span>✦ ESCAPE THE ORDINARY ✦ SHOP TRAVEL GEAR ✦ DARE TO TRAVEL ✦ ADVENTURE AWAITS ✦ MODERN NOMAD ✦ SHOP ✦ ESCAPE THE ORDINARY ✦ SHOP TRAVEL GEAR ✦ DARE TO TRAVEL ✦ ADVENTURE AWAITS ✦ MODERN NOMAD ✦ SHOP ✦ ESCAPE THE ORDINARY ✦ SHOP TRAVEL GEAR ✦ DARE TO TRAVEL ✦ ADVENTURE AWAITS ✦ MODERN NOMAD ✦ SHOP</span>
+      <div className="bg-[#FF623E] text-white h-[78px] flex items-center overflow-hidden select-none relative z-10 w-full py-[24px]">
+        <div className="flex whitespace-nowrap gap-[10px] animate-marquee font-serif font-semibold text-[24px] leading-none uppercase text-white tracking-[0px]">
+          <span>✦ ESCAPE THE ORDINARY ✦ SHOP TRAVEL GEAR ✦ DARE TO TRAVEL ✦ ADVENTURE AWAITS ✦ MODERN NOMAD ✦ SHOP TRAVEL GEAR ✦ ESCAPE THE ORDINARY ✦ SHOP TRAVEL GEAR ✦ DARE TO TRAVEL ✦ ADVENTURE AWAITS ✦ MODERN NOMAD ✦ SHOP TRAVEL GEAR ✦ ESCAPE THE ORDINARY ✦ SHOP TRAVEL GEAR ✦ DARE TO TRAVEL ✦ ADVENTURE AWAITS ✦ MODERN NOMAD ✦ SHOP TRAVEL GEAR</span>
         </div>
       </div>
 
       {/* 9. MEET BONJO SECTION (Brand story) */}
-      <section className="max-w-[1440px] mx-auto px-6 md:px-20 pt-[42px] pb-[42px] relative overflow-visible">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
+      <section className="max-w-[1440px] w-full mx-auto px-6 md:px-[80px] pt-[62px] pb-[62px] md:h-[774px] flex items-center bg-white relative overflow-visible">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-[32px] items-center w-full">
           {/* Left Column: Image with slight rotation and glow */}
           <div className="relative">
             {/* Soft glow background */}
             <div className="absolute -top-10 -left-10 w-48 h-48 bg-[#FF5A36]/15 rounded-full blur-3xl" />
-            <div className="relative rounded-[32px] overflow-hidden shadow-2xl border border-gray-150 transform -rotate-2 hover:rotate-0 transition-transform duration-500 w-full aspect-square max-w-[440px] mx-auto md:mx-0 bg-gray-50">
+            <div className="relative rounded-[12px] overflow-hidden shadow-2xl border border-gray-150 transform -rotate-2 hover:rotate-0 transition-transform duration-500 w-full md:w-[584px] md:h-[584px] aspect-square mx-auto md:mx-0 bg-gray-50">
               {/* Orange gradient overlay in top-left */}
               <div className="absolute top-0 left-0 w-40 h-40 bg-gradient-to-br from-[#FF5A36]/40 via-[#FF5A36]/10 to-transparent pointer-events-none z-10" />
               <img 
@@ -1089,16 +1089,16 @@ export default function Homepage() {
           </div>
 
           {/* Right Column: Text & Content */}
-          <div className="space-y-6 text-left">
-            <div className="space-y-3">
-              <span className="inline-block text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-1 rounded-[4px] text-xs font-bold uppercase tracking-wider">
+          <div className="flex flex-col gap-[32px] w-full md:w-[644px] md:h-[650px] text-left justify-center">
+            <div className="flex flex-col gap-[12px]">
+              <span className="inline-flex items-center justify-center text-[#FF623E] bg-[#FF623E]/8 px-2.5 py-0.5 rounded-[4px] text-[14px] font-semibold uppercase tracking-[1.2px] leading-none self-start">
                 The Banjara Soul
               </span>
               <h2 className="text-3xl md:text-[40px] font-serif font-black text-[#1D493E] leading-tight">
                 Meet Bonjo.
               </h2>
             </div>
-            <div className="space-y-4 text-gray-600 text-sm md:text-base font-medium leading-relaxed">
+            <div className="flex flex-col gap-[32px] text-gray-600 text-sm md:text-base font-medium leading-relaxed">
               <p>
                 Go Banjara was born from a frustration travel in India had become a checklist. Same cafés, same photo spots, same three-day Goa loop. We wanted something slower, closer to the ground, and honest about the places it visited.
               </p>
@@ -1112,7 +1112,7 @@ export default function Homepage() {
             <div className="pt-2">
               <Link 
                 href="/about" 
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-[#1D493E] hover:bg-[#15342c] text-white text-sm font-bold transition-all shadow-sm cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-[#1D493E] hover:bg-[#15342c] text-white text-sm font-bold transition-all shadow-sm cursor-pointer w-fit"
               >
                 <span>Our Story</span>
                 <ArrowUpRight className="w-4 h-4" />

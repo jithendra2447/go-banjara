@@ -138,7 +138,7 @@ export const Footer: React.FC = () => {
         </div>
 
           {/* Contact us — 439px × 290px, gap-12 */}
-          <div style={{ width: "439px", display: "flex", flexDirection: "column", gap: "12px" }}>
+          <div style={{ width: "439px", height: "290px", display: "flex", flexDirection: "column", gap: "12px" }}>
             <h4 style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "26px", letterSpacing: "-0.1px", color: "rgba(255,255,255,0.8)", margin: 0 }}>Contact us</h4>
             <ul style={{ display: "flex", flexDirection: "column", gap: "12px" }} className="text-sm font-semibold">
               <li className="flex items-center gap-3">
@@ -215,9 +215,34 @@ export const Footer: React.FC = () => {
           {/* Newsletter */}
           <div className="flex flex-col gap-2">
             <span className="text-xs font-bold text-slate-200">Stay connected by subscribe newsletter</span>
-            <form onSubmit={(e) => { e.preventDefault(); alert("Subscribed!"); }} className="flex bg-white rounded-lg p-1 border border-slate-200">
-              <input type="email" required placeholder="Enter your email address" className="w-[280px] bg-transparent px-3 py-2 text-slate-800 text-xs focus:outline-none placeholder-slate-400 font-sans font-medium" />
-              <button type="submit" className="bg-[#1D493E] hover:bg-[#15342c] text-white px-5 py-2 rounded-md text-xs font-bold transition duration-300 cursor-pointer shadow-sm shrink-0">Subscribe</button>
+            <form
+              onSubmit={(e) => { e.preventDefault(); alert("Subscribed!"); }}
+              style={{
+                width: "546px",
+                height: "56px",
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                gap: "8px",
+                borderRadius: "8px",
+                padding: "8px",
+                background: "white",
+                boxSizing: "border-box",
+              }}
+            >
+              <input
+                type="email"
+                required
+                placeholder="Enter your email address"
+                style={{ flex: 1, background: "transparent", border: "none", outline: "none", fontSize: "14px", color: "#1a2e29", fontFamily: "'Faktum','Outfit',sans-serif", paddingLeft: "8px" }}
+                className="placeholder-slate-400"
+              />
+              <button
+                type="submit"
+                style={{ height: "40px", padding: "0 20px", background: "#1D493E", color: "white", borderRadius: "6px", fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "14px", border: "none", cursor: "pointer", flexShrink: 0 }}
+              >
+                Subscribe
+              </button>
             </form>
           </div>
         </div>

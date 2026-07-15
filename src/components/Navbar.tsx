@@ -216,9 +216,29 @@ export const Navbar: React.FC = () => {
             ) : (
               <button
                 onClick={() => setAuthOpen(true)}
-                className="hidden sm:flex items-center justify-center px-6 rounded-[8px] transition-all duration-300 cursor-pointer bg-[#1D493E] hover:bg-[#16372f] text-white h-[47px] shrink-0"
+                style={{
+                  width: "90px",
+                  height: "47px",
+                  paddingTop: "12px",
+                  paddingBottom: "12px",
+                  paddingLeft: "24px",
+                  paddingRight: "24px",
+                  gap: "8px",
+                  borderRadius: "4px",
+                  background: "rgba(29, 73, 62, 1)",
+                  display: "none",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  cursor: "pointer",
+                  border: "none",
+                  flexShrink: 0,
+                  transition: "background 0.2s",
+                }}
+                className="sm:flex hover:bg-[#16372f]"
+                onMouseEnter={e => (e.currentTarget.style.background = "rgba(22,55,47,1)")}
+                onMouseLeave={e => (e.currentTarget.style.background = "rgba(29,73,62,1)")}
               >
-                <span className="font-sans font-medium text-[16px] leading-none text-white w-[42px] h-[20px] flex items-center justify-center">Login</span>
+                <span style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "16px", lineHeight: "100%", letterSpacing: "0px", color: "#FFFFFF" }}>Login</span>
               </button>
             )}
 

@@ -48,11 +48,21 @@ export const Footer: React.FC = () => {
             alt="go banjāra"
             style={{ width: "220px", height: "auto" }}
           />
-          {/* Description */}
-          <p className="text-sm text-slate-200/90 max-w-xs leading-relaxed font-sans">
-            Crafting high-end editorial travel experience and gear for the modern nomad.
-            <br />
-            Escape the ordinary with us.
+          {/* Description — 273×168, Faktum 500 20px 42lh */}
+          <p
+            style={{
+              width: "273px",
+              height: "168px",
+              fontFamily: "'Faktum', 'Outfit', sans-serif",
+              fontWeight: 500,
+              fontSize: "20px",
+              lineHeight: "42px",
+              letterSpacing: "0px",
+              color: "rgba(255, 255, 255, 1)",
+              margin: 0,
+            }}
+          >
+            Crafting high-end editorial travel experience and gear for the modern nomad. Escape the ordinary with us.
           </p>
         </div>
 

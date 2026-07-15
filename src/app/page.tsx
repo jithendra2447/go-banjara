@@ -160,8 +160,39 @@ export default function Homepage() {
 
   const resolveProduct = (defaultId: string, fallbackName: string, fallbackCategory: string, fallbackImg: string, fallbackPrice: number, fallbackOrig: number) => {
     const found = productsList.find(p => p.id === defaultId);
-    const img = found?.image || fallbackImg;
+    let img = found?.image || fallbackImg;
     
+    if (!img || img === 'undefined' || img.trim() === '') {
+      img = fallbackImg;
+    }
+    
+    // Clean up absolute paths or local storage entries to make sure they are relative to the public folder
+    if (img.includes('explore_more_keychain.png')) {
+      img = '/explore_more_keychain.png';
+    } else if (img.includes('go_banjara_tshirt.jpg')) {
+      img = '/go_banjara_tshirt.jpg';
+    } else if (img.includes('naturally_nomad_badge.png')) {
+      img = '/naturally_nomad_badge.png';
+    } else if (img.includes('around_the_world_sticker.jpg')) {
+      img = '/around_the_world_sticker.jpg';
+    } else if (img.includes('blue_mavin_slides.jpg')) {
+      img = '/blue_mavin_slides.jpg';
+    } else if (img.includes('banjara_slides.jpg')) {
+      img = '/banjara_slides.jpg';
+    } else if (img.includes('wakefit_pillow.jpg')) {
+      img = '/wakefit_pillow.jpg';
+    } else if (img.includes('fur_jaden_backpack.jpg')) {
+      img = '/fur_jaden_backpack.jpg';
+    } else if (img.includes('go_passport_cover.jpg')) {
+      img = '/go_passport_cover.jpg';
+    } else if (img.includes('banjara_luggage_tag.jpg')) {
+      img = '/banjara_luggage_tag.jpg';
+    } else if (img.includes('banjara_blue_slides.png')) {
+      img = '/banjara_blue_slides.png';
+    } else if (!img.startsWith('/') && !img.startsWith('http')) {
+      img = '/' + img;
+    }
+
     // Setup a list of 5 fallback images for indicators
     const fallbackImages = [
       img,
@@ -176,7 +207,7 @@ export default function Homepage() {
         id: found.id,
         name: found.name,
         category: found.category,
-        image: found.image,
+        image: img,
         images: found.images || fallbackImages,
         price: found.price,
         originalPrice: found.originalPrice,
@@ -190,7 +221,7 @@ export default function Homepage() {
       id: defaultId,
       name: fallbackName,
       category: fallbackCategory,
-      image: fallbackImg,
+      image: img,
       images: fallbackImages,
       price: fallbackPrice,
       originalPrice: fallbackOrig,

@@ -797,9 +797,9 @@ export default function Homepage() {
 
                   {/* Details Block (Width: 339px, Height: 350px, Gap: 32px between text and button) */}
                   <div className="w-full md:h-[349.68px] flex flex-col justify-between gap-[32px] text-left">
-                    {/* Text Group */}
-                    <div className="space-y-3">
-                      <span className="inline-block text-[#FF5A36] bg-[#FF5A36]/10 px-2 py-0.5 rounded text-[10px] font-bold">
+                    {/* Text Group (Gap: 12px) */}
+                    <div className="flex flex-col gap-[12px]">
+                      <span className="inline-block self-start text-[#FF5A36] bg-[#FF5A36]/10 px-2 py-0.5 rounded text-[10px] font-bold">
                         {deal.category}
                       </span>
                       {/* Title & Price Row (Width: 339px, Height: 35px, Justify: space-between, Font: Faktum 20px, Weight: 600, Color: #2B2B2B) */}
@@ -811,16 +811,16 @@ export default function Homepage() {
                         </div>
                       </div>
 
-                      {/* Rating */}
-                      <div className="flex items-center gap-1.5">
-                        <div className="flex text-amber-400 text-xs gap-0.5">
-                          <Star className="w-3 h-3 fill-current" />
-                          <Star className="w-3 h-3 fill-current" />
-                          <Star className="w-3 h-3 fill-current" />
-                          <Star className="w-3 h-3 fill-current" />
-                          <Star className="w-3 h-3 fill-current" />
+                      {/* Rating Row (Gap: 12px, Stars: 20px, Reviews: 20px Faktum Medium) */}
+                      <div className="flex items-center gap-[12px]">
+                        <div className="flex text-amber-400 gap-0.5">
+                          <Star className="w-5 h-5 fill-current" />
+                          <Star className="w-5 h-5 fill-current" />
+                          <Star className="w-5 h-5 fill-current" />
+                          <Star className="w-5 h-5 fill-current" />
+                          <Star className="w-5 h-5 fill-current" />
                         </div>
-                        <span className="text-[11px] text-gray-500 font-semibold">({deal.reviews})</span>
+                        <span className="text-[20px] font-sans font-medium text-[#2B2B2B]">({deal.reviews})</span>
                       </div>
 
                       {/* Bought & Delivery Block (Height: 66.7px, Gap: 12px) */}
@@ -942,9 +942,9 @@ export default function Homepage() {
 
                   {/* Details Block (Width: 339px, Height: 350px, Gap: 32px between text and button) */}
                   <div className="w-full md:h-[349.68px] flex flex-col justify-between gap-[32px] text-left">
-                    {/* Text Group */}
-                    <div className="space-y-3">
-                      <span className="inline-block text-[#FF5A36] bg-[#FF5A36]/10 px-2 py-0.5 rounded text-[10px] font-bold">
+                    {/* Text Group (Gap: 12px) */}
+                    <div className="flex flex-col gap-[12px]">
+                      <span className="inline-block self-start text-[#FF5A36] bg-[#FF5A36]/10 px-2 py-0.5 rounded text-[10px] font-bold">
                         {prod.category}
                       </span>
                       {/* Title & Price Row (Width: 339px, Height: 35px, Justify: space-between, Font: Faktum 20px, Weight: 600, Color: #2B2B2B) */}
@@ -956,16 +956,16 @@ export default function Homepage() {
                         </div>
                       </div>
 
-                      {/* Rating */}
-                      <div className="flex items-center gap-1.5">
-                        <div className="flex text-amber-400 text-xs gap-0.5">
-                          <Star className="w-3 h-3 fill-current" />
-                          <Star className="w-3 h-3 fill-current" />
-                          <Star className="w-3 h-3 fill-current" />
-                          <Star className="w-3 h-3 fill-current" />
-                          <Star className="w-3 h-3 fill-current" />
+                      {/* Rating Row (Gap: 12px, Stars: 20px, Reviews: 20px Faktum Medium) */}
+                      <div className="flex items-center gap-[12px]">
+                        <div className="flex text-amber-400 gap-0.5">
+                          <Star className="w-5 h-5 fill-current" />
+                          <Star className="w-5 h-5 fill-current" />
+                          <Star className="w-5 h-5 fill-current" />
+                          <Star className="w-5 h-5 fill-current" />
+                          <Star className="w-5 h-5 fill-current" />
                         </div>
-                        <span className="text-[11px] text-gray-500 font-semibold">({prod.reviews})</span>
+                        <span className="text-[20px] font-sans font-medium text-[#2B2B2B]">({prod.reviews})</span>
                       </div>
 
                       {/* Bought & Delivery Block (Height: 66.7px, Gap: 12px) */}

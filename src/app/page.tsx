@@ -795,46 +795,42 @@ export default function Homepage() {
                     </div>
                   </div>
 
-                  {/* Details Block (Width: 339px, Height: 350px, Gap: 32px between text and button) */}
-                  <div className="w-full md:h-[349.68px] flex flex-col justify-between gap-[32px] text-left">
-                    {/* Text Group (Gap: 12px) */}
-                    <div className="flex flex-col gap-[12px]">
-                      {/* Category Tag (Height: 28px, Radius: 4px, Padding: 4px vertical, 8px horizontal, Background: #FF623E/8, Text: #FF623E) */}
-                      <span className="inline-flex items-center justify-center h-[28px] rounded-[4px] px-[8px] py-[4px] text-[14px] font-sans font-medium text-[#FF623E] bg-[#FF623E]/8 self-start">
-                        {deal.category}
-                      </span>
-                      {/* Title & Price Row (Width: 339px, Height: 35px, Justify: space-between, Font: Faktum 20px, Weight: 600, Color: #2B2B2B) */}
-                      <div className="w-full h-[35px] flex justify-between items-center gap-2">
-                        <h4 className="text-[20px] font-sans font-semibold text-[#2B2B2B] truncate">{deal.name}</h4>
-                        <div className="flex items-center gap-2.5 shrink-0">
-                          <span className="text-gray-400 line-through text-base font-medium">₹{deal.originalPrice}</span>
-                          <span className="text-[20px] font-sans font-semibold text-[#2B2B2B]">₹{deal.price}</span>
-                        </div>
+                  {/* Details Block (Width: 339px, Height: 350px) */}
+                  <div className="w-full md:h-[349.68px] flex flex-col justify-between text-left">
+                    {/* Category Tag (Height: 28px, Radius: 4px, Padding: 4px vertical, 8px horizontal, Background: #FF623E/8, Text: #FF623E) */}
+                    <span className="inline-flex items-center justify-center h-[28px] rounded-[4px] px-[8px] py-[4px] text-[14px] font-sans font-medium text-[#FF623E] bg-[#FF623E]/8 self-start">
+                      {deal.category}
+                    </span>
+                    
+                    {/* Title & Price Row (Width: 339px, Height: 35px, Justify: space-between, Font: Faktum 20px, Weight: 600, Color: #2B2B2B) */}
+                    <div className="w-full h-[35px] flex justify-between items-center gap-2">
+                      <h4 className="text-[20px] font-sans font-semibold text-[#2B2B2B] truncate">{deal.name}</h4>
+                      <div className="flex items-center gap-2.5 shrink-0">
+                        <span className="text-gray-400 line-through text-base font-medium">₹{deal.originalPrice}</span>
+                        <span className="text-[20px] font-sans font-semibold text-[#2B2B2B]">₹{deal.price}</span>
                       </div>
-
-                      {/* Rating & Bought Container (Width: 296px, Height: 66.7px, Gap: 12px) */}
-                      <div className="w-full md:h-[66.7px] flex flex-col gap-[12px]">
-                        {/* Rating Row (Gap: 12px, Stars: 20px, Reviews: 20px Faktum Medium) */}
-                        <div className="flex items-center gap-[12px] h-[20px] shrink-0">
-                          <div className="flex text-amber-400 gap-0.5">
-                            <Star className="w-5 h-5 fill-current" />
-                            <Star className="w-5 h-5 fill-current" />
-                            <Star className="w-5 h-5 fill-current" />
-                            <Star className="w-5 h-5 fill-current" />
-                            <Star className="w-5 h-5 fill-current" />
-                          </div>
-                          <span className="text-[20px] font-sans font-medium text-[#2B2B2B] leading-none">({deal.reviews})</span>
-                        </div>
-                        {/* Bought statistics (Height: 25px, Font: Faktum 20px, Weight: 500, Color: #8D8D8D) */}
-                        <p className="font-sans font-medium text-[20px] leading-none text-[#8D8D8D] h-[25px] flex items-center shrink-0">{deal.boughtText}</p>
-                      </div>
-
-                      {/* Delivery text (Font: Faktum 20px, Weight: 500, Line-height: 28px, Color split) */}
-                      <p className="font-sans font-medium text-[20px] leading-[28px]">
-                        <span className="text-[#8D8D8D]">FREE delivery as soon as </span>
-                        <span className="text-[#2B2B2B]">Thu, 9 Apr, 7 am - 10 pm</span>
-                      </p>
                     </div>
+
+                    {/* Rating Row (Gap: 12px, Stars: 20px, Reviews: 20px Faktum Medium) */}
+                    <div className="flex items-center gap-[12px] h-[20px] shrink-0">
+                      <div className="flex text-amber-400 gap-0.5">
+                        <Star className="w-5 h-5 fill-current" />
+                        <Star className="w-5 h-5 fill-current" />
+                        <Star className="w-5 h-5 fill-current" />
+                        <Star className="w-5 h-5 fill-current" />
+                        <Star className="w-5 h-5 fill-current" />
+                      </div>
+                      <span className="text-[20px] font-sans font-medium text-[#2B2B2B] leading-none">({deal.reviews})</span>
+                    </div>
+
+                    {/* Bought statistics (Height: 25px, Font: Faktum 20px, Weight: 500, Color: #8D8D8D) */}
+                    <p className="font-sans font-medium text-[20px] leading-none text-[#8D8D8D] h-[25px] flex items-center shrink-0">{deal.boughtText}</p>
+
+                    {/* Delivery text (Font: Faktum 20px, Weight: 500, Line-height: 28px, Color split) */}
+                    <p className="font-sans font-medium text-[20px] leading-[28px]">
+                      <span className="text-[#8D8D8D]">FREE delivery as soon as </span>
+                      <span className="text-[#2B2B2B]">Thu, 9 Apr, 7 am - 10 pm</span>
+                    </p>
 
                     {/* Add to Cart Button (Width: 296px, Height: 60px, Padding: 16px vertical, 32px horizontal, Border: 2px, Radius: 4px, Gap: 8px) */}
                     <button
@@ -941,46 +937,42 @@ export default function Homepage() {
                     </div>
                   </div>
 
-                  {/* Details Block (Width: 339px, Height: 350px, Gap: 32px between text and button) */}
-                  <div className="w-full md:h-[349.68px] flex flex-col justify-between gap-[32px] text-left">
-                    {/* Text Group (Gap: 12px) */}
-                    <div className="flex flex-col gap-[12px]">
-                      {/* Category Tag (Height: 28px, Radius: 4px, Padding: 4px vertical, 8px horizontal, Background: #FF623E/8, Text: #FF623E) */}
-                      <span className="inline-flex items-center justify-center h-[28px] rounded-[4px] px-[8px] py-[4px] text-[14px] font-sans font-medium text-[#FF623E] bg-[#FF623E]/8 self-start">
-                        {prod.category}
-                      </span>
-                      {/* Title & Price Row (Width: 339px, Height: 35px, Justify: space-between, Font: Faktum 20px, Weight: 600, Color: #2B2B2B) */}
-                      <div className="w-full h-[35px] flex justify-between items-center gap-2">
-                        <h4 className="text-[20px] font-sans font-semibold text-[#2B2B2B] truncate">{prod.name}</h4>
-                        <div className="flex items-center gap-2.5 shrink-0">
-                          <span className="text-gray-400 line-through text-base font-medium">₹{prod.originalPrice}</span>
-                          <span className="text-[20px] font-sans font-semibold text-[#2B2B2B]">₹{prod.price}</span>
-                        </div>
+                  {/* Details Block (Width: 339px, Height: 350px) */}
+                  <div className="w-full md:h-[349.68px] flex flex-col justify-between text-left">
+                    {/* Category Tag (Height: 28px, Radius: 4px, Padding: 4px vertical, 8px horizontal, Background: #FF623E/8, Text: #FF623E) */}
+                    <span className="inline-flex items-center justify-center h-[28px] rounded-[4px] px-[8px] py-[4px] text-[14px] font-sans font-medium text-[#FF623E] bg-[#FF623E]/8 self-start">
+                      {prod.category}
+                    </span>
+                    
+                    {/* Title & Price Row (Width: 339px, Height: 35px, Justify: space-between, Font: Faktum 20px, Weight: 600, Color: #2B2B2B) */}
+                    <div className="w-full h-[35px] flex justify-between items-center gap-2">
+                      <h4 className="text-[20px] font-sans font-semibold text-[#2B2B2B] truncate">{prod.name}</h4>
+                      <div className="flex items-center gap-2.5 shrink-0">
+                        <span className="text-gray-400 line-through text-base font-medium">₹{prod.originalPrice}</span>
+                        <span className="text-[20px] font-sans font-semibold text-[#2B2B2B]">₹{prod.price}</span>
                       </div>
-
-                      {/* Rating & Bought Container (Width: 296px, Height: 66.7px, Gap: 12px) */}
-                      <div className="w-full md:h-[66.7px] flex flex-col gap-[12px]">
-                        {/* Rating Row (Gap: 12px, Stars: 20px, Reviews: 20px Faktum Medium) */}
-                        <div className="flex items-center gap-[12px] h-[20px] shrink-0">
-                          <div className="flex text-amber-400 gap-0.5">
-                            <Star className="w-5 h-5 fill-current" />
-                            <Star className="w-5 h-5 fill-current" />
-                            <Star className="w-5 h-5 fill-current" />
-                            <Star className="w-5 h-5 fill-current" />
-                            <Star className="w-5 h-5 fill-current" />
-                          </div>
-                          <span className="text-[20px] font-sans font-medium text-[#2B2B2B] leading-none">({prod.reviews})</span>
-                        </div>
-                        {/* Bought statistics (Height: 25px, Font: Faktum 20px, Weight: 500, Color: #8D8D8D) */}
-                        <p className="font-sans font-medium text-[20px] leading-none text-[#8D8D8D] h-[25px] flex items-center shrink-0">{prod.boughtText}</p>
-                      </div>
-
-                      {/* Delivery text (Font: Faktum 20px, Weight: 500, Line-height: 28px, Color split) */}
-                      <p className="font-sans font-medium text-[20px] leading-[28px]">
-                        <span className="text-[#8D8D8D]">FREE delivery as soon as </span>
-                        <span className="text-[#2B2B2B]">Thu, 9 Apr, 7 am - 10 pm</span>
-                      </p>
                     </div>
+
+                    {/* Rating Row (Gap: 12px, Stars: 20px, Reviews: 20px Faktum Medium) */}
+                    <div className="flex items-center gap-[12px] h-[20px] shrink-0">
+                      <div className="flex text-amber-400 gap-0.5">
+                        <Star className="w-5 h-5 fill-current" />
+                        <Star className="w-5 h-5 fill-current" />
+                        <Star className="w-5 h-5 fill-current" />
+                        <Star className="w-5 h-5 fill-current" />
+                        <Star className="w-5 h-5 fill-current" />
+                      </div>
+                      <span className="text-[20px] font-sans font-medium text-[#2B2B2B] leading-none">({prod.reviews})</span>
+                    </div>
+
+                    {/* Bought statistics (Height: 25px, Font: Faktum 20px, Weight: 500, Color: #8D8D8D) */}
+                    <p className="font-sans font-medium text-[20px] leading-none text-[#8D8D8D] h-[25px] flex items-center shrink-0">{prod.boughtText}</p>
+
+                    {/* Delivery text (Font: Faktum 20px, Weight: 500, Line-height: 28px, Color split) */}
+                    <p className="font-sans font-medium text-[20px] leading-[28px]">
+                      <span className="text-[#8D8D8D]">FREE delivery as soon as </span>
+                      <span className="text-[#2B2B2B]">Thu, 9 Apr, 7 am - 10 pm</span>
+                    </p>
 
                     {/* Add to Cart Button (Width: 296px, Height: 60px, Padding: 16px vertical, 32px horizontal, Border: 2px, Radius: 4px, Gap: 8px) */}
                     <button

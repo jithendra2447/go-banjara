@@ -277,15 +277,67 @@ export default function HolidaysPortal() {
       {/* 1. AVAILABLE PACKAGES SECTION (Expanded Container Width: max-w-[1440px] with px-5 md:px-[80px]) */}
       <section className="max-w-[1440px] mx-auto px-5 md:px-[80px] pt-16 pb-12 space-y-10">
         
-        {/* Header Title block (Increased font sizes) */}
-        <div className="text-center space-y-3">
-          <span className="inline-block text-[#FF623E] font-extrabold text-sm uppercase tracking-widest">
+        {/* Header Title block — styled to match exact Figma specifications */}
+        <div 
+          style={{
+            width: "100%",
+            maxWidth: "1280px",
+            height: "134px",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            alignItems: "center",
+            margin: "0 auto",
+          }}
+        >
+          <span 
+            style={{ 
+              display: "inline-flex", 
+              alignItems: "center", 
+              justifyContent: "center",
+              height: "28px",
+              padding: "0 16px",
+              borderRadius: "4px",
+              fontFamily: "'Faktum', 'Outfit', sans-serif",
+              fontWeight: 600,
+              fontSize: "14px",
+              lineHeight: "100%",
+              letterSpacing: "1.2px",
+              textTransform: "uppercase",
+              color: "rgba(255, 98, 62, 1)",
+              background: "rgba(255, 98, 62, 0.1)",
+            }}
+          >
             Discover Your Path
           </span>
-          <h1 className="text-5xl md:text-6xl font-serif font-light text-[#1D493E] leading-tight">
-            Available <span className="text-[#FF623E] font-serif font-normal">Packages</span>
+          <h1 
+            style={{
+              fontFamily: "'Fraunces', serif",
+              fontWeight: 600,
+              fontSize: "42px",
+              lineHeight: "100%",
+              letterSpacing: "0px",
+              textAlign: "center",
+              color: "rgba(29, 73, 62, 1)",
+              margin: 0,
+            }}
+          >
+            Available <span style={{ color: "rgba(255, 98, 62, 1)", fontWeight: 600 }}>Packages</span>
           </h1>
-          <p className="text-gray-600 text-sm md:text-base max-w-4xl mx-auto leading-relaxed font-semibold">
+          <p 
+            style={{
+              width: "100%",
+              maxWidth: "1280px",
+              fontFamily: "'Faktum', 'Outfit', sans-serif",
+              fontWeight: 500,
+              fontSize: "24px",
+              lineHeight: "32px",
+              letterSpacing: "0px",
+              textAlign: "center",
+              color: "rgba(43, 43, 43, 1)",
+              margin: 0,
+            }}
+          >
             Curated journeys for the modern nomad, designed to push boundaries and discover India's hidden heart
           </p>
         </div>

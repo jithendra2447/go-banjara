@@ -99,10 +99,23 @@ export default function HolidaysPortal() {
           merged.push(hp);
           needsSave = true;
         } else {
-          // If default package is missing critical fields, restore it
+          // Always sync the name, description, category, and other layout-critical fields from default packages
           const item = merged[foundIdx];
-          if (item.price === undefined || !item.routeList || !item.itinerary) {
-            merged[foundIdx] = hp;
+          if (
+            item.name !== hp.name || 
+            item.description !== hp.description || 
+            item.price === undefined || 
+            !item.routeList || 
+            !item.itinerary
+          ) {
+            merged[foundIdx] = {
+              ...item,
+              name: hp.name,
+              description: hp.description,
+              category: hp.category,
+              durationDays: hp.durationDays,
+              duration: hp.duration
+            };
             needsSave = true;
           }
         }

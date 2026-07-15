@@ -69,6 +69,10 @@ const FAQ_ITEMS = [
   {
     question: "Do you support local communities?",
     answer: "Yes, 85% of your travel package expenses go directly to supporting local homestays, native guides, remote monasteries, and local micro-economies. Our gear is also sourced responsibly from local artisans."
+  },
+  {
+    question: "What materials are the badges made from? Zinc alloy with glossy enamel fill.",
+    answer: "Lightweight, durable, and safe to pin on bags, jackets, or backpacks without damaging fabric."
   }
 ];
 
@@ -1408,11 +1412,12 @@ export default function Homepage() {
       </section>
 
       {/* 10. TRAVEL DIARIES / STORIES */}
+      {/* 10. TRAVEL DIARIES / STORIES */}
       <section className="bg-white pt-[42px] pb-[24px] text-left relative z-10 border-t border-gray-100 w-full md:h-[1423.24px] flex items-center">
-        <div className="max-w-[1440px] w-full mx-auto px-6 md:px-[80px] flex flex-col gap-[62px]">
+        <div className="w-full md:w-[1280px] md:h-[1227.24px] mx-auto px-6 md:px-0 flex flex-col gap-[32px] shrink-0">
           
           {/* Header Container (Width: 1280px, Height: 134px, Gap: 12px) */}
-          <div className="w-full md:w-[1280px] md:h-[134px] mx-auto flex flex-col justify-center items-center gap-[12px] text-center shrink-0">
+          <div className="w-full md:w-[1280px] md:h-[134px] flex flex-col justify-center items-center gap-[12px] text-center shrink-0">
             <div className="h-[18px] flex items-center justify-center">
               <span className="w-[53px] h-[18px] flex items-center justify-center font-sans font-semibold text-[14px] leading-none tracking-[1.2px] text-[#FF623E] uppercase">
                 Blogs
@@ -1426,75 +1431,62 @@ export default function Homepage() {
             </p>
           </div>
 
-          {/* Blog posts grid and footer container */}
-          <div className="w-full md:w-[1280px] md:h-[1061.24px] mx-auto flex flex-col justify-between shrink-0">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-10 md:gap-x-[32px] md:gap-y-[42px]">
-              {BLOG_POSTS.slice(0, 4).map((post) => (
-                <Link 
-                  key={post.id} 
-                  href={`/blog`}
-                  className="flex flex-col gap-4 group block text-left"
-                >
-                  {/* Image Wrapper */}
-                  <div className="relative w-full md:w-[624px] md:h-[358.62px] overflow-hidden rounded-t-[4px] rounded-b-none bg-gray-100 border border-gray-150">
-                    <img 
-                      src={post.image} 
-                      alt={post.title} 
-                      className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
-                      style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
-                    />
-                  </div>
-                  {/* Text Content */}
-                  <div className="flex flex-col gap-2">
-                    <h3 className="w-full md:w-[624px] md:h-[78px] flex items-center font-serif font-semibold text-[32px] leading-none text-[#2B2B2B] group-hover:text-[#FF5A36] transition-colors">
-                      {post.title}
-                    </h3>
-                    <p className="text-xs md:text-sm text-gray-400 font-bold leading-none">
-                      {post.date}  •  {post.readTime}
-                    </p>
-                  </div>
-                </Link>
-              ))}
-            </div>
-
-            {/* View all footer (Figma: Size Extra Large, height 68px, background transparent, border radius 4px) */}
-            <div className="text-center">
+          {/* Grid Container (Width: 1280px) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-10 md:gap-x-[32px] md:gap-y-[42px] shrink-0">
+            {BLOG_POSTS.slice(0, 4).map((post) => (
               <Link 
-                href="/blog" 
-                className="inline-flex items-center justify-center w-[185px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[4px] bg-transparent text-[#1D493E] hover:opacity-80 transition-all duration-300 cursor-pointer group"
+                key={post.id} 
+                href={`/blog`}
+                className="w-full md:w-[624px] md:h-[504.62px] flex flex-col gap-[24px] group block text-left shrink-0"
               >
-                <span className="w-[73px] h-[25px] flex items-center justify-center font-sans font-medium text-[20px] leading-none">
-                  View all
-                </span>
-                <svg 
-                  style={{ width: '32px', height: '32px' }}
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="2.25" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round"
-                  className="shrink-0"
-                >
-                  <path d="M7 17l2.5-2.5" />
-                  <path d="M12.5 11.5L17 7" />
-                  <path d="M7 7h10v10" />
-                </svg>
+                {/* Image Wrapper */}
+                <div className="relative w-full md:w-[624px] md:h-[358.62px] overflow-hidden rounded-t-[4px] rounded-b-none bg-gray-100 border border-gray-150 shrink-0">
+                  <img 
+                    src={post.image} 
+                    alt={post.title} 
+                    className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
+                    style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
+                  />
+                </div>
+                {/* Text Content */}
+                <div className="w-full md:w-[624px] md:h-[122px] flex flex-col gap-[4px] shrink-0">
+                  <h3 className="w-full md:w-[624px] md:h-[78px] flex items-start overflow-hidden font-serif font-semibold text-[32px] leading-[1] tracking-[0px] text-[#2B2B2B] group-hover:text-[#FF5A36] transition-colors">
+                    {post.title}
+                  </h3>
+                  <p className="w-full md:w-[624px] h-[32px] flex items-center font-sans font-medium text-[20px] leading-[32px] tracking-[0px] text-[#2B2B2B]/80">
+                    {post.date}  •  {post.readTime}
+                  </p>
+                </div>
               </Link>
-            </div>
+            ))}
+          </div>
+
+          {/* View all footer (Figma: Size Extra Large, height 68px, background transparent, border radius 4px) */}
+          <div className="text-center h-[68px] flex items-center justify-center shrink-0">
+            <Link 
+              href="/blog" 
+              className="inline-flex items-center justify-center w-[185px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[4px] bg-transparent text-[#1D493E] hover:opacity-80 transition-all duration-300 cursor-pointer group"
+            >
+              <span className="font-sans font-medium text-[20px] leading-none whitespace-nowrap">
+                View all
+              </span>
+              <ArrowUpRight className="w-[24px] h-[24px] shrink-0" strokeWidth={2} />
+            </Link>
           </div>
 
         </div>
       </section>
 
       {/* 11. FAQ ACCORDION SECTION (Matching Shop page design) */}
-      <section className="max-w-4xl mx-auto px-6 md:px-12 pt-[32px] pb-[32px] flex flex-col gap-[32px] w-full">
-        {/* Header */}
-        <div className="text-left space-y-2.5">
-          <span className="inline-block text-[9px] font-black uppercase tracking-[0.15em] text-[#FF5B37] bg-[#FFEBE5] px-2.5 py-1 rounded-sm">
-            FAQ'S
-          </span>
-          <h2 className="text-2xl sm:text-3xl font-serif font-medium text-[#2B2B2B]">
+      <section className="w-full md:w-[1440px] md:h-[642px] bg-white rounded-[4px] pt-[42px] pb-[42px] md:px-[80px] px-6 flex flex-col gap-[32px] mx-auto">
+        {/* Header (Width: 1280px, Height: 90px, Gap: 12px) */}
+        <div className="w-full md:w-[1280px] md:h-[90px] flex flex-col gap-[12px] justify-center text-left">
+          <div className="w-[54px] h-[26px] flex items-center justify-center bg-[#FFEBE5] rounded-[4px]">
+            <span className="w-[46px] h-[18px] flex items-center justify-center font-sans font-semibold text-[14px] leading-none tracking-[1.2px] text-[#FF623E] uppercase">
+              FAQ'S
+            </span>
+          </div>
+          <h2 className="w-full md:w-[541px] md:h-[52px] flex items-center font-serif font-semibold text-[42px] leading-[1] tracking-[0px] text-[#2B2B2B]">
             Frequently asked questions
           </h2>
         </div>
@@ -1504,19 +1496,21 @@ export default function Homepage() {
           {FAQ_ITEMS.map((item, idx) => {
             const isOpen = openFaqIndex === idx;
             return (
-              <div key={idx} className="py-5 text-left">
+              <div key={idx} className="py-5 text-left border-b border-slate-200">
                 <button
                   onClick={() => toggleFaq(idx)}
-                  className="w-full flex justify-between items-start text-left gap-4 font-sans text-sm sm:text-base font-bold text-[#2B2B2B] hover:text-[#1D493E] transition-colors cursor-pointer group"
+                  className="w-full flex justify-between items-center text-left gap-4 cursor-pointer group"
                 >
-                  <span>{item.question}</span>
+                  <span className="w-full md:w-[1196px] h-[32px] flex items-center font-sans font-medium text-[20px] leading-[32px] tracking-[0px] text-[#2B2B2B]">
+                    {item.question}
+                  </span>
                   <span className="text-xl font-medium text-[#1D493E] shrink-0 leading-none select-none">
                     {isOpen ? '—' : '+'}
                   </span>
                 </button>
                 {/* Expandable answer */}
                 {isOpen && (
-                  <p className="mt-3 text-xs sm:text-sm text-slate-400 font-medium leading-relaxed animate-fade-in">
+                  <p className="mt-3 w-full md:w-[1196px] md:h-[32px] font-sans font-medium text-[20px] leading-[32px] tracking-[0px] text-[#8D8D8D] animate-fade-in">
                     {item.answer}
                   </p>
                 )}
@@ -1526,66 +1520,69 @@ export default function Homepage() {
         </div>
       </section>
 
+
+
       {/* 12. SERVICES TO HELP YOU SHOP */}
-      <section className="bg-[#FAF9F6] pt-[32px] pb-[32px] border-t border-[#1D493E]/5 text-left">
-        <div className="max-w-[1440px] mx-auto px-6 md:px-20 space-y-12">
-          <div className="text-center space-y-3 max-w-2xl mx-auto">
-            <span className="inline-block text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-1 rounded-[4px] text-xs font-bold uppercase tracking-wider">
-              Services
+      <section className="w-full md:w-[1440px] bg-white pt-[42px] pb-[42px] md:px-[80px] px-6 flex flex-col gap-[32px] mx-auto">
+        {/* Header */}
+        <div className="w-full md:w-[1280px] md:h-[90px] flex flex-col gap-[12px] justify-center text-left mx-auto">
+          <div className="w-[54px] h-[26px] flex items-center justify-center bg-[#FFEBE5] rounded-[4px]">
+            <span className="font-sans font-semibold text-[14px] leading-none tracking-[1.2px] text-[#FF623E] uppercase">
+              Real
             </span>
-            <h2 className="text-3xl md:text-[38px] font-sans font-black text-[#1D493E] leading-tight">
-              Services to help you <span className="text-[#FF5A36]">shop</span>
-            </h2>
-            <p className="text-gray-500 text-xs md:text-sm font-semibold leading-relaxed">
-              Premium services designed to make your travel gear shopping seamless, secure, and supportive of local communities.
-            </p>
+          </div>
+          <h2 className="font-serif font-semibold text-[42px] leading-[1] tracking-[0px] text-[#2B2B2B]">
+            Services to help you <span className="text-[#FF623E]">shop</span>
+          </h2>
+        </div>
+
+        {/* Cards Grid — 1280×458px, gap 32px */}
+        <div className="w-full md:w-[1280px] md:h-[458px] flex flex-col md:flex-row gap-[32px] mx-auto">
+
+          {/* Card 1: FAQ */}
+          <div className="w-full md:w-[296px] md:h-[458px] flex flex-col gap-[24px] rounded-[4px] bg-white">
+            <div className="w-full md:w-[296px] h-[250px] rounded-tl-[4px] rounded-tr-[4px] overflow-hidden">
+              <img src="/service-faq.png" alt="FAQ illustration" className="w-full h-full object-cover" />
+            </div>
+            <div className="w-full md:w-[296px] md:h-[76px] flex flex-col gap-[12px]">
+              <h3 className="font-sans font-semibold text-[28px] leading-[38px] tracking-[0px] text-[#2B2B2B]">Frequently Asked Questions (FAQ)</h3>
+              <p className="w-full md:w-[296px] md:h-[96px] font-sans font-medium text-[20px] leading-[32px] tracking-[0px] text-[rgba(43,43,43,0.8)]">See what are the commonly asked questions by our costumers</p>
+            </div>
           </div>
 
-          <div className="grid md:grid-cols-4 gap-8">
-            {/* Service 1: Free Shipping */}
-            <div className="bg-white border border-[#1D493E]/10 p-6 rounded-3xl space-y-3 shadow-2xs">
-              <div className="w-10 h-10 rounded-xl bg-[#FFF0EB] flex items-center justify-center text-[#E05434]">
-                <ShoppingBag className="w-5 h-5" />
-              </div>
-              <h4 className="text-sm font-black uppercase text-[#1D493E] tracking-wider">Free Shipping</h4>
-              <p className="text-[11px] text-gray-500 font-semibold leading-relaxed">
-                Enjoy free delivery on all orders over ₹999 across India, shipped with reliable tracking partners.
-              </p>
+          {/* Card 2: Home Delivery */}
+          <div className="w-full md:w-[296px] md:h-[458px] flex flex-col gap-[24px] rounded-[4px] bg-white">
+            <div className="w-full md:w-[296px] h-[250px] rounded-tl-[4px] rounded-tr-[4px] overflow-hidden">
+              <img src="/service-delivery.png" alt="Home delivery illustration" className="w-full h-full object-cover" />
             </div>
-
-            {/* Service 2: Easy Returns */}
-            <div className="bg-white border border-[#1D493E]/10 p-6 rounded-3xl space-y-3 shadow-2xs">
-              <div className="w-10 h-10 rounded-xl bg-[#FFF0EB] flex items-center justify-center text-[#E05434]">
-                <ShieldCheck className="w-5 h-5" />
-              </div>
-              <h4 className="text-sm font-black uppercase text-[#1D493E] tracking-wider">15-Day Easy Returns</h4>
-              <p className="text-[11px] text-gray-500 font-semibold leading-relaxed">
-                Hassle-free 15-day return and replacement policy for all premium outdoor gear and apparel.
-              </p>
-            </div>
-
-            {/* Service 3: Secure Checkout */}
-            <div className="bg-white border border-[#1D493E]/10 p-6 rounded-3xl space-y-3 shadow-2xs">
-              <div className="w-10 h-10 rounded-xl bg-[#FFF0EB] flex items-center justify-center text-[#E05434]">
-                <Check className="w-5 h-5" />
-              </div>
-              <h4 className="text-sm font-black uppercase text-[#1D493E] tracking-wider">100% Secure Checkout</h4>
-              <p className="text-[11px] text-gray-500 font-semibold leading-relaxed">
-                Fully encrypted payment gateway supporting UPI, major credit/debit cards, and net banking.
-              </p>
-            </div>
-
-            {/* Service 4: Community Support */}
-            <div className="bg-white border border-[#1D493E]/10 p-6 rounded-3xl space-y-3 shadow-2xs">
-              <div className="w-10 h-10 rounded-xl bg-[#FFF0EB] flex items-center justify-center text-[#E05434]">
-                <Compass className="w-5 h-5" />
-              </div>
-              <h4 className="text-sm font-black uppercase text-[#1D493E] tracking-wider">Artisan Support</h4>
-              <p className="text-[11px] text-gray-500 font-semibold leading-relaxed">
-                Every purchase directly supports our community homestays, native guides, and local helpers.
-              </p>
+            <div className="w-full md:w-[296px] md:h-[76px] flex flex-col gap-[12px]">
+              <h3 className="font-sans font-semibold text-[28px] leading-[38px] tracking-[0px] text-[#2B2B2B]">Home Delivery Options available</h3>
+              <p className="w-full md:w-[296px] md:h-[96px] font-sans font-medium text-[20px] leading-[32px] tracking-[0px] text-[rgba(43,43,43,0.8)]">Pay with multiple cards seamlessly and without interruption</p>
             </div>
           </div>
+
+          {/* Card 3: Secure Payment */}
+          <div className="w-full md:w-[296px] md:h-[458px] flex flex-col gap-[24px] rounded-[4px] bg-white">
+            <div className="w-full md:w-[296px] h-[250px] rounded-tl-[4px] rounded-tr-[4px] overflow-hidden">
+              <img src="/service-payment.png" alt="Secure payment illustration" className="w-full h-full object-cover" />
+            </div>
+            <div className="w-full md:w-[296px] md:h-[76px] flex flex-col gap-[12px]">
+              <h3 className="font-sans font-semibold text-[28px] leading-[38px] tracking-[0px] text-[#2B2B2B]">Secure Online Payment Process</h3>
+              <p className="w-full md:w-[296px] md:h-[96px] font-sans font-medium text-[20px] leading-[32px] tracking-[0px] text-[rgba(43,43,43,0.8)]">Pay with multiple cards seamlessly and without interruption</p>
+            </div>
+          </div>
+
+          {/* Card 4: Open Box Delivery */}
+          <div className="w-full md:w-[296px] md:h-[458px] flex flex-col gap-[24px] rounded-[4px] bg-white">
+            <div className="w-full md:w-[296px] h-[250px] rounded-tl-[4px] rounded-tr-[4px] overflow-hidden">
+              <img src="/service-openbox.png" alt="Open box delivery illustration" className="w-full h-full object-cover" />
+            </div>
+            <div className="w-full md:w-[296px] md:h-[76px] flex flex-col gap-[12px]">
+              <h3 className="font-sans font-semibold text-[28px] leading-[38px] tracking-[0px] text-[#2B2B2B]">Open Box Delivery</h3>
+              <p className="w-full md:w-[296px] md:h-[96px] font-sans font-medium text-[20px] leading-[32px] tracking-[0px] text-[rgba(43,43,43,0.8)]">Pay with multiple cards seamlessly and without interruption</p>
+            </div>
+          </div>
+
         </div>
       </section>
 

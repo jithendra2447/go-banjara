@@ -359,7 +359,19 @@ export default function ProductDetailsPage() {
                 className="w-full py-4 border border-[#1D493E] text-[#1D493E] hover:bg-[#1D493E]/5 rounded-lg font-bold text-xs uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center gap-2 shadow-xs bg-white"
               >
                 <span>Add to Cart</span>
-                <ShoppingCart className="w-4 h-4" />
+                <svg 
+                  className="w-4 h-4 shrink-0" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"
+                >
+                  <path d="M3 3h2l.4 2" />
+                  <path d="M7 13h10l4-8H5.4" />
+                  <path d="M7 13L5.4 5" />
+                </svg>
               </button>
               <button
                 onClick={handleBuyNow}
@@ -606,7 +618,19 @@ export default function ProductDetailsPage() {
                     className="w-full py-2.5 border border-[#1D493E] text-[#1D493E] hover:bg-[#1D493E] hover:text-white rounded-md font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-sm bg-white"
                   >
                     <span>Add to cart</span>
-                    <ShoppingCart className="w-3.5 h-3.5" />
+                    <svg 
+                      className="w-3.5 h-3.5 shrink-0" 
+                      viewBox="0 0 24 24" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      strokeWidth="2" 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round"
+                    >
+                      <path d="M3 3h2l.4 2" />
+                      <path d="M7 13h10l4-8H5.4" />
+                      <path d="M7 13L5.4 5" />
+                    </svg>
                   </button>
                 </div>
               </div>
@@ -688,7 +712,19 @@ export default function ProductDetailsPage() {
                       className="w-full py-2.5 border border-[#1D493E] text-[#1D493E] hover:bg-[#1D493E] hover:text-white rounded-md font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-sm bg-white"
                     >
                       <span>Add to cart</span>
-                      <ShoppingCart className="w-3.5 h-3.5" />
+                      <svg 
+                        className="w-3.5 h-3.5 shrink-0" 
+                        viewBox="0 0 24 24" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        strokeWidth="2" 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round"
+                      >
+                        <path d="M3 3h2l.4 2" />
+                        <path d="M7 13h10l4-8H5.4" />
+                        <path d="M7 13L5.4 5" />
+                      </svg>
                     </button>
                   </div>
                 </div>

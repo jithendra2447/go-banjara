@@ -151,19 +151,8 @@ export const Navbar: React.FC = () => {
               className="relative p-2.5 rounded-full transition-all duration-300 flex items-center justify-center hover:scale-105 cursor-pointer hover:bg-gray-50 text-[#1D493E] h-[47px] w-[47px] shrink-0"
               aria-label="Shopping Cart"
             >
-              <svg 
-                style={{ width: '22.17px', height: '14.58px' }}
-                viewBox="0 0 24 24" 
-                fill="none" 
-                stroke="#2B2B2B" 
-                strokeWidth="1.75" 
-                strokeLinecap="round" 
-                strokeLinejoin="round"
-                className="shrink-0"
-              >
-                <path d="M3 3h2l.4 2" />
-                <path d="M7 13h10l4-8H5.4" />
-                <path d="M7 13L5.4 5" />
+              <svg className="w-5.5 h-5.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
               </svg>
               {cartCount > 0 && (
                 <span className="absolute top-[2px] right-[2px] min-w-[18px] h-[18px] px-1 bg-[#FF5A36] text-white text-[9px] font-black rounded-full flex items-center justify-center border border-white">

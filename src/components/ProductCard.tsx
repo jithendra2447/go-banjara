@@ -157,7 +157,20 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
           className="w-full h-[60px] pt-[16px] pr-[32px] pb-[16px] pl-[32px] gap-[8px] rounded-[4px] border-2 border-[#1D493E] hover:bg-[#1D493E] hover:text-white text-[#1D493E] text-[16px] font-bold transition flex items-center justify-center cursor-pointer"
         >
           <span>{isAdded ? 'Added to Cart!' : 'Add to cart'}</span>
-          <ShoppingCart className="w-[20px] h-[20px]" />
+          <svg 
+            style={{ width: '28px', height: '28px' }} 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            strokeWidth="1.75" 
+            strokeLinecap="round" 
+            strokeLinejoin="round"
+            className="shrink-0"
+          >
+            <path d="M3 3h2l.4 2" />
+            <path d="M7 13h10l4-8H5.4" />
+            <path d="M7 13L5.4 5" />
+          </svg>
         </button>
       </div>
     </div>

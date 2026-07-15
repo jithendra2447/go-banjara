@@ -756,7 +756,7 @@ export default function Homepage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[32px] w-full max-w-[1280px] mx-auto">
             {[
               resolveProduct("naturally-nomad-badge-1", "Naturally Nomad", "Badges", "/naturally_nomad_badge.png", 139, 199),
               resolveProduct("explore-more-keychain-1", "Explore more", "Key Chains", "/explore_more_keychain.png", 149, 193),
@@ -776,7 +776,7 @@ export default function Homepage() {
               };
 
               return (
-                <div key={deal.id} className="bg-white rounded-[4px] w-full md:w-[339px] md:h-[627.68px] flex flex-col justify-between gap-[24px] hover:shadow-xs transition duration-300 overflow-hidden">
+                <div key={deal.id} className="bg-white rounded-[4px] w-full md:h-[627.68px] flex flex-col justify-between gap-[24px] hover:shadow-xs transition duration-300 overflow-hidden">
                   {/* Image Container with Dots (Width: 339px, Height: 254px, Radius: 4px) */}
                   <div className="relative w-full md:h-[254px] rounded-[4px] overflow-hidden shrink-0">
                     <img 
@@ -823,8 +823,8 @@ export default function Homepage() {
                         <span className="text-[11px] text-gray-500 font-semibold">({deal.reviews})</span>
                       </div>
 
-                      {/* Bought & Delivery Block (Width: 339px, Height: 66.7px, Gap: 12px) */}
-                      <div className="w-full md:w-[339px] md:h-[66.7px] flex flex-col gap-[12px]">
+                      {/* Bought & Delivery Block (Height: 66.7px, Gap: 12px) */}
+                      <div className="w-full md:h-[66.7px] flex flex-col gap-[12px]">
                         {/* Bought statistics (Height: 25px, Font: Faktum 20px, Weight: 500, Color: #8D8D8D) */}
                         <p className="font-sans font-medium text-[20px] leading-none text-[#8D8D8D] h-[25px] flex items-center">{deal.boughtText}</p>
                         
@@ -897,7 +897,7 @@ export default function Homepage() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[32px] w-full max-w-[1280px] mx-auto">
             {[
               resolveProduct("naturally-nomad-badge-1", "Naturally Nomad", "Badges", "/naturally_nomad_badge.png", 139, 199),
               resolveProduct("banjara-blue-slides-png", "Blue Mavin", "Slippers", "/blue_mavin_slides.jpg", 399, 599),
@@ -921,7 +921,7 @@ export default function Homepage() {
               };
 
               return (
-                <div key={prod.id} className="bg-white rounded-[4px] w-full md:w-[339px] md:h-[627.68px] flex flex-col justify-between gap-[24px] hover:shadow-xs transition duration-300 overflow-hidden">
+                <div key={prod.id} className="bg-white rounded-[4px] w-full md:h-[627.68px] flex flex-col justify-between gap-[24px] hover:shadow-xs transition duration-300 overflow-hidden">
                   {/* Image Container with Dots (Width: 339px, Height: 254px, Radius: 4px) */}
                   <div className="relative w-full md:h-[254px] rounded-[4px] overflow-hidden shrink-0">
                     <img 
@@ -968,8 +968,8 @@ export default function Homepage() {
                         <span className="text-[11px] text-gray-500 font-semibold">({prod.reviews})</span>
                       </div>
 
-                      {/* Bought & Delivery Block (Width: 339px, Height: 66.7px, Gap: 12px) */}
-                      <div className="w-full md:w-[339px] md:h-[66.7px] flex flex-col gap-[12px]">
+                      {/* Bought & Delivery Block (Height: 66.7px, Gap: 12px) */}
+                      <div className="w-full md:h-[66.7px] flex flex-col gap-[12px]">
                         {/* Bought statistics (Height: 25px, Font: Faktum 20px, Weight: 500, Color: #8D8D8D) */}
                         <p className="font-sans font-medium text-[20px] leading-none text-[#8D8D8D] h-[25px] flex items-center">{prod.boughtText}</p>
                         

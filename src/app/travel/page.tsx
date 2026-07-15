@@ -623,11 +623,43 @@ export default function HolidaysPortal() {
           </div>
         </div>
 
-        {/* RESULTS HEADER & FILTER DROPDOWN (Increased font size) */}
-        <div className="flex items-center justify-between border-t border-gray-100 pt-10 mt-8">
-          <div className="text-left font-sans text-2xl md:text-3xl font-black text-[#1C2C26]">
-            {filteredAndSortedPackages.length} Experiences across india
-            <p className="text-xs md:text-sm font-sans font-semibold text-gray-500 mt-1">Hand-picked by our team of seasoned travellers</p>
+        {/* RESULTS HEADER & FILTER DROPDOWN — styled to match exact Figma specs */}
+        <div 
+          style={{
+            width: "100%",
+            maxWidth: "1280px",
+            height: "83px",
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            boxSizing: "border-box",
+            margin: "0 auto",
+          }}
+        >
+          <div style={{ display: "flex", flexDirection: "column", gap: "4px", justifyContent: "center", textAlign: "left" }}>
+            <h2 style={{
+              fontFamily: "'Fraunces', serif",
+              fontWeight: 600,
+              fontSize: "32px",
+              lineHeight: "100%",
+              letterSpacing: "0px",
+              color: "rgba(43, 43, 43, 1)",
+              margin: 0,
+            }}>
+              {filteredAndSortedPackages.length} Experiences across india
+            </h2>
+            <p style={{
+              fontFamily: "'Faktum', 'Outfit', sans-serif",
+              fontWeight: 500,
+              fontSize: "20px",
+              lineHeight: "32px",
+              letterSpacing: "0px",
+              color: "rgba(43, 43, 43, 1)",
+              margin: 0,
+            }}>
+              Hand-picked by our team of seasoned travellers
+            </p>
           </div>
           
           {/* Filters Toggle Dropdown */}
@@ -635,10 +667,25 @@ export default function HolidaysPortal() {
             <button
               type="button"
               onClick={() => setShowFiltersDropdown(!showFiltersDropdown)}
-              className="flex items-center gap-2.5 px-5 py-2.5 rounded-lg border border-gray-200 bg-white text-sm font-extrabold text-gray-700 hover:border-gray-400 transition duration-300 cursor-pointer"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+                height: "46px",
+                padding: "0 20px",
+                borderRadius: "8px",
+                border: "1px solid rgba(141, 141, 141, 0.5)",
+                background: "white",
+                fontFamily: "'Faktum', 'Outfit', sans-serif",
+                fontWeight: 500,
+                fontSize: "16px",
+                color: "rgba(43, 43, 43, 1)",
+                cursor: "pointer",
+              }}
+              className="hover:border-gray-400 transition-colors"
             >
               <span>Filters</span>
-              <ChevronDown className="w-4 h-4 text-gray-500" />
+              <ChevronDown style={{ width: "16px", height: "16px", color: "rgba(141, 141, 141, 1)" }} />
             </button>
 
             {showFiltersDropdown && (

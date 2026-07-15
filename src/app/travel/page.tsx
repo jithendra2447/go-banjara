@@ -1270,28 +1270,120 @@ export default function HolidaysPortal() {
 
       </section>
 
-      {/* 2. HOW TO BOOK YOUR TOUR SECTION (max-w-[1440px]) */}
-      <section className="bg-white border-t border-gray-200 py-24 relative z-10">
-        <div className="max-w-[1440px] mx-auto px-5 md:px-[80px] space-y-16">
+      {/* 2. HOW TO BOOK YOUR TOUR SECTION (1440x806px) */}
+      <section 
+        style={{
+          width: "100%",
+          maxWidth: "1440px",
+          height: "806px",
+          paddingTop: "42px",
+          paddingRight: "80px",
+          paddingBottom: "42px",
+          paddingLeft: "80px",
+          display: "flex",
+          flexDirection: "column",
+          gap: "32px",
+          backgroundColor: "rgba(255, 255, 255, 1)",
+          boxSizing: "border-box",
+          margin: "0 auto",
+          position: "relative",
+          zIndex: 10
+        }}
+      >
+        <div 
+          style={{
+            width: "100%",
+            maxWidth: "1280px",
+            height: "100%",
+            margin: "0 auto",
+            display: "flex",
+            flexDirection: "column",
+            gap: "32px",
+            boxSizing: "border-box"
+          }}
+        >
           
-          <div className="text-center space-y-3">
-            <span className="inline-block text-[#FF623E] font-extrabold text-xs uppercase tracking-[0.2em]">
+          {/* Header block (1280x134px, space-between) */}
+          <div 
+            style={{
+              width: "100%",
+              maxWidth: "1280px",
+              height: "134px",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              alignItems: "center",
+              margin: "0 auto",
+              boxSizing: "border-box"
+            }}
+          >
+            <span 
+              style={{
+                fontFamily: "'Faktum', 'Outfit', sans-serif",
+                color: "#FF623E",
+                fontWeight: 800,
+                fontSize: "12px",
+                textTransform: "uppercase",
+                letterSpacing: "0.2em",
+                margin: 0,
+                lineHeight: "1",
+              }}
+            >
               Discover Your Path
             </span>
-            <h2 className="text-4xl md:text-5xl font-serif font-light text-[#1D493E]">
-              How to book your <span className="text-[#FF623E] font-serif font-normal">Tour</span>
+            <h2 
+              style={{
+                fontFamily: "'Playfair Display', serif",
+                fontWeight: 300,
+                fontSize: "48px",
+                lineHeight: "1",
+                color: "#1D493E",
+                margin: 0,
+              }}
+            >
+              How to book your <span style={{ color: "#FF623E", fontWeight: 400 }}>Tour</span>
             </h2>
-            <p className="text-sm text-gray-500 max-w-2xl mx-auto font-medium">
+            <p 
+              style={{
+                fontFamily: "'Faktum', 'Outfit', sans-serif",
+                fontSize: "14px",
+                lineHeight: "1",
+                color: "#8D8D8D",
+                margin: 0,
+                fontWeight: 500,
+              }}
+            >
               Curated journeys for the modern nomad, designed to push boundaries and discover India's hidden heart
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+          <div 
+            style={{
+              width: "100%",
+              maxWidth: "1280px",
+              height: "556px",
+              display: "grid",
+              gridTemplateColumns: "repeat(2, 1fr)",
+              gap: "64px",
+              alignItems: "center",
+              boxSizing: "border-box"
+            }}
+          >
             
             {/* Left side: Large featured Srinagar to Leh Card matching Figma */}
             <Link 
               href="/travel/srinagar-to-leh" 
-              className="relative block h-[520px] rounded-[16px] overflow-hidden border border-gray-200 shadow-sm group"
+              style={{
+                display: "block",
+                width: "100%",
+                height: "556px",
+                borderRadius: "16px",
+                overflow: "hidden",
+                border: "1px solid rgba(0,0,0,0.1)",
+                position: "relative",
+                boxSizing: "border-box"
+              }}
+              className="group"
             >
               <img 
                 src="/travel-leh-2.jpg" 

@@ -1392,6 +1392,7 @@ export default function HolidaysPortal() {
               style={{
                 display: "block",
                 width: "100%",
+                maxWidth: "624px",
                 height: "556px",
                 borderRadius: "16px",
                 overflow: "hidden",

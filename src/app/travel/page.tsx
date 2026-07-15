@@ -375,7 +375,8 @@ export default function HolidaysPortal() {
             padding: "24px",
             background: "rgba(255, 255, 255, 1)",
             boxSizing: "border-box",
-            margin: "0 auto",
+            marginLeft: "auto",
+            marginRight: "auto",
           }}
           className="text-left relative z-30"
         >
@@ -584,7 +585,9 @@ export default function HolidaysPortal() {
             justifyContent: "space-between",
             alignItems: "center",
             boxSizing: "border-box",
-            margin: "0 auto",
+            marginLeft: "auto",
+            marginRight: "auto",
+            marginTop: "32px",
           }}
         >
           <div style={{ display: "flex", flexDirection: "row", gap: "12px", alignItems: "center" }}>
@@ -634,7 +637,9 @@ export default function HolidaysPortal() {
             justifyContent: "space-between",
             alignItems: "center",
             boxSizing: "border-box",
-            margin: "0 auto",
+            marginLeft: "auto",
+            marginRight: "auto",
+            marginTop: "48px",
           }}
         >
           <div 
@@ -884,7 +889,7 @@ export default function HolidaysPortal() {
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-10">
             {filteredAndSortedPackages.slice(0, visiblePackagesCount).map((pkg) => {
               const displayCategory = pkg.category === 'Weekend' ? 'Weekend' : 
                                       pkg.category === 'Trek' ? 'Trek' :

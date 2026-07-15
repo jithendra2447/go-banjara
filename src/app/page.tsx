@@ -1082,8 +1082,6 @@ export default function Homepage() {
               }}
             />
             <div className="relative hover:rotate-2 transition-transform duration-500 w-full md:w-[584px] md:h-[584px] aspect-square mx-auto md:mx-0 bg-transparent">
-              {/* Orange gradient overlay in top-left */}
-              <div className="absolute top-0 left-0 w-40 h-40 bg-gradient-to-br from-[#FF5A36]/40 via-[#FF5A36]/10 to-transparent pointer-events-none z-10 rounded-[32px] overflow-hidden" />
               <img 
                 src="/llama_mascot.png" 
                 alt="Bonjo Mascot" 

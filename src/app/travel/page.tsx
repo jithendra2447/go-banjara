@@ -599,9 +599,9 @@ export default function HolidaysPortal() {
                     setVisiblePackagesCount(6); 
                   }}
                   style={{
-                    height: "52px",
-                    padding: "0 24px",
-                    borderRadius: "8px",
+                    height: "62px",
+                    padding: "16px 32px",
+                    borderRadius: "4px",
                     fontFamily: "'Faktum', 'Outfit', sans-serif",
                     fontWeight: 500,
                     fontSize: "24px",
@@ -610,8 +610,8 @@ export default function HolidaysPortal() {
                     textAlign: "center",
                     cursor: "pointer",
                     transition: "all 0.2s ease-in-out",
-                    border: isActive ? "1px solid rgba(255, 98, 62, 1)" : "1px solid rgba(141, 141, 141, 0.5)",
-                    background: isActive ? "rgba(255, 98, 62, 1)" : "rgba(255, 255, 255, 1)",
+                    border: isActive ? "none" : "1px solid rgba(141, 141, 141, 0.5)",
+                    background: isActive ? "rgba(29, 73, 62, 1)" : "rgba(255, 255, 255, 1)",
                     color: isActive ? "rgba(255, 255, 255, 1)" : "rgba(43, 43, 43, 1)",
                   }}
                   className="hover:scale-[1.02] active:scale-[0.98]"

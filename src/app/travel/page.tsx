@@ -1098,7 +1098,7 @@ export default function HolidaysPortal() {
                         style={{
                           width: "100%",
                           maxWidth: "405.33px",
-                          height: "64px",
+                          height: "96px",
                           fontFamily: "'Faktum', 'Outfit', sans-serif",
                           fontWeight: 500,
                           fontSize: "20px",
@@ -1108,7 +1108,7 @@ export default function HolidaysPortal() {
                           margin: 0,
                           overflow: "hidden",
                           display: "-webkit-box",
-                          WebkitLineClamp: 2,
+                          WebkitLineClamp: 3,
                           WebkitBoxOrient: "vertical",
                           textOverflow: "ellipsis",
                         }}

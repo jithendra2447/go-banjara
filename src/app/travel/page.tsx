@@ -1624,7 +1624,7 @@ export default function HolidaysPortal() {
           }}
         >
           
-          {/* Header block (1280x134px, space-between) */}
+          {/* Header block (1280x134px, space-between, left-aligned) */}
           <div 
             style={{
               width: "100%",
@@ -1633,7 +1633,7 @@ export default function HolidaysPortal() {
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-between",
-              alignItems: "center",
+              alignItems: "flex-start",
               margin: "0 auto",
               boxSizing: "border-box"
             }}
@@ -1684,7 +1684,7 @@ export default function HolidaysPortal() {
                 lineHeight: "52px",
                 letterSpacing: "0px",
                 color: "#1D493E",
-                textAlign: "center",
+                textAlign: "left",
                 margin: 0,
                 boxSizing: "border-box"
               }}
@@ -1702,7 +1702,7 @@ export default function HolidaysPortal() {
                 color: "rgba(43, 43, 43, 1)",
                 margin: 0,
                 fontWeight: 500,
-                textAlign: "center",
+                textAlign: "left",
                 boxSizing: "border-box"
               }}
             >

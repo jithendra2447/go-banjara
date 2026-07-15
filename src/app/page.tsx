@@ -473,7 +473,7 @@ export default function Homepage() {
                         <h3 className="text-2xl md:text-[32px] font-sans font-bold text-[#1D493E] leading-tight">{pkg1.name}</h3>
                         <span className="text-xl md:text-[24px] font-sans font-bold text-[#1D493E] shrink-0">₹{(pkg1.price ?? 0).toLocaleString('en-IN')}/Person</span>
                       </div>
-                      <p className="font-sans font-medium text-[20px] leading-[32px] text-[#8D8D8D] h-[64px] overflow-hidden line-clamp-2 shrink-0">
+                      <p className="font-sans font-medium text-[20px] leading-[32px] text-[#8D8D8D] w-full md:w-[616px] h-[64px] overflow-hidden line-clamp-2 shrink-0">
                         {pkg1.description}
                       </p>
                     </div>
@@ -485,13 +485,13 @@ export default function Homepage() {
                           <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
                             <MapPin className="w-4 h-4 text-[#1D493E]" />
                           </div>
-                          <span className="font-sans font-medium text-[20px] leading-[28px] text-gray-600 align-middle">Starts from {pkg1.startPoint || 'Srinagar'}</span>
+                          <span className="font-sans font-medium text-[20px] leading-[28px] text-[#2B2B2B] align-middle">Starts from {pkg1.startPoint || 'Srinagar'}</span>
                         </div>
                         <div className="w-[308px] h-[70px] pt-[12px] pr-[12px] pb-[12px] flex items-center gap-[8px] shrink-0">
                           <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
                             <ArrowUpRight className="w-4 h-4 text-[#1D493E]" />
                           </div>
-                          <span className="font-sans font-medium text-[20px] leading-[28px] text-gray-600 align-middle">{pkg1.difficulty || 'Moderate'} Difficulty</span>
+                          <span className="font-sans font-medium text-[20px] leading-[28px] text-[#2B2B2B] align-middle">{pkg1.difficulty || 'Moderate'} Difficulty</span>
                         </div>
                       </div>
                       {/* Column 2 (Width: 308px, Height: 140px, Gap: space-between) */}
@@ -500,13 +500,13 @@ export default function Homepage() {
                           <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
                             <Users className="w-4 h-4 text-[#1D493E]" />
                           </div>
-                          <span className="font-sans font-medium text-[20px] leading-[28px] text-gray-600 align-middle">{pkg1.groupType || 'Curated group Trip'}</span>
+                          <span className="font-sans font-medium text-[20px] leading-[28px] text-[#2B2B2B] align-middle">{pkg1.groupType || 'Curated group Trip'}</span>
                         </div>
                         <div className="w-[308px] h-[70px] pt-[12px] pr-[12px] pb-[12px] flex items-center gap-[8px] shrink-0">
                           <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
                             <Calendar className="w-4 h-4 text-[#1D493E]" />
                           </div>
-                          <span className="font-sans font-medium text-[20px] leading-[28px] text-gray-600 align-middle">Next: {pkg1.nextDeparture || 'Aug, 2026'}</span>
+                          <span className="font-sans font-medium text-[20px] leading-[28px] text-[#2B2B2B] align-middle">Next: {pkg1.nextDeparture || 'Aug, 2026'}</span>
                         </div>
                       </div>
                     </div>
@@ -558,7 +558,7 @@ export default function Homepage() {
                           <h3 className="text-2xl md:text-[32px] font-sans font-bold text-[#1D493E] leading-tight">{pkg.name}</h3>
                           <span className="text-xl md:text-[24px] font-sans font-bold text-[#1D493E] shrink-0">₹{(pkg.price ?? 0).toLocaleString('en-IN')}/Person</span>
                         </div>
-                        <p className="font-sans font-medium text-[20px] leading-[32px] text-[#8D8D8D] h-[64px] overflow-hidden line-clamp-2 shrink-0">
+                        <p className="font-sans font-medium text-[20px] leading-[32px] text-[#8D8D8D] w-full md:w-[616px] h-[64px] overflow-hidden line-clamp-2 shrink-0">
                           {pkg.description}
                         </p>
                       </div>
@@ -571,13 +571,13 @@ export default function Homepage() {
                             <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
                               <MapPin className="w-4 h-4 text-[#1D493E]" />
                             </div>
-                            <span className="font-sans font-medium text-[20px] leading-[28px] text-gray-600 align-middle">Starts from {pkg.startPoint || 'Srinagar'}</span>
+                            <span className="font-sans font-medium text-[20px] leading-[28px] text-[#2B2B2B] align-middle">Starts from {pkg.startPoint || 'Srinagar'}</span>
                           </div>
                           <div className="w-[308px] h-[70px] pt-[12px] pr-[12px] pb-[12px] flex items-center gap-[8px] shrink-0">
                             <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
                               <ArrowUpRight className="w-4 h-4 text-[#1D493E]" />
                             </div>
-                            <span className="font-sans font-medium text-[20px] leading-[28px] text-gray-600 align-middle">{pkg.difficulty || 'Moderate'} Difficulty</span>
+                            <span className="font-sans font-medium text-[20px] leading-[28px] text-[#2B2B2B] align-middle">{pkg.difficulty || 'Moderate'} Difficulty</span>
                           </div>
                         </div>
                         {/* Column 2 (Width: 308px, Height: 140px, Gap: space-between) */}
@@ -586,13 +586,13 @@ export default function Homepage() {
                             <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
                               <Users className="w-4 h-4 text-[#1D493E]" />
                             </div>
-                            <span className="font-sans font-medium text-[20px] leading-[28px] text-gray-600 align-middle">{pkg.groupType || 'Curated group Trip'}</span>
+                            <span className="font-sans font-medium text-[20px] leading-[28px] text-[#2B2B2B] align-middle">{pkg.groupType || 'Curated group Trip'}</span>
                           </div>
                           <div className="w-[308px] h-[70px] pt-[12px] pr-[12px] pb-[12px] flex items-center gap-[8px] shrink-0">
                             <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
                               <Calendar className="w-4 h-4 text-[#1D493E]" />
                             </div>
-                            <span className="font-sans font-medium text-[20px] leading-[28px] text-gray-600 align-middle">Next: {pkg.nextDeparture || 'Aug, 2026'}</span>
+                            <span className="font-sans font-medium text-[20px] leading-[28px] text-[#2B2B2B] align-middle">Next: {pkg.nextDeparture || 'Aug, 2026'}</span>
                           </div>
                         </div>
                       </div>

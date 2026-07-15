@@ -1513,11 +1513,12 @@ export default function HolidaysPortal() {
                 >
                   <div 
                     style={{
-                      width: "72px",
-                      height: "72px",
+                      width: "88px",
+                      height: "86px",
                       backgroundColor: "#FAF9F6",
                       border: "1px solid rgba(0,0,0,0.06)",
-                      borderRadius: "8px",
+                      borderRadius: "4px",
+                      padding: "24px",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
@@ -1525,7 +1526,8 @@ export default function HolidaysPortal() {
                       fontFamily: "'Playfair Display', serif",
                       fontSize: "24px",
                       fontWeight: 400,
-                      flexShrink: 0
+                      flexShrink: 0,
+                      boxSizing: "border-box"
                     }}
                   >
                     {step.num}

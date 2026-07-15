@@ -35,10 +35,10 @@ export const Navbar: React.FC = () => {
   };
 
   return (
-    <header className="w-full z-50 flex flex-col sticky top-0 bg-white shadow-sm border-b border-gray-100">
+    <header className="w-full z-50 flex flex-col sticky top-0 bg-white/90 backdrop-blur-[12px] border-b border-[#CCCCCC]">
       {/* 2. MAIN NAV BAR */}
-      <nav className="h-24 flex items-center bg-white">
-        <div className="max-w-[1440px] mx-auto px-6 w-full flex items-center justify-between">
+      <nav className="h-[129px] flex items-center w-full">
+        <div className="max-w-[1440px] mx-auto px-[42px] pt-[40px] pb-[40px] w-full flex items-center justify-between h-full">
           
           <div className="flex items-center gap-10">
             {/* Logo (Direct Image from Figma Mockup) */}
@@ -46,12 +46,12 @@ export const Navbar: React.FC = () => {
               <img
                 src="/logo.png"
                 alt="go banjāra logo"
-                className="h-10 w-auto transition-transform duration-300 group-hover:scale-102"
+                className="h-[48px] w-[217px] object-contain transition-transform duration-300 group-hover:scale-102"
               />
             </Link>
 
             {/* Desktop Menu Links */}
-            <div className="hidden xl:flex items-center gap-6">
+            <div className="hidden xl:flex items-center justify-between gap-[12px] w-[605px] h-[49px]">
               {navLinks.map((link) => {
                 const active = isActive(link.path);
                 const activeClass = active

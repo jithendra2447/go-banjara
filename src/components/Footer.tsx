@@ -26,14 +26,13 @@ export const Footer: React.FC = () => {
       className="text-slate-200 border-t border-white/5 font-sans"
     >
       <div
-        style={{ maxWidth: "1440px", margin: "0 auto", display: "flex", flexDirection: "column", gap: "32px" }}
+        style={{ width: "100%", maxWidth: "1440px", height: "606px", margin: "0 auto", display: "flex", flexDirection: "column", gap: "32px", justifyContent: "space-between" }}
       >
         {/* Main Footer Row — 1280×290, space-between */}
         <div
           style={{
             width: "100%",
             maxWidth: "1280px",
-            minHeight: "290px",
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
@@ -71,7 +70,6 @@ export const Footer: React.FC = () => {
         <div
           style={{
             width: "153px",
-            minHeight: "290px",
             display: "flex",
             flexDirection: "column",
             gap: "12px",
@@ -90,7 +88,6 @@ export const Footer: React.FC = () => {
         <div
           style={{
             width: "231px",
-            minHeight: "290px",
             display: "flex",
             flexDirection: "column",
             gap: "12px",
@@ -108,7 +105,7 @@ export const Footer: React.FC = () => {
         </div>
 
           {/* Contact us — 439px × 290px, gap-12 */}
-          <div style={{ width: "439px", minHeight: "290px", display: "flex", flexDirection: "column", gap: "12px" }}>
+          <div style={{ width: "439px", display: "flex", flexDirection: "column", gap: "12px" }}>
             <h4 className="text-xs font-bold uppercase tracking-wider text-slate-300/80">Contact us</h4>
             <ul style={{ display: "flex", flexDirection: "column", gap: "12px" }} className="text-sm font-semibold">
               <li className="flex items-center gap-3">

@@ -970,13 +970,28 @@ export default function Homepage() {
           </div>
 
           {/* View all products footer */}
-          <div className="text-center pt-2">
+          <div className="text-center pt-4">
             <Link 
               href="/shop" 
-              className="inline-flex items-center gap-1.5 text-sm font-bold text-[#1D493E] hover:text-[#FF5A36] transition-all duration-300"
+              className="inline-flex items-center justify-center w-[275px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[4px] bg-transparent text-[#1D493E] hover:opacity-80 transition-all duration-300 cursor-pointer group"
             >
-              <span>View all products</span>
-              <ArrowUpRight className="w-4 h-4" />
+              <span className="w-[163px] h-[25px] flex items-center justify-center font-sans font-medium text-[20px] leading-none">
+                View all products
+              </span>
+              <svg 
+                style={{ width: '32px', height: '32px' }}
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2.25" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+                className="shrink-0"
+              >
+                <path d="M7 17l2.5-2.5" />
+                <path d="M12.5 11.5L17 7" />
+                <path d="M7 7h10v10" />
+              </svg>
             </Link>
           </div>
 
@@ -1242,15 +1257,18 @@ export default function Homepage() {
       </section>
 
       {/* 9.5 REVIEWS SECTION (3-column grid matching Figma design) */}
-      <section className="bg-white pt-[42px] pb-[42px] text-left relative z-10 border-t border-gray-100">
-        <div className="max-w-[1440px] mx-auto px-6 md:px-20 space-y-10">
+      <section className="bg-white pt-[42px] pb-[42px] text-left relative z-10 border-t border-gray-100 w-full md:h-[853.38px] flex items-center">
+        <div className="max-w-[1440px] w-full mx-auto flex flex-col gap-[32px]">
           
-          <div className="space-y-3">
-            <span className="inline-block text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-1 rounded-[4px] text-xs font-bold uppercase tracking-wider">
-              Real Experiences
-            </span>
-            <h2 className="text-3xl md:text-[38px] font-sans font-black text-[#1D493E] leading-tight">
-              What <span className="text-[#FF5A36]">people say</span> about products
+          {/* Header Row (Figma: Width: 1440, Height: 90, Padding: 0px vertical, 80px horizontal) */}
+          <div className="w-full md:w-[1440px] h-[90px] px-6 md:px-[80px] flex flex-col justify-between text-left shrink-0">
+            <div>
+              <span className="inline-block text-[#FF623E] bg-[#FF623E]/8 px-2.5 py-0.5 rounded-[4px] text-[14px] font-semibold uppercase tracking-[1.2px] leading-none">
+                Real Experiences
+              </span>
+            </div>
+            <h2 className="text-[42px] font-serif font-semibold text-[#1D493E] leading-none w-full md:w-[1280px] h-[52px] flex items-center">
+              What <span className="text-[#FF623E]">people say</span> about products
             </h2>
           </div>
 

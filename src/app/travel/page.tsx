@@ -1124,9 +1124,9 @@ export default function HolidaysPortal() {
                         maxWidth: "405.33px",
                         height: "136px",
                         display: "grid", 
-                        gridTemplateColumns: "repeat(2, 1fr)", 
+                        gridTemplateColumns: "repeat(2, auto)", 
+                        justifyContent: "space-between",
                         alignContent: "space-between",
-                        paddingTop: "16px",
                         boxSizing: "border-box"
                       }}
                     >

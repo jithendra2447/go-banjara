@@ -28,16 +28,36 @@ export const Footer: React.FC = () => {
       <div
         style={{ maxWidth: "1440px", margin: "0 auto", display: "flex", flexDirection: "column", gap: "32px" }}
       >
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        {/* Main Footer Row — 1280×290, space-between */}
+        <div
+          style={{
+            width: "100%",
+            maxWidth: "1280px",
+            minHeight: "290px",
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "flex-start",
+          }}
+        >
         
         {/* Brand, Logo & Description */}
         <div className="flex flex-col gap-4">
-          {/* Logo Row */}
-          <div className="flex items-center gap-3">
-            <div className="relative w-9 h-9 rounded-full bg-[#FFF080]/10 flex items-center justify-center border border-[#FFF080]/20">
-              <BonjoMascot width={24} height={24} interactive={false} />
+          {/* Logo Row — 273.5×51, gap-12 */}
+          <div
+            style={{
+              width: "273.5px",
+              height: "51px",
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              gap: "12px",
+            }}
+          >
+            <div className="relative w-[51px] h-[51px] rounded-xl bg-[#FFF080]/10 flex items-center justify-center border border-[#FFF080]/20 shrink-0">
+              <BonjoMascot width={36} height={36} interactive={false} />
             </div>
-            <span className="font-serif font-black text-xl text-[#FFF080] tracking-tight">gobanjara</span>
+            <span className="font-serif font-black text-[28px] text-[#FFF080] tracking-tight leading-none">gobanjara</span>
           </div>
           {/* Description */}
           <p className="text-sm text-slate-200/90 max-w-xs leading-relaxed font-sans">
@@ -47,102 +67,85 @@ export const Footer: React.FC = () => {
           </p>
         </div>
 
-        {/* Important Links */}
-        <div className="space-y-4">
+        {/* Important Links — 153×290, gap-12 */}
+        <div
+          style={{
+            width: "153px",
+            minHeight: "290px",
+            display: "flex",
+            flexDirection: "column",
+            gap: "12px",
+          }}
+        >
           <h4 className="text-xs font-bold uppercase tracking-wider text-slate-300/80">Important Links</h4>
-          <ul className="space-y-3 text-sm font-semibold">
-            <li>
-              <Link href="/" className="hover:text-[#FFF080] transition-colors">Home</Link>
-            </li>
-            <li>
-              <Link href="/travel" className="hover:text-[#FFF080] transition-colors">Travel Packages</Link>
-            </li>
-            <li>
-              <Link href="/about" className="hover:text-[#FFF080] transition-colors">About us</Link>
-            </li>
-            <li>
-              <Link href="/shop" className="hover:text-[#FFF080] transition-colors">Shop</Link>
-            </li>
+          <ul style={{ display: "flex", flexDirection: "column", gap: "12px" }} className="text-sm font-semibold">
+            <li><Link href="/" className="hover:text-[#FFF080] transition-colors">Home</Link></li>
+            <li><Link href="/travel" className="hover:text-[#FFF080] transition-colors">Travel Packages</Link></li>
+            <li><Link href="/about" className="hover:text-[#FFF080] transition-colors">About us</Link></li>
+            <li><Link href="/shop" className="hover:text-[#FFF080] transition-colors">Shop</Link></li>
           </ul>
         </div>
 
-        {/* Let us help */}
-        <div className="space-y-4">
+        {/* Let us help — 231px × 290px, gap-12 */}
+        <div
+          style={{
+            width: "231px",
+            minHeight: "290px",
+            display: "flex",
+            flexDirection: "column",
+            gap: "12px",
+          }}
+        >
           <h4 className="text-xs font-bold uppercase tracking-wider text-slate-300/80">Let us help</h4>
-          <ul className="space-y-3 text-sm font-semibold">
-            <li>
-              <Link href="/profile" className="hover:text-[#FFF080] transition-colors">Your Account</Link>
-            </li>
-            <li>
-              <Link href="/profile" className="hover:text-[#FFF080] transition-colors">Your Orders</Link>
-            </li>
-            <li>
-              <Link href="/contact" className="hover:text-[#FFF080] transition-colors">Returns & Replacements</Link>
-            </li>
-            <li>
-              <Link href="/contact" className="hover:text-[#FFF080] transition-colors">Refund & Returns Policy</Link>
-            </li>
-            <li>
-              <Link href="/about" className="hover:text-[#FFF080] transition-colors">Privacy Policy</Link>
-            </li>
-            <li>
-              <Link href="/contact" className="hover:text-[#FFF080] transition-colors">Help Center</Link>
-            </li>
+          <ul style={{ display: "flex", flexDirection: "column", gap: "12px" }} className="text-sm font-semibold">
+            <li><Link href="/profile" className="hover:text-[#FFF080] transition-colors">Your Account</Link></li>
+            <li><Link href="/profile" className="hover:text-[#FFF080] transition-colors">Your Orders</Link></li>
+            <li><Link href="/contact" className="hover:text-[#FFF080] transition-colors">Returns &amp; Replacements</Link></li>
+            <li><Link href="/contact" className="hover:text-[#FFF080] transition-colors">Refund &amp; Returns Policy</Link></li>
+            <li><Link href="/about" className="hover:text-[#FFF080] transition-colors">Privacy Policy</Link></li>
+            <li><Link href="/contact" className="hover:text-[#FFF080] transition-colors">Help Center</Link></li>
           </ul>
         </div>
 
-        {/* Contact us & Newsletter */}
-        <div className="space-y-6 text-left">
-          <div className="space-y-4">
+          {/* Contact us — 439px × 290px, gap-12 */}
+          <div style={{ width: "439px", minHeight: "290px", display: "flex", flexDirection: "column", gap: "12px" }}>
             <h4 className="text-xs font-bold uppercase tracking-wider text-slate-300/80">Contact us</h4>
-            <ul className="space-y-3.5 text-sm font-semibold">
+            <ul style={{ display: "flex", flexDirection: "column", gap: "12px" }} className="text-sm font-semibold">
               <li className="flex items-center gap-3">
-                <svg className="w-4 h-4 text-[#FFF080] shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
+                <div className="w-9 h-9 rounded-xl bg-[#1D493E] border border-white/10 flex items-center justify-center shrink-0">
+                  <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                </div>
                 <span>HITEC City, Hyderabad, Telangana, India</span>
               </li>
               <li className="flex items-center gap-3">
-                <svg className="w-4 h-4 text-[#FFF080] shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
+                <div className="w-9 h-9 rounded-xl bg-[#1D493E] border border-white/10 flex items-center justify-center shrink-0">
+                  <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
                 <a href="mailto:services@gobanjara.com" className="hover:text-[#FFF080] transition-colors">services@gobanjara.com</a>
               </li>
               <li className="flex items-center gap-3">
-                <svg className="w-4 h-4 text-[#FFF080] shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                </svg>
+                <div className="w-9 h-9 rounded-xl bg-[#1D493E] border border-white/10 flex items-center justify-center shrink-0">
+                  <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                </div>
                 <a href="tel:+910123456789" className="hover:text-[#FFF080] transition-colors">+91 0123456789</a>
               </li>
               <li className="flex items-center gap-3">
-                <svg className="w-4 h-4 text-[#FFF080] shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+                <div className="w-9 h-9 rounded-xl bg-[#1D493E] border border-white/10 flex items-center justify-center shrink-0">
+                  <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
                 <span>Mon–Sat, 10:00–19:00 IST</span>
               </li>
             </ul>
           </div>
-
-          {/* Newsletter Input Box */}
-          <div className="space-y-2.5 pt-8">
-            <span className="block text-xs font-bold text-slate-200">Stay connected by subscribe newsletter</span>
-            <form onSubmit={(e) => { e.preventDefault(); alert("Subscribed to the Go Banjara newsletter!"); }} className="flex bg-white rounded-lg p-1 w-full max-w-sm border border-slate-200">
-              <input
-                type="email"
-                required
-                placeholder="Enter your email address"
-                className="w-full bg-transparent px-3 py-2 text-slate-800 text-xs focus:outline-none placeholder-slate-400 font-sans font-medium"
-              />
-              <button
-                type="submit"
-                className="bg-[#1D493E] hover:bg-[#15342c] text-white px-5 py-2 rounded-md text-xs font-bold transition duration-300 cursor-pointer shadow-sm shrink-0"
-              >
-                Subscribe
-              </button>
-            </form>
-          </div>
-        </div>
 
         </div>
 

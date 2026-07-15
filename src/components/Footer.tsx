@@ -212,7 +212,7 @@ export const Footer: React.FC = () => {
 
           {/* Newsletter — 439px to align with Contact us column */}
           <div className="flex flex-col gap-2" style={{ width: "439px" }}>
-            <span style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "100%", letterSpacing: "0px", textAlign: "center", color: "rgba(255,255,255,1)" }}>Stay connected by subscribe newsletter</span>
+            <span style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "100%", letterSpacing: "0px", textAlign: "left", color: "rgba(255,255,255,1)" }}>Stay connected by subscribe newsletter</span>
             <form
               onSubmit={(e) => { e.preventDefault(); alert("Subscribed!"); }}
               style={{

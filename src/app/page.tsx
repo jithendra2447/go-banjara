@@ -407,25 +407,28 @@ export default function Homepage() {
       </section>
 
       {/* 2. METRICS WIDGET BAR */}
-      <section className="bg-white border-b border-gray-200 md:h-[145px] pt-6 pb-6 md:py-6 relative z-30 flex items-center">
-        <div className="max-w-[1440px] mx-auto px-6 md:px-20 grid grid-cols-2 md:grid-cols-5 gap-y-6 md:gap-y-0 text-center md:divide-x md:divide-gray-200 w-full h-full items-center">
-          <div className="flex flex-col items-center justify-center space-y-1.5 px-2">
+      <section style={{ background: "rgba(255,255,255,1)", borderBottom: "1px solid #e5e7eb" }} className="relative z-30 flex items-center w-full md:h-[145px]">
+        <div
+          className="w-full max-w-[1440px] mx-auto flex flex-col md:flex-row items-center md:divide-x md:divide-gray-200"
+          style={{ paddingTop: "24px", paddingBottom: "24px", paddingLeft: "80px", paddingRight: "80px", justifyContent: "space-between" }}
+        >
+          <div className="flex flex-col items-center justify-center space-y-1.5 flex-1 px-2 py-3 md:py-0">
             <h4 className="text-3xl md:text-[36px] font-bold text-[#1A1A1A] font-sans tracking-tight">10+</h4>
             <p className="text-[13px] md:text-sm text-gray-500 font-medium font-sans">Travel Packages</p>
           </div>
-          <div className="flex flex-col items-center justify-center space-y-1.5 px-2">
+          <div className="flex flex-col items-center justify-center space-y-1.5 flex-1 px-2 py-3 md:py-0">
             <h4 className="text-3xl md:text-[36px] font-bold text-[#1A1A1A] font-sans tracking-tight">15k+</h4>
             <p className="text-[13px] md:text-sm text-gray-500 font-medium font-sans">Nomads Joined</p>
           </div>
-          <div className="flex flex-col items-center justify-center space-y-1.5 px-2">
+          <div className="flex flex-col items-center justify-center space-y-1.5 flex-1 px-2 py-3 md:py-0">
             <h4 className="text-3xl md:text-[36px] font-bold text-[#1A1A1A] font-sans tracking-tight">24/7</h4>
             <p className="text-[13px] md:text-sm text-gray-500 font-medium font-sans">On-road Support</p>
           </div>
-          <div className="flex flex-col items-center justify-center space-y-1.5 px-2">
+          <div className="flex flex-col items-center justify-center space-y-1.5 flex-1 px-2 py-3 md:py-0">
             <h4 className="text-3xl md:text-[36px] font-bold text-[#1A1A1A] font-sans tracking-tight">7+</h4>
             <p className="text-[13px] md:text-sm text-gray-500 font-medium font-sans">Shop Products</p>
           </div>
-          <div className="flex flex-col items-center justify-center space-y-1.5 px-2 text-center">
+          <div className="flex flex-col items-center justify-center space-y-1.5 flex-1 px-2 py-3 md:py-0 text-center">
             <h4 className="text-3xl md:text-[36px] font-bold text-[#1A1A1A] font-sans tracking-tight">4.5+</h4>
             <p className="text-[13px] md:text-sm text-gray-500 font-medium font-sans">Average trip rating</p>
           </div>

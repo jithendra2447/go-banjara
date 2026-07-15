@@ -776,9 +776,9 @@ export default function Homepage() {
               };
 
               return (
-                <div key={deal.id} className="bg-white rounded-2xl w-full md:w-[339px] md:h-[608px] flex flex-col justify-between hover:shadow-xs transition duration-300 overflow-hidden">
-                  {/* Image Container with Dots (Width: 339px, Height: 254px) */}
-                  <div className="relative w-full md:h-[254px] rounded-xl overflow-hidden shrink-0">
+                <div key={deal.id} className="bg-white rounded-[4px] w-full md:w-[339px] md:h-[627.68px] flex flex-col justify-between gap-[24px] hover:shadow-xs transition duration-300 overflow-hidden">
+                  {/* Image Container with Dots (Width: 339px, Height: 254px, Radius: 4px) */}
+                  <div className="relative w-full md:h-[254px] rounded-[4px] overflow-hidden shrink-0">
                     <img 
                       src={deal.image} 
                       alt={deal.name} 
@@ -795,8 +795,8 @@ export default function Homepage() {
                     </div>
                   </div>
 
-                  {/* Details Block (Width: 339px, Height: 354px, Gap: 32px between text and button) */}
-                  <div className="w-full md:h-[354px] flex flex-col justify-between gap-[32px] pt-4 text-left">
+                  {/* Details Block (Width: 339px, Height: 350px, Gap: 32px between text and button) */}
+                  <div className="w-full md:h-[349.68px] flex flex-col justify-between gap-[32px] text-left">
                     {/* Text Group */}
                     <div className="space-y-3">
                       <span className="inline-block text-[#FF5A36] bg-[#FF5A36]/10 px-2 py-0.5 rounded text-[10px] font-bold">
@@ -921,9 +921,9 @@ export default function Homepage() {
               };
 
               return (
-                <div key={prod.id} className="bg-white rounded-2xl w-full md:w-[339px] md:h-[608px] flex flex-col justify-between hover:shadow-xs transition duration-300 overflow-hidden">
-                  {/* Image Container with Dots (Width: 339px, Height: 254px) */}
-                  <div className="relative w-full md:h-[254px] rounded-xl overflow-hidden shrink-0">
+                <div key={prod.id} className="bg-white rounded-[4px] w-full md:w-[339px] md:h-[627.68px] flex flex-col justify-between gap-[24px] hover:shadow-xs transition duration-300 overflow-hidden">
+                  {/* Image Container with Dots (Width: 339px, Height: 254px, Radius: 4px) */}
+                  <div className="relative w-full md:h-[254px] rounded-[4px] overflow-hidden shrink-0">
                     <img 
                       src={prod.image} 
                       alt={prod.name} 
@@ -940,8 +940,8 @@ export default function Homepage() {
                     </div>
                   </div>
 
-                  {/* Details Block (Width: 339px, Height: 354px, Gap: 32px between text and button) */}
-                  <div className="w-full md:h-[354px] flex flex-col justify-between gap-[32px] pt-4 text-left">
+                  {/* Details Block (Width: 339px, Height: 350px, Gap: 32px between text and button) */}
+                  <div className="w-full md:h-[349.68px] flex flex-col justify-between gap-[32px] text-left">
                     {/* Text Group */}
                     <div className="space-y-3">
                       <span className="inline-block text-[#FF5A36] bg-[#FF5A36]/10 px-2 py-0.5 rounded text-[10px] font-bold">

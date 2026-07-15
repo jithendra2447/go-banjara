@@ -96,9 +96,12 @@ export const Navbar: React.FC = () => {
                   <Link
                     key={link.path}
                     href={link.path}
-                    className={`flex items-center justify-center p-[12px] h-[49px] rounded-[4px] transition-all duration-300 font-sans font-medium text-[20px] leading-none tracking-[-0.2px] ${wrapperWidthClass} ${activeClass}`}
+                    className={`flex items-center justify-center p-[12px] h-[49px] rounded-[4px] transition-all duration-300 ${wrapperWidthClass} ${activeClass}`}
                   >
-                    <span className={`flex items-center justify-center h-[25px] text-center ${contentWidthClass}`}>
+                    <span
+                      className={`flex items-center justify-center h-[25px] text-center ${contentWidthClass}`}
+                      style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", verticalAlign: "middle" }}
+                    >
                       {link.name}
                     </span>
                   </Link>

@@ -342,69 +342,208 @@ export default function HolidaysPortal() {
           </p>
         </div>
 
-        {/* SEARCH WIDGET CARD (Spans full max-w-7xl width) */}
-        <div className="bg-white border border-[#FF623E] rounded-[24px] shadow-xs p-8 text-left relative z-30">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* SEARCH WIDGET CARD (Spans full width, styled to match exact Figma specs) */}
+        <div 
+          style={{
+            width: "100%",
+            maxWidth: "1280px",
+            height: "137px",
+            borderRadius: "12px",
+            border: "1px solid rgba(255, 98, 62, 1)",
+            boxShadow: "0px 4px 12px 0px rgba(255, 98, 62, 0.24)",
+            padding: "24px",
+            background: "rgba(255, 255, 255, 1)",
+            boxSizing: "border-box",
+            margin: "0 auto",
+          }}
+          className="text-left relative z-30"
+        >
+          <div style={{ display: "flex", flexDirection: "row", gap: "24px", width: "100%", height: "100%", alignItems: "center" }}>
             
             {/* Field 1: Destination */}
-            <div className="space-y-2">
-              <label className="text-xs font-sans font-black uppercase tracking-wider text-gray-800 block">
+            <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "8px" }}>
+              <label style={{ 
+                fontFamily: "'Faktum', 'Outfit', sans-serif", 
+                fontWeight: 500, 
+                fontSize: "20px", 
+                lineHeight: "100%", 
+                letterSpacing: "0px", 
+                color: "rgba(43, 43, 43, 1)",
+                margin: 0,
+                textAlign: "left",
+              }}>
                 Destination
               </label>
-              <div className="border border-gray-200 rounded-lg p-3 flex items-center gap-3.5 bg-white focus-within:border-[#FF623E] transition duration-300">
-                <Globe className="w-5 h-5 text-gray-400 shrink-0" />
+              <div 
+                style={{ 
+                  height: "56px", 
+                  border: "1px solid rgba(141, 141, 141, 0.5)", 
+                  borderRadius: "8px", 
+                  padding: "0 16px", 
+                  display: "flex", 
+                  alignItems: "center", 
+                  gap: "14px", 
+                  background: "white" 
+                }}
+              >
+                <Globe style={{ width: "24px", height: "24px", color: "rgba(141, 141, 141, 1)" }} className="shrink-0" />
                 <input
                   type="text"
                   value={destinationSearch}
                   onChange={(e) => setDestinationSearch(e.target.value)}
                   placeholder="eg. kerala, manali, araku, ladakh"
-                  className="w-full bg-transparent text-sm font-bold text-gray-800 placeholder-gray-400 focus:outline-none"
+                  style={{ 
+                    flex: 1, 
+                    background: "transparent", 
+                    border: "none", 
+                    outline: "none", 
+                    fontFamily: "'Faktum', 'Outfit', sans-serif", 
+                    fontWeight: 500, 
+                    fontSize: "20px", 
+                    lineHeight: "100%", 
+                    letterSpacing: "0px", 
+                    color: "rgba(43, 43, 43, 1)",
+                    padding: 0
+                  }}
+                  className="placeholder-[rgba(141,141,141,1)]"
                 />
               </div>
             </div>
 
             {/* Field 2: Date Range */}
-            <div className="space-y-2">
-              <label className="text-xs font-sans font-black uppercase tracking-wider text-gray-800 block">
+            <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "8px" }}>
+              <label style={{ 
+                fontFamily: "'Faktum', 'Outfit', sans-serif", 
+                fontWeight: 500, 
+                fontSize: "20px", 
+                lineHeight: "100%", 
+                letterSpacing: "0px", 
+                color: "rgba(43, 43, 43, 1)",
+                margin: 0,
+                textAlign: "left",
+              }}>
                 Date
               </label>
-              <div className="flex gap-3">
-                <div className="flex-1 border border-gray-200 rounded-lg p-3 flex items-center gap-3.5 bg-white focus-within:border-[#FF623E] transition duration-300">
-                  <Calendar className="w-5 h-5 text-gray-400 shrink-0" />
+              <div style={{ display: "flex", flexDirection: "row", gap: "12px", width: "100%" }}>
+                <div 
+                  style={{ 
+                    flex: 1,
+                    height: "56px", 
+                    border: "1px solid rgba(141, 141, 141, 0.5)", 
+                    borderRadius: "8px", 
+                    padding: "0 16px", 
+                    display: "flex", 
+                    alignItems: "center", 
+                    gap: "14px", 
+                    background: "white" 
+                  }}
+                >
+                  <Calendar style={{ width: "24px", height: "24px", color: "rgba(141, 141, 141, 1)" }} className="shrink-0" />
                   <input
                     type="text"
                     value={startDate}
                     onChange={(e) => setStartDate(e.target.value)}
                     placeholder="dd/mm/yyyy"
-                    className="w-full bg-transparent text-sm font-bold text-gray-800 placeholder-gray-400 focus:outline-none"
+                    style={{ 
+                      flex: 1, 
+                      background: "transparent", 
+                      border: "none", 
+                      outline: "none", 
+                      fontFamily: "'Faktum', 'Outfit', sans-serif", 
+                      fontWeight: 500, 
+                      fontSize: "20px", 
+                      lineHeight: "100%", 
+                      letterSpacing: "0px", 
+                      color: "rgba(43, 43, 43, 1)",
+                      padding: 0
+                    }}
+                    className="placeholder-[rgba(141,141,141,1)]"
                   />
                 </div>
-                <div className="flex-1 border border-gray-200 rounded-lg p-3 flex items-center gap-3.5 bg-white focus-within:border-[#FF623E] transition duration-300">
-                  <Calendar className="w-5 h-5 text-gray-400 shrink-0" />
+                <div 
+                  style={{ 
+                    flex: 1,
+                    height: "56px", 
+                    border: "1px solid rgba(141, 141, 141, 0.5)", 
+                    borderRadius: "8px", 
+                    padding: "0 16px", 
+                    display: "flex", 
+                    alignItems: "center", 
+                    gap: "14px", 
+                    background: "white" 
+                  }}
+                >
+                  <Calendar style={{ width: "24px", height: "24px", color: "rgba(141, 141, 141, 1)" }} className="shrink-0" />
                   <input
                     type="text"
                     value={endDate}
                     onChange={(e) => setEndDate(e.target.value)}
                     placeholder="dd/mm/yyyy"
-                    className="w-full bg-transparent text-sm font-bold text-gray-800 placeholder-gray-400 focus:outline-none"
+                    style={{ 
+                      flex: 1, 
+                      background: "transparent", 
+                      border: "none", 
+                      outline: "none", 
+                      fontFamily: "'Faktum', 'Outfit', sans-serif", 
+                      fontWeight: 500, 
+                      fontSize: "20px", 
+                      lineHeight: "100%", 
+                      letterSpacing: "0px", 
+                      color: "rgba(43, 43, 43, 1)",
+                      padding: 0
+                    }}
+                    className="placeholder-[rgba(141,141,141,1)]"
                   />
                 </div>
               </div>
             </div>
 
             {/* Field 3: No of Travelers */}
-            <div className="space-y-2">
-              <label className="text-xs font-sans font-black uppercase tracking-wider text-gray-800 block">
+            <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "8px" }}>
+              <label style={{ 
+                fontFamily: "'Faktum', 'Outfit', sans-serif", 
+                fontWeight: 500, 
+                fontSize: "20px", 
+                lineHeight: "100%", 
+                letterSpacing: "0px", 
+                color: "rgba(43, 43, 43, 1)",
+                margin: 0,
+                textAlign: "left",
+              }}>
                 No of Travelers
               </label>
-              <div className="border border-gray-200 rounded-lg p-3 flex items-center gap-3.5 bg-white focus-within:border-[#FF623E] transition duration-300">
-                <Users className="w-5 h-5 text-gray-400 shrink-0" />
+              <div 
+                style={{ 
+                  height: "56px", 
+                  border: "1px solid rgba(141, 141, 141, 0.5)", 
+                  borderRadius: "8px", 
+                  padding: "0 16px", 
+                  display: "flex", 
+                  alignItems: "center", 
+                  gap: "14px", 
+                  background: "white" 
+                }}
+              >
+                <Users style={{ width: "24px", height: "24px", color: "rgba(141, 141, 141, 1)" }} className="shrink-0" />
                 <input
                   type="text"
                   value={travelersInput}
                   onChange={(e) => setTravelersInput(e.target.value)}
                   placeholder="Enter no of visitors"
-                  className="w-full bg-transparent text-sm font-bold text-gray-800 placeholder-gray-400 focus:outline-none"
+                  style={{ 
+                    flex: 1, 
+                    background: "transparent", 
+                    border: "none", 
+                    outline: "none", 
+                    fontFamily: "'Faktum', 'Outfit', sans-serif", 
+                    fontWeight: 500, 
+                    fontSize: "20px", 
+                    lineHeight: "100%", 
+                    letterSpacing: "0px", 
+                    color: "rgba(43, 43, 43, 1)",
+                    padding: 0
+                  }}
+                  className="placeholder-[rgba(141,141,141,1)]"
                 />
               </div>
             </div>

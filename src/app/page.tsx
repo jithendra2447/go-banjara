@@ -455,7 +455,7 @@ export default function Homepage() {
       </section>
 
       {/* 4. DESTINATIONS SECTION */}
-      <section className="bg-white pt-[42px] pb-[42px] relative z-10">
+      <section className="bg-white pt-[42px] pb-0 relative z-10">
         <div className="max-w-[1440px] mx-auto px-6 md:px-[80px] flex flex-col gap-[62px] text-center">
           
           {/* Centered Header (Figma styled: serif title 42px, sans medium subtitle 24px) */}
@@ -650,7 +650,7 @@ export default function Homepage() {
             </div>
 
             {/* Centered Destinations Footer Link (Figma style: 331x68px, padding 18x36px, radius 4px, NO BORDER) */}
-            <div className="flex justify-center mt-8 mb-6">
+            <div className="flex justify-center mt-6 mb-4">
               <Link 
                 href="/travel" 
                 className="inline-flex items-center justify-center w-[331px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[4px] bg-transparent text-[#1D493E] hover:opacity-80 transition-all duration-300 cursor-pointer group"
@@ -681,7 +681,7 @@ export default function Homepage() {
 
       {/* 5. TOP PRODUCT CATEGORIES */}
       <section className="bg-white relative z-10">
-        <div className="max-w-[1440px] mx-auto px-6 md:px-20 pt-[42px] pb-[42px] flex flex-col gap-[32px]">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-20 pt-8 pb-[42px] flex flex-col gap-[32px]">
           
           {/* Header Row (Flow Horizontal, Justify space-between, Width Fill 1280px, Height Hug 134px) */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-gray-100 text-left">

@@ -1076,7 +1076,7 @@ export default function Homepage() {
           <div className="relative">
             {/* Soft glow background */}
             <div className="absolute -top-10 -left-10 w-48 h-48 bg-[#FF5A36]/15 rounded-full blur-3xl" />
-            <div className="relative rounded-[12px] overflow-hidden shadow-2xl border border-gray-150 transform -rotate-2 hover:rotate-0 transition-transform duration-500 w-full md:w-[584px] md:h-[584px] aspect-square mx-auto md:mx-0 bg-gray-50">
+            <div className="relative rounded-[12px] overflow-hidden shadow-2xl transform -rotate-2 hover:rotate-0 transition-transform duration-500 w-full md:w-[584px] md:h-[584px] aspect-square mx-auto md:mx-0 bg-white">
               {/* Orange gradient overlay in top-left */}
               <div className="absolute top-0 left-0 w-40 h-40 bg-gradient-to-br from-[#FF5A36]/40 via-[#FF5A36]/10 to-transparent pointer-events-none z-10" />
               <img 

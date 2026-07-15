@@ -549,13 +549,15 @@ export default function Homepage() {
                     <div className="flex gap-3 w-full h-[55px] shrink-0 mt-0">
                       <Link 
                         href={`/travel/package/${pkg1.id}`} 
-                        className="flex-1 h-[55px] flex items-center justify-center rounded-[4px] bg-[#1D493E] hover:bg-[#15342c] text-white text-xs font-bold transition cursor-pointer"
+                        className="flex-1 h-[55px] flex items-center justify-center rounded-[4px] bg-[#1D493E] hover:bg-[#15342c] transition cursor-pointer"
+                        style={{ color: "#FFFFFF", fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "100%", letterSpacing: "0px", textDecoration: "none", verticalAlign: "middle" }}
                       >
                         Book Now
                       </Link>
                       <Link 
                         href={pkg1.link || `/travel/package/${pkg1.id}`} 
-                        className="flex-1 h-[55px] flex items-center justify-center rounded-[4px] border border-[#1D493E] text-center text-[#1D493E] hover:bg-gray-50 text-xs font-bold transition"
+                        className="flex-1 h-[55px] flex items-center justify-center rounded-[4px] border border-[#1D493E] text-center hover:bg-gray-50 transition"
+                        style={{ color: "rgba(29,73,62,1)", fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "100%", letterSpacing: "0px", textDecoration: "none" }}
                       >
                         Get details
                       </Link>
@@ -636,13 +638,15 @@ export default function Homepage() {
                       <div className="flex gap-3 w-full h-[55px] shrink-0 mt-0">
                         <Link 
                           href={`/travel/package/${pkg.id}`} 
-                          className="flex-1 h-[55px] flex items-center justify-center rounded-[4px] bg-[#1D493E] hover:bg-[#15342c] text-white text-xs font-bold transition cursor-pointer"
+                          className="flex-1 h-[55px] flex items-center justify-center rounded-[4px] bg-[#1D493E] hover:bg-[#15342c] transition cursor-pointer"
+                          style={{ color: "#FFFFFF", fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "100%", letterSpacing: "0px", textDecoration: "none", verticalAlign: "middle" }}
                         >
                           Book Now
                         </Link>
                         <Link 
                           href={pkg.link || `/travel/package/${pkg.id}`} 
-                          className="flex-1 h-[55px] flex items-center justify-center rounded-[4px] border border-[#1D493E] text-center text-[#1D493E] hover:bg-gray-50 text-xs font-bold transition"
+                          className="flex-1 h-[55px] flex items-center justify-center rounded-[4px] border border-[#1D493E] text-center hover:bg-gray-50 transition"
+                          style={{ color: "rgba(29,73,62,1)", fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "100%", letterSpacing: "0px", textDecoration: "none" }}
                         >
                           Get details
                         </Link>
@@ -1696,8 +1700,11 @@ export default function Homepage() {
                 alignItems: "center",
                 justifyContent: "center",
                 color: "rgba(29, 73, 62, 1)",
-                fontWeight: 700,
-                fontSize: "14px",
+                fontFamily: "'Faktum','Outfit',sans-serif",
+                fontWeight: 500,
+                fontSize: "18px",
+                lineHeight: "100%",
+                letterSpacing: "0px",
                 textDecoration: "none",
                 transition: "background 0.2s",
               }}

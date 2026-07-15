@@ -17,7 +17,6 @@ export const Footer: React.FC = () => {
     <footer
       style={{
         width: "100%",
-        maxWidth: "1440px",
         height: "606px",
         boxSizing: "border-box",
         background: "rgba(29, 73, 62, 1)",
@@ -25,12 +24,11 @@ export const Footer: React.FC = () => {
         paddingBottom: "42px",
         paddingLeft: "80px",
         paddingRight: "80px",
-        margin: "0 auto",
       }}
       className="text-slate-200 border-t border-white/5 font-sans"
     >
       <div
-        style={{ width: "100%", display: "flex", flexDirection: "column", gap: "32px" }}
+        style={{ width: "100%", maxWidth: "1280px", margin: "0 auto", display: "flex", flexDirection: "column", gap: "32px" }}
       >
         {/* Main Footer Row — 1280×290, space-between */}
         <div

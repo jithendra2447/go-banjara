@@ -1319,38 +1319,54 @@ export default function HolidaysPortal() {
           >
             <span 
               style={{
+                width: "176px",
+                height: "18px",
                 fontFamily: "'Faktum', 'Outfit', sans-serif",
-                color: "#FF623E",
-                fontWeight: 800,
-                fontSize: "12px",
+                color: "rgba(255, 98, 62, 1)",
+                fontWeight: 600,
+                fontSize: "14px",
+                lineHeight: "18px",
                 textTransform: "uppercase",
-                letterSpacing: "0.2em",
+                letterSpacing: "1.2px",
+                textAlign: "center",
                 margin: 0,
-                lineHeight: "1",
+                display: "block",
+                boxSizing: "border-box"
               }}
             >
               Discover Your Path
             </span>
             <h2 
               style={{
-                fontFamily: "'Playfair Display', serif",
-                fontWeight: 300,
-                fontSize: "48px",
-                lineHeight: "1",
+                width: "100%",
+                maxWidth: "1280px",
+                height: "52px",
+                fontFamily: "'Fraunces', serif",
+                fontWeight: 600,
+                fontSize: "42px",
+                lineHeight: "52px",
+                letterSpacing: "0px",
                 color: "#1D493E",
+                textAlign: "center",
                 margin: 0,
+                boxSizing: "border-box"
               }}
             >
-              How to book your <span style={{ color: "#FF623E", fontWeight: 400 }}>Tour</span>
+              How to book your <span style={{ color: "rgba(255, 98, 62, 1)", fontWeight: 600 }}>Tour</span>
             </h2>
             <p 
               style={{
+                width: "100%",
+                maxWidth: "1280px",
+                height: "32px",
                 fontFamily: "'Faktum', 'Outfit', sans-serif",
-                fontSize: "14px",
-                lineHeight: "1",
-                color: "#8D8D8D",
+                fontSize: "24px",
+                lineHeight: "32px",
+                color: "rgba(43, 43, 43, 1)",
                 margin: 0,
                 fontWeight: 500,
+                textAlign: "center",
+                boxSizing: "border-box"
               }}
             >
               Curated journeys for the modern nomad, designed to push boundaries and discover India's hidden heart
@@ -1364,7 +1380,7 @@ export default function HolidaysPortal() {
               height: "556px",
               display: "grid",
               gridTemplateColumns: "repeat(2, 1fr)",
-              gap: "64px",
+              gap: "32px",
               alignItems: "center",
               boxSizing: "border-box"
             }}

@@ -889,7 +889,17 @@ export default function HolidaysPortal() {
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-10">
+          <div 
+            style={{
+              width: "100%",
+              maxWidth: "1280px",
+              marginLeft: "auto",
+              marginRight: "auto",
+              marginTop: "40px",
+              gap: "52px",
+            }}
+            className="grid grid-cols-1 md:grid-cols-3"
+          >
             {filteredAndSortedPackages.slice(0, visiblePackagesCount).map((pkg) => {
               const displayCategory = pkg.category === 'Weekend' ? 'Weekend' : 
                                       pkg.category === 'Trek' ? 'Trek' :

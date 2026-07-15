@@ -674,7 +674,7 @@ export default function Homepage() {
                   style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
                 />
               </div>
-              <div className="flex flex-col">
+              <div className="flex flex-col gap-[12px] mt-[16px]">
                 <h4 className="font-sans font-semibold text-[24px] leading-none text-[#2B2B2B] h-[30px] flex items-center">Stickers</h4>
                 <p className="font-sans font-medium text-[20px] leading-none text-[#8D8D8D] h-[25px] flex items-center">Starts from ₹93</p>
               </div>
@@ -690,7 +690,7 @@ export default function Homepage() {
                   style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
                 />
               </div>
-              <div className="flex flex-col">
+              <div className="flex flex-col gap-[12px] mt-[16px]">
                 <h4 className="font-sans font-semibold text-[24px] leading-none text-[#2B2B2B] h-[30px] flex items-center">Badges</h4>
                 <p className="font-sans font-medium text-[20px] leading-none text-[#8D8D8D] h-[25px] flex items-center">Starts from ₹199</p>
               </div>
@@ -706,7 +706,7 @@ export default function Homepage() {
                   style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
                 />
               </div>
-              <div className="flex flex-col">
+              <div className="flex flex-col gap-[12px] mt-[16px]">
                 <h4 className="font-sans font-semibold text-[24px] leading-none text-[#2B2B2B] h-[30px] flex items-center">Fridge Magnets</h4>
                 <p className="font-sans font-medium text-[20px] leading-none text-[#8D8D8D] h-[25px] flex items-center">Starts from ₹199</p>
               </div>

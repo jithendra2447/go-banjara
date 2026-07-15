@@ -408,7 +408,7 @@ export default function Homepage() {
       </section>
 
       {/* 4. DESTINATIONS SECTION */}
-      <section className="bg-white pt-[42px] pb-[24px] relative z-10">
+      <section className="bg-white pt-[42px] pb-[42px] relative z-10">
         <div className="max-w-[1440px] mx-auto px-6 md:px-[80px] flex flex-col gap-[62px] text-center">
           
           {/* Centered Header (Figma styled: serif title 42px, sans medium subtitle 24px) */}
@@ -730,7 +730,7 @@ export default function Homepage() {
 
       {/* 7. TODAY'S BEST DEALS FOR YOU */}
       <section className="bg-white relative z-10">
-        <div className="max-w-[1440px] w-full mx-auto pt-[42px] pb-[24px] px-6 md:px-[80px] flex flex-col gap-[62px]">
+        <div className="max-w-[1440px] w-full mx-auto pt-[42px] pb-[42px] px-6 md:px-[80px] flex flex-col gap-[62px]">
           
           {/* Header Container (Width: 1280px, Height: 134px, Justify: space-between, Background: white, Border radius: 4px) */}
           <div className="w-full md:w-[1280px] md:h-[134px] mx-auto flex flex-col justify-between items-center bg-white rounded-[4px] text-center">
@@ -864,7 +864,7 @@ export default function Homepage() {
       </section>
 
       {/* 8. MOST SELLING PRODUCTS */}
-      <section className="bg-white py-16 text-left relative z-10 border-t border-gray-100">
+      <section className="bg-white pt-[42px] pb-[42px] text-left relative z-10 border-t border-gray-100">
         <div className="max-w-[1440px] mx-auto px-6 md:px-20 space-y-10">
           
           <div className="text-center max-w-2xl mx-auto space-y-4">
@@ -992,7 +992,7 @@ export default function Homepage() {
       </div>
 
       {/* 9. MEET BONJO SECTION (Brand story) */}
-      <section className="max-w-[1440px] mx-auto px-6 md:px-20 pt-16 pb-8 relative overflow-visible">
+      <section className="max-w-[1440px] mx-auto px-6 md:px-20 pt-[42px] pb-[42px] relative overflow-visible">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
           {/* Left Column: Image with slight rotation and glow */}
           <div className="relative">
@@ -1045,7 +1045,7 @@ export default function Homepage() {
       </section>
 
       {/* 9.5 REVIEWS SECTION (3-column grid matching Figma design) */}
-      <section className="bg-white pt-16 pb-8 text-left relative z-10 border-t border-gray-100">
+      <section className="bg-white pt-[42px] pb-[42px] text-left relative z-10 border-t border-gray-100">
         <div className="max-w-[1440px] mx-auto px-6 md:px-20 space-y-10">
           
           <div className="space-y-3">
@@ -1176,7 +1176,7 @@ export default function Homepage() {
       </section>
 
       {/* 10. TRAVEL DIARIES / STORIES */}
-      <section className="bg-white pt-8 pb-8 text-left relative z-10 border-t border-gray-100">
+      <section className="bg-white pt-[42px] pb-[42px] text-left relative z-10 border-t border-gray-100">
         <div className="max-w-[1440px] mx-auto px-6 md:px-20 space-y-12">
           
           <div className="text-center space-y-3">
@@ -1235,7 +1235,7 @@ export default function Homepage() {
       </section>
 
       {/* 11. FAQ ACCORDION SECTION (Matching Shop page design) */}
-      <section className="max-w-4xl mx-auto px-6 md:px-12 pt-[42px] pb-[24px] flex flex-col gap-[32px] w-full mt-8">
+      <section className="max-w-4xl mx-auto px-6 md:px-12 pt-[42px] pb-[42px] flex flex-col gap-[32px] w-full">
         {/* Header */}
         <div className="text-left space-y-2.5">
           <span className="inline-block text-[9px] font-black uppercase tracking-[0.15em] text-[#FF5B37] bg-[#FFEBE5] px-2.5 py-1 rounded-sm">
@@ -1274,7 +1274,7 @@ export default function Homepage() {
       </section>
 
       {/* 12. SERVICES TO HELP YOU SHOP */}
-      <section className="bg-[#FAF9F6] py-16 border-t border-[#1D493E]/5 text-left">
+      <section className="bg-[#FAF9F6] pt-[42px] pb-[42px] border-t border-[#1D493E]/5 text-left">
         <div className="max-w-[1440px] mx-auto px-6 md:px-20 space-y-12">
           <div className="text-center space-y-3 max-w-2xl mx-auto">
             <span className="inline-block text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-1 rounded-[4px] text-xs font-bold uppercase tracking-wider">
@@ -1337,7 +1337,7 @@ export default function Homepage() {
       </section>
 
       {/* 13. BRAND CTA SECTION */}
-      <section className="bg-[#1D493E] text-white py-16 text-center relative z-10">
+      <section className="bg-[#1D493E] text-white pt-[42px] pb-[42px] text-center relative z-10">
         <div className="max-w-4xl mx-auto space-y-6">
           <h2 className="text-3xl md:text-[44px] font-serif font-black tracking-tight leading-tight">
             Escape the ordinary. Join the road.

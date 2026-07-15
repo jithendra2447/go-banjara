@@ -736,7 +736,7 @@ export default function Homepage() {
           <div className="w-full md:w-[1280px] md:h-[134px] mx-auto flex flex-col justify-between items-center bg-white rounded-[4px] text-center">
             {/* Tag (Width: 150px, Height: 18px, Font: Faktum 14px, Weight: 600, Color: #FF623E background, text uppercase, tracking 1.2px) */}
             <div className="flex items-center justify-center h-[18px]">
-              <span className="inline-flex items-center justify-center text-white bg-[#FF623E] px-2.5 py-0.5 rounded-[4px] text-[14px] font-semibold uppercase tracking-[1.2px] leading-none">
+              <span className="inline-flex items-center justify-center text-[#FF623E] bg-[#FF623E]/8 px-2.5 py-0.5 rounded-[4px] text-[14px] font-semibold uppercase tracking-[1.2px] leading-none">
                 Most People Like
               </span>
             </div>
@@ -776,36 +776,38 @@ export default function Homepage() {
               };
 
               return (
-                <div key={deal.id} className="bg-white rounded-2xl flex flex-col justify-between space-y-4 hover:shadow-xs transition duration-300">
-                  <div className="space-y-4">
-                    {/* Image Container with Dots */}
-                    <div className="relative aspect-[4/3] rounded-xl overflow-hidden">
-                      <img 
-                        src={deal.image} 
-                        alt={deal.name} 
-                        className="w-full h-full object-cover"
-                        style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
-                      />
-                      {/* Dots indicator */}
-                      <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex gap-1">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#1D493E]"></span>
-                        <span className="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
-                        <span className="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
-                        <span className="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
-                        <span className="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
-                      </div>
+                <div key={deal.id} className="bg-white rounded-2xl w-full md:w-[339px] md:h-[608px] flex flex-col justify-between hover:shadow-xs transition duration-300 overflow-hidden">
+                  {/* Image Container with Dots (Width: 339px, Height: 254px) */}
+                  <div className="relative w-full md:h-[254px] rounded-xl overflow-hidden shrink-0">
+                    <img 
+                      src={deal.image} 
+                      alt={deal.name} 
+                      className="w-full h-full object-cover"
+                      style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
+                    />
+                    {/* Dots indicator */}
+                    <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#1D493E]"></span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
                     </div>
+                  </div>
 
-                    {/* Details */}
-                    <div className="space-y-2 text-left">
+                  {/* Details Block (Width: 339px, Height: 354px, Gap: 32px between text and button) */}
+                  <div className="w-full md:h-[354px] flex flex-col justify-between gap-[32px] pt-4 text-left">
+                    {/* Text Group */}
+                    <div className="space-y-3">
                       <span className="inline-block text-[#FF5A36] bg-[#FF5A36]/10 px-2 py-0.5 rounded text-[10px] font-bold">
                         {deal.category}
                       </span>
-                      <div className="flex justify-between items-baseline gap-2">
-                        <h4 className="text-sm font-bold text-[#1D493E] truncate">{deal.name}</h4>
-                        <div className="flex items-center gap-1.5 shrink-0">
-                          <span className="text-gray-400 line-through text-xs font-semibold">₹{deal.originalPrice}</span>
-                          <span className="text-sm font-bold text-[#1D493E]">₹{deal.price}</span>
+                      {/* Title & Price Row (Width: 339px, Height: 35px, Justify: space-between, Font: Faktum 20px, Weight: 600, Color: #2B2B2B) */}
+                      <div className="w-full h-[35px] flex justify-between items-center gap-2">
+                        <h4 className="text-[20px] font-sans font-semibold text-[#2B2B2B] truncate">{deal.name}</h4>
+                        <div className="flex items-center gap-2.5 shrink-0">
+                          <span className="text-gray-400 line-through text-base font-medium">₹{deal.originalPrice}</span>
+                          <span className="text-[20px] font-sans font-semibold text-[#2B2B2B]">₹{deal.price}</span>
                         </div>
                       </div>
 
@@ -825,23 +827,23 @@ export default function Homepage() {
                       <p className="text-[11px] text-gray-500 font-semibold">{deal.boughtText}</p>
                       
                       {/* Delivery text */}
-                      <p className="text-[10px] md:text-[11px] text-gray-400 font-medium leading-tight pt-1">
+                      <p className="text-[10px] md:text-[11px] text-gray-400 font-medium leading-tight">
                         {deal.deliveryText}
                       </p>
                     </div>
-                  </div>
 
-                  {/* Add to Cart Button */}
-                  <button
-                    onClick={() => handleProductAdd(mockProduct)}
-                    className="w-full py-2.5 rounded-xl border border-[#1D493E] hover:bg-[#1D493E] hover:text-white text-[#1D493E] text-xs font-bold transition flex items-center justify-center gap-1.5 cursor-pointer"
-                  >
+                    {/* Add to Cart Button */}
+                    <button
+                      onClick={() => handleProductAdd(mockProduct)}
+                      className="w-full py-2.5 rounded-xl border border-[#1D493E] hover:bg-[#1D493E] hover:text-white text-[#1D493E] text-xs font-bold transition flex items-center justify-center gap-1.5 cursor-pointer"
+                    >
                     <span>{addedProductId === deal.id ? 'Added to Cart!' : 'Add to cart'}</span>
                     <ShoppingCart className="w-3.5 h-3.5" />
                   </button>
                 </div>
-              );
-            })}
+              </div>
+            );
+          })}
           </div>
 
           {/* Bottom active state indicator line */}
@@ -916,36 +918,38 @@ export default function Homepage() {
               };
 
               return (
-                <div key={prod.id} className="bg-white rounded-2xl border border-gray-150 p-4 flex flex-col justify-between space-y-4 hover:shadow-xs transition duration-300">
-                  <div className="space-y-4">
-                    {/* Image Container with Dots */}
-                    <div className="relative aspect-[4/3] rounded-xl overflow-hidden">
-                      <img 
-                        src={prod.image} 
-                        alt={prod.name} 
-                        className="w-full h-full object-cover"
-                        style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
-                      />
-                      {/* Dots indicator */}
-                      <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex gap-1">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#1D493E]"></span>
-                        <span className="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
-                        <span className="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
-                        <span className="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
-                        <span className="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
-                      </div>
+                <div key={prod.id} className="bg-white rounded-2xl w-full md:w-[339px] md:h-[608px] flex flex-col justify-between hover:shadow-xs transition duration-300 overflow-hidden">
+                  {/* Image Container with Dots (Width: 339px, Height: 254px) */}
+                  <div className="relative w-full md:h-[254px] rounded-xl overflow-hidden shrink-0">
+                    <img 
+                      src={prod.image} 
+                      alt={prod.name} 
+                      className="w-full h-full object-cover"
+                      style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
+                    />
+                    {/* Dots indicator */}
+                    <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#1D493E]"></span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
                     </div>
+                  </div>
 
-                    {/* Details */}
-                    <div className="space-y-2 text-left">
+                  {/* Details Block (Width: 339px, Height: 354px, Gap: 32px between text and button) */}
+                  <div className="w-full md:h-[354px] flex flex-col justify-between gap-[32px] pt-4 text-left">
+                    {/* Text Group */}
+                    <div className="space-y-3">
                       <span className="inline-block text-[#FF5A36] bg-[#FF5A36]/10 px-2 py-0.5 rounded text-[10px] font-bold">
                         {prod.category}
                       </span>
-                      <div className="flex justify-between items-baseline gap-2">
-                        <h4 className="text-sm font-bold text-[#1D493E] truncate">{prod.name}</h4>
-                        <div className="flex items-center gap-1.5 shrink-0">
-                          <span className="text-gray-400 line-through text-xs font-semibold">₹{prod.originalPrice}</span>
-                          <span className="text-sm font-bold text-[#1D493E]">₹{prod.price}</span>
+                      {/* Title & Price Row (Width: 339px, Height: 35px, Justify: space-between, Font: Faktum 20px, Weight: 600, Color: #2B2B2B) */}
+                      <div className="w-full h-[35px] flex justify-between items-center gap-2">
+                        <h4 className="text-[20px] font-sans font-semibold text-[#2B2B2B] truncate">{prod.name}</h4>
+                        <div className="flex items-center gap-2.5 shrink-0">
+                          <span className="text-gray-400 line-through text-base font-medium">₹{prod.originalPrice}</span>
+                          <span className="text-[20px] font-sans font-semibold text-[#2B2B2B]">₹{prod.price}</span>
                         </div>
                       </div>
 
@@ -965,23 +969,23 @@ export default function Homepage() {
                       <p className="text-[11px] text-gray-500 font-semibold">{prod.boughtText}</p>
                       
                       {/* Delivery text */}
-                      <p className="text-[10px] md:text-[11px] text-gray-400 font-medium leading-tight pt-1">
+                      <p className="text-[10px] md:text-[11px] text-gray-400 font-medium leading-tight">
                         {prod.deliveryText}
                       </p>
                     </div>
-                  </div>
 
-                  {/* Add to Cart Button */}
-                  <button
-                    onClick={() => handleProductAdd(mockProduct)}
-                    className="w-full py-2.5 rounded-xl border border-[#1D493E] hover:bg-[#1D493E] hover:text-white text-[#1D493E] text-xs font-bold transition flex items-center justify-center gap-1.5 cursor-pointer"
-                  >
+                    {/* Add to Cart Button */}
+                    <button
+                      onClick={() => handleProductAdd(mockProduct)}
+                      className="w-full py-2.5 rounded-xl border border-[#1D493E] hover:bg-[#1D493E] hover:text-white text-[#1D493E] text-xs font-bold transition flex items-center justify-center gap-1.5 cursor-pointer"
+                    >
                     <span>{addedProductId === prod.id ? 'Added to Cart!' : 'Add to cart'}</span>
                     <ShoppingCart className="w-3.5 h-3.5" />
                   </button>
                 </div>
-              );
-            })}
+              </div>
+            );
+          })}
           </div>
 
         </div>

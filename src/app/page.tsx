@@ -701,10 +701,25 @@ export default function Homepage() {
             <div className="shrink-0 pb-1">
               <Link 
                 href="/shop"
-                className="inline-flex items-center justify-center gap-2 h-[68px] w-full md:w-[251px] rounded-[4px] border border-[#1D493E] text-[#1D493E] hover:bg-[#1D493E] hover:text-white px-[24px] py-[18px] text-base font-bold transition-all duration-300 cursor-pointer"
+                className="inline-flex items-center justify-center w-[275px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[4px] bg-transparent text-[#1D493E] hover:opacity-80 transition-all duration-300 cursor-pointer group"
               >
-                <span>View all products</span>
-                <ArrowUpRight className="w-5 h-5" />
+                <span className="w-[163px] h-[25px] flex items-center justify-center font-sans font-medium text-[20px] leading-none">
+                  View all products
+                </span>
+                <svg 
+                  style={{ width: '32px', height: '32px' }}
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2.25" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"
+                  className="shrink-0"
+                >
+                  <path d="M7 17l2.5-2.5" />
+                  <path d="M12.5 11.5L17 7" />
+                  <path d="M7 7h10v10" />
+                </svg>
               </Link>
             </div>
           </div>
@@ -989,10 +1004,25 @@ export default function Homepage() {
             <div className="shrink-0 pb-1">
               <Link 
                 href="/shop"
-                className="inline-flex items-center gap-1.5 text-sm font-bold text-[#1D493E] hover:text-[#FF5A36] transition-all duration-300"
+                className="inline-flex items-center justify-center w-[275px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[4px] bg-transparent text-[#1D493E] hover:opacity-80 transition-all duration-300 cursor-pointer group"
               >
-                <span>View all products</span>
-                <ArrowUpRight className="w-4 h-4" />
+                <span className="w-[163px] h-[25px] flex items-center justify-center font-sans font-medium text-[20px] leading-none">
+                  View all products
+                </span>
+                <svg 
+                  style={{ width: '32px', height: '32px' }}
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2.25" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"
+                  className="shrink-0"
+                >
+                  <path d="M7 17l2.5-2.5" />
+                  <path d="M12.5 11.5L17 7" />
+                  <path d="M7 7h10v10" />
+                </svg>
               </Link>
             </div>
           </div>

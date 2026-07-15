@@ -412,25 +412,25 @@ export default function Homepage() {
           className="w-full max-w-[1440px] mx-auto flex flex-col md:flex-row items-center md:divide-x md:divide-gray-200"
           style={{ paddingTop: "24px", paddingBottom: "24px", paddingLeft: "80px", paddingRight: "80px", justifyContent: "space-between" }}
         >
-          <div className="flex flex-col items-center justify-center space-y-1.5 flex-1 px-2 py-3 md:py-0">
-            <h4 className="text-3xl md:text-[36px] font-bold text-[#1A1A1A] font-sans tracking-tight">10+</h4>
-            <p className="text-[13px] md:text-sm text-gray-500 font-medium font-sans">Travel Packages</p>
+          <div style={{ width: "174px", height: "97px", gap: "8px", padding: "12px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+            <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43,43,43,1)", textAlign: "center", verticalAlign: "middle" }}>10+</h4>
+            <p className="text-[13px] md:text-sm text-gray-500 font-medium font-sans text-center">Travel Packages</p>
           </div>
-          <div className="flex flex-col items-center justify-center space-y-1.5 flex-1 px-2 py-3 md:py-0">
-            <h4 className="text-3xl md:text-[36px] font-bold text-[#1A1A1A] font-sans tracking-tight">15k+</h4>
-            <p className="text-[13px] md:text-sm text-gray-500 font-medium font-sans">Nomads Joined</p>
+          <div style={{ width: "174px", height: "97px", gap: "8px", padding: "12px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+            <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43,43,43,1)", textAlign: "center", verticalAlign: "middle" }}>15k+</h4>
+            <p className="text-[13px] md:text-sm text-gray-500 font-medium font-sans text-center">Nomads Joined</p>
           </div>
-          <div className="flex flex-col items-center justify-center space-y-1.5 flex-1 px-2 py-3 md:py-0">
-            <h4 className="text-3xl md:text-[36px] font-bold text-[#1A1A1A] font-sans tracking-tight">24/7</h4>
-            <p className="text-[13px] md:text-sm text-gray-500 font-medium font-sans">On-road Support</p>
+          <div style={{ width: "174px", height: "97px", gap: "8px", padding: "12px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+            <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43,43,43,1)", textAlign: "center", verticalAlign: "middle" }}>24/7</h4>
+            <p className="text-[13px] md:text-sm text-gray-500 font-medium font-sans text-center">On-road Support</p>
           </div>
-          <div className="flex flex-col items-center justify-center space-y-1.5 flex-1 px-2 py-3 md:py-0">
-            <h4 className="text-3xl md:text-[36px] font-bold text-[#1A1A1A] font-sans tracking-tight">7+</h4>
-            <p className="text-[13px] md:text-sm text-gray-500 font-medium font-sans">Shop Products</p>
+          <div style={{ width: "174px", height: "97px", gap: "8px", padding: "12px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+            <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43,43,43,1)", textAlign: "center", verticalAlign: "middle" }}>7+</h4>
+            <p className="text-[13px] md:text-sm text-gray-500 font-medium font-sans text-center">Shop Products</p>
           </div>
-          <div className="flex flex-col items-center justify-center space-y-1.5 flex-1 px-2 py-3 md:py-0 text-center">
-            <h4 className="text-3xl md:text-[36px] font-bold text-[#1A1A1A] font-sans tracking-tight">4.5+</h4>
-            <p className="text-[13px] md:text-sm text-gray-500 font-medium font-sans">Average trip rating</p>
+          <div style={{ width: "174px", height: "97px", gap: "8px", padding: "12px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+            <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43,43,43,1)", textAlign: "center", verticalAlign: "middle" }}>4.5+</h4>
+            <p className="text-[13px] md:text-sm text-gray-500 font-medium font-sans text-center">Average trip rating</p>
           </div>
         </div>
       </section>

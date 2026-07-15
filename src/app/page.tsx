@@ -1263,7 +1263,7 @@ export default function Homepage() {
           {/* Header Row (Figma: Width: 1440, Height: 90, Padding: 0px vertical, 80px horizontal) */}
           <div className="w-full md:w-[1440px] h-[90px] px-6 md:px-[80px] flex flex-col justify-between text-left shrink-0">
             <div>
-              <span className="inline-block text-[#FF623E] bg-[#FF623E]/8 px-2.5 py-0.5 rounded-[4px] text-[14px] font-semibold uppercase tracking-[1.2px] leading-none">
+              <span className="w-[153px] h-[18px] flex items-center font-sans font-semibold text-[14px] leading-none tracking-[1.2px] text-[#FF623E] uppercase">
                 Real Experiences
               </span>
             </div>
@@ -1271,120 +1271,129 @@ export default function Homepage() {
               What <span className="text-[#FF623E]">people say</span> about products
             </h2>
           </div>
-
           {/* 3-column Testimonial Grid matching Figma design */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Column 1 (Faded) */}
-            <div className="space-y-8 md:opacity-40 hover:opacity-100 transition duration-300">
-              {[
-                {
-                  id: "rev-1",
-                  name: "Kiran Makwan",
-                  subtitle: "Verified Wanderer",
-                  avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150&q=80",
-                  text: "The quality of the journal is incredible. It feels like a piece of art that I can actually take on my treks. Bonjo's personality shines through the brand!",
-                  stars: 5
-                },
-                {
-                  id: "rev-4",
-                  name: "Priyanka Sen",
-                  subtitle: "Slow Traveler",
-                  avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&h=150&q=80",
-                  text: "The double-walled thermal flask keeps my chai steaming hot even at 14,000 feet in Ladakh. Truly premium travel gear built for real conditions.",
-                  stars: 5
-                }
-              ].map((review) => (
-                <div key={review.id} className="bg-gray-50 border border-gray-100 p-8 rounded-2xl space-y-5 text-left shadow-2xs">
-                  <div className="flex text-amber-400 text-sm gap-0.5">
-                    {Array.from({ length: review.stars }).map((_, s) => (
-                      <Star key={s} className="w-3.5 h-3.5 fill-current" />
-                    ))}
-                  </div>
-                  <p className="text-gray-500 font-semibold italic text-xs md:text-sm leading-relaxed">
-                    “{review.text}”
-                  </p>
-                  <div className="flex items-center gap-3.5 pt-2 border-t border-gray-100">
-                    <img src={review.avatar} alt={review.name} className="w-12 h-12 rounded-full object-cover shrink-0" />
-                    <div>
-                      <h4 className="text-sm font-extrabold text-gray-805">{review.name}</h4>
-                      <p className="text-xs text-gray-400 font-semibold">{review.subtitle}</p>
+          <div className="relative w-full md:w-[1440px] h-[647.38px] overflow-visible">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 h-full relative z-10">
+              {/* Column 1 (Faded) */}
+              <div className="space-y-8 md:opacity-40 hover:opacity-100 transition duration-300">
+                {[
+                  {
+                    id: "rev-1",
+                    name: "Kiran Makwan",
+                    subtitle: "Verified Wanderer",
+                    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150&q=80",
+                    text: "The quality of the journal is incredible. It feels like a piece of art that I can actually take on my treks. Bonjo's personality shines through the brand!",
+                    stars: 5
+                  },
+                  {
+                    id: "rev-4",
+                    name: "Priyanka Sen",
+                    subtitle: "Slow Traveler",
+                    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&h=150&q=80",
+                    text: "The double-walled thermal flask keeps my chai steaming hot even at 14,000 feet in Ladakh. Truly premium travel gear built for real conditions.",
+                    stars: 5
+                  }
+                ].map((review) => (
+                  <div key={review.id} className="bg-gray-50 border border-gray-100 p-8 rounded-2xl space-y-5 text-left shadow-2xs">
+                    <div className="flex text-amber-400 text-sm gap-0.5">
+                      {Array.from({ length: review.stars }).map((_, s) => (
+                        <Star key={s} className="w-3.5 h-3.5 fill-current" />
+                      ))}
+                    </div>
+                    <p className="text-gray-500 font-semibold italic text-xs md:text-sm leading-relaxed">
+                      “{review.text}”
+                    </p>
+                    <div className="flex items-center gap-3.5 pt-2 border-t border-gray-100">
+                      <img src={review.avatar} alt={review.name} className="w-12 h-12 rounded-full object-cover shrink-0" />
+                      <div>
+                        <h4 className="text-sm font-extrabold text-gray-850">{review.name}</h4>
+                        <p className="text-xs text-gray-400 font-semibold">{review.subtitle}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
+
+              {/* Column 2 (Active/Sharp highlighted) */}
+              <div className="space-y-8">
+                {[
+                  {
+                    id: "rev-2",
+                    name: "Ananya Roy",
+                    subtitle: "Himalayan Backpacker",
+                    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&h=150&q=80",
+                    text: "I bought the waterproof stickers for my laptop and flask. They've survived rain, dust, and countless camping trips without peeling or fading at all!",
+                    stars: 5
+                  },
+                  {
+                    id: "rev-5",
+                    name: "Arjun Mehta",
+                    subtitle: "Weekend Explorer",
+                    avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&h=150&q=80",
+                    text: "Super clean design on the T-shirts! The fit is perfect, the fabric is extremely soft and breathable, and the graphics represent the soul of travel.",
+                    stars: 5
+                  }
+                ].map((review) => (
+                  <div key={review.id} className="bg-white border border-gray-200 p-8 rounded-2xl space-y-5 text-left shadow-xs scale-102">
+                    <div className="flex text-amber-400 text-sm gap-0.5">
+                      {Array.from({ length: review.stars }).map((_, s) => (
+                        <Star key={s} className="w-3.5 h-3.5 fill-current" />
+                      ))}
+                    </div>
+                    <p className="text-gray-700 font-bold italic text-xs md:text-sm leading-relaxed">
+                      “{review.text}”
+                    </p>
+                    <div className="flex items-center gap-3.5 pt-2 border-t border-gray-100">
+                      <img src={review.avatar} alt={review.name} className="w-12 h-12 rounded-full object-cover shrink-0" />
+                      <div>
+                        <h4 className="text-sm font-black text-gray-808">{review.name}</h4>
+                        <p className="text-xs text-[#1D493E]/60 font-black">{review.subtitle}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Column 3 (Faded) */}
+              <div className="space-y-8 md:opacity-40 hover:opacity-100 transition duration-300">
+                {[
+                  {
+                    id: "rev-3",
+                    name: "Rohan Sharma",
+                    subtitle: "Motorcycle Nomad",
+                    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&h=150&q=80",
+                    text: "The Kashmir Road Trip package was pure magic. Extremely well-planned with authentic local homestays and off-the-beaten-path trails. Will book again!",
+                    stars: 5
+                  }
+                ].map((review) => (
+                  <div key={review.id} className="bg-gray-50 border border-gray-100 p-8 rounded-2xl space-y-5 text-left shadow-2xs">
+                    <div className="flex text-amber-400 text-sm gap-0.5">
+                      {Array.from({ length: review.stars }).map((_, s) => (
+                        <Star key={s} className="w-3.5 h-3.5 fill-current" />
+                      ))}
+                    </div>
+                    <p className="text-gray-500 font-semibold italic text-xs md:text-sm leading-relaxed">
+                      “{review.text}”
+                    </p>
+                    <div className="flex items-center gap-3.5 pt-2 border-t border-gray-100">
+                      <img src={review.avatar} alt={review.name} className="w-12 h-12 rounded-full object-cover shrink-0" />
+                      <div>
+                        <h4 className="text-sm font-bold text-gray-805">{review.name}</h4>
+                        <p className="text-xs text-gray-400 font-semibold">{review.subtitle}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            {/* Column 2 (Active/Sharp highlighted) */}
-            <div className="space-y-8">
-              {[
-                {
-                  id: "rev-2",
-                  name: "Ananya Roy",
-                  subtitle: "Himalayan Backpacker",
-                  avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&h=150&q=80",
-                  text: "I bought the waterproof stickers for my laptop and flask. They've survived rain, dust, and countless camping trips without peeling or fading at all!",
-                  stars: 5
-                },
-                {
-                  id: "rev-5",
-                  name: "Arjun Mehta",
-                  subtitle: "Weekend Explorer",
-                  avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&h=150&q=80",
-                  text: "Super clean design on the T-shirts! The fit is perfect, the fabric is extremely soft and breathable, and the graphics represent the soul of travel.",
-                  stars: 5
-                }
-              ].map((review) => (
-                <div key={review.id} className="bg-white border border-gray-200 p-8 rounded-2xl space-y-5 text-left shadow-xs scale-102">
-                  <div className="flex text-amber-400 text-sm gap-0.5">
-                    {Array.from({ length: review.stars }).map((_, s) => (
-                      <Star key={s} className="w-3.5 h-3.5 fill-current" />
-                    ))}
-                  </div>
-                  <p className="text-gray-700 font-bold italic text-xs md:text-sm leading-relaxed">
-                    “{review.text}”
-                  </p>
-                  <div className="flex items-center gap-3.5 pt-2 border-t border-gray-100">
-                    <img src={review.avatar} alt={review.name} className="w-12 h-12 rounded-full object-cover shrink-0" />
-                    <div>
-                      <h4 className="text-sm font-black text-gray-808">{review.name}</h4>
-                      <p className="text-xs text-[#1D493E]/60 font-black">{review.subtitle}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Column 3 (Faded) */}
-            <div className="space-y-8 md:opacity-40 hover:opacity-100 transition duration-300">
-              {[
-                {
-                  id: "rev-3",
-                  name: "Rohan Sharma",
-                  subtitle: "Motorcycle Nomad",
-                  avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&h=150&q=80",
-                  text: "The Kashmir Road Trip package was pure magic. Extremely well-planned with authentic local homestays and off-the-beaten-path trails. Will book again!",
-                  stars: 5
-                }
-              ].map((review) => (
-                <div key={review.id} className="bg-gray-50 border border-gray-100 p-8 rounded-2xl space-y-5 text-left shadow-2xs">
-                  <div className="flex text-amber-400 text-sm gap-0.5">
-                    {Array.from({ length: review.stars }).map((_, s) => (
-                      <Star key={s} className="w-3.5 h-3.5 fill-current" />
-                    ))}
-                  </div>
-                  <p className="text-gray-500 font-semibold italic text-xs md:text-sm leading-relaxed">
-                    “{review.text}”
-                  </p>
-                  <div className="flex items-center gap-3.5 pt-2 border-t border-gray-100">
-                    <img src={review.avatar} alt={review.name} className="w-12 h-12 rounded-full object-cover shrink-0" />
-                    <div>
-                      <h4 className="text-sm font-bold text-gray-805">{review.name}</h4>
-                      <p className="text-xs text-gray-400 font-semibold">{review.subtitle}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+            {/* Edge fade overlay */}
+            <div 
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1542px] h-[639px] pointer-events-none z-20 hidden md:block"
+              style={{
+                background: 'linear-gradient(90.01deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 46.69%, #FFFFFF 93.38%)'
+              }}
+            />
           </div>
 
         </div>

@@ -150,7 +150,7 @@ export const Footer: React.FC = () => {
           {/* Contact us — 439px × 290px, gap-12 */}
           <div style={{ width: "439px", height: "290px", display: "flex", flexDirection: "column", gap: "12px" }}>
             <h4 style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "26px", letterSpacing: "-0.1px", color: "rgba(255,255,255,0.8)", margin: 0 }}>Contact us</h4>
-            <ul style={{ display: "flex", flexDirection: "column", gap: "12px" }} className="text-sm font-semibold">
+            <ul style={{ display: "flex", flexDirection: "column", gap: "12px", listStyle: "none", padding: 0, margin: 0 }}>
               <li className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-xl bg-[#1D493E] border border-white/10 flex items-center justify-center shrink-0">
                   <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -158,7 +158,7 @@ export const Footer: React.FC = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
                 </div>
-                <span>HITEC City, Hyderabad, Telangana, India</span>
+                <span style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(255,255,255,1)" }}>HITEC City, Hyderabad, Telangana, India</span>
               </li>
               <li className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-xl bg-[#1D493E] border border-white/10 flex items-center justify-center shrink-0">
@@ -166,7 +166,7 @@ export const Footer: React.FC = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                 </div>
-                <a href="mailto:services@gobanjara.com" className="hover:text-[#FFF080] transition-colors">services@gobanjara.com</a>
+                <a href="mailto:services@gobanjara.com" style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(255,255,255,1)" }} className="hover:text-[#FFF080] transition-colors">services@gobanjara.com</a>
               </li>
               <li className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-xl bg-[#1D493E] border border-white/10 flex items-center justify-center shrink-0">
@@ -174,7 +174,7 @@ export const Footer: React.FC = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
                 </div>
-                <a href="tel:+910123456789" className="hover:text-[#FFF080] transition-colors">+91 0123456789</a>
+                <a href="tel:+910123456789" style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(255,255,255,1)" }} className="hover:text-[#FFF080] transition-colors">+91 0123456789</a>
               </li>
               <li className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-xl bg-[#1D493E] border border-white/10 flex items-center justify-center shrink-0">
@@ -182,7 +182,7 @@ export const Footer: React.FC = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
-                <span>Mon–Sat, 10:00–19:00 IST</span>
+                <span style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(255,255,255,1)" }}>Mon–Sat, 10:00–19:00 IST</span>
               </li>
             </ul>
           </div>

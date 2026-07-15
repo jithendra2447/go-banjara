@@ -65,12 +65,32 @@ export const Footer: React.FC = () => {
             gap: "12px",
           }}
         >
-          <h4 className="text-xs font-bold uppercase tracking-wider text-slate-300/80">Important Links</h4>
-          <ul style={{ display: "flex", flexDirection: "column", gap: "12px" }} className="text-sm font-semibold">
-            <li><Link href="/" className="hover:text-[#FFF080] transition-colors">Home</Link></li>
-            <li><Link href="/travel" className="hover:text-[#FFF080] transition-colors">Travel Packages</Link></li>
-            <li><Link href="/about" className="hover:text-[#FFF080] transition-colors">About us</Link></li>
-            <li><Link href="/shop" className="hover:text-[#FFF080] transition-colors">Shop</Link></li>
+          <h4 style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "26px", letterSpacing: "-0.1px", color: "rgba(255,255,255,0.8)", margin: 0 }}>Important Links</h4>
+          <ul
+            style={{
+              width: "153px",
+              height: "168px",
+              display: "flex",
+              flexDirection: "column",
+              listStyle: "none",
+              padding: 0,
+              margin: 0,
+            }}
+          >
+            {[{ label: "Home", href: "/" }, { label: "Travel Packages", href: "/travel" }, { label: "About us", href: "/about" }, { label: "Shop", href: "/shop" }].map((item) => (
+              <li key={item.href}
+                style={{
+                  fontFamily: "'Faktum', 'Outfit', sans-serif",
+                  fontWeight: 500,
+                  fontSize: "20px",
+                  lineHeight: "42px",
+                  letterSpacing: "0px",
+                  color: "rgba(255, 255, 255, 1)",
+                }}
+              >
+                <Link href={item.href} className="hover:text-[#FFF080] transition-colors">{item.label}</Link>
+              </li>
+            ))}
           </ul>
         </div>
 
@@ -83,20 +103,43 @@ export const Footer: React.FC = () => {
             gap: "12px",
           }}
         >
-          <h4 className="text-xs font-bold uppercase tracking-wider text-slate-300/80">Let us help</h4>
-          <ul style={{ display: "flex", flexDirection: "column", gap: "12px" }} className="text-sm font-semibold">
-            <li><Link href="/profile" className="hover:text-[#FFF080] transition-colors">Your Account</Link></li>
-            <li><Link href="/profile" className="hover:text-[#FFF080] transition-colors">Your Orders</Link></li>
-            <li><Link href="/contact" className="hover:text-[#FFF080] transition-colors">Returns &amp; Replacements</Link></li>
-            <li><Link href="/contact" className="hover:text-[#FFF080] transition-colors">Refund &amp; Returns Policy</Link></li>
-            <li><Link href="/about" className="hover:text-[#FFF080] transition-colors">Privacy Policy</Link></li>
-            <li><Link href="/contact" className="hover:text-[#FFF080] transition-colors">Help Center</Link></li>
+          <h4 style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "26px", letterSpacing: "-0.1px", color: "rgba(255,255,255,0.8)", margin: 0 }}>Let us help</h4>
+          <ul
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              listStyle: "none",
+              padding: 0,
+              margin: 0,
+            }}
+          >
+            {[
+              { label: "Your Account", href: "/profile" },
+              { label: "Your Orders", href: "/profile" },
+              { label: "Returns & Replacements", href: "/contact" },
+              { label: "Refund & Returns Policy", href: "/contact" },
+              { label: "Privacy Policy", href: "/about" },
+              { label: "Help Center", href: "/contact" },
+            ].map((item) => (
+              <li key={item.label}
+                style={{
+                  fontFamily: "'Faktum', 'Outfit', sans-serif",
+                  fontWeight: 500,
+                  fontSize: "20px",
+                  lineHeight: "42px",
+                  letterSpacing: "0px",
+                  color: "rgba(255, 255, 255, 1)",
+                }}
+              >
+                <Link href={item.href} className="hover:text-[#FFF080] transition-colors">{item.label}</Link>
+              </li>
+            ))}
           </ul>
         </div>
 
           {/* Contact us — 439px × 290px, gap-12 */}
           <div style={{ width: "439px", display: "flex", flexDirection: "column", gap: "12px" }}>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-300/80">Contact us</h4>
+            <h4 style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "26px", letterSpacing: "-0.1px", color: "rgba(255,255,255,0.8)", margin: 0 }}>Contact us</h4>
             <ul style={{ display: "flex", flexDirection: "column", gap: "12px" }} className="text-sm font-semibold">
               <li className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-xl bg-[#1D493E] border border-white/10 flex items-center justify-center shrink-0">

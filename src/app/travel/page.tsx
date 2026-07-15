@@ -915,7 +915,7 @@ export default function HolidaysPortal() {
                     height: "695.44px",
                     display: "flex",
                     flexDirection: "column",
-                    justifyContent: "space-between",
+                    gap: "24px",
                     borderRadius: "4px",
                     background: "rgba(255, 255, 255, 1)",
                     boxSizing: "border-box",
@@ -961,7 +961,6 @@ export default function HolidaysPortal() {
                       display: "flex", 
                       flexDirection: "column", 
                       justifyContent: "space-between", 
-                      paddingTop: "24px",
                       boxSizing: "border-box" 
                     }}
                   >
@@ -979,7 +978,16 @@ export default function HolidaysPortal() {
                       }}
                     >
                       {/* Category & Duration Row */}
-                      <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
+                      <div 
+                        style={{ 
+                          width: "100%",
+                          height: "28px",
+                          display: "flex", 
+                          flexDirection: "row", 
+                          justifyContent: "space-between", 
+                          alignItems: "center" 
+                        }}
+                      >
                         <span 
                           style={{
                             padding: "4px 12px",
@@ -991,6 +999,9 @@ export default function HolidaysPortal() {
                             background: "rgba(255, 98, 62, 0.1)",
                             textTransform: "uppercase",
                             letterSpacing: "0.5px",
+                            display: "inline-flex",
+                            alignItems: "center",
+                            height: "100%",
                           }}
                         >
                           {displayCategory}
@@ -1006,6 +1017,9 @@ export default function HolidaysPortal() {
                             background: "rgba(29, 73, 62, 0.1)",
                             textTransform: "uppercase",
                             letterSpacing: "0.5px",
+                            display: "inline-flex",
+                            alignItems: "center",
+                            height: "100%",
                           }}
                         >
                           {pkg.durationDays} days

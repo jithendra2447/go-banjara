@@ -1161,30 +1161,104 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
         </div>
       </section>
 
-      {/* Newsletter / Booking CTA Banner */}
-      <section className="bg-[#FAF9F6] border-t border-[#1D493E]/10 py-16 text-center relative z-10">
-        <div className="max-w-4xl mx-auto px-6 space-y-6">
-          <h2 className="text-2xl md:text-4xl font-serif text-[#1D493E] leading-tight">
-            The <span className="text-[#E05434] font-serif font-normal">best adventures</span> find their way to your inbox.
-          </h2>
-          <p className="text-xs md:text-sm text-gray-500 max-w-2xl mx-auto leading-relaxed">
-            Hidden places, exclusive trip drops, curated gear, and stories from the road delivered before anyone else hears about them.
-          </p>
-          <div className="pt-2">
-            <button
-              type="button"
-              onClick={() => {
-                const bookingEl = document.querySelector('form');
-                if (bookingEl) {
-                  bookingEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
+      {/* Newsletter / Booking CTA Banner (Matching Home page section design) */}
+      <section
+        style={{
+          width: "100%",
+          paddingTop: "42px",
+          paddingBottom: "42px",
+          paddingLeft: "80px",
+          paddingRight: "80px",
+          background: "#FFFFFF",
+          borderTop: "1px solid rgba(29, 73, 62, 0.1)",
+        }}
+        className="relative z-10"
+      >
+        <div
+          style={{
+            maxWidth: "1440px",
+            margin: "0 auto",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "32px",
+            textAlign: "center",
+          }}
+        >
+          {/* Text block */}
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
+            {/* Heading: Fraunces SemiBold 42px, lh 100%, #2B2B2B */}
+            <h2
+              style={{
+                fontFamily: "Fraunces, serif",
+                fontWeight: 600,
+                fontSize: "42px",
+                lineHeight: "100%",
+                letterSpacing: "0px",
+                textAlign: "center",
+                color: "#2B2B2B",
+                maxWidth: "1280px",
+                margin: 0,
               }}
-              className="inline-flex items-center gap-2 bg-[#1D493E] hover:bg-[#16372f] text-white px-8 py-3.5 rounded-xl font-bold text-xs uppercase tracking-widest transition duration-300 shadow-sm cursor-pointer"
             >
-              <span>Reserve your tour now</span>
-              <span className="text-sm font-sans">↗</span>
-            </button>
+              The{" "}
+              <span style={{ color: "#FF5A36" }}>best adventures</span>{" "}
+              find their way to your inbox.
+            </h2>
+            {/* Subtitle: Faktum Medium 24px, lh 32px, rgba(43,43,43,1) */}
+            <p
+              style={{
+                fontFamily: "Faktum, sans-serif",
+                fontWeight: 500,
+                fontSize: "24px",
+                lineHeight: "32px",
+                letterSpacing: "0px",
+                textAlign: "center",
+                color: "rgba(43, 43, 43, 1)",
+                maxWidth: "1280px",
+                margin: 0,
+              }}
+            >
+              Hidden places, exclusive trip drops, curated gear, and stories from the road delivered before anyone else hears about them.
+            </p>
           </div>
+
+          {/* Button: 286×55, pt-16 pr-32 pb-16 pl-32, radius-4, bg #1D493E */}
+          <button
+            type="button"
+            onClick={() => {
+              const bookingEl = document.querySelector('form');
+              if (bookingEl) {
+                bookingEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              }
+            }}
+            style={{
+              width: "286px",
+              height: "55px",
+              paddingTop: "16px",
+              paddingBottom: "16px",
+              paddingLeft: "32px",
+              paddingRight: "32px",
+              borderRadius: "4px",
+              background: "rgba(29, 73, 62, 1)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              color: "#FFFFFF",
+              fontFamily: "'Faktum','Outfit',sans-serif",
+              fontWeight: 500,
+              fontSize: "18px",
+              lineHeight: "100%",
+              letterSpacing: "0px",
+              border: "none",
+              transition: "opacity 0.2s",
+              cursor: "pointer",
+            }}
+            className="hover:opacity-90 inline-flex items-center gap-2"
+          >
+            <span>Reserve your tour now</span>
+            <span className="text-lg font-sans">↗</span>
+          </button>
         </div>
       </section>
 

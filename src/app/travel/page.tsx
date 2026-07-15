@@ -401,7 +401,7 @@ export default function HolidaysPortal() {
       </div>
 
       {/* 1. AVAILABLE PACKAGES CONTENT SECTION */}
-      <section className="max-w-[1440px] mx-auto px-5 md:px-[80px] pt-10 pb-12 space-y-10">
+      <section id="available-packages" className="max-w-[1440px] mx-auto px-5 md:px-[80px] pt-10 pb-12 space-y-10">
 
         {/* SEARCH WIDGET CARD (Spans full width, styled to match exact Figma specs) */}
         <div 
@@ -1865,6 +1865,107 @@ export default function HolidaysPortal() {
               </div>
             );
           })}
+        </div>
+      </section>
+
+      {/* 3.7 NEWSLETTER / CTA SECTION (Matching Home page fonts and styles) */}
+      <section
+        style={{
+          width: "100%",
+          paddingTop: "42px",
+          paddingBottom: "42px",
+          paddingLeft: "80px",
+          paddingRight: "80px",
+          background: "#FFFFFF",
+          borderTop: "1px solid rgba(29, 73, 62, 0.1)",
+        }}
+        className="relative z-10"
+      >
+        <div
+          style={{
+            maxWidth: "1440px",
+            margin: "0 auto",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "32px",
+            textAlign: "center",
+          }}
+        >
+          {/* Text block */}
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
+            {/* Heading: Fraunces SemiBold 42px, lh 100%, #2B2B2B */}
+            <h2
+              style={{
+                fontFamily: "Fraunces, serif",
+                fontWeight: 600,
+                fontSize: "42px",
+                lineHeight: "100%",
+                letterSpacing: "0px",
+                textAlign: "center",
+                color: "#2B2B2B",
+                maxWidth: "1280px",
+                margin: 0,
+              }}
+            >
+              The{" "}
+              <span style={{ color: "#FF5A36" }}>best adventures</span>{" "}
+              find their way to your inbox.
+            </h2>
+            {/* Subtitle: Faktum Medium 24px, lh 32px, rgba(43,43,43,1) */}
+            <p
+              style={{
+                fontFamily: "Faktum, sans-serif",
+                fontWeight: 500,
+                fontSize: "24px",
+                lineHeight: "32px",
+                letterSpacing: "0px",
+                textAlign: "center",
+                color: "rgba(43, 43, 43, 1)",
+                maxWidth: "1280px",
+                margin: 0,
+              }}
+            >
+              Hidden places, exclusive trip drops, curated gear, and stories from the road delivered before anyone else hears about them.
+            </p>
+          </div>
+
+          {/* Button: 286×55, pt-16 pr-32 pb-16 pl-32, radius-4, bg #1D493E */}
+          <button
+            type="button"
+            onClick={() => {
+              const bookingEl = document.getElementById('available-packages');
+              if (bookingEl) {
+                bookingEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }
+            }}
+            style={{
+              width: "286px",
+              height: "55px",
+              paddingTop: "16px",
+              paddingBottom: "16px",
+              paddingLeft: "32px",
+              paddingRight: "32px",
+              borderRadius: "4px",
+              background: "rgba(29, 73, 62, 1)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              color: "#FFFFFF",
+              fontFamily: "'Faktum','Outfit',sans-serif",
+              fontWeight: 500,
+              fontSize: "18px",
+              lineHeight: "100%",
+              letterSpacing: "0px",
+              border: "none",
+              transition: "opacity 0.2s",
+              cursor: "pointer",
+            }}
+            className="hover:opacity-90 inline-flex items-center gap-2"
+          >
+            <span>Reserve your tour now</span>
+            <span className="text-lg font-sans">↗</span>
+          </button>
         </div>
       </section>
 

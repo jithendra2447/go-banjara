@@ -865,23 +865,26 @@ export default function Homepage() {
 
       {/* 8. MOST SELLING PRODUCTS */}
       <section className="bg-white pt-[42px] pb-[42px] text-left relative z-10 border-t border-gray-100">
-        <div className="max-w-[1440px] mx-auto px-6 md:px-20 space-y-10">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-[80px] flex flex-col gap-[32px]">
           
-          <div className="text-center max-w-2xl mx-auto space-y-4">
-            <h2 className="text-3xl md:text-[38px] font-sans font-black text-[#1D493E] leading-tight">
-              {pageContent.sellingTitle.includes("Selling Products") ? (
-                <>Most <span className="text-[#FF5A36]">Selling Products</span></>
-              ) : (
-                pageContent.sellingTitle
-              )}
-            </h2>
-            <p className="text-gray-500 text-sm md:text-base font-semibold leading-relaxed">
-              {pageContent.sellingSub}
-            </p>
-            <div className="pt-2">
+          {/* Header Row (Flow Horizontal, Justify space-between, Width Fill, items-end) */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-2 text-left">
+            <div className="space-y-3.5 text-left max-w-4xl">
+              <h2 className="text-3xl md:text-[42px] font-serif font-semibold text-[#1D493E] leading-none">
+                {pageContent.sellingTitle.includes("Selling Products") ? (
+                  <>Most <span className="text-[#FF5A36]">Selling Products</span></>
+                ) : (
+                  pageContent.sellingTitle
+                )}
+              </h2>
+              <p className="text-gray-500 text-base md:text-[24px] md:leading-8 font-medium">
+                {pageContent.sellingSub}
+              </p>
+            </div>
+            <div className="shrink-0 pb-1">
               <Link 
                 href="/shop"
-                className="inline-flex items-center gap-1.5 text-sm font-bold text-[#1D493E] hover:text-[#FF5A36] transition"
+                className="inline-flex items-center gap-1.5 text-sm font-bold text-[#1D493E] hover:text-[#FF5A36] transition-all duration-300"
               >
                 <span>View all products</span>
                 <ArrowUpRight className="w-4 h-4" />

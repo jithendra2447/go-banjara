@@ -811,7 +811,7 @@ export default function Homepage() {
 
       {/* 7. TODAY'S BEST DEALS FOR YOU */}
       <section className="bg-white relative z-10">
-        <div className="max-w-[1440px] w-full mx-auto pt-[32px] pb-[32px] px-6 md:px-[80px] flex flex-col gap-[62px]">
+        <div className="max-w-[1440px] w-full mx-auto pt-[20px] pb-[20px] px-6 md:px-[80px] flex flex-col gap-[32px]">
           
           {/* Header Container (Width: 1280px, Height: 134px, Justify: space-between, Background: white, Border radius: 4px) */}
           <div className="w-full md:w-[1280px] md:h-[134px] mx-auto flex flex-col justify-between items-center bg-white rounded-[4px] text-center">
@@ -1192,7 +1192,7 @@ export default function Homepage() {
       </div>
 
       {/* 9. MEET BONJO SECTION (Brand story) */}
-      <section className="max-w-[1440px] w-full mx-auto px-6 md:px-[80px] pt-[28px] pb-[28px] md:h-[774px] flex items-center bg-white relative overflow-visible">
+      <section className="max-w-[1440px] w-full mx-auto px-6 md:px-[80px] pt-[28px] pb-[28px] bg-white relative overflow-visible">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-[32px] items-center w-full">
           {/* Left Column: Image with slight rotation and glow */}
           <div className="relative">
@@ -1261,7 +1261,7 @@ export default function Homepage() {
       </section>
 
       {/* 9.5 REVIEWS SECTION (3-column grid matching Figma design) */}
-      <section className="bg-white pt-[28px] pb-[28px] text-left relative z-10 border-t border-gray-100 w-full md:h-[853.38px] flex items-center">
+      <section className="bg-white pt-[28px] pb-[28px] text-left relative z-10 border-t border-gray-100 w-full">
         <div className="max-w-[1440px] w-full mx-auto flex flex-col gap-[32px]">
           
           {/* Header Row (Figma: Width: 1440, Height: 90, Padding: 0px vertical, 80px horizontal) */}
@@ -1413,8 +1413,8 @@ export default function Homepage() {
 
       {/* 10. TRAVEL DIARIES / STORIES */}
       {/* 10. TRAVEL DIARIES / STORIES */}
-      <section className="bg-white pt-[28px] pb-[16px] text-left relative z-10 border-t border-gray-100 w-full md:h-[1423.24px] flex items-center">
-        <div className="w-full md:w-[1280px] md:h-[1227.24px] mx-auto px-6 md:px-0 flex flex-col gap-[32px] shrink-0">
+      <section className="bg-white pt-[28px] pb-[16px] text-left relative z-10 border-t border-gray-100 w-full">
+        <div className="w-full md:w-[1280px] mx-auto px-6 md:px-0 flex flex-col gap-[32px]">
           
           {/* Header Container (Width: 1280px, Height: 134px, Gap: 12px) */}
           <div className="w-full md:w-[1280px] md:h-[134px] flex flex-col justify-center items-center gap-[12px] text-center shrink-0">

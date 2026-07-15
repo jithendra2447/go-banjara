@@ -637,7 +637,19 @@ export default function HolidaysPortal() {
             margin: "0 auto",
           }}
         >
-          <div style={{ display: "flex", flexDirection: "column", gap: "4px", justifyContent: "center", textAlign: "left" }}>
+          <div 
+            style={{ 
+              width: "100%",
+              maxWidth: "1154px",
+              height: "83px",
+              display: "flex", 
+              flexDirection: "column", 
+              gap: "4px", 
+              justifyContent: "center", 
+              textAlign: "left",
+              boxSizing: "border-box",
+            }}
+          >
             <h2 style={{
               fontFamily: "'Fraunces', serif",
               fontWeight: 600,

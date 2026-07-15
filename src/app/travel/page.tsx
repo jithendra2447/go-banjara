@@ -909,14 +909,41 @@ export default function HolidaysPortal() {
               return (
                 <div 
                   key={pkg.id}
-                  className="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-2xs hover:shadow-xs transition-all duration-300 flex flex-col justify-between group"
+                  style={{
+                    width: "100%",
+                    maxWidth: "405.33px",
+                    height: "695.44px",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                    borderRadius: "4px",
+                    background: "rgba(255, 255, 255, 1)",
+                    boxSizing: "border-box",
+                    position: "relative",
+                  }}
+                  className="group"
                 >
                   {/* Card Image */}
-                  <Link href={pkg.link || `/travel/package/${pkg.id}`} className="block relative h-64 w-full overflow-hidden bg-slate-900">
+                  <Link 
+                    href={pkg.link || `/travel/package/${pkg.id}`} 
+                    style={{ 
+                      display: "block", 
+                      position: "relative", 
+                      width: "100%", 
+                      height: "249.44px",
+                      borderRadius: "4px",
+                      overflow: "hidden"
+                    }}
+                  >
                     <img 
                       src={pkg.image} 
                       alt={pkg.name} 
-                      className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                      }}
+                      className="group-hover:scale-[1.02] transition-transform duration-500"
                     />
 
                     {/* Best Seller Overlay */}
@@ -928,74 +955,175 @@ export default function HolidaysPortal() {
                   </Link>
 
                   {/* Card Content details */}
-                  <div className="p-6 flex-1 flex flex-col justify-between space-y-5">
+                  <div 
+                    style={{ 
+                      flex: 1, 
+                      display: "flex", 
+                      flexDirection: "column", 
+                      justifyContent: "space-between", 
+                      paddingTop: "24px",
+                      boxSizing: "border-box" 
+                    }}
+                  >
                     
-                    <div className="space-y-4">
+                    {/* Upper block with badges, title, description */}
+                    <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
                       {/* Category & Duration Row */}
-                      <div className="flex items-center justify-between">
-                        <span className="bg-[#FFF0EB] text-[#FF623E] font-black text-xs uppercase tracking-wider px-3 py-1 rounded-sm">
+                      <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
+                        <span 
+                          style={{
+                            padding: "4px 12px",
+                            borderRadius: "4px",
+                            fontFamily: "'Faktum', 'Outfit', sans-serif",
+                            fontWeight: 600,
+                            fontSize: "14px",
+                            color: "rgba(255, 98, 62, 1)",
+                            background: "rgba(255, 98, 62, 0.1)",
+                            textTransform: "uppercase",
+                            letterSpacing: "0.5px",
+                          }}
+                        >
                           {displayCategory}
                         </span>
-                        <span className="bg-[#E8F5E9] text-[#2E7D32] font-black text-xs uppercase tracking-wider px-3 py-1 rounded-sm">
+                        <span 
+                          style={{
+                            padding: "4px 12px",
+                            borderRadius: "4px",
+                            fontFamily: "'Faktum', 'Outfit', sans-serif",
+                            fontWeight: 600,
+                            fontSize: "14px",
+                            color: "rgba(29, 73, 62, 1)",
+                            background: "rgba(29, 73, 62, 0.1)",
+                            textTransform: "uppercase",
+                            letterSpacing: "0.5px",
+                          }}
+                        >
                           {pkg.durationDays} days
                         </span>
                       </div>
 
-                      {/* Title & Price inline (increased font sizes) */}
+                      {/* Title & Price inline */}
                       <Link href={pkg.link || `/travel/package/${pkg.id}`} className="block group">
-                        <h3 className="font-sans text-[17px] font-black text-[#1C2C26] leading-snug group-hover:text-[#FF623E] transition-colors">
-                          {pkg.name} <span className="font-black text-[#1D493E] ml-1">₹{pkg.price.toLocaleString('en-IN')}/Person</span>
+                        <h3 
+                          style={{
+                            fontFamily: "'Fraunces', serif",
+                            fontSize: "24px",
+                            fontWeight: 600,
+                            lineHeight: "120%",
+                            color: "rgba(43, 43, 43, 1)",
+                            margin: 0,
+                          }}
+                        >
+                          {pkg.name} <span style={{ marginLeft: "8px", fontWeight: 600 }}>₹{pkg.price.toLocaleString('en-IN')}/Person</span>
                         </h3>
                       </Link>
 
                       {/* Description */}
-                      <p className="text-xs text-gray-500 font-semibold leading-relaxed">
+                      <p 
+                        style={{
+                          fontFamily: "'Faktum', 'Outfit', sans-serif",
+                          fontWeight: 500,
+                          fontSize: "16px",
+                          lineHeight: "150%",
+                          color: "rgba(141, 141, 141, 1)",
+                          margin: 0,
+                        }}
+                      >
                         {pkg.description}
                       </p>
+                    </div>
 
-                      {/* 2x2 Details Grid matching Figma spec with square grey icon boxes */}
-                      <div className="grid grid-cols-2 gap-4 pt-4 border-t border-gray-150">
-                        <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-lg flex items-center justify-center shrink-0">
-                            <MapPin className="w-4 h-4 text-[#1C2C26]" />
-                          </div>
-                          <span className="text-[12px] font-bold text-gray-600 leading-tight">Starts from {pkg.startPoint || 'Srinagar'}</span>
+                    {/* 2x2 Details Grid matching Figma spec */}
+                    <div 
+                      style={{ 
+                        display: "grid", 
+                        gridTemplateColumns: "repeat(2, 1fr)", 
+                        gap: "16px", 
+                        paddingTop: "16px",
+                        borderTop: "1px solid rgba(141, 141, 141, 0.15)" 
+                      }}
+                    >
+                      <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                        <div style={{ width: "40px", height: "40px", borderRadius: "8px", background: "rgba(29, 73, 62, 0.05)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                          <MapPin style={{ width: "16px", height: "16px", color: "rgba(29, 73, 62, 1)" }} />
                         </div>
-                        <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-lg flex items-center justify-center shrink-0">
-                            <Users className="w-4 h-4 text-[#1C2C26]" />
-                          </div>
-                          <span className="text-[12px] font-bold text-gray-600 leading-tight">{pkg.groupType || 'Curated group Trip'}</span>
+                        <span style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, fontSize: "14px", color: "rgba(43, 43, 43, 1)", lineHeight: "120%" }}>
+                          Starts from {pkg.startPoint || 'Srinagar'}
+                        </span>
+                      </div>
+                      
+                      <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                        <div style={{ width: "40px", height: "40px", borderRadius: "8px", background: "rgba(29, 73, 62, 0.05)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                          <Users style={{ width: "16px", height: "16px", color: "rgba(29, 73, 62, 1)" }} />
                         </div>
-                        <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-lg flex items-center justify-center shrink-0">
-                            <ArrowUpRight className="w-4 h-4 text-[#1C2C26]" />
-                          </div>
-                          <span className="text-[12px] font-bold text-gray-600 leading-tight">{pkg.difficulty || 'Moderate'} Difficulty</span>
-                        </div>
-                        <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-lg flex items-center justify-center shrink-0">
-                            <Calendar className="w-4 h-4 text-[#1C2C26]" />
-                          </div>
-                          <span className="text-[12px] font-bold text-gray-600 leading-tight">Next: {pkg.nextDeparture || 'Aug, 2026'}</span>
-                        </div>
+                        <span style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, fontSize: "14px", color: "rgba(43, 43, 43, 1)", lineHeight: "120%" }}>
+                          {pkg.groupType || 'Curated group Trip'}
+                        </span>
                       </div>
 
+                      <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                        <div style={{ width: "40px", height: "40px", borderRadius: "8px", background: "rgba(29, 73, 62, 0.05)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                          <ArrowUpRight style={{ width: "16px", height: "16px", color: "rgba(29, 73, 62, 1)" }} />
+                        </div>
+                        <span style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, fontSize: "14px", color: "rgba(43, 43, 43, 1)", lineHeight: "120%" }}>
+                          {pkg.difficulty || 'Moderate'} Difficulty
+                        </span>
+                      </div>
+
+                      <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                        <div style={{ width: "40px", height: "40px", borderRadius: "8px", background: "rgba(29, 73, 62, 0.05)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                          <Calendar style={{ width: "16px", height: "16px", color: "rgba(29, 73, 62, 1)" }} />
+                        </div>
+                        <span style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, fontSize: "14px", color: "rgba(43, 43, 43, 1)", lineHeight: "120%" }}>
+                          Next: {pkg.nextDeparture || 'Aug, 2026'}
+                        </span>
+                      </div>
                     </div>
 
                     {/* Bottom Action buttons */}
-                    <div className="flex gap-3 pt-2">
+                    <div style={{ display: "flex", gap: "12px", paddingTop: "16px" }}>
                       <button
                         type="button"
                         onClick={() => handleOpenBookingDrawer(pkg)}
-                        className="flex-1 py-3 rounded-lg bg-[#1D493E] hover:bg-[#15342c] text-white text-xs font-bold text-center uppercase tracking-wider transition cursor-pointer"
+                        style={{
+                          flex: 1,
+                          height: "48px",
+                          borderRadius: "4px",
+                          background: "rgba(29, 73, 62, 1)",
+                          color: "white",
+                          fontFamily: "'Faktum', 'Outfit', sans-serif",
+                          fontWeight: 600,
+                          fontSize: "16px",
+                          textTransform: "uppercase",
+                          letterSpacing: "0.5px",
+                          border: "none",
+                          cursor: "pointer",
+                        }}
+                        className="hover:bg-[#15342c] transition-colors"
                       >
                         Book Now
                       </button>
                       
                       <Link 
                         href={pkg.link || `/travel/package/${pkg.id}`}
-                        className="flex-1 py-3 rounded-lg border border-[#1D493E] text-center text-[#1D493E] hover:bg-gray-50 text-xs font-bold uppercase tracking-wider transition"
+                        style={{
+                          flex: 1,
+                          height: "48px",
+                          borderRadius: "4px",
+                          border: "1px solid rgba(29, 73, 62, 1)",
+                          background: "white",
+                          color: "rgba(29, 73, 62, 1)",
+                          fontFamily: "'Faktum', 'Outfit', sans-serif",
+                          fontWeight: 600,
+                          fontSize: "16px",
+                          textTransform: "uppercase",
+                          letterSpacing: "0.5px",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          textDecoration: "none",
+                        }}
+                        className="hover:bg-gray-50 transition-colors"
                       >
                         Get details
                       </Link>

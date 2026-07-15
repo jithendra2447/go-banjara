@@ -368,9 +368,9 @@ export default function ProductDetailsPage() {
                   strokeLinecap="round" 
                   strokeLinejoin="round"
                 >
-                  <path d="M3 3h2l.4 2" />
-                  <path d="M7 13h10l4-8H5.4" />
-                  <path d="M7 13L5.4 5" />
+                  <path d="M3 5h2l.5 3" />
+                  <path d="M7.5 17h10l3.5-9H6" />
+                  <path d="M7.5 17L6 8" />
                 </svg>
               </button>
               <button
@@ -627,9 +627,9 @@ export default function ProductDetailsPage() {
                       strokeLinecap="round" 
                       strokeLinejoin="round"
                     >
-                      <path d="M3 3h2l.4 2" />
-                      <path d="M7 13h10l4-8H5.4" />
-                      <path d="M7 13L5.4 5" />
+                      <path d="M3 5h2l.5 3" />
+                      <path d="M7.5 17h10l3.5-9H6" />
+                      <path d="M7.5 17L6 8" />
                     </svg>
                   </button>
                 </div>
@@ -721,9 +721,9 @@ export default function ProductDetailsPage() {
                         strokeLinecap="round" 
                         strokeLinejoin="round"
                       >
-                        <path d="M3 3h2l.4 2" />
-                        <path d="M7 13h10l4-8H5.4" />
-                        <path d="M7 13L5.4 5" />
+                        <path d="M3 5h2l.5 3" />
+                        <path d="M7.5 17h10l3.5-9H6" />
+                        <path d="M7.5 17L6 8" />
                       </svg>
                     </button>
                   </div>

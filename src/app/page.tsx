@@ -412,7 +412,7 @@ export default function Homepage() {
       </section>
 
       {/* 3. DUAL CALL-TO-ACTIONS */}
-      <section className="max-w-[1440px] mx-auto px-6 md:px-20 pt-[32px] pb-[32px] bg-white relative z-35">
+      <section className="max-w-[1440px] mx-auto px-6 md:px-20 pt-[20px] pb-[20px] bg-white relative z-35">
         <div className="grid md:grid-cols-2 gap-8">
           {/* Card 1 - Shop Gear (Left, Green) */}
           <div className="bg-[#1D493E] text-white p-6 rounded-[4px] flex flex-col justify-between gap-8 relative overflow-hidden group shadow-md border border-white/5">
@@ -459,7 +459,7 @@ export default function Homepage() {
       </section>
 
       {/* 4. DESTINATIONS SECTION */}
-      <section className="bg-white pt-[32px] pb-0 relative z-10">
+      <section className="bg-white pt-[20px] pb-0 relative z-10">
         <div className="max-w-[1440px] mx-auto px-6 md:px-[80px] flex flex-col gap-[62px] text-center">
           
           {/* Centered Header (Figma styled: serif title 42px, sans medium subtitle 24px) */}
@@ -1003,7 +1003,7 @@ export default function Homepage() {
       </section>
 
       {/* 8. MOST SELLING PRODUCTS */}
-      <section className="bg-white pt-[32px] pb-[32px] text-left relative z-10 border-t border-gray-100">
+      <section className="bg-white pt-[20px] pb-[20px] text-left relative z-10 border-t border-gray-100">
         <div className="max-w-[1440px] mx-auto px-6 md:px-[80px] flex flex-col gap-[32px]">
           
           {/* Header Row (Flow Horizontal, Justify space-between, Width Fill, items-end) */}
@@ -1192,7 +1192,7 @@ export default function Homepage() {
       </div>
 
       {/* 9. MEET BONJO SECTION (Brand story) */}
-      <section className="max-w-[1440px] w-full mx-auto px-6 md:px-[80px] pt-[48px] pb-[48px] md:h-[774px] flex items-center bg-white relative overflow-visible">
+      <section className="max-w-[1440px] w-full mx-auto px-6 md:px-[80px] pt-[28px] pb-[28px] md:h-[774px] flex items-center bg-white relative overflow-visible">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-[32px] items-center w-full">
           {/* Left Column: Image with slight rotation and glow */}
           <div className="relative">
@@ -1261,7 +1261,7 @@ export default function Homepage() {
       </section>
 
       {/* 9.5 REVIEWS SECTION (3-column grid matching Figma design) */}
-      <section className="bg-white pt-[42px] pb-[42px] text-left relative z-10 border-t border-gray-100 w-full md:h-[853.38px] flex items-center">
+      <section className="bg-white pt-[28px] pb-[28px] text-left relative z-10 border-t border-gray-100 w-full md:h-[853.38px] flex items-center">
         <div className="max-w-[1440px] w-full mx-auto flex flex-col gap-[32px]">
           
           {/* Header Row (Figma: Width: 1440, Height: 90, Padding: 0px vertical, 80px horizontal) */}
@@ -1413,7 +1413,7 @@ export default function Homepage() {
 
       {/* 10. TRAVEL DIARIES / STORIES */}
       {/* 10. TRAVEL DIARIES / STORIES */}
-      <section className="bg-white pt-[42px] pb-[24px] text-left relative z-10 border-t border-gray-100 w-full md:h-[1423.24px] flex items-center">
+      <section className="bg-white pt-[28px] pb-[16px] text-left relative z-10 border-t border-gray-100 w-full md:h-[1423.24px] flex items-center">
         <div className="w-full md:w-[1280px] md:h-[1227.24px] mx-auto px-6 md:px-0 flex flex-col gap-[32px] shrink-0">
           
           {/* Header Container (Width: 1280px, Height: 134px, Gap: 12px) */}
@@ -1478,7 +1478,7 @@ export default function Homepage() {
       </section>
 
       {/* 11. FAQ ACCORDION SECTION (Matching Shop page design) */}
-      <section className="w-full md:w-[1440px] md:h-[642px] bg-white rounded-[4px] pt-[42px] pb-[42px] md:px-[80px] px-6 flex flex-col gap-[32px] mx-auto">
+      <section className="w-full md:w-[1440px] md:h-[642px] bg-white rounded-[4px] pt-[28px] pb-[28px] md:px-[80px] px-6 flex flex-col gap-[32px] mx-auto">
         {/* Header (Width: 1280px, Height: 90px, Gap: 12px) */}
         <div className="w-full md:w-[1280px] md:h-[90px] flex flex-col gap-[12px] justify-center text-left">
           <div className="w-[54px] h-[26px] flex items-center justify-center bg-[#FFEBE5] rounded-[4px]">
@@ -1523,7 +1523,7 @@ export default function Homepage() {
 
 
       {/* 12. SERVICES TO HELP YOU SHOP */}
-      <section className="w-full md:w-[1440px] bg-white pt-[42px] pb-[42px] md:px-[80px] px-6 flex flex-col gap-[32px] mx-auto">
+      <section className="w-full md:w-[1440px] bg-white pt-[28px] pb-[28px] md:px-[80px] px-6 flex flex-col gap-[32px] mx-auto">
         {/* Header */}
         <div className="w-full md:w-[1280px] md:h-[90px] flex flex-col gap-[12px] justify-center text-left mx-auto">
           <div className="w-[54px] h-[26px] flex items-center justify-center bg-[#FFEBE5] rounded-[4px]">

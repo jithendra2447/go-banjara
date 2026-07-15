@@ -6,6 +6,7 @@ import { Star, ShoppingCart } from 'lucide-react';
 import { useCart } from '@/components/providers';
 import { PRODUCTS } from '@/data/products';
 import { Product } from '@/types';
+import ProductCard from '@/components/ProductCard';
 import { FilterDrawer } from '@/components/FilterDrawer';
 
 const categoryGroupMap: Record<string, string[]> = {
@@ -215,82 +216,13 @@ export default function DiscountSalePage() {
 
         {/* Product Grid */}
         {sortedProducts.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16 w-full">
-            {sortedProducts.map((prod, idx) => (
-              <div key={`${prod.id}-${idx}`} className="bg-white flex flex-col justify-between text-left group">
-                <div className="relative w-full h-[250px] bg-[#F5F5F5] rounded-xl overflow-hidden flex items-center justify-center">
-                  <Link href={`/shop/product/${prod.id}`} className="w-full h-full">
-                    <img
-                      src={prod.image}
-                      alt={prod.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-555"
-                    />
-                  </Link>
-                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex justify-center gap-1.5 pointer-events-none">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#1D493E]"></span>
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#E2E8F0]"></span>
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#E2E8F0]"></span>
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#E2E8F0]"></span>
-                  </div>
-                </div>
-
-                <div className="pt-6 flex flex-col gap-8 text-left">
-                  <div className="space-y-2">
-                    <span className="inline-block text-[10px] font-black uppercase tracking-wider text-[#FF5B37] bg-[#FFEBE5] px-2 py-0.5 rounded-sm">
-                      {prod.category}
-                    </span>
-
-                    <div className="flex justify-between items-baseline pt-0.5">
-                      <h3 className="font-sans font-bold text-sm sm:text-base text-[#2B2B2B] line-clamp-1">
-                        <Link href={`/shop/product/${prod.id}`} className="hover:text-[#FF5B37] transition-colors">
-                          {prod.name}
-                        </Link>
-                      </h3>
-                      <div className="flex items-center gap-1.5 shrink-0 pl-2">
-                        {prod.originalPrice && (
-                          <span className="text-xs line-through text-slate-400 font-normal">
-                            ₹{prod.originalPrice}
-                          </span>
-                        )}
-                        <span className="text-sm sm:text-base font-extrabold text-[#2B2B2B]">
-                          ₹{prod.price}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="space-y-1">
-                    <div className="flex items-center gap-1.5">
-                      <div className="flex items-center gap-0.5">
-                        {[1, 2, 3, 4, 5].map((star) => (
-                          <Star
-                            key={star}
-                            className="w-3.5 h-3.5 fill-[#FFB95E] text-[#FFB95E]"
-                          />
-                        ))}
-                      </div>
-                      <span className="text-xs text-slate-500 font-medium">
-                        ({prod.reviewsCount === 1000 ? '1k' : prod.reviewsCount} Reviews)
-                      </span>
-                    </div>
-                    <p className="text-xs text-slate-400 font-medium">
-                      {prod.boughtCount}
-                    </p>
-                  </div>
-
-                  <p className="text-[11px] text-slate-400 font-medium leading-relaxed">
-                    FREE delivery as soon as <span className="text-slate-600 font-semibold">Thu, 9 Apr, 7 am - 10 pm</span>
-                  </p>
-
-                  <button
-                    onClick={() => addToCart(prod, 'shop')}
-                    className="w-full py-2.5 border border-[#1D493E] text-[#1D493E] hover:bg-[#1D493E] hover:text-white rounded-md font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-sm"
-                  >
-                    <span>Add to cart</span>
-                    <ShoppingCart className="w-3.5 h-3.5" />
-                  </button>
-                </div>
-              </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[32px] w-full max-w-[1280px] mx-auto">
+            {sortedProducts.map((prod) => (
+              <ProductCard
+                key={prod.id}
+                product={prod}
+                onAddToCart={(p) => addToCart(p, 'shop')}
+              />
             ))}
           </div>
         ) : (

@@ -226,7 +226,6 @@ export const Navbar: React.FC = () => {
                   gap: "8px",
                   borderRadius: "4px",
                   background: "rgba(29, 73, 62, 1)",
-                  display: "none",
                   alignItems: "center",
                   justifyContent: "center",
                   cursor: "pointer",
@@ -234,7 +233,7 @@ export const Navbar: React.FC = () => {
                   flexShrink: 0,
                   transition: "background 0.2s",
                 }}
-                className="sm:flex hover:bg-[#16372f]"
+                className="hidden sm:flex hover:opacity-90"
                 onMouseEnter={e => (e.currentTarget.style.background = "rgba(22,55,47,1)")}
                 onMouseLeave={e => (e.currentTarget.style.background = "rgba(29,73,62,1)")}
               >

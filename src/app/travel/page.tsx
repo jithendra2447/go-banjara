@@ -746,33 +746,28 @@ export default function HolidaysPortal() {
             </button>
 
             {showFiltersDropdown && (
-              <div className="absolute right-0 top-full mt-2 bg-white border border-gray-200/80 rounded-[20px] shadow-xl p-6 z-40 w-[290px] sm:w-[500px] md:w-[680px] text-left animate-in fade-in slide-in-from-top-2 duration-300">
-                
-                {/* Clear Filters header */}
-                <div className="flex justify-between items-center pb-3 mb-4 border-b border-gray-100">
-                  <span className="text-[10px] font-mono font-black uppercase text-gray-400">
-                    Filter Packages
-                  </span>
-                  {(selectedDurations.length > 0 || selectedTravelTypes.length > 0 || selectedInclusions.length > 0) && (
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setSelectedDurations([]);
-                        setSelectedTravelTypes([]);
-                        setSelectedInclusions([]);
-                      }}
-                      className="text-[10px] font-sans font-extrabold text-[#FF623E] hover:underline cursor-pointer"
-                    >
-                      Clear all filters
-                    </button>
-                  )}
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+              <div 
+                style={{
+                  boxShadow: "0px 4px 12px 0px rgba(0, 0, 0, 0.25)",
+                  borderRadius: "8px",
+                  border: "1px solid rgba(226, 232, 240, 1)",
+                  backgroundColor: "#FFFFFF",
+                  padding: "20px 24px",
+                  boxSizing: "border-box",
+                }}
+                className="absolute right-0 top-full mt-2 z-40 text-left flex flex-col justify-between animate-in fade-in slide-in-from-top-2 duration-300 w-screen max-w-[912px] md:w-[912px] md:h-[286px] overflow-y-auto md:overflow-hidden bg-white"
+              >
+                {/* Columns Container */}
+                <div className="flex flex-col md:flex-row gap-6 md:gap-0 justify-between items-stretch flex-1">
                   
                   {/* Column 1: Duration */}
-                  <div className="space-y-3.5 md:border-r md:border-gray-100 md:pr-4">
-                    <span className="text-xs font-black text-gray-400 font-sans tracking-wide block">Duration</span>
+                  <div className="flex-1 md:pr-6 space-y-3">
+                    <span 
+                      style={{ fontFamily: "'Faktum', 'Outfit', sans-serif" }} 
+                      className="text-xs font-semibold text-[#8D8D8D] tracking-wide block"
+                    >
+                      Duration
+                    </span>
                     <div className="space-y-1">
                       {['1-2 Days', '3-5 Days', '6-10 Days', '10+ Days'].map(dur => {
                         const isChecked = selectedDurations.includes(dur);
@@ -784,26 +779,35 @@ export default function HolidaysPortal() {
                                 prev.includes(dur) ? prev.filter(d => d !== dur) : [...prev, dur]
                               );
                             }}
-                            className={`flex items-center gap-3 px-2 py-1.5 rounded-lg cursor-pointer transition ${
-                              isChecked ? 'bg-[#1D493E]/5 text-[#1D493E] font-bold' : 'hover:bg-gray-50 text-gray-600'
+                            className={`flex items-center gap-3 px-2 py-1.5 rounded-[4px] cursor-pointer transition ${
+                              isChecked ? 'bg-[#1D493E]/5 text-[#1D493E] font-bold' : 'hover:bg-gray-50 text-[#2B2B2B]'
                             }`}
                           >
-                            <input 
-                              type="checkbox"
-                              checked={isChecked}
-                              readOnly
-                              className="w-4 h-4 rounded border-gray-300 text-[#1D493E] focus:ring-[#1D493E]/20 cursor-pointer accent-[#1D493E]"
-                            />
-                            <span className="text-xs font-semibold leading-none">{dur}</span>
+                            <div className={`w-4 h-4 rounded-[2px] border ${isChecked ? 'bg-[#1D493E] border-[#1D493E]' : 'border-gray-300 bg-white'} flex items-center justify-center shrink-0 transition-colors`}>
+                              {isChecked && (
+                                <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="4">
+                                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                                </svg>
+                              )}
+                            </div>
+                            <span style={{ fontFamily: "'Faktum', 'Outfit', sans-serif" }} className="text-xs font-medium leading-none">{dur}</span>
                           </div>
                         );
                       })}
                     </div>
                   </div>
 
+                  {/* Divider */}
+                  <div className="w-[1px] bg-[#E2E8F0] self-stretch hidden md:block" />
+
                   {/* Column 2: Travel Type */}
-                  <div className="space-y-3.5 md:border-r md:border-gray-100 md:pr-4">
-                    <span className="text-xs font-black text-gray-400 font-sans tracking-wide block">Travel Type</span>
+                  <div className="flex-1 md:px-6 space-y-3">
+                    <span 
+                      style={{ fontFamily: "'Faktum', 'Outfit', sans-serif" }} 
+                      className="text-xs font-semibold text-[#8D8D8D] tracking-wide block"
+                    >
+                      Travel Type
+                    </span>
                     <div className="space-y-1">
                       {['Solo Friendly', 'Family', 'Group', 'Corporate'].map(type => {
                         const isChecked = selectedTravelTypes.includes(type);
@@ -815,26 +819,35 @@ export default function HolidaysPortal() {
                                 prev.includes(type) ? prev.filter(t => t !== type) : [...prev, type]
                               );
                             }}
-                            className={`flex items-center gap-3 px-2 py-1.5 rounded-lg cursor-pointer transition ${
-                              isChecked ? 'bg-[#1D493E]/5 text-[#1D493E] font-bold' : 'hover:bg-gray-50 text-gray-600'
+                            className={`flex items-center gap-3 px-2 py-1.5 rounded-[4px] cursor-pointer transition ${
+                              isChecked ? 'bg-[#1D493E]/5 text-[#1D493E] font-bold' : 'hover:bg-gray-50 text-[#2B2B2B]'
                             }`}
                           >
-                            <input 
-                              type="checkbox"
-                              checked={isChecked}
-                              readOnly
-                              className="w-4 h-4 rounded border-gray-300 text-[#1D493E] focus:ring-[#1D493E]/20 cursor-pointer accent-[#1D493E]"
-                            />
-                            <span className="text-xs font-semibold leading-none">{type}</span>
+                            <div className={`w-4 h-4 rounded-[2px] border ${isChecked ? 'bg-[#1D493E] border-[#1D493E]' : 'border-gray-300 bg-white'} flex items-center justify-center shrink-0 transition-colors`}>
+                              {isChecked && (
+                                <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="4">
+                                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                                </svg>
+                              )}
+                            </div>
+                            <span style={{ fontFamily: "'Faktum', 'Outfit', sans-serif" }} className="text-xs font-medium leading-none">{type}</span>
                           </div>
                         );
                       })}
                     </div>
                   </div>
 
+                  {/* Divider */}
+                  <div className="w-[1px] bg-[#E2E8F0] self-stretch hidden md:block" />
+
                   {/* Column 3: Includes */}
-                  <div className="space-y-3.5">
-                    <span className="text-xs font-black text-gray-400 font-sans tracking-wide block">Includes</span>
+                  <div className="flex-1 md:pl-6 space-y-3">
+                    <span 
+                      style={{ fontFamily: "'Faktum', 'Outfit', sans-serif" }} 
+                      className="text-xs font-semibold text-[#8D8D8D] tracking-wide block"
+                    >
+                      Includes
+                    </span>
                     <div className="space-y-1">
                       {['Meals', 'Accommodation', 'Transport', 'Guide', 'Travel Gear'].map(incl => {
                         const isChecked = selectedInclusions.includes(incl);
@@ -846,17 +859,18 @@ export default function HolidaysPortal() {
                                 prev.includes(incl) ? prev.filter(i => i !== incl) : [...prev, incl]
                               );
                             }}
-                            className={`flex items-center gap-3 px-2 py-1.5 rounded-lg cursor-pointer transition ${
-                              isChecked ? 'bg-[#1D493E]/5 text-[#1D493E] font-bold' : 'hover:bg-gray-50 text-gray-600'
+                            className={`flex items-center gap-3 px-2 py-1.5 rounded-[4px] cursor-pointer transition ${
+                              isChecked ? 'bg-[#1D493E]/5 text-[#1D493E] font-bold' : 'hover:bg-gray-50 text-[#2B2B2B]'
                             }`}
                           >
-                            <input 
-                              type="checkbox"
-                              checked={isChecked}
-                              readOnly
-                              className="w-4 h-4 rounded border-gray-300 text-[#1D493E] focus:ring-[#1D493E]/20 cursor-pointer accent-[#1D493E]"
-                            />
-                            <span className="text-xs font-semibold leading-none">{incl}</span>
+                            <div className={`w-4 h-4 rounded-[2px] border ${isChecked ? 'bg-[#1D493E] border-[#1D493E]' : 'border-gray-300 bg-white'} flex items-center justify-center shrink-0 transition-colors`}>
+                              {isChecked && (
+                                <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="4">
+                                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                                </svg>
+                              )}
+                            </div>
+                            <span style={{ fontFamily: "'Faktum', 'Outfit', sans-serif" }} className="text-xs font-medium leading-none">{incl}</span>
                           </div>
                         );
                       })}
@@ -865,10 +879,10 @@ export default function HolidaysPortal() {
 
                 </div>
 
-                {/* Sort Option & Actions */}
-                <div className="mt-6 pt-4 border-t border-gray-100 flex flex-wrap items-center justify-between gap-4">
+                {/* Bottom Row */}
+                <div className="mt-4 pt-3 border-t border-[#E2E8F0] flex flex-wrap items-center justify-between gap-4 shrink-0">
                   <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-mono font-black uppercase text-gray-400">Sort By:</span>
+                    <span style={{ fontFamily: "'Faktum', 'Outfit', sans-serif" }} className="text-[10px] font-bold uppercase text-[#8D8D8D]">Sort By:</span>
                     <div className="flex gap-1.5">
                       {[
                         { val: 'recommended', label: 'Featured' },
@@ -880,6 +894,7 @@ export default function HolidaysPortal() {
                           key={opt.val}
                           type="button"
                           onClick={() => setSortBy(opt.val)}
+                          style={{ fontFamily: "'Faktum', 'Outfit', sans-serif" }}
                           className={`px-2.5 py-1 rounded-md text-[10px] font-bold border transition cursor-pointer ${
                             sortBy === opt.val 
                               ? 'bg-[#1D493E] text-white border-[#1D493E]' 
@@ -892,13 +907,30 @@ export default function HolidaysPortal() {
                     </div>
                   </div>
                   
-                  <button
-                    type="button"
-                    onClick={() => setShowFiltersDropdown(false)}
-                    className="bg-[#1D493E] hover:bg-[#16372f] text-white text-[10px] font-black uppercase tracking-wider px-4 py-2 rounded-lg transition cursor-pointer"
-                  >
-                    Apply Filters
-                  </button>
+                  <div className="flex items-center gap-2">
+                    {(selectedDurations.length > 0 || selectedTravelTypes.length > 0 || selectedInclusions.length > 0) && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setSelectedDurations([]);
+                          setSelectedTravelTypes([]);
+                          setSelectedInclusions([]);
+                        }}
+                        style={{ fontFamily: "'Faktum', 'Outfit', sans-serif" }}
+                        className="text-[10px] font-extrabold text-[#FF623E] hover:underline cursor-pointer pr-2"
+                      >
+                        Clear All
+                      </button>
+                    )}
+                    <button
+                      type="button"
+                      onClick={() => setShowFiltersDropdown(false)}
+                      style={{ fontFamily: "'Faktum', 'Outfit', sans-serif" }}
+                      className="bg-[#1D493E] hover:bg-[#16372f] text-white text-[10px] font-black uppercase tracking-wider px-4 py-2 rounded-[4px] transition cursor-pointer"
+                    >
+                      Apply
+                    </button>
+                  </div>
                 </div>
 
               </div>

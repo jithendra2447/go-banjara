@@ -154,22 +154,38 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
             setIsAdded(true);
             setTimeout(() => setIsAdded(false), 2000);
           }}
-          className="w-full h-[60px] pt-[16px] pr-[32px] pb-[16px] pl-[32px] gap-[8px] rounded-[4px] border-2 border-[#1D493E] hover:bg-[#1D493E] hover:text-white text-[#1D493E] text-[16px] font-bold transition flex items-center justify-center cursor-pointer"
+          className="w-full h-[60px] pt-[16px] pr-[32px] pb-[16px] pl-[32px] gap-[8px] rounded-[4px] border-2 border-[#1D493E] hover:bg-[#1D493E] hover:text-white text-[#1D493E] text-[16px] font-bold transition flex items-center justify-center cursor-pointer group"
         >
           <span>{isAdded ? 'Added to Cart!' : 'Add to cart'}</span>
           <svg 
             style={{ width: '28px', height: '28px' }} 
-            viewBox="0 0 24 24" 
+            viewBox="0 0 28 28" 
             fill="none" 
-            stroke="currentColor" 
             strokeWidth="1.75" 
             strokeLinecap="round" 
             strokeLinejoin="round"
             className="shrink-0"
           >
-            <path d="M3 5h2l.5 3" />
-            <path d="M7.5 17h10l3.5-9H6" />
-            <path d="M7.5 17L6 8" />
+            <path 
+              d="M4 5h3l2 11h11l2.5-9H14" 
+              className="stroke-[#2B2B2B] group-hover:stroke-white transition-colors duration-300"
+            />
+            <path 
+              d="M7.8 8.5H9.5" 
+              className="stroke-[#2B2B2B] group-hover:stroke-white transition-colors duration-300"
+            />
+            <circle 
+              cx="10.5" 
+              cy="21.5" 
+              r="2" 
+              className="stroke-[#1D493E] group-hover:stroke-white transition-colors duration-300"
+            />
+            <circle 
+              cx="17.5" 
+              cy="21.5" 
+              r="2" 
+              className="stroke-[#1D493E] group-hover:stroke-white transition-colors duration-300"
+            />
           </svg>
         </button>
       </div>

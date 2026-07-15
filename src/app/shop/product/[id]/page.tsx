@@ -356,21 +356,38 @@ export default function ProductDetailsPage() {
             <div className="grid grid-cols-2 gap-4 pt-1">
               <button
                 onClick={handleAddToCart}
-                className="w-full py-4 border border-[#1D493E] text-[#1D493E] hover:bg-[#1D493E]/5 rounded-lg font-bold text-xs uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center gap-2 shadow-xs bg-white"
+                className="w-full py-4 border border-[#1D493E] text-[#1D493E] hover:bg-[#1D493E] hover:text-white rounded-lg font-bold text-xs uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center gap-2 shadow-xs bg-white group"
               >
                 <span>Add to Cart</span>
                 <svg 
-                  className="w-4 h-4 shrink-0" 
-                  viewBox="0 0 24 24" 
+                  style={{ width: '28px', height: '28px' }} 
+                  viewBox="0 0 28 28" 
                   fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="2" 
+                  strokeWidth="1.75" 
                   strokeLinecap="round" 
                   strokeLinejoin="round"
+                  className="shrink-0"
                 >
-                  <path d="M3 5h2l.5 3" />
-                  <path d="M7.5 17h10l3.5-9H6" />
-                  <path d="M7.5 17L6 8" />
+                  <path 
+                    d="M4 5h3l2 11h11l2.5-9H14" 
+                    className="stroke-[#2B2B2B] group-hover:stroke-white transition-colors duration-300"
+                  />
+                  <path 
+                    d="M7.8 8.5H9.5" 
+                    className="stroke-[#2B2B2B] group-hover:stroke-white transition-colors duration-300"
+                  />
+                  <circle 
+                    cx="10.5" 
+                    cy="21.5" 
+                    r="2" 
+                    className="stroke-[#1D493E] group-hover:stroke-white transition-colors duration-300"
+                  />
+                  <circle 
+                    cx="17.5" 
+                    cy="21.5" 
+                    r="2" 
+                    className="stroke-[#1D493E] group-hover:stroke-white transition-colors duration-300"
+                  />
                 </svg>
               </button>
               <button
@@ -615,21 +632,38 @@ export default function ProductDetailsPage() {
 
                   <button
                     onClick={() => addToCart(prod, 'shop')}
-                    className="w-full py-2.5 border border-[#1D493E] text-[#1D493E] hover:bg-[#1D493E] hover:text-white rounded-md font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-sm bg-white"
+                    className="w-full py-2.5 border border-[#1D493E] text-[#1D493E] hover:bg-[#1D493E] hover:text-white rounded-md font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-sm bg-white group"
                   >
                     <span>Add to cart</span>
                     <svg 
-                      className="w-3.5 h-3.5 shrink-0" 
-                      viewBox="0 0 24 24" 
+                      style={{ width: '28px', height: '28px' }} 
+                      viewBox="0 0 28 28" 
                       fill="none" 
-                      stroke="currentColor" 
-                      strokeWidth="2" 
+                      strokeWidth="1.75" 
                       strokeLinecap="round" 
                       strokeLinejoin="round"
+                      className="shrink-0"
                     >
-                      <path d="M3 5h2l.5 3" />
-                      <path d="M7.5 17h10l3.5-9H6" />
-                      <path d="M7.5 17L6 8" />
+                      <path 
+                        d="M4 5h3l2 11h11l2.5-9H14" 
+                        className="stroke-[#2B2B2B] group-hover:stroke-white transition-colors duration-300"
+                      />
+                      <path 
+                        d="M7.8 8.5H9.5" 
+                        className="stroke-[#2B2B2B] group-hover:stroke-white transition-colors duration-300"
+                      />
+                      <circle 
+                        cx="10.5" 
+                        cy="21.5" 
+                        r="2" 
+                        className="stroke-[#1D493E] group-hover:stroke-white transition-colors duration-300"
+                      />
+                      <circle 
+                        cx="17.5" 
+                        cy="21.5" 
+                        r="2" 
+                        className="stroke-[#1D493E] group-hover:stroke-white transition-colors duration-300"
+                      />
                     </svg>
                   </button>
                 </div>
@@ -709,21 +743,38 @@ export default function ProductDetailsPage() {
 
                     <button
                       onClick={() => addToCart(prod, 'shop')}
-                      className="w-full py-2.5 border border-[#1D493E] text-[#1D493E] hover:bg-[#1D493E] hover:text-white rounded-md font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-sm bg-white"
+                      className="w-full py-2.5 border border-[#1D493E] text-[#1D493E] hover:bg-[#1D493E] hover:text-white rounded-md font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-sm bg-white group"
                     >
                       <span>Add to cart</span>
                       <svg 
-                        className="w-3.5 h-3.5 shrink-0" 
-                        viewBox="0 0 24 24" 
+                        style={{ width: '28px', height: '28px' }} 
+                        viewBox="0 0 28 28" 
                         fill="none" 
-                        stroke="currentColor" 
-                        strokeWidth="2" 
+                        strokeWidth="1.75" 
                         strokeLinecap="round" 
                         strokeLinejoin="round"
+                        className="shrink-0"
                       >
-                        <path d="M3 5h2l.5 3" />
-                        <path d="M7.5 17h10l3.5-9H6" />
-                        <path d="M7.5 17L6 8" />
+                        <path 
+                          d="M4 5h3l2 11h11l2.5-9H14" 
+                          className="stroke-[#2B2B2B] group-hover:stroke-white transition-colors duration-300"
+                        />
+                        <path 
+                          d="M7.8 8.5H9.5" 
+                          className="stroke-[#2B2B2B] group-hover:stroke-white transition-colors duration-300"
+                        />
+                        <circle 
+                          cx="10.5" 
+                          cy="21.5" 
+                          r="2" 
+                          className="stroke-[#1D493E] group-hover:stroke-white transition-colors duration-300"
+                        />
+                        <circle 
+                          cx="17.5" 
+                          cy="21.5" 
+                          r="2" 
+                          className="stroke-[#1D493E] group-hover:stroke-white transition-colors duration-300"
+                        />
                       </svg>
                     </button>
                   </div>

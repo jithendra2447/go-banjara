@@ -95,25 +95,25 @@ export const Navbar: React.FC = () => {
             </div>
           </div>
 
-          {/* Right actions: Search Bar, Wishlist, Cart & Login */}
-          <div className="flex items-center gap-4 shrink-0">
+          {/* Right actions: Search Bar, Cart & Login */}
+          <div className="flex items-center justify-between gap-[24px] w-[405px] h-[47px] shrink-0">
             
             {/* Search Input Box */}
-            <div className="hidden md:flex items-center border rounded-lg px-3 py-1.5 w-64 bg-white border-slate-200 text-slate-700 placeholder-slate-400">
-              <svg className="w-4 h-4 mr-2 shrink-0 text-slate-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+            <div className="hidden md:flex items-center w-[215px] h-[47px] gap-[8px] rounded-[4px] p-[12px] bg-white border border-[#CCCCCC]">
+              <svg className="w-[20px] h-[20px] shrink-0 text-[#8D8D8D]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
               <input
                 type="text"
                 placeholder="Search by products"
-                className="w-full bg-transparent text-sm focus:outline-none font-sans font-medium placeholder-slate-400 text-slate-700"
+                className="w-[163px] h-[23px] bg-transparent text-[18px] leading-none focus:outline-none font-sans font-normal placeholder-[#8D8D8D] text-slate-800"
               />
             </div>
 
-            {/* Wishlist Button */}
+            {/* Wishlist Button (Hidden to match Figma mockup) */}
             <button
               onClick={() => setWishlistOpen(true)}
-              className="relative p-2.5 rounded-full transition-all duration-300 flex items-center justify-center hover:scale-105 cursor-pointer hover:bg-gray-50 text-[#1D493E]"
+              className="hidden relative p-2.5 rounded-full transition-all duration-300 items-center justify-center hover:scale-105 cursor-pointer hover:bg-gray-50 text-[#1D493E]"
               aria-label="Wishlist"
             >
               <Heart className="w-5.5 h-5.5" />
@@ -127,14 +127,14 @@ export const Navbar: React.FC = () => {
             {/* Shopping Cart Bag (Redesigned with SVG cart from Figma mockup) */}
             <button
               onClick={() => setCartOpen(true)}
-              className="relative p-2.5 rounded-full transition-all duration-300 flex items-center justify-center hover:scale-105 cursor-pointer hover:bg-gray-50 text-[#1D493E]"
+              className="relative p-2.5 rounded-full transition-all duration-300 flex items-center justify-center hover:scale-105 cursor-pointer hover:bg-gray-50 text-[#1D493E] h-[47px] w-[47px] shrink-0"
               aria-label="Shopping Cart"
             >
               <svg className="w-5.5 h-5.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
               </svg>
               {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 bg-[#FF5A36] text-white text-[9px] font-black rounded-full flex items-center justify-center border border-white">
+                <span className="absolute top-[2px] right-[2px] min-w-[18px] h-[18px] px-1 bg-[#FF5A36] text-white text-[9px] font-black rounded-full flex items-center justify-center border border-white">
                   {cartCount < 10 ? `0${cartCount}` : cartCount}
                 </span>
               )}
@@ -145,7 +145,7 @@ export const Navbar: React.FC = () => {
               <div className="relative">
                 <button
                   onClick={() => setIsProfileOpen(!isProfileOpen)}
-                  className="hidden sm:flex items-center gap-2 py-1.5 pl-2 pr-4 rounded-full border transition-all duration-300 text-xs font-black uppercase tracking-wider cursor-pointer border-gray-200 bg-gray-50 hover:bg-gray-100 text-[#1D493E]"
+                  className="hidden sm:flex items-center gap-2 py-1.5 pl-2 pr-4 rounded-full border transition-all duration-300 text-xs font-black uppercase tracking-wider cursor-pointer border-gray-200 bg-gray-50 hover:bg-gray-100 text-[#1D493E] h-[47px]"
                 >
                   {user.avatar ? (
                     <img src={user.avatar} alt={user.name} className="w-6 h-6 rounded-full object-cover border border-white/20" />
@@ -195,9 +195,9 @@ export const Navbar: React.FC = () => {
             ) : (
               <button
                 onClick={() => setAuthOpen(true)}
-                className="hidden sm:flex items-center gap-2 px-6 py-2.5 rounded-lg transition-all duration-300 text-xs font-bold uppercase tracking-wider cursor-pointer bg-[#1D493E] hover:bg-[#16372f] text-white"
+                className="hidden sm:flex items-center justify-center px-6 rounded-[8px] transition-all duration-300 cursor-pointer bg-[#1D493E] hover:bg-[#16372f] text-white h-[47px] shrink-0"
               >
-                <span>Login</span>
+                <span className="font-sans font-medium text-[16px] leading-none text-white w-[42px] h-[20px] flex items-center justify-center">Login</span>
               </button>
             )}
 

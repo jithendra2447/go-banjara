@@ -732,19 +732,27 @@ export default function Homepage() {
       <section className="bg-white relative z-10">
         <div className="max-w-[1440px] w-full mx-auto pt-[42px] pb-[24px] px-6 md:px-[80px] flex flex-col gap-[62px]">
           
-          <div className="text-center space-y-3">
-            <span className="inline-block text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-1 rounded-[4px] text-xs font-bold uppercase tracking-wider">
-              Most People Like
-            </span>
-            <h2 className="text-3xl md:text-[38px] font-sans font-black text-[#1D493E] leading-tight">
+          {/* Header Container (Width: 1280px, Height: 134px, Justify: space-between, Background: white, Border radius: 4px) */}
+          <div className="w-full md:w-[1280px] md:h-[134px] mx-auto flex flex-col justify-between items-center bg-white rounded-[4px] text-center">
+            {/* Tag (Width: 150px, Height: 18px, Font: Faktum 14px, Weight: 600, Color: #FF623E background, text uppercase, tracking 1.2px) */}
+            <div className="flex items-center justify-center h-[18px]">
+              <span className="inline-flex items-center justify-center text-white bg-[#FF623E] px-2.5 py-0.5 rounded-[4px] text-[14px] font-semibold uppercase tracking-[1.2px] leading-none">
+                Most People Like
+              </span>
+            </div>
+            
+            {/* Title (Width: 1280px, Height: 52px, Font: Fraunces Serif 42px, Weight: 600, Line-height: 100%) */}
+            <h2 className="w-full md:w-[1280px] md:h-[52px] flex items-center justify-center text-[32px] md:text-[42px] font-serif font-semibold text-[#1D493E] leading-none text-center">
               {pageContent.dealsTitle.includes("best deals") ? (
                 <>Today's <span className="text-[#FF5A36]">best deals</span> for you</>
               ) : (
                 pageContent.dealsTitle
               )}
             </h2>
-            <p className="text-gray-500 text-sm md:text-base font-semibold leading-relaxed max-w-2xl mx-auto">
-              {pageContent.dealsSub}
+            
+            {/* Subtitle (Width: 1280px, Height: 32px, Font: Faktum 24px, Weight: 500, Line-height: 32px, Color: #2B2B2B) */}
+            <p className="w-full md:w-[1280px] md:h-[32px] flex items-center justify-center text-[#2B2B2B] text-base md:text-[24px] md:leading-[32px] font-medium text-center">
+              A hand-picked map of the corners of India our community keeps coming back to
             </p>
           </div>
 

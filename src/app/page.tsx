@@ -1097,18 +1097,18 @@ export default function Homepage() {
               <span className="inline-flex items-center justify-center text-[#FF623E] bg-[#FF623E]/8 px-2.5 py-0.5 rounded-[4px] text-[14px] font-semibold uppercase tracking-[1.2px] leading-none self-start">
                 The Banjara Soul
               </span>
-              <h2 className="text-3xl md:text-[40px] font-serif font-black text-[#1D493E] leading-tight">
+              <h2 className="text-[62px] font-serif font-bold text-[#1D493E] leading-none md:w-[644px] h-[76px] flex items-center">
                 Meet Bonjo.
               </h2>
             </div>
-            <div className="flex flex-col gap-[32px] text-gray-600 text-sm md:text-base font-medium leading-relaxed">
+            <div className="flex flex-col gap-[32px] w-full md:w-[644px] md:h-[384px] text-[#2B2B2B]/80 text-[20px] font-sans font-medium leading-[32px]">
               <p>
                 Go Banjara was born from a frustration travel in India had become a checklist. Same cafés, same photo spots, same three-day Goa loop. We wanted something slower, closer to the ground, and honest about the places it visited.
               </p>
               <p>
                 So we built a hybrid platform: curated small-group journeys, a shop of honest gear made by artisans we know by name, and a community of travelers who share notes from the road instead of just photos.
               </p>
-              <p className="font-bold text-[#1D493E]">
+              <p>
                 Travel. Lifestyle. Community. Commerce. Under one roof because we don't think they were ever supposed to live apart.
               </p>
             </div>

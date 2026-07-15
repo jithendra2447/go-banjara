@@ -13,45 +13,45 @@ import { HOLIDAY_PACKAGES, HolidayPackage } from '@/data/packages';
 const TESTIMONIALS = [
   {
     rating: 5,
-    quote: "“The quality of the journal is incredible. It feels like a piece of art that I can actually take on my treks. Bonjo’s personality shines through the brand!”",
+    quote: "“Exploring Spiti Valley with Go Banjara was a life-changing journey. Flawless planning, cozy homestays, and a wonderful group of fellow travelers. Highly recommended!”",
     author: "Kiran Makwan",
     role: "Verified Wanderer",
     avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80"
   },
   {
     rating: 5,
-    quote: "“The quality of the journal is incredible. It feels like a piece of art that I can actually take on my treks. Bonjo’s personality shines through the brand!”",
-    author: "Kiran Makwan",
-    role: "Verified Wanderer",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80"
+    quote: "“The Kerala Backwaters & Munnar Hills trip was breathtaking. The coordination was flawless, and the local guides showed us hidden trails away from all the tourists!”",
+    author: "Priya Nair",
+    role: "Solo Backpacker",
+    avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80"
   },
   {
     rating: 5,
-    quote: "“The quality of the journal is incredible. It feels like a piece of art that I can actually take on my treks. Bonjo’s personality shines through the brand!”",
-    author: "Kiran Makwan",
-    role: "Verified Wanderer",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80"
+    quote: "“The Kashmir Road Trip package was pure magic. Extremely well-planned with authentic local homestays and off-the-beaten-path trails. Will book again!”",
+    author: "Rohan Sharma",
+    role: "Motorcycle Nomad",
+    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&h=150&q=80"
   },
   {
     rating: 5,
-    quote: "“The quality of the journal is incredible. It feels like a piece of art that I can actually take on my treks. Bonjo’s personality shines through the brand!”",
-    author: "Kiran Makwan",
-    role: "Verified Wanderer",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80"
+    quote: "“The Meghalaya backpacking trip exceeded all expectations. Exploring the living root bridges and walking behind waterfalls with Go Banjara's guides felt like a dream!”",
+    author: "Amit Verma",
+    role: "Adventure Enthusiast",
+    avatar: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=150&h=150&q=80"
   },
   {
     rating: 5,
-    quote: "“The quality of the journal is incredible. It feels like a piece of art that I can actually take on my treks. Bonjo’s personality shines through the brand!”",
-    author: "Kiran Makwan",
-    role: "Verified Wanderer",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80"
+    quote: "“Laka Glacier and Triund trek was my first ever trek. The trek leaders were so patient, encouraging, and made sure everyone made it to the top safely. Incredible vibe!”",
+    author: "Divya Hegde",
+    role: "Mountain Trekker",
+    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&h=150&q=80"
   },
   {
     rating: 5,
-    quote: "“The quality of the journal is incredible. It feels like a piece of art that I can actually take on my treks. Bonjo’s personality shines through the brand!”",
-    author: "Kiran Makwan",
-    role: "Verified Wanderer",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80"
+    quote: "“Rajasthan Heritage Tour was a perfect blend of slow-travel and rich historical exploration. Boutique heritage stays and tasting authentic local food was absolute bliss!”",
+    author: "Kabir Sen",
+    role: "Cultural Explorer",
+    avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=150&h=150&q=80"
   }
 ];
 

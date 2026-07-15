@@ -651,40 +651,6 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                     </div>
                   </div>
                 </div>
-
-                {/* FAQ accordions */}
-                <div className="space-y-4 border-t border-[#1D493E]/10 pt-8 text-left">
-                  <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-mono text-[#E05434] bg-[#FFF0EB] px-2.5 py-1 rounded font-black uppercase">
-                      Faqs
-                    </span>
-                  </div>
-                  <h3 className="text-2xl font-serif font-light text-[#1D493E]">
-                    Commonly asked <span className="text-[#E05434] font-serif font-normal">questions</span>
-                  </h3>
-                  <div className="space-y-3">
-                    {faqs.map((faq: any, idx: number) => {
-                      const isOpen = openFaqIdx === idx;
-                      return (
-                        <div key={idx} className="border border-[#1D493E]/10 rounded-2xl overflow-hidden bg-white shadow-xs">
-                          <button
-                            type="button"
-                            onClick={() => setOpenFaqIdx(isOpen ? null : idx)}
-                            className="w-full p-5 flex justify-between items-center text-left hover:bg-gray-50 transition cursor-pointer"
-                          >
-                            <span className="text-sm font-extrabold text-[#1D493E]">{faq.q}</span>
-                            <span className="text-sm font-bold text-[#1D493E]">{isOpen ? '−' : '+'}</span>
-                          </button>
-                          {isOpen && (
-                            <div className="p-5 border-t border-[#1D493E]/5 bg-[#FAF9F6] text-sm text-gray-600 font-semibold leading-relaxed">
-                              {faq.a}
-                            </div>
-                          )}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
               </div>
             )}
 
@@ -1150,6 +1116,50 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
           </div>
         </section>
       )}
+
+      {/* 11. FAQ ACCORDION SECTION (Matching Home/Shop page design) */}
+      <section className="w-full md:w-[1440px] bg-white rounded-[4px] py-16 md:px-[80px] px-6 flex flex-col gap-[32px] mx-auto border-t border-gray-100 relative z-10">
+        {/* Header (Width: 1280px, Height: 90px, Gap: 12px) */}
+        <div className="w-full md:w-[1280px] md:h-[90px] flex flex-col gap-[12px] justify-center text-left mx-auto">
+          <div className="w-[54px] h-[26px] flex items-center justify-center bg-[#FFEBE5] rounded-[4px]">
+            <span className="w-[46px] h-[18px] flex items-center justify-center font-sans font-semibold text-[14px] leading-none tracking-[1.2px] text-[#FF623E] uppercase font-mono">
+              FAQ'S
+            </span>
+          </div>
+          <h2 className="w-full md:w-[541px] md:h-[52px] flex items-center font-serif font-semibold text-[42px] leading-[1] tracking-[0px] text-[#2B2B2B]">
+            Frequently asked questions
+          </h2>
+        </div>
+
+        {/* Accordion List */}
+        <div className="w-full md:w-[1280px] border-t border-slate-200 divide-y divide-slate-200 mx-auto">
+          {faqs.map((faq: any, idx: number) => {
+            const isOpen = openFaqIdx === idx;
+            return (
+              <div key={idx} className="py-5 text-left border-b border-slate-200">
+                <button
+                  type="button"
+                  onClick={() => setOpenFaqIdx(isOpen ? null : idx)}
+                  className="w-full flex justify-between items-center text-left gap-4 cursor-pointer group"
+                >
+                  <span className="w-full md:w-[1196px] h-[32px] flex items-center font-sans font-medium text-[20px] leading-[32px] tracking-[0px] text-[#2B2B2B]">
+                    {faq.q}
+                  </span>
+                  <span className="text-xl font-medium text-[#1D493E] shrink-0 leading-none select-none">
+                    {isOpen ? '—' : '+'}
+                  </span>
+                </button>
+                {/* Expandable answer */}
+                {isOpen && (
+                  <p className="mt-3 w-full md:w-[1196px] font-sans font-medium text-[20px] leading-[32px] tracking-[0px] text-[#8D8D8D] animate-fade-in">
+                    {faq.a}
+                  </p>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </section>
 
       {/* Newsletter / Booking CTA Banner */}
       <section className="bg-[#FAF9F6] border-t border-[#1D493E]/10 py-16 text-center relative z-10">

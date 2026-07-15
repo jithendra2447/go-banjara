@@ -1012,31 +1012,70 @@ export default function HolidaysPortal() {
                         </span>
                       </div>
 
-                      {/* Title & Price inline */}
-                      <Link href={pkg.link || `/travel/package/${pkg.id}`} className="block group">
+                       {/* Title & Price Row */}
+                      <Link 
+                        href={pkg.link || `/travel/package/${pkg.id}`} 
+                        style={{ 
+                          width: "100%",
+                          height: "35px",
+                          display: "flex",
+                          flexDirection: "row",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                          textDecoration: "none",
+                        }}
+                        className="group"
+                      >
                         <h3 
                           style={{
+                            width: "178px",
+                            height: "30px",
                             fontFamily: "'Faktum', 'Outfit', sans-serif",
-                            fontSize: "24px",
                             fontWeight: 600,
-                            lineHeight: "120%",
+                            fontSize: "24px",
+                            lineHeight: "100%",
+                            letterSpacing: "0px",
                             color: "rgba(43, 43, 43, 1)",
                             margin: 0,
+                            display: "flex",
+                            alignItems: "center",
                           }}
                         >
-                          {pkg.name} <span style={{ marginLeft: "8px", fontWeight: 600 }}>₹{pkg.price.toLocaleString('en-IN')}/Person</span>
+                          {pkg.name}
                         </h3>
+                        <span 
+                          style={{
+                            width: "213px",
+                            height: "35px",
+                            fontFamily: "'Faktum', 'Outfit', sans-serif",
+                            fontWeight: 600,
+                            fontSize: "28px",
+                            lineHeight: "100%",
+                            letterSpacing: "0px",
+                            color: "rgba(43, 43, 43, 1)",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "flex-end",
+                          }}
+                        >
+                          ₹{pkg.price.toLocaleString('en-IN')}/Person
+                        </span>
                       </Link>
 
                       {/* Description */}
                       <p 
                         style={{
+                          width: "100%",
+                          maxWidth: "405.33px",
+                          height: "96px",
                           fontFamily: "'Faktum', 'Outfit', sans-serif",
                           fontWeight: 500,
-                          fontSize: "16px",
-                          lineHeight: "150%",
+                          fontSize: "20px",
+                          lineHeight: "32px",
+                          letterSpacing: "0px",
                           color: "rgba(141, 141, 141, 1)",
                           margin: 0,
+                          overflow: "hidden",
                         }}
                       >
                         {pkg.description}

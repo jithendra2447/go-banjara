@@ -233,8 +233,21 @@ export const Footer: React.FC = () => {
                 type="email"
                 required
                 placeholder="Enter your email address"
-                style={{ flex: 1, background: "transparent", border: "none", outline: "none", fontSize: "14px", color: "#1a2e29", fontFamily: "'Faktum','Outfit',sans-serif", paddingLeft: "8px" }}
-                className="placeholder-slate-400"
+                style={{
+                  flex: 1,
+                  background: "transparent",
+                  border: "none",
+                  outline: "none",
+                  fontFamily: "'Faktum','Outfit',sans-serif",
+                  fontWeight: 500,
+                  fontSize: "20px",
+                  lineHeight: "100%",
+                  letterSpacing: "0px",
+                  color: "#1a2e29",
+                  paddingLeft: "8px",
+                  verticalAlign: "middle",
+                }}
+                className="placeholder-[rgba(141,141,141,1)]"
               />
               <button
                 type="submit"

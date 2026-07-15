@@ -123,28 +123,22 @@ export const Footer: React.FC = () => {
         <div style={{ width: "439px", display: "flex", flexDirection: "column", gap: "12px" }}>
           <h4 style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "26px", letterSpacing: "-0.1px", color: "rgba(255,255,255,0.8)", margin: 0 }}>Contact us</h4>
           <ul style={{ display: "flex", flexDirection: "column", gap: "12px", listStyle: "none", padding: 0, margin: 0 }}>
-            <li className="flex items-center gap-2">
-              <div style={{ width: "42px", height: "42px", background: "rgba(29,73,62,1)", borderRadius: "10px", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                <img src="/icon-location.png" alt="Location" style={{ width: "22px", height: "22px" }} />
-              </div>
+            <li className="flex items-center gap-3">
+              <img src="/icon-location.png" alt="Location" style={{ width: "42px", height: "42px", flexShrink: 0 }} />
               <span style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(255,255,255,1)" }}>HITEC City, Hyderabad, Telangana, India</span>
             </li>
-            <li className="flex items-center gap-2">
+            <li className="flex items-center gap-3">
               <div style={{ width: "42px", height: "42px", background: "rgba(29,73,62,1)", borderRadius: "10px", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                 <img src="/icon-email.png" alt="Email" style={{ width: "22px", height: "22px" }} />
               </div>
               <a href="mailto:services@gobanjara.com" style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(255,255,255,1)" }} className="hover:text-[#FFF080] transition-colors">services@gobanjara.com</a>
             </li>
-            <li className="flex items-center gap-2">
-              <div style={{ width: "42px", height: "42px", background: "rgba(29,73,62,1)", borderRadius: "10px", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                <img src="/icon-phone.png" alt="Phone" style={{ width: "22px", height: "22px" }} />
-              </div>
+            <li className="flex items-center gap-3">
+              <img src="/icon-phone.png" alt="Phone" style={{ width: "42px", height: "42px", flexShrink: 0 }} />
               <a href="tel:+910123456789" style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(255,255,255,1)" }} className="hover:text-[#FFF080] transition-colors">+91 0123456789</a>
             </li>
-            <li className="flex items-center gap-2">
-              <div style={{ width: "42px", height: "42px", background: "rgba(29,73,62,1)", borderRadius: "10px", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                <img src="/icon-clock.png" alt="Hours" style={{ width: "22px", height: "22px" }} />
-              </div>
+            <li className="flex items-center gap-3">
+              <img src="/icon-clock.png" alt="Hours" style={{ width: "42px", height: "42px", flexShrink: 0 }} />
               <span style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(255,255,255,1)" }}>Mon–Sat, 10:00–19:00 IST</span>
             </li>
           </ul>

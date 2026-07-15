@@ -71,13 +71,13 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
   };
 
   return (
-    <div className="bg-white rounded-[4px] w-full md:h-[627.68px] flex flex-col justify-between gap-[24px] hover:shadow-xs transition duration-300 overflow-hidden">
+    <div className="bg-white rounded-[4px] w-full h-[580px] md:h-[627.68px] flex flex-col justify-between gap-[20px] md:gap-[24px] hover:shadow-xs transition duration-300 overflow-hidden border border-gray-100">
       {/* Image Container with Dots (Width: 339px, Height: 254px, Radius: 4px) */}
-      <div className="relative w-full md:h-[254px] rounded-[4px] overflow-hidden shrink-0">
+      <div className="relative w-full h-[200px] md:h-[254px] rounded-[4px] overflow-hidden shrink-0 bg-gray-50 flex items-center justify-center">
         <img 
           src={images[activeImgIdx]} 
           alt={product.name} 
-          className="w-full h-full object-cover"
+          className="w-full h-full object-contain"
           style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
         />
         {/* Dots indicator */}
@@ -103,7 +103,7 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
       </div>
 
       {/* Details Block (Width: 339px, Height: 350px) */}
-      <div className="w-full md:h-[349.68px] flex flex-col justify-between text-left">
+      <div className="w-full h-[320px] md:h-[349.68px] flex flex-col justify-between text-left p-3 md:p-0">
         {/* Category Tag (Height: 28px, Radius: 4px, Padding: 4px vertical, 8px horizontal, Background: #FF623E/8, Text: #FF623E) */}
         <span className="inline-flex items-center justify-center h-[28px] rounded-[4px] px-[8px] py-[4px] text-[14px] font-sans font-medium text-[#FF623E] bg-[#FF623E]/8 self-start">
           {product.category}

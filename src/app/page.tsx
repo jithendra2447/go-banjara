@@ -531,7 +531,7 @@ export default function Homepage() {
                         <span className="bg-gray-100 text-gray-600 px-2.5 py-0.5 rounded-[4px] text-xs font-bold">{pkg1.durationDays} days</span>
                       </div>
                       <div className="flex justify-between items-baseline gap-4">
-                        <h3 className="text-2xl md:text-[32px] font-sans font-bold text-[#1D493E] leading-tight">{pkg1.name}</h3>
+                        <h3 className="text-2xl md:text-[32px] font-sans font-bold text-[#1D493E] leading-tight truncate flex-1" title={pkg1.name}>{pkg1.name}</h3>
                         <span className="text-xl md:text-[24px] font-sans font-bold text-[#1D493E] shrink-0">₹{(pkg1.price ?? 0).toLocaleString('en-IN')}/Person</span>
                       </div>
                       <p className="font-sans font-medium text-[20px] leading-[32px] text-[#8D8D8D] w-full md:w-[616px] h-[64px] overflow-hidden line-clamp-2 shrink-0">
@@ -618,7 +618,7 @@ export default function Homepage() {
                           <span className="bg-gray-100 text-gray-600 px-2.5 py-0.5 rounded-[4px] text-xs font-bold">{pkg.durationDays} days</span>
                         </div>
                         <div className="flex justify-between items-baseline gap-4">
-                          <h3 className="text-2xl md:text-[32px] font-sans font-bold text-[#1D493E] leading-tight">{pkg.name}</h3>
+                          <h3 className="text-2xl md:text-[32px] font-sans font-bold text-[#1D493E] leading-tight truncate flex-1" title={pkg.name}>{pkg.name}</h3>
                           <span className="text-xl md:text-[24px] font-sans font-bold text-[#1D493E] shrink-0">₹{(pkg.price ?? 0).toLocaleString('en-IN')}/Person</span>
                         </div>
                         <p className="font-sans font-medium text-[20px] leading-[32px] text-[#8D8D8D] w-full md:w-[616px] h-[64px] overflow-hidden line-clamp-2 shrink-0">

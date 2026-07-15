@@ -274,8 +274,8 @@ export default function HolidaysPortal() {
   return (
     <div className="min-h-screen bg-white text-[#1D493E] font-sans antialiased pb-20 relative">
       
-      {/* 1. AVAILABLE PACKAGES SECTION (Expanded Container Width: max-w-7xl with px-8 md:px-16) */}
-      <section className="max-w-7xl mx-auto px-8 md:px-16 pt-16 pb-12 space-y-10">
+      {/* 1. AVAILABLE PACKAGES SECTION (Expanded Container Width: max-w-[1440px] with px-5 md:px-[80px]) */}
+      <section className="max-w-[1440px] mx-auto px-5 md:px-[80px] pt-16 pb-12 space-y-10">
         
         {/* Header Title block (Increased font sizes) */}
         <div className="text-center space-y-3">
@@ -710,9 +710,9 @@ export default function HolidaysPortal() {
 
       </section>
 
-      {/* 2. HOW TO BOOK YOUR TOUR SECTION (max-w-7xl) */}
+      {/* 2. HOW TO BOOK YOUR TOUR SECTION (max-w-[1440px]) */}
       <section className="bg-white border-t border-gray-200 py-24 relative z-10">
-        <div className="max-w-7xl mx-auto px-8 md:px-16 space-y-16">
+        <div className="max-w-[1440px] mx-auto px-5 md:px-[80px] space-y-16">
           
           <div className="text-center space-y-3">
             <span className="inline-block text-[#FF623E] font-extrabold text-xs uppercase tracking-[0.2em]">
@@ -785,9 +785,9 @@ export default function HolidaysPortal() {
         </div>
       </section>
 
-      {/* 3. CAPTURED MEMORIES TESTIMONIALS SECTION (max-w-7xl) */}
+      {/* 3. CAPTURED MEMORIES TESTIMONIALS SECTION (max-w-[1440px]) */}
       <section className="bg-white border-t border-gray-200 py-24 relative z-10">
-        <div className="max-w-7xl mx-auto px-8 md:px-16 space-y-16">
+        <div className="max-w-[1440px] mx-auto px-5 md:px-[80px] space-y-16">
           
           <div className="text-center space-y-3">
             <span className="inline-block text-[#FF623E] font-bold text-xs uppercase tracking-widest">

@@ -1096,38 +1096,38 @@ export default function HolidaysPortal() {
                         boxSizing: "border-box"
                       }}
                     >
-                      <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                        <div style={{ width: "40px", height: "40px", borderRadius: "8px", background: "rgba(29, 73, 62, 0.05)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                          <MapPin style={{ width: "16px", height: "16px", color: "rgba(29, 73, 62, 1)" }} />
+                      <div style={{ display: "flex", alignItems: "center", gap: "12px", height: "56px", boxSizing: "border-box" }}>
+                        <div style={{ width: "46px", height: "46px", borderRadius: "4px", background: "rgba(246, 243, 238, 1)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                          <MapPin style={{ width: "16px", height: "16px", color: "rgba(43, 43, 43, 1)" }} />
                         </div>
-                        <span style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, fontSize: "14px", color: "rgba(43, 43, 43, 1)", lineHeight: "120%" }}>
+                        <span style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, fontSize: "20px", color: "rgba(43, 43, 43, 1)", lineHeight: "28px", display: "inline-block", verticalAlign: "middle" }}>
                           Starts from {pkg.startPoint || 'Srinagar'}
                         </span>
                       </div>
                       
-                      <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                        <div style={{ width: "40px", height: "40px", borderRadius: "8px", background: "rgba(29, 73, 62, 0.05)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                          <Users style={{ width: "16px", height: "16px", color: "rgba(29, 73, 62, 1)" }} />
+                      <div style={{ display: "flex", alignItems: "center", gap: "12px", height: "56px", boxSizing: "border-box" }}>
+                        <div style={{ width: "46px", height: "46px", borderRadius: "4px", background: "rgba(246, 243, 238, 1)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                          <Users style={{ width: "16px", height: "16px", color: "rgba(43, 43, 43, 1)" }} />
                         </div>
-                        <span style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, fontSize: "14px", color: "rgba(43, 43, 43, 1)", lineHeight: "120%" }}>
+                        <span style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, fontSize: "20px", color: "rgba(43, 43, 43, 1)", lineHeight: "28px", display: "inline-block", verticalAlign: "middle" }}>
                           {pkg.groupType || 'Curated group Trip'}
                         </span>
                       </div>
 
-                      <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                        <div style={{ width: "40px", height: "40px", borderRadius: "8px", background: "rgba(29, 73, 62, 0.05)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                          <ArrowUpRight style={{ width: "16px", height: "16px", color: "rgba(29, 73, 62, 1)" }} />
+                      <div style={{ display: "flex", alignItems: "center", gap: "12px", height: "56px", boxSizing: "border-box" }}>
+                        <div style={{ width: "46px", height: "46px", borderRadius: "4px", background: "rgba(246, 243, 238, 1)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                          <ArrowUpRight style={{ width: "16px", height: "16px", color: "rgba(43, 43, 43, 1)" }} />
                         </div>
-                        <span style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, fontSize: "14px", color: "rgba(43, 43, 43, 1)", lineHeight: "120%" }}>
+                        <span style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, fontSize: "20px", color: "rgba(43, 43, 43, 1)", lineHeight: "28px", display: "inline-block", verticalAlign: "middle" }}>
                           {pkg.difficulty || 'Moderate'} Difficulty
                         </span>
                       </div>
 
-                      <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                        <div style={{ width: "40px", height: "40px", borderRadius: "8px", background: "rgba(29, 73, 62, 0.05)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                          <Calendar style={{ width: "16px", height: "16px", color: "rgba(29, 73, 62, 1)" }} />
+                      <div style={{ display: "flex", alignItems: "center", gap: "12px", height: "56px", boxSizing: "border-box" }}>
+                        <div style={{ width: "46px", height: "46px", borderRadius: "4px", background: "rgba(246, 243, 238, 1)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                          <Calendar style={{ width: "16px", height: "16px", color: "rgba(43, 43, 43, 1)" }} />
                         </div>
-                        <span style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, fontSize: "14px", color: "rgba(43, 43, 43, 1)", lineHeight: "120%" }}>
+                        <span style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, fontSize: "20px", color: "rgba(43, 43, 43, 1)", lineHeight: "28px", display: "inline-block", verticalAlign: "middle" }}>
                           Next: {pkg.nextDeparture || 'Aug, 2026'}
                         </span>
                       </div>

@@ -1016,7 +1016,7 @@ export default function HolidaysPortal() {
                       <Link href={pkg.link || `/travel/package/${pkg.id}`} className="block group">
                         <h3 
                           style={{
-                            fontFamily: "'Fraunces', serif",
+                            fontFamily: "'Faktum', 'Outfit', sans-serif",
                             fontSize: "24px",
                             fontWeight: 600,
                             lineHeight: "120%",

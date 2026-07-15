@@ -1132,7 +1132,7 @@ export default function HolidaysPortal() {
                     >
                       <div style={{ display: "flex", alignItems: "center", gap: "12px", height: "56px", boxSizing: "border-box" }}>
                         <div style={{ width: "46px", height: "46px", borderRadius: "4px", background: "rgba(246, 243, 238, 1)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                          <MapPin style={{ width: "16px", height: "16px", color: "rgba(43, 43, 43, 1)" }} />
+                          <MapPin style={{ width: "28px", height: "28px", color: "rgba(43, 43, 43, 1)" }} />
                         </div>
                         <span style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, fontSize: "20px", color: "rgba(43, 43, 43, 1)", lineHeight: "28px", display: "inline-block", verticalAlign: "middle" }}>
                           Starts from {pkg.startPoint || 'Srinagar'}
@@ -1141,7 +1141,7 @@ export default function HolidaysPortal() {
                       
                       <div style={{ display: "flex", alignItems: "center", gap: "12px", height: "56px", boxSizing: "border-box" }}>
                         <div style={{ width: "46px", height: "46px", borderRadius: "4px", background: "rgba(246, 243, 238, 1)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                          <Users style={{ width: "16px", height: "16px", color: "rgba(43, 43, 43, 1)" }} />
+                          <Users style={{ width: "28px", height: "28px", color: "rgba(43, 43, 43, 1)" }} />
                         </div>
                         <span style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, fontSize: "20px", color: "rgba(43, 43, 43, 1)", lineHeight: "28px", display: "inline-block", verticalAlign: "middle" }}>
                           {pkg.groupType || 'Curated group Trip'}
@@ -1150,7 +1150,7 @@ export default function HolidaysPortal() {
 
                       <div style={{ display: "flex", alignItems: "center", gap: "12px", height: "56px", boxSizing: "border-box" }}>
                         <div style={{ width: "46px", height: "46px", borderRadius: "4px", background: "rgba(246, 243, 238, 1)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                          <ArrowUpRight style={{ width: "16px", height: "16px", color: "rgba(43, 43, 43, 1)" }} />
+                          <ArrowUpRight style={{ width: "28px", height: "28px", color: "rgba(43, 43, 43, 1)" }} />
                         </div>
                         <span style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, fontSize: "20px", color: "rgba(43, 43, 43, 1)", lineHeight: "28px", display: "inline-block", verticalAlign: "middle" }}>
                           {pkg.difficulty || 'Moderate'} Difficulty
@@ -1159,7 +1159,7 @@ export default function HolidaysPortal() {
 
                       <div style={{ display: "flex", alignItems: "center", gap: "12px", height: "56px", boxSizing: "border-box" }}>
                         <div style={{ width: "46px", height: "46px", borderRadius: "4px", background: "rgba(246, 243, 238, 1)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                          <Calendar style={{ width: "16px", height: "16px", color: "rgba(43, 43, 43, 1)" }} />
+                          <Calendar style={{ width: "28px", height: "28px", color: "rgba(43, 43, 43, 1)" }} />
                         </div>
                         <span style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, fontSize: "20px", color: "rgba(43, 43, 43, 1)", lineHeight: "28px", display: "inline-block", verticalAlign: "middle" }}>
                           Next: {pkg.nextDeparture || 'Aug, 2026'}

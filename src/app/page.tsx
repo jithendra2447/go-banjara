@@ -407,7 +407,7 @@ export default function Homepage() {
       </section>
 
       {/* 2. METRICS WIDGET BAR */}
-      <section style={{ background: "rgba(255,255,255,1)", borderBottom: "1px solid #e5e7eb" }} className="relative z-30 flex items-center w-full md:h-[145px]">
+      <section style={{ background: "rgba(255,255,255,1)" }} className="relative z-30 flex items-center w-full md:h-[145px]">
         <div
           className="w-full max-w-[1440px] mx-auto flex flex-col md:flex-row items-center md:divide-x md:divide-gray-200"
           style={{ paddingTop: "24px", paddingBottom: "24px", paddingLeft: "80px", paddingRight: "80px", justifyContent: "space-between" }}

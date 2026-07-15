@@ -175,8 +175,8 @@ export default function ShopPage() {
       {/* Main Sections Container (Width: 1440px, Side Padding: 80px) */}
       <main className="w-full max-w-[1440px] mx-auto mt-0 px-6 md:px-[80px]">
         
-        {/* Main 4x2 product grid directly below the EXPERIENCE THE SHOPPING header (Gap inside section: 62px, Padding Tightened) */}
-        <section className="bg-white pt-[32px] pb-[24px] flex flex-col gap-[62px] w-full">
+        {/* Main 4x2 product grid directly below the EXPERIENCE THE SHOPPING header (Gap inside section: 52px, Padding Tightened) */}
+        <section className="bg-white pt-[32px] pb-[24px] flex flex-col gap-[52px] w-full">
           {renderProductGrid(mainGridProducts.slice(0, 4))}
           {renderProductGrid(mainGridProducts.slice(4, 8))}
 
@@ -217,7 +217,7 @@ export default function ShopPage() {
         </section>
 
         {/* Section 2: Travels Essentials (Padding: pt-[42px] pb-[24px]) */}
-        <section className="bg-white pt-[42px] pb-[24px] flex flex-col gap-[62px] w-full">
+        <section className="bg-white pt-[42px] pb-[24px] flex flex-col gap-[52px] w-full">
           {/* Header */}
           <div className="text-left space-y-2.5">
             <span className="inline-block text-[9px] font-black uppercase tracking-[0.15em] text-[#FF5B37] bg-[#FFEBE5] px-2.5 py-1 rounded-sm">
@@ -271,7 +271,7 @@ export default function ShopPage() {
         </section>
 
         {/* Section 4: 25% to 50% Discount Sale (Padding: pt-[42px] pb-[24px]) */}
-        <section className="bg-white pt-[42px] pb-[24px] flex flex-col gap-[62px] w-full">
+        <section className="bg-white pt-[42px] pb-[24px] flex flex-col gap-[52px] w-full">
           {/* Header */}
           <div className="text-left space-y-2.5">
             <span className="inline-block text-[9px] font-black uppercase tracking-[0.15em] text-[#FF5B37] bg-[#FFEBE5] px-2.5 py-1 rounded-sm">

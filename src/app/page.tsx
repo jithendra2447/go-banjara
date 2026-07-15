@@ -649,11 +649,11 @@ export default function Homepage() {
               })()}
             </div>
 
-            {/* Centered Destinations Footer Link (Figma Boxed style: 331x68px, padding 18x36px, radius 4px) */}
-            <div className="flex justify-center">
+            {/* Centered Destinations Footer Link (Figma style: 331x68px, padding 18x36px, radius 4px, NO BORDER) */}
+            <div className="flex justify-center mt-8 mb-6">
               <Link 
                 href="/travel" 
-                className="inline-flex items-center justify-center w-[331px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[4px] border-[1.75px] border-[#1D493E] text-[#1D493E] hover:bg-[#1D493E] hover:text-white transition-all duration-300 cursor-pointer group"
+                className="inline-flex items-center justify-center w-[331px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[4px] bg-transparent text-[#1D493E] hover:opacity-80 transition-all duration-300 cursor-pointer group"
               >
                 <span className="w-[219px] h-[25px] flex items-center justify-center font-sans font-medium text-[20px] leading-none">
                   Explore all destinations

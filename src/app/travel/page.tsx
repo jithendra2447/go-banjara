@@ -967,7 +967,17 @@ export default function HolidaysPortal() {
                   >
                     
                     {/* Upper block with badges, title, description */}
-                    <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+                    <div 
+                      style={{ 
+                        width: "100%",
+                        maxWidth: "405.33px",
+                        height: "183px",
+                        display: "flex", 
+                        flexDirection: "column", 
+                        gap: "12px",
+                        boxSizing: "border-box"
+                      }}
+                    >
                       {/* Category & Duration Row */}
                       <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
                         <span 
@@ -1036,11 +1046,15 @@ export default function HolidaysPortal() {
                     {/* 2x2 Details Grid matching Figma spec */}
                     <div 
                       style={{ 
+                        width: "100%",
+                        maxWidth: "405.33px",
+                        height: "136px",
                         display: "grid", 
                         gridTemplateColumns: "repeat(2, 1fr)", 
-                        gap: "16px", 
+                        alignContent: "space-between",
                         paddingTop: "16px",
-                        borderTop: "1px solid rgba(141, 141, 141, 0.15)" 
+                        borderTop: "1px solid rgba(141, 141, 141, 0.15)",
+                        boxSizing: "border-box"
                       }}
                     >
                       <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>

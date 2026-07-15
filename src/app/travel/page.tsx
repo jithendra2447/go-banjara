@@ -274,9 +274,26 @@ export default function HolidaysPortal() {
   return (
     <div className="min-h-screen bg-white text-[#1D493E] font-sans antialiased pb-20 relative">
       
-      {/* 1. AVAILABLE PACKAGES SECTION (Expanded Container Width: max-w-[1440px] with px-5 md:px-[80px]) */}
-      <section className="max-w-[1440px] mx-auto px-5 md:px-[80px] pt-16 pb-12 space-y-10">
-        
+      {/* Header Section wrapper — styled to match exact Figma specifications */}
+      <div
+        style={{
+          width: "100%",
+          maxWidth: "1440px",
+          height: "220px",
+          paddingTop: "62px",
+          paddingBottom: "24px",
+          paddingLeft: "80px",
+          paddingRight: "80px",
+          gap: "10px",
+          background: "rgba(255, 255, 255, 1)",
+          boxSizing: "border-box",
+          margin: "0 auto",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         {/* Header Title block — styled to match exact Figma specifications */}
         <div 
           style={{
@@ -341,6 +358,10 @@ export default function HolidaysPortal() {
             Curated journeys for the modern nomad, designed to push boundaries and discover India's hidden heart
           </p>
         </div>
+      </div>
+
+      {/* 1. AVAILABLE PACKAGES CONTENT SECTION */}
+      <section className="max-w-[1440px] mx-auto px-5 md:px-[80px] pt-10 pb-12 space-y-10">
 
         {/* SEARCH WIDGET CARD (Spans full width, styled to match exact Figma specs) */}
         <div 

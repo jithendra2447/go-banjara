@@ -51,44 +51,43 @@ export const Navbar: React.FC = () => {
             </Link>
 
             {/* Desktop Menu Links */}
-            <div className="hidden xl:flex items-center justify-between gap-[12px] w-[605px] h-[49px]">
+            <div className="hidden xl:flex items-center justify-between w-[605px] h-[49px]">
               {navLinks.map((link) => {
                 const active = isActive(link.path);
-                const activeClass = active
-                  ? 'bg-[#1D493E]/8 text-[#1D493E] px-3.5 py-2 rounded-lg font-bold text-[20px] transition-all font-sans'
-                  : 'text-[#535352] hover:text-[#1D493E] px-3.5 py-2 font-semibold text-[20px] transition-all font-sans';
-
+                
+                // Determine exact width of wrapper container for each menu item
+                let wrapperWidthClass = 'w-[119px]';
+                let contentWidthClass = 'w-[95px]';
                 if (link.name === 'Travel Packages') {
-                  return (
-                    <div
-                      key={link.path}
-                      className="relative h-full flex items-center"
-                      onMouseEnter={() => setIsTravelHovered(true)}
-                      onMouseLeave={() => setIsTravelHovered(false)}
-                    >
-                      <Link href={link.path} className={activeClass}>
-                        <span>{link.name}</span>
-                      </Link>
-                    </div>
-                  );
+                  wrapperWidthClass = 'w-[174px]';
+                  contentWidthClass = 'w-[150px]';
+                } else if (link.name === 'Shop') {
+                  wrapperWidthClass = 'w-[86px]';
+                  contentWidthClass = 'w-[62px]';
+                } else if (link.name === 'About us') {
+                  wrapperWidthClass = 'w-[119px]';
+                  contentWidthClass = 'w-[95px]';
+                } else if (link.name === 'Blogs') {
+                  wrapperWidthClass = 'w-[87px]';
+                  contentWidthClass = 'w-[63px]';
+                } else if (link.name === 'Contact us') {
+                  wrapperWidthClass = 'w-[139px]';
+                  contentWidthClass = 'w-[115px]';
                 }
-                if (link.name === 'Shop') {
-                  return (
-                    <div
-                      key={link.path}
-                      className="relative h-full flex items-center"
-                      onMouseEnter={() => setIsShopHovered(true)}
-                      onMouseLeave={() => setIsShopHovered(false)}
-                    >
-                      <Link href={link.path} className={activeClass}>
-                        <span>{link.name}</span>
-                      </Link>
-                    </div>
-                  );
-                }
+
+                const activeClass = active
+                  ? 'bg-[#1D493E]/8 text-[#1D493E]'
+                  : 'text-[#535352] hover:text-[#1D493E] hover:bg-gray-50';
+
                 return (
-                  <Link key={link.path} href={link.path} className={activeClass}>
-                    <span>{link.name}</span>
+                  <Link
+                    key={link.path}
+                    href={link.path}
+                    className={`flex items-center justify-center p-[12px] h-[49px] rounded-[4px] transition-all duration-300 font-sans font-medium text-[20px] leading-none tracking-[-0.2px] ${wrapperWidthClass} ${activeClass}`}
+                  >
+                    <span className={`flex items-center justify-center h-[25px] text-center ${contentWidthClass}`}>
+                      {link.name}
+                    </span>
                   </Link>
                 );
               })}

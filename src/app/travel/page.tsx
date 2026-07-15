@@ -779,7 +779,7 @@ export default function HolidaysPortal() {
                       style={{ 
                         fontFamily: "'Faktum', 'Outfit', sans-serif",
                         color: "rgba(141, 141, 141, 1)",
-                        fontSize: "14px",
+                        fontSize: "18px",
                         fontWeight: 500,
                         paddingLeft: "16px",
                         paddingTop: "12px",
@@ -848,7 +848,7 @@ export default function HolidaysPortal() {
                       style={{ 
                         fontFamily: "'Faktum', 'Outfit', sans-serif",
                         color: "rgba(141, 141, 141, 1)",
-                        fontSize: "14px",
+                        fontSize: "18px",
                         fontWeight: 500,
                         paddingLeft: "16px",
                         paddingTop: "12px",
@@ -919,7 +919,7 @@ export default function HolidaysPortal() {
                       style={{ 
                         fontFamily: "'Faktum', 'Outfit', sans-serif",
                         color: "rgba(141, 141, 141, 1)",
-                        fontSize: "14px",
+                        fontSize: "18px",
                         fontWeight: 500,
                         paddingLeft: "16px",
                         paddingTop: "12px",

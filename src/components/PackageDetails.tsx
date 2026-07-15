@@ -6,7 +6,8 @@ import { useParams, useRouter } from 'next/navigation';
 import {
   Calendar, Users, Check, ShoppingBag,
   Star, Compass, MapPin, Tag,
-  Sun, Wind, ArrowLeft, Lock, ArrowUpRight
+  Sun, Wind, ArrowLeft, Lock, ArrowUpRight,
+  ChevronDown
 } from 'lucide-react';
 import { useCart } from '@/components/providers';
 import { AmbientVibe } from '@/components/AmbientVibe';
@@ -191,7 +192,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
         price: pkg.price,
         image: pkg.images?.[0] || pkg.image,
       };
-      addToCart(finalItem, 'travel', bookingDate, enquiryGuests);
+      addToCart(finalItem, 'travel', bookingDate, Number(enquiryGuests) || 1);
       setBookedSuccess(true);
       setTimeout(() => setBookedSuccess(false), 3000);
     }, 2000);
@@ -1436,9 +1437,6 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                 </form>
               </>
             )}
-          </div>
-        </div>
-      )}    )}
           </div>
         </div>
       )}

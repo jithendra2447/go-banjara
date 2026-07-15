@@ -747,24 +747,45 @@ export default function HolidaysPortal() {
 
             {showFiltersDropdown && (
               <div 
-                style={{
-                  boxShadow: "0px 4px 12px 0px rgba(0, 0, 0, 0.25)",
-                  borderRadius: "8px",
-                  border: "1px solid rgba(226, 232, 240, 1)",
-                  backgroundColor: "#FFFFFF",
-                  padding: "20px 24px",
-                  boxSizing: "border-box",
-                }}
-                className="absolute right-0 top-full mt-2 z-40 text-left flex flex-col justify-between animate-in fade-in slide-in-from-top-2 duration-300 w-screen max-w-[912px] md:w-[912px] md:h-[286px] overflow-y-auto md:overflow-hidden bg-white"
+                className="absolute right-0 top-full mt-2 z-40 text-left flex flex-col animate-in fade-in slide-in-from-top-2 duration-300 w-screen max-w-[912px] md:w-[912px] bg-transparent"
               >
-                {/* Columns Container */}
-                <div className="flex flex-col md:flex-row gap-6 md:gap-0 justify-between items-stretch flex-1">
-                  
+                {/* 3 Columns Row */}
+                <div 
+                  style={{
+                    boxShadow: "0px 4px 12px 0px rgba(0, 0, 0, 0.25)",
+                    borderRadius: "4px",
+                  }}
+                  className="flex flex-col md:flex-row items-stretch w-full h-auto md:h-[286px] bg-transparent overflow-hidden"
+                >
                   {/* Column 1: Duration */}
-                  <div className="flex-1 md:pr-6 space-y-3">
+                  <div 
+                    style={{
+                      width: "304px",
+                      height: "286px",
+                      padding: "8px",
+                      background: "#FFFFFF",
+                      borderColor: "rgba(204, 204, 204, 0.54)",
+                      borderStyle: "solid",
+                      borderWidth: "1px 0px 1px 1px",
+                      borderTopLeftRadius: "4px",
+                      borderBottomLeftRadius: "4px",
+                      boxSizing: "border-box",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "4px",
+                    }}
+                  >
                     <span 
-                      style={{ fontFamily: "'Faktum', 'Outfit', sans-serif" }} 
-                      className="text-xs font-semibold text-[#8D8D8D] tracking-wide block"
+                      style={{ 
+                        fontFamily: "'Faktum', 'Outfit', sans-serif",
+                        color: "rgba(141, 141, 141, 1)",
+                        fontSize: "14px",
+                        fontWeight: 500,
+                        paddingLeft: "16px",
+                        paddingTop: "12px",
+                        paddingBottom: "4px",
+                      }} 
+                      className="tracking-wide block"
                     >
                       Duration
                     </span>
@@ -779,7 +800,7 @@ export default function HolidaysPortal() {
                                 prev.includes(dur) ? prev.filter(d => d !== dur) : [...prev, dur]
                               );
                             }}
-                            className={`flex items-center gap-3 px-2 py-1.5 rounded-[4px] cursor-pointer transition ${
+                            className={`flex items-center gap-3 px-4 py-2.5 rounded-[4px] cursor-pointer transition ${
                               isChecked ? 'bg-[#1D493E]/5 text-[#1D493E] font-bold' : 'hover:bg-gray-50 text-[#2B2B2B]'
                             }`}
                           >
@@ -807,14 +828,33 @@ export default function HolidaysPortal() {
                     </div>
                   </div>
 
-                  {/* Divider */}
-                  <div className="w-[1px] bg-[#E2E8F0] self-stretch hidden md:block" />
-
                   {/* Column 2: Travel Type */}
-                  <div className="flex-1 md:px-6 space-y-3">
+                  <div 
+                    style={{
+                      width: "304px",
+                      height: "286px",
+                      padding: "8px",
+                      background: "#FFFFFF",
+                      borderColor: "rgba(204, 204, 204, 0.54)",
+                      borderStyle: "solid",
+                      borderWidth: "1px 0px 1px 1px",
+                      boxSizing: "border-box",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "4px",
+                    }}
+                  >
                     <span 
-                      style={{ fontFamily: "'Faktum', 'Outfit', sans-serif" }} 
-                      className="text-xs font-semibold text-[#8D8D8D] tracking-wide block"
+                      style={{ 
+                        fontFamily: "'Faktum', 'Outfit', sans-serif",
+                        color: "rgba(141, 141, 141, 1)",
+                        fontSize: "14px",
+                        fontWeight: 500,
+                        paddingLeft: "16px",
+                        paddingTop: "12px",
+                        paddingBottom: "4px",
+                      }} 
+                      className="tracking-wide block"
                     >
                       Travel Type
                     </span>
@@ -829,7 +869,7 @@ export default function HolidaysPortal() {
                                 prev.includes(type) ? prev.filter(t => t !== type) : [...prev, type]
                               );
                             }}
-                            className={`flex items-center gap-3 px-2 py-1.5 rounded-[4px] cursor-pointer transition ${
+                            className={`flex items-center gap-3 px-4 py-2.5 rounded-[4px] cursor-pointer transition ${
                               isChecked ? 'bg-[#1D493E]/5 text-[#1D493E] font-bold' : 'hover:bg-gray-50 text-[#2B2B2B]'
                             }`}
                           >
@@ -857,14 +897,35 @@ export default function HolidaysPortal() {
                     </div>
                   </div>
 
-                  {/* Divider */}
-                  <div className="w-[1px] bg-[#E2E8F0] self-stretch hidden md:block" />
-
                   {/* Column 3: Includes */}
-                  <div className="flex-1 md:pl-6 space-y-3">
+                  <div 
+                    style={{
+                      width: "304px",
+                      height: "286px",
+                      padding: "8px",
+                      background: "#FFFFFF",
+                      borderColor: "rgba(204, 204, 204, 0.54)",
+                      borderStyle: "solid",
+                      borderWidth: "1px 1px 1px 1px",
+                      borderTopRightRadius: "4px",
+                      borderBottomRightRadius: "4px",
+                      boxSizing: "border-box",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "4px",
+                    }}
+                  >
                     <span 
-                      style={{ fontFamily: "'Faktum', 'Outfit', sans-serif" }} 
-                      className="text-xs font-semibold text-[#8D8D8D] tracking-wide block"
+                      style={{ 
+                        fontFamily: "'Faktum', 'Outfit', sans-serif",
+                        color: "rgba(141, 141, 141, 1)",
+                        fontSize: "14px",
+                        fontWeight: 500,
+                        paddingLeft: "16px",
+                        paddingTop: "12px",
+                        paddingBottom: "4px",
+                      }} 
+                      className="tracking-wide block"
                     >
                       Includes
                     </span>
@@ -879,7 +940,7 @@ export default function HolidaysPortal() {
                                 prev.includes(incl) ? prev.filter(i => i !== incl) : [...prev, incl]
                               );
                             }}
-                            className={`flex items-center gap-3 px-2 py-1.5 rounded-[4px] cursor-pointer transition ${
+                            className={`flex items-center gap-3 px-4 py-2.5 rounded-[4px] cursor-pointer transition ${
                               isChecked ? 'bg-[#1D493E]/5 text-[#1D493E] font-bold' : 'hover:bg-gray-50 text-[#2B2B2B]'
                             }`}
                           >
@@ -906,7 +967,6 @@ export default function HolidaysPortal() {
                       })}
                     </div>
                   </div>
-
                 </div>
 
                 {/* Bottom Row */}

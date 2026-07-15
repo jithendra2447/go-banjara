@@ -234,7 +234,7 @@ export const HOLIDAY_PACKAGES: HolidayPackage[] = [
   },
   {
     id: 'pkg-kashmir-gulmarg',
-    name: 'Gulmarg Winter Skiing',
+    name: 'Gulmarg Skiing',
     price: 26900,
     originalPrice: 32000,
     duration: '7 Days / 6 Nights',
@@ -533,7 +533,7 @@ export const HOLIDAY_PACKAGES: HolidayPackage[] = [
   },
   {
     id: 'pkg-kerala-classic3',
-    name: 'KERALA COUPLE & FAMILY SPL – PRIVATE TRIP- CLASSIC 3 – 4Days/3Nights',
+    name: 'Kerala Classic Tour',
     price: 19999,
     originalPrice: 29999,
     duration: '4 Days / 3 Nights',
@@ -656,7 +656,7 @@ export const HOLIDAY_PACKAGES: HolidayPackage[] = [
   },
   {
     id: 'pkg-kerala-highlights',
-    name: 'KERALA HIGHLIGHTS TRIP – COUPLE & FAMILY SPL PRIVATE TRIP – 6 Days/5 Nights',
+    name: 'Kerala Highlights',
     price: 29999,
     originalPrice: 39999,
     duration: '6 Days / 5 Nights',
@@ -800,7 +800,7 @@ export const HOLIDAY_PACKAGES: HolidayPackage[] = [
   },
   {
     id: 'pkg-kerala-vibe',
-    name: 'KERALA VIBE SPL – COUPLE & FAMILY SPL PRIVATE TRIP – 5Days/4Nights',
+    name: 'Kerala Vibe Special',
     price: 24999,
     originalPrice: 39999,
     duration: '5 Days / 4 Nights',
@@ -932,7 +932,7 @@ export const HOLIDAY_PACKAGES: HolidayPackage[] = [
   },
   {
     id: 'pkg-goa-beach',
-    name: 'Sun-Kissed Goa Heritage & Beach Escape',
+    name: 'Goa Beach Escape',
     price: 12500,
     originalPrice: 17500,
     duration: '5 Days / 4 Nights',
@@ -1065,7 +1065,7 @@ export const HOLIDAY_PACKAGES: HolidayPackage[] = [
   },
   {
     id: 'pkg-rajasthan-royal',
-    name: 'Royal Forts & Desert Dunes of Rajasthan',
+    name: 'Rajasthan Royal Tour',
     price: 21500,
     originalPrice: 28000,
     duration: '8 Days / 7 Nights',
@@ -1228,7 +1228,7 @@ export const HOLIDAY_PACKAGES: HolidayPackage[] = [
   },
   {
     id: 'pkg-himachal-trek',
-    name: 'Scenic Manali & Solang Valley Trek',
+    name: 'Manali Valley Trek',
     price: 15900,
     originalPrice: 21000,
     duration: '6 Days / 5 Nights',
@@ -1371,7 +1371,7 @@ export const HOLIDAY_PACKAGES: HolidayPackage[] = [
   },
   {
     id: 'pkg-andaman-island',
-    name: 'Andaman Pristine Reefs & Island Getaway',
+    name: 'Andaman Island Getaway',
     price: 28900,
     originalPrice: 36500,
     duration: '6 Days / 5 Nights',

@@ -377,8 +377,27 @@ export default function Homepage() {
               </Link>
               <Link 
                 href="/travel"
-                className="px-8 py-3.5 rounded-lg border border-[#1D493E] bg-transparent hover:bg-[#1D493E] hover:text-white hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 cursor-pointer text-center min-w-[210px] shadow-sm flex items-center justify-center"
-                style={{ color: "rgba(29,73,62,1)", fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "100%", letterSpacing: "0px", verticalAlign: "middle" }}
+                className="hover:bg-[#1D493E] hover:text-white hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 cursor-pointer flex items-center justify-center"
+                style={{
+                  width: "237px",
+                  height: "55px",
+                  paddingTop: "16px",
+                  paddingBottom: "16px",
+                  paddingLeft: "32px",
+                  paddingRight: "32px",
+                  gap: "8px",
+                  borderRadius: "4px",
+                  border: "2px solid rgba(29, 73, 62, 1)",
+                  background: "transparent",
+                  color: "rgba(29,73,62,1)",
+                  fontFamily: "'Faktum','Outfit',sans-serif",
+                  fontWeight: 500,
+                  fontSize: "18px",
+                  lineHeight: "100%",
+                  letterSpacing: "0px",
+                  textDecoration: "none",
+                  boxSizing: "border-box",
+                }}
               >
                 {pageContent.heroTravelBtn}
               </Link>

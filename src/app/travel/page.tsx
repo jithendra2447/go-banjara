@@ -1638,25 +1638,41 @@ export default function HolidaysPortal() {
               boxSizing: "border-box"
             }}
           >
-            <span 
+            <div 
               style={{
-                width: "176px",
-                height: "18px",
-                fontFamily: "'Faktum', 'Outfit', sans-serif",
-                color: "rgba(255, 98, 62, 1)",
-                fontWeight: 600,
-                fontSize: "14px",
-                lineHeight: "18px",
-                textTransform: "uppercase",
-                letterSpacing: "1.2px",
-                textAlign: "center",
-                margin: 0,
-                display: "block",
-                boxSizing: "border-box"
+                width: "185px",
+                height: "26px",
+                backgroundColor: "rgba(255, 98, 62, 0.08)",
+                borderRadius: "4px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                boxSizing: "border-box",
+                flexShrink: 0
               }}
             >
-              Captured Memories
-            </span>
+              <span 
+                style={{
+                  width: "177px",
+                  height: "18px",
+                  fontFamily: "'Faktum', 'Outfit', sans-serif",
+                  color: "rgba(255, 98, 62, 1)",
+                  fontWeight: 600,
+                  fontSize: "14px",
+                  lineHeight: "18px",
+                  textTransform: "uppercase",
+                  letterSpacing: "1.2px",
+                  textAlign: "center",
+                  margin: 0,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  boxSizing: "border-box"
+                }}
+              >
+                Captured Memories
+              </span>
+            </div>
             <h2 
               style={{
                 width: "100%",

@@ -1522,15 +1522,26 @@ export default function HolidaysPortal() {
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      color: "#1D493E",
-                      fontFamily: "'Playfair Display', serif",
-                      fontSize: "24px",
-                      fontWeight: 400,
                       flexShrink: 0,
                       boxSizing: "border-box"
                     }}
                   >
-                    {step.num}
+                    <span
+                      style={{
+                        width: "40px",
+                        height: "38px",
+                        fontFamily: "'Fragment Mono SC', 'Fragment Mono', 'Courier New', monospace",
+                        fontWeight: 400,
+                        fontSize: "32px",
+                        lineHeight: "32px",
+                        color: "rgba(43, 43, 43, 1)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {step.num}
+                    </span>
                   </div>
                   <div 
                     style={{

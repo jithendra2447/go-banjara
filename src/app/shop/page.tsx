@@ -150,23 +150,26 @@ export default function ShopPage() {
   return (
     <div className="bg-white min-h-screen pb-24 flex flex-col items-center">
       {/* Header Section (Width: 1440px, Padding: 62px 80px 0px 80px) */}
-      <header className="max-w-[1440px] w-full text-center space-y-6 px-6 md:px-[80px] pt-[62px] pb-[10px]">
-        {/* Tag */}
-        <div className="flex justify-center">
-          <span className="inline-block text-[10px] font-black uppercase tracking-[0.18em] text-[#FF5B37] bg-[#FFEBE5] px-3.5 py-1.5 rounded-sm">
-            EXPERIENCE THE SHOPPING
-          </span>
+      <header className="w-full max-w-[1440px] px-6 md:px-[80px] pt-[62px] pb-[10px] flex justify-center bg-white">
+        {/* Inner header container (Width: 1280px, Height: 166px, Gap: 12px, Background: white) */}
+        <div className="w-full max-w-[1280px] md:h-[166px] flex flex-col justify-between items-center gap-[12px] bg-white">
+          {/* Tag (Width: 222px, Height: 18px, Font: Faktum 14px, Weight: 600, Color: #FF623E background, text uppercase, tracking 1.2px) */}
+          <div className="flex items-center justify-center h-[18px]">
+            <span className="inline-flex items-center justify-center text-[#FF623E] bg-[#FF623E]/8 px-2.5 py-0.5 rounded-[4px] text-[14px] font-semibold uppercase tracking-[1.2px] leading-none h-full w-[222px]">
+              Experience the Shopping
+            </span>
+          </div>
+
+          {/* Heading (Width: 1280px, Height: 52px, Font: Fraunces 42px, Weight: 600, Line-height: 100%, Color: #2B2B2B) */}
+          <h1 className="w-full md:h-[52px] flex items-center justify-center text-[28px] md:text-[42px] font-serif font-semibold text-[#2B2B2B] leading-none text-center">
+            Some journeys change where you go. Others change who you are.
+          </h1>
+
+          {/* Subtitle (Width: 1280px, Height: 64px, Font: Faktum 24px, Weight: 500, Line-height: 32px, Color: #2B2B2B) */}
+          <p className="w-full md:h-[64px] flex items-center justify-center text-[#2B2B2B] text-base md:text-[24px] md:leading-[32px] font-sans font-medium text-center">
+            Discover curated travel experiences, gear that keeps up with you, and a community of free-spirited explorers across India.
+          </p>
         </div>
-
-        {/* Heading */}
-        <h1 className="text-4xl md:text-[44px] font-serif text-[#1A1A1A] tracking-tight leading-[1.15] max-w-none font-medium">
-          Some journeys change where you go. Others change who you are.
-        </h1>
-
-        {/* Subheading */}
-        <p className="text-sm md:text-base font-sans text-[#2D2D2D] leading-[1.6] max-w-none font-normal">
-          Discover curated travel experiences, gear that keeps up with you, and a community of free-spirited explorers across India.
-        </p>
       </header>
 
       {/* Main Sections Container (Width: 1440px, Side Padding: 80px) */}

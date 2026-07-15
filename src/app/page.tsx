@@ -78,6 +78,9 @@ export default function Homepage() {
   const [productsList, setProductsList] = useState<any[]>(PRODUCTS);
   const [packagesList, setPackagesList] = useState<any[]>(HOLIDAY_PACKAGES);
 
+  // Active image index for each product card
+  const [activeImageIndices, setActiveImageIndices] = useState<Record<string, number>>({});
+
   const [pageContent, setPageContent] = useState({
     heroTitleLine1: "Hey! Let’s",
     heroTitleLine2: "Escape from",
@@ -157,12 +160,24 @@ export default function Homepage() {
 
   const resolveProduct = (defaultId: string, fallbackName: string, fallbackCategory: string, fallbackImg: string, fallbackPrice: number, fallbackOrig: number) => {
     const found = productsList.find(p => p.id === defaultId);
+    const img = found?.image || fallbackImg;
+    
+    // Setup a list of 5 fallback images for indicators
+    const fallbackImages = [
+      img,
+      img.includes('badge') ? '/around_the_world_sticker.jpg' : (img.includes('keychain') ? '/explore_more_keychain.png?v=1' : (img.includes('tshirt') ? '/go_banjara_tshirt.jpg?v=1' : (img.includes('slides') || img.includes('mavin') ? '/blue_mavin_slides.jpg' : img + '?v=1'))),
+      img.includes('slides') || img.includes('mavin') ? '/banjara_blue_slides.png' : img + '?v=2',
+      img.includes('badge') ? '/around_the_world_sticker.jpg?v=2' : (img.includes('keychain') ? '/explore_more_keychain.png?v=2' : (img.includes('tshirt') ? '/go_banjara_tshirt.jpg?v=2' : (img.includes('slides') || img.includes('mavin') ? '/blue_mavin_slides.jpg?v=2' : img + '?v=3'))),
+      img + '?v=4'
+    ];
+
     if (found) {
       return {
         id: found.id,
         name: found.name,
         category: found.category,
         image: found.image,
+        images: found.images || fallbackImages,
         price: found.price,
         originalPrice: found.originalPrice,
         rating: found.rating || 5,
@@ -176,6 +191,7 @@ export default function Homepage() {
       name: fallbackName,
       category: fallbackCategory,
       image: fallbackImg,
+      images: fallbackImages,
       price: fallbackPrice,
       originalPrice: fallbackOrig,
       rating: 5,
@@ -780,18 +796,30 @@ export default function Homepage() {
                   {/* Image Container with Dots (Width: 339px, Height: 254px, Radius: 4px) */}
                   <div className="relative w-full md:h-[254px] rounded-[4px] overflow-hidden shrink-0">
                     <img 
-                      src={deal.image} 
+                      src={deal.images[activeImageIndices[deal.id] || 0]} 
                       alt={deal.name} 
                       className="w-full h-full object-cover"
                       style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
                     />
                     {/* Dots indicator */}
-                    <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex gap-1">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#1D493E]"></span>
-                      <span className="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
-                      <span className="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
-                      <span className="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
-                      <span className="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
+                    <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+                      {deal.images.map((_: string, dotIdx: number) => {
+                        const isActive = (activeImageIndices[deal.id] || 0) === dotIdx;
+                        return (
+                          <button
+                            key={dotIdx}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              e.preventDefault();
+                              setActiveImageIndices(prev => ({ ...prev, [deal.id]: dotIdx }));
+                            }}
+                            className={`w-1.5 h-1.5 rounded-full transition-all duration-200 cursor-pointer ${
+                              isActive ? 'bg-[#1D493E] scale-110' : 'bg-gray-300 hover:bg-gray-400'
+                            }`}
+                            aria-label={`Go to slide ${dotIdx + 1}`}
+                          />
+                        );
+                      })}
                     </div>
                   </div>
 
@@ -922,18 +950,30 @@ export default function Homepage() {
                   {/* Image Container with Dots (Width: 339px, Height: 254px, Radius: 4px) */}
                   <div className="relative w-full md:h-[254px] rounded-[4px] overflow-hidden shrink-0">
                     <img 
-                      src={prod.image} 
+                      src={prod.images[activeImageIndices[prod.id] || 0]} 
                       alt={prod.name} 
                       className="w-full h-full object-cover"
                       style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
                     />
                     {/* Dots indicator */}
-                    <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex gap-1">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#1D493E]"></span>
-                      <span className="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
-                      <span className="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
-                      <span className="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
-                      <span className="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
+                    <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+                      {prod.images.map((_: string, dotIdx: number) => {
+                        const isActive = (activeImageIndices[prod.id] || 0) === dotIdx;
+                        return (
+                          <button
+                            key={dotIdx}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              e.preventDefault();
+                              setActiveImageIndices(prev => ({ ...prev, [prod.id]: dotIdx }));
+                            }}
+                            className={`w-1.5 h-1.5 rounded-full transition-all duration-200 cursor-pointer ${
+                              isActive ? 'bg-[#1D493E] scale-110' : 'bg-gray-300 hover:bg-gray-400'
+                            }`}
+                            aria-label={`Go to slide ${dotIdx + 1}`}
+                          />
+                        );
+                      })}
                     </div>
                   </div>
 

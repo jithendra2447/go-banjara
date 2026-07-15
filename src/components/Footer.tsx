@@ -42,16 +42,13 @@ export const Footer: React.FC = () => {
         
         {/* Brand, Logo & Description */}
         <div className="flex flex-col gap-4">
-          {/* Logo Image */}
-          <img
-            src="/logo.png"
-            alt="go banjāra"
-            style={{
-              width: "210px",
-              height: "auto",
-              filter: "brightness(0) invert(1) sepia(1) saturate(4) hue-rotate(10deg)",
-            }}
-          />
+          {/* Logo — Icon + Text */}
+          <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "10px" }}>
+            <div style={{ width: "44px", height: "44px", borderRadius: "12px", background: "#FFF080", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+              <BonjoMascot width={30} height={30} interactive={false} />
+            </div>
+            <span style={{ fontFamily: "'Fraunces', serif", fontWeight: 900, fontSize: "26px", color: "#FFF080", letterSpacing: "-0.5px", lineHeight: 1 }}>gobanjara</span>
+          </div>
           {/* Description */}
           <p className="text-sm text-slate-200/90 max-w-xs leading-relaxed font-sans">
             Crafting high-end editorial travel experience and gear for the modern nomad.

@@ -55,8 +55,35 @@ const TESTIMONIALS = [
   }
 ];
 
+const FAQ_ITEMS = [
+  {
+    question: "What is Go Banjara?",
+    answer: "Go Banjara is a premium adventure and outdoor lifestyle brand. We design highly curated slow-travel experiences and manufacture high-quality heritage outdoor gear, apparel, and collectible badges for modern nomads and explorers."
+  },
+  {
+    question: "How do I book a travel package?",
+    answer: "Browse our Curated Journeys, choose your package, check availability, and submit an inquiry or book directly. Our travel coordinators will handle all permits, boutique stays, and local transportation."
+  },
+  {
+    question: "What is your gear return policy?",
+    answer: "We offer a 30-day hassle-free return policy on all unworn clothing and unused gear in original packaging. Travel package bookings have separate cancellation policies detailed during checkout."
+  },
+  {
+    question: "Do you support local communities?",
+    answer: "Yes, community empowerment is at our core. 15% of all travel package revenues go directly to supporting local family homestays, native mountain guides, and indigenous craft cooperatives in Kashmir and Kerala."
+  },
+  {
+    question: "What materials are the badges made from? Zinc alloy with glossy enamel fill.",
+    answer: "All our collectible badges are stamped from premium zinc alloy with glossy enamel fill and butterfly clutch backings, built to last a lifetime of rugged exploration."
+  }
+];
+
 export default function HolidaysPortal() {
   const { addToCart, setCartOpen } = useCart();
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+  const toggleFaq = (index: number) => {
+    setOpenFaqIndex(openFaqIndex === index ? null : index);
+  };
 
   // Search and filter states
   const [destinationSearch, setDestinationSearch] = useState('');
@@ -1794,6 +1821,50 @@ export default function HolidaysPortal() {
 
           </div>
 
+        </div>
+      </section>
+
+      {/* 3.5 FAQ ACCORDION SECTION (Matching Home page fonts and styles) */}
+      <section className="w-full md:w-[1440px] bg-white rounded-[4px] py-16 md:px-[80px] px-6 flex flex-col gap-[32px] mx-auto border-t border-gray-100 relative z-10">
+        {/* Header (Width: 1280px, Height: 90px, Gap: 12px) */}
+        <div className="w-full md:w-[1280px] md:h-[90px] flex flex-col gap-[12px] justify-center text-left mx-auto">
+          <div className="w-[54px] h-[26px] flex items-center justify-center bg-[#FFEBE5] rounded-[4px]">
+            <span className="w-[46px] h-[18px] flex items-center justify-center font-sans font-semibold text-[14px] leading-none tracking-[1.2px] text-[#FF623E] uppercase font-mono">
+              FAQ'S
+            </span>
+          </div>
+          <h2 className="w-full md:w-[541px] md:h-[52px] flex items-center font-serif font-semibold text-[42px] leading-[1] tracking-[0px] text-[#2B2B2B]">
+            Frequently asked questions
+          </h2>
+        </div>
+
+        {/* Accordion List */}
+        <div className="w-full md:w-[1280px] border-t border-slate-200 divide-y divide-slate-200 mx-auto">
+          {FAQ_ITEMS.map((item, idx) => {
+            const isOpen = openFaqIndex === idx;
+            return (
+              <div key={idx} className="py-5 text-left border-b border-slate-200">
+                <button
+                  type="button"
+                  onClick={() => toggleFaq(idx)}
+                  className="w-full flex justify-between items-center text-left gap-4 cursor-pointer group"
+                >
+                  <span className="w-full md:w-[1196px] h-[32px] flex items-center font-sans font-medium text-[20px] leading-[32px] tracking-[0px] text-[#2B2B2B]">
+                    {item.question}
+                  </span>
+                  <span className="text-xl font-medium text-[#1D493E] shrink-0 leading-none select-none">
+                    {isOpen ? '—' : '+'}
+                  </span>
+                </button>
+                {/* Expandable answer */}
+                {isOpen && (
+                  <p className="mt-3 w-full md:w-[1196px] font-sans font-medium text-[20px] leading-[32px] tracking-[0px] text-[#8D8D8D] animate-fade-in">
+                    {item.answer}
+                  </p>
+                )}
+              </div>
+            );
+          })}
         </div>
       </section>
 

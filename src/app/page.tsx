@@ -1075,7 +1075,12 @@ export default function Homepage() {
           {/* Left Column: Image with slight rotation and glow */}
           <div className="relative">
             {/* Soft glow background */}
-            <div className="absolute -top-[40px] -left-[40px] w-[192px] h-[192px] bg-[#E05434]/30 rounded-full blur-[64px]" />
+            <div 
+              className="absolute -top-[40px] -left-[40px] w-[192px] h-[192px] pointer-events-none" 
+              style={{
+                background: 'radial-gradient(circle, rgba(224, 84, 52, 0.3) 0%, rgba(224, 84, 52, 0) 70%)'
+              }}
+            />
             <div className="relative hover:rotate-2 transition-transform duration-500 w-full md:w-[584px] md:h-[584px] aspect-square mx-auto md:mx-0 bg-transparent">
               {/* Orange gradient overlay in top-left */}
               <div className="absolute top-0 left-0 w-40 h-40 bg-gradient-to-br from-[#FF5A36]/40 via-[#FF5A36]/10 to-transparent pointer-events-none z-10 rounded-[32px] overflow-hidden" />

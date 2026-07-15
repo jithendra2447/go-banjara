@@ -370,7 +370,8 @@ export default function Homepage() {
             <div className="flex flex-wrap items-center gap-4">
               <Link 
                 href="/shop"
-                className="px-8 py-3.5 rounded-lg bg-[#1D493E] hover:bg-[#15342c] hover:scale-[1.02] active:scale-[0.98] text-white border border-[#1D493E] font-sans font-bold text-base transition-all duration-300 cursor-pointer text-center min-w-[150px] shadow-sm"
+                className="px-8 py-3.5 rounded-lg bg-[#1D493E] hover:bg-[#15342c] hover:scale-[1.02] active:scale-[0.98] text-white border border-[#1D493E] transition-all duration-300 cursor-pointer text-center min-w-[150px] shadow-sm flex items-center justify-center"
+                style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "100%", letterSpacing: "0px", verticalAlign: "middle" }}
               >
                 {pageContent.heroShopBtn}
               </Link>

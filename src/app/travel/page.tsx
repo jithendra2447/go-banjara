@@ -572,28 +572,55 @@ export default function HolidaysPortal() {
           </div>
         </div>
 
-        {/* LEFT-ALIGNED CATEGORY FILTER TABS (Increased padding/font size) */}
-        <div className="flex flex-wrap gap-3 pt-2 justify-start">
-          {['All', 'Weekends', 'Treks', 'Road Trips', 'Camping'].map((cat) => {
-            const isActive = activeCategory === cat;
-            return (
-              <button
-                key={cat}
-                type="button"
-                onClick={() => {
-                  setActiveCategory(cat);
-                  setVisiblePackagesCount(6); 
-                }}
-                className={`px-8 py-3 rounded-md text-sm font-extrabold tracking-wide transition-all border cursor-pointer ${
-                  isActive 
-                    ? 'bg-[#1D493E] text-white border-[#1D493E] shadow-xs' 
-                    : 'bg-white text-gray-700 border-gray-200 hover:border-gray-400'
-                }`}
-              >
-                {cat}
-              </button>
-            );
-          })}
+        {/* CATEGORY FILTER TABS ROW — styled to match exact Figma specs */}
+        <div 
+          style={{
+            width: "100%",
+            maxWidth: "1280px",
+            height: "86px",
+            paddingTop: "24px",
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            boxSizing: "border-box",
+            margin: "0 auto",
+          }}
+        >
+          <div style={{ display: "flex", flexDirection: "row", gap: "12px", alignItems: "center" }}>
+            {['All', 'Weekends', 'Treks', 'Road Trips', 'Camping'].map((cat) => {
+              const isActive = activeCategory === cat;
+              return (
+                <button
+                  key={cat}
+                  type="button"
+                  onClick={() => {
+                    setActiveCategory(cat);
+                    setVisiblePackagesCount(6); 
+                  }}
+                  style={{
+                    height: "52px",
+                    padding: "0 24px",
+                    borderRadius: "8px",
+                    fontFamily: "'Faktum', 'Outfit', sans-serif",
+                    fontWeight: 500,
+                    fontSize: "24px",
+                    lineHeight: "28px",
+                    letterSpacing: "0px",
+                    textAlign: "center",
+                    cursor: "pointer",
+                    transition: "all 0.2s ease-in-out",
+                    border: isActive ? "1px solid rgba(255, 98, 62, 1)" : "1px solid rgba(141, 141, 141, 0.5)",
+                    background: isActive ? "rgba(255, 98, 62, 1)" : "rgba(255, 255, 255, 1)",
+                    color: isActive ? "rgba(255, 255, 255, 1)" : "rgba(43, 43, 43, 1)",
+                  }}
+                  className="hover:scale-[1.02] active:scale-[0.98]"
+                >
+                  {cat}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* RESULTS HEADER & FILTER DROPDOWN (Increased font size) */}

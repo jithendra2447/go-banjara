@@ -42,19 +42,17 @@ export const Footer: React.FC = () => {
           }}
         >
         
-        {/* Brand, Logo & Description */}
-        <div className="flex flex-col gap-4">
-          {/* Logo — Figma Export */}
+        {/* Brand, Logo & Description + Social */}
+        <div style={{ display: "flex", flexDirection: "column", gap: "16px", width: "280px" }}>
+          {/* Logo */}
           <img
             src="/logo-footer.png"
             alt="go banjāra"
             style={{ width: "220px", height: "auto" }}
           />
-          {/* Description — 273×168, Faktum 500 20px 42lh */}
+          {/* Description */}
           <p
             style={{
-              width: "273px",
-              height: "168px",
               fontFamily: "'Faktum', 'Outfit', sans-serif",
               fontWeight: 500,
               fontSize: "20px",
@@ -66,133 +64,10 @@ export const Footer: React.FC = () => {
           >
             Crafting high-end editorial travel experience and gear for the modern nomad. Escape the ordinary with us.
           </p>
-        </div>
-
-        {/* Important Links — 153×290, gap-12 */}
-        <div
-          style={{
-            width: "153px",
-            display: "flex",
-            flexDirection: "column",
-            gap: "12px",
-          }}
-        >
-          <h4 style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "26px", letterSpacing: "-0.1px", color: "rgba(255,255,255,0.8)", margin: 0 }}>Important Links</h4>
-          <ul
-            style={{
-              width: "153px",
-              height: "168px",
-              display: "flex",
-              flexDirection: "column",
-              listStyle: "none",
-              padding: 0,
-              margin: 0,
-            }}
-          >
-            {[{ label: "Home", href: "/" }, { label: "Travel Packages", href: "/travel" }, { label: "About us", href: "/about" }, { label: "Shop", href: "/shop" }].map((item) => (
-              <li key={item.href}
-                style={{
-                  fontFamily: "'Faktum', 'Outfit', sans-serif",
-                  fontWeight: 500,
-                  fontSize: "20px",
-                  lineHeight: "42px",
-                  letterSpacing: "0px",
-                  color: "rgba(255, 255, 255, 1)",
-                }}
-              >
-                <Link href={item.href} className="hover:text-[#FFF080] transition-colors">{item.label}</Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Let us help — 231px × 290px, gap-12 */}
-        <div
-          style={{
-            width: "231px",
-            display: "flex",
-            flexDirection: "column",
-            gap: "12px",
-          }}
-        >
-          <h4 style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "26px", letterSpacing: "-0.1px", color: "rgba(255,255,255,0.8)", margin: 0 }}>Let us help</h4>
-          <ul
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              listStyle: "none",
-              padding: 0,
-              margin: 0,
-            }}
-          >
-            {[
-              { label: "Your Account", href: "/profile" },
-              { label: "Your Orders", href: "/profile" },
-              { label: "Returns & Replacements", href: "/contact" },
-              { label: "Refund & Returns Policy", href: "/contact" },
-              { label: "Privacy Policy", href: "/about" },
-              { label: "Help Center", href: "/contact" },
-            ].map((item) => (
-              <li key={item.label}
-                style={{
-                  fontFamily: "'Faktum', 'Outfit', sans-serif",
-                  fontWeight: 500,
-                  fontSize: "20px",
-                  lineHeight: "42px",
-                  letterSpacing: "0px",
-                  color: "rgba(255, 255, 255, 1)",
-                }}
-              >
-                <Link href={item.href} className="hover:text-[#FFF080] transition-colors">{item.label}</Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-          {/* Contact us — 439px × 290px, gap-12 */}
-          <div style={{ width: "439px", height: "290px", display: "flex", flexDirection: "column", gap: "12px" }}>
-            <h4 style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "26px", letterSpacing: "-0.1px", color: "rgba(255,255,255,0.8)", margin: 0 }}>Contact us</h4>
-            <ul style={{ width: "439px", height: "220px", display: "flex", flexDirection: "column", gap: "12px", listStyle: "none", padding: 0, margin: 0 }}>
-              <li className="flex items-center gap-3">
-                <img src="/icon-location.png" alt="Location" style={{ width: "42px", height: "42px", flexShrink: 0 }} />
-                <span style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(255,255,255,1)" }}>HITEC City, Hyderabad, Telangana, India</span>
-              </li>
-              <li className="flex items-center gap-3">
-                <div style={{ width: "42px", height: "42px", background: "rgba(29,73,62,1)", borderRadius: "10px", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                  <img src="/icon-email.png" alt="Email" style={{ width: "22px", height: "22px" }} />
-                </div>
-                <a href="mailto:services@gobanjara.com" style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(255,255,255,1)" }} className="hover:text-[#FFF080] transition-colors">services@gobanjara.com</a>
-              </li>
-              <li className="flex items-center gap-3">
-                <img src="/icon-phone.png" alt="Phone" style={{ width: "42px", height: "42px", flexShrink: 0 }} />
-                <a href="tel:+910123456789" style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(255,255,255,1)" }} className="hover:text-[#FFF080] transition-colors">+91 0123456789</a>
-              </li>
-              <li className="flex items-center gap-3">
-                <img src="/icon-clock.png" alt="Hours" style={{ width: "42px", height: "42px", flexShrink: 0 }} />
-                <span style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(255,255,255,1)" }}>Mon–Sat, 10:00–19:00 IST</span>
-              </li>
-            </ul>
-          </div>
-
-        </div>
-
-        {/* Socials + Newsletter Row — 1280×87, space-between */}
-        <div
-          style={{
-            width: "100%",
-            maxWidth: "1280px",
-            height: "87px",
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
           {/* Social Icons */}
-          <div className="flex items-center gap-3">
+          <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
             <span style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "100%", letterSpacing: "-0.1px", color: "rgba(255,255,255,1)" }}>Follow us on:</span>
-            {/* Icons row — 204×42, gap 12 */}
-            <div style={{ width: "204px", height: "42px", display: "flex", flexDirection: "row", alignItems: "center", gap: "12px" }}>
+            <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "12px" }}>
               {/* Facebook */}
               <a href="#" style={{ width: "42px", height: "42px", borderRadius: "10px", background: "#3B5998", display: "flex", alignItems: "center", justifyContent: "center", color: "white", flexShrink: 0 }} className="hover:scale-105 transition-transform duration-200">
                 <svg style={{ width: "20px", height: "20px" }} className="fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" /></svg>
@@ -211,50 +86,82 @@ export const Footer: React.FC = () => {
               </a>
             </div>
           </div>
+        </div>
 
-          {/* Newsletter — 439px to align with Contact us column */}
+        {/* Important Links */}
+        <div style={{ width: "153px", display: "flex", flexDirection: "column", gap: "12px" }}>
+          <h4 style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "26px", letterSpacing: "-0.1px", color: "rgba(255,255,255,0.8)", margin: 0 }}>Important Links</h4>
+          <ul style={{ display: "flex", flexDirection: "column", listStyle: "none", padding: 0, margin: 0 }}>
+            {[{ label: "Home", href: "/" }, { label: "Travel Packages", href: "/travel" }, { label: "About us", href: "/about" }, { label: "Shop", href: "/shop" }].map((item) => (
+              <li key={item.href} style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "42px", letterSpacing: "0px", color: "rgba(255, 255, 255, 1)" }}>
+                <Link href={item.href} className="hover:text-[#FFF080] transition-colors">{item.label}</Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Let us help */}
+        <div style={{ width: "231px", display: "flex", flexDirection: "column", gap: "12px" }}>
+          <h4 style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "26px", letterSpacing: "-0.1px", color: "rgba(255,255,255,0.8)", margin: 0 }}>Let us help</h4>
+          <ul style={{ display: "flex", flexDirection: "column", listStyle: "none", padding: 0, margin: 0 }}>
+            {[
+              { label: "Your Account", href: "/profile" },
+              { label: "Your Orders", href: "/profile" },
+              { label: "Returns & Replacements", href: "/contact" },
+              { label: "Refund & Returns Policy", href: "/contact" },
+              { label: "Privacy Policy", href: "/about" },
+              { label: "Help Center", href: "/contact" },
+            ].map((item) => (
+              <li key={item.label} style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "42px", letterSpacing: "0px", color: "rgba(255, 255, 255, 1)" }}>
+                <Link href={item.href} className="hover:text-[#FFF080] transition-colors">{item.label}</Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Contact us */}
+        <div style={{ width: "439px", display: "flex", flexDirection: "column", gap: "12px" }}>
+          <h4 style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "26px", letterSpacing: "-0.1px", color: "rgba(255,255,255,0.8)", margin: 0 }}>Contact us</h4>
+          <ul style={{ display: "flex", flexDirection: "column", gap: "12px", listStyle: "none", padding: 0, margin: 0 }}>
+            <li className="flex items-center gap-3">
+              <img src="/icon-location.png" alt="Location" style={{ width: "42px", height: "42px", flexShrink: 0 }} />
+              <span style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(255,255,255,1)" }}>HITEC City, Hyderabad, Telangana, India</span>
+            </li>
+            <li className="flex items-center gap-3">
+              <div style={{ width: "42px", height: "42px", background: "rgba(29,73,62,1)", borderRadius: "10px", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, border: "1px solid rgba(255,255,255,0.2)" }}>
+                <img src="/icon-email.png" alt="Email" style={{ width: "22px", height: "22px" }} />
+              </div>
+              <a href="mailto:services@gobanjara.com" style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(255,255,255,1)" }} className="hover:text-[#FFF080] transition-colors">services@gobanjara.com</a>
+            </li>
+            <li className="flex items-center gap-3">
+              <img src="/icon-phone.png" alt="Phone" style={{ width: "42px", height: "42px", flexShrink: 0 }} />
+              <a href="tel:+910123456789" style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(255,255,255,1)" }} className="hover:text-[#FFF080] transition-colors">+91 0123456789</a>
+            </li>
+            <li className="flex items-center gap-3">
+              <img src="/icon-clock.png" alt="Hours" style={{ width: "42px", height: "42px", flexShrink: 0 }} />
+              <span style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(255,255,255,1)" }}>Mon–Sat, 10:00–19:00 IST</span>
+            </li>
+          </ul>
+        </div>
+
+        </div>
+
+        {/* Newsletter Row — right-aligned to match Contact us column (439px) */}
+        <div style={{ width: "100%", display: "flex", justifyContent: "flex-end" }}>
           <div className="flex flex-col gap-2" style={{ width: "439px" }}>
-            <span style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "100%", letterSpacing: "0px", textAlign: "left", color: "rgba(255,255,255,1)" }}>Stay connected by subscribe newsletter</span>
+            <span style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(255,255,255,1)" }}>Stay connected by subscribe newsletter</span>
             <form
               onSubmit={(e) => { e.preventDefault(); alert("Subscribed!"); }}
-              style={{
-                width: "439px",
-                height: "56px",
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                gap: "8px",
-                borderRadius: "4px",
-                padding: "8px",
-                background: "white",
-                border: "1px solid rgba(141, 141, 141, 1)",
-                boxSizing: "border-box",
-              }}
+              style={{ width: "439px", height: "56px", display: "flex", flexDirection: "row", alignItems: "center", gap: "8px", borderRadius: "4px", padding: "8px", background: "white", border: "1px solid rgba(141, 141, 141, 1)", boxSizing: "border-box" }}
             >
               <input
                 type="email"
                 required
                 placeholder="Enter your email address"
-                style={{
-                  flex: 1,
-                  background: "transparent",
-                  border: "none",
-                  outline: "none",
-                  fontFamily: "'Faktum','Outfit',sans-serif",
-                  fontWeight: 500,
-                  fontSize: "20px",
-                  lineHeight: "100%",
-                  letterSpacing: "0px",
-                  color: "#1a2e29",
-                  paddingLeft: "8px",
-                  verticalAlign: "middle",
-                }}
+                style={{ flex: 1, background: "transparent", border: "none", outline: "none", fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "#1a2e29", paddingLeft: "8px" }}
                 className="placeholder-[rgba(141,141,141,1)]"
               />
-              <button
-                type="submit"
-                style={{ height: "40px", padding: "0 20px", background: "#1D493E", color: "white", borderRadius: "6px", fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "14px", border: "none", cursor: "pointer", flexShrink: 0 }}
-              >
+              <button type="submit" style={{ height: "40px", padding: "0 20px", background: "#1D493E", color: "white", borderRadius: "6px", fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "14px", border: "none", cursor: "pointer", flexShrink: 0 }}>
                 Subscribe
               </button>
             </form>

@@ -684,7 +684,7 @@ export default function Homepage() {
             </div>
 
             {/* Centered Destinations Footer Link (Figma style: 331x68px, padding 18x36px, radius 4px, NO BORDER) */}
-            <div className="flex justify-center mt-6 mb-4">
+            <div className="flex justify-center mt-4 mb-0">
               <Link 
                 href="/travel" 
                 className="inline-flex items-center justify-center w-[331px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[4px] bg-transparent text-[#1D493E] hover:opacity-80 transition-all duration-300 cursor-pointer group"
@@ -715,7 +715,7 @@ export default function Homepage() {
 
       {/* 5. TOP PRODUCT CATEGORIES */}
       <section className="bg-white relative z-10">
-        <div className="max-w-[1440px] mx-auto px-6 md:px-20 pt-6 pb-[32px] flex flex-col gap-[32px]">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-20 pt-2 pb-[32px] flex flex-col gap-[32px]">
           
           {/* Header Row (Flow Horizontal, Justify space-between, Width Fill 1280px, Height Hug 134px) */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-gray-100 text-left">
@@ -1291,7 +1291,7 @@ export default function Homepage() {
       </section>
 
       {/* 9.5 REVIEWS SECTION (3-column grid matching Figma design) */}
-      <section className="bg-white pt-[28px] pb-[28px] text-left relative z-10 border-t border-gray-100 w-full">
+      <section className="bg-white pt-[28px] pb-0 text-left relative z-10 border-t border-gray-100 w-full">
         <div className="max-w-[1440px] w-full mx-auto flex flex-col gap-[32px]">
           
           {/* Header Row (Figma: Width: 1440, Height: 90, Padding: 0px vertical, 80px horizontal) */}
@@ -1449,7 +1449,7 @@ export default function Homepage() {
           {/* Header Container (Width: 1280px, Height: 134px, Gap: 12px) */}
           <div className="w-full md:w-[1280px] md:h-[134px] flex flex-col justify-center items-center gap-[12px] text-center shrink-0">
             <div className="h-[18px] flex items-center justify-center">
-              <span className="w-[53px] h-[18px] flex items-center justify-center font-sans font-semibold text-[14px] leading-none tracking-[1.2px] text-[#FF623E] uppercase">
+              <span style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 600, fontSize: "14px", lineHeight: "100%", letterSpacing: "1.2px", color: "rgba(255, 98, 62, 1)", textTransform: "uppercase", width: "53px", height: "18px", display: "flex", alignItems: "center", justifyContent: "center" }}>
                 Blogs
               </span>
             </div>

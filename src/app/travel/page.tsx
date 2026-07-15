@@ -1033,13 +1033,17 @@ export default function HolidaysPortal() {
                             fontFamily: "'Faktum', 'Outfit', sans-serif",
                             fontWeight: 600,
                             fontSize: "24px",
-                            lineHeight: "100%",
+                            lineHeight: "30px",
                             letterSpacing: "0px",
                             color: "rgba(43, 43, 43, 1)",
                             margin: 0,
                             display: "flex",
                             alignItems: "center",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            whiteSpace: "nowrap",
                           }}
+                          title={pkg.name}
                         >
                           {pkg.name}
                         </h3>
@@ -1076,6 +1080,10 @@ export default function HolidaysPortal() {
                           color: "rgba(141, 141, 141, 1)",
                           margin: 0,
                           overflow: "hidden",
+                          display: "-webkit-box",
+                          WebkitLineClamp: 3,
+                          WebkitBoxOrient: "vertical",
+                          textOverflow: "ellipsis",
                         }}
                       >
                         {pkg.description}

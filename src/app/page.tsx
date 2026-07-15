@@ -744,7 +744,7 @@ export default function Homepage() {
             {/* Title (Width: 1280px, Height: 52px, Font: Fraunces Serif 42px, Weight: 600, Line-height: 100%) */}
             <h2 className="w-full md:w-[1280px] md:h-[52px] flex items-center justify-center text-[32px] md:text-[42px] font-serif font-semibold text-[#1D493E] leading-none text-center">
               {pageContent.dealsTitle.includes("best deals") ? (
-                <>Today's <span className="text-[#FF5A36]">best deals</span> for you</>
+                <>Today's{" "}<span className="text-[#FF5A36]">best deals</span>{" "}for you</>
               ) : (
                 pageContent.dealsTitle
               )}

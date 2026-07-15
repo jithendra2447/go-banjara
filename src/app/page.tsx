@@ -674,9 +674,9 @@ export default function Homepage() {
                   style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
                 />
               </div>
-              <div className="space-y-1">
-                <h4 className="text-lg font-bold text-[#1D493E]">Stickers</h4>
-                <p className="text-xs text-gray-500 font-semibold">Starts from ₹93</p>
+              <div className="flex flex-col">
+                <h4 className="font-sans font-semibold text-[24px] leading-none text-[#2B2B2B] h-[30px] flex items-center">Stickers</h4>
+                <p className="font-sans font-medium text-[20px] leading-none text-[#8D8D8D] h-[25px] flex items-center">Starts from ₹93</p>
               </div>
             </Link>
 
@@ -690,9 +690,9 @@ export default function Homepage() {
                   style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
                 />
               </div>
-              <div className="space-y-1">
-                <h4 className="text-lg font-bold text-[#1D493E]">Badges</h4>
-                <p className="text-xs text-gray-500 font-semibold">Starts from ₹199</p>
+              <div className="flex flex-col">
+                <h4 className="font-sans font-semibold text-[24px] leading-none text-[#2B2B2B] h-[30px] flex items-center">Badges</h4>
+                <p className="font-sans font-medium text-[20px] leading-none text-[#8D8D8D] h-[25px] flex items-center">Starts from ₹199</p>
               </div>
             </Link>
 
@@ -706,9 +706,9 @@ export default function Homepage() {
                   style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
                 />
               </div>
-              <div className="space-y-1">
-                <h4 className="text-lg font-bold text-[#1D493E]">Fridge Magnets</h4>
-                <p className="text-xs text-gray-500 font-semibold">Starts from ₹199</p>
+              <div className="flex flex-col">
+                <h4 className="font-sans font-semibold text-[24px] leading-none text-[#2B2B2B] h-[30px] flex items-center">Fridge Magnets</h4>
+                <p className="font-sans font-medium text-[20px] leading-none text-[#8D8D8D] h-[25px] flex items-center">Starts from ₹199</p>
               </div>
             </Link>
           </div>

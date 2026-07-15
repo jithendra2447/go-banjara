@@ -1574,7 +1574,7 @@ export default function Homepage() {
 
           {/* Card 4: Open Box Delivery */}
           <div className="w-full md:w-[296px] md:h-[458px] flex flex-col gap-[24px] rounded-[4px] bg-white">
-            <div className="w-full md:w-[296px] h-[250px] rounded-tl-[4px] rounded-tr-[4px] overflow-hidden">
+                    <div className="w-full md:w-[296px] h-[250px] rounded-tl-[4px] rounded-tr-[4px] overflow-hidden">
               <img src="/service-openbox.png" alt="Open box delivery illustration" className="w-full h-full object-cover" />
             </div>
             <div className="w-full md:w-[296px] md:h-[76px] flex flex-col gap-[12px]">
@@ -1586,29 +1586,118 @@ export default function Homepage() {
         </div>
       </section>
 
-      {/* 13. NEWSLETTER / CTA SECTION */}
-      <section className="w-full bg-white py-[42px] px-[80px]">
-        <div className="max-w-[1440px] mx-auto flex flex-col items-center gap-[32px] text-center">
-          <div className="flex flex-col items-center gap-[12px]">
-            <h2 className="font-serif font-black text-[36px] md:text-[44px] leading-tight tracking-tight text-[#2B2B2B]">
+      {/* 13. NEWSLETTER / CTA SECTION — 1440×337, py-42, px-80, gap-32 */}
+      <section
+        style={{
+          width: "100%",
+          paddingTop: "42px",
+          paddingBottom: "42px",
+          paddingLeft: "80px",
+          paddingRight: "80px",
+          background: "#FFFFFF",
+        }}
+      >
+        <div
+          style={{
+            maxWidth: "1440px",
+            margin: "0 auto",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "32px",
+            textAlign: "center",
+          }}
+        >
+          {/* Text block */}
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
+            {/* Heading: Fraunces SemiBold 42px, lh 100%, #2B2B2B */}
+            <h2
+              style={{
+                fontFamily: "Fraunces, serif",
+                fontWeight: 600,
+                fontSize: "42px",
+                lineHeight: "100%",
+                letterSpacing: "0px",
+                textAlign: "center",
+                color: "#2B2B2B",
+                maxWidth: "1280px",
+                margin: 0,
+              }}
+            >
               The{" "}
-              <span className="text-[#FF5A36]">best adventures</span>{" "}
+              <span style={{ color: "#FF5A36" }}>best adventures</span>{" "}
               find their way to your inbox.
             </h2>
-            <p className="text-[#2B2B2B]/70 text-[16px] md:text-[18px] leading-relaxed max-w-[680px]">
+            {/* Subtitle: Faktum Medium 24px, lh 32px, rgba(43,43,43,1) */}
+            <p
+              style={{
+                fontFamily: "Faktum, sans-serif",
+                fontWeight: 500,
+                fontSize: "24px",
+                lineHeight: "32px",
+                letterSpacing: "0px",
+                textAlign: "center",
+                color: "rgba(43, 43, 43, 1)",
+                maxWidth: "1280px",
+                margin: 0,
+              }}
+            >
               Hidden places, exclusive trip drops, curated gear, and stories from the road delivered before anyone else hears about them.
             </p>
           </div>
-          <div className="flex flex-wrap justify-center gap-4">
+
+          {/* Buttons row: w-584, gap-12 */}
+          <div style={{ display: "flex", gap: "12px", width: "584px", maxWidth: "100%" }}>
+            {/* Book Now: 286×55, pt-16 pr-32 pb-16 pl-32, radius-4, bg #1D493E */}
             <Link
               href="/travel"
-              className="px-8 py-3.5 rounded-lg bg-[#1D493E] hover:bg-[#163a31] text-white font-bold text-sm transition-all shadow-sm"
+              style={{
+                width: "286px",
+                height: "55px",
+                paddingTop: "16px",
+                paddingBottom: "16px",
+                paddingLeft: "32px",
+                paddingRight: "32px",
+                gap: "8px",
+                borderRadius: "4px",
+                background: "rgba(29, 73, 62, 1)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "#FFFFFF",
+                fontWeight: 700,
+                fontSize: "14px",
+                textDecoration: "none",
+                transition: "opacity 0.2s",
+              }}
+              className="hover:opacity-90"
             >
               Book Now
             </Link>
+            {/* Explore collection: 286×55, pt-16 pr-32 pb-16 pl-32, radius-4, border 2px solid #1D493E */}
             <Link
               href="/shop"
-              className="px-8 py-3.5 rounded-lg border border-[#2B2B2B] bg-transparent hover:bg-[#2B2B2B]/5 text-[#2B2B2B] font-bold text-sm transition-all"
+              style={{
+                width: "286px",
+                height: "55px",
+                paddingTop: "16px",
+                paddingBottom: "16px",
+                paddingLeft: "32px",
+                paddingRight: "32px",
+                gap: "8px",
+                borderRadius: "4px",
+                border: "2px solid rgba(29, 73, 62, 1)",
+                background: "transparent",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "rgba(29, 73, 62, 1)",
+                fontWeight: 700,
+                fontSize: "14px",
+                textDecoration: "none",
+                transition: "background 0.2s",
+              }}
+              className="hover:bg-[#1D493E]/5"
             >
               Explore collection
             </Link>

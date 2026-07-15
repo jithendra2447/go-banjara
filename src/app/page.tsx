@@ -408,7 +408,7 @@ export default function Homepage() {
       </section>
 
       {/* 3. DUAL CALL-TO-ACTIONS */}
-      <section className="max-w-[1440px] mx-auto px-6 md:px-20 pt-[42px] pb-[42px] bg-white relative z-35">
+      <section className="max-w-[1440px] mx-auto px-6 md:px-20 pt-[32px] pb-[32px] bg-white relative z-35">
         <div className="grid md:grid-cols-2 gap-8">
           {/* Card 1 - Shop Gear (Left, Green) */}
           <div className="bg-[#1D493E] text-white p-6 rounded-[4px] flex flex-col justify-between gap-8 relative overflow-hidden group shadow-md border border-white/5">
@@ -455,7 +455,7 @@ export default function Homepage() {
       </section>
 
       {/* 4. DESTINATIONS SECTION */}
-      <section className="bg-white pt-[42px] pb-0 relative z-10">
+      <section className="bg-white pt-[32px] pb-0 relative z-10">
         <div className="max-w-[1440px] mx-auto px-6 md:px-[80px] flex flex-col gap-[62px] text-center">
           
           {/* Centered Header (Figma styled: serif title 42px, sans medium subtitle 24px) */}
@@ -681,7 +681,7 @@ export default function Homepage() {
 
       {/* 5. TOP PRODUCT CATEGORIES */}
       <section className="bg-white relative z-10">
-        <div className="max-w-[1440px] mx-auto px-6 md:px-20 pt-8 pb-[42px] flex flex-col gap-[32px]">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-20 pt-6 pb-[32px] flex flex-col gap-[32px]">
           
           {/* Header Row (Flow Horizontal, Justify space-between, Width Fill 1280px, Height Hug 134px) */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-gray-100 text-left">
@@ -807,7 +807,7 @@ export default function Homepage() {
 
       {/* 7. TODAY'S BEST DEALS FOR YOU */}
       <section className="bg-white relative z-10">
-        <div className="max-w-[1440px] w-full mx-auto pt-[42px] pb-[42px] px-6 md:px-[80px] flex flex-col gap-[62px]">
+        <div className="max-w-[1440px] w-full mx-auto pt-[32px] pb-[32px] px-6 md:px-[80px] flex flex-col gap-[62px]">
           
           {/* Header Container (Width: 1280px, Height: 134px, Justify: space-between, Background: white, Border radius: 4px) */}
           <div className="w-full md:w-[1280px] md:h-[134px] mx-auto flex flex-col justify-between items-center bg-white rounded-[4px] text-center">
@@ -999,7 +999,7 @@ export default function Homepage() {
       </section>
 
       {/* 8. MOST SELLING PRODUCTS */}
-      <section className="bg-white pt-[42px] pb-[42px] text-left relative z-10 border-t border-gray-100">
+      <section className="bg-white pt-[32px] pb-[32px] text-left relative z-10 border-t border-gray-100">
         <div className="max-w-[1440px] mx-auto px-6 md:px-[80px] flex flex-col gap-[32px]">
           
           {/* Header Row (Flow Horizontal, Justify space-between, Width Fill, items-end) */}
@@ -1188,7 +1188,7 @@ export default function Homepage() {
       </div>
 
       {/* 9. MEET BONJO SECTION (Brand story) */}
-      <section className="max-w-[1440px] w-full mx-auto px-6 md:px-[80px] pt-[62px] pb-[62px] md:h-[774px] flex items-center bg-white relative overflow-visible">
+      <section className="max-w-[1440px] w-full mx-auto px-6 md:px-[80px] pt-[48px] pb-[48px] md:h-[774px] flex items-center bg-white relative overflow-visible">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-[32px] items-center w-full">
           {/* Left Column: Image with slight rotation and glow */}
           <div className="relative">
@@ -1408,66 +1408,87 @@ export default function Homepage() {
       </section>
 
       {/* 10. TRAVEL DIARIES / STORIES */}
-      <section className="bg-white pt-[42px] pb-[42px] text-left relative z-10 border-t border-gray-100">
-        <div className="max-w-[1440px] mx-auto px-6 md:px-20 space-y-12">
+      <section className="bg-white pt-[42px] pb-[24px] text-left relative z-10 border-t border-gray-100 w-full md:h-[1423.24px] flex items-center">
+        <div className="max-w-[1440px] w-full mx-auto px-6 md:px-[80px] flex flex-col gap-[62px]">
           
-          <div className="text-center space-y-3">
-            <span className="inline-block text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-1 rounded-[4px] text-xs font-bold uppercase tracking-wider">
-              Blogs
-            </span>
-            <h2 className="text-3xl md:text-[38px] font-sans font-black text-[#1D493E] leading-tight">
-              Travel Tales from the <span className="text-[#FF5A36]">curious Explorer</span>
+          {/* Header Container (Width: 1280px, Height: 134px, Gap: 12px) */}
+          <div className="w-full md:w-[1280px] md:h-[134px] mx-auto flex flex-col justify-center items-center gap-[12px] text-center shrink-0">
+            <div className="h-[18px] flex items-center justify-center">
+              <span className="w-[53px] h-[18px] flex items-center justify-center font-sans font-semibold text-[14px] leading-none tracking-[1.2px] text-[#FF623E] uppercase">
+                Blogs
+              </span>
+            </div>
+            <h2 className="text-3xl md:text-[42px] font-serif font-semibold text-[#2B2B2B] leading-none h-[52px] flex items-center justify-center">
+              Travel Tales from the curious Explorer
             </h2>
-            <p className="text-gray-500 text-sm md:text-base font-semibold leading-relaxed max-w-2xl mx-auto">
+            <p className="text-[#2B2B2B] text-sm md:text-[24px] font-medium leading-[32px] h-[32px] flex items-center justify-center">
               Follow my voices to discover unique voices, breathtaking landscapes & unforgettable experiences
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-x-12 md:gap-y-10">
-            {BLOG_POSTS.slice(0, 4).map((post) => (
-              <Link 
-                key={post.id} 
-                href={`/blog`}
-                className="space-y-4 group block text-left"
-              >
-                {/* Image Wrapper */}
-                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[4px] bg-gray-100 border border-gray-150">
-                  <img 
-                    src={post.image} 
-                    alt={post.title} 
-                    className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
-                    style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
-                  />
-                </div>
-                {/* Text Content */}
-                <div className="space-y-2">
-                  <h3 className="text-lg md:text-xl font-serif font-black text-[#1D493E] leading-snug group-hover:text-[#FF5A36] transition-colors">
-                    {post.title}
-                  </h3>
-                  <p className="text-xs md:text-sm text-gray-400 font-bold leading-none">
-                    {post.date}  •  {post.readTime}
-                  </p>
-                </div>
-              </Link>
-            ))}
-          </div>
+          {/* Blog posts grid and footer container */}
+          <div className="w-full md:w-[1280px] md:h-[1061.24px] mx-auto flex flex-col justify-between shrink-0">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-10 md:gap-x-[32px] md:gap-y-[42px]">
+              {BLOG_POSTS.slice(0, 4).map((post) => (
+                <Link 
+                  key={post.id} 
+                  href={`/blog`}
+                  className="flex flex-col gap-4 group block text-left"
+                >
+                  {/* Image Wrapper */}
+                  <div className="relative w-full md:w-[624px] md:h-[358.62px] overflow-hidden rounded-t-[4px] rounded-b-none bg-gray-100 border border-gray-150">
+                    <img 
+                      src={post.image} 
+                      alt={post.title} 
+                      className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
+                      style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
+                    />
+                  </div>
+                  {/* Text Content */}
+                  <div className="flex flex-col gap-2">
+                    <h3 className="w-full md:w-[624px] md:h-[78px] flex items-center font-serif font-semibold text-[32px] leading-none text-[#2B2B2B] group-hover:text-[#FF5A36] transition-colors">
+                      {post.title}
+                    </h3>
+                    <p className="text-xs md:text-sm text-gray-400 font-bold leading-none">
+                      {post.date}  •  {post.readTime}
+                    </p>
+                  </div>
+                </Link>
+              ))}
+            </div>
 
-          {/* View all footer */}
-          <div className="text-center pt-4">
-            <Link 
-              href="/blog" 
-              className="inline-flex items-center gap-1.5 text-sm font-bold text-[#1D493E] hover:text-[#FF5A36] transition-all duration-300"
-            >
-              <span>View all</span>
-              <ArrowUpRight className="w-4 h-4" />
-            </Link>
+            {/* View all footer (Figma: Size Extra Large, height 68px, background transparent, border radius 4px) */}
+            <div className="text-center">
+              <Link 
+                href="/blog" 
+                className="inline-flex items-center justify-center w-[185px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[4px] bg-transparent text-[#1D493E] hover:opacity-80 transition-all duration-300 cursor-pointer group"
+              >
+                <span className="w-[73px] h-[25px] flex items-center justify-center font-sans font-medium text-[20px] leading-none">
+                  View all
+                </span>
+                <svg 
+                  style={{ width: '32px', height: '32px' }}
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2.25" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"
+                  className="shrink-0"
+                >
+                  <path d="M7 17l2.5-2.5" />
+                  <path d="M12.5 11.5L17 7" />
+                  <path d="M7 7h10v10" />
+                </svg>
+              </Link>
+            </div>
           </div>
 
         </div>
       </section>
 
       {/* 11. FAQ ACCORDION SECTION (Matching Shop page design) */}
-      <section className="max-w-4xl mx-auto px-6 md:px-12 pt-[42px] pb-[42px] flex flex-col gap-[32px] w-full">
+      <section className="max-w-4xl mx-auto px-6 md:px-12 pt-[32px] pb-[32px] flex flex-col gap-[32px] w-full">
         {/* Header */}
         <div className="text-left space-y-2.5">
           <span className="inline-block text-[9px] font-black uppercase tracking-[0.15em] text-[#FF5B37] bg-[#FFEBE5] px-2.5 py-1 rounded-sm">
@@ -1506,7 +1527,7 @@ export default function Homepage() {
       </section>
 
       {/* 12. SERVICES TO HELP YOU SHOP */}
-      <section className="bg-[#FAF9F6] pt-[42px] pb-[42px] border-t border-[#1D493E]/5 text-left">
+      <section className="bg-[#FAF9F6] pt-[32px] pb-[32px] border-t border-[#1D493E]/5 text-left">
         <div className="max-w-[1440px] mx-auto px-6 md:px-20 space-y-12">
           <div className="text-center space-y-3 max-w-2xl mx-auto">
             <span className="inline-block text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-1 rounded-[4px] text-xs font-bold uppercase tracking-wider">
@@ -1569,7 +1590,7 @@ export default function Homepage() {
       </section>
 
       {/* 13. BRAND CTA SECTION */}
-      <section className="bg-[#1D493E] text-white pt-[42px] pb-[42px] text-center relative z-10">
+      <section className="bg-[#1D493E] text-white pt-[32px] pb-[32px] text-center relative z-10">
         <div className="max-w-4xl mx-auto space-y-6">
           <h2 className="text-3xl md:text-[44px] font-serif font-black tracking-tight leading-tight">
             Escape the ordinary. Join the road.

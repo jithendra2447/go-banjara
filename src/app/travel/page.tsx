@@ -1095,13 +1095,22 @@ export default function HolidaysPortal() {
                     </div>
 
                     {/* Bottom Action buttons */}
-                    <div style={{ display: "flex", gap: "12px", paddingTop: "16px" }}>
+                    <div 
+                      style={{ 
+                        width: "100%",
+                        maxWidth: "405.33px",
+                        height: "55px",
+                        display: "flex", 
+                        gap: "12px",
+                        boxSizing: "border-box"
+                      }}
+                    >
                       <button
                         type="button"
                         onClick={() => handleOpenBookingDrawer(pkg)}
                         style={{
                           flex: 1,
-                          height: "48px",
+                          height: "55px",
                           borderRadius: "4px",
                           background: "rgba(29, 73, 62, 1)",
                           color: "white",
@@ -1122,7 +1131,7 @@ export default function HolidaysPortal() {
                         href={pkg.link || `/travel/package/${pkg.id}`}
                         style={{
                           flex: 1,
-                          height: "48px",
+                          height: "55px",
                           borderRadius: "4px",
                           border: "1px solid rgba(29, 73, 62, 1)",
                           background: "white",

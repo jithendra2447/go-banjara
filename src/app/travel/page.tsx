@@ -1238,7 +1238,30 @@ export default function HolidaysPortal() {
             <button
               type="button"
               onClick={() => setVisiblePackagesCount(prev => prev + 3)}
-              className="px-8 py-3 rounded-md border border-gray-300 bg-white hover:border-gray-400 text-xs font-bold text-gray-700 transition cursor-pointer"
+              style={{
+                width: "258px",
+                height: "68px",
+                paddingTop: "18px",
+                paddingRight: "36px",
+                paddingBottom: "18px",
+                paddingLeft: "36px",
+                gap: "8px",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                boxSizing: "border-box",
+                borderRadius: "4px",
+                border: "2px solid rgba(204, 204, 204, 1)",
+                backgroundColor: "rgba(255, 255, 255, 1)",
+                fontFamily: "'Faktum', 'Outfit', sans-serif",
+                fontWeight: 600,
+                fontSize: "20px",
+                lineHeight: "28px",
+                color: "rgba(29, 73, 62, 1)",
+                cursor: "pointer",
+                transition: "all 0.2s ease-in-out",
+              }}
+              className="hover:bg-gray-50 active:scale-95"
             >
               Load more
             </button>

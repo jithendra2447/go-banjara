@@ -222,9 +222,10 @@ export const Footer: React.FC = () => {
                 flexDirection: "row",
                 alignItems: "center",
                 gap: "8px",
-                borderRadius: "8px",
+                borderRadius: "4px",
                 padding: "8px",
                 background: "white",
+                border: "1px solid rgba(141, 141, 141, 1)",
                 boxSizing: "border-box",
               }}
             >

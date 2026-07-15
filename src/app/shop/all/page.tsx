@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import Link from 'next/link';
 import { Star, ShoppingCart } from 'lucide-react';
 import { useCart } from '@/components/providers';
@@ -8,6 +8,7 @@ import { PRODUCTS } from '@/data/products';
 import { Product } from '@/types';
 import ProductCard from '@/components/ProductCard';
 import { FilterDrawer } from '@/components/FilterDrawer';
+import { useSearchParams } from 'next/navigation';
 
 const categoryGroupMap: Record<string, string[]> = {
   'Collectibles & Accessories': ['stickers', 'badges', 'badges / pins', 'bookmarks', 'fridge magnets', 'key chains', 'keychains', 'luggage tags'],
@@ -17,10 +18,12 @@ const categoryGroupMap: Record<string, string[]> = {
   'Bags & Travel': ['backpacks', 'tote bags'],
 };
 
-export default function AllProductsPage() {
+function AllProductsContent() {
   const { addToCart } = useCart();
   const [productsList, setProductsList] = React.useState<Product[]>(PRODUCTS);
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
+  const searchParams = useSearchParams();
+  const searchQuery = searchParams.get('search') || '';
 
   // Filters State
   const [selectedGroup, setSelectedGroup] = React.useState<string | null>(null);
@@ -69,6 +72,12 @@ export default function AllProductsPage() {
   // Filter Products
   const filteredProducts = React.useMemo(() => {
     let list = productsList;
+
+    // 0. Search Filter
+    if (searchQuery) {
+      const q = searchQuery.toLowerCase();
+      list = list.filter((p) => p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q));
+    }
 
     // 1. Group Filter
     if (selectedGroup) {
@@ -169,8 +178,25 @@ export default function AllProductsPage() {
         {/* Filter and Sort Toolbar */}
         <div className="flex flex-row items-center justify-between gap-6 border-b border-slate-100 pb-8 pt-4 w-full">
           {/* Results count (Left) */}
-          <div className="text-sm sm:text-base text-slate-800 font-medium">
-            Showing all {sortedProducts.length} results
+          <div className="text-sm sm:text-base text-slate-800 font-medium flex flex-col gap-1 text-left">
+            <div>
+              Showing {sortedProducts.length} results
+              {searchQuery && (
+                <span className="text-[#FF5B37] font-semibold ml-1.5">
+                  for &ldquo;{searchQuery}&rdquo;
+                </span>
+              )}
+            </div>
+            {searchQuery && (
+              <button
+                onClick={() => {
+                  window.location.href = '/shop/all';
+                }}
+                className="text-xs text-slate-400 hover:text-[#1D493E] font-bold uppercase tracking-wider text-left transition mt-0.5"
+              >
+                ✕ Clear search query
+              </button>
+            )}
           </div>
 
           {/* Interactive Filters & Sort (Right) */}
@@ -255,5 +281,17 @@ export default function AllProductsPage() {
         onClear={handleClear}
       />
     </div>
+  );
+}
+
+export default function AllProductsPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-white flex items-center justify-center font-sans font-medium text-slate-500">
+        Loading products...
+      </div>
+    }>
+      <AllProductsContent />
+    </Suspense>
   );
 }

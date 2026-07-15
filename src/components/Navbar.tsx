@@ -15,6 +15,19 @@ export const Navbar: React.FC = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const pathname = usePathname();
   const { cartCount, setCartOpen, wishlist, setWishlistOpen, user, logout, setAuthOpen } = useCart();
+  const [searchVal, setSearchVal] = useState('');
+
+  const triggerSearch = () => {
+    if (searchVal.trim()) {
+      window.location.href = `/shop/all?search=${encodeURIComponent(searchVal.trim())}`;
+    }
+  };
+
+  const handleSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      triggerSearch();
+    }
+  };
 
   const navLinks = [
     { name: 'Travel Packages', path: '/travel' },
@@ -99,12 +112,21 @@ export const Navbar: React.FC = () => {
             
             {/* Search Input Box */}
             <div className="hidden md:flex items-center w-[215px] h-[47px] gap-[8px] rounded-[4px] p-[12px] bg-white border border-[#CCCCCC]">
-              <svg className="w-[20px] h-[20px] shrink-0 text-[#8D8D8D]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
+              <button
+                onClick={triggerSearch}
+                className="focus:outline-none shrink-0 text-[#8D8D8D] hover:text-[#1D493E] transition-colors"
+                aria-label="Search"
+              >
+                <svg className="w-[20px] h-[20px]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </button>
               <input
                 type="text"
                 placeholder="Search by products"
+                value={searchVal}
+                onChange={(e) => setSearchVal(e.target.value)}
+                onKeyDown={handleSearchKeyDown}
                 className="w-[163px] h-[23px] bg-transparent text-[18px] leading-none focus:outline-none font-sans font-normal placeholder-[#8D8D8D] text-slate-800"
               />
             </div>

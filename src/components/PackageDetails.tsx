@@ -41,9 +41,9 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
 
   const [isEnquiryModalOpen, setIsEnquiryModalOpen] = useState(false);
   const [enquiryName, setEnquiryName] = useState('');
-  const [phonePrefix, setPhonePrefix] = useState('+91');
+  const [phonePrefix, setPhonePrefix] = useState('+020');
   const [enquiryPhone, setEnquiryPhone] = useState('');
-  const [enquiryGuests, setEnquiryGuests] = useState(2);
+  const [enquiryGuests, setEnquiryGuests] = useState<string | number>('02');
   const [pickupLocation, setPickupLocation] = useState('');
   const [enquiryMessage, setEnquiryMessage] = useState('');
   const [enquirySubmitted, setEnquirySubmitted] = useState(false);
@@ -157,7 +157,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
       alert('Please select a travel date.');
       return;
     }
-    setEnquiryGuests(guests);
+    setEnquiryGuests(String(guests).padStart(2, '0'));
     setIsEnquiryModalOpen(true);
   };
 
@@ -1262,10 +1262,24 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
         </div>
       </section>
 
-      {/* Booking Enquiry Modal */}
       {isEnquiryModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-in fade-in duration-200">
-          <div className="bg-white rounded-[28px] border border-gray-150 max-w-md w-full p-6 md:p-8 space-y-6 shadow-2xl relative animate-in fade-in zoom-in-95 duration-200 text-left">
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-black/40 backdrop-blur-xs p-4 flex justify-center items-start">
+          <div 
+            style={{
+              width: "100%",
+              maxWidth: "778px",
+              minHeight: "834px",
+              background: "rgba(255, 255, 255, 1)",
+              border: "1px solid rgba(204, 204, 204, 1)",
+              borderRadius: "4px",
+              padding: "24px",
+              boxSizing: "border-box",
+              display: "flex",
+              flexDirection: "column",
+              gap: "24px",
+            }}
+            className="relative md:absolute md:top-[95px] md:left-1/2 md:-translate-x-1/2 shadow-2xl text-left animate-in fade-in duration-200"
+          >
             {/* Close Button */}
             <button
               type="button"
@@ -1276,12 +1290,12 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
             </button>
 
             {enquirySubmitted ? (
-              <div className="py-12 flex flex-col items-center justify-center space-y-4 text-center animate-in fade-in duration-300">
+              <div className="py-12 flex flex-col items-center justify-center space-y-4 text-center animate-in fade-in duration-300 my-auto">
                 <div className="w-16 h-16 bg-[#1D493E]/10 border-2 border-[#1D493E]/20 text-[#1D493E] rounded-full flex items-center justify-center animate-bounce">
                   <Check className="w-8 h-8" />
                 </div>
-                <h3 className="text-lg font-serif font-bold text-[#1D493E]">Enquiry Submitted!</h3>
-                <p className="text-xs text-gray-550 font-medium max-w-xs leading-relaxed">
+                <h3 className="text-2xl font-sans font-bold text-[#1D493E]">Enquiry Submitted!</h3>
+                <p className="text-sm text-gray-550 font-medium max-w-xs leading-relaxed">
                   Thank you! We will reach out to you within 24 hours on your contact number.
                 </p>
               </div>
@@ -1289,15 +1303,19 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
               <>
                 {/* Header */}
                 <div className="space-y-1">
-                  <h3 className="text-xl md:text-2xl font-serif font-bold text-[#1D493E]">{pkg.name} Booking</h3>
-                  <p className="text-xs text-gray-500 font-semibold font-mono">You can reach us anytime</p>
+                  <h3 className="font-sans font-bold text-[32px] text-[#2B2B2B] leading-none mb-1">
+                    {pkg?.name || 'Srinagar to Leh'} Booking
+                  </h3>
+                  <p className="font-sans font-medium text-[18px] text-[#8D8D8D] leading-none">
+                    You can reach us anytime
+                  </p>
                 </div>
 
                 {/* Form */}
-                <form onSubmit={handleEnquirySubmit} className="space-y-4">
+                <form onSubmit={handleEnquirySubmit} className="flex flex-col gap-[24px]">
                   {/* Full Name */}
-                  <div className="space-y-1.5">
-                    <label className="block text-[10px] font-mono tracking-wider text-gray-400 uppercase font-black">
+                  <div>
+                    <label className="font-sans font-medium text-[16px] text-[#2B2B2B] block mb-2">
                       Full Name
                     </label>
                     <input
@@ -1306,93 +1324,121 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                       placeholder="Kumar Sai Arja"
                       value={enquiryName}
                       onChange={(e) => setEnquiryName(e.target.value)}
-                      className="w-full p-3 rounded-xl border border-gray-200 bg-[#FAF9F6] text-xs text-[#1D493E] focus:outline-none focus:ring-2 focus:ring-[#1D493E]/10 font-bold"
+                      style={{ borderColor: "rgba(204, 204, 204, 1)" }}
+                      className="w-full p-4 rounded-[4px] border bg-white text-base text-[#2B2B2B] focus:outline-none focus:ring-1 focus:ring-[#1D493E] font-medium placeholder-[#CCCCCC]"
                     />
                   </div>
 
                   {/* Contact Number */}
-                  <div className="space-y-1.5">
-                    <label className="block text-[10px] font-mono tracking-wider text-gray-400 uppercase font-black">
+                  <div>
+                    <label className="font-sans font-medium text-[16px] text-[#2B2B2B] block mb-2">
                       Contact Number
                     </label>
-                    <div className="flex gap-2">
-                      <select
-                        value={phonePrefix}
-                        onChange={(e) => setPhonePrefix(e.target.value)}
-                        className="p-3 rounded-xl border border-gray-200 bg-[#FAF9F6] text-xs text-[#1D493E] focus:outline-none focus:ring-2 focus:ring-[#1D493E]/10 font-bold cursor-pointer"
-                      >
-                        <option value="+91">+91</option>
-                        <option value="+1">+1</option>
-                        <option value="+44">+44</option>
-                      </select>
+                    <div 
+                      style={{ borderColor: "rgba(204, 204, 204, 1)" }} 
+                      className="flex rounded-[4px] border bg-white overflow-hidden"
+                    >
+                      <div className="relative flex items-center border-r border-[#CCCCCC] bg-[#F4F6F5] px-4 cursor-pointer">
+                        <select
+                          value={phonePrefix}
+                          onChange={(e) => setPhonePrefix(e.target.value)}
+                          className="appearance-none bg-transparent pr-6 text-base font-medium text-[#2B2B2B] focus:outline-none cursor-pointer"
+                        >
+                          <option value="+020">+020</option>
+                          <option value="+91">+91</option>
+                          <option value="+1">+1</option>
+                          <option value="+44">+44</option>
+                        </select>
+                        <ChevronDown className="w-4 h-4 text-gray-500 absolute right-2 pointer-events-none" />
+                      </div>
                       <input
                         type="tel"
                         required
                         placeholder="9492906356"
                         value={enquiryPhone}
                         onChange={(e) => setEnquiryPhone(e.target.value)}
-                        className="flex-1 p-3 rounded-xl border border-gray-200 bg-[#FAF9F6] text-xs text-[#1D493E] focus:outline-none focus:ring-2 focus:ring-[#1D493E]/10 font-bold"
+                        className="flex-1 px-4 py-3.5 text-base text-[#2B2B2B] focus:outline-none font-medium placeholder-[#CCCCCC]"
                       />
                     </div>
                   </div>
 
                   {/* No of Travelers */}
-                  <div className="space-y-1.5">
-                    <label className="block text-[10px] font-mono tracking-wider text-gray-400 uppercase font-black">
+                  <div>
+                    <label className="font-sans font-medium text-[16px] text-[#2B2B2B] block mb-2">
                       No of Travelers
                     </label>
                     <input
-                      type="number"
+                      type="text"
                       required
-                      min="1"
+                      placeholder="02"
                       value={enquiryGuests}
-                      onChange={(e) => setEnquiryGuests(parseInt(e.target.value) || 1)}
-                      className="w-full p-3 rounded-xl border border-gray-200 bg-[#FAF9F6] text-xs text-[#1D493E] focus:outline-none focus:ring-2 focus:ring-[#1D493E]/10 font-bold"
+                      onChange={(e) => setEnquiryGuests(e.target.value)}
+                      style={{ borderColor: "rgba(204, 204, 204, 1)" }}
+                      className="w-full p-4 rounded-[4px] border bg-white text-base text-[#2B2B2B] focus:outline-none focus:ring-1 focus:ring-[#1D493E] font-medium placeholder-[#CCCCCC]"
                     />
                   </div>
 
                   {/* Pick up location */}
-                  <div className="space-y-1.5">
-                    <label className="block text-[10px] font-mono tracking-wider text-gray-400 uppercase font-black">
+                  <div>
+                    <label className="font-sans font-medium text-[16px] text-[#2B2B2B] block mb-2">
                       Pick up location
                     </label>
-                    <select
-                      value={pickupLocation}
-                      onChange={(e) => setPickupLocation(e.target.value)}
-                      className="w-full p-3 rounded-xl border border-gray-200 bg-[#FAF9F6] text-xs text-[#1D493E] focus:outline-none focus:ring-2 focus:ring-[#1D493E]/10 font-bold cursor-pointer"
-                    >
-                      <option value="">Ex: Telangana</option>
-                      <option value="Telangana">Telangana</option>
-                      <option value="Delhi">Delhi</option>
-                      <option value="Maharashtra">Maharashtra</option>
-                      <option value="Karnataka">Karnataka</option>
-                    </select>
+                    <div className="relative">
+                      <select
+                        value={pickupLocation}
+                        onChange={(e) => setPickupLocation(e.target.value)}
+                        style={{ borderColor: "rgba(204, 204, 204, 1)" }}
+                        className="w-full p-4 pr-10 rounded-[4px] border bg-white text-base text-[#2B2B2B] appearance-none focus:outline-none focus:ring-1 focus:ring-[#1D493E] font-medium cursor-pointer"
+                      >
+                        <option value="">Ex: Telangana</option>
+                        <option value="Telangana">Telangana</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Maharashtra">Maharashtra</option>
+                        <option value="Karnataka">Karnataka</option>
+                      </select>
+                      <ChevronDown className="w-5 h-5 text-gray-500 absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+                    </div>
                   </div>
 
                   {/* Message */}
-                  <div className="space-y-1.5">
-                    <label className="block text-[10px] font-mono tracking-wider text-gray-400 uppercase font-black">
+                  <div>
+                    <label className="font-sans font-medium text-[16px] text-[#2B2B2B] block mb-2">
                       Message
                     </label>
                     <textarea
                       placeholder="Tell us about your requirements"
                       value={enquiryMessage}
                       onChange={(e) => setEnquiryMessage(e.target.value)}
-                      rows={3}
-                      className="w-full p-3 rounded-xl border border-gray-200 bg-[#FAF9F6] text-xs text-[#1D493E] focus:outline-none focus:ring-2 focus:ring-[#1D493E]/10 font-bold resize-none"
+                      rows={4}
+                      style={{ borderColor: "rgba(204, 204, 204, 1)" }}
+                      className="w-full p-4 rounded-[4px] border bg-white text-base text-[#2B2B2B] focus:outline-none focus:ring-1 focus:ring-[#1D493E] font-medium placeholder-[#CCCCCC] resize-none"
                     />
                   </div>
 
                   {/* Submit Button */}
                   <button
                     type="submit"
-                    className="w-full bg-[#1D493E] hover:bg-[#16372f] text-white py-3.5 rounded-xl font-bold text-xs uppercase tracking-widest transition duration-300 shadow-sm cursor-pointer mt-2 text-center"
+                    style={{
+                      backgroundColor: "rgba(29, 73, 62, 1)",
+                      height: "55px",
+                      borderRadius: "4px",
+                      border: "none",
+                      fontFamily: "'Faktum', 'Outfit', sans-serif",
+                      fontWeight: 500,
+                      fontSize: "18px",
+                      lineHeight: "100%",
+                      color: "#FFFFFF",
+                    }}
+                    className="w-full hover:opacity-95 transition-opacity cursor-pointer mt-2 flex items-center justify-center font-semibold"
                   >
                     Submit Enquiry
                   </button>
                 </form>
               </>
             )}
+          </div>
+        </div>
+      )}    )}
           </div>
         </div>
       )}

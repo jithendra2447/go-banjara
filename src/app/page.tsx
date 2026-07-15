@@ -1282,7 +1282,7 @@ export default function Homepage() {
                     name: "Kiran Makwan",
                     subtitle: "Verified Wanderer",
                     avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150&q=80",
-                    text: "The quality of the journal is incredible. It feels like a piece of art that I can actually take on my treks. Bonjo's personality shines through the brand!",
+                    text: "Exploring Spiti Valley with Go Banjara was a life-changing journey. Flawless planning, cozy homestays, and a wonderful group of fellow travelers. Highly recommended!",
                     stars: 5
                   },
                   {
@@ -1290,7 +1290,7 @@ export default function Homepage() {
                     name: "Priyanka Sen",
                     subtitle: "Slow Traveler",
                     avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&h=150&q=80",
-                    text: "The double-walled thermal flask keeps my chai steaming hot even at 14,000 feet in Ladakh. Truly premium travel gear built for real conditions.",
+                    text: "The double-walled thermal flask keeps my tea steaming hot even at 14,000 feet in Ladakh. Truly premium travel gear built for real mountain conditions.",
                     stars: 5
                   }
                 ].map((review) => (
@@ -1322,15 +1322,15 @@ export default function Homepage() {
                     name: "Ananya Roy",
                     subtitle: "Himalayan Backpacker",
                     avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&h=150&q=80",
-                    text: "I bought the waterproof stickers for my laptop and flask. They've survived rain, dust, and countless camping trips without peeling or fading at all!",
+                    text: "I bought the waterproof stickers for my laptop and helmet. They've survived rain, dust, and countless rugged camping trips without peeling or fading!",
                     stars: 5
                   },
                   {
-                    id: "rev-5",
-                    name: "Arjun Mehta",
-                    subtitle: "Weekend Explorer",
-                    avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&h=150&q=80",
-                    text: "Super clean design on the T-shirts! The fit is perfect, the fabric is extremely soft and breathable, and the graphics represent the soul of travel.",
+                    id: "rev-6",
+                    name: "Priya Nair",
+                    subtitle: "Solo Backpacker",
+                    avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&h=150&q=80",
+                    text: "The Kerala Backwaters & Munnar Hills trip was breathtaking. The coordination was flawless, and the local guides showed us hidden trails away from all the tourists!",
                     stars: 5
                   }
                 ].map((review) => (
@@ -1346,7 +1346,7 @@ export default function Homepage() {
                     <div className="flex items-center gap-3.5 pt-2 border-t border-gray-100">
                       <img src={review.avatar} alt={review.name} className="w-12 h-12 rounded-full object-cover shrink-0" />
                       <div>
-                        <h4 className="text-sm font-black text-gray-808">{review.name}</h4>
+                        <h4 className="text-sm font-black text-gray-888">{review.name}</h4>
                         <p className="text-xs text-[#1D493E]/60 font-black">{review.subtitle}</p>
                       </div>
                     </div>
@@ -1357,6 +1357,14 @@ export default function Homepage() {
               {/* Column 3 (Faded) */}
               <div className="space-y-8 md:opacity-40 hover:opacity-100 transition duration-300">
                 {[
+                  {
+                    id: "rev-5",
+                    name: "Arjun Mehta",
+                    subtitle: "Weekend Explorer",
+                    avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&h=150&q=80",
+                    text: "Super clean design on the T-shirts! The fit is perfect, the fabric is extremely soft and breathable, and the graphics represent the soul of adventure travel.",
+                    stars: 5
+                  },
                   {
                     id: "rev-3",
                     name: "Rohan Sharma",
@@ -1391,7 +1399,7 @@ export default function Homepage() {
             <div 
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1542px] h-[639px] pointer-events-none z-20 hidden md:block"
               style={{
-                background: 'linear-gradient(90.01deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 46.69%, #FFFFFF 93.38%)'
+                background: 'linear-gradient(90deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 12%, rgba(255, 255, 255, 0) 88%, #FFFFFF 100%)'
               }}
             />
           </div>

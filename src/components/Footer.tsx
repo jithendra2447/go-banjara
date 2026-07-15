@@ -238,11 +238,32 @@ export const Footer: React.FC = () => {
             justifyContent: "space-between",
             alignItems: "center",
           }}
-          className="text-xs font-medium text-slate-300/70"
         >
-          <span>Copyrights © 2026 Go Banjara. All Rights Reserved.</span>
+          <span
+            style={{
+              fontFamily: "'Faktum', 'Outfit', sans-serif",
+              fontWeight: 500,
+              fontSize: "20px",
+              lineHeight: "100%",
+              letterSpacing: "0px",
+              color: "rgba(255, 255, 255, 1)",
+            }}
+          >
+            Copyrights © 2026 Go Banjara. All Rights Reserved.
+          </span>
           <div className="flex items-center gap-2">
-            <span>Handmade with love ❤️ by TRD Studios</span>
+            <span
+              style={{
+                fontFamily: "'Faktum', 'Outfit', sans-serif",
+                fontWeight: 500,
+                fontSize: "20px",
+                lineHeight: "100%",
+                letterSpacing: "0px",
+                color: "rgba(255, 255, 255, 1)",
+              }}
+            >
+              Handmade with love ❤️ by TRD Studios
+            </span>
             {/* Secret Invisible Link to Admin Portal */}
             <Link
               href="/admin"

@@ -1028,7 +1028,7 @@ export default function HolidaysPortal() {
                       >
                         <h3 
                           style={{
-                            width: "178px",
+                            flex: 1,
                             height: "30px",
                             fontFamily: "'Faktum', 'Outfit', sans-serif",
                             fontWeight: 600,
@@ -1049,17 +1049,18 @@ export default function HolidaysPortal() {
                         </h3>
                         <span 
                           style={{
-                            width: "213px",
+                            flexShrink: 0,
                             height: "35px",
                             fontFamily: "'Faktum', 'Outfit', sans-serif",
                             fontWeight: 600,
                             fontSize: "28px",
-                            lineHeight: "100%",
+                            lineHeight: "35px",
                             letterSpacing: "0px",
                             color: "rgba(43, 43, 43, 1)",
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "flex-end",
+                            marginLeft: "16px",
                           }}
                         >
                           ₹{pkg.price.toLocaleString('en-IN')}/Person
@@ -1100,7 +1101,6 @@ export default function HolidaysPortal() {
                         gridTemplateColumns: "repeat(2, 1fr)", 
                         alignContent: "space-between",
                         paddingTop: "16px",
-                        borderTop: "1px solid rgba(141, 141, 141, 0.15)",
                         boxSizing: "border-box"
                       }}
                     >

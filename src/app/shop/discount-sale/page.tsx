@@ -141,7 +141,7 @@ export default function DiscountSalePage() {
   return (
     <div className="bg-white min-h-screen pb-24 flex flex-col items-center">
       {/* Header Section */}
-      <header className="max-w-[1440px] w-full text-left space-y-6 px-6 md:px-[80px] pt-[62px] pb-[24px]">
+      <header className="max-w-[1440px] w-full mx-auto text-left space-y-6 px-6 md:px-[80px] pt-[62px] pb-[24px]">
         <div className="flex justify-start">
           <span className="inline-block text-[10px] font-black uppercase tracking-[0.18em] text-[#FF5B37] bg-[#FFEBE5] px-3.5 py-1.5 rounded-sm">
             EXPERIENCE THE SHOPPING

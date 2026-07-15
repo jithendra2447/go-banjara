@@ -150,7 +150,7 @@ export default function ShopPage() {
   return (
     <div className="bg-white min-h-screen pb-24 flex flex-col items-center">
       {/* Header Section (Width: 1440px, Padding: 62px 80px 0px 80px) */}
-      <header className="w-full max-w-[1440px] px-6 md:px-[80px] pt-[62px] pb-[10px] flex justify-center bg-white">
+      <header className="w-full max-w-[1440px] mx-auto px-6 md:px-[80px] pt-[62px] pb-[10px] flex justify-center bg-white">
         {/* Inner header container (Width: 1280px, Height: 166px, Gap: 12px, Background: white) */}
         <div className="w-full max-w-[1280px] md:h-[166px] flex flex-col justify-between items-center gap-[12px] bg-white">
           {/* Tag (Width: 222px, Height: 18px, Font: Faktum 14px, Weight: 600, Color: #FF623E background, text uppercase, tracking 1.2px) */}

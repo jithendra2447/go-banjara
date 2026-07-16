@@ -50,8 +50,8 @@ export const Navbar: React.FC = () => {
   return (
     <header className="w-full z-50 flex flex-col sticky top-0 bg-white backdrop-blur-[12px] border-b border-[#CCCCCC]">
       {/* 2. MAIN NAV BAR */}
-      <nav className="h-[129px] flex items-center w-full">
-        <div className="max-w-[1440px] mx-auto px-[42px] pt-[40px] pb-[40px] w-full flex items-center justify-between h-full">
+      <nav className="h-[90px] flex items-center w-full">
+        <div className="max-w-[1440px] mx-auto px-[42px] pt-[20px] pb-[20px] w-full flex items-center justify-between h-full">
           
           <div className="flex items-center gap-10">
             {/* Logo (Direct Image from Figma Mockup) */}

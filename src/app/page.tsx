@@ -359,12 +359,12 @@ export default function Homepage() {
         <div className="max-w-[1440px] mx-auto px-6 md:px-20 w-full grid md:grid-cols-2 gap-12 items-center relative pt-[110px] pb-4">
           <div className="flex flex-col gap-[52px] text-left md:max-w-[454px] w-full">
             <h1 className="text-4xl md:text-[62px] md:leading-[1.25] tracking-[-0.2px] font-semibold text-white font-sans md:max-w-[454px] md:h-[234px] w-full">
-              {pageContent.heroTitleLine1} <br />
-              {pageContent.heroTitleLine2} <br />
-              {pageContent.heroTitleLine3}
+              {pageContent.heroTitleLine1?.trim() ? pageContent.heroTitleLine1 : "Hey! Let’s"} <br />
+              {pageContent.heroTitleLine2?.trim() ? pageContent.heroTitleLine2 : "Escape from"} <br />
+              {pageContent.heroTitleLine3?.trim() ? pageContent.heroTitleLine3 : "the Ordinary"}
             </h1>
             <p className="text-sm md:text-[20px] md:leading-[34px] tracking-[0px] text-white/95 font-sans font-medium max-w-md md:max-w-[454px]">
-              {pageContent.heroSubtitle}
+              {pageContent.heroSubtitle?.trim() ? pageContent.heroSubtitle : "We bridge the gap between soulful Indian travel and high end gear. curated for those who find home in the dust of the road"}
             </p>
             <div className="flex flex-wrap items-center gap-4">
               <Link 
@@ -372,7 +372,7 @@ export default function Homepage() {
                 className="px-8 py-3.5 rounded-lg bg-[#1D493E] hover:bg-[#15342c] hover:scale-[1.02] active:scale-[0.98] text-white border border-[#1D493E] transition-all duration-300 cursor-pointer text-center min-w-[150px] shadow-sm flex items-center justify-center"
                 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "100%", letterSpacing: "0px", verticalAlign: "middle" }}
               >
-                {pageContent.heroShopBtn}
+                {pageContent.heroShopBtn?.trim() ? pageContent.heroShopBtn : "Shop Now"}
               </Link>
               <Link 
                 href="/travel"
@@ -398,7 +398,7 @@ export default function Homepage() {
                   boxSizing: "border-box",
                 }}
               >
-                {pageContent.heroTravelBtn}
+                {pageContent.heroTravelBtn?.trim() ? pageContent.heroTravelBtn : "See Travel Packages"}
               </Link>
             </div>
           </div>

@@ -825,13 +825,18 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                     ({pkg.ratingCount || 312} reviews)
                   </span>
                 </div>
-                <span 
+                 <span 
                   style={{
+                    width: "100%",
+                    maxWidth: "837px",
+                    height: "25px",
                     fontFamily: "'Faktum', 'Outfit', sans-serif",
                     fontWeight: 500,
                     fontSize: "20px",
                     lineHeight: "100%",
                     color: "rgba(141, 141, 141, 1)",
+                    display: "inline-flex",
+                    alignItems: "center",
                   }}
                   className="leading-none"
                 >

@@ -298,7 +298,7 @@ export default function Homepage() {
           <img 
             src="/hero-combined.png?v=5" 
             alt="Hero Background" 
-            className="absolute inset-x-0 top-0 w-full h-[112%] object-cover object-top brightness-[0.88] contrast-[1.05] saturate-[1.05]"
+            className="absolute inset-x-0 top-0 w-full h-full object-cover object-top brightness-[0.88] contrast-[1.05] saturate-[1.05]"
             style={{ 
               imageRendering: '-webkit-optimize-contrast',
               transform: 'translateZ(0)'
@@ -309,7 +309,7 @@ export default function Homepage() {
           <img 
             src="/hero-overlay.png" 
             alt="Overlay Layer" 
-            className="absolute inset-x-0 top-0 w-full h-[112%] object-cover object-top opacity-15 mix-blend-multiply"
+            className="absolute inset-x-0 top-0 w-full h-full object-cover object-top opacity-15 mix-blend-multiply"
             style={{ 
               imageRendering: '-webkit-optimize-contrast',
               transform: 'translateZ(0)'
@@ -320,7 +320,7 @@ export default function Homepage() {
           <img 
             src="/hero-top-gradient.png" 
             alt="Top Dark Gradient Layer" 
-            className="absolute inset-x-0 top-0 w-full h-[112%] object-cover object-top"
+            className="absolute inset-x-0 top-0 w-full h-full object-cover object-top"
             style={{ 
               imageRendering: '-webkit-optimize-contrast',
               transform: 'translateZ(0)'
@@ -343,7 +343,7 @@ export default function Homepage() {
           <img 
             src="/hero-bike.png?v=5" 
             alt="Biker" 
-            className="absolute inset-x-0 top-0 w-full h-[112%] object-cover object-top"
+            className="absolute inset-x-0 top-0 w-full h-full object-cover object-top"
             style={{ 
               imageRendering: '-webkit-optimize-contrast',
               transform: 'translateZ(0)'

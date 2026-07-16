@@ -417,7 +417,8 @@ export default function Homepage() {
                   boxSizing: "border-box",
                 }}
               >
-                {pageContent.heroTravelBtn?.trim() ? pageContent.heroTravelBtn : "See Travel Packages"}
+                <span>{pageContent.heroTravelBtn?.trim() ? pageContent.heroTravelBtn : "See Travel Packages"}</span>
+                <ArrowUpRight className="w-[24px] h-[24px] shrink-0" strokeWidth={2.5} />
               </Link>
             </div>
           </div>

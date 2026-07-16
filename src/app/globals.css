@@ -109,3 +109,13 @@ section {
   padding-top: 42px !important;
   padding-bottom: 42px !important;
 }
+
+/* Locked Hero height rule to guarantee Figma proportions */
+.hero-banner-height {
+  height: 600px !important;
+}
+@media (min-width: 768px) {
+  .hero-banner-height {
+    height: 770px !important;
+  }
+}

@@ -904,43 +904,45 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
               <div className="flex flex-col gap-[62px] w-full max-w-[837px] animate-in fade-in duration-300">
                 
                 {/* Introduction Section */}
-                <div
+                 <div
                   style={{
                     width: "100%",
                     maxWidth: "837px",
-                    height: "232px",
+                    height: "274px",
                     display: "flex",
                     flexDirection: "column",
-                    gap: "32px",
+                    gap: "12px",
                     background: "rgba(255, 255, 255, 1)",
-                    borderRadius: "4px",
                     boxSizing: "border-box",
                   }}
                   className="text-left"
                 >
-
                   <h2
                     style={{
+                      height: "52px",
+                      display: "flex",
+                      alignItems: "center",
                       fontFamily: "Fraunces, serif",
                       fontWeight: 600,
                       fontSize: "42px",
                       lineHeight: "100%",
                       color: "rgba(43, 43, 43, 1)",
+                      margin: 0,
                     }}
-                    className="leading-none"
                   >
                     {mainPart}{" "}
                     <span style={{ color: "rgba(255, 98, 62, 1)" }}>{lastWord}</span>
                   </h2>
                   <p
                     style={{
-                      fontFamily: "Faktum, sans-serif",
+                      height: "210px",
+                      fontFamily: "'Faktum', 'Outfit', sans-serif",
                       fontWeight: 500,
                       fontSize: "20px",
                       lineHeight: "42px",
                       color: "rgba(43, 43, 43, 1)",
+                      margin: 0,
                     }}
-                    className="leading-relaxed"
                   >
                     {pkg.description || `Spiti Valley sits at 12,500 feet in the cold desert of Himachal Pradesh one of the most remote and breathtaking landscapes in India. This 8-day traverse takes you through high mountain passes, Tibetan-influenced villages, ancient monasteries carved into cliffs, and skies so clear you'll see the Milky Way before breakfast. This isn't a trip. It's a reckoning.`}
                   </p>

@@ -368,17 +368,78 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
           height: "118px",
           paddingTop: "62px",
           paddingBottom: "24px",
+          paddingLeft: "80px",
+          paddingRight: "80px",
           boxSizing: "border-box",
         }}
-        className="w-full max-w-[1440px] mx-auto px-4 md:px-10 lg:px-[80px] text-left flex items-center"
+        className="w-full max-w-[1440px] mx-auto text-left flex items-center"
       >
-        <div className="flex items-center gap-[12px] text-[16px] font-sans font-medium text-[#8D8D8D]">
-          <Link href="/" className="hover:text-[#1D493E] transition-colors">Home</Link>
-          <span className="text-gray-400 font-sans font-normal">&gt;</span>
-          <Link href="/travel" className="hover:text-[#1D493E] transition-colors">Travel Page</Link>
-          <span className="text-gray-400 font-sans font-normal">&gt;</span>
-          <span className="text-[#3B82F6] underline font-semibold truncate max-w-[300px]">
-            {pkg.name}
+        <div className="flex items-center gap-[12px]">
+          <Link 
+            href="/" 
+            className="hover:opacity-80 transition-opacity"
+            style={{
+              fontFamily: "'Faktum', 'Outfit', sans-serif",
+              fontWeight: 500,
+              fontSize: "24px",
+              lineHeight: "32px",
+              letterSpacing: "0px",
+              color: "rgba(141, 141, 141, 1)",
+              textDecoration: "none",
+            }}
+          >
+            Home
+          </Link>
+          <span 
+            style={{
+              fontFamily: "'Faktum', 'Outfit', sans-serif",
+              fontWeight: 500,
+              fontSize: "24px",
+              lineHeight: "32px",
+              color: "rgba(141, 141, 141, 1)",
+            }}
+          >
+            &gt;
+          </span>
+          <Link 
+            href="/travel" 
+            className="hover:opacity-80 transition-opacity"
+            style={{
+              fontFamily: "'Faktum', 'Outfit', sans-serif",
+              fontWeight: 500,
+              fontSize: "24px",
+              lineHeight: "32px",
+              letterSpacing: "0px",
+              color: "rgba(141, 141, 141, 1)",
+              textDecoration: "none",
+            }}
+          >
+            Travel Page
+          </Link>
+          <span 
+            style={{
+              fontFamily: "'Faktum', 'Outfit', sans-serif",
+              fontWeight: 500,
+              fontSize: "24px",
+              lineHeight: "32px",
+              color: "rgba(141, 141, 141, 1)",
+            }}
+          >
+            &gt;
+          </span>
+          <span 
+            style={{
+              fontFamily: "'Faktum', 'Outfit', sans-serif",
+              fontWeight: 500,
+              fontSize: "24px",
+              lineHeight: "32px",
+              letterSpacing: "0px",
+              color: "rgba(63, 136, 255, 1)",
+              textDecoration: "underline",
+            }}
+            className="truncate max-w-[400px]"
+          >
+            {pkg?.name || "Spiti Valley Traverse"}
           </span>
         </div>
       </div>
@@ -708,7 +769,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
 
             {/* TAB CONTENT: Overview */}
             {activeTab === 'overview' && (
-              <div className="flex flex-col gap-[62px] w-full max-w-[837px] animate-in fade-in duration-300">
+              <div className="flex flex-col gap-[32px] w-full max-w-[837px] animate-in fade-in duration-300">
                 
                 {/* Introduction Section */}
                 <div
@@ -832,140 +893,138 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-[48px] border-t border-[#1D493E]/10 pt-8">
-                  {/* What's Included */}
-                  <div
+                {/* What's Included */}
+                <div
+                  style={{
+                    width: "100%",
+                    maxWidth: "837px",
+                    background: "rgba(255, 255, 255, 1)",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "12px",
+                  }}
+                  className="border-t border-[#CCCCCC] pt-8 text-left"
+                >
+                  <span 
                     style={{
-                      width: "100%",
-                      maxWidth: "837px",
-                      background: "rgba(255, 255, 255, 1)",
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: "12px",
+                      backgroundColor: "rgba(0, 160, 35, 0.08)",
+                      color: "rgba(0, 160, 35, 1)",
+                      fontFamily: "Faktum, sans-serif",
+                      fontWeight: 600,
+                      fontSize: "14px",
+                      lineHeight: "100%",
+                      letterSpacing: "1.2px",
+                      textTransform: "uppercase",
+                      padding: "4px 10px",
+                      borderRadius: "4px",
+                      alignSelf: "flex-start",
                     }}
-                    className="text-left"
                   >
-                    <span 
-                      style={{
-                        backgroundColor: "rgba(0, 160, 35, 0.08)",
-                        color: "rgba(0, 160, 35, 1)",
-                        fontFamily: "Faktum, sans-serif",
-                        fontWeight: 600,
-                        fontSize: "14px",
-                        lineHeight: "100%",
-                        letterSpacing: "1.2px",
-                        textTransform: "uppercase",
-                        padding: "4px 10px",
-                        borderRadius: "4px",
-                        alignSelf: "flex-start",
-                      }}
-                    >
-                      DO'S
-                    </span>
-                    <h3 
-                      style={{
-                        fontFamily: "Fraunces, serif",
-                        fontWeight: 600,
-                        fontSize: "42px",
-                        lineHeight: "100%",
-                        color: "rgba(43, 43, 43, 1)",
-                      }}
-                      className="leading-none mb-2 font-sans"
-                    >
-                      What's Included
-                    </h3>
-                    <ul className="list-disc pl-5">
-                      {richInclusions.map((inc: string, i: number) => (
-                        <li 
-                          key={i} 
-                          style={{
-                            fontFamily: "Faktum, sans-serif",
-                            fontWeight: 500,
-                            fontSize: "24px",
-                            lineHeight: "42px",
-                            color: "rgba(43, 43, 43, 1)",
-                          }}
-                          className="leading-relaxed font-sans"
-                        >
-                          {inc}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Not Included */}
-                  <div
+                    DO'S
+                  </span>
+                  <h3 
                     style={{
-                      width: "100%",
-                      maxWidth: "837px",
-                      background: "rgba(255, 255, 255, 1)",
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: "12px",
+                      fontFamily: "Fraunces, serif",
+                      fontWeight: 600,
+                      fontSize: "42px",
+                      lineHeight: "100%",
+                      color: "rgba(43, 43, 43, 1)",
                     }}
-                    className="text-left"
+                    className="leading-none mb-2 font-sans"
                   >
-                    <span 
-                      style={{
-                        backgroundColor: "rgba(255, 98, 62, 0.08)",
-                        color: "rgba(255, 98, 62, 1)",
-                        fontFamily: "Faktum, sans-serif",
-                        fontWeight: 600,
-                        fontSize: "14px",
-                        lineHeight: "100%",
-                        letterSpacing: "1.2px",
-                        textTransform: "uppercase",
-                        padding: "4px 10px",
-                        borderRadius: "4px",
-                        alignSelf: "flex-start",
-                      }}
-                    >
-                      DON'TS
-                    </span>
-                    <h3 
-                      style={{
-                        fontFamily: "Fraunces, serif",
-                        fontWeight: 600,
-                        fontSize: "42px",
-                        lineHeight: "100%",
-                        color: "rgba(43, 43, 43, 1)",
-                      }}
-                      className="leading-none mb-2 font-sans"
-                    >
-                      Not Included
-                    </h3>
-                    <ul className="list-disc pl-5">
-                      {exclusions.map((exc: string, i: number) => (
-                        <li 
-                          key={i} 
-                          style={{
-                            fontFamily: "Faktum, sans-serif",
-                            fontWeight: 500,
-                            fontSize: "24px",
-                            lineHeight: "42px",
-                            color: "rgba(43, 43, 43, 1)",
-                          }}
-                          className="leading-relaxed font-sans"
-                        >
-                          {exc}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                    What's Included
+                  </h3>
+                  <ul className="list-disc pl-5">
+                    {richInclusions.map((inc: string, i: number) => (
+                      <li 
+                        key={i} 
+                        style={{
+                          fontFamily: "Faktum, sans-serif",
+                          fontWeight: 500,
+                          fontSize: "24px",
+                          lineHeight: "42px",
+                          color: "rgba(43, 43, 43, 1)",
+                        }}
+                        className="leading-relaxed font-sans"
+                      >
+                        {inc}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
 
-                 {/* Packing List */}
-                 <div 
-                   style={{
-                     width: "100%",
-                     maxWidth: "837px",
-                     background: "rgba(255, 255, 255, 1)",
-                     display: "flex",
-                     flexDirection: "column",
-                     gap: "12px",
-                   }}
-                   className="border-t border-[#1D493E]/10 pt-8 text-left"
-                 >
+                {/* Not Included */}
+                <div
+                  style={{
+                    width: "100%",
+                    maxWidth: "837px",
+                    background: "rgba(255, 255, 255, 1)",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "12px",
+                  }}
+                  className="border-t border-[#CCCCCC] pt-8 text-left"
+                >
+                  <span 
+                    style={{
+                      backgroundColor: "rgba(255, 98, 62, 0.08)",
+                      color: "rgba(255, 98, 62, 1)",
+                      fontFamily: "Faktum, sans-serif",
+                      fontWeight: 600,
+                      fontSize: "14px",
+                      lineHeight: "100%",
+                      letterSpacing: "1.2px",
+                      textTransform: "uppercase",
+                      padding: "4px 10px",
+                      borderRadius: "4px",
+                      alignSelf: "flex-start",
+                    }}
+                  >
+                    DON'TS
+                  </span>
+                  <h3 
+                    style={{
+                      fontFamily: "Fraunces, serif",
+                      fontWeight: 600,
+                      fontSize: "42px",
+                      lineHeight: "100%",
+                      color: "rgba(43, 43, 43, 1)",
+                    }}
+                    className="leading-none mb-2 font-sans"
+                  >
+                    Not Included
+                  </h3>
+                  <ul className="list-disc pl-5">
+                    {exclusions.map((exc: string, i: number) => (
+                      <li 
+                        key={i} 
+                        style={{
+                          fontFamily: "Faktum, sans-serif",
+                          fontWeight: 500,
+                          fontSize: "24px",
+                          lineHeight: "42px",
+                          color: "rgba(43, 43, 43, 1)",
+                        }}
+                        className="leading-relaxed font-sans"
+                      >
+                        {exc}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Packing List */}
+                <div 
+                  style={{
+                    width: "100%",
+                    maxWidth: "837px",
+                    background: "rgba(255, 255, 255, 1)",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "12px",
+                  }}
+                  className="border-t border-[#CCCCCC] pt-8 text-left"
+                >
                    <h3 
                      style={{
                        fontFamily: "Fraunces, serif",
@@ -1006,9 +1065,9 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                     maxWidth: "837px",
                     display: "flex",
                     flexDirection: "column",
-                    gap: "12px",
+                    gap: "32px",
                   }}
-                  className="border-t border-[#1D493E]/10 pt-8 text-left"
+                  className="border-t border-[#CCCCCC] pt-8 text-left"
                 >
                   <h3 
                     style={{
@@ -1114,7 +1173,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                     flexDirection: "column",
                     gap: "12px",
                   }}
-                  className="border-t border-[#1D493E]/10 pt-8 text-left"
+                  className="border-t border-[#CCCCCC] pt-8 text-left"
                 >
                   <span 
                     style={{

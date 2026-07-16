@@ -291,7 +291,7 @@ export default function Homepage() {
     <div className="min-h-screen bg-white text-[#1D493E] font-sans antialiased relative">
       
       {/* 1. HERO BACKGROUND LAYER (z-20, sits behind metrics bar z-35) */}
-      <div className="absolute inset-x-0 top-0 h-[600px] md:h-[601px] pointer-events-none z-20 overflow-visible max-w-[1440px] mx-auto">
+      <div className="absolute inset-x-0 top-0 min-h-[600px] md:min-h-[601px] md:h-auto md:aspect-[1024/427] w-full pointer-events-none z-20 overflow-visible">
         {/* Sub-container for background overlays (z-10, overflow-visible to prevent clipping) */}
         <div className="absolute inset-0 overflow-visible z-10">
           {/* Layer 1: Background */}
@@ -338,7 +338,7 @@ export default function Homepage() {
       </div>
 
       {/* 1.5 BIKER LAYER (z-40, sits on top of metrics bar z-30 to overlap tyres, matches background proportions exactly) */}
-      <div className="absolute inset-x-0 top-0 h-[600px] md:h-[601px] pointer-events-none z-40 overflow-visible max-w-[1440px] mx-auto">
+      <div className="absolute inset-x-0 top-0 min-h-[600px] md:min-h-[601px] md:h-auto md:aspect-[1024/427] w-full pointer-events-none z-40 overflow-visible">
         <div className="absolute inset-0 overflow-visible z-10">
           <img 
             src="/hero-bike.png?v=5" 
@@ -355,7 +355,7 @@ export default function Homepage() {
 
 
       {/* 2. HERO CONTENT SECTION (Transparent background, relative z-50 to sit on top of everything) */}
-      <section className="relative min-h-[600px] md:min-h-[601px] flex flex-col justify-start z-50 bg-transparent">
+      <section className="relative min-h-[600px] md:min-h-[601px] md:h-auto md:aspect-[1024/427] flex flex-col justify-start z-50 bg-transparent">
         <div className="max-w-[1440px] mx-auto px-6 md:px-20 w-full grid md:grid-cols-2 gap-12 items-center relative pt-[110px] pb-4">
           <div className="flex flex-col gap-[52px] text-left md:max-w-[454px] w-full">
             <h1 className="text-4xl md:text-[62px] md:leading-[1.25] tracking-[-0.2px] font-semibold text-white font-sans md:max-w-[454px] md:h-[234px] w-full">

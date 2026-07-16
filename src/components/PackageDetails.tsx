@@ -611,28 +611,42 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                 {/* Fact 1 */}
                 <div 
                   style={{
-                    width: "calc(50% - 16px)",
-                    height: "48px",
+                    width: "418.5px",
+                    height: "46px",
+                    paddingRight: "12px",
                     display: "flex",
                     alignItems: "center",
-                    gap: "16px",
+                    gap: "8px",
+                    boxSizing: "border-box",
                   }}
                 >
                   <div 
-                    style={{ backgroundColor: "rgba(247, 245, 240, 1)" }}
-                    className="w-12 h-12 rounded-[4px] flex items-center justify-center shrink-0"
+                    style={{ 
+                      width: "46px", 
+                      height: "46px", 
+                      backgroundColor: "rgba(247, 245, 240, 1)",
+                      borderRadius: "4px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flexShrink: 0,
+                    }}
                   >
                     <MapPin className="w-5 h-5 text-[#2B2B2B]" />
                   </div>
                   <span 
                     style={{
+                      width: "352.5px",
+                      height: "28px",
                       fontFamily: "'Faktum', 'Outfit', sans-serif",
                       fontWeight: 500,
                       fontSize: "20px",
                       lineHeight: "28px",
                       color: "rgba(43, 43, 43, 1)",
+                      display: "inline-flex",
+                      alignItems: "center",
                     }}
-                    className="leading-none"
+                    className="truncate"
                   >
                     {pkg.startPoint || 'Srinagar'}, {pkg.destination || 'Kashmir'}
                   </span>
@@ -641,28 +655,42 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                 {/* Fact 2 */}
                 <div 
                   style={{
-                    width: "calc(50% - 16px)",
-                    height: "48px",
+                    width: "418.5px",
+                    height: "46px",
+                    paddingRight: "12px",
                     display: "flex",
                     alignItems: "center",
-                    gap: "16px",
+                    gap: "8px",
+                    boxSizing: "border-box",
                   }}
                 >
                   <div 
-                    style={{ backgroundColor: "rgba(247, 245, 240, 1)" }}
-                    className="w-12 h-12 rounded-[4px] flex items-center justify-center shrink-0"
+                    style={{ 
+                      width: "46px", 
+                      height: "46px", 
+                      backgroundColor: "rgba(247, 245, 240, 1)",
+                      borderRadius: "4px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flexShrink: 0,
+                    }}
                   >
                     <Users className="w-5 h-5 text-[#2B2B2B]" />
                   </div>
                   <span 
                     style={{
+                      width: "352.5px",
+                      height: "28px",
                       fontFamily: "'Faktum', 'Outfit', sans-serif",
                       fontWeight: 500,
                       fontSize: "20px",
                       lineHeight: "28px",
                       color: "rgba(43, 43, 43, 1)",
+                      display: "inline-flex",
+                      alignItems: "center",
                     }}
-                    className="leading-none"
+                    className="truncate"
                   >
                     {pkg.groupType || 'Curated group Trip'}
                   </span>
@@ -671,28 +699,42 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                 {/* Fact 3 */}
                 <div 
                   style={{
-                    width: "calc(50% - 16px)",
-                    height: "48px",
+                    width: "418.5px",
+                    height: "46px",
+                    paddingRight: "12px",
                     display: "flex",
                     alignItems: "center",
-                    gap: "16px",
+                    gap: "8px",
+                    boxSizing: "border-box",
                   }}
                 >
                   <div 
-                    style={{ backgroundColor: "rgba(247, 245, 240, 1)" }}
-                    className="w-12 h-12 rounded-[4px] flex items-center justify-center shrink-0"
+                    style={{ 
+                      width: "46px", 
+                      height: "46px", 
+                      backgroundColor: "rgba(247, 245, 240, 1)",
+                      borderRadius: "4px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flexShrink: 0,
+                    }}
                   >
                     <Compass className="w-5 h-5 text-[#2B2B2B]" />
                   </div>
                   <span 
                     style={{
+                      width: "352.5px",
+                      height: "28px",
                       fontFamily: "'Faktum', 'Outfit', sans-serif",
                       fontWeight: 500,
                       fontSize: "20px",
                       lineHeight: "28px",
                       color: "rgba(43, 43, 43, 1)",
+                      display: "inline-flex",
+                      alignItems: "center",
                     }}
-                    className="leading-none"
+                    className="truncate"
                   >
                     {pkg.difficulty || 'Moderate'} Difficulty
                   </span>
@@ -701,28 +743,42 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                 {/* Fact 4 */}
                 <div 
                   style={{
-                    width: "calc(50% - 16px)",
-                    height: "48px",
+                    width: "418.5px",
+                    height: "46px",
+                    paddingRight: "12px",
                     display: "flex",
                     alignItems: "center",
-                    gap: "16px",
+                    gap: "8px",
+                    boxSizing: "border-box",
                   }}
                 >
                   <div 
-                    style={{ backgroundColor: "rgba(247, 245, 240, 1)" }}
-                    className="w-12 h-12 rounded-[4px] flex items-center justify-center shrink-0"
+                    style={{ 
+                      width: "46px", 
+                      height: "46px", 
+                      backgroundColor: "rgba(247, 245, 240, 1)",
+                      borderRadius: "4px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flexShrink: 0,
+                    }}
                   >
                     <Calendar className="w-5 h-5 text-[#2B2B2B]" />
                   </div>
                   <span 
                     style={{
+                      width: "352.5px",
+                      height: "28px",
                       fontFamily: "'Faktum', 'Outfit', sans-serif",
                       fontWeight: 500,
                       fontSize: "20px",
                       lineHeight: "28px",
                       color: "rgba(43, 43, 43, 1)",
+                      display: "inline-flex",
+                      alignItems: "center",
                     }}
-                    className="leading-none"
+                    className="truncate"
                   >
                     Next: {pkg.nextDeparture || 'Aug, 2026'}
                   </span>

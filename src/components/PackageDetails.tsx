@@ -7,7 +7,7 @@ import {
   Calendar, Users, Check, ShoppingBag, Clock,
   Star, Compass, MapPin, Tag,
   Sun, Wind, ArrowLeft, Lock, ArrowUpRight,
-  ChevronDown
+  ChevronDown, ShoppingCart
 } from 'lucide-react';
 import { useCart } from '@/components/providers';
 import { AmbientVibe } from '@/components/AmbientVibe';
@@ -48,6 +48,11 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
   const [pickupLocation, setPickupLocation] = useState('');
   const [enquiryMessage, setEnquiryMessage] = useState('');
   const [enquirySubmitted, setEnquirySubmitted] = useState(false);
+  const [saved, setSaved] = useState(false);
+
+  const handleSaveForLater = () => {
+    setSaved(!saved);
+  };
 
   useEffect(() => {
     try {
@@ -230,9 +235,10 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
 
   // Recommended products list
   const isColdPlace = ['kashmir', 'himachal'].includes((pkg.destination || '').toLowerCase());
-  const recommendedProducts = productsList.filter((p) =>
-    ['fur-jaden-backpack-1', 'go-passport-cover-1', 'nomad-leather-journal-1', 'banjara-luggage-tag-1'].includes(p.id)
-  ).slice(0, 2);
+  const targetProductIds = ['naturally-nomad-badge-1', 'blue-mavin-slides-1', 'explore-more-keychain-1', 'blue-mavin-slides-2'];
+  const recommendedProducts = targetProductIds
+    .map((id) => productsList.find((p) => p.id === id))
+    .filter(Boolean);
 
   // Dynamic ambient effect selection
   const destLower = (pkg.destination || '').toLowerCase();
@@ -507,7 +513,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
         >
           
           {/* LEFT COLUMN: Travel package details */}
-          <div className="text-left space-y-[62px] w-full">
+          <div className="text-left space-y-[32px] w-full">
             
             {/* Main Details content container with exact 32px gap and 837px width */}
             <div 
@@ -855,7 +861,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                 background: "rgba(255, 255, 255, 1)",
                 display: "flex",
                 alignItems: "center",
-                gap: "10px",
+                gap: "40px",
               }}
               className="text-left"
             >
@@ -901,7 +907,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
 
             {/* TAB CONTENT: Overview */}
             {activeTab === 'overview' && (
-              <div className="flex flex-col gap-[62px] w-full max-w-[837px] animate-in fade-in duration-300">
+              <div className="flex flex-col gap-[32px] w-full max-w-[837px] animate-in fade-in duration-300">
                 
                 {/* Introduction Section */}
                  <div
@@ -948,13 +954,24 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                   </p>
                 </div>
 
+                {/* Separation Line */}
+                <div
+                  style={{
+                    width: "100%",
+                    maxWidth: "837px",
+                    height: "0px",
+                    borderTop: "2px solid rgba(204, 204, 204, 1)",
+                    opacity: 1,
+                  }}
+                />
+
                 {/* Highlights Section */}
                 <div
                   style={{
                     width: "100%",
                     maxWidth: "837px",
                     height: "266px",
-                    background: "rgba(243, 243, 243, 1)",
+                    background: "rgba(255, 255, 255, 1)",
                     borderRadius: "4px",
                     padding: "32px",
                     boxSizing: "border-box",
@@ -1012,10 +1029,10 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                         </div>
                         <span 
                           style={{
-                            fontFamily: "Faktum, sans-serif",
+                            fontFamily: "'Faktum', 'Outfit', sans-serif",
                             fontWeight: 500,
-                            fontSize: "18px",
-                            lineHeight: "24px",
+                            fontSize: "20px",
+                            lineHeight: "28px",
                             color: "rgba(43, 43, 43, 1)",
                           }}
                           className="leading-tight"
@@ -1027,127 +1044,158 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-[48px] border-t border-[#1D493E]/10 pt-8">
-                  {/* What's Included */}
-                  <div
-                    style={{
-                      width: "100%",
-                      maxWidth: "837px",
-                      background: "rgba(255, 255, 255, 1)",
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: "12px",
-                    }}
-                    className="text-left"
-                  >
-                    <span 
-                      style={{
-                        backgroundColor: "rgba(0, 160, 35, 0.08)",
-                        color: "rgba(0, 160, 35, 1)",
-                        fontFamily: "Faktum, sans-serif",
-                        fontWeight: 600,
-                        fontSize: "14px",
-                        lineHeight: "100%",
-                        letterSpacing: "1.2px",
-                        textTransform: "uppercase",
-                        padding: "4px 10px",
-                        borderRadius: "4px",
-                        alignSelf: "flex-start",
-                      }}
-                    >
-                      DO'S
-                    </span>
-                    <h3 
-                      style={{
-                        fontFamily: "Fraunces, serif",
-                        fontWeight: 600,
-                        fontSize: "42px",
-                        lineHeight: "100%",
-                        color: "rgba(43, 43, 43, 1)",
-                      }}
-                      className="leading-none mb-2 font-sans"
-                    >
-                      What's Included
-                    </h3>
-                    <ul className="list-disc pl-5">
-                      {richInclusions.map((inc: string, i: number) => (
-                        <li 
-                          key={i} 
-                          style={{
-                            fontFamily: "Faktum, sans-serif",
-                            fontWeight: 500,
-                            fontSize: "24px",
-                            lineHeight: "42px",
-                            color: "rgba(43, 43, 43, 1)",
-                          }}
-                          className="leading-relaxed font-sans"
-                        >
-                          {inc}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                {/* Separation Line */}
+                <div
+                  style={{
+                    width: "100%",
+                    maxWidth: "837px",
+                    height: "0px",
+                    borderTop: "2px solid rgba(204, 204, 204, 1)",
+                    opacity: 1,
+                  }}
+                />
 
-                  {/* Not Included */}
-                  <div
+                {/* What's Included */}
+                <div
+                  style={{
+                    width: "100%",
+                    maxWidth: "837px",
+                    background: "rgba(255, 255, 255, 1)",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "12px",
+                  }}
+                  className="text-left"
+                >
+                  <span 
                     style={{
-                      width: "100%",
-                      maxWidth: "837px",
-                      background: "rgba(255, 255, 255, 1)",
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: "12px",
+                      backgroundColor: "rgba(0, 160, 35, 0.08)",
+                      color: "rgba(0, 160, 35, 1)",
+                      fontFamily: "Faktum, sans-serif",
+                      fontWeight: 600,
+                      fontSize: "14px",
+                      lineHeight: "100%",
+                      letterSpacing: "1.2px",
+                      textTransform: "uppercase",
+                      padding: "4px 10px",
+                      borderRadius: "4px",
+                      alignSelf: "flex-start",
                     }}
-                    className="text-left"
                   >
-                    <span 
-                      style={{
-                        backgroundColor: "rgba(255, 98, 62, 0.08)",
-                        color: "rgba(255, 98, 62, 1)",
-                        fontFamily: "Faktum, sans-serif",
-                        fontWeight: 600,
-                        fontSize: "14px",
-                        lineHeight: "100%",
-                        letterSpacing: "1.2px",
-                        textTransform: "uppercase",
-                        padding: "4px 10px",
-                        borderRadius: "4px",
-                        alignSelf: "flex-start",
-                      }}
-                    >
-                      DON'TS
-                    </span>
-                    <h3 
-                      style={{
-                        fontFamily: "Fraunces, serif",
-                        fontWeight: 600,
-                        fontSize: "42px",
-                        lineHeight: "100%",
-                        color: "rgba(43, 43, 43, 1)",
-                      }}
-                      className="leading-none mb-2 font-sans"
-                    >
-                      Not Included
-                    </h3>
-                    <ul className="list-disc pl-5">
-                      {exclusions.map((exc: string, i: number) => (
-                        <li 
-                          key={i} 
-                          style={{
-                            fontFamily: "Faktum, sans-serif",
-                            fontWeight: 500,
-                            fontSize: "24px",
-                            lineHeight: "42px",
-                            color: "rgba(43, 43, 43, 1)",
-                          }}
-                          className="leading-relaxed font-sans"
-                        >
-                          {exc}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                    DO'S
+                  </span>
+                  <h3 
+                    style={{
+                      fontFamily: "Fraunces, serif",
+                      fontWeight: 600,
+                      fontSize: "42px",
+                      lineHeight: "100%",
+                      color: "rgba(43, 43, 43, 1)",
+                    }}
+                    className="leading-none mb-2 font-sans"
+                  >
+                    What's Included
+                  </h3>
+                  <ul className="list-disc pl-5">
+                    {richInclusions.map((inc: string, i: number) => (
+                      <li 
+                        key={i} 
+                        style={{
+                          fontFamily: "Faktum, sans-serif",
+                          fontWeight: 500,
+                          fontSize: "24px",
+                          lineHeight: "42px",
+                          color: "rgba(43, 43, 43, 1)",
+                        }}
+                        className="leading-relaxed font-sans"
+                      >
+                        {inc}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
+
+                {/* Separation Line */}
+                <div
+                  style={{
+                    width: "100%",
+                    maxWidth: "837px",
+                    height: "0px",
+                    borderTop: "2px solid rgba(204, 204, 204, 1)",
+                    opacity: 1,
+                  }}
+                />
+
+                {/* Not Included */}
+                <div
+                  style={{
+                    width: "100%",
+                    maxWidth: "837px",
+                    background: "rgba(255, 255, 255, 1)",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "12px",
+                  }}
+                  className="text-left"
+                >
+                  <span 
+                    style={{
+                      backgroundColor: "rgba(255, 98, 62, 0.08)",
+                      color: "rgba(255, 98, 62, 1)",
+                      fontFamily: "Faktum, sans-serif",
+                      fontWeight: 600,
+                      fontSize: "14px",
+                      lineHeight: "100%",
+                      letterSpacing: "1.2px",
+                      textTransform: "uppercase",
+                      padding: "4px 10px",
+                      borderRadius: "4px",
+                      alignSelf: "flex-start",
+                    }}
+                  >
+                    DON'TS
+                  </span>
+                  <h3 
+                    style={{
+                      fontFamily: "Fraunces, serif",
+                      fontWeight: 600,
+                      fontSize: "42px",
+                      lineHeight: "100%",
+                      color: "rgba(43, 43, 43, 1)",
+                    }}
+                    className="leading-none mb-2 font-sans"
+                  >
+                    Not Included
+                  </h3>
+                  <ul className="list-disc pl-5">
+                    {exclusions.map((exc: string, i: number) => (
+                      <li 
+                        key={i} 
+                        style={{
+                          fontFamily: "Faktum, sans-serif",
+                          fontWeight: 500,
+                          fontSize: "24px",
+                          lineHeight: "42px",
+                          color: "rgba(43, 43, 43, 1)",
+                        }}
+                        className="leading-relaxed font-sans"
+                      >
+                        {exc}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Separation Line */}
+                <div
+                  style={{
+                    width: "100%",
+                    maxWidth: "837px",
+                    height: "0px",
+                    borderTop: "2px solid rgba(204, 204, 204, 1)",
+                    opacity: 1,
+                  }}
+                />
 
                  {/* Packing List */}
                  <div 
@@ -1159,7 +1207,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                      flexDirection: "column",
                      gap: "12px",
                    }}
-                   className="border-t border-[#1D493E]/10 pt-8 text-left"
+                   className="text-left"
                  >
                    <h3 
                      style={{
@@ -1194,6 +1242,17 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
 
 
 
+                {/* Separation Line */}
+                <div
+                  style={{
+                    width: "100%",
+                    maxWidth: "837px",
+                    height: "0px",
+                    borderTop: "2px solid rgba(204, 204, 204, 1)",
+                    opacity: 1,
+                  }}
+                />
+
                 {/* Know your Guide */}
                 <div 
                   style={{
@@ -1203,7 +1262,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                     flexDirection: "column",
                     gap: "12px",
                   }}
-                  className="border-t border-[#1D493E]/10 pt-8 text-left"
+                  className="text-left"
                 >
                   <h3 
                     style={{
@@ -1300,6 +1359,17 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                   </div>
                 </div>
 
+                {/* Separation Line */}
+                <div
+                  style={{
+                    width: "100%",
+                    maxWidth: "837px",
+                    height: "0px",
+                    borderTop: "2px solid rgba(204, 204, 204, 1)",
+                    opacity: 1,
+                  }}
+                />
+
                 {/* Commonly asked questions */}
                 <div 
                   style={{
@@ -1309,7 +1379,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                     flexDirection: "column",
                     gap: "12px",
                   }}
-                  className="border-t border-[#1D493E]/10 pt-8 text-left"
+                  className="text-left"
                 >
                   <span 
                     style={{
@@ -1326,7 +1396,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                       alignSelf: "flex-start",
                     }}
                   >
-                    FAQ'S
+                    FAQs
                   </span>
                   <h3 
                     style={{
@@ -1392,89 +1462,146 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
             {/* TAB CONTENT: Itinerary */}
             {activeTab === 'itinerary' && pkg.itinerary && (
               <div className="space-y-6 text-left animate-in fade-in duration-300">
-                <h3 className="text-2xl font-serif font-light text-[#E05434] leading-snug mb-6 max-w-xl">
+                <h3 
+                  style={{
+                    width: "837px",
+                    height: "auto",
+                    fontFamily: "Fraunces, serif",
+                    fontWeight: 600,
+                    fontSize: "42px",
+                    lineHeight: "100%",
+                    color: "rgba(43, 43, 43, 1)",
+                    margin: 0,
+                    boxSizing: "border-box",
+                  }}
+                  className="text-left mb-6"
+                >
                   A day-by-day breakdown of what to expect. Every day is designed to balance discovery, culture, and recovery.
                 </h3>
 
-                <div className="space-y-4">
+                <div 
+                  style={{
+                    width: "837px",
+                    height: "auto",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "32px",
+                    backgroundColor: "rgba(255, 255, 255, 1)",
+                    boxSizing: "border-box",
+                  }}
+                >
                   {pkg.itinerary.map((step: any, idx: number) => {
                     const isOpen = expandedDayIdx === idx;
                     const numStr = String(idx + 1).padStart(2, '0');
                     return (
-                      <div key={idx} className="border border-[#1D493E]/10 rounded-2xl overflow-hidden bg-white shadow-xs">
+                      <div 
+                        key={idx} 
+                        style={{
+                          width: "837px",
+                          height: "auto",
+                          padding: "24px",
+                          gap: isOpen ? "24px" : "0px",
+                          borderWidth: "1px",
+                          borderRadius: "4px",
+                          backgroundColor: "rgba(255, 255, 255, 1)",
+                          border: "1px solid rgba(204, 204, 204, 1)",
+                          boxSizing: "border-box",
+                          display: "flex",
+                          flexDirection: "column",
+                          justifyContent: "flex-start",
+                        }}
+                      >
                         <button
                           type="button"
                           onClick={() => setExpandedDayIdx(isOpen ? null : idx)}
-                          className="w-full p-6 flex justify-between items-center text-left hover:bg-gray-50 transition cursor-pointer"
+                          style={{
+                            width: "787px",
+                            height: "29px",
+                            background: "transparent",
+                            border: "none",
+                            cursor: "pointer",
+                            textAlign: "left",
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                            padding: 0,
+                            boxSizing: "border-box",
+                          }}
                         >
-                          <div className="flex items-center gap-3">
-                            <span className="text-[#E05434] font-black text-sm font-mono shrink-0">
+                          <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+                            <span 
+                              style={{
+                                width: "29px",
+                                height: "29px",
+                                opacity: 1,
+                                fontFamily: "Inter, sans-serif",
+                                fontWeight: 700,
+                                fontSize: "24px",
+                                lineHeight: "100%",
+                                letterSpacing: "0px",
+                                verticalAlign: "middle",
+                                color: "rgba(255, 98, 62, 1)",
+                                display: "inline-flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                              }}
+                            >
                               {numStr}
                             </span>
-                            <span className="text-sm font-extrabold text-[#1D493E] leading-snug">
+                            <span 
+                              style={{
+                                height: "25px",
+                                opacity: 1,
+                                fontFamily: "Faktum, sans-serif",
+                                fontWeight: 600,
+                                fontSize: "20px",
+                                lineHeight: "100%",
+                                letterSpacing: "0px",
+                                verticalAlign: "middle",
+                                color: "rgba(43, 43, 43, 1)",
+                                display: "inline-flex",
+                                alignItems: "center",
+                                whiteSpace: "nowrap",
+                              }}
+                            >
                               Day {idx + 1}: {step.title}
                             </span>
                           </div>
-                          <span className="text-[#1D493E] text-xs font-bold font-mono transition-transform duration-300">
-                            {isOpen ? '▲' : '▼'}
-                          </span>
+                          <ChevronDown 
+                            style={{
+                              width: "24px",
+                              height: "24px",
+                              color: "rgba(43, 43, 43, 1)",
+                              transform: isOpen ? "rotate(180deg)" : "none",
+                              transition: "transform 0.2s ease",
+                            }} 
+                          />
                         </button>
                         {isOpen && (
-                          <div className="px-6 pb-6 pt-4 border-t border-[#1D493E]/5 text-sm text-gray-600 font-normal leading-relaxed space-y-4 text-left">
-                            <p>{step.offering}</p>
-
-                            {/* Route stops path */}
-                            {step.places && step.places.length > 0 && (
-                              <div className="space-y-1.5 pt-2 border-t border-[#1D493E]/5">
-                                <span className="text-[9px] font-mono text-gray-400 uppercase tracking-wider block">
-                                  Key Route Stops:
-                                </span>
-                                <div className="flex flex-wrap items-center gap-1.5">
-                                  {step.places.map((place: string, i: number) => (
-                                    <React.Fragment key={i}>
-                                      <span className="text-[9px] font-sans font-extrabold text-[#1D493E] bg-[#FAF9F6] border border-gray-150/60 px-2.5 py-1 rounded-xl">
-                                        {place}
-                                      </span>
-                                      {i < step.places.length - 1 && (
-                                        <span className="text-gray-300 text-[9px]">➔</span>
-                                      )}
-                                    </React.Fragment>
-                                  ))}
-                                </div>
-                              </div>
-                            )}
-
-                            {/* Today's inclusions */}
-                            {step.activities && step.activities.length > 0 && (
-                              <div className="space-y-2 pt-2 border-t border-[#1D493E]/5">
-                                <span className="text-[9px] font-mono text-gray-400 uppercase tracking-wider block">
-                                  Today's Experiences:
-                                </span>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                                  {step.activities.map((act: string, i: number) => (
-                                    <div key={i} className="flex items-center gap-2 text-sm font-medium text-gray-600">
-                                      <Check className="w-3.5 h-3.5 text-[#E05434]" />
-                                      <span>{act}</span>
-                                    </div>
-                                  ))}
-                                </div>
-                              </div>
-                            )}
-
-                            {/* Insider Tip box */}
-                            {step.insiderTip && (
-                              <div className="bg-[#FAF9F6] border border-[#1D493E]/10 rounded-xl p-4 mt-2 flex items-start gap-3">
-                                <Compass className="w-4 h-4 text-[#E05434] shrink-0 mt-0.5" />
-                                <div>
-                                  <span className="text-[9px] font-mono font-black text-[#E05434] uppercase tracking-wider block">
-                                    Banjāra Tip
-                                  </span>
-                                  <p className="text-xs text-gray-500 font-medium leading-relaxed mt-0.5">
-                                    {step.insiderTip}
-                                  </p>
-                                </div>
-                              </div>
-                            )}
+                          <div 
+                            style={{
+                              width: "787px",
+                              height: "auto",
+                              paddingTop: "16px",
+                              paddingLeft: "40px",
+                              borderTop: "1px solid rgba(204, 204, 204, 0.54)",
+                              boxSizing: "border-box",
+                            }}
+                          >
+                            <p 
+                              style={{
+                                width: "747px",
+                                height: "auto",
+                                fontFamily: "Faktum, sans-serif",
+                                fontWeight: 500,
+                                fontSize: "16px",
+                                lineHeight: "32px",
+                                color: "rgba(43, 43, 43, 0.8)",
+                                margin: 0,
+                              }}
+                            >
+                              {step.offering}
+                            </p>
                           </div>
                         )}
                       </div>
@@ -1488,61 +1615,179 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
             {activeTab === 'reviews' && (
               <div className="space-y-6 text-left animate-in fade-in duration-300">
                 {/* Big Score Summary card */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 bg-white border border-[#1D493E]/10 p-6 rounded-2xl items-center shadow-xs">
-                  <div className="text-center space-y-1.5 border-r border-[#1D493E]/10 pr-6">
-                    <span className="text-5xl font-black text-[#1D493E] font-serif">{pkg.rating.toFixed(1)}</span>
-                    <div className="flex justify-center text-[#E05434] gap-0.5">
+                <div 
+                  style={{
+                    width: "837px",
+                    height: "301px",
+                    display: "flex",
+                    flexDirection: "row",
+                    gap: "32px",
+                    padding: "12px",
+                    border: "1px solid rgba(204, 204, 204, 1)",
+                    borderRadius: "4px",
+                    backgroundColor: "rgba(255, 255, 255, 1)",
+                    boxSizing: "border-box",
+                    alignItems: "center",
+                  }}
+                  className="shadow-xs"
+                >
+                  {/* Left Column: Score */}
+                  <div style={{
+                    width: "145.69px",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "16px",
+                    paddingLeft: "24px",
+                  }}>
+                    <span 
+                      style={{
+                        width: "145.69px",
+                        height: "53px",
+                        fontFamily: "Faktum, sans-serif",
+                        fontWeight: 500,
+                        fontSize: "42px",
+                        lineHeight: "100%",
+                        color: "rgba(43, 43, 43, 1)",
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                    >
+                      {pkg.rating.toFixed(1)}
+                    </span>
+                    <div style={{ display: "flex", gap: "4px" }}>
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 fill-[#E05434] stroke-none" />
+                        <Star key={i} className="w-[20px] h-[20px] fill-[#FFC72C] stroke-none" />
                       ))}
                     </div>
-                    <span className="text-[10px] text-gray-400 block font-mono">{pkg.ratingCount} Reviews</span>
+                    <span 
+                      style={{
+                        width: "145.69px",
+                        height: "25px",
+                        fontFamily: "Faktum, sans-serif",
+                        fontWeight: 500,
+                        fontSize: "20px",
+                        lineHeight: "100%",
+                        color: "rgba(141, 141, 141, 1)",
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                    >
+                      {pkg.ratingCount} Reviews
+                    </span>
                   </div>
-                  <div className="sm:col-span-2 space-y-2.5 text-xs font-semibold text-gray-600 pl-2">
+
+                  {/* Right Column: Bars */}
+                  <div style={{
+                    flex: 1,
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "16px",
+                    paddingRight: "24px",
+                  }}>
                     {[
-                      { label: '05', width: 'w-[92%]' },
-                      { label: '04', width: 'w-[68%]' },
-                      { label: '03', width: 'w-[55%]' },
-                      { label: '02', width: 'w-[30%]' },
-                      { label: '01', width: 'w-[12%]' },
+                      { label: '05', width: '92%' },
+                      { label: '04', width: '68%' },
+                      { label: '03', width: '55%' },
+                      { label: '02', width: '30%' },
+                      { label: '01', width: '12%' },
                     ].map((row) => (
-                      <div key={row.label} className="flex items-center gap-3.5">
-                        <span className="w-5 font-mono text-gray-500">{row.label}</span>
-                        <div className="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
-                          <div className={`h-full bg-[#E05434] rounded-full ${row.width}`} />
+                      <div key={row.label} style={{ display: "flex", alignItems: "center", gap: "16px", width: "100%" }}>
+                        <span 
+                          style={{
+                            width: "25px",
+                            height: "25px",
+                            fontFamily: "Faktum, sans-serif",
+                            fontWeight: 500,
+                            fontSize: "20px",
+                            lineHeight: "100%",
+                            color: "rgba(43, 43, 43, 0.7)",
+                            display: "inline-flex",
+                            alignItems: "center",
+                          }}
+                        >
+                          {row.label}
+                        </span>
+                        <div style={{ width: "545.31px", height: "19px", backgroundColor: "rgba(204, 204, 204, 0.24)", borderRadius: "4px", overflow: "hidden" }}>
+                          <div style={{ height: "100%", width: row.width, backgroundColor: "rgba(255, 98, 62, 1)", borderRadius: "4px" }} />
                         </div>
-                        <Star className="w-3.5 h-3.5 fill-[#FFFF80] text-[#E05434] shrink-0" />
+                        <Star className="w-[20px] h-[20px] fill-[#FFC72C] stroke-none shrink-0" />
                       </div>
                     ))}
                   </div>
                 </div>
 
                 {/* Reviews card list */}
-                <div className="space-y-4">
+                <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
                   {reviews.map((rev: any, i: number) => (
-                    <div key={i} className="bg-white border border-[#1D493E]/10 p-6 rounded-2xl space-y-4 shadow-xs">
-                      <div className="flex justify-between items-start">
-                        <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-full overflow-hidden shrink-0 bg-slate-100 border border-gray-150">
-                            <img src={rev.avatar} alt={rev.name} className="w-full h-full object-cover" />
+                    <div 
+                      key={i} 
+                      style={{
+                        width: "837px",
+                        height: "auto",
+                        minHeight: "229px",
+                        padding: "24px",
+                        borderRadius: "4px",
+                        backgroundColor: "rgba(255, 255, 255, 1)",
+                        border: "1px solid rgba(204, 204, 204, 1)",
+                        boxSizing: "border-box",
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "24px",
+                      }}
+                    >
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", width: "100%" }}>
+                        <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+                          <div style={{ width: "56px", height: "56px", borderRadius: "4px", overflow: "hidden", flexShrink: 0 }}>
+                            <img src={rev.avatar} alt={rev.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                           </div>
-                          <div>
-                            <div className="flex items-center gap-2">
-                              <h4 className="text-sm font-extrabold text-[#1D493E]">{rev.name}</h4>
-                              <span className="text-[8px] bg-green-50 text-green-600 border border-green-200/50 px-2 py-0.5 rounded font-black uppercase tracking-wider">
+                          <div style={{ width: "326px", height: "61px", display: "flex", flexDirection: "column", gap: "8px", justifyContent: "center" }}>
+                            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                              <h4 style={{ margin: 0, fontFamily: "Faktum, sans-serif", fontWeight: 600, fontSize: "24px", lineHeight: "100%", color: "rgba(43, 43, 43, 1)" }}>{rev.name}</h4>
+                              <span 
+                                style={{
+                                  width: "71px",
+                                  height: "18px",
+                                  fontFamily: "Faktum, sans-serif",
+                                  fontWeight: 600,
+                                  fontSize: "14px",
+                                  lineHeight: "100%",
+                                  letterSpacing: "1.2px",
+                                  textTransform: "uppercase",
+                                  color: "rgba(46, 125, 50, 1)",
+                                  backgroundColor: "rgba(46, 125, 50, 0.08)",
+                                  display: "inline-flex",
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                                  borderRadius: "2px",
+                                }}
+                              >
                                 Verified
                               </span>
                             </div>
-                            <span className="text-[10px] text-gray-400 font-mono block mt-0.5">{rev.date}</span>
+                            <span style={{ width: "170px", height: "23px", fontFamily: "Faktum, sans-serif", fontWeight: 500, fontStyle: "italic", fontSize: "18px", lineHeight: "100%", color: "rgba(141, 141, 141, 1)", display: "flex", alignItems: "center" }}>
+                              {rev.date}
+                            </span>
                           </div>
                         </div>
-                        <div className="flex text-[#E05434] gap-0.5">
-                          {[...Array(rev.rating || 5)].map((_, j) => (
-                            <Star key={j} className="w-3.5 h-3.5 fill-[#E05434] stroke-none" />
+                        <div style={{ display: "flex", gap: "4px" }}>
+                          {[...Array(Math.floor(Number(rev.rating)) || 5)].map((_, j) => (
+                            <Star key={j} className="w-[20px] h-[20px] fill-[#FFC72C] stroke-none" />
                           ))}
                         </div>
                       </div>
-                      <p className="text-sm text-gray-700 font-semibold leading-relaxed italic">
+                      <p 
+                        style={{
+                          margin: 0,
+                          width: "789px",
+                          height: "auto",
+                          fontFamily: "Faktum, sans-serif",
+                          fontWeight: 500,
+                          fontSize: "24px",
+                          lineHeight: "32px",
+                          color: "rgba(43, 43, 43, 1)",
+                          fontStyle: "italic",
+                        }}
+                      >
                         {rev.comment}
                       </p>
                     </div>
@@ -1558,9 +1803,8 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
             {/* Secure Booking Board Card */}
             <div 
               style={{
-                width: "100%",
-                maxWidth: "411px",
-                height: "593px",
+                width: "411px",
+                height: "auto",
                 background: "rgba(255, 255, 255, 1)",
                 border: "1px solid rgba(204, 204, 204, 1)",
                 borderRadius: "4px",
@@ -1569,52 +1813,99 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                 display: "flex",
                 flexDirection: "column",
                 gap: "32px",
-                justifyContent: "space-between",
+                justifyContent: "flex-start",
               }}
               className="text-left"
             >
-              <div>
+              <div
+                style={{
+                  width: "363px",
+                  height: "72px",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "12px",
+                  boxSizing: "border-box",
+                }}
+              >
                 <span 
                   style={{
+                    width: "363px",
+                    height: "20px",
                     fontFamily: "Faktum, sans-serif",
                     fontWeight: 500,
                     fontSize: "16px",
                     lineHeight: "20px",
-                    color: "rgba(141, 141, 141, 1)"
+                    color: "rgba(141, 141, 141, 1)",
+                    display: "inline-block",
                   }}
-                  className="block mb-2"
                 >
                   Tour Package Price
                 </span>
                 <div className="flex items-center gap-2">
                   <span 
                     style={{
+                      width: "127px",
+                      height: "40px",
                       fontFamily: "Faktum, sans-serif",
                       fontWeight: 700,
                       fontSize: "32px",
                       lineHeight: "40px",
-                      color: "rgba(43, 43, 43, 1)"
+                      color: "rgba(43, 43, 43, 1)",
+                      display: "inline-block",
                     }}
-                    className="leading-none"
                   >
                     ₹{pkg.price.toLocaleString('en-IN')}
                   </span>
-                  <span className="font-sans font-medium text-[16px] text-[#8D8D8D] leading-none">/ per person</span>
+                  <span
+                    style={{
+                      width: "81px",
+                      height: "20px",
+                      fontFamily: "Faktum, sans-serif",
+                      fontWeight: 500,
+                      fontSize: "14px",
+                      lineHeight: "20px",
+                      color: "rgba(141, 141, 141, 1)",
+                      display: "inline-block",
+                    }}
+                  >
+                    / per person
+                  </span>
                   {pkg.originalPrice && pkg.originalPrice > pkg.price && (
                     <>
-                      <span className="font-sans font-medium text-[16px] text-[#8D8D8D] line-through leading-none ml-2">₹{pkg.originalPrice.toLocaleString('en-IN')}</span>
+                      <span
+                        style={{
+                          width: "56px",
+                          height: "18px",
+                          fontFamily: "Faktum, sans-serif",
+                          fontWeight: 500,
+                          fontSize: "14px",
+                          lineHeight: "18px",
+                          color: "rgba(141, 141, 141, 1)",
+                          textDecoration: "line-through",
+                          display: "inline-block",
+                        }}
+                      >
+                        ₹{pkg.originalPrice.toLocaleString('en-IN')}
+                      </span>
                       <span 
                         style={{
+                          width: "auto",
+                          minWidth: "57px",
+                          height: "20px",
+                          paddingLeft: "8px",
+                          paddingRight: "8px",
                           backgroundColor: "rgba(0, 160, 35, 0.08)",
                           color: "rgba(0, 160, 35, 1)",
                           fontFamily: "Faktum, sans-serif",
                           fontWeight: 500,
                           fontSize: "16px",
-                          lineHeight: "100%",
-                          padding: "2px 8px",
+                          lineHeight: "20px",
                           borderRadius: "4px",
+                          display: "inline-flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          whiteSpace: "nowrap",
                         }}
-                        className="inline-flex items-center justify-center ml-2"
                       >
                         {discountPercent}% off
                       </span>
@@ -1624,25 +1915,71 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
               </div>
 
               {/* Next Departures */}
-              <div className="flex-1 flex flex-col justify-center gap-4">
-                <span className="font-sans font-medium text-[16px] text-[#8D8D8D] block">Next Departures</span>
-                <div className="flex flex-col gap-3">
+              <div 
+                style={{
+                  width: "363px",
+                  height: "134px",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "12px",
+                  boxSizing: "border-box",
+                }}
+              >
+                <span 
+                  style={{
+                    width: "363px",
+                    height: "23px",
+                    fontFamily: "Faktum, sans-serif",
+                    fontWeight: 500,
+                    fontSize: "16px",
+                    lineHeight: "23px",
+                    color: "rgba(141, 141, 141, 1)",
+                    display: "inline-block",
+                  }}
+                >
+                  Next Departures
+                </span>
+                <div 
+                  style={{
+                    width: "363px",
+                    height: "99px",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "12px",
+                    boxSizing: "border-box",
+                  }}
+                >
                   {departures.map((dept: any) => {
                     const isSelected = bookingDate === dept.value;
+                    const seatsText = dept.seats.replace(' Available', '');
                     return (
                       <button
                         key={dept.value}
                         type="button"
                         onClick={() => setBookingDate(dept.value)}
                         className="w-full flex justify-between items-center transition cursor-pointer"
+                        style={{
+                          height: "25px",
+                          border: "none",
+                          background: "transparent",
+                          padding: 0,
+                          margin: 0,
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                        }}
                       >
                         <span 
                           style={{
+                            width: "123px",
+                            height: "25px",
                             fontFamily: "Faktum, sans-serif",
                             fontWeight: isSelected ? 600 : 500,
-                            fontSize: "18px",
-                            lineHeight: "100%",
+                            fontSize: "20px",
+                            lineHeight: "25px",
                             color: "rgba(43, 43, 43, 1)",
+                            display: "inline-block",
+                            textAlign: "left",
                           }}
                         >
                           {dept.label}
@@ -1651,12 +1988,14 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                           style={{
                             fontFamily: "Faktum, sans-serif",
                             fontWeight: isSelected ? 600 : 500,
-                            fontSize: "18px",
-                            lineHeight: "100%",
+                            fontSize: "20px",
+                            lineHeight: "25px",
                             color: "rgba(43, 43, 43, 1)",
+                            display: "inline-block",
+                            textAlign: "right",
                           }}
                         >
-                          {dept.seats}
+                          {seatsText}
                         </span>
                       </button>
                     );
@@ -1665,34 +2004,57 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
               </div>
 
               {/* Action Buttons & Badges */}
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-2">
                 <form onSubmit={handleBook}>
                   <button
                     type="submit"
                     style={{
                       backgroundColor: "rgba(29, 73, 62, 1)",
                       width: "363px",
-                      height: "55px",
+                      height: "60px",
+                      paddingTop: "16px",
+                      paddingBottom: "16px",
+                      paddingLeft: "32px",
+                      paddingRight: "32px",
+                      gap: "8px",
                       borderRadius: "4px",
                       border: "none",
-                      fontFamily: "Faktum, sans-serif",
-                      fontWeight: 500,
-                      fontSize: "18px",
-                      lineHeight: "100%",
                       color: "#FFFFFF",
                       boxSizing: "border-box",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
                     }}
-                    className="hover:opacity-95 transition-opacity cursor-pointer flex items-center justify-center gap-2"
+                    className="hover:opacity-95 transition-opacity cursor-pointer"
                   >
                     {bookedSuccess ? (
-                      <>
-                        <Check className="w-5 h-5" />
+                      <span
+                        style={{
+                          fontFamily: "Faktum, sans-serif",
+                          fontWeight: 500,
+                          fontSize: "18px",
+                          lineHeight: "23px",
+                        }}
+                      >
                         Added to Cart!
-                      </>
+                      </span>
                     ) : (
                       <>
                         <Calendar style={{ width: "28px", height: "28px" }} className="shrink-0" />
-                        Book this experience
+                        <span
+                          style={{
+                            width: "176px",
+                            height: "23px",
+                            fontFamily: "Faktum, sans-serif",
+                            fontWeight: 500,
+                            fontSize: "18px",
+                            lineHeight: "23px",
+                            display: "inline-block",
+                            color: "rgba(255, 255, 255, 1)",
+                          }}
+                        >
+                          Book this experience
+                        </span>
                       </>
                     )}
                   </button>
@@ -1700,6 +2062,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
 
                 <button
                   type="button"
+                  onClick={handleSaveForLater}
                   style={{
                     backgroundColor: "transparent",
                     width: "363px",
@@ -1711,11 +2074,6 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                     gap: "8px",
                     borderRadius: "4px",
                     border: "2px solid rgba(29, 73, 62, 1)",
-                    fontFamily: "Faktum, sans-serif",
-                    fontWeight: 500,
-                    fontSize: "18px",
-                    lineHeight: "100%",
-                    color: "rgba(29, 73, 62, 1)",
                     boxSizing: "border-box",
                     display: "flex",
                     alignItems: "center",
@@ -1723,92 +2081,170 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                   }}
                   className="hover:bg-[#1D493E]/5 transition cursor-pointer"
                 >
-                  Save for later
+                  <span
+                    style={{
+                      width: "115px",
+                      height: "23px",
+                      fontFamily: "Faktum, sans-serif",
+                      fontWeight: 500,
+                      fontSize: "18px",
+                      lineHeight: "23px",
+                      display: "inline-block",
+                      color: "rgba(29, 73, 62, 1)",
+                      textAlign: "center",
+                    }}
+                  >
+                    {saved ? 'Saved' : 'Save for later'}
+                  </span>
                 </button>
               </div>
 
               {/* Inclusions features badge lists */}
-              <div className="grid grid-cols-3 gap-2 pt-2 text-center">
-                <div className="flex flex-col items-center gap-2">
+              <div 
+                style={{
+                  width: "363px",
+                  height: "74px",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  boxSizing: "border-box",
+                  marginTop: "8px",
+                }}
+              >
+                <div 
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    gap: "8px",
+                    width: "106px",
+                    height: "74px",
+                    boxSizing: "border-box",
+                  }}
+                >
                   <div 
                     style={{ 
-                      width: "48px", 
-                      height: "48px", 
-                      borderRadius: "12px", 
-                      backgroundColor: "rgba(247, 245, 240, 1)",
+                      width: "46px", 
+                      height: "46px", 
+                      borderRadius: "4px", 
+                      backgroundColor: "rgba(246, 243, 238, 1)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                     }}
                     className="shrink-0"
                   >
-                    <Lock className="w-5 h-5 text-[#2B2B2B]" />
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2B2B2B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="5" y="11" width="14" height="9" rx="2" />
+                      <path d="M16 11V7a4 4 0 0 0-8 0v2" />
+                      <line x1="12" y1="14" x2="12" y2="17" />
+                    </svg>
                   </div>
                   <span 
                     style={{
+                      width: "106px",
+                      height: "20px",
                       fontFamily: "Faktum, sans-serif",
                       fontWeight: 500,
-                      fontSize: "16px",
-                      lineHeight: "100%",
+                      fontSize: "14px",
+                      lineHeight: "20px",
                       color: "rgba(43, 43, 43, 1)",
+                      display: "inline-block",
+                      textAlign: "center",
+                      whiteSpace: "nowrap",
                     }}
-                    className="font-sans"
                   >
                     Safe & Secure
                   </span>
                 </div>
-                <div className="flex flex-col items-center gap-2">
+
+                <div 
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    gap: "8px",
+                    width: "106px",
+                    height: "74px",
+                    boxSizing: "border-box",
+                  }}
+                >
                   <div 
                     style={{ 
-                      width: "48px", 
-                      height: "48px", 
-                      borderRadius: "12px", 
-                      backgroundColor: "rgba(247, 245, 240, 1)",
+                      width: "46px", 
+                      height: "46px", 
+                      borderRadius: "4px", 
+                      backgroundColor: "rgba(246, 243, 238, 1)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                     }}
                     className="shrink-0"
                   >
-                    <Clock className="w-5 h-5 text-[#2B2B2B]" />
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2B2B2B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M12 4 A 8 8 0 1 1 4.5 13" />
+                      <path d="M12 8v4l3 3" />
+                    </svg>
                   </div>
                   <span 
                     style={{
+                      width: "106px",
+                      height: "20px",
                       fontFamily: "Faktum, sans-serif",
                       fontWeight: 500,
-                      fontSize: "16px",
-                      lineHeight: "100%",
+                      fontSize: "14px",
+                      lineHeight: "20px",
                       color: "rgba(43, 43, 43, 1)",
+                      display: "inline-block",
+                      textAlign: "center",
+                      whiteSpace: "nowrap",
                     }}
-                    className="font-sans"
                   >
                     24/7 Support
                   </span>
                 </div>
-                <div className="flex flex-col items-center gap-2">
+
+                <div 
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    gap: "8px",
+                    width: "106px",
+                    height: "74px",
+                    boxSizing: "border-box",
+                  }}
+                >
                   <div 
                     style={{ 
-                      width: "48px", 
-                      height: "48px", 
-                      borderRadius: "12px", 
-                      backgroundColor: "rgba(247, 245, 240, 1)",
+                      width: "46px", 
+                      height: "46px", 
+                      borderRadius: "4px", 
+                      backgroundColor: "rgba(246, 243, 238, 1)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                     }}
                     className="shrink-0"
                   >
-                    <Star className="w-5 h-5 text-[#2B2B2B]" />
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2B2B2B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M12 3l2.5 5.5H21l-3.5 3.5" />
+                      <path d="M18.5 19.5l-6.5-4-6.5 4 1.5-6.5-5-5h6.5L12 3" />
+                    </svg>
                   </div>
                   <span 
                     style={{
+                      width: "106px",
+                      height: "20px",
                       fontFamily: "Faktum, sans-serif",
                       fontWeight: 500,
-                      fontSize: "16px",
-                      lineHeight: "100%",
+                      fontSize: "14px",
+                      lineHeight: "20px",
                       color: "rgba(43, 43, 43, 1)",
+                      display: "inline-block",
+                      textAlign: "center",
+                      whiteSpace: "nowrap",
                     }}
-                    className="font-sans"
                   >
                     {pkg.rating.toFixed(1)}/5 Rating
                   </span>
@@ -1818,15 +2254,18 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
               {/* Free Cancellation text */}
               <span 
                 style={{
+                  width: "363px",
+                  height: "18px",
                   fontFamily: "Faktum, sans-serif",
                   fontWeight: 500,
-                  fontSize: "12px",
+                  fontSize: "14px",
+                  lineHeight: "18px",
                   color: "rgba(141, 141, 141, 1)",
                   textAlign: "center",
-                  display: "block",
-                  marginTop: "8px",
+                  display: "inline-block",
+                  boxSizing: "border-box",
+                  marginTop: "0px",
                 }}
-                className="font-sans"
               >
                 Free cancellation • 14 days before departure
               </span>
@@ -1837,49 +2276,323 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
         </div>
       </div>
 
-      {/* Recommended gear products bottom row */}
+      {/* Boutique Gear Recommendations section */}
       {recommendedProducts.length > 0 && (
-        <section className="max-w-4xl mx-auto px-6 mt-16 pt-16 border-t border-[#1D493E]/10 text-left space-y-8">
-          <div className="text-center space-y-3">
-            <span className="inline-block bg-[#1D493E]/5 text-[#1D493E] border border-[#1D493E]/15 font-black text-xs px-4 py-1.5 rounded-full uppercase tracking-widest">
-              Boutique Gear Recommendations
-            </span>
-            <h2 className="text-3xl font-light font-serif text-[#1D493E] tracking-wide text-center">
-              Prepare For Your Journey
-            </h2>
-            <p className="text-xs text-[#1D493E]/75 max-w-sm mx-auto leading-relaxed text-center">
-              Shop recommended travel gear and clothing items handpicked for your destination.
-            </p>
+        <section
+          style={{
+            width: "100%",
+            maxWidth: "1440px",
+            minHeight: "840px",
+            paddingTop: "42px",
+            paddingRight: "80px",
+            paddingBottom: "42px",
+            paddingLeft: "80px",
+            backgroundColor: "rgba(255, 255, 255, 1)",
+            boxSizing: "border-box",
+            display: "flex",
+            flexDirection: "column",
+            gap: "32px",
+          }}
+          className="relative z-10 mx-auto text-left"
+        >
+          <div className="flex justify-between items-end w-full">
+             <div style={{ display: "flex", flexDirection: "column", gap: "12px", width: "1029px" }}>
+              <h2
+                style={{
+                  fontFamily: "Fraunces, serif",
+                  fontWeight: 600,
+                  fontSize: "42px",
+                  lineHeight: "100%",
+                  color: "#2B2B2B",
+                  margin: 0,
+                  width: "1029px",
+                  height: "52px",
+                }}
+              >
+                Prepare for your <span style={{ color: "#FF5A36" }}>Journey</span>
+              </h2>
+              <p
+                style={{
+                  fontFamily: "Faktum, sans-serif",
+                  fontWeight: 500,
+                  fontSize: "20px",
+                  lineHeight: "100%",
+                  color: "rgba(141, 141, 141, 1)",
+                  margin: 0,
+                  width: "1029px",
+                  height: "20px",
+                }}
+              >
+                Shop recommended travel gear and clothing items handpicked for your destination
+              </p>
+            </div>
+            <Link
+              href="/shop"
+              style={{
+                width: "251px",
+                height: "68px",
+                paddingTop: "18px",
+                paddingBottom: "18px",
+                paddingLeft: "24px",
+                paddingRight: "24px",
+                borderRadius: "4px",
+                color: "rgba(29, 73, 62, 1)",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "8px",
+                textDecoration: "none",
+                boxSizing: "border-box",
+              }}
+              className="hover:opacity-80 transition-opacity"
+            >
+              <span
+                style={{
+                  width: "163px",
+                  height: "25px",
+                  fontFamily: "Faktum, sans-serif",
+                  fontWeight: 500,
+                  fontSize: "20px",
+                  lineHeight: "25px",
+                  display: "inline-block",
+                }}
+              >
+                View all products
+              </span>
+              <ArrowUpRight style={{ width: "32px", height: "32px" }} className="text-[#1D493E] shrink-0" />
+            </Link>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {recommendedProducts.map((prod) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-[32px] w-full mt-4">
+            {recommendedProducts.map((prod: any) => (
               <div
                 key={prod.id}
-                className="bg-white border border-[#1D493E]/10 rounded-2xl p-5 hover:border-[#1D493E]/20 transition-all duration-300 flex flex-col justify-between space-y-4 shadow-sm"
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "12px",
+                  boxSizing: "border-box",
+                }}
+                className="w-full text-left"
               >
-                <div className="space-y-4">
-                  <Link href={`/shop/product/${prod.id}`} className="relative h-56 w-full rounded-xl overflow-hidden border border-[#1D493E]/5 bg-[#FAF9F6] block hover:opacity-95 transition-opacity">
-                    <img src={prod.image} alt={prod.name} className="w-full h-full object-cover" />
-                  </Link>
-                  <div>
-                    <Link href={`/shop/product/${prod.id}`} className="hover:text-[#E05434] transition-colors block">
-                      <h4 className="text-xs font-black uppercase text-[#1D493E] tracking-wider truncate">
-                        {prod.name}
-                      </h4>
-                    </Link>
-                    <p className="text-[10px] text-gray-500 font-semibold leading-relaxed mt-1">
-                      {prod.description}
-                    </p>
+                <div
+                  style={{
+                    width: "296px",
+                    height: "250px",
+                    borderTopLeftRadius: "4px",
+                    borderTopRightRadius: "4px",
+                    overflow: "hidden",
+                    position: "relative",
+                  }}
+                  className="bg-slate-100 group cursor-pointer"
+                >
+                  <img
+                    src={prod.image}
+                    alt={prod.name}
+                    loading="lazy"
+                    className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300"
+                  />
+                  {/* Slider dots overlay */}
+                  <div
+                    style={{
+                      position: "absolute",
+                      bottom: "12px",
+                      left: "0",
+                      right: "0",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      gap: "10px",
+                    }}
+                  >
+                    <div style={{ width: "12px", height: "6px", borderRadius: "100px", backgroundColor: "#1D493E" }} />
+                    <div style={{ width: "6px", height: "6px", borderRadius: "50%", backgroundColor: "rgba(255, 255, 255, 0.6)" }} />
+                    <div style={{ width: "6px", height: "6px", borderRadius: "50%", backgroundColor: "rgba(255, 255, 255, 0.6)" }} />
+                    <div style={{ width: "6px", height: "6px", borderRadius: "50%", backgroundColor: "rgba(255, 255, 255, 0.6)" }} />
+                    <div style={{ width: "6px", height: "6px", borderRadius: "50%", backgroundColor: "rgba(255, 255, 255, 0.6)" }} />
                   </div>
                 </div>
-                <div className="flex justify-between items-center pt-2">
-                  <span className="text-sm font-black text-[#1D493E]">₹{prod.price.toLocaleString('en-IN')}</span>
+
+                 {/* Product Content Block */}
+                <div
+                  style={{
+                    width: "296px",
+                    height: "354px",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "32px",
+                    boxSizing: "border-box",
+                  }}
+                >
+                  {/* Category Badge */}
+                  <span
+                    style={{
+                      backgroundColor: "rgba(255, 240, 235, 1)",
+                      color: "rgba(255, 98, 62, 1)",
+                      fontFamily: "Faktum, sans-serif",
+                      fontWeight: 700,
+                      fontSize: "12px",
+                      padding: "4px 10px",
+                      borderRadius: "4px",
+                      alignSelf: "flex-start",
+                    }}
+                    className="tracking-wider uppercase"
+                  >
+                    {prod.category}
+                  </span>
+
+                  {/* Name & Price */}
+                  <div 
+                    style={{
+                      width: "296px",
+                      height: "35px",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      boxSizing: "border-box",
+                    }}
+                  >
+                    <span
+                      style={{
+                        width: "168px",
+                        height: "25px",
+                        fontFamily: "Faktum, sans-serif",
+                        fontWeight: 600,
+                        fontSize: "20px",
+                        lineHeight: "25px",
+                        color: "rgba(43, 43, 43, 1)",
+                        display: "inline-block",
+                      }}
+                      className="truncate"
+                    >
+                      {prod.name}
+                    </span>
+                    <div className="flex items-center gap-2 shrink-0">
+                      {prod.originalPrice && (
+                        <span
+                          style={{
+                            width: "45px",
+                            height: "25px",
+                            fontFamily: "Faktum, sans-serif",
+                            fontWeight: 600,
+                            fontSize: "20px",
+                            lineHeight: "25px",
+                            color: "rgba(141, 141, 141, 1)",
+                            textDecoration: "line-through",
+                            display: "inline-block",
+                          }}
+                        >
+                          ₹{prod.originalPrice}
+                        </span>
+                      )}
+                      <span
+                        style={{
+                          width: "64px",
+                          height: "35px",
+                          fontFamily: "Faktum, sans-serif",
+                          fontWeight: 700,
+                          fontSize: "28px",
+                          lineHeight: "35px",
+                          color: "rgba(43, 43, 43, 1)",
+                          display: "inline-block",
+                        }}
+                      >
+                        ₹{prod.price}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Reviews & Bought count block */}
+                  <div
+                    style={{
+                      width: "296px",
+                      height: "67px",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "12px",
+                      boxSizing: "border-box",
+                    }}
+                  >
+                    {/* Reviews */}
+                    <div className="flex items-center gap-2">
+                      <div className="flex text-[#FF5A36] gap-0.5">
+                        {[...Array(5)].map((_, i) => (
+                          <Star key={i} className="w-4 h-4 fill-[#FF5A36] stroke-none" />
+                        ))}
+                      </div>
+                      <span
+                        style={{
+                          fontFamily: "Faktum, sans-serif",
+                          fontWeight: 500,
+                          fontSize: "16px",
+                          color: "rgba(141, 141, 141, 1)",
+                        }}
+                      >
+                        ({prod.reviewsCount} Reviews)
+                      </span>
+                    </div>
+
+                    {/* Bought count */}
+                    <span
+                      style={{
+                        fontFamily: "Faktum, sans-serif",
+                        fontWeight: 500,
+                        fontSize: "16px",
+                        color: "rgba(141, 141, 141, 1)",
+                      }}
+                    >
+                      {prod.boughtCount}
+                    </span>
+                  </div>
+
+                  {/* Delivery */}
+                  <span
+                    style={{
+                      width: "296px",
+                      height: "56px",
+                      fontFamily: "Faktum, sans-serif",
+                      fontWeight: 500,
+                      fontSize: "20px",
+                      lineHeight: "28px",
+                      color: "rgba(141, 141, 141, 1)",
+                      display: "block",
+                      boxSizing: "border-box",
+                    }}
+                  >
+                    FREE delivery as soon as{" "}
+                    <span style={{ color: "rgba(43, 43, 43, 1)", fontWeight: 500 }}>
+                      Thu, 9 Apr, 7 am - 10 pm
+                    </span>
+                  </span>
+
+                  {/* Add to Cart button */}
                   <button
                     onClick={() => handleProductAdd(prod)}
-                    className="px-4 py-2 bg-[#1D493E] text-white text-[9.5px] font-black uppercase tracking-widest rounded-xl hover:bg-[#E05434] transition shadow-xs cursor-pointer"
+                    style={{
+                      width: "296px",
+                      height: "60px",
+                      paddingTop: "16px",
+                      paddingBottom: "16px",
+                      paddingLeft: "32px",
+                      paddingRight: "32px",
+                      border: "2px solid rgba(29, 73, 62, 1)",
+                      borderRadius: "4px",
+                      backgroundColor: "rgba(255, 255, 255, 1)",
+                      color: "rgba(29, 73, 62, 1)",
+                      fontFamily: "Faktum, sans-serif",
+                      fontWeight: 500,
+                      fontSize: "20px",
+                      lineHeight: "28px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: "8px",
+                      cursor: "pointer",
+                      boxSizing: "border-box",
+                    }}
+                    className="hover:bg-[#1D493E] hover:text-white transition-colors"
                   >
-                    {productAddedSuccess === prod.id ? 'Added!' : 'Add to Cart'}
+                    {productAddedSuccess === prod.id ? 'Added!' : 'Add to cart'}
+                    <ShoppingCart className="w-[24px] h-[24px]" />
                   </button>
                 </div>
               </div>
@@ -1887,8 +2600,6 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
           </div>
         </section>
       )}
-
-
 
       {/* Newsletter / Booking CTA Banner (Matching Home page section design) */}
       <section

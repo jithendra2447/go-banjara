@@ -71,17 +71,47 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
   };
 
   return (
-    <div className="bg-white rounded-[4px] w-full h-[580px] md:h-[627.68px] flex flex-col justify-between gap-[20px] md:gap-[24px] hover:shadow-xs transition duration-300 overflow-hidden border border-gray-100">
+    <div 
+      style={{
+        width: "100%",
+        height: "628px",
+        backgroundColor: "rgba(255, 255, 255, 1)",
+        borderRadius: "4px",
+        overflow: "hidden",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        gap: "24px",
+        boxSizing: "border-box",
+      }}
+    >
       {/* Image Container with Dots (Width: 339px, Height: 254px, Radius: 4px) */}
-      <div className="relative w-full h-[200px] md:h-[254px] rounded-[4px] overflow-hidden shrink-0 bg-gray-50 flex items-center justify-center">
+      <div 
+        style={{
+          position: "relative",
+          width: "100%",
+          height: "254px",
+          borderRadius: "4px",
+          overflow: "hidden",
+          flexShrink: 0,
+          backgroundColor: "rgba(245, 245, 245, 1)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <img 
           src={images[activeImgIdx]} 
           alt={product.name} 
-          className="w-full h-full object-contain"
-          style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "contain",
+            imageRendering: '-webkit-optimize-contrast',
+          }}
         />
         {/* Dots indicator */}
-        <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+        <div style={{ position: "absolute", bottom: "10px", left: "50%", transform: "translateX(-50%)", display: "flex", gap: "6px", zIndex: 10 }}>
           {images.map((_: string, dotIdx: number) => {
             const isActive = activeImgIdx === dotIdx;
             return (
@@ -92,9 +122,16 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
                   e.preventDefault();
                   setActiveImgIdx(dotIdx);
                 }}
-                className={`w-1.5 h-1.5 rounded-full transition-all duration-200 cursor-pointer ${
-                  isActive ? 'bg-[#1D493E] scale-110' : 'bg-gray-300 hover:bg-gray-400'
-                }`}
+                style={{
+                  width: "6px",
+                  height: "6px",
+                  borderRadius: "50%",
+                  backgroundColor: isActive ? "rgba(29, 73, 62, 1)" : "rgba(204, 204, 204, 1)",
+                  border: "none",
+                  padding: 0,
+                  cursor: "pointer",
+                  transition: "background-color 0.2s ease",
+                }}
                 aria-label={`Go to slide ${dotIdx + 1}`}
               />
             );
@@ -103,58 +140,107 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
       </div>
 
       {/* Details Block (Width: 339px, Height: 350px) */}
-      <div className="w-full h-[320px] md:h-[349.68px] flex flex-col justify-between text-left p-3 md:p-0">
-        {/* Category Tag (Height: 28px, Radius: 4px, Padding: 4px vertical, 8px horizontal, Background: #FF623E/8, Text: #FF623E) */}
-        <span className="inline-flex items-center justify-center h-[28px] rounded-[4px] px-[8px] py-[4px] text-[14px] font-sans font-medium text-[#FF623E] bg-[#FF623E]/8 self-start">
+      <div style={{ width: "100%", height: "350px", display: "flex", flexDirection: "column", justifyContent: "space-between", textAlign: "left", boxSizing: "border-box" }}>
+        {/* Category Tag */}
+        <span 
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "28px",
+            borderRadius: "4px",
+            padding: "4px 8px",
+            fontFamily: "Faktum, sans-serif",
+            fontWeight: 500,
+            fontSize: "14px",
+            color: "rgba(255, 98, 62, 1)",
+            backgroundColor: "rgba(255, 98, 62, 0.08)",
+            alignSelf: "flex-start",
+          }}
+        >
           {product.category}
         </span>
         
-        {/* Title & Price Row (Width: 339px, Height: 35px, Justify: space-between, Font: Faktum 20px, Weight: 600, Color: #2B2B2B) */}
-        <div className="w-full h-[35px] flex justify-between items-center gap-2">
-          <h4 className="text-[20px] font-sans font-semibold text-[#2B2B2B] truncate hover:text-[#FF5A36] transition-colors">
-            <Link href={`/shop/product/${product.id}`}>
+        {/* Title & Price Row */}
+        <div style={{ width: "100%", height: "35px", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "8px" }}>
+          <h4 style={{ margin: 0, fontSize: "20px", fontFamily: "Faktum, sans-serif", fontWeight: 600, color: "rgba(43, 43, 43, 1)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+            <Link href={`/shop/product/${product.id}`} style={{ textDecoration: "none", color: "inherit" }}>
               {product.name}
             </Link>
           </h4>
-          <div className="flex items-center gap-2.5 shrink-0">
+          <div style={{ display: "flex", alignItems: "center", gap: "10px", flexShrink: 0 }}>
             {product.originalPrice && (
-              <span className="text-gray-400 line-through text-base font-medium">₹{product.originalPrice}</span>
+              <span style={{ color: "rgba(141, 141, 141, 1)", textDecoration: "line-through", fontSize: "18px", fontFamily: "Faktum, sans-serif", fontWeight: 500 }}>
+                ₹{product.originalPrice}
+              </span>
             )}
-            <span className="text-[20px] font-sans font-semibold text-[#2B2B2B]">₹{product.price}</span>
+            <span style={{ fontSize: "24px", fontFamily: "Faktum, sans-serif", fontWeight: 600, color: "rgba(43, 43, 43, 1)" }}>
+              ₹{product.price}
+            </span>
           </div>
         </div>
 
-        {/* Rating Row (Gap: 12px, Stars: 20px, Reviews: 20px Faktum Medium) */}
-        <div className="flex items-center gap-[12px] h-[20px] shrink-0">
-          <div className="flex text-amber-400 gap-0.5">
-            <Star className="w-5 h-5 fill-current" />
-            <Star className="w-5 h-5 fill-current" />
-            <Star className="w-5 h-5 fill-current" />
-            <Star className="w-5 h-5 fill-current" />
-            <Star className="w-5 h-5 fill-current" />
+        {/* Rating Row */}
+        <div style={{ display: "flex", alignItems: "center", gap: "12px", height: "20px", flexShrink: 0 }}>
+          <div style={{ display: "flex", gap: "2px" }}>
+            <Star style={{ width: "20px", height: "20px", fill: "#FFC72C", color: "transparent" }} />
+            <Star style={{ width: "20px", height: "20px", fill: "#FFC72C", color: "transparent" }} />
+            <Star style={{ width: "20px", height: "20px", fill: "#FFC72C", color: "transparent" }} />
+            <Star style={{ width: "20px", height: "20px", fill: "#FFC72C", color: "transparent" }} />
+            <Star style={{ width: "20px", height: "20px", fill: "#FFC72C", color: "transparent" }} />
           </div>
-          <span className="text-[20px] font-sans font-medium text-[#2B2B2B] leading-none">
+          <span style={{ fontSize: "20px", fontFamily: "Faktum, sans-serif", fontWeight: 500, color: "rgba(43, 43, 43, 1)", lineHeight: "100%" }}>
             ({reviewsCount} Reviews)
           </span>
         </div>
 
-        {/* Bought statistics (Height: 25px, Font: Faktum 20px, Weight: 500, Color: #8D8D8D) */}
-        <p className="font-sans font-medium text-[20px] leading-none text-[#8D8D8D] h-[25px] flex items-center shrink-0">{boughtText}</p>
-
-        {/* Delivery text (Font: Faktum 20px, Weight: 500, Line-height: 28px, Color split) */}
-        <p className="font-sans font-medium text-[20px] leading-[28px]">
-          <span className="text-[#8D8D8D]">FREE delivery as soon as </span>
-          <span className="text-[#2B2B2B]">Thu, 9 Apr, 7 am - 10 pm</span>
+        {/* Bought statistics */}
+        <p style={{ margin: 0, fontFamily: "Faktum, sans-serif", fontWeight: 500, fontSize: "20px", color: "rgba(141, 141, 141, 1)", height: "25px", display: "flex", alignItems: "center", flexShrink: 0 }}>
+          {boughtText}
         </p>
 
-        {/* Add to Cart Button (Width: 296px, Height: 60px, Padding: 16px vertical, 32px horizontal, Border: 2px, Radius: 4px, Gap: 8px) */}
+        {/* Delivery text */}
+        <p style={{ margin: 0, fontFamily: "Faktum, sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "28px" }}>
+          <span style={{ color: "rgba(141, 141, 141, 1)" }}>FREE delivery as soon as </span>
+          <span style={{ color: "rgba(43, 43, 43, 1)" }}>Thu, 9 Apr, 7 am - 10 pm</span>
+        </p>
+
+        {/* Add to Cart Button */}
         <button
           onClick={() => {
             onAddToCart(mockProduct);
             setIsAdded(true);
             setTimeout(() => setIsAdded(false), 2000);
           }}
-          className="w-full h-[60px] pt-[16px] pr-[32px] pb-[16px] pl-[32px] gap-[8px] rounded-[4px] border-2 border-[#1D493E] hover:bg-[#1D493E] hover:text-white text-[#1D493E] text-[16px] font-bold transition flex items-center justify-center cursor-pointer group"
+          style={{
+            width: "100%",
+            height: "60px",
+            padding: "16px 32px",
+            borderRadius: "4px",
+            border: "2px solid rgba(29, 73, 62, 1)",
+            backgroundColor: "transparent",
+            color: "rgba(29, 73, 62, 1)",
+            fontSize: "16px",
+            fontWeight: "bold",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "8px",
+            cursor: "pointer",
+            transition: "all 0.2s ease",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = "rgba(29, 73, 62, 1)";
+            e.currentTarget.style.color = "white";
+            const paths = e.currentTarget.querySelectorAll('path, circle');
+            paths.forEach((p: any) => p.style.stroke = 'white');
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = "transparent";
+            e.currentTarget.style.color = "rgba(29, 73, 62, 1)";
+            const paths = e.currentTarget.querySelectorAll('path, circle');
+            paths.forEach((p: any) => p.style.stroke = 'rgba(29, 73, 62, 1)');
+          }}
         >
           <span>{isAdded ? 'Added to Cart!' : 'Add to cart'}</span>
           <svg 
@@ -168,23 +254,23 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
           >
             <path 
               d="M4 5h3l2 11h11l2.5-9H14" 
-              className="stroke-[#2B2B2B] group-hover:stroke-white transition-colors duration-300"
+              style={{ stroke: "rgba(29, 73, 62, 1)", transition: "stroke 0.2s ease" }}
             />
             <path 
               d="M7.8 8.5H9.5" 
-              className="stroke-[#2B2B2B] group-hover:stroke-white transition-colors duration-300"
+              style={{ stroke: "rgba(29, 73, 62, 1)", transition: "stroke 0.2s ease" }}
             />
             <circle 
               cx="10.5" 
               cy="21.5" 
               r="2" 
-              className="stroke-[#1D493E] group-hover:stroke-white transition-colors duration-300"
+              style={{ stroke: "rgba(29, 73, 62, 1)", transition: "stroke 0.2s ease" }}
             />
             <circle 
               cx="17.5" 
               cy="21.5" 
               r="2" 
-              className="stroke-[#1D493E] group-hover:stroke-white transition-colors duration-300"
+              style={{ stroke: "rgba(29, 73, 62, 1)", transition: "stroke 0.2s ease" }}
             />
           </svg>
         </button>

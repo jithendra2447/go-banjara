@@ -51,24 +51,24 @@ export interface HolidayPackage {
 export const HOLIDAY_PACKAGES: HolidayPackage[] = [
   {
     id: 'pkg-kashmir-classic',
-    name: 'Srinagar to Leh',
+    name: 'Spiti Valley Traverse',
     price: 22900,
     originalPrice: 29500,
-    duration: '8 Days / 7 Nights',
-    durationDays: 8,
+    duration: '6 Days / 5 Nights',
+    durationDays: 6,
     rating: 5.0,
     ratingCount: 450,
     hotelStars: '4★ Premium Stays',
     hotelClass: '4',
-    route: 'Srinagar → Kargil → Leh',
-    routeList: ['Srinagar', 'Kargil', 'Leh'],
-    description: 'Experience the iconic highway journey crossing high mountain passes and sapphire lakes.',
+    route: 'Manali → Kaza → Chandratal → Manali',
+    routeList: ['Manali', 'Kaza', 'Chandratal'],
+    description: 'Explore high altitude Spiti villages, post cards from Hikkim, and camp under the stars at Chandratal.',
     inclusions: ['flights', 'hotel', 'transfers', 'meals', 'sightseeing'],
     highlights: [
-      'Drive through Zoji La & Namika La passes',
-      'Visit the ancient Alchi & Lamayuru monasteries',
-      'Pangong Tso lake camping and stargazing',
-      'Acclimatize and relax in Leh town'
+      'Drive through Atal Tunnel & Kunzum Pass',
+      'Visit the ancient Key & Dhankar monasteries',
+      'Chandratal lake camping and stargazing',
+      'Explore Langza, Hikkim & Komik villages'
     ],
     image: '/travel-leh-6.jpg',
     themes: ['Mountain', 'Romantic', 'Adventure'],
@@ -79,7 +79,7 @@ export const HOLIDAY_PACKAGES: HolidayPackage[] = [
     difficulty: 'Moderate',
     groupType: 'Curated group Trip',
     nextDeparture: 'Aug, 2026',
-    startPoint: 'Srinagar',
+    startPoint: 'Manali',
     isBestSeller: true,
     
     // Detailed fields
@@ -92,7 +92,7 @@ export const HOLIDAY_PACKAGES: HolidayPackage[] = [
       '/ladakh-hero.jpg'
     ],
     exclusions: [
-      'Flights or travel expenses to Srinagar and from Leh',
+      'Flights or travel expenses to Manali',
       'Mandatory travel insurance (highly recommended)',
       'Lunch meals, personal snacks, and bottled mineral water',
       'Tips for guides, driver, hotel staff, and camel handlers',
@@ -109,15 +109,11 @@ export const HOLIDAY_PACKAGES: HolidayPackage[] = [
     faqs: [
       {
         q: 'What standard are the accommodations? (Hotels, homestays, tents)',
-        a: 'We use premium 3-star boutique hotels in Srinagar and Leh, a comfortable local hotel in Kargil, deluxe desert tents in Hunder (Nubra), and high-quality lakeside dome tents with attached bathrooms at Pangong Tso.'
+        a: 'We use premium boutique hotels in Kaza, and high-quality lakeside dome tents with attached bathrooms at Chandratal.'
       },
       {
         q: 'Is AMS (Altitude Mountain Sickness) a concern?',
-        a: 'Yes, because Leh is at 3,500m. We include 24 hours of rest in Leh on Day 4 and Day 5 for acclimatization. Our vehicles carry medical oxygen cylinders, and our coordinators are certified in Wilderness First Aid.'
-      },
-      {
-        q: 'What is the group size for the trip?',
-        a: 'We keep our groups small and intimate, typically between 8 to 12 travelers per batch, to ensure safety, comfort, and a personalized experience.'
+        a: 'Yes, because Spiti is at 3,800m. We include acclimatization rest on Day 1 and Day 2. Our vehicles carry medical oxygen cylinders.'
       }
     ],
     reviews: [
@@ -125,14 +121,7 @@ export const HOLIDAY_PACKAGES: HolidayPackage[] = [
         name: 'Rohan Malhotra',
         date: 'July, 02nd, 2026',
         avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&h=100&q=80',
-        comment: '“An absolute dream road trip! Driving through Zoji La was thrilling, and the view of Pangong Tso at sunset is something I will never forget. Vikram Aditya was the perfect guide—super knowledgeable and kept us safe all along.”',
-        rating: 5
-      },
-      {
-        name: 'Sarah Jenkins',
-        date: 'June, 28th, 2026',
-        avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&h=100&q=80',
-        comment: '“Everything was incredibly well-organized. The acclimatization days in Leh were crucial and handled perfectly. Camping at Pangong Tso under a sky full of stars was magical. 10/10 recommendation!”',
+        comment: '“An absolute dream road trip! Driving through Kunzum Pass was thrilling, and the view of Chandratal at sunset is something I will never forget. Vikram Aditya was the perfect guide.”',
         rating: 5
       }
     ],
@@ -142,93 +131,72 @@ export const HOLIDAY_PACKAGES: HolidayPackage[] = [
       image: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=120&h=120&fit=crop&q=60',
       rating: 5.0,
       trips: 143,
-      bio: 'Vikram is a native Himalayan guide with 12+ years of experience leading high-altitude road trips and treks across Ladakh, Zanskar, and Kashmir. Certified in Wilderness Advanced First Aid (WAFA).'
+      bio: 'Vikram is a native Himalayan guide with 12+ years of experience leading high-altitude road trips across Himachal and Ladakh.'
     },
     departures: [
       { value: '2026-08-14', label: '14 Aug, 2026', seats: '4 Seats' },
-      { value: '2026-08-21', label: '21 Aug, 2026', seats: '8 Seats' },
-      { value: '2026-09-04', label: '4 Sep, 2026', seats: '12 Seats' }
+      { value: '2026-08-21', label: '21 Aug, 2026', seats: '8 Seats' }
     ],
     itinerary: [
       {
         day: 'Day 01',
-        title: 'Arrival in Srinagar & Houseboat Check-in',
-        location: 'Srinagar',
-        places: ['Srinagar Airport', 'Dal Lake Houseboat'],
-        offering: 'Arrive at Srinagar Airport. Transfer in a private heated luxury 4x4 SUV to your heritage cedar houseboat on Dal Lake. Enjoy a warm welcoming cup of Kashmiri Kahwa, followed by a relaxing sunset Shikara cruise.',
-        activities: ['Private heated 4x4 SUV transfer', 'Heritage cedar houseboat stay', 'Welcome Kashmiri Kahwa session', 'Sunset Shikara cruise on Dal Lake'],
-        insiderTip: 'Kashmiri Kahwa is brewed with green tea, saffron, cardamom, and cinnamon, served with crushed almonds. Enjoy it hot on the deck!',
+        title: 'Manali → Kaza via Atal Tunnel',
+        location: 'Kaza',
+        places: ['Atal Tunnel', 'Lahaul Valley', 'Kunzum Pass', 'Kaza'],
+        offering: 'Drive through the Atal Tunnel at 3,000m and emerge into the cold desert. Afternoon arrival in Kaza. Acclimatization walk, orientation dinner.',
+        activities: ['Drive through Atal Tunnel', 'Cross Kunzum Pass', 'Acclimatization walk', 'Orientation dinner'],
+        insiderTip: 'Take it extremely slow today to help your body adapt to the sudden high altitude of Kaza.',
         image: '/travel-leh-day1.jpg'
       },
       {
         day: 'Day 02',
-        title: 'Srinagar Mughal Gardens & Royal Heritage',
-        location: 'Srinagar',
-        places: ['Shalimar Bagh', 'Nishat Bagh', 'Pari Mahal Ruins'],
-        offering: 'Spend the day exploring Srinagar\'s royal heritage. Walk through the sprawling terraces of Shalimar and Nishat Mughal Gardens, and visit the historic Pari Mahal ruins overlooking the lake.',
-        activities: ['Mughal Gardens entry tickets', 'Local guide & audio stories', 'Traditional Pheran costume photo shoot', 'Saffron tea & snacks in Srinagar old city'],
-        insiderTip: 'Wear the traditional Kashmiri Pheran for your photo shoot at Pari Mahal for stunning contrast against the ancient stone ruins.',
+        title: 'Kaza → Key Monastery → Kibber',
+        location: 'Kaza',
+        places: ['Key Monastery', 'Kibber Village', 'Chicham Bridge'],
+        offering: 'Arrive at Srinagar airport. Meet our team and transfer to a traditional Houseboat on Dal Lake. Afternoon shikara ride and trip briefing in the evening.',
+        activities: ['Key Monastery guided tour', 'Kibber Village walk', 'Chicham Bridge photo stop'],
+        insiderTip: 'Try the local butter tea in Kibber; it is great for keeping warm in the high altitudes.',
         image: 'https://images.unsplash.com/photo-1598324421714-235f4980c749?auto=format&fit=crop&w=500&q=80'
       },
       {
         day: 'Day 03',
-        title: 'Crossing Zoji La Pass to Kargil',
-        location: 'Srinagar to Kargil',
-        places: ['Sonamarg Meadows', 'Zoji La Pass', 'Drass War Memorial', 'Kargil'],
-        offering: 'Leave Srinagar early for Kargil. Traverse the scenic Sonamarg meadows before scaling the thrilling Zoji La pass. Pay respect at the Drass War Memorial before checking into your Kargil hotel.',
-        activities: ['High altitude highway driving', 'Base camp stop in Sonamarg', 'Visit Drass (second coldest inhabited place)', 'Overnight premium stay in Kargil'],
-        insiderTip: 'Keep your camera ready as you approach Zoji La; the transformation from green valley to stark rocky mountains is dramatic.',
+        title: 'Kibber → Hikkim → Komik → Langza',
+        location: 'Kaza',
+        places: ['Hikkim Post Office', 'Komik', 'Langza Buddha'],
+        offering: 'Arrive at Srinagar airport. Meet our team and transfer to a traditional Houseboat on Dal Lake. Afternoon shikara ride and trip briefing in the evening.',
+        activities: ['Send a letter from the highest post office', 'Visit Langza Buddha statue', 'Komik village walk'],
+        insiderTip: 'Look for marine fossils in Langza, but do not take them home as they are protected.',
         image: 'https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=500&q=80'
       },
       {
         day: 'Day 04',
-        title: 'Lunar Landscapes & Monasteries to Leh',
-        location: 'Kargil to Leh',
-        places: ['Mulbekh Giant Buddha', 'Namika La', 'Lamayuru Moonland', 'Alchi', 'Leh'],
-        offering: 'Drive from Kargil to Leh. Stop at Mulbekh to see the giant rock-cut Buddha, cross Namika La pass, marvel at the Moonland of Lamayuru, and visit the 1,000-year-old wood carving work at Alchi Monastery.',
-        activities: ['Mulbekh Monastery visit', 'Lamayuru Moonland landscape walk', 'Guided tour of Alchi Monastery', 'Leh boutique hotel check-in'],
-        insiderTip: 'Alchi is famous for its unique Kashmiri-style Buddhist wall paintings that date back to the 10th century. Flash photography is prohibited inside to protect them.',
+        title: 'Langza → Pin Valley National Park',
+        location: 'Pin Valley',
+        places: ['Mudh Village', 'Pin Valley National Park', 'Dhankar Monastery'],
+        offering: 'Drive to Pin Valley National Park, visiting Mudh village and the ancient cliffside Dhankar Monastery.',
+        activities: ['Pin Valley scenic drive', 'Mudh Village exploration', 'Dhankar Monastery tour'],
+        insiderTip: 'The views of the confluence of Spiti and Pin rivers near Dhankar are spectacular.',
         image: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=500&q=80'
       },
       {
         day: 'Day 05',
-        title: 'Leh Monasteries & Sunset Shanti Stupa',
-        location: 'Leh',
-        places: ['Leh Palace', 'Thiksey Monastery', 'Shanti Stupa', 'Hall of Fame'],
-        offering: 'Explore Leh town and its surrounding culture. Climb the multi-story Thiksey Monastery, tour the ruins of Leh Palace, and watch the sunset paint the mountains pink from Shanti Stupa.',
-        activities: ['Thiksey Monastery morning tour', 'Leh Palace entry ticket', 'Panoramic sunset at Shanti Stupa', 'Stroll through Leh Main Market'],
-        insiderTip: 'Try to visit Thiksey early in the morning. Hearing the monks chant and blow the traditional copper horns is a mystical experience.',
+        title: 'Kaza to Chandratal Lake',
+        location: 'Chandratal',
+        places: ['Chandratal Lake', 'Lakeside Camp'],
+        offering: 'Drive to the breathtaking crescent-shaped Chandratal Lake. Stargaze under clear Himalayan skies at the lakeside campsite.',
+        activities: ['Chandratal lake trekking', 'Lakeside sunset walk', 'Stargazing session'],
+        insiderTip: 'Keep all warm layers handy as temperatures at Chandratal can drop below freezing even in summer.',
         image: 'https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=500&q=80'
       },
       {
         day: 'Day 06',
-        title: 'Khardung La Pass to Nubra Valley',
-        location: 'Leh to Nubra Valley',
-        places: ['Khardung La Pass', 'Diskit Monastery', 'Hunder Sand Dunes'],
-        offering: 'Scale one of the world\'s highest motorable roads at Khardung La (5,359m). Descent into the Nubra Valley to see the giant Buddha at Diskit and ride Bactrian camels in the sand dunes of Hunder.',
-        activities: ['Khardung La summit photo stop', 'Diskit Monastery walk', 'Bactrian double-humped camel safari', 'Luxury desert camping stay'],
-        insiderTip: 'Do not stay at the Khardung La summit for more than 15-20 minutes due to the thin air. Hydrate constantly with water and local butter tea.',
+        title: 'Chandratal Lake to Manali',
+        location: 'Manali',
+        places: ['Kunzum Pass', 'Atal Tunnel', 'Manali'],
+        offering: 'Drive back to Manali via Kunzum Pass and Atal Tunnel. Departure and trip ends by evening.',
+        activities: ['Kunzum Pass crossing', 'Atal Tunnel drive', 'Manali departure transfer'],
+        insiderTip: 'Leave early from Chandratal to avoid traffic near the Atal Tunnel.',
         image: 'https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=500&q=80'
-      },
-      {
-        day: 'Day 07',
-        title: 'Nubra Valley to Turquoise Pangong Tso Lake',
-        location: 'Nubra to Pangong Tso',
-        places: ['Shyok River Road', 'Pangong Tso Lake', 'Lakeside Camp'],
-        offering: 'Drive along the rugged Shyok River road to reach Pangong Tso Lake. Marvel at the lake shifting colors from turquoise to deep indigo, and sleep in lakeside camps under the clear sky.',
-        activities: ['Scenic Shyok river highway drive', 'Lakeside sunset photography walk', 'Traditional Ladakhi dinner', 'Lakeside stargazing under clear skies'],
-        insiderTip: 'Pangong Tso is situated at 4,250m. Nights are extremely cold even in summer, so keep your heavy thermal wear and windproof jacket handy.',
-        image: 'https://images.unsplash.com/photo-1596176530529-78163a4f7af2?auto=format&fit=crop&w=500&q=80'
-      },
-      {
-        day: 'Day 08',
-        title: 'Return to Leh & Departure',
-        location: 'Pangong to Leh & Out',
-        places: ['Chang La Pass', 'Leh Main Bazaar', 'Leh Airport'],
-        offering: 'Cross the Chang La pass back to Leh. Do last-minute shopping for local apricots, sea buckthorn juice, and prayer wheels, before transferring to Leh Airport for your flight.',
-        activities: ['Chang La pass crossing', 'Apricot and souvenir shopping', 'Private airport departure transfer'],
-        insiderTip: 'Leh airport is heavily secured. Arrive at least 2.5 hours early, and keep your cabin bags ready for security scanning.',
-        image: 'https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=500&q=80'
       }
     ]
   },

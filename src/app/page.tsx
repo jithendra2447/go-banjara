@@ -336,7 +336,7 @@ export default function Homepage() {
           <div 
             className="absolute inset-x-0 top-0 w-full h-[601px] pointer-events-none" 
             style={{ 
-              background: "linear-gradient(360deg, #FFFFFF 2.79%, rgba(255, 255, 255, 0) 47.84%)" 
+              background: "linear-gradient(360deg, #FFFFFF 2.79%, rgba(255, 255, 255, 0) 20%)" 
             }}
           />
 
@@ -361,7 +361,7 @@ export default function Homepage() {
 
       {/* 2. HERO CONTENT SECTION (Transparent background, relative z-[45] to sit on top of everything, but below navbar z-50) */}
       <section className="relative hero-banner-height flex flex-col justify-end z-[45] bg-transparent">
-        <div className="max-w-[1440px] mx-auto px-6 md:px-20 w-full grid md:grid-cols-2 gap-12 items-center relative pt-4 pb-[95px]">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-20 w-full grid md:grid-cols-2 gap-[24px] items-center relative pt-4 pb-[95px]">
           <div className="w-full md:w-[454px] md:h-[530px] flex flex-col justify-between text-left shrink-0">
             <div className="w-full md:w-[454px] md:h-[368px] flex flex-col gap-[32px] justify-start shrink-0">
               <h1 className="text-4xl md:text-[62px] md:leading-[1.25] tracking-[-0.2px] font-semibold text-white font-sans w-full md:w-[454px] md:h-[234px] shrink-0">

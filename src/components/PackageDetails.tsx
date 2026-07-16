@@ -44,13 +44,24 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
     }
   }, [id]);
 
+  const galleryImages = (pkg?.images && pkg.images.length >= 6)
+    ? pkg.images.slice(0, 6)
+    : [
+        pkg?.image || '/travel-leh-6.jpg',
+        '/travel-leh-1.jpg',
+        '/travel-leh-2.jpg',
+        '/travel-leh-4.jpg',
+        '/travel-leh-5.jpg',
+        '/ladakh-hero.jpg'
+      ];
+
   return (
     <div 
       style={{
         backgroundColor: "rgba(255, 255, 255, 1)",
-        paddingBottom: "0px",
+        paddingBottom: "62px",
       }}
-      className="text-[#1D493E] min-h-fit font-sans relative overflow-x-hidden w-full"
+      className="text-[#1D493E] min-h-screen font-sans relative overflow-x-hidden w-full"
     >
       {/* Breadcrumbs */}
       <div 
@@ -133,6 +144,40 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
           >
             {pkg?.name || "Spiti Valley Traverse"}
           </span>
+        </div>
+      </div>
+
+      {/* 6-Image Grid Collage Showcase */}
+      <div 
+        style={{
+          width: "100%",
+          maxWidth: "1280px",
+          height: "527px",
+          boxSizing: "border-box",
+          background: "rgba(255, 255, 255, 1)",
+        }}
+        className="w-full max-w-[1280px] mx-auto"
+      >
+        <div 
+          style={{
+            gap: "32px",
+          }}
+          className="grid grid-cols-3 grid-rows-2 w-full h-full"
+        >
+          {galleryImages.map((img: string, idx: number) => (
+            <div
+              key={idx}
+              style={{ borderRadius: "4px" }}
+              className="relative overflow-hidden w-full h-full bg-slate-100"
+            >
+              <img
+                src={img}
+                alt={`${pkg?.name || "Package"} gallery image ${idx + 1}`}
+                loading="lazy"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          ))}
         </div>
       </div>
     </div>

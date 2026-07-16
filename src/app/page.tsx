@@ -304,20 +304,6 @@ export default function Homepage() {
               transform: 'translateZ(0)'
             }}
           />
-          {/* Layer 1: White Gradient Fade (height: 601px, transitions to white at the bottom) */}
-          <div 
-            className="absolute inset-x-0 top-0 w-full h-[601px] pointer-events-none" 
-            style={{ 
-              background: "linear-gradient(360deg, #FFFFFF 2.79%, rgba(255, 255, 255, 0) 47.84%)" 
-            }}
-          />
-
-          {/* Layer 2: Dark Overlay (rgba(43, 43, 43, 0.54), height: 601px) */}
-          <div 
-            className="absolute inset-x-0 top-0 w-full h-[601px] pointer-events-none"
-            style={{ backgroundColor: "rgba(43, 43, 43, 0.54)" }}
-          />
-
           {/* Layer 1.5: User's Grey Overlay Layer */}
           <img 
             src="/hero-overlay.png" 
@@ -337,6 +323,20 @@ export default function Homepage() {
             style={{ 
               imageRendering: '-webkit-optimize-contrast',
               transform: 'translateZ(0)'
+            }}
+          />
+
+          {/* Layer 2: Dark Overlay (rgba(43, 43, 43, 0.54), height: 601px) */}
+          <div 
+            className="absolute inset-x-0 top-0 w-full h-[601px] pointer-events-none"
+            style={{ backgroundColor: "rgba(43, 43, 43, 0.54)" }}
+          />
+
+          {/* Layer 1: White Gradient Fade (height: 601px, transitions to white at the bottom) */}
+          <div 
+            className="absolute inset-x-0 top-0 w-full h-[601px] pointer-events-none" 
+            style={{ 
+              background: "linear-gradient(360deg, #FFFFFF 2.79%, rgba(255, 255, 255, 0) 47.84%)" 
             }}
           />
 

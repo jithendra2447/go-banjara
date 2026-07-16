@@ -48,9 +48,9 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
     <div 
       style={{
         backgroundColor: "rgba(255, 255, 255, 1)",
-        paddingBottom: "62px",
+        paddingBottom: "0px",
       }}
-      className="text-[#1D493E] min-h-screen font-sans relative overflow-x-hidden w-full"
+      className="text-[#1D493E] min-h-fit font-sans relative overflow-x-hidden w-full"
     >
       {/* Breadcrumbs */}
       <div 

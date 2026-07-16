@@ -304,6 +304,19 @@ export default function Homepage() {
               transform: 'translateZ(0)'
             }}
           />
+          {/* Layer 1: White Gradient Fade (height: 601px, transitions to white at the bottom) */}
+          <div 
+            className="absolute inset-x-0 top-0 w-full h-[601px] pointer-events-none" 
+            style={{ 
+              background: "linear-gradient(360deg, #FFFFFF 2.79%, rgba(255, 255, 255, 0) 47.84%)" 
+            }}
+          />
+
+          {/* Layer 2: Dark Overlay (rgba(43, 43, 43, 0.54), height: 601px) */}
+          <div 
+            className="absolute inset-x-0 top-0 w-full h-[601px] pointer-events-none"
+            style={{ backgroundColor: "rgba(43, 43, 43, 0.54)" }}
+          />
 
           {/* Layer 1.5: User's Grey Overlay Layer */}
           <img 
@@ -327,13 +340,7 @@ export default function Homepage() {
             }}
           />
 
-          {/* Layer 2: White Gradient Fade (Positioned behind/back side of the bike to transition to the metrics section) */}
-          <div 
-            className="absolute inset-x-0 bottom-0 h-[20px] z-20 pointer-events-none" 
-            style={{ 
-              background: 'linear-gradient(to top, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0) 100%)' 
-            }}
-          />
+
         </div>
       </div>
 

@@ -444,53 +444,66 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
         </div>
       </div>
 
-      {/* 6-Image Grid Collage Showcase */}
-      <div className="w-full max-w-[1280px] mx-auto px-4 md:px-10 lg:px-0 mb-10">
-        <div 
-          style={{
-            background: "rgba(255, 255, 255, 1)",
-          }}
-          className="grid grid-cols-2 md:grid-cols-3 md:grid-rows-2 gap-4 md:gap-[32px] md:h-[527px] rounded-[4px] overflow-hidden"
-        >
-          {galleryImages.map((img: string, idx: number) => (
-            <div
-              key={idx}
-              style={{ borderRadius: "4px" }}
-              className="relative overflow-hidden border border-[#1D493E]/10 bg-slate-900 group cursor-pointer w-full h-full aspect-[3/2] md:aspect-auto"
-              onClick={() => setActivePhotoIdx(idx)}
-            >
-              <img
-                src={img}
-                alt={`${pkg.name} gallery image ${idx + 1}`}
-                loading="lazy"
-                className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500 opacity-90"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-              <div className="absolute bottom-4 left-4 right-4 text-left opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white pointer-events-none">
-                <span className="text-[9px] font-mono tracking-widest text-[#FFFF80] uppercase block">
-                  {pkg.destination} Gallery
-                </span>
-                <h4 className="text-xs font-serif font-bold mt-0.5">{pkg.routeList?.[idx % pkg.routeList.length] || pkg.destination}</h4>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Dual Column Layout Spread */}
-      <section 
+      {/* Main Container */}
+      <div 
         style={{
           width: "100%",
-          maxWidth: "1280px",
-          backgroundColor: "rgba(255, 255, 255, 1)",
+          maxWidth: "1440px",
           paddingTop: "42px",
           paddingBottom: "42px",
+          paddingLeft: "80px",
+          paddingRight: "80px",
+          backgroundColor: "rgba(255, 255, 255, 1)",
           boxSizing: "border-box",
+          display: "flex",
+          flexDirection: "column",
+          gap: "32px",
         }}
-        className="relative z-10 mx-auto w-full px-4 md:px-10 lg:px-0"
+        className="relative z-10 mx-auto w-full"
       >
+        {/* Image Gallery */}
         <div 
-          className="w-full mx-auto grid grid-cols-1 lg:grid-cols-[1fr_411px] gap-8 lg:gap-[32px] items-start"
+          style={{
+            width: "100%",
+            height: "527px",
+            boxSizing: "border-box",
+          }}
+          className="w-full"
+        >
+          <div 
+            style={{
+              background: "rgba(255, 255, 255, 1)",
+            }}
+            className="grid grid-cols-2 md:grid-cols-3 md:grid-rows-2 gap-4 md:gap-[32px] w-full h-full rounded-[4px] overflow-hidden"
+          >
+            {galleryImages.map((img: string, idx: number) => (
+              <div
+                key={idx}
+                style={{ borderRadius: "4px" }}
+                className="relative overflow-hidden border border-[#1D493E]/10 bg-slate-900 group cursor-pointer w-full h-full aspect-[3/2] md:aspect-auto"
+                onClick={() => setActivePhotoIdx(idx)}
+              >
+                <img
+                  src={img}
+                  alt={`${pkg.name} gallery image ${idx + 1}`}
+                  loading="lazy"
+                  className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500 opacity-90"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                <div className="absolute bottom-4 left-4 right-4 text-left opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white pointer-events-none">
+                  <span className="text-[9px] font-mono tracking-widest text-[#FFFF80] uppercase block">
+                    {pkg.destination} Gallery
+                  </span>
+                  <h4 className="text-xs font-serif font-bold mt-0.5">{pkg.routeList?.[idx % pkg.routeList.length] || pkg.destination}</h4>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Details Section */}
+        <div 
+          className="w-full grid grid-cols-1 lg:grid-cols-[1fr_411px] gap-8 lg:gap-[32px] items-start"
         >
           
           {/* LEFT COLUMN: Travel package details */}
@@ -1770,7 +1783,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
       {/* Recommended gear products bottom row */}
       {recommendedProducts.length > 0 && (

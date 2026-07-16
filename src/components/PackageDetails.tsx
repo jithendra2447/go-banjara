@@ -859,7 +859,6 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
               }}
               className="text-left"
             >
-
               {(['overview', 'itinerary', 'reviews'] as const).map((tab) => {
                 const isSelected = activeTab === tab;
                 const label = tab === 'overview' ? 'Overview' : tab === 'itinerary' ? 'Itinerary' : 'Reviews';
@@ -869,19 +868,32 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                     type="button"
                     onClick={() => setActiveTab(tab)}
                     style={{
-                      fontFamily: "'Faktum', 'Outfit', sans-serif",
-                      fontWeight: 500,
-                      fontSize: "24px",
-                      lineHeight: "100%",
-                      color: isSelected ? "rgba(28, 68, 140, 1)" : "rgba(43, 43, 43, 1)",
-                      borderBottom: isSelected ? "2px solid rgba(28, 68, 140, 1)" : "2px solid transparent",
-                      height: "100%",
-                      paddingBottom: "8px",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      height: "54px",
+                      padding: "12px",
+                      boxSizing: "border-box",
+                      borderBottom: isSelected ? "3px solid rgba(28, 68, 140, 1)" : "3px solid transparent",
                       marginBottom: "-2px",
+                      cursor: "pointer",
                     }}
-                    className="transition-all cursor-pointer capitalize"
+                    className="transition-all capitalize"
                   >
-                    {label}
+                    <span
+                      style={{
+                        fontFamily: "'Faktum', 'Outfit', sans-serif",
+                        fontWeight: 500,
+                        fontSize: "24px",
+                        lineHeight: "100%",
+                        color: isSelected ? "rgba(28, 68, 140, 1)" : "rgba(43, 43, 43, 1)",
+                        height: "30px",
+                        display: "inline-flex",
+                        alignItems: "center",
+                      }}
+                    >
+                      {label}
+                    </span>
                   </button>
                 );
               })}

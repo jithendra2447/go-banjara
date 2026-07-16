@@ -408,26 +408,26 @@ export default function Homepage() {
       {/* 2. METRICS WIDGET BAR */}
       <section style={{ background: "rgba(255,255,255,1)" }} className="relative z-30 flex items-center w-full md:h-[145px]">
         <div
-          className="w-full max-w-[1440px] mx-auto flex flex-col md:flex-row items-center divide-y md:divide-y-0 md:divide-x divide-gray-200"
+          className="w-full max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-center divide-y md:divide-y-0 md:divide-x divide-gray-200"
           style={{ paddingTop: "24px", paddingBottom: "24px", paddingLeft: "80px", paddingRight: "80px" }}
         >
-          <div className="flex-1 flex flex-col items-center justify-center p-[12px]" style={{ gap: "8px" }}>
+          <div className="flex-1 md:flex-none w-full md:w-[177px] md:h-[97px] flex flex-col items-center justify-center p-[12px]" style={{ gap: "8px" }}>
             <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43,43,43,1)", textAlign: "center" }}>10+</h4>
             <p className="text-[13px] md:text-sm text-gray-500 font-medium font-sans text-center">Travel Packages</p>
           </div>
-          <div className="flex-1 flex flex-col items-center justify-center p-[12px]" style={{ gap: "8px" }}>
+          <div className="flex-1 md:flex-none w-full md:w-[177px] md:h-[97px] flex flex-col items-center justify-center p-[12px]" style={{ gap: "8px" }}>
             <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43,43,43,1)", textAlign: "center" }}>15k+</h4>
             <p className="text-[13px] md:text-sm text-gray-500 font-medium font-sans text-center">Nomads Joined</p>
           </div>
-          <div className="flex-1 flex flex-col items-center justify-center p-[12px]" style={{ gap: "8px" }}>
+          <div className="flex-1 md:flex-none w-full md:w-[177px] md:h-[97px] flex flex-col items-center justify-center p-[12px]" style={{ gap: "8px" }}>
             <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43,43,43,1)", textAlign: "center" }}>24/7</h4>
             <p className="text-[13px] md:text-sm text-gray-500 font-medium font-sans text-center">On-road Support</p>
           </div>
-          <div className="flex-1 flex flex-col items-center justify-center p-[12px]" style={{ gap: "8px" }}>
+          <div className="flex-1 md:flex-none w-full md:w-[177px] md:h-[97px] flex flex-col items-center justify-center p-[12px]" style={{ gap: "8px" }}>
             <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43,43,43,1)", textAlign: "center" }}>7+</h4>
             <p className="text-[13px] md:text-sm text-gray-500 font-medium font-sans text-center">Shop Products</p>
           </div>
-          <div className="flex-1 flex flex-col items-center justify-center p-[12px]" style={{ gap: "8px" }}>
+          <div className="flex-1 md:flex-none w-full md:w-[177px] md:h-[97px] flex flex-col items-center justify-center p-[12px]" style={{ gap: "8px" }}>
             <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43,43,43,1)", textAlign: "center" }}>4.5+</h4>
             <p className="text-[13px] md:text-sm text-gray-500 font-medium font-sans text-center">Average trip rating</p>
           </div>

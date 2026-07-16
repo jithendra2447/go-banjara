@@ -291,7 +291,7 @@ export default function Homepage() {
     <div className="min-h-screen bg-white text-[#1D493E] font-sans antialiased relative">
       
       {/* 1. HERO BACKGROUND LAYER (z-20, sits behind metrics bar z-35) */}
-      <div className="absolute inset-x-0 top-0 hero-banner-height w-full pointer-events-none z-20 overflow-visible">
+      <div className="absolute left-1/2 -translate-x-1/2 top-0 hero-banner-height w-full max-w-[1440px] pointer-events-none z-20 overflow-visible">
         {/* Sub-container for background overlays (z-10, overflow-visible to prevent clipping) */}
         <div className="absolute inset-0 overflow-visible z-10">
           {/* Layer 1: Background */}
@@ -337,13 +337,13 @@ export default function Homepage() {
         </div>
       </div>
 
-      {/* 1.5 BIKER LAYER (z-40, sits on top of metrics bar z-30 to overlap tyres, locked to 600px height to prevent scaling distortion) */}
-      <div className="absolute inset-x-0 bottom-0 h-[600px] w-full pointer-events-none z-40 overflow-visible">
+      {/* 1.5 BIKER LAYER (z-40, sits on top of metrics bar z-30 to overlap tyres, matches background placement exactly for zero ghosting) */}
+      <div className="absolute left-1/2 -translate-x-1/2 top-0 hero-banner-height w-full max-w-[1440px] pointer-events-none z-40 overflow-visible">
         <div className="absolute inset-0 overflow-visible z-10">
           <img 
             src="/hero-bike.png?v=5" 
             alt="Biker" 
-            className="absolute inset-x-0 bottom-0 w-full h-full object-contain object-bottom"
+            className="absolute inset-x-0 top-0 w-full h-full object-cover object-top"
             style={{ 
               imageRendering: '-webkit-optimize-contrast',
               transform: 'translateZ(0)'

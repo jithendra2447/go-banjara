@@ -600,16 +600,24 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                 style={{
                   width: "100%",
                   maxWidth: "837px",
-                  minHeight: "116px",
-                  display: "grid",
-                  gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+                  height: "116px",
+                  display: "flex",
+                  flexWrap: "wrap",
                   justifyContent: "space-between",
-                  gap: "24px 32px",
+                  alignContent: "space-between",
                 }}
                 className="text-left"
               >
                 {/* Fact 1 */}
-                <div className="flex items-center gap-4">
+                <div 
+                  style={{
+                    width: "calc(50% - 16px)",
+                    height: "48px",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "16px",
+                  }}
+                >
                   <div 
                     style={{ backgroundColor: "rgba(247, 245, 240, 1)" }}
                     className="w-12 h-12 rounded-[4px] flex items-center justify-center shrink-0"
@@ -618,7 +626,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                   </div>
                   <span 
                     style={{
-                      fontFamily: "Faktum, sans-serif",
+                      fontFamily: "'Faktum', 'Outfit', sans-serif",
                       fontWeight: 500,
                       fontSize: "20px",
                       lineHeight: "28px",
@@ -631,7 +639,15 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                 </div>
 
                 {/* Fact 2 */}
-                <div className="flex items-center gap-4">
+                <div 
+                  style={{
+                    width: "calc(50% - 16px)",
+                    height: "48px",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "16px",
+                  }}
+                >
                   <div 
                     style={{ backgroundColor: "rgba(247, 245, 240, 1)" }}
                     className="w-12 h-12 rounded-[4px] flex items-center justify-center shrink-0"
@@ -640,7 +656,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                   </div>
                   <span 
                     style={{
-                      fontFamily: "Faktum, sans-serif",
+                      fontFamily: "'Faktum', 'Outfit', sans-serif",
                       fontWeight: 500,
                       fontSize: "20px",
                       lineHeight: "28px",
@@ -653,7 +669,15 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                 </div>
 
                 {/* Fact 3 */}
-                <div className="flex items-center gap-4">
+                <div 
+                  style={{
+                    width: "calc(50% - 16px)",
+                    height: "48px",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "16px",
+                  }}
+                >
                   <div 
                     style={{ backgroundColor: "rgba(247, 245, 240, 1)" }}
                     className="w-12 h-12 rounded-[4px] flex items-center justify-center shrink-0"
@@ -662,7 +686,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                   </div>
                   <span 
                     style={{
-                      fontFamily: "Faktum, sans-serif",
+                      fontFamily: "'Faktum', 'Outfit', sans-serif",
                       fontWeight: 500,
                       fontSize: "20px",
                       lineHeight: "28px",
@@ -675,7 +699,15 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                 </div>
 
                 {/* Fact 4 */}
-                <div className="flex items-center gap-4">
+                <div 
+                  style={{
+                    width: "calc(50% - 16px)",
+                    height: "48px",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "16px",
+                  }}
+                >
                   <div 
                     style={{ backgroundColor: "rgba(247, 245, 240, 1)" }}
                     className="w-12 h-12 rounded-[4px] flex items-center justify-center shrink-0"
@@ -684,7 +716,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                   </div>
                   <span 
                     style={{
-                      fontFamily: "Faktum, sans-serif",
+                      fontFamily: "'Faktum', 'Outfit', sans-serif",
                       fontWeight: 500,
                       fontSize: "20px",
                       lineHeight: "28px",

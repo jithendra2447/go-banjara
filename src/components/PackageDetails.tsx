@@ -562,19 +562,19 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                     lineHeight: "100%",
                     color: "rgba(43, 43, 43, 1)",
                   }}
-                  className="leading-tight text-left"
+                  className="text-left"
                 >
                   {pkg.name}
                 </h1>
                 <span 
                   style={{
-                    fontFamily: "Faktum, sans-serif",
+                    fontFamily: "'Faktum', 'Outfit', sans-serif",
                     fontWeight: 700,
                     fontSize: "28px",
                     lineHeight: "100%",
                     color: "rgba(43, 43, 43, 1)",
                   }}
-                  className="leading-none text-right shrink-0"
+                  className="text-right shrink-0"
                 >
                   ₹{pkg.price.toLocaleString('en-IN')}/Person
                 </span>

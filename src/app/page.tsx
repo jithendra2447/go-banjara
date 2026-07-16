@@ -357,20 +357,39 @@ export default function Homepage() {
       {/* 2. HERO CONTENT SECTION (Transparent background, relative z-[45] to sit on top of everything, but below navbar z-50) */}
       <section className="relative hero-banner-height flex flex-col justify-center z-[45] bg-transparent">
         <div className="max-w-[1440px] mx-auto px-6 md:px-20 w-full grid md:grid-cols-2 gap-12 items-center relative py-4">
-          <div className="flex flex-col gap-[24px] text-left md:max-w-[454px] w-full">
-            <h1 className="text-4xl md:text-[62px] md:leading-[1.25] tracking-[-0.2px] font-semibold text-white font-sans md:max-w-[454px] md:h-[234px] w-full">
-              {pageContent.heroTitleLine1?.trim() ? pageContent.heroTitleLine1 : "Hey! Let’s"} <br />
-              {pageContent.heroTitleLine2?.trim() ? pageContent.heroTitleLine2 : "Escape from"} <br />
-              {pageContent.heroTitleLine3?.trim() ? pageContent.heroTitleLine3 : "the Ordinary"}
-            </h1>
-            <p className="text-sm md:text-[20px] md:leading-[34px] tracking-[0px] text-white/95 font-sans font-medium max-w-md md:max-w-[454px]">
-              {pageContent.heroSubtitle?.trim() ? pageContent.heroSubtitle : "We bridge the gap between soulful Indian travel and high end gear. curated for those who find home in the dust of the road"}
-            </p>
-            <div className="flex flex-wrap items-center gap-4">
+          <div className="w-full md:w-[454px] md:h-[475px] flex flex-col gap-[52px] text-left shrink-0">
+            <div className="w-full md:w-[454px] md:h-[368px] flex flex-col gap-[32px] justify-start shrink-0">
+              <h1 className="text-4xl md:text-[62px] md:leading-[1.25] tracking-[-0.2px] font-semibold text-white font-sans w-full md:w-[454px] md:h-[234px] shrink-0">
+                {pageContent.heroTitleLine1?.trim() ? pageContent.heroTitleLine1 : "Hey! Let’s"} <br />
+                {pageContent.heroTitleLine2?.trim() ? pageContent.heroTitleLine2 : "Escape from"} <br />
+                {pageContent.heroTitleLine3?.trim() ? pageContent.heroTitleLine3 : "the Ordinary"}
+              </h1>
+              <p className="text-sm md:text-[20px] md:leading-[34px] tracking-[0px] text-white/95 font-sans font-medium w-full md:w-[454px] md:h-[102px] overflow-hidden shrink-0">
+                {pageContent.heroSubtitle?.trim() ? pageContent.heroSubtitle : "We bridge the gap between soulful Indian travel and high end gear. curated for those who find home in the dust of the road"}
+              </p>
+            </div>
+            <div className="flex items-center gap-[24px] w-full md:w-[412px] h-[55px] justify-start shrink-0">
               <Link 
                 href="/shop"
-                className="px-8 py-3.5 rounded-lg bg-[#1D493E] hover:bg-[#15342c] hover:scale-[1.02] active:scale-[0.98] text-white border border-[#1D493E] transition-all duration-300 cursor-pointer text-center min-w-[150px] shadow-sm flex items-center justify-center"
-                style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "100%", letterSpacing: "0px", verticalAlign: "middle" }}
+                className="hover:scale-[1.02] active:scale-[0.98] text-white border border-[#1D493E] transition-all duration-300 cursor-pointer flex items-center justify-center"
+                style={{
+                  width: "150px",
+                  height: "55px",
+                  paddingTop: "16px",
+                  paddingBottom: "16px",
+                  paddingLeft: "32px",
+                  paddingRight: "32px",
+                  gap: "8px",
+                  borderRadius: "4px",
+                  background: "#1D493E",
+                  fontFamily: "'Faktum','Outfit',sans-serif",
+                  fontWeight: 500,
+                  fontSize: "18px",
+                  lineHeight: "100%",
+                  letterSpacing: "0px",
+                  textDecoration: "none",
+                  boxSizing: "border-box",
+                }}
               >
                 {pageContent.heroShopBtn?.trim() ? pageContent.heroShopBtn : "Shop Now"}
               </Link>

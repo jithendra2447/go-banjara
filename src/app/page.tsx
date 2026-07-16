@@ -291,7 +291,7 @@ export default function Homepage() {
     <div className="min-h-screen bg-white text-[#1D493E] font-sans antialiased relative">
       
       {/* 1. HERO BACKGROUND LAYER (z-20, sits behind metrics bar z-35) */}
-      <div className="absolute inset-x-0 top-0 h-[600px] md:h-[601px] pointer-events-none z-20 overflow-visible">
+      <div className="absolute inset-x-0 top-0 h-[600px] md:h-[601px] pointer-events-none z-20 overflow-visible max-w-[1440px] mx-auto">
         {/* Sub-container for background overlays (z-10, overflow-visible to prevent clipping) */}
         <div className="absolute inset-0 overflow-visible z-10">
           {/* Layer 1: Background */}
@@ -338,7 +338,7 @@ export default function Homepage() {
       </div>
 
       {/* 1.5 BIKER LAYER (z-40, sits on top of metrics bar z-30 to overlap tyres, matches background proportions exactly) */}
-      <div className="absolute inset-x-0 top-0 h-[600px] md:h-[601px] pointer-events-none z-40 overflow-visible">
+      <div className="absolute inset-x-0 top-0 h-[600px] md:h-[601px] pointer-events-none z-40 overflow-visible max-w-[1440px] mx-auto">
         <div className="absolute inset-0 overflow-visible z-10">
           <img 
             src="/hero-bike.png?v=5" 

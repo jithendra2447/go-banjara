@@ -290,15 +290,15 @@ export default function Homepage() {
   return (
     <div className="min-h-screen bg-white text-[#1D493E] font-sans antialiased relative">
       
-      {/* 1. HERO BACKGROUND LAYER (z-20, sits behind metrics bar z-35) */}
-      <div className="absolute inset-x-0 top-0 hero-banner-height w-full pointer-events-none z-20 overflow-visible">
+      {/* 1. HERO BACKGROUND LAYER (z-20, sits behind metrics bar z-35, matches Biker alignment exactly) */}
+      <div className="absolute inset-x-0 bottom-0 h-[600px] w-full pointer-events-none z-20 overflow-visible">
         {/* Sub-container for background overlays (z-10, overflow-visible to prevent clipping) */}
         <div className="absolute inset-0 overflow-visible z-10">
           {/* Layer 1: Background */}
           <img 
             src="/hero-combined.png?v=5" 
             alt="Hero Background" 
-            className="absolute inset-x-0 top-0 w-full h-full object-cover object-top brightness-[0.88] contrast-[1.05] saturate-[1.05]"
+            className="absolute inset-x-0 bottom-0 w-full h-full object-contain object-bottom brightness-[0.88] contrast-[1.05] saturate-[1.05]"
             style={{ 
               imageRendering: '-webkit-optimize-contrast',
               transform: 'translateZ(0)'

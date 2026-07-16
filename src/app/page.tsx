@@ -408,26 +408,30 @@ export default function Homepage() {
       {/* 2. METRICS WIDGET BAR */}
       <section style={{ background: "rgba(255,255,255,1)" }} className="relative z-30 flex items-center w-full md:h-[145px]">
         <div
-          className="w-full max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-center divide-y md:divide-y-0 md:divide-x divide-[#CCCCCC]"
+          className="w-full max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between"
           style={{ paddingTop: "24px", paddingBottom: "24px", paddingLeft: "80px", paddingRight: "80px" }}
         >
-          <div className="flex-1 md:flex-none w-full md:w-[177px] md:h-[97px] flex flex-col items-center justify-center p-[12px]" style={{ gap: "8px" }}>
+          <div className="w-full md:w-[177px] h-auto md:h-[97px] flex flex-col items-center justify-center p-[12px] border-b border-[#CCCCCC] md:border-b-0 shrink-0" style={{ gap: "8px" }}>
             <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center" }}>10+</h4>
             <p style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center" }}>Travel Packages</p>
           </div>
-          <div className="flex-1 md:flex-none w-full md:w-[177px] md:h-[97px] flex flex-col items-center justify-center p-[12px]" style={{ gap: "8px" }}>
+          <div className="hidden md:block w-[1px] h-[97px] bg-[#CCCCCC] shrink-0" />
+          <div className="w-full md:w-[177px] h-auto md:h-[97px] flex flex-col items-center justify-center p-[12px] border-b border-[#CCCCCC] md:border-b-0 shrink-0" style={{ gap: "8px" }}>
             <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center" }}>15k+</h4>
             <p style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center" }}>Nomads Joined</p>
           </div>
-          <div className="flex-1 md:flex-none w-full md:w-[177px] md:h-[97px] flex flex-col items-center justify-center p-[12px]" style={{ gap: "8px" }}>
+          <div className="hidden md:block w-[1px] h-[97px] bg-[#CCCCCC] shrink-0" />
+          <div className="w-full md:w-[177px] h-auto md:h-[97px] flex flex-col items-center justify-center p-[12px] border-b border-[#CCCCCC] md:border-b-0 shrink-0" style={{ gap: "8px" }}>
             <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center" }}>24/7</h4>
             <p style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center" }}>On-road Support</p>
           </div>
-          <div className="flex-1 md:flex-none w-full md:w-[177px] md:h-[97px] flex flex-col items-center justify-center p-[12px]" style={{ gap: "8px" }}>
+          <div className="hidden md:block w-[1px] h-[97px] bg-[#CCCCCC] shrink-0" />
+          <div className="w-full md:w-[177px] h-auto md:h-[97px] flex flex-col items-center justify-center p-[12px] border-b border-[#CCCCCC] md:border-b-0 shrink-0" style={{ gap: "8px" }}>
             <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center" }}>7+</h4>
             <p style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center" }}>Shop Products</p>
           </div>
-          <div className="flex-1 md:flex-none w-full md:w-[177px] md:h-[97px] flex flex-col items-center justify-center p-[12px]" style={{ gap: "8px" }}>
+          <div className="hidden md:block w-[1px] h-[97px] bg-[#CCCCCC] shrink-0" />
+          <div className="w-full md:w-[177px] h-auto md:h-[97px] flex flex-col items-center justify-center p-[12px] shrink-0" style={{ gap: "8px" }}>
             <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center" }}>4.5+</h4>
             <p style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center" }}>Average trip rating</p>
           </div>

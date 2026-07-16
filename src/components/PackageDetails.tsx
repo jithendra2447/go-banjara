@@ -869,7 +869,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                     type="button"
                     onClick={() => setActiveTab(tab)}
                     style={{
-                      fontFamily: "Faktum, sans-serif",
+                      fontFamily: "'Faktum', 'Outfit', sans-serif",
                       fontWeight: 500,
                       fontSize: "24px",
                       lineHeight: "100%",
@@ -879,7 +879,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                       paddingBottom: "8px",
                       marginBottom: "-2px",
                     }}
-                    className="transition-all cursor-pointer capitalize font-sans"
+                    className="transition-all cursor-pointer capitalize"
                   >
                     {label}
                   </button>

@@ -930,7 +930,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                       margin: 0,
                     }}
                   >
-                    {mainPart}{" "}
+                    {mainPart + " "}
                     <span style={{ color: "rgba(255, 98, 62, 1)" }}>{lastWord}</span>
                   </h2>
                   <p
@@ -1832,76 +1832,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
               </span>
             </div>
 
-            {/* Boutique Gear recommendations card in sidebar */}
-            {recommendedProducts.length > 0 && (
-              <div className="bg-white border border-[#1D493E]/10 p-5 rounded-[24px] shadow-sm text-left space-y-4">
-                <div className="space-y-1">
-                  <span className="text-[9px] font-mono text-[#E05434] uppercase font-black tracking-widest block">
-                    Boutique Gear
-                  </span>
-                  <h4 className="text-sm font-serif font-bold text-[#1D493E]">
-                    {pkg.destination} Essentials
-                  </h4>
-                </div>
 
-                <div className="space-y-3">
-                  {recommendedProducts.map((prod) => (
-                    <div
-                      key={prod.id}
-                      className="flex gap-3 items-center border-b border-gray-50 pb-3 last:border-b-0 last:pb-0"
-                    >
-                      <Link href={`/shop/product/${prod.id}`} className="w-14 h-14 rounded-xl overflow-hidden bg-[#FAF9F6] border border-[#1D493E]/5 shrink-0 block hover:opacity-90 transition-opacity">
-                        <img src={prod.image} alt={prod.name} className="w-full h-full object-cover" />
-                      </Link>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex justify-between items-start gap-1">
-                          <Link href={`/shop/product/${prod.id}`} className="truncate hover:text-[#E05434] transition-colors block">
-                            <h5 className="text-[11px] font-extrabold text-[#1D493E] truncate">{prod.name}</h5>
-                          </Link>
-                          <span className="text-[8px] font-bold text-gray-500 shrink-0">
-                            ★ {prod.rating.toFixed(1)}
-                          </span>
-                        </div>
-                        <div className="flex justify-between items-center mt-1">
-                          <span className="text-xs font-black text-[#E05434] font-serif">
-                            ₹{prod.price.toLocaleString('en-IN')}
-                          </span>
-                          <button
-                            type="button"
-                            onClick={() => handleProductAdd(prod)}
-                            className={`px-3 py-1 rounded-lg border text-[9px] font-black uppercase tracking-wider transition ${
-                              productAddedSuccess === prod.id
-                                ? 'bg-[#1D493E] text-white border-[#1D493E]'
-                                : 'bg-[#1D493E]/5 hover:bg-[#1D493E]/10 border-[#1D493E]/10 text-[#1D493E]'
-                            }`}
-                          >
-                            {productAddedSuccess === prod.id ? 'Added' : 'Add'}
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Travel Advisory Card */}
-            <div className="bg-[#FFF0EB] border border-[#E05434]/15 p-5 rounded-[24px] text-left space-y-3">
-              <div className="flex items-center gap-2 text-[#E05434]">
-                <Compass className="w-4 h-4 shrink-0" />
-                <span className="text-[10px] font-mono font-black uppercase tracking-widest">
-                  Advisory Note
-                </span>
-              </div>
-              <h4 className="text-xs font-serif font-bold text-[#1D493E]">
-                {isColdPlace ? 'Himalayan Acclimatization' : 'Tropical Travel Advice'}
-              </h4>
-              <p className="text-[11px] text-gray-600 font-semibold leading-relaxed">
-                {isColdPlace
-                  ? 'This route crosses high passes up to 13,478 ft. We recommend starting hydration 48 hours prior. All our support vehicles carry oxygen cylinders and first-aid kits.'
-                  : 'Prepare for warm tropical weather. Stay hydrated, carry sun protection, insect repellent, and lightweight breathable clothing. Safety kits are available with our drivers.'}
-              </p>
-            </div>
           </div>
         </div>
       </div>

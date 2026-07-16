@@ -624,7 +624,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                     style={{ 
                       width: "46px", 
                       height: "46px", 
-                      backgroundColor: "rgba(247, 245, 240, 1)",
+                      backgroundColor: "rgba(246, 243, 238, 1)",
                       borderRadius: "4px",
                       display: "flex",
                       alignItems: "center",
@@ -668,7 +668,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                     style={{ 
                       width: "46px", 
                       height: "46px", 
-                      backgroundColor: "rgba(247, 245, 240, 1)",
+                      backgroundColor: "rgba(246, 243, 238, 1)",
                       borderRadius: "4px",
                       display: "flex",
                       alignItems: "center",
@@ -712,7 +712,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                     style={{ 
                       width: "46px", 
                       height: "46px", 
-                      backgroundColor: "rgba(247, 245, 240, 1)",
+                      backgroundColor: "rgba(246, 243, 238, 1)",
                       borderRadius: "4px",
                       display: "flex",
                       alignItems: "center",
@@ -756,7 +756,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                     style={{ 
                       width: "46px", 
                       height: "46px", 
-                      backgroundColor: "rgba(247, 245, 240, 1)",
+                      backgroundColor: "rgba(246, 243, 238, 1)",
                       borderRadius: "4px",
                       display: "flex",
                       alignItems: "center",

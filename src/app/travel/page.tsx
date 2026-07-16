@@ -969,59 +969,7 @@ export default function HolidaysPortal() {
                   </div>
                 </div>
 
-                {/* Bottom Row */}
-                <div className="mt-4 pt-3 border-t border-[#E2E8F0] flex flex-wrap items-center justify-between gap-4 shrink-0">
-                  <div className="flex items-center gap-2">
-                    <span style={{ fontFamily: "'Faktum', 'Outfit', sans-serif" }} className="text-[10px] font-bold uppercase text-[#8D8D8D]">Sort By:</span>
-                    <div className="flex gap-1.5">
-                      {[
-                        { val: 'recommended', label: 'Featured' },
-                        { val: 'price-low-high', label: 'Price: Low-High' },
-                        { val: 'price-high-low', label: 'Price: High-Low' },
-                        { val: 'rating', label: 'Rating' }
-                      ].map(opt => (
-                        <button
-                          key={opt.val}
-                          type="button"
-                          onClick={() => setSortBy(opt.val)}
-                          style={{ fontFamily: "'Faktum', 'Outfit', sans-serif" }}
-                          className={`px-2.5 py-1 rounded-md text-[10px] font-bold border transition cursor-pointer ${
-                            sortBy === opt.val 
-                              ? 'bg-[#1D493E] text-white border-[#1D493E]' 
-                              : 'bg-white text-gray-600 border-gray-200 hover:border-gray-300'
-                          }`}
-                        >
-                          {opt.label}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center gap-2">
-                    {(selectedDurations.length > 0 || selectedTravelTypes.length > 0 || selectedInclusions.length > 0) && (
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setSelectedDurations([]);
-                          setSelectedTravelTypes([]);
-                          setSelectedInclusions([]);
-                        }}
-                        style={{ fontFamily: "'Faktum', 'Outfit', sans-serif" }}
-                        className="text-[10px] font-extrabold text-[#FF623E] hover:underline cursor-pointer pr-2"
-                      >
-                        Clear All
-                      </button>
-                    )}
-                    <button
-                      type="button"
-                      onClick={() => setShowFiltersDropdown(false)}
-                      style={{ fontFamily: "'Faktum', 'Outfit', sans-serif" }}
-                      className="bg-[#1D493E] hover:bg-[#16372f] text-white text-[10px] font-black uppercase tracking-wider px-4 py-2 rounded-[4px] transition cursor-pointer"
-                    >
-                      Apply
-                    </button>
-                  </div>
-                </div>
+
 
               </div>
             )}

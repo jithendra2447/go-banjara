@@ -431,28 +431,28 @@ export default function Homepage() {
           style={{ paddingTop: "24px", paddingBottom: "24px", paddingLeft: "80px", paddingRight: "80px" }}
         >
           <div className="w-full md:w-[177px] h-auto md:h-[97px] flex flex-col items-center justify-center p-[12px] border-b border-[#CCCCCC] md:border-b-0 shrink-0" style={{ gap: "8px" }}>
-            <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center" }}>10+</h4>
-            <p style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center", whiteSpace: "nowrap" }}>Travel Packages</p>
+            <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center", height: "40px", display: "inline-flex", alignItems: "center", justifyContent: "center" }}>10+</h4>
+            <p style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center", whiteSpace: "nowrap", height: "25px", display: "inline-flex", alignItems: "center", justifyContent: "center" }}>Travel Packages</p>
           </div>
           <div className="hidden md:block w-[1px] h-[97px] bg-[#CCCCCC] shrink-0" />
           <div className="w-full md:w-[177px] h-auto md:h-[97px] flex flex-col items-center justify-center p-[12px] border-b border-[#CCCCCC] md:border-b-0 shrink-0" style={{ gap: "8px" }}>
-            <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center" }}>15k+</h4>
-            <p style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center", whiteSpace: "nowrap" }}>Nomads Joined</p>
+            <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center", height: "40px", display: "inline-flex", alignItems: "center", justifyContent: "center" }}>15k+</h4>
+            <p style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center", whiteSpace: "nowrap", height: "25px", display: "inline-flex", alignItems: "center", justifyContent: "center" }}>Nomads Joined</p>
           </div>
           <div className="hidden md:block w-[1px] h-[97px] bg-[#CCCCCC] shrink-0" />
           <div className="w-full md:w-[177px] h-auto md:h-[97px] flex flex-col items-center justify-center p-[12px] border-b border-[#CCCCCC] md:border-b-0 shrink-0" style={{ gap: "8px" }}>
-            <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center" }}>24/7</h4>
-            <p style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center", whiteSpace: "nowrap" }}>On-road Support</p>
+            <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center", height: "40px", display: "inline-flex", alignItems: "center", justifyContent: "center" }}>24/7</h4>
+            <p style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center", whiteSpace: "nowrap", height: "25px", display: "inline-flex", alignItems: "center", justifyContent: "center" }}>On-road Support</p>
           </div>
           <div className="hidden md:block w-[1px] h-[97px] bg-[#CCCCCC] shrink-0" />
           <div className="w-full md:w-[177px] h-auto md:h-[97px] flex flex-col items-center justify-center p-[12px] border-b border-[#CCCCCC] md:border-b-0 shrink-0" style={{ gap: "8px" }}>
-            <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center" }}>7+</h4>
-            <p style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center", whiteSpace: "nowrap" }}>Shop Products</p>
+            <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center", height: "40px", display: "inline-flex", alignItems: "center", justifyContent: "center" }}>7+</h4>
+            <p style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center", whiteSpace: "nowrap", height: "25px", display: "inline-flex", alignItems: "center", justifyContent: "center" }}>Shop Products</p>
           </div>
           <div className="hidden md:block w-[1px] h-[97px] bg-[#CCCCCC] shrink-0" />
           <div className="w-full md:w-[177px] h-auto md:h-[97px] flex flex-col items-center justify-center p-[12px] shrink-0" style={{ gap: "8px" }}>
-            <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center" }}>4.5+</h4>
-            <p style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center", whiteSpace: "nowrap" }}>Average trip rating</p>
+            <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center", height: "40px", display: "inline-flex", alignItems: "center", justifyContent: "center" }}>4.5+</h4>
+            <p style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center", whiteSpace: "nowrap", height: "25px", display: "inline-flex", alignItems: "center", justifyContent: "center" }}>Average trip rating</p>
           </div>
         </div>
       </section>

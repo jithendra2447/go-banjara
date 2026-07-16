@@ -510,7 +510,7 @@ export default function Homepage() {
               const pkg1 = displayPkgs[0];
               if (!pkg1) return null;
               return (
-                <div className="bg-[#F6F3EE] rounded-[4px] border border-gray-200 shadow-xs flex flex-col md:flex-row gap-0 w-full overflow-hidden md:h-[394px] text-left">
+                <div className="bg-[#F6F3EE] rounded-[4px] shadow-xs flex flex-col md:flex-row gap-0 w-full overflow-hidden md:h-[394px] text-left">
                   {/* Image */}
                   <div className="relative h-[280px] md:h-full w-full md:w-[640px] shrink-0 overflow-hidden">
                     <img 
@@ -597,7 +597,7 @@ export default function Homepage() {
               {(() => {
                 const displayPkgs = packagesList && packagesList.length > 0 ? packagesList : HOLIDAY_PACKAGES;
                 return displayPkgs.slice(1, 3).map((pkg) => (
-                  <div key={pkg.id} className="bg-white rounded-[4px] border border-gray-200 shadow-xs flex flex-col text-left md:h-[778px] overflow-hidden">
+                  <div key={pkg.id} className="bg-white rounded-[4px] shadow-xs flex flex-col text-left md:h-[778px] overflow-hidden">
                     {/* Image (Flushed with top, left, and right edges) */}
                     <div className="relative w-full h-[200px] md:h-[384px] overflow-hidden shrink-0">
                       <img 

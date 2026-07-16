@@ -285,144 +285,145 @@ export default function Homepage() {
 
   const toggleFaq = (index: number) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
-  };
-
-  return (
+  };  return (
     <div className="min-h-screen bg-white text-[#1D493E] font-sans antialiased relative">
       
-      {/* 1. HERO BACKGROUND LAYER (z-20, sits behind metrics bar z-35, matches Biker alignment exactly) */}
-      <div className="absolute inset-x-0 bottom-0 h-[600px] w-full pointer-events-none z-20 overflow-visible">
-        {/* Sub-container for background overlays (z-10, overflow-visible to prevent clipping) */}
-        <div className="absolute inset-0 overflow-visible z-10">
-          {/* Layer 1: Background */}
-          <img 
-            src="/hero-combined.png?v=5" 
-            alt="Hero Background" 
-            className="absolute inset-x-0 bottom-0 w-full h-full object-contain object-bottom brightness-[0.88] contrast-[1.05] saturate-[1.05]"
-            style={{ 
-              imageRendering: '-webkit-optimize-contrast',
-              transform: 'translateZ(0)'
-            }}
-          />
+      {/* Hero Wrapper Container to anchor absolute children within the Hero section */}
+      <div className="relative hero-banner-height w-full overflow-visible">
 
-          {/* Layer 1.5: User's Grey Overlay Layer */}
-          <img 
-            src="/hero-overlay.png" 
-            alt="Overlay Layer" 
-            className="absolute inset-x-0 top-0 w-full h-full object-cover object-top opacity-15 mix-blend-multiply"
-            style={{ 
-              imageRendering: '-webkit-optimize-contrast',
-              transform: 'translateZ(0)'
-            }}
-          />
+        {/* 1. HERO BACKGROUND LAYER (z-20, sits behind metrics bar z-35, matches Biker alignment exactly) */}
+        <div className="absolute inset-x-0 bottom-0 h-[600px] w-full pointer-events-none z-20 overflow-visible">
+          {/* Sub-container for background overlays (z-10, overflow-visible to prevent clipping) */}
+          <div className="absolute inset-0 overflow-visible z-10">
+            {/* Layer 1: Background */}
+            <img 
+              src="/hero-combined.png?v=5" 
+              alt="Hero Background" 
+              className="absolute inset-x-0 bottom-0 w-full h-full object-contain object-bottom brightness-[0.88] contrast-[1.05] saturate-[1.05]"
+              style={{ 
+                imageRendering: '-webkit-optimize-contrast',
+                transform: 'translateZ(0)'
+              }}
+            />
 
-          {/* Layer 1.8: User's Top Dark Gradient Layer */}
-          <img 
-            src="/hero-top-gradient.png" 
-            alt="Top Dark Gradient Layer" 
-            className="absolute inset-x-0 top-0 w-full h-full object-cover object-top"
-            style={{ 
-              imageRendering: '-webkit-optimize-contrast',
-              transform: 'translateZ(0)'
-            }}
-          />
+            {/* Layer 1.5: User's Grey Overlay Layer */}
+            <img 
+              src="/hero-overlay.png" 
+              alt="Overlay Layer" 
+              className="absolute inset-x-0 top-0 w-full h-full object-cover object-top opacity-15 mix-blend-multiply"
+              style={{ 
+                imageRendering: '-webkit-optimize-contrast',
+                transform: 'translateZ(0)'
+              }}
+            />
 
-          {/* Layer 2: White Gradient Fade (Positioned behind/back side of the bike to transition to the metrics section) */}
-          <div 
-            className="absolute inset-x-0 bottom-0 h-[20px] z-20 pointer-events-none" 
-            style={{ 
-              background: 'linear-gradient(to top, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0) 100%)' 
-            }}
-          />
-        </div>
-      </div>
+            {/* Layer 1.8: User's Top Dark Gradient Layer */}
+            <img 
+              src="/hero-top-gradient.png" 
+              alt="Top Dark Gradient Layer" 
+              className="absolute inset-x-0 top-0 w-full h-full object-cover object-top"
+              style={{ 
+                imageRendering: '-webkit-optimize-contrast',
+                transform: 'translateZ(0)'
+              }}
+            />
 
-      {/* 1.5 BIKER LAYER (z-40, sits on top of metrics bar z-30 to overlap tyres, locked to 600px height to prevent scaling distortion) */}
-      <div className="absolute inset-x-0 bottom-0 h-[600px] w-full pointer-events-none z-40 overflow-visible">
-        <div className="absolute inset-0 overflow-visible z-10">
-          <img 
-            src="/hero-bike.png?v=5" 
-            alt="Biker" 
-            className="absolute inset-x-0 bottom-0 w-full h-full object-contain object-bottom"
-            style={{ 
-              imageRendering: '-webkit-optimize-contrast',
-              transform: 'translateZ(0)'
-            }}
-          />
-        </div>
-      </div>
-
-
-
-      {/* 2. HERO CONTENT SECTION (Transparent background, relative z-[45] to sit on top of everything, but below navbar z-50) */}
-      <section className="relative hero-banner-height flex flex-col justify-start z-[45] bg-transparent">
-        <div className="max-w-[1440px] mx-auto px-6 md:px-20 w-full grid md:grid-cols-2 gap-12 items-center relative pt-[120px] pb-4">
-          <div className="w-full md:w-[454px] md:h-[530px] flex flex-col justify-between text-left shrink-0">
-            <div className="w-full md:w-[454px] md:h-[368px] flex flex-col gap-[32px] justify-start shrink-0">
-              <h1 className="text-4xl md:text-[62px] md:leading-[1.25] tracking-[-0.2px] font-semibold text-white font-sans w-full md:w-[454px] md:h-[234px] shrink-0">
-                {pageContent.heroTitleLine1?.trim() ? pageContent.heroTitleLine1 : "Hey! Let’s"} <br />
-                {pageContent.heroTitleLine2?.trim() ? pageContent.heroTitleLine2 : "Escape from"} <br />
-                {pageContent.heroTitleLine3?.trim() ? pageContent.heroTitleLine3 : "the Ordinary"}
-              </h1>
-              <p className="text-sm md:text-[20px] md:leading-[34px] tracking-[0px] text-white/95 font-sans font-medium w-full md:w-[454px] md:h-[102px] overflow-hidden shrink-0">
-                {pageContent.heroSubtitle?.trim() ? pageContent.heroSubtitle : "We bridge the gap between soulful Indian travel and high end gear. curated for those who find home in the dust of the road"}
-              </p>
-            </div>
-            <div className="flex items-center gap-[24px] w-full md:w-[412px] h-[55px] justify-start shrink-0">
-              <Link 
-                href="/shop"
-                className="hover:scale-[1.02] active:scale-[0.98] text-white border border-[#1D493E] transition-all duration-300 cursor-pointer flex items-center justify-center"
-                style={{
-                  width: "150px",
-                  height: "55px",
-                  paddingTop: "16px",
-                  paddingBottom: "16px",
-                  paddingLeft: "32px",
-                  paddingRight: "32px",
-                  gap: "8px",
-                  borderRadius: "4px",
-                  background: "#1D493E",
-                  fontFamily: "'Faktum','Outfit',sans-serif",
-                  fontWeight: 500,
-                  fontSize: "18px",
-                  lineHeight: "100%",
-                  letterSpacing: "0px",
-                  textDecoration: "none",
-                  boxSizing: "border-box",
-                }}
-              >
-                {pageContent.heroShopBtn?.trim() ? pageContent.heroShopBtn : "Shop Now"}
-              </Link>
-              <Link 
-                href="/travel"
-                className="hover:bg-[#1D493E] hover:text-white hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 cursor-pointer flex items-center justify-center"
-                style={{
-                  width: "237px",
-                  height: "55px",
-                  paddingTop: "16px",
-                  paddingBottom: "16px",
-                  paddingLeft: "32px",
-                  paddingRight: "32px",
-                  gap: "8px",
-                  borderRadius: "4px",
-                  border: "2px solid rgba(29, 73, 62, 1)",
-                  background: "transparent",
-                  color: "rgba(29,73,62,1)",
-                  fontFamily: "'Faktum','Outfit',sans-serif",
-                  fontWeight: 500,
-                  fontSize: "18px",
-                  lineHeight: "100%",
-                  letterSpacing: "0px",
-                  textDecoration: "none",
-                  boxSizing: "border-box",
-                }}
-              >
-                {pageContent.heroTravelBtn?.trim() ? pageContent.heroTravelBtn : "See Travel Packages"}
-              </Link>
-            </div>
+            {/* Layer 2: White Gradient Fade (Positioned behind/back side of the bike to transition to the metrics section) */}
+            <div 
+              className="absolute inset-x-0 bottom-0 h-[20px] z-20 pointer-events-none" 
+              style={{ 
+                background: 'linear-gradient(to top, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0) 100%)' 
+              }}
+            />
           </div>
         </div>
-      </section>
+
+        {/* 1.5 BIKER LAYER (z-40, sits on top of metrics bar z-30 to overlap tyres, locked to 600px height to prevent scaling distortion) */}
+        <div className="absolute inset-x-0 bottom-0 h-[600px] w-full pointer-events-none z-40 overflow-visible">
+          <div className="absolute inset-0 overflow-visible z-10">
+            <img 
+              src="/hero-bike.png?v=5" 
+              alt="Biker" 
+              className="absolute inset-x-0 bottom-0 w-full h-full object-contain object-bottom"
+              style={{ 
+                imageRendering: '-webkit-optimize-contrast',
+                transform: 'translateZ(0)'
+              }}
+            />
+          </div>
+        </div>
+
+        {/* 2. HERO CONTENT SECTION (Transparent background, relative z-[45] to sit on top of everything, but below navbar z-50) */}
+        <section className="relative hero-banner-height flex flex-col justify-start z-[45] bg-transparent">
+          <div className="max-w-[1440px] mx-auto px-6 md:px-20 w-full grid md:grid-cols-2 gap-12 items-center relative pt-[120px] pb-4">
+            <div className="w-full md:w-[454px] md:h-[530px] flex flex-col justify-between text-left shrink-0">
+              <div className="w-full md:w-[454px] md:h-[368px] flex flex-col gap-[32px] justify-start shrink-0">
+                <h1 className="text-4xl md:text-[62px] md:leading-[1.25] tracking-[-0.2px] font-semibold text-white font-sans w-full md:w-[454px] md:h-[234px] shrink-0">
+                  {pageContent.heroTitleLine1?.trim() ? pageContent.heroTitleLine1 : "Hey! Let’s"} <br />
+                  {pageContent.heroTitleLine2?.trim() ? pageContent.heroTitleLine2 : "Escape from"} <br />
+                  {pageContent.heroTitleLine3?.trim() ? pageContent.heroTitleLine3 : "the Ordinary"}
+                </h1>
+                <p className="text-sm md:text-[20px] md:leading-[34px] tracking-[0px] text-white/95 font-sans font-medium w-full md:w-[454px] md:h-[102px] overflow-hidden shrink-0">
+                  {pageContent.heroSubtitle?.trim() ? pageContent.heroSubtitle : "We bridge the gap between soulful Indian travel and high end gear. curated for those who find home in the dust of the road"}
+                </p>
+              </div>
+              <div className="flex items-center gap-[24px] w-full md:w-[412px] h-[55px] justify-start shrink-0">
+                <Link 
+                  href="/shop"
+                  className="hover:scale-[1.02] active:scale-[0.98] text-white border border-[#1D493E] transition-all duration-300 cursor-pointer flex items-center justify-center"
+                  style={{
+                    width: "150px",
+                    height: "55px",
+                    paddingTop: "16px",
+                    paddingBottom: "16px",
+                    paddingLeft: "32px",
+                    paddingRight: "32px",
+                    gap: "8px",
+                    borderRadius: "4px",
+                    background: "#1D493E",
+                    fontFamily: "'Faktum','Outfit',sans-serif",
+                    fontWeight: 500,
+                    fontSize: "18px",
+                    lineHeight: "100%",
+                    letterSpacing: "0px",
+                    textDecoration: "none",
+                    boxSizing: "border-box",
+                  }}
+                >
+                  {pageContent.heroShopBtn?.trim() ? pageContent.heroShopBtn : "Shop Now"}
+                </Link>
+                <Link 
+                  href="/travel"
+                  className="hover:bg-[#1D493E] hover:text-white hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 cursor-pointer flex items-center justify-center"
+                  style={{
+                    width: "237px",
+                    height: "55px",
+                    paddingTop: "16px",
+                    paddingBottom: "16px",
+                    paddingLeft: "32px",
+                    paddingRight: "32px",
+                    gap: "8px",
+                    borderRadius: "4px",
+                    border: "2px solid rgba(29, 73, 62, 1)",
+                    background: "transparent",
+                    color: "rgba(29,73,62,1)",
+                    fontFamily: "'Faktum','Outfit',sans-serif",
+                    fontWeight: 500,
+                    fontSize: "18px",
+                    lineHeight: "100%",
+                    letterSpacing: "0px",
+                    textDecoration: "none",
+                    boxSizing: "border-box",
+                  }}
+                >
+                  {pageContent.heroTravelBtn?.trim() ? pageContent.heroTravelBtn : "See Travel Packages"}
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
 
       {/* 2. METRICS WIDGET BAR */}
       <section style={{ background: "rgba(255,255,255,1)", marginTop: "-35px" }} className="relative z-30 flex items-center w-full md:h-[145px]">

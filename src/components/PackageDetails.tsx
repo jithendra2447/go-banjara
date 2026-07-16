@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
 import {
-  Calendar, Users, Check, ShoppingBag,
+  Calendar, Users, Check, ShoppingBag, Clock,
   Star, Compass, MapPin, Tag,
   Sun, Wind, ArrowLeft, Lock, ArrowUpRight,
   ChevronDown
@@ -76,7 +76,25 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
         }
       }
 
-      let foundPkg = list.find((p) => p.id === id);
+      const staticPkg = HOLIDAY_PACKAGES.find((p) => p.id === id);
+      let foundPkg = staticPkg || null;
+
+      if (!foundPkg) {
+        const saved = localStorage.getItem('gb_admin_packages');
+        if (saved) {
+          try {
+            const parsed = JSON.parse(saved);
+            if (Array.isArray(parsed) && parsed.length > 0) {
+              const matched = parsed.find((p) => p.id === id);
+              if (matched) {
+                foundPkg = matched;
+              }
+            }
+          } catch (e) {
+            console.error('Error parsing admin packages:', e);
+          }
+        }
+      }
 
       if (foundPkg) {
         setPkg(foundPkg);
@@ -227,6 +245,18 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
 
   // Fallback defaults for detailed package layouts
   const galleryImages = pkg.images || [pkg.image, pkg.image, pkg.image, pkg.image, pkg.image, pkg.image];
+  const words = (pkg.name || '').split(' ');
+  const mainPart = words.slice(0, -1).join(' ');
+  const lastWord = words[words.length - 1] || '';
+  const richInclusions = pkg.richInclusions || [
+    'All accommodation (guesthouses, homestays, tented camp)',
+    'All meals as specified in the itinerary',
+    'Experienced local guide + assistant guide',
+    'Private vehicle (Innova/Bolero) for all transfers',
+    'Innerline Permit for restricted areas',
+    'First aid kit + oxygen cylinder',
+    'Go Banjara welcome kit (journal + map)'
+  ];
   const exclusions = pkg.exclusions || [
     'Flights or train tickets to destination',
     'Mandatory travel insurance (highly recommended)',
@@ -321,30 +351,51 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
     : 0;
 
   return (
-    <div className="bg-[#FAF9F6] text-[#1D493E] min-h-screen font-sans relative overflow-x-hidden pb-12">
-      {/* Dynamic ambient particles */}
-      <AmbientVibe effect={ambientEffect} />
+    <div 
+      style={{
+        backgroundColor: "rgba(255, 255, 255, 1)",
+        paddingBottom: "62px",
+      }}
+      className="text-[#1D493E] min-h-screen font-sans relative overflow-x-hidden w-full"
+    >
+      {/* Dynamic ambient particles removed for solid white background */}
 
       {/* Breadcrumbs */}
-      <div className="max-w-6xl mx-auto px-6 pt-6 pb-4 text-left">
-        <div className="flex items-center gap-2 text-xs text-gray-500 font-semibold">
-          <Link href="/" className="hover:text-[#1D493E]">Home</Link>
-          <span>/</span>
-          <Link href="/travel" className="hover:text-[#1D493E]">Travel</Link>
-          <span>/</span>
-          <span className="text-gray-400">{pkg.destination}</span>
-          <span>/</span>
-          <span className="text-gray-400 truncate max-w-[200px]">{pkg.name}</span>
+      <div 
+        style={{
+          width: "100%",
+          maxWidth: "1440px",
+          height: "118px",
+          paddingTop: "62px",
+          paddingBottom: "24px",
+          boxSizing: "border-box",
+        }}
+        className="w-full max-w-[1440px] mx-auto px-4 md:px-10 lg:px-[80px] text-left flex items-center"
+      >
+        <div className="flex items-center gap-[12px] text-[16px] font-sans font-medium text-[#8D8D8D]">
+          <Link href="/" className="hover:text-[#1D493E] transition-colors">Home</Link>
+          <span className="text-gray-400 font-sans font-normal">&gt;</span>
+          <Link href="/travel" className="hover:text-[#1D493E] transition-colors">Travel Page</Link>
+          <span className="text-gray-400 font-sans font-normal">&gt;</span>
+          <span className="text-[#3B82F6] underline font-semibold truncate max-w-[300px]">
+            {pkg.name}
+          </span>
         </div>
       </div>
 
       {/* 6-Image Grid Collage Showcase */}
-      <div className="max-w-6xl mx-auto px-6 mb-10">
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 rounded-[24px] overflow-hidden">
+      <div className="w-full max-w-[1440px] mx-auto px-4 md:px-10 lg:px-[80px] mb-10">
+        <div 
+          style={{
+            background: "rgba(255, 255, 255, 1)",
+          }}
+          className="grid grid-cols-2 md:grid-cols-3 md:grid-rows-2 gap-4 md:gap-[32px] md:h-[527px] rounded-[4px] overflow-hidden"
+        >
           {galleryImages.map((img: string, idx: number) => (
             <div
               key={idx}
-              className="relative aspect-[3/2] overflow-hidden rounded-2xl border border-[#1D493E]/10 bg-slate-900 group cursor-pointer"
+              style={{ borderRadius: "4px" }}
+              className="relative overflow-hidden border border-[#1D493E]/10 bg-slate-900 group cursor-pointer w-full h-full aspect-[3/2] md:aspect-auto"
               onClick={() => setActivePhotoIdx(idx)}
             >
               <img
@@ -366,260 +417,660 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
       </div>
 
       {/* Dual Column Layout Spread */}
-      <section className="relative z-10">
-        <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+      <section 
+        style={{
+          width: "100%",
+          maxWidth: "1440px",
+          backgroundColor: "rgba(255, 255, 255, 1)",
+          paddingTop: "42px",
+          paddingBottom: "42px",
+          boxSizing: "border-box",
+        }}
+        className="relative z-10 mx-auto w-full"
+      >
+        <div 
+          className="w-full mx-auto px-4 md:px-10 lg:px-[80px] grid grid-cols-1 lg:grid-cols-[1fr_411px] gap-8 lg:gap-[32px] items-start"
+        >
           
           {/* LEFT COLUMN: Travel package details */}
-          <div className="lg:col-span-8 space-y-10 text-left">
+          <div className="text-left space-y-[62px] w-full">
             
-            {/* Header Title Row */}
-            <div className="space-y-3">
+            {/* Main Details content container with exact 32px gap and 837px width */}
+            <div 
+              style={{
+                width: "100%",
+                maxWidth: "837px",
+                display: "flex",
+                flexDirection: "column",
+                gap: "32px",
+              }}
+              className="text-left"
+            >
+              {/* Category & Duration Row */}
               <div className="flex justify-between items-center text-[10px] font-black uppercase font-mono">
-                <span className="bg-[#FFF0EB] text-[#FF623E] tracking-wider px-2.5 py-1 rounded">
+                <span 
+                  style={{
+                    backgroundColor: "rgba(255, 240, 235, 1)",
+                    color: "rgba(255, 98, 62, 1)",
+                    fontFamily: "Faktum, sans-serif",
+                    fontWeight: 700,
+                    fontSize: "12px",
+                    padding: "4px 10px",
+                    borderRadius: "4px",
+                  }}
+                  className="tracking-wider"
+                >
                   {pkg.category || 'Road Trip'}
                 </span>
-                <span className="text-gray-500">{pkg.duration}</span>
+                <span 
+                  style={{
+                    backgroundColor: "rgba(234, 245, 240, 1)",
+                    color: "rgba(29, 73, 62, 1)",
+                    fontFamily: "Faktum, sans-serif",
+                    fontWeight: 700,
+                    fontSize: "12px",
+                    padding: "4px 10px",
+                    borderRadius: "4px",
+                  }}
+                  className="tracking-wider text-right"
+                >
+                  {pkg.durationDays ? `${pkg.durationDays} days` : '8 days'}
+                </span>
               </div>
-              <div className="flex flex-col sm:flex-row justify-between sm:items-start border-b border-[#1D493E]/10 pb-5 gap-3">
-                <h1 className="text-2xl md:text-3xl font-serif font-bold text-[#1D493E] leading-tight">
+
+              {/* Title & Price Row */}
+              <div className="flex justify-between items-center gap-4">
+                <h1 
+                  style={{
+                    fontFamily: "'Faktum', 'Outfit', sans-serif",
+                    fontWeight: 600,
+                    fontSize: "28px",
+                    lineHeight: "100%",
+                    color: "rgba(43, 43, 43, 1)",
+                  }}
+                  className="leading-tight text-left"
+                >
                   {pkg.name}
                 </h1>
-                <div className="text-left sm:text-right space-y-1">
-                  <span className="text-2xl font-serif font-black text-[#E05434]">
-                    ₹{pkg.price.toLocaleString('en-IN')}/Person
+                <span 
+                  style={{
+                    fontFamily: "Faktum, sans-serif",
+                    fontWeight: 700,
+                    fontSize: "28px",
+                    lineHeight: "100%",
+                    color: "rgba(43, 43, 43, 1)",
+                  }}
+                  className="leading-none text-right shrink-0"
+                >
+                  ₹{pkg.price.toLocaleString('en-IN')}/Person
+                </span>
+              </div>
+
+              {/* General Overview Paragraph */}
+              <p 
+                style={{
+                  fontFamily: "'Faktum', 'Outfit', sans-serif",
+                  fontWeight: 500,
+                  fontSize: "20px",
+                  lineHeight: "32px",
+                  color: "rgba(141, 141, 141, 1)",
+                  maxWidth: "837px",
+                }}
+                className="text-left leading-relaxed mt-2"
+              >
+                {pkg.description}
+              </p>
+
+              {/* Key Specs Grid */}
+              <div 
+                style={{
+                  width: "100%",
+                  maxWidth: "837px",
+                  minHeight: "116px",
+                  display: "grid",
+                  gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+                  justifyContent: "space-between",
+                  gap: "24px 32px",
+                }}
+                className="text-left"
+              >
+                {/* Fact 1 */}
+                <div className="flex items-center gap-4">
+                  <div 
+                    style={{ backgroundColor: "rgba(247, 245, 240, 1)" }}
+                    className="w-12 h-12 rounded-[4px] flex items-center justify-center shrink-0"
+                  >
+                    <MapPin className="w-5 h-5 text-[#2B2B2B]" />
+                  </div>
+                  <span 
+                    style={{
+                      fontFamily: "Faktum, sans-serif",
+                      fontWeight: 500,
+                      fontSize: "20px",
+                      lineHeight: "28px",
+                      color: "rgba(43, 43, 43, 1)",
+                    }}
+                    className="leading-none"
+                  >
+                    {pkg.startPoint || 'Srinagar'}, {pkg.destination || 'Kashmir'}
                   </span>
-                  <span className="text-[10px] text-gray-400 block font-mono">Permits & Transport included</span>
                 </div>
-              </div>
-            </div>
 
-            {/* General Overview Paragraph */}
-            <p className="text-base md:text-lg text-gray-700 leading-relaxed font-normal">
-              {pkg.description}
-            </p>
+                {/* Fact 2 */}
+                <div className="flex items-center gap-4">
+                  <div 
+                    style={{ backgroundColor: "rgba(247, 245, 240, 1)" }}
+                    className="w-12 h-12 rounded-[4px] flex items-center justify-center shrink-0"
+                  >
+                    <Users className="w-5 h-5 text-[#2B2B2B]" />
+                  </div>
+                  <span 
+                    style={{
+                      fontFamily: "Faktum, sans-serif",
+                      fontWeight: 500,
+                      fontSize: "20px",
+                      lineHeight: "28px",
+                      color: "rgba(43, 43, 43, 1)",
+                    }}
+                    className="leading-none"
+                  >
+                    {pkg.groupType || 'Curated group Trip'}
+                  </span>
+                </div>
 
-            {/* Key Specs Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-white border border-[#1D493E]/20 flex items-center justify-center shrink-0 shadow-xs">
-                  <MapPin className="w-5 h-5 text-[#1D493E]" />
+                {/* Fact 3 */}
+                <div className="flex items-center gap-4">
+                  <div 
+                    style={{ backgroundColor: "rgba(247, 245, 240, 1)" }}
+                    className="w-12 h-12 rounded-[4px] flex items-center justify-center shrink-0"
+                  >
+                    <Compass className="w-5 h-5 text-[#2B2B2B]" />
+                  </div>
+                  <span 
+                    style={{
+                      fontFamily: "Faktum, sans-serif",
+                      fontWeight: 500,
+                      fontSize: "20px",
+                      lineHeight: "28px",
+                      color: "rgba(43, 43, 43, 1)",
+                    }}
+                    className="leading-none"
+                  >
+                    {pkg.difficulty || 'Moderate'} Difficulty
+                  </span>
                 </div>
-                <div>
-                  <span className="text-sm font-bold text-gray-800">Starts: {pkg.startPoint || 'Srinagar'}</span>
-                </div>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-white border border-[#1D493E]/20 flex items-center justify-center shrink-0 shadow-xs">
-                  <Users className="w-5 h-5 text-[#1D493E]" />
-                </div>
-                <div>
-                  <span className="text-sm font-bold text-gray-800">{pkg.groupType || 'Curated group Trip'}</span>
-                </div>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-white border border-[#1D493E]/20 flex items-center justify-center shrink-0 shadow-xs">
-                  <Compass className="w-5 h-5 text-[#1D493E]" />
-                </div>
-                <div>
-                  <span className="text-sm font-bold text-gray-800">{pkg.difficulty || 'Moderate'} Difficulty</span>
-                </div>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-white border border-[#1D493E]/20 flex items-center justify-center shrink-0 shadow-xs">
-                  <Calendar className="w-5 h-5 text-[#1D493E]" />
-                </div>
-                <div>
-                  <span className="text-sm font-bold text-gray-800">Next: {pkg.nextDeparture || 'Aug, 2026'}</span>
-                </div>
-              </div>
-            </div>
 
-            {/* Rating summary */}
-            <div className="flex flex-col gap-1 items-start">
-              <div className="flex items-center gap-2">
-                <div className="flex text-[#E05434] gap-0.5">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className={`w-3.5 h-3.5 fill-[#E05434] stroke-none ${
-                        i < Math.floor(pkg.rating) ? 'fill-[#E05434]' : 'fill-gray-200'
-                      }`}
-                    />
-                  ))}
+                {/* Fact 4 */}
+                <div className="flex items-center gap-4">
+                  <div 
+                    style={{ backgroundColor: "rgba(247, 245, 240, 1)" }}
+                    className="w-12 h-12 rounded-[4px] flex items-center justify-center shrink-0"
+                  >
+                    <Calendar className="w-5 h-5 text-[#2B2B2B]" />
+                  </div>
+                  <span 
+                    style={{
+                      fontFamily: "Faktum, sans-serif",
+                      fontWeight: 500,
+                      fontSize: "20px",
+                      lineHeight: "28px",
+                      color: "rgba(43, 43, 43, 1)",
+                    }}
+                    className="leading-none"
+                  >
+                    Next: {pkg.nextDeparture || 'Aug, 2026'}
+                  </span>
                 </div>
-                <span className="text-xs font-bold text-gray-500">({pkg.ratingCount} reviews)</span>
               </div>
-              <span className="text-xs font-semibold text-gray-400">
-                100+ bought in past month
-              </span>
+
+              {/* Rating summary */}
+              <div className="flex flex-col gap-2 items-start mt-2">
+                <div className="flex items-center gap-3">
+                  <div className="flex text-[#E05434] gap-1">
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className={`w-4 h-4 fill-[#E05434] stroke-none ${
+                          i < Math.floor(pkg.rating) ? 'fill-[#E05434]' : 'fill-gray-200'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                  <span 
+                    style={{
+                      fontFamily: "'Faktum', 'Outfit', sans-serif",
+                      fontWeight: 500,
+                      fontSize: "20px",
+                      lineHeight: "100%",
+                      color: "rgba(43, 43, 43, 1)",
+                    }}
+                    className="leading-none"
+                  >
+                    ({pkg.ratingCount || 312} reviews)
+                  </span>
+                </div>
+                <span 
+                  style={{
+                    fontFamily: "'Faktum', 'Outfit', sans-serif",
+                    fontWeight: 500,
+                    fontSize: "20px",
+                    lineHeight: "100%",
+                    color: "rgba(141, 141, 141, 1)",
+                  }}
+                  className="leading-none"
+                >
+                  200+ bought in past month
+                </span>
+              </div>
             </div>
 
             {/* Navigation Tabs */}
-            <div className="flex gap-8 border-b border-gray-200">
-              {(['overview', 'itinerary', 'reviews'] as const).map((tab) => (
-                <button
-                  key={tab}
-                  type="button"
-                  onClick={() => setActiveTab(tab)}
-                  className={`pb-3 text-sm font-bold uppercase tracking-wider transition-all cursor-pointer border-b-2 ${
-                    activeTab === tab
-                      ? 'border-[#1D493E] text-[#1D493E]'
-                      : 'border-transparent text-gray-400 hover:text-gray-600'
-                  }`}
-                >
-                  {tab}
-                </button>
-              ))}
+            <div 
+              style={{
+                width: "100%",
+                maxWidth: "837px",
+                height: "54px",
+                borderBottom: "2px solid rgba(204, 204, 204, 1)",
+                background: "rgba(255, 255, 255, 1)",
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+              }}
+              className="text-left"
+            >
+
+              {(['overview', 'itinerary', 'reviews'] as const).map((tab) => {
+                const isSelected = activeTab === tab;
+                const label = tab === 'overview' ? 'Overview' : tab === 'itinerary' ? 'Itinerary' : 'Reviews';
+                return (
+                  <button
+                    key={tab}
+                    type="button"
+                    onClick={() => setActiveTab(tab)}
+                    style={{
+                      fontFamily: "Faktum, sans-serif",
+                      fontWeight: 500,
+                      fontSize: "24px",
+                      lineHeight: "100%",
+                      color: isSelected ? "rgba(28, 68, 140, 1)" : "rgba(43, 43, 43, 1)",
+                      borderBottom: isSelected ? "2px solid rgba(28, 68, 140, 1)" : "2px solid transparent",
+                      height: "100%",
+                      paddingBottom: "8px",
+                      marginBottom: "-2px",
+                    }}
+                    className="transition-all cursor-pointer capitalize font-sans"
+                  >
+                    {label}
+                  </button>
+                );
+              })}
             </div>
 
             {/* TAB CONTENT: Overview */}
             {activeTab === 'overview' && (
-              <div className="space-y-10 animate-in fade-in duration-300">
+              <div className="flex flex-col gap-[62px] w-full max-w-[837px] animate-in fade-in duration-300">
                 
-                {/* Route stops map block */}
-                <div className="space-y-2.5">
-                  <span className="text-[10px] font-mono text-[#1D493E]/60 uppercase font-black tracking-wider block">
-                    Expedition Route Map
-                  </span>
-                  <div className="flex flex-wrap items-center gap-2 bg-[#f3faf5] border border-[#1D493E]/8 p-3.5 rounded-2xl">
-                    {pkg.routeList.map((node: string, i: number) => (
-                      <React.Fragment key={i}>
-                        <span className="text-[10px] font-sans font-extrabold text-[#1D493E] bg-white border border-[#1D493E]/10 px-2.5 py-1.5 rounded-xl shadow-sm">
-                          {node}
-                        </span>
-                        {i < pkg.routeList.length - 1 && (
-                          <span className="text-[#E05434] text-xs font-black">→</span>
-                        )}
-                      </React.Fragment>
-                    ))}
-                  </div>
+                {/* Introduction Section */}
+                <div
+                  style={{
+                    width: "100%",
+                    maxWidth: "837px",
+                    height: "232px",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "32px",
+                    background: "rgba(255, 255, 255, 1)",
+                    borderRadius: "4px",
+                    boxSizing: "border-box",
+                  }}
+                  className="text-left"
+                >
+
+                  <h2
+                    style={{
+                      fontFamily: "Fraunces, serif",
+                      fontWeight: 600,
+                      fontSize: "42px",
+                      lineHeight: "100%",
+                      color: "rgba(43, 43, 43, 1)",
+                    }}
+                    className="leading-none"
+                  >
+                    {mainPart}{" "}
+                    <span style={{ color: "rgba(255, 98, 62, 1)" }}>{lastWord}</span>
+                  </h2>
+                  <p
+                    style={{
+                      fontFamily: "Faktum, sans-serif",
+                      fontWeight: 500,
+                      fontSize: "20px",
+                      lineHeight: "42px",
+                      color: "rgba(43, 43, 43, 1)",
+                    }}
+                    className="leading-relaxed"
+                  >
+                    {pkg.description || `Spiti Valley sits at 12,500 feet in the cold desert of Himachal Pradesh one of the most remote and breathtaking landscapes in India. This 8-day traverse takes you through high mountain passes, Tibetan-influenced villages, ancient monasteries carved into cliffs, and skies so clear you'll see the Milky Way before breakfast. This isn't a trip. It's a reckoning.`}
+                  </p>
                 </div>
 
-                {/* Highlights */}
-                <div className="space-y-4">
-                  <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-mono text-[#E05434] bg-[#FFF0EB] px-2.5 py-1 rounded font-black uppercase">
-                      Critical Highlights
+                {/* Highlights Section */}
+                <div
+                  style={{
+                    width: "100%",
+                    maxWidth: "837px",
+                    height: "266px",
+                    background: "rgba(243, 243, 243, 1)",
+                    borderRadius: "4px",
+                    padding: "32px",
+                    boxSizing: "border-box",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "32px",
+                  }}
+                  className="text-left justify-center"
+                >
+                  <div className="flex flex-col gap-[12px]">
+                    <span 
+                      style={{
+                        backgroundColor: "rgba(255, 240, 235, 1)",
+                        color: "rgba(255, 98, 62, 1)",
+                        fontFamily: "Faktum, sans-serif",
+                        fontWeight: 700,
+                        fontSize: "12px",
+                        padding: "4px 10px",
+                        borderRadius: "4px",
+                        alignSelf: "flex-start",
+                      }}
+                      className="tracking-wider uppercase"
+                    >
+                      Discover Your Path
                     </span>
+                    <h3 
+                      style={{
+                        fontFamily: "Fraunces, serif",
+                        fontWeight: 600,
+                        fontSize: "36px",
+                        lineHeight: "100%",
+                        color: "rgba(43, 43, 43, 1)",
+                      }}
+                    >
+                      Highlights
+                    </h3>
                   </div>
-                  <h3 className="text-2xl font-serif font-light text-[#1D493E]">Highlights</h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {pkg.highlights.map((hl: string, i: number) => (
-                      <div key={i} className="flex items-start gap-3 bg-white border border-[#1D493E]/10 p-3.5 rounded-2xl shadow-xs">
-                        <Check className="w-4 h-4 text-[#E05434] shrink-0 mt-0.5" />
-                        <span className="text-sm text-[#1D493E] font-medium leading-relaxed">{hl}</span>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
+                    {pkg.highlights.slice(0, 4).map((hl: string, i: number) => (
+                      <div key={i} className="flex items-center gap-3">
+                        <div 
+                          style={{ 
+                            width: "32px", 
+                            height: "32px", 
+                            backgroundColor: "rgba(247, 245, 240, 1)", 
+                            borderRadius: "4px",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                          }}
+                          className="shrink-0"
+                        >
+                          <Check className="w-4 h-4 text-[#2B2B2B]" />
+                        </div>
+                        <span 
+                          style={{
+                            fontFamily: "Faktum, sans-serif",
+                            fontWeight: 500,
+                            fontSize: "18px",
+                            lineHeight: "24px",
+                            color: "rgba(43, 43, 43, 1)",
+                          }}
+                          className="leading-tight"
+                        >
+                          {hl}
+                        </span>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                {/* Narrow Brand Banner 1 */}
-                <div className="bg-[#E05434]/5 border border-[#E05434]/20 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-                  <div className="flex items-center gap-3 text-left">
-                    <div className="w-10 h-10 rounded-xl bg-[#E05434]/10 border border-[#E05434]/20 flex items-center justify-center text-[#E05434] shrink-0">
-                      <Users className="w-5 h-5 text-[#E05434]" />
-                    </div>
-                    <div>
-                      <h4 className="text-xs font-black text-[#1D493E] uppercase tracking-wider">Intimate Group Batches</h4>
-                      <p className="text-[11px] text-gray-500 font-semibold mt-0.5">We limit every batch to 12 travelers to ensure premium hospitality, flexibility, and group safety.</p>
-                    </div>
-                  </div>
-                  <span className="text-[9px] font-mono font-black text-[#E05434] uppercase tracking-wider bg-white border border-[#E05434]/15 px-3 py-1.5 rounded-lg shrink-0">
-                    12 Spots Max
-                  </span>
-                </div>
-
-                {/* What's Included & Not Included Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 border-t border-[#1D493E]/10 pt-8">
-                  {/* Included */}
-                  <div className="space-y-4 text-left">
-                    <div className="flex items-center gap-2">
-                      <span className="text-[10px] font-mono text-[#1D493E] bg-[#f3faf5] px-2.5 py-1 rounded font-black uppercase">
-                        Free
-                      </span>
-                    </div>
-                    <h3 className="text-2xl font-serif font-light text-[#1D493E]">
-                      What's <span className="text-[#1D493E] font-serif font-normal">Included</span>
-                    </h3>
-                    <ul className="space-y-2.5">
-                      {pkg.inclusions.map((inc: string, i: number) => (
-                        <li key={i} className="flex items-start gap-2.5 text-sm text-gray-600 font-normal leading-relaxed capitalize">
-                          <span className="text-[#1D493E] font-bold text-sm">•</span>
-                          <span>{inc}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Excluded */}
-                  <div className="space-y-4 text-left">
-                    <div className="flex items-center gap-2">
-                      <span className="text-[10px] font-mono text-[#E05434] bg-[#FFF0EB] px-2.5 py-1 rounded font-black uppercase">
-                        Costs
-                      </span>
-                    </div>
-                    <h3 className="text-2xl font-serif font-light text-[#1D493E]">
-                      <span className="text-[#E05434] font-serif font-normal">Not</span> Included
-                    </h3>
-                    <ul className="space-y-2.5">
-                      {exclusions.map((exc: string, i: number) => (
-                        <li key={i} className="flex items-start gap-2.5 text-sm text-gray-600 font-normal leading-relaxed">
-                          <span className="text-[#E05434] font-bold text-sm">•</span>
-                          <span>{exc}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-
-                {/* Packing List */}
-                <div className="space-y-4 border-t border-[#1D493E]/10 pt-8 text-left">
-                  <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-mono text-[#E05434] bg-[#FFF0EB] px-2.5 py-1 rounded font-black uppercase">
-                      Gears
+                <div className="flex flex-col gap-[48px] border-t border-[#1D493E]/10 pt-8">
+                  {/* What's Included */}
+                  <div
+                    style={{
+                      width: "100%",
+                      maxWidth: "837px",
+                      background: "rgba(255, 255, 255, 1)",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "12px",
+                    }}
+                    className="text-left"
+                  >
+                    <span 
+                      style={{
+                        backgroundColor: "rgba(0, 160, 35, 0.08)",
+                        color: "rgba(0, 160, 35, 1)",
+                        fontFamily: "Faktum, sans-serif",
+                        fontWeight: 600,
+                        fontSize: "14px",
+                        lineHeight: "100%",
+                        letterSpacing: "1.2px",
+                        textTransform: "uppercase",
+                        padding: "4px 10px",
+                        borderRadius: "4px",
+                        alignSelf: "flex-start",
+                      }}
+                    >
+                      DO'S
                     </span>
+                    <h3 
+                      style={{
+                        fontFamily: "Fraunces, serif",
+                        fontWeight: 600,
+                        fontSize: "42px",
+                        lineHeight: "100%",
+                        color: "rgba(43, 43, 43, 1)",
+                      }}
+                      className="leading-none mb-2 font-sans"
+                    >
+                      What's Included
+                    </h3>
+                    <ul className="list-disc pl-5">
+                      {richInclusions.map((inc: string, i: number) => (
+                        <li 
+                          key={i} 
+                          style={{
+                            fontFamily: "Faktum, sans-serif",
+                            fontWeight: 500,
+                            fontSize: "24px",
+                            lineHeight: "42px",
+                            color: "rgba(43, 43, 43, 1)",
+                          }}
+                          className="leading-relaxed font-sans"
+                        >
+                          {inc}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <h3 className="text-2xl font-serif font-light text-[#1D493E]">
-                    <span className="text-[#E05434] font-serif font-normal">Packing</span> List
-                  </h3>
-                  <ul className="space-y-2.5 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-1">
-                    {packingList.map((pk: string, i: number) => (
-                      <li key={i} className="flex items-start gap-2.5 text-sm text-gray-600 font-normal leading-relaxed">
-                        <span className="text-[#1D493E] font-bold text-sm">•</span>
-                        <span>{pk}</span>
-                      </li>
-                    ))}
-                  </ul>
+
+                  {/* Not Included */}
+                  <div
+                    style={{
+                      width: "100%",
+                      maxWidth: "837px",
+                      background: "rgba(255, 255, 255, 1)",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "12px",
+                    }}
+                    className="text-left"
+                  >
+                    <span 
+                      style={{
+                        backgroundColor: "rgba(255, 98, 62, 0.08)",
+                        color: "rgba(255, 98, 62, 1)",
+                        fontFamily: "Faktum, sans-serif",
+                        fontWeight: 600,
+                        fontSize: "14px",
+                        lineHeight: "100%",
+                        letterSpacing: "1.2px",
+                        textTransform: "uppercase",
+                        padding: "4px 10px",
+                        borderRadius: "4px",
+                        alignSelf: "flex-start",
+                      }}
+                    >
+                      DON'TS
+                    </span>
+                    <h3 
+                      style={{
+                        fontFamily: "Fraunces, serif",
+                        fontWeight: 600,
+                        fontSize: "42px",
+                        lineHeight: "100%",
+                        color: "rgba(43, 43, 43, 1)",
+                      }}
+                      className="leading-none mb-2 font-sans"
+                    >
+                      Not Included
+                    </h3>
+                    <ul className="list-disc pl-5">
+                      {exclusions.map((exc: string, i: number) => (
+                        <li 
+                          key={i} 
+                          style={{
+                            fontFamily: "Faktum, sans-serif",
+                            fontWeight: 500,
+                            fontSize: "24px",
+                            lineHeight: "42px",
+                            color: "rgba(43, 43, 43, 1)",
+                          }}
+                          className="leading-relaxed font-sans"
+                        >
+                          {exc}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
 
-                {/* Narrow Brand Banner 2 */}
-                <div className="bg-[#1D493E] text-white rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm border border-white/5">
-                  <div className="flex items-center gap-3 text-left">
-                    <div className="w-10 h-10 rounded-xl bg-[#FFFF80] flex items-center justify-center shrink-0">
-                      <Compass className="w-5 h-5 text-[#1D493E]" />
-                    </div>
-                    <div>
-                      <h4 className="text-xs font-black text-[#FFFF80] uppercase tracking-wider">Community-Led Tourism</h4>
-                      <p className="text-[11px] text-slate-200 font-medium mt-0.5">85% of your tour expenses are directly funneled to local homestays, native guides, and remote monasteries.</p>
-                    </div>
-                  </div>
-                  <span className="text-[9px] font-mono font-black text-[#FFFF80] uppercase tracking-wider bg-white/5 border border-white/10 px-3 py-1.5 rounded-lg shrink-0">
-                    Support Local
-                  </span>
-                </div>
+                 {/* Packing List */}
+                 <div 
+                   style={{
+                     width: "100%",
+                     maxWidth: "837px",
+                     background: "rgba(255, 255, 255, 1)",
+                     display: "flex",
+                     flexDirection: "column",
+                     gap: "12px",
+                   }}
+                   className="border-t border-[#1D493E]/10 pt-8 text-left"
+                 >
+                   <h3 
+                     style={{
+                       fontFamily: "Fraunces, serif",
+                       fontWeight: 600,
+                       fontSize: "42px",
+                       lineHeight: "100%",
+                     }}
+                     className="leading-none mb-2 font-sans"
+                   >
+                     <span style={{ color: "rgba(255, 98, 62, 1)" }}>Packing</span>{" "}
+                     <span style={{ color: "rgba(43, 43, 43, 1)" }}>List</span>
+                   </h3>
+                   <ul className="list-disc pl-5">
+                     {packingList.map((pk: string, i: number) => (
+                       <li 
+                         key={i} 
+                         style={{
+                           fontFamily: "Faktum, sans-serif",
+                           fontWeight: 500,
+                           fontSize: "24px",
+                           lineHeight: "42px",
+                           color: "rgba(43, 43, 43, 1)",
+                         }}
+                         className="leading-relaxed font-sans"
+                       >
+                         {pk}
+                       </li>
+                     ))}
+                   </ul>
+                 </div>
+
+
 
                 {/* Know your Guide */}
-                <div className="space-y-4 border-t border-[#1D493E]/10 pt-8 text-left">
-                  <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-mono text-[#E05434] bg-[#FFF0EB] px-2.5 py-1 rounded font-black uppercase">
-                      Support Team
-                    </span>
-                  </div>
-                  <h3 className="text-2xl font-serif font-light text-[#1D493E]">
-                    Know your <span className="text-[#E05434] font-serif font-normal">Guide</span>
+                <div 
+                  style={{
+                    width: "100%",
+                    maxWidth: "837px",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "12px",
+                  }}
+                  className="border-t border-[#1D493E]/10 pt-8 text-left"
+                >
+                  <h3 
+                    style={{
+                      fontFamily: "Fraunces, serif",
+                      fontWeight: 600,
+                      fontSize: "42px",
+                      lineHeight: "100%",
+                    }}
+                    className="leading-none mb-2 font-sans"
+                  >
+                    <span style={{ color: "rgba(43, 43, 43, 1)" }}>Know your</span>{" "}
+                    <span style={{ color: "rgba(255, 98, 62, 1)" }}>Guide</span>
                   </h3>
-                  <div className="bg-white border border-[#1D493E]/15 rounded-3xl p-6 flex flex-col sm:flex-row items-center gap-6 shadow-xs">
-                    <div className="w-24 h-24 rounded-2xl overflow-hidden shrink-0 bg-slate-100 border border-[#1D493E]/15">
+                  
+                  {/* Badge & Rating Row */}
+                  <div className="flex flex-wrap justify-between items-center gap-4 mt-2">
+                    <span 
+                      style={{
+                        backgroundColor: "rgba(255, 240, 235, 1)",
+                        color: "rgba(255, 98, 62, 1)",
+                        fontFamily: "Faktum, sans-serif",
+                        fontWeight: 600,
+                        fontSize: "14px",
+                        lineHeight: "100%",
+                        letterSpacing: "1.2px",
+                        textTransform: "uppercase",
+                        padding: "4px 10px",
+                        borderRadius: "4px",
+                      }}
+                    >
+                      Your Lead Guide
+                    </span>
+                    <div className="flex items-center gap-2">
+                      <div className="flex text-[#FF623E] gap-0.5">
+                        {[...Array(5)].map((_, i) => (
+                          <Star key={i} className="w-5 h-5 fill-[#FF623E] stroke-none" />
+                        ))}
+                      </div>
+                      <span 
+                        style={{
+                          fontFamily: "Faktum, sans-serif",
+                          fontWeight: 500,
+                          fontSize: "16px",
+                          color: "rgba(43, 43, 43, 1)",
+                        }}
+                      >
+                        {guide.rating.toFixed(2)} ({guide.trips} Trips)
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Guide details panel */}
+                  <div className="flex flex-col md:flex-row gap-6 mt-4 items-start">
+                    <div 
+                      style={{
+                        width: "180px",
+                        height: "180px",
+                        borderRadius: "4px",
+                        overflow: "hidden",
+                      }}
+                      className="shrink-0 bg-slate-100"
+                    >
                       <img
                         src={guide.image}
                         alt={`${guide.name} Guide`}
@@ -627,29 +1078,117 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                         className="w-full h-full object-cover"
                       />
                     </div>
-                    <div className="space-y-2 text-center sm:text-left flex-1">
-                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
-                        <div>
-                          <span className="text-[9px] font-mono text-[#E05434] uppercase font-black tracking-widest block">
-                            {guide.role}
-                          </span>
-                          <h4 className="text-xl font-serif font-bold text-[#1D493E]">{guide.name}</h4>
-                        </div>
-                        <div className="flex items-center gap-1.5 justify-center sm:justify-end text-[#E05434]">
-                          <div className="flex text-[#E05434] gap-0.5">
-                            {[...Array(5)].map((_, i) => (
-                              <Star key={i} className="w-3.5 h-3.5 fill-[#E05434] stroke-none" />
-                            ))}
-                          </div>
-                          <span className="text-xs font-black text-gray-600">
-                            {guide.rating.toFixed(1)} ({guide.trips} Trips)
-                          </span>
-                        </div>
-                      </div>
-                      <p className="text-sm text-gray-600 leading-relaxed font-normal">
+                    <div className="flex-1 space-y-3">
+                      <h4 
+                        style={{
+                          fontFamily: "Faktum, sans-serif",
+                          fontWeight: 600,
+                          fontSize: "28px",
+                          lineHeight: "120%",
+                          color: "rgba(43, 43, 43, 1)",
+                        }}
+                      >
+                        {guide.name}
+                      </h4>
+                      <p 
+                        style={{
+                          fontFamily: "Faktum, sans-serif",
+                          fontWeight: 500,
+                          fontSize: "20px",
+                          lineHeight: "32px",
+                          color: "rgba(43, 43, 43, 1)",
+                        }}
+                      >
                         {guide.bio}
                       </p>
                     </div>
+                  </div>
+                </div>
+
+                {/* Commonly asked questions */}
+                <div 
+                  style={{
+                    width: "100%",
+                    maxWidth: "837px",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "12px",
+                  }}
+                  className="border-t border-[#1D493E]/10 pt-8 text-left"
+                >
+                  <span 
+                    style={{
+                      backgroundColor: "rgba(255, 240, 235, 1)",
+                      color: "rgba(255, 98, 62, 1)",
+                      fontFamily: "Faktum, sans-serif",
+                      fontWeight: 600,
+                      fontSize: "14px",
+                      lineHeight: "100%",
+                      letterSpacing: "1.2px",
+                      textTransform: "uppercase",
+                      padding: "4px 10px",
+                      borderRadius: "4px",
+                      alignSelf: "flex-start",
+                    }}
+                  >
+                    FAQ'S
+                  </span>
+                  <h3 
+                    style={{
+                      fontFamily: "Fraunces, serif",
+                      fontWeight: 600,
+                      fontSize: "42px",
+                      lineHeight: "100%",
+                    }}
+                    className="leading-none mb-4 font-sans"
+                  >
+                    <span style={{ color: "rgba(43, 43, 43, 1)" }}>Commonly asked</span>{" "}
+                    <span style={{ color: "rgba(255, 98, 62, 1)" }}>questions</span>
+                  </h3>
+
+                  {/* Accordion container */}
+                  <div className="flex flex-col border-t border-gray-200">
+                    {faqs.map((faq: any, idx: number) => {
+                      const isOpen = openFaqIdx === idx;
+                      return (
+                        <div key={idx} className="border-b border-gray-200/60 py-4">
+                          <button
+                            type="button"
+                            onClick={() => setOpenFaqIdx(isOpen ? null : idx)}
+                            className="w-full flex justify-between items-center text-left py-2 hover:opacity-90 transition cursor-pointer"
+                          >
+                            <span 
+                              style={{
+                                fontFamily: "Faktum, sans-serif",
+                                fontWeight: 600,
+                                fontSize: "20px",
+                                lineHeight: "130%",
+                                color: "rgba(43, 43, 43, 1)",
+                              }}
+                            >
+                              {faq.q}
+                            </span>
+                            <span className="text-[#FF623E] text-2xl font-light pl-4 select-none shrink-0">
+                              {isOpen ? '−' : '+'}
+                            </span>
+                          </button>
+                          {isOpen && (
+                            <p 
+                              style={{
+                                fontFamily: "Faktum, sans-serif",
+                                fontWeight: 500,
+                                fontSize: "18px",
+                                lineHeight: "28px",
+                                color: "rgba(141, 141, 141, 1)",
+                              }}
+                              className="mt-2"
+                            >
+                              {faq.a}
+                            </p>
+                          )}
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               </div>
@@ -819,59 +1358,69 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
           </div>
 
           {/* RIGHT COLUMN: Booking Sidebar Panel */}
-          <div className="lg:col-span-4 sticky top-6 space-y-6">
+          <div className="sticky top-6 space-y-6 w-full">
             
-            {/* Live Weather Widget */}
-            <div className="bg-[#1D493E] text-white p-5 rounded-[24px] border border-white/10 shadow-md space-y-4">
-              <div className="flex justify-between items-center">
-                <span className="text-[10px] uppercase font-mono tracking-widest text-[#FFFF80] flex items-center gap-1.5 font-bold">
-                  <span className="w-2 h-2 rounded-full bg-[#E05434] animate-ping" />
-                  Live Weather
-                </span>
-                <span className="text-[9px] text-slate-300 font-mono">Base Camp</span>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="flex items-baseline text-4xl font-light text-slate-100 font-serif">
-                  {liveTemp.temp}
-                  <span className="text-2xl font-serif">°C</span>
-                </div>
-                <div className="h-8 w-px bg-white/10" />
-                <div className="text-left space-y-0.5">
-                  <p className="text-xs font-bold text-white">{liveTemp.condition}</p>
-                  <p className="text-[9px] text-slate-300 font-mono">Wind: {liveTemp.wind}</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Exclusive Offers Widget */}
-            <div className="bg-white border border-[#1D493E]/10 rounded-[24px] p-5 shadow-xs space-y-3">
-              <span className="text-[10px] uppercase font-mono tracking-widest text-[#E05434] font-black flex items-center gap-1.5">
-                <Tag className="w-3.5 h-3.5 text-[#E05434]" />
-                Exclusive Offers
-              </span>
-              <div className="space-y-2 text-[11px] text-gray-500 font-semibold">
-                <p className="leading-normal flex items-start gap-1">
-                  <span className="text-[#E05434] font-bold">•</span>
-                  <span><strong>BANJARACOZY:</strong> Complimentary welcome dinner.</span>
-                </p>
-                <p className="leading-normal flex items-start gap-1">
-                  <span className="text-[#E05434] font-bold">•</span>
-                  <span>Free local guide and cultural experience.</span>
-                </p>
-              </div>
-            </div>
-
             {/* Secure Booking Board Card */}
-            <div className="bg-white border-2 border-[#1D493E] p-6 rounded-[28px] shadow-[4px_4px_0px_0px_#1D493E] space-y-5 text-left">
+            <div 
+              style={{
+                width: "100%",
+                maxWidth: "411px",
+                height: "593px",
+                background: "rgba(255, 255, 255, 1)",
+                border: "1px solid rgba(204, 204, 204, 1)",
+                borderRadius: "4px",
+                padding: "24px",
+                boxSizing: "border-box",
+                display: "flex",
+                flexDirection: "column",
+                gap: "32px",
+                justifyContent: "space-between",
+              }}
+              className="text-left"
+            >
               <div>
-                <span className="text-[11px] font-bold text-gray-400 block">Tour Package Price</span>
-                <div className="flex items-baseline gap-2 mt-1">
-                  <span className="text-3xl font-black font-sans text-[#1D493E]">₹{pkg.price.toLocaleString('en-IN')}</span>
-                  <span className="text-xs text-gray-500 font-semibold">/ per person</span>
+                <span 
+                  style={{
+                    fontFamily: "Faktum, sans-serif",
+                    fontWeight: 500,
+                    fontSize: "16px",
+                    lineHeight: "20px",
+                    color: "rgba(141, 141, 141, 1)"
+                  }}
+                  className="block mb-2"
+                >
+                  Tour Package Price
+                </span>
+                <div className="flex items-center gap-2">
+                  <span 
+                    style={{
+                      fontFamily: "Faktum, sans-serif",
+                      fontWeight: 700,
+                      fontSize: "32px",
+                      lineHeight: "40px",
+                      color: "rgba(43, 43, 43, 1)"
+                    }}
+                    className="leading-none"
+                  >
+                    ₹{pkg.price.toLocaleString('en-IN')}
+                  </span>
+                  <span className="font-sans font-medium text-[16px] text-[#8D8D8D] leading-none">/ per person</span>
                   {pkg.originalPrice && pkg.originalPrice > pkg.price && (
                     <>
-                      <span className="text-xs text-gray-400 line-through font-semibold">₹{pkg.originalPrice.toLocaleString('en-IN')}</span>
-                      <span className="bg-[#f0faf2] text-green-700 font-black text-[9px] uppercase tracking-wider px-2 py-0.5 rounded border border-green-200/50">
+                      <span className="font-sans font-medium text-[16px] text-[#8D8D8D] line-through leading-none ml-2">₹{pkg.originalPrice.toLocaleString('en-IN')}</span>
+                      <span 
+                        style={{
+                          backgroundColor: "rgba(0, 160, 35, 0.08)",
+                          color: "rgba(0, 160, 35, 1)",
+                          fontFamily: "Faktum, sans-serif",
+                          fontWeight: 500,
+                          fontSize: "16px",
+                          lineHeight: "100%",
+                          padding: "2px 8px",
+                          borderRadius: "4px",
+                        }}
+                        className="inline-flex items-center justify-center ml-2"
+                      >
                         {discountPercent}% off
                       </span>
                     </>
@@ -880,9 +1429,9 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
               </div>
 
               {/* Next Departures */}
-              <div className="space-y-2 border-t border-gray-100 pt-4">
-                <span className="text-xs font-bold text-gray-500 block">Next Departures</span>
-                <div className="space-y-2">
+              <div className="flex-1 flex flex-col justify-center gap-4">
+                <span className="font-sans font-medium text-[16px] text-[#8D8D8D] block">Next Departures</span>
+                <div className="flex flex-col gap-3">
                   {departures.map((dept: any) => {
                     const isSelected = bookingDate === dept.value;
                     return (
@@ -890,105 +1439,200 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                         key={dept.value}
                         type="button"
                         onClick={() => setBookingDate(dept.value)}
-                        className={`w-full flex justify-between items-center text-xs font-semibold py-1 transition cursor-pointer ${
-                          isSelected ? 'text-[#1D493E] font-extrabold' : 'text-gray-600 hover:text-[#1D493E]'
-                        }`}
+                        className="w-full flex justify-between items-center transition cursor-pointer"
                       >
-                        <div className="flex items-center gap-2">
-                          <div
-                            className={`w-3.5 h-3.5 rounded-full border flex items-center justify-center ${
-                              isSelected ? 'border-[#1D493E] bg-[#1D493E]/5' : 'border-gray-300'
-                            }`}
-                          >
-                            {isSelected && <div className="w-1.5 h-1.5 rounded-full bg-[#1D493E]" />}
-                          </div>
-                          <span>{dept.label}</span>
-                        </div>
-                        <span className="text-gray-400 font-mono text-[11px]">{dept.seats}</span>
+                        <span 
+                          style={{
+                            fontFamily: "Faktum, sans-serif",
+                            fontWeight: isSelected ? 600 : 500,
+                            fontSize: "18px",
+                            lineHeight: "100%",
+                            color: "rgba(43, 43, 43, 1)",
+                          }}
+                        >
+                          {dept.label}
+                        </span>
+                        <span 
+                          style={{
+                            fontFamily: "Faktum, sans-serif",
+                            fontWeight: isSelected ? 600 : 500,
+                            fontSize: "18px",
+                            lineHeight: "100%",
+                            color: "rgba(43, 43, 43, 1)",
+                          }}
+                        >
+                          {dept.seats}
+                        </span>
                       </button>
                     );
                   })}
                 </div>
               </div>
 
-              <form onSubmit={handleBook} className="pt-2 border-t border-gray-100 space-y-4">
-                {/* Guests Selector */}
-                <div className="flex items-center justify-between text-xs">
-                  <span className="font-bold text-gray-500">Number of Guests</span>
-                  <div className="flex items-center gap-2">
-                    <button
-                      type="button"
-                      onClick={() => setGuests(Math.max(1, guests - 1))}
-                      className="w-7 h-7 rounded-lg border border-gray-200 flex items-center justify-center font-bold hover:bg-gray-50 transition text-gray-600 cursor-pointer"
-                    >
-                      -
-                    </button>
-                    <span className="w-8 text-center font-mono font-bold text-[#1D493E]">{guests}</span>
-                    <button
-                      type="button"
-                      onClick={() => setGuests(guests + 1)}
-                      className="w-7 h-7 rounded-lg border border-gray-200 flex items-center justify-center font-bold hover:bg-gray-50 transition text-gray-600 cursor-pointer"
-                    >
-                      +
-                    </button>
-                  </div>
-                </div>
-
-                {/* Estimate Cost & Submit */}
-                <div className="space-y-3 pt-2 border-t border-gray-50">
-                  <div className="flex justify-between items-center text-xs">
-                    <span className="font-bold text-gray-500">Estimated Total</span>
-                    <span className="font-mono font-black text-lg text-[#E05434]">
-                      ₹{(pkg.price * guests).toLocaleString('en-IN')}
-                    </span>
-                  </div>
-
+              {/* Action Buttons & Badges */}
+              <div className="flex flex-col gap-4">
+                <form onSubmit={handleBook}>
                   <button
                     type="submit"
-                    disabled={bookedSuccess}
-                    className="w-full bg-[#1D493E] hover:bg-[#16372f] text-white py-3.5 rounded-xl font-bold text-sm transition flex items-center justify-center gap-2 cursor-pointer shadow-sm"
+                    style={{
+                      backgroundColor: "rgba(29, 73, 62, 1)",
+                      width: "363px",
+                      height: "55px",
+                      borderRadius: "4px",
+                      border: "none",
+                      fontFamily: "Faktum, sans-serif",
+                      fontWeight: 500,
+                      fontSize: "18px",
+                      lineHeight: "100%",
+                      color: "#FFFFFF",
+                      boxSizing: "border-box",
+                    }}
+                    className="hover:opacity-95 transition-opacity cursor-pointer flex items-center justify-center gap-2"
                   >
                     {bookedSuccess ? (
                       <>
-                        <Check className="w-4 h-4" />
+                        <Check className="w-5 h-5" />
                         Added to Cart!
                       </>
                     ) : (
                       <>
-                        <Calendar className="w-4 h-4" />
+                        <Calendar style={{ width: "28px", height: "28px" }} className="shrink-0" />
                         Book this experience
                       </>
                     )}
                   </button>
-                </div>
-              </form>
+                </form>
 
-              {/* Save for later button */}
-              <button
-                type="button"
-                className="w-full border border-gray-200 text-gray-700 py-3.5 rounded-xl font-bold text-sm hover:bg-gray-50 hover:border-gray-400 transition cursor-pointer text-center block"
-              >
-                Save for later
-              </button>
+                <button
+                  type="button"
+                  style={{
+                    backgroundColor: "transparent",
+                    width: "363px",
+                    height: "55px",
+                    paddingTop: "16px",
+                    paddingBottom: "16px",
+                    paddingLeft: "32px",
+                    paddingRight: "32px",
+                    gap: "8px",
+                    borderRadius: "4px",
+                    border: "2px solid rgba(29, 73, 62, 1)",
+                    fontFamily: "Faktum, sans-serif",
+                    fontWeight: 500,
+                    fontSize: "18px",
+                    lineHeight: "100%",
+                    color: "rgba(29, 73, 62, 1)",
+                    boxSizing: "border-box",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                  className="hover:bg-[#1D493E]/5 transition cursor-pointer"
+                >
+                  Save for later
+                </button>
+              </div>
 
               {/* Inclusions features badge lists */}
-              <div className="grid grid-cols-3 gap-2 pt-4 border-t border-gray-100 text-center text-[9px] font-bold text-gray-400 uppercase font-mono">
-                <div className="flex flex-col items-center gap-1.5">
-                  <Lock className="w-4 h-4 text-gray-400" />
-                  <span>Safe & Secure</span>
+              <div className="grid grid-cols-3 gap-2 pt-2 text-center">
+                <div className="flex flex-col items-center gap-2">
+                  <div 
+                    style={{ 
+                      width: "48px", 
+                      height: "48px", 
+                      borderRadius: "12px", 
+                      backgroundColor: "rgba(247, 245, 240, 1)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                    className="shrink-0"
+                  >
+                    <Lock className="w-5 h-5 text-[#2B2B2B]" />
+                  </div>
+                  <span 
+                    style={{
+                      fontFamily: "Faktum, sans-serif",
+                      fontWeight: 500,
+                      fontSize: "16px",
+                      lineHeight: "100%",
+                      color: "rgba(43, 43, 43, 1)",
+                    }}
+                    className="font-sans"
+                  >
+                    Safe & Secure
+                  </span>
                 </div>
-                <div className="flex flex-col items-center gap-1.5">
-                  <Users className="w-4 h-4 text-gray-400" />
-                  <span>24/7 Support</span>
+                <div className="flex flex-col items-center gap-2">
+                  <div 
+                    style={{ 
+                      width: "48px", 
+                      height: "48px", 
+                      borderRadius: "12px", 
+                      backgroundColor: "rgba(247, 245, 240, 1)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                    className="shrink-0"
+                  >
+                    <Clock className="w-5 h-5 text-[#2B2B2B]" />
+                  </div>
+                  <span 
+                    style={{
+                      fontFamily: "Faktum, sans-serif",
+                      fontWeight: 500,
+                      fontSize: "16px",
+                      lineHeight: "100%",
+                      color: "rgba(43, 43, 43, 1)",
+                    }}
+                    className="font-sans"
+                  >
+                    24/7 Support
+                  </span>
                 </div>
-                <div className="flex flex-col items-center gap-1.5">
-                  <Star className="w-4 h-4 text-gray-400" />
-                  <span>{pkg.rating.toFixed(1)}/5 Rating</span>
+                <div className="flex flex-col items-center gap-2">
+                  <div 
+                    style={{ 
+                      width: "48px", 
+                      height: "48px", 
+                      borderRadius: "12px", 
+                      backgroundColor: "rgba(247, 245, 240, 1)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                    className="shrink-0"
+                  >
+                    <Star className="w-5 h-5 text-[#2B2B2B]" />
+                  </div>
+                  <span 
+                    style={{
+                      fontFamily: "Faktum, sans-serif",
+                      fontWeight: 500,
+                      fontSize: "16px",
+                      lineHeight: "100%",
+                      color: "rgba(43, 43, 43, 1)",
+                    }}
+                    className="font-sans"
+                  >
+                    {pkg.rating.toFixed(1)}/5 Rating
+                  </span>
                 </div>
               </div>
 
               {/* Free Cancellation text */}
-              <span className="text-[10px] text-gray-400 font-semibold block text-center pt-1">
+              <span 
+                style={{
+                  fontFamily: "Faktum, sans-serif",
+                  fontWeight: 500,
+                  fontSize: "12px",
+                  color: "rgba(141, 141, 141, 1)",
+                  textAlign: "center",
+                  display: "block",
+                  marginTop: "8px",
+                }}
+                className="font-sans"
+              >
                 Free cancellation • 14 days before departure
               </span>
             </div>
@@ -1118,49 +1762,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
         </section>
       )}
 
-      {/* 11. FAQ ACCORDION SECTION (Matching Home/Shop page design) */}
-      <section className="w-full md:w-[1440px] bg-white rounded-[4px] py-16 md:px-[80px] px-6 flex flex-col gap-[32px] mx-auto border-t border-gray-100 relative z-10">
-        {/* Header (Width: 1280px, Height: 90px, Gap: 12px) */}
-        <div className="w-full md:w-[1280px] md:h-[90px] flex flex-col gap-[12px] justify-center text-left mx-auto">
-          <div className="w-[54px] h-[26px] flex items-center justify-center bg-[#FFEBE5] rounded-[4px]">
-            <span className="w-[46px] h-[18px] flex items-center justify-center font-sans font-semibold text-[14px] leading-none tracking-[1.2px] text-[#FF623E] uppercase font-mono">
-              FAQ'S
-            </span>
-          </div>
-          <h2 className="w-full md:w-[541px] md:h-[52px] flex items-center font-serif font-semibold text-[42px] leading-[1] tracking-[0px] text-[#2B2B2B]">
-            Frequently asked questions
-          </h2>
-        </div>
 
-        {/* Accordion List */}
-        <div className="w-full md:w-[1280px] border-t border-slate-200 divide-y divide-slate-200 mx-auto">
-          {faqs.map((faq: any, idx: number) => {
-            const isOpen = openFaqIdx === idx;
-            return (
-              <div key={idx} className="py-5 text-left border-b border-slate-200">
-                <button
-                  type="button"
-                  onClick={() => setOpenFaqIdx(isOpen ? null : idx)}
-                  className="w-full flex justify-between items-center text-left gap-4 cursor-pointer group"
-                >
-                  <span className="w-full md:w-[1196px] h-[32px] flex items-center font-sans font-medium text-[20px] leading-[32px] tracking-[0px] text-[#2B2B2B]">
-                    {faq.q}
-                  </span>
-                  <span className="text-xl font-medium text-[#1D493E] shrink-0 leading-none select-none">
-                    {isOpen ? '—' : '+'}
-                  </span>
-                </button>
-                {/* Expandable answer */}
-                {isOpen && (
-                  <p className="mt-3 w-full md:w-[1196px] font-sans font-medium text-[20px] leading-[32px] tracking-[0px] text-[#8D8D8D] animate-fade-in">
-                    {faq.a}
-                  </p>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      </section>
 
       {/* Newsletter / Booking CTA Banner (Matching Home page section design) */}
       <section

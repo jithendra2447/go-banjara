@@ -338,16 +338,18 @@ export default function Homepage() {
       </div>
 
       {/* 1.5 BIKER LAYER (z-40, sits on top of metrics bar z-30 to overlap tyres, matches background proportions exactly) */}
-      <div className="absolute inset-x-0 top-0 h-[720px] pointer-events-none z-40">
-        <img 
-          src="/hero-bike.png?v=5" 
-          alt="Biker" 
-          className="absolute inset-0 w-full h-full object-cover object-top"
-          style={{ 
-            imageRendering: '-webkit-optimize-contrast',
-            transform: 'translateZ(0)'
-          }}
-        />
+      <div className="absolute inset-x-0 top-0 h-[600px] md:h-[601px] pointer-events-none z-40 overflow-visible">
+        <div className="absolute inset-0 overflow-visible z-10">
+          <img 
+            src="/hero-bike.png?v=5" 
+            alt="Biker" 
+            className="absolute inset-x-0 top-0 w-full h-[112%] object-cover object-top"
+            style={{ 
+              imageRendering: '-webkit-optimize-contrast',
+              transform: 'translateZ(0)'
+            }}
+          />
+        </div>
       </div>
 
 

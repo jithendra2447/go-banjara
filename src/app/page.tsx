@@ -355,8 +355,8 @@ export default function Homepage() {
 
 
       {/* 2. HERO CONTENT SECTION (Transparent background, relative z-[45] to sit on top of everything, but below navbar z-50) */}
-      <section className="relative hero-banner-height flex flex-col justify-center z-[45] bg-transparent">
-        <div className="max-w-[1440px] mx-auto px-6 md:px-20 w-full grid md:grid-cols-2 gap-12 items-center relative py-4">
+      <section className="relative hero-banner-height flex flex-col justify-start z-[45] bg-transparent">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-20 w-full grid md:grid-cols-2 gap-12 items-center relative pt-[200px] pb-4">
           <div className="w-full md:w-[454px] md:h-[475px] flex flex-col gap-[52px] text-left shrink-0">
             <div className="w-full md:w-[454px] md:h-[368px] flex flex-col gap-[32px] justify-start shrink-0">
               <h1 className="text-4xl md:text-[62px] md:leading-[1.25] tracking-[-0.2px] font-semibold text-white font-sans w-full md:w-[454px] md:h-[234px] shrink-0">
@@ -425,7 +425,7 @@ export default function Homepage() {
       </section>
 
       {/* 2. METRICS WIDGET BAR */}
-      <section style={{ background: "rgba(255,255,255,1)" }} className="relative z-30 flex items-center w-full md:h-[145px]">
+      <section style={{ background: "rgba(255,255,255,1)", marginTop: "-35px" }} className="relative z-30 flex items-center w-full md:h-[145px]">
         <div
           className="w-full max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between"
           style={{ paddingTop: "24px", paddingBottom: "24px", paddingLeft: "80px", paddingRight: "80px" }}

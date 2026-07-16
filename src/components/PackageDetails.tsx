@@ -786,8 +786,19 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
               </div>
 
               {/* Rating summary */}
-              <div className="flex flex-col gap-2 items-start mt-2">
-                <div className="flex items-center gap-3">
+              <div 
+                style={{
+                  width: "100%",
+                  maxWidth: "837px",
+                  height: "67px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  alignItems: "flex-start",
+                }}
+                className="text-left"
+              >
+                <div className="flex items-center gap-3 h-[30px]">
                   <div className="flex text-[#E05434] gap-1">
                     {[...Array(5)].map((_, i) => (
                       <Star
@@ -805,6 +816,9 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                       fontSize: "20px",
                       lineHeight: "100%",
                       color: "rgba(43, 43, 43, 1)",
+                      height: "30px",
+                      display: "inline-flex",
+                      alignItems: "center",
                     }}
                     className="leading-none"
                   >

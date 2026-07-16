@@ -368,7 +368,7 @@ export default function Homepage() {
                 {pageContent.heroSubtitle?.trim() ? pageContent.heroSubtitle : "We bridge the gap between soulful Indian travel and high end gear. curated for those who find home in the dust of the road"}
               </p>
             </div>
-            <div className="flex items-center gap-[24px] w-full md:w-[412px] h-[55px] justify-start shrink-0">
+            <div className="flex items-center gap-[24px] w-full md:w-[412px] h-[55px] justify-start shrink-0 md:translate-y-[30px]">
               <Link 
                 href="/shop"
                 className="hover:scale-[1.02] active:scale-[0.98] text-white border border-[#1D493E] transition-all duration-300 cursor-pointer flex items-center justify-center"

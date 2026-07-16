@@ -541,7 +541,7 @@ export default function Homepage() {
                   boxSizing: "border-box"
                 }}
               >
-                <span>Book a Trip</span>
+                <span>Find the Route</span>
                 <ArrowUpRight className="w-5 h-5" />
               </Link>
             </div>

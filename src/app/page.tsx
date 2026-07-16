@@ -304,6 +304,7 @@ export default function Homepage() {
               transform: 'translateZ(0)'
             }}
           />
+
           {/* Layer 1.5: User's Grey Overlay Layer */}
           <img 
             src="/hero-overlay.png" 
@@ -326,21 +327,13 @@ export default function Homepage() {
             }}
           />
 
-          {/* Layer 2: Dark Overlay (rgba(43, 43, 43, 0.54), height: 601px) */}
+          {/* Layer 2: White Gradient Fade (Positioned behind/back side of the bike to transition to the metrics section) */}
           <div 
-            className="absolute inset-x-0 top-0 w-full h-[601px] pointer-events-none"
-            style={{ backgroundColor: "rgba(43, 43, 43, 0.54)" }}
-          />
-
-          {/* Layer 1: White Gradient Fade (height: 601px, transitions to white at the bottom) */}
-          <div 
-            className="absolute inset-x-0 top-0 w-full h-[601px] pointer-events-none" 
+            className="absolute inset-x-0 bottom-0 h-[20px] z-20 pointer-events-none" 
             style={{ 
-              background: "linear-gradient(360deg, #FFFFFF 2.79%, rgba(255, 255, 255, 0) 20%)" 
+              background: 'linear-gradient(to top, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0) 100%)' 
             }}
           />
-
-
         </div>
       </div>
 
@@ -359,9 +352,11 @@ export default function Homepage() {
         </div>
       </div>
 
+
+
       {/* 2. HERO CONTENT SECTION (Transparent background, relative z-[45] to sit on top of everything, but below navbar z-50) */}
-      <section className="relative hero-banner-height flex flex-col justify-end z-[45] bg-transparent">
-        <div className="max-w-[1440px] mx-auto px-6 md:px-20 w-full grid md:grid-cols-2 gap-[24px] items-center relative pt-4 pb-[50px]">
+      <section className="relative hero-banner-height flex flex-col justify-center z-[45] bg-transparent">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-20 w-full grid md:grid-cols-2 gap-12 items-center relative py-4">
           <div className="w-full md:w-[454px] md:h-[530px] flex flex-col justify-between text-left shrink-0">
             <div className="w-full md:w-[454px] md:h-[368px] flex flex-col gap-[32px] justify-start shrink-0">
               <h1 className="text-4xl md:text-[62px] md:leading-[1.25] tracking-[-0.2px] font-semibold text-white font-sans w-full md:w-[454px] md:h-[234px] shrink-0">
@@ -376,26 +371,25 @@ export default function Homepage() {
             <div className="flex items-center gap-[24px] w-full md:w-[412px] h-[55px] justify-start shrink-0">
               <Link 
                 href="/shop"
-                className="hover:bg-[#15352D] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 cursor-pointer flex items-center justify-center"
+                className="hover:scale-[1.02] active:scale-[0.98] text-white border border-[#1D493E] transition-all duration-300 cursor-pointer flex items-center justify-center"
                 style={{
-                  width: "150px",
+                  width: "194px",
                   height: "55px",
                   paddingTop: "16px",
                   paddingBottom: "16px",
-                  paddingLeft: "32px",
-                  paddingRight: "32px",
+                  paddingLeft: "12px",
+                  paddingRight: "12px",
                   gap: "8px",
                   borderRadius: "4px",
-                  background: "rgba(29, 73, 62, 1)",
-                  color: "white",
+                  background: "#1D493E",
                   fontFamily: "'Faktum','Outfit',sans-serif",
                   fontWeight: 500,
-                  fontSize: "18px",
+                  fontSize: "16px",
                   lineHeight: "100%",
                   letterSpacing: "0px",
                   textDecoration: "none",
                   boxSizing: "border-box",
-                  border: "none",
+                  whiteSpace: "nowrap",
                 }}
               >
                 {pageContent.heroShopBtn?.trim() ? pageContent.heroShopBtn : "Shop Now"}
@@ -404,12 +398,12 @@ export default function Homepage() {
                 href="/travel"
                 className="hover:bg-[#1D493E] hover:text-white hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 cursor-pointer flex items-center justify-center"
                 style={{
-                  width: "237px",
+                  width: "194px",
                   height: "55px",
                   paddingTop: "16px",
                   paddingBottom: "16px",
-                  paddingLeft: "32px",
-                  paddingRight: "32px",
+                  paddingLeft: "12px",
+                  paddingRight: "12px",
                   gap: "8px",
                   borderRadius: "4px",
                   border: "2px solid rgba(29, 73, 62, 1)",
@@ -417,11 +411,12 @@ export default function Homepage() {
                   color: "rgba(29,73,62,1)",
                   fontFamily: "'Faktum','Outfit',sans-serif",
                   fontWeight: 500,
-                  fontSize: "18px",
+                  fontSize: "16px",
                   lineHeight: "100%",
                   letterSpacing: "0px",
                   textDecoration: "none",
                   boxSizing: "border-box",
+                  whiteSpace: "nowrap",
                 }}
               >
                 {pageContent.heroTravelBtn?.trim() ? pageContent.heroTravelBtn : "See Travel Packages"}
@@ -480,29 +475,11 @@ export default function Homepage() {
             <div className="relative z-10">
               <Link 
                 href="/shop" 
-                className="inline-flex items-center justify-center hover:bg-white/30 transition-all duration-300 cursor-pointer text-center w-full md:w-[576px]"
-                style={{ 
-                  color: "rgba(255,255,255,1)", 
-                  fontFamily: "'Faktum','Outfit',sans-serif", 
-                  fontWeight: 500, 
-                  fontSize: "18px", 
-                  lineHeight: "100%", 
-                  letterSpacing: "0px", 
-                  verticalAlign: "middle", 
-                  textDecoration: "none",
-                  height: "48px",
-                  paddingTop: "12px",
-                  paddingBottom: "12px",
-                  paddingLeft: "24px",
-                  paddingRight: "24px",
-                  gap: "8px",
-                  borderRadius: "4px",
-                  background: "rgba(255, 255, 255, 0.24)",
-                  boxSizing: "border-box"
-                }}
+                className="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-xl bg-white/10 hover:bg-white/15 transition-all duration-300 cursor-pointer text-center"
+                style={{ color: "rgba(255,255,255,1)", fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "16px", lineHeight: "100%", letterSpacing: "0px", verticalAlign: "middle", textDecoration: "none" }}
               >
                 <span>Explore Collections</span>
-                <ArrowUpRight className="w-5 h-5" />
+                <ArrowUpRight className="w-4 h-4" />
               </Link>
             </div>
           </div>
@@ -520,29 +497,11 @@ export default function Homepage() {
             <div className="relative z-10">
               <Link 
                 href="/travel" 
-                className="inline-flex items-center justify-center hover:bg-white/30 transition-all duration-300 cursor-pointer text-center w-full md:w-[576px]"
-                style={{ 
-                  color: "rgba(255,255,255,1)", 
-                  fontFamily: "'Faktum','Outfit',sans-serif", 
-                  fontWeight: 500, 
-                  fontSize: "18px", 
-                  lineHeight: "100%", 
-                  letterSpacing: "0px", 
-                  verticalAlign: "middle", 
-                  textDecoration: "none",
-                  height: "48px",
-                  paddingTop: "12px",
-                  paddingBottom: "12px",
-                  paddingLeft: "24px",
-                  paddingRight: "24px",
-                  gap: "8px",
-                  borderRadius: "4px",
-                  background: "rgba(255, 255, 255, 0.24)",
-                  boxSizing: "border-box"
-                }}
+                className="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-xl bg-white/15 hover:bg-white/25 transition-all duration-300 cursor-pointer text-center"
+                style={{ color: "rgba(255,255,255,1)", fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "16px", lineHeight: "100%", letterSpacing: "0px", verticalAlign: "middle", textDecoration: "none" }}
               >
                 <span>Find the Route</span>
-                <ArrowUpRight className="w-5 h-5" />
+                <ArrowUpRight className="w-4 h-4" />
               </Link>
             </div>
           </div>

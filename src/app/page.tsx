@@ -376,33 +376,9 @@ export default function Homepage() {
             <div className="flex items-center gap-[24px] w-full md:w-[412px] h-[55px] justify-start shrink-0">
               <Link 
                 href="/shop"
-                className="hover:scale-[1.02] active:scale-[0.98] text-white border border-[#1D493E] transition-all duration-300 cursor-pointer flex items-center justify-center"
-                style={{
-                  width: "150px",
-                  height: "55px",
-                  paddingTop: "16px",
-                  paddingBottom: "16px",
-                  paddingLeft: "32px",
-                  paddingRight: "32px",
-                  gap: "8px",
-                  borderRadius: "4px",
-                  background: "#1D493E",
-                  fontFamily: "'Faktum','Outfit',sans-serif",
-                  fontWeight: 500,
-                  fontSize: "18px",
-                  lineHeight: "100%",
-                  letterSpacing: "0px",
-                  textDecoration: "none",
-                  boxSizing: "border-box",
-                }}
-              >
-                {pageContent.heroShopBtn?.trim() ? pageContent.heroShopBtn : "Shop Now"}
-              </Link>
-              <Link 
-                href="/travel"
                 className="hover:bg-[#1D493E] hover:text-white hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 cursor-pointer flex items-center justify-center"
                 style={{
-                  width: "237px",
+                  width: "150px",
                   height: "55px",
                   paddingTop: "16px",
                   paddingBottom: "16px",
@@ -420,6 +396,32 @@ export default function Homepage() {
                   letterSpacing: "0px",
                   textDecoration: "none",
                   boxSizing: "border-box",
+                }}
+              >
+                {pageContent.heroShopBtn?.trim() ? pageContent.heroShopBtn : "Shop Now"}
+              </Link>
+              <Link 
+                href="/travel"
+                className="hover:bg-[#15352D] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 cursor-pointer flex items-center justify-center"
+                style={{
+                  width: "237px",
+                  height: "55px",
+                  paddingTop: "16px",
+                  paddingBottom: "16px",
+                  paddingLeft: "32px",
+                  paddingRight: "32px",
+                  gap: "8px",
+                  borderRadius: "4px",
+                  background: "rgba(29, 73, 62, 1)",
+                  color: "white",
+                  fontFamily: "'Faktum','Outfit',sans-serif",
+                  fontWeight: 500,
+                  fontSize: "18px",
+                  lineHeight: "100%",
+                  letterSpacing: "0px",
+                  textDecoration: "none",
+                  boxSizing: "border-box",
+                  border: "none",
                 }}
               >
                 {pageContent.heroTravelBtn?.trim() ? pageContent.heroTravelBtn : "See Travel Packages"}

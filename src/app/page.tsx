@@ -359,7 +359,7 @@ export default function Homepage() {
         <div className="max-w-[1440px] mx-auto px-6 md:px-20 w-full grid md:grid-cols-2 gap-12 items-center relative py-4">
           <div className="w-full md:w-[454px] md:h-[530px] flex flex-col justify-between text-left shrink-0">
             <div className="w-full md:w-[454px] md:h-[368px] flex flex-col gap-[32px] justify-start shrink-0">
-              <h1 className="text-4xl md:text-[62px] md:leading-[1.25] tracking-[-0.2px] font-semibold text-white font-sans w-full md:w-[454px] md:h-[234px] shrink-0">
+              <h1 className="text-4xl md:text-[62px] md:leading-[1.38] tracking-[-0.2px] font-semibold text-white font-sans w-full md:w-[454px] md:h-auto shrink-0">
                 {pageContent.heroTitleLine1?.trim() ? pageContent.heroTitleLine1 : "Hey! Let’s"} <br />
                 {pageContent.heroTitleLine2?.trim() ? pageContent.heroTitleLine2 : "Escape from"} <br />
                 {pageContent.heroTitleLine3?.trim() ? pageContent.heroTitleLine3 : "the Ordinary"}

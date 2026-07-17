@@ -414,7 +414,7 @@ export default function HolidaysPortal() {
           <div className="w-full flex flex-col md:flex-row gap-6 items-stretch md:items-center">
             
             {/* Field 1: Destination */}
-            <div className="flex-1 flex flex-col gap-2">
+            <div className="flex-1 md:flex-[1] flex flex-col gap-2">
               <label style={{ 
                 fontFamily: "'Faktum', 'Outfit', sans-serif", 
                 fontWeight: 500, 
@@ -462,7 +462,7 @@ export default function HolidaysPortal() {
             </div>
 
             {/* Field 2: Date Range */}
-            <div className="flex-1 flex flex-col gap-2">
+            <div className="flex-1 md:flex-[1.8] flex flex-col gap-2">
               <label style={{ 
                 fontFamily: "'Faktum', 'Outfit', sans-serif", 
                 fontWeight: 500, 
@@ -569,7 +569,7 @@ export default function HolidaysPortal() {
             </div>
 
             {/* Field 3: No of Travelers */}
-            <div className="flex-1 flex flex-col gap-2">
+            <div className="flex-1 md:flex-[1] flex flex-col gap-2">
               <label style={{ 
                 fontFamily: "'Faktum', 'Outfit', sans-serif", 
                 fontWeight: 500, 

@@ -454,8 +454,8 @@ export default function ProductDetailsPage() {
               fontSize: "24px",
               lineHeight: "32px",
               letterSpacing: "0px",
-              color: "rgba(63, 136, 255, 1)",
-              textDecoration: "underline",
+              color: "rgba(29, 73, 62, 1)",
+              textDecoration: "none",
             }}
             className="text-base md:text-[24px]"
           >
@@ -569,9 +569,6 @@ export default function ProductDetailsPage() {
             style={{
               width: "100%",
               maxWidth: "624px",
-              padding: "24px",
-              borderRadius: "4px",
-              border: "1px solid rgba(204, 204, 204, 1)",
               backgroundColor: "rgba(255, 255, 255, 1)",
               display: "flex",
               flexDirection: "column",
@@ -579,7 +576,7 @@ export default function ProductDetailsPage() {
               boxSizing: "border-box",
               opacity: 1,
             }}
-            className="w-full h-auto md:h-[1050.6888427734375px] text-left font-sans text-[#2B2B2B]"
+            className="w-full h-auto md:h-[1050.6888427734375px] text-left font-sans text-[#2B2B2B] p-4 md:p-[24px] rounded-none md:rounded-[4px] border-0 md:border border-[rgba(204,204,204,1)]"
           >
             {/* Title & Tag Row */}
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
@@ -742,11 +739,11 @@ export default function ProductDetailsPage() {
                 >
                   <path 
                     d="M4 5h3l2 11h11l2.5-9H14" 
-                    className="stroke-[#2B2B2B] group-hover:stroke-white transition-colors duration-300"
+                    className="stroke-[#1D493E] group-hover:stroke-white transition-colors duration-300"
                   />
                   <path 
                     d="M7.8 8.5H9.5" 
-                    className="stroke-[#2B2B2B] group-hover:stroke-white transition-colors duration-300"
+                    className="stroke-[#1D493E] group-hover:stroke-white transition-colors duration-300"
                   />
                   <circle 
                     cx="10.5" 
@@ -839,7 +836,7 @@ export default function ProductDetailsPage() {
                 </button>
               </div>
               <span style={{ fontFamily: "Faktum, sans-serif", fontSize: "12px", color: "rgba(141, 141, 141, 1)", fontWeight: 500 }}>
-                Enter the pin code to know when it got delivered to our door step
+                Enter your pincode to know when it will be delivered to your doorstep
               </span>
               {pincodeMessage ? (
                 <span style={{ fontFamily: "Faktum, sans-serif", fontSize: "14px", fontWeight: 600, color: pincodeMessage.startsWith('✓') ? "#10B981" : "#EF4444" }}>

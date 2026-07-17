@@ -64,30 +64,10 @@ export const Navbar: React.FC = () => {
             </Link>
 
             {/* Desktop Menu Links */}
-            <div className="hidden xl:flex items-center justify-between w-[605px] h-[49px]">
+            <div className="hidden xl:flex items-center gap-[10px] lg:gap-[16px] h-[49px]">
               {navLinks.map((link) => {
                 const active = isActive(link.path);
                 
-                // Determine exact width of wrapper container for each menu item
-                let wrapperWidthClass = 'w-[119px]';
-                let contentWidthClass = 'w-[95px]';
-                if (link.name === 'Travel Packages') {
-                  wrapperWidthClass = 'w-[174px]';
-                  contentWidthClass = 'w-[150px]';
-                } else if (link.name === 'Shop') {
-                  wrapperWidthClass = 'w-[86px]';
-                  contentWidthClass = 'w-[62px]';
-                } else if (link.name === 'About us') {
-                  wrapperWidthClass = 'w-[119px]';
-                  contentWidthClass = 'w-[95px]';
-                } else if (link.name === 'Blogs') {
-                  wrapperWidthClass = 'w-[87px]';
-                  contentWidthClass = 'w-[63px]';
-                } else if (link.name === 'Contact us') {
-                  wrapperWidthClass = 'w-[139px]';
-                  contentWidthClass = 'w-[115px]';
-                }
-
                 const activeClass = active
                   ? 'bg-[#1D493E]/8 text-[#1D493E]'
                   : 'text-[#535352] hover:text-[#1D493E] hover:bg-gray-50';
@@ -96,10 +76,10 @@ export const Navbar: React.FC = () => {
                   <Link
                     key={link.path}
                     href={link.path}
-                    className={`flex items-center justify-center p-[12px] h-[49px] rounded-[4px] transition-all duration-300 ${wrapperWidthClass} ${activeClass}`}
+                    className={`flex items-center justify-center px-[16px] py-[12px] h-[49px] rounded-[4px] transition-all duration-300 w-auto ${activeClass}`}
                   >
                     <span
-                      className={`flex items-center justify-center h-[25px] text-center ${contentWidthClass}`}
+                      className="flex items-center justify-center h-[25px] text-center w-auto whitespace-nowrap"
                       style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", verticalAlign: "middle" }}
                     >
                       {link.name}
@@ -111,7 +91,7 @@ export const Navbar: React.FC = () => {
           </div>
 
           {/* Right actions: Search Bar, Cart & Login */}
-          <div className="flex items-center justify-end gap-3 md:gap-[24px] w-auto md:w-[405px] h-[47px] shrink-0">
+          <div className="flex items-center justify-end gap-3 md:gap-[16px] xl:gap-[24px] h-[47px] shrink-0">
             
             {/* Search Input Box */}
             <div className="hidden md:flex items-center w-[215px] h-[47px] gap-[8px] rounded-[4px] p-[12px] bg-white border border-[#CCCCCC]">

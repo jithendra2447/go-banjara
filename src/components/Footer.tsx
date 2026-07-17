@@ -162,12 +162,7 @@ export const Footer: React.FC = () => {
 
         {/* Copyrights Bar */}
         <div
-          style={{
-            width: "100%",
-            maxWidth: "1280px",
-            display: "flex",
-          }}
-          className="w-full flex flex-col sm:flex-row justify-between items-center gap-4 py-4"
+          className="w-full max-w-[1280px] flex flex-col sm:flex-row justify-between items-center gap-4 py-4"
         >
           <span
             style={{

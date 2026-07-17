@@ -1917,21 +1917,21 @@ export default function HolidaysPortal() {
       </section>
 
       {/* 3.5 FAQ ACCORDION SECTION (Matching Home page fonts and styles) */}
-      <section className="w-full md:w-[1440px] bg-white rounded-[4px] py-16 md:px-[80px] px-6 flex flex-col gap-[32px] mx-auto border-t border-gray-100 relative z-10">
-        {/* Header (Width: 1280px, Height: 90px, Gap: 12px) */}
-        <div className="w-full md:w-[1280px] md:h-[90px] flex flex-col gap-[12px] justify-center text-left mx-auto">
+      <section className="w-full max-w-[1440px] bg-white rounded-[4px] py-16 md:px-[80px] px-6 flex flex-col gap-[32px] mx-auto border-t border-gray-100 relative z-10">
+        {/* Header */}
+        <div className="w-full max-w-[1280px] h-auto flex flex-col gap-[12px] justify-center text-left mx-auto">
           <div className="w-[54px] h-[26px] flex items-center justify-center bg-[#FFEBE5] rounded-[4px]">
             <span className="w-[46px] h-[18px] flex items-center justify-center font-sans font-semibold text-[14px] leading-none tracking-[1.2px] text-[#FF623E] uppercase font-mono">
               FAQ'S
             </span>
           </div>
-          <h2 className="w-full md:w-[541px] md:h-[52px] flex items-center font-serif font-semibold text-[42px] leading-[1] tracking-[0px] text-[#2B2B2B]">
+          <h2 className="w-full max-w-[541px] h-auto flex items-center font-serif font-semibold text-[32px] md:text-[42px] leading-[1] tracking-[0px] text-[#2B2B2B] py-2">
             Frequently asked questions
           </h2>
         </div>
 
         {/* Accordion List */}
-        <div className="w-full md:w-[1280px] border-t border-slate-200 divide-y divide-slate-200 mx-auto">
+        <div className="w-full max-w-[1280px] border-t border-slate-200 divide-y divide-slate-200 mx-auto">
           {FAQ_ITEMS.map((item, idx) => {
             const isOpen = openFaqIndex === idx;
             return (
@@ -1941,7 +1941,7 @@ export default function HolidaysPortal() {
                   onClick={() => toggleFaq(idx)}
                   className="w-full flex justify-between items-center text-left gap-4 cursor-pointer group"
                 >
-                  <span className="w-full md:w-[1196px] h-[32px] flex items-center font-sans font-medium text-[20px] leading-[32px] tracking-[0px] text-[#2B2B2B]">
+                  <span className="w-full max-w-[1196px] flex items-center font-sans font-medium text-base sm:text-lg md:text-[20px] leading-tight md:leading-[32px] tracking-[0px] text-[#2B2B2B]">
                     {item.question}
                   </span>
                   <span className="text-xl font-medium text-[#1D493E] shrink-0 leading-none select-none">
@@ -1950,7 +1950,7 @@ export default function HolidaysPortal() {
                 </button>
                 {/* Expandable answer */}
                 {isOpen && (
-                  <p className="mt-3 w-full md:w-[1196px] font-sans font-medium text-[20px] leading-[32px] tracking-[0px] text-[#8D8D8D] animate-fade-in">
+                  <p className="mt-3 w-full max-w-[1196px] font-sans font-medium text-sm sm:text-base md:text-[20px] leading-relaxed md:leading-[32px] tracking-[0px] text-[#8D8D8D] animate-fade-in">
                     {item.answer}
                   </p>
                 )}
@@ -1966,12 +1966,10 @@ export default function HolidaysPortal() {
           width: "100%",
           paddingTop: "42px",
           paddingBottom: "42px",
-          paddingLeft: "80px",
-          paddingRight: "80px",
           background: "#FFFFFF",
           borderTop: "1px solid rgba(29, 73, 62, 0.1)",
         }}
-        className="relative z-10"
+        className="relative z-10 px-6 md:px-20"
       >
         <div
           style={{
@@ -1985,44 +1983,43 @@ export default function HolidaysPortal() {
           }}
         >
           {/* Text block */}
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
-            {/* Heading: Fraunces SemiBold 42px, lh 100%, #2B2B2B */}
+          <div className="flex flex-col items-center gap-[12px] w-full">
+            {/* Heading */}
             <h2
               style={{
                 fontFamily: "Fraunces, serif",
                 fontWeight: 600,
-                fontSize: "42px",
-                lineHeight: "100%",
+                lineHeight: "1.2",
                 letterSpacing: "0px",
                 textAlign: "center",
                 color: "#2B2B2B",
                 maxWidth: "1280px",
                 margin: 0,
               }}
+              className="text-2xl sm:text-3xl md:text-[42px]"
             >
               The{" "}
               <span style={{ color: "#FF5A36" }}>best adventures</span>{" "}
               find their way to your inbox.
             </h2>
-            {/* Subtitle: Faktum Medium 24px, lh 32px, rgba(43,43,43,1) */}
+            {/* Subtitle */}
             <p
               style={{
                 fontFamily: "Faktum, sans-serif",
                 fontWeight: 500,
-                fontSize: "24px",
-                lineHeight: "32px",
                 letterSpacing: "0px",
                 textAlign: "center",
                 color: "rgba(43, 43, 43, 1)",
                 maxWidth: "1280px",
                 margin: 0,
               }}
+              className="text-sm sm:text-base md:text-[24px] leading-relaxed md:leading-[32px]"
             >
               Hidden places, exclusive trip drops, curated gear, and stories from the road delivered before anyone else hears about them.
             </p>
           </div>
 
-          {/* Button: 286×55, pt-16 pr-32 pb-16 pl-32, radius-4, bg #1D493E */}
+          {/* Button */}
           <button
             type="button"
             onClick={() => {
@@ -2032,7 +2029,6 @@ export default function HolidaysPortal() {
               }
             }}
             style={{
-              width: "286px",
               height: "55px",
               paddingTop: "16px",
               paddingBottom: "16px",
@@ -2053,7 +2049,7 @@ export default function HolidaysPortal() {
               transition: "opacity 0.2s",
               cursor: "pointer",
             }}
-            className="hover:opacity-90 inline-flex items-center gap-2"
+            className="hover:opacity-90 inline-flex items-center gap-2 w-full max-w-[286px]"
           >
             <span>Reserve your tour now</span>
             <span className="text-lg font-sans">↗</span>

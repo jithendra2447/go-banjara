@@ -149,24 +149,42 @@ export default function ShopPage() {
 
   return (
     <div className="bg-white min-h-screen pb-24 flex flex-col items-center">
-      {/* Header Section (Width: 1440px, Height: 252px, Padding: 62px 80px 24px 80px, Background: white) */}
-      <header style={{ width: "100%", maxWidth: "1440px", height: "252px", paddingTop: "62px", paddingBottom: "24px", display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: "white", boxSizing: "border-box" }} className="mx-auto px-6 md:px-[80px]">
-        {/* Inner header container (Width: 1280px, Height: 166px, Justify: space-between, Background: white, Radius: 4px) */}
-        <div style={{ width: "100%", maxWidth: "1280px", height: "166px", display: "flex", flexDirection: "column", justifyContent: "space-between", alignItems: "center", backgroundColor: "white", borderRadius: "4px", boxSizing: "border-box" }}>
-          {/* Tag (Height: 18px, Font: Faktum 14px, Weight: 600, Color: #FF623E background, text uppercase, tracking 1.2px) */}
-          <div style={{ height: "18px", display: "flex", alignItems: "center", justifyContent: "center" }} className="shrink-0">
-            <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 600, fontSize: "14px", lineHeight: "100%", letterSpacing: "1.2px", textTransform: "uppercase", color: "rgba(255, 98, 62, 1)", backgroundColor: "rgba(255, 98, 62, 0.08)", padding: "2px 8px", borderRadius: "4px", display: "inline-flex", alignItems: "center", justifyContent: "center", height: "100%", whiteSpace: "nowrap" }}>
+      {/* Header Section */}
+      <header style={{ width: "100%", maxWidth: "1440px", display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: "white", boxSizing: "border-box" }} className="mx-auto px-6 md:px-[80px] pt-[40px] md:pt-[62px] pb-[24px]">
+        {/* Inner header container */}
+        <div className="w-full max-w-[1280px] flex flex-col items-center gap-[16px] md:gap-[24px] bg-white rounded-[4px] py-4 text-center shrink-0">
+          {/* Tag */}
+          <div className="h-[26px] flex items-center justify-center shrink-0 bg-[#FFEBE5] rounded-[4px] px-2.5">
+            <span className="font-sans font-semibold text-[14px] leading-none tracking-[1.2px] text-[#FF623E] uppercase whitespace-nowrap">
               Experience the Shopping
             </span>
           </div>
 
-          {/* Heading (Width: 1280px, Height: 52px, Font: Fraunces 42px, Weight: 600, Line-height: 100%, Color: #2B2B2B) */}
-          <h1 style={{ margin: 0, width: "100%", maxWidth: "1280px", height: "52px", fontFamily: "Fraunces, serif", fontWeight: 600, fontSize: "42px", lineHeight: "100%", color: "rgba(43, 43, 43, 1)", textAlign: "center", display: "flex", alignItems: "center", justifyContent: "center" }}>
+          {/* Heading */}
+          <h1
+            style={{
+              margin: 0,
+              fontFamily: "Fraunces, serif",
+              fontWeight: 600,
+              color: "rgba(43, 43, 43, 1)",
+              textAlign: "center",
+            }}
+            className="text-2xl sm:text-3xl md:text-[42px] leading-tight md:leading-[1.2] w-full max-w-[1280px]"
+          >
             Some journeys change where you go. Others change who you are.
           </h1>
 
-          {/* Subtitle (Width: 1280px, Height: 64px, Font: Faktum 24px, Weight: 500, Line-height: 32px, Color: #2B2B2B) */}
-          <p style={{ margin: 0, width: "100%", maxWidth: "1280px", height: "64px", fontFamily: "Faktum, sans-serif", fontWeight: 500, fontSize: "24px", lineHeight: "32px", color: "rgba(43, 43, 43, 1)", textAlign: "center", display: "flex", alignItems: "center", justifyContent: "center" }}>
+          {/* Subtitle */}
+          <p
+            style={{
+              margin: 0,
+              fontFamily: "Faktum, sans-serif",
+              fontWeight: 500,
+              color: "rgba(43, 43, 43, 1)",
+              textAlign: "center",
+            }}
+            className="text-sm sm:text-base md:text-[24px] leading-relaxed md:leading-[32px] w-full max-w-[900px]"
+          >
             Discover curated travel experiences, gear that keeps up with you, and a community of free-spirited explorers across India.
           </p>
         </div>

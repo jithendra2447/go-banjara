@@ -100,16 +100,21 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
           justifyContent: "center",
         }}
       >
-        <img 
-          src={images[activeImgIdx]} 
-          alt={product.name} 
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            imageRendering: '-webkit-optimize-contrast',
-          }}
-        />
+        <Link 
+          href={`/shop/product/${product.id}`}
+          style={{ width: "100%", height: "100%", display: "block" }}
+        >
+          <img 
+            src={images[activeImgIdx]} 
+            alt={product.name} 
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              imageRendering: '-webkit-optimize-contrast',
+            }}
+          />
+        </Link>
         {/* Dots indicator */}
         <div style={{ position: "absolute", bottom: "10px", left: "50%", transform: "translateX(-50%)", display: "flex", gap: "6px", zIndex: 10 }}>
           {images.map((_: string, dotIdx: number) => {

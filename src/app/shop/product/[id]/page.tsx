@@ -218,16 +218,173 @@ export default function ProductDetailsPage() {
 
   return (
     <div className="bg-white min-h-screen pb-24 flex flex-col items-center font-sans text-[#2B2B2B]">
-      {/* Breadcrumbs Header */}
-      <header className="max-w-[1440px] w-full text-left px-6 md:px-[80px] pt-[30px] pb-[10px]">
-        <div className="flex items-center gap-2 text-xs font-sans text-slate-400 font-semibold">
-          <Link href="/" className="hover:text-[#1D493E] transition-colors">Home</Link>
-          <span className="text-slate-350">&gt;</span>
-          <Link href="/shop" className="hover:text-[#1D493E] transition-colors">Shop Page</Link>
-          <span className="text-slate-350">&gt;</span>
-          <Link href="/shop/all" className="hover:text-[#1D493E] transition-colors">Product Categories</Link>
-          <span className="text-slate-350">&gt;</span>
-          <span className="text-[#2B2B2B] font-bold">{product.name}</span>
+      {/* Page Header (Width: 1440px, Height: 284px, pt-62, pb-24, px-80, Background: white) */}
+      <header 
+        style={{
+          width: "100%",
+          maxWidth: "1440px",
+          minHeight: "284px",
+          paddingTop: "62px",
+          paddingBottom: "24px",
+          background: "rgba(255, 255, 255, 1)",
+          display: "flex",
+          flexDirection: "column",
+          gap: "32px",
+          boxSizing: "border-box"
+        }}
+        className="px-6 md:px-[80px]"
+      >
+        {/* Text Block (Label, Title, Subtitle) */}
+        <div style={{ display: "flex", flexDirection: "column", gap: "10px", textAlign: "left" }}>
+          {/* Label: EXPERIENCE THE SHOPPING */}
+          <div className="w-max">
+            <span 
+              style={{
+                fontFamily: "Faktum, sans-serif",
+                fontWeight: 600,
+                fontSize: "14px",
+                letterSpacing: "1.2px",
+                color: "rgba(255, 98, 62, 1)",
+                backgroundColor: "rgba(255, 98, 62, 0.1)",
+                padding: "4px 10px",
+                borderRadius: "4px",
+                textTransform: "uppercase",
+              }}
+            >
+              Experience the Shopping
+            </span>
+          </div>
+
+          {/* Title: Shop Product in all Categories */}
+          <h1
+            style={{
+              fontFamily: "Fraunces, serif",
+              fontWeight: 600,
+              fontSize: "42px",
+              lineHeight: "100%",
+              letterSpacing: "0px",
+              color: "#2B2B2B",
+              margin: 0,
+            }}
+            className="text-3xl md:text-[42px]"
+          >
+            Shop Product in all <span style={{ color: "rgba(255, 98, 62, 1)" }}>Categories</span>
+          </h1>
+
+          {/* Subtitle */}
+          <p
+            style={{
+              fontFamily: "Faktum, sans-serif",
+              fontWeight: 500,
+              fontSize: "24px",
+              lineHeight: "32px",
+              letterSpacing: "0px",
+              color: "rgba(43, 43, 43, 1)",
+              margin: 0,
+            }}
+            className="text-lg md:text-[24px]"
+          >
+            Curated gear for the modern nomad. From durable journal covers to the stickers that tell your story
+          </p>
+        </div>
+
+        {/* Breadcrumbs Row */}
+        <div style={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: "12px", textAlign: "left" }}>
+          <Link
+            href="/"
+            style={{
+              fontFamily: "Faktum, sans-serif",
+              fontWeight: 500,
+              fontSize: "24px",
+              lineHeight: "32px",
+              letterSpacing: "0px",
+              color: "rgba(141, 141, 141, 1)",
+              textDecoration: "none",
+            }}
+            className="text-base md:text-[24px] hover:text-[#1D493E] transition-colors"
+          >
+            Home
+          </Link>
+          <span 
+            style={{
+              fontFamily: "Faktum, sans-serif",
+              fontWeight: 500,
+              fontSize: "24px",
+              lineHeight: "32px",
+              color: "rgba(141, 141, 141, 1)",
+            }}
+            className="text-base md:text-[24px]"
+          >
+            ›
+          </span>
+          <Link
+            href="/shop"
+            style={{
+              fontFamily: "Faktum, sans-serif",
+              fontWeight: 500,
+              fontSize: "24px",
+              lineHeight: "32px",
+              letterSpacing: "0px",
+              color: "rgba(141, 141, 141, 1)",
+              textDecoration: "none",
+            }}
+            className="text-base md:text-[24px] hover:text-[#1D493E] transition-colors"
+          >
+            Shop Page
+          </Link>
+          <span 
+            style={{
+              fontFamily: "Faktum, sans-serif",
+              fontWeight: 500,
+              fontSize: "24px",
+              lineHeight: "32px",
+              color: "rgba(141, 141, 141, 1)",
+            }}
+            className="text-base md:text-[24px]"
+          >
+            ›
+          </span>
+          <Link
+            href="/shop/all"
+            style={{
+              fontFamily: "Faktum, sans-serif",
+              fontWeight: 500,
+              fontSize: "24px",
+              lineHeight: "32px",
+              letterSpacing: "0px",
+              color: "rgba(141, 141, 141, 1)",
+              textDecoration: "none",
+            }}
+            className="text-base md:text-[24px] hover:text-[#1D493E] transition-colors"
+          >
+            Product Categories
+          </Link>
+          <span 
+            style={{
+              fontFamily: "Faktum, sans-serif",
+              fontWeight: 500,
+              fontSize: "24px",
+              lineHeight: "32px",
+              color: "rgba(141, 141, 141, 1)",
+            }}
+            className="text-base md:text-[24px]"
+          >
+            ›
+          </span>
+          <span
+            style={{
+              fontFamily: "Faktum, sans-serif",
+              fontWeight: 500,
+              fontSize: "24px",
+              lineHeight: "32px",
+              letterSpacing: "0px",
+              color: "rgba(63, 136, 255, 1)",
+              textDecoration: "underline",
+            }}
+            className="text-base md:text-[24px]"
+          >
+            {product.name}
+          </span>
         </div>
       </header>
 

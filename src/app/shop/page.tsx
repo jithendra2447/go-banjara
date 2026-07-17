@@ -149,24 +149,24 @@ export default function ShopPage() {
 
   return (
     <div className="bg-white min-h-screen pb-24 flex flex-col items-center">
-      {/* Header Section (Width: 1440px, Padding: 62px 80px 0px 80px) */}
-      <header className="w-full max-w-[1440px] mx-auto px-6 md:px-[80px] pt-[62px] pb-[10px] flex justify-center bg-white">
-        {/* Inner header container (Width: 1280px, Height: 166px, Gap: 12px, Background: white) */}
-        <div className="w-full max-w-[1280px] md:h-[166px] flex flex-col justify-between items-center gap-[12px] bg-white">
-          {/* Tag (Width: 222px, Height: 18px, Font: Faktum 14px, Weight: 600, Color: #FF623E background, text uppercase, tracking 1.2px) */}
-          <div className="flex items-center justify-center h-[18px]">
-            <span className="inline-flex items-center justify-center text-[#FF623E] bg-[#FF623E]/8 px-2.5 py-0.5 rounded-[4px] text-[14px] font-semibold uppercase tracking-[1.2px] leading-none h-full w-[222px]">
+      {/* Header Section (Width: 1440px, Height: 252px, Padding: 62px 80px 24px 80px, Background: white) */}
+      <header style={{ width: "100%", maxWidth: "1440px", height: "252px", paddingTop: "62px", paddingBottom: "24px", display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: "white", boxSizing: "border-box" }} className="mx-auto px-6 md:px-[80px]">
+        {/* Inner header container (Width: 1280px, Height: 166px, Justify: space-between, Background: white, Radius: 4px) */}
+        <div style={{ width: "100%", maxWidth: "1280px", height: "166px", display: "flex", flexDirection: "column", justifyContent: "space-between", alignItems: "center", backgroundColor: "white", borderRadius: "4px", boxSizing: "border-box" }}>
+          {/* Tag (Height: 18px, Font: Faktum 14px, Weight: 600, Color: #FF623E background, text uppercase, tracking 1.2px) */}
+          <div style={{ height: "18px", display: "flex", alignItems: "center", justifyContent: "center" }} className="shrink-0">
+            <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 600, fontSize: "14px", lineHeight: "100%", letterSpacing: "1.2px", textTransform: "uppercase", color: "rgba(255, 98, 62, 1)", backgroundColor: "rgba(255, 98, 62, 0.08)", padding: "2px 8px", borderRadius: "4px", display: "inline-flex", alignItems: "center", justifyContent: "center", height: "100%", whiteSpace: "nowrap" }}>
               Experience the Shopping
             </span>
           </div>
 
           {/* Heading (Width: 1280px, Height: 52px, Font: Fraunces 42px, Weight: 600, Line-height: 100%, Color: #2B2B2B) */}
-          <h1 className="w-full md:h-[52px] flex items-center justify-center text-[28px] md:text-[42px] font-serif font-semibold text-[#2B2B2B] leading-none text-center">
+          <h1 style={{ margin: 0, width: "100%", maxWidth: "1280px", height: "52px", fontFamily: "Fraunces, serif", fontWeight: 600, fontSize: "42px", lineHeight: "100%", color: "rgba(43, 43, 43, 1)", textAlign: "center", display: "flex", alignItems: "center", justifyContent: "center" }}>
             Some journeys change where you go. Others change who you are.
           </h1>
 
           {/* Subtitle (Width: 1280px, Height: 64px, Font: Faktum 24px, Weight: 500, Line-height: 32px, Color: #2B2B2B) */}
-          <p className="w-full md:h-[64px] flex items-center justify-center text-[#2B2B2B] text-base md:text-[24px] md:leading-[32px] font-sans font-medium text-center">
+          <p style={{ margin: 0, width: "100%", maxWidth: "1280px", height: "64px", fontFamily: "Faktum, sans-serif", fontWeight: 500, fontSize: "24px", lineHeight: "32px", color: "rgba(43, 43, 43, 1)", textAlign: "center", display: "flex", alignItems: "center", justifyContent: "center" }}>
             Discover curated travel experiences, gear that keeps up with you, and a community of free-spirited explorers across India.
           </p>
         </div>
@@ -175,10 +175,12 @@ export default function ShopPage() {
       {/* Main Sections Container (Width: 1440px, Side Padding: 80px) */}
       <main className="w-full max-w-[1440px] mx-auto mt-0 px-6 md:px-[80px]">
         
-        {/* Main 4x2 product grid directly below the EXPERIENCE THE SHOPPING header (Gap inside section: 52px, Padding Tightened) */}
-        <section className="bg-white pt-[32px] pb-[24px] flex flex-col gap-[52px] w-full">
+        {/* Main 4x2 product grid directly below the EXPERIENCE THE SHOPPING header */}
+        <div style={{ paddingTop: "42px", paddingBottom: "42px", display: "flex", flexDirection: "column", width: "100%", backgroundColor: "white" }}>
           {renderProductGrid(mainGridProducts.slice(0, 4))}
+          <div style={{ height: "62px" }} className="shrink-0" />
           {renderProductGrid(mainGridProducts.slice(4, 8))}
+          <div style={{ height: "62px" }} className="shrink-0" />
 
           {/* Centered View All Link */}
           <div className="flex justify-center pt-0">
@@ -190,10 +192,10 @@ export default function ShopPage() {
               <span className="text-base font-semibold group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300">↗</span>
             </Link>
           </div>
-        </section>
+        </div>
         
-        {/* Section 1: New Arrivals (Padding: pt-[42px] pb-[24px]) */}
-        <section className="bg-white pt-[42px] pb-[24px] flex flex-col gap-[32px] w-full">
+        {/* Section 1: New Arrivals */}
+        <div style={{ paddingTop: "42px", paddingBottom: "42px", display: "flex", flexDirection: "column", width: "100%", backgroundColor: "white" }}>
           {/* Header */}
           <div className="text-left space-y-2.5">
             <span className="inline-block text-[9px] font-black uppercase tracking-[0.15em] text-[#FF5B37] bg-[#FFEBE5] px-2.5 py-1 rounded-sm">
@@ -206,18 +208,20 @@ export default function ShopPage() {
               Curated gear for the modern nomad. From durable journal covers to the stickers that tell your story
             </p>
           </div>
+          <div style={{ height: "62px" }} className="shrink-0" />
 
           {/* Grid */}
           {renderProductGrid(newArrivals)}
+          <div style={{ height: "62px" }} className="shrink-0" />
 
           {/* Progress / Scroll Indicator */}
-          <div className="w-full max-w-xs mx-auto mt-4 h-[3px] bg-[#E2E8F0] rounded-full overflow-hidden">
+          <div className="w-full max-w-xs mx-auto h-[3px] bg-[#E2E8F0] rounded-full overflow-hidden">
             <div className="w-[40%] h-full bg-[#1D493E] rounded-full"></div>
           </div>
-        </section>
+        </div>
 
-        {/* Section 2: Travels Essentials (Padding: pt-[42px] pb-[24px]) */}
-        <section className="bg-white pt-[42px] pb-[24px] flex flex-col gap-[52px] w-full">
+        {/* Section 2: Travels Essentials */}
+        <div style={{ paddingTop: "42px", paddingBottom: "42px", display: "flex", flexDirection: "column", width: "100%", backgroundColor: "white" }}>
           {/* Header */}
           <div className="text-left space-y-2.5">
             <span className="inline-block text-[9px] font-black uppercase tracking-[0.15em] text-[#FF5B37] bg-[#FFEBE5] px-2.5 py-1 rounded-sm">
@@ -230,10 +234,13 @@ export default function ShopPage() {
               Curated gear for the modern nomad. From durable journal covers to the stickers that tell your story
             </p>
           </div>
+          <div style={{ height: "62px" }} className="shrink-0" />
 
           {/* Grid Rows */}
           {renderProductGrid(travelsEssentials.slice(0, 4))}
+          <div style={{ height: "62px" }} className="shrink-0" />
           {renderProductGrid(travelsEssentials.slice(4, 8))}
+          <div style={{ height: "62px" }} className="shrink-0" />
 
           {/* Centered Load More Button */}
           <div className="flex justify-center pt-0">
@@ -244,10 +251,10 @@ export default function ShopPage() {
               Load more
             </Link>
           </div>
-        </section>
+        </div>
 
-        {/* Section 3: Limited Edition (Padding: pt-[42px] pb-[24px]) */}
-        <section className="bg-white pt-[42px] pb-[24px] flex flex-col gap-[32px] w-full">
+        {/* Section 3: Limited Edition */}
+        <div style={{ paddingTop: "42px", paddingBottom: "42px", display: "flex", flexDirection: "column", width: "100%", backgroundColor: "white" }}>
           {/* Header */}
           <div className="text-left space-y-2.5">
             <span className="inline-block text-[9px] font-black uppercase tracking-[0.15em] text-[#FF5B37] bg-[#FFEBE5] px-2.5 py-1 rounded-sm">
@@ -260,18 +267,20 @@ export default function ShopPage() {
               Curated gear for the modern nomad. From durable journal covers to the stickers that tell your story
             </p>
           </div>
+          <div style={{ height: "62px" }} className="shrink-0" />
 
           {/* Grid */}
           {renderProductGrid(limitedEdition)}
+          <div style={{ height: "62px" }} className="shrink-0" />
 
           {/* Progress / Scroll Indicator */}
-          <div className="w-full max-w-xs mx-auto mt-4 h-[3px] bg-[#E2E8F0] rounded-full overflow-hidden">
+          <div className="w-full max-w-xs mx-auto h-[3px] bg-[#E2E8F0] rounded-full overflow-hidden">
             <div className="w-[40%] h-full bg-[#1D493E] rounded-full"></div>
           </div>
-        </section>
+        </div>
 
-        {/* Section 4: 25% to 50% Discount Sale (Padding: pt-[42px] pb-[24px]) */}
-        <section className="bg-white pt-[42px] pb-[24px] flex flex-col gap-[52px] w-full">
+        {/* Section 4: 25% to 50% Discount Sale */}
+        <div style={{ paddingTop: "42px", paddingBottom: "42px", display: "flex", flexDirection: "column", width: "100%", backgroundColor: "white" }}>
           {/* Header */}
           <div className="text-left space-y-2.5">
             <span className="inline-block text-[9px] font-black uppercase tracking-[0.15em] text-[#FF5B37] bg-[#FFEBE5] px-2.5 py-1 rounded-sm">
@@ -284,10 +293,13 @@ export default function ShopPage() {
               Curated gear for the modern nomad. From durable journal covers to the stickers that tell your story
             </p>
           </div>
+          <div style={{ height: "62px" }} className="shrink-0" />
 
           {/* Grid Rows */}
           {renderProductGrid(travelsEssentials.slice(0, 4))}
+          <div style={{ height: "62px" }} className="shrink-0" />
           {renderProductGrid(travelsEssentials.slice(4, 8))}
+          <div style={{ height: "62px" }} className="shrink-0" />
 
           {/* Centered View All Link */}
           <div className="flex justify-center pt-0">
@@ -299,10 +311,10 @@ export default function ShopPage() {
               <span className="text-base font-semibold group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300">↗</span>
             </Link>
           </div>
-        </section>
+        </div>
 
         {/* Testimonials Section (Captured Memories) (Padding: pt-[42px] pb-[24px]) */}
-        <section className="bg-white pt-[42px] pb-[24px] flex flex-col gap-[32px] w-full border-t border-slate-100 mt-8">
+        <div className="bg-white pt-[42px] pb-[24px] flex flex-col gap-[32px] w-full border-t border-slate-100 mt-8">
           {/* Header */}
           <div className="text-left space-y-2.5">
             <span className="inline-block text-[9px] font-black uppercase tracking-[0.15em] text-[#FF5B37] bg-[#FFEBE5] px-2.5 py-1 rounded-sm">
@@ -389,10 +401,10 @@ export default function ShopPage() {
             </div>
 
           </div>
-        </section>
+        </div>
 
         {/* FAQ Section (Padding: pt-[42px] pb-[24px]) */}
-        <section className="bg-white pt-[42px] pb-[24px] flex flex-col gap-[32px] w-full border-t border-slate-100 mt-8">
+        <div className="bg-white pt-[42px] pb-[24px] flex flex-col gap-[32px] w-full border-t border-slate-100 mt-8">
           {/* Header */}
           <div className="text-left space-y-2.5">
             <span className="inline-block text-[9px] font-black uppercase tracking-[0.15em] text-[#FF5B37] bg-[#FFEBE5] px-2.5 py-1 rounded-sm">
@@ -404,23 +416,78 @@ export default function ShopPage() {
           </div>
 
           {/* Accordion List */}
-          <div className="w-full border-t border-slate-200 divide-y divide-slate-200">
+          <div className="w-full">
             {FAQ_ITEMS.map((item, idx) => {
               const isOpen = openFaqIdx === idx;
               return (
-                <div key={idx} className="py-5 text-left">
+                <div
+                  key={idx}
+                  style={{
+                    width: "100%",
+                    padding: "24px",
+                    borderBottom: "2px solid rgba(204, 204, 204, 0.54)",
+                    borderTop: idx === 0 ? "2px solid rgba(204, 204, 204, 0.54)" : "none",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "12px",
+                    boxSizing: "border-box",
+                  }}
+                  className="text-left"
+                >
                   <button
                     onClick={() => setOpenFaqIdx(isOpen ? null : idx)}
-                    className="w-full flex justify-between items-start text-left gap-4 font-sans text-sm sm:text-base font-bold text-[#2B2B2B] hover:text-[#1D493E] transition-colors cursor-pointer group"
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      background: "none",
+                      border: "none",
+                      padding: 0,
+                      cursor: "pointer",
+                      textAlign: "left",
+                    }}
+                    className="group"
                   >
-                    <span>{item.question}</span>
-                    <span className="text-xl font-medium text-[#1D493E] shrink-0 leading-none select-none">
+                    <span
+                      style={{
+                        fontFamily: "Faktum, sans-serif",
+                        fontWeight: 500,
+                        fontSize: "20px",
+                        lineHeight: "32px",
+                        color: "rgba(43, 43, 43, 1)",
+                        margin: 0,
+                      }}
+                      className="text-base md:text-[20px]"
+                    >
+                      {item.question}
+                    </span>
+                    <span
+                      style={{
+                        fontSize: "24px",
+                        fontWeight: 500,
+                        color: "rgba(29, 73, 62, 1)",
+                        lineHeight: "100%",
+                        userSelect: "none",
+                      }}
+                      className="shrink-0"
+                    >
                       {isOpen ? '—' : '+'}
                     </span>
                   </button>
                   {/* Expandable answer */}
                   {isOpen && (
-                    <p className="mt-3 text-xs sm:text-sm text-slate-400 font-medium leading-relaxed animate-fade-in">
+                    <p
+                      style={{
+                        fontFamily: "Faktum, sans-serif",
+                        fontWeight: 500,
+                        fontSize: "20px",
+                        lineHeight: "32px",
+                        color: "rgba(141, 141, 141, 1)",
+                        margin: 0,
+                      }}
+                      className="text-sm md:text-[20px]"
+                    >
                       {item.answer}
                     </p>
                   )}
@@ -428,8 +495,104 @@ export default function ShopPage() {
               );
             })}
           </div>
-        </section>
+        </div>
 
+        {/* Spacer */}
+        <div style={{ height: "62px" }} className="shrink-0" />
+
+        {/* 13. NEWSLETTER / CTA SECTION — 1440×337, py-42, px-80, gap-32 */}
+        <div
+          style={{
+            width: "100%",
+            paddingTop: "42px",
+            paddingBottom: "42px",
+            background: "#FFFFFF",
+            boxSizing: "border-box",
+          }}
+        >
+          <div
+            style={{
+              maxWidth: "1280px",
+              margin: "0 auto",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "32px",
+              textAlign: "center",
+              boxSizing: "border-box",
+            }}
+          >
+            {/* Text block */}
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
+              {/* Heading: Fraunces SemiBold 42px, lh 100%, #2B2B2B */}
+              <h2
+                style={{
+                  fontFamily: "Fraunces, serif",
+                  fontWeight: 600,
+                  fontSize: "42px",
+                  lineHeight: "100%",
+                  letterSpacing: "0px",
+                  textAlign: "center",
+                  color: "#2B2B2B",
+                  maxWidth: "1280px",
+                  margin: 0,
+                }}
+                className="text-[28px] md:text-[42px]"
+              >
+                The{" "}
+                <span style={{ color: "#FF5A36" }}>best adventures</span>{" "}
+                find their way to your inbox.
+              </h2>
+              {/* Subtitle: Faktum Medium 24px, lh 32px, rgba(43,43,43,1) */}
+              <p
+                style={{
+                  fontFamily: "Faktum, sans-serif",
+                  fontWeight: 500,
+                  fontSize: "24px",
+                  lineHeight: "32px",
+                  letterSpacing: "0px",
+                  textAlign: "center",
+                  color: "rgba(43, 43, 43, 1)",
+                  maxWidth: "1280px",
+                  margin: 0,
+                }}
+                className="text-base md:text-[24px]"
+              >
+                Hidden places, exclusive trip drops, curated gear, and stories from the road delivered before anyone else hears about them.
+              </p>
+            </div>
+
+            {/* Button: 286×55, pt-16 pr-32 pb-16 pl-32, radius-4, bg #1D493E */}
+            <Link
+              href="/travel"
+              style={{
+                width: "286px",
+                height: "55px",
+                paddingTop: "16px",
+                paddingBottom: "16px",
+                paddingLeft: "32px",
+                paddingRight: "32px",
+                borderRadius: "4px",
+                background: "rgba(29, 73, 62, 1)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "#FFFFFF",
+                fontFamily: "'Faktum','Outfit',sans-serif",
+                fontWeight: 500,
+                fontSize: "18px",
+                lineHeight: "100%",
+                letterSpacing: "0px",
+                textDecoration: "none",
+                transition: "opacity 0.2s",
+              }}
+              className="hover:opacity-90 inline-flex items-center gap-2"
+            >
+              <span>Reserve your tour now</span>
+              <span className="text-lg font-sans">↗</span>
+            </Link>
+          </div>
+        </div>
 
       </main>
     </div>

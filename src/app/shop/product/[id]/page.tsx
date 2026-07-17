@@ -389,13 +389,34 @@ export default function ProductDetailsPage() {
       </header>
 
       {/* Main Container */}
-      <main className="w-full max-w-[1440px] mx-auto px-6 md:px-[80px] mt-6 flex flex-col gap-16">
+      <main 
+        style={{
+          width: "100%",
+          maxWidth: "1440px",
+          paddingTop: "24px",
+          paddingBottom: "42px",
+          display: "flex",
+          flexDirection: "column",
+          gap: "32px",
+          boxSizing: "border-box"
+        }}
+        className="w-full mx-auto px-6 md:px-[80px]"
+      >
         
-        {/* Product Details Section */}
-        <section className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start w-full">
+        {/* Product Details Section (Width: 1280px, gap: 32px, Background: white) */}
+        <div 
+          style={{
+            display: "grid",
+            gap: "32px",
+            width: "100%",
+            backgroundColor: "rgba(255, 255, 255, 1)",
+            boxSizing: "border-box"
+          }}
+          className="grid grid-cols-1 md:grid-cols-2 items-start"
+        >
           
           {/* LEFT COLUMN: Main Showcase & Thumbnails */}
-          <div className="lg:col-span-6 space-y-6">
+          <div className="space-y-6">
             <div className="relative w-full aspect-square bg-[#FFFFFF] rounded-3xl overflow-hidden flex items-center justify-center border border-[#F6F3EE] p-8 shadow-xs">
               <img
                 src={activeImg || product.image}
@@ -440,7 +461,7 @@ export default function ProductDetailsPage() {
           </div>
 
           {/* RIGHT COLUMN: Buying Dashboard */}
-          <div className="lg:col-span-6 space-y-7 text-left font-sans text-[#2B2B2B]">
+          <div className="space-y-7 text-left font-sans text-[#2B2B2B]">
             <div className="space-y-3">
               <div className="flex justify-between items-start gap-4">
                 <h1 className="text-3xl font-sans font-bold text-[#2B2B2B] leading-tight">
@@ -625,7 +646,7 @@ export default function ProductDetailsPage() {
             </div>
 
           </div>
-        </section>
+        </div>
 
         {/* Tab Selection */}
         <section className="border-b border-[#F6F3EE] w-full pt-10 font-sans">

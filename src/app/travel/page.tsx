@@ -314,17 +314,11 @@ export default function HolidaysPortal() {
   return (
     <div className="min-h-screen bg-white text-[#1D493E] font-sans antialiased pb-20 relative">
       
-      {/* Header Section wrapper — styled to match exact Figma specifications */}
+      {/* Header Section wrapper */}
       <div
         style={{
           width: "100%",
           maxWidth: "1440px",
-          height: "220px",
-          paddingTop: "62px",
-          paddingBottom: "24px",
-          paddingLeft: "80px",
-          paddingRight: "80px",
-          gap: "10px",
           background: "rgba(255, 255, 255, 1)",
           boxSizing: "border-box",
           margin: "0 auto",
@@ -333,18 +327,18 @@ export default function HolidaysPortal() {
           justifyContent: "center",
           alignItems: "center",
         }}
+        className="px-6 md:px-20 pt-10 pb-6"
       >
-        {/* Header Title block — styled to match exact Figma specifications */}
+        {/* Header Title block */}
         <div 
           style={{
             width: "100%",
             maxWidth: "1280px",
-            height: "134px",
             display: "flex",
             flexDirection: "column",
-            justifyContent: "space-between",
             alignItems: "center",
             margin: "0 auto",
+            gap: "16px",
           }}
         >
           <span 
@@ -371,13 +365,12 @@ export default function HolidaysPortal() {
             style={{
               fontFamily: "'Fraunces', serif",
               fontWeight: 600,
-              fontSize: "42px",
-              lineHeight: "100%",
               letterSpacing: "0px",
               textAlign: "center",
               color: "rgba(29, 73, 62, 1)",
               margin: 0,
             }}
+            className="text-3xl md:text-[42px] leading-tight"
           >
             Available <span style={{ color: "rgba(255, 98, 62, 1)", fontWeight: 600 }}>Packages</span>
           </h1>
@@ -387,13 +380,12 @@ export default function HolidaysPortal() {
               maxWidth: "1280px",
               fontFamily: "'Faktum', 'Outfit', sans-serif",
               fontWeight: 500,
-              fontSize: "24px",
-              lineHeight: "32px",
               letterSpacing: "0px",
               textAlign: "center",
               color: "rgba(43, 43, 43, 1)",
               margin: 0,
             }}
+            className="text-sm sm:text-base md:text-[24px] leading-relaxed md:leading-[32px]"
           >
             Curated journeys for the modern nomad, designed to push boundaries and discover India's hidden heart
           </p>
@@ -408,7 +400,6 @@ export default function HolidaysPortal() {
           style={{
             width: "100%",
             maxWidth: "1280px",
-            height: "137px",
             borderRadius: "12px",
             border: "1px solid rgba(255, 98, 62, 1)",
             boxShadow: "0px 4px 12px 0px rgba(255, 98, 62, 0.24)",
@@ -418,22 +409,21 @@ export default function HolidaysPortal() {
             marginLeft: "auto",
             marginRight: "auto",
           }}
-          className="text-left relative z-30"
+          className="text-left relative z-30 h-auto"
         >
-          <div style={{ display: "flex", flexDirection: "row", gap: "24px", width: "100%", height: "100%", alignItems: "center" }}>
+          <div className="w-full flex flex-col md:flex-row gap-6 items-stretch md:items-center">
             
             {/* Field 1: Destination */}
-            <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "8px" }}>
+            <div className="flex-1 flex flex-col gap-2">
               <label style={{ 
                 fontFamily: "'Faktum', 'Outfit', sans-serif", 
                 fontWeight: 500, 
-                fontSize: "20px", 
                 lineHeight: "100%", 
                 letterSpacing: "0px", 
                 color: "rgba(43, 43, 43, 1)",
                 margin: 0,
                 textAlign: "left",
-              }}>
+              }} className="text-sm sm:text-base md:text-[20px]">
                 Destination
               </label>
               <div 
@@ -461,46 +451,44 @@ export default function HolidaysPortal() {
                     outline: "none", 
                     fontFamily: "'Faktum', 'Outfit', sans-serif", 
                     fontWeight: 500, 
-                    fontSize: "20px", 
                     lineHeight: "100%", 
                     letterSpacing: "0px", 
                     color: "rgba(43, 43, 43, 1)",
                     padding: 0
                   }}
-                  className="placeholder-[rgba(141,141,141,1)]"
+                  className="placeholder-[rgba(141,141,141,1)] text-sm sm:text-base md:text-[20px]"
                 />
               </div>
             </div>
 
             {/* Field 2: Date Range */}
-            <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "8px" }}>
+            <div className="flex-1 flex flex-col gap-2">
               <label style={{ 
                 fontFamily: "'Faktum', 'Outfit', sans-serif", 
                 fontWeight: 500, 
-                fontSize: "20px", 
                 lineHeight: "100%", 
                 letterSpacing: "0px", 
                 color: "rgba(43, 43, 43, 1)",
                 margin: 0,
                 textAlign: "left",
-              }}>
+              }} className="text-sm sm:text-base md:text-[20px]">
                 Date
               </label>
-              <div style={{ display: "flex", flexDirection: "row", gap: "12px", width: "100%" }}>
+              <div className="w-full flex flex-col sm:flex-row gap-3">
                 <div 
                   style={{ 
                     flex: 1,
                     height: "56px", 
                     border: "1px solid rgba(141, 141, 141, 0.5)", 
                     borderRadius: "8px", 
-                    padding: "0 16px", 
+                    padding: "0 12px sm:p-0 16px", 
                     display: "flex", 
                     alignItems: "center", 
-                    gap: "14px", 
+                    gap: "10px sm:gap-14", 
                     background: "white" 
                   }}
                 >
-                  <Calendar style={{ width: "24px", height: "24px", color: "rgba(141, 141, 141, 1)" }} className="shrink-0" />
+                  <Calendar style={{ width: "20px sm:w-24px", height: "20px sm:h-24px", color: "rgba(141, 141, 141, 1)" }} className="shrink-0" />
                   <input
                     type="date"
                     value={startDate}
@@ -523,14 +511,13 @@ export default function HolidaysPortal() {
                       outline: "none", 
                       fontFamily: "'Faktum', 'Outfit', sans-serif", 
                       fontWeight: 500, 
-                      fontSize: "20px", 
                       lineHeight: "100%", 
                       letterSpacing: "0px", 
                       color: "rgba(43, 43, 43, 1)",
                       padding: 0,
                       cursor: "pointer"
                     }}
-                    className="placeholder-[rgba(141,141,141,1)] hide-calendar-picker-icon"
+                    className="placeholder-[rgba(141,141,141,1)] hide-calendar-picker-icon text-sm sm:text-base md:text-[20px]"
                   />
                 </div>
                 <div 
@@ -539,14 +526,14 @@ export default function HolidaysPortal() {
                     height: "56px", 
                     border: "1px solid rgba(141, 141, 141, 0.5)", 
                     borderRadius: "8px", 
-                    padding: "0 16px", 
+                    padding: "0 12px sm:p-0 16px", 
                     display: "flex", 
                     alignItems: "center", 
-                    gap: "14px", 
+                    gap: "10px sm:gap-14", 
                     background: "white" 
                   }}
                 >
-                  <Calendar style={{ width: "24px", height: "24px", color: "rgba(141, 141, 141, 1)" }} className="shrink-0" />
+                  <Calendar style={{ width: "20px sm:w-24px", height: "20px sm:h-24px", color: "rgba(141, 141, 141, 1)" }} className="shrink-0" />
                   <input
                     type="date"
                     value={endDate}
@@ -569,31 +556,29 @@ export default function HolidaysPortal() {
                       outline: "none", 
                       fontFamily: "'Faktum', 'Outfit', sans-serif", 
                       fontWeight: 500, 
-                      fontSize: "20px", 
                       lineHeight: "100%", 
                       letterSpacing: "0px", 
                       color: "rgba(43, 43, 43, 1)",
                       padding: 0,
                       cursor: "pointer"
                     }}
-                    className="placeholder-[rgba(141,141,141,1)] hide-calendar-picker-icon"
+                    className="placeholder-[rgba(141,141,141,1)] hide-calendar-picker-icon text-sm sm:text-base md:text-[20px]"
                   />
                 </div>
               </div>
             </div>
 
             {/* Field 3: No of Travelers */}
-            <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "8px" }}>
+            <div className="flex-1 flex flex-col gap-2">
               <label style={{ 
                 fontFamily: "'Faktum', 'Outfit', sans-serif", 
                 fontWeight: 500, 
-                fontSize: "20px", 
                 lineHeight: "100%", 
                 letterSpacing: "0px", 
                 color: "rgba(43, 43, 43, 1)",
                 margin: 0,
                 textAlign: "left",
-              }}>
+              }} className="text-sm sm:text-base md:text-[20px]">
                 No of Travelers
               </label>
               <div 
@@ -621,13 +606,12 @@ export default function HolidaysPortal() {
                     outline: "none", 
                     fontFamily: "'Faktum', 'Outfit', sans-serif", 
                     fontWeight: 500, 
-                    fontSize: "20px", 
                     lineHeight: "100%", 
                     letterSpacing: "0px", 
                     color: "rgba(43, 43, 43, 1)",
                     padding: 0
                   }}
-                  className="placeholder-[rgba(141,141,141,1)]"
+                  className="placeholder-[rgba(141,141,141,1)] text-sm sm:text-base md:text-[20px]"
                 />
               </div>
             </div>
@@ -1028,9 +1012,8 @@ export default function HolidaysPortal() {
               marginLeft: "auto",
               marginRight: "auto",
               marginTop: "40px",
-              gap: "52px",
             }}
-            className="grid grid-cols-1 md:grid-cols-3"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center"
           >
             {filteredAndSortedPackages.slice(0, visiblePackagesCount).map((pkg) => {
               const displayCategory = pkg.category === 'Weekend' ? 'Weekend' : 
@@ -1044,7 +1027,6 @@ export default function HolidaysPortal() {
                   style={{
                     width: "100%",
                     maxWidth: "405.33px",
-                    height: "695.44px",
                     display: "flex",
                     flexDirection: "column",
                     gap: "24px",
@@ -1053,7 +1035,7 @@ export default function HolidaysPortal() {
                     boxSizing: "border-box",
                     position: "relative",
                   }}
-                  className="group"
+                  className="group h-auto min-h-[695px] pb-4"
                 >
                   {/* Card Image */}
                   <Link 
@@ -1093,7 +1075,8 @@ export default function HolidaysPortal() {
                       display: "flex", 
                       flexDirection: "column", 
                       justifyContent: "space-between", 
-                      boxSizing: "border-box" 
+                      boxSizing: "border-box",
+                      gap: "20px"
                     }}
                   >
                     
@@ -1102,12 +1085,12 @@ export default function HolidaysPortal() {
                       style={{ 
                         width: "100%",
                         maxWidth: "405.33px",
-                        height: "183px",
                         display: "flex", 
                         flexDirection: "column", 
                         gap: "12px",
                         boxSizing: "border-box"
                       }}
+                      className="h-auto md:h-[183px]"
                     >
                       {/* Category & Duration Row */}
                       <div 
@@ -1163,19 +1146,17 @@ export default function HolidaysPortal() {
                         href={pkg.link || `/travel/package/${pkg.id}`} 
                         style={{ 
                           width: "100%",
-                          height: "35px",
                           display: "flex",
                           flexDirection: "row",
                           justifyContent: "space-between",
                           alignItems: "center",
                           textDecoration: "none",
                         }}
-                        className="group"
+                        className="group h-auto min-h-[35px]"
                       >
                         <h3 
                           style={{
                             flex: 1,
-                            height: "30px",
                             fontFamily: "'Faktum', 'Outfit', sans-serif",
                             fontWeight: 600,
                             fontSize: "24px",
@@ -1183,11 +1164,8 @@ export default function HolidaysPortal() {
                             letterSpacing: "0px",
                             color: "rgba(43, 43, 43, 1)",
                             margin: 0,
-                            overflow: "hidden",
-                            textOverflow: "ellipsis",
-                            whiteSpace: "nowrap",
-                            display: "block",
                           }}
+                          className="truncate block"
                           title={pkg.name}
                         >
                           {pkg.name}
@@ -1217,11 +1195,10 @@ export default function HolidaysPortal() {
                         style={{
                           width: "100%",
                           maxWidth: "405.33px",
-                          height: "96px",
                           fontFamily: "'Faktum', 'Outfit', sans-serif",
                           fontWeight: 500,
-                          fontSize: "20px",
-                          lineHeight: "32px",
+                          fontSize: "18px",
+                          lineHeight: "28px",
                           letterSpacing: "0px",
                           color: "rgba(141, 141, 141, 1)",
                           margin: 0,
@@ -1231,29 +1208,26 @@ export default function HolidaysPortal() {
                           WebkitBoxOrient: "vertical",
                           textOverflow: "ellipsis",
                         }}
+                        className="h-auto min-h-[84px]"
                       >
                         {pkg.description}
                       </p>
                     </div>
 
-                    {/* 2x2 Details Grid matching Figma spec */}
+                    {/* 2x2 Details Grid */}
                     <div 
                       style={{ 
                         width: "100%",
                         maxWidth: "405.33px",
-                        height: "136px",
-                        display: "grid", 
-                        gridTemplateColumns: "repeat(2, auto)", 
-                        justifyContent: "space-between",
-                        alignContent: "space-between",
                         boxSizing: "border-box"
                       }}
+                      className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-2"
                     >
                       <div style={{ display: "flex", alignItems: "center", gap: "12px", height: "56px", boxSizing: "border-box" }}>
                         <div style={{ width: "46px", height: "46px", borderRadius: "4px", background: "rgba(246, 243, 238, 1)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                           <MapPin style={{ width: "28px", height: "28px", color: "rgba(43, 43, 43, 1)" }} />
                         </div>
-                        <span style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, fontSize: "20px", color: "rgba(43, 43, 43, 1)", lineHeight: "28px", display: "inline-block", verticalAlign: "middle" }}>
+                        <span style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, color: "rgba(43, 43, 43, 1)", lineHeight: "24px", display: "inline-block", verticalAlign: "middle" }} className="text-sm md:text-[16px]">
                           Starts from {pkg.startPoint || 'Srinagar'}
                         </span>
                       </div>
@@ -1262,7 +1236,7 @@ export default function HolidaysPortal() {
                         <div style={{ width: "46px", height: "46px", borderRadius: "4px", background: "rgba(246, 243, 238, 1)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                           <Users style={{ width: "28px", height: "28px", color: "rgba(43, 43, 43, 1)" }} />
                         </div>
-                        <span style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, fontSize: "20px", color: "rgba(43, 43, 43, 1)", lineHeight: "28px", display: "inline-block", verticalAlign: "middle" }}>
+                        <span style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, color: "rgba(43, 43, 43, 1)", lineHeight: "24px", display: "inline-block", verticalAlign: "middle" }} className="text-sm md:text-[16px]">
                           {pkg.groupType || 'Curated group Trip'}
                         </span>
                       </div>
@@ -1271,7 +1245,7 @@ export default function HolidaysPortal() {
                         <div style={{ width: "46px", height: "46px", borderRadius: "4px", background: "rgba(246, 243, 238, 1)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                           <ArrowUpRight style={{ width: "28px", height: "28px", color: "rgba(43, 43, 43, 1)" }} />
                         </div>
-                        <span style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, fontSize: "20px", color: "rgba(43, 43, 43, 1)", lineHeight: "28px", display: "inline-block", verticalAlign: "middle" }}>
+                        <span style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, color: "rgba(43, 43, 43, 1)", lineHeight: "24px", display: "inline-block", verticalAlign: "middle" }} className="text-sm md:text-[16px]">
                           {pkg.difficulty || 'Moderate'} Difficulty
                         </span>
                       </div>
@@ -1280,7 +1254,7 @@ export default function HolidaysPortal() {
                         <div style={{ width: "46px", height: "46px", borderRadius: "4px", background: "rgba(246, 243, 238, 1)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                           <Calendar style={{ width: "28px", height: "28px", color: "rgba(43, 43, 43, 1)" }} />
                         </div>
-                        <span style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, fontSize: "20px", color: "rgba(43, 43, 43, 1)", lineHeight: "28px", display: "inline-block", verticalAlign: "middle" }}>
+                        <span style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, color: "rgba(43, 43, 43, 1)", lineHeight: "24px", display: "inline-block", verticalAlign: "middle" }} className="text-sm md:text-[16px]">
                           Next: {pkg.nextDeparture || 'Aug, 2026'}
                         </span>
                       </div>

@@ -35,6 +35,7 @@ export default function ProductDetailsPage() {
   const [productsList, setProductsList] = useState<Product[]>(PRODUCTS);
   const [product, setProduct] = useState<Product | null>(null);
   const [activeImg, setActiveImg] = useState<string>('');
+  const [activeImgIdx, setActiveImgIdx] = useState<number>(2); // Defaults to index 2 (centered flat badge view)
   const [quantity, setQuantity] = useState(1);
   const [pincode, setPincode] = useState('');
   const [pincodeMessage, setPincodeMessage] = useState<string | null>(null);
@@ -215,6 +216,81 @@ export default function ProductDetailsPage() {
   const discountPercent = product.originalPrice 
     ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100) 
     : 16; 
+
+  // Dynamic mock variant images based on selected index
+  const renderMediaContent = (index: number, isThumbnail: boolean = false) => {
+    const mainImg = product?.image || '';
+    
+    // Define layout and sizing tokens
+    const rulerWidth = isThumbnail ? "12px" : "40px";
+    const rulerTickMajor = isThumbnail ? "4px" : "12px";
+    const rulerTickMinor = isThumbnail ? "2px" : "8px";
+    const fontSizeLabel = isThumbnail ? "4px" : "10px";
+    const fontSizeUnits = isThumbnail ? "3px" : "8px";
+    const rulerOffset = isThumbnail ? "4px" : "16px";
+    
+    switch (index) {
+      case 0: // 1st: Ruler Scale View
+        return (
+          <div style={{ position: "relative", width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "#FFFFFF" }}>
+            <img src={mainImg} style={{ width: "70%", height: "70%", objectFit: "contain" }} />
+            {/* Ruler Overlay */}
+            <div style={{ position: "absolute", left: rulerOffset, top: "15%", bottom: "15%", width: rulerWidth, borderRight: `${isThumbnail ? '0.5px' : '2px'} solid #2B2B2B`, display: "flex", flexDirection: "column", justifyContent: "space-between", alignItems: "flex-end", paddingRight: isThumbnail ? "2px" : "6px", fontFamily: "Faktum, sans-serif", fontSize: fontSizeLabel, color: "#2B2B2B", fontWeight: 600 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: isThumbnail ? "1px" : "4px" }}><span>1</span><div style={{ width: rulerTickMajor, height: isThumbnail ? "0.5px" : "2px", backgroundColor: "#2B2B2B" }}></div></div>
+              <div style={{ width: rulerTickMinor, height: isThumbnail ? "0.2px" : "1px", backgroundColor: "#8D8D8D" }}></div>
+              <div style={{ display: "flex", alignItems: "center", gap: isThumbnail ? "1px" : "4px" }}><span>0.5</span><div style={{ width: rulerTickMajor, height: isThumbnail ? "0.5px" : "2px", backgroundColor: "#2B2B2B" }}></div></div>
+              <div style={{ width: rulerTickMinor, height: isThumbnail ? "0.2px" : "1px", backgroundColor: "#8D8D8D" }}></div>
+              <div style={{ display: "flex", alignItems: "center", gap: isThumbnail ? "1px" : "4px" }}><span>0</span><div style={{ width: rulerTickMajor, height: isThumbnail ? "0.5px" : "2px", backgroundColor: "#2B2B2B" }}></div></div>
+              <span style={{ fontSize: fontSizeUnits, transform: "rotate(-90deg)", transformOrigin: "right bottom", marginTop: isThumbnail ? "2px" : "12px", color: "#8D8D8D" }}>Inches</span>
+            </div>
+          </div>
+        );
+      case 1: // 2nd: Close Up Detailed view
+        return (
+          <div style={{ position: "relative", width: "100%", height: "100%", overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "#FFFFFF" }}>
+            <img src={mainImg} style={{ width: "100%", height: "100%", objectFit: "cover", transform: isThumbnail ? "scale(1.8) rotate(15deg)" : "scale(2.2) rotate(15deg)" }} />
+            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 50%, rgba(0,0,0,0.15) 100%)", pointerEvents: "none" }} />
+          </div>
+        );
+      case 2: // 3rd: Flat centered view (Normal view)
+        return (
+          <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "#FFFFFF" }}>
+            <img src={mainImg} style={{ width: "80%", height: "80%", objectFit: "contain" }} />
+          </div>
+        );
+      case 3: // 4th: Front + Back Combo
+        return (
+          <div style={{ display: "flex", width: "100%", height: "100%", alignItems: "center", justifyContent: "center", gap: isThumbnail ? "4px" : "16px", backgroundColor: "#FFFFFF", padding: "4px" }}>
+            <img src={mainImg} style={{ width: "42%", height: "42%", objectFit: "contain" }} />
+            <div style={{ width: "42%", aspectRatio: "1", borderRadius: "50%", background: "radial-gradient(circle, #E2E8F0 0%, #CBD5E1 100%)", boxShadow: isThumbnail ? "inset 0 1px 2px rgba(0,0,0,0.15)" : "inset 0 2px 4px rgba(0,0,0,0.15), 0 4px 8px rgba(0,0,0,0.1)", display: "flex", alignItems: "center", justifyContent: "center", position: "relative" }}>
+              <div style={{ width: "30%", height: "30%", borderRadius: "50%", backgroundColor: "#475569", border: `${isThumbnail ? '1px' : '2px'} solid #334155`, position: "relative", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <div style={{ width: "140%", height: isThumbnail ? "1.5px" : "6px", borderRadius: "3px", backgroundColor: "#334155", position: "absolute", transform: "rotate(25deg)" }}></div>
+                <div style={{ width: "140%", height: isThumbnail ? "1.5px" : "6px", borderRadius: "3px", backgroundColor: "#334155", position: "absolute", transform: "rotate(-25deg)" }}></div>
+              </div>
+            </div>
+          </div>
+        );
+      case 4: // 5th: Single Front view
+        return (
+          <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "#FCFAF6" }}>
+            <img src={mainImg} style={{ width: "75%", height: "75%", objectFit: "contain", filter: isThumbnail ? "none" : "drop-shadow(0 8px 16px rgba(0,0,0,0.06))" }} />
+          </div>
+        );
+      case 5: // 6th: Detailed back clasp view
+        return (
+          <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "#FFFFFF" }}>
+            <div style={{ width: "65%", aspectRatio: "1", borderRadius: "50%", background: "radial-gradient(circle, #D1D5DB 0%, #9CA3AF 100%)", boxShadow: isThumbnail ? "inset 0 1px 2px rgba(0,0,0,0.15)" : "inset 0 4px 8px rgba(0,0,0,0.15), 0 10px 20px rgba(0,0,0,0.12)", display: "flex", alignItems: "center", justifyContent: "center", position: "relative" }}>
+              <div style={{ width: "35%", height: "35%", borderRadius: "50%", backgroundColor: "#374151", border: `${isThumbnail ? '1px' : '3px'} solid #1F2937`, position: "relative", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <div style={{ width: "150%", height: isThumbnail ? "2px" : "8px", borderRadius: "4px", backgroundColor: "#1F2937", position: "absolute", transform: "rotate(35deg)" }}></div>
+                <div style={{ width: "150%", height: isThumbnail ? "2px" : "8px", borderRadius: "4px", backgroundColor: "#1F2937", position: "absolute", transform: "rotate(-25deg)" }}></div>
+              </div>
+            </div>
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
 
   return (
     <div className="bg-white min-h-screen pb-24 flex flex-col items-center font-sans text-[#2B2B2B]">
@@ -415,115 +491,218 @@ export default function ProductDetailsPage() {
           className="grid grid-cols-1 md:grid-cols-2 items-start"
         >
           
-          {/* LEFT COLUMN: Main Showcase & Thumbnails */}
-          <div className="space-y-6">
-            <div className="relative w-full aspect-square bg-[#FFFFFF] rounded-3xl overflow-hidden flex items-center justify-center border border-[#F6F3EE] p-8 shadow-xs">
-              <img
-                src={activeImg || product.image}
-                alt={product.name}
-                className="w-full h-full object-contain rounded-2xl"
-              />
+          {/* LEFT COLUMN: Main Showcase & Thumbnails (Width: 624px, Height: 1050.68px, gap: 24px) */}
+          <div 
+            style={{
+              width: "100%",
+              maxWidth: "624px",
+              display: "flex",
+              flexDirection: "column",
+              gap: "24px",
+              boxSizing: "border-box"
+            }}
+            className="w-full"
+          >
+            {/* Main Showcase Box (Width: 624px, Height: 934.68px, border-width: 1.05px, radius: 4px) */}
+            <div 
+              style={{
+                position: "relative",
+                width: "100%",
+                height: "934.6888427734375px",
+                borderRadius: "4px",
+                border: "1.05px solid rgba(204, 204, 204, 1)",
+                backgroundColor: "#FFFFFF",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                overflow: "hidden",
+                boxSizing: "border-box"
+              }}
+              className="w-full aspect-[624/934.68] md:h-[934.6888427734375px]"
+            >
+              {renderMediaContent(activeImgIdx, false)}
             </div>
             
-            {/* Thumbnails grid */}
-            <div className="grid grid-cols-6 gap-3">
-              {/* Thumbnail 1: Main Image */}
-              <button
-                onClick={() => setActiveImg(product.image)}
-                className={`aspect-square bg-[#FFFFFF] rounded-xl overflow-hidden border-2 transition-all p-1.5 ${
-                  activeImg === product.image ? 'border-[#01B99F]' : 'border-[#F6F3EE] hover:border-slate-300'
-                }`}
-              >
-                <img
-                  src={product.image}
-                  alt={`${product.name} main view`}
-                  className="w-full h-full object-contain rounded-lg"
-                />
-              </button>
-
-              {/* Other dummy variants of the product */}
-              {[...Array(5)].map((_, i) => (
+            {/* Thumbnails Row (Width: 624px, Height: 92px, gap: 12px) */}
+            <div 
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                gap: "12px",
+                width: "100%",
+                height: "92px",
+                boxSizing: "border-box"
+              }}
+              className="w-full overflow-x-auto md:overflow-visible"
+            >
+              {[...Array(6)].map((_, i) => (
                 <button
                   key={i}
-                  onClick={() => setActiveImg(product.image)} // default variants fallback to main image
-                  className={`aspect-square bg-[#FFFFFF] rounded-xl overflow-hidden border-2 transition-all p-1.5 ${
-                    i === 1 ? 'border-[#01B99F]' : 'border-[#F6F3EE] hover:border-slate-300' // active outline match
-                  }`}
+                  onClick={() => setActiveImgIdx(i)}
+                  style={{
+                    width: "94px",
+                    height: "92px",
+                    flexShrink: 0,
+                    borderRadius: "4px",
+                    border: activeImgIdx === i 
+                      ? "2px solid rgba(29, 73, 62, 1)" 
+                      : "1.05px solid rgba(204, 204, 204, 1)",
+                    backgroundColor: "#FFFFFF",
+                    padding: "2px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    cursor: "pointer",
+                    boxSizing: "border-box",
+                    transition: "border-color 0.2s ease"
+                  }}
                 >
-                  <img
-                    src={product.image}
-                    alt={`${product.name} variant view ${i}`}
-                    className="w-full h-full object-contain rounded-lg opacity-85 hover:opacity-100"
-                  />
+                  <div style={{ width: "100%", height: "100%", overflow: "hidden", borderRadius: "2px" }}>
+                    {renderMediaContent(i, true)}
+                  </div>
                 </button>
               ))}
             </div>
           </div>
 
-          {/* RIGHT COLUMN: Buying Dashboard */}
-          <div className="space-y-7 text-left font-sans text-[#2B2B2B]">
-            <div className="space-y-3">
-              <div className="flex justify-between items-start gap-4">
-                <h1 className="text-3xl font-sans font-bold text-[#2B2B2B] leading-tight">
-                  {product.name}
-                </h1>
-                <span className="inline-block text-[10px] font-black uppercase tracking-wider text-[#FF623E] bg-[#FFEBE5] px-2.5 py-1 rounded-sm shrink-0">
-                  {product.category}
+          {/* RIGHT COLUMN: Buying Dashboard (Width: 624px, Height: 1050.68px, justify-content: space-between, padding: 24px, border: 1px, radius: 4px) */}
+          <div 
+            style={{
+              width: "100%",
+              maxWidth: "624px",
+              height: "1050.6888427734375px",
+              padding: "24px",
+              borderRadius: "4px",
+              border: "1px solid rgba(204, 204, 204, 1)",
+              backgroundColor: "rgba(255, 255, 255, 1)",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              boxSizing: "border-box",
+              opacity: 1,
+            }}
+            className="md:h-[1050.6888427734375px] text-left font-sans text-[#2B2B2B]"
+          >
+            {/* Title & Tag Row */}
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <h2 style={{ fontFamily: "Faktum, sans-serif", fontSize: "28px", fontWeight: 600, color: "rgba(43, 43, 43, 1)", margin: 0 }}>
+                {product.name}
+              </h2>
+              <span 
+                style={{
+                  fontFamily: "Faktum, sans-serif",
+                  fontWeight: 600,
+                  fontSize: "12px",
+                  color: "rgba(255, 98, 62, 1)",
+                  backgroundColor: "rgba(255, 98, 62, 0.08)",
+                  padding: "4px 8px",
+                  borderRadius: "4px",
+                  textTransform: "uppercase"
+                }}
+              >
+                {product.category}
+              </span>
+            </div>
+
+            {/* Price & Rating Row */}
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", width: "100%" }}>
+              {/* Left: Price & Discount */}
+              <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                <span style={{ fontSize: "32px", fontFamily: "Faktum, sans-serif", fontWeight: 600, color: "rgba(43, 43, 43, 1)" }}>
+                  ₹{product.price.toLocaleString('en-IN')}
+                </span>
+                {product.originalPrice && (
+                  <span style={{ fontSize: "14px", fontFamily: "Faktum, sans-serif", fontWeight: 500, color: "rgba(141, 141, 141, 1)", textDecoration: "line-through" }}>
+                    ₹{product.originalPrice.toLocaleString('en-IN')}
+                  </span>
+                )}
+                <span 
+                  style={{
+                    fontSize: "12px",
+                    fontFamily: "Faktum, sans-serif",
+                    fontWeight: 600,
+                    color: "rgba(22, 163, 74, 1)",
+                    backgroundColor: "rgba(22, 163, 74, 0.08)",
+                    padding: "2px 6px",
+                    borderRadius: "2px"
+                  }}
+                >
+                  {discountPercent}% off
                 </span>
               </div>
 
-              {/* Price & Discount Info */}
-              <div className="flex justify-between items-start flex-wrap gap-4 pt-1">
-                <div className="flex items-baseline gap-3">
-                  <span className="text-3xl font-extrabold text-[#2B2B2B]">
-                    ₹{product.price.toLocaleString('en-IN')}
-                  </span>
-                  {product.originalPrice ? (
-                    <span className="text-sm line-through text-slate-400 font-normal">
-                      ₹{product.originalPrice.toLocaleString('en-IN')}
-                    </span>
-                  ) : (
-                    <span className="text-sm line-through text-slate-400 font-normal">
-                      ₹{(product.price + 100).toLocaleString('en-IN')}
-                    </span>
-                  )}
-                  <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-sm">
-                    {discountPercent}% off
-                  </span>
-                </div>
-
-                <div className="text-right">
-                  <div className="flex items-center justify-end gap-2">
-                    <div className="flex items-center gap-0.5 text-[#FFB95E]">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 fill-[#FFB95E] stroke-none" />
-                      ))}
-                    </div>
-                    <span className="text-xs text-slate-500 font-bold">
-                      ({product.reviewsCount || 120} Reviews)
-                    </span>
+              {/* Right: Stars & Reviews */}
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                  <div style={{ display: "flex", gap: "2px" }}>
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} style={{ width: "16px", height: "16px", fill: "#FFC72C", color: "transparent" }} />
+                    ))}
                   </div>
-                  <span className="text-xs text-slate-400 font-medium mt-1 block">
-                    {product.boughtCount || '200+ bought in past month'}
+                  <span style={{ fontSize: "14px", fontFamily: "Faktum, sans-serif", fontWeight: 500, color: "rgba(43, 43, 43, 1)" }}>
+                    ({product.reviewsCount || 120} Reviews)
                   </span>
                 </div>
+                <span style={{ fontSize: "12px", fontFamily: "Faktum, sans-serif", fontWeight: 500, color: "rgba(141, 141, 141, 1)", marginTop: "4px" }}>
+                  {product.boughtCount || '200+ bought in past month'}
+                </span>
               </div>
             </div>
 
             {/* Quantity Selector */}
-            <div className="space-y-2.5 pt-1">
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-500 block">Quantity</span>
-              <div className="flex items-center border border-[#F6F3EE] rounded-lg w-max bg-white">
+            <div style={{ display: "flex", flexDirection: "column", gap: "8px", textAlign: "left" }}>
+              <span style={{ fontFamily: "Faktum, sans-serif", fontSize: "14px", fontWeight: 500, color: "rgba(141, 141, 141, 1)" }}>Quantity</span>
+              <div 
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  border: "1px solid rgba(204, 204, 204, 0.54)",
+                  borderRadius: "4px",
+                  width: "max-content",
+                  height: "40px",
+                  backgroundColor: "#FFFFFF"
+                }}
+              >
                 <button
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="px-3.5 py-1.5 hover:bg-slate-50 text-slate-600 font-bold transition cursor-pointer select-none"
+                  style={{
+                    width: "40px",
+                    height: "100%",
+                    border: "none",
+                    background: "none",
+                    fontSize: "18px",
+                    fontWeight: 600,
+                    color: "rgba(43, 43, 43, 1)",
+                    cursor: "pointer",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    borderRight: "1px solid rgba(204, 204, 204, 0.54)"
+                  }}
+                  className="hover:bg-slate-50 transition"
                 >
                   −
                 </button>
-                <span className="px-5 text-sm font-bold text-[#2B2B2B] select-none">{quantity}</span>
+                <span style={{ minWidth: "48px", textAlign: "center", fontFamily: "Faktum, sans-serif", fontSize: "16px", fontWeight: 500, color: "rgba(43, 43, 43, 1)" }}>
+                  {quantity}
+                </span>
                 <button
                   onClick={() => setQuantity(quantity + 1)}
-                  className="px-3.5 py-1.5 hover:bg-slate-50 text-slate-600 font-bold transition cursor-pointer select-none"
+                  style={{
+                    width: "40px",
+                    height: "100%",
+                    border: "none",
+                    background: "none",
+                    fontSize: "18px",
+                    fontWeight: 600,
+                    color: "rgba(43, 43, 43, 1)",
+                    cursor: "pointer",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    borderLeft: "1px solid rgba(204, 204, 204, 0.54)"
+                  }}
+                  className="hover:bg-slate-50 transition"
                 >
                   +
                 </button>
@@ -531,10 +710,27 @@ export default function ProductDetailsPage() {
             </div>
 
             {/* Action Buttons */}
-            <div className="grid grid-cols-2 gap-4 pt-1">
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px", width: "100%" }}>
               <button
                 onClick={handleAddToCart}
-                className="w-full py-4 border border-[#1D493E] text-[#1D493E] hover:bg-[#1D493E] hover:text-white rounded-lg font-bold text-xs uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center gap-2 shadow-xs bg-white group"
+                style={{
+                  width: "100%",
+                  height: "50px",
+                  border: "1px solid rgba(29, 73, 62, 1)",
+                  color: "rgba(29, 73, 62, 1)",
+                  backgroundColor: "#FFFFFF",
+                  borderRadius: "4px",
+                  fontFamily: "Faktum, sans-serif",
+                  fontWeight: 600,
+                  fontSize: "14px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "10px",
+                  cursor: "pointer",
+                  boxSizing: "border-box"
+                }}
+                className="hover:bg-[#1D493E] hover:text-white transition-all duration-300 group"
               >
                 <span>Add to Cart</span>
                 <svg 
@@ -570,78 +766,155 @@ export default function ProductDetailsPage() {
               </button>
               <button
                 onClick={handleBuyNow}
-                className="w-full py-4 bg-[#1D493E] hover:bg-[#15342c] text-white rounded-lg font-bold text-xs uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center gap-1.5 shadow-md"
+                style={{
+                  width: "100%",
+                  height: "50px",
+                  backgroundColor: "rgba(29, 73, 62, 1)",
+                  color: "#FFFFFF",
+                  border: "none",
+                  borderRadius: "4px",
+                  fontFamily: "Faktum, sans-serif",
+                  fontWeight: 600,
+                  fontSize: "14px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "6px",
+                  cursor: "pointer",
+                  boxSizing: "border-box"
+                }}
+                className="hover:bg-[#15342c] transition-all duration-300"
               >
                 <span>Buy Now</span>
-                <span className="text-sm font-sans">↗</span>
+                <span style={{ fontSize: "16px" }}>↗</span>
               </button>
             </div>
 
             {addedToCartSuccess && (
-              <p className="text-xs font-bold text-emerald-600 animate-pulse">
+              <p className="text-xs font-bold text-emerald-600 animate-pulse" style={{ margin: 0 }}>
                 ✓ Product successfully added to your cart!
               </p>
             )}
 
             {/* Delivery option checks */}
-            <div className="space-y-2 pt-2 text-[#2B2B2B]">
-              <span className="text-xs font-bold uppercase tracking-wider block text-slate-500">Delivery options</span>
-              <div className="relative flex items-center w-full">
+            <div style={{ display: "flex", flexDirection: "column", gap: "8px", textAlign: "left" }}>
+              <span style={{ fontFamily: "Faktum, sans-serif", fontSize: "14px", fontWeight: 500, color: "rgba(141, 141, 141, 1)" }}>
+                Delivery options
+              </span>
+              <div style={{ position: "relative", display: "flex", alignItems: "center", width: "100%" }}>
                 <input
                   type="text"
                   placeholder="Enter the pincode"
                   value={pincode}
                   onChange={(e) => setPincode(e.target.value)}
-                  className="w-full pl-3.5 pr-20 py-2.5 border border-[#F6F3EE] rounded-lg bg-white text-xs font-semibold focus:outline-none placeholder-slate-400"
+                  style={{
+                    width: "100%",
+                    height: "40px",
+                    paddingLeft: "12px",
+                    paddingRight: "70px",
+                    border: "1px solid rgba(204, 204, 204, 1)",
+                    borderRadius: "4px",
+                    fontSize: "14px",
+                    fontFamily: "Faktum, sans-serif",
+                    color: "rgba(43, 43, 43, 1)",
+                    boxSizing: "border-box"
+                  }}
+                  className="placeholder-slate-400 focus:outline-none"
                 />
                 <button
                   type="button"
                   onClick={handleCheckPincode as any}
-                  className="absolute right-2 text-sky-500 hover:text-sky-600 rounded-lg text-xs font-bold transition cursor-pointer px-3 py-1.5"
+                  style={{
+                    position: "absolute",
+                    right: "12px",
+                    color: "rgba(63, 136, 255, 1)",
+                    border: "none",
+                    background: "none",
+                    fontSize: "14px",
+                    fontFamily: "Faktum, sans-serif",
+                    fontWeight: 600,
+                    cursor: "pointer"
+                  }}
+                  className="hover:text-blue-600 transition"
                 >
                   Check
                 </button>
               </div>
-              <p className="text-[10px] text-slate-450 font-semibold tracking-wide">
+              <span style={{ fontFamily: "Faktum, sans-serif", fontSize: "12px", color: "rgba(141, 141, 141, 1)", fontWeight: 500 }}>
                 Enter the pin code to know when it got delivered to our door step
-              </p>
+              </span>
               {pincodeMessage ? (
-                <p className={`text-xs font-bold ${pincodeMessage.startsWith('✓') ? 'text-emerald-600' : 'text-rose-600'}`}>
+                <span style={{ fontFamily: "Faktum, sans-serif", fontSize: "14px", fontWeight: 600, color: pincodeMessage.startsWith('✓') ? "#10B981" : "#EF4444" }}>
                   {pincodeMessage}
-                </p>
+                </span>
               ) : (
-                <p className="text-xs font-semibold text-slate-500 pt-1">
-                  FREE delivery as soon as <span className="font-bold text-[#2B2B2B]">Thu, 9 Apr, 7 am - 10 pm</span>
-                </p>
+                <span style={{ fontFamily: "Faktum, sans-serif", fontSize: "14px", color: "rgba(141, 141, 141, 1)", fontWeight: 500 }}>
+                  FREE delivery as soon as <span style={{ color: "rgba(43, 43, 43, 1)", fontWeight: 600 }}>Thu, 9 Apr, 7am - 10pm</span>
+                </span>
               )}
             </div>
 
             {/* Product Specifications Table */}
-            <div className="space-y-3 pt-2">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400">Product Details</h3>
-              <div className="border border-[#F6F3EE] rounded-xl overflow-hidden divide-y divide-[#F6F3EE] bg-white shadow-xs">
+            <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+              <span style={{ fontFamily: "Faktum, sans-serif", fontSize: "14px", fontWeight: 600, color: "rgba(43, 43, 43, 1)", textAlign: "left" }}>
+                Product Details
+              </span>
+              <div style={{ width: "100%", display: "flex", flexDirection: "column", borderTop: "1px solid rgba(204, 204, 204, 0.54)" }}>
                 {productSpecs.map((sp) => (
-                  <div key={sp.label} className="grid grid-cols-2 p-4 text-xs font-semibold items-center">
-                    <span className="text-slate-400 font-sans">{sp.label}</span>
-                    <span className="text-[#2B2B2B] text-right font-bold font-sans capitalize">{sp.value}</span>
+                  <div 
+                    key={sp.label} 
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      padding: "12px 0",
+                      borderBottom: "1px solid rgba(204, 204, 204, 0.54)",
+                      fontSize: "14px",
+                      fontFamily: "Faktum, sans-serif"
+                    }}
+                  >
+                    <span style={{ color: "rgba(141, 141, 141, 1)", fontWeight: 500 }}>{sp.label}</span>
+                    <span style={{ color: "rgba(43, 43, 43, 1)", fontWeight: 600 }}>{sp.value}</span>
                   </div>
                 ))}
               </div>
             </div>
 
             {/* Trust Badges */}
-            <div className="grid grid-cols-3 gap-3 pt-4 border-t border-[#F6F3EE] text-center font-semibold">
-              <div className="flex flex-col items-center justify-center p-3 bg-slate-50 rounded-xl space-y-1.5">
-                <Shield className="w-5 h-5 text-[#1D493E] stroke-[1.5]" />
-                <span className="text-[10px] text-slate-500 tracking-tight font-sans">Safe Payment</span>
+            <div 
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(3, 1fr)",
+                gap: "12px",
+                paddingTop: "16px",
+                borderTop: "1px solid rgba(204, 204, 204, 0.54)",
+                boxSizing: "border-box"
+              }}
+              className="text-center font-semibold"
+            >
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
+                <div style={{ width: "48px", height: "48px", borderRadius: "8px", backgroundColor: "#F8F9FA", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <Shield className="w-6 h-6 text-[#1D493E] stroke-[1.5]" />
+                </div>
+                <span style={{ fontSize: "10px", fontFamily: "Faktum, sans-serif", fontWeight: 500, color: "rgba(141, 141, 141, 1)" }}>
+                  Safe Payment
+                </span>
               </div>
-              <div className="flex flex-col items-center justify-center p-3 bg-slate-50 rounded-xl space-y-1.5">
-                <Truck className="w-5 h-5 text-[#1D493E] stroke-[1.5]" />
-                <span className="text-[10px] text-slate-500 tracking-tight font-sans">Free & fast Shipping</span>
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
+                <div style={{ width: "48px", height: "48px", borderRadius: "8px", backgroundColor: "#F8F9FA", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <Truck className="w-6 h-6 text-[#1D493E] stroke-[1.5]" />
+                </div>
+                <span style={{ fontSize: "10px", fontFamily: "Faktum, sans-serif", fontWeight: 500, color: "rgba(141, 141, 141, 1)" }}>
+                  Free & fast Shipping
+                </span>
               </div>
-              <div className="flex flex-col items-center justify-center p-3 bg-slate-50 rounded-xl space-y-1.5">
-                <Box className="w-5 h-5 text-[#1D493E] stroke-[1.5]" />
-                <span className="text-[10px] text-slate-500 tracking-tight font-sans">2 - 5 days Delivery</span>
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
+                <div style={{ width: "48px", height: "48px", borderRadius: "8px", backgroundColor: "#F8F9FA", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <Box className="w-6 h-6 text-[#1D493E] stroke-[1.5]" />
+                </div>
+                <span style={{ fontSize: "10px", fontFamily: "Faktum, sans-serif", fontWeight: 500, color: "rgba(141, 141, 141, 1)" }}>
+                  2 - 5 days Delivery
+                </span>
               </div>
             </div>
 

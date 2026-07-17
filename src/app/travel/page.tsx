@@ -502,9 +502,19 @@ export default function HolidaysPortal() {
                 >
                   <Calendar style={{ width: "24px", height: "24px", color: "rgba(141, 141, 141, 1)" }} className="shrink-0" />
                   <input
-                    type="text"
+                    type="date"
                     value={startDate}
                     onChange={(e) => setStartDate(e.target.value)}
+                    onClick={(e) => {
+                      try {
+                        e.currentTarget.showPicker();
+                      } catch (err) {}
+                    }}
+                    onFocus={(e) => {
+                      try {
+                        e.currentTarget.showPicker();
+                      } catch (err) {}
+                    }}
                     placeholder="dd/mm/yyyy"
                     style={{ 
                       flex: 1, 
@@ -517,9 +527,10 @@ export default function HolidaysPortal() {
                       lineHeight: "100%", 
                       letterSpacing: "0px", 
                       color: "rgba(43, 43, 43, 1)",
-                      padding: 0
+                      padding: 0,
+                      cursor: "pointer"
                     }}
-                    className="placeholder-[rgba(141,141,141,1)]"
+                    className="placeholder-[rgba(141,141,141,1)] hide-calendar-picker-icon"
                   />
                 </div>
                 <div 
@@ -537,9 +548,19 @@ export default function HolidaysPortal() {
                 >
                   <Calendar style={{ width: "24px", height: "24px", color: "rgba(141, 141, 141, 1)" }} className="shrink-0" />
                   <input
-                    type="text"
+                    type="date"
                     value={endDate}
                     onChange={(e) => setEndDate(e.target.value)}
+                    onClick={(e) => {
+                      try {
+                        e.currentTarget.showPicker();
+                      } catch (err) {}
+                    }}
+                    onFocus={(e) => {
+                      try {
+                        e.currentTarget.showPicker();
+                      } catch (err) {}
+                    }}
                     placeholder="dd/mm/yyyy"
                     style={{ 
                       flex: 1, 
@@ -552,9 +573,10 @@ export default function HolidaysPortal() {
                       lineHeight: "100%", 
                       letterSpacing: "0px", 
                       color: "rgba(43, 43, 43, 1)",
-                      padding: 0
+                      padding: 0,
+                      cursor: "pointer"
                     }}
-                    className="placeholder-[rgba(141,141,141,1)]"
+                    className="placeholder-[rgba(141,141,141,1)] hide-calendar-picker-icon"
                   />
                 </div>
               </div>

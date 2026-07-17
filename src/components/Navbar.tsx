@@ -51,7 +51,7 @@ export const Navbar: React.FC = () => {
     <header className="w-full z-50 flex flex-col sticky top-0 bg-white backdrop-blur-[12px] border-b border-[#CCCCCC]">
       {/* 2. MAIN NAV BAR */}
       <nav className="h-[90px] flex items-center w-full">
-        <div className="max-w-[1440px] mx-auto px-[42px] pt-[20px] pb-[20px] w-full flex items-center justify-between h-full">
+        <div className="max-w-[1440px] mx-auto px-4 md:px-[42px] pt-[20px] pb-[20px] w-full flex items-center justify-between h-full">
           
           <div className="flex items-center gap-10">
             {/* Logo (Direct Image from Figma Mockup) */}
@@ -59,7 +59,7 @@ export const Navbar: React.FC = () => {
               <img
                 src="/logo.png"
                 alt="go banjāra logo"
-                className="h-[48px] w-[217px] object-contain transition-transform duration-300 group-hover:scale-102"
+                className="h-[40px] sm:h-[48px] w-auto max-w-[160px] sm:max-w-[217px] object-contain transition-transform duration-300 group-hover:scale-102"
               />
             </Link>
 
@@ -111,7 +111,7 @@ export const Navbar: React.FC = () => {
           </div>
 
           {/* Right actions: Search Bar, Cart & Login */}
-          <div className="flex items-center justify-between gap-[24px] w-[405px] h-[47px] shrink-0">
+          <div className="flex items-center justify-end gap-3 md:gap-[24px] w-auto md:w-[405px] h-[47px] shrink-0">
             
             {/* Search Input Box */}
             <div className="hidden md:flex items-center w-[215px] h-[47px] gap-[8px] rounded-[4px] p-[12px] bg-white border border-[#CCCCCC]">

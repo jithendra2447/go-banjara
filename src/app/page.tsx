@@ -71,8 +71,8 @@ const FAQ_ITEMS = [
     answer: "Yes, 85% of your travel package expenses go directly to supporting local homestays, native guides, remote monasteries, and local micro-economies. Our gear is also sourced responsibly from local artisans."
   },
   {
-    question: "What materials are the badges made from? Zinc alloy with glossy enamel fill.",
-    answer: "Lightweight, durable, and safe to pin on bags, jackets, or backpacks without damaging fabric."
+    question: "What materials are the badges made from?",
+    answer: "Zinc alloy with glossy enamel fill. Lightweight, durable, and safe to pin on bags, jackets, or backpacks without damaging fabric."
   }
 ];
 
@@ -357,24 +357,22 @@ export default function Homepage() {
       {/* 2. HERO CONTENT SECTION (Transparent background, relative z-[45] to sit on top of everything, but below navbar z-50) */}
       <section className="relative hero-banner-height flex flex-col justify-center z-[45] bg-transparent">
         <div className="max-w-[1440px] mx-auto px-6 md:px-20 w-full grid md:grid-cols-2 gap-12 items-center relative py-4">
-          <div className="w-full md:w-[454px] md:h-[530px] flex flex-col justify-between text-left shrink-0">
-            <div className="w-full md:w-[454px] md:h-[368px] flex flex-col gap-[32px] justify-start shrink-0">
-              <h1 className="text-4xl md:text-[62px] md:leading-[1.38] tracking-[-0.2px] font-semibold text-white font-sans w-full md:w-[454px] md:h-auto shrink-0">
+          <div className="w-full md:max-w-[454px] md:h-auto flex flex-col justify-between text-left shrink-0 gap-6 md:gap-12">
+            <div className="w-full md:max-w-[454px] md:h-auto flex flex-col gap-[24px] md:gap-[32px] justify-start shrink-0">
+              <h1 className="text-4xl md:text-[62px] md:leading-[1.38] tracking-[-0.2px] font-semibold text-white font-sans w-full md:max-w-[454px] md:h-auto shrink-0">
                 {pageContent.heroTitleLine1?.trim() ? pageContent.heroTitleLine1 : "Hey! Let’s"} <br />
                 {pageContent.heroTitleLine2?.trim() ? pageContent.heroTitleLine2 : "Escape from"} <br />
                 {pageContent.heroTitleLine3?.trim() ? pageContent.heroTitleLine3 : "the Ordinary"}
               </h1>
-              <p className="text-sm md:text-[20px] md:leading-[34px] tracking-[0px] text-white/95 font-sans font-medium w-full md:w-[454px] md:h-[102px] overflow-hidden shrink-0">
+              <p className="text-sm md:text-[20px] md:leading-[34px] tracking-[0px] text-white/95 font-sans font-medium w-full md:max-w-[454px] md:h-auto overflow-hidden shrink-0">
                 {pageContent.heroSubtitle?.trim() ? pageContent.heroSubtitle : "We bridge the gap between soulful Indian travel and high end gear. curated for those who find home in the dust of the road"}
               </p>
             </div>
-            <div className="flex items-center gap-[24px] w-full md:w-[412px] h-[55px] justify-start shrink-0 md:translate-y-[30px]">
+            <div className="flex flex-col sm:flex-row items-center gap-[16px] md:gap-[24px] w-full max-w-[412px] h-auto justify-start shrink-0 md:translate-y-[30px]">
               <Link 
                 href="/shop"
-                className="hover:scale-[1.02] active:scale-[0.98] text-white border border-[#1D493E] transition-all duration-300 cursor-pointer flex items-center justify-center"
+                className="hover:scale-[1.02] active:scale-[0.98] text-white border border-[#1D493E] transition-all duration-300 cursor-pointer flex items-center justify-center w-full sm:w-[194px] h-[55px]"
                 style={{
-                  width: "194px",
-                  height: "55px",
                   paddingTop: "16px",
                   paddingBottom: "16px",
                   paddingLeft: "12px",
@@ -396,10 +394,8 @@ export default function Homepage() {
               </Link>
               <Link 
                 href="/travel"
-                className="hover:bg-[#1D493E] hover:text-white hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 cursor-pointer flex items-center justify-center"
+                className="hover:bg-[#1D493E] hover:text-white hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 cursor-pointer flex items-center justify-center w-full sm:w-[194px] h-[55px]"
                 style={{
-                  width: "194px",
-                  height: "55px",
                   paddingTop: "16px",
                   paddingBottom: "16px",
                   paddingLeft: "12px",
@@ -427,34 +423,34 @@ export default function Homepage() {
       </section>
 
       {/* 2. METRICS WIDGET BAR */}
-      <section style={{ background: "rgba(255,255,255,1)", marginTop: "-35px" }} className="relative z-30 flex items-center w-full md:h-[145px]">
+      <section style={{ background: "rgba(255,255,255,1)", marginTop: "-35px" }} className="relative z-30 flex items-center w-full md:h-[145px] py-6 md:py-0">
         <div
-          className="w-full max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between"
-          style={{ paddingTop: "24px", paddingBottom: "24px", paddingLeft: "80px", paddingRight: "80px" }}
+          className="w-full max-w-[1440px] mx-auto flex flex-wrap md:flex-nowrap items-center justify-between px-6 md:px-[80px]"
+          style={{ paddingTop: "24px", paddingBottom: "24px" }}
         >
-          <div className="w-full md:w-[177px] h-auto md:h-[97px] flex flex-col items-center justify-center p-[12px] border-b border-[#CCCCCC] md:border-b-0 shrink-0" style={{ gap: "8px" }}>
-            <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center", height: "40px", display: "inline-flex", alignItems: "center", justifyContent: "center" }}>10+</h4>
-            <p style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center", whiteSpace: "nowrap", height: "25px", display: "inline-flex", alignItems: "center", justifyContent: "center" }}>Travel Packages</p>
+          <div className="w-[45%] md:w-[177px] h-auto md:h-[97px] flex flex-col items-center justify-center p-[12px] shrink-0" style={{ gap: "8px" }}>
+            <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center", height: "40px", display: "inline-flex", alignItems: "center", justifyContent: "center" }} className="text-2xl sm:text-3xl md:text-[32px]">10+</h4>
+            <p style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center", whiteSpace: "nowrap", height: "25px", display: "inline-flex", alignItems: "center", justifyContent: "center" }} className="text-sm sm:text-base md:text-[20px]">Travel Packages</p>
           </div>
           <div className="hidden md:block w-[1px] h-[97px] bg-[#CCCCCC] shrink-0" />
-          <div className="w-full md:w-[177px] h-auto md:h-[97px] flex flex-col items-center justify-center p-[12px] border-b border-[#CCCCCC] md:border-b-0 shrink-0" style={{ gap: "8px" }}>
-            <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center", height: "40px", display: "inline-flex", alignItems: "center", justifyContent: "center" }}>15k+</h4>
-            <p style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center", whiteSpace: "nowrap", height: "25px", display: "inline-flex", alignItems: "center", justifyContent: "center" }}>Nomads Joined</p>
+          <div className="w-[45%] md:w-[177px] h-auto md:h-[97px] flex flex-col items-center justify-center p-[12px] shrink-0" style={{ gap: "8px" }}>
+            <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center", height: "40px", display: "inline-flex", alignItems: "center", justifyContent: "center" }} className="text-2xl sm:text-3xl md:text-[32px]">15k+</h4>
+            <p style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center", whiteSpace: "nowrap", height: "25px", display: "inline-flex", alignItems: "center", justifyContent: "center" }} className="text-sm sm:text-base md:text-[20px]">Nomads Joined</p>
           </div>
           <div className="hidden md:block w-[1px] h-[97px] bg-[#CCCCCC] shrink-0" />
-          <div className="w-full md:w-[177px] h-auto md:h-[97px] flex flex-col items-center justify-center p-[12px] border-b border-[#CCCCCC] md:border-b-0 shrink-0" style={{ gap: "8px" }}>
-            <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center", height: "40px", display: "inline-flex", alignItems: "center", justifyContent: "center" }}>24/7</h4>
-            <p style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center", whiteSpace: "nowrap", height: "25px", display: "inline-flex", alignItems: "center", justifyContent: "center" }}>On-road Support</p>
+          <div className="w-[45%] md:w-[177px] h-auto md:h-[97px] flex flex-col items-center justify-center p-[12px] shrink-0" style={{ gap: "8px" }}>
+            <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center", height: "40px", display: "inline-flex", alignItems: "center", justifyContent: "center" }} className="text-2xl sm:text-3xl md:text-[32px]">24/7</h4>
+            <p style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center", whiteSpace: "nowrap", height: "25px", display: "inline-flex", alignItems: "center", justifyContent: "center" }} className="text-sm sm:text-base md:text-[20px]">On-road Support</p>
           </div>
           <div className="hidden md:block w-[1px] h-[97px] bg-[#CCCCCC] shrink-0" />
-          <div className="w-full md:w-[177px] h-auto md:h-[97px] flex flex-col items-center justify-center p-[12px] border-b border-[#CCCCCC] md:border-b-0 shrink-0" style={{ gap: "8px" }}>
-            <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center", height: "40px", display: "inline-flex", alignItems: "center", justifyContent: "center" }}>7+</h4>
-            <p style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center", whiteSpace: "nowrap", height: "25px", display: "inline-flex", alignItems: "center", justifyContent: "center" }}>Shop Products</p>
+          <div className="w-[45%] md:w-[177px] h-auto md:h-[97px] flex flex-col items-center justify-center p-[12px] shrink-0" style={{ gap: "8px" }}>
+            <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center", height: "40px", display: "inline-flex", alignItems: "center", justifyContent: "center" }} className="text-2xl sm:text-3xl md:text-[32px]">7+</h4>
+            <p style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center", whiteSpace: "nowrap", height: "25px", display: "inline-flex", alignItems: "center", justifyContent: "center" }} className="text-sm sm:text-base md:text-[20px]">Shop Products</p>
           </div>
           <div className="hidden md:block w-[1px] h-[97px] bg-[#CCCCCC] shrink-0" />
-          <div className="w-full md:w-[177px] h-auto md:h-[97px] flex flex-col items-center justify-center p-[12px] shrink-0" style={{ gap: "8px" }}>
-            <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center", height: "40px", display: "inline-flex", alignItems: "center", justifyContent: "center" }}>4.5+</h4>
-            <p style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center", whiteSpace: "nowrap", height: "25px", display: "inline-flex", alignItems: "center", justifyContent: "center" }}>Average trip rating</p>
+          <div className="w-[100%] md:w-[177px] h-auto md:h-[97px] flex flex-col items-center justify-center p-[12px] shrink-0 mt-4 md:mt-0" style={{ gap: "8px" }}>
+            <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center", height: "40px", display: "inline-flex", alignItems: "center", justifyContent: "center" }} className="text-2xl sm:text-3xl md:text-[32px]">4.5+</h4>
+            <p style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center", whiteSpace: "nowrap", height: "25px", display: "inline-flex", alignItems: "center", justifyContent: "center" }} className="text-sm sm:text-base md:text-[20px]">Average trip rating</p>
           </div>
         </div>
       </section>
@@ -468,7 +464,7 @@ export default function Homepage() {
               <h2 className="text-2xl md:text-3xl font-black leading-tight font-sans">
                 Shop Travel Gear for Nomads
               </h2>
-              <p className="text-[20px] leading-[32px] tracking-[0px] text-white/80 font-sans font-medium">
+              <p className="text-base md:text-[20px] leading-[32px] tracking-[0px] text-white/80 font-sans font-medium">
                 Explore our collection of hand-picked journals, weather-proof stickers and artisanal badges designed for the road
               </p>
             </div>
@@ -490,7 +486,7 @@ export default function Homepage() {
               <h2 className="text-2xl md:text-3xl font-black leading-tight font-sans">
                 Book a Trip
               </h2>
-              <p className="text-[20px] leading-[32px] tracking-[0px] text-white/90 font-sans font-medium">
+              <p className="text-base md:text-[20px] leading-[32px] tracking-[0px] text-white/90 font-sans font-medium">
                 Explore our collection of hand-picked journals, weather-proof stickers and artisanal badges designed for the road
               </p>
             </div>
@@ -546,7 +542,7 @@ export default function Homepage() {
                     />
                   </div>
                   {/* Details */}
-                  <div className="w-full md:w-[640px] pt-[12px] pb-[12px] px-[12px] flex flex-col justify-between h-full bg-white shrink-0">
+                  <div className="w-full md:w-[640px] pt-4 pb-4 px-4 flex flex-col justify-between md:h-full bg-white shrink-0 gap-6 md:gap-0">
                     {/* Top Group (Width: Fill, Height: 151px, Gap: 12px) */}
                     <div className="flex flex-col gap-2 min-h-[140px] shrink-0 w-full">
                       {/* Tags Container (Width: Fill, Height: Hug 28px, Justify: space-between) */}
@@ -558,40 +554,40 @@ export default function Homepage() {
                         <h3 className="text-2xl md:text-[32px] font-sans font-bold text-[#1D493E] leading-tight truncate flex-1" title={pkg1.name}>{pkg1.name}</h3>
                         <span className="text-xl md:text-[24px] font-sans font-bold text-[#1D493E] shrink-0">₹{(pkg1.price ?? 0).toLocaleString('en-IN')}/Person</span>
                       </div>
-                      <p className="font-sans font-medium text-[20px] leading-[32px] text-[#8D8D8D] w-full md:w-[616px] h-[64px] overflow-hidden line-clamp-2 shrink-0">
+                      <p className="font-sans font-medium text-sm sm:text-base md:text-[20px] md:leading-[32px] text-[#8D8D8D] w-full max-w-[616px] md:h-[64px] overflow-hidden line-clamp-2 shrink-0">
                         {pkg1.description}
                       </p>
                     </div>
                     {/* Details Grid Block (Width: 616px, Height: 140px, Justify: space-between) */}
-                    <div className="w-full md:w-[616px] h-[140px] flex justify-between border-t border-gray-200 pt-3 shrink-0">
+                    <div className="w-full max-w-[616px] h-auto flex flex-col sm:flex-row justify-between border-t border-gray-200 pt-3 shrink-0 gap-4 sm:gap-0">
                       {/* Column 1 (Width: 308px, Height: 140px, Gap: space-between) */}
-                      <div className="w-full md:w-[308px] h-full flex flex-col justify-between shrink-0">
-                        <div className="w-[308px] h-[70px] pt-[12px] pr-[12px] pb-[12px] flex items-center gap-[8px] shrink-0">
+                      <div className="w-full sm:w-[50%] md:w-[308px] flex flex-col gap-2 sm:gap-0 justify-between shrink-0">
+                        <div className="w-full sm:max-w-[308px] h-auto min-h-[50px] flex items-center gap-[8px] shrink-0 py-2">
                           <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
                             <MapPin className="w-4 h-4 text-[#1D493E]" />
                           </div>
-                          <span className="font-sans font-medium text-[20px] leading-[28px] text-[#2B2B2B] align-middle">Starts from {pkg1.startPoint || 'Srinagar'}</span>
+                          <span className="font-sans font-medium text-xs sm:text-sm md:text-[20px] leading-normal text-[#2B2B2B] align-middle">Starts from {pkg1.startPoint || 'Srinagar'}</span>
                         </div>
-                        <div className="w-[308px] h-[70px] pt-[12px] pr-[12px] pb-[12px] flex items-center gap-[8px] shrink-0">
+                        <div className="w-full sm:max-w-[308px] h-auto min-h-[50px] flex items-center gap-[8px] shrink-0 py-2">
                           <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
                             <ArrowUpRight className="w-4 h-4 text-[#1D493E]" />
                           </div>
-                          <span className="font-sans font-medium text-[20px] leading-[28px] text-[#2B2B2B] align-middle">{pkg1.difficulty || 'Moderate'} Difficulty</span>
+                          <span className="font-sans font-medium text-xs sm:text-sm md:text-[20px] leading-normal text-[#2B2B2B] align-middle">{pkg1.difficulty || 'Moderate'} Difficulty</span>
                         </div>
                       </div>
                       {/* Column 2 (Width: 308px, Height: 140px, Gap: space-between) */}
-                      <div className="w-full md:w-[308px] h-full flex flex-col justify-between shrink-0">
-                        <div className="w-[308px] h-[70px] pt-[12px] pr-[12px] pb-[12px] flex items-center gap-[8px] shrink-0">
+                      <div className="w-full sm:w-[50%] md:w-[308px] flex flex-col gap-2 sm:gap-0 justify-between shrink-0">
+                        <div className="w-full sm:max-w-[308px] h-auto min-h-[50px] flex items-center gap-[8px] shrink-0 py-2">
                           <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
                             <Users className="w-4 h-4 text-[#1D493E]" />
                           </div>
-                          <span className="font-sans font-medium text-[20px] leading-[28px] text-[#2B2B2B] align-middle">{pkg1.groupType || 'Curated group Trip'}</span>
+                          <span className="font-sans font-medium text-xs sm:text-sm md:text-[20px] leading-normal text-[#2B2B2B] align-middle">{pkg1.groupType || 'Curated group Trip'}</span>
                         </div>
-                        <div className="w-[308px] h-[70px] pt-[12px] pr-[12px] pb-[12px] flex items-center gap-[8px] shrink-0">
+                        <div className="w-full sm:max-w-[308px] h-auto min-h-[50px] flex items-center gap-[8px] shrink-0 py-2">
                           <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
                             <Calendar className="w-4 h-4 text-[#1D493E]" />
                           </div>
-                          <span className="font-sans font-medium text-[20px] leading-[28px] text-[#2B2B2B] align-middle">Next: {pkg1.nextDeparture || 'Aug, 2026'}</span>
+                          <span className="font-sans font-medium text-xs sm:text-sm md:text-[20px] leading-normal text-[#2B2B2B] align-middle">Next: {pkg1.nextDeparture || 'Aug, 2026'}</span>
                         </div>
                       </div>
                     </div>
@@ -633,7 +629,7 @@ export default function Homepage() {
                       />
                     </div>
                     {/* Details block with padding */}
-                    <div className="flex-1 flex flex-col justify-between pt-[12px] pb-[12px] px-[12px]">
+                    <div className="flex-1 flex flex-col justify-between pt-4 pb-4 px-4 gap-6 md:gap-0">
                       {/* Top Group (Width: Fill, Height: 151px, Gap: 12px) */}
                       <div className="flex flex-col gap-2 min-h-[140px] shrink-0 w-full">
                         {/* Tags Container (Width: Fill, Height: Hug 28px, Justify: space-between) */}
@@ -645,41 +641,41 @@ export default function Homepage() {
                           <h3 className="text-2xl md:text-[32px] font-sans font-bold text-[#1D493E] leading-tight truncate flex-1" title={pkg.name}>{pkg.name}</h3>
                           <span className="text-xl md:text-[24px] font-sans font-bold text-[#1D493E] shrink-0">₹{(pkg.price ?? 0).toLocaleString('en-IN')}/Person</span>
                         </div>
-                        <p className="font-sans font-medium text-[20px] leading-[32px] text-[#8D8D8D] w-full md:w-[616px] h-[64px] overflow-hidden line-clamp-2 shrink-0">
+                        <p className="font-sans font-medium text-sm sm:text-base md:text-[20px] md:leading-[32px] text-[#8D8D8D] w-full max-w-[616px] md:h-[64px] overflow-hidden line-clamp-2 shrink-0">
                           {pkg.description}
                         </p>
                       </div>
 
                       {/* Details Grid Block (Width: 616px, Height: 140px, Justify: space-between) */}
-                      <div className="w-full md:w-[616px] h-[140px] flex justify-between border-t border-gray-200 pt-3 shrink-0">
+                      <div className="w-full max-w-[616px] h-auto flex flex-col sm:flex-row justify-between border-t border-gray-200 pt-3 shrink-0 gap-4 sm:gap-0">
                         {/* Column 1 (Width: 308px, Height: 140px, Gap: space-between) */}
-                        <div className="w-full md:w-[308px] h-full flex flex-col justify-between shrink-0">
-                          <div className="w-[308px] h-[70px] pt-[12px] pr-[12px] pb-[12px] flex items-center gap-[8px] shrink-0">
+                        <div className="w-full sm:w-[50%] md:w-[308px] flex flex-col gap-2 sm:gap-0 justify-between shrink-0">
+                          <div className="w-full sm:max-w-[308px] h-auto min-h-[50px] flex items-center gap-[8px] shrink-0 py-2">
                             <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
                               <MapPin className="w-4 h-4 text-[#1D493E]" />
                             </div>
-                            <span className="font-sans font-medium text-[20px] leading-[28px] text-[#2B2B2B] align-middle">Starts from {pkg.startPoint || 'Srinagar'}</span>
+                            <span className="font-sans font-medium text-xs sm:text-sm md:text-[20px] leading-normal text-[#2B2B2B] align-middle">Starts from {pkg.startPoint || 'Srinagar'}</span>
                           </div>
-                          <div className="w-[308px] h-[70px] pt-[12px] pr-[12px] pb-[12px] flex items-center gap-[8px] shrink-0">
+                          <div className="w-full sm:max-w-[308px] h-auto min-h-[50px] flex items-center gap-[8px] shrink-0 py-2">
                             <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
                               <ArrowUpRight className="w-4 h-4 text-[#1D493E]" />
                             </div>
-                            <span className="font-sans font-medium text-[20px] leading-[28px] text-[#2B2B2B] align-middle">{pkg.difficulty || 'Moderate'} Difficulty</span>
+                            <span className="font-sans font-medium text-xs sm:text-sm md:text-[20px] leading-normal text-[#2B2B2B] align-middle">{pkg.difficulty || 'Moderate'} Difficulty</span>
                           </div>
                         </div>
                         {/* Column 2 (Width: 308px, Height: 140px, Gap: space-between) */}
-                        <div className="w-full md:w-[308px] h-full flex flex-col justify-between shrink-0">
-                          <div className="w-[308px] h-[70px] pt-[12px] pr-[12px] pb-[12px] flex items-center gap-[8px] shrink-0">
+                        <div className="w-full sm:w-[50%] md:w-[308px] flex flex-col gap-2 sm:gap-0 justify-between shrink-0">
+                          <div className="w-full sm:max-w-[308px] h-auto min-h-[50px] flex items-center gap-[8px] shrink-0 py-2">
                             <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
                               <Users className="w-4 h-4 text-[#1D493E]" />
                             </div>
-                            <span className="font-sans font-medium text-[20px] leading-[28px] text-[#2B2B2B] align-middle">{pkg.groupType || 'Curated group Trip'}</span>
+                            <span className="font-sans font-medium text-xs sm:text-sm md:text-[20px] leading-normal text-[#2B2B2B] align-middle">{pkg.groupType || 'Curated group Trip'}</span>
                           </div>
-                          <div className="w-[308px] h-[70px] pt-[12px] pr-[12px] pb-[12px] flex items-center gap-[8px] shrink-0">
+                          <div className="w-full sm:max-w-[308px] h-auto min-h-[50px] flex items-center gap-[8px] shrink-0 py-2">
                             <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
                               <Calendar className="w-4 h-4 text-[#1D493E]" />
                             </div>
-                            <span className="font-sans font-medium text-[20px] leading-[28px] text-[#2B2B2B] align-middle">Next: {pkg.nextDeparture || 'Aug, 2026'}</span>
+                            <span className="font-sans font-medium text-xs sm:text-sm md:text-[20px] leading-normal text-[#2B2B2B] align-middle">Next: {pkg.nextDeparture || 'Aug, 2026'}</span>
                           </div>
                         </div>
                       </div>
@@ -782,7 +778,7 @@ export default function Homepage() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 text-left">
             {/* Category 1: Stickers */}
             <Link href="/shop?category=Stickers" className="space-y-4 group">
               <div className="rounded-lg aspect-[3/2] overflow-hidden bg-[#FAF9F6] border border-gray-200/50">
@@ -794,8 +790,8 @@ export default function Homepage() {
                 />
               </div>
               <div className="flex flex-col gap-[12px] mt-[16px]">
-                <h4 className="font-sans font-semibold text-[24px] leading-none text-[#2B2B2B] h-[30px] flex items-center">Stickers</h4>
-                <p className="font-sans font-medium text-[20px] leading-none text-[#8D8D8D] h-[25px] flex items-center">Starts from ₹93</p>
+                <h4 className="font-sans font-semibold text-lg sm:text-xl md:text-[24px] leading-none text-[#2B2B2B] h-[30px] flex items-center">Stickers</h4>
+                <p className="font-sans font-medium text-sm sm:text-base md:text-[20px] leading-none text-[#8D8D8D] h-[25px] flex items-center">Starts from ₹93</p>
               </div>
             </Link>
 
@@ -810,8 +806,8 @@ export default function Homepage() {
                 />
               </div>
               <div className="flex flex-col gap-[12px] mt-[16px]">
-                <h4 className="font-sans font-semibold text-[24px] leading-none text-[#2B2B2B] h-[30px] flex items-center">Badges</h4>
-                <p className="font-sans font-medium text-[20px] leading-none text-[#8D8D8D] h-[25px] flex items-center">Starts from ₹199</p>
+                <h4 className="font-sans font-semibold text-lg sm:text-xl md:text-[24px] leading-none text-[#2B2B2B] h-[30px] flex items-center">Badges</h4>
+                <p className="font-sans font-medium text-sm sm:text-base md:text-[20px] leading-none text-[#8D8D8D] h-[25px] flex items-center">Starts from ₹199</p>
               </div>
             </Link>
 
@@ -826,8 +822,8 @@ export default function Homepage() {
                 />
               </div>
               <div className="flex flex-col gap-[12px] mt-[16px]">
-                <h4 className="font-sans font-semibold text-[24px] leading-none text-[#2B2B2B] h-[30px] flex items-center">Fridge Magnets</h4>
-                <p className="font-sans font-medium text-[20px] leading-none text-[#8D8D8D] h-[25px] flex items-center">Starts from ₹199</p>
+                <h4 className="font-sans font-semibold text-lg sm:text-xl md:text-[24px] leading-none text-[#2B2B2B] h-[30px] flex items-center">Fridge Magnets</h4>
+                <p className="font-sans font-medium text-sm sm:text-base md:text-[20px] leading-none text-[#8D8D8D] h-[25px] flex items-center">Starts from ₹199</p>
               </div>
             </Link>
           </div>
@@ -942,39 +938,39 @@ export default function Homepage() {
                     </div>
                   </div>
 
-                  {/* Details Block (Width: 339px, Height: 350px) */}
-                  <div className="w-full md:h-[349.68px] flex flex-col justify-between text-left">
-                    {/* Category Tag (Height: 28px, Radius: 4px, Padding: 4px vertical, 8px horizontal, Background: #FF623E/8, Text: #FF623E) */}
+                  {/* Details Block */}
+                  <div className="w-full md:h-[349.68px] flex flex-col justify-between text-left gap-3 md:gap-0 mt-3 md:mt-0">
+                    {/* Category Tag */}
                     <span className="inline-flex items-center justify-center h-[28px] rounded-[4px] px-[8px] py-[4px] text-[14px] font-sans font-medium text-[#FF623E] bg-[#FF623E]/8 self-start">
                       {deal.category}
                     </span>
                     
-                    {/* Title & Price Row (Width: 339px, Height: 35px, Justify: space-between, Font: Faktum 20px, Weight: 600, Color: #2B2B2B) */}
-                    <div className="w-full h-[35px] flex justify-between items-center gap-2">
-                      <h4 className="text-[20px] font-sans font-semibold text-[#2B2B2B] truncate">{deal.name}</h4>
+                    {/* Title & Price Row */}
+                    <div className="w-full h-auto min-h-[35px] flex justify-between items-center gap-2">
+                      <h4 className="text-base md:text-[20px] font-sans font-semibold text-[#2B2B2B] truncate">{deal.name}</h4>
                       <div className="flex items-center gap-2.5 shrink-0">
-                        <span className="text-gray-400 line-through text-base font-medium">₹{deal.originalPrice}</span>
-                        <span className="text-[20px] font-sans font-semibold text-[#2B2B2B]">₹{deal.price}</span>
+                        <span className="text-gray-400 line-through text-xs sm:text-sm font-medium">₹{deal.originalPrice}</span>
+                        <span className="text-base md:text-[20px] font-sans font-semibold text-[#2B2B2B]">₹{deal.price}</span>
                       </div>
                     </div>
 
-                    {/* Rating Row (Gap: 12px, Stars: 20px, Reviews: 20px Faktum Medium) */}
+                    {/* Rating Row */}
                     <div className="flex items-center gap-[12px] h-[20px] shrink-0">
                       <div className="flex text-amber-400 gap-0.5">
-                        <Star className="w-5 h-5 fill-current" />
-                        <Star className="w-5 h-5 fill-current" />
-                        <Star className="w-5 h-5 fill-current" />
-                        <Star className="w-5 h-5 fill-current" />
-                        <Star className="w-5 h-5 fill-current" />
+                        <Star className="w-4 h-4 md:w-5 md:h-5 fill-current" />
+                        <Star className="w-4 h-4 md:w-5 md:h-5 fill-current" />
+                        <Star className="w-4 h-4 md:w-5 md:h-5 fill-current" />
+                        <Star className="w-4 h-4 md:w-5 md:h-5 fill-current" />
+                        <Star className="w-4 h-4 md:w-5 md:h-5 fill-current" />
                       </div>
-                      <span className="text-[20px] font-sans font-medium text-[#2B2B2B] leading-none">({deal.reviews})</span>
+                      <span className="text-sm sm:text-base md:text-[20px] font-sans font-medium text-[#2B2B2B] leading-none">({deal.reviews})</span>
                     </div>
 
-                    {/* Bought statistics (Height: 25px, Font: Faktum 20px, Weight: 500, Color: #8D8D8D) */}
-                    <p className="font-sans font-medium text-[20px] leading-none text-[#8D8D8D] h-[25px] flex items-center shrink-0">{deal.boughtText}</p>
+                    {/* Bought statistics */}
+                    <p className="font-sans font-medium text-sm sm:text-base md:text-[20px] leading-none text-[#8D8D8D] h-[25px] flex items-center shrink-0">{deal.boughtText}</p>
 
-                    {/* Delivery text (Font: Faktum 20px, Weight: 500, Line-height: 28px, Color split) */}
-                    <p className="font-sans font-medium text-[20px] leading-[28px]">
+                    {/* Delivery text */}
+                    <p className="font-sans font-medium text-xs sm:text-sm md:text-[20px] md:leading-[28px]">
                       <span className="text-[#8D8D8D]">FREE delivery as soon as </span>
                       <span className="text-[#2B2B2B]">Thu, 9 Apr, 7 am - 10 pm</span>
                     </p>
@@ -1155,39 +1151,39 @@ export default function Homepage() {
                     </div>
                   </div>
 
-                  {/* Details Block (Width: 339px, Height: 350px) */}
-                  <div className="w-full md:h-[349.68px] flex flex-col justify-between text-left">
-                    {/* Category Tag (Height: 28px, Radius: 4px, Padding: 4px vertical, 8px horizontal, Background: #FF623E/8, Text: #FF623E) */}
+                  {/* Details Block */}
+                  <div className="w-full md:h-[349.68px] flex flex-col justify-between text-left gap-3 md:gap-0 mt-3 md:mt-0">
+                    {/* Category Tag */}
                     <span className="inline-flex items-center justify-center h-[28px] rounded-[4px] px-[8px] py-[4px] text-[14px] font-sans font-medium text-[#FF623E] bg-[#FF623E]/8 self-start">
                       {prod.category}
                     </span>
                     
-                    {/* Title & Price Row (Width: 339px, Height: 35px, Justify: space-between, Font: Faktum 20px, Weight: 600, Color: #2B2B2B) */}
-                    <div className="w-full h-[35px] flex justify-between items-center gap-2">
-                      <h4 className="text-[20px] font-sans font-semibold text-[#2B2B2B] truncate">{prod.name}</h4>
+                    {/* Title & Price Row */}
+                    <div className="w-full h-auto min-h-[35px] flex justify-between items-center gap-2">
+                      <h4 className="text-base md:text-[20px] font-sans font-semibold text-[#2B2B2B] truncate">{prod.name}</h4>
                       <div className="flex items-center gap-2.5 shrink-0">
-                        <span className="text-gray-400 line-through text-base font-medium">₹{prod.originalPrice}</span>
-                        <span className="text-[20px] font-sans font-semibold text-[#2B2B2B]">₹{prod.price}</span>
+                        <span className="text-gray-400 line-through text-xs sm:text-sm font-medium">₹{prod.originalPrice}</span>
+                        <span className="text-base md:text-[20px] font-sans font-semibold text-[#2B2B2B]">₹{prod.price}</span>
                       </div>
                     </div>
 
-                    {/* Rating Row (Gap: 12px, Stars: 20px, Reviews: 20px Faktum Medium) */}
+                    {/* Rating Row */}
                     <div className="flex items-center gap-[12px] h-[20px] shrink-0">
                       <div className="flex text-amber-400 gap-0.5">
-                        <Star className="w-5 h-5 fill-current" />
-                        <Star className="w-5 h-5 fill-current" />
-                        <Star className="w-5 h-5 fill-current" />
-                        <Star className="w-5 h-5 fill-current" />
-                        <Star className="w-5 h-5 fill-current" />
+                        <Star className="w-4 h-4 md:w-5 md:h-5 fill-current" />
+                        <Star className="w-4 h-4 md:w-5 md:h-5 fill-current" />
+                        <Star className="w-4 h-4 md:w-5 md:h-5 fill-current" />
+                        <Star className="w-4 h-4 md:w-5 md:h-5 fill-current" />
+                        <Star className="w-4 h-4 md:w-5 md:h-5 fill-current" />
                       </div>
-                      <span className="text-[20px] font-sans font-medium text-[#2B2B2B] leading-none">({prod.reviews})</span>
+                      <span className="text-sm sm:text-base md:text-[20px] font-sans font-medium text-[#2B2B2B] leading-none">({prod.reviews})</span>
                     </div>
 
-                    {/* Bought statistics (Height: 25px, Font: Faktum 20px, Weight: 500, Color: #8D8D8D) */}
-                    <p className="font-sans font-medium text-[20px] leading-none text-[#8D8D8D] h-[25px] flex items-center shrink-0">{prod.boughtText}</p>
+                    {/* Bought statistics */}
+                    <p className="font-sans font-medium text-sm sm:text-base md:text-[20px] leading-none text-[#8D8D8D] h-[25px] flex items-center shrink-0">{prod.boughtText}</p>
 
-                    {/* Delivery text (Font: Faktum 20px, Weight: 500, Line-height: 28px, Color split) */}
-                    <p className="font-sans font-medium text-[20px] leading-[28px]">
+                    {/* Delivery text */}
+                    <p className="font-sans font-medium text-xs sm:text-sm md:text-[20px] md:leading-[28px]">
                       <span className="text-[#8D8D8D]">FREE delivery as soon as </span>
                       <span className="text-[#2B2B2B]">Thu, 9 Apr, 7 am - 10 pm</span>
                     </p>
@@ -1268,16 +1264,16 @@ export default function Homepage() {
           </div>
 
           {/* Right Column: Text & Content */}
-          <div className="flex flex-col gap-[32px] w-full md:w-[644px] md:h-[650px] text-left justify-center">
+          <div className="flex flex-col gap-[24px] md:gap-[32px] w-full max-w-[644px] h-auto text-left justify-center py-6 md:py-0">
             <div className="flex flex-col gap-[12px]">
               <span className="inline-flex items-center justify-center text-[#FF623E] bg-[#FF623E]/8 px-2.5 py-0.5 rounded-[4px] text-[14px] font-semibold uppercase tracking-[1.2px] leading-none self-start">
                 The Banjara Soul
               </span>
-              <h2 className="text-[62px] font-serif font-bold text-[#1D493E] leading-none md:w-[644px] h-[76px] flex items-center">
+              <h2 className="text-4xl md:text-[62px] font-serif font-bold text-[#1D493E] leading-none w-full max-w-[644px] h-auto flex items-center py-2">
                 Meet Bonjo.
               </h2>
             </div>
-            <div className="flex flex-col gap-[32px] w-full md:w-[644px] md:h-[384px] text-[#2B2B2B]/80 text-[20px] font-sans font-medium leading-[32px]">
+            <div className="flex flex-col gap-[16px] md:gap-[32px] w-full max-w-[644px] h-auto text-[#2B2B2B]/80 text-base md:text-[20px] font-sans font-medium leading-relaxed md:leading-[32px]">
               <p>
                 Go Banjara was born from a frustration travel in India had become a checklist. Same cafés, same photo spots, same three-day Goa loop. We wanted something slower, closer to the ground, and honest about the places it visited.
               </p>
@@ -1318,20 +1314,20 @@ export default function Homepage() {
       <section className="bg-white pt-[28px] pb-0 text-left relative z-10 border-t border-gray-100 w-full">
         <div className="max-w-[1440px] w-full mx-auto flex flex-col gap-[32px]">
           
-          {/* Header Row (Figma: Width: 1440, Height: 90, Padding: 0px vertical, 80px horizontal) */}
-          <div className="w-full md:w-[1440px] h-[90px] px-6 md:px-[80px] flex flex-col justify-between text-left shrink-0">
+          {/* Header Row */}
+          <div className="w-full max-w-[1440px] h-auto px-6 md:px-[80px] flex flex-col gap-2 text-left shrink-0">
             <div>
               <span className="w-[153px] h-[18px] flex items-center font-sans font-semibold text-[14px] leading-none tracking-[1.2px] text-[#FF623E] uppercase">
                 Real Experiences
               </span>
             </div>
-            <h2 className="text-[42px] font-serif font-semibold text-[#1D493E] leading-none w-full md:w-[1280px] h-[52px] flex items-center">
+            <h2 className="text-3xl md:text-[42px] font-serif font-semibold text-[#1D493E] leading-none w-full max-w-[1280px] h-auto flex items-center py-2">
               What <span className="text-[#FF623E]">people say</span> about products
             </h2>
           </div>
           {/* 3-column Testimonial Grid matching Figma design */}
-          <div className="relative w-full md:w-[1440px] h-[647.38px] overflow-visible">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 h-full relative z-10">
+          <div className="relative w-full max-w-[1440px] h-auto overflow-visible px-6 md:px-[80px]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 h-auto relative z-10">
               {/* Column 1 (Faded) */}
               <div className="space-y-8 md:opacity-40 hover:opacity-100 transition duration-300">
                 {[
@@ -1444,7 +1440,7 @@ export default function Homepage() {
                     <div className="flex items-center gap-3.5 pt-2 border-t border-gray-100">
                       <img src={review.avatar} alt={review.name} className="w-12 h-12 rounded-full object-cover shrink-0" />
                       <div>
-                        <h4 className="text-sm font-bold text-gray-805">{review.name}</h4>
+                        <h4 className="text-sm font-bold text-gray-850">{review.name}</h4>
                         <p className="text-xs text-gray-400 font-semibold">{review.subtitle}</p>
                       </div>
                     </div>
@@ -1455,7 +1451,7 @@ export default function Homepage() {
 
             {/* Edge fade overlay */}
             <div 
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1542px] h-[639px] pointer-events-none z-20 hidden md:block"
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1542px] h-[639px] pointer-events-none z-20 hidden lg:block"
               style={{
                 background: 'linear-gradient(90deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 12%, rgba(255, 255, 255, 0) 88%, #FFFFFF 100%)'
               }}
@@ -1466,35 +1462,34 @@ export default function Homepage() {
       </section>
 
       {/* 10. TRAVEL DIARIES / STORIES */}
-      {/* 10. TRAVEL DIARIES / STORIES */}
       <section className="bg-white pt-[28px] pb-[16px] text-left relative z-10 border-t border-gray-100 w-full">
-        <div className="w-full md:w-[1280px] mx-auto px-6 md:px-0 flex flex-col gap-[32px]">
+        <div className="w-full max-w-[1280px] mx-auto px-6 md:px-0 flex flex-col gap-[32px]">
           
-          {/* Header Container (Width: 1280px, Height: 134px, Gap: 12px) */}
-          <div className="w-full md:w-[1280px] md:h-[134px] flex flex-col justify-center items-center gap-[12px] text-center shrink-0">
+          {/* Header Container */}
+          <div className="w-full max-w-[1280px] h-auto flex flex-col justify-center items-center gap-[12px] text-center shrink-0">
             <div className="h-[18px] flex items-center justify-center">
               <span style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 600, fontSize: "14px", lineHeight: "100%", letterSpacing: "1.2px", color: "rgba(255, 98, 62, 1)", background: "rgba(255, 98, 62, 0.1)", borderRadius: "4px", textTransform: "uppercase", width: "53px", height: "18px", display: "flex", alignItems: "center", justifyContent: "center" }}>
                 BLOGS
               </span>
             </div>
-            <h2 className="text-3xl md:text-[42px] font-serif font-semibold text-[#2B2B2B] leading-none h-[52px] flex items-center justify-center">
+            <h2 className="text-3xl md:text-[42px] font-serif font-semibold text-[#2B2B2B] leading-none h-auto flex items-center justify-center py-2">
               Travel Tales from the curious Explorer
             </h2>
-            <p className="text-[#2B2B2B] text-sm md:text-[24px] font-medium leading-[32px] h-[32px] flex items-center justify-center">
+            <p className="text-[#2B2B2B] text-sm sm:text-base md:text-[24px] font-medium leading-relaxed md:leading-[32px] h-auto flex items-center justify-center">
               Follow my voices to discover unique voices, breathtaking landscapes & unforgettable experiences
             </p>
           </div>
 
-          {/* Grid Container (Width: 1280px) */}
+          {/* Grid Container */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-10 md:gap-x-[32px] md:gap-y-[42px] shrink-0">
             {BLOG_POSTS.slice(0, 4).map((post) => (
               <Link 
                 key={post.id} 
                 href={`/blog`}
-                className="w-full md:w-[624px] md:h-[504.62px] flex flex-col gap-[24px] group block text-left shrink-0"
+                className="w-full max-w-[624px] h-auto flex flex-col gap-[24px] group block text-left shrink-0"
               >
                 {/* Image Wrapper */}
-                <div className="relative w-full md:w-[624px] md:h-[358.62px] overflow-hidden rounded-t-[4px] rounded-b-none bg-gray-100 border border-gray-150 shrink-0">
+                <div className="relative w-full h-auto aspect-[16/10] overflow-hidden rounded-t-[4px] rounded-b-none bg-gray-100 border border-gray-150 shrink-0">
                   <img 
                     src={post.image} 
                     alt={post.title} 
@@ -1503,11 +1498,11 @@ export default function Homepage() {
                   />
                 </div>
                 {/* Text Content */}
-                <div className="w-full md:w-[624px] md:h-[122px] flex flex-col gap-[4px] shrink-0">
-                  <h3 className="w-full md:w-[624px] md:h-[78px] flex items-start overflow-hidden font-serif font-semibold text-[32px] leading-[1] tracking-[0px] text-[#2B2B2B] group-hover:text-[#FF5A36] transition-colors">
+                <div className="w-full h-auto flex flex-col gap-[4px] shrink-0">
+                  <h3 className="w-full h-auto flex items-start overflow-hidden font-serif font-semibold text-xl sm:text-2xl md:text-[32px] leading-snug tracking-[0px] text-[#2B2B2B] group-hover:text-[#FF5A36] transition-colors">
                     {post.title}
                   </h3>
-                  <p className="w-full md:w-[624px] h-[32px] flex items-center font-sans font-medium text-[20px] leading-[32px] tracking-[0px] text-[#2B2B2B]/80">
+                  <p className="w-full h-auto flex items-center font-sans font-medium text-sm sm:text-base md:text-[20px] leading-[32px] tracking-[0px] text-[#2B2B2B]/80">
                     {post.date}  •  {post.readTime}
                   </p>
                 </div>
@@ -1515,13 +1510,13 @@ export default function Homepage() {
             ))}
           </div>
 
-          {/* View all footer (Figma: Size Extra Large, height 68px, background transparent, border radius 4px) */}
+          {/* View all footer */}
           <div className="text-center h-[68px] flex items-center justify-center shrink-0">
             <Link 
               href="/blog" 
               className="inline-flex items-center justify-center w-[185px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[4px] bg-transparent text-[#1D493E] hover:opacity-80 transition-all duration-300 cursor-pointer group"
             >
-              <span className="font-sans font-medium text-[20px] leading-none whitespace-nowrap">
+              <span className="font-sans font-medium text-sm sm:text-base md:text-[20px] leading-none whitespace-nowrap">
                 View all
               </span>
               <ArrowUpRight className="w-[24px] h-[24px] shrink-0" strokeWidth={2} />
@@ -1532,15 +1527,15 @@ export default function Homepage() {
       </section>
 
       {/* 11. FAQ ACCORDION SECTION (Matching Shop page design) */}
-      <section className="w-full md:w-[1440px] md:h-[642px] bg-white rounded-[4px] pt-[28px] pb-[28px] md:px-[80px] px-6 flex flex-col gap-[32px] mx-auto">
-        {/* Header (Width: 1280px, Height: 90px, Gap: 12px) */}
-        <div className="w-full md:w-[1280px] md:h-[90px] flex flex-col gap-[12px] justify-center text-left">
+      <section className="w-full max-w-[1440px] h-auto bg-white rounded-[4px] pt-[28px] pb-[28px] md:px-[80px] px-6 flex flex-col gap-[32px] mx-auto">
+        {/* Header */}
+        <div className="w-full max-w-[1280px] h-auto flex flex-col gap-[12px] justify-center text-left">
           <div className="w-[54px] h-[26px] flex items-center justify-center bg-[#FFEBE5] rounded-[4px]">
             <span className="w-[46px] h-[18px] flex items-center justify-center font-sans font-semibold text-[14px] leading-none tracking-[1.2px] text-[#FF623E] uppercase">
               FAQ'S
             </span>
           </div>
-          <h2 className="w-full md:w-[541px] md:h-[52px] flex items-center font-serif font-semibold text-[42px] leading-[1] tracking-[0px] text-[#2B2B2B]">
+          <h2 className="w-full max-w-[541px] h-auto flex items-center font-serif font-semibold text-3xl md:text-[42px] leading-[1] tracking-[0px] text-[#2B2B2B] py-2">
             Frequently asked questions
           </h2>
         </div>
@@ -1555,7 +1550,7 @@ export default function Homepage() {
                   onClick={() => toggleFaq(idx)}
                   className="w-full flex justify-between items-center text-left gap-4 cursor-pointer group"
                 >
-                  <span className="w-full md:w-[1196px] h-[32px] flex items-center font-sans font-medium text-[20px] leading-[32px] tracking-[0px] text-[#2B2B2B]">
+                  <span className="w-full h-auto py-2 flex items-center font-sans font-medium text-sm sm:text-base md:text-[20px] leading-normal tracking-[0px] text-[#2B2B2B]">
                     {item.question}
                   </span>
                   <span className="text-xl font-medium text-[#1D493E] shrink-0 leading-none select-none">
@@ -1564,7 +1559,7 @@ export default function Homepage() {
                 </button>
                 {/* Expandable answer */}
                 {isOpen && (
-                  <p className="mt-3 w-full md:w-[1196px] md:h-[32px] font-sans font-medium text-[20px] leading-[32px] tracking-[0px] text-[#8D8D8D] animate-fade-in">
+                  <p className="mt-3 w-full h-auto py-1 font-sans font-medium text-sm sm:text-base md:text-[20px] leading-normal tracking-[0px] text-[#8D8D8D] animate-fade-in">
                     {item.answer}
                   </p>
                 )}
@@ -1577,63 +1572,63 @@ export default function Homepage() {
 
 
       {/* 12. SERVICES TO HELP YOU SHOP */}
-      <section className="w-full md:w-[1440px] bg-white pt-[28px] pb-[28px] md:px-[80px] px-6 flex flex-col gap-[32px] mx-auto">
+      <section className="w-full max-w-[1440px] bg-white pt-[28px] pb-[28px] md:px-[80px] px-6 flex flex-col gap-[32px] mx-auto">
         {/* Header */}
-        <div className="w-full md:w-[1280px] md:h-[90px] flex flex-col gap-[12px] justify-center text-left mx-auto">
+        <div className="w-full max-w-[1280px] h-auto flex flex-col gap-[12px] justify-center text-left mx-auto">
           <div className="w-[54px] h-[26px] flex items-center justify-center bg-[#FFEBE5] rounded-[4px]">
             <span className="font-sans font-semibold text-[14px] leading-none tracking-[1.2px] text-[#FF623E] uppercase">
               Real
             </span>
           </div>
-          <h2 className="font-serif font-semibold text-[42px] leading-[1] tracking-[0px] text-[#2B2B2B]">
+          <h2 className="font-serif font-semibold text-3xl md:text-[42px] leading-[1] tracking-[0px] text-[#2B2B2B] py-2">
             Services to help you <span className="text-[#FF623E]">shop</span>
           </h2>
         </div>
 
-        {/* Cards Grid — 1280×458px, gap 32px */}
-        <div className="w-full md:w-[1280px] md:h-[458px] flex flex-col md:flex-row gap-[32px] mx-auto">
+        {/* Cards Grid */}
+        <div className="w-full max-w-[1280px] h-auto grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-row gap-[32px] mx-auto">
 
           {/* Card 1: FAQ */}
-          <div className="w-full md:w-[296px] md:h-[458px] flex flex-col gap-[24px] rounded-[4px] bg-white">
-            <div className="w-full md:w-[296px] h-[250px] rounded-tl-[4px] rounded-tr-[4px] overflow-hidden">
+          <div className="w-full lg:w-[296px] h-auto flex flex-col gap-[24px] rounded-[4px] bg-white">
+            <div className="w-full h-[250px] rounded-tl-[4px] rounded-tr-[4px] overflow-hidden">
               <img src="/service-faq.png" alt="FAQ illustration" className="w-full h-full object-cover" />
             </div>
-            <div className="w-full md:w-[296px] md:h-[76px] flex flex-col gap-[12px]">
-              <h3 className="font-sans font-semibold text-[28px] leading-[38px] tracking-[0px] text-[#2B2B2B]">Frequently Asked Questions (FAQ)</h3>
-              <p className="w-full md:w-[296px] md:h-[96px] font-sans font-medium text-[20px] leading-[32px] tracking-[0px] text-[rgba(43,43,43,0.8)]">See what are the commonly asked questions by our costumers</p>
+            <div className="w-full h-auto flex flex-col gap-[12px]">
+              <h3 className="font-sans font-semibold text-lg sm:text-xl md:text-[28px] leading-snug tracking-[0px] text-[#2B2B2B]">Frequently Asked Questions (FAQ)</h3>
+              <p className="w-full h-auto font-sans font-medium text-sm sm:text-base md:text-[20px] leading-normal tracking-[0px] text-[rgba(43,43,43,0.8)]">See what are the commonly asked questions by our costumers</p>
             </div>
           </div>
 
           {/* Card 2: Home Delivery */}
-          <div className="w-full md:w-[296px] md:h-[458px] flex flex-col gap-[24px] rounded-[4px] bg-white">
-            <div className="w-full md:w-[296px] h-[250px] rounded-tl-[4px] rounded-tr-[4px] overflow-hidden">
+          <div className="w-full lg:w-[296px] h-auto flex flex-col gap-[24px] rounded-[4px] bg-white">
+            <div className="w-full h-[250px] rounded-tl-[4px] rounded-tr-[4px] overflow-hidden">
               <img src="/service-delivery.png" alt="Home delivery illustration" className="w-full h-full object-cover" />
             </div>
-            <div className="w-full md:w-[296px] md:h-[76px] flex flex-col gap-[12px]">
-              <h3 className="font-sans font-semibold text-[28px] leading-[38px] tracking-[0px] text-[#2B2B2B]">Home Delivery Options available</h3>
-              <p className="w-full md:w-[296px] md:h-[96px] font-sans font-medium text-[20px] leading-[32px] tracking-[0px] text-[rgba(43,43,43,0.8)]">Pay with multiple cards seamlessly and without interruption</p>
+            <div className="w-full h-auto flex flex-col gap-[12px]">
+              <h3 className="font-sans font-semibold text-lg sm:text-xl md:text-[28px] leading-snug tracking-[0px] text-[#2B2B2B]">Home Delivery Options available</h3>
+              <p className="w-full h-auto font-sans font-medium text-sm sm:text-base md:text-[20px] leading-normal tracking-[0px] text-[rgba(43,43,43,0.8)]">Pay with multiple cards seamlessly and without interruption</p>
             </div>
           </div>
 
           {/* Card 3: Secure Payment */}
-          <div className="w-full md:w-[296px] md:h-[458px] flex flex-col gap-[24px] rounded-[4px] bg-white">
-            <div className="w-full md:w-[296px] h-[250px] rounded-tl-[4px] rounded-tr-[4px] overflow-hidden">
+          <div className="w-full lg:w-[296px] h-auto flex flex-col gap-[24px] rounded-[4px] bg-white">
+            <div className="w-full h-[250px] rounded-tl-[4px] rounded-tr-[4px] overflow-hidden">
               <img src="/service-payment.png" alt="Secure payment illustration" className="w-full h-full object-cover" />
             </div>
-            <div className="w-full md:w-[296px] md:h-[76px] flex flex-col gap-[12px]">
-              <h3 className="font-sans font-semibold text-[28px] leading-[38px] tracking-[0px] text-[#2B2B2B]">Secure Online Payment Process</h3>
-              <p className="w-full md:w-[296px] md:h-[96px] font-sans font-medium text-[20px] leading-[32px] tracking-[0px] text-[rgba(43,43,43,0.8)]">Pay with multiple cards seamlessly and without interruption</p>
+            <div className="w-full h-auto flex flex-col gap-[12px]">
+              <h3 className="font-sans font-semibold text-lg sm:text-xl md:text-[28px] leading-snug tracking-[0px] text-[#2B2B2B]">Secure Online Payment Process</h3>
+              <p className="w-full h-auto font-sans font-medium text-sm sm:text-base md:text-[20px] leading-normal tracking-[0px] text-[rgba(43,43,43,0.8)]">Pay with multiple cards seamlessly and without interruption</p>
             </div>
           </div>
 
           {/* Card 4: Open Box Delivery */}
-          <div className="w-full md:w-[296px] md:h-[458px] flex flex-col gap-[24px] rounded-[4px] bg-white">
-                    <div className="w-full md:w-[296px] h-[250px] rounded-tl-[4px] rounded-tr-[4px] overflow-hidden">
+          <div className="w-full lg:w-[296px] h-auto flex flex-col gap-[24px] rounded-[4px] bg-white">
+            <div className="w-full h-[250px] rounded-tl-[4px] rounded-tr-[4px] overflow-hidden">
               <img src="/service-openbox.png" alt="Open box delivery illustration" className="w-full h-full object-cover" />
             </div>
-            <div className="w-full md:w-[296px] md:h-[76px] flex flex-col gap-[12px]">
-              <h3 className="font-sans font-semibold text-[28px] leading-[38px] tracking-[0px] text-[#2B2B2B]">Open Box Delivery</h3>
-              <p className="w-full md:w-[296px] md:h-[96px] font-sans font-medium text-[20px] leading-[32px] tracking-[0px] text-[rgba(43,43,43,0.8)]">Pay with multiple cards seamlessly and without interruption</p>
+            <div className="w-full h-auto flex flex-col gap-[12px]">
+              <h3 className="font-sans font-semibold text-lg sm:text-xl md:text-[28px] leading-snug tracking-[0px] text-[#2B2B2B]">Open Box Delivery</h3>
+              <p className="w-full h-auto font-sans font-medium text-sm sm:text-base md:text-[20px] leading-normal tracking-[0px] text-[rgba(43,43,43,0.8)]">Pay with multiple cards seamlessly and without interruption</p>
             </div>
           </div>
 
@@ -1641,16 +1636,7 @@ export default function Homepage() {
       </section>
 
       {/* 13. NEWSLETTER / CTA SECTION — 1440×337, py-42, px-80, gap-32 */}
-      <section
-        style={{
-          width: "100%",
-          paddingTop: "42px",
-          paddingBottom: "42px",
-          paddingLeft: "80px",
-          paddingRight: "80px",
-          background: "#FFFFFF",
-        }}
-      >
+      <section className="w-full py-[42px] px-6 md:px-[80px] bg-white">
         <div
           style={{
             maxWidth: "1440px",
@@ -1663,19 +1649,13 @@ export default function Homepage() {
           }}
         >
           {/* Text block */}
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
+          <div className="flex flex-col items-center gap-[12px] w-full">
             {/* Heading: Fraunces SemiBold 42px, lh 100%, #2B2B2B */}
             <h2
+              className="text-3xl md:text-[42px] font-serif font-semibold text-center text-[#2B2B2B] max-w-[1280px] m-0"
               style={{
-                fontFamily: "Fraunces, serif",
-                fontWeight: 600,
-                fontSize: "42px",
-                lineHeight: "100%",
+                lineHeight: "120%",
                 letterSpacing: "0px",
-                textAlign: "center",
-                color: "#2B2B2B",
-                maxWidth: "1280px",
-                margin: 0,
               }}
             >
               The{" "}
@@ -1684,40 +1664,28 @@ export default function Homepage() {
             </h2>
             {/* Subtitle: Faktum Medium 24px, lh 32px, rgba(43,43,43,1) */}
             <p
+              className="text-base sm:text-lg md:text-[24px] font-sans font-medium text-center text-[rgba(43,43,43,0.8)] max-w-[1280px] m-0"
               style={{
-                fontFamily: "Faktum, sans-serif",
-                fontWeight: 500,
-                fontSize: "24px",
-                lineHeight: "32px",
+                lineHeight: "1.4",
                 letterSpacing: "0px",
-                textAlign: "center",
-                color: "rgba(43, 43, 43, 1)",
-                maxWidth: "1280px",
-                margin: 0,
               }}
             >
               Hidden places, exclusive trip drops, curated gear, and stories from the road delivered before anyone else hears about them.
             </p>
           </div>
 
-          {/* Buttons row: w-584, gap-12 */}
-          <div style={{ display: "flex", gap: "12px", width: "584px", maxWidth: "100%" }}>
-            {/* Book Now: 286×55, pt-16 pr-32 pb-16 pl-32, radius-4, bg #1D493E */}
+          {/* Buttons row */}
+          <div className="flex flex-col sm:flex-row gap-3 w-full max-w-[584px] justify-center items-center">
+            {/* Book Now */}
             <Link
               href="/travel"
               style={{
-                width: "286px",
-                height: "55px",
                 paddingTop: "16px",
                 paddingBottom: "16px",
                 paddingLeft: "32px",
                 paddingRight: "32px",
                 gap: "8px",
-                borderRadius: "4px",
                 background: "rgba(29, 73, 62, 1)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
                 color: "#FFFFFF",
                 fontFamily: "'Faktum','Outfit',sans-serif",
                 fontWeight: 500,
@@ -1728,27 +1696,21 @@ export default function Homepage() {
                 textDecoration: "none",
                 transition: "opacity 0.2s",
               }}
-              className="hover:opacity-90"
+              className="w-full sm:w-[286px] h-[55px] flex items-center justify-center rounded-[4px] hover:opacity-90"
             >
               Book Now
             </Link>
-            {/* Explore collection: 286×55, pt-16 pr-32 pb-16 pl-32, radius-4, border 2px solid #1D493E */}
+            {/* Explore collection */}
             <Link
               href="/shop"
               style={{
-                width: "286px",
-                height: "55px",
                 paddingTop: "16px",
                 paddingBottom: "16px",
                 paddingLeft: "32px",
                 paddingRight: "32px",
                 gap: "8px",
-                borderRadius: "4px",
                 border: "2px solid rgba(29, 73, 62, 1)",
                 background: "transparent",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
                 color: "rgba(29, 73, 62, 1)",
                 fontFamily: "'Faktum','Outfit',sans-serif",
                 fontWeight: 500,
@@ -1758,7 +1720,7 @@ export default function Homepage() {
                 textDecoration: "none",
                 transition: "background 0.2s",
               }}
-              className="hover:bg-[#1D493E]/5"
+              className="w-full sm:w-[286px] h-[55px] flex items-center justify-center rounded-[4px] hover:bg-[#1D493E]/5"
             >
               Explore collection
             </Link>

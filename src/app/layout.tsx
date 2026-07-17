@@ -19,9 +19,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+    <html lang="en" className="scroll-smooth overflow-x-hidden" style={{ overflowX: 'hidden' }} suppressHydrationWarning>
       <body
-        className="antialiased min-h-screen bg-brand-beige text-primary-dark flex flex-col font-sans"
+        className="antialiased min-h-screen bg-brand-beige text-primary-dark flex flex-col font-sans overflow-x-hidden w-full relative"
         suppressHydrationWarning
       >
         <CartProvider>

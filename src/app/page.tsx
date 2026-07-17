@@ -533,7 +533,7 @@ export default function Homepage() {
               return (
                 <div className="bg-[#F6F3EE] rounded-[4px] shadow-xs flex flex-col md:flex-row gap-0 w-full overflow-hidden md:h-[394px] text-left">
                   {/* Image */}
-                  <div className="relative h-[280px] md:h-full w-full md:w-[640px] shrink-0 overflow-hidden">
+                  <div className="relative h-[280px] md:h-full w-full md:w-1/2 shrink-0 overflow-hidden">
                     <img 
                       src={pkg1.image} 
                       alt={pkg1.name} 
@@ -542,7 +542,7 @@ export default function Homepage() {
                     />
                   </div>
                   {/* Details */}
-                  <div className="w-full md:w-[640px] pt-4 pb-4 px-4 flex flex-col justify-between md:h-full bg-white shrink-0 gap-6 md:gap-0">
+                  <div className="w-full md:w-1/2 pt-4 pb-4 px-4 flex flex-col justify-between md:h-full bg-white shrink-0 gap-6 md:gap-0">
                     {/* Top Group (Width: Fill, Height: 151px, Gap: 12px) */}
                     <div className="flex flex-col gap-2 min-h-[140px] shrink-0 w-full">
                       {/* Tags Container (Width: Fill, Height: Hug 28px, Justify: space-between) */}
@@ -561,7 +561,7 @@ export default function Homepage() {
                     {/* Details Grid Block (Width: 616px, Height: 140px, Justify: space-between) */}
                     <div className="w-full max-w-[616px] h-auto flex flex-col sm:flex-row justify-between border-t border-gray-200 pt-3 shrink-0 gap-4 sm:gap-0">
                       {/* Column 1 (Width: 308px, Height: 140px, Gap: space-between) */}
-                      <div className="w-full sm:w-[50%] md:w-[308px] flex flex-col gap-2 sm:gap-0 justify-between shrink-0">
+                      <div className="w-full sm:w-[50%] lg:w-[308px] flex flex-col gap-2 sm:gap-0 justify-between shrink-0">
                         <div className="w-full sm:max-w-[308px] h-auto min-h-[50px] flex items-center gap-[8px] shrink-0 py-2">
                           <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
                             <MapPin className="w-4 h-4 text-[#1D493E]" />
@@ -576,7 +576,7 @@ export default function Homepage() {
                         </div>
                       </div>
                       {/* Column 2 (Width: 308px, Height: 140px, Gap: space-between) */}
-                      <div className="w-full sm:w-[50%] md:w-[308px] flex flex-col gap-2 sm:gap-0 justify-between shrink-0">
+                      <div className="w-full sm:w-[50%] lg:w-[308px] flex flex-col gap-2 sm:gap-0 justify-between shrink-0">
                         <div className="w-full sm:max-w-[308px] h-auto min-h-[50px] flex items-center gap-[8px] shrink-0 py-2">
                           <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
                             <Users className="w-4 h-4 text-[#1D493E]" />
@@ -649,7 +649,7 @@ export default function Homepage() {
                       {/* Details Grid Block (Width: 616px, Height: 140px, Justify: space-between) */}
                       <div className="w-full max-w-[616px] h-auto flex flex-col sm:flex-row justify-between border-t border-gray-200 pt-3 shrink-0 gap-4 sm:gap-0">
                         {/* Column 1 (Width: 308px, Height: 140px, Gap: space-between) */}
-                        <div className="w-full sm:w-[50%] md:w-[308px] flex flex-col gap-2 sm:gap-0 justify-between shrink-0">
+                        <div className="w-full sm:w-[50%] lg:w-[308px] flex flex-col gap-2 sm:gap-0 justify-between shrink-0">
                           <div className="w-full sm:max-w-[308px] h-auto min-h-[50px] flex items-center gap-[8px] shrink-0 py-2">
                             <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
                               <MapPin className="w-4 h-4 text-[#1D493E]" />
@@ -664,7 +664,7 @@ export default function Homepage() {
                           </div>
                         </div>
                         {/* Column 2 (Width: 308px, Height: 140px, Gap: space-between) */}
-                        <div className="w-full sm:w-[50%] md:w-[308px] flex flex-col gap-2 sm:gap-0 justify-between shrink-0">
+                        <div className="w-full sm:w-[50%] lg:w-[308px] flex flex-col gap-2 sm:gap-0 justify-between shrink-0">
                           <div className="w-full sm:max-w-[308px] h-auto min-h-[50px] flex items-center gap-[8px] shrink-0 py-2">
                             <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
                               <Users className="w-4 h-4 text-[#1D493E]" />
@@ -863,17 +863,17 @@ export default function Homepage() {
       <section className="bg-white relative z-10">
         <div className="max-w-[1440px] w-full mx-auto pt-[20px] pb-[20px] px-6 md:px-[80px] flex flex-col gap-[32px]">
           
-          {/* Header Container (Width: 1280px, Height: 134px, Justify: space-between, Background: white, Border radius: 4px) */}
-          <div className="w-full md:w-[1280px] md:h-[134px] mx-auto flex flex-col justify-between items-center bg-white rounded-[4px] text-center">
-            {/* Tag (Width: 150px, Height: 18px, Font: Faktum 14px, Weight: 600, Color: #FF623E background, text uppercase, tracking 1.2px) */}
+          {/* Header Container */}
+          <div className="w-full max-w-[1280px] h-auto mx-auto flex flex-col justify-between items-center bg-white rounded-[4px] text-center gap-4">
+            {/* Tag */}
             <div className="flex items-center justify-center h-[18px]">
               <span className="inline-flex items-center justify-center text-[#FF623E] bg-[#FF623E]/8 px-2.5 py-0.5 rounded-[4px] text-[14px] font-semibold uppercase tracking-[1.2px] leading-none">
                 Most People Like
               </span>
             </div>
             
-            {/* Title (Width: 1280px, Height: 52px, Font: Fraunces Serif 42px, Weight: 600, Line-height: 100%) */}
-            <h2 className="w-full md:w-[1280px] md:h-[52px] flex items-center justify-center text-[32px] md:text-[42px] font-serif font-semibold text-[#1D493E] leading-none text-center">
+            {/* Title */}
+            <h2 className="w-full max-w-[1280px] h-auto flex items-center justify-center text-[32px] md:text-[42px] font-serif font-semibold text-[#1D493E] leading-none text-center">
               {pageContent.dealsTitle.includes("best deals") ? (
                 <>Today's{" "}<span className="text-[#FF5A36]">best deals</span>{" "}for you</>
               ) : (
@@ -881,8 +881,8 @@ export default function Homepage() {
               )}
             </h2>
             
-            {/* Subtitle (Width: 1280px, Height: 32px, Font: Faktum 24px, Weight: 500, Line-height: 32px, Color: #2B2B2B) */}
-            <p className="w-full md:w-[1280px] md:h-[32px] flex items-center justify-center text-[#2B2B2B] text-base md:text-[24px] md:leading-[32px] font-medium text-center">
+            {/* Subtitle */}
+            <p className="w-full max-w-[1280px] h-auto flex items-center justify-center text-[#2B2B2B] text-base md:text-[24px] md:leading-[32px] font-medium text-center">
               A hand-picked map of the corners of India our community keeps coming back to
             </p>
           </div>
@@ -1253,7 +1253,7 @@ export default function Homepage() {
                 background: 'radial-gradient(circle, rgba(224, 84, 52, 0.3) 0%, rgba(224, 84, 52, 0) 70%)'
               }}
             />
-            <div className="relative hover:rotate-2 transition-transform duration-500 w-full md:w-[584px] md:h-[584px] aspect-square mx-auto md:mx-0 bg-transparent">
+            <div className="relative hover:rotate-2 transition-transform duration-500 w-full max-w-[584px] aspect-square mx-auto md:mx-0 bg-transparent">
               <img 
                 src="/llama_mascot.png" 
                 alt="Bonjo Mascot" 

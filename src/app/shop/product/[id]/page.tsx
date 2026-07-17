@@ -503,12 +503,11 @@ export default function ProductDetailsPage() {
             }}
             className="w-full"
           >
-            {/* Main Showcase Box (Width: 624px, Height: 934.68px, border-width: 1.05px, radius: 4px) */}
+            {/* Main Showcase Box (Width: 624px, Height: 934.68px on desktop, aspect-square on mobile) */}
             <div 
               style={{
                 position: "relative",
                 width: "100%",
-                height: "934.6888427734375px",
                 borderRadius: "4px",
                 border: "1.05px solid rgba(204, 204, 204, 1)",
                 backgroundColor: "#FFFFFF",
@@ -518,7 +517,7 @@ export default function ProductDetailsPage() {
                 overflow: "hidden",
                 boxSizing: "border-box"
               }}
-              className="w-full aspect-[624/934.68] md:h-[934.6888427734375px]"
+              className="w-full aspect-square md:aspect-auto h-auto md:h-[934.6888427734375px]"
             >
               {renderMediaContent(activeImgIdx, false)}
             </div>
@@ -565,12 +564,11 @@ export default function ProductDetailsPage() {
             </div>
           </div>
 
-          {/* RIGHT COLUMN: Buying Dashboard (Width: 624px, Height: 1050.68px, justify-content: space-between, padding: 24px, border: 1px, radius: 4px) */}
+          {/* RIGHT COLUMN: Buying Dashboard (Width: 624px, Height: 1050.68px on desktop, auto-height on mobile) */}
           <div 
             style={{
               width: "100%",
               maxWidth: "624px",
-              height: "1050.6888427734375px",
               padding: "24px",
               borderRadius: "4px",
               border: "1px solid rgba(204, 204, 204, 1)",
@@ -581,7 +579,7 @@ export default function ProductDetailsPage() {
               boxSizing: "border-box",
               opacity: 1,
             }}
-            className="md:h-[1050.6888427734375px] text-left font-sans text-[#2B2B2B]"
+            className="w-full h-auto md:h-[1050.6888427734375px] text-left font-sans text-[#2B2B2B] gap-6 md:gap-0"
           >
             {/* Title & Tag Row */}
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>

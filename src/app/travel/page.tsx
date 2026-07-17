@@ -619,24 +619,19 @@ export default function HolidaysPortal() {
           </div>
         </div>
 
-        {/* CATEGORY FILTER TABS ROW — styled to match exact Figma specs */}
+        {/* CATEGORY FILTER TABS ROW */}
         <div 
           style={{
             width: "100%",
             maxWidth: "1280px",
-            height: "86px",
-            paddingTop: "24px",
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
             boxSizing: "border-box",
             marginLeft: "auto",
             marginRight: "auto",
             marginTop: "32px",
           }}
+          className="overflow-x-auto scrollbar-none pb-2"
         >
-          <div style={{ display: "flex", flexDirection: "row", gap: "12px", alignItems: "center" }}>
+          <div className="flex flex-row gap-3 items-center min-w-max">
             {['All', 'Weekends', 'Treks', 'Road Trips', 'Camping'].map((cat) => {
               const isActive = activeCategory === cat;
               return (
@@ -648,13 +643,9 @@ export default function HolidaysPortal() {
                     setVisiblePackagesCount(6); 
                   }}
                   style={{
-                    height: "62px",
-                    padding: "16px 32px",
                     borderRadius: "4px",
                     fontFamily: "'Faktum', 'Outfit', sans-serif",
                     fontWeight: 500,
-                    fontSize: "24px",
-                    lineHeight: "28px",
                     letterSpacing: "0px",
                     textAlign: "center",
                     cursor: "pointer",
@@ -663,7 +654,7 @@ export default function HolidaysPortal() {
                     background: isActive ? "rgba(29, 73, 62, 1)" : "rgba(255, 255, 255, 1)",
                     color: isActive ? "rgba(255, 255, 255, 1)" : "rgba(43, 43, 43, 1)",
                   }}
-                  className="hover:scale-[1.02] active:scale-[0.98]"
+                  className="hover:scale-[1.02] active:scale-[0.98] h-auto px-5 py-2.5 sm:px-8 sm:py-3.5 text-base sm:text-lg md:text-[24px]"
                 >
                   {cat}
                 </button>
@@ -672,27 +663,22 @@ export default function HolidaysPortal() {
           </div>
         </div>
 
-        {/* RESULTS HEADER & FILTER DROPDOWN — styled to match exact Figma specs */}
+        {/* RESULTS HEADER & FILTER DROPDOWN */}
         <div 
           style={{
             width: "100%",
             maxWidth: "1280px",
-            height: "83px",
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
             boxSizing: "border-box",
             marginLeft: "auto",
             marginRight: "auto",
             marginTop: "48px",
           }}
+          className="flex flex-col md:flex-row gap-4 justify-between items-start md:items-center"
         >
           <div 
             style={{ 
               width: "100%",
               maxWidth: "1154px",
-              height: "83px",
               display: "flex", 
               flexDirection: "column", 
               gap: "4px", 
@@ -704,23 +690,19 @@ export default function HolidaysPortal() {
             <h2 style={{
               fontFamily: "'Fraunces', serif",
               fontWeight: 600,
-              fontSize: "32px",
-              lineHeight: "100%",
               letterSpacing: "0px",
               color: "rgba(43, 43, 43, 1)",
               margin: 0,
-            }}>
+            }} className="text-xl sm:text-2xl md:text-[32px] leading-tight">
               {filteredAndSortedPackages.length} Experiences across india
             </h2>
             <p style={{
               fontFamily: "'Faktum', 'Outfit', sans-serif",
               fontWeight: 500,
-              fontSize: "20px",
-              lineHeight: "32px",
               letterSpacing: "0px",
               color: "rgba(43, 43, 43, 1)",
               margin: 0,
-            }}>
+            }} className="text-sm sm:text-base md:text-[20px] leading-relaxed">
               Hand-picked by our team of seasoned travellers
             </p>
           </div>

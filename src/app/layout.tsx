@@ -26,7 +26,7 @@ export default function RootLayout({
       >
         <CartProvider>
           <Navbar />
-          <main className="flex-1">{children}</main>
+          <main className="flex-1 pt-[90px]">{children}</main>
           <Footer />
           <CartDrawer />
           <WishlistDrawer />

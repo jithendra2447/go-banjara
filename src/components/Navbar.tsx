@@ -48,7 +48,7 @@ export const Navbar: React.FC = () => {
   };
 
   return (
-    <header className="w-full z-50 flex flex-col sticky top-0 bg-white backdrop-blur-[12px] border-b border-[#CCCCCC]">
+    <header className="w-full z-50 flex flex-col fixed top-0 left-0 bg-white backdrop-blur-[12px] border-b border-[#CCCCCC]">
       {/* 2. MAIN NAV BAR */}
       <nav className="h-[90px] flex items-center w-full">
         <div className="max-w-[1440px] mx-auto px-4 md:px-[42px] pt-[20px] pb-[20px] w-full flex items-center justify-between h-full">

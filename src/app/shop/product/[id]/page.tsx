@@ -479,11 +479,11 @@ export default function ProductDetailsPage() {
         className="w-full mx-auto px-6 md:px-[80px]"
       >
         
-        {/* Product Details Section (Width: 1280px, gap: 32px, Background: white) */}
+        {/* Product Details Section (Width: 1280px, gap: 24px, Background: white) */}
         <div 
           style={{
             display: "grid",
-            gap: "32px",
+            gap: "24px",
             width: "100%",
             backgroundColor: "rgba(255, 255, 255, 1)",
             boxSizing: "border-box"

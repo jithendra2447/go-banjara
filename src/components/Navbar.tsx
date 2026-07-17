@@ -533,8 +533,11 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile Sidebar/Menu */}
       {isOpen && (
-        <div className="xl:hidden bg-white border-t border-gray-100 absolute left-0 w-full shadow-xl transition-all duration-300 z-50 top-24">
-          <div className="px-6 py-6 flex flex-col gap-4">
+        <div 
+          className="xl:hidden border-t border-gray-100 absolute left-0 w-full shadow-xl transition-all duration-300 z-50 top-[90px]"
+          style={{ backgroundColor: 'rgba(255, 255, 255, 1)' }}
+        >
+          <div className="px-6 py-8 flex flex-col gap-8">
             {navLinks.map((link) => {
               const active = isActive(link.path);
               return (
@@ -542,8 +545,8 @@ export const Navbar: React.FC = () => {
                   key={link.path}
                   href={link.path}
                   onClick={() => setIsOpen(false)}
-                  className={`text-[20px] font-sans font-bold tracking-wide p-2 rounded-lg transition-all duration-300 ${
-                    active ? 'text-[#1D493E] bg-[#1D493E]/8' : 'text-[#535352] hover:text-[#1D493E]'
+                  className={`text-[20px] font-sans font-medium tracking-[-0.2px] leading-[100%] transition-all duration-300 ${
+                    active ? 'text-[#1D493E]' : 'text-[#535352] hover:text-[#1D493E]'
                   }`}
                 >
                   {link.name}
@@ -600,9 +603,9 @@ export const Navbar: React.FC = () => {
                   setIsOpen(false);
                   setAuthOpen(true);
                 }}
-                className="mt-2 flex items-center justify-center gap-2 w-full py-3 bg-[#1D493E] text-white text-xs font-bold rounded-lg transition-all hover:bg-[#16372f] cursor-pointer"
+                className="mt-2 flex items-center justify-center gap-2.5 w-full py-4 bg-[#1D493E] text-white text-[20px] font-sans font-medium tracking-[-0.2px] leading-[100%] rounded-lg transition-all hover:bg-[#16372f] cursor-pointer"
               >
-                <User className="w-4 h-4" />
+                <User className="w-5 h-5" />
                 <span>Login</span>
               </button>
             )}

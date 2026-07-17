@@ -14,7 +14,7 @@ export const TravelerAvatar: React.FC<TravelerAvatarProps> = ({
   height = 320,
 }) => {
   return (
-    <div 
+    <div
       className={`relative inline-flex items-center justify-center select-none ${className}`}
       style={{ width, height }}
     >
@@ -56,10 +56,10 @@ export const TravelerAvatar: React.FC<TravelerAvatarProps> = ({
         <g id="minimalist-portrait">
           {/* Slender Neck */}
           <path d="M94 75 C94 75 92 90 92 95 C98 98 102 98 108 95 C108 90 106 75 106 75" fill="url(#skin-grad)" stroke="#1D493E" strokeWidth="1.5" />
-          
+
           {/* Elegant Face Line */}
           <path d="M82 55 C82 38 118 38 118 55 C118 72 108 78 100 78 C92 78 82 72 82 55 Z" fill="url(#skin-grad)" stroke="#1D493E" strokeWidth="1.5" />
-          
+
           {/* High fashion closed eyes (sleeping beauty style) */}
           <path d="M88 56 C90 58 94 58 96 56" stroke="#1D493E" strokeWidth="1.5" strokeLinecap="round" />
           <path d="M104 56 C106 58 110 58 112 56" stroke="#1D493E" strokeWidth="1.5" strokeLinecap="round" />
@@ -76,9 +76,9 @@ export const TravelerAvatar: React.FC<TravelerAvatarProps> = ({
         </g>
 
         {/* OUTFIT 1: KERALA (Boutique gold-cream handloom saree dress) */}
-        <g 
-          id="outfit-kerala" 
-          className="transition-opacity duration-500 ease-in-out" 
+        <g
+          id="outfit-kerala"
+          className="transition-opacity duration-500 ease-in-out"
           style={{ opacity: outfit === 'kerala' ? 1 : 0, pointerEvents: outfit === 'kerala' ? 'auto' : 'none' }}
         >
           {/* Blouse */}
@@ -119,9 +119,9 @@ export const TravelerAvatar: React.FC<TravelerAvatarProps> = ({
         </g>
 
         {/* OUTFIT 2: LADAKH (Premium designer insulated puffer coat & chic yellow scarf) */}
-        <g 
-          id="outfit-ladakh" 
-          className="transition-opacity duration-500 ease-in-out" 
+        <g
+          id="outfit-ladakh"
+          className="transition-opacity duration-500 ease-in-out"
           style={{ opacity: outfit === 'ladakh' ? 1 : 0, pointerEvents: outfit === 'ladakh' ? 'auto' : 'none' }}
         >
           {/* Cozy Mountain Beanie */}
@@ -184,9 +184,9 @@ export const TravelerAvatar: React.FC<TravelerAvatarProps> = ({
         </g>
 
         {/* OUTFIT 3: HYDERABAD (Modern urban street fashion, linen vest & pearl details) */}
-        <g 
-          id="outfit-hyderabad" 
-          className="transition-opacity duration-500 ease-in-out" 
+        <g
+          id="outfit-hyderabad"
+          className="transition-opacity duration-500 ease-in-out"
           style={{ opacity: outfit === 'hyderabad' ? 1 : 0, pointerEvents: outfit === 'hyderabad' ? 'auto' : 'none' }}
         >
           {/* Orange crop tank-top */}

@@ -575,11 +575,11 @@ export default function ProductDetailsPage() {
               backgroundColor: "rgba(255, 255, 255, 1)",
               display: "flex",
               flexDirection: "column",
-              justifyContent: "space-between",
+              gap: "24px",
               boxSizing: "border-box",
               opacity: 1,
             }}
-            className="w-full h-auto md:h-[1050.6888427734375px] text-left font-sans text-[#2B2B2B] gap-6 md:gap-0"
+            className="w-full h-auto md:h-[1050.6888427734375px] text-left font-sans text-[#2B2B2B]"
           >
             {/* Title & Tag Row */}
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
@@ -647,9 +647,9 @@ export default function ProductDetailsPage() {
               </div>
             </div>
 
-            {/* Quantity Selector */}
-            <div style={{ display: "flex", flexDirection: "column", gap: "8px", textAlign: "left" }}>
-              <span style={{ fontFamily: "Faktum, sans-serif", fontSize: "14px", fontWeight: 500, color: "rgba(141, 141, 141, 1)" }}>Quantity</span>
+            {/* Quantity Selector (Height: 84px, gap: 12px) */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "12px", textAlign: "left", height: "84px", boxSizing: "border-box" }}>
+              <span style={{ fontFamily: "Faktum, sans-serif", fontSize: "20px", fontWeight: 500, lineHeight: "32px", color: "rgba(43, 43, 43, 1)", margin: 0 }}>Quantity</span>
               <div 
                 style={{
                   display: "flex",
@@ -707,13 +707,13 @@ export default function ProductDetailsPage() {
               </div>
             </div>
 
-            {/* Action Buttons */}
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px", width: "100%" }}>
+            {/* Action Buttons (Height: 60px, gap: 12px) */}
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", width: "100%", height: "60px", boxSizing: "border-box" }}>
               <button
                 onClick={handleAddToCart}
                 style={{
                   width: "100%",
-                  height: "50px",
+                  height: "60px",
                   border: "1px solid rgba(29, 73, 62, 1)",
                   color: "rgba(29, 73, 62, 1)",
                   backgroundColor: "#FFFFFF",
@@ -766,7 +766,7 @@ export default function ProductDetailsPage() {
                 onClick={handleBuyNow}
                 style={{
                   width: "100%",
-                  height: "50px",
+                  height: "60px",
                   backgroundColor: "rgba(29, 73, 62, 1)",
                   color: "#FFFFFF",
                   border: "none",
@@ -884,9 +884,10 @@ export default function ProductDetailsPage() {
                 display: "grid",
                 gridTemplateColumns: "repeat(3, 1fr)",
                 gap: "12px",
-                paddingTop: "16px",
+                paddingTop: "24px",
                 borderTop: "1px solid rgba(204, 204, 204, 0.54)",
-                boxSizing: "border-box"
+                boxSizing: "border-box",
+                marginTop: "auto"
               }}
               className="text-center font-semibold"
             >

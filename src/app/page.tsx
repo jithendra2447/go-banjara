@@ -288,172 +288,88 @@ export default function Homepage() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-[#1D493E] font-sans antialiased relative">
+    <div className="min-h-screen bg-white text-[#1D493E] font-sans antialiased relative -mt-[90px]">
       
-      {/* 1. HERO BACKGROUND LAYER (z-20, sits behind metrics bar z-35) */}
-      <div className="absolute inset-x-0 top-0 hero-banner-height w-full pointer-events-none z-20 overflow-visible">
-        {/* Sub-container for background overlays (z-10, overflow-visible to prevent clipping) */}
-        <div className="absolute inset-0 overflow-visible z-10">
-          {/* Layer 1: Background */}
+      {/* 1. HERO VIDEO BACKGROUND LAYER (z-20, sits behind metrics bar z-35) */}
+      <div className="relative hero-banner-height w-full z-20 overflow-hidden">
+        {/* HTML5 Video Element */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover brightness-[0.75] contrast-[1.05]"
+          style={{ transform: 'translateZ(0)' }}
+        >
+          <source src="/hero-video.mp4" type="video/mp4" />
+          {/* Fallback image */}
           <img 
             src="/hero-combined.png?v=5" 
-            alt="Hero Background" 
-            className="absolute inset-x-0 top-0 w-full h-full object-cover object-top brightness-[0.88] contrast-[1.05] saturate-[1.05]"
-            style={{ 
-              imageRendering: '-webkit-optimize-contrast',
-              transform: 'translateZ(0)'
-            }}
+            alt="Hero Background Fallback" 
+            className="w-full h-full object-cover object-top"
           />
+        </video>
 
-          {/* Layer 1.5: User's Grey Overlay Layer */}
-          <img 
-            src="/hero-overlay.png" 
-            alt="Overlay Layer" 
-            className="absolute inset-x-0 top-0 w-full h-full object-cover object-top opacity-15 mix-blend-multiply"
-            style={{ 
-              imageRendering: '-webkit-optimize-contrast',
-              transform: 'translateZ(0)'
-            }}
-          />
+        {/* Dark overlay to make white text highly readable */}
+        <div className="absolute inset-0 bg-black/20 pointer-events-none z-10" />
 
-          {/* Layer 1.8: User's Top Dark Gradient Layer */}
-          <img 
-            src="/hero-top-gradient.png" 
-            alt="Top Dark Gradient Layer" 
-            className="absolute inset-x-0 top-0 w-full h-full object-cover object-top"
-            style={{ 
-              imageRendering: '-webkit-optimize-contrast',
-              transform: 'translateZ(0)'
-            }}
-          />
-
-          {/* Layer 2: White Gradient Fade (Positioned behind/back side of the bike to transition to the metrics section) */}
-          <div 
-            className="absolute inset-x-0 bottom-0 h-[20px] z-20 pointer-events-none" 
-            style={{ 
-              background: 'linear-gradient(to top, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0) 100%)' 
-            }}
-          />
-        </div>
-      </div>
-
-      {/* 1.5 BIKER LAYER (z-40, sits on top of metrics bar z-30 to overlap tyres, matches background placement exactly for zero ghosting) */}
-      <div className="absolute inset-x-0 top-0 hero-banner-height w-full pointer-events-none z-40 overflow-visible">
-        <div className="absolute inset-0 overflow-visible z-10">
-          <img 
-            src="/hero-bike.png?v=5" 
-            alt="Biker" 
-            className="absolute inset-x-0 top-0 w-full h-full object-cover object-top"
-            style={{ 
-              imageRendering: '-webkit-optimize-contrast',
-              transform: 'translateZ(0)'
-            }}
-          />
-        </div>
-      </div>
-
-
-
-      {/* 2. HERO CONTENT SECTION (Transparent background, relative z-[45] to sit on top of everything, but below navbar z-50) */}
-      <section className="relative hero-banner-height flex flex-col justify-center z-[45] bg-transparent">
-        <div className="max-w-[1440px] mx-auto px-6 md:px-20 w-full grid md:grid-cols-2 gap-12 items-center relative py-4">
-          <div className="w-full md:max-w-[454px] md:h-auto flex flex-col justify-between text-left shrink-0 gap-6 md:gap-12">
-            <div className="w-full md:max-w-[454px] md:h-auto flex flex-col gap-[24px] md:gap-[32px] justify-start shrink-0">
-              <h1 className="text-4xl md:text-[62px] md:leading-[1.38] tracking-[-0.2px] font-semibold text-white font-sans w-full md:max-w-[454px] md:h-auto shrink-0">
-                {pageContent.heroTitleLine1?.trim() ? pageContent.heroTitleLine1 : "Hey! Let’s"} <br />
-                {pageContent.heroTitleLine2?.trim() ? pageContent.heroTitleLine2 : "Escape from"} <br />
-                {pageContent.heroTitleLine3?.trim() ? pageContent.heroTitleLine3 : "the Ordinary"}
+        {/* 2. HERO CONTENT SECTION (Overlay on top of video, z-20) */}
+        <div className="absolute inset-0 flex flex-col justify-end pb-12 md:pb-[62px] z-20 bg-transparent animate-fade-in">
+          <div className="max-w-[1440px] mx-auto px-6 md:px-20 w-full flex flex-col md:flex-row md:items-end justify-between gap-8 md:gap-12">
+            
+            {/* Left side: Heading & Subtitle */}
+            <div className="flex flex-col gap-6 md:max-w-[850px] text-left">
+              <h1 className="text-4xl md:text-[62px] md:leading-[1.2] tracking-[-0.2px] font-semibold text-white font-sans">
+                Hey! Let’s Escape from the <br className="hidden md:inline" />
+                Ordinary
               </h1>
-              <p className="text-sm md:text-[20px] md:leading-[34px] tracking-[0px] text-white/95 font-sans font-medium w-full md:max-w-[454px] md:h-auto overflow-hidden shrink-0">
-                {pageContent.heroSubtitle?.trim() ? pageContent.heroSubtitle : "We bridge the gap between soulful Indian travel and high end gear. curated for those who find home in the dust of the road"}
+              <p className="text-sm md:text-[20px] md:leading-[32px] tracking-[0px] text-white/95 font-sans font-medium max-w-[650px]">
+                We bridge the gap between soulful Indian travel and high end gear. <br className="hidden md:inline" />
+                curated for those who find home in the dust of the road
               </p>
             </div>
-            <div className="flex flex-col sm:flex-row items-center gap-[16px] md:gap-[24px] w-full max-w-[412px] h-auto justify-start shrink-0 md:translate-y-[30px]">
+
+            {/* Right side: Two Buttons side-by-side */}
+            <div className="flex flex-row items-center gap-[16px] md:gap-[24px] justify-start shrink-0 pb-1">
               <Link 
                 href="/shop"
-                className="hover:scale-[1.02] active:scale-[0.98] text-white border border-[#1D493E] transition-all duration-300 cursor-pointer flex items-center justify-center w-full sm:w-[194px] h-[55px]"
+                className="hover:scale-[1.02] active:scale-[0.98] text-[#2B2B2B] bg-white hover:bg-white/90 transition-all duration-300 cursor-pointer flex items-center justify-center w-[150px] md:w-[177px] h-[55px]"
                 style={{
-                  paddingTop: "16px",
-                  paddingBottom: "16px",
-                  paddingLeft: "12px",
-                  paddingRight: "12px",
-                  gap: "8px",
                   borderRadius: "4px",
-                  background: "#1D493E",
                   fontFamily: "'Faktum','Outfit',sans-serif",
-                  fontWeight: 500,
+                  fontWeight: 600,
                   fontSize: "16px",
                   lineHeight: "100%",
-                  letterSpacing: "0px",
                   textDecoration: "none",
                   boxSizing: "border-box",
                   whiteSpace: "nowrap",
                 }}
               >
-                {pageContent.heroShopBtn?.trim() ? pageContent.heroShopBtn : "Shop Now"}
+                Shop Now
               </Link>
               <Link 
                 href="/travel"
-                className="hover:bg-[#1D493E] hover:text-white hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 cursor-pointer flex items-center justify-center w-full sm:w-[194px] h-[55px]"
+                className="hover:bg-white/10 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 cursor-pointer flex items-center justify-center w-[190px] md:w-[215px] h-[55px] border border-white/30 text-white"
                 style={{
-                  paddingTop: "16px",
-                  paddingBottom: "16px",
-                  paddingLeft: "12px",
-                  paddingRight: "12px",
-                  gap: "8px",
                   borderRadius: "4px",
-                  border: "2px solid rgba(29, 73, 62, 1)",
-                  background: "transparent",
-                  color: "rgba(29,73,62,1)",
+                  background: "rgba(255, 255, 255, 0.1)",
+                  backdropFilter: "blur(4px)",
                   fontFamily: "'Faktum','Outfit',sans-serif",
-                  fontWeight: 500,
+                  fontWeight: 600,
                   fontSize: "16px",
                   lineHeight: "100%",
-                  letterSpacing: "0px",
                   textDecoration: "none",
                   boxSizing: "border-box",
                   whiteSpace: "nowrap",
                 }}
               >
-                {pageContent.heroTravelBtn?.trim() ? pageContent.heroTravelBtn : "See Travel Packages"}
+                See Travel Packages
               </Link>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* 2. METRICS WIDGET BAR */}
-      <section style={{ background: "rgba(255,255,255,1)", marginTop: "-35px" }} className="relative z-30 flex items-center w-full md:h-[145px] py-6 md:py-0">
-        <div
-          className="w-full max-w-[1440px] mx-auto flex flex-wrap md:flex-nowrap items-center justify-between px-6 md:px-[80px]"
-          style={{ paddingTop: "24px", paddingBottom: "24px" }}
-        >
-          <div className="w-[45%] md:w-[177px] h-auto md:h-[97px] flex flex-col items-center justify-center p-[12px] shrink-0" style={{ gap: "8px" }}>
-            <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center", height: "40px", display: "inline-flex", alignItems: "center", justifyContent: "center" }} className="text-2xl sm:text-3xl md:text-[32px]">10+</h4>
-            <p style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center", whiteSpace: "nowrap", height: "25px", display: "inline-flex", alignItems: "center", justifyContent: "center" }} className="text-sm sm:text-base md:text-[20px]">Travel Packages</p>
-          </div>
-          <div className="hidden md:block w-[1px] h-[97px] bg-[#CCCCCC] shrink-0" />
-          <div className="w-[45%] md:w-[177px] h-auto md:h-[97px] flex flex-col items-center justify-center p-[12px] shrink-0" style={{ gap: "8px" }}>
-            <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center", height: "40px", display: "inline-flex", alignItems: "center", justifyContent: "center" }} className="text-2xl sm:text-3xl md:text-[32px]">15k+</h4>
-            <p style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center", whiteSpace: "nowrap", height: "25px", display: "inline-flex", alignItems: "center", justifyContent: "center" }} className="text-sm sm:text-base md:text-[20px]">Nomads Joined</p>
-          </div>
-          <div className="hidden md:block w-[1px] h-[97px] bg-[#CCCCCC] shrink-0" />
-          <div className="w-[45%] md:w-[177px] h-auto md:h-[97px] flex flex-col items-center justify-center p-[12px] shrink-0" style={{ gap: "8px" }}>
-            <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center", height: "40px", display: "inline-flex", alignItems: "center", justifyContent: "center" }} className="text-2xl sm:text-3xl md:text-[32px]">24/7</h4>
-            <p style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center", whiteSpace: "nowrap", height: "25px", display: "inline-flex", alignItems: "center", justifyContent: "center" }} className="text-sm sm:text-base md:text-[20px]">On-road Support</p>
-          </div>
-          <div className="hidden md:block w-[1px] h-[97px] bg-[#CCCCCC] shrink-0" />
-          <div className="w-[45%] md:w-[177px] h-auto md:h-[97px] flex flex-col items-center justify-center p-[12px] shrink-0" style={{ gap: "8px" }}>
-            <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center", height: "40px", display: "inline-flex", alignItems: "center", justifyContent: "center" }} className="text-2xl sm:text-3xl md:text-[32px]">7+</h4>
-            <p style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center", whiteSpace: "nowrap", height: "25px", display: "inline-flex", alignItems: "center", justifyContent: "center" }} className="text-sm sm:text-base md:text-[20px]">Shop Products</p>
-          </div>
-          <div className="hidden md:block w-[1px] h-[97px] bg-[#CCCCCC] shrink-0" />
-          <div className="w-[100%] md:w-[177px] h-auto md:h-[97px] flex flex-col items-center justify-center p-[12px] shrink-0 mt-4 md:mt-0" style={{ gap: "8px" }}>
-            <h4 style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center", height: "40px", display: "inline-flex", alignItems: "center", justifyContent: "center" }} className="text-2xl sm:text-3xl md:text-[32px]">4.5+</h4>
-            <p style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(43, 43, 43, 1)", textAlign: "center", whiteSpace: "nowrap", height: "25px", display: "inline-flex", alignItems: "center", justifyContent: "center" }} className="text-sm sm:text-base md:text-[20px]">Average trip rating</p>
           </div>
         </div>
-      </section>
+      </div>
 
       {/* 3. DUAL CALL-TO-ACTIONS */}
       <section className="max-w-[1440px] mx-auto px-6 md:px-20 pt-[20px] pb-[20px] bg-white relative z-35">
@@ -734,6 +650,48 @@ export default function Homepage() {
       </section>
 
       {/* 5. TOP PRODUCT CATEGORIES */}
+      {/* 4.5 STANDALONE SHOP BANNER SECTION */}
+      <section className="bg-white relative z-10 w-full">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-20 py-2">
+          <div 
+            style={{ width: "100%", maxWidth: "1356px", height: "242px" }}
+            className="mx-auto bg-white flex items-end justify-between pb-8 border-b border-gray-100 text-left relative"
+          >
+            <div className="space-y-4 max-w-4xl text-left">
+              <h2 className="text-3xl md:text-[42px] font-serif font-semibold text-[#1D493E] leading-none">
+                Shop Product in all Categories
+              </h2>
+              <p className="text-gray-500 text-base md:text-[24px] md:leading-8 font-medium">
+                Curated gear for the modern nomad. From durable journal covers to the stickers that tell your story
+              </p>
+            </div>
+            <div className="shrink-0 pb-1">
+              <Link 
+                href="/shop"
+                className="inline-flex items-center justify-center gap-[8px] text-[#1D493E] hover:opacity-80 transition-all duration-300 cursor-pointer group font-sans font-medium text-lg md:text-[20px] leading-none"
+              >
+                <span>Shop Now</span>
+                <svg 
+                  style={{ width: '28px', height: '28px' }}
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2.25" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"
+                  className="shrink-0 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"
+                >
+                  <path d="M7 17l2.5-2.5" />
+                  <path d="M12.5 11.5L17 7" />
+                  <path d="M7 7h10v10" />
+                </svg>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. TOP PRODUCT CATEGORIES */}
       <section className="bg-white relative z-10">
         <div className="max-w-[1440px] mx-auto px-6 md:px-20 pt-2 pb-[32px] flex flex-col gap-[32px]">
           
@@ -893,7 +851,7 @@ export default function Homepage() {
               resolveProduct("explore-more-keychain-1", "Explore more", "Key Chains", "/explore_more_keychain.png", 149, 193),
               resolveProduct("go-banjara-tshirt-1", "Go Banjara", "T-Shirts", "/go_banjara_tshirt.jpg", 399, 599),
               resolveProduct("prod-badge-around", "Naturally Nomad", "Badges", "/around_the_world_sticker.jpg", 139, 199)
-            ].map((deal) => {
+            ].map((deal, idx) => {
               // Mock product object for cart action
               const mockProduct = {
                 id: deal.id,
@@ -907,7 +865,12 @@ export default function Homepage() {
               };
 
               return (
-                <div key={deal.id} className="bg-white rounded-[4px] w-full md:h-[627.68px] flex flex-col justify-between gap-[24px] hover:shadow-xs transition duration-300 overflow-hidden">
+                <div 
+                  key={deal.id} 
+                  className={`bg-white rounded-[4px] w-full h-auto pb-4 flex flex-col justify-between gap-[16px] hover:shadow-xs transition duration-300 overflow-hidden ${
+                    idx >= 3 ? 'hidden md:flex' : 'flex'
+                  }`}
+                >
                   {/* Image Container with Dots (Width: 339px, Height: 254px, Radius: 4px) */}
                   <div className="relative w-full md:h-[254px] rounded-[4px] overflow-hidden shrink-0">
                     <img 
@@ -939,50 +902,50 @@ export default function Homepage() {
                   </div>
 
                   {/* Details Block */}
-                  <div className="w-full md:h-[349.68px] flex flex-col justify-between text-left gap-3 md:gap-0 mt-3 md:mt-0">
+                  <div className="w-full h-auto flex flex-col justify-between text-left gap-3 px-4">
                     {/* Category Tag */}
-                    <span className="inline-flex items-center justify-center h-[28px] rounded-[4px] px-[8px] py-[4px] text-[14px] font-sans font-medium text-[#FF623E] bg-[#FF623E]/8 self-start">
+                    <span className="inline-flex items-center justify-center h-[28px] rounded-[4px] px-[8px] py-[4px] text-[13px] font-sans font-medium text-[#FF623E] bg-[#FF623E]/8 self-start">
                       {deal.category}
                     </span>
                     
                     {/* Title & Price Row */}
                     <div className="w-full h-auto min-h-[35px] flex justify-between items-center gap-2">
-                      <h4 className="text-base md:text-[20px] font-sans font-semibold text-[#2B2B2B] truncate">{deal.name}</h4>
+                      <h4 className="text-[15px] md:text-[17px] font-sans font-semibold text-[#2B2B2B] truncate">{deal.name}</h4>
                       <div className="flex items-center gap-2.5 shrink-0">
-                        <span className="text-gray-400 line-through text-xs sm:text-sm font-medium">₹{deal.originalPrice}</span>
-                        <span className="text-base md:text-[20px] font-sans font-semibold text-[#2B2B2B]">₹{deal.price}</span>
+                        <span className="text-gray-400 line-through text-xs font-medium">₹{deal.originalPrice}</span>
+                        <span className="text-[15px] md:text-[17px] font-sans font-semibold text-[#2B2B2B]">₹{deal.price}</span>
                       </div>
                     </div>
 
                     {/* Rating Row */}
                     <div className="flex items-center gap-[12px] h-[20px] shrink-0">
                       <div className="flex text-amber-400 gap-0.5">
-                        <Star className="w-4 h-4 md:w-5 md:h-5 fill-current" />
-                        <Star className="w-4 h-4 md:w-5 md:h-5 fill-current" />
-                        <Star className="w-4 h-4 md:w-5 md:h-5 fill-current" />
-                        <Star className="w-4 h-4 md:w-5 md:h-5 fill-current" />
-                        <Star className="w-4 h-4 md:w-5 md:h-5 fill-current" />
+                        <Star className="w-3.5 h-3.5 md:w-[18px] md:h-[18px] fill-current" />
+                        <Star className="w-3.5 h-3.5 md:w-[18px] md:h-[18px] fill-current" />
+                        <Star className="w-3.5 h-3.5 md:w-[18px] md:h-[18px] fill-current" />
+                        <Star className="w-3.5 h-3.5 md:w-[18px] md:h-[18px] fill-current" />
+                        <Star className="w-3.5 h-3.5 md:w-[18px] md:h-[18px] fill-current" />
                       </div>
-                      <span className="text-sm sm:text-base md:text-[20px] font-sans font-medium text-[#2B2B2B] leading-none">({deal.reviews})</span>
+                      <span className="text-xs md:text-sm font-sans font-medium text-[#2B2B2B] leading-none">({deal.reviews})</span>
                     </div>
 
                     {/* Bought statistics */}
-                    <p className="font-sans font-medium text-sm sm:text-base md:text-[20px] leading-none text-[#8D8D8D] h-[25px] flex items-center shrink-0">{deal.boughtText}</p>
+                    <p className="font-sans font-medium text-xs md:text-sm leading-none text-[#8D8D8D] h-[25px] flex items-center shrink-0">{deal.boughtText}</p>
 
                     {/* Delivery text */}
-                    <p className="font-sans font-medium text-xs sm:text-sm md:text-[20px] md:leading-[28px]">
+                    <p className="font-sans font-medium text-[11px] md:text-xs md:leading-[20px]">
                       <span className="text-[#8D8D8D]">FREE delivery as soon as </span>
                       <span className="text-[#2B2B2B]">Thu, 9 Apr, 7 am - 10 pm</span>
                     </p>
 
-                    {/* Add to Cart Button (Width: 296px, Height: 60px, Padding: 16px vertical, 32px horizontal, Border: 2px, Radius: 4px, Gap: 8px) */}
+                    {/* Add to Cart Button */}
                     <button
                       onClick={() => handleProductAdd(mockProduct)}
-                      className="w-full h-[60px] pt-[16px] pr-[32px] pb-[16px] pl-[32px] gap-[8px] rounded-[4px] border-2 border-[#1D493E] hover:bg-[#1D493E] hover:text-white text-[#1D493E] text-[16px] font-bold transition flex items-center justify-center cursor-pointer group"
+                      className="w-full h-[48px] py-[10px] px-[20px] gap-[8px] rounded-[4px] border-2 border-[#1D493E] hover:bg-[#1D493E] hover:text-white text-[#1D493E] text-xs md:text-sm font-bold transition flex items-center justify-center cursor-pointer group"
                     >
                       <span>{addedProductId === deal.id ? 'Added to Cart!' : 'Add to cart'}</span>
                       <svg 
-                        style={{ width: '28px', height: '28px' }} 
+                        style={{ width: '20px', height: '20px' }} 
                         viewBox="0 0 28 28" 
                         fill="none" 
                         strokeWidth="1.75" 
@@ -1012,10 +975,10 @@ export default function Homepage() {
                         />
                       </svg>
                     </button>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
           </div>
 
           {/* Bottom active state indicator line */}
@@ -1106,7 +1069,7 @@ export default function Homepage() {
               resolveProduct("fur-jaden-backpack-1", "Fur Jaden C/W", "Backpacks", "/fur_jaden_backpack.jpg", 149, 193),
               resolveProduct("go-passport-cover-1", "Go Passport Cover", "Passport Covers", "/go_passport_cover.jpg", 399, 599),
               resolveProduct("banjara-luggage-tag-1", "Banjara Luggage Tag", "Luggage Tags", "/banjara_luggage_tag.jpg", 139, 199)
-            ].map((prod) => {
+            ].map((prod, idx) => {
               // Mock product object for cart action
               const mockProduct = {
                 id: prod.id,
@@ -1120,7 +1083,12 @@ export default function Homepage() {
               };
 
               return (
-                <div key={prod.id} className="bg-white rounded-[4px] w-full md:h-[627.68px] flex flex-col justify-between gap-[24px] hover:shadow-xs transition duration-300 overflow-hidden">
+                <div 
+                  key={prod.id} 
+                  className={`bg-white rounded-[4px] w-full h-auto pb-4 flex flex-col justify-between gap-[16px] hover:shadow-xs transition duration-300 overflow-hidden ${
+                    idx >= 3 ? 'hidden md:flex' : 'flex'
+                  }`}
+                >
                   {/* Image Container with Dots (Width: 339px, Height: 254px, Radius: 4px) */}
                   <div className="relative w-full md:h-[254px] rounded-[4px] overflow-hidden shrink-0">
                     <img 
@@ -1152,50 +1120,50 @@ export default function Homepage() {
                   </div>
 
                   {/* Details Block */}
-                  <div className="w-full md:h-[349.68px] flex flex-col justify-between text-left gap-3 md:gap-0 mt-3 md:mt-0">
+                  <div className="w-full h-auto flex flex-col justify-between text-left gap-3 px-4">
                     {/* Category Tag */}
-                    <span className="inline-flex items-center justify-center h-[28px] rounded-[4px] px-[8px] py-[4px] text-[14px] font-sans font-medium text-[#FF623E] bg-[#FF623E]/8 self-start">
+                    <span className="inline-flex items-center justify-center h-[28px] rounded-[4px] px-[8px] py-[4px] text-[13px] font-sans font-medium text-[#FF623E] bg-[#FF623E]/8 self-start">
                       {prod.category}
                     </span>
                     
                     {/* Title & Price Row */}
                     <div className="w-full h-auto min-h-[35px] flex justify-between items-center gap-2">
-                      <h4 className="text-base md:text-[20px] font-sans font-semibold text-[#2B2B2B] truncate">{prod.name}</h4>
+                      <h4 className="text-[15px] md:text-[17px] font-sans font-semibold text-[#2B2B2B] truncate">{prod.name}</h4>
                       <div className="flex items-center gap-2.5 shrink-0">
-                        <span className="text-gray-400 line-through text-xs sm:text-sm font-medium">₹{prod.originalPrice}</span>
-                        <span className="text-base md:text-[20px] font-sans font-semibold text-[#2B2B2B]">₹{prod.price}</span>
+                        <span className="text-gray-400 line-through text-xs font-medium">₹{prod.originalPrice}</span>
+                        <span className="text-[15px] md:text-[17px] font-sans font-semibold text-[#2B2B2B]">₹{prod.price}</span>
                       </div>
                     </div>
 
                     {/* Rating Row */}
                     <div className="flex items-center gap-[12px] h-[20px] shrink-0">
                       <div className="flex text-amber-400 gap-0.5">
-                        <Star className="w-4 h-4 md:w-5 md:h-5 fill-current" />
-                        <Star className="w-4 h-4 md:w-5 md:h-5 fill-current" />
-                        <Star className="w-4 h-4 md:w-5 md:h-5 fill-current" />
-                        <Star className="w-4 h-4 md:w-5 md:h-5 fill-current" />
-                        <Star className="w-4 h-4 md:w-5 md:h-5 fill-current" />
+                        <Star className="w-3.5 h-3.5 md:w-[18px] md:h-[18px] fill-current" />
+                        <Star className="w-3.5 h-3.5 md:w-[18px] md:h-[18px] fill-current" />
+                        <Star className="w-3.5 h-3.5 md:w-[18px] md:h-[18px] fill-current" />
+                        <Star className="w-3.5 h-3.5 md:w-[18px] md:h-[18px] fill-current" />
+                        <Star className="w-3.5 h-3.5 md:w-[18px] md:h-[18px] fill-current" />
                       </div>
-                      <span className="text-sm sm:text-base md:text-[20px] font-sans font-medium text-[#2B2B2B] leading-none">({prod.reviews})</span>
+                      <span className="text-xs md:text-sm font-sans font-medium text-[#2B2B2B] leading-none">({prod.reviews})</span>
                     </div>
 
                     {/* Bought statistics */}
-                    <p className="font-sans font-medium text-sm sm:text-base md:text-[20px] leading-none text-[#8D8D8D] h-[25px] flex items-center shrink-0">{prod.boughtText}</p>
+                    <p className="font-sans font-medium text-xs md:text-sm leading-none text-[#8D8D8D] h-[25px] flex items-center shrink-0">{prod.boughtText}</p>
 
                     {/* Delivery text */}
-                    <p className="font-sans font-medium text-xs sm:text-sm md:text-[20px] md:leading-[28px]">
+                    <p className="font-sans font-medium text-[11px] md:text-xs md:leading-[20px]">
                       <span className="text-[#8D8D8D]">FREE delivery as soon as </span>
                       <span className="text-[#2B2B2B]">Thu, 9 Apr, 7 am - 10 pm</span>
                     </p>
 
-                    {/* Add to Cart Button (Width: 296px, Height: 60px, Padding: 16px vertical, 32px horizontal, Border: 2px, Radius: 4px, Gap: 8px) */}
+                    {/* Add to Cart Button */}
                     <button
                       onClick={() => handleProductAdd(mockProduct)}
-                      className="w-full h-[60px] pt-[16px] pr-[32px] pb-[16px] pl-[32px] gap-[8px] rounded-[4px] border-2 border-[#1D493E] hover:bg-[#1D493E] hover:text-white text-[#1D493E] text-[16px] font-bold transition flex items-center justify-center cursor-pointer group"
+                      className="w-full h-[48px] py-[10px] px-[20px] gap-[8px] rounded-[4px] border-2 border-[#1D493E] hover:bg-[#1D493E] hover:text-white text-[#1D493E] text-xs md:text-sm font-bold transition flex items-center justify-center cursor-pointer group"
                     >
                       <span>{addedProductId === prod.id ? 'Added to Cart!' : 'Add to cart'}</span>
                       <svg 
-                        style={{ width: '28px', height: '28px' }} 
+                        style={{ width: '20px', height: '20px' }} 
                         viewBox="0 0 28 28" 
                         fill="none" 
                         strokeWidth="1.75" 
@@ -1225,10 +1193,10 @@ export default function Homepage() {
                         />
                       </svg>
                     </button>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
           </div>
 
         </div>

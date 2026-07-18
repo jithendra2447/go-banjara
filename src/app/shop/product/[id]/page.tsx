@@ -944,7 +944,7 @@ export default function ProductDetailsPage() {
             marginTop: "32px"
           }}
         >
-          <div style={{ display: "flex", gap: "24px", height: "100%", alignItems: "flex-end" }}>
+          <div style={{ display: "flex", gap: "48px", height: "100%", alignItems: "flex-end" }}>
 
             {/* Product Description Tab */}
             <button
@@ -1012,10 +1012,9 @@ export default function ProductDetailsPage() {
             {/* Overview of Product */}
             <section style={{
               width: "100%",
-              height: "358px",
+              height: "auto",
               display: "flex",
               flexDirection: "column",
-              justifyContent: "space-between",
               borderRadius: "4px",
               backgroundColor: "rgba(255, 255, 255, 1)",
               boxSizing: "border-box"
@@ -1023,20 +1022,20 @@ export default function ProductDetailsPage() {
               <h2 style={{
                 fontFamily: "Fraunces, serif",
                 fontWeight: 600,
-                fontSize: "42px",
-                lineHeight: "100%",
+                fontSize: "32px",
+                lineHeight: "120%",
                 letterSpacing: "0px",
                 color: "rgba(43, 43, 43, 1)",
-                margin: "0 0 24px 0"
+                margin: "0 0 16px 0"
               }}>
                 Overview of the <span style={{ color: "rgba(255, 98, 62, 1)" }}>Product</span>
               </h2>
-              <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: "24px", boxSizing: "border-box" }}>
+              <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: "16px", boxSizing: "border-box" }}>
                 <p style={{
                   fontFamily: "Faktum, sans-serif",
                   fontWeight: 500,
-                  fontSize: "20px",
-                  lineHeight: "42px",
+                  fontSize: "18px",
+                  lineHeight: "32px",
                   letterSpacing: "0px",
                   color: "rgba(43, 43, 43, 1)",
                   margin: 0,
@@ -1046,8 +1045,8 @@ export default function ProductDetailsPage() {
                 <p style={{
                   fontFamily: "Faktum, sans-serif",
                   fontWeight: 500,
-                  fontSize: "20px",
-                  lineHeight: "42px",
+                  fontSize: "18px",
+                  lineHeight: "32px",
                   letterSpacing: "0px",
                   color: "rgba(43, 43, 43, 1)",
                   margin: 0,
@@ -1059,34 +1058,31 @@ export default function ProductDetailsPage() {
             </section>
 
             {/* Product Highlights */}
-            <section style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+            <section style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
               <div>
                 <span style={{ display: "inline-block", fontSize: "9px", fontWeight: 900, textTransform: "uppercase", letterSpacing: "0.15em", color: "rgba(255, 98, 62, 1)", backgroundColor: "rgba(255, 235, 229, 1)", padding: "4px 10px", borderRadius: "2px" }}>
                   SPECIFICATIONS
                 </span>
               </div>
-              <h2 style={{ fontFamily: "Fraunces, serif", fontWeight: 600, fontSize: "36px", color: "rgba(43, 43, 43, 1)", margin: 0 }}>
+              <h2 style={{ fontFamily: "Fraunces, serif", fontWeight: 600, fontSize: "28px", color: "rgba(43, 43, 43, 1)", margin: 0 }}>
                 Product <span style={{ color: "rgba(255, 98, 62, 1)" }}>Highlights</span>
               </h2>
-              <div style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(3, 405px)",
-                rowGap: "24px",
-                columnGap: "32px",
-                width: "100%"
-              }}>
+              <div 
+                className="grid grid-cols-1 md:grid-cols-3 gap-x-[32px] gap-y-[16px] w-full"
+              >
                 {highlights.map((hl, i) => (
                   <div key={i} style={{
                     display: "flex",
                     alignItems: "center",
                     gap: "12px",
-                    width: "405px",
-                    height: "64px"
+                    width: "100%",
+                    height: "auto",
+                    minHeight: "32px"
                   }}>
                     {/* Checkbox */}
                     <div style={{
-                      width: "32px",
-                      height: "32px",
+                      width: "28px",
+                      height: "28px",
                       borderRadius: "4px",
                       backgroundColor: "rgba(246, 243, 238, 1)",
                       display: "flex",
@@ -1094,14 +1090,14 @@ export default function ProductDetailsPage() {
                       justifyContent: "center",
                       flexShrink: 0
                     }}>
-                      <Check style={{ width: "16px", height: "16px", color: "rgba(43, 43, 43, 1)" }} />
+                      <Check style={{ width: "14px", height: "14px", color: "rgba(43, 43, 43, 1)" }} />
                     </div>
                     {/* Text */}
                     <span style={{
                       fontFamily: "Faktum, sans-serif",
                       fontWeight: 500,
-                      fontSize: "20px",
-                      lineHeight: "32px",
+                      fontSize: "16px",
+                      lineHeight: "26px",
                       letterSpacing: "0px",
                       color: "rgba(43, 43, 43, 1)",
                       verticalAlign: "middle"
@@ -1115,7 +1111,7 @@ export default function ProductDetailsPage() {
         ) : (
           <div style={{ width: "100%", minHeight: "742px", paddingTop: "32px", boxSizing: "border-box" }}>
             <section style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
-              <h2 style={{ fontFamily: "Fraunces, serif", fontWeight: 600, fontSize: "36px", color: "rgba(43, 43, 43, 1)", margin: 0 }}>Customer Reviews</h2>
+              <h2 style={{ fontFamily: "Fraunces, serif", fontWeight: 600, fontSize: "28px", color: "rgba(43, 43, 43, 1)", margin: 0 }}>Customer Reviews</h2>
               {[
                 { author: "Karan S.", rating: 5, date: "May 12, 2026", text: "Amazing quality badge! It has a premium gloss and the clasp holds very strong on my backpack. Will buy more variants." },
                 { author: "Sneha M.", rating: 5, date: "April 28, 2026", text: "Looks exactly like the photo. High-quality details and very vibrant colors. Highly recommended!" }

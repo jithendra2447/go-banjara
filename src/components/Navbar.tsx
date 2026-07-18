@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { 
@@ -16,6 +16,27 @@ export const Navbar: React.FC = () => {
   const pathname = usePathname();
   const { cartCount, setCartOpen, wishlist, setWishlistOpen, user, logout, setAuthOpen } = useCart();
   const [searchVal, setSearchVal] = useState('');
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    if (pathname !== '/') {
+      setIsScrolled(false);
+      return;
+    }
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // run once initially
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [pathname]);
+
+  const isHomepage = pathname === '/';
+  const isTransparent = isHomepage && !isScrolled;
 
   const triggerSearch = () => {
     if (searchVal.trim()) {
@@ -48,7 +69,11 @@ export const Navbar: React.FC = () => {
   };
 
   return (
-    <header className="w-full z-50 flex flex-col fixed top-0 left-0 bg-white backdrop-blur-[12px] border-b border-[#CCCCCC]">
+    <header className={`w-full z-50 flex flex-col fixed top-0 left-0 transition-all duration-300 ${
+      isTransparent
+        ? 'bg-transparent border-b border-white/10'
+        : 'bg-white backdrop-blur-[12px] border-b border-[#CCCCCC]'
+    }`}>
       {/* 2. MAIN NAV BAR */}
       <nav className="h-[90px] flex items-center w-full">
         <div className="max-w-[1440px] mx-auto px-4 md:px-[42px] pt-[20px] pb-[20px] w-full flex items-center justify-between h-full">
@@ -57,7 +82,7 @@ export const Navbar: React.FC = () => {
             {/* Logo (Direct Image from Figma Mockup) */}
             <Link href="/" className="flex items-center group shrink-0">
               <img
-                src="/logo.png"
+                src={isTransparent ? "/logo-footer.png" : "/logo.png"}
                 alt="go banjāra logo"
                 className="h-[40px] sm:h-[48px] w-auto max-w-[160px] sm:max-w-[217px] object-contain transition-transform duration-300 group-hover:scale-102"
               />
@@ -69,8 +94,8 @@ export const Navbar: React.FC = () => {
                 const active = isActive(link.path);
                 
                 const activeClass = active
-                  ? 'bg-[#1D493E]/8 text-[#1D493E]'
-                  : 'text-[#535352] hover:text-[#1D493E] hover:bg-gray-50';
+                  ? (isTransparent ? 'bg-white/10 text-white' : 'bg-[#1D493E]/8 text-[#1D493E]')
+                  : (isTransparent ? 'text-white/80 hover:text-white hover:bg-white/10' : 'text-[#535352] hover:text-[#1D493E] hover:bg-gray-50');
 
                 return (
                   <Link
@@ -94,10 +119,16 @@ export const Navbar: React.FC = () => {
           <div className="flex items-center justify-end gap-3 md:gap-[16px] xl:gap-[24px] h-[47px] shrink-0">
             
             {/* Search Input Box */}
-            <div className="hidden md:flex items-center w-[215px] h-[47px] gap-[8px] rounded-[4px] p-[12px] bg-white border border-[#CCCCCC]">
+            <div className={`hidden md:flex items-center w-[215px] h-[47px] gap-[8px] rounded-[4px] p-[12px] transition-all duration-300 ${
+              isTransparent
+                ? 'bg-black/20 border border-white/20 text-white'
+                : 'bg-white border border-[#CCCCCC] text-slate-800'
+            }`}>
               <button
                 onClick={triggerSearch}
-                className="focus:outline-none shrink-0 text-[#8D8D8D] hover:text-[#1D493E] transition-colors"
+                className={`focus:outline-none shrink-0 transition-colors ${
+                  isTransparent ? 'text-white/80 hover:text-white' : 'text-[#8D8D8D] hover:text-[#1D493E]'
+                }`}
                 aria-label="Search"
               >
                 <svg className="w-[20px] h-[20px]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -110,7 +141,9 @@ export const Navbar: React.FC = () => {
                 value={searchVal}
                 onChange={(e) => setSearchVal(e.target.value)}
                 onKeyDown={handleSearchKeyDown}
-                className="w-[163px] h-[23px] bg-transparent text-[18px] leading-none focus:outline-none font-sans font-normal placeholder-[#8D8D8D] text-slate-800"
+                className={`w-[163px] h-[23px] bg-transparent text-[18px] leading-none focus:outline-none font-sans font-normal ${
+                  isTransparent ? 'placeholder-white/60 text-white' : 'placeholder-[#8D8D8D] text-slate-800'
+                }`}
               />
             </div>
 
@@ -131,7 +164,9 @@ export const Navbar: React.FC = () => {
             {/* Shopping Cart Bag (Redesigned with SVG cart from Figma mockup) */}
             <button
               onClick={() => setCartOpen(true)}
-              className="relative p-2.5 rounded-full transition-all duration-300 flex items-center justify-center hover:scale-105 cursor-pointer hover:bg-gray-50 text-[#1D493E] h-[47px] w-[47px] shrink-0"
+              className={`relative p-2.5 rounded-full transition-all duration-300 flex items-center justify-center hover:scale-105 cursor-pointer h-[47px] w-[47px] shrink-0 ${
+                isTransparent ? 'text-white hover:bg-white/10' : 'text-[#1D493E] hover:bg-gray-50'
+              }`}
               aria-label="Shopping Cart"
             >
               <svg className="w-5.5 h-5.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -149,7 +184,11 @@ export const Navbar: React.FC = () => {
               <div className="relative">
                 <button
                   onClick={() => setIsProfileOpen(!isProfileOpen)}
-                  className="hidden sm:flex items-center gap-2 py-1.5 pl-2 pr-4 rounded-full border transition-all duration-300 text-xs font-black uppercase tracking-wider cursor-pointer border-gray-200 bg-gray-50 hover:bg-gray-100 text-[#1D493E] h-[47px]"
+                  className={`hidden sm:flex items-center gap-2 py-1.5 pl-2 pr-4 rounded-full border transition-all duration-300 text-xs font-black uppercase tracking-wider cursor-pointer h-[47px] ${
+                    isTransparent
+                      ? 'border-white/20 bg-white/10 hover:bg-white/20 text-white'
+                      : 'border-gray-200 bg-gray-50 hover:bg-gray-100 text-[#1D493E]'
+                  }`}
                 >
                   {user.avatar ? (
                     <img src={user.avatar} alt={user.name} className="w-6 h-6 rounded-full object-cover border border-white/20" />
@@ -227,7 +266,11 @@ export const Navbar: React.FC = () => {
             {/* Mobile menu Toggle */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="xl:hidden p-2 rounded-full transition-all duration-300 cursor-pointer hover:bg-gray-50 text-[#1D493E]"
+              className={`xl:hidden p-2 rounded-full transition-all duration-300 cursor-pointer ${
+                isTransparent 
+                  ? 'hover:bg-white/10 text-white' 
+                  : 'hover:bg-gray-50 text-[#1D493E]'
+              }`}
               aria-label="Toggle Menu"
             >
               {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}

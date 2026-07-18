@@ -233,7 +233,7 @@ export default function ProductDetailsPage() {
       case 0: // 1st: Ruler Scale View
         return (
           <div style={{ position: "relative", width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "#FFFFFF" }}>
-            <img src={mainImg} style={{ width: "70%", height: "70%", objectFit: "contain" }} />
+            <img src={mainImg} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
             {/* Ruler Overlay */}
             <div style={{ position: "absolute", left: rulerOffset, top: "15%", bottom: "15%", width: rulerWidth, borderRight: `${isThumbnail ? '0.5px' : '2px'} solid #2B2B2B`, display: "flex", flexDirection: "column", justifyContent: "space-between", alignItems: "flex-end", paddingRight: isThumbnail ? "2px" : "6px", fontFamily: "Faktum, sans-serif", fontSize: fontSizeLabel, color: "#2B2B2B", fontWeight: 600 }}>
               <div style={{ display: "flex", alignItems: "center", gap: isThumbnail ? "1px" : "4px" }}><span>1</span><div style={{ width: rulerTickMajor, height: isThumbnail ? "0.5px" : "2px", backgroundColor: "#2B2B2B" }}></div></div>
@@ -255,7 +255,7 @@ export default function ProductDetailsPage() {
       case 2: // 3rd: Flat centered view (Normal view)
         return (
           <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "#FFFFFF" }}>
-            <img src={mainImg} style={{ width: "80%", height: "80%", objectFit: "contain" }} />
+            <img src={mainImg} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
           </div>
         );
       case 3: // 4th: Front + Back Combo
@@ -273,7 +273,7 @@ export default function ProductDetailsPage() {
       case 4: // 5th: Single Front view
         return (
           <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "#FCFAF6" }}>
-            <img src={mainImg} style={{ width: "75%", height: "75%", objectFit: "contain", filter: isThumbnail ? "none" : "drop-shadow(0 8px 16px rgba(0,0,0,0.06))" }} />
+            <img src={mainImg} style={{ width: "100%", height: "100%", objectFit: "cover", filter: isThumbnail ? "none" : "drop-shadow(0 8px 16px rgba(0,0,0,0.06))" }} />
           </div>
         );
       case 5: // 6th: Detailed back clasp view
@@ -294,55 +294,37 @@ export default function ProductDetailsPage() {
 
   return (
     <div className="bg-white min-h-screen pb-24 flex flex-col items-center font-sans text-[#2B2B2B]">
-      {/* Page Header (Width: 1440px, Height: 284px, pt-62, pb-24, px-80, Background: white) */}
+      {/* Page Header (Width: 1440px, dynamic height, Background: white) */}
       <header 
         style={{
           width: "100%",
           maxWidth: "1440px",
-          minHeight: "284px",
-          paddingTop: "62px",
-          paddingBottom: "24px",
+          paddingTop: "20px",
+          paddingBottom: "16px",
           background: "rgba(255, 255, 255, 1)",
           display: "flex",
           flexDirection: "column",
-          gap: "32px",
+          gap: "20px",
           boxSizing: "border-box"
         }}
         className="px-6 md:px-[80px]"
       >
         {/* Text Block (Label, Title, Subtitle) */}
         <div style={{ display: "flex", flexDirection: "column", gap: "10px", textAlign: "left" }}>
-          {/* Label: EXPERIENCE THE SHOPPING */}
-          <div className="w-max">
-            <span 
-              style={{
-                fontFamily: "Faktum, sans-serif",
-                fontWeight: 600,
-                fontSize: "14px",
-                letterSpacing: "1.2px",
-                color: "rgba(255, 98, 62, 1)",
-                backgroundColor: "rgba(255, 98, 62, 0.1)",
-                padding: "4px 10px",
-                borderRadius: "4px",
-                textTransform: "uppercase",
-              }}
-            >
-              Experience the Shopping
-            </span>
-          </div>
+
 
           {/* Title: Shop Product in all Categories */}
           <h1
             style={{
               fontFamily: "Fraunces, serif",
               fontWeight: 600,
-              fontSize: "42px",
+              fontSize: "28px",
               lineHeight: "100%",
               letterSpacing: "0px",
               color: "#2B2B2B",
               margin: 0,
             }}
-            className="text-3xl md:text-[42px]"
+            className="text-2xl md:text-[28px]"
           >
             Shop Product in all <span style={{ color: "rgba(255, 98, 62, 1)" }}>Categories</span>
           </h1>
@@ -352,32 +334,32 @@ export default function ProductDetailsPage() {
             style={{
               fontFamily: "Faktum, sans-serif",
               fontWeight: 500,
-              fontSize: "24px",
-              lineHeight: "32px",
+              fontSize: "16px",
+              lineHeight: "24px",
               letterSpacing: "0px",
               color: "rgba(43, 43, 43, 1)",
               margin: 0,
             }}
-            className="text-lg md:text-[24px]"
+            className="text-base md:text-[16px]"
           >
             Curated gear for the modern nomad. From durable journal covers to the stickers that tell your story
           </p>
         </div>
 
         {/* Breadcrumbs Row */}
-        <div style={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: "12px", textAlign: "left" }}>
+        <div style={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: "8px", textAlign: "left" }}>
           <Link
             href="/"
             style={{
               fontFamily: "Faktum, sans-serif",
               fontWeight: 500,
-              fontSize: "24px",
-              lineHeight: "32px",
+              fontSize: "14px",
+              lineHeight: "20px",
               letterSpacing: "0px",
               color: "rgba(141, 141, 141, 1)",
               textDecoration: "none",
             }}
-            className="text-base md:text-[24px] hover:text-[#1D493E] transition-colors"
+            className="hover:text-[#1D493E] transition-colors"
           >
             Home
           </Link>
@@ -385,11 +367,10 @@ export default function ProductDetailsPage() {
             style={{
               fontFamily: "Faktum, sans-serif",
               fontWeight: 500,
-              fontSize: "24px",
-              lineHeight: "32px",
+              fontSize: "14px",
+              lineHeight: "20px",
               color: "rgba(141, 141, 141, 1)",
             }}
-            className="text-base md:text-[24px]"
           >
             ›
           </span>
@@ -398,13 +379,13 @@ export default function ProductDetailsPage() {
             style={{
               fontFamily: "Faktum, sans-serif",
               fontWeight: 500,
-              fontSize: "24px",
-              lineHeight: "32px",
+              fontSize: "14px",
+              lineHeight: "20px",
               letterSpacing: "0px",
               color: "rgba(141, 141, 141, 1)",
               textDecoration: "none",
             }}
-            className="text-base md:text-[24px] hover:text-[#1D493E] transition-colors"
+            className="hover:text-[#1D493E] transition-colors"
           >
             Shop Page
           </Link>
@@ -412,11 +393,10 @@ export default function ProductDetailsPage() {
             style={{
               fontFamily: "Faktum, sans-serif",
               fontWeight: 500,
-              fontSize: "24px",
-              lineHeight: "32px",
+              fontSize: "14px",
+              lineHeight: "20px",
               color: "rgba(141, 141, 141, 1)",
             }}
-            className="text-base md:text-[24px]"
           >
             ›
           </span>
@@ -425,13 +405,13 @@ export default function ProductDetailsPage() {
             style={{
               fontFamily: "Faktum, sans-serif",
               fontWeight: 500,
-              fontSize: "24px",
-              lineHeight: "32px",
+              fontSize: "14px",
+              lineHeight: "20px",
               letterSpacing: "0px",
               color: "rgba(141, 141, 141, 1)",
               textDecoration: "none",
             }}
-            className="text-base md:text-[24px] hover:text-[#1D493E] transition-colors"
+            className="hover:text-[#1D493E] transition-colors"
           >
             Product Categories
           </Link>
@@ -439,11 +419,10 @@ export default function ProductDetailsPage() {
             style={{
               fontFamily: "Faktum, sans-serif",
               fontWeight: 500,
-              fontSize: "24px",
-              lineHeight: "32px",
+              fontSize: "14px",
+              lineHeight: "20px",
               color: "rgba(141, 141, 141, 1)",
             }}
-            className="text-base md:text-[24px]"
           >
             ›
           </span>
@@ -451,13 +430,12 @@ export default function ProductDetailsPage() {
             style={{
               fontFamily: "Faktum, sans-serif",
               fontWeight: 500,
-              fontSize: "24px",
-              lineHeight: "32px",
+              fontSize: "14px",
+              lineHeight: "20px",
               letterSpacing: "0px",
               color: "rgba(29, 73, 62, 1)",
               textDecoration: "none",
             }}
-            className="text-base md:text-[24px]"
           >
             {product.name}
           </span>
@@ -469,11 +447,11 @@ export default function ProductDetailsPage() {
         style={{
           width: "100%",
           maxWidth: "1440px",
-          paddingTop: "24px",
-          paddingBottom: "42px",
+          paddingTop: "8px",
+          paddingBottom: "16px",
           display: "flex",
           flexDirection: "column",
-          gap: "32px",
+          gap: "16px",
           boxSizing: "border-box"
         }}
         className="w-full mx-auto px-6 md:px-[80px]"
@@ -488,7 +466,7 @@ export default function ProductDetailsPage() {
             backgroundColor: "rgba(255, 255, 255, 1)",
             boxSizing: "border-box"
           }}
-          className="grid grid-cols-1 md:grid-cols-2 items-start"
+          className="grid grid-cols-1 md:grid-cols-2 items-stretch"
         >
           
           {/* LEFT COLUMN: Main Showcase & Thumbnails (Width: 624px, Height: 1050.68px, gap: 24px) */}
@@ -498,12 +476,14 @@ export default function ProductDetailsPage() {
               maxWidth: "624px",
               display: "flex",
               flexDirection: "column",
+              justifyContent: "space-between",
               gap: "24px",
-              boxSizing: "border-box"
+              boxSizing: "border-box",
+              height: "100%"
             }}
             className="w-full"
           >
-            {/* Main Showcase Box (Width: 624px, Height: 934.68px on desktop, aspect-square on mobile) */}
+            {/* Main Showcase Box (Aspect 3:2 on all screen sizes) */}
             <div 
               style={{
                 position: "relative",
@@ -517,7 +497,7 @@ export default function ProductDetailsPage() {
                 overflow: "hidden",
                 boxSizing: "border-box"
               }}
-              className="w-full aspect-square md:aspect-auto h-auto md:h-[934.6888427734375px]"
+              className="w-full flex-1"
             >
               {renderMediaContent(activeImgIdx, false)}
             </div>
@@ -564,709 +544,598 @@ export default function ProductDetailsPage() {
             </div>
           </div>
 
-          {/* RIGHT COLUMN: Buying Dashboard (Width: 624px, Height: 1050.68px on desktop, auto-height on mobile) */}
+          {/* RIGHT COLUMN: Buying Dashboard & Specs Container */}
           <div 
             style={{
               width: "100%",
               maxWidth: "624px",
-              backgroundColor: "rgba(255, 255, 255, 1)",
               display: "flex",
               flexDirection: "column",
               gap: "24px",
               boxSizing: "border-box",
-              opacity: 1,
+              height: "100%"
             }}
-            className="w-full h-auto md:h-[1050.6888427734375px] text-left font-sans text-[#2B2B2B] p-4 md:p-[24px] rounded-none md:rounded-[4px] border-0 md:border border-[rgba(204,204,204,1)]"
+            className="w-full"
           >
-            {/* Title & Tag Row */}
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <h2 style={{ fontFamily: "Faktum, sans-serif", fontSize: "28px", fontWeight: 600, color: "rgba(43, 43, 43, 1)", margin: 0 }}>
-                {product.name}
-              </h2>
-              <span 
-                style={{
-                  fontFamily: "Faktum, sans-serif",
-                  fontWeight: 600,
-                  fontSize: "12px",
-                  color: "rgba(255, 98, 62, 1)",
-                  backgroundColor: "rgba(255, 98, 62, 0.08)",
-                  padding: "4px 8px",
-                  borderRadius: "4px",
-                  textTransform: "uppercase"
-                }}
-              >
-                {product.category}
-              </span>
-            </div>
-
-            {/* Price & Rating Row */}
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", width: "100%" }}>
-              {/* Left: Price & Discount */}
-              <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                <span style={{ fontSize: "32px", fontFamily: "Faktum, sans-serif", fontWeight: 600, color: "rgba(43, 43, 43, 1)" }}>
-                  ₹{product.price.toLocaleString('en-IN')}
-                </span>
-                {product.originalPrice && (
-                  <span style={{ fontSize: "14px", fontFamily: "Faktum, sans-serif", fontWeight: 500, color: "rgba(141, 141, 141, 1)", textDecoration: "line-through" }}>
-                    ₹{product.originalPrice.toLocaleString('en-IN')}
-                  </span>
-                )}
-                <span 
-                  style={{
-                    fontSize: "12px",
-                    fontFamily: "Faktum, sans-serif",
-                    fontWeight: 600,
-                    color: "rgba(22, 163, 74, 1)",
-                    backgroundColor: "rgba(22, 163, 74, 0.08)",
-                    padding: "2px 6px",
-                    borderRadius: "2px"
-                  }}
-                >
-                  {discountPercent}% off
-                </span>
-              </div>
-
-              {/* Right: Stars & Reviews */}
-              <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-                  <div style={{ display: "flex", gap: "2px" }}>
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} style={{ width: "16px", height: "16px", fill: "#FFC72C", color: "transparent" }} />
-                    ))}
-                  </div>
-                  <span style={{ fontSize: "14px", fontFamily: "Faktum, sans-serif", fontWeight: 500, color: "rgba(43, 43, 43, 1)" }}>
-                    ({product.reviewsCount || 120} Reviews)
-                  </span>
-                </div>
-                <span style={{ fontSize: "12px", fontFamily: "Faktum, sans-serif", fontWeight: 500, color: "rgba(141, 141, 141, 1)", marginTop: "4px" }}>
-                  {product.boughtCount || '200+ bought in past month'}
-                </span>
-              </div>
-            </div>
-
-            {/* Quantity Selector (Height: 84px, gap: 12px) */}
-            <div style={{ display: "flex", flexDirection: "column", gap: "12px", textAlign: "left", height: "84px", boxSizing: "border-box" }}>
-              <span style={{ fontFamily: "Faktum, sans-serif", fontSize: "20px", fontWeight: 500, lineHeight: "32px", color: "rgba(43, 43, 43, 1)", margin: 0 }}>Quantity</span>
-              <div 
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  border: "1px solid rgba(204, 204, 204, 0.54)",
-                  borderRadius: "4px",
-                  width: "max-content",
-                  height: "40px",
-                  backgroundColor: "#FFFFFF"
-                }}
-              >
-                <button
-                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  style={{
-                    width: "40px",
-                    height: "100%",
-                    border: "none",
-                    background: "none",
-                    fontSize: "18px",
-                    fontWeight: 600,
-                    color: "rgba(43, 43, 43, 1)",
-                    cursor: "pointer",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    borderRight: "1px solid rgba(204, 204, 204, 0.54)"
-                  }}
-                  className="hover:bg-slate-50 transition"
-                >
-                  −
-                </button>
-                <span style={{ minWidth: "48px", textAlign: "center", fontFamily: "Faktum, sans-serif", fontSize: "16px", fontWeight: 500, color: "rgba(43, 43, 43, 1)" }}>
-                  {quantity}
-                </span>
-                <button
-                  onClick={() => setQuantity(quantity + 1)}
-                  style={{
-                    width: "40px",
-                    height: "100%",
-                    border: "none",
-                    background: "none",
-                    fontSize: "18px",
-                    fontWeight: 600,
-                    color: "rgba(43, 43, 43, 1)",
-                    cursor: "pointer",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    borderLeft: "1px solid rgba(204, 204, 204, 0.54)"
-                  }}
-                  className="hover:bg-slate-50 transition"
-                >
-                  +
-                </button>
-              </div>
-            </div>
-
-            {/* Action Buttons (Height: 60px, gap: 12px) */}
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", width: "100%", height: "60px", boxSizing: "border-box" }}>
-              <button
-                onClick={handleAddToCart}
-                style={{
-                  width: "100%",
-                  height: "60px",
-                  border: "1px solid rgba(29, 73, 62, 1)",
-                  color: "rgba(29, 73, 62, 1)",
-                  backgroundColor: "#FFFFFF",
-                  borderRadius: "4px",
-                  fontFamily: "Faktum, sans-serif",
-                  fontWeight: 600,
-                  fontSize: "14px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  gap: "10px",
-                  cursor: "pointer",
-                  boxSizing: "border-box"
-                }}
-                className="hover:bg-[#1D493E] hover:text-white transition-all duration-300 group"
-              >
-                <span>Add to Cart</span>
-                <svg 
-                  style={{ width: '28px', height: '28px' }} 
-                  viewBox="0 0 28 28" 
-                  fill="none" 
-                  strokeWidth="1.75" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round"
-                  className="shrink-0"
-                >
-                  <path 
-                    d="M4 5h3l2 11h11l2.5-9H14" 
-                    className="stroke-[#1D493E] group-hover:stroke-white transition-colors duration-300"
-                  />
-                  <path 
-                    d="M7.8 8.5H9.5" 
-                    className="stroke-[#1D493E] group-hover:stroke-white transition-colors duration-300"
-                  />
-                  <circle 
-                    cx="10.5" 
-                    cy="21.5" 
-                    r="2" 
-                    className="stroke-[#1D493E] group-hover:stroke-white transition-colors duration-300"
-                  />
-                  <circle 
-                    cx="17.5" 
-                    cy="21.5" 
-                    r="2" 
-                    className="stroke-[#1D493E] group-hover:stroke-white transition-colors duration-300"
-                  />
-                </svg>
-              </button>
-              <button
-                onClick={handleBuyNow}
-                style={{
-                  width: "100%",
-                  height: "60px",
-                  backgroundColor: "rgba(29, 73, 62, 1)",
-                  color: "#FFFFFF",
-                  border: "none",
-                  borderRadius: "4px",
-                  fontFamily: "Faktum, sans-serif",
-                  fontWeight: 600,
-                  fontSize: "14px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  gap: "6px",
-                  cursor: "pointer",
-                  boxSizing: "border-box"
-                }}
-                className="hover:bg-[#15342c] transition-all duration-300"
-              >
-                <span>Buy Now</span>
-                <span style={{ fontSize: "16px" }}>↗</span>
-              </button>
-            </div>
-
-            {addedToCartSuccess && (
-              <p className="text-xs font-bold text-emerald-600 animate-pulse" style={{ margin: 0 }}>
-                ✓ Product successfully added to your cart!
-              </p>
-            )}
-
-            {/* Delivery option checks */}
-            <div style={{ display: "flex", flexDirection: "column", gap: "8px", textAlign: "left" }}>
-              <span style={{ fontFamily: "Faktum, sans-serif", fontSize: "14px", fontWeight: 500, color: "rgba(141, 141, 141, 1)" }}>
-                Delivery options
-              </span>
-              <div style={{ position: "relative", display: "flex", alignItems: "center", width: "100%" }}>
-                <input
-                  type="text"
-                  placeholder="Enter the pincode"
-                  value={pincode}
-                  onChange={(e) => setPincode(e.target.value)}
-                  style={{
-                    width: "100%",
-                    height: "40px",
-                    paddingLeft: "12px",
-                    paddingRight: "70px",
-                    border: "1px solid rgba(204, 204, 204, 1)",
-                    borderRadius: "4px",
-                    fontSize: "14px",
-                    fontFamily: "Faktum, sans-serif",
-                    color: "rgba(43, 43, 43, 1)",
-                    boxSizing: "border-box"
-                  }}
-                  className="placeholder-slate-400 focus:outline-none"
-                />
-                <button
-                  type="button"
-                  onClick={handleCheckPincode as any}
-                  style={{
-                    position: "absolute",
-                    right: "12px",
-                    color: "rgba(63, 136, 255, 1)",
-                    border: "none",
-                    background: "none",
-                    fontSize: "14px",
-                    fontFamily: "Faktum, sans-serif",
-                    fontWeight: 600,
-                    cursor: "pointer"
-                  }}
-                  className="hover:text-blue-600 transition"
-                >
-                  Check
-                </button>
-              </div>
-              <span style={{ fontFamily: "Faktum, sans-serif", fontSize: "12px", color: "rgba(141, 141, 141, 1)", fontWeight: 500 }}>
-                Enter your pincode to know when it will be delivered to your doorstep
-              </span>
-              {pincodeMessage ? (
-                <span style={{ fontFamily: "Faktum, sans-serif", fontSize: "14px", fontWeight: 600, color: pincodeMessage.startsWith('✓') ? "#10B981" : "#EF4444" }}>
-                  {pincodeMessage}
-                </span>
-              ) : (
-                <span style={{ fontFamily: "Faktum, sans-serif", fontSize: "14px", color: "rgba(141, 141, 141, 1)", fontWeight: 500 }}>
-                  FREE delivery as soon as <span style={{ color: "rgba(43, 43, 43, 1)", fontWeight: 600 }}>Thu, 9 Apr, 7am - 10pm</span>
-                </span>
-              )}
-            </div>
-
-            {/* Product Specifications Table */}
-            <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-              <span style={{ fontFamily: "Faktum, sans-serif", fontSize: "14px", fontWeight: 600, color: "rgba(43, 43, 43, 1)", textAlign: "left" }}>
-                Product Details
-              </span>
-              <div style={{ width: "100%", display: "flex", flexDirection: "column", borderTop: "1px solid rgba(204, 204, 204, 0.54)" }}>
-                {productSpecs.map((sp) => (
-                  <div 
-                    key={sp.label} 
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      padding: "12px 0",
-                      borderBottom: "1px solid rgba(204, 204, 204, 0.54)",
-                      fontSize: "14px",
-                      fontFamily: "Faktum, sans-serif"
-                    }}
-                  >
-                    <span style={{ color: "rgba(141, 141, 141, 1)", fontWeight: 500 }}>{sp.label}</span>
-                    <span style={{ color: "rgba(43, 43, 43, 1)", fontWeight: 600 }}>{sp.value}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Trust Badges */}
+            {/* Box 1: Buying Dashboard */}
             <div 
               style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(3, 1fr)",
-                gap: "12px",
-                paddingTop: "24px",
-                borderTop: "1px solid rgba(204, 204, 204, 0.54)",
+                width: "100%",
+                flex: 1,
+                backgroundColor: "rgba(255, 255, 255, 1)",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                gap: "16px",
                 boxSizing: "border-box",
-                marginTop: "auto"
+                opacity: 1,
               }}
-              className="text-center font-semibold"
+              className="w-full text-left font-sans text-[#2B2B2B] px-4 py-2 md:py-2 md:px-[24px] rounded-none md:rounded-[4px] border-0 md:border border-[rgba(204,204,204,1)]"
             >
-              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
-                <div style={{ width: "48px", height: "48px", borderRadius: "8px", backgroundColor: "#F8F9FA", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <Shield className="w-6 h-6 text-[#1D493E] stroke-[1.5]" />
-                </div>
-                <span style={{ fontSize: "10px", fontFamily: "Faktum, sans-serif", fontWeight: 500, color: "rgba(141, 141, 141, 1)" }}>
-                  Safe Payment
+              {/* Title & Tag Row */}
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <h2 style={{ fontFamily: "Faktum, sans-serif", fontSize: "28px", fontWeight: 600, color: "rgba(43, 43, 43, 1)", margin: 0 }}>
+                  {product.name}
+                </h2>
+                <span 
+                  style={{
+                    fontFamily: "Faktum, sans-serif",
+                    fontWeight: 600,
+                    fontSize: "12px",
+                    color: "rgba(255, 98, 62, 1)",
+                    backgroundColor: "rgba(255, 98, 62, 0.08)",
+                    padding: "4px 8px",
+                    borderRadius: "4px",
+                    textTransform: "uppercase"
+                  }}
+                >
+                  {product.category}
                 </span>
               </div>
-              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
-                <div style={{ width: "48px", height: "48px", borderRadius: "8px", backgroundColor: "#F8F9FA", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <Truck className="w-6 h-6 text-[#1D493E] stroke-[1.5]" />
+
+              {/* Price & Rating Row */}
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", width: "100%" }}>
+                {/* Left: Price & Discount */}
+                <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                  <span style={{ fontSize: "32px", fontFamily: "Faktum, sans-serif", fontWeight: 600, color: "rgba(43, 43, 43, 1)" }}>
+                    ₹{product.price.toLocaleString('en-IN')}
+                  </span>
+                  {product.originalPrice && (
+                    <span style={{ fontSize: "14px", fontFamily: "Faktum, sans-serif", fontWeight: 500, color: "rgba(141, 141, 141, 1)", textDecoration: "line-through" }}>
+                      ₹{product.originalPrice.toLocaleString('en-IN')}
+                    </span>
+                  )}
+                  <span 
+                    style={{
+                      fontSize: "12px",
+                      fontFamily: "Faktum, sans-serif",
+                      fontWeight: 600,
+                      color: "rgba(22, 163, 74, 1)",
+                      backgroundColor: "rgba(22, 163, 74, 0.08)",
+                      padding: "2px 6px",
+                      borderRadius: "2px"
+                    }}
+                  >
+                    {discountPercent}% off
+                  </span>
                 </div>
-                <span style={{ fontSize: "10px", fontFamily: "Faktum, sans-serif", fontWeight: 500, color: "rgba(141, 141, 141, 1)" }}>
-                  Free & fast Shipping
-                </span>
-              </div>
-              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
-                <div style={{ width: "48px", height: "48px", borderRadius: "8px", backgroundColor: "#F8F9FA", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <Box className="w-6 h-6 text-[#1D493E] stroke-[1.5]" />
+
+                {/* Right: Stars & Reviews */}
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                    <div style={{ display: "flex", gap: "2px" }}>
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} style={{ width: "16px", height: "16px", fill: "#FFC72C", color: "transparent" }} />
+                      ))}
+                    </div>
+                    <span style={{ fontSize: "14px", fontFamily: "Faktum, sans-serif", fontWeight: 500, color: "rgba(43, 43, 43, 1)" }}>
+                      ({product.reviewsCount || 120} Reviews)
+                    </span>
+                  </div>
+                  <span style={{ fontSize: "12px", fontFamily: "Faktum, sans-serif", fontWeight: 500, color: "rgba(141, 141, 141, 1)", marginTop: "4px" }}>
+                    {product.boughtCount || '200+ bought in past month'}
+                  </span>
                 </div>
-                <span style={{ fontSize: "10px", fontFamily: "Faktum, sans-serif", fontWeight: 500, color: "rgba(141, 141, 141, 1)" }}>
-                  2 - 5 days Delivery
-                </span>
               </div>
+
+              {/* Quantity Selector (gap: 8px) */}
+              <div style={{ display: "flex", flexDirection: "column", gap: "8px", textAlign: "left", boxSizing: "border-box" }}>
+                <span style={{ fontFamily: "Faktum, sans-serif", fontSize: "16px", fontWeight: 500, lineHeight: "24px", color: "rgba(43, 43, 43, 1)", margin: 0 }}>Quantity</span>
+                <div 
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    border: "1px solid rgba(204, 204, 204, 0.54)",
+                    borderRadius: "4px",
+                    width: "max-content",
+                    height: "40px",
+                    backgroundColor: "#FFFFFF"
+                  }}
+                >
+                  <button
+                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                    style={{
+                      width: "40px",
+                      height: "100%",
+                      border: "none",
+                      background: "none",
+                      fontSize: "18px",
+                      fontWeight: 600,
+                      color: "rgba(43, 43, 43, 1)",
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      borderRight: "1px solid rgba(204, 204, 204, 0.54)"
+                    }}
+                    className="hover:bg-slate-50 transition"
+                  >
+                    −
+                  </button>
+                  <span style={{ minWidth: "48px", textAlign: "center", fontFamily: "Faktum, sans-serif", fontSize: "16px", fontWeight: 500, color: "rgba(43, 43, 43, 1)" }}>
+                    {quantity}
+                  </span>
+                  <button
+                    onClick={() => setQuantity(quantity + 1)}
+                    style={{
+                      width: "40px",
+                      height: "100%",
+                      border: "none",
+                      background: "none",
+                      fontSize: "18px",
+                      fontWeight: 600,
+                      color: "rgba(43, 43, 43, 1)",
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      borderLeft: "1px solid rgba(204, 204, 204, 0.54)"
+                    }}
+                    className="hover:bg-slate-50 transition"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+
+              {/* Action Buttons (Height: 48px, gap: 12px) */}
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", width: "100%", height: "48px", boxSizing: "border-box" }}>
+                <button
+                  onClick={handleAddToCart}
+                  style={{
+                    width: "100%",
+                    height: "48px",
+                    border: "1px solid rgba(29, 73, 62, 1)",
+                    color: "rgba(29, 73, 62, 1)",
+                    backgroundColor: "#FFFFFF",
+                    borderRadius: "4px",
+                    fontFamily: "Faktum, sans-serif",
+                    fontWeight: 600,
+                    fontSize: "14px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: "10px",
+                    cursor: "pointer",
+                    boxSizing: "border-box"
+                  }}
+                  className="hover:bg-[#1D493E] hover:text-white transition-all duration-300 group"
+                >
+                  <span>Add to Cart</span>
+                  <svg 
+                    style={{ width: '28px', height: '28px' }} 
+                    viewBox="0 0 28 28" 
+                    fill="none" 
+                    strokeWidth="1.75" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round"
+                    className="shrink-0"
+                  >
+                    <path 
+                      d="M4 5h3l2 11h11l2.5-9H14" 
+                      className="stroke-[#1D493E] group-hover:stroke-white transition-colors duration-300"
+                    />
+                    <path 
+                      d="M7.8 8.5H9.5" 
+                      className="stroke-[#1D493E] group-hover:stroke-white transition-colors duration-300"
+                    />
+                    <circle 
+                      cx="10.5" 
+                      cy="21.5" 
+                      r="2" 
+                      className="stroke-[#1D493E] group-hover:stroke-white transition-colors duration-300"
+                    />
+                    <circle 
+                      cx="17.5" 
+                      cy="21.5" 
+                      r="2" 
+                      className="stroke-[#1D493E] group-hover:stroke-white transition-colors duration-300"
+                    />
+                  </svg>
+                </button>
+                <button
+                  onClick={handleBuyNow}
+                  style={{
+                    width: "100%",
+                    height: "48px",
+                    backgroundColor: "rgba(29, 73, 62, 1)",
+                    color: "#FFFFFF",
+                    border: "none",
+                    borderRadius: "4px",
+                    fontFamily: "Faktum, sans-serif",
+                    fontWeight: 600,
+                    fontSize: "14px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: "6px",
+                    cursor: "pointer",
+                    boxSizing: "border-box"
+                  }}
+                  className="hover:bg-[#15342c] transition-all duration-300"
+                >
+                  <span>Buy Now</span>
+                  <span style={{ fontSize: "16px" }}>↗</span>
+                </button>
+              </div>
+
+              {addedToCartSuccess && (
+                <p className="text-xs font-bold text-emerald-600 animate-pulse" style={{ margin: 0 }}>
+                  ✓ Product successfully added to your cart!
+                </p>
+              )}
+
+              {/* Delivery option checks */}
+              <div style={{ display: "flex", flexDirection: "column", gap: "8px", textAlign: "left" }}>
+                <span style={{ fontFamily: "Faktum, sans-serif", fontSize: "14px", fontWeight: 500, color: "rgba(141, 141, 141, 1)" }}>
+                  Delivery options
+                </span>
+                <div style={{ position: "relative", display: "flex", alignItems: "center", width: "100%" }}>
+                  <input
+                    type="text"
+                    placeholder="Enter the pincode"
+                    value={pincode}
+                    onChange={(e) => setPincode(e.target.value)}
+                    style={{
+                      width: "100%",
+                      height: "40px",
+                      paddingLeft: "12px",
+                      paddingRight: "70px",
+                      border: "1px solid rgba(204, 204, 204, 1)",
+                      borderRadius: "4px",
+                      fontSize: "14px",
+                      fontFamily: "Faktum, sans-serif",
+                      color: "rgba(43, 43, 43, 1)",
+                      boxSizing: "border-box"
+                    }}
+                    className="placeholder-slate-400 focus:outline-none"
+                  />
+                  <button
+                    type="button"
+                    onClick={handleCheckPincode as any}
+                    style={{
+                      position: "absolute",
+                      right: "12px",
+                      color: "rgba(63, 136, 255, 1)",
+                      border: "none",
+                      background: "none",
+                      fontSize: "14px",
+                      fontFamily: "Faktum, sans-serif",
+                      fontWeight: 600,
+                      cursor: "pointer"
+                    }}
+                    className="hover:text-blue-600 transition"
+                  >
+                    Check
+                  </button>
+                </div>
+                <span style={{ fontFamily: "Faktum, sans-serif", fontSize: "12px", color: "rgba(141, 141, 141, 1)", fontWeight: 500 }}>
+                  Enter your pincode to know when it will be delivered to your doorstep
+                </span>
+                {pincodeMessage ? (
+                  <span style={{ fontFamily: "Faktum, sans-serif", fontSize: "14px", fontWeight: 600, color: pincodeMessage.startsWith('✓') ? "#10B981" : "#EF4444" }}>
+                    {pincodeMessage}
+                  </span>
+                ) : (
+                  <span style={{ fontFamily: "Faktum, sans-serif", fontSize: "14px", color: "rgba(141, 141, 141, 1)", fontWeight: 500 }}>
+                    FREE delivery as soon as <span style={{ color: "rgba(43, 43, 43, 1)", fontWeight: 600 }}>Thu, 9 Apr, 7am - 10pm</span>
+                  </span>
+                )}
+              </div>              {/* Trust Badges */}
+              {/* Trust Badges */}
+              <div 
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(3, 1fr)",
+                  gap: "12px",
+                  paddingTop: "16px",
+                  paddingBottom: "8px",
+                  borderTop: "1px solid rgba(204, 204, 204, 0.4)",
+                  boxSizing: "border-box",
+                  marginTop: "8px"
+                }}
+                className="w-full text-center"
+              >
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
+                  <div style={{ width: "46px", height: "46px", borderRadius: "4px", backgroundColor: "rgba(246, 243, 238, 1)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <Shield className="w-[14px] h-[14px] text-[#2B2B2B] stroke-[1.75]" />
+                  </div>
+                  <span style={{ fontSize: "12px", fontFamily: "Faktum, sans-serif", fontWeight: 500, color: "rgba(43, 43, 43, 1)" }}>
+                    Safe Payment
+                  </span>
+                </div>
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
+                  <div style={{ width: "46px", height: "46px", borderRadius: "4px", backgroundColor: "rgba(246, 243, 238, 1)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <Truck className="w-[14px] h-[14px] text-[#2B2B2B] stroke-[1.75]" />
+                  </div>
+                  <span style={{ fontSize: "12px", fontFamily: "Faktum, sans-serif", fontWeight: 500, color: "rgba(43, 43, 43, 1)" }}>
+                    Free & fast Shipping
+                  </span>
+                </div>
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
+                  <div style={{ width: "46px", height: "46px", borderRadius: "4px", backgroundColor: "rgba(246, 243, 238, 1)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <Box className="w-[14px] h-[14px] text-[#2B2B2B] stroke-[1.75]" />
+                  </div>
+                  <span style={{ fontSize: "12px", fontFamily: "Faktum, sans-serif", fontWeight: 500, color: "rgba(43, 43, 43, 1)" }}>
+                    2 - 5 days Delivery
+                  </span>
+                </div>
+              </div>
+
             </div>
 
           </div>
         </div>
 
-        {/* Tab Selection */}
-        <section className="border-b border-[#F6F3EE] w-full pt-10 font-sans">
-          <div className="flex gap-8">
+        {/* Product Specifications Section */}
+        <div
+          style={{
+            width: "100%",
+            backgroundColor: "rgba(255, 255, 255, 1)",
+            display: "flex",
+            flexDirection: "column",
+            gap: "20px",
+            boxSizing: "border-box",
+            padding: "24px",
+            border: "1px solid rgba(204, 204, 204, 1)",
+            borderRadius: "4px",
+            marginTop: "0px"
+          }}
+        >
+          <span style={{ fontFamily: "Faktum, sans-serif", fontSize: "16px", fontWeight: 600, color: "rgba(43, 43, 43, 1)" }}>
+            Product Specifications
+          </span>
+          <div
+            style={{
+              width: "100%",
+              display: "grid",
+              gap: "24px",
+              borderTop: "1px solid rgba(204, 204, 204, 0.54)",
+              paddingTop: "20px"
+            }}
+            className="grid grid-cols-2 md:grid-cols-4"
+          >
+            {productSpecs.map((sp) => (
+              <div
+                key={sp.label}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "6px",
+                  fontSize: "14px",
+                  fontFamily: "Faktum, sans-serif"
+                }}
+              >
+                <span style={{ color: "rgba(141, 141, 141, 1)", fontWeight: 500, textTransform: "uppercase", fontSize: "12px", letterSpacing: "0.5px" }}>{sp.label}</span>
+                <span style={{ color: "rgba(43, 43, 43, 1)", fontWeight: 600, fontSize: "16px" }}>{sp.value}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Tab Bar — width: 1280, height: 54px, gap: 24px */}
+        <div
+          style={{
+            width: "100%",
+            height: "54px",
+            borderBottom: "2px solid rgba(204, 204, 204, 1)",
+            backgroundColor: "rgba(255, 255, 255, 1)",
+            boxSizing: "border-box",
+            marginTop: "32px"
+          }}
+        >
+          <div style={{ display: "flex", gap: "24px", height: "100%", alignItems: "flex-end" }}>
+
+            {/* Product Description Tab */}
             <button
               onClick={() => setActiveTab('desc')}
-              className={`pb-4 text-sm font-bold uppercase tracking-wider transition-all cursor-pointer relative ${
-                activeTab === 'desc' ? 'text-[#1D493E]' : 'text-slate-400 hover:text-slate-600'
-              }`}
+              style={{
+                cursor: "pointer",
+                background: "none",
+                border: "none",
+                padding: "0 0 10px 0",
+                borderBottom: activeTab === 'desc' ? "3px solid rgba(28, 68, 140, 1)" : "3px solid transparent",
+                marginBottom: "-2px",
+                transition: "border-color 0.2s"
+              }}
             >
-              <span>Product Description</span>
-              {activeTab === 'desc' && (
-                <div className="absolute bottom-0 left-0 w-full h-[3px] bg-[#3B82F6] rounded-t-full"></div>
-              )}
+              <span style={{
+                fontFamily: "Faktum, sans-serif",
+                fontWeight: 500,
+                fontSize: "24px",
+                lineHeight: "100%",
+                letterSpacing: "0px",
+                color: activeTab === 'desc' ? "rgba(28, 68, 140, 1)" : "rgba(43, 43, 43, 1)",
+                transition: "color 0.2s"
+              }}>Product Description</span>
             </button>
+
+            {/* Reviews Tab */}
             <button
               onClick={() => setActiveTab('reviews')}
-              className={`pb-4 text-sm font-bold uppercase tracking-wider transition-all cursor-pointer relative ${
-                activeTab === 'reviews' ? 'text-[#1D493E]' : 'text-slate-400 hover:text-slate-600'
-              }`}
+              style={{
+                cursor: "pointer",
+                background: "none",
+                border: "none",
+                padding: "0 0 10px 0",
+                borderBottom: activeTab === 'reviews' ? "3px solid rgba(28, 68, 140, 1)" : "3px solid transparent",
+                marginBottom: "-2px",
+                transition: "border-color 0.2s"
+              }}
             >
-              <span>Reviews</span>
-              {activeTab === 'reviews' && (
-                <div className="absolute bottom-0 left-0 w-full h-[3px] bg-[#3B82F6] rounded-t-full"></div>
-              )}
+              <span style={{
+                fontFamily: "Faktum, sans-serif",
+                fontWeight: 500,
+                fontSize: "24px",
+                lineHeight: "100%",
+                letterSpacing: "0px",
+                color: activeTab === 'reviews' ? "rgba(28, 68, 140, 1)" : "rgba(43, 43, 43, 1)",
+                transition: "color 0.2s"
+              }}>Reviews</span>
             </button>
-          </div>
-        </section>
 
+          </div>
+        </div>
+
+        {/* Tab Content — width: 1280, height: 742, gap: 32px */}
         {activeTab === 'desc' ? (
-          <>
+          <div style={{
+            width: "100%",
+            minHeight: "742px",
+            display: "flex",
+            flexDirection: "column",
+            gap: "32px",
+            boxSizing: "border-box",
+            paddingTop: "4px"
+          }}>
+
             {/* Overview of Product */}
-            <section className="space-y-4 text-left pt-2 font-sans">
-              <h2 className="text-3xl font-sans font-bold text-[#2B2B2B]">
-                Overview of the <span className="text-[#FF623E]">Product</span>
+            <section style={{
+              width: "100%",
+              height: "358px",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              borderRadius: "4px",
+              backgroundColor: "rgba(255, 255, 255, 1)",
+              boxSizing: "border-box"
+            }}>
+              <h2 style={{
+                fontFamily: "Fraunces, serif",
+                fontWeight: 600,
+                fontSize: "42px",
+                lineHeight: "100%",
+                letterSpacing: "0px",
+                color: "rgba(43, 43, 43, 1)",
+                margin: "0 0 24px 0"
+              }}>
+                Overview of the <span style={{ color: "rgba(255, 98, 62, 1)" }}>Product</span>
               </h2>
-              <p className="text-sm md:text-base font-sans text-slate-600 leading-relaxed font-normal pt-1">
-                {product.description}
-              </p>
-              <p className="text-xs md:text-sm font-sans text-slate-500 leading-relaxed font-normal">
-                Designed for the digital nomads and the barefoot explorers, the Naturally Nomad badge is more than just an accessory it's a mark of identity. Whether you're working from a cafe in Dharamshala or hitchhiking through the Spiti Valley, this badge represents the freedom to move and the courage to belong nowhere and everywhere at once.
-              </p>
-              <p className="text-xs md:text-sm font-sans text-slate-500 leading-relaxed font-normal">
-                Crafted with high-grade hard enamel, the colors are deep and durable, reflecting the rugged nature of travel. The minimalist aesthetic ensures it pairs perfectly with your denim jacket, your trusty rucksack, or even your camera strap. Every stroke in the design is inspired by the rolling hills of the Western Ghats and the clear skies of the Himalayas.
-              </p>
+              <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: "24px", boxSizing: "border-box" }}>
+                <p style={{
+                  fontFamily: "Faktum, sans-serif",
+                  fontWeight: 500,
+                  fontSize: "20px",
+                  lineHeight: "42px",
+                  letterSpacing: "0px",
+                  color: "rgba(43, 43, 43, 1)",
+                  margin: 0,
+                  textAlign: "justify"
+                }}>Designed for the digital nomads and the barefoot explorers, the Naturally Nomad badge is more than just an accessory it&apos;s a mark of identity. Whether you&apos;re working from a cafe in Dharamshala or hitchhiking through the Spiti Valley, this badge represents the freedom to move and the courage to belong nowhere and everywhere at once.
+                </p>
+                <p style={{
+                  fontFamily: "Faktum, sans-serif",
+                  fontWeight: 500,
+                  fontSize: "20px",
+                  lineHeight: "42px",
+                  letterSpacing: "0px",
+                  color: "rgba(43, 43, 43, 1)",
+                  margin: 0,
+                  textAlign: "justify"
+                }}>
+                  Crafted with high-grade hard enamel, the colors are deep and durable, reflecting the rugged nature of travel. The minimalist aesthetic ensures it pairs perfectly with your denim jacket, your trusty rucksack, or even your camera strap. Every stroke in the design is inspired by the rolling hills of the Western Ghats and the clear skies of the Himalayas.
+                </p>
+              </div>
             </section>
 
-            {/* Product Highlights checklist */}
-            <section className="space-y-4 text-left pt-6 font-sans">
-              <div className="w-max">
-                <span className="inline-block text-[9px] font-black uppercase tracking-[0.15em] text-[#FF623E] bg-[#FFEBE5] px-2.5 py-1 rounded-sm">
+            {/* Product Highlights */}
+            <section style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+              <div>
+                <span style={{ display: "inline-block", fontSize: "9px", fontWeight: 900, textTransform: "uppercase", letterSpacing: "0.15em", color: "rgba(255, 98, 62, 1)", backgroundColor: "rgba(255, 235, 229, 1)", padding: "4px 10px", borderRadius: "2px" }}>
                   SPECIFICATIONS
                 </span>
               </div>
-              <h2 className="text-3xl font-sans font-bold text-[#2B2B2B]">
-                Product <span className="text-[#FF623E]">Highlights</span>
+              <h2 style={{ fontFamily: "Fraunces, serif", fontWeight: 600, fontSize: "36px", color: "rgba(43, 43, 43, 1)", margin: 0 }}>
+                Product <span style={{ color: "rgba(255, 98, 62, 1)" }}>Highlights</span>
               </h2>
-              
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-3">
+              <div style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(3, 405px)",
+                rowGap: "24px",
+                columnGap: "32px",
+                width: "100%"
+              }}>
                 {highlights.map((hl, i) => (
-                  <div key={i} className="flex items-start gap-2.5">
-                    <Check className="w-4 h-4 text-[#2B2B2B] shrink-0 mt-0.5" />
-                    <span className="text-sm font-semibold text-[#2B2B2B] leading-relaxed">{hl}</span>
+                  <div key={i} style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "12px",
+                    width: "405px",
+                    height: "64px"
+                  }}>
+                    {/* Checkbox */}
+                    <div style={{
+                      width: "32px",
+                      height: "32px",
+                      borderRadius: "4px",
+                      backgroundColor: "rgba(246, 243, 238, 1)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flexShrink: 0
+                    }}>
+                      <Check style={{ width: "16px", height: "16px", color: "rgba(43, 43, 43, 1)" }} />
+                    </div>
+                    {/* Text */}
+                    <span style={{
+                      fontFamily: "Faktum, sans-serif",
+                      fontWeight: 500,
+                      fontSize: "20px",
+                      lineHeight: "32px",
+                      letterSpacing: "0px",
+                      color: "rgba(43, 43, 43, 1)",
+                      verticalAlign: "middle"
+                    }}>{hl}</span>
                   </div>
                 ))}
               </div>
             </section>
-          </>
+
+          </div>
         ) : (
-          <section className="space-y-6 text-left py-4 font-sans">
-            <h2 className="text-2xl font-sans font-bold text-[#2B2B2B]">Customer Reviews</h2>
-            <div className="space-y-6 divide-y divide-[#F6F3EE]">
+          <div style={{ width: "100%", minHeight: "742px", paddingTop: "32px", boxSizing: "border-box" }}>
+            <section style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
+              <h2 style={{ fontFamily: "Fraunces, serif", fontWeight: 600, fontSize: "36px", color: "rgba(43, 43, 43, 1)", margin: 0 }}>Customer Reviews</h2>
               {[
                 { author: "Karan S.", rating: 5, date: "May 12, 2026", text: "Amazing quality badge! It has a premium gloss and the clasp holds very strong on my backpack. Will buy more variants." },
                 { author: "Sneha M.", rating: 5, date: "April 28, 2026", text: "Looks exactly like the photo. High-quality details and very vibrant colors. Highly recommended!" }
               ].map((rev, i) => (
-                <div key={i} className={`pt-4 ${i === 0 ? 'pt-0' : ''}`}>
-                  <div className="flex items-center justify-between font-sans">
-                    <span className="font-bold text-sm text-[#2B2B2B]">{rev.author}</span>
-                    <span className="text-xs text-slate-400 font-semibold">{rev.date}</span>
+                <div key={i} style={{ paddingTop: i === 0 ? 0 : "16px", borderTop: i === 0 ? "none" : "1px solid rgba(246,243,238,1)" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between" }}>
+                    <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 700, fontSize: "14px", color: "rgba(43, 43, 43, 1)" }}>{rev.author}</span>
+                    <span style={{ fontFamily: "Faktum, sans-serif", fontSize: "12px", color: "rgba(141, 141, 141, 1)" }}>{rev.date}</span>
                   </div>
-                  <div className="flex items-center gap-0.5 text-[#FFB95E] my-1.5">
+                  <div style={{ display: "flex", gap: "2px", margin: "6px 0" }}>
                     {[...Array(rev.rating)].map((_, idx) => (
-                      <Star key={idx} className="w-3.5 h-3.5 fill-[#FFB95E] stroke-none" />
+                      <Star key={idx} style={{ width: "14px", height: "14px", fill: "rgba(255,185,94,1)", color: "rgba(255,185,94,1)" }} />
                     ))}
                   </div>
-                  <p className="text-xs sm:text-sm text-slate-655 font-normal leading-relaxed">{rev.text}</p>
+                  <p style={{ fontFamily: "Faktum, sans-serif", fontSize: "14px", color: "rgba(100,100,100,1)", lineHeight: "1.6", margin: 0 }}>{rev.text}</p>
                 </div>
               ))}
-            </div>
-          </section>
+            </section>
+          </div>
         )}
-
-        {/* Similar Products */}
-        <section className="space-y-6 border-t border-[#F6F3EE] pt-16 text-left font-sans">
-          <div className="flex items-center gap-2">
-            <span className="inline-block text-[9px] font-black uppercase tracking-[0.15em] text-[#FF623E] bg-[#FFEBE5] px-2.5 py-1 rounded-sm font-sans">
-              YOU MAY ALSO LIKE
-            </span>
-          </div>
-          <h2 className="text-2xl sm:text-3xl font-sans font-bold text-[#2B2B2B]">
-            Similar <span className="text-[#FF623E]">Products</span>
-          </h2>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 pt-2">
-            {fallbackSimilarProducts.map((prod, idx) => (
-              <div key={`${prod.id}-${idx}`} className="bg-white flex flex-col justify-between text-left group">
-                <div className="relative w-full h-[250px] bg-[#F5F5F5] rounded-xl overflow-hidden flex items-center justify-center border border-[#F6F3EE]">
-                  <Link href={`/shop/product/${prod.id}`} className="w-full h-full">
-                    <img
-                      src={prod.image}
-                      alt={prod.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-555"
-                    />
-                  </Link>
-                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex justify-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#1D493E]"></span>
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#E2E8F0]"></span>
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#E2E8F0]"></span>
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#E2E8F0]"></span>
-                  </div>
-                </div>
-
-                <div className="pt-6 flex flex-col gap-6 text-left font-sans">
-                  <div className="space-y-2">
-                    <span className="inline-block text-[10px] font-black uppercase tracking-wider text-[#FF623E] bg-[#FFEBE5] px-2 py-0.5 rounded-sm">
-                      {prod.category}
-                    </span>
-
-                    <div className="flex justify-between items-baseline pt-0.5">
-                      <h3 className="font-sans font-bold text-sm sm:text-base text-[#2B2B2B] line-clamp-1">
-                        <Link href={`/shop/product/${prod.id}`} className="hover:text-[#FF623E] transition-colors">
-                          {prod.name}
-                        </Link>
-                      </h3>
-                      <div className="flex items-center gap-1.5 shrink-0 pl-2">
-                        {prod.originalPrice && (
-                          <span className="text-xs line-through text-slate-400 font-normal">
-                            ₹{prod.originalPrice}
-                          </span>
-                        )}
-                        <span className="text-sm sm:text-base font-extrabold text-[#2B2B2B]">
-                          ₹{prod.price}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="space-y-1 font-sans">
-                    <div className="flex items-center gap-1.5">
-                      <div className="flex items-center gap-0.5">
-                        {[1, 2, 3, 4, 5].map((star) => (
-                          <Star key={star} className="w-3.5 h-3.5 fill-[#FFB95E] text-[#FFB95E]" />
-                        ))}
-                      </div>
-                      <span className="text-xs text-slate-500 font-medium font-sans">
-                        ({prod.reviewsCount === 1000 ? '1k' : prod.reviewsCount} Reviews)
-                      </span>
-                    </div>
-                  </div>
-
-                  <button
-                    onClick={() => addToCart(prod, 'shop')}
-                    className="w-full py-2.5 border border-[#1D493E] text-[#1D493E] hover:bg-[#1D493E] hover:text-white rounded-md font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-sm bg-white group"
-                  >
-                    <span>Add to cart</span>
-                    <svg 
-                      style={{ width: '28px', height: '28px' }} 
-                      viewBox="0 0 28 28" 
-                      fill="none" 
-                      strokeWidth="1.75" 
-                      strokeLinecap="round" 
-                      strokeLinejoin="round"
-                      className="shrink-0"
-                    >
-                      <path 
-                        d="M4 5h3l2 11h11l2.5-9H14" 
-                        className="stroke-[#2B2B2B] group-hover:stroke-white transition-colors duration-300"
-                      />
-                      <path 
-                        d="M7.8 8.5H9.5" 
-                        className="stroke-[#2B2B2B] group-hover:stroke-white transition-colors duration-300"
-                      />
-                      <circle 
-                        cx="10.5" 
-                        cy="21.5" 
-                        r="2" 
-                        className="stroke-[#1D493E] group-hover:stroke-white transition-colors duration-300"
-                      />
-                      <circle 
-                        cx="17.5" 
-                        cy="21.5" 
-                        r="2" 
-                        className="stroke-[#1D493E] group-hover:stroke-white transition-colors duration-300"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Recently Viewed Products */}
-        {recentlyViewed.length > 0 && (
-          <section className="space-y-6 border-t border-[#F6F3EE] pt-16 text-left font-sans animate-fade-in">
-            <div className="flex items-center gap-2">
-              <span className="inline-block text-[9px] font-black uppercase tracking-[0.15em] text-[#FF623E] bg-[#FFEBE5] px-2.5 py-1 rounded-sm font-sans">
-                YOUR HISTORY
-              </span>
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-sans font-bold text-[#2B2B2B]">
-              Recently <span className="text-[#FF623E]">viewed products</span>
-            </h2>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 pt-2">
-              {recentlyViewed.map((prod, idx) => (
-                <div key={`${prod.id}-${idx}`} className="bg-white flex flex-col justify-between text-left group">
-                  <div className="relative w-full h-[250px] bg-[#F5F5F5] rounded-xl overflow-hidden flex items-center justify-center border border-[#F6F3EE]">
-                    <Link href={`/shop/product/${prod.id}`} className="w-full h-full">
-                      <img
-                        src={prod.image}
-                        alt={prod.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-555"
-                      />
-                    </Link>
-                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex justify-center gap-1.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#1D493E]"></span>
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#E2E8F0]"></span>
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#E2E8F0]"></span>
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#E2E8F0]"></span>
-                    </div>
-                  </div>
-
-                  <div className="pt-6 flex flex-col gap-6 text-left font-sans">
-                    <div className="space-y-2">
-                      <span className="inline-block text-[10px] font-black uppercase tracking-wider text-[#FF623E] bg-[#FFEBE5] px-2 py-0.5 rounded-sm">
-                        {prod.category}
-                      </span>
-
-                      <div className="flex justify-between items-baseline pt-0.5">
-                        <h3 className="font-sans font-bold text-sm sm:text-base text-[#2B2B2B] line-clamp-1">
-                          <Link href={`/shop/product/${prod.id}`} className="hover:text-[#FF623E] transition-colors">
-                            {prod.name}
-                          </Link>
-                        </h3>
-                        <div className="flex items-center gap-1.5 shrink-0 pl-2">
-                          {prod.originalPrice && (
-                            <span className="text-xs line-through text-slate-400 font-normal">
-                              ₹{prod.originalPrice}
-                            </span>
-                          )}
-                          <span className="text-sm sm:text-base font-extrabold text-[#2B2B2B]">
-                            ₹{prod.price}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="space-y-1 font-sans">
-                      <div className="flex items-center gap-1.5">
-                        <div className="flex items-center gap-0.5">
-                          {[1, 2, 3, 4, 5].map((star) => (
-                            <Star key={star} className="w-3.5 h-3.5 fill-[#FFB95E] text-[#FFB95E]" />
-                          ))}
-                        </div>
-                        <span className="text-xs text-slate-500 font-medium font-sans">
-                          ({prod.reviewsCount === 1000 ? '1k' : prod.reviewsCount} Reviews)
-                        </span>
-                      </div>
-                    </div>
-
-                    <button
-                      onClick={() => addToCart(prod, 'shop')}
-                      className="w-full py-2.5 border border-[#1D493E] text-[#1D493E] hover:bg-[#1D493E] hover:text-white rounded-md font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-sm bg-white group"
-                    >
-                      <span>Add to cart</span>
-                      <svg 
-                        style={{ width: '28px', height: '28px' }} 
-                        viewBox="0 0 28 28" 
-                        fill="none" 
-                        strokeWidth="1.75" 
-                        strokeLinecap="round" 
-                        strokeLinejoin="round"
-                        className="shrink-0"
-                      >
-                        <path 
-                          d="M4 5h3l2 11h11l2.5-9H14" 
-                          className="stroke-[#2B2B2B] group-hover:stroke-white transition-colors duration-300"
-                        />
-                        <path 
-                          d="M7.8 8.5H9.5" 
-                          className="stroke-[#2B2B2B] group-hover:stroke-white transition-colors duration-300"
-                        />
-                        <circle 
-                          cx="10.5" 
-                          cy="21.5" 
-                          r="2" 
-                          className="stroke-[#1D493E] group-hover:stroke-white transition-colors duration-300"
-                        />
-                        <circle 
-                          cx="17.5" 
-                          cy="21.5" 
-                          r="2" 
-                          className="stroke-[#1D493E] group-hover:stroke-white transition-colors duration-300"
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* FAQ Section */}
-        <section className="space-y-4 border-t border-[#F6F3EE] pt-16 text-left font-sans">
-          <div className="flex items-center gap-2">
-            <span className="inline-block text-[9px] font-black uppercase tracking-[0.15em] text-[#FF623E] bg-[#FFEBE5] px-2.5 py-1 rounded-sm font-sans">
-              FAQ'S
-            </span>
-          </div>
-          <h2 className="text-2xl sm:text-3xl font-sans font-bold text-[#2B2B2B]">
-            Frequently asked <span className="text-[#FF623E]">questions</span>
-          </h2>
-          
-          <div className="w-full border-t border-[#F6F3EE] divide-y divide-[#F6F3EE] pt-2 font-sans">
-            {FAQ_ITEMS.map((item, idx) => {
-              const isOpen = openFaqIdx === idx;
-              return (
-                <div key={idx} className="py-5 text-left">
-                  <button
-                    onClick={() => setOpenFaqIdx(isOpen ? null : idx)}
-                    className="w-full flex justify-between items-start text-left gap-4 font-sans text-sm sm:text-base font-bold text-[#2B2B2B] hover:text-[#1D493E] transition-colors cursor-pointer group"
-                  >
-                    <span>{item.question}</span>
-                    <span className="text-xl font-medium text-[#1D493E] shrink-0 leading-none select-none">
-                      {isOpen ? '—' : '+'}
-                    </span>
-                  </button>
-                  {isOpen && (
-                    <p className="mt-3 text-xs sm:text-sm text-slate-450 font-medium leading-relaxed animate-fade-in font-sans">
-                      {item.answer}
-                    </p>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        </section>
-
 
       </main>
     </div>

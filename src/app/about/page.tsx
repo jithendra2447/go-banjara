@@ -367,7 +367,7 @@ export default function AboutPage() {
             }}
           >
             <img 
-              src="/card-hikers.png" 
+              src="/card-1-full.png" 
               alt="Go Banjara Traveler Card" 
               className="w-full h-full object-cover pointer-events-none select-none"
             />

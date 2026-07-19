@@ -1353,12 +1353,12 @@ export const AuthModal: React.FC = () => {
             <div 
               style={{
                 position: 'absolute',
-                top: '0px',
-                left: '0px',
-                width: '588px',
-                height: '588px',
+                top: '10.08px',
+                left: '10.08px',
+                width: '567.83px',
+                height: '567.83px',
                 borderRadius: '12px',
-                background: 'rgba(204, 204, 204, 0.4)',
+                background: 'rgba(204, 204, 204, 1)',
                 transform: 'rotate(-2.5deg)',
                 zIndex: 1,
               }}

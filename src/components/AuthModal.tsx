@@ -258,9 +258,10 @@ export const AuthModal: React.FC = () => {
 
       {/* Two-Column split modal box / Main Frame (Matches Figma specs 1440x1024 base wrapper style) */}
       <div 
-        className="relative w-full z-10 flex flex-col md:flex-row items-center md:items-start justify-center gap-6 max-h-[95vh] md:max-h-none overflow-y-auto md:overflow-visible animate-[scaleIn_0.3s_ease-out] mx-auto px-6 md:px-0 py-8"
+        className="relative z-10 flex flex-col md:flex-row items-center md:items-start justify-center animate-[scaleIn_0.3s_ease-out] w-full h-full max-h-[95vh] md:max-h-none md:w-[1440px] md:h-[1024px] overflow-y-auto md:overflow-visible p-6 md:pt-[60px] md:pr-[75px] md:pb-[60px] md:pl-[120px] md:gap-[24px]"
         style={{
-          maxWidth: '1280px',
+          boxSizing: 'border-box',
+          background: 'rgba(255, 252, 248, 1)',
         }}
       >
         
@@ -276,10 +277,8 @@ export const AuthModal: React.FC = () => {
 
         {/* LEFT COLUMN: AUTH FORMS (Figma specs: 556x904, border 1px rgba(204,204,204,0.54), bg white, padding 32px) */}
         <div 
-          className="w-full flex flex-col justify-between"
+          className="w-full md:w-[556px] md:h-[904px] flex flex-col justify-between"
           style={{
-            maxWidth: '556px',
-            minHeight: '840px',
             background: 'rgba(255, 255, 255, 1)',
             border: '1px solid rgba(204, 204, 204, 0.54)',
             borderRadius: '4px',
@@ -643,12 +642,12 @@ export const AuthModal: React.FC = () => {
 
         </div>
 
-        {/* RIGHT COLUMN: BRAND MASCOT CARD (Figma specs: width 588, height 743.915, gap 24, top 58.12px) */}
+        {/* RIGHT COLUMN: BRAND MASCOT CARD (Figma specs: width 633, height 802.04, gap 24, top 58.12px) */}
         <div 
           className="hidden md:flex flex-col justify-between items-center text-center select-none"
           style={{
-            width: '588px',
-            height: '743.9px',
+            width: '633px',
+            height: '802.04px',
             display: 'flex',
             flexDirection: 'column',
             gap: '24px',

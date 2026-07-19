@@ -1503,104 +1503,214 @@ export default function AboutPage() {
           </p>
         </div>
 
-        {/* 6 Value Cards Grid (2 Rows of 3 Cards) */}
-        <div className="w-full max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mt-4">
-          {[
-            {
-              title: "Explore - Never Stop Being Curious",
-              body: "We believe the best version of you lives just beyond your comfort zone. Every trip is a permission slip to discover something new",
-              footer: "Brand Philosophy"
-            },
-            {
-              title: "Explore - Never Stop Being Curious",
-              body: "We believe the best version of you lives just beyond your comfort zone. Every trip is a permission slip to discover something new",
-              footer: "Brand Philosophy"
-            },
-            {
-              title: "Explore - Never Stop Being Curious",
-              body: "We believe the best version of you lives just beyond your comfort zone. Every trip is a permission slip to discover something new",
-              footer: "Brand Philosophy"
-            },
-            {
-              title: "Explore - Never Stop Being Curious",
-              body: "We believe the best version of you lives just beyond your comfort zone. Every trip is a permission slip to discover something new",
-              footer: "Brand Philosophy"
-            },
-            {
-              title: "Explore - Never Stop Being Curious",
-              body: "We believe the best version of you lives just beyond your comfort zone. Every trip is a permission slip to discover something new",
-              footer: "Brand Philosophy"
-            },
-            {
-              title: "Explore - Never Stop Being Curious",
-              body: "We believe the best version of you lives just beyond your comfort zone. Every trip is a permission slip to discover something new",
-              footer: "Brand Philosophy"
-            }
-          ].map((card, idx) => (
-            <div 
-              key={idx}
-              style={{
-                background: "#F7F7F7",
-                borderRadius: "8px",
-                padding: "32px",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "space-between",
-                textAlign: "center",
-                minHeight: "360px",
-                boxSizing: "border-box"
-              }}
-              className="hover:shadow-md transition-shadow duration-300 border border-gray-100"
-            >
-              {/* Top Icon Emblem */}
-              <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-xs border border-gray-150 mb-2">
-                <Compass className="w-5 h-5 text-[#FF623E]" />
+        {/* 6 Value Cards Grid Container (1280px x 886px spec, gap: 32px) */}
+        <div 
+          style={{
+            width: "1280px",
+            maxWidth: "100%",
+            height: "886px",
+            display: "flex",
+            flexDirection: "column",
+            gap: "32px",
+            boxSizing: "border-box"
+          }}
+          className="mx-auto"
+        >
+          {/* Row 1 (1280px x 427px spec, gap: 32px) */}
+          <div 
+            style={{
+              width: "1280px",
+              maxWidth: "100%",
+              height: "427px",
+              display: "flex",
+              flexDirection: "row",
+              gap: "32px",
+              boxSizing: "border-box"
+            }}
+          >
+            {[
+              {
+                title: "Explore - Never Stop Being Curious",
+                body: "We believe the best version of you lives just beyond your comfort zone. Every trip is a permission slip to discover something new",
+                footer: "Brand Philosophy"
+              },
+              {
+                title: "Explore - Never Stop Being Curious",
+                body: "We believe the best version of you lives just beyond your comfort zone. Every trip is a permission slip to discover something new",
+                footer: "Brand Philosophy"
+              },
+              {
+                title: "Explore - Never Stop Being Curious",
+                body: "We believe the best version of you lives just beyond your comfort zone. Every trip is a permission slip to discover something new",
+                footer: "Brand Philosophy"
+              }
+            ].map((card, idx) => (
+              <div 
+                key={idx}
+                style={{
+                  width: "405.33px",
+                  maxWidth: "100%",
+                  height: "427px",
+                  background: "rgba(248, 248, 248, 1)",
+                  borderRadius: "4px",
+                  padding: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  textAlign: "center",
+                  boxSizing: "border-box"
+                }}
+                className="hover:shadow-md transition-shadow duration-300"
+              >
+                {/* Top Icon Emblem: White square box */}
+                <div className="w-12 h-12 rounded-[8px] bg-white flex items-center justify-center border border-gray-100 shadow-2xs">
+                  <Compass className="w-6 h-6 text-[#FF623E]" />
+                </div>
+
+                {/* Title */}
+                <h3 
+                  style={{
+                    fontFamily: "Faktum, sans-serif",
+                    fontWeight: 700,
+                    fontSize: "20px",
+                    lineHeight: "28px",
+                    color: "rgba(43, 43, 43, 1)",
+                    margin: 0,
+                    maxWidth: "320px"
+                  }}
+                >
+                  {card.title}
+                </h3>
+
+                {/* Body */}
+                <p 
+                  style={{
+                    fontFamily: "Faktum, sans-serif",
+                    fontWeight: 400,
+                    fontSize: "16px",
+                    lineHeight: "26px",
+                    color: "rgba(43, 43, 43, 0.75)",
+                    margin: 0,
+                    maxWidth: "340px"
+                  }}
+                >
+                  {card.body}
+                </p>
+
+                {/* Footer */}
+                <span 
+                  style={{
+                    fontFamily: "Faktum, sans-serif",
+                    fontWeight: 500,
+                    fontSize: "14px",
+                    lineHeight: "20px",
+                    color: "rgba(43, 43, 43, 0.6)"
+                  }}
+                >
+                  {card.footer}
+                </span>
               </div>
+            ))}
+          </div>
 
-              {/* Title */}
-              <h3 
+          {/* Row 2 (1280px x 427px spec, gap: 32px) */}
+          <div 
+            style={{
+              width: "1280px",
+              maxWidth: "100%",
+              height: "427px",
+              display: "flex",
+              flexDirection: "row",
+              gap: "32px",
+              boxSizing: "border-box"
+            }}
+          >
+            {[
+              {
+                title: "Explore - Never Stop Being Curious",
+                body: "We believe the best version of you lives just beyond your comfort zone. Every trip is a permission slip to discover something new",
+                footer: "Brand Philosophy"
+              },
+              {
+                title: "Explore - Never Stop Being Curious",
+                body: "We believe the best version of you lives just beyond your comfort zone. Every trip is a permission slip to discover something new",
+                footer: "Brand Philosophy"
+              },
+              {
+                title: "Explore - Never Stop Being Curious",
+                body: "We believe the best version of you lives just beyond your comfort zone. Every trip is a permission slip to discover something new",
+                footer: "Brand Philosophy"
+              }
+            ].map((card, idx) => (
+              <div 
+                key={idx}
                 style={{
-                  fontFamily: "Faktum, sans-serif",
-                  fontWeight: 700,
-                  fontSize: "20px",
-                  lineHeight: "28px",
-                  color: "#2B2B2B",
-                  margin: 0
+                  width: "405.33px",
+                  maxWidth: "100%",
+                  height: "427px",
+                  background: "rgba(248, 248, 248, 1)",
+                  borderRadius: "4px",
+                  padding: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  textAlign: "center",
+                  boxSizing: "border-box"
                 }}
+                className="hover:shadow-md transition-shadow duration-300"
               >
-                {card.title}
-              </h3>
+                {/* Top Icon Emblem: White square box */}
+                <div className="w-12 h-12 rounded-[8px] bg-white flex items-center justify-center border border-gray-100 shadow-2xs">
+                  <Compass className="w-6 h-6 text-[#FF623E]" />
+                </div>
 
-              {/* Body */}
-              <p 
-                style={{
-                  fontFamily: "Faktum, sans-serif",
-                  fontWeight: 400,
-                  fontSize: "15px",
-                  lineHeight: "24px",
-                  color: "#2B2B2B",
-                  opacity: 0.75,
-                  margin: 0
-                }}
-              >
-                {card.body}
-              </p>
+                {/* Title */}
+                <h3 
+                  style={{
+                    fontFamily: "Faktum, sans-serif",
+                    fontWeight: 700,
+                    fontSize: "20px",
+                    lineHeight: "28px",
+                    color: "rgba(43, 43, 43, 1)",
+                    margin: 0,
+                    maxWidth: "320px"
+                  }}
+                >
+                  {card.title}
+                </h3>
 
-              {/* Footer */}
-              <span 
-                style={{
-                  fontFamily: "Faktum, sans-serif",
-                  fontWeight: 500,
-                  fontSize: "14px",
-                  color: "#2B2B2B",
-                  opacity: 0.5
-                }}
-              >
-                {card.footer}
-              </span>
-            </div>
-          ))}
+                {/* Body */}
+                <p 
+                  style={{
+                    fontFamily: "Faktum, sans-serif",
+                    fontWeight: 400,
+                    fontSize: "16px",
+                    lineHeight: "26px",
+                    color: "rgba(43, 43, 43, 0.75)",
+                    margin: 0,
+                    maxWidth: "340px"
+                  }}
+                >
+                  {card.body}
+                </p>
+
+                {/* Footer */}
+                <span 
+                  style={{
+                    fontFamily: "Faktum, sans-serif",
+                    fontWeight: 500,
+                    fontSize: "14px",
+                    lineHeight: "20px",
+                    color: "rgba(43, 43, 43, 0.6)"
+                  }}
+                >
+                  {card.footer}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

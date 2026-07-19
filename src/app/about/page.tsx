@@ -1417,85 +1417,190 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 7. Six Card Core Values Grid (What We Live By) */}
-      <section className="w-full bg-white py-[62px] px-6 md:px-[80px] border-t border-b border-gray-150 mx-auto max-w-[1440px] shrink-0">
-        <div className="w-full max-w-[1280px] mx-auto text-center flex flex-col gap-12">
-          <div className="space-y-3">
-            <span className="text-[14px] font-semibold text-[#FF623E] bg-[#FFEBE5] px-3 py-1 rounded-[4px] inline-block uppercase tracking-widest">
-              OUR VALUES
-            </span>
-            <h2 className="text-3xl md:text-[42px] font-serif font-semibold text-[#1D493E]">
-              What we live by
-            </h2>
-          </div>
+      {/* 7. BRAND PHILOSOPHY / SIX WORDS WE LIVE BY Section (1440x1168px spec) */}
+      <section 
+        style={{
+          width: "100%",
+          maxWidth: "1440px",
+          minHeight: "1168px",
+          paddingTop: "42px",
+          paddingRight: "80px",
+          paddingBottom: "42px",
+          paddingLeft: "80px",
+          background: "rgba(255, 255, 255, 1)",
+          boxSizing: "border-box",
+          display: "flex",
+          flexDirection: "column",
+          gap: "32px"
+        }}
+        className="mx-auto w-full shrink-0"
+      >
+        {/* Header Box (1280px x 166px spec, space-between, borderRadius 4px) */}
+        <div 
+          style={{ 
+            width: "1280px", 
+            maxWidth: "100%", 
+            height: "166px", 
+            display: "flex", 
+            flexDirection: "column", 
+            alignItems: "center", 
+            justifyContent: "space-between",
+            borderRadius: "4px",
+            boxSizing: "border-box"
+          }} 
+          className="mx-auto text-center"
+        >
+          <span 
+            style={{
+              width: "165px",
+              height: "26px",
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px",
+              background: "#FFEBE5",
+              color: "#FF623E",
+              fontFamily: "Faktum, sans-serif",
+              fontWeight: 600,
+              fontSize: "14px",
+              lineHeight: "14px",
+              letterSpacing: "1.2px",
+              borderRadius: "4px",
+              textTransform: "uppercase"
+            }}
+          >
+            BRAND PHILOSOPHY
+          </span>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Value 1 */}
-            <div className="p-8 bg-[#F3FFEF]/40 rounded-2xl border border-[#1D493E]/10 text-left space-y-4 hover:-translate-y-1 hover:shadow-md transition-all duration-300">
-              <div className="w-12 h-12 rounded-full bg-[#1D493E]/10 text-[#1D493E] flex items-center justify-center">
-                <Compass className="w-6 h-6" />
-              </div>
-              <h3 className="text-xl font-serif font-bold text-[#1D493E]">01 / Off the Map</h3>
-              <p className="text-gray-500 text-sm font-semibold leading-relaxed">
-                We design routes and experiences that skip the commercial hotspots for authentic wilderness.
-              </p>
-            </div>
+          <h2 
+            style={{
+              fontFamily: "Fraunces, serif",
+              fontWeight: 600,
+              fontSize: "42px",
+              lineHeight: "42px",
+              color: "rgba(43, 43, 43, 1)",
+              letterSpacing: "0px",
+              margin: 0
+            }}
+          >
+            <span style={{ color: "#FF623E" }}>Six words</span> we live by.
+          </h2>
 
-            {/* Value 2 */}
-            <div className="p-8 bg-[#F3FFEF]/40 rounded-2xl border border-[#1D493E]/10 text-left space-y-4 hover:-translate-y-1 hover:shadow-md transition-all duration-300">
-              <div className="w-12 h-12 rounded-full bg-[#1D493E]/10 text-[#1D493E] flex items-center justify-center">
-                <Users className="w-6 h-6" />
-              </div>
-              <h3 className="text-xl font-serif font-bold text-[#1D493E]">02 / Community First</h3>
-              <p className="text-gray-500 text-sm font-semibold leading-relaxed">
-                We employ local guides, stay in family-run homestays, and ensure tourism directly benefits local ecosystems.
-              </p>
-            </div>
+          <p 
+            style={{
+              width: "1280px",
+              maxWidth: "100%",
+              fontFamily: "Faktum, sans-serif",
+              fontWeight: 500,
+              fontSize: "20px",
+              lineHeight: "30px",
+              color: "rgba(43, 43, 43, 0.75)",
+              margin: 0,
+              textAlign: "center"
+            }}
+          >
+            Not a mission statement. Not a poster on the wall. Just six things we've earned the right to say after seven years on the road.
+          </p>
+        </div>
 
-            {/* Value 3 */}
-            <div className="p-8 bg-[#F3FFEF]/40 rounded-2xl border border-[#1D493E]/10 text-left space-y-4 hover:-translate-y-1 hover:shadow-md transition-all duration-300">
-              <div className="w-12 h-12 rounded-full bg-[#1D493E]/10 text-[#1D493E] flex items-center justify-center">
-                <MapPin className="w-6 h-6" />
+        {/* 6 Value Cards Grid (2 Rows of 3 Cards) */}
+        <div className="w-full max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mt-4">
+          {[
+            {
+              title: "Explore - Never Stop Being Curious",
+              body: "We believe the best version of you lives just beyond your comfort zone. Every trip is a permission slip to discover something new",
+              footer: "Brand Philosophy"
+            },
+            {
+              title: "Explore - Never Stop Being Curious",
+              body: "We believe the best version of you lives just beyond your comfort zone. Every trip is a permission slip to discover something new",
+              footer: "Brand Philosophy"
+            },
+            {
+              title: "Explore - Never Stop Being Curious",
+              body: "We believe the best version of you lives just beyond your comfort zone. Every trip is a permission slip to discover something new",
+              footer: "Brand Philosophy"
+            },
+            {
+              title: "Explore - Never Stop Being Curious",
+              body: "We believe the best version of you lives just beyond your comfort zone. Every trip is a permission slip to discover something new",
+              footer: "Brand Philosophy"
+            },
+            {
+              title: "Explore - Never Stop Being Curious",
+              body: "We believe the best version of you lives just beyond your comfort zone. Every trip is a permission slip to discover something new",
+              footer: "Brand Philosophy"
+            },
+            {
+              title: "Explore - Never Stop Being Curious",
+              body: "We believe the best version of you lives just beyond your comfort zone. Every trip is a permission slip to discover something new",
+              footer: "Brand Philosophy"
+            }
+          ].map((card, idx) => (
+            <div 
+              key={idx}
+              style={{
+                background: "#F7F7F7",
+                borderRadius: "8px",
+                padding: "32px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "space-between",
+                textAlign: "center",
+                minHeight: "360px",
+                boxSizing: "border-box"
+              }}
+              className="hover:shadow-md transition-shadow duration-300 border border-gray-100"
+            >
+              {/* Top Icon Emblem */}
+              <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-xs border border-gray-150 mb-2">
+                <Compass className="w-5 h-5 text-[#FF623E]" />
               </div>
-              <h3 className="text-xl font-serif font-bold text-[#1D493E]">03 / Native Roots</h3>
-              <p className="text-gray-500 text-sm font-semibold leading-relaxed">
-                All our designs, badges, and travel collectibles are inspired by local folk legends and terrains.
-              </p>
-            </div>
 
-            {/* Value 4 */}
-            <div className="p-8 bg-[#F3FFEF]/40 rounded-2xl border border-[#1D493E]/10 text-left space-y-4 hover:-translate-y-1 hover:shadow-md transition-all duration-300">
-              <div className="w-12 h-12 rounded-full bg-[#1D493E]/10 text-[#1D493E] flex items-center justify-center">
-                <Sparkles className="w-6 h-6" />
-              </div>
-              <h3 className="text-xl font-serif font-bold text-[#1D493E]">04 / Built to Last</h3>
-              <p className="text-gray-500 text-sm font-semibold leading-relaxed">
-                Whether it's an adventure or a sticker, we craft for durability and timeless aesthetic quality.
-              </p>
-            </div>
+              {/* Title */}
+              <h3 
+                style={{
+                  fontFamily: "Faktum, sans-serif",
+                  fontWeight: 700,
+                  fontSize: "20px",
+                  lineHeight: "28px",
+                  color: "#2B2B2B",
+                  margin: 0
+                }}
+              >
+                {card.title}
+              </h3>
 
-            {/* Value 5 */}
-            <div className="p-8 bg-[#F3FFEF]/40 rounded-2xl border border-[#1D493E]/10 text-left space-y-4 hover:-translate-y-1 hover:shadow-md transition-all duration-300">
-              <div className="w-12 h-12 rounded-full bg-[#1D493E]/10 text-[#1D493E] flex items-center justify-center">
-                <Hammer className="w-6 h-6" />
-              </div>
-              <h3 className="text-xl font-serif font-bold text-[#1D493E]">05 / Handcrafted Gear</h3>
-              <p className="text-gray-500 text-sm font-semibold leading-relaxed">
-                Made directly by skilled craftspeople using traditional methods, ensuring top quality stitchwork.
+              {/* Body */}
+              <p 
+                style={{
+                  fontFamily: "Faktum, sans-serif",
+                  fontWeight: 400,
+                  fontSize: "15px",
+                  lineHeight: "24px",
+                  color: "#2B2B2B",
+                  opacity: 0.75,
+                  margin: 0
+                }}
+              >
+                {card.body}
               </p>
-            </div>
 
-            {/* Value 6 */}
-            <div className="p-8 bg-[#F3FFEF]/40 rounded-2xl border border-[#1D493E]/10 text-left space-y-4 hover:-translate-y-1 hover:shadow-md transition-all duration-300">
-              <div className="w-12 h-12 rounded-full bg-[#1D493E]/10 text-[#1D493E] flex items-center justify-center">
-                <HeartHandshake className="w-6 h-6" />
-              </div>
-              <h3 className="text-xl font-serif font-bold text-[#1D493E]">06 / Direct Local Benefit</h3>
-              <p className="text-gray-500 text-sm font-semibold leading-relaxed">
-                More than 70% of booking fees flow directly back into regional jobs and sustainability programs.
-              </p>
+              {/* Footer */}
+              <span 
+                style={{
+                  fontFamily: "Faktum, sans-serif",
+                  fontWeight: 500,
+                  fontSize: "14px",
+                  color: "#2B2B2B",
+                  opacity: 0.5
+                }}
+              >
+                {card.footer}
+              </span>
             </div>
-          </div>
+          ))}
         </div>
       </section>
 

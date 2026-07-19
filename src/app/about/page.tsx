@@ -333,16 +333,16 @@ export default function AboutPage() {
       >
         <div 
           style={{ 
-            width: "100%",
-            maxWidth: "1709.57px", 
-            height: "380px", 
+            width: "1709.57px", 
+            height: "418.33px", 
             display: "flex", 
             alignItems: "center", 
             overflowX: "auto",
             scrollbarWidth: "none",
             boxSizing: "border-box",
-            paddingLeft: "135px",
-            paddingRight: "135px"
+            position: "absolute",
+            left: "50%",
+            transform: "translateX(-50%)"
           }}
           className="scrollbar-none"
         >
@@ -355,7 +355,7 @@ export default function AboutPage() {
               borderBottomRightRadius: "4px",
               borderBottomLeftRadius: "4px",
               borderTopLeftRadius: "0px",
-              backgroundImage: "url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80')",
+              backgroundImage: "url('https://images.unsplash.com/photo-1527631746610-bca00a040d60?auto=format&fit=crop&w=600&q=80')",
               backgroundSize: "cover",
               backgroundPosition: "center",
               position: "relative",
@@ -517,7 +517,7 @@ export default function AboutPage() {
             </div>
           </div>
 
-          {/* Card 6: Green Card */}
+          {/* Card 6: Green Card (repeat) */}
           <div 
             style={{ 
               width: "302px", 
@@ -546,7 +546,7 @@ export default function AboutPage() {
             <span style={{ position: "absolute", bottom: "40px", right: "30px", fontFamily: "Fraunces, serif", fontStyle: "italic", fontWeight: 500, fontSize: "36px", color: "#FAF9F6", transform: "rotate(-6deg)" }}>journey</span>
           </div>
 
-          {/* Card 7: Cream Camel Card */}
+          {/* Card 7: Cream Camel Card (repeat) */}
           <div 
             style={{ 
               width: "302px", 
@@ -589,6 +589,45 @@ export default function AboutPage() {
                   <circle cx="124" cy="82" r="4" fill="#FFFFFF" opacity="0.8" />
                 </g>
               </svg>
+            </div>
+          </div>
+
+          {/* Card 8: Yellow Card (repeat) */}
+          <div 
+            style={{ 
+              width: "302px", 
+              height: "380px", 
+              borderTopRightRadius: "4px",
+              borderBottomRightRadius: "4px",
+              borderBottomLeftRadius: "4px",
+              borderTopLeftRadius: "0px",
+              background: "#FFFF80",
+              position: "relative",
+              boxShadow: "0 10px 20px rgba(0,0,0,0.15)",
+              transform: "rotate(3deg)",
+              zIndex: 17,
+              marginLeft: "-35px",
+              flexShrink: 0,
+              overflow: "hidden",
+              boxSizing: "border-box"
+            }}
+          >
+            <div style={{ position: "absolute", top: "45px", left: "20px", width: "120px", height: "120px", borderRadius: "50%", background: "#FF623E", transform: "rotate(-12deg)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <div style={{ width: "100px", height: "100px", borderRadius: "50%", border: "1px dashed #FFFF80", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+                <img src="/logo.png" alt="Mascot" style={{ width: "38px", height: "auto" }} />
+                <span style={{ fontSize: "7px", fontWeight: 800, fontFamily: "Faktum, sans-serif", color: "#FFFF80", marginTop: "4px" }}>Go Banjara</span>
+              </div>
+            </div>
+            <div style={{ position: "absolute", top: "30px", right: "15px", background: "#59D3F3", padding: "8px 12px", borderRadius: "4px", border: "3.5px solid #FFFFFF", transform: "rotate(6deg)", display: "flex", flexDirection: "column" }}>
+              <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 800, fontSize: "14px", color: "#FF623E", lineHeight: "1" }}>explore</span>
+              <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 800, fontSize: "14px", color: "#FFFFFF", lineHeight: "1" }}>MORE!</span>
+            </div>
+            <div style={{ position: "absolute", bottom: "20px", right: "15px", background: "#02B3A6", width: "115px", height: "170px", borderRadius: "6px", border: "3.5px solid #FFFFFF", transform: "rotate(4deg)", padding: "10px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+              <div style={{ display: "flex", justifyContent: "center", gap: "2px" }}><div className="w-6 h-2 bg-[#FFFF80] rounded-xs" /><div className="w-6 h-2 bg-[#FF623E] rounded-xs" /></div>
+              <span style={{ fontFamily: "Fraunces, serif", fontStyle: "italic", fontWeight: 600, fontSize: "20px", color: "#FFFF80", lineHeight: "1" }}>I travel to read.</span>
+            </div>
+            <div style={{ position: "absolute", bottom: "-10px", left: "15px", background: "#AE99FF", padding: "6px 20px 14px", borderRadius: "20px 20px 4px 4px", border: "3.5px solid #FFFFFF", transform: "rotate(-10deg) translateY(5px)" }}>
+              <span style={{ fontFamily: "Fraunces, serif", fontWeight: 700, fontSize: "16px", color: "#FFFFFF" }}>GOA</span>
             </div>
           </div>
         </div>

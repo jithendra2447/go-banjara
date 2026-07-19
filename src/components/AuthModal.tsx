@@ -473,20 +473,95 @@ export const AuthModal: React.FC = () => {
                         *
                       </span>
                     </label>
-                    <div className="flex gap-2">
-                      <div className="p-3.5 border border-slate-200 bg-slate-50 text-xs font-black text-slate-500 rounded-xl select-none flex items-center">
+                    <div 
+                      className="flex items-center"
+                      style={{
+                        width: '492px',
+                        height: '53px',
+                        borderRadius: '4px',
+                        border: '1px solid rgba(204, 204, 204, 1)',
+                        background: 'rgba(255, 255, 255, 1)',
+                        overflow: 'hidden',
+                        boxSizing: 'border-box',
+                      }}
+                    >
+                      <div 
+                        style={{
+                          height: '100%',
+                          padding: '0 16px',
+                          background: 'rgba(240, 240, 240, 1)',
+                          borderRight: '1px solid rgba(204, 204, 204, 1)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          fontFamily: '"Faktum", "Outfit", sans-serif',
+                          fontWeight: 500,
+                          fontSize: '20px',
+                          color: 'rgba(43, 43, 43, 1)',
+                          userSelect: 'none',
+                        }}
+                      >
                         +91
                       </div>
                       <input 
                         type="tel" required pattern="[0-9]{10}" maxLength={10} placeholder="9492906356" value={phone}
                         onChange={(e) => setPhone(e.target.value.replace(/\D/g, ''))}
-                        className="flex-1 p-3.5 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-1 focus:ring-[#1D493E] focus:border-[#1D493E] transition text-xs font-bold"
+                        style={{
+                          flex: 1,
+                          height: '100%',
+                          border: 'none',
+                          outline: 'none',
+                          background: 'transparent',
+                          padding: '0 16px',
+                          fontFamily: '"Faktum", "Outfit", sans-serif',
+                          fontWeight: 500,
+                          fontSize: '20px',
+                          color: 'rgba(43, 43, 43, 1)',
+                        }}
                       />
                     </div>
                   </div>
 
-                  <p className="text-[10px] text-slate-400 font-semibold leading-relaxed">
-                    By continuing, you agree to our <a href="#" className="text-[#1D493E] hover:underline font-bold">Terms and Conditions</a> and <a href="#" className="text-[#1D493E] hover:underline font-bold">Privacy Policy</a>.
+                  <p 
+                    style={{
+                      width: '492px',
+                      height: '64px',
+                      fontFamily: '"Faktum", "Outfit", sans-serif',
+                      fontWeight: 500,
+                      fontSize: '16px',
+                      lineHeight: '32px',
+                      color: 'rgba(141, 141, 141, 1)',
+                      margin: '0 auto',
+                    }}
+                  >
+                    By continuing, you agree to our{' '}
+                    <a 
+                      href="#" 
+                      style={{
+                        fontFamily: '"Faktum", "Outfit", sans-serif',
+                        fontWeight: 500,
+                        fontSize: '16px',
+                        lineHeight: '32px',
+                        textDecoration: 'underline',
+                        color: 'rgba(89, 153, 255, 1)',
+                      }}
+                    >
+                      Terms and Conditions
+                    </a>{' '}
+                    and{' '}
+                    <a 
+                      href="#" 
+                      style={{
+                        fontFamily: '"Faktum", "Outfit", sans-serif',
+                        fontWeight: 500,
+                        fontSize: '16px',
+                        lineHeight: '32px',
+                        textDecoration: 'underline',
+                        color: 'rgba(89, 153, 255, 1)',
+                      }}
+                    >
+                      Privacy Policy
+                    </a>.
                   </p>
 
                   <button 
@@ -555,7 +630,20 @@ export const AuthModal: React.FC = () => {
                     <input 
                       type="text" required placeholder="Kumar Sai Arja" value={name}
                       onChange={(e) => setName(e.target.value)}
-                      className="w-full p-3.5 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-1 focus:ring-[#1D493E] focus:border-[#1D493E] transition text-xs font-bold"
+                      style={{
+                        width: '492px',
+                        height: '53px',
+                        borderRadius: '4px',
+                        border: '1px solid rgba(204, 204, 204, 1)',
+                        background: 'rgba(255, 255, 255, 1)',
+                        padding: '0 16px',
+                        outline: 'none',
+                        boxSizing: 'border-box',
+                        fontFamily: '"Faktum", "Outfit", sans-serif',
+                        fontWeight: 500,
+                        fontSize: '20px',
+                        color: 'rgba(43, 43, 43, 1)',
+                      }}
                     />
                   </div>
 
@@ -594,7 +682,20 @@ export const AuthModal: React.FC = () => {
                     <input 
                       type="email" required placeholder="kumarsaiarja2468@gmail.com" value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full p-3.5 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-1 focus:ring-[#1D493E] focus:border-[#1D493E] transition text-xs font-bold"
+                      style={{
+                        width: '492px',
+                        height: '53px',
+                        borderRadius: '4px',
+                        border: '1px solid rgba(204, 204, 204, 1)',
+                        background: 'rgba(255, 255, 255, 1)',
+                        padding: '0 16px',
+                        outline: 'none',
+                        boxSizing: 'border-box',
+                        fontFamily: '"Faktum", "Outfit", sans-serif',
+                        fontWeight: 500,
+                        fontSize: '20px',
+                        color: 'rgba(43, 43, 43, 1)',
+                      }}
                     />
                   </div>
 
@@ -630,14 +731,51 @@ export const AuthModal: React.FC = () => {
                         *
                       </span>
                     </label>
-                    <div className="flex gap-2">
-                      <div className="p-3.5 border border-slate-200 bg-slate-50 text-xs font-black text-slate-500 rounded-xl select-none flex items-center">
+                    <div 
+                      className="flex items-center"
+                      style={{
+                        width: '492px',
+                        height: '53px',
+                        borderRadius: '4px',
+                        border: '1px solid rgba(204, 204, 204, 1)',
+                        background: 'rgba(255, 255, 255, 1)',
+                        overflow: 'hidden',
+                        boxSizing: 'border-box',
+                      }}
+                    >
+                      <div 
+                        style={{
+                          height: '100%',
+                          padding: '0 16px',
+                          background: 'rgba(240, 240, 240, 1)',
+                          borderRight: '1px solid rgba(204, 204, 204, 1)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          fontFamily: '"Faktum", "Outfit", sans-serif',
+                          fontWeight: 500,
+                          fontSize: '20px',
+                          color: 'rgba(43, 43, 43, 1)',
+                          userSelect: 'none',
+                        }}
+                      >
                         +91
                       </div>
                       <input 
                         type="tel" required pattern="[0-9]{10}" maxLength={10} placeholder="9492906356" value={phone}
                         onChange={(e) => setPhone(e.target.value.replace(/\D/g, ''))}
-                        className="flex-1 p-3.5 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-1 focus:ring-[#1D493E] focus:border-[#1D493E] transition text-xs font-bold"
+                        style={{
+                          flex: 1,
+                          height: '100%',
+                          border: 'none',
+                          outline: 'none',
+                          background: 'transparent',
+                          padding: '0 16px',
+                          fontFamily: '"Faktum", "Outfit", sans-serif',
+                          fontWeight: 500,
+                          fontSize: '20px',
+                          color: 'rgba(43, 43, 43, 1)',
+                        }}
                       />
                     </div>
                   </div>
@@ -721,7 +859,20 @@ export const AuthModal: React.FC = () => {
                     <input 
                       type="email" required placeholder="rahul@example.com" value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full p-3.5 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-1 focus:ring-[#1D493E] focus:border-[#1D493E] transition text-xs font-bold"
+                      style={{
+                        width: '492px',
+                        height: '53px',
+                        borderRadius: '4px',
+                        border: '1px solid rgba(204, 204, 204, 1)',
+                        background: 'rgba(255, 255, 255, 1)',
+                        padding: '0 16px',
+                        outline: 'none',
+                        boxSizing: 'border-box',
+                        fontFamily: '"Faktum", "Outfit", sans-serif',
+                        fontWeight: 500,
+                        fontSize: '20px',
+                        color: 'rgba(43, 43, 43, 1)',
+                      }}
                     />
                   </div>
 
@@ -738,7 +889,20 @@ export const AuthModal: React.FC = () => {
                     <input 
                       type="password" required placeholder="••••••••" value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      className="w-full p-3.5 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-1 focus:ring-[#1D493E] focus:border-[#1D493E] transition text-xs font-bold"
+                      style={{
+                        width: '492px',
+                        height: '53px',
+                        borderRadius: '4px',
+                        border: '1px solid rgba(204, 204, 204, 1)',
+                        background: 'rgba(255, 255, 255, 1)',
+                        padding: '0 16px',
+                        outline: 'none',
+                        boxSizing: 'border-box',
+                        fontFamily: '"Faktum", "Outfit", sans-serif',
+                        fontWeight: 500,
+                        fontSize: '20px',
+                        color: 'rgba(43, 43, 43, 1)',
+                      }}
                     />
                   </div>
 
@@ -770,7 +934,20 @@ export const AuthModal: React.FC = () => {
                     <input 
                       type="email" required placeholder="rahul@example.com" value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full p-3.5 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-1 focus:ring-[#1D493E] focus:border-[#1D493E] transition text-xs font-bold"
+                      style={{
+                        width: '492px',
+                        height: '53px',
+                        borderRadius: '4px',
+                        border: '1px solid rgba(204, 204, 204, 1)',
+                        background: 'rgba(255, 255, 255, 1)',
+                        padding: '0 16px',
+                        outline: 'none',
+                        boxSizing: 'border-box',
+                        fontFamily: '"Faktum", "Outfit", sans-serif',
+                        fontWeight: 500,
+                        fontSize: '20px',
+                        color: 'rgba(43, 43, 43, 1)',
+                      }}
                     />
                   </div>
 

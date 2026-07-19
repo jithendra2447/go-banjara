@@ -46,7 +46,7 @@ export const Footer: React.FC = () => {
               color: "rgba(255, 255, 255, 1)",
               margin: 0,
             }}
-            className="text-sm sm:text-base md:text-[20px] md:leading-[32px]"
+            className="text-sm md:text-[14px] md:leading-[22px] opacity-75"
           >
             Crafting high-end editorial travel experience and gear for the modern nomad. Escape the ordinary with us.
           </p>
@@ -57,7 +57,7 @@ export const Footer: React.FC = () => {
           <h4 style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "26px", letterSpacing: "-0.1px", color: "rgba(255,255,255,0.8)", margin: 0 }}>Important Links</h4>
           <ul style={{ display: "flex", flexDirection: "column", listStyle: "none", padding: 0, margin: 0 }}>
             {[{ label: "Home", href: "/" }, { label: "Travel Packages", href: "/travel" }, { label: "About us", href: "/about" }, { label: "Shop", href: "/shop" }].map((item) => (
-              <li key={item.href} style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, color: "rgba(255, 255, 255, 1)" }} className="text-sm sm:text-base md:text-[20px] md:leading-[36px]">
+              <li key={item.href} style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, color: "rgba(255, 255, 255, 1)" }} className="text-sm md:text-[14px] md:leading-[28px]">
                 <Link href={item.href} className="hover:text-[#FFF080] transition-colors">{item.label}</Link>
               </li>
             ))}
@@ -76,7 +76,7 @@ export const Footer: React.FC = () => {
               { label: "Privacy Policy", href: "/about" },
               { label: "Help Center", href: "/contact" },
             ].map((item) => (
-              <li key={item.label} style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, color: "rgba(255, 255, 255, 1)" }} className="text-sm sm:text-base md:text-[20px] md:leading-[36px]">
+              <li key={item.label} style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, color: "rgba(255, 255, 255, 1)" }} className="text-sm md:text-[14px] md:leading-[28px]">
                 <Link href={item.href} className="hover:text-[#FFF080] transition-colors">{item.label}</Link>
               </li>
             ))}
@@ -88,22 +88,22 @@ export const Footer: React.FC = () => {
           <h4 style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "26px", letterSpacing: "-0.1px", color: "rgba(255,255,255,0.8)", margin: 0 }}>Contact us</h4>
           <ul style={{ display: "flex", flexDirection: "column", gap: "12px", listStyle: "none", padding: 0, margin: 0 }}>
             <li className="flex items-center gap-3">
-              <img src="/icon-location.png" alt="Location" style={{ width: "42px", height: "42px", flexShrink: 0 }} />
-              <span style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, color: "rgba(255,255,255,1)" }} className="text-sm sm:text-base md:text-[20px] leading-tight">HITEC City, Hyderabad, Telangana, India</span>
+              <img src="/icon-location.png" alt="Location" style={{ width: "24px", height: "24px", flexShrink: 0 }} />
+              <span style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, color: "rgba(255,255,255,1)" }} className="text-sm md:text-[14px] leading-normal">HITEC City, Hyderabad, Telangana, India</span>
             </li>
             <li className="flex items-center gap-3">
-              <div style={{ width: "42px", height: "42px", background: "rgba(29,73,62,1)", borderRadius: "10px", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                <img src="/icon-email.png" alt="Email" style={{ width: "22px", height: "22px" }} />
+              <div style={{ width: "24px", height: "24px", background: "rgba(29,73,62,1)", borderRadius: "6px", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                <img src="/icon-email.png" alt="Email" style={{ width: "12px", height: "12px" }} />
               </div>
-              <a href="mailto:services@gobanjara.com" style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, color: "rgba(255,255,255,1)" }} className="hover:text-[#FFF080] transition-colors text-sm sm:text-base md:text-[20px] leading-tight">services@gobanjara.com</a>
+              <a href="mailto:services@gobanjara.com" style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, color: "rgba(255,255,255,1)" }} className="hover:text-[#FFF080] transition-colors text-sm md:text-[14px] leading-normal">services@gobanjara.com</a>
             </li>
             <li className="flex items-center gap-3">
-              <img src="/icon-phone.png" alt="Phone" style={{ width: "42px", height: "42px", flexShrink: 0 }} />
-              <a href="tel:+910123456789" style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, color: "rgba(255,255,255,1)" }} className="hover:text-[#FFF080] transition-colors text-sm sm:text-base md:text-[20px] leading-tight">+91 0123456789</a>
+              <img src="/icon-phone.png" alt="Phone" style={{ width: "24px", height: "24px", flexShrink: 0 }} />
+              <a href="tel:+910123456789" style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, color: "rgba(255,255,255,1)" }} className="hover:text-[#FFF080] transition-colors text-sm md:text-[14px] leading-normal">+91 0123456789</a>
             </li>
             <li className="flex items-center gap-3">
-              <img src="/icon-clock.png" alt="Hours" style={{ width: "42px", height: "42px", flexShrink: 0 }} />
-              <span style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, color: "rgba(255,255,255,1)" }} className="text-sm sm:text-base md:text-[20px] leading-tight">Mon–Sat, 10:00–19:00 IST</span>
+              <img src="/icon-clock.png" alt="Hours" style={{ width: "24px", height: "24px", flexShrink: 0 }} />
+              <span style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, color: "rgba(255,255,255,1)" }} className="text-sm md:text-[14px] leading-normal">Mon–Sat, 10:00–19:00 IST</span>
             </li>
           </ul>
         </div>
@@ -114,7 +114,7 @@ export const Footer: React.FC = () => {
         <div className="w-full flex flex-col md:flex-row justify-between items-start md:items-end gap-6 pt-4">
           {/* Social Icons */}
           <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-            <span style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "100%", letterSpacing: "-0.1px", color: "rgba(255,255,255,1)" }}>Follow us on:</span>
+            <span style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "14px", lineHeight: "100%", letterSpacing: "-0.1px", color: "rgba(255,255,255,1)" }}>Follow us on:</span>
             <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "12px" }}>
               {/* Facebook */}
               <a href="#" style={{ width: "42px", height: "42px", borderRadius: "10px", background: "#3B5998", display: "flex", alignItems: "center", justifyContent: "center", color: "white", flexShrink: 0 }} className="hover:scale-105 transition-transform duration-200">
@@ -137,7 +137,7 @@ export const Footer: React.FC = () => {
 
           {/* Right: Newsletter Form */}
           <div className="flex flex-col gap-2 w-full max-w-[439px]">
-            <span style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(255,255,255,1)" }}>Stay connected by subscribing to our newsletter</span>
+            <span style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "14px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(255,255,255,1)" }}>Stay connected by subscribing to our newsletter</span>
             <form
               onSubmit={(e) => { e.preventDefault(); alert("Subscribed!"); }}
               style={{ height: "56px", display: "flex", flexDirection: "row", alignItems: "center", gap: "8px", borderRadius: "4px", padding: "8px", background: "white", border: "1px solid rgba(141, 141, 141, 1)", boxSizing: "border-box" }}
@@ -170,7 +170,7 @@ export const Footer: React.FC = () => {
               fontWeight: 500,
               color: "rgba(255, 255, 255, 1)",
             }}
-            className="text-xs sm:text-sm md:text-[20px] text-center sm:text-left"
+            className="text-xs sm:text-sm md:text-[13px] text-center sm:text-left opacity-75"
           >
             Copyrights © 2026 Go Banjara. All Rights Reserved.
           </span>
@@ -181,7 +181,7 @@ export const Footer: React.FC = () => {
                 fontWeight: 500,
                 color: "rgba(255, 255, 255, 1)",
               }}
-              className="text-xs sm:text-sm md:text-[20px] text-center"
+              className="text-xs sm:text-sm md:text-[13px] text-center opacity-75"
             >
               Handmade with love ❤️ by TRD Studios
             </span>

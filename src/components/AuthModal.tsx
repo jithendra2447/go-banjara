@@ -564,31 +564,93 @@ export const AuthModal: React.FC = () => {
                     </a>.
                   </p>
 
-                  <button 
-                    type="submit" disabled={loading}
-                    className="w-full py-3.5 bg-[#1D493E] hover:bg-[#E05434] text-white rounded-xl text-xs font-black uppercase tracking-wider shadow-md flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 transition-colors"
-                  >
-                    {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Verify with OTP'}
-                  </button>
-                </form>
-
-                <div className="text-center space-y-3 pt-2">
-                  <p className="text-xs text-slate-500 font-semibold">
-                    Not registered yet?{' '}
-                    <button 
-                      onClick={() => { setError(''); setSuccessMsg(''); setView('signup'); }}
-                      className="font-black text-[#1D493E] hover:underline cursor-pointer"
+                    {/* Action Block (Figma specs: width 492, height 104, gap 12px) */}
+                    <div 
+                      style={{
+                        width: '492px',
+                        height: '104px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '12px',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        margin: '0 auto',
+                      }}
                     >
-                      Create an account
+                      <button 
+                        type="submit" disabled={loading}
+                        style={{
+                          width: '492px',
+                          height: '53px',
+                          background: '#1D493E',
+                          color: '#FFFFFF',
+                          border: 'none',
+                          borderRadius: '4px',
+                          fontFamily: '"Faktum", "Outfit", sans-serif',
+                          fontWeight: 600,
+                          fontSize: '18px',
+                          lineHeight: '100%',
+                          cursor: 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: '8px',
+                          transition: 'background-color 0.2s',
+                          boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                        }}
+                        onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#E05434'; }}
+                        onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#1D493E'; }}
+                      >
+                        {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Verify with OTP'}
+                      </button>
+
+                      <div 
+                        style={{
+                          height: '39px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        <p 
+                          style={{
+                            fontFamily: '"Faktum", "Outfit", sans-serif',
+                            fontWeight: 500,
+                            fontSize: '16px',
+                            color: 'rgba(141, 141, 141, 1)',
+                            margin: 0,
+                          }}
+                        >
+                          Not registered yet?{' '}
+                          <button 
+                            type="button"
+                            onClick={() => { setError(''); setSuccessMsg(''); setView('signup'); }}
+                            style={{
+                              fontFamily: '"Faktum", "Outfit", sans-serif',
+                              fontWeight: 600,
+                              color: '#1D493E',
+                              background: 'none',
+                              border: 'none',
+                              padding: 0,
+                              cursor: 'pointer',
+                              textDecoration: 'underline',
+                            }}
+                          >
+                            Create an account
+                          </button>
+                        </p>
+                      </div>
+                    </div>
+                  </form>
+
+                  <div className="text-center pt-1">
+                    <button 
+                      onClick={() => { setError(''); setSuccessMsg(''); setView('email_login'); }}
+                      className="text-[10px] font-black uppercase text-slate-400 hover:text-[#1D493E] transition tracking-wider"
+                    >
+                      Login with Email Password
                     </button>
-                  </p>
-                  <button 
-                    onClick={() => { setError(''); setSuccessMsg(''); setView('email_login'); }}
-                    className="text-[10px] font-black uppercase text-slate-400 hover:text-primary-dark transition tracking-wider"
-                  >
-                    Login with Email Password
-                  </button>
-                </div>
+                  </div>
               </div>
             )}
 
@@ -780,25 +842,84 @@ export const AuthModal: React.FC = () => {
                     </div>
                   </div>
 
-                  <button 
-                    type="submit" disabled={loading}
-                    className="w-full py-3.5 bg-[#1D493E] hover:bg-[#E05434] text-white rounded-xl text-xs font-black uppercase tracking-wider shadow-md flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 transition-colors"
-                  >
-                    {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Verify with OTP'}
-                  </button>
-                </form>
-
-                <div className="text-center">
-                  <p className="text-xs text-slate-500 font-semibold">
-                    Already have an account?{' '}
-                    <button 
-                      onClick={() => { setError(''); setSuccessMsg(''); setView('login'); }}
-                      className="font-black text-[#1D493E] hover:underline cursor-pointer"
+                    {/* Action Block (Figma specs: width 492, height 104, gap 12px) */}
+                    <div 
+                      style={{
+                        width: '492px',
+                        height: '104px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '12px',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        margin: '0 auto',
+                      }}
                     >
-                      Log In
-                    </button>
-                  </p>
-                </div>
+                      <button 
+                        type="submit" disabled={loading}
+                        style={{
+                          width: '492px',
+                          height: '53px',
+                          background: '#1D493E',
+                          color: '#FFFFFF',
+                          border: 'none',
+                          borderRadius: '4px',
+                          fontFamily: '"Faktum", "Outfit", sans-serif',
+                          fontWeight: 600,
+                          fontSize: '18px',
+                          lineHeight: '100%',
+                          cursor: 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: '8px',
+                          transition: 'background-color 0.2s',
+                          boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                        }}
+                        onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#E05434'; }}
+                        onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#1D493E'; }}
+                      >
+                        {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Verify with OTP'}
+                      </button>
+
+                      <div 
+                        style={{
+                          height: '39px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        <p 
+                          style={{
+                            fontFamily: '"Faktum", "Outfit", sans-serif',
+                            fontWeight: 500,
+                            fontSize: '16px',
+                            color: 'rgba(141, 141, 141, 1)',
+                            margin: 0,
+                          }}
+                        >
+                          Already have an account?{' '}
+                          <button 
+                            type="button"
+                            onClick={() => { setError(''); setSuccessMsg(''); setView('login'); }}
+                            style={{
+                              fontFamily: '"Faktum", "Outfit", sans-serif',
+                              fontWeight: 600,
+                              color: '#1D493E',
+                              background: 'none',
+                              border: 'none',
+                              padding: 0,
+                              cursor: 'pointer',
+                              textDecoration: 'underline',
+                            }}
+                          >
+                            Log In
+                          </button>
+                        </p>
+                      </div>
+                    </div>
+                  </form>
               </div>
             )}
 
@@ -842,9 +963,33 @@ export const AuthModal: React.FC = () => {
 
                   <button 
                     type="submit" disabled={loading}
-                    className="w-full py-3.5 bg-[#1D493E] hover:bg-[#E05434] text-white rounded-xl text-xs font-black uppercase tracking-wider shadow-md flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 transition-colors"
+                    style={{
+                      width: '492px',
+                      height: '60px',
+                      background: 'rgba(29, 73, 62, 1)',
+                      color: '#FFFFFF',
+                      border: 'none',
+                      borderRadius: '4px',
+                      paddingTop: '16px',
+                      paddingRight: '32px',
+                      paddingBottom: '16px',
+                      paddingLeft: '32px',
+                      gap: '8px',
+                      fontFamily: '"Faktum", "Outfit", sans-serif',
+                      fontWeight: 600,
+                      fontSize: '18px',
+                      lineHeight: '100%',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                      boxSizing: 'border-box',
+                    }}
+                    onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#E05434'; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'rgba(29, 73, 62, 1)'; }}
                   >
-                    {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Submit'}
+                    {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Submit'}
                   </button>
                 </form>
               </div>
@@ -908,9 +1053,33 @@ export const AuthModal: React.FC = () => {
 
                   <button 
                     type="submit" disabled={loading}
-                    className="w-full py-3.5 bg-[#1D493E] hover:bg-[#E05434] text-white rounded-xl text-xs font-black uppercase tracking-wider shadow-md flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 transition-colors"
+                    style={{
+                      width: '492px',
+                      height: '60px',
+                      background: 'rgba(29, 73, 62, 1)',
+                      color: '#FFFFFF',
+                      border: 'none',
+                      borderRadius: '4px',
+                      paddingTop: '16px',
+                      paddingRight: '32px',
+                      paddingBottom: '16px',
+                      paddingLeft: '32px',
+                      gap: '8px',
+                      fontFamily: '"Faktum", "Outfit", sans-serif',
+                      fontWeight: 600,
+                      fontSize: '18px',
+                      lineHeight: '100%',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                      boxSizing: 'border-box',
+                    }}
+                    onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#E05434'; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'rgba(29, 73, 62, 1)'; }}
                   >
-                    {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Sign In'}
+                    {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Sign In'}
                   </button>
                 </form>
 
@@ -953,9 +1122,33 @@ export const AuthModal: React.FC = () => {
 
                   <button 
                     type="submit" disabled={loading}
-                    className="w-full py-3.5 bg-[#1D493E] hover:bg-[#E05434] text-white rounded-xl text-xs font-black uppercase tracking-wider shadow-md flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 transition-colors"
+                    style={{
+                      width: '492px',
+                      height: '60px',
+                      background: 'rgba(29, 73, 62, 1)',
+                      color: '#FFFFFF',
+                      border: 'none',
+                      borderRadius: '4px',
+                      paddingTop: '16px',
+                      paddingRight: '32px',
+                      paddingBottom: '16px',
+                      paddingLeft: '32px',
+                      gap: '8px',
+                      fontFamily: '"Faktum", "Outfit", sans-serif',
+                      fontWeight: 600,
+                      fontSize: '18px',
+                      lineHeight: '100%',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                      boxSizing: 'border-box',
+                    }}
+                    onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#E05434'; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'rgba(29, 73, 62, 1)'; }}
                   >
-                    {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Send Reset Link'}
+                    {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Send Reset Link'}
                   </button>
                 </form>
 

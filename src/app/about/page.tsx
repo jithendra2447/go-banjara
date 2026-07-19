@@ -2095,30 +2095,44 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 10. Newsletter / CTA Banner Section */}
-      <section className="w-full bg-white py-[62px] px-6 md:px-[80px] mx-auto max-w-[1440px] text-center shrink-0">
-        <div className="max-w-[1280px] mx-auto flex flex-col items-center gap-8">
-          <div className="flex flex-col items-center gap-3">
-            <h2 className="text-3xl md:text-[42px] font-serif font-bold text-[#2B2B2B] leading-tight">
-              The <span className="text-[#FF5A36]">best adventures</span> find their way to your inbox.
+      {/* 10. Newsletter / CTA Banner Section (Pre-Footer) */}
+      <section className="w-full bg-white py-[64px] px-6 md:px-[80px] mx-auto max-w-[1440px] text-center shrink-0">
+        <div className="max-w-[1280px] mx-auto flex flex-col items-center gap-6">
+          <div className="flex flex-col items-center gap-4 text-center">
+            <h2 
+              style={{
+                fontFamily: "Fraunces, serif",
+                fontWeight: 600,
+                fontSize: "42px",
+                lineHeight: "50px",
+                color: "rgba(43, 43, 43, 1)",
+                margin: 0
+              }}
+            >
+              The <span style={{ color: "#FF623E" }}>best adventures</span> find their way to your inbox.
             </h2>
-            <p className="text-base sm:text-lg md:text-[22px] font-sans font-medium text-[rgba(43,43,43,0.8)] max-w-[900px] leading-relaxed">
+            <p 
+              style={{
+                fontFamily: "Faktum, sans-serif",
+                fontWeight: 500,
+                fontSize: "20px",
+                lineHeight: "30px",
+                color: "rgba(43, 43, 43, 0.8)",
+                maxWidth: "840px",
+                margin: "0 auto"
+              }}
+            >
               Hidden places, exclusive trip drops, curated gear, and stories from the road delivered before anyone else hears about them.
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 w-full max-w-[580px] justify-center">
+          <div className="pt-2">
             <Link
               href="/travel"
-              className="w-full sm:w-[280px] h-[55px] flex items-center justify-center rounded-[4px] bg-[#1D493E] hover:bg-[#15342c] text-white font-sans font-bold text-[18px] transition-all cursor-pointer shadow-sm"
+              className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-[4px] bg-[#1D493E] hover:bg-[#15342c] text-white font-sans font-medium text-[16px] transition-all cursor-pointer shadow-sm group"
             >
-              Book Now
-            </Link>
-            <Link
-              href="/shop"
-              className="w-full sm:w-[280px] h-[55px] flex items-center justify-center rounded-[4px] border-2 border-[#1D493E] bg-transparent text-[#1D493E] hover:bg-[#1D493E]/5 font-sans font-bold text-[18px] transition-all cursor-pointer"
-            >
-              Explore collection
+              <span>Reserve your tour now</span>
+              <ArrowUpRight className="w-4 h-4 text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </Link>
           </div>
         </div>

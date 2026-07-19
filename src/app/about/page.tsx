@@ -1563,49 +1563,77 @@ export default function AboutPage() {
                 }}
                 className="hover:shadow-md transition-shadow duration-300"
               >
-                {/* Top Icon Emblem: White square box */}
-                <div className="w-12 h-12 rounded-[8px] bg-white flex items-center justify-center border border-gray-100 shadow-2xs">
-                  <Compass className="w-6 h-6 text-[#FF623E]" />
+                {/* Top Stack Container (357.33px x 282px spec, gap: 24px) */}
+                <div 
+                  style={{
+                    width: "357.33px",
+                    maxWidth: "100%",
+                    height: "282px",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    gap: "24px",
+                    boxSizing: "border-box"
+                  }}
+                >
+                  {/* Top Icon Emblem: White square box */}
+                  <div className="w-12 h-12 rounded-[8px] bg-white flex items-center justify-center border border-gray-100 shadow-2xs shrink-0">
+                    <Compass className="w-6 h-6 text-[#FF623E]" />
+                  </div>
+
+                  {/* Title */}
+                  <h3 
+                    style={{
+                      fontFamily: "Faktum, sans-serif",
+                      fontWeight: 700,
+                      fontSize: "20px",
+                      lineHeight: "28px",
+                      color: "rgba(43, 43, 43, 1)",
+                      margin: 0,
+                      maxWidth: "320px",
+                      textAlign: "center"
+                    }}
+                  >
+                    {card.title}
+                  </h3>
+
+                  {/* Body */}
+                  <p 
+                    style={{
+                      width: "357.33px",
+                      maxWidth: "100%",
+                      height: "128px",
+                      fontFamily: "Faktum, sans-serif",
+                      fontWeight: 500,
+                      fontSize: "20px",
+                      lineHeight: "32px",
+                      letterSpacing: "0px",
+                      textAlign: "center",
+                      color: "rgba(43, 43, 43, 0.7)",
+                      margin: 0,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center"
+                    }}
+                  >
+                    {card.body}
+                  </p>
                 </div>
 
-                {/* Title */}
-                <h3 
-                  style={{
-                    fontFamily: "Faktum, sans-serif",
-                    fontWeight: 700,
-                    fontSize: "20px",
-                    lineHeight: "28px",
-                    color: "rgba(43, 43, 43, 1)",
-                    margin: 0,
-                    maxWidth: "320px"
-                  }}
-                >
-                  {card.title}
-                </h3>
-
-                {/* Body */}
-                <p 
-                  style={{
-                    fontFamily: "Faktum, sans-serif",
-                    fontWeight: 400,
-                    fontSize: "16px",
-                    lineHeight: "26px",
-                    color: "rgba(43, 43, 43, 0.75)",
-                    margin: 0,
-                    maxWidth: "340px"
-                  }}
-                >
-                  {card.body}
-                </p>
-
-                {/* Footer */}
+                {/* Footer (357.33px x 25px spec) */}
                 <span 
                   style={{
+                    width: "357.33px",
+                    maxWidth: "100%",
+                    height: "25px",
                     fontFamily: "Faktum, sans-serif",
                     fontWeight: 500,
-                    fontSize: "14px",
-                    lineHeight: "20px",
-                    color: "rgba(43, 43, 43, 0.6)"
+                    fontSize: "20px",
+                    lineHeight: "25px",
+                    letterSpacing: "0px",
+                    textAlign: "center",
+                    color: "rgba(43, 43, 43, 0.8)",
+                    display: "block"
                   }}
                 >
                   {card.footer}
@@ -1661,49 +1689,77 @@ export default function AboutPage() {
                 }}
                 className="hover:shadow-md transition-shadow duration-300"
               >
-                {/* Top Icon Emblem: White square box */}
-                <div className="w-12 h-12 rounded-[8px] bg-white flex items-center justify-center border border-gray-100 shadow-2xs">
-                  <Compass className="w-6 h-6 text-[#FF623E]" />
+                {/* Top Stack Container (357.33px x 282px spec, gap: 24px) */}
+                <div 
+                  style={{
+                    width: "357.33px",
+                    maxWidth: "100%",
+                    height: "282px",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    gap: "24px",
+                    boxSizing: "border-box"
+                  }}
+                >
+                  {/* Top Icon Emblem: White square box */}
+                  <div className="w-12 h-12 rounded-[8px] bg-white flex items-center justify-center border border-gray-100 shadow-2xs shrink-0">
+                    <Compass className="w-6 h-6 text-[#FF623E]" />
+                  </div>
+
+                  {/* Title */}
+                  <h3 
+                    style={{
+                      fontFamily: "Faktum, sans-serif",
+                      fontWeight: 700,
+                      fontSize: "20px",
+                      lineHeight: "28px",
+                      color: "rgba(43, 43, 43, 1)",
+                      margin: 0,
+                      maxWidth: "320px",
+                      textAlign: "center"
+                    }}
+                  >
+                    {card.title}
+                  </h3>
+
+                  {/* Body */}
+                  <p 
+                    style={{
+                      width: "357.33px",
+                      maxWidth: "100%",
+                      height: "128px",
+                      fontFamily: "Faktum, sans-serif",
+                      fontWeight: 500,
+                      fontSize: "20px",
+                      lineHeight: "32px",
+                      letterSpacing: "0px",
+                      textAlign: "center",
+                      color: "rgba(43, 43, 43, 0.7)",
+                      margin: 0,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center"
+                    }}
+                  >
+                    {card.body}
+                  </p>
                 </div>
 
-                {/* Title */}
-                <h3 
-                  style={{
-                    fontFamily: "Faktum, sans-serif",
-                    fontWeight: 700,
-                    fontSize: "20px",
-                    lineHeight: "28px",
-                    color: "rgba(43, 43, 43, 1)",
-                    margin: 0,
-                    maxWidth: "320px"
-                  }}
-                >
-                  {card.title}
-                </h3>
-
-                {/* Body */}
-                <p 
-                  style={{
-                    fontFamily: "Faktum, sans-serif",
-                    fontWeight: 400,
-                    fontSize: "16px",
-                    lineHeight: "26px",
-                    color: "rgba(43, 43, 43, 0.75)",
-                    margin: 0,
-                    maxWidth: "340px"
-                  }}
-                >
-                  {card.body}
-                </p>
-
-                {/* Footer */}
+                {/* Footer (357.33px x 25px spec) */}
                 <span 
                   style={{
+                    width: "357.33px",
+                    maxWidth: "100%",
+                    height: "25px",
                     fontFamily: "Faktum, sans-serif",
                     fontWeight: 500,
-                    fontSize: "14px",
-                    lineHeight: "20px",
-                    color: "rgba(43, 43, 43, 0.6)"
+                    fontSize: "20px",
+                    lineHeight: "25px",
+                    letterSpacing: "0px",
+                    textAlign: "center",
+                    color: "rgba(43, 43, 43, 0.8)",
+                    display: "block"
                   }}
                 >
                   {card.footer}

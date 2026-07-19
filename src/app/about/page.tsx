@@ -822,343 +822,292 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 6. Alternating Sticker Grid Section */}
-      <section className="w-full bg-white py-[62px] px-6 md:px-[80px] mx-auto max-w-[1440px] flex flex-col gap-12 shrink-0">
+      {/* 6. OUR JOURNEY TIMELINE / ABOUT GO BANJARA Section (1440x2146px spec) */}
+      <section 
+        style={{
+          width: "100%",
+          maxWidth: "1440px",
+          minHeight: "2146px",
+          paddingTop: "42px",
+          paddingRight: "80px",
+          paddingBottom: "42px",
+          paddingLeft: "80px",
+          background: "rgba(255, 255, 255, 1)",
+          boxSizing: "border-box",
+          display: "flex",
+          flexDirection: "column",
+          gap: "32px"
+        }}
+        className="mx-auto w-full shrink-0"
+      >
         {/* Header */}
-        <div className="w-full text-center flex flex-col gap-2">
-          <span className="text-[14px] font-semibold text-[#FF623E] bg-[#FFEBE5] px-3 py-1 rounded-[4px] self-center uppercase tracking-widest">
-            OUR STORY
+        <div className="w-full text-left flex flex-col gap-2 max-w-[1280px] mx-auto">
+          <span className="text-[12px] font-semibold text-[#FF623E] tracking-wider uppercase">
+            OUR JOURNEY TIMELINE
           </span>
-          <h2 className="text-3xl md:text-[42px] font-serif font-bold text-[#1D493E]">
-            How We Build Experiences
+          <h2 className="text-3xl md:text-[40px] font-serif font-bold text-[#2B2B2B] leading-tight">
+            From a scribbled notebook to a <span className="text-[#FF623E]">travelling tribe</span>
           </h2>
+          <p className="text-[#2B2B2B]/70 font-sans text-base md:text-lg">
+            Curated gear for the modern nomad. From durable journal covers to the stickers that tell your story
+          </p>
         </div>
 
-        {/* 4 Rows of 3-Column Grid */}
-        <div className="flex flex-col gap-12 w-full max-w-[1280px] mx-auto">
+        {/* 4 Rows of 3-Column Grid (302px x 380px cards) */}
+        <div style={{ gap: "32px" }} className="flex flex-col w-full max-w-[1280px] mx-auto mt-4">
+          
           {/* Row 1 */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center justify-center">
-            {/* Col 1 */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center justify-between w-full">
+            {/* Col 1: Card 1 (Hikers) */}
             <div className="flex justify-center">
               <div 
                 style={{ 
                   width: "302px", 
                   height: "380px", 
-                  borderTopRightRadius: "4px",
-                  borderBottomRightRadius: "4px",
-                  borderBottomLeftRadius: "4px",
-                  borderTopLeftRadius: "0px",
-                  backgroundImage: "url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80')",
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                  position: "relative",
-                  boxShadow: "0 10px 20px rgba(0,0,0,0.1)",
-                  transform: "rotate(-2deg)"
+                  borderRadius: "4px",
+                  overflow: "hidden",
+                  boxShadow: "0 10px 20px rgba(0,0,0,0.08)"
                 }}
               >
-                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/55 to-transparent pointer-events-none" />
-                <div style={{ position: "absolute", bottom: "35px", left: "20px", transform: "rotate(-4deg)" }}>
-                  <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 800, fontSize: "48px", color: "#FFFF80", letterSpacing: "-1.5px", lineHeight: "1" }}>
-                    go banjara
-                  </span>
-                </div>
+                <img src="/card-1-full.png" alt="Go Banjara Traveler Card 1" className="w-full h-full object-cover" />
               </div>
             </div>
 
-            {/* Col 2: Text Card */}
+            {/* Col 2: Center Text Card */}
             <div className="flex justify-center">
-              <div className="flex flex-col items-center justify-center p-8 bg-white border border-gray-150 rounded-2xl text-center w-[302px] h-[380px] shadow-xs">
-                <span className="text-[12px] font-bold text-[#FF623E] bg-[#FFEBE5] px-3 py-1 rounded-[4px] mb-6 uppercase tracking-wider">
-                  01 / PHILOSOPHY
+              <div 
+                style={{ 
+                  width: "380px", 
+                  maxWidth: "100%",
+                  height: "380px", 
+                  borderRadius: "4px",
+                  background: "#FFFFFF",
+                  padding: "32px",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  textAlign: "center",
+                  boxSizing: "border-box"
+                }}
+              >
+                <span className="bg-[#E8F5E9] text-[#2E7D32] text-[12px] font-semibold px-3 py-1 rounded-[4px] uppercase tracking-wider mb-4">
+                  THE START
                 </span>
-                <p className="font-serif font-semibold text-xl md:text-2xl text-[#1D493E] leading-relaxed">
+                <h3 className="font-serif font-bold text-2xl md:text-[28px] text-[#2B2B2B] leading-snug mb-3">
                   We don't sell trips. We hand you back a country you forgot.
+                </h3>
+                <p className="text-[#2B2B2B]/70 font-sans text-sm md:text-base leading-relaxed">
+                  Go Banjara is a small collective of travelers, writers, makers and local guides quietly rebuilding what travel across India was supposed to feel like
                 </p>
               </div>
             </div>
 
-            {/* Col 3 */}
+            {/* Col 3: Card 3 (Cream Camel) */}
             <div className="flex justify-center">
               <div 
                 style={{ 
                   width: "302px", 
                   height: "380px", 
-                  borderTopRightRadius: "4px",
-                  borderBottomRightRadius: "4px",
-                  borderBottomLeftRadius: "4px",
-                  borderTopLeftRadius: "0px",
-                  background: "#F4FBF4",
-                  position: "relative",
-                  boxShadow: "0 10px 20px rgba(0,0,0,0.1)",
-                  transform: "rotate(3deg)"
+                  borderRadius: "4px",
+                  overflow: "hidden",
+                  boxShadow: "0 10px 20px rgba(0,0,0,0.08)"
                 }}
-                className="p-6 flex flex-col justify-between overflow-hidden"
               >
-                <div>
-                  <h3 style={{ fontFamily: "Fraunces, serif", fontWeight: 600, fontSize: "36px", lineHeight: "105%", color: "#1D493E", margin: 0, transform: "rotate(-2deg)" }}>
-                    Humps down,<br />surfs up!
-                  </h3>
-                </div>
-                <div style={{ position: "absolute", bottom: "-10px", right: "-10px", width: "240px", height: "240px" }}>
-                  <svg viewBox="0 0 200 200" fill="none" style={{ width: "100%", height: "100%" }}>
-                    <path d="M60,200 C60,140 70,120 70,100 C70,70 60,60 80,50 C100,40 130,40 140,60 C150,75 145,100 140,110 C130,125 130,150 130,200 Z" fill="#FF623E" />
-                    <path d="M72,52 L62,35 C60,32 65,30 68,34 L78,48 Z" fill="#FF623E" />
-                    <path d="M132,58 L146,42 C148,39 152,43 148,46 L136,58 Z" fill="#FF623E" />
-                    <path d="M125,100 C125,120 100,125 95,120 C90,115 90,100 95,95 Z" fill="#E24C28" opacity="0.6" />
-                    <g transform="rotate(4, 105, 80)">
-                      <path d="M70,78 C70,70 88,68 98,72 C108,76 102,96 88,96 C74,96 70,86 70,78 Z" fill="#1D493E" stroke="#FFFFFF" strokeWidth="4" />
-                      <path d="M102,82 C102,74 120,72 130,76 C140,80 134,100 120,100 C106,100 102,90 102,82 Z" fill="#1D493E" stroke="#FFFFFF" strokeWidth="4" />
-                      <rect x="94" y="74" width="12" height="4" fill="#FFFFFF" rx="2" />
-                      <circle cx="92" cy="78" r="4" fill="#FFFFFF" opacity="0.8" />
-                      <circle cx="124" cy="82" r="4" fill="#FFFFFF" opacity="0.8" />
-                    </g>
-                  </svg>
-                </div>
+                <img src="/card-3-full.png" alt="Humps Down Surf's Up Card 3" className="w-full h-full object-cover" />
               </div>
             </div>
           </div>
 
           {/* Row 2 */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center justify-center">
-            {/* Col 1 */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center justify-between w-full">
+            {/* Col 1: Card 2 (Green Explore) */}
             <div className="flex justify-center">
               <div 
                 style={{ 
                   width: "302px", 
                   height: "380px", 
-                  borderTopRightRadius: "4px",
-                  borderBottomRightRadius: "4px",
-                  borderBottomLeftRadius: "4px",
-                  borderTopLeftRadius: "0px",
-                  background: "#1D493E",
-                  position: "relative",
-                  boxShadow: "0 10px 20px rgba(0,0,0,0.1)",
-                  transform: "rotate(-3deg)"
+                  borderRadius: "4px",
+                  overflow: "hidden",
+                  boxShadow: "0 10px 20px rgba(0,0,0,0.08)"
                 }}
-                className="overflow-hidden"
               >
-                <svg viewBox="0 0 302 380" fill="none" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}>
-                  <path d="M-20,320 Q90,260 90,140 Q90,50 180,90 Q220,110 240,40 Q250,10 280,-20" fill="none" stroke="#FF623E" strokeWidth="28" strokeLinecap="round" />
-                  <path d="M240,40 Q260,110 290,180" fill="none" stroke="#FF623E" strokeWidth="28" strokeLinecap="round" />
-                </svg>
-                <span style={{ position: "absolute", top: "45px", left: "30px", fontFamily: "Fraunces, serif", fontStyle: "italic", fontWeight: 500, fontSize: "36px", color: "#FAF9F6", transform: "rotate(-5deg)" }}>explore</span>
-                <span style={{ position: "absolute", top: "140px", right: "25px", fontFamily: "Fraunces, serif", fontStyle: "italic", fontWeight: 500, fontSize: "36px", color: "#FAF9F6", transform: "rotate(-6deg)" }}>adventure</span>
-                <span style={{ position: "absolute", bottom: "100px", left: "35px", fontFamily: "Fraunces, serif", fontStyle: "italic", fontWeight: 500, fontSize: "36px", color: "#FAF9F6", transform: "rotate(-4deg)" }}>wild</span>
-                <span style={{ position: "absolute", bottom: "40px", right: "30px", fontFamily: "Fraunces, serif", fontStyle: "italic", fontWeight: 500, fontSize: "36px", color: "#FAF9F6", transform: "rotate(-6deg)" }}>journey</span>
+                <img src="/card-2-full.png" alt="Explore Adventure Card 2" className="w-full h-full object-cover" />
               </div>
             </div>
 
-            {/* Col 2: Text Card */}
+            {/* Col 2: Center Text Card */}
             <div className="flex justify-center">
-              <div className="flex flex-col items-center justify-center p-8 bg-white border border-gray-150 rounded-2xl text-center w-[302px] h-[380px] shadow-xs">
-                <span className="text-[12px] font-bold text-[#FF623E] bg-[#FFEBE5] px-3 py-1 rounded-[4px] mb-6 uppercase tracking-wider">
-                  02 / EXPLORATION
+              <div 
+                style={{ 
+                  width: "380px", 
+                  maxWidth: "100%",
+                  height: "380px", 
+                  borderRadius: "4px",
+                  background: "#FFFFFF",
+                  padding: "32px",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  textAlign: "center",
+                  boxSizing: "border-box"
+                }}
+              >
+                <span className="bg-[#E8F5E9] text-[#2E7D32] text-[12px] font-semibold px-3 py-1 rounded-[4px] uppercase tracking-wider mb-4">
+                  ABOUT GO BANJARA
                 </span>
-                <p className="font-serif font-semibold text-xl md:text-2xl text-[#1D493E] leading-relaxed">
-                  Slower exploration. Closer to the soil. Honest connections with the land.
+                <h3 className="font-serif font-bold text-2xl md:text-[28px] text-[#2B2B2B] leading-snug mb-3">
+                  We don't sell trips. We hand you back a country you forgot.
+                </h3>
+                <p className="text-[#2B2B2B]/70 font-sans text-sm md:text-base leading-relaxed">
+                  Go Banjara is a small collective of travelers, writers, makers and local guides quietly rebuilding what travel across India was supposed to feel like
                 </p>
               </div>
             </div>
 
-            {/* Col 3 */}
+            {/* Col 3: Card 4 (Yellow Stickers) */}
             <div className="flex justify-center">
               <div 
                 style={{ 
                   width: "302px", 
                   height: "380px", 
-                  borderTopRightRadius: "4px",
-                  borderBottomRightRadius: "4px",
-                  borderBottomLeftRadius: "4px",
-                  borderTopLeftRadius: "0px",
-                  background: "#FFFF80",
-                  position: "relative",
-                  boxShadow: "0 10px 20px rgba(0,0,0,0.1)",
-                  transform: "rotate(2deg)"
+                  borderRadius: "4px",
+                  overflow: "hidden",
+                  boxShadow: "0 10px 20px rgba(0,0,0,0.08)"
                 }}
-                className="overflow-hidden"
               >
-                <div style={{ position: "absolute", top: "45px", left: "20px", width: "120px", height: "120px", borderRadius: "50%", background: "#FF623E", transform: "rotate(-12deg)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <div style={{ width: "100px", height: "100px", borderRadius: "50%", border: "1px dashed #FFFF80", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
-                    <img src="/logo.png" alt="Mascot" style={{ width: "38px", height: "auto" }} />
-                    <span style={{ fontSize: "7px", fontWeight: 800, fontFamily: "Faktum, sans-serif", color: "#FFFF80", marginTop: "4px" }}>Go Banjara</span>
-                  </div>
-                </div>
-                <div style={{ position: "absolute", top: "30px", right: "15px", background: "#59D3F3", padding: "8px 12px", borderRadius: "4px", border: "3.5px solid #FFFFFF", transform: "rotate(6deg)", display: "flex", flexDirection: "column" }}>
-                  <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 800, fontSize: "14px", color: "#FF623E", lineHeight: "1" }}>explore</span>
-                  <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 800, fontSize: "14px", color: "#FFFFFF", lineHeight: "1" }}>MORE!</span>
-                </div>
-                <div style={{ position: "absolute", bottom: "20px", right: "15px", background: "#02B3A6", width: "115px", height: "170px", borderRadius: "6px", border: "3.5px solid #FFFFFF", transform: "rotate(4deg)", padding: "10px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-                  <div style={{ display: "flex", justifyContent: "center", gap: "2px" }}><div className="w-6 h-2 bg-[#FFFF80] rounded-xs" /><div className="w-6 h-2 bg-[#FF623E] rounded-xs" /></div>
-                  <span style={{ fontFamily: "Fraunces, serif", fontStyle: "italic", fontWeight: 600, fontSize: "20px", color: "#FFFF80", lineHeight: "1" }}>I travel to read.</span>
-                </div>
-                <div style={{ position: "absolute", bottom: "-10px", left: "15px", background: "#AE99FF", padding: "6px 20px 14px", borderRadius: "20px 20px 4px 4px", border: "3.5px solid #FFFFFF", transform: "rotate(-10deg) translateY(5px)" }}>
-                  <span style={{ fontFamily: "Fraunces, serif", fontWeight: 700, fontSize: "16px", color: "#FFFFFF" }}>GOA</span>
-                </div>
+                <img src="/card-4-full.png" alt="Yellow Stickers Card 4" className="w-full h-full object-cover" />
               </div>
             </div>
           </div>
 
           {/* Row 3 */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center justify-center">
-            {/* Col 1 */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center justify-between w-full">
+            {/* Col 1: Card 7 (Cream Camel) */}
             <div className="flex justify-center">
               <div 
                 style={{ 
                   width: "302px", 
                   height: "380px", 
-                  borderTopRightRadius: "4px",
-                  borderBottomRightRadius: "4px",
-                  borderBottomLeftRadius: "4px",
-                  borderTopLeftRadius: "0px",
-                  background: "#F4FBF4",
-                  position: "relative",
-                  boxShadow: "0 10px 20px rgba(0,0,0,0.1)",
-                  transform: "rotate(-2deg)"
+                  borderRadius: "4px",
+                  overflow: "hidden",
+                  boxShadow: "0 10px 20px rgba(0,0,0,0.08)"
                 }}
-                className="p-6 flex flex-col justify-between overflow-hidden"
               >
-                <div>
-                  <h3 style={{ fontFamily: "Fraunces, serif", fontWeight: 600, fontSize: "36px", lineHeight: "105%", color: "#1D493E", margin: 0, transform: "rotate(-2deg)" }}>
-                    Humps down,<br />surfs up!
-                  </h3>
-                </div>
-                <div style={{ position: "absolute", bottom: "-10px", right: "-10px", width: "240px", height: "240px" }}>
-                  <svg viewBox="0 0 200 200" fill="none" style={{ width: "100%", height: "100%" }}>
-                    <path d="M60,200 C60,140 70,120 70,100 C70,70 60,60 80,50 C100,40 130,40 140,60 C150,75 145,100 140,110 C130,125 130,150 130,200 Z" fill="#FF623E" />
-                    <path d="M72,52 L62,35 C60,32 65,30 68,34 L78,48 Z" fill="#FF623E" />
-                    <path d="M132,58 L146,42 C148,39 152,43 148,46 L136,58 Z" fill="#FF623E" />
-                    <path d="M125,100 C125,120 100,125 95,120 C90,115 90,100 95,95 Z" fill="#E24C28" opacity="0.6" />
-                    <g transform="rotate(4, 105, 80)">
-                      <path d="M70,78 C70,70 88,68 98,72 C108,76 102,96 88,96 C74,96 70,86 70,78 Z" fill="#1D493E" stroke="#FFFFFF" strokeWidth="4" />
-                      <path d="M102,82 C102,74 120,72 130,76 C140,80 134,100 120,100 C106,100 102,90 102,82 Z" fill="#1D493E" stroke="#FFFFFF" strokeWidth="4" />
-                      <rect x="94" y="74" width="12" height="4" fill="#FFFFFF" rx="2" />
-                      <circle cx="92" cy="78" r="4" fill="#FFFFFF" opacity="0.8" />
-                      <circle cx="124" cy="82" r="4" fill="#FFFFFF" opacity="0.8" />
-                    </g>
-                  </svg>
-                </div>
+                <img src="/card-7-full.png" alt="Humps Down Surf's Up Card 7" className="w-full h-full object-cover" />
               </div>
             </div>
 
-            {/* Col 2: Text Card */}
+            {/* Col 2: Center Text Card */}
             <div className="flex justify-center">
-              <div className="flex flex-col items-center justify-center p-8 bg-white border border-gray-150 rounded-2xl text-center w-[302px] h-[380px] shadow-xs">
-                <span className="text-[12px] font-bold text-[#FF623E] bg-[#FFEBE5] px-3 py-1 rounded-[4px] mb-6 uppercase tracking-wider">
-                  03 / CRAFTSMANSHIP
+              <div 
+                style={{ 
+                  width: "380px", 
+                  maxWidth: "100%",
+                  height: "380px", 
+                  borderRadius: "4px",
+                  background: "#FFFFFF",
+                  padding: "32px",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  textAlign: "center",
+                  boxSizing: "border-box"
+                }}
+              >
+                <span className="bg-[#E8F5E9] text-[#2E7D32] text-[12px] font-semibold px-3 py-1 rounded-[4px] uppercase tracking-wider mb-4">
+                  ABOUT GO BANJARA
                 </span>
-                <p className="font-serif font-semibold text-xl md:text-2xl text-[#1D493E] leading-relaxed">
-                  Curating gear made by artisans we know by name, built to last.
+                <h3 className="font-serif font-bold text-2xl md:text-[28px] text-[#2B2B2B] leading-snug mb-3">
+                  We don't sell trips. We hand you back a country you forgot.
+                </h3>
+                <p className="text-[#2B2B2B]/70 font-sans text-sm md:text-base leading-relaxed">
+                  Go Banjara is a small collective of travelers, writers, makers and local guides quietly rebuilding what travel across India was supposed to feel like
                 </p>
               </div>
             </div>
 
-            {/* Col 3 */}
+            {/* Col 3: Card 5 (Hikers) */}
             <div className="flex justify-center">
               <div 
                 style={{ 
                   width: "302px", 
                   height: "380px", 
-                  borderTopRightRadius: "4px",
-                  borderBottomRightRadius: "4px",
-                  borderBottomLeftRadius: "4px",
-                  borderTopLeftRadius: "0px",
-                  backgroundImage: "url('https://images.unsplash.com/photo-1527631746610-bca00a040d60?auto=format&fit=crop&w=600&q=80')",
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                  position: "relative",
-                  boxShadow: "0 10px 20px rgba(0,0,0,0.1)",
-                  transform: "rotate(3deg)"
+                  borderRadius: "4px",
+                  overflow: "hidden",
+                  boxShadow: "0 10px 20px rgba(0,0,0,0.08)"
                 }}
               >
-                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/55 to-transparent pointer-events-none" />
-                <div style={{ position: "absolute", bottom: "35px", left: "20px", transform: "rotate(-4deg)" }}>
-                  <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 800, fontSize: "48px", color: "#FFFF80", letterSpacing: "-1.5px", lineHeight: "1" }}>
-                    go banjara
-                  </span>
-                </div>
+                <img src="/card-5-full.png" alt="Go Banjara Traveler Card 5" className="w-full h-full object-cover" />
               </div>
             </div>
           </div>
 
           {/* Row 4 */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center justify-center">
-            {/* Col 1 */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center justify-between w-full">
+            {/* Col 1: Card 8 (Yellow Stickers) */}
             <div className="flex justify-center">
               <div 
                 style={{ 
                   width: "302px", 
                   height: "380px", 
-                  borderTopRightRadius: "4px",
-                  borderBottomRightRadius: "4px",
-                  borderBottomLeftRadius: "4px",
-                  borderTopLeftRadius: "0px",
-                  background: "#FFFF80",
-                  position: "relative",
-                  boxShadow: "0 10px 20px rgba(0,0,0,0.1)",
-                  transform: "rotate(-2deg)"
+                  borderRadius: "4px",
+                  overflow: "hidden",
+                  boxShadow: "0 10px 20px rgba(0,0,0,0.08)"
                 }}
-                className="overflow-hidden"
               >
-                <div style={{ position: "absolute", top: "45px", left: "20px", width: "120px", height: "120px", borderRadius: "50%", background: "#FF623E", transform: "rotate(-12deg)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <div style={{ width: "100px", height: "100px", borderRadius: "50%", border: "1px dashed #FFFF80", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
-                    <img src="/logo.png" alt="Mascot" style={{ width: "38px", height: "auto" }} />
-                    <span style={{ fontSize: "7px", fontWeight: 800, fontFamily: "Faktum, sans-serif", color: "#FFFF80", marginTop: "4px" }}>Go Banjara</span>
-                  </div>
-                </div>
-                <div style={{ position: "absolute", top: "30px", right: "15px", background: "#59D3F3", padding: "8px 12px", borderRadius: "4px", border: "3.5px solid #FFFFFF", transform: "rotate(6deg)", display: "flex", flexDirection: "column" }}>
-                  <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 800, fontSize: "14px", color: "#FF623E", lineHeight: "1" }}>explore</span>
-                  <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 800, fontSize: "14px", color: "#FFFFFF", lineHeight: "1" }}>MORE!</span>
-                </div>
-                <div style={{ position: "absolute", bottom: "20px", right: "15px", background: "#02B3A6", width: "115px", height: "170px", borderRadius: "6px", border: "3.5px solid #FFFFFF", transform: "rotate(4deg)", padding: "10px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-                  <div style={{ display: "flex", justifyContent: "center", gap: "2px" }}><div className="w-6 h-2 bg-[#FFFF80] rounded-xs" /><div className="w-6 h-2 bg-[#FF623E] rounded-xs" /></div>
-                  <span style={{ fontFamily: "Fraunces, serif", fontStyle: "italic", fontWeight: 600, fontSize: "20px", color: "#FFFF80", lineHeight: "1" }}>I travel to read.</span>
-                </div>
-                <div style={{ position: "absolute", bottom: "-10px", left: "15px", background: "#AE99FF", padding: "6px 20px 14px", borderRadius: "20px 20px 4px 4px", border: "3.5px solid #FFFFFF", transform: "rotate(-10deg) translateY(5px)" }}>
-                  <span style={{ fontFamily: "Fraunces, serif", fontWeight: 700, fontSize: "16px", color: "#FFFFFF" }}>GOA</span>
-                </div>
+                <img src="/card-8-full.png" alt="Yellow Stickers Card 8" className="w-full h-full object-cover" />
               </div>
             </div>
 
-            {/* Col 2: Text Card */}
+            {/* Col 2: Center Text Card */}
             <div className="flex justify-center">
-              <div className="flex flex-col items-center justify-center p-8 bg-white border border-gray-150 rounded-2xl text-center w-[302px] h-[380px] shadow-xs">
-                <span className="text-[12px] font-bold text-[#FF623E] bg-[#FFEBE5] px-3 py-1 rounded-[4px] mb-6 uppercase tracking-wider">
-                  04 / COMMUNITY
+              <div 
+                style={{ 
+                  width: "380px", 
+                  maxWidth: "100%",
+                  height: "380px", 
+                  borderRadius: "4px",
+                  background: "#FFFFFF",
+                  padding: "32px",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  textAlign: "center",
+                  boxSizing: "border-box"
+                }}
+              >
+                <span className="bg-[#E8F5E9] text-[#2E7D32] text-[12px] font-semibold px-3 py-1 rounded-[4px] uppercase tracking-wider mb-4">
+                  ABOUT GO BANJARA
                 </span>
-                <p className="font-serif font-semibold text-xl md:text-2xl text-[#1D493E] leading-relaxed">
-                  A community of travelers who share raw notes from the road.
+                <h3 className="font-serif font-bold text-2xl md:text-[28px] text-[#2B2B2B] leading-snug mb-3">
+                  We don't sell trips. We hand you back a country you forgot.
+                </h3>
+                <p className="text-[#2B2B2B]/70 font-sans text-sm md:text-base leading-relaxed">
+                  Go Banjara is a small collective of travelers, writers, makers and local guides quietly rebuilding what travel across India was supposed to feel like
                 </p>
               </div>
             </div>
 
-            {/* Col 3 */}
+            {/* Col 3: Card 6 (Green Explore) */}
             <div className="flex justify-center">
               <div 
                 style={{ 
                   width: "302px", 
                   height: "380px", 
-                  borderTopRightRadius: "4px",
-                  borderBottomRightRadius: "4px",
-                  borderBottomLeftRadius: "4px",
-                  borderTopLeftRadius: "0px",
-                  background: "#1D493E",
-                  position: "relative",
-                  boxShadow: "0 10px 20px rgba(0,0,0,0.1)",
-                  transform: "rotate(4deg)"
+                  borderRadius: "4px",
+                  overflow: "hidden",
+                  boxShadow: "0 10px 20px rgba(0,0,0,0.08)"
                 }}
-                className="overflow-hidden"
               >
-                <svg viewBox="0 0 302 380" fill="none" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}>
-                  <path d="M-20,320 Q90,260 90,140 Q90,50 180,90 Q220,110 240,40 Q250,10 280,-20" fill="none" stroke="#FF623E" strokeWidth="28" strokeLinecap="round" />
-                  <path d="M240,40 Q260,110 290,180" fill="none" stroke="#FF623E" strokeWidth="28" strokeLinecap="round" />
-                </svg>
-                <span style={{ position: "absolute", top: "45px", left: "30px", fontFamily: "Fraunces, serif", fontStyle: "italic", fontWeight: 500, fontSize: "36px", color: "#FAF9F6", transform: "rotate(-5deg)" }}>explore</span>
-                <span style={{ position: "absolute", top: "140px", right: "25px", fontFamily: "Fraunces, serif", fontStyle: "italic", fontWeight: 500, fontSize: "36px", color: "#FAF9F6", transform: "rotate(-6deg)" }}>adventure</span>
-                <span style={{ position: "absolute", bottom: "100px", left: "35px", fontFamily: "Fraunces, serif", fontStyle: "italic", fontWeight: 500, fontSize: "36px", color: "#FAF9F6", transform: "rotate(-4deg)" }}>wild</span>
-                <span style={{ position: "absolute", bottom: "40px", right: "30px", fontFamily: "Fraunces, serif", fontStyle: "italic", fontWeight: 500, fontSize: "36px", color: "#FAF9F6", transform: "rotate(-6deg)" }}>journey</span>
+                <img src="/card-6-full.png" alt="Explore Adventure Card 6" className="w-full h-full object-cover" />
               </div>
             </div>
           </div>
+
         </div>
       </section>
 

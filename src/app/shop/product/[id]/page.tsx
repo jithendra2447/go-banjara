@@ -295,7 +295,7 @@ export default function ProductDetailsPage() {
   };
 
   return (
-    <div className="bg-white min-h-screen pb-12 flex flex-col items-center font-sans text-[#2B2B2B]">
+    <div className="bg-white min-h-screen pb-0 flex flex-col items-center font-sans text-[#2B2B2B]">
       {/* Page Header (Width: 1440px, dynamic height, Background: white) */}
       <header 
         style={{

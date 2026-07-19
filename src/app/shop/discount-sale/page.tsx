@@ -140,7 +140,7 @@ export default function DiscountSalePage() {
   }, [filteredProducts, sortBy]);
 
   return (
-    <div className="bg-white min-h-screen pb-24 flex flex-col items-center">
+    <div className="bg-white min-h-screen pb-0 flex flex-col items-center">
       {/* Header Section */}
       <header className="max-w-[1440px] w-full mx-auto text-left space-y-6 px-6 md:px-[80px] pt-[62px] pb-[24px]">
         <div className="flex justify-start">

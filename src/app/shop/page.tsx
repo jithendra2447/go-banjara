@@ -149,7 +149,7 @@ export default function ShopPage() {
   );
 
   return (
-    <div className="bg-white min-h-screen pb-24 flex flex-col items-center">
+    <div className="bg-white min-h-screen pb-0 flex flex-col items-center">
       {/* Header Section */}
       <header style={{ width: "100%", maxWidth: "1440px", display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: "white", boxSizing: "border-box" }} className="mx-auto px-6 md:px-[80px] pt-[40px] md:pt-[62px] pb-[24px]">
         {/* Inner header container */}

@@ -229,19 +229,23 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 4. Stats Section inside 1440x556px container */}
+      {/* 3. Stats Bar Section (1440x145px spec) */}
       <section 
-        style={{ 
-          width: "100%", 
+        style={{
+          width: "100%",
           maxWidth: "1440px",
-          height: "556px", 
-          background: "rgba(255, 255, 255, 1)", 
-          display: "flex", 
-          alignItems: "center", 
+          height: "145px",
+          paddingTop: "24px",
+          paddingRight: "80px",
+          paddingBottom: "24px",
+          paddingLeft: "80px",
+          background: "rgba(255, 255, 255, 1)",
+          display: "flex",
+          alignItems: "center",
           justifyContent: "center",
           boxSizing: "border-box"
         }}
-        className="mx-auto px-6 md:px-[80px] w-full shrink-0"
+        className="mx-auto w-full shrink-0"
       >
         <div 
           style={{ 
@@ -310,6 +314,345 @@ export default function AboutPage() {
             <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "25px", height: "25px", color: "rgba(43, 43, 43, 1)", display: "block" }}>
               Average trip rating
             </span>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. Overlapping Sticker Cards Strip Section (1440x556px spec) */}
+      <section 
+        style={{ 
+          width: "100%", 
+          maxWidth: "1440px",
+          height: "556px", 
+          background: "rgba(255, 255, 255, 1)", 
+          position: "relative",
+          overflow: "hidden",
+          boxSizing: "border-box"
+        }}
+        className="mx-auto w-full shrink-0"
+      >
+        {/* Cards Container */}
+        <div 
+          style={{ 
+            width: "1709.57px", 
+            height: "418.33px", 
+            display: "flex", 
+            alignItems: "center", 
+            overflowX: "auto",
+            scrollbarWidth: "none",
+            boxSizing: "border-box",
+            position: "absolute",
+            top: "68px",
+            left: "50%",
+            transform: "translateX(-50%)"
+          }}
+          className="scrollbar-none"
+        >
+          {/* Card 1: Go Banjara Text Card */}
+          <div 
+            style={{ 
+              width: "302px", 
+              height: "380px", 
+              borderTopRightRadius: "4px",
+              borderBottomRightRadius: "4px",
+              borderBottomLeftRadius: "4px",
+              borderTopLeftRadius: "0px",
+              background: "#1D493E",
+              position: "relative",
+              boxShadow: "0 10px 20px rgba(0,0,0,0.15)",
+              transform: "rotate(-3deg)",
+              zIndex: 10,
+              flexShrink: 0,
+              overflow: "hidden"
+            }}
+          >
+            <div style={{ position: "absolute", bottom: "35px", left: "20px", transform: "rotate(-4deg)" }}>
+              <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 800, fontSize: "48px", color: "#FFFF80", letterSpacing: "-1.5px", lineHeight: "1" }}>
+                go banjara
+              </span>
+            </div>
+          </div>
+
+          {/* Card 2: Green Card */}
+          <div 
+            style={{ 
+              width: "302px", 
+              height: "380px", 
+              borderTopRightRadius: "4px",
+              borderBottomRightRadius: "4px",
+              borderBottomLeftRadius: "4px",
+              borderTopLeftRadius: "0px",
+              background: "#1D493E",
+              position: "relative",
+              boxShadow: "0 10px 20px rgba(0,0,0,0.15)",
+              transform: "rotate(4deg)",
+              zIndex: 11,
+              marginLeft: "-35px",
+              flexShrink: 0,
+              overflow: "hidden"
+            }}
+          >
+            <svg viewBox="0 0 302 380" fill="none" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}>
+              <path d="M-20,320 Q90,260 90,140 Q90,50 180,90 Q220,110 240,40 Q250,10 280,-20" fill="none" stroke="#FF623E" strokeWidth="28" strokeLinecap="round" />
+              <path d="M240,40 Q260,110 290,180" fill="none" stroke="#FF623E" strokeWidth="28" strokeLinecap="round" />
+            </svg>
+            <span style={{ position: "absolute", top: "45px", left: "30px", fontFamily: "Fraunces, serif", fontStyle: "italic", fontWeight: 500, fontSize: "36px", color: "#FAF9F6", transform: "rotate(-5deg)" }}>explore</span>
+            <span style={{ position: "absolute", top: "140px", right: "25px", fontFamily: "Fraunces, serif", fontStyle: "italic", fontWeight: 500, fontSize: "36px", color: "#FAF9F6", transform: "rotate(-6deg)" }}>adventure</span>
+            <span style={{ position: "absolute", bottom: "100px", left: "35px", fontFamily: "Fraunces, serif", fontStyle: "italic", fontWeight: 500, fontSize: "36px", color: "#FAF9F6", transform: "rotate(-4deg)" }}>wild</span>
+            <span style={{ position: "absolute", bottom: "40px", right: "30px", fontFamily: "Fraunces, serif", fontStyle: "italic", fontWeight: 500, fontSize: "36px", color: "#FAF9F6", transform: "rotate(-6deg)" }}>journey</span>
+          </div>
+
+          {/* Card 3: Cream Camel Card */}
+          <div 
+            style={{ 
+              width: "302px", 
+              height: "380px", 
+              borderTopRightRadius: "4px",
+              borderBottomRightRadius: "4px",
+              borderBottomLeftRadius: "4px",
+              borderTopLeftRadius: "0px",
+              background: "#F4FBF4",
+              position: "relative",
+              boxShadow: "0 10px 20px rgba(0,0,0,0.15)",
+              transform: "rotate(-4deg)",
+              zIndex: 12,
+              marginLeft: "-35px",
+              flexShrink: 0,
+              padding: "24px",
+              boxSizing: "border-box",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              overflow: "hidden"
+            }}
+          >
+            <div>
+              <h3 style={{ fontFamily: "Fraunces, serif", fontWeight: 600, fontSize: "36px", lineHeight: "105%", color: "#1D493E", margin: 0, transform: "rotate(-2deg)" }}>
+                Humps down,<br />surfs up!
+              </h3>
+            </div>
+            <div style={{ position: "absolute", bottom: "-20px", right: "-10px", width: "240px", height: "240px" }}>
+              <svg viewBox="0 0 200 200" fill="none" style={{ width: "100%", height: "100%" }}>
+                {/* Ears */}
+                <path d="M65,75 C58,35 68,25 74,30 L85,75 Z" fill="#FF623E" />
+                <path d="M125,75 L136,30 C142,25 152,35 145,75 Z" fill="#FF623E" />
+
+                {/* Head */}
+                <path d="M70,70 C70,60 140,60 140,70 L145,150 C145,175 65,175 65,150 Z" fill="#FF623E" />
+
+                {/* Muzzle (white details) */}
+                <path d="M85,125 C85,115 125,115 125,125 L120,150 C120,158 90,158 90,150 Z" fill="#FF623E" />
+                <path d="M92,135 L118,135" stroke="#FFFFFF" strokeWidth="3" strokeLinecap="round" />
+                <path d="M105,142 L105,147 C100,147 98,149 98,149 M105,147 C110,147 112,149 112,149" stroke="#FFFFFF" strokeWidth="3" strokeLinecap="round" />
+
+                {/* Sunglasses */}
+                <g>
+                  {/* Left Frame */}
+                  <path d="M72,92 C72,82 96,80 98,92 C100,102 78,110 72,92 Z" fill="#1D493E" stroke="#FFFFFF" strokeWidth="5.5" strokeLinejoin="round" />
+                  <path d="M76,88 A 6 6 0 0 1 88,84" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" opacity="0.6" />
+
+                  {/* Right Frame */}
+                  <path d="M112,92 C114,80 138,82 138,92 C132,110 110,102 112,92 Z" fill="#1D493E" stroke="#FFFFFF" strokeWidth="5.5" strokeLinejoin="round" />
+                  <path d="M116,88 A 6 6 0 0 1 128,84" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" opacity="0.6" />
+
+                  {/* Bridge */}
+                  <path d="M94,92 L116,92" stroke="#FFFFFF" strokeWidth="5" strokeLinecap="round" />
+                </g>
+              </svg>
+            </div>
+          </div>
+
+          {/* Card 4: Yellow Card */}
+          <div 
+            style={{ 
+              width: "302px", 
+              height: "380px", 
+              borderTopRightRadius: "4px",
+              borderBottomRightRadius: "4px",
+              borderBottomLeftRadius: "4px",
+              borderTopLeftRadius: "0px",
+              background: "#FFFF80",
+              position: "relative",
+              boxShadow: "0 10px 20px rgba(0,0,0,0.15)",
+              transform: "rotate(3deg)",
+              zIndex: 13,
+              marginLeft: "-35px",
+              flexShrink: 0,
+              overflow: "hidden",
+              boxSizing: "border-box"
+            }}
+          >
+            <div style={{ position: "absolute", top: "45px", left: "20px", width: "120px", height: "120px", borderRadius: "50%", background: "#FF623E", transform: "rotate(-12deg)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <div style={{ width: "100px", height: "100px", borderRadius: "50%", border: "1px dashed #FFFF80", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+                <img src="/logo.png" alt="Mascot" style={{ width: "38px", height: "auto" }} />
+                <span style={{ fontSize: "7px", fontWeight: 800, fontFamily: "Faktum, sans-serif", color: "#FFFF80", marginTop: "4px" }}>Go Banjara</span>
+              </div>
+            </div>
+            <div style={{ position: "absolute", top: "30px", right: "15px", background: "#59D3F3", padding: "8px 12px", borderRadius: "4px", border: "3.5px solid #FFFFFF", transform: "rotate(6deg)", display: "flex", flexDirection: "column" }}>
+              <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 800, fontSize: "14px", color: "#FF623E", lineHeight: "1" }}>explore</span>
+              <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 800, fontSize: "14px", color: "#FFFFFF", lineHeight: "1" }}>MORE!</span>
+            </div>
+            <div style={{ position: "absolute", bottom: "20px", right: "15px", background: "#02B3A6", width: "115px", height: "170px", borderRadius: "6px", border: "3.5px solid #FFFFFF", transform: "rotate(4deg)", padding: "10px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+              <div style={{ display: "flex", justifyContent: "center", gap: "2px" }}><div className="w-6 h-2 bg-[#FFFF80] rounded-xs" /><div className="w-6 h-2 bg-[#FF623E] rounded-xs" /></div>
+              <span style={{ fontFamily: "Fraunces, serif", fontStyle: "italic", fontWeight: 600, fontSize: "20px", color: "#FFFF80", lineHeight: "1" }}>I travel to read.</span>
+            </div>
+            <div style={{ position: "absolute", bottom: "-10px", left: "15px", background: "#AE99FF", padding: "6px 20px 14px", borderRadius: "20px 20px 4px 4px", border: "3.5px solid #FFFFFF", transform: "rotate(-10deg) translateY(5px)" }}>
+              <span style={{ fontFamily: "Fraunces, serif", fontWeight: 700, fontSize: "16px", color: "#FFFFFF" }}>GOA</span>
+            </div>
+          </div>
+
+          {/* Card 5: Go Banjara Text Card (repeat) */}
+          <div 
+            style={{ 
+              width: "302px", 
+              height: "380px", 
+              borderTopRightRadius: "4px",
+              borderBottomRightRadius: "4px",
+              borderBottomLeftRadius: "4px",
+              borderTopLeftRadius: "0px",
+              background: "#1D493E",
+              position: "relative",
+              boxShadow: "0 10px 20px rgba(0,0,0,0.15)",
+              transform: "rotate(-4deg)",
+              zIndex: 14,
+              marginLeft: "-35px",
+              flexShrink: 0,
+              overflow: "hidden"
+            }}
+          >
+            <div style={{ position: "absolute", bottom: "35px", left: "20px", transform: "rotate(-4deg)" }}>
+              <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 800, fontSize: "48px", color: "#FFFF80", letterSpacing: "-1.5px", lineHeight: "1" }}>
+                go banjara
+              </span>
+            </div>
+          </div>
+
+          {/* Card 6: Green Card (repeat) */}
+          <div 
+            style={{ 
+              width: "302px", 
+              height: "380px", 
+              borderTopRightRadius: "4px",
+              borderBottomRightRadius: "4px",
+              borderBottomLeftRadius: "4px",
+              borderTopLeftRadius: "0px",
+              background: "#1D493E",
+              position: "relative",
+              boxShadow: "0 10px 20px rgba(0,0,0,0.15)",
+              transform: "rotate(2deg)",
+              zIndex: 15,
+              marginLeft: "-35px",
+              flexShrink: 0,
+              overflow: "hidden"
+            }}
+          >
+            <svg viewBox="0 0 302 380" fill="none" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}>
+              <path d="M-20,320 Q90,260 90,140 Q90,50 180,90 Q220,110 240,40 Q250,10 280,-20" fill="none" stroke="#FF623E" strokeWidth="28" strokeLinecap="round" />
+              <path d="M240,40 Q260,110 290,180" fill="none" stroke="#FF623E" strokeWidth="28" strokeLinecap="round" />
+            </svg>
+            <span style={{ position: "absolute", top: "45px", left: "30px", fontFamily: "Fraunces, serif", fontStyle: "italic", fontWeight: 500, fontSize: "36px", color: "#FAF9F6", transform: "rotate(-5deg)" }}>explore</span>
+            <span style={{ position: "absolute", top: "140px", right: "25px", fontFamily: "Fraunces, serif", fontStyle: "italic", fontWeight: 500, fontSize: "36px", color: "#FAF9F6", transform: "rotate(-6deg)" }}>adventure</span>
+            <span style={{ position: "absolute", bottom: "100px", left: "35px", fontFamily: "Fraunces, serif", fontStyle: "italic", fontWeight: 500, fontSize: "36px", color: "#FAF9F6", transform: "rotate(-4deg)" }}>wild</span>
+            <span style={{ position: "absolute", bottom: "40px", right: "30px", fontFamily: "Fraunces, serif", fontStyle: "italic", fontWeight: 500, fontSize: "36px", color: "#FAF9F6", transform: "rotate(-6deg)" }}>journey</span>
+          </div>
+
+          {/* Card 7: Cream Camel Card (repeat) */}
+          <div 
+            style={{ 
+              width: "302px", 
+              height: "380px", 
+              borderTopRightRadius: "4px",
+              borderBottomRightRadius: "4px",
+              borderBottomLeftRadius: "4px",
+              borderTopLeftRadius: "0px",
+              background: "#F4FBF4",
+              position: "relative",
+              boxShadow: "0 10px 20px rgba(0,0,0,0.15)",
+              transform: "rotate(-3deg)",
+              zIndex: 16,
+              marginLeft: "-35px",
+              flexShrink: 0,
+              padding: "24px",
+              boxSizing: "border-box",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              overflow: "hidden"
+            }}
+          >
+            <div>
+              <h3 style={{ fontFamily: "Fraunces, serif", fontWeight: 600, fontSize: "36px", lineHeight: "105%", color: "#1D493E", margin: 0, transform: "rotate(-2deg)" }}>
+                Humps down,<br />surfs up!
+              </h3>
+            </div>
+            <div style={{ position: "absolute", bottom: "-20px", right: "-10px", width: "240px", height: "240px" }}>
+              <svg viewBox="0 0 200 200" fill="none" style={{ width: "100%", height: "100%" }}>
+                {/* Ears */}
+                <path d="M65,75 C58,35 68,25 74,30 L85,75 Z" fill="#FF623E" />
+                <path d="M125,75 L136,30 C142,25 152,35 145,75 Z" fill="#FF623E" />
+
+                {/* Head */}
+                <path d="M70,70 C70,60 140,60 140,70 L145,150 C145,175 65,175 65,150 Z" fill="#FF623E" />
+
+                {/* Muzzle (white details) */}
+                <path d="M85,125 C85,115 125,115 125,125 L120,150 C120,158 90,158 90,150 Z" fill="#FF623E" />
+                <path d="M92,135 L118,135" stroke="#FFFFFF" strokeWidth="3" strokeLinecap="round" />
+                <path d="M105,142 L105,147 C100,147 98,149 98,149 M105,147 C110,147 112,149 112,149" stroke="#FFFFFF" strokeWidth="3" strokeLinecap="round" />
+
+                {/* Sunglasses */}
+                <g>
+                  {/* Left Frame */}
+                  <path d="M72,92 C72,82 96,80 98,92 C100,102 78,110 72,92 Z" fill="#1D493E" stroke="#FFFFFF" strokeWidth="5.5" strokeLinejoin="round" />
+                  <path d="M76,88 A 6 6 0 0 1 88,84" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" opacity="0.6" />
+
+                  {/* Right Frame */}
+                  <path d="M112,92 C114,80 138,82 138,92 C132,110 110,102 112,92 Z" fill="#1D493E" stroke="#FFFFFF" strokeWidth="5.5" strokeLinejoin="round" />
+                  <path d="M116,88 A 6 6 0 0 1 128,84" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" opacity="0.6" />
+
+                  {/* Bridge */}
+                  <path d="M94,92 L116,92" stroke="#FFFFFF" strokeWidth="5" strokeLinecap="round" />
+                </g>
+              </svg>
+            </div>
+          </div>
+
+          {/* Card 8: Yellow Card (repeat) */}
+          <div 
+            style={{ 
+              width: "302px", 
+              height: "380px", 
+              borderTopRightRadius: "4px",
+              borderBottomRightRadius: "4px",
+              borderBottomLeftRadius: "4px",
+              borderTopLeftRadius: "0px",
+              background: "#FFFF80",
+              position: "relative",
+              boxShadow: "0 10px 20px rgba(0,0,0,0.15)",
+              transform: "rotate(3deg)",
+              zIndex: 17,
+              marginLeft: "-35px",
+              flexShrink: 0,
+              overflow: "hidden",
+              boxSizing: "border-box"
+            }}
+          >
+            <div style={{ position: "absolute", top: "45px", left: "20px", width: "120px", height: "120px", borderRadius: "50%", background: "#FF623E", transform: "rotate(-12deg)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <div style={{ width: "100px", height: "100px", borderRadius: "50%", border: "1px dashed #FFFF80", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+                <img src="/logo.png" alt="Mascot" style={{ width: "38px", height: "auto" }} />
+                <span style={{ fontSize: "7px", fontWeight: 800, fontFamily: "Faktum, sans-serif", color: "#FFFF80", marginTop: "4px" }}>Go Banjara</span>
+              </div>
+            </div>
+            <div style={{ position: "absolute", top: "30px", right: "15px", background: "#59D3F3", padding: "8px 12px", borderRadius: "4px", border: "3.5px solid #FFFFFF", transform: "rotate(6deg)", display: "flex", flexDirection: "column" }}>
+              <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 800, fontSize: "14px", color: "#FF623E", lineHeight: "1" }}>explore</span>
+              <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 800, fontSize: "14px", color: "#FFFFFF", lineHeight: "1" }}>MORE!</span>
+            </div>
+            <div style={{ position: "absolute", bottom: "20px", right: "15px", background: "#02B3A6", width: "115px", height: "170px", borderRadius: "6px", border: "3.5px solid #FFFFFF", transform: "rotate(4deg)", padding: "10px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+              <div style={{ display: "flex", justifyContent: "center", gap: "2px" }}><div className="w-6 h-2 bg-[#FFFF80] rounded-xs" /><div className="w-6 h-2 bg-[#FF623E] rounded-xs" /></div>
+              <span style={{ fontFamily: "Fraunces, serif", fontStyle: "italic", fontWeight: 600, fontSize: "20px", color: "#FFFF80", lineHeight: "1" }}>I travel to read.</span>
+            </div>
+            <div style={{ position: "absolute", bottom: "-10px", left: "15px", background: "#AE99FF", padding: "6px 20px 14px", borderRadius: "20px 20px 4px 4px", border: "3.5px solid #FFFFFF", transform: "rotate(-10deg) translateY(5px)" }}>
+              <span style={{ fontFamily: "Fraunces, serif", fontWeight: 700, fontSize: "16px", color: "#FFFFFF" }}>GOA</span>
+            </div>
           </div>
         </div>
       </section>

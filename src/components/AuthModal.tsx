@@ -1275,22 +1275,24 @@ export const AuthModal: React.FC = () => {
             {/* Logo Brand Footer */}
             <div 
               style={{
+                width: '128px',
+                height: '28.3px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                gap: '6px',
+                gap: '8px',
               }}
             >
               <div 
                 className="rounded-full flex items-center justify-center shadow-xs"
                 style={{
-                  width: '20px',
-                  height: '20px',
+                  width: '28.3px',
+                  height: '28.3px',
                   background: '#FFFF80',
                   border: '1px solid rgba(29, 73, 62, 0.15)',
                 }}
               >
-                <BonjoMascot width={14} height={14} interactive={false} />
+                <BonjoMascot width={18} height={18} interactive={false} />
               </div>
               <span className="text-sm font-black text-[#1D493E] tracking-tight select-none">go banjāra</span>
             </div>
@@ -1300,7 +1302,7 @@ export const AuthModal: React.FC = () => {
                 height: '18px',
                 fontFamily: '"Faktum", "Outfit", sans-serif',
                 fontWeight: 500,
-                fontSize: '12px',
+                fontSize: '14px',
                 color: 'rgba(141, 141, 141, 1)',
                 textAlign: 'center',
                 margin: 0,

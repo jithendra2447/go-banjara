@@ -840,15 +840,64 @@ export default function AboutPage() {
         }}
         className="mx-auto w-full shrink-0"
       >
-        {/* Header */}
-        <div className="w-full text-left flex flex-col gap-2 max-w-[1280px] mx-auto">
-          <span className="text-[12px] font-semibold text-[#FF623E] tracking-wider uppercase">
+        {/* Header (Exact Figma specs) */}
+        <div style={{ width: "1280px", maxWidth: "100%", display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "12px" }} className="mx-auto">
+          {/* Orange Badge (195px x 26px) */}
+          <span 
+            style={{
+              width: "195px",
+              height: "26px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px",
+              background: "rgba(255, 98, 62, 1)",
+              color: "#FFFFFF",
+              fontFamily: "Faktum, sans-serif",
+              fontWeight: 600,
+              fontSize: "14px",
+              lineHeight: "14px",
+              letterSpacing: "1.2px",
+              borderRadius: "4px",
+              textTransform: "uppercase"
+            }}
+          >
             OUR JOURNEY TIMELINE
           </span>
-          <h2 className="text-3xl md:text-[40px] font-serif font-bold text-[#2B2B2B] leading-tight">
-            From a scribbled notebook to a <span className="text-[#FF623E]">travelling tribe</span>
+
+          {/* Main Title (1280px x 52px, Fraunces 600, 42px) */}
+          <h2 
+            style={{
+              width: "1280px",
+              maxWidth: "100%",
+              minHeight: "52px",
+              fontFamily: "Fraunces, serif",
+              fontWeight: 600,
+              fontSize: "42px",
+              lineHeight: "42px",
+              color: "rgba(43, 43, 43, 1)",
+              letterSpacing: "0px",
+              margin: 0
+            }}
+          >
+            From a scribbled notebook to a <span style={{ color: "#FF623E", fontFamily: "Fraunces, serif", fontWeight: 600, fontSize: "42px", lineHeight: "42px", letterSpacing: "0px" }}>travelling tribe</span>
           </h2>
-          <p className="text-[#2B2B2B]/70 font-sans text-base md:text-lg">
+
+          {/* Subtitle (1280px x 32px, Faktum 500, 24px, line-height 32px) */}
+          <p 
+            style={{
+              width: "1280px",
+              maxWidth: "100%",
+              minHeight: "32px",
+              fontFamily: "Faktum, sans-serif",
+              fontWeight: 500,
+              fontSize: "24px",
+              lineHeight: "32px",
+              color: "rgba(43, 43, 43, 1)",
+              letterSpacing: "0px",
+              margin: 0
+            }}
+          >
             Curated gear for the modern nomad. From durable journal covers to the stickers that tell your story
           </p>
         </div>

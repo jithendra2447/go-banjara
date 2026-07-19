@@ -318,7 +318,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 4. Overlapping Sticker Cards Strip Section (1440x556px spec) */}
+      {/* 4. Overlapping Sticker Cards Section (1440x556px spec) */}
       <section 
         style={{ 
           width: "100%", 
@@ -331,11 +331,11 @@ export default function AboutPage() {
         }}
         className="mx-auto w-full shrink-0"
       >
-        {/* Cards Container */}
+        {/* Cards Container (1709.57px x 418.33px, top: 251px) */}
         <div 
           style={{ 
-            width: "1709.57px", 
-            height: "418.33px", 
+            width: "1709.5738525390625px", 
+            height: "418.3321228027344px", 
             display: "flex", 
             alignItems: "center", 
             overflowX: "auto",
@@ -344,7 +344,8 @@ export default function AboutPage() {
             position: "absolute",
             top: "68px",
             left: "50%",
-            transform: "translateX(-50%)"
+            transform: "translateX(-50%)",
+            opacity: 1
           }}
           className="scrollbar-none"
         >
@@ -368,7 +369,7 @@ export default function AboutPage() {
           >
             <img 
               src="/card-1-full.png" 
-              alt="Go Banjara Traveler Card" 
+              alt="Go Banjara Traveler Card 1" 
               className="w-full h-full object-cover pointer-events-none select-none"
             />
           </div>
@@ -387,14 +388,14 @@ export default function AboutPage() {
               transform: "rotate(-3deg)",
               opacity: 1,
               zIndex: 11,
-              marginLeft: "-35px",
+              marginLeft: "-45px",
               flexShrink: 0,
               overflow: "hidden"
             }}
           >
             <img 
-              src="/card-green.png" 
-              alt="Explore Adventure Card" 
+              src="/card-2-full.png" 
+              alt="Explore Adventure Card 2" 
               className="w-full h-full object-cover pointer-events-none select-none"
             />
           </div>
@@ -413,14 +414,144 @@ export default function AboutPage() {
               transform: "rotate(-4deg)",
               opacity: 1,
               zIndex: 12,
-              marginLeft: "-35px",
+              marginLeft: "-45px",
               flexShrink: 0,
               overflow: "hidden"
             }}
           >
             <img 
-              src="/card-camel.png" 
-              alt="Humps Down Surf's Up Card" 
+              src="/card-3-full.png" 
+              alt="Humps Down Surf's Up Card 3" 
+              className="w-full h-full object-cover pointer-events-none select-none"
+            />
+          </div>
+
+          {/* Card 4: Yellow Stickers Card */}
+          <div 
+            style={{ 
+              width: "301.99999443948394px", 
+              height: "379.99999300332416px", 
+              borderTopRightRadius: "4px",
+              borderBottomRightRadius: "4px",
+              borderBottomLeftRadius: "4px",
+              borderTopLeftRadius: "0px",
+              position: "relative",
+              boxShadow: "0 10px 20px rgba(0,0,0,0.15)",
+              transform: "rotate(-3deg)",
+              opacity: 1,
+              zIndex: 13,
+              marginLeft: "-45px",
+              flexShrink: 0,
+              overflow: "hidden"
+            }}
+          >
+            <img 
+              src="/card-4-full.png" 
+              alt="Yellow Stickers Card 4" 
+              className="w-full h-full object-cover pointer-events-none select-none"
+            />
+          </div>
+
+          {/* Card 5: Traveler / Go Banjara Card (repeat) */}
+          <div 
+            style={{ 
+              width: "301.99999443948394px", 
+              height: "379.99999300332416px", 
+              borderTopRightRadius: "4px",
+              borderBottomRightRadius: "4px",
+              borderBottomLeftRadius: "4px",
+              borderTopLeftRadius: "0px",
+              position: "relative",
+              boxShadow: "0 10px 20px rgba(0,0,0,0.15)",
+              transform: "rotate(-4deg)",
+              opacity: 1,
+              zIndex: 14,
+              marginLeft: "-45px",
+              flexShrink: 0,
+              overflow: "hidden"
+            }}
+          >
+            <img 
+              src="/card-5-full.png" 
+              alt="Go Banjara Traveler Card 5" 
+              className="w-full h-full object-cover pointer-events-none select-none"
+            />
+          </div>
+
+          {/* Card 6: Green Explore/Adventure Card (repeat) */}
+          <div 
+            style={{ 
+              width: "301.99999443948394px", 
+              height: "379.99999300332416px", 
+              borderTopRightRadius: "4px",
+              borderBottomRightRadius: "4px",
+              borderBottomLeftRadius: "4px",
+              borderTopLeftRadius: "0px",
+              position: "relative",
+              boxShadow: "0 10px 20px rgba(0,0,0,0.15)",
+              transform: "rotate(-3deg)",
+              opacity: 1,
+              zIndex: 15,
+              marginLeft: "-45px",
+              flexShrink: 0,
+              overflow: "hidden"
+            }}
+          >
+            <img 
+              src="/card-6-full.png" 
+              alt="Explore Adventure Card 6" 
+              className="w-full h-full object-cover pointer-events-none select-none"
+            />
+          </div>
+
+          {/* Card 7: Cream Camel Card (repeat) */}
+          <div 
+            style={{ 
+              width: "301.99999443948394px", 
+              height: "379.99999300332416px", 
+              borderTopRightRadius: "4px",
+              borderBottomRightRadius: "4px",
+              borderBottomLeftRadius: "4px",
+              borderTopLeftRadius: "0px",
+              position: "relative",
+              boxShadow: "0 10px 20px rgba(0,0,0,0.15)",
+              transform: "rotate(-4deg)",
+              opacity: 1,
+              zIndex: 16,
+              marginLeft: "-45px",
+              flexShrink: 0,
+              overflow: "hidden"
+            }}
+          >
+            <img 
+              src="/card-7-full.png" 
+              alt="Humps Down Surf's Up Card 7" 
+              className="w-full h-full object-cover pointer-events-none select-none"
+            />
+          </div>
+
+          {/* Card 8: Yellow Stickers Card (repeat) */}
+          <div 
+            style={{ 
+              width: "301.99999443948394px", 
+              height: "379.99999300332416px", 
+              borderTopRightRadius: "4px",
+              borderBottomRightRadius: "4px",
+              borderBottomLeftRadius: "4px",
+              borderTopLeftRadius: "0px",
+              position: "relative",
+              boxShadow: "0 10px 20px rgba(0,0,0,0.15)",
+              transform: "rotate(-3deg)",
+              opacity: 1,
+              zIndex: 17,
+              marginLeft: "-45px",
+              flexShrink: 0,
+              overflow: "hidden"
+            }}
+          >
+            <img 
+              src="/card-8-full.png" 
+              alt="Yellow Stickers Card 8" 
               className="w-full h-full object-cover pointer-events-none select-none"
             />
           </div>

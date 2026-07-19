@@ -1533,18 +1533,18 @@ export default function AboutPage() {
           >
             {[
               {
-                title: "Explore - Never Stop Being Curious",
-                body: "We believe the best version of you lives just beyond your comfort zone. Every trip is a permission slip to discover something new",
+                title: "Curiosity — Explore Beyond Boundaries",
+                body: "We believe the best version of you lives just beyond your comfort zone. Every trip is an unwritten invitation to discover something new",
                 footer: "Brand Philosophy"
               },
               {
-                title: "Explore - Never Stop Being Curious",
-                body: "We believe the best version of you lives just beyond your comfort zone. Every trip is a permission slip to discover something new",
+                title: "Authenticity — Deep Native Roots",
+                body: "We skip commercial hotspots to honor local cultures, native guides, and true regional heritage across India's untamed wilderness",
                 footer: "Brand Philosophy"
               },
               {
-                title: "Explore - Never Stop Being Curious",
-                body: "We believe the best version of you lives just beyond your comfort zone. Every trip is a permission slip to discover something new",
+                title: "Craftsmanship — Built for the Long Road",
+                body: "From hand-stitched leather journals to weatherproof vinyl stickers, everything we create is crafted for lifetime durability and timeless quality",
                 footer: "Brand Philosophy"
               }
             ].map((card, idx) => (
@@ -1659,18 +1659,18 @@ export default function AboutPage() {
           >
             {[
               {
-                title: "Explore - Never Stop Being Curious",
-                body: "We believe the best version of you lives just beyond your comfort zone. Every trip is a permission slip to discover something new",
+                title: "Community — Traveling Together",
+                body: "We are a collective of writers, locals, and nomads. Over 70% of booking fees flow directly back into regional jobs and sustainability",
                 footer: "Brand Philosophy"
               },
               {
-                title: "Explore - Never Stop Being Curious",
-                body: "We believe the best version of you lives just beyond your comfort zone. Every trip is a permission slip to discover something new",
+                title: "Sustainability — Slower Footprints",
+                body: "We tread lightly on fragile ecosystems, protecting mountain trails and wildlife habitats so future wanderers experience untouched nature",
                 footer: "Brand Philosophy"
               },
               {
-                title: "Explore - Never Stop Being Curious",
-                body: "We believe the best version of you lives just beyond your comfort zone. Every trip is a permission slip to discover something new",
+                title: "Freedom — The Spirit of the Banjara",
+                body: "Travel isn't about ticking off bucket lists; it's about handing you back the wild, untamed spirit of freedom you almost forgot",
                 footer: "Brand Philosophy"
               }
             ].map((card, idx) => (
@@ -1874,45 +1874,45 @@ export default function AboutPage() {
               {[
                 {
                   id: 1,
-                  name: "Kiran Makwan",
-                  subtitle: "Verified Wanderer",
-                  text: "The quality of the journal is incredible. It feels like a piece of art that I can actually take on my treks. Bonjo's personality shines through the brand!",
-                  avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=256&auto=format&fit=crop"
+                  name: "Aarav Mehta",
+                  subtitle: "Kashmir Trekker",
+                  text: "The Zanskar expedition changed how I look at travel. Go Banjara didn't just organize a trek; they brought us into home-cooked meals with Himalayan villagers.",
+                  avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=256&auto=format&fit=crop"
                 },
                 {
                   id: 2,
-                  name: "Kiran Makwan",
-                  subtitle: "Verified Wanderer",
-                  text: "The quality of the journal is incredible. It feels like a piece of art that I can actually take on my treks. Bonjo's personality shines through the brand!",
-                  avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=256&auto=format&fit=crop"
-                },
-                {
-                  id: 3,
-                  name: "Kiran Makwan",
-                  subtitle: "Verified Wanderer",
-                  text: "The quality of the journal is incredible. It feels like a piece of art that I can actually take on my treks. Bonjo's personality shines through the brand!",
-                  avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=256&auto=format&fit=crop"
-                },
-                {
-                  id: 4,
-                  name: "Kiran Makwan",
-                  subtitle: "Verified Wanderer",
-                  text: "The quality of the journal is incredible. It feels like a piece of art that I can actually take on my treks. Bonjo's personality shines through the brand!",
+                  name: "Rohan Deshmukh",
+                  subtitle: "Solo Nomad & Journaler",
+                  text: "The quality of the journal is incredible. It feels like a piece of art that I take on every expedition. Bonjo's personality shines through the brand!",
                   avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=256&auto=format&fit=crop"
                 },
                 {
+                  id: 3,
+                  name: "Priya Sharma",
+                  subtitle: "Spiti Explorer",
+                  text: "Finding a travel community that respects remote trails and local ecosystems is rare. Go Banjara's team handled every mountain pass with absolute care.",
+                  avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=256&auto=format&fit=crop"
+                },
+                {
+                  id: 4,
+                  name: "Vikram Sengupta",
+                  subtitle: "Gear Enthusiast",
+                  text: "The enamel badges and brass compass gear are heirloom-grade. You can tell every sticker and cover was designed by people who actually live on the road.",
+                  avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=256&auto=format&fit=crop"
+                },
+                {
                   id: 5,
-                  name: "Kiran Makwan",
-                  subtitle: "Verified Wanderer",
-                  text: "The quality of the journal is incredible. It feels like a piece of art that I can actually take on my treks. Bonjo's personality shines through the brand!",
-                  avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=256&auto=format&fit=crop"
+                  name: "Ananya Iyer",
+                  subtitle: "Kerala Backwaters Nomad",
+                  text: "Sailing the quiet backwaters with local boatmen gave me back a quiet peace I hadn't felt in years. Unforgettable, authentic Indian travel.",
+                  avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=256&auto=format&fit=crop"
                 },
                 {
                   id: 6,
-                  name: "Kiran Makwan",
-                  subtitle: "Verified Wanderer",
-                  text: "The quality of the journal is incredible. It feels like a piece of art that I can actually take on my treks. Bonjo's personality shines through the brand!",
-                  avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=256&auto=format&fit=crop"
+                  name: "Devansh Verma",
+                  subtitle: "Highland Photographer",
+                  text: "No commercial tourist traps, no rushed itineraries. Just raw landscapes, campfire conversations, and a tribe of genuine wanderers.",
+                  avatar: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=256&auto=format&fit=crop"
                 }
               ].map((review) => (
                 <div 

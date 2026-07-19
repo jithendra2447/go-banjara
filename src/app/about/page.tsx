@@ -930,13 +930,15 @@ export default function AboutPage() {
           </p>
         </div>
 
-        {/* 4 Rows of 3-Column Grid (Interactive Scroll Animations) */}
-        <div style={{ gap: "32px" }} className="flex flex-col w-full max-w-[1280px] mx-auto mt-4">
+        {/* 4 Rows of 3-Column Grid (Sticky Card Stacking Effect like Kalinq) */}
+        <div style={{ gap: "40px" }} className="flex flex-col w-full max-w-[1280px] mx-auto mt-4 relative">
           
-          {/* Row 1 (data-row-index={0}) */}
+          {/* Row 1 (Sticky Stack 1) */}
           <div 
-            data-row-index={0}
             style={{
+              position: "sticky",
+              top: "120px",
+              zIndex: 10,
               width: "1280px",
               maxWidth: "100%",
               height: "450px",
@@ -944,20 +946,22 @@ export default function AboutPage() {
               flexDirection: "row",
               alignItems: "center",
               justifyContent: "space-between",
-              background: "rgba(255, 255, 255, 1)",
+              background: "#FFFFFF",
+              borderRadius: "16px",
+              border: "1px solid rgba(0, 0, 0, 0.08)",
+              boxShadow: "0 -10px 30px rgba(0, 0, 0, 0.05), 0 15px 35px rgba(0, 0, 0, 0.08)",
               boxSizing: "border-box",
-              opacity: visibleRowIndices.includes(0) ? 1 : 0.2,
-              transform: visibleRowIndices.includes(0) ? "translateY(0px) scale(1)" : "translateY(50px) scale(0.96)",
-              transition: "opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)"
+              marginBottom: "40px",
+              transition: "transform 0.4s ease, box-shadow 0.4s ease"
             }}
-            className="timeline-row-item w-full mx-auto"
+            className="w-full mx-auto p-6"
           >
             {/* Col 1: Card 1 (Hikers - 302px x 380px) */}
             <div 
               style={{ 
                 width: "302px", 
                 height: "380px", 
-                borderRadius: "4px",
+                borderRadius: "8px",
                 overflow: "hidden",
                 boxShadow: "0 10px 20px rgba(0,0,0,0.08)",
                 flexShrink: 0
@@ -1051,7 +1055,7 @@ export default function AboutPage() {
               style={{ 
                 width: "302px", 
                 height: "380px", 
-                borderRadius: "4px",
+                borderRadius: "8px",
                 overflow: "hidden",
                 boxShadow: "0 10px 20px rgba(0,0,0,0.08)",
                 flexShrink: 0
@@ -1061,10 +1065,12 @@ export default function AboutPage() {
             </div>
           </div>
 
-          {/* Row 2 (data-row-index={1}) */}
+          {/* Row 2 (Sticky Stack 2) */}
           <div 
-            data-row-index={1}
             style={{
+              position: "sticky",
+              top: "150px",
+              zIndex: 20,
               width: "1280px",
               maxWidth: "100%",
               height: "450px",
@@ -1072,20 +1078,22 @@ export default function AboutPage() {
               flexDirection: "row",
               alignItems: "center",
               justifyContent: "space-between",
-              background: "rgba(255, 255, 255, 1)",
+              background: "#FFFFFF",
+              borderRadius: "16px",
+              border: "1px solid rgba(0, 0, 0, 0.08)",
+              boxShadow: "0 -10px 30px rgba(0, 0, 0, 0.06), 0 15px 35px rgba(0, 0, 0, 0.09)",
               boxSizing: "border-box",
-              opacity: visibleRowIndices.includes(1) ? 1 : 0.2,
-              transform: visibleRowIndices.includes(1) ? "translateY(0px) scale(1)" : "translateY(50px) scale(0.96)",
-              transition: "opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)"
+              marginBottom: "40px",
+              transition: "transform 0.4s ease, box-shadow 0.4s ease"
             }}
-            className="timeline-row-item w-full mx-auto"
+            className="w-full mx-auto p-6"
           >
             {/* Col 1: Card 2 (Green Explore - 302px x 380px) */}
             <div 
               style={{ 
                 width: "302px", 
                 height: "380px", 
-                borderRadius: "4px",
+                borderRadius: "8px",
                 overflow: "hidden",
                 boxShadow: "0 10px 20px rgba(0,0,0,0.08)",
                 flexShrink: 0
@@ -1182,7 +1190,7 @@ export default function AboutPage() {
               style={{ 
                 width: "302px", 
                 height: "380px", 
-                borderRadius: "4px",
+                borderRadius: "8px",
                 overflow: "hidden",
                 boxShadow: "0 10px 20px rgba(0,0,0,0.08)",
                 flexShrink: 0
@@ -1192,10 +1200,12 @@ export default function AboutPage() {
             </div>
           </div>
 
-          {/* Row 3 (data-row-index={2}) */}
+          {/* Row 3 (Sticky Stack 3) */}
           <div 
-            data-row-index={2}
             style={{
+              position: "sticky",
+              top: "180px",
+              zIndex: 30,
               width: "1280px",
               maxWidth: "100%",
               height: "450px",
@@ -1203,20 +1213,22 @@ export default function AboutPage() {
               flexDirection: "row",
               alignItems: "center",
               justifyContent: "space-between",
-              background: "rgba(255, 255, 255, 1)",
+              background: "#FFFFFF",
+              borderRadius: "16px",
+              border: "1px solid rgba(0, 0, 0, 0.08)",
+              boxShadow: "0 -10px 30px rgba(0, 0, 0, 0.07), 0 15px 35px rgba(0, 0, 0, 0.1)",
               boxSizing: "border-box",
-              opacity: visibleRowIndices.includes(2) ? 1 : 0.2,
-              transform: visibleRowIndices.includes(2) ? "translateY(0px) scale(1)" : "translateY(50px) scale(0.96)",
-              transition: "opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)"
+              marginBottom: "40px",
+              transition: "transform 0.4s ease, box-shadow 0.4s ease"
             }}
-            className="timeline-row-item w-full mx-auto"
+            className="w-full mx-auto p-6"
           >
             {/* Col 1: Card 7 (Cream Camel - 302px x 380px) */}
             <div 
               style={{ 
                 width: "302px", 
                 height: "380px", 
-                borderRadius: "4px",
+                borderRadius: "8px",
                 overflow: "hidden",
                 boxShadow: "0 10px 20px rgba(0,0,0,0.08)",
                 flexShrink: 0
@@ -1313,7 +1325,7 @@ export default function AboutPage() {
               style={{ 
                 width: "302px", 
                 height: "380px", 
-                borderRadius: "4px",
+                borderRadius: "8px",
                 overflow: "hidden",
                 boxShadow: "0 10px 20px rgba(0,0,0,0.08)",
                 flexShrink: 0
@@ -1323,10 +1335,12 @@ export default function AboutPage() {
             </div>
           </div>
 
-          {/* Row 4 (data-row-index={3}) */}
+          {/* Row 4 (Sticky Stack 4) */}
           <div 
-            data-row-index={3}
             style={{
+              position: "sticky",
+              top: "210px",
+              zIndex: 40,
               width: "1280px",
               maxWidth: "100%",
               height: "450px",
@@ -1334,20 +1348,22 @@ export default function AboutPage() {
               flexDirection: "row",
               alignItems: "center",
               justifyContent: "space-between",
-              background: "rgba(255, 255, 255, 1)",
+              background: "#FFFFFF",
+              borderRadius: "16px",
+              border: "1px solid rgba(0, 0, 0, 0.08)",
+              boxShadow: "0 -10px 30px rgba(0, 0, 0, 0.08), 0 15px 35px rgba(0, 0, 0, 0.12)",
               boxSizing: "border-box",
-              opacity: visibleRowIndices.includes(3) ? 1 : 0.2,
-              transform: visibleRowIndices.includes(3) ? "translateY(0px) scale(1)" : "translateY(50px) scale(0.96)",
-              transition: "opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)"
+              marginBottom: "40px",
+              transition: "transform 0.4s ease, box-shadow 0.4s ease"
             }}
-            className="timeline-row-item w-full mx-auto"
+            className="w-full mx-auto p-6"
           >
             {/* Col 1: Card 8 (Yellow Stickers - 302px x 380px) */}
             <div 
               style={{ 
                 width: "302px", 
                 height: "380px", 
-                borderRadius: "4px",
+                borderRadius: "8px",
                 overflow: "hidden",
                 boxShadow: "0 10px 20px rgba(0,0,0,0.08)",
                 flexShrink: 0
@@ -1444,7 +1460,7 @@ export default function AboutPage() {
               style={{ 
                 width: "302px", 
                 height: "380px", 
-                borderRadius: "4px",
+                borderRadius: "8px",
                 overflow: "hidden",
                 boxShadow: "0 10px 20px rgba(0,0,0,0.08)",
                 flexShrink: 0

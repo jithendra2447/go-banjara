@@ -160,7 +160,7 @@ export default function ContactPage() {
             
             {/* Left Column: Direct Info Card & Mascot */}
             <div className="lg:col-span-5 space-y-8">
-              <div className="bg-[#F3FFEF] border border-[#1D493E]/10 rounded-[24px] p-8 space-y-8">
+              <div className="bg-white border border-[#1D493E]/15 rounded-[24px] p-8 space-y-8 shadow-2xs">
                 <div className="space-y-2">
                   <h3 className="font-serif font-bold text-2xl text-[#1D493E]">Direct Outposts</h3>
                   <p className="text-sm text-[#1D493E]/70 font-medium">Skip the form and reach us directly via basecamp waves.</p>
@@ -230,7 +230,7 @@ export default function ContactPage() {
             {/* Right Column: Multi-tab Interactive Inquiry Form */}
             <div className="lg:col-span-7 bg-white border-2 border-[#1D493E] rounded-[28px] shadow-[6px_6px_0px_0px_#1D493E] overflow-hidden">
               {/* Tab headers */}
-              <div className="flex border-b border-[#1D493E]/10 bg-gray-50/50">
+              <div className="flex border-b border-[#1D493E]/10 bg-white">
                 <button 
                   onClick={() => { setActiveTab('trip'); setFormSubmitted(false); }}
                   className={`flex-1 py-4 text-center text-xs font-mono font-black uppercase tracking-wider transition ${
@@ -277,7 +277,7 @@ export default function ContactPage() {
               <div className="p-8">
                 {formSubmitted ? (
                   <div className="py-12 text-center space-y-4">
-                    <div className="w-16 h-16 bg-[#F3FFEF] text-[#1D493E] rounded-full flex items-center justify-center mx-auto border border-[#1D493E]/20">
+                    <div className="w-16 h-16 bg-white text-[#1D493E] rounded-full flex items-center justify-center mx-auto border border-[#1D493E]/20">
                       <CheckCircle2 className="w-8 h-8" />
                     </div>
                     <h3 className="font-serif font-bold text-2xl text-[#1D493E]">Message Dispatched!</h3>
@@ -501,7 +501,7 @@ export default function ContactPage() {
         </section>
 
         {/* SECTION 3: BASECAMPS & HQ LOCATIONS MAP */}
-        <section className="w-full px-6 md:px-20 py-16 bg-[#F3FFEF]/40 border-t border-b border-[#1D493E]/5">
+        <section className="w-full px-6 md:px-20 py-16 bg-white border-t border-b border-[#1D493E]/10">
           <div className="max-w-[1280px] mx-auto space-y-12">
             <div className="text-center space-y-3">
               <span className="text-[10px] font-mono uppercase font-black tracking-widest text-[#FF623E] bg-[#FF623E]/10 px-2.5 py-0.5 rounded-[4px]">
@@ -723,7 +723,8 @@ export default function ContactPage() {
               paddingBottom: "24px",
               gap: "24px",
               borderRadius: "4px",
-              background: "rgba(255, 98, 62, 0.1)",
+              background: "rgba(255, 255, 255, 1)",
+              border: "1px solid rgba(141, 141, 141, 0.3)",
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",

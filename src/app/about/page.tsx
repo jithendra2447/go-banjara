@@ -9,6 +9,7 @@ import { TrustBanner } from '@/components/TrustBanner';
 
 export default function AboutPage() {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+  const [activeCard, setActiveCard] = useState<'mission' | 'vision'>('mission');
 
   const toggleFaq = (idx: number) => {
     setOpenFaqIndex(openFaqIndex === idx ? null : idx);
@@ -559,7 +560,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 5. Two Large Mission/Vision Cards Section (1440x783px spec) */}
+      {/* 5. Two Large Mission/Vision Cards Section (Interactive Animated Accordion Hover) */}
       <section 
         style={{ 
           marginTop: "0px", 
@@ -581,22 +582,26 @@ export default function AboutPage() {
           style={{ gap: "32px", width: "100%", maxWidth: "1280px", height: "699px" }}
           className="flex flex-col md:flex-row items-center justify-between mx-auto"
         >
-          {/* Card 1: OUR MISSION (843px x 699px) */}
+          {/* Card 1: OUR MISSION (Animates between 843px and 405px) */}
           <div 
             style={{ 
-              width: "843px", 
+              width: activeCard === 'mission' ? "843px" : "405px", 
               height: "699px", 
               borderRadius: "4px",
-              boxSizing: "border-box"
+              boxSizing: "border-box",
+              transition: "width 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s ease",
+              cursor: "pointer"
             }} 
-            className="relative overflow-hidden group shadow-md shrink-0 w-full md:w-[843px]"
+            onMouseEnter={() => setActiveCard('mission')}
+            className="relative overflow-hidden shadow-md shrink-0 w-full"
           >
             <img 
-              src="https://images.unsplash.com/photo-1533240332313-0db49b439ad3?auto=format&fit=crop&w=1400&q=80" 
-              alt="Hikers on snowy mountains" 
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-102"
+              src="/mission-vision-full.png" 
+              alt="Nomads on camels in snowy mountain valley" 
+              className="w-full h-full object-cover transition-transform duration-700 hover:scale-103"
             />
-            {/* Translucent Glass Text Box at bottom left (811px x 230px spec) */}
+
+            {/* Translucent Glass Text Box (Visible when activeCard === 'mission') */}
             <div 
               style={{
                 position: "absolute",
@@ -615,7 +620,11 @@ export default function AboutPage() {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "flex-start",
-                gap: "12px"
+                gap: "12px",
+                opacity: activeCard === 'mission' ? 1 : 0,
+                transform: activeCard === 'mission' ? "translateY(0)" : "translateY(12px)",
+                pointerEvents: activeCard === 'mission' ? "auto" : "none",
+                transition: "opacity 0.4s ease, transform 0.4s ease"
               }}
             >
               <span 
@@ -656,24 +665,137 @@ export default function AboutPage() {
                 We exist to bridge the gap between the life people are living and the adventures they are dreaming about. Every experience we curate, every product we build, and every story we tell is in service of one thing: helping people go further.
               </p>
             </div>
+
+            {/* Compact Badge (Visible when activeCard !== 'mission') */}
+            <div 
+              style={{
+                position: "absolute",
+                bottom: "24px",
+                left: "24px",
+                opacity: activeCard === 'mission' ? 0 : 1,
+                pointerEvents: activeCard === 'mission' ? "none" : "auto",
+                transition: "opacity 0.4s ease"
+              }}
+            >
+              <span 
+                style={{
+                  width: "117px",
+                  height: "26px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "10px",
+                  background: "#FF623E",
+                  color: "#FFFFFF",
+                  fontFamily: "Faktum, sans-serif",
+                  fontWeight: 600,
+                  fontSize: "14px",
+                  lineHeight: "14px",
+                  letterSpacing: "1.2px",
+                  borderRadius: "4px",
+                  textTransform: "uppercase"
+                }}
+              >
+                OUR MISSION
+              </span>
+            </div>
           </div>
 
-          {/* Card 2: OUR VISION (405px x 699px) */}
+          {/* Card 2: OUR VISION (Animates between 843px and 405px) */}
           <div 
             style={{ 
-              width: "405px",
+              width: activeCard === 'vision' ? "843px" : "405px",
               height: "699px", 
               borderRadius: "4px",
-              boxSizing: "border-box"
+              boxSizing: "border-box",
+              transition: "width 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s ease",
+              cursor: "pointer"
             }} 
-            className="relative overflow-hidden group shadow-md shrink-0 w-full md:w-[405px]"
+            onMouseEnter={() => setActiveCard('vision')}
+            className="relative overflow-hidden shadow-md shrink-0 w-full"
           >
             <img 
-              src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=80" 
+              src="/mission-vision-full.png" 
               alt="Nomads on camels in snowy mountain valley" 
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-102"
+              className="w-full h-full object-cover transition-transform duration-700 hover:scale-103"
             />
-            <div className="absolute bottom-6 left-6">
+
+            {/* Translucent Glass Text Box (Visible when activeCard === 'vision') */}
+            <div 
+              style={{
+                position: "absolute",
+                bottom: "16px",
+                left: "16px",
+                width: "811px",
+                maxWidth: "calc(100% - 32px)",
+                height: "230px",
+                background: "rgba(43, 43, 43, 0.55)",
+                backdropFilter: "blur(16px)",
+                WebkitBackdropFilter: "blur(16px)",
+                border: "1px solid rgba(255, 255, 255, 0.15)",
+                borderRadius: "4px",
+                padding: "12px",
+                boxSizing: "border-box",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+                gap: "12px",
+                opacity: activeCard === 'vision' ? 1 : 0,
+                transform: activeCard === 'vision' ? "translateY(0)" : "translateY(12px)",
+                pointerEvents: activeCard === 'vision' ? "auto" : "none",
+                transition: "opacity 0.4s ease, transform 0.4s ease"
+              }}
+            >
+              <span 
+                style={{
+                  width: "117px",
+                  height: "26px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "10px",
+                  background: "#FF623E",
+                  color: "#FFFFFF",
+                  fontFamily: "Faktum, sans-serif",
+                  fontWeight: 600,
+                  fontSize: "14px",
+                  lineHeight: "14px",
+                  letterSpacing: "1.2px",
+                  borderRadius: "4px",
+                  textTransform: "uppercase"
+                }}
+              >
+                OUR VISION
+              </span>
+              <p 
+                style={{
+                  width: "787px",
+                  maxWidth: "100%",
+                  height: "168px",
+                  fontFamily: "Faktum, sans-serif",
+                  fontWeight: 500,
+                  fontSize: "24px",
+                  lineHeight: "42px",
+                  color: "rgba(255, 255, 255, 1)",
+                  letterSpacing: "0px",
+                  margin: 0
+                }}
+              >
+                To build India's most loved travel & nomadic lifestyle brand, empowering travelers to explore without boundaries while respecting local culture, heritage, and nature.
+              </p>
+            </div>
+
+            {/* Compact Badge (Visible when activeCard !== 'vision') */}
+            <div 
+              style={{
+                position: "absolute",
+                bottom: "24px",
+                left: "24px",
+                opacity: activeCard === 'vision' ? 0 : 1,
+                pointerEvents: activeCard === 'vision' ? "none" : "auto",
+                transition: "opacity 0.4s ease"
+              }}
+            >
               <span 
                 style={{
                   width: "117px",

@@ -1002,7 +1002,7 @@ export default function ProductDetailsPage() {
         {activeTab === 'desc' ? (
           <div style={{
             width: "100%",
-            minHeight: "742px",
+            minHeight: "auto",
             display: "flex",
             flexDirection: "column",
             gap: "32px",
@@ -1110,7 +1110,7 @@ export default function ProductDetailsPage() {
 
           </div>
         ) : (
-          <div style={{ width: "100%", minHeight: "742px", paddingTop: "32px", boxSizing: "border-box" }}>
+          <div style={{ width: "100%", minHeight: "auto", paddingTop: "32px", boxSizing: "border-box" }}>
             <section style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
               <h2 style={{ fontFamily: "Fraunces, serif", fontWeight: 600, fontSize: "28px", color: "rgba(43, 43, 43, 1)", margin: 0 }}>Customer Reviews</h2>
               {[

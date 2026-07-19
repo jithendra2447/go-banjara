@@ -285,15 +285,35 @@ export const AuthModal: React.FC = () => {
           }}
         >
           
-          {/* Logo Brand Header */}
-          <div className="flex items-center gap-2 mb-8">
-            <div className="w-7 h-7 rounded-full bg-[#f3faf5] border border-[#1D493E]/15 flex items-center justify-center shadow-sm">
-              <BonjoMascot width={20} height={20} interactive={false} />
+          {/* Brand & Heading Header Block (Figma specs: width 492, height 110, gap 24px) */}
+          <div 
+            style={{
+              width: '492px',
+              height: '110px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '24px',
+              alignItems: 'center',
+              justifyContent: 'center',
+              margin: '0 auto',
+            }}
+          >
+            {/* Logo Brand Header */}
+            <div className="flex items-center gap-2">
+              <div className="w-7 h-7 rounded-full bg-[#f3faf5] border border-[#1D493E]/15 flex items-center justify-center shadow-sm">
+                <BonjoMascot width={20} height={20} interactive={false} />
+              </div>
+              <span className="text-base font-black text-[#1D493E] tracking-tight select-none">go banjāra</span>
             </div>
-            <span className="text-base font-black text-[#1D493E] tracking-tight select-none">go banjāra</span>
+
+            {/* Title / Description */}
+            <div className="text-center">
+              <h2 className="text-2xl font-black text-slate-900 leading-tight m-0">Create Account</h2>
+              <p className="text-xs text-slate-400 font-semibold mt-1 mb-0">Get started for a seamless shopping experience</p>
+            </div>
           </div>
 
-          <div className="space-y-6 flex-1 flex flex-col justify-center">
+          <div className="space-y-6 flex-1 flex flex-col justify-center mt-6">
             
             {/* Feedback Notifications */}
             {error && (
@@ -312,11 +332,6 @@ export const AuthModal: React.FC = () => {
             {/* A. WELCOME BACK / PHONE LOGIN VIEW */}
             {view === 'login' && (
               <div className="space-y-6">
-                <div>
-                  <h2 className="text-2xl font-black text-slate-900 leading-tight">Welcome back Kumar Sai!</h2>
-                  <p className="text-xs text-slate-400 font-semibold mt-1">Get started for a seamless shopping experience</p>
-                </div>
-
                 <form onSubmit={handleMobileRequest} className="space-y-4">
                   <div className="space-y-1.5">
                     <label className="block text-xs font-semibold text-slate-800">
@@ -664,34 +679,37 @@ export const AuthModal: React.FC = () => {
               className="w-full h-full object-cover" 
               style={{ borderRadius: '8px' }} 
               alt="Go Banjara Mascot Llama" 
+                     {/* Sticker 1: Top Left (Figma specs: 99.2x91, angle 15deg, top 0, left 32) */}
+            <div 
+              className="absolute rounded-full shadow-md flex items-center justify-center text-center select-none"
+              style={{
+                width: '99.19px',
+                height: '91px',
+                top: '0px',
+                left: '32px',
+                transform: 'rotate(15deg)',
+                backgroundImage: 'url("/sticker-nomad.png")',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                zIndex: 20,
+              }}
             />
-            
-            {/* Sticker 1: Top Left */}
-            <div 
-              className="absolute rounded-full bg-amber-400 border-2 border-white shadow-md flex items-center justify-center text-center p-1 text-[8px] font-black text-primary-dark uppercase leading-none"
-              style={{
-                width: '64px',
-                height: '64px',
-                top: '-16px',
-                left: '-16px',
-                transform: 'rotate(-12deg)',
-              }}
-            >
-              Banjāra Originals
-            </div>
 
-            {/* Sticker 2: Bottom Right */}
+            {/* Sticker 2: Bottom Right (Figma specs: 124x120, angle -0deg, top 469.12, left 509) */}
             <div 
-              className="absolute rounded-full bg-[#E05434] border-2 border-white shadow-md flex items-center justify-center text-center p-1 text-[8px] font-black text-white uppercase leading-none"
+              className="absolute rounded-full shadow-md flex items-center justify-center text-center select-none"
               style={{
-                width: '64px',
-                height: '64px',
-                bottom: '-16px',
-                right: '-16px',
-                transform: 'rotate(12deg)',
+                width: '124px',
+                height: '120px',
+                top: '469.12px',
+                left: '509px',
+                transform: 'rotate(0deg)',
+                backgroundImage: 'url("/sticker-dare.png")',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                zIndex: 20,
               }}
-            >
-              Dare to Travel
+            />
             </div>
           </div>
 

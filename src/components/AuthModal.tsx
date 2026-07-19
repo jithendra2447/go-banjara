@@ -1413,13 +1413,18 @@ export const AuthModal: React.FC = () => {
           >
             <h3 
               style={{
+                width: '588px',
+                height: '32px',
                 fontFamily: '"Faktum", "Outfit", sans-serif',
-                fontWeight: 600,
-                fontSize: '24px',
-                lineHeight: '100%',
+                fontWeight: 500,
+                fontSize: '20px',
+                lineHeight: '32px',
                 color: 'rgba(43, 43, 43, 1)',
                 margin: 0,
                 textAlign: 'center',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
               }}
             >
               Start Shopping Today

@@ -244,7 +244,7 @@ export const AuthModal: React.FC = () => {
 
   return (
     <div 
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto font-sans"
+      className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto font-sans"
       style={{
         background: 'rgba(255, 252, 248, 1)',
       }}
@@ -252,7 +252,10 @@ export const AuthModal: React.FC = () => {
       
       {/* Backdrop */}
       <div 
-        className="absolute inset-0 bg-[#0F172A]/50 backdrop-blur-sm transition-opacity duration-300 animate-[fadeIn_0.2s_ease-out]"
+        className="absolute inset-0 transition-opacity duration-300"
+        style={{
+          background: 'rgba(255, 252, 248, 1)',
+        }}
         onClick={!loading ? handleClose : undefined}
       />
 

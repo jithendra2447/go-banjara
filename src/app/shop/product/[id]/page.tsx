@@ -1297,6 +1297,103 @@ export default function ProductDetailsPage() {
           </div>
         </section>
 
+        {/* Newsletter Section */}
+        <section 
+          style={{
+            width: "100%",
+            paddingTop: "56px",
+            paddingBottom: "56px",
+            borderTop: "1px solid rgba(204, 204, 204, 0.54)",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "28px",
+            boxSizing: "border-box"
+          }}
+          className="!px-0 text-center"
+        >
+          {/* Text block */}
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
+            <h2
+              style={{
+                fontFamily: "Fraunces, serif",
+                fontWeight: 600,
+                fontSize: "36px",
+                lineHeight: "120%",
+                letterSpacing: "0px",
+                textAlign: "center",
+                color: "#2B2B2B",
+                maxWidth: "1000px",
+                margin: 0,
+              }}
+              className="text-[26px] md:text-[36px]"
+            >
+              The{" "}
+              <span style={{ color: "#FF5A36" }}>best adventures</span>{" "}
+              find their way to your inbox.
+            </h2>
+            <p
+              style={{
+                fontFamily: "Faktum, sans-serif",
+                fontWeight: 500,
+                fontSize: "18px",
+                lineHeight: "28px",
+                letterSpacing: "0px",
+                textAlign: "center",
+                color: "rgba(43, 43, 43, 0.8)",
+                maxWidth: "850px",
+                margin: 0,
+              }}
+              className="text-sm md:text-[18px]"
+            >
+              Hidden places, exclusive trip drops, curated gear, and stories from the road delivered before anyone else hears about them.
+            </p>
+          </div>
+
+          {/* Button */}
+          <Link
+            href="/travel"
+            style={{
+              width: "286px",
+              height: "55px",
+              paddingTop: "16px",
+              paddingBottom: "16px",
+              paddingLeft: "32px",
+              paddingRight: "32px",
+              borderRadius: "4px",
+              background: "rgba(29, 73, 62, 1)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "8px",
+              cursor: "pointer",
+              textDecoration: "none",
+              boxSizing: "border-box",
+            }}
+            className="hover:bg-[rgba(29,73,62,0.9)] transition-colors"
+          >
+            <span style={{
+              fontFamily: "Faktum, sans-serif",
+              fontWeight: 600,
+              fontSize: "16px",
+              lineHeight: "100%",
+              letterSpacing: "0px",
+              color: "#FFFFFF",
+            }}>
+              Reserve your tour now
+            </span>
+            <span style={{
+              fontFamily: "Faktum, sans-serif",
+              fontWeight: 600,
+              fontSize: "16px",
+              lineHeight: "100%",
+              color: "#FFFFFF",
+            }}>
+              ↗
+            </span>
+          </Link>
+        </section>
+
       </main>
     </div>
   );

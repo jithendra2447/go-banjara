@@ -1848,74 +1848,97 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                id: 1,
-                name: "Kiran Makwan",
-                subtitle: "Verified Wanderer",
-                text: "The quality of the journal is incredible. It feels like a piece of art that I can actually take on my treks. Bonjo's personality shines through the brand!",
-                avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=256&auto=format&fit=crop"
-              },
-              {
-                id: 2,
-                name: "Kiran Makwan",
-                subtitle: "Verified Wanderer",
-                text: "The quality of the journal is incredible. It feels like a piece of art that I can actually take on my treks. Bonjo's personality shines through the brand!",
-                avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=256&auto=format&fit=crop"
-              },
-              {
-                id: 3,
-                name: "Kiran Makwan",
-                subtitle: "Verified Wanderer",
-                text: "The quality of the journal is incredible. It feels like a piece of art that I can actually take on my treks. Bonjo's personality shines through the brand!",
-                avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=256&auto=format&fit=crop"
-              },
-              {
-                id: 4,
-                name: "Kiran Makwan",
-                subtitle: "Verified Wanderer",
-                text: "The quality of the journal is incredible. It feels like a piece of art that I can actually take on my treks. Bonjo's personality shines through the brand!",
-                avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=256&auto=format&fit=crop"
-              },
-              {
-                id: 5,
-                name: "Kiran Makwan",
-                subtitle: "Verified Wanderer",
-                text: "The quality of the journal is incredible. It feels like a piece of art that I can actually take on my treks. Bonjo's personality shines through the brand!",
-                avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=256&auto=format&fit=crop"
-              },
-              {
-                id: 6,
-                name: "Kiran Makwan",
-                subtitle: "Verified Wanderer",
-                text: "The quality of the journal is incredible. It feels like a piece of art that I can actually take on my treks. Bonjo's personality shines through the brand!",
-                avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=256&auto=format&fit=crop"
-              }
-            ].map((review) => (
-              <div 
-                key={review.id} 
-                className="bg-white border border-gray-200 p-8 rounded-[8px] flex flex-col justify-between space-y-6 shadow-2xs hover:shadow-md transition-shadow"
-              >
-                <div className="space-y-4">
-                  <div className="flex text-amber-400 text-base gap-1">
-                    {Array.from({ length: 5 }).map((_, s) => (
-                      <Star key={s} className="w-4 h-4 fill-amber-400 text-amber-400" />
-                    ))}
+          {/* Reviews Container Wrapper (1558px x 662.5px spec with Linear Gradient Overlay) */}
+          <div 
+            style={{
+              width: "1558px",
+              maxWidth: "100%",
+              minHeight: "662.5px",
+              position: "relative",
+              overflow: "hidden",
+              margin: "0 auto"
+            }}
+          >
+            {/* Linear Gradient Fade Overlay (linear-gradient(90.01deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 46.69%, #FFFFFF 93.38%)) */}
+            <div 
+              style={{
+                position: "absolute",
+                inset: 0,
+                pointerEvents: "none",
+                zIndex: 10,
+                background: "linear-gradient(90.01deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 46.69%, #FFFFFF 93.38%)"
+              }}
+            />
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 py-2">
+              {[
+                {
+                  id: 1,
+                  name: "Kiran Makwan",
+                  subtitle: "Verified Wanderer",
+                  text: "The quality of the journal is incredible. It feels like a piece of art that I can actually take on my treks. Bonjo's personality shines through the brand!",
+                  avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=256&auto=format&fit=crop"
+                },
+                {
+                  id: 2,
+                  name: "Kiran Makwan",
+                  subtitle: "Verified Wanderer",
+                  text: "The quality of the journal is incredible. It feels like a piece of art that I can actually take on my treks. Bonjo's personality shines through the brand!",
+                  avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=256&auto=format&fit=crop"
+                },
+                {
+                  id: 3,
+                  name: "Kiran Makwan",
+                  subtitle: "Verified Wanderer",
+                  text: "The quality of the journal is incredible. It feels like a piece of art that I can actually take on my treks. Bonjo's personality shines through the brand!",
+                  avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=256&auto=format&fit=crop"
+                },
+                {
+                  id: 4,
+                  name: "Kiran Makwan",
+                  subtitle: "Verified Wanderer",
+                  text: "The quality of the journal is incredible. It feels like a piece of art that I can actually take on my treks. Bonjo's personality shines through the brand!",
+                  avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=256&auto=format&fit=crop"
+                },
+                {
+                  id: 5,
+                  name: "Kiran Makwan",
+                  subtitle: "Verified Wanderer",
+                  text: "The quality of the journal is incredible. It feels like a piece of art that I can actually take on my treks. Bonjo's personality shines through the brand!",
+                  avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=256&auto=format&fit=crop"
+                },
+                {
+                  id: 6,
+                  name: "Kiran Makwan",
+                  subtitle: "Verified Wanderer",
+                  text: "The quality of the journal is incredible. It feels like a piece of art that I can actually take on my treks. Bonjo's personality shines through the brand!",
+                  avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=256&auto=format&fit=crop"
+                }
+              ].map((review) => (
+                <div 
+                  key={review.id} 
+                  className="bg-white border border-gray-200 p-8 rounded-[8px] flex flex-col justify-between space-y-6 shadow-2xs hover:shadow-md transition-shadow"
+                >
+                  <div className="space-y-4">
+                    <div className="flex text-amber-400 text-base gap-1">
+                      {Array.from({ length: 5 }).map((_, s) => (
+                        <Star key={s} className="w-4 h-4 fill-amber-400 text-amber-400" />
+                      ))}
+                    </div>
+                    <p className="text-gray-700 font-medium italic text-[16px] leading-relaxed">
+                      “{review.text}”
+                    </p>
                   </div>
-                  <p className="text-gray-700 font-medium italic text-[16px] leading-relaxed">
-                    “{review.text}”
-                  </p>
-                </div>
-                <div className="flex items-center gap-3.5 pt-4 border-t border-gray-100">
-                  <img src={review.avatar} alt={review.name} className="w-11 h-11 rounded-full object-cover shrink-0" />
-                  <div>
-                    <h4 className="text-[16px] font-bold text-gray-800 leading-none">{review.name}</h4>
-                    <p className="text-xs text-gray-400 font-medium mt-1">{review.subtitle}</p>
+                  <div className="flex items-center gap-3.5 pt-4 border-t border-gray-100">
+                    <img src={review.avatar} alt={review.name} className="w-11 h-11 rounded-full object-cover shrink-0" />
+                    <div>
+                      <h4 className="text-[16px] font-bold text-gray-800 leading-none">{review.name}</h4>
+                      <p className="text-xs text-gray-400 font-medium mt-1">{review.subtitle}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>

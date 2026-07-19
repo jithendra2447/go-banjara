@@ -360,32 +360,63 @@ export default function ShopPage() {
               }}
             />
 
-            {/* Continuous Marquee Track (Pauses on Hover) */}
-            <div className="flex gap-8 py-4 w-max animate-marquee hover:[animation-play-state:paused]">
-              {[...TESTIMONIALS, ...TESTIMONIALS].map((test, idx) => (
-                <div 
-                  key={idx} 
-                  className="bg-white border border-gray-200 p-8 rounded-2xl flex flex-col justify-between space-y-5 shadow-xs hover:shadow-xl hover:border-[#FF5B37] hover:scale-105 transition-all duration-300 w-[380px] shrink-0 cursor-pointer"
-                >
-                  <div className="space-y-4">
-                    <div className="flex text-amber-400 text-base gap-1">
-                      {Array.from({ length: test.rating }).map((_, s) => (
-                        <Star key={s} className="w-4 h-4 fill-amber-400 text-amber-400" />
-                      ))}
+            {/* 2 Stacked Marquee Rows (Row 1 Left, Row 2 Right, Pauses on Hover) */}
+            <div className="flex flex-col gap-6 py-2">
+              {/* Row 1 (Left Scrolling) */}
+              <div className="flex gap-8 py-2 w-max animate-marquee hover:[animation-play-state:paused]">
+                {[...TESTIMONIALS, ...TESTIMONIALS].map((test, idx) => (
+                  <div 
+                    key={idx} 
+                    className="bg-white border border-gray-200 p-6 rounded-2xl flex flex-col justify-between space-y-4 shadow-xs hover:shadow-xl hover:border-[#FF5B37] hover:scale-105 transition-all duration-300 w-[380px] shrink-0 cursor-pointer"
+                  >
+                    <div className="space-y-3">
+                      <div className="flex text-amber-400 text-sm gap-1">
+                        {Array.from({ length: test.rating }).map((_, s) => (
+                          <Star key={s} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                        ))}
+                      </div>
+                      <p className="text-gray-700 font-medium italic text-[15px] leading-relaxed">
+                        {test.quote}
+                      </p>
                     </div>
-                    <p className="text-gray-700 font-medium italic text-[15px] leading-relaxed">
-                      {test.quote}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-3.5 pt-4 border-t border-gray-100">
-                    <img src={test.avatar} alt={test.author} className="w-11 h-11 rounded-full object-cover shrink-0" />
-                    <div>
-                      <h4 className="text-[15px] font-bold text-gray-800 leading-none">{test.author}</h4>
-                      <p className="text-xs text-[#1D493E] font-semibold mt-1">{test.role}</p>
+                    <div className="flex items-center gap-3 pt-3 border-t border-gray-100">
+                      <img src={test.avatar} alt={test.author} className="w-10 h-10 rounded-full object-cover shrink-0" />
+                      <div>
+                        <h4 className="text-[15px] font-bold text-gray-800 leading-none">{test.author}</h4>
+                        <p className="text-xs text-[#1D493E] font-semibold mt-0.5">{test.role}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
+
+              {/* Row 2 (Right Reverse Scrolling) */}
+              <div className="flex gap-8 py-2 w-max animate-marquee-reverse hover:[animation-play-state:paused]">
+                {[...TESTIMONIALS.slice().reverse(), ...TESTIMONIALS.slice().reverse()].map((test, idx) => (
+                  <div 
+                    key={idx} 
+                    className="bg-white border border-gray-200 p-6 rounded-2xl flex flex-col justify-between space-y-4 shadow-xs hover:shadow-xl hover:border-[#FF5B37] hover:scale-105 transition-all duration-300 w-[380px] shrink-0 cursor-pointer"
+                  >
+                    <div className="space-y-3">
+                      <div className="flex text-amber-400 text-sm gap-1">
+                        {Array.from({ length: test.rating }).map((_, s) => (
+                          <Star key={s} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                        ))}
+                      </div>
+                      <p className="text-gray-700 font-medium italic text-[15px] leading-relaxed">
+                        {test.quote}
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-3 pt-3 border-t border-gray-100">
+                      <img src={test.avatar} alt={test.author} className="w-10 h-10 rounded-full object-cover shrink-0" />
+                      <div>
+                        <h4 className="text-[15px] font-bold text-gray-800 leading-none">{test.author}</h4>
+                        <p className="text-xs text-[#1D493E] font-semibold mt-0.5">{test.role}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>

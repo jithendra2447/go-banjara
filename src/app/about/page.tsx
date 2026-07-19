@@ -1870,118 +1870,235 @@ export default function AboutPage() {
               }}
             />
 
-            {/* Infinite Continuous Scrolling Track (Pauses on Hover) */}
-            <div className="flex gap-8 py-4 w-max animate-marquee hover:[animation-play-state:paused]">
-              {[
-                {
-                  id: 1,
-                  name: "Aarav Mehta",
-                  subtitle: "Kashmir Trekker",
-                  text: "The Zanskar expedition changed how I look at travel. Go Banjara didn't just organize a trek; they brought us into home-cooked meals with Himalayan villagers.",
-                  avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=256&auto=format&fit=crop"
-                },
-                {
-                  id: 2,
-                  name: "Rohan Deshmukh",
-                  subtitle: "Solo Nomad & Journaler",
-                  text: "The quality of the journal is incredible. It feels like a piece of art that I take on every expedition. Bonjo's personality shines through the brand!",
-                  avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=256&auto=format&fit=crop"
-                },
-                {
-                  id: 3,
-                  name: "Priya Sharma",
-                  subtitle: "Spiti Explorer",
-                  text: "Finding a travel community that respects remote trails and local ecosystems is rare. Go Banjara's team handled every mountain pass with absolute care.",
-                  avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=256&auto=format&fit=crop"
-                },
-                {
-                  id: 4,
-                  name: "Vikram Sengupta",
-                  subtitle: "Gear Enthusiast",
-                  text: "The enamel badges and brass compass gear are heirloom-grade. You can tell every sticker and cover was designed by people who actually live on the road.",
-                  avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=256&auto=format&fit=crop"
-                },
-                {
-                  id: 5,
-                  name: "Ananya Iyer",
-                  subtitle: "Kerala Backwaters Nomad",
-                  text: "Sailing the quiet backwaters with local boatmen gave me back a quiet peace I hadn't felt in years. Unforgettable, authentic Indian travel.",
-                  avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=256&auto=format&fit=crop"
-                },
-                {
-                  id: 6,
-                  name: "Devansh Verma",
-                  subtitle: "Highland Photographer",
-                  text: "No commercial tourist traps, no rushed itineraries. Just raw landscapes, campfire conversations, and a tribe of genuine wanderers.",
-                  avatar: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=256&auto=format&fit=crop"
-                },
-                // Duplicated for infinite smooth looping
-                {
-                  id: 7,
-                  name: "Aarav Mehta",
-                  subtitle: "Kashmir Trekker",
-                  text: "The Zanskar expedition changed how I look at travel. Go Banjara didn't just organize a trek; they brought us into home-cooked meals with Himalayan villagers.",
-                  avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=256&auto=format&fit=crop"
-                },
-                {
-                  id: 8,
-                  name: "Rohan Deshmukh",
-                  subtitle: "Solo Nomad & Journaler",
-                  text: "The quality of the journal is incredible. It feels like a piece of art that I take on every expedition. Bonjo's personality shines through the brand!",
-                  avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=256&auto=format&fit=crop"
-                },
-                {
-                  id: 9,
-                  name: "Priya Sharma",
-                  subtitle: "Spiti Explorer",
-                  text: "Finding a travel community that respects remote trails and local ecosystems is rare. Go Banjara's team handled every mountain pass with absolute care.",
-                  avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=256&auto=format&fit=crop"
-                },
-                {
-                  id: 10,
-                  name: "Vikram Sengupta",
-                  subtitle: "Gear Enthusiast",
-                  text: "The enamel badges and brass compass gear are heirloom-grade. You can tell every sticker and cover was designed by people who actually live on the road.",
-                  avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=256&auto=format&fit=crop"
-                },
-                {
-                  id: 11,
-                  name: "Ananya Iyer",
-                  subtitle: "Kerala Backwaters Nomad",
-                  text: "Sailing the quiet backwaters with local boatmen gave me back a quiet peace I hadn't felt in years. Unforgettable, authentic Indian travel.",
-                  avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=256&auto=format&fit=crop"
-                },
-                {
-                  id: 12,
-                  name: "Devansh Verma",
-                  subtitle: "Highland Photographer",
-                  text: "No commercial tourist traps, no rushed itineraries. Just raw landscapes, campfire conversations, and a tribe of genuine wanderers.",
-                  avatar: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=256&auto=format&fit=crop"
-                }
-              ].map((review, idx) => (
-                <div 
-                  key={idx} 
-                  className="bg-white border border-gray-200 p-8 rounded-[8px] flex flex-col justify-between space-y-6 shadow-2xs hover:shadow-xl hover:border-[#FF623E] hover:scale-105 transition-all duration-300 w-[380px] shrink-0 cursor-pointer"
-                >
-                  <div className="space-y-4">
-                    <div className="flex text-amber-400 text-base gap-1">
-                      {Array.from({ length: 5 }).map((_, s) => (
-                        <Star key={s} className="w-4 h-4 fill-amber-400 text-amber-400" />
-                      ))}
+            {/* 2 Stacked Marquee Rows (Row 1 Left, Row 2 Right) */}
+            <div className="flex flex-col gap-6 py-2">
+              {/* Row 1 (Left Scrolling, Pauses on Hover) */}
+              <div className="flex gap-8 py-2 w-max animate-marquee hover:[animation-play-state:paused]">
+                {[
+                  {
+                    id: 1,
+                    name: "Aarav Mehta",
+                    subtitle: "Kashmir Trekker",
+                    text: "The Zanskar expedition changed how I look at travel. Go Banjara didn't just organize a trek; they brought us into home-cooked meals with Himalayan villagers.",
+                    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=256&auto=format&fit=crop"
+                  },
+                  {
+                    id: 2,
+                    name: "Rohan Deshmukh",
+                    subtitle: "Solo Nomad & Journaler",
+                    text: "The quality of the journal is incredible. It feels like a piece of art that I take on every expedition. Bonjo's personality shines through the brand!",
+                    avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=256&auto=format&fit=crop"
+                  },
+                  {
+                    id: 3,
+                    name: "Priya Sharma",
+                    subtitle: "Spiti Explorer",
+                    text: "Finding a travel community that respects remote trails and local ecosystems is rare. Go Banjara's team handled every mountain pass with absolute care.",
+                    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=256&auto=format&fit=crop"
+                  },
+                  {
+                    id: 4,
+                    name: "Vikram Sengupta",
+                    subtitle: "Gear Enthusiast",
+                    text: "The enamel badges and brass compass gear are heirloom-grade. You can tell every sticker and cover was designed by people who actually live on the road.",
+                    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=256&auto=format&fit=crop"
+                  },
+                  {
+                    id: 5,
+                    name: "Ananya Iyer",
+                    subtitle: "Kerala Backwaters Nomad",
+                    text: "Sailing the quiet backwaters with local boatmen gave me back a quiet peace I hadn't felt in years. Unforgettable, authentic Indian travel.",
+                    avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=256&auto=format&fit=crop"
+                  },
+                  {
+                    id: 6,
+                    name: "Devansh Verma",
+                    subtitle: "Highland Photographer",
+                    text: "No commercial tourist traps, no rushed itineraries. Just raw landscapes, campfire conversations, and a tribe of genuine wanderers.",
+                    avatar: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=256&auto=format&fit=crop"
+                  },
+                  // Duplicated for infinite loop
+                  {
+                    id: 7,
+                    name: "Aarav Mehta",
+                    subtitle: "Kashmir Trekker",
+                    text: "The Zanskar expedition changed how I look at travel. Go Banjara didn't just organize a trek; they brought us into home-cooked meals with Himalayan villagers.",
+                    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=256&auto=format&fit=crop"
+                  },
+                  {
+                    id: 8,
+                    name: "Rohan Deshmukh",
+                    subtitle: "Solo Nomad & Journaler",
+                    text: "The quality of the journal is incredible. It feels like a piece of art that I take on every expedition. Bonjo's personality shines through the brand!",
+                    avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=256&auto=format&fit=crop"
+                  },
+                  {
+                    id: 9,
+                    name: "Priya Sharma",
+                    subtitle: "Spiti Explorer",
+                    text: "Finding a travel community that respects remote trails and local ecosystems is rare. Go Banjara's team handled every mountain pass with absolute care.",
+                    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=256&auto=format&fit=crop"
+                  },
+                  {
+                    id: 10,
+                    name: "Vikram Sengupta",
+                    subtitle: "Gear Enthusiast",
+                    text: "The enamel badges and brass compass gear are heirloom-grade. You can tell every sticker and cover was designed by people who actually live on the road.",
+                    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=256&auto=format&fit=crop"
+                  },
+                  {
+                    id: 11,
+                    name: "Ananya Iyer",
+                    subtitle: "Kerala Backwaters Nomad",
+                    text: "Sailing the quiet backwaters with local boatmen gave me back a quiet peace I hadn't felt in years. Unforgettable, authentic Indian travel.",
+                    avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=256&auto=format&fit=crop"
+                  },
+                  {
+                    id: 12,
+                    name: "Devansh Verma",
+                    subtitle: "Highland Photographer",
+                    text: "No commercial tourist traps, no rushed itineraries. Just raw landscapes, campfire conversations, and a tribe of genuine wanderers.",
+                    avatar: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=256&auto=format&fit=crop"
+                  }
+                ].map((review, idx) => (
+                  <div 
+                    key={idx} 
+                    className="bg-white border border-gray-200 p-6 rounded-[8px] flex flex-col justify-between space-y-4 shadow-2xs hover:shadow-xl hover:border-[#FF623E] hover:scale-105 transition-all duration-300 w-[380px] shrink-0 cursor-pointer"
+                  >
+                    <div className="space-y-3">
+                      <div className="flex text-amber-400 text-sm gap-1">
+                        {Array.from({ length: 5 }).map((_, s) => (
+                          <Star key={s} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                        ))}
+                      </div>
+                      <p className="text-gray-700 font-medium italic text-[15px] leading-relaxed">
+                        “{review.text}”
+                      </p>
                     </div>
-                    <p className="text-gray-700 font-medium italic text-[16px] leading-relaxed">
-                      “{review.text}”
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-3.5 pt-4 border-t border-gray-100">
-                    <img src={review.avatar} alt={review.name} className="w-11 h-11 rounded-full object-cover shrink-0" />
-                    <div>
-                      <h4 className="text-[16px] font-bold text-gray-800 leading-none">{review.name}</h4>
-                      <p className="text-xs text-gray-400 font-medium mt-1">{review.subtitle}</p>
+                    <div className="flex items-center gap-3 pt-3 border-t border-gray-100">
+                      <img src={review.avatar} alt={review.name} className="w-10 h-10 rounded-full object-cover shrink-0" />
+                      <div>
+                        <h4 className="text-[15px] font-bold text-gray-800 leading-none">{review.name}</h4>
+                        <p className="text-xs text-gray-400 font-medium mt-0.5">{review.subtitle}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
+
+              {/* Row 2 (Right Reverse Scrolling, Pauses on Hover) */}
+              <div className="flex gap-8 py-2 w-max animate-marquee-reverse hover:[animation-play-state:paused]">
+                {[
+                  {
+                    id: 6,
+                    name: "Devansh Verma",
+                    subtitle: "Highland Photographer",
+                    text: "No commercial tourist traps, no rushed itineraries. Just raw landscapes, campfire conversations, and a tribe of genuine wanderers.",
+                    avatar: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=256&auto=format&fit=crop"
+                  },
+                  {
+                    id: 5,
+                    name: "Ananya Iyer",
+                    subtitle: "Kerala Backwaters Nomad",
+                    text: "Sailing the quiet backwaters with local boatmen gave me back a quiet peace I hadn't felt in years. Unforgettable, authentic Indian travel.",
+                    avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=256&auto=format&fit=crop"
+                  },
+                  {
+                    id: 4,
+                    name: "Vikram Sengupta",
+                    subtitle: "Gear Enthusiast",
+                    text: "The enamel badges and brass compass gear are heirloom-grade. You can tell every sticker and cover was designed by people who actually live on the road.",
+                    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=256&auto=format&fit=crop"
+                  },
+                  {
+                    id: 3,
+                    name: "Priya Sharma",
+                    subtitle: "Spiti Explorer",
+                    text: "Finding a travel community that respects remote trails and local ecosystems is rare. Go Banjara's team handled every mountain pass with absolute care.",
+                    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=256&auto=format&fit=crop"
+                  },
+                  {
+                    id: 2,
+                    name: "Rohan Deshmukh",
+                    subtitle: "Solo Nomad & Journaler",
+                    text: "The quality of the journal is incredible. It feels like a piece of art that I take on every expedition. Bonjo's personality shines through the brand!",
+                    avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=256&auto=format&fit=crop"
+                  },
+                  {
+                    id: 1,
+                    name: "Aarav Mehta",
+                    subtitle: "Kashmir Trekker",
+                    text: "The Zanskar expedition changed how I look at travel. Go Banjara didn't just organize a trek; they brought us into home-cooked meals with Himalayan villagers.",
+                    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=256&auto=format&fit=crop"
+                  },
+                  // Duplicated for infinite loop
+                  {
+                    id: 12,
+                    name: "Devansh Verma",
+                    subtitle: "Highland Photographer",
+                    text: "No commercial tourist traps, no rushed itineraries. Just raw landscapes, campfire conversations, and a tribe of genuine wanderers.",
+                    avatar: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=256&auto=format&fit=crop"
+                  },
+                  {
+                    id: 11,
+                    name: "Ananya Iyer",
+                    subtitle: "Kerala Backwaters Nomad",
+                    text: "Sailing the quiet backwaters with local boatmen gave me back a quiet peace I hadn't felt in years. Unforgettable, authentic Indian travel.",
+                    avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=256&auto=format&fit=crop"
+                  },
+                  {
+                    id: 10,
+                    name: "Vikram Sengupta",
+                    subtitle: "Gear Enthusiast",
+                    text: "The enamel badges and brass compass gear are heirloom-grade. You can tell every sticker and cover was designed by people who actually live on the road.",
+                    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=256&auto=format&fit=crop"
+                  },
+                  {
+                    id: 9,
+                    name: "Priya Sharma",
+                    subtitle: "Spiti Explorer",
+                    text: "Finding a travel community that respects remote trails and local ecosystems is rare. Go Banjara's team handled every mountain pass with absolute care.",
+                    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=256&auto=format&fit=crop"
+                  },
+                  {
+                    id: 8,
+                    name: "Rohan Deshmukh",
+                    subtitle: "Solo Nomad & Journaler",
+                    text: "The quality of the journal is incredible. It feels like a piece of art that I take on every expedition. Bonjo's personality shines through the brand!",
+                    avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=256&auto=format&fit=crop"
+                  },
+                  {
+                    id: 7,
+                    name: "Aarav Mehta",
+                    subtitle: "Kashmir Trekker",
+                    text: "The Zanskar expedition changed how I look at travel. Go Banjara didn't just organize a trek; they brought us into home-cooked meals with Himalayan villagers.",
+                    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=256&auto=format&fit=crop"
+                  }
+                ].map((review, idx) => (
+                  <div 
+                    key={idx} 
+                    className="bg-white border border-gray-200 p-6 rounded-[8px] flex flex-col justify-between space-y-4 shadow-2xs hover:shadow-xl hover:border-[#FF623E] hover:scale-105 transition-all duration-300 w-[380px] shrink-0 cursor-pointer"
+                  >
+                    <div className="space-y-3">
+                      <div className="flex text-amber-400 text-sm gap-1">
+                        {Array.from({ length: 5 }).map((_, s) => (
+                          <Star key={s} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                        ))}
+                      </div>
+                      <p className="text-gray-700 font-medium italic text-[15px] leading-relaxed">
+                        “{review.text}”
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-3 pt-3 border-t border-gray-100">
+                      <img src={review.avatar} alt={review.name} className="w-10 h-10 rounded-full object-cover shrink-0" />
+                      <div>
+                        <h4 className="text-[15px] font-bold text-gray-800 leading-none">{review.name}</h4>
+                        <p className="text-xs text-gray-400 font-medium mt-0.5">{review.subtitle}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>

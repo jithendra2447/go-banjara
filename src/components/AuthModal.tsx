@@ -309,9 +309,9 @@ export const AuthModal: React.FC = () => {
           </button>
         )}
 
-        {/* LEFT COLUMN: AUTH FORMS (Figma specs: 556x802, border 1px rgba(204,204,204,0.54), bg white, padding 32px, gap 42px) */}
+        {/* LEFT COLUMN: AUTH FORMS (Figma specs: 556x802/1163, border 1px rgba(204,204,204,0.54), bg white, padding 32px, gap 42px) */}
         <div 
-          className="w-full md:w-[556px] md:h-[802px] flex flex-col justify-between"
+          className="w-full md:w-[556px] flex flex-col justify-between"
           style={{
             background: 'rgba(255, 255, 255, 1)',
             border: '1px solid rgba(204, 204, 204, 0.54)',
@@ -319,6 +319,8 @@ export const AuthModal: React.FC = () => {
             padding: '32px',
             boxSizing: 'border-box',
             gap: '42px',
+            height: view === 'signup' ? '1163px' : '802px',
+            paddingBottom: view === 'signup' ? '62px' : '32px',
           }}
         >
           

@@ -294,7 +294,7 @@ export default function ProductDetailsPage() {
   };
 
   return (
-    <div className="bg-white min-h-screen pb-24 flex flex-col items-center font-sans text-[#2B2B2B]">
+    <div className="bg-white min-h-screen pb-12 flex flex-col items-center font-sans text-[#2B2B2B]">
       {/* Page Header (Width: 1440px, dynamic height, Background: white) */}
       <header 
         style={{
@@ -449,7 +449,7 @@ export default function ProductDetailsPage() {
           width: "100%",
           maxWidth: "1440px",
           paddingTop: "8px",
-          paddingBottom: "16px",
+          paddingBottom: "0px",
           display: "flex",
           flexDirection: "column",
           gap: "16px",
@@ -1302,7 +1302,7 @@ export default function ProductDetailsPage() {
           style={{
             width: "100%",
             paddingTop: "56px",
-            paddingBottom: "56px",
+            paddingBottom: "0px",
             borderTop: "1px solid rgba(204, 204, 204, 0.54)",
             display: "flex",
             flexDirection: "column",

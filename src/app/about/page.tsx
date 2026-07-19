@@ -1830,12 +1830,18 @@ export default function AboutPage() {
 
             <p 
               style={{
+                width: "1280px",
+                maxWidth: "100%",
+                height: "32px",
                 fontFamily: "Faktum, sans-serif",
                 fontWeight: 500,
-                fontSize: "20px",
-                lineHeight: "30px",
-                color: "rgba(43, 43, 43, 0.75)",
-                margin: 0
+                fontSize: "24px",
+                lineHeight: "32px",
+                letterSpacing: "0px",
+                color: "rgba(43, 43, 43, 1)",
+                margin: 0,
+                display: "flex",
+                alignItems: "center"
               }}
             >
               Curated journeys for the modern nomad, designed to push boundaries and discover India's hidden heart
@@ -1914,37 +1920,149 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 9. FAQ Accordion Section */}
-      <section className="w-full bg-white py-[62px] px-6 md:px-[80px] mx-auto max-w-[1440px] border-t border-b border-gray-150 shrink-0">
-        <div className="w-full max-w-[1280px] mx-auto flex flex-col gap-12 text-left">
+      {/* 9. FAQ Accordion Section (1440x634px spec, padding 42px 80px, gap 24px) */}
+      <section 
+        style={{
+          width: "100%",
+          maxWidth: "1440px",
+          minHeight: "634px",
+          paddingTop: "42px",
+          paddingRight: "80px",
+          paddingBottom: "42px",
+          paddingLeft: "80px",
+          background: "rgba(255, 255, 255, 1)",
+          borderRadius: "4px",
+          boxSizing: "border-box",
+          display: "flex",
+          flexDirection: "column",
+          gap: "24px"
+        }}
+        className="mx-auto shrink-0"
+      >
+        <div className="w-full max-w-[1280px] mx-auto flex flex-col gap-6 text-left">
+          {/* Header */}
           <div className="space-y-2">
-            <span className="text-[14px] font-semibold text-[#FF623E] bg-[#FFEBE5] px-3 py-1 rounded-[4px] inline-block uppercase tracking-widest">
+            <span 
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                background: "#FFEBE5",
+                color: "#FF623E",
+                fontFamily: "Faktum, sans-serif",
+                fontWeight: 600,
+                fontSize: "14px",
+                lineHeight: "14px",
+                letterSpacing: "1.2px",
+                padding: "6px 12px",
+                borderRadius: "4px",
+                textTransform: "uppercase",
+                whiteSpace: "nowrap"
+              }}
+            >
               FAQ'S
             </span>
-            <h2 className="text-3xl md:text-[42px] font-serif font-semibold text-[#2B2B2B]">
+
+            <h2 
+              style={{
+                fontFamily: "Fraunces, serif",
+                fontWeight: 600,
+                fontSize: "42px",
+                lineHeight: "42px",
+                color: "rgba(43, 43, 43, 1)",
+                margin: 0
+              }}
+            >
               Frequently asked questions
             </h2>
           </div>
 
+          {/* Accordion Rows */}
           <div className="w-full border-t border-gray-200 divide-y divide-gray-200">
-            {FAQ_ITEMS.map((item, idx) => {
+            {[
+              {
+                question: "What materials are the badges made from?",
+                boldAnswer: "Zinc alloy with glossy enamel fill.",
+                descAnswer: "Lightweight, durable, and safe to pin on bags, jackets, or backpacks without damaging fabric."
+              },
+              {
+                question: "How big are the stickers?",
+                boldAnswer: "",
+                descAnswer: "Our premium die-cut vinyl stickers range from 2.5 to 3.5 inches, with weatherproof UV matte lamination."
+              },
+              {
+                question: "Do you ship across India?",
+                boldAnswer: "",
+                descAnswer: "Yes! We offer express shipping across all states and union territories in India with tracking numbers provided via SMS & email."
+              },
+              {
+                question: "Can I return a product if I don't like it?",
+                boldAnswer: "",
+                descAnswer: "We offer a hassle-free 7-day return and exchange policy for any unused products in original packaging."
+              },
+              {
+                question: "I have no reviews on this product. Is it safe to buy?",
+                boldAnswer: "",
+                descAnswer: "Absolutely. All our gear is thoroughly field-tested by our collective of guides before listing, and backed by our quality guarantee."
+              }
+            ].map((item, idx) => {
               const isOpen = openFaqIndex === idx;
               return (
-                <div key={idx} className="py-6">
+                <div key={idx} className="py-5">
                   <button
                     onClick={() => toggleFaq(idx)}
                     className="w-full flex justify-between items-center text-left gap-4 cursor-pointer group"
                   >
-                    <span className="font-sans font-medium text-lg md:text-[20px] text-[#2B2B2B] group-hover:text-[#FF623E] transition-colors">
-                      {item.question}
-                    </span>
-                    <span className="text-2xl font-bold text-[#1D493E] shrink-0 leading-none">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span 
+                        style={{
+                          fontFamily: "Faktum, sans-serif",
+                          fontWeight: 600,
+                          fontSize: "18px",
+                          lineHeight: "26px",
+                          color: "rgba(43, 43, 43, 1)"
+                        }}
+                        className="group-hover:text-[#FF623E] transition-colors"
+                      >
+                        {item.question}
+                      </span>
+                      {item.boldAnswer && (
+                        <span 
+                          style={{
+                            fontFamily: "Faktum, sans-serif",
+                            fontWeight: 600,
+                            fontSize: "18px",
+                            lineHeight: "26px",
+                            color: "rgba(43, 43, 43, 1)"
+                          }}
+                        >
+                          {item.boldAnswer}
+                        </span>
+                      )}
+                    </div>
+                    <span 
+                      style={{
+                        fontSize: "24px",
+                        fontWeight: 300,
+                        color: "#1D493E"
+                      }}
+                      className="shrink-0 leading-none select-none"
+                    >
                       {isOpen ? '—' : '+'}
                     </span>
                   </button>
                   {isOpen && (
-                    <p className="mt-4 font-sans font-medium text-base md:text-[18px] text-gray-500 leading-relaxed animate-fade-in">
-                      {item.answer}
+                    <p 
+                      style={{
+                        fontFamily: "Faktum, sans-serif",
+                        fontWeight: 400,
+                        fontSize: "16px",
+                        lineHeight: "26px",
+                        color: "rgba(43, 43, 43, 0.65)"
+                      }}
+                      className="mt-2 animate-fade-in"
+                    >
+                      {item.descAnswer}
                     </p>
                   )}
                 </div>

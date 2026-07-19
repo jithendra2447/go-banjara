@@ -1452,8 +1452,10 @@ export default function AboutPage() {
         >
           <span 
             style={{
-              width: "165px",
+              minWidth: "165px",
               height: "26px",
+              paddingLeft: "12px",
+              paddingRight: "12px",
               display: "inline-flex",
               alignItems: "center",
               justifyContent: "center",
@@ -1466,7 +1468,8 @@ export default function AboutPage() {
               lineHeight: "14px",
               letterSpacing: "1.2px",
               borderRadius: "4px",
-              textTransform: "uppercase"
+              textTransform: "uppercase",
+              whiteSpace: "nowrap"
             }}
           >
             BRAND PHILOSOPHY
@@ -1770,36 +1773,104 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 8. Customer Reviews / Feedback Section */}
+      {/* 8. Customer Reviews / Captured Memories Section */}
       <section className="w-full bg-[#FFFFFF] py-[62px] px-6 md:px-[80px] mx-auto max-w-[1440px] shrink-0">
-        <div className="w-full max-w-[1280px] mx-auto flex flex-col gap-12 text-left">
-          <div className="space-y-2">
-            <span className="text-[14px] font-semibold text-[#FF623E] bg-[#FFEBE5] px-3 py-1 rounded-[4px] inline-block uppercase tracking-widest">
-              REAL EXPERIENCES
+        <div className="w-full max-w-[1280px] mx-auto flex flex-col gap-10 text-left">
+          <div className="space-y-3">
+            <span 
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                background: "#FFEBE5",
+                color: "#FF623E",
+                fontFamily: "Faktum, sans-serif",
+                fontWeight: 600,
+                fontSize: "14px",
+                lineHeight: "14px",
+                letterSpacing: "1.2px",
+                padding: "6px 12px",
+                borderRadius: "4px",
+                textTransform: "uppercase",
+                whiteSpace: "nowrap"
+              }}
+            >
+              CAPTURED MEMORIES
             </span>
-            <h2 className="text-3xl md:text-[42px] font-serif font-semibold text-[#1D493E]">
-              What our travelers <span className="text-[#FF623E]">say about us</span>
+
+            <h2 className="text-3xl md:text-[42px] font-serif font-semibold text-[#2B2B2B] leading-tight">
+              Capture your adventurous travel <span className="text-[#FF623E]">Forever</span>
             </h2>
+
+            <p className="text-lg md:text-[20px] font-sans font-medium text-[#2B2B2B]/75 max-w-[1000px]">
+              Curated journeys for the modern nomad, designed to push boundaries and discover India's hidden heart
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {REVIEWS.map((review) => (
-              <div key={review.id} className="bg-gray-50 border border-gray-150 p-8 rounded-2xl flex flex-col justify-between space-y-6 shadow-2xs hover:shadow-xs transition-shadow">
+            {[
+              {
+                id: 1,
+                name: "Kiran Makwan",
+                subtitle: "Verified Wanderer",
+                text: "The quality of the journal is incredible. It feels like a piece of art that I can actually take on my treks. Bonjo's personality shines through the brand!",
+                avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=256&auto=format&fit=crop"
+              },
+              {
+                id: 2,
+                name: "Kiran Makwan",
+                subtitle: "Verified Wanderer",
+                text: "The quality of the journal is incredible. It feels like a piece of art that I can actually take on my treks. Bonjo's personality shines through the brand!",
+                avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=256&auto=format&fit=crop"
+              },
+              {
+                id: 3,
+                name: "Kiran Makwan",
+                subtitle: "Verified Wanderer",
+                text: "The quality of the journal is incredible. It feels like a piece of art that I can actually take on my treks. Bonjo's personality shines through the brand!",
+                avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=256&auto=format&fit=crop"
+              },
+              {
+                id: 4,
+                name: "Kiran Makwan",
+                subtitle: "Verified Wanderer",
+                text: "The quality of the journal is incredible. It feels like a piece of art that I can actually take on my treks. Bonjo's personality shines through the brand!",
+                avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=256&auto=format&fit=crop"
+              },
+              {
+                id: 5,
+                name: "Kiran Makwan",
+                subtitle: "Verified Wanderer",
+                text: "The quality of the journal is incredible. It feels like a piece of art that I can actually take on my treks. Bonjo's personality shines through the brand!",
+                avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=256&auto=format&fit=crop"
+              },
+              {
+                id: 6,
+                name: "Kiran Makwan",
+                subtitle: "Verified Wanderer",
+                text: "The quality of the journal is incredible. It feels like a piece of art that I can actually take on my treks. Bonjo's personality shines through the brand!",
+                avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=256&auto=format&fit=crop"
+              }
+            ].map((review) => (
+              <div 
+                key={review.id} 
+                className="bg-white border border-gray-200 p-8 rounded-[8px] flex flex-col justify-between space-y-6 shadow-2xs hover:shadow-md transition-shadow"
+              >
                 <div className="space-y-4">
-                  <div className="flex text-amber-400 text-sm gap-0.5">
-                    {Array.from({ length: review.stars }).map((_, s) => (
-                      <Star key={s} className="w-3.5 h-3.5 fill-current" />
+                  <div className="flex text-amber-400 text-base gap-1">
+                    {Array.from({ length: 5 }).map((_, s) => (
+                      <Star key={s} className="w-4 h-4 fill-amber-400 text-amber-400" />
                     ))}
                   </div>
-                  <p className="text-gray-600 font-medium italic text-[15px] leading-relaxed">
+                  <p className="text-gray-700 font-medium italic text-[16px] leading-relaxed">
                     “{review.text}”
                   </p>
                 </div>
                 <div className="flex items-center gap-3.5 pt-4 border-t border-gray-100">
-                  <img src={review.avatar} alt={review.name} className="w-12 h-12 rounded-full object-cover shrink-0" />
+                  <img src={review.avatar} alt={review.name} className="w-11 h-11 rounded-full object-cover shrink-0" />
                   <div>
-                    <h4 className="text-[15px] font-bold text-gray-800 leading-none">{review.name}</h4>
-                    <p className="text-xs text-gray-400 font-semibold mt-1">{review.subtitle}</p>
+                    <h4 className="text-[16px] font-bold text-gray-800 leading-none">{review.name}</h4>
+                    <p className="text-xs text-gray-400 font-medium mt-1">{review.subtitle}</p>
                   </div>
                 </div>
               </div>

@@ -22,7 +22,7 @@ export function TrustBanner() {
           display: "flex", 
           alignItems: "center", 
           justifyContent: "center", 
-          gap: "34px",
+          gap: "72px",
           width: "100%",
           maxWidth: "1280px"
         }}

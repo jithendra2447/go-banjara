@@ -318,20 +318,20 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 4. Overlapping Sticker Cards Section (Non-movable, Fits to screen directly under Stats Bar) */}
+      {/* 4. Overlapping Sticker Cards Section (Images Row - 1709.57px x 418.33px) */}
       <section 
         style={{ 
           width: "100%", 
-          height: "420px", 
+          height: "380px", 
           background: "rgba(255, 255, 255, 1)", 
           position: "relative",
           overflow: "hidden",
           boxSizing: "border-box",
-          marginTop: "10px"
+          zIndex: 10
         }}
         className="w-full shrink-0"
       >
-        {/* Cards Container (Static 1709.57px x 418.33px centered right below Stats Bar, non-scrollable) */}
+        {/* Cards Container (Static 1709.57px x 418.33px centered) */}
         <div 
           style={{ 
             width: "1709.5738525390625px", 
@@ -559,52 +559,81 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 5. Two Large Story/Mission Cards Section */}
-      <section className="w-full bg-[#FFFFFF] py-[62px] px-6 md:px-[80px] mx-auto max-w-[1440px] shrink-0">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-[1280px] mx-auto">
-          {/* Card 1: Story */}
+      {/* 5. Two Large Mission/Vision Cards Section (1440x783px spec) */}
+      <section 
+        style={{ 
+          marginTop: "-150px", 
+          position: "relative", 
+          zIndex: 20,
+          width: "100%",
+          maxWidth: "1440px",
+          height: "783px",
+          paddingTop: "42px",
+          paddingRight: "80px",
+          paddingBottom: "42px",
+          paddingLeft: "80px",
+          background: "rgba(255, 255, 255, 1)",
+          boxSizing: "border-box"
+        }}
+        className="mx-auto w-full shrink-0 flex items-center justify-center"
+      >
+        <div 
+          style={{ gap: "32px" }}
+          className="grid grid-cols-1 md:grid-cols-2 w-full h-full max-w-[1280px] mx-auto"
+        >
+          {/* Card 1: OUR MISSION */}
           <div 
-            style={{ height: "450px", borderRadius: "16px" }} 
-            className="relative overflow-hidden group shadow-md"
+            style={{ borderRadius: "4px" }} 
+            className="relative overflow-hidden group shadow-md w-full h-full"
           >
             <img 
-              src="https://images.unsplash.com/photo-1533240332313-0db49b439ad3?auto=format&fit=crop&w=800&q=80" 
-              alt="Hikers on mountains" 
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-103"
+              src="https://images.unsplash.com/photo-1533240332313-0db49b439ad3?auto=format&fit=crop&w=1200&q=80" 
+              alt="Hikers on snowy mountains" 
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-102"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent flex flex-col justify-end p-8 text-left">
-              <span className="bg-[#FF623E] text-white text-[12px] font-bold px-3 py-1 rounded-[4px] self-start mb-3 uppercase tracking-wider">
-                STORY
+            {/* Translucent Glass Text Box at bottom left */}
+            <div 
+              style={{
+                position: "absolute",
+                bottom: "24px",
+                left: "24px",
+                right: "24px",
+                background: "rgba(43, 43, 43, 0.55)",
+                backdropFilter: "blur(12px)",
+                WebkitBackdropFilter: "blur(12px)",
+                borderRadius: "4px",
+                padding: "24px",
+                boxSizing: "border-box",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+                gap: "12px",
+                maxWidth: "520px"
+              }}
+            >
+              <span className="bg-[#FF623E] text-white text-[12px] font-semibold px-3 py-1 rounded-[4px] uppercase tracking-wider">
+                OUR MISSION
               </span>
-              <h3 className="font-serif font-semibold text-2xl sm:text-3xl text-white mb-2 leading-tight">
-                "We wanted something slower, closer to the ground, and honest about the places we visited."
-              </h3>
-              <p className="text-white/80 text-sm sm:text-base font-sans font-medium">
-                Our journeys are designed around raw human experiences, local hospitality, and respect for native communities.
+              <p className="text-white text-base sm:text-lg font-sans font-medium leading-relaxed m-0">
+                We exist to bridge the gap between the life people are living and the adventures they are dreaming about. Every experience we curate, every product we build, and every story we tell is in service of one thing: helping people go further.
               </p>
             </div>
           </div>
 
-          {/* Card 2: Trips */}
+          {/* Card 2: OUR VISION */}
           <div 
-            style={{ height: "450px", borderRadius: "16px" }} 
-            className="relative overflow-hidden group shadow-md"
+            style={{ borderRadius: "4px" }} 
+            className="relative overflow-hidden group shadow-md w-full h-full"
           >
             <img 
-              src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" 
-              alt="Camels in desert" 
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-103"
+              src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80" 
+              alt="Nomads on camels in snowy mountain valley" 
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-102"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent flex flex-col justify-end p-8 text-left">
-              <span className="bg-[#FF623E] text-white text-[12px] font-bold px-3 py-1 rounded-[4px] self-start mb-3 uppercase tracking-wider">
-                MISSION
+            <div className="absolute bottom-6 left-6">
+              <span className="bg-[#FF623E] text-white text-[12px] font-semibold px-3 py-1 rounded-[4px] uppercase tracking-wider">
+                OUR VISION
               </span>
-              <h3 className="font-serif font-semibold text-2xl sm:text-3xl text-white mb-2 leading-tight">
-                Curated small-group journeys led by local experts.
-              </h3>
-              <p className="text-white/80 text-sm sm:text-base font-sans font-medium">
-                Unlocking unseen terrains of India with small traveler circles, ensuring minimal footprint and maximum connection.
-              </p>
             </div>
           </div>
         </div>

@@ -442,8 +442,36 @@ export const AuthModal: React.FC = () => {
               <div className="space-y-6">
                 <form onSubmit={handleMobileRequest} className="space-y-4">
                   <div className="space-y-1.5">
-                    <label className="block text-xs font-semibold text-slate-800">
-                      Enter mobile number <span className="text-red-500">*</span>
+                    <label 
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '2px',
+                        height: '23px',
+                        fontFamily: '"Faktum", "Outfit", sans-serif',
+                        fontWeight: 500,
+                        fontSize: '18px',
+                        lineHeight: '100%',
+                        color: 'rgba(43, 43, 43, 1)',
+                        margin: 0,
+                      }}
+                    >
+                      Enter mobile number
+                      <span 
+                        style={{
+                          display: 'inline-block',
+                          width: '7px',
+                          height: '18px',
+                          fontFamily: '"IBM Plex Sans", sans-serif',
+                          fontWeight: 400,
+                          fontSize: '14px',
+                          lineHeight: '100%',
+                          color: 'rgba(196, 64, 64, 1)',
+                          marginLeft: '2px',
+                        }}
+                      >
+                        *
+                      </span>
                     </label>
                     <div className="flex gap-2">
                       <div className="p-3.5 border border-slate-200 bg-slate-50 text-xs font-black text-slate-500 rounded-xl select-none flex items-center">
@@ -493,8 +521,36 @@ export const AuthModal: React.FC = () => {
               <div className="space-y-6">
                 <form onSubmit={handleEmailSignup} className="space-y-4">
                   <div className="space-y-1.5">
-                    <label className="block text-xs font-semibold text-slate-800">
-                      Full name <span className="text-red-500">*</span>
+                    <label 
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '2px',
+                        height: '23px',
+                        fontFamily: '"Faktum", "Outfit", sans-serif',
+                        fontWeight: 500,
+                        fontSize: '18px',
+                        lineHeight: '100%',
+                        color: 'rgba(43, 43, 43, 1)',
+                        margin: 0,
+                      }}
+                    >
+                      Full name
+                      <span 
+                        style={{
+                          display: 'inline-block',
+                          width: '7px',
+                          height: '18px',
+                          fontFamily: '"IBM Plex Sans", sans-serif',
+                          fontWeight: 400,
+                          fontSize: '14px',
+                          lineHeight: '100%',
+                          color: 'rgba(196, 64, 64, 1)',
+                          marginLeft: '2px',
+                        }}
+                      >
+                        *
+                      </span>
                     </label>
                     <input 
                       type="text" required placeholder="Kumar Sai Arja" value={name}
@@ -504,8 +560,36 @@ export const AuthModal: React.FC = () => {
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="block text-xs font-semibold text-slate-800">
-                      Email ID <span className="text-red-500">*</span>
+                    <label 
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '2px',
+                        height: '23px',
+                        fontFamily: '"Faktum", "Outfit", sans-serif',
+                        fontWeight: 500,
+                        fontSize: '18px',
+                        lineHeight: '100%',
+                        color: 'rgba(43, 43, 43, 1)',
+                        margin: 0,
+                      }}
+                    >
+                      Email ID
+                      <span 
+                        style={{
+                          display: 'inline-block',
+                          width: '7px',
+                          height: '18px',
+                          fontFamily: '"IBM Plex Sans", sans-serif',
+                          fontWeight: 400,
+                          fontSize: '14px',
+                          lineHeight: '100%',
+                          color: 'rgba(196, 64, 64, 1)',
+                          marginLeft: '2px',
+                        }}
+                      >
+                        *
+                      </span>
                     </label>
                     <input 
                       type="email" required placeholder="kumarsaiarja2468@gmail.com" value={email}
@@ -515,8 +599,36 @@ export const AuthModal: React.FC = () => {
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="block text-xs font-semibold text-slate-800">
-                      Enter mobile number <span className="text-red-500">*</span>
+                    <label 
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '2px',
+                        height: '23px',
+                        fontFamily: '"Faktum", "Outfit", sans-serif',
+                        fontWeight: 500,
+                        fontSize: '18px',
+                        lineHeight: '100%',
+                        color: 'rgba(43, 43, 43, 1)',
+                        margin: 0,
+                      }}
+                    >
+                      Enter mobile number
+                      <span 
+                        style={{
+                          display: 'inline-block',
+                          width: '7px',
+                          height: '18px',
+                          fontFamily: '"IBM Plex Sans", sans-serif',
+                          fontWeight: 400,
+                          fontSize: '14px',
+                          lineHeight: '100%',
+                          color: 'rgba(196, 64, 64, 1)',
+                          marginLeft: '2px',
+                        }}
+                      >
+                        *
+                      </span>
                     </label>
                     <div className="flex gap-2">
                       <div className="p-3.5 border border-slate-200 bg-slate-50 text-xs font-black text-slate-500 rounded-xl select-none flex items-center">

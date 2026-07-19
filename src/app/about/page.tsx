@@ -376,6 +376,35 @@ export default function AboutPage() {
               </span>
             </div>
           </div>
+          {/* Card 2: Green Explore/Adventure Card */}
+          <div 
+            style={{ 
+              width: "301.99999443948394px", 
+              height: "379.99999300332416px", 
+              borderTopRightRadius: "4px",
+              borderBottomRightRadius: "4px",
+              borderBottomLeftRadius: "4px",
+              borderTopLeftRadius: "0px",
+              background: "#1D493E",
+              position: "relative",
+              boxShadow: "0 10px 20px rgba(0,0,0,0.15)",
+              transform: "rotate(8deg)",
+              opacity: 1,
+              zIndex: 11,
+              marginLeft: "-35px",
+              flexShrink: 0,
+              overflow: "hidden"
+            }}
+          >
+            <svg viewBox="0 0 302 380" fill="none" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}>
+              <path d="M-20,320 Q90,260 90,140 Q90,50 180,90 Q220,110 240,40 Q250,10 280,-20" fill="none" stroke="#FF623E" strokeWidth="28" strokeLinecap="round" />
+              <path d="M240,40 Q260,110 290,180" fill="none" stroke="#FF623E" strokeWidth="28" strokeLinecap="round" />
+            </svg>
+            <span style={{ position: "absolute", top: "45px", left: "30px", fontFamily: "Fraunces, serif", fontStyle: "italic", fontWeight: 500, fontSize: "36px", color: "#FAF9F6", transform: "rotate(-5deg)" }}>explore</span>
+            <span style={{ position: "absolute", top: "140px", right: "25px", fontFamily: "Fraunces, serif", fontStyle: "italic", fontWeight: 500, fontSize: "36px", color: "#FAF9F6", transform: "rotate(-6deg)" }}>adventure</span>
+            <span style={{ position: "absolute", bottom: "100px", left: "35px", fontFamily: "Fraunces, serif", fontStyle: "italic", fontWeight: 500, fontSize: "36px", color: "#FAF9F6", transform: "rotate(-4deg)" }}>wild</span>
+            <span style={{ position: "absolute", bottom: "40px", right: "30px", fontFamily: "Fraunces, serif", fontStyle: "italic", fontWeight: 500, fontSize: "36px", color: "#FAF9F6", transform: "rotate(-6deg)" }}>journey</span>
+          </div>
         </div>
       </section>
 

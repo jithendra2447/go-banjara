@@ -670,7 +670,7 @@ export const AuthModal: React.FC = () => {
             }}
           >
             <img 
-              src="/llama_mascot.jpg" 
+              src="/llama_mascot.png" 
               className="w-full h-full object-cover" 
               style={{ borderRadius: '8px' }} 
               alt="Go Banjara Mascot Llama" 

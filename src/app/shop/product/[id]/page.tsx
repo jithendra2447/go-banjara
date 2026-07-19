@@ -7,6 +7,7 @@ import { Star, ShoppingCart, Check, Shield, Truck, Box } from 'lucide-react';
 import { useCart } from '@/components/providers';
 import { PRODUCTS } from '@/data/products';
 import { Product } from '@/types';
+import ProductCard from '@/components/ProductCard';
 
 const FAQ_ITEMS = [
   {
@@ -1132,6 +1133,80 @@ export default function ProductDetailsPage() {
             </section>
           </div>
         )}
+
+        {/* Similar Products (You May Also Like) */}
+        <section className="w-full mt-16 pt-8 border-t border-slate-100 text-left">
+          <h2 className="text-2xl md:text-[32px] font-serif font-semibold text-[#2B2B2B] mb-8">
+            You May Also <span className="text-[#FF5A36]">Like</span>
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {fallbackSimilarProducts.map((prod) => (
+              <ProductCard
+                key={prod.id}
+                product={prod}
+                onAddToCart={(p) => addToCart(p, 'shop')}
+              />
+            ))}
+          </div>
+        </section>
+
+        {/* Recently Viewed Products */}
+        {recentlyViewed.length > 0 && (
+          <section className="w-full mt-16 pt-8 border-t border-slate-100 text-left">
+            <h2 className="text-2xl md:text-[32px] font-serif font-semibold text-[#2B2B2B] mb-8">
+              Recently <span className="text-[#FF5A36]">Viewed</span>
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {recentlyViewed.map((prod) => (
+                <ProductCard
+                  key={prod.id}
+                  product={prod}
+                  onAddToCart={(p) => addToCart(p, 'shop')}
+                />
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* FAQ Accordion Section */}
+        <section className="w-full mt-16 pt-8 border-t border-slate-100 pb-16 text-left">
+          <div className="max-w-[800px] mx-auto flex flex-col gap-6">
+            <div className="text-center space-y-2">
+              <span className="inline-block text-[9px] font-black uppercase tracking-wider text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-1 rounded-[4px]">
+                FAQS
+              </span>
+              <h2 className="text-2xl md:text-[32px] font-serif font-semibold text-[#2B2B2B]">
+                Frequently Asked <span className="text-[#FF5A36]">Questions</span>
+              </h2>
+            </div>
+            
+            <div className="mt-4 border border-slate-200 rounded-lg overflow-hidden divide-y divide-slate-200 bg-white">
+              {FAQ_ITEMS.map((item, idx) => {
+                const isOpen = openFaqIdx === idx;
+                return (
+                  <div key={idx} className="transition-all duration-300">
+                    <button
+                      onClick={() => setOpenFaqIdx(isOpen ? null : idx)}
+                      className="w-full px-6 py-4 flex justify-between items-center text-left gap-4 hover:bg-slate-50 transition-colors cursor-pointer border-none bg-transparent"
+                    >
+                      <span className="font-sans font-semibold text-[#2B2B2B] text-base md:text-lg">
+                        {item.question}
+                      </span>
+                      <span className={`text-[#FF5A36] text-xl font-bold transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
+                        {isOpen ? '−' : '+'}
+                      </span>
+                    </button>
+                    {isOpen && (
+                      <div className="px-6 pb-5 pt-1 text-slate-600 font-sans text-sm md:text-base leading-relaxed">
+                        {item.answer}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
 
       </main>
     </div>

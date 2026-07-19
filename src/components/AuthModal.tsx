@@ -581,11 +581,16 @@ export const AuthModal: React.FC = () => {
                         type="submit" disabled={loading}
                         style={{
                           width: '492px',
-                          height: '53px',
-                          background: '#1D493E',
+                          height: '60px',
+                          background: 'rgba(29, 73, 62, 1)',
                           color: '#FFFFFF',
                           border: 'none',
                           borderRadius: '4px',
+                          paddingTop: '16px',
+                          paddingRight: '32px',
+                          paddingBottom: '16px',
+                          paddingLeft: '32px',
+                          gap: '8px',
                           fontFamily: '"Faktum", "Outfit", sans-serif',
                           fontWeight: 600,
                           fontSize: '18px',
@@ -594,19 +599,19 @@ export const AuthModal: React.FC = () => {
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
-                          gap: '8px',
                           transition: 'background-color 0.2s',
                           boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                          boxSizing: 'border-box',
                         }}
                         onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#E05434'; }}
-                        onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#1D493E'; }}
+                        onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'rgba(29, 73, 62, 1)'; }}
                       >
                         {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Verify with OTP'}
                       </button>
 
                       <div 
                         style={{
-                          height: '39px',
+                          height: '32px',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
@@ -616,7 +621,8 @@ export const AuthModal: React.FC = () => {
                           style={{
                             fontFamily: '"Faktum", "Outfit", sans-serif',
                             fontWeight: 500,
-                            fontSize: '16px',
+                            fontSize: '18px',
+                            lineHeight: '32px',
                             color: 'rgba(141, 141, 141, 1)',
                             margin: 0,
                           }}
@@ -627,8 +633,10 @@ export const AuthModal: React.FC = () => {
                             onClick={() => { setError(''); setSuccessMsg(''); setView('signup'); }}
                             style={{
                               fontFamily: '"Faktum", "Outfit", sans-serif',
-                              fontWeight: 600,
-                              color: '#1D493E',
+                              fontWeight: 500,
+                              fontSize: '18px',
+                              lineHeight: '32px',
+                              color: 'rgba(29, 73, 62, 1)',
                               background: 'none',
                               border: 'none',
                               padding: 0,
@@ -859,11 +867,16 @@ export const AuthModal: React.FC = () => {
                         type="submit" disabled={loading}
                         style={{
                           width: '492px',
-                          height: '53px',
-                          background: '#1D493E',
+                          height: '60px',
+                          background: 'rgba(29, 73, 62, 1)',
                           color: '#FFFFFF',
                           border: 'none',
                           borderRadius: '4px',
+                          paddingTop: '16px',
+                          paddingRight: '32px',
+                          paddingBottom: '16px',
+                          paddingLeft: '32px',
+                          gap: '8px',
                           fontFamily: '"Faktum", "Outfit", sans-serif',
                           fontWeight: 600,
                           fontSize: '18px',
@@ -872,19 +885,19 @@ export const AuthModal: React.FC = () => {
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
-                          gap: '8px',
                           transition: 'background-color 0.2s',
                           boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                          boxSizing: 'border-box',
                         }}
                         onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#E05434'; }}
-                        onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#1D493E'; }}
+                        onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'rgba(29, 73, 62, 1)'; }}
                       >
                         {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Verify with OTP'}
                       </button>
 
                       <div 
                         style={{
-                          height: '39px',
+                          height: '32px',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
@@ -894,7 +907,8 @@ export const AuthModal: React.FC = () => {
                           style={{
                             fontFamily: '"Faktum", "Outfit", sans-serif',
                             fontWeight: 500,
-                            fontSize: '16px',
+                            fontSize: '18px',
+                            lineHeight: '32px',
                             color: 'rgba(141, 141, 141, 1)',
                             margin: 0,
                           }}
@@ -905,8 +919,10 @@ export const AuthModal: React.FC = () => {
                             onClick={() => { setError(''); setSuccessMsg(''); setView('login'); }}
                             style={{
                               fontFamily: '"Faktum", "Outfit", sans-serif',
-                              fontWeight: 600,
-                              color: '#1D493E',
+                              fontWeight: 500,
+                              fontSize: '18px',
+                              lineHeight: '32px',
+                              color: 'rgba(29, 73, 62, 1)',
                               background: 'none',
                               border: 'none',
                               padding: 0,
@@ -1395,15 +1411,62 @@ export const AuthModal: React.FC = () => {
               justifyContent: 'center',
             }}
           >
-            <h3 className="text-xl font-bold text-slate-800" style={{ margin: 0 }}>Start Shopping Today</h3>
-            <p className="text-sm text-slate-500 leading-relaxed font-medium" style={{ margin: 0, maxWidth: '480px' }}>
-              Get personalized shopping and customization experience. When you sign in to your account
+            <h3 
+              style={{
+                fontFamily: '"Faktum", "Outfit", sans-serif',
+                fontWeight: 600,
+                fontSize: '24px',
+                lineHeight: '100%',
+                color: 'rgba(43, 43, 43, 1)',
+                margin: 0,
+                textAlign: 'center',
+              }}
+            >
+              Start Shopping Today
+            </h3>
+            <p 
+              style={{
+                width: '588px',
+                fontFamily: '"Faktum", "Outfit", sans-serif',
+                fontWeight: 500,
+                fontSize: '16px',
+                lineHeight: '150%',
+                color: 'rgba(141, 141, 141, 1)',
+                textAlign: 'center',
+                margin: 0,
+              }}
+            >
+              Get personalized shopping and customization experience.
+              <br />
+              When you sign in to your account
             </p>
             
             {/* Dots Carousel Indicator */}
-            <div className="flex gap-1.5 pt-2">
-              <span className="w-6 h-1.5 rounded-full bg-[#1D493E]" />
-              <span className="w-2 h-1.5 rounded-full bg-slate-300" />
+            <div 
+              style={{
+                display: 'flex',
+                gap: '6px',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginTop: '4px',
+              }}
+            >
+              <span 
+                style={{
+                  width: '16px',
+                  height: '4px',
+                  borderRadius: '2px',
+                  background: 'rgba(29, 73, 62, 1)',
+                }}
+              />
+              <span 
+                style={{
+                  width: '16px',
+                  height: '4px',
+                  borderRadius: '2px',
+                  background: 'rgba(204, 204, 204, 0.54)',
+                }}
+              />
             </div>
           </div>
 

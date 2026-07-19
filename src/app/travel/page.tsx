@@ -1940,11 +1940,12 @@ export default function HolidaysPortal() {
                   <span
                     style={{
                       fontFamily: 'Faktum, var(--font-sans), sans-serif',
-                      fontWeight: 600,
-                      fontSize: '18px',
-                      lineHeight: '26px',
-                      color: 'rgba(44, 44, 44, 1)',
+                      fontWeight: 500,
+                      fontSize: '20px',
+                      lineHeight: '32px',
+                      color: 'rgba(43, 43, 43, 1)',
                       flex: 1,
+                      maxWidth: '1196px',
                     }}
                   >
                     {item.question}
@@ -1960,10 +1961,11 @@ export default function HolidaysPortal() {
                     style={{
                       fontFamily: 'Faktum, var(--font-sans), sans-serif',
                       fontWeight: 500,
-                      fontSize: '14px',
-                      lineHeight: '22px',
-                      color: 'rgba(102, 102, 102, 1)',
+                      fontSize: '20px',
+                      lineHeight: '32px',
+                      color: 'rgba(141, 141, 141, 1)',
                       margin: 0,
+                      maxWidth: '1196px',
                       paddingBottom: '20px',
                     }}
                   >

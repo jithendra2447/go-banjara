@@ -240,7 +240,12 @@ export const AuthModal: React.FC = () => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-hidden font-sans">
+    <div 
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto font-sans"
+      style={{
+        background: 'rgba(255, 252, 248, 1)',
+      }}
+    >
       
       {/* Backdrop */}
       <div 
@@ -248,8 +253,13 @@ export const AuthModal: React.FC = () => {
         onClick={!loading ? handleClose : undefined}
       />
 
-      {/* Two-Column split modal box */}
-      <div className="relative w-full max-w-[900px] bg-white rounded-[32px] shadow-2xl overflow-hidden z-10 grid grid-cols-1 md:grid-cols-12 max-h-[95vh] md:max-h-none overflow-y-auto md:overflow-hidden animate-[scaleIn_0.3s_ease-out]">
+      {/* Two-Column split modal box / Main Frame (Matches Figma specs 1440x1024 base wrapper style) */}
+      <div 
+        className="relative w-full z-10 flex flex-col md:flex-row items-center md:items-start justify-center gap-6 max-h-[95vh] md:max-h-none overflow-y-auto md:overflow-visible animate-[scaleIn_0.3s_ease-out] mx-auto px-6 md:px-0 py-8"
+        style={{
+          maxWidth: '1280px',
+        }}
+      >
         
         {/* Close Button */}
         {!loading && (
@@ -261,8 +271,19 @@ export const AuthModal: React.FC = () => {
           </button>
         )}
 
-        {/* LEFT COLUMN: AUTH FORMS (6 cols on desktop) */}
-        <div className="col-span-1 md:col-span-6 p-8 md:p-12 flex flex-col justify-between min-h-[560px]">
+        {/* LEFT COLUMN: AUTH FORMS (Figma specs: 556x904, border 1px rgba(204,204,204,0.54), bg white, padding 32px) */}
+        <div 
+          className="w-full flex flex-col justify-between"
+          style={{
+            maxWidth: '556px',
+            minHeight: '840px',
+            background: 'rgba(255, 255, 255, 1)',
+            border: '1px solid rgba(204, 204, 204, 0.54)',
+            borderRadius: '4px',
+            padding: '32px',
+            boxSizing: 'border-box',
+          }}
+        >
           
           {/* Logo Brand Header */}
           <div className="flex items-center gap-2 mb-8">
@@ -611,39 +632,91 @@ export const AuthModal: React.FC = () => {
 
         </div>
 
-        {/* RIGHT COLUMN: BRAND MASCOT CARD (6 cols on desktop) */}
-        <div className="col-span-1 md:col-span-6 bg-[#FAF7F2] p-8 md:p-12 hidden md:flex flex-col justify-between items-center text-center select-none">
+        {/* RIGHT COLUMN: BRAND MASCOT CARD (Figma specs: width 588, height 743.915, gap 24, top 58.12px) */}
+        <div 
+          className="hidden md:flex flex-col justify-between items-center text-center select-none"
+          style={{
+            width: '588px',
+            height: '743.9px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '24px',
+            marginTop: '58.12px',
+            boxSizing: 'border-box',
+          }}
+        >
           
-          <div className="flex-1 flex flex-col justify-center items-center space-y-8">
-            {/* Llama Card Container */}
-            <div className="relative w-64 h-64 rounded-[32px] bg-white border border-[#1D493E]/10 shadow-lg overflow-visible p-4 flex items-center justify-center rotate-[-1.5deg] hover:rotate-0 transition-transform duration-300">
-              
-              <img src="/llama_mascot.jpg" className="w-full h-full object-cover rounded-2xl" alt="Go Banjara Mascot Llama" />
-              
-              {/* Sticker 1: Top Left */}
-              <div className="absolute -top-4 -left-4 w-12 h-12 rounded-full bg-amber-400 border-2 border-white shadow-md flex items-center justify-center text-center p-1 text-[8px] font-black text-primary-dark rotate-[-12deg] tracking-tight uppercase leading-none">
-                Banjāra Originals
-              </div>
-
-              {/* Sticker 2: Bottom Right */}
-              <div className="absolute -bottom-4 -right-4 w-12 h-12 rounded-full bg-[#E05434] border-2 border-white shadow-md flex items-center justify-center text-center p-1 text-[8px] font-black text-white rotate-[12deg] tracking-tight uppercase leading-none">
-                Dare to Travel
-              </div>
+          {/* Llama Card Container (Figma specs: 568.42x568.42, -2 deg angle, 12px border-radius, box-shadow) */}
+          <div 
+            className="relative bg-white border border-[#1D493E]/10 flex items-center justify-center transition-transform duration-300"
+            style={{
+              width: '568.42px',
+              height: '568.42px',
+              borderRadius: '12px',
+              transform: 'rotate(-2deg)',
+              boxShadow: '0px 27.27px 54.54px -13.09px rgba(0, 0, 0, 0.25)',
+              padding: '16px',
+              boxSizing: 'border-box',
+            }}
+          >
+            <img 
+              src="/llama_mascot.jpg" 
+              className="w-full h-full object-cover" 
+              style={{ borderRadius: '8px' }} 
+              alt="Go Banjara Mascot Llama" 
+            />
+            
+            {/* Sticker 1: Top Left */}
+            <div 
+              className="absolute rounded-full bg-amber-400 border-2 border-white shadow-md flex items-center justify-center text-center p-1 text-[8px] font-black text-primary-dark uppercase leading-none"
+              style={{
+                width: '64px',
+                height: '64px',
+                top: '-16px',
+                left: '-16px',
+                transform: 'rotate(-12deg)',
+              }}
+            >
+              Banjāra Originals
             </div>
 
-            {/* Description Text */}
-            <div className="space-y-2 max-w-xs">
-              <h3 className="text-base font-black text-slate-800">Start Shopping Today</h3>
-              <p className="text-xs text-slate-400 leading-relaxed font-semibold">
-                Get personalized shopping and customization experience. When you sign in to your account
-              </p>
+            {/* Sticker 2: Bottom Right */}
+            <div 
+              className="absolute rounded-full bg-[#E05434] border-2 border-white shadow-md flex items-center justify-center text-center p-1 text-[8px] font-black text-white uppercase leading-none"
+              style={{
+                width: '64px',
+                height: '64px',
+                bottom: '-16px',
+                right: '-16px',
+                transform: 'rotate(12deg)',
+              }}
+            >
+              Dare to Travel
             </div>
           </div>
 
-          {/* Dots Carousel Indicator */}
-          <div className="flex gap-1.5 pt-4">
-            <span className="w-6 h-1.5 rounded-full bg-[#1D493E]" />
-            <span className="w-2 h-1.5 rounded-full bg-slate-300" />
+          {/* Description Text (Figma specs: width 588, height 132, gap 12px) */}
+          <div 
+            style={{
+              width: '588px',
+              height: '132px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '12px',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <h3 className="text-xl font-bold text-slate-800" style={{ margin: 0 }}>Start Shopping Today</h3>
+            <p className="text-sm text-slate-500 leading-relaxed font-medium" style={{ margin: 0, maxWidth: '480px' }}>
+              Get personalized shopping and customization experience. When you sign in to your account
+            </p>
+            
+            {/* Dots Carousel Indicator */}
+            <div className="flex gap-1.5 pt-2">
+              <span className="w-6 h-1.5 rounded-full bg-[#1D493E]" />
+              <span className="w-2 h-1.5 rounded-full bg-slate-300" />
+            </div>
           </div>
 
         </div>

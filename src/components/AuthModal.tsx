@@ -708,7 +708,6 @@ export const AuthModal: React.FC = () => {
               }}
             />
             </div>
-          </div>
 
           {/* Description Text (Figma specs: width 588, height 132, gap 12px) */}
           <div 

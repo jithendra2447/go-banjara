@@ -318,6 +318,67 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* 4. Overlapping Sticker Cards Strip Section (1440x556px spec) */}
+      <section 
+        style={{ 
+          width: "100%", 
+          maxWidth: "1440px",
+          height: "556px", 
+          background: "rgba(255, 255, 255, 1)", 
+          position: "relative",
+          overflow: "hidden",
+          boxSizing: "border-box"
+        }}
+        className="mx-auto w-full shrink-0"
+      >
+        {/* Cards Container */}
+        <div 
+          style={{ 
+            width: "1709.57px", 
+            height: "418.33px", 
+            display: "flex", 
+            alignItems: "center", 
+            overflowX: "auto",
+            scrollbarWidth: "none",
+            boxSizing: "border-box",
+            position: "absolute",
+            top: "68px",
+            left: "50%",
+            transform: "translateX(-50%)"
+          }}
+          className="scrollbar-none"
+        >
+          {/* Card 1: Traveler / Go Banjara Card */}
+          <div 
+            style={{ 
+              width: "301.99999443948394px", 
+              height: "379.99999300332416px", 
+              borderTopRightRadius: "4px",
+              borderBottomRightRadius: "4px",
+              borderBottomLeftRadius: "4px",
+              borderTopLeftRadius: "0px",
+              backgroundImage: "url('https://images.unsplash.com/photo-1527631746610-bca00a040d60?auto=format&fit=crop&w=600&q=80')",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              position: "relative",
+              boxShadow: "0 10px 20px rgba(0,0,0,0.15)",
+              transform: "rotate(8deg)",
+              opacity: 1,
+              zIndex: 10,
+              flexShrink: 0,
+              overflow: "hidden"
+            }}
+          >
+            <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/55 to-transparent pointer-events-none" />
+            <div style={{ position: "absolute", bottom: "35px", left: "20px", transform: "rotate(-4deg)" }}>
+              <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 800, fontSize: "48px", color: "#FFFF80", letterSpacing: "-1.5px", lineHeight: "1" }}>
+                go banjara
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* 5. Two Large Story/Mission Cards Section */}
       <section className="w-full bg-[#FFFFFF] py-[62px] px-6 md:px-[80px] mx-auto max-w-[1440px] shrink-0">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-[1280px] mx-auto">

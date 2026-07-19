@@ -476,19 +476,9 @@ export default function HolidaysPortal() {
               </label>
               <div className="w-full flex flex-col sm:flex-row gap-3">
                 <div 
-                  style={{ 
-                    flex: 1,
-                    height: "56px", 
-                    border: "1px solid rgba(141, 141, 141, 0.5)", 
-                    borderRadius: "8px", 
-                    padding: "0 12px sm:p-0 16px", 
-                    display: "flex", 
-                    alignItems: "center", 
-                    gap: "10px sm:gap-14", 
-                    background: "white" 
-                  }}
+                  className="flex-1 h-[56px] border border-[rgba(141,141,141,0.5)] rounded-[8px] px-3 sm:px-4 flex items-center gap-2 sm:gap-3 bg-white"
                 >
-                  <Calendar style={{ width: "20px sm:w-24px", height: "20px sm:h-24px", color: "rgba(141, 141, 141, 1)" }} className="shrink-0" />
+                  <Calendar className="w-5 h-5 sm:w-6 sm:h-6 text-[rgba(141,141,141,1)] shrink-0" />
                   <input
                     type="date"
                     value={startDate}
@@ -515,25 +505,16 @@ export default function HolidaysPortal() {
                       letterSpacing: "0px", 
                       color: "rgba(43, 43, 43, 1)",
                       padding: 0,
-                      cursor: "pointer"
+                      cursor: "pointer",
+                      textAlign: "center"
                     }}
-                    className="placeholder-[rgba(141,141,141,1)] hide-calendar-picker-icon text-sm sm:text-base md:text-[20px]"
+                    className="placeholder-[rgba(141,141,141,1)] hide-calendar-picker-icon text-sm sm:text-base md:text-[20px] w-full text-center"
                   />
                 </div>
                 <div 
-                  style={{ 
-                    flex: 1,
-                    height: "56px", 
-                    border: "1px solid rgba(141, 141, 141, 0.5)", 
-                    borderRadius: "8px", 
-                    padding: "0 12px sm:p-0 16px", 
-                    display: "flex", 
-                    alignItems: "center", 
-                    gap: "10px sm:gap-14", 
-                    background: "white" 
-                  }}
+                  className="flex-1 h-[56px] border border-[rgba(141,141,141,0.5)] rounded-[8px] px-3 sm:px-4 flex items-center gap-2 sm:gap-3 bg-white"
                 >
-                  <Calendar style={{ width: "20px sm:w-24px", height: "20px sm:h-24px", color: "rgba(141, 141, 141, 1)" }} className="shrink-0" />
+                  <Calendar className="w-5 h-5 sm:w-6 sm:h-6 text-[rgba(141,141,141,1)] shrink-0" />
                   <input
                     type="date"
                     value={endDate}
@@ -560,9 +541,10 @@ export default function HolidaysPortal() {
                       letterSpacing: "0px", 
                       color: "rgba(43, 43, 43, 1)",
                       padding: 0,
-                      cursor: "pointer"
+                      cursor: "pointer",
+                      textAlign: "center"
                     }}
-                    className="placeholder-[rgba(141,141,141,1)] hide-calendar-picker-icon text-sm sm:text-base md:text-[20px]"
+                    className="placeholder-[rgba(141,141,141,1)] hide-calendar-picker-icon text-sm sm:text-base md:text-[20px] w-full text-center"
                   />
                 </div>
               </div>
@@ -1785,88 +1767,86 @@ export default function HolidaysPortal() {
             </p>
           </div>
 
-          {/* Testimonial grid (Increased text sizes) */}
+          {/* Reviews Container Wrapper (1558px x 662.5px spec with Linear Gradient Overlay & 2 Stacked Marquees) */}
           <div 
             style={{
-              width: "100%",
-              maxWidth: "1280px",
-              height: "662.5px",
-              display: "grid",
-              gridTemplateColumns: "repeat(3, 1fr)",
-              gap: "32px",
-              boxSizing: "border-box"
+              width: "1558px",
+              maxWidth: "100%",
+              minHeight: "662.5px",
+              position: "relative",
+              overflow: "hidden",
+              margin: "0 auto"
             }}
           >
-            
-            {/* Column 1 (Faded) */}
-            <div className="space-y-8 md:opacity-40 hover:opacity-100 transition duration-300">
-              {[TESTIMONIALS[0], TESTIMONIALS[3]].map((test, i) => (
-                <div key={i} className="bg-gray-50 border border-gray-100 p-8 rounded-2xl space-y-5 text-left shadow-2xs">
-                  <div className="flex gap-0.5 text-yellow-500">
-                    {Array.from({ length: test.rating }).map((_, s) => (
-                      <Star key={s} className="w-4 h-4 fill-yellow-500 stroke-none" />
-                    ))}
-                  </div>
-                  <p className="text-xs md:text-sm text-gray-600 font-medium italic leading-relaxed">
-                    {test.quote}
-                  </p>
-                  <div className="flex items-center gap-3.5 pt-2">
-                    <img src={test.avatar} alt={test.author} className="w-12 h-12 rounded-full object-cover shrink-0" />
-                    <div>
-                      <h4 className="text-sm font-extrabold text-gray-800">{test.author}</h4>
-                      <p className="text-xs text-gray-400 font-semibold">{test.role}</p>
+            {/* Linear Gradient Fade Overlay */}
+            <div 
+              style={{
+                position: "absolute",
+                inset: 0,
+                pointerEvents: "none",
+                zIndex: 10,
+                background: "linear-gradient(90.01deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 80%, #FFFFFF 100%)"
+              }}
+            />
+
+            {/* 2 Stacked Marquee Rows (Row 1 Left, Row 2 Right, Pauses on Hover) */}
+            <div className="flex flex-col gap-6 py-2">
+              {/* Row 1 (Left Scrolling) */}
+              <div className="flex gap-8 py-2 w-max animate-marquee hover:[animation-play-state:paused]">
+                {[...TESTIMONIALS, ...TESTIMONIALS].map((test, idx) => (
+                  <div 
+                    key={idx} 
+                    className="bg-white border border-gray-200 p-6 rounded-[8px] flex flex-col justify-between space-y-4 shadow-2xs hover:shadow-xl hover:border-[#FF623E] hover:scale-105 transition-all duration-300 w-[380px] shrink-0 cursor-pointer text-left"
+                  >
+                    <div className="space-y-3">
+                      <div className="flex text-amber-400 text-sm gap-1">
+                        {Array.from({ length: test.rating }).map((_, s) => (
+                          <Star key={s} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                        ))}
+                      </div>
+                      <p className="text-gray-700 font-medium italic text-[15px] leading-relaxed">
+                        {test.quote}
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-3 pt-3 border-t border-gray-100">
+                      <img src={test.avatar} alt={test.author} className="w-10 h-10 rounded-full object-cover shrink-0" />
+                      <div>
+                        <h4 className="text-[15px] font-bold text-gray-800 leading-none">{test.author}</h4>
+                        <p className="text-xs text-gray-400 font-medium mt-0.5">{test.role}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
 
-            {/* Column 2 (Active/Sharp) */}
-            <div className="space-y-8">
-              {[TESTIMONIALS[1], TESTIMONIALS[4]].map((test, i) => (
-                <div key={i} className="bg-white border border-gray-200 p-8 rounded-2xl space-y-5 text-left shadow-xs scale-102">
-                  <div className="flex gap-0.5 text-yellow-500">
-                    {Array.from({ length: test.rating }).map((_, s) => (
-                      <Star key={s} className="w-4 h-4 fill-yellow-500 stroke-none" />
-                    ))}
-                  </div>
-                  <p className="text-xs md:text-sm text-gray-600 font-bold italic leading-relaxed">
-                    {test.quote}
-                  </p>
-                  <div className="flex items-center gap-3.5 pt-2">
-                    <img src={test.avatar} alt={test.author} className="w-12 h-12 rounded-full object-cover shrink-0" />
-                    <div>
-                      <h4 className="text-sm font-black text-gray-800">{test.author}</h4>
-                      <p className="text-xs text-[#1D493E]/60 font-black">{test.role}</p>
+              {/* Row 2 (Right Reverse Scrolling) */}
+              <div className="flex gap-8 py-2 w-max animate-marquee-reverse hover:[animation-play-state:paused]">
+                {[...TESTIMONIALS.slice().reverse(), ...TESTIMONIALS.slice().reverse()].map((test, idx) => (
+                  <div 
+                    key={idx} 
+                    className="bg-white border border-gray-200 p-6 rounded-[8px] flex flex-col justify-between space-y-4 shadow-2xs hover:shadow-xl hover:border-[#FF623E] hover:scale-105 transition-all duration-300 w-[380px] shrink-0 cursor-pointer text-left"
+                  >
+                    <div className="space-y-3">
+                      <div className="flex text-amber-400 text-sm gap-1">
+                        {Array.from({ length: test.rating }).map((_, s) => (
+                          <Star key={s} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                        ))}
+                      </div>
+                      <p className="text-gray-700 font-medium italic text-[15px] leading-relaxed">
+                        {test.quote}
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-3 pt-3 border-t border-gray-100">
+                      <img src={test.avatar} alt={test.author} className="w-10 h-10 rounded-full object-cover shrink-0" />
+                      <div>
+                        <h4 className="text-[15px] font-bold text-gray-800 leading-none">{test.author}</h4>
+                        <p className="text-xs text-gray-400 font-medium mt-0.5">{test.role}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-
-            {/* Column 3 (Faded) */}
-            <div className="space-y-8 md:opacity-40 hover:opacity-100 transition duration-300">
-              {[TESTIMONIALS[2], TESTIMONIALS[5]].map((test, i) => (
-                <div key={i} className="bg-gray-50 border border-gray-100 p-8 rounded-2xl space-y-5 text-left shadow-2xs">
-                  <div className="flex gap-0.5 text-yellow-500">
-                    {Array.from({ length: test.rating }).map((_, s) => (
-                      <Star key={s} className="w-4 h-4 fill-yellow-500 stroke-none" />
-                    ))}
-                  </div>
-                  <p className="text-xs md:text-sm text-gray-600 font-medium italic leading-relaxed">
-                    {test.quote}
-                  </p>
-                  <div className="flex items-center gap-3.5 pt-2">
-                    <img src={test.avatar} alt={test.author} className="w-12 h-12 rounded-full object-cover shrink-0" />
-                    <div>
-                      <h4 className="text-sm font-bold text-gray-800">{test.author}</h4>
-                      <p className="text-xs text-gray-400 font-semibold">{test.role}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
           </div>
 
         </div>
@@ -2057,7 +2037,18 @@ export default function HolidaysPortal() {
                       required
                       value={bookingDate}
                       onChange={(e) => setBookingDate(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl border-2 border-[#1D493E] bg-white text-xs font-bold text-[#1D493E] focus:outline-none"
+                      onClick={(e) => {
+                        try {
+                          e.currentTarget.showPicker();
+                        } catch (err) {}
+                      }}
+                      onFocus={(e) => {
+                        try {
+                          e.currentTarget.showPicker();
+                        } catch (err) {}
+                      }}
+                      style={{ textAlign: "center" }}
+                      className="w-full px-4 py-3 rounded-xl border-2 border-[#1D493E] bg-white text-xs font-bold text-[#1D493E] focus:outline-none text-center cursor-pointer hide-calendar-picker-icon"
                     />
                   </div>
 

@@ -1491,7 +1491,18 @@ export default function KeralaDetails() {
                       required
                       value={bookingDate}
                       onChange={(e) => setBookingDate(e.target.value)}
-                      className="w-full p-3 rounded-xl border border-[#1D493E]/20 bg-white text-xs text-[#1D493E] focus:outline-none focus:ring-2 focus:ring-[#1D493E]/10 font-bold cursor-pointer"
+                      onClick={(e) => {
+                        try {
+                          e.currentTarget.showPicker();
+                        } catch (err) {}
+                      }}
+                      onFocus={(e) => {
+                        try {
+                          e.currentTarget.showPicker();
+                        } catch (err) {}
+                      }}
+                      style={{ textAlign: "center" }}
+                      className="w-full p-3 rounded-xl border border-[#1D493E]/20 bg-white text-xs text-[#1D493E] focus:outline-none focus:ring-2 focus:ring-[#1D493E]/10 font-bold text-center hide-calendar-picker-icon cursor-pointer"
                     />
                   </div>
 

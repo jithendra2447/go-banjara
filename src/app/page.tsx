@@ -649,47 +649,6 @@ export default function Homepage() {
         </div>
       </section>
 
-      {/* 5. TOP PRODUCT CATEGORIES */}
-      {/* 4.5 STANDALONE SHOP BANNER SECTION */}
-      <section className="bg-white relative z-10 w-full">
-        <div className="max-w-[1440px] mx-auto px-6 md:px-20 py-2">
-          <div 
-            style={{ width: "100%", maxWidth: "1356px", height: "242px" }}
-            className="mx-auto bg-white flex items-end justify-between pb-8 border-b border-gray-100 text-left relative"
-          >
-            <div className="space-y-4 max-w-4xl text-left">
-              <h2 className="text-3xl md:text-[42px] font-serif font-semibold text-[#1D493E] leading-none">
-                Shop Product in all Categories
-              </h2>
-              <p className="text-gray-500 text-base md:text-[24px] md:leading-8 font-medium">
-                Curated gear for the modern nomad. From durable journal covers to the stickers that tell your story
-              </p>
-            </div>
-            <div className="shrink-0 pb-1">
-              <Link 
-                href="/shop"
-                className="inline-flex items-center justify-center gap-[8px] text-[#1D493E] hover:opacity-80 transition-all duration-300 cursor-pointer group font-sans font-medium text-lg md:text-[20px] leading-none"
-              >
-                <span>Shop Now</span>
-                <svg 
-                  style={{ width: '28px', height: '28px' }}
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="2.25" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round"
-                  className="shrink-0 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"
-                >
-                  <path d="M7 17l2.5-2.5" />
-                  <path d="M12.5 11.5L17 7" />
-                  <path d="M7 7h10v10" />
-                </svg>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* 5. TOP PRODUCT CATEGORIES */}
       <section className="bg-white relative z-10">

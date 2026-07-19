@@ -357,9 +357,6 @@ export default function AboutPage() {
               borderBottomRightRadius: "4px",
               borderBottomLeftRadius: "4px",
               borderTopLeftRadius: "0px",
-              backgroundImage: "url('https://images.unsplash.com/photo-1527631746610-bca00a040d60?auto=format&fit=crop&w=600&q=80')",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
               position: "relative",
               boxShadow: "0 10px 20px rgba(0,0,0,0.15)",
               transform: "rotate(-8deg)",
@@ -369,13 +366,13 @@ export default function AboutPage() {
               overflow: "hidden"
             }}
           >
-            <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/55 to-transparent pointer-events-none" />
-            <div style={{ position: "absolute", bottom: "35px", left: "20px", transform: "rotate(-4deg)" }}>
-              <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 800, fontSize: "48px", color: "#FFFF80", letterSpacing: "-1.5px", lineHeight: "1" }}>
-                go banjara
-              </span>
-            </div>
+            <img 
+              src="/card-hikers.png" 
+              alt="Go Banjara Traveler Card" 
+              className="w-full h-full object-cover pointer-events-none select-none"
+            />
           </div>
+
           {/* Card 2: Green Explore/Adventure Card */}
           <div 
             style={{ 
@@ -385,7 +382,6 @@ export default function AboutPage() {
               borderBottomRightRadius: "4px",
               borderBottomLeftRadius: "4px",
               borderTopLeftRadius: "0px",
-              background: "#1D493E",
               position: "relative",
               boxShadow: "0 10px 20px rgba(0,0,0,0.15)",
               transform: "rotate(-3deg)",
@@ -396,14 +392,11 @@ export default function AboutPage() {
               overflow: "hidden"
             }}
           >
-            <svg viewBox="0 0 302 380" fill="none" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}>
-              <path d="M-20,320 Q90,260 90,140 Q90,50 180,90 Q220,110 240,40 Q250,10 280,-20" fill="none" stroke="#FF623E" strokeWidth="28" strokeLinecap="round" />
-              <path d="M240,40 Q260,110 290,180" fill="none" stroke="#FF623E" strokeWidth="28" strokeLinecap="round" />
-            </svg>
-            <span style={{ position: "absolute", top: "45px", left: "30px", fontFamily: "Fraunces, serif", fontStyle: "italic", fontWeight: 500, fontSize: "36px", color: "#FAF9F6", transform: "rotate(-5deg)" }}>explore</span>
-            <span style={{ position: "absolute", top: "140px", right: "25px", fontFamily: "Fraunces, serif", fontStyle: "italic", fontWeight: 500, fontSize: "36px", color: "#FAF9F6", transform: "rotate(-6deg)" }}>adventure</span>
-            <span style={{ position: "absolute", bottom: "100px", left: "35px", fontFamily: "Fraunces, serif", fontStyle: "italic", fontWeight: 500, fontSize: "36px", color: "#FAF9F6", transform: "rotate(-4deg)" }}>wild</span>
-            <span style={{ position: "absolute", bottom: "40px", right: "30px", fontFamily: "Fraunces, serif", fontStyle: "italic", fontWeight: 500, fontSize: "36px", color: "#FAF9F6", transform: "rotate(-6deg)" }}>journey</span>
+            <img 
+              src="/card-green.png" 
+              alt="Explore Adventure Card" 
+              className="w-full h-full object-cover pointer-events-none select-none"
+            />
           </div>
 
           {/* Card 3: Cream Camel Card */}
@@ -415,7 +408,6 @@ export default function AboutPage() {
               borderBottomRightRadius: "4px",
               borderBottomLeftRadius: "4px",
               borderTopLeftRadius: "0px",
-              background: "#F4FBF4",
               position: "relative",
               boxShadow: "0 10px 20px rgba(0,0,0,0.15)",
               transform: "rotate(-4deg)",
@@ -423,61 +415,14 @@ export default function AboutPage() {
               zIndex: 12,
               marginLeft: "-35px",
               flexShrink: 0,
-              padding: "24px",
-              boxSizing: "border-box",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
               overflow: "hidden"
             }}
           >
-            <div>
-              <h3 style={{ fontFamily: "Fraunces, serif", fontWeight: 600, fontSize: "36px", lineHeight: "105%", color: "#1D493E", margin: 0, transform: "rotate(-2deg)" }}>
-                Humps down,<br />surfs up!
-              </h3>
-            </div>
-            <div style={{ position: "absolute", bottom: "-25px", right: "-15px", width: "250px", height: "250px" }}>
-              <svg viewBox="0 0 220 220" fill="none" style={{ width: "100%", height: "100%" }}>
-                {/* Outer White Border Outline */}
-                <g stroke="#FFFFFF" strokeWidth="10" strokeLinejoin="round" strokeLinecap="round">
-                  {/* Left Ear */}
-                  <path d="M55,85 C35,45 55,25 72,38 C82,48 85,75 85,85 Z" fill="#FF5733" />
-                  {/* Right Ear */}
-                  <path d="M142,85 C142,75 145,48 155,38 C172,25 192,45 172,85 Z" fill="#FF5733" />
-                  {/* Head & Neck */}
-                  <path d="M55,95 C50,85 177,85 172,95 L166,180 C161,210 66,210 61,180 Z" fill="#FF5733" />
-                </g>
-
-                {/* Orange Camel Body Fill */}
-                <g fill="#FF5733">
-                  <path d="M55,85 C35,45 55,25 72,38 C82,48 85,75 85,85 Z" />
-                  <path d="M142,85 C142,75 145,48 155,38 C172,25 192,45 172,85 Z" />
-                  <path d="M55,95 C50,85 177,85 172,95 L166,180 C161,210 66,210 61,180 Z" />
-                </g>
-
-                {/* White Snout / Muzzle Outline */}
-                <path d="M85,140 C85,120 142,120 142,140 C142,175 85,175 85,140 Z" fill="#FFFFFF" stroke="#FFFFFF" strokeWidth="4" />
-                <path d="M98,148 C106,160 121,160 129,148" stroke="#FF5733" strokeWidth="4" strokeLinecap="round" fill="none" />
-                <path d="M114,140 L114,152" stroke="#FF5733" strokeWidth="4" strokeLinecap="round" />
-
-                {/* Cool Sunglasses */}
-                <g>
-                  {/* White Sunglass Frame Structure */}
-                  <path d="M48,102 L179,102 C183,102 185,106 181,110 L167,143 C163,152 149,156 137,148 L114,126 L90,148 C78,156 64,152 60,143 L46,110 C42,106 44,102 48,102 Z" fill="#FFFFFF" />
-                  <path d="M48,98 L179,98" stroke="#FFFFFF" strokeWidth="8" strokeLinecap="round" />
-
-                  {/* Left Dark Green Lens */}
-                  <path d="M62,110 C62,106 92,106 92,112 C92,130 82,144 70,142 C62,140 62,122 62,110 Z" fill="#1D493E" />
-                  {/* Left Lens White Reflection Highlight */}
-                  <path d="M68,112 C68,110 80,110 82,114 C80,118 70,118 68,112 Z" fill="#FFFFFF" opacity="0.9" />
-
-                  {/* Right Dark Green Lens */}
-                  <path d="M136,112 C136,106 166,106 166,110 C166,122 166,140 158,142 C146,144 136,130 136,112 Z" fill="#1D493E" />
-                  {/* Right Lens White Reflection Highlight */}
-                  <path d="M142,112 C142,110 154,110 156,114 C154,118 144,118 142,112 Z" fill="#FFFFFF" opacity="0.9" />
-                </g>
-              </svg>
-            </div>
+            <img 
+              src="/card-camel.png" 
+              alt="Humps Down Surf's Up Card" 
+              className="w-full h-full object-cover pointer-events-none select-none"
+            />
           </div>
         </div>
       </section>

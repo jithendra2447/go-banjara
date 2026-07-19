@@ -1183,36 +1183,111 @@ export default function ProductDetailsPage() {
         )}
  
         {/* FAQ Accordion Section */}
-        <section className="w-full py-[42px] border-t border-slate-100 pb-16 text-left !px-0 flex flex-col gap-[32px]">
-          <div className="w-full h-auto flex flex-col gap-[12px] justify-center text-left">
-            <div className="w-[54px] h-[26px] flex items-center justify-center bg-[#FFEBE5] rounded-[4px]">
-              <span className="font-sans font-semibold text-[14px] leading-none tracking-[1.2px] text-[#FF623E] uppercase">
+        <section 
+          style={{
+            width: "100%",
+            paddingTop: "42px",
+            paddingBottom: "42px",
+            borderTop: "1px solid rgba(204, 204, 204, 0.54)",
+            display: "flex",
+            flexDirection: "column",
+            gap: "32px",
+            boxSizing: "border-box"
+          }}
+          className="!px-0 text-left"
+        >
+          {/* Header */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "12px", width: "100%" }}>
+            <div>
+              <span style={{
+                fontFamily: "Faktum, sans-serif",
+                fontWeight: 600,
+                fontSize: "12px",
+                lineHeight: "100%",
+                letterSpacing: "1.2px",
+                color: "rgba(255, 98, 62, 1)",
+                backgroundColor: "rgba(255, 235, 229, 1)",
+                padding: "4px 8px",
+                borderRadius: "2px",
+                textTransform: "uppercase",
+                display: "inline-block"
+              }}>
                 FAQ'S
               </span>
             </div>
-            <h2 className="w-full max-w-[541px] h-auto flex items-center font-serif font-semibold text-3xl md:text-[42px] leading-[1] tracking-[0px] text-[#2B2B2B] py-2">
+            <h2 style={{
+              fontFamily: "Fraunces, serif",
+              fontWeight: 600,
+              fontSize: "32px",
+              lineHeight: "120%",
+              letterSpacing: "0px",
+              color: "rgba(43, 43, 43, 1)",
+              margin: 0
+            }}>
               Frequently asked questions
             </h2>
           </div>
 
-          <div className="w-full border-t border-slate-200 divide-y divide-slate-200">
+          {/* Accordion container */}
+          <div style={{ width: "100%", borderTop: "1px solid rgba(204, 204, 204, 0.54)", display: "flex", flexDirection: "column" }}>
             {FAQ_ITEMS.map((item, idx) => {
               const isOpen = openFaqIdx === idx;
               return (
-                <div key={idx} className="py-5 text-left border-b border-slate-200">
+                <div 
+                  key={idx} 
+                  style={{
+                    paddingTop: "20px",
+                    paddingBottom: "20px",
+                    borderBottom: "1px solid rgba(204, 204, 204, 0.3)",
+                    display: "flex",
+                    flexDirection: "column",
+                    width: "100%"
+                  }}
+                >
                   <button
                     onClick={() => setOpenFaqIdx(isOpen ? null : idx)}
-                    className="w-full flex justify-between items-center text-left gap-4 cursor-pointer group bg-transparent border-none p-0"
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      border: "none",
+                      background: "none",
+                      padding: 0,
+                      cursor: "pointer",
+                      textAlign: "left"
+                    }}
                   >
-                    <span className="w-full h-auto py-2 flex items-center font-sans font-medium text-sm sm:text-base md:text-[20px] leading-normal tracking-[0px] text-[#2B2B2B]">
+                    <span style={{
+                      fontFamily: "Faktum, sans-serif",
+                      fontWeight: 500,
+                      fontSize: "18px",
+                      lineHeight: "140%",
+                      color: "rgba(43, 43, 43, 1)",
+                      flex: 1
+                    }}>
                       {item.question}
                     </span>
-                    <span className="text-xl font-medium text-[#1D493E] shrink-0 leading-none select-none">
+                    <span style={{
+                      fontFamily: "Faktum, sans-serif",
+                      fontSize: "20px",
+                      fontWeight: 500,
+                      color: "rgba(29, 73, 62, 1)",
+                      marginLeft: "16px",
+                      flexShrink: 0
+                    }}>
                       {isOpen ? '—' : '+'}
                     </span>
                   </button>
                   {isOpen && (
-                    <p className="mt-3 w-full h-auto py-1 font-sans font-medium text-sm sm:text-base md:text-[20px] leading-normal tracking-[0px] text-[#8D8D8D] animate-fade-in">
+                    <p style={{
+                      fontFamily: "Faktum, sans-serif",
+                      fontWeight: 500,
+                      fontSize: "16px",
+                      lineHeight: "28px",
+                      color: "rgba(141, 141, 141, 1)",
+                      margin: "12px 0 0 0"
+                    }}>
                       {item.answer}
                     </p>
                   )}

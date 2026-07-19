@@ -618,10 +618,41 @@ export default function AboutPage() {
                 gap: "12px"
               }}
             >
-              <span className="bg-[#FF623E] text-white text-[12px] font-semibold px-3 py-1 rounded-[4px] uppercase tracking-wider">
+              <span 
+                style={{
+                  width: "117px",
+                  height: "26px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "10px",
+                  background: "#FF623E",
+                  color: "#FFFFFF",
+                  fontFamily: "Faktum, sans-serif",
+                  fontWeight: 600,
+                  fontSize: "14px",
+                  lineHeight: "14px",
+                  letterSpacing: "1.2px",
+                  borderRadius: "4px",
+                  textTransform: "uppercase"
+                }}
+              >
                 OUR MISSION
               </span>
-              <p className="text-white text-base md:text-[20px] font-sans font-medium leading-[28px] m-0">
+              <p 
+                style={{
+                  width: "787px",
+                  maxWidth: "100%",
+                  height: "168px",
+                  fontFamily: "Faktum, sans-serif",
+                  fontWeight: 500,
+                  fontSize: "24px",
+                  lineHeight: "42px",
+                  color: "rgba(255, 255, 255, 1)",
+                  letterSpacing: "0px",
+                  margin: 0
+                }}
+              >
                 We exist to bridge the gap between the life people are living and the adventures they are dreaming about. Every experience we curate, every product we build, and every story we tell is in service of one thing: helping people go further.
               </p>
             </div>
@@ -643,7 +674,25 @@ export default function AboutPage() {
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-102"
             />
             <div className="absolute bottom-6 left-6">
-              <span className="bg-[#FF623E] text-white text-[12px] font-semibold px-3 py-1 rounded-[4px] uppercase tracking-wider">
+              <span 
+                style={{
+                  width: "117px",
+                  height: "26px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "10px",
+                  background: "#FF623E",
+                  color: "#FFFFFF",
+                  fontFamily: "Faktum, sans-serif",
+                  fontWeight: 600,
+                  fontSize: "14px",
+                  lineHeight: "14px",
+                  letterSpacing: "1.2px",
+                  borderRadius: "4px",
+                  textTransform: "uppercase"
+                }}
+              >
                 OUR VISION
               </span>
             </div>

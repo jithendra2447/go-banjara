@@ -1135,11 +1135,11 @@ export default function ProductDetailsPage() {
         )}
 
         {/* Similar Products (You May Also Like) */}
-        <section className="w-full mt-16 pt-8 border-t border-slate-100 text-left px-4 md:px-8">
+        <section className="w-full mt-16 pt-8 border-t border-slate-100 text-left">
           <h2 className="text-2xl md:text-[32px] font-serif font-semibold text-[#2B2B2B] mb-8">
             You May Also <span className="text-[#FF5A36]">Like</span>
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[32px] w-full">
             {fallbackSimilarProducts.map((prod) => (
               <ProductCard
                 key={prod.id}
@@ -1152,11 +1152,11 @@ export default function ProductDetailsPage() {
 
         {/* Recently Viewed Products */}
         {recentlyViewed.length > 0 && (
-          <section className="w-full mt-16 pt-8 border-t border-slate-100 text-left px-4 md:px-8">
+          <section className="w-full mt-16 pt-8 border-t border-slate-100 text-left">
             <h2 className="text-2xl md:text-[32px] font-serif font-semibold text-[#2B2B2B] mb-8">
               Recently <span className="text-[#FF5A36]">Viewed</span>
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[32px] w-full">
               {recentlyViewed.map((prod) => (
                 <ProductCard
                   key={prod.id}
@@ -1169,7 +1169,7 @@ export default function ProductDetailsPage() {
         )}
 
         {/* FAQ Accordion Section */}
-        <section className="w-full mt-16 pt-8 border-t border-slate-100 pb-16 text-left px-4 md:px-8">
+        <section className="w-full mt-16 pt-8 border-t border-slate-100 pb-16 text-left">
           <div className="max-w-[800px] mx-auto flex flex-col gap-6">
             <div className="text-center space-y-2">
               <span className="inline-block text-[9px] font-black uppercase tracking-wider text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-1 rounded-[4px]">

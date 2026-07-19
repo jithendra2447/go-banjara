@@ -1183,42 +1183,42 @@ export default function ProductDetailsPage() {
         )}
  
         {/* FAQ Accordion Section */}
-        <section className="w-full mt-16 pt-8 border-t border-slate-100 pb-16 text-left !px-0">
-          <div className="max-w-[800px] mx-auto flex flex-col gap-6">
-            <div className="text-center space-y-2">
-              <span className="inline-block text-[9px] font-black uppercase tracking-wider text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-1 rounded-[4px]">
-                FAQS
+        <section className="w-full py-[42px] border-t border-slate-100 pb-16 text-left !px-0 flex flex-col gap-[32px]">
+          <div className="w-full h-auto flex flex-col gap-[12px] justify-center text-left">
+            <div className="w-[54px] h-[26px] flex items-center justify-center bg-[#FFEBE5] rounded-[4px]">
+              <span className="font-sans font-semibold text-[14px] leading-none tracking-[1.2px] text-[#FF623E] uppercase">
+                FAQ'S
               </span>
-              <h2 className="text-2xl md:text-[32px] font-serif font-semibold text-[#2B2B2B]">
-                Frequently Asked <span className="text-[#FF5A36]">Questions</span>
-              </h2>
             </div>
-            
-            <div className="mt-4 border border-slate-200 rounded-lg overflow-hidden divide-y divide-slate-200 bg-white">
-              {FAQ_ITEMS.map((item, idx) => {
-                const isOpen = openFaqIdx === idx;
-                return (
-                  <div key={idx} className="transition-all duration-300">
-                    <button
-                      onClick={() => setOpenFaqIdx(isOpen ? null : idx)}
-                      className="w-full px-6 py-4 flex justify-between items-center text-left gap-4 hover:bg-slate-50 transition-colors cursor-pointer border-none bg-transparent"
-                    >
-                      <span className="font-sans font-semibold text-[#2B2B2B] text-base md:text-lg">
-                        {item.question}
-                      </span>
-                      <span className={`text-[#FF5A36] text-xl font-bold transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
-                        {isOpen ? '−' : '+'}
-                      </span>
-                    </button>
-                    {isOpen && (
-                      <div className="px-6 pb-5 pt-1 text-slate-600 font-sans text-sm md:text-base leading-relaxed">
-                        {item.answer}
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
+            <h2 className="w-full max-w-[541px] h-auto flex items-center font-serif font-semibold text-3xl md:text-[42px] leading-[1] tracking-[0px] text-[#2B2B2B] py-2">
+              Frequently asked questions
+            </h2>
+          </div>
+
+          <div className="w-full border-t border-slate-200 divide-y divide-slate-200">
+            {FAQ_ITEMS.map((item, idx) => {
+              const isOpen = openFaqIdx === idx;
+              return (
+                <div key={idx} className="py-5 text-left border-b border-slate-200">
+                  <button
+                    onClick={() => setOpenFaqIdx(isOpen ? null : idx)}
+                    className="w-full flex justify-between items-center text-left gap-4 cursor-pointer group bg-transparent border-none p-0"
+                  >
+                    <span className="w-full h-auto py-2 flex items-center font-sans font-medium text-sm sm:text-base md:text-[20px] leading-normal tracking-[0px] text-[#2B2B2B]">
+                      {item.question}
+                    </span>
+                    <span className="text-xl font-medium text-[#1D493E] shrink-0 leading-none select-none">
+                      {isOpen ? '—' : '+'}
+                    </span>
+                  </button>
+                  {isOpen && (
+                    <p className="mt-3 w-full h-auto py-1 font-sans font-medium text-sm sm:text-base md:text-[20px] leading-normal tracking-[0px] text-[#8D8D8D] animate-fade-in">
+                      {item.answer}
+                    </p>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </section>
 

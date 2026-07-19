@@ -10,13 +10,14 @@ type AuthView = 'login' | 'signup' | 'forgot' | 'mobile_otp' | 'email_login';
 export const AuthModal: React.FC = () => {
   const { isAuthOpen, setAuthOpen, login } = useCart();
   const [view, setView] = useState<AuthView>('login');
+  const [otpFlowSource, setOtpFlowSource] = useState<'login' | 'signup'>('login');
 
   // Input states
   const [email, setEmail] = useState('kumarsaiarja2468@gmail.com');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('Kumar Sai Arja');
   const [phone, setPhone] = useState('9492906356');
-  const [otp, setOtp] = useState<string[]>(Array(7).fill('')); // 7 digits exactly to match figma
+  const [otp, setOtp] = useState<string[]>(Array(6).fill('')); // 6 digits exactly to match figma
   
   // Feedback states
   const [error, setError] = useState('');
@@ -117,6 +118,7 @@ export const AuthModal: React.FC = () => {
       const errMsg = err instanceof Error ? err.message : String(err);
       console.warn('Fallback registration active:', errMsg);
       if (name && email && phone) {
+        setOtpFlowSource('signup');
         setLoading(false);
         setOtpCountdown(30);
         setView('mobile_otp');
@@ -166,6 +168,7 @@ export const AuthModal: React.FC = () => {
       return;
     }
 
+    setOtpFlowSource('login');
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
@@ -180,8 +183,8 @@ export const AuthModal: React.FC = () => {
     setError('');
     const fullOtp = otp.join('');
 
-    if (fullOtp.length !== 7) {
-      setError('Please enter the complete 7-digit OTP.');
+    if (fullOtp.length !== 6) {
+      setError('Please enter the complete 6-digit OTP.');
       return;
     }
 
@@ -308,8 +311,22 @@ export const AuthModal: React.FC = () => {
 
             {/* Title / Description */}
             <div className="text-center">
-              <h2 className="text-2xl font-black text-slate-900 leading-tight m-0">Create Account</h2>
-              <p className="text-xs text-slate-400 font-semibold mt-1 mb-0">Get started for a seamless shopping experience</p>
+              <h2 className="text-2xl font-black text-slate-900 leading-tight m-0">
+                {view === 'signup' || (view === 'mobile_otp' && otpFlowSource === 'signup') 
+                  ? 'Create Account' 
+                  : view === 'forgot'
+                  ? 'Reset Password'
+                  : view === 'email_login'
+                  ? 'Log In'
+                  : 'Welcome back Kumar Sai!'}
+              </h2>
+              <p className="text-xs text-slate-400 font-semibold mt-1 mb-0">
+                {view === 'email_login' 
+                  ? 'Log in using email address and password' 
+                  : view === 'forgot'
+                  ? 'Enter email to recover account credentials'
+                  : 'Get started for a seamless shopping experience'}
+              </p>
             </div>
           </div>
 
@@ -381,14 +398,8 @@ export const AuthModal: React.FC = () => {
               </div>
             )}
 
-            {/* B. CREATE ACCOUNT / SIGNUP VIEW */}
             {view === 'signup' && (
               <div className="space-y-6">
-                <div>
-                  <h2 className="text-2xl font-black text-slate-900 leading-tight">Create Account</h2>
-                  <p className="text-xs text-slate-400 font-semibold mt-1">Get started for a seamless shopping experience</p>
-                </div>
-
                 <form onSubmit={handleEmailSignup} className="space-y-4">
                   <div className="space-y-1.5">
                     <label className="block text-xs font-semibold text-slate-800">
@@ -453,11 +464,6 @@ export const AuthModal: React.FC = () => {
             {/* C. ENTER OTP / VERIFY VIEW */}
             {view === 'mobile_otp' && (
               <div className="space-y-6">
-                <div>
-                  <h2 className="text-2xl font-black text-slate-900 leading-tight">Welcome back Kumar Sai!</h2>
-                  <p className="text-xs text-slate-400 font-semibold mt-1">Get started for a seamless shopping experience</p>
-                </div>
-
                 <form onSubmit={handleOtpVerify} className="space-y-4">
                   <div className="space-y-2">
                     <label className="block text-xs font-semibold text-slate-800">Enter OTP</label>
@@ -506,11 +512,6 @@ export const AuthModal: React.FC = () => {
             {/* D. TRADITIONAL EMAIL/PASSWORD LOGIN */}
             {view === 'email_login' && (
               <div className="space-y-6">
-                <div>
-                  <h2 className="text-2xl font-black text-slate-900 leading-tight">Log In</h2>
-                  <p className="text-xs text-slate-400 font-semibold mt-1">Log in using email address and password</p>
-                </div>
-
                 <form onSubmit={handleEmailLogin} className="space-y-4">
                   <div className="space-y-1.5">
                     <label className="block text-xs font-semibold text-slate-800">Email Address</label>
@@ -560,11 +561,6 @@ export const AuthModal: React.FC = () => {
             {/* E. FORGOT PASSWORD VIEW */}
             {view === 'forgot' && (
               <div className="space-y-6">
-                <div>
-                  <h2 className="text-2xl font-black text-slate-900 leading-tight">Reset Password</h2>
-                  <p className="text-xs text-slate-400 font-semibold mt-1">Enter email to recover account credentials</p>
-                </div>
-
                 <form onSubmit={handleForgotSubmit} className="space-y-4">
                   <div className="space-y-1.5">
                     <label className="block text-xs font-semibold text-slate-800">Email Address</label>
@@ -679,7 +675,8 @@ export const AuthModal: React.FC = () => {
               className="w-full h-full object-cover" 
               style={{ borderRadius: '8px' }} 
               alt="Go Banjara Mascot Llama" 
-                     {/* Sticker 1: Top Left (Figma specs: 99.2x91, angle 15deg, top 0, left 32) */}
+            />
+            {/* Sticker 1: Top Left (Figma specs: 99.2x91, angle 15deg, top 0, left 32) */}
             <div 
               className="absolute rounded-full shadow-md flex items-center justify-center text-center select-none"
               style={{

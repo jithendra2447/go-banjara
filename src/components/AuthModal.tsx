@@ -1363,38 +1363,6 @@ export const AuthModal: React.FC = () => {
                 alt="Go Banjara Mascot Llama" 
               />
             </div>
-
-            {/* Sticker 1: Top Left (Figma specs: 99.2x91, angle 15deg, top 0, left 32) */}
-            <img 
-              src="/naturally_nomad_badge.png"
-              alt="Naturally Nomad Badge"
-              style={{
-                position: 'absolute',
-                width: '99.19px',
-                height: '91px',
-                top: '0px',
-                left: '32px',
-                transform: 'rotate(15deg)',
-                zIndex: 20,
-                borderRadius: '50%',
-              }}
-            />
-
-            {/* Sticker 2: Bottom Right (Figma specs: 124x120, angle -0deg, top 469.12, left 509) */}
-            <img 
-              src="/around_the_world_sticker.jpg"
-              alt="Around the World Sticker"
-              style={{
-                position: 'absolute',
-                width: '124px',
-                height: '120px',
-                top: '469.12px',
-                left: '509px',
-                transform: 'rotate(0deg)',
-                zIndex: 20,
-                borderRadius: '50%',
-              }}
-            />
           </div>
 
           {/* Description Text (Figma specs: width 588, height 132, gap 12px) */}

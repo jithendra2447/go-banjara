@@ -361,8 +361,33 @@ export const AuthModal: React.FC = () => {
             </div>
 
             {/* Title / Description */}
-            <div className="text-center">
-              <h2 className="text-2xl font-black text-slate-900 leading-tight m-0">
+            <div 
+              style={{
+                width: '492px',
+                height: '53px',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '8px',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <h2 
+                style={{
+                  width: '492px',
+                  height: '25px',
+                  fontFamily: '"Faktum", "Outfit", sans-serif',
+                  fontWeight: 600,
+                  fontSize: '20px',
+                  lineHeight: '100%',
+                  color: 'rgba(43, 43, 43, 1)',
+                  textAlign: 'center',
+                  margin: 0,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
                 {view === 'signup' || (view === 'mobile_otp' && otpFlowSource === 'signup') 
                   ? 'Create Account' 
                   : view === 'forgot'
@@ -371,7 +396,22 @@ export const AuthModal: React.FC = () => {
                   ? 'Log In'
                   : 'Welcome back Kumar Sai!'}
               </h2>
-              <p className="text-xs text-slate-400 font-semibold mt-1 mb-0">
+              <p 
+                style={{
+                  width: '492px',
+                  height: '20px',
+                  fontFamily: '"Faktum", "Outfit", sans-serif',
+                  fontWeight: 500,
+                  fontSize: '12px',
+                  lineHeight: '100%',
+                  color: 'rgba(141, 141, 141, 1)',
+                  textAlign: 'center',
+                  margin: 0,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
                 {view === 'email_login' 
                   ? 'Log in using email address and password' 
                   : view === 'forgot'

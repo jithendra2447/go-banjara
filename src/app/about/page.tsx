@@ -257,11 +257,11 @@ export default function AboutPage() {
           className="flex-wrap md:flex-nowrap justify-between md:justify-center w-full"
         >
           {/* Stat 1 */}
-          <div className="flex flex-col items-center text-center gap-1.5 flex-1 min-w-[120px]">
-            <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", color: "rgba(43, 43, 43, 1)" }}>
+          <div className="flex flex-col items-center text-center flex-1 min-w-[120px]" style={{ gap: "10px" }}>
+            <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "40px", height: "40px", color: "rgba(43, 43, 43, 1)", display: "block" }}>
               10+
             </span>
-            <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", color: "rgba(43, 43, 43, 1)" }}>
+            <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "25px", height: "25px", color: "rgba(43, 43, 43, 1)", display: "block" }}>
               Travel Packages
             </span>
           </div>
@@ -269,11 +269,11 @@ export default function AboutPage() {
           <div className="w-[1px] h-[55px] bg-[#2B2B2B]/10 shrink-0 hidden md:block" />
 
           {/* Stat 2 */}
-          <div className="flex flex-col items-center text-center gap-1.5 flex-1 min-w-[120px]">
-            <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", color: "rgba(43, 43, 43, 1)" }}>
+          <div className="flex flex-col items-center text-center flex-1 min-w-[120px]" style={{ gap: "10px" }}>
+            <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "40px", height: "40px", color: "rgba(43, 43, 43, 1)", display: "block" }}>
               15k+
             </span>
-            <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", color: "rgba(43, 43, 43, 1)" }}>
+            <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "25px", height: "25px", color: "rgba(43, 43, 43, 1)", display: "block" }}>
               Nomads Joined
             </span>
           </div>
@@ -281,11 +281,11 @@ export default function AboutPage() {
           <div className="w-[1px] h-[55px] bg-[#2B2B2B]/10 shrink-0 hidden md:block" />
 
           {/* Stat 3 */}
-          <div className="flex flex-col items-center text-center gap-1.5 flex-1 min-w-[120px]">
-            <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", color: "rgba(43, 43, 43, 1)" }}>
+          <div className="flex flex-col items-center text-center flex-1 min-w-[120px]" style={{ gap: "10px" }}>
+            <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "40px", height: "40px", color: "rgba(43, 43, 43, 1)", display: "block" }}>
               24/7
             </span>
-            <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", color: "rgba(43, 43, 43, 1)" }}>
+            <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "25px", height: "25px", color: "rgba(43, 43, 43, 1)", display: "block" }}>
               On-road Support
             </span>
           </div>
@@ -293,11 +293,11 @@ export default function AboutPage() {
           <div className="w-[1px] h-[55px] bg-[#2B2B2B]/10 shrink-0 hidden md:block" />
 
           {/* Stat 4 */}
-          <div className="flex flex-col items-center text-center gap-1.5 flex-1 min-w-[120px]">
-            <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", color: "rgba(43, 43, 43, 1)" }}>
+          <div className="flex flex-col items-center text-center flex-1 min-w-[120px]" style={{ gap: "10px" }}>
+            <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "40px", height: "40px", color: "rgba(43, 43, 43, 1)", display: "block" }}>
               7+
             </span>
-            <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", color: "rgba(43, 43, 43, 1)" }}>
+            <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "25px", height: "25px", color: "rgba(43, 43, 43, 1)", display: "block" }}>
               Shop Products
             </span>
           </div>
@@ -305,11 +305,11 @@ export default function AboutPage() {
           <div className="w-[1px] h-[55px] bg-[#2B2B2B]/10 shrink-0 hidden md:block" />
 
           {/* Stat 5 */}
-          <div className="flex flex-col items-center text-center gap-1.5 flex-1 min-w-[120px]">
-            <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", color: "rgba(43, 43, 43, 1)" }}>
+          <div className="flex flex-col items-center text-center flex-1 min-w-[120px]" style={{ gap: "10px" }}>
+            <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "40px", height: "40px", color: "rgba(43, 43, 43, 1)", display: "block" }}>
               4.5+
             </span>
-            <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", color: "rgba(43, 43, 43, 1)" }}>
+            <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "25px", height: "25px", color: "rgba(43, 43, 43, 1)", display: "block" }}>
               Average trip rating
             </span>
           </div>

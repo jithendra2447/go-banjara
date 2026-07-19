@@ -703,10 +703,10 @@ export default function Homepage() {
                   The Collection
                 </span>
               </div>
-              <h2 className="text-3xl md:text-[42px] font-serif font-semibold text-[#1D493E] leading-none">
+              <h2 className="text-3xl md:text-[38px] font-serif font-semibold text-[#1D493E] leading-none">
                 Shop from our <span className="text-[#FF5A36]">Top Product Categories</span>
               </h2>
-              <p className="text-gray-500 text-base md:text-[24px] md:leading-8 font-medium">
+              <p className="text-gray-500 text-sm md:text-[18px] font-medium">
                 A hand-picked map of the corners of India
               </p>
             </div>
@@ -737,53 +737,143 @@ export default function Homepage() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 text-left">
-            {/* Category 1: Stickers */}
-            <Link href="/shop?category=Stickers" className="space-y-4 group">
-              <div className="rounded-lg aspect-[3/2] overflow-hidden bg-[#FAF9F6] border border-gray-200/50">
-                <img 
-                  src="/around_the_world_sticker.jpg" 
-                  alt="Stickers" 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                  style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
-                />
-              </div>
-              <div className="flex flex-col gap-[12px] mt-[16px]">
-                <h4 className="font-sans font-semibold text-lg sm:text-xl md:text-[24px] leading-none text-[#2B2B2B] h-[30px] flex items-center">Stickers</h4>
-                <p className="font-sans font-medium text-sm sm:text-base md:text-[20px] leading-none text-[#8D8D8D] h-[25px] flex items-center">Starts from ₹93</p>
-              </div>
-            </Link>
+            {badges.map((prod) => {
+              // Mock product object for cart action
+              const mockProduct = {
+                id: prod.id,
+                name: prod.name,
+                price: prod.price,
+                image: prod.image,
+                category: prod.category,
+                rating: prod.rating,
+                reviewsCount: 120,
+                description: "Featured product"
+              };
 
-            {/* Category 2: Badges */}
-            <Link href="/shop?category=Badges" className="space-y-4 group">
-              <div className="rounded-lg aspect-[3/2] overflow-hidden bg-[#FAF9F6] border border-gray-200/50">
-                <img 
-                  src="/around_the_world_sticker.jpg" 
-                  alt="Badges" 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
-                />
-              </div>
-              <div className="flex flex-col gap-[12px] mt-[16px]">
-                <h4 className="font-sans font-semibold text-lg sm:text-xl md:text-[24px] leading-none text-[#2B2B2B] h-[30px] flex items-center">Badges</h4>
-                <p className="font-sans font-medium text-sm sm:text-base md:text-[20px] leading-none text-[#8D8D8D] h-[25px] flex items-center">Starts from ₹199</p>
-              </div>
-            </Link>
+              const resolvedImg = prod.image || (prod.images && prod.images[0]) || "/naturally_nomad_badge.png";
+              const resolvedImages = prod.images || [resolvedImg];
 
-            {/* Category 3: Fridge Magnets */}
-            <Link href="/shop?category=Magnets" className="space-y-4 group">
-              <div className="rounded-lg aspect-[3/2] overflow-hidden bg-[#FAF9F6] border border-gray-200/50">
-                <img 
-                  src="/around_the_world_sticker.jpg" 
-                  alt="Fridge Magnets" 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
-                />
-              </div>
-              <div className="flex flex-col gap-[12px] mt-[16px]">
-                <h4 className="font-sans font-semibold text-lg sm:text-xl md:text-[24px] leading-none text-[#2B2B2B] h-[30px] flex items-center">Fridge Magnets</h4>
-                <p className="font-sans font-medium text-sm sm:text-base md:text-[20px] leading-none text-[#8D8D8D] h-[25px] flex items-center">Starts from ₹199</p>
-              </div>
-            </Link>
+              return (
+                <div 
+                  key={prod.id} 
+                  className="bg-white rounded-[4px] w-full h-auto pb-4 flex flex-col justify-between gap-[16px] hover:shadow-xs transition duration-300 overflow-hidden"
+                >
+                  {/* Image Container with Dots (Width: 339px, Height: 254px, Radius: 4px) */}
+                  <div className="relative w-full h-[254px] rounded-[4px] overflow-hidden shrink-0">
+                    <img 
+                      src={resolvedImages[activeImageIndices[prod.id] || 0]} 
+                      alt={prod.name} 
+                      className="w-full h-full object-cover"
+                      style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
+                    />
+                    {/* Dots indicator */}
+                    {resolvedImages.length > 1 && (
+                      <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+                        {resolvedImages.map((_: string, dotIdx: number) => {
+                          const isActive = (activeImageIndices[prod.id] || 0) === dotIdx;
+                          return (
+                            <button
+                              key={dotIdx}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                setActiveImageIndices(prev => ({ ...prev, [prod.id]: dotIdx }));
+                              }}
+                              className={`w-1.5 h-1.5 rounded-full transition-all duration-200 cursor-pointer ${
+                                isActive ? 'bg-[#1D493E] scale-110' : 'bg-gray-300 hover:bg-gray-400'
+                              }`}
+                              aria-label={`Go to slide ${dotIdx + 1}`}
+                            />
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Details Block */}
+                  <div className="w-full h-auto flex flex-col justify-between text-left gap-3 px-4">
+                    {/* Category Tag */}
+                    <span className="inline-flex items-center justify-center h-[24px] rounded-[4px] px-[8px] py-[2px] text-[12px] font-sans font-medium text-[#FF623E] bg-[#FF623E]/8 self-start">
+                      {prod.category}
+                    </span>
+                    
+                    {/* Title & Price Row */}
+                    <div className="w-full h-auto min-h-[35px] flex justify-between items-center gap-2">
+                      <h4 className="text-[16px] font-sans font-semibold text-[#2B2B2B] truncate">{prod.name}</h4>
+                      <div className="flex items-center gap-2.5 shrink-0">
+                        {prod.originalPrice && prod.originalPrice > prod.price && (
+                          <span className="text-gray-400 line-through text-xs font-medium">₹{prod.originalPrice}</span>
+                        )}
+                        <span className="text-[16px] font-sans font-semibold text-[#2B2B2B]">₹{prod.price}</span>
+                      </div>
+                    </div>
+
+                    {/* Rating Row */}
+                    <div className="flex items-center gap-[12px] h-[20px] shrink-0">
+                      <div className="flex text-amber-400 gap-0.5">
+                        <Star className="w-3.5 h-3.5 fill-current" />
+                        <Star className="w-3.5 h-3.5 fill-current" />
+                        <Star className="w-3.5 h-3.5 fill-current" />
+                        <Star className="w-3.5 h-3.5 fill-current" />
+                        <Star className="w-3.5 h-3.5 fill-current" />
+                      </div>
+                      <span className="text-xs font-sans font-medium text-[#2B2B2B] leading-none">
+                        ({prod.reviewsCount || 120})
+                      </span>
+                    </div>
+
+                    {/* Bought statistics */}
+                    <p className="font-sans font-medium text-xs leading-none text-[#8D8D8D] h-[20px] flex items-center shrink-0">
+                      {prod.boughtText || "200+ bought in past month"}
+                    </p>
+
+                    {/* Delivery text */}
+                    <p className="font-sans font-medium text-[11px] leading-[18px]">
+                      <span className="text-[#8D8D8D]">FREE delivery as soon as </span>
+                      <span className="text-[#2B2B2B]">Thu, 9 Apr</span>
+                    </p>
+
+                    {/* Add to Cart Button */}
+                    <button
+                      onClick={() => handleProductAdd(mockProduct)}
+                      className="w-full h-[44px] py-[8px] px-[16px] gap-[8px] rounded-[4px] border-2 border-[#1D493E] hover:bg-[#1D493E] hover:text-white text-[#1D493E] text-xs font-bold transition flex items-center justify-center cursor-pointer group"
+                    >
+                      <span>{addedProductId === prod.id ? 'Added to Cart!' : 'Add to cart'}</span>
+                      <svg 
+                        style={{ width: '18px', height: '18px' }} 
+                        viewBox="0 0 28 28" 
+                        fill="none" 
+                        strokeWidth="1.75" 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round"
+                        className="shrink-0"
+                      >
+                        <path 
+                          d="M4 5h3l2 11h11l2.5-9H14" 
+                          className="stroke-[#1D493E] group-hover:stroke-white transition-colors duration-300"
+                        />
+                        <path 
+                          d="M7.8 8.5H9.5" 
+                          className="stroke-[#1D493E] group-hover:stroke-white transition-colors duration-300"
+                        />
+                        <circle 
+                          cx="10.5" 
+                          cy="21.5" 
+                          r="2" 
+                          className="stroke-[#1D493E] group-hover:stroke-white transition-colors duration-300"
+                        />
+                        <circle 
+                          cx="17.5" 
+                          cy="21.5" 
+                          r="2" 
+                          className="stroke-[#1D493E] group-hover:stroke-white transition-colors duration-300"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
           </div>
 
           {/* Bottom active state indicator line */}

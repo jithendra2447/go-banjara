@@ -89,7 +89,7 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F3FFEF] font-sans text-[#2B2B2B] overflow-x-hidden">
+    <div className="min-h-screen flex flex-col bg-white font-sans text-[#2B2B2B] overflow-x-hidden">
       
       {/* 1. Header Section (1440x252px spec) */}
       <header 
@@ -153,7 +153,7 @@ export default function AboutPage() {
           minHeight: "774px", 
           paddingTop: "62px", 
           paddingBottom: "62px", 
-          background: "#F3FFEF",
+          background: "rgba(255, 255, 255, 1)",
           boxSizing: "border-box",
           display: "flex",
           alignItems: "center"
@@ -644,7 +644,7 @@ export default function AboutPage() {
       </section>
 
       {/* 6. Alternating Sticker Grid Section */}
-      <section className="w-full bg-[#FAF9F6] py-[62px] px-6 md:px-[80px] mx-auto max-w-[1440px] flex flex-col gap-12 shrink-0">
+      <section className="w-full bg-white py-[62px] px-6 md:px-[80px] mx-auto max-w-[1440px] flex flex-col gap-12 shrink-0">
         {/* Header */}
         <div className="w-full text-center flex flex-col gap-2">
           <span className="text-[14px] font-semibold text-[#FF623E] bg-[#FFEBE5] px-3 py-1 rounded-[4px] self-center uppercase tracking-widest">
@@ -1104,7 +1104,7 @@ export default function AboutPage() {
       </section>
 
       {/* 9. FAQ Accordion Section */}
-      <section className="w-full bg-[#FAF9F6] py-[62px] px-6 md:px-[80px] mx-auto max-w-[1440px] border-t border-b border-gray-150 shrink-0">
+      <section className="w-full bg-white py-[62px] px-6 md:px-[80px] mx-auto max-w-[1440px] border-t border-b border-gray-150 shrink-0">
         <div className="w-full max-w-[1280px] mx-auto flex flex-col gap-12 text-left">
           <div className="space-y-2">
             <span className="text-[14px] font-semibold text-[#FF623E] bg-[#FFEBE5] px-3 py-1 rounded-[4px] inline-block uppercase tracking-widest">

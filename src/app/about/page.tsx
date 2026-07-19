@@ -955,7 +955,25 @@ export default function AboutPage() {
                 boxSizing: "border-box"
               }}
             >
-              <span className="bg-[#E8F5E9] text-[#2E7D32] text-[12px] font-semibold px-3 py-1 rounded-[4px] uppercase tracking-wider">
+              <span 
+                style={{
+                  width: "92px",
+                  height: "26px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "10px",
+                  background: "#EBF7ED",
+                  color: "rgba(0, 160, 35, 1)",
+                  fontFamily: "Faktum, sans-serif",
+                  fontWeight: 600,
+                  fontSize: "14px",
+                  lineHeight: "14px",
+                  letterSpacing: "1.2px",
+                  borderRadius: "4px",
+                  textTransform: "uppercase"
+                }}
+              >
                 THE START
               </span>
               <h3 
@@ -979,8 +997,22 @@ export default function AboutPage() {
                 We don't sell trips. We hand you back a country you forgot.
               </h3>
               <p 
-                style={{ fontFamily: "Faktum, sans-serif", fontWeight: 400, fontSize: "18px", lineHeight: "26px", color: "rgba(43, 43, 43, 0.75)", margin: 0 }}
-                className="w-full"
+                style={{ 
+                  width: "482px",
+                  maxWidth: "100%",
+                  height: "128px",
+                  fontFamily: "Faktum, sans-serif", 
+                  fontWeight: 500, 
+                  fontSize: "24px", 
+                  lineHeight: "32px", 
+                  color: "rgba(43, 43, 43, 1)", 
+                  letterSpacing: "0px",
+                  textAlign: "center",
+                  margin: 0,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center"
+                }}
               >
                 Go Banjara is a small collective of travelers, writers, makers and local guides quietly rebuilding what travel across India was supposed to feel like
               </p>
@@ -1047,7 +1079,28 @@ export default function AboutPage() {
                 boxSizing: "border-box"
               }}
             >
-              <span className="bg-[#E8F5E9] text-[#2E7D32] text-[12px] font-semibold px-3 py-1 rounded-[4px] uppercase tracking-wider">
+              <span 
+                style={{
+                  minWidth: "155px",
+                  height: "26px",
+                  paddingLeft: "10px",
+                  paddingRight: "10px",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "10px",
+                  background: "#EBF7ED",
+                  color: "rgba(0, 160, 35, 1)",
+                  fontFamily: "Faktum, sans-serif",
+                  fontWeight: 600,
+                  fontSize: "14px",
+                  lineHeight: "14px",
+                  letterSpacing: "1.2px",
+                  borderRadius: "4px",
+                  textTransform: "uppercase",
+                  whiteSpace: "nowrap"
+                }}
+              >
                 ABOUT GO BANJARA
               </span>
               <h3 
@@ -1071,8 +1124,22 @@ export default function AboutPage() {
                 We don't sell trips. We hand you back a country you forgot.
               </h3>
               <p 
-                style={{ fontFamily: "Faktum, sans-serif", fontWeight: 400, fontSize: "18px", lineHeight: "26px", color: "rgba(43, 43, 43, 0.75)", margin: 0 }}
-                className="w-full"
+                style={{ 
+                  width: "482px",
+                  maxWidth: "100%",
+                  height: "128px",
+                  fontFamily: "Faktum, sans-serif", 
+                  fontWeight: 500, 
+                  fontSize: "24px", 
+                  lineHeight: "32px", 
+                  color: "rgba(43, 43, 43, 1)", 
+                  letterSpacing: "0px",
+                  textAlign: "center",
+                  margin: 0,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center"
+                }}
               >
                 Go Banjara is a small collective of travelers, writers, makers and local guides quietly rebuilding what travel across India was supposed to feel like
               </p>
@@ -1139,7 +1206,28 @@ export default function AboutPage() {
                 boxSizing: "border-box"
               }}
             >
-              <span className="bg-[#E8F5E9] text-[#2E7D32] text-[12px] font-semibold px-3 py-1 rounded-[4px] uppercase tracking-wider">
+              <span 
+                style={{
+                  minWidth: "155px",
+                  height: "26px",
+                  paddingLeft: "10px",
+                  paddingRight: "10px",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "10px",
+                  background: "#EBF7ED",
+                  color: "rgba(0, 160, 35, 1)",
+                  fontFamily: "Faktum, sans-serif",
+                  fontWeight: 600,
+                  fontSize: "14px",
+                  lineHeight: "14px",
+                  letterSpacing: "1.2px",
+                  borderRadius: "4px",
+                  textTransform: "uppercase",
+                  whiteSpace: "nowrap"
+                }}
+              >
                 ABOUT GO BANJARA
               </span>
               <h3 
@@ -1163,8 +1251,22 @@ export default function AboutPage() {
                 We don't sell trips. We hand you back a country you forgot.
               </h3>
               <p 
-                style={{ fontFamily: "Faktum, sans-serif", fontWeight: 400, fontSize: "18px", lineHeight: "26px", color: "rgba(43, 43, 43, 0.75)", margin: 0 }}
-                className="w-full"
+                style={{ 
+                  width: "482px",
+                  maxWidth: "100%",
+                  height: "128px",
+                  fontFamily: "Faktum, sans-serif", 
+                  fontWeight: 500, 
+                  fontSize: "24px", 
+                  lineHeight: "32px", 
+                  color: "rgba(43, 43, 43, 1)", 
+                  letterSpacing: "0px",
+                  textAlign: "center",
+                  margin: 0,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center"
+                }}
               >
                 Go Banjara is a small collective of travelers, writers, makers and local guides quietly rebuilding what travel across India was supposed to feel like
               </p>
@@ -1231,7 +1333,28 @@ export default function AboutPage() {
                 boxSizing: "border-box"
               }}
             >
-              <span className="bg-[#E8F5E9] text-[#2E7D32] text-[12px] font-semibold px-3 py-1 rounded-[4px] uppercase tracking-wider">
+              <span 
+                style={{
+                  minWidth: "155px",
+                  height: "26px",
+                  paddingLeft: "10px",
+                  paddingRight: "10px",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "10px",
+                  background: "#EBF7ED",
+                  color: "rgba(0, 160, 35, 1)",
+                  fontFamily: "Faktum, sans-serif",
+                  fontWeight: 600,
+                  fontSize: "14px",
+                  lineHeight: "14px",
+                  letterSpacing: "1.2px",
+                  borderRadius: "4px",
+                  textTransform: "uppercase",
+                  whiteSpace: "nowrap"
+                }}
+              >
                 ABOUT GO BANJARA
               </span>
               <h3 
@@ -1255,8 +1378,22 @@ export default function AboutPage() {
                 We don't sell trips. We hand you back a country you forgot.
               </h3>
               <p 
-                style={{ fontFamily: "Faktum, sans-serif", fontWeight: 400, fontSize: "18px", lineHeight: "26px", color: "rgba(43, 43, 43, 0.75)", margin: 0 }}
-                className="w-full"
+                style={{ 
+                  width: "482px",
+                  maxWidth: "100%",
+                  height: "128px",
+                  fontFamily: "Faktum, sans-serif", 
+                  fontWeight: 500, 
+                  fontSize: "24px", 
+                  lineHeight: "32px", 
+                  color: "rgba(43, 43, 43, 1)", 
+                  letterSpacing: "0px",
+                  textAlign: "center",
+                  margin: 0,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center"
+                }}
               >
                 Go Banjara is a small collective of travelers, writers, makers and local guides quietly rebuilding what travel across India was supposed to feel like
               </p>

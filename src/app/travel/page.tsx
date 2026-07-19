@@ -1852,98 +1852,120 @@ export default function HolidaysPortal() {
         </div>
       </section>
 
-      {/* 3.5 FAQ ACCORDION SECTION (Matching Shop page fonts and styles) */}
-      <section 
+      {/* 3.5 FAQ ACCORDION SECTION (Matching Blog page fonts and styles) */}
+      <section
         style={{
           width: '100%',
           maxWidth: '1440px',
           margin: '0 auto',
           paddingTop: '42px',
           paddingBottom: '42px',
+          paddingLeft: '80px',
+          paddingRight: '80px',
           background: 'rgba(255, 255, 255, 1)',
           boxSizing: 'border-box',
           display: 'flex',
           flexDirection: 'column',
           gap: '24px',
         }}
-        className="md:px-[80px] px-6 relative z-10"
       >
         {/* Header */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }} className="text-left w-full">
-          <div className="space-y-3">
-            <span 
-              style={{
-                fontFamily: "Faktum, Outfit, sans-serif",
-                fontWeight: 600,
-                fontSize: "14px",
-                lineHeight: "100%",
-                letterSpacing: "1.2px",
-                textTransform: "uppercase",
-                color: "rgba(255, 98, 62, 1)",
-                background: "rgba(255, 98, 62, 0.1)",
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                height: "28px",
-                padding: "0 16px",
-                borderRadius: "4px"
-              }}
-            >
-              FAQ'S
-            </span>
-            <h2
-              style={{
-                fontFamily: "Fraunces, serif",
-                fontWeight: 600,
-                color: "#2B2B2B",
-                margin: 0
-              }}
-              className="text-3xl md:text-[42px] leading-tight"
-            >
-              Frequently asked questions
-            </h2>
-          </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          {/* Label */}
+          <span
+            style={{
+              fontFamily: 'Faktum, var(--font-sans), sans-serif',
+              fontWeight: 600,
+              fontSize: '14px',
+              lineHeight: '100%',
+              letterSpacing: '1.2px',
+              textTransform: 'uppercase',
+              color: 'rgba(255, 98, 62, 1)',
+              background: 'rgba(255, 98, 62, 0.1)',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              height: '28px',
+              padding: '0 16px',
+              borderRadius: '4px',
+              width: 'fit-content',
+            }}
+          >
+            FAQ&apos;S
+          </span>
+
+          {/* Title */}
+          <h2
+            style={{
+              fontFamily: 'Fraunces, Georgia, serif',
+              fontWeight: 600,
+              fontSize: '42px',
+              lineHeight: '100%',
+              letterSpacing: '0px',
+              color: 'rgba(43, 43, 43, 1)',
+              margin: 0,
+            }}
+          >
+            Frequently asked questions
+          </h2>
         </div>
 
-        {/* Accordion List */}
-        <div className="w-full flex flex-col border-t border-gray-200 mt-2">
+        {/* Accordion */}
+        <div style={{ width: '100%', display: 'flex', flexDirection: 'column', borderTop: '1px solid rgba(204, 204, 204, 1)' }}>
           {FAQ_ITEMS.map((item, idx) => {
             const isOpen = openFaqIndex === idx;
             return (
-              <div 
-                key={idx} 
-                className="w-full border-b border-gray-200 py-5 flex flex-col text-left transition-colors duration-200"
+              <div
+                key={idx}
+                style={{
+                  width: '100%',
+                  borderBottom: '1px solid rgba(204, 204, 204, 1)',
+                }}
               >
-                <button 
+                <button
                   onClick={() => toggleFaq(idx)}
-                  className="w-full flex justify-between items-center text-left focus:outline-none cursor-pointer bg-transparent border-none p-0"
+                  style={{
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    padding: '20px 0',
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    textAlign: 'left',
+                    gap: '16px',
+                  }}
                 >
-                  <span 
+                  <span
                     style={{
-                      fontFamily: "Faktum, Outfit, sans-serif",
+                      fontFamily: 'Faktum, var(--font-sans), sans-serif',
                       fontWeight: 600,
-                      color: "#2C2C2C"
+                      fontSize: '18px',
+                      lineHeight: '26px',
+                      color: 'rgba(44, 44, 44, 1)',
+                      flex: 1,
                     }}
-                    className="text-base md:text-[18px] leading-normal"
                   >
                     {item.question}
                   </span>
                   {isOpen ? (
-                    <span className="text-2xl font-semibold text-[#FF623E] select-none shrink-0 ml-4">—</span>
+                    <span style={{ fontSize: '24px', fontWeight: 600, color: 'rgba(255, 98, 62, 1)', flexShrink: 0, lineHeight: 1 }}>−</span>
                   ) : (
-                    <span className="text-2xl font-semibold text-[#1D493E] select-none shrink-0 ml-4">+</span>
+                    <span style={{ fontSize: '24px', fontWeight: 600, color: 'rgba(29, 73, 62, 1)', flexShrink: 0, lineHeight: 1 }}>+</span>
                   )}
                 </button>
                 {isOpen && (
-                  <p 
+                  <p
                     style={{
-                      fontFamily: "Faktum, Outfit, sans-serif",
+                      fontFamily: 'Faktum, var(--font-sans), sans-serif',
                       fontWeight: 500,
-                      color: "#666666",
+                      fontSize: '14px',
+                      lineHeight: '22px',
+                      color: 'rgba(102, 102, 102, 1)',
                       margin: 0,
-                      paddingTop: "8px"
+                      paddingBottom: '20px',
                     }}
-                    className="text-sm md:text-[14px] leading-relaxed animate-fade-in-up"
                   >
                     {item.answer}
                   </p>

@@ -1943,149 +1943,113 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 9. FAQ Accordion Section (1440x634px spec, padding 42px 80px, gap 24px) */}
-      <section 
-        style={{
-          width: "100%",
-          maxWidth: "1440px",
-          minHeight: "634px",
-          paddingTop: "42px",
-          paddingRight: "80px",
-          paddingBottom: "42px",
-          paddingLeft: "80px",
-          background: "rgba(255, 255, 255, 1)",
-          borderRadius: "4px",
-          boxSizing: "border-box",
-          display: "flex",
-          flexDirection: "column",
-          gap: "24px"
-        }}
-        className="mx-auto shrink-0"
-      >
-        <div className="w-full max-w-[1280px] mx-auto flex flex-col gap-6 text-left">
+      {/* 9. FAQ Accordion Section (Exact match with Shop Page reference) */}
+      <section className="w-full bg-white py-[62px] px-6 md:px-[80px] mx-auto max-w-[1440px] shrink-0">
+        <div className="w-full max-w-[1280px] mx-auto flex flex-col gap-10 text-left">
           {/* Header */}
-          <div className="space-y-2">
-            <span 
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                background: "#FFEBE5",
-                color: "#FF623E",
-                fontFamily: "Faktum, sans-serif",
-                fontWeight: 600,
-                fontSize: "14px",
-                lineHeight: "14px",
-                letterSpacing: "1.2px",
-                padding: "6px 12px",
-                borderRadius: "4px",
-                textTransform: "uppercase",
-                whiteSpace: "nowrap"
-              }}
-            >
+          <div className="text-left space-y-2.5">
+            <span className="inline-block text-[9px] font-black uppercase tracking-[0.15em] text-[#FF5B37] bg-[#FFEBE5] px-2.5 py-1 rounded-sm">
               FAQ'S
             </span>
-
-            <h2 
-              style={{
-                fontFamily: "Fraunces, serif",
-                fontWeight: 600,
-                fontSize: "42px",
-                lineHeight: "42px",
-                color: "rgba(43, 43, 43, 1)",
-                margin: 0
-              }}
-            >
+            <h2 className="text-2xl sm:text-3xl font-serif font-medium text-[#2B2B2B]">
               Frequently asked questions
             </h2>
           </div>
 
-          {/* Accordion Rows */}
-          <div className="w-full border-t border-gray-200 divide-y divide-gray-200">
+          {/* Accordion Rows matching Shop Page */}
+          <div className="w-full">
             {[
               {
-                question: "What materials are the badges made from?",
-                boldAnswer: "Zinc alloy with glossy enamel fill.",
-                descAnswer: "Lightweight, durable, and safe to pin on bags, jackets, or backpacks without damaging fabric."
+                question: "What materials are the badges made from? Zinc alloy with glossy enamel fill.",
+                answer: "Lightweight, durable, and safe to pin on bags, jackets, or backpacks without damaging fabric."
               },
               {
                 question: "How big are the stickers?",
-                boldAnswer: "",
-                descAnswer: "Our premium die-cut vinyl stickers range from 2.5 to 3.5 inches, with weatherproof UV matte lamination."
+                answer: "Our premium die-cut vinyl stickers range from 2.5 to 3.5 inches, with weatherproof UV matte lamination."
               },
               {
                 question: "Do you ship across India?",
-                boldAnswer: "",
-                descAnswer: "Yes! We offer express shipping across all states and union territories in India with tracking numbers provided via SMS & email."
+                answer: "Yes! We offer express shipping across all states and union territories in India with tracking numbers provided via SMS & email."
               },
               {
                 question: "Can I return a product if I don't like it?",
-                boldAnswer: "",
-                descAnswer: "We offer a hassle-free 7-day return and exchange policy for any unused products in original packaging."
+                answer: "We offer a hassle-free 7-day return and exchange policy for any unused products in original packaging."
               },
               {
                 question: "I have no reviews on this product. Is it safe to buy?",
-                boldAnswer: "",
-                descAnswer: "Absolutely. All our gear is thoroughly field-tested by our collective of guides before listing, and backed by our quality guarantee."
+                answer: "Absolutely. All our gear is thoroughly field-tested by our collective of guides before listing, and backed by our quality guarantee."
               }
             ].map((item, idx) => {
               const isOpen = openFaqIndex === idx;
               return (
-                <div key={idx} className="py-5">
+                <div
+                  key={idx}
+                  style={{
+                    width: "100%",
+                    padding: "24px",
+                    borderBottom: "2px solid rgba(204, 204, 204, 0.54)",
+                    borderTop: idx === 0 ? "2px solid rgba(204, 204, 204, 0.54)" : "none",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "12px",
+                    boxSizing: "border-box",
+                  }}
+                  className="text-left"
+                >
                   <button
                     onClick={() => toggleFaq(idx)}
-                    className="w-full flex justify-between items-center text-left gap-4 cursor-pointer group"
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      background: "none",
+                      border: "none",
+                      padding: 0,
+                      cursor: "pointer",
+                      textAlign: "left",
+                    }}
+                    className="group"
                   >
-                    <div className="flex flex-wrap items-center gap-2">
-                      <span 
-                        style={{
-                          fontFamily: "Faktum, sans-serif",
-                          fontWeight: 600,
-                          fontSize: "18px",
-                          lineHeight: "26px",
-                          color: "rgba(43, 43, 43, 1)"
-                        }}
-                        className="group-hover:text-[#FF623E] transition-colors"
-                      >
-                        {item.question}
-                      </span>
-                      {item.boldAnswer && (
-                        <span 
-                          style={{
-                            fontFamily: "Faktum, sans-serif",
-                            fontWeight: 600,
-                            fontSize: "18px",
-                            lineHeight: "26px",
-                            color: "rgba(43, 43, 43, 1)"
-                          }}
-                        >
-                          {item.boldAnswer}
-                        </span>
-                      )}
-                    </div>
-                    <span 
+                    <span
+                      style={{
+                        fontFamily: "Faktum, sans-serif",
+                        fontWeight: 500,
+                        fontSize: "20px",
+                        lineHeight: "32px",
+                        color: "rgba(43, 43, 43, 1)",
+                        margin: 0,
+                      }}
+                      className="text-base md:text-[20px]"
+                    >
+                      {item.question}
+                    </span>
+                    <span
                       style={{
                         fontSize: "24px",
-                        fontWeight: 300,
-                        color: "#1D493E"
+                        fontWeight: 500,
+                        color: "rgba(29, 73, 62, 1)",
+                        lineHeight: "100%",
+                        userSelect: "none",
                       }}
-                      className="shrink-0 leading-none select-none"
+                      className="shrink-0"
                     >
                       {isOpen ? '—' : '+'}
                     </span>
                   </button>
                   {isOpen && (
-                    <p 
+                    <p
                       style={{
                         fontFamily: "Faktum, sans-serif",
-                        fontWeight: 400,
-                        fontSize: "16px",
-                        lineHeight: "26px",
-                        color: "rgba(43, 43, 43, 0.65)"
+                        fontWeight: 500,
+                        fontSize: "20px",
+                        lineHeight: "32px",
+                        color: "rgba(141, 141, 141, 1)",
+                        margin: 0,
                       }}
-                      className="mt-2 animate-fade-in"
+                      className="text-sm md:text-[20px]"
                     >
-                      {item.descAnswer}
+                      {item.answer}
                     </p>
                   )}
                 </div>
@@ -2095,48 +2059,102 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 10. Newsletter / CTA Banner Section (Pre-Footer) */}
-      <section className="w-full bg-white py-[64px] px-6 md:px-[80px] mx-auto max-w-[1440px] text-center shrink-0">
-        <div className="max-w-[1280px] mx-auto flex flex-col items-center gap-6">
-          <div className="flex flex-col items-center gap-4 text-center">
-            <h2 
+      {/* Spacer */}
+      <div style={{ height: "62px" }} className="shrink-0" />
+
+      {/* 10. NEWSLETTER / CTA SECTION — Exact Match with Shop Page Reference */}
+      <div
+        style={{
+          width: "100%",
+          paddingTop: "42px",
+          paddingBottom: "42px",
+          background: "#FFFFFF",
+          boxSizing: "border-box",
+        }}
+      >
+        <div
+          style={{
+            maxWidth: "1280px",
+            margin: "0 auto",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "32px",
+            textAlign: "center",
+            boxSizing: "border-box",
+          }}
+        >
+          {/* Text block */}
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
+            {/* Heading: Fraunces SemiBold 42px, lh 100%, #2B2B2B */}
+            <h2
               style={{
                 fontFamily: "Fraunces, serif",
                 fontWeight: 600,
                 fontSize: "42px",
-                lineHeight: "50px",
-                color: "rgba(43, 43, 43, 1)",
-                margin: 0
+                lineHeight: "100%",
+                letterSpacing: "0px",
+                textAlign: "center",
+                color: "#2B2B2B",
+                maxWidth: "1280px",
+                margin: 0,
               }}
+              className="text-[28px] md:text-[42px]"
             >
-              The <span style={{ color: "#FF623E" }}>best adventures</span> find their way to your inbox.
+              The{" "}
+              <span style={{ color: "#FF5A36" }}>best adventures</span>{" "}
+              find their way to your inbox.
             </h2>
-            <p 
+            {/* Subtitle: Faktum Medium 24px, lh 32px, rgba(43,43,43,1) */}
+            <p
               style={{
                 fontFamily: "Faktum, sans-serif",
                 fontWeight: 500,
-                fontSize: "20px",
-                lineHeight: "30px",
-                color: "rgba(43, 43, 43, 0.8)",
-                maxWidth: "840px",
-                margin: "0 auto"
+                fontSize: "24px",
+                lineHeight: "32px",
+                letterSpacing: "0px",
+                textAlign: "center",
+                color: "rgba(43, 43, 43, 1)",
+                maxWidth: "1280px",
+                margin: 0,
               }}
+              className="text-base md:text-[24px]"
             >
               Hidden places, exclusive trip drops, curated gear, and stories from the road delivered before anyone else hears about them.
             </p>
           </div>
 
-          <div className="pt-2">
-            <Link
-              href="/travel"
-              className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-[4px] bg-[#1D493E] hover:bg-[#15342c] text-white font-sans font-medium text-[16px] transition-all cursor-pointer shadow-sm group"
-            >
-              <span>Reserve your tour now</span>
-              <ArrowUpRight className="w-4 h-4 text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-            </Link>
-          </div>
+          {/* Button: 286×55, pt-16 pr-32 pb-16 pl-32, radius-4, bg #1D493E */}
+          <Link
+            href="/travel"
+            style={{
+              width: "286px",
+              height: "55px",
+              paddingTop: "16px",
+              paddingBottom: "16px",
+              paddingLeft: "32px",
+              paddingRight: "32px",
+              borderRadius: "4px",
+              background: "rgba(29, 73, 62, 1)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              color: "#FFFFFF",
+              fontFamily: "'Faktum','Outfit',sans-serif",
+              fontWeight: 500,
+              fontSize: "18px",
+              lineHeight: "100%",
+              letterSpacing: "0px",
+              textDecoration: "none",
+              transition: "opacity 0.2s",
+            }}
+            className="hover:opacity-90 inline-flex items-center gap-2"
+          >
+            <span>Reserve your tour now</span>
+            <span className="text-lg font-sans">↗</span>
+          </Link>
         </div>
-      </section>
+      </div>
 
       {/* 11. Trust Banner */}
       <TrustBanner />

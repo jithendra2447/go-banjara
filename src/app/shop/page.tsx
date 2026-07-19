@@ -422,151 +422,97 @@ export default function ShopPage() {
           </div>
         </div>
 
-        {/* 12. FAQ Section */}
-        <div
-          style={{
-            width: "100%",
-            maxWidth: "1440px",
-            paddingTop: "42px",
-            paddingBottom: "42px",
-            background: "#FFFFFF",
-            boxSizing: "border-box",
-            display: "flex",
-            flexDirection: "column",
-            gap: "24px"
-          }}
-          className="mx-auto text-left"
-        >
-          <div className="w-full max-w-[1280px] mx-auto flex flex-col gap-6">
-            {/* Header */}
-            <div className="space-y-2">
-              <span 
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  background: "#FFEBE5",
-                  color: "#FF623E",
-                  fontFamily: "Faktum, sans-serif",
-                  fontWeight: 600,
-                  fontSize: "14px",
-                  lineHeight: "14px",
-                  letterSpacing: "1.2px",
-                  padding: "6px 12px",
-                  borderRadius: "4px",
-                  textTransform: "uppercase",
-                  whiteSpace: "nowrap"
-                }}
-              >
-                FAQ'S
-              </span>
+        {/* FAQ Section (Padding: pt-[42px] pb-[24px]) */}
+        <div className="bg-white pt-[42px] pb-[24px] flex flex-col gap-[32px] w-full border-t border-slate-100 mt-8">
+          {/* Header */}
+          <div className="text-left space-y-2.5">
+            <span className="inline-block text-[9px] font-black uppercase tracking-[0.15em] text-[#FF5B37] bg-[#FFEBE5] px-2.5 py-1 rounded-sm">
+              FAQ'S
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-serif font-medium text-[#2B2B2B]">
+              Frequently asked questions
+            </h2>
+          </div>
 
-              <h2 
-                style={{
-                  fontFamily: "Fraunces, serif",
-                  fontWeight: 600,
-                  fontSize: "42px",
-                  lineHeight: "42px",
-                  color: "rgba(43, 43, 43, 1)",
-                  margin: 0
-                }}
-              >
-                Frequently asked questions
-              </h2>
-            </div>
-
-            {/* Accordion Rows */}
-            <div className="w-full border-t border-gray-200 divide-y divide-gray-200">
-              {[
-                {
-                  question: "What materials are the badges made from?",
-                  boldAnswer: "Zinc alloy with glossy enamel fill.",
-                  descAnswer: "Lightweight, durable, and safe to pin on bags, jackets, or backpacks without damaging fabric."
-                },
-                {
-                  question: "How big are the stickers?",
-                  boldAnswer: "",
-                  descAnswer: "Our premium die-cut vinyl stickers range from 2.5 to 3.5 inches, with weatherproof UV matte lamination."
-                },
-                {
-                  question: "Do you ship across India?",
-                  boldAnswer: "",
-                  descAnswer: "Yes! We offer express shipping across all states and union territories in India with tracking numbers provided via SMS & email."
-                },
-                {
-                  question: "Can I return a product if I don't like it?",
-                  boldAnswer: "",
-                  descAnswer: "We offer a hassle-free 7-day return and exchange policy for any unused products in original packaging."
-                },
-                {
-                  question: "I have no reviews on this product. Is it safe to buy?",
-                  boldAnswer: "",
-                  descAnswer: "Absolutely. All our gear is thoroughly field-tested by our collective of guides before listing, and backed by our quality guarantee."
-                }
-              ].map((item, idx) => {
-                const isOpen = openFaqIdx === idx || (openFaqIdx === null && idx === 0);
-                return (
-                  <div key={idx} className="py-5">
-                    <button
-                      onClick={() => setOpenFaqIdx(isOpen && openFaqIdx === idx ? -1 : idx)}
-                      className="w-full flex justify-between items-center text-left gap-4 cursor-pointer group"
+          {/* Accordion List */}
+          <div className="w-full">
+            {FAQ_ITEMS.map((item, idx) => {
+              const isOpen = openFaqIdx === idx;
+              return (
+                <div
+                  key={idx}
+                  style={{
+                    width: "100%",
+                    padding: "24px",
+                    borderBottom: "2px solid rgba(204, 204, 204, 0.54)",
+                    borderTop: idx === 0 ? "2px solid rgba(204, 204, 204, 0.54)" : "none",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "12px",
+                    boxSizing: "border-box",
+                  }}
+                  className="text-left"
+                >
+                  <button
+                    onClick={() => setOpenFaqIdx(isOpen ? null : idx)}
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      background: "none",
+                      border: "none",
+                      padding: 0,
+                      cursor: "pointer",
+                      textAlign: "left",
+                    }}
+                    className="group"
+                  >
+                    <span
+                      style={{
+                        fontFamily: "Faktum, sans-serif",
+                        fontWeight: 500,
+                        fontSize: "20px",
+                        lineHeight: "32px",
+                        color: "rgba(43, 43, 43, 1)",
+                        margin: 0,
+                      }}
+                      className="text-base md:text-[20px]"
                     >
-                      <div className="flex flex-wrap items-center gap-2">
-                        <span 
-                          style={{
-                            fontFamily: "Faktum, sans-serif",
-                            fontWeight: 600,
-                            fontSize: "18px",
-                            lineHeight: "26px",
-                            color: "rgba(43, 43, 43, 1)"
-                          }}
-                          className="group-hover:text-[#FF623E] transition-colors"
-                        >
-                          {item.question}
-                        </span>
-                        {item.boldAnswer && (
-                          <span 
-                            style={{
-                              fontFamily: "Faktum, sans-serif",
-                              fontWeight: 600,
-                              fontSize: "18px",
-                              lineHeight: "26px",
-                              color: "rgba(43, 43, 43, 1)"
-                            }}
-                          >
-                            {item.boldAnswer}
-                          </span>
-                        )}
-                      </div>
-                      <span 
-                        style={{
-                          fontSize: "24px",
-                          fontWeight: 300,
-                          color: "#1D493E"
-                        }}
-                        className="shrink-0 leading-none select-none"
-                      >
-                        {isOpen ? '—' : '+'}
-                      </span>
-                    </button>
-                    {isOpen && (
-                      <p 
-                        style={{
-                          fontFamily: "Faktum, sans-serif",
-                          fontWeight: 400,
-                          fontSize: "16px",
-                          lineHeight: "26px",
-                          color: "rgba(43, 43, 43, 0.65)"
-                        }}
-                        className="mt-2 animate-fade-in"
-                      >
-                        {item.descAnswer}
-                      </p>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
+                      {item.question}
+                    </span>
+                    <span
+                      style={{
+                        fontSize: "24px",
+                        fontWeight: 500,
+                        color: "rgba(29, 73, 62, 1)",
+                        lineHeight: "100%",
+                        userSelect: "none",
+                      }}
+                      className="shrink-0"
+                    >
+                      {isOpen ? '—' : '+'}
+                    </span>
+                  </button>
+                  {/* Expandable answer */}
+                  {isOpen && (
+                    <p
+                      style={{
+                        fontFamily: "Faktum, sans-serif",
+                        fontWeight: 500,
+                        fontSize: "20px",
+                        lineHeight: "32px",
+                        color: "rgba(141, 141, 141, 1)",
+                        margin: 0,
+                      }}
+                      className="text-sm md:text-[20px]"
+                    >
+                      {item.answer}
+                    </p>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
 

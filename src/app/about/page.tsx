@@ -135,11 +135,13 @@ export default function AboutPage() {
           style={{ 
             fontFamily: "Faktum, sans-serif", 
             fontWeight: 500, 
-            color: "rgba(43, 43, 43, 0.8)", 
+            color: "rgba(43, 43, 43, 1)", 
             textAlign: "center",
-            margin: 0
+            margin: 0,
+            fontSize: "24px",
+            lineHeight: "32px",
           }} 
-          className="text-sm sm:text-base md:text-[20px] leading-relaxed md:leading-[28px] w-full max-w-[950px]"
+          className="text-lg md:text-[24px] w-full max-w-[1280px]"
         >
           Go Banjara is a small collective of travelers, writers, makers and local guides quietly rebuilding what travel across India was supposed to feel like
         </p>

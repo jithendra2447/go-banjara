@@ -906,258 +906,374 @@ export default function AboutPage() {
           </p>
         </div>
 
-        {/* 4 Rows of 3-Column Grid (302px x 380px cards) */}
+        {/* 4 Rows of 3-Column Grid (1280px x 450px spec per row, justifyContent: space-between) */}
         <div style={{ gap: "32px" }} className="flex flex-col w-full max-w-[1280px] mx-auto mt-4">
           
-          {/* Row 1 */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center justify-between w-full">
-            {/* Col 1: Card 1 (Hikers) */}
-            <div className="flex justify-center">
-              <div 
-                style={{ 
-                  width: "302px", 
-                  height: "380px", 
-                  borderRadius: "4px",
-                  overflow: "hidden",
-                  boxShadow: "0 10px 20px rgba(0,0,0,0.08)"
-                }}
-              >
-                <img src="/card-1-full.png" alt="Go Banjara Traveler Card 1" className="w-full h-full object-cover" />
-              </div>
+          {/* Row 1 (1280px x 450px, justifyContent: space-between) */}
+          <div 
+            style={{
+              width: "1280px",
+              maxWidth: "100%",
+              height: "450px",
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
+              background: "rgba(255, 255, 255, 1)",
+              boxSizing: "border-box"
+            }}
+            className="w-full mx-auto"
+          >
+            {/* Col 1: Card 1 (Hikers - 302px x 380px) */}
+            <div 
+              style={{ 
+                width: "302px", 
+                height: "380px", 
+                borderRadius: "4px",
+                overflow: "hidden",
+                boxShadow: "0 10px 20px rgba(0,0,0,0.08)",
+                flexShrink: 0
+              }}
+            >
+              <img src="/card-1-full.png" alt="Go Banjara Traveler Card 1" className="w-full h-full object-cover" />
             </div>
 
-            {/* Col 2: Center Text Card */}
-            <div className="flex justify-center">
-              <div 
+            {/* Col 2: Center Text Card (482px x 334px spec, gap: 12px) */}
+            <div 
+              style={{ 
+                width: "482px", 
+                maxWidth: "100%",
+                height: "334px", 
+                borderRadius: "4px",
+                background: "#FFFFFF",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                textAlign: "center",
+                gap: "12px",
+                boxSizing: "border-box"
+              }}
+            >
+              <span className="bg-[#E8F5E9] text-[#2E7D32] text-[12px] font-semibold px-3 py-1 rounded-[4px] uppercase tracking-wider">
+                THE START
+              </span>
+              <h3 
                 style={{ 
-                  width: "380px", 
+                  width: "482px",
                   maxWidth: "100%",
-                  height: "380px", 
-                  borderRadius: "4px",
-                  background: "#FFFFFF",
-                  padding: "32px",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "center",
+                  height: "156px",
+                  fontFamily: "Fraunces, serif", 
+                  fontWeight: 600, 
+                  fontSize: "42px", 
+                  lineHeight: "50px", 
+                  color: "rgba(43, 43, 43, 1)", 
+                  letterSpacing: "0px",
                   textAlign: "center",
-                  boxSizing: "border-box"
+                  margin: 0,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center"
                 }}
               >
-                <span className="bg-[#E8F5E9] text-[#2E7D32] text-[12px] font-semibold px-3 py-1 rounded-[4px] uppercase tracking-wider mb-4">
-                  THE START
-                </span>
-                <h3 className="font-serif font-bold text-2xl md:text-[28px] text-[#2B2B2B] leading-snug mb-3">
-                  We don't sell trips. We hand you back a country you forgot.
-                </h3>
-                <p className="text-[#2B2B2B]/70 font-sans text-sm md:text-base leading-relaxed">
-                  Go Banjara is a small collective of travelers, writers, makers and local guides quietly rebuilding what travel across India was supposed to feel like
-                </p>
-              </div>
+                We don't sell trips. We hand you back a country you forgot.
+              </h3>
+              <p 
+                style={{ fontFamily: "Faktum, sans-serif", fontWeight: 400, fontSize: "18px", lineHeight: "26px", color: "rgba(43, 43, 43, 0.75)", margin: 0 }}
+                className="w-full"
+              >
+                Go Banjara is a small collective of travelers, writers, makers and local guides quietly rebuilding what travel across India was supposed to feel like
+              </p>
             </div>
 
-            {/* Col 3: Card 3 (Cream Camel) */}
-            <div className="flex justify-center">
-              <div 
-                style={{ 
-                  width: "302px", 
-                  height: "380px", 
-                  borderRadius: "4px",
-                  overflow: "hidden",
-                  boxShadow: "0 10px 20px rgba(0,0,0,0.08)"
-                }}
-              >
-                <img src="/card-3-full.png" alt="Humps Down Surf's Up Card 3" className="w-full h-full object-cover" />
-              </div>
+            {/* Col 3: Card 3 (Cream Camel - 302px x 380px) */}
+            <div 
+              style={{ 
+                width: "302px", 
+                height: "380px", 
+                borderRadius: "4px",
+                overflow: "hidden",
+                boxShadow: "0 10px 20px rgba(0,0,0,0.08)",
+                flexShrink: 0
+              }}
+            >
+              <img src="/card-3-full.png" alt="Humps Down Surf's Up Card 3" className="w-full h-full object-cover" />
             </div>
           </div>
 
-          {/* Row 2 */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center justify-between w-full">
-            {/* Col 1: Card 2 (Green Explore) */}
-            <div className="flex justify-center">
-              <div 
-                style={{ 
-                  width: "302px", 
-                  height: "380px", 
-                  borderRadius: "4px",
-                  overflow: "hidden",
-                  boxShadow: "0 10px 20px rgba(0,0,0,0.08)"
-                }}
-              >
-                <img src="/card-2-full.png" alt="Explore Adventure Card 2" className="w-full h-full object-cover" />
-              </div>
+          {/* Row 2 (1280px x 450px, justifyContent: space-between) */}
+          <div 
+            style={{
+              width: "1280px",
+              maxWidth: "100%",
+              height: "450px",
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
+              background: "rgba(255, 255, 255, 1)",
+              boxSizing: "border-box"
+            }}
+            className="w-full mx-auto"
+          >
+            {/* Col 1: Card 2 (Green Explore - 302px x 380px) */}
+            <div 
+              style={{ 
+                width: "302px", 
+                height: "380px", 
+                borderRadius: "4px",
+                overflow: "hidden",
+                boxShadow: "0 10px 20px rgba(0,0,0,0.08)",
+                flexShrink: 0
+              }}
+            >
+              <img src="/card-2-full.png" alt="Explore Adventure Card 2" className="w-full h-full object-cover" />
             </div>
 
-            {/* Col 2: Center Text Card */}
-            <div className="flex justify-center">
-              <div 
+            {/* Col 2: Center Text Card (482px x 334px spec, gap: 12px) */}
+            <div 
+              style={{ 
+                width: "482px", 
+                maxWidth: "100%",
+                height: "334px", 
+                borderRadius: "4px",
+                background: "#FFFFFF",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                textAlign: "center",
+                gap: "12px",
+                boxSizing: "border-box"
+              }}
+            >
+              <span className="bg-[#E8F5E9] text-[#2E7D32] text-[12px] font-semibold px-3 py-1 rounded-[4px] uppercase tracking-wider">
+                ABOUT GO BANJARA
+              </span>
+              <h3 
                 style={{ 
-                  width: "380px", 
+                  width: "482px",
                   maxWidth: "100%",
-                  height: "380px", 
-                  borderRadius: "4px",
-                  background: "#FFFFFF",
-                  padding: "32px",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "center",
+                  height: "156px",
+                  fontFamily: "Fraunces, serif", 
+                  fontWeight: 600, 
+                  fontSize: "42px", 
+                  lineHeight: "50px", 
+                  color: "rgba(43, 43, 43, 1)", 
+                  letterSpacing: "0px",
                   textAlign: "center",
-                  boxSizing: "border-box"
+                  margin: 0,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center"
                 }}
               >
-                <span className="bg-[#E8F5E9] text-[#2E7D32] text-[12px] font-semibold px-3 py-1 rounded-[4px] uppercase tracking-wider mb-4">
-                  ABOUT GO BANJARA
-                </span>
-                <h3 className="font-serif font-bold text-2xl md:text-[28px] text-[#2B2B2B] leading-snug mb-3">
-                  We don't sell trips. We hand you back a country you forgot.
-                </h3>
-                <p className="text-[#2B2B2B]/70 font-sans text-sm md:text-base leading-relaxed">
-                  Go Banjara is a small collective of travelers, writers, makers and local guides quietly rebuilding what travel across India was supposed to feel like
-                </p>
-              </div>
+                We don't sell trips. We hand you back a country you forgot.
+              </h3>
+              <p 
+                style={{ fontFamily: "Faktum, sans-serif", fontWeight: 400, fontSize: "18px", lineHeight: "26px", color: "rgba(43, 43, 43, 0.75)", margin: 0 }}
+                className="w-full"
+              >
+                Go Banjara is a small collective of travelers, writers, makers and local guides quietly rebuilding what travel across India was supposed to feel like
+              </p>
             </div>
 
-            {/* Col 3: Card 4 (Yellow Stickers) */}
-            <div className="flex justify-center">
-              <div 
-                style={{ 
-                  width: "302px", 
-                  height: "380px", 
-                  borderRadius: "4px",
-                  overflow: "hidden",
-                  boxShadow: "0 10px 20px rgba(0,0,0,0.08)"
-                }}
-              >
-                <img src="/card-4-full.png" alt="Yellow Stickers Card 4" className="w-full h-full object-cover" />
-              </div>
+            {/* Col 3: Card 4 (Yellow Stickers - 302px x 380px) */}
+            <div 
+              style={{ 
+                width: "302px", 
+                height: "380px", 
+                borderRadius: "4px",
+                overflow: "hidden",
+                boxShadow: "0 10px 20px rgba(0,0,0,0.08)",
+                flexShrink: 0
+              }}
+            >
+              <img src="/card-4-full.png" alt="Yellow Stickers Card 4" className="w-full h-full object-cover" />
             </div>
           </div>
 
-          {/* Row 3 */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center justify-between w-full">
-            {/* Col 1: Card 7 (Cream Camel) */}
-            <div className="flex justify-center">
-              <div 
-                style={{ 
-                  width: "302px", 
-                  height: "380px", 
-                  borderRadius: "4px",
-                  overflow: "hidden",
-                  boxShadow: "0 10px 20px rgba(0,0,0,0.08)"
-                }}
-              >
-                <img src="/card-7-full.png" alt="Humps Down Surf's Up Card 7" className="w-full h-full object-cover" />
-              </div>
+          {/* Row 3 (1280px x 450px, justifyContent: space-between) */}
+          <div 
+            style={{
+              width: "1280px",
+              maxWidth: "100%",
+              height: "450px",
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
+              background: "rgba(255, 255, 255, 1)",
+              boxSizing: "border-box"
+            }}
+            className="w-full mx-auto"
+          >
+            {/* Col 1: Card 7 (Cream Camel - 302px x 380px) */}
+            <div 
+              style={{ 
+                width: "302px", 
+                height: "380px", 
+                borderRadius: "4px",
+                overflow: "hidden",
+                boxShadow: "0 10px 20px rgba(0,0,0,0.08)",
+                flexShrink: 0
+              }}
+            >
+              <img src="/card-7-full.png" alt="Humps Down Surf's Up Card 7" className="w-full h-full object-cover" />
             </div>
 
-            {/* Col 2: Center Text Card */}
-            <div className="flex justify-center">
-              <div 
+            {/* Col 2: Center Text Card (482px x 334px spec, gap: 12px) */}
+            <div 
+              style={{ 
+                width: "482px", 
+                maxWidth: "100%",
+                height: "334px", 
+                borderRadius: "4px",
+                background: "#FFFFFF",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                textAlign: "center",
+                gap: "12px",
+                boxSizing: "border-box"
+              }}
+            >
+              <span className="bg-[#E8F5E9] text-[#2E7D32] text-[12px] font-semibold px-3 py-1 rounded-[4px] uppercase tracking-wider">
+                ABOUT GO BANJARA
+              </span>
+              <h3 
                 style={{ 
-                  width: "380px", 
+                  width: "482px",
                   maxWidth: "100%",
-                  height: "380px", 
-                  borderRadius: "4px",
-                  background: "#FFFFFF",
-                  padding: "32px",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "center",
+                  height: "156px",
+                  fontFamily: "Fraunces, serif", 
+                  fontWeight: 600, 
+                  fontSize: "42px", 
+                  lineHeight: "50px", 
+                  color: "rgba(43, 43, 43, 1)", 
+                  letterSpacing: "0px",
                   textAlign: "center",
-                  boxSizing: "border-box"
+                  margin: 0,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center"
                 }}
               >
-                <span className="bg-[#E8F5E9] text-[#2E7D32] text-[12px] font-semibold px-3 py-1 rounded-[4px] uppercase tracking-wider mb-4">
-                  ABOUT GO BANJARA
-                </span>
-                <h3 className="font-serif font-bold text-2xl md:text-[28px] text-[#2B2B2B] leading-snug mb-3">
-                  We don't sell trips. We hand you back a country you forgot.
-                </h3>
-                <p className="text-[#2B2B2B]/70 font-sans text-sm md:text-base leading-relaxed">
-                  Go Banjara is a small collective of travelers, writers, makers and local guides quietly rebuilding what travel across India was supposed to feel like
-                </p>
-              </div>
+                We don't sell trips. We hand you back a country you forgot.
+              </h3>
+              <p 
+                style={{ fontFamily: "Faktum, sans-serif", fontWeight: 400, fontSize: "18px", lineHeight: "26px", color: "rgba(43, 43, 43, 0.75)", margin: 0 }}
+                className="w-full"
+              >
+                Go Banjara is a small collective of travelers, writers, makers and local guides quietly rebuilding what travel across India was supposed to feel like
+              </p>
             </div>
 
-            {/* Col 3: Card 5 (Hikers) */}
-            <div className="flex justify-center">
-              <div 
-                style={{ 
-                  width: "302px", 
-                  height: "380px", 
-                  borderRadius: "4px",
-                  overflow: "hidden",
-                  boxShadow: "0 10px 20px rgba(0,0,0,0.08)"
-                }}
-              >
-                <img src="/card-5-full.png" alt="Go Banjara Traveler Card 5" className="w-full h-full object-cover" />
-              </div>
+            {/* Col 3: Card 5 (Hikers - 302px x 380px) */}
+            <div 
+              style={{ 
+                width: "302px", 
+                height: "380px", 
+                borderRadius: "4px",
+                overflow: "hidden",
+                boxShadow: "0 10px 20px rgba(0,0,0,0.08)",
+                flexShrink: 0
+              }}
+            >
+              <img src="/card-5-full.png" alt="Go Banjara Traveler Card 5" className="w-full h-full object-cover" />
             </div>
           </div>
 
-          {/* Row 4 */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center justify-between w-full">
-            {/* Col 1: Card 8 (Yellow Stickers) */}
-            <div className="flex justify-center">
-              <div 
-                style={{ 
-                  width: "302px", 
-                  height: "380px", 
-                  borderRadius: "4px",
-                  overflow: "hidden",
-                  boxShadow: "0 10px 20px rgba(0,0,0,0.08)"
-                }}
-              >
-                <img src="/card-8-full.png" alt="Yellow Stickers Card 8" className="w-full h-full object-cover" />
-              </div>
+          {/* Row 4 (1280px x 450px, justifyContent: space-between) */}
+          <div 
+            style={{
+              width: "1280px",
+              maxWidth: "100%",
+              height: "450px",
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
+              background: "rgba(255, 255, 255, 1)",
+              boxSizing: "border-box"
+            }}
+            className="w-full mx-auto"
+          >
+            {/* Col 1: Card 8 (Yellow Stickers - 302px x 380px) */}
+            <div 
+              style={{ 
+                width: "302px", 
+                height: "380px", 
+                borderRadius: "4px",
+                overflow: "hidden",
+                boxShadow: "0 10px 20px rgba(0,0,0,0.08)",
+                flexShrink: 0
+              }}
+            >
+              <img src="/card-8-full.png" alt="Yellow Stickers Card 8" className="w-full h-full object-cover" />
             </div>
 
-            {/* Col 2: Center Text Card */}
-            <div className="flex justify-center">
-              <div 
+            {/* Col 2: Center Text Card (482px x 334px spec, gap: 12px) */}
+            <div 
+              style={{ 
+                width: "482px", 
+                maxWidth: "100%",
+                height: "334px", 
+                borderRadius: "4px",
+                background: "#FFFFFF",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                textAlign: "center",
+                gap: "12px",
+                boxSizing: "border-box"
+              }}
+            >
+              <span className="bg-[#E8F5E9] text-[#2E7D32] text-[12px] font-semibold px-3 py-1 rounded-[4px] uppercase tracking-wider">
+                ABOUT GO BANJARA
+              </span>
+              <h3 
                 style={{ 
-                  width: "380px", 
+                  width: "482px",
                   maxWidth: "100%",
-                  height: "380px", 
-                  borderRadius: "4px",
-                  background: "#FFFFFF",
-                  padding: "32px",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "center",
+                  height: "156px",
+                  fontFamily: "Fraunces, serif", 
+                  fontWeight: 600, 
+                  fontSize: "42px", 
+                  lineHeight: "50px", 
+                  color: "rgba(43, 43, 43, 1)", 
+                  letterSpacing: "0px",
                   textAlign: "center",
-                  boxSizing: "border-box"
+                  margin: 0,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center"
                 }}
               >
-                <span className="bg-[#E8F5E9] text-[#2E7D32] text-[12px] font-semibold px-3 py-1 rounded-[4px] uppercase tracking-wider mb-4">
-                  ABOUT GO BANJARA
-                </span>
-                <h3 className="font-serif font-bold text-2xl md:text-[28px] text-[#2B2B2B] leading-snug mb-3">
-                  We don't sell trips. We hand you back a country you forgot.
-                </h3>
-                <p className="text-[#2B2B2B]/70 font-sans text-sm md:text-base leading-relaxed">
-                  Go Banjara is a small collective of travelers, writers, makers and local guides quietly rebuilding what travel across India was supposed to feel like
-                </p>
-              </div>
+                We don't sell trips. We hand you back a country you forgot.
+              </h3>
+              <p 
+                style={{ fontFamily: "Faktum, sans-serif", fontWeight: 400, fontSize: "18px", lineHeight: "26px", color: "rgba(43, 43, 43, 0.75)", margin: 0 }}
+                className="w-full"
+              >
+                Go Banjara is a small collective of travelers, writers, makers and local guides quietly rebuilding what travel across India was supposed to feel like
+              </p>
             </div>
 
-            {/* Col 3: Card 6 (Green Explore) */}
-            <div className="flex justify-center">
-              <div 
-                style={{ 
-                  width: "302px", 
-                  height: "380px", 
-                  borderRadius: "4px",
-                  overflow: "hidden",
-                  boxShadow: "0 10px 20px rgba(0,0,0,0.08)"
-                }}
-              >
-                <img src="/card-6-full.png" alt="Explore Adventure Card 6" className="w-full h-full object-cover" />
-              </div>
+            {/* Col 3: Card 6 (Green Explore - 302px x 380px) */}
+            <div 
+              style={{ 
+                width: "302px", 
+                height: "380px", 
+                borderRadius: "4px",
+                overflow: "hidden",
+                boxShadow: "0 10px 20px rgba(0,0,0,0.08)",
+                flexShrink: 0
+              }}
+            >
+              <img src="/card-6-full.png" alt="Explore Adventure Card 6" className="w-full h-full object-cover" />
             </div>
           </div>
 

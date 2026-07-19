@@ -229,21 +229,19 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 3. Stats Bar Section (1440x145px spec) */}
+      {/* 4. Stats Section inside 1440x556px container */}
       <section 
-        style={{
-          width: "100%",
+        style={{ 
+          width: "100%", 
           maxWidth: "1440px",
-          minHeight: "145px",
-          background: "rgba(255, 255, 255, 1)",
-          display: "flex",
-          alignItems: "center",
+          height: "556px", 
+          background: "rgba(255, 255, 255, 1)", 
+          display: "flex", 
+          alignItems: "center", 
           justifyContent: "center",
-          boxSizing: "border-box",
-          paddingTop: "24px",
-          paddingBottom: "24px",
+          boxSizing: "border-box"
         }}
-        className="mx-auto px-6 md:px-[80px] w-full border-t border-b border-gray-100 shrink-0"
+        className="mx-auto px-6 md:px-[80px] w-full shrink-0"
       >
         <div 
           style={{ 
@@ -315,18 +313,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-
-      {/* 4. Overlapping Sticker Cards Strip (1440x556px spec) */}
-      <section 
-        style={{ 
-          width: "100%", 
-          maxWidth: "1440px",
-          height: "556px", 
-          background: "rgba(255, 255, 255, 1)", 
-          boxSizing: "border-box"
-        }}
-        className="mx-auto w-full shrink-0"
-      />
 
       {/* 5. Two Large Story/Mission Cards Section */}
       <section className="w-full bg-[#FFFFFF] py-[62px] px-6 md:px-[80px] mx-auto max-w-[1440px] shrink-0">

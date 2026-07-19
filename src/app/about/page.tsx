@@ -432,18 +432,32 @@ export default function AboutPage() {
                 Humps down,<br />surfs up!
               </h3>
             </div>
-            <div style={{ position: "absolute", bottom: "-10px", right: "-10px", width: "240px", height: "240px", transform: "rotate(-3deg)" }}>
+            <div style={{ position: "absolute", bottom: "-20px", right: "-10px", width: "240px", height: "240px" }}>
               <svg viewBox="0 0 200 200" fill="none" style={{ width: "100%", height: "100%" }}>
-                <path d="M60,200 C60,140 70,120 70,100 C70,70 60,60 80,50 C100,40 130,40 140,60 C150,75 145,100 140,110 C130,125 130,150 130,200 Z" fill="#FF623E" />
-                <path d="M72,52 L62,35 C60,32 65,30 68,34 L78,48 Z" fill="#FF623E" />
-                <path d="M132,58 L146,42 C148,39 152,43 148,46 L136,58 Z" fill="#FF623E" />
-                <path d="M125,100 C125,120 100,125 95,120 C90,115 90,100 95,95 Z" fill="#E24C28" opacity="0.6" />
-                <g transform="rotate(4, 105, 80)">
-                  <path d="M70,78 C70,70 88,68 98,72 C108,76 102,96 88,96 C74,96 70,86 70,78 Z" fill="#1D493E" stroke="#FFFFFF" strokeWidth="4" />
-                  <path d="M102,82 C102,74 120,72 130,76 C140,80 134,100 120,100 C106,100 102,90 102,82 Z" fill="#1D493E" stroke="#FFFFFF" strokeWidth="4" />
-                  <rect x="94" y="74" width="12" height="4" fill="#FFFFFF" rx="2" />
-                  <circle cx="92" cy="78" r="4" fill="#FFFFFF" opacity="0.8" />
-                  <circle cx="124" cy="82" r="4" fill="#FFFFFF" opacity="0.8" />
+                {/* Ears */}
+                <path d="M65,75 C58,35 68,25 74,30 L85,75 Z" fill="#FF623E" />
+                <path d="M125,75 L136,30 C142,25 152,35 145,75 Z" fill="#FF623E" />
+
+                {/* Head */}
+                <path d="M70,70 C70,60 140,60 140,70 L145,150 C145,175 65,175 65,150 Z" fill="#FF623E" />
+
+                {/* Muzzle (white details) */}
+                <path d="M85,125 C85,115 125,115 125,125 L120,150 C120,158 90,158 90,150 Z" fill="#FF623E" />
+                <path d="M92,135 L118,135" stroke="#FFFFFF" strokeWidth="3" strokeLinecap="round" />
+                <path d="M105,142 L105,147 C100,147 98,149 98,149 M105,147 C110,147 112,149 112,149" stroke="#FFFFFF" strokeWidth="3" strokeLinecap="round" />
+
+                {/* Sunglasses */}
+                <g>
+                  {/* Left Frame */}
+                  <path d="M72,92 C72,82 96,80 98,92 C100,102 78,110 72,92 Z" fill="#1D493E" stroke="#FFFFFF" strokeWidth="5.5" strokeLinejoin="round" />
+                  <path d="M76,88 A 6 6 0 0 1 88,84" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" opacity="0.6" />
+
+                  {/* Right Frame */}
+                  <path d="M112,92 C114,80 138,82 138,92 C132,110 110,102 112,92 Z" fill="#1D493E" stroke="#FFFFFF" strokeWidth="5.5" strokeLinejoin="round" />
+                  <path d="M116,88 A 6 6 0 0 1 128,84" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" opacity="0.6" />
+
+                  {/* Bridge */}
+                  <path d="M94,92 L116,92" stroke="#FFFFFF" strokeWidth="5" strokeLinecap="round" />
                 </g>
               </svg>
             </div>
@@ -575,18 +589,32 @@ export default function AboutPage() {
                 Humps down,<br />surfs up!
               </h3>
             </div>
-            <div style={{ position: "absolute", bottom: "-10px", right: "-10px", width: "240px", height: "240px", transform: "rotate(-3deg)" }}>
+            <div style={{ position: "absolute", bottom: "-20px", right: "-10px", width: "240px", height: "240px" }}>
               <svg viewBox="0 0 200 200" fill="none" style={{ width: "100%", height: "100%" }}>
-                <path d="M60,200 C60,140 70,120 70,100 C70,70 60,60 80,50 C100,40 130,40 140,60 C150,75 145,100 140,110 C130,125 130,150 130,200 Z" fill="#FF623E" />
-                <path d="M72,52 L62,35 C60,32 65,30 68,34 L78,48 Z" fill="#FF623E" />
-                <path d="M132,58 L146,42 C148,39 152,43 148,46 L136,58 Z" fill="#FF623E" />
-                <path d="M125,100 C125,120 100,125 95,120 C90,115 90,100 95,95 Z" fill="#E24C28" opacity="0.6" />
-                <g transform="rotate(4, 105, 80)">
-                  <path d="M70,78 C70,70 88,68 98,72 C108,76 102,96 88,96 C74,96 70,86 70,78 Z" fill="#1D493E" stroke="#FFFFFF" strokeWidth="4" />
-                  <path d="M102,82 C102,74 120,72 130,76 C140,80 134,100 120,100 C106,100 102,90 102,82 Z" fill="#1D493E" stroke="#FFFFFF" strokeWidth="4" />
-                  <rect x="94" y="74" width="12" height="4" fill="#FFFFFF" rx="2" />
-                  <circle cx="92" cy="78" r="4" fill="#FFFFFF" opacity="0.8" />
-                  <circle cx="124" cy="82" r="4" fill="#FFFFFF" opacity="0.8" />
+                {/* Ears */}
+                <path d="M65,75 C58,35 68,25 74,30 L85,75 Z" fill="#FF623E" />
+                <path d="M125,75 L136,30 C142,25 152,35 145,75 Z" fill="#FF623E" />
+
+                {/* Head */}
+                <path d="M70,70 C70,60 140,60 140,70 L145,150 C145,175 65,175 65,150 Z" fill="#FF623E" />
+
+                {/* Muzzle (white details) */}
+                <path d="M85,125 C85,115 125,115 125,125 L120,150 C120,158 90,158 90,150 Z" fill="#FF623E" />
+                <path d="M92,135 L118,135" stroke="#FFFFFF" strokeWidth="3" strokeLinecap="round" />
+                <path d="M105,142 L105,147 C100,147 98,149 98,149 M105,147 C110,147 112,149 112,149" stroke="#FFFFFF" strokeWidth="3" strokeLinecap="round" />
+
+                {/* Sunglasses */}
+                <g>
+                  {/* Left Frame */}
+                  <path d="M72,92 C72,82 96,80 98,92 C100,102 78,110 72,92 Z" fill="#1D493E" stroke="#FFFFFF" strokeWidth="5.5" strokeLinejoin="round" />
+                  <path d="M76,88 A 6 6 0 0 1 88,84" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" opacity="0.6" />
+
+                  {/* Right Frame */}
+                  <path d="M112,92 C114,80 138,82 138,92 C132,110 110,102 112,92 Z" fill="#1D493E" stroke="#FFFFFF" strokeWidth="5.5" strokeLinejoin="round" />
+                  <path d="M116,88 A 6 6 0 0 1 128,84" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" opacity="0.6" />
+
+                  {/* Bridge */}
+                  <path d="M94,92 L116,92" stroke="#FFFFFF" strokeWidth="5" strokeLinecap="round" />
                 </g>
               </svg>
             </div>

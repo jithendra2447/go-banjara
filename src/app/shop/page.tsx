@@ -7,6 +7,7 @@ import { useCart } from '@/components/providers';
 import { PRODUCTS } from '@/data/products';
 import { Product } from '@/types';
 import ProductCard from '@/components/ProductCard';
+import { TrustBanner } from '@/components/TrustBanner';
 
 const TESTIMONIALS = [
   {
@@ -613,6 +614,7 @@ export default function ShopPage() {
         </div>
 
       </main>
+      <TrustBanner />
     </div>
   );
 }

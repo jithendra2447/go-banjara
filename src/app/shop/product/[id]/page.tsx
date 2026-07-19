@@ -8,6 +8,7 @@ import { useCart } from '@/components/providers';
 import { PRODUCTS } from '@/data/products';
 import { Product } from '@/types';
 import ProductCard from '@/components/ProductCard';
+import { TrustBanner } from '@/components/TrustBanner';
 
 const FAQ_ITEMS = [
   {
@@ -1395,6 +1396,7 @@ export default function ProductDetailsPage() {
         </section>
 
       </main>
+      <TrustBanner />
     </div>
   );
 }

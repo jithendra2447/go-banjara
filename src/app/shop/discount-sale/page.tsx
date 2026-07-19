@@ -8,6 +8,7 @@ import { PRODUCTS } from '@/data/products';
 import { Product } from '@/types';
 import ProductCard from '@/components/ProductCard';
 import { FilterDrawer } from '@/components/FilterDrawer';
+import { TrustBanner } from '@/components/TrustBanner';
 
 const categoryGroupMap: Record<string, string[]> = {
   'Collectibles & Accessories': ['stickers', 'badges', 'badges / pins', 'bookmarks', 'fridge magnets', 'key chains', 'keychains', 'luggage tags'],
@@ -256,6 +257,7 @@ export default function DiscountSalePage() {
         selectedCount={selectedCount}
         onClear={handleClear}
       />
+      <TrustBanner />
     </div>
   );
 }

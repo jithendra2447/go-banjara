@@ -9,6 +9,7 @@ import { Product } from '@/types';
 import ProductCard from '@/components/ProductCard';
 import { FilterDrawer } from '@/components/FilterDrawer';
 import { useSearchParams } from 'next/navigation';
+import { TrustBanner } from '@/components/TrustBanner';
 
 const categoryGroupMap: Record<string, string[]> = {
   'Collectibles & Accessories': ['stickers', 'badges', 'badges / pins', 'bookmarks', 'fridge magnets', 'key chains', 'keychains', 'luggage tags'],
@@ -280,6 +281,7 @@ function AllProductsContent() {
         selectedCount={selectedCount}
         onClear={handleClear}
       />
+      <TrustBanner />
     </div>
   );
 }

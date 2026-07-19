@@ -256,10 +256,10 @@ export default function AboutPage() {
         >
           {/* Stat 1 */}
           <div className="flex flex-col items-center text-center gap-1.5 flex-1 min-w-[120px]">
-            <span style={{ fontFamily: "Fraunces, serif", fontWeight: 600, fontSize: "36px", lineHeight: "100%", color: "#2B2B2B" }}>
+            <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", color: "rgba(43, 43, 43, 1)" }}>
               10+
             </span>
-            <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 500, fontSize: "16px", lineHeight: "100%", color: "rgba(43, 43, 43, 0.8)" }}>
+            <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", color: "rgba(43, 43, 43, 1)" }}>
               Travel Packages
             </span>
           </div>
@@ -268,10 +268,10 @@ export default function AboutPage() {
 
           {/* Stat 2 */}
           <div className="flex flex-col items-center text-center gap-1.5 flex-1 min-w-[120px]">
-            <span style={{ fontFamily: "Fraunces, serif", fontWeight: 600, fontSize: "36px", lineHeight: "100%", color: "#2B2B2B" }}>
+            <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", color: "rgba(43, 43, 43, 1)" }}>
               15k+
             </span>
-            <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 500, fontSize: "16px", lineHeight: "100%", color: "rgba(43, 43, 43, 0.8)" }}>
+            <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", color: "rgba(43, 43, 43, 1)" }}>
               Nomads Joined
             </span>
           </div>
@@ -280,10 +280,10 @@ export default function AboutPage() {
 
           {/* Stat 3 */}
           <div className="flex flex-col items-center text-center gap-1.5 flex-1 min-w-[120px]">
-            <span style={{ fontFamily: "Fraunces, serif", fontWeight: 600, fontSize: "36px", lineHeight: "100%", color: "#2B2B2B" }}>
+            <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", color: "rgba(43, 43, 43, 1)" }}>
               24/7
             </span>
-            <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 500, fontSize: "16px", lineHeight: "100%", color: "rgba(43, 43, 43, 0.8)" }}>
+            <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", color: "rgba(43, 43, 43, 1)" }}>
               On-road Support
             </span>
           </div>
@@ -292,10 +292,10 @@ export default function AboutPage() {
 
           {/* Stat 4 */}
           <div className="flex flex-col items-center text-center gap-1.5 flex-1 min-w-[120px]">
-            <span style={{ fontFamily: "Fraunces, serif", fontWeight: 600, fontSize: "36px", lineHeight: "100%", color: "#2B2B2B" }}>
+            <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", color: "rgba(43, 43, 43, 1)" }}>
               7+
             </span>
-            <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 500, fontSize: "16px", lineHeight: "100%", color: "rgba(43, 43, 43, 0.8)" }}>
+            <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", color: "rgba(43, 43, 43, 1)" }}>
               Shop Products
             </span>
           </div>
@@ -304,10 +304,10 @@ export default function AboutPage() {
 
           {/* Stat 5 */}
           <div className="flex flex-col items-center text-center gap-1.5 flex-1 min-w-[120px]">
-            <span style={{ fontFamily: "Fraunces, serif", fontWeight: 600, fontSize: "36px", lineHeight: "100%", color: "#2B2B2B" }}>
+            <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 600, fontSize: "32px", lineHeight: "100%", color: "rgba(43, 43, 43, 1)" }}>
               4.5+
             </span>
-            <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 500, fontSize: "16px", lineHeight: "100%", color: "rgba(43, 43, 43, 0.8)" }}>
+            <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", color: "rgba(43, 43, 43, 1)" }}>
               Average trip rating
             </span>
           </div>

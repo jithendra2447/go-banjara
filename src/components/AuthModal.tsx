@@ -309,15 +309,16 @@ export const AuthModal: React.FC = () => {
           </button>
         )}
 
-        {/* LEFT COLUMN: AUTH FORMS (Figma specs: 556x904, border 1px rgba(204,204,204,0.54), bg white, padding 32px) */}
+        {/* LEFT COLUMN: AUTH FORMS (Figma specs: 556x802, border 1px rgba(204,204,204,0.54), bg white, padding 32px, gap 42px) */}
         <div 
-          className="w-full md:w-[556px] md:h-[904px] flex flex-col justify-between"
+          className="w-full md:w-[556px] md:h-[802px] flex flex-col justify-between"
           style={{
             background: 'rgba(255, 255, 255, 1)',
             border: '1px solid rgba(204, 204, 204, 0.54)',
             borderRadius: '4px',
             padding: '32px',
             boxSizing: 'border-box',
+            gap: '42px',
           }}
         >
           
@@ -334,12 +335,29 @@ export const AuthModal: React.FC = () => {
               margin: '0 auto',
             }}
           >
-            {/* Logo Brand Header */}
-            <div className="flex items-center gap-2">
-              <div className="w-7 h-7 rounded-full bg-[#f3faf5] border border-[#1D493E]/15 flex items-center justify-center shadow-sm">
-                <BonjoMascot width={20} height={20} interactive={false} />
+            {/* Logo Brand Header (Figma specs: width 492, height 33, gap 10px) */}
+            <div 
+              style={{
+                width: '492px',
+                height: '33px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '10px',
+              }}
+            >
+              <div 
+                className="rounded-full flex items-center justify-center shadow-sm"
+                style={{
+                  width: '33px',
+                  height: '33px',
+                  background: '#FFFF80',
+                  border: '1px solid rgba(29, 73, 62, 0.15)',
+                }}
+              >
+                <BonjoMascot width={22} height={22} interactive={false} />
               </div>
-              <span className="text-base font-black text-[#1D493E] tracking-tight select-none">go banjāra</span>
+              <span className="text-xl font-black text-[#1D493E] tracking-tight select-none">go banjāra</span>
             </div>
 
             {/* Title / Description */}

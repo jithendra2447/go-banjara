@@ -1347,57 +1347,78 @@ export const AuthModal: React.FC = () => {
           }}
         >
           
-          {/* Llama Card Container (Figma specs: 568.42x568.42, -2 deg angle, 12px border-radius, box-shadow) */}
-          <div 
-            className="relative bg-white border border-[#1D493E]/10 flex items-center justify-center transition-transform duration-300"
-            style={{
-              width: '568.42px',
-              height: '568.42px',
-              borderRadius: '12px',
-              transform: 'rotate(-2deg)',
-              boxShadow: '0px 27.27px 54.54px -13.09px rgba(0, 0, 0, 0.25)',
-              padding: '16px',
-              boxSizing: 'border-box',
-            }}
-          >
-            <img 
-              src="/llama_mascot.png" 
-              className="w-full h-full object-cover" 
-              style={{ borderRadius: '8px' }} 
-              alt="Go Banjara Mascot Llama" 
-            />
-            {/* Sticker 1: Top Left (Figma specs: 99.2x91, angle 15deg, top 0, left 32) */}
+          {/* Llama Card Container (Figma specs: 587.9px x 587.9px, angle 0deg, 12px border-radius) */}
+          <div className="relative select-none" style={{ width: '588px', height: '588px' }}>
+            {/* Background Rotated Card */}
             <div 
-              className="absolute rounded-full shadow-md flex items-center justify-center text-center select-none"
               style={{
-                width: '99.19px',
-                height: '91px',
+                position: 'absolute',
                 top: '0px',
-                left: '32px',
-                transform: 'rotate(15deg)',
-                backgroundImage: 'url("/naturally_nomad_badge.png")',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                zIndex: 20,
+                left: '0px',
+                width: '588px',
+                height: '588px',
+                borderRadius: '12px',
+                background: 'rgba(204, 204, 204, 0.4)',
+                transform: 'rotate(-2.5deg)',
+                zIndex: 1,
               }}
             />
 
-            {/* Sticker 2: Bottom Right (Figma specs: 124x120, angle -0deg, top 469.12, left 509) */}
+            {/* Main Llama Image Card */}
             <div 
-              className="absolute rounded-full shadow-md flex items-center justify-center text-center select-none"
+              className="absolute bg-white border border-[#1D493E]/10 flex items-center justify-center"
               style={{
-                width: '124px',
-                height: '120px',
-                top: '469.12px',
-                left: '509px',
+                top: '0px',
+                left: '0px',
+                width: '588px',
+                height: '588px',
+                borderRadius: '12px',
                 transform: 'rotate(0deg)',
-                backgroundImage: 'url("/around_the_world_sticker.jpg")',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                zIndex: 20,
+                boxShadow: '0px 27.27px 54.54px -13.09px rgba(0, 0, 0, 0.25)',
+                padding: '16px',
+                boxSizing: 'border-box',
+                zIndex: 2,
               }}
-            />
+            >
+              <img 
+                src="/llama_mascot.png" 
+                className="w-full h-full object-cover" 
+                style={{ borderRadius: '8px' }} 
+                alt="Go Banjara Mascot Llama" 
+              />
+              {/* Sticker 1: Top Left (Figma specs: 99.2x91, angle 15deg, top 0, left 32) */}
+              <div 
+                className="absolute rounded-full shadow-md flex items-center justify-center text-center select-none"
+                style={{
+                  width: '99.19px',
+                  height: '91px',
+                  top: '0px',
+                  left: '32px',
+                  transform: 'rotate(15deg)',
+                  backgroundImage: 'url("/naturally_nomad_badge.png")',
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  zIndex: 20,
+                }}
+              />
+
+              {/* Sticker 2: Bottom Right (Figma specs: 124x120, angle -0deg, top 469.12, left 509) */}
+              <div 
+                className="absolute rounded-full shadow-md flex items-center justify-center text-center select-none"
+                style={{
+                  width: '124px',
+                  height: '120px',
+                  top: '469.12px',
+                  left: '509px',
+                  transform: 'rotate(0deg)',
+                  backgroundImage: 'url("/around_the_world_sticker.jpg")',
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  zIndex: 20,
+                }}
+              />
             </div>
+          </div>
 
           {/* Description Text (Figma specs: width 588, height 132, gap 12px) */}
           <div 

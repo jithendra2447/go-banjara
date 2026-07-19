@@ -101,57 +101,84 @@ export default function ContactPage() {
       className="relative z-10"
     >
       <div>
-        {/* SECTION 1: HERO SECTION */}
-        <section className="w-full px-6 md:px-20 pt-16 pb-10 text-center flex flex-col items-center">
-          <div className="max-w-[1280px] w-full flex flex-col items-center gap-6">
-            <span 
-              style={{ 
-                display: "inline-flex", 
-                alignItems: "center", 
-                justifyContent: "center",
-                height: "28px",
-                padding: "0 16px",
-                borderRadius: "4px",
-                fontFamily: "'Faktum', 'Outfit', sans-serif",
-                fontWeight: 600,
-                fontSize: "14px",
-                lineHeight: "100%",
-                letterSpacing: "1.2px",
-                textTransform: "uppercase",
-                color: "rgba(255, 98, 62, 1)",
-                background: "rgba(255, 98, 62, 0.1)",
-              }}
+        {/* SECTION 1: HERO SECTION (Styled exactly to Figma specs 1440x220) */}
+        <section 
+          style={{
+            width: "100%",
+            maxWidth: "1440px",
+            minHeight: "220px",
+            paddingTop: "62px",
+            paddingBottom: "24px",
+            paddingLeft: "80px",
+            paddingRight: "80px",
+            background: "rgba(255, 255, 255, 1)",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "10px",
+            boxSizing: "border-box"
+          }}
+          className="mx-auto text-center px-6 md:px-20"
+        >
+          {/* Small orange badge */}
+          <span 
+            style={{ 
+              display: "inline-flex", 
+              alignItems: "center", 
+              justifyContent: "center",
+              height: "24px",
+              padding: "0 12px",
+              borderRadius: "4px",
+              fontFamily: "'Faktum', 'Outfit', sans-serif",
+              fontWeight: 700,
+              fontSize: "12px",
+              lineHeight: "100%",
+              letterSpacing: "1.2px",
+              textTransform: "uppercase",
+              color: "rgba(255, 98, 62, 1)",
+              background: "rgba(255, 98, 62, 0.08)",
+            }}
+          >
+            CONTACT US
+          </span>
+          
+          {/* Main Title Let's Get in Touch */}
+          <h1 
+            style={{
+              fontFamily: "'Fraunces', serif",
+              fontWeight: 600,
+              fontSize: "40px",
+              lineHeight: "1.1",
+              letterSpacing: "-0.5px",
+              color: "#2C2C2C",
+              margin: 0,
+            }}
+            className="text-3xl md:text-[40px]"
+          >
+            Let’s Get in Touch
+          </h1>
+
+          {/* Subtitle with email link */}
+          <p 
+            style={{
+              fontFamily: "'Faktum', 'Outfit', sans-serif",
+              fontWeight: 500,
+              fontSize: "18px",
+              lineHeight: "24px",
+              color: "rgba(43, 43, 43, 0.9)",
+              margin: 0,
+            }}
+            className="text-sm md:text-[18px]"
+          >
+            or Just reach out manually to{" "}
+            <a 
+              href="mailto:hello@gobanjara.com" 
+              className="text-[#3b82f6] hover:text-[#2563eb] underline underline-offset-4 font-semibold transition"
             >
-              Get In Touch
-            </span>
-            <h1 
-              style={{
-                fontFamily: "'Fraunces', serif",
-                fontWeight: 600,
-                letterSpacing: "-0.5px",
-                color: "rgba(29, 73, 62, 1)",
-                margin: 0,
-              }}
-              className="text-4xl md:text-[56px] leading-tight"
-            >
-              Let's Connect <span style={{ color: "rgba(255, 98, 62, 1)" }}>With the Tribe</span>
-            </h1>
-            <p 
-              style={{
-                width: "100%",
-                maxWidth: "800px",
-                fontFamily: "'Faktum', 'Outfit', sans-serif",
-                fontWeight: 500,
-                fontSize: "20px",
-                lineHeight: "30px",
-                color: "rgba(43, 43, 43, 0.8)",
-                margin: 0,
-              }}
-              className="text-sm sm:text-base md:text-[20px]"
-            >
-              Whether you are planning a Himalayan trek, checking on a custom clothing order, or just want to swap travel stories over a hot cup of kahwa—we are here for it.
-            </p>
-          </div>
+              hello@gobanjara.com
+            </a>
+          </p>
         </section>
 
         {/* SECTION 2: INTERACTIVE FORM & DIRECT INFO GRID */}

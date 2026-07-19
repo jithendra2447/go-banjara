@@ -562,7 +562,7 @@ export default function AboutPage() {
       {/* 5. Two Large Mission/Vision Cards Section (1440x783px spec) */}
       <section 
         style={{ 
-          marginTop: "-150px", 
+          marginTop: "0px", 
           position: "relative", 
           zIndex: 20,
           width: "100%",

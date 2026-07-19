@@ -842,12 +842,14 @@ export default function AboutPage() {
       >
         {/* Header (Exact Figma specs) */}
         <div style={{ width: "1280px", maxWidth: "100%", display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "12px" }} className="mx-auto">
-          {/* Orange Badge (195px x 26px) */}
+          {/* Orange Badge (Single line 195px x 26px) */}
           <span 
             style={{
-              width: "195px",
+              minWidth: "195px",
               height: "26px",
-              display: "flex",
+              paddingLeft: "12px",
+              paddingRight: "12px",
+              display: "inline-flex",
               alignItems: "center",
               justifyContent: "center",
               gap: "10px",
@@ -859,13 +861,14 @@ export default function AboutPage() {
               lineHeight: "14px",
               letterSpacing: "1.2px",
               borderRadius: "4px",
-              textTransform: "uppercase"
+              textTransform: "uppercase",
+              whiteSpace: "nowrap"
             }}
           >
             OUR JOURNEY TIMELINE
           </span>
 
-          {/* Main Title (1280px x 52px, Fraunces 600, 42px) */}
+          {/* Main Title (Single line 1280px x 52px, Fraunces 600, 42px) */}
           <h2 
             style={{
               width: "1280px",
@@ -877,10 +880,11 @@ export default function AboutPage() {
               lineHeight: "42px",
               color: "rgba(43, 43, 43, 1)",
               letterSpacing: "0px",
-              margin: 0
+              margin: 0,
+              whiteSpace: "nowrap"
             }}
           >
-            From a scribbled notebook to a <span style={{ color: "#FF623E", fontFamily: "Fraunces, serif", fontWeight: 600, fontSize: "42px", lineHeight: "42px", letterSpacing: "0px" }}>travelling tribe</span>
+            From a scribbled notebook to a <span style={{ color: "#FF623E", fontFamily: "Fraunces, serif", fontWeight: 600, fontSize: "42px", lineHeight: "42px", letterSpacing: "0px", whiteSpace: "nowrap" }}>travelling tribe</span>
           </h2>
 
           {/* Subtitle (1280px x 32px, Faktum 500, 24px, line-height 32px) */}

@@ -318,19 +318,20 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 4. Overlapping Sticker Cards Section (Non-movable, Fits to screen) */}
+      {/* 4. Overlapping Sticker Cards Section (Non-movable, Fits to screen directly under Stats Bar) */}
       <section 
         style={{ 
           width: "100%", 
-          height: "556px", 
+          height: "420px", 
           background: "rgba(255, 255, 255, 1)", 
           position: "relative",
           overflow: "hidden",
-          boxSizing: "border-box"
+          boxSizing: "border-box",
+          marginTop: "10px"
         }}
         className="w-full shrink-0"
       >
-        {/* Cards Container (Static 1709.57px x 418.33px centered, non-scrollable, locked) */}
+        {/* Cards Container (Static 1709.57px x 418.33px centered right below Stats Bar, non-scrollable) */}
         <div 
           style={{ 
             width: "1709.5738525390625px", 
@@ -343,7 +344,7 @@ export default function AboutPage() {
             userSelect: "none",
             boxSizing: "border-box",
             position: "absolute",
-            top: "68px",
+            top: "0px",
             left: "50%",
             transform: "translateX(-50%)",
             opacity: 1

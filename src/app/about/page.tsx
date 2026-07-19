@@ -578,55 +578,67 @@ export default function AboutPage() {
         className="mx-auto w-full shrink-0 flex items-center justify-center"
       >
         <div 
-          style={{ gap: "32px" }}
-          className="grid grid-cols-1 md:grid-cols-2 w-full h-full max-w-[1280px] mx-auto"
+          style={{ gap: "32px", width: "100%", maxWidth: "1280px", height: "699px" }}
+          className="flex flex-col md:flex-row items-center justify-between mx-auto"
         >
-          {/* Card 1: OUR MISSION */}
+          {/* Card 1: OUR MISSION (843px x 699px) */}
           <div 
-            style={{ borderRadius: "4px" }} 
-            className="relative overflow-hidden group shadow-md w-full h-full"
+            style={{ 
+              width: "843px", 
+              height: "699px", 
+              borderRadius: "4px",
+              boxSizing: "border-box"
+            }} 
+            className="relative overflow-hidden group shadow-md shrink-0 w-full md:w-[843px]"
           >
             <img 
-              src="https://images.unsplash.com/photo-1533240332313-0db49b439ad3?auto=format&fit=crop&w=1200&q=80" 
+              src="https://images.unsplash.com/photo-1533240332313-0db49b439ad3?auto=format&fit=crop&w=1400&q=80" 
               alt="Hikers on snowy mountains" 
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-102"
             />
-            {/* Translucent Glass Text Box at bottom left */}
+            {/* Translucent Glass Text Box at bottom left (811px x 230px spec) */}
             <div 
               style={{
                 position: "absolute",
-                bottom: "24px",
-                left: "24px",
-                right: "24px",
+                bottom: "16px",
+                left: "16px",
+                width: "811px",
+                maxWidth: "calc(100% - 32px)",
+                height: "230px",
                 background: "rgba(43, 43, 43, 0.55)",
-                backdropFilter: "blur(12px)",
-                WebkitBackdropFilter: "blur(12px)",
+                backdropFilter: "blur(16px)",
+                WebkitBackdropFilter: "blur(16px)",
+                border: "1px solid rgba(255, 255, 255, 0.15)",
                 borderRadius: "4px",
-                padding: "24px",
+                padding: "12px",
                 boxSizing: "border-box",
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "flex-start",
-                gap: "12px",
-                maxWidth: "520px"
+                gap: "12px"
               }}
             >
               <span className="bg-[#FF623E] text-white text-[12px] font-semibold px-3 py-1 rounded-[4px] uppercase tracking-wider">
                 OUR MISSION
               </span>
-              <p className="text-white text-base sm:text-lg font-sans font-medium leading-relaxed m-0">
+              <p className="text-white text-base md:text-[20px] font-sans font-medium leading-[28px] m-0">
                 We exist to bridge the gap between the life people are living and the adventures they are dreaming about. Every experience we curate, every product we build, and every story we tell is in service of one thing: helping people go further.
               </p>
             </div>
           </div>
 
-          {/* Card 2: OUR VISION */}
+          {/* Card 2: OUR VISION (405px x 699px) */}
           <div 
-            style={{ borderRadius: "4px" }} 
-            className="relative overflow-hidden group shadow-md w-full h-full"
+            style={{ 
+              width: "405px",
+              height: "699px", 
+              borderRadius: "4px",
+              boxSizing: "border-box"
+            }} 
+            className="relative overflow-hidden group shadow-md shrink-0 w-full md:w-[405px]"
           >
             <img 
-              src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80" 
+              src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=80" 
               alt="Nomads on camels in snowy mountain valley" 
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-102"
             />

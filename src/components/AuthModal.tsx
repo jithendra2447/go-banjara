@@ -1432,13 +1432,15 @@ export const AuthModal: React.FC = () => {
             <p 
               style={{
                 width: '588px',
+                height: '64px',
                 fontFamily: '"Faktum", "Outfit", sans-serif',
                 fontWeight: 500,
-                fontSize: '16px',
-                lineHeight: '150%',
+                fontSize: '20px',
+                lineHeight: '32px',
                 color: 'rgba(141, 141, 141, 1)',
                 textAlign: 'center',
                 margin: 0,
+                display: 'block',
               }}
             >
               Get personalized shopping and customization experience.

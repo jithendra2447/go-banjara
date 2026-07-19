@@ -1852,41 +1852,99 @@ export default function HolidaysPortal() {
         </div>
       </section>
 
-      {/* 3.5 FAQ ACCORDION SECTION (Matching Home page fonts and styles) */}
-      <section className="w-full max-w-[1440px] bg-white rounded-[4px] py-16 md:px-[80px] px-6 flex flex-col gap-[32px] mx-auto border-t border-gray-100 relative z-10">
+      {/* 3.5 FAQ ACCORDION SECTION (Matching Shop page fonts and styles) */}
+      <section 
+        style={{
+          width: '100%',
+          maxWidth: '1440px',
+          margin: '0 auto',
+          paddingTop: '42px',
+          paddingBottom: '42px',
+          background: 'rgba(255, 255, 255, 1)',
+          boxSizing: 'border-box',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '24px',
+        }}
+        className="md:px-[80px] px-6 relative z-10"
+      >
         {/* Header */}
-        <div className="w-full max-w-[1280px] h-auto flex flex-col gap-[12px] justify-center text-left mx-auto">
-          <div className="w-[54px] h-[26px] flex items-center justify-center bg-[#FFEBE5] rounded-[4px]">
-            <span className="w-[46px] h-[18px] flex items-center justify-center font-sans font-semibold text-[14px] leading-none tracking-[1.2px] text-[#FF623E] uppercase font-mono">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }} className="text-left w-full">
+          <div className="space-y-3">
+            <span 
+              style={{
+                fontFamily: "Faktum, Outfit, sans-serif",
+                fontWeight: 600,
+                fontSize: "14px",
+                lineHeight: "100%",
+                letterSpacing: "1.2px",
+                textTransform: "uppercase",
+                color: "rgba(255, 98, 62, 1)",
+                background: "rgba(255, 98, 62, 0.1)",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                height: "28px",
+                padding: "0 16px",
+                borderRadius: "4px"
+              }}
+            >
               FAQ'S
             </span>
+            <h2
+              style={{
+                fontFamily: "Fraunces, serif",
+                fontWeight: 600,
+                color: "#2B2B2B",
+                margin: 0
+              }}
+              className="text-3xl md:text-[42px] leading-tight"
+            >
+              Frequently asked questions
+            </h2>
           </div>
-          <h2 className="w-full max-w-[541px] h-auto flex items-center font-serif font-semibold text-[32px] md:text-[42px] leading-[1] tracking-[0px] text-[#2B2B2B] py-2">
-            Frequently asked questions
-          </h2>
         </div>
 
         {/* Accordion List */}
-        <div className="w-full max-w-[1280px] border-t border-slate-200 divide-y divide-slate-200 mx-auto">
+        <div className="w-full flex flex-col border-t border-gray-200 mt-2">
           {FAQ_ITEMS.map((item, idx) => {
             const isOpen = openFaqIndex === idx;
             return (
-              <div key={idx} className="py-5 text-left border-b border-slate-200">
-                <button
-                  type="button"
+              <div 
+                key={idx} 
+                className="w-full border-b border-gray-200 py-5 flex flex-col text-left transition-colors duration-200"
+              >
+                <button 
                   onClick={() => toggleFaq(idx)}
-                  className="w-full flex justify-between items-center text-left gap-4 cursor-pointer group"
+                  className="w-full flex justify-between items-center text-left focus:outline-none cursor-pointer bg-transparent border-none p-0"
                 >
-                  <span className="w-full max-w-[1196px] flex items-center font-sans font-medium text-base sm:text-lg md:text-[20px] leading-tight md:leading-[32px] tracking-[0px] text-[#2B2B2B]">
+                  <span 
+                    style={{
+                      fontFamily: "Faktum, Outfit, sans-serif",
+                      fontWeight: 600,
+                      color: "#2C2C2C"
+                    }}
+                    className="text-base md:text-[18px] leading-normal"
+                  >
                     {item.question}
                   </span>
-                  <span className="text-xl font-medium text-[#1D493E] shrink-0 leading-none select-none">
-                    {isOpen ? '—' : '+'}
-                  </span>
+                  {isOpen ? (
+                    <span className="text-2xl font-semibold text-[#FF623E] select-none shrink-0 ml-4">—</span>
+                  ) : (
+                    <span className="text-2xl font-semibold text-[#1D493E] select-none shrink-0 ml-4">+</span>
+                  )}
                 </button>
-                {/* Expandable answer */}
                 {isOpen && (
-                  <p className="mt-3 w-full max-w-[1196px] font-sans font-medium text-sm sm:text-base md:text-[20px] leading-relaxed md:leading-[32px] tracking-[0px] text-[#8D8D8D] animate-fade-in">
+                  <p 
+                    style={{
+                      fontFamily: "Faktum, Outfit, sans-serif",
+                      fontWeight: 500,
+                      color: "#666666",
+                      margin: 0,
+                      paddingTop: "8px"
+                    }}
+                    className="text-sm md:text-[14px] leading-relaxed animate-fade-in-up"
+                  >
                     {item.answer}
                   </p>
                 )}

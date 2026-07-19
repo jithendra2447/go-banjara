@@ -1135,10 +1135,17 @@ export default function ProductDetailsPage() {
         )}
 
         {/* Similar Products (You May Also Like) */}
-        <section className="w-full mt-16 pt-8 border-t border-slate-100 text-left">
-          <h2 className="text-2xl md:text-[32px] font-serif font-semibold text-[#2B2B2B] mb-8">
-            You May Also <span className="text-[#FF5A36]">Like</span>
-          </h2>
+        <section className="w-full py-[42px] border-t border-slate-100 text-left flex flex-col gap-[32px] !px-0">
+          <div className="flex flex-col gap-2">
+            <div>
+              <span className="inline-block text-[9px] font-black uppercase tracking-wider text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-1 rounded-[4px]">
+                YOU MAY ALSO LIKE
+              </span>
+            </div>
+            <h2 className="text-2xl md:text-[32px] font-serif font-semibold text-[#2B2B2B]">
+              Similar <span className="text-[#FF5A36]">Products</span>
+            </h2>
+          </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[32px] w-full">
             {fallbackSimilarProducts.map((prod) => (
               <ProductCard
@@ -1149,13 +1156,20 @@ export default function ProductDetailsPage() {
             ))}
           </div>
         </section>
-
+ 
         {/* Recently Viewed Products */}
         {recentlyViewed.length > 0 && (
-          <section className="w-full mt-16 pt-8 border-t border-slate-100 text-left">
-            <h2 className="text-2xl md:text-[32px] font-serif font-semibold text-[#2B2B2B] mb-8">
-              Recently <span className="text-[#FF5A36]">Viewed</span>
-            </h2>
+          <section className="w-full py-[42px] border-t border-slate-100 text-left flex flex-col gap-[32px] !px-0">
+            <div className="flex flex-col gap-2">
+              <div>
+                <span className="inline-block text-[9px] font-black uppercase tracking-wider text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-1 rounded-[4px]">
+                  RECENTLY VIEWED
+                </span>
+              </div>
+              <h2 className="text-2xl md:text-[32px] font-serif font-semibold text-[#2B2B2B]">
+                Recently <span className="text-[#FF5A36]">Viewed</span>
+              </h2>
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[32px] w-full">
               {recentlyViewed.map((prod) => (
                 <ProductCard
@@ -1167,9 +1181,9 @@ export default function ProductDetailsPage() {
             </div>
           </section>
         )}
-
+ 
         {/* FAQ Accordion Section */}
-        <section className="w-full mt-16 pt-8 border-t border-slate-100 pb-16 text-left">
+        <section className="w-full mt-16 pt-8 border-t border-slate-100 pb-16 text-left !px-0">
           <div className="max-w-[800px] mx-auto flex flex-col gap-6">
             <div className="text-center space-y-2">
               <span className="inline-block text-[9px] font-black uppercase tracking-wider text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-1 rounded-[4px]">

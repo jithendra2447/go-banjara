@@ -1870,7 +1870,8 @@ export default function AboutPage() {
               }}
             />
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 py-2">
+            {/* Infinite Continuous Scrolling Track (Pauses on Hover) */}
+            <div className="flex gap-8 py-4 w-max animate-marquee hover:[animation-play-state:paused]">
               {[
                 {
                   id: 1,
@@ -1913,11 +1914,54 @@ export default function AboutPage() {
                   subtitle: "Highland Photographer",
                   text: "No commercial tourist traps, no rushed itineraries. Just raw landscapes, campfire conversations, and a tribe of genuine wanderers.",
                   avatar: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=256&auto=format&fit=crop"
+                },
+                // Duplicated for infinite smooth looping
+                {
+                  id: 7,
+                  name: "Aarav Mehta",
+                  subtitle: "Kashmir Trekker",
+                  text: "The Zanskar expedition changed how I look at travel. Go Banjara didn't just organize a trek; they brought us into home-cooked meals with Himalayan villagers.",
+                  avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=256&auto=format&fit=crop"
+                },
+                {
+                  id: 8,
+                  name: "Rohan Deshmukh",
+                  subtitle: "Solo Nomad & Journaler",
+                  text: "The quality of the journal is incredible. It feels like a piece of art that I take on every expedition. Bonjo's personality shines through the brand!",
+                  avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=256&auto=format&fit=crop"
+                },
+                {
+                  id: 9,
+                  name: "Priya Sharma",
+                  subtitle: "Spiti Explorer",
+                  text: "Finding a travel community that respects remote trails and local ecosystems is rare. Go Banjara's team handled every mountain pass with absolute care.",
+                  avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=256&auto=format&fit=crop"
+                },
+                {
+                  id: 10,
+                  name: "Vikram Sengupta",
+                  subtitle: "Gear Enthusiast",
+                  text: "The enamel badges and brass compass gear are heirloom-grade. You can tell every sticker and cover was designed by people who actually live on the road.",
+                  avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=256&auto=format&fit=crop"
+                },
+                {
+                  id: 11,
+                  name: "Ananya Iyer",
+                  subtitle: "Kerala Backwaters Nomad",
+                  text: "Sailing the quiet backwaters with local boatmen gave me back a quiet peace I hadn't felt in years. Unforgettable, authentic Indian travel.",
+                  avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=256&auto=format&fit=crop"
+                },
+                {
+                  id: 12,
+                  name: "Devansh Verma",
+                  subtitle: "Highland Photographer",
+                  text: "No commercial tourist traps, no rushed itineraries. Just raw landscapes, campfire conversations, and a tribe of genuine wanderers.",
+                  avatar: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=256&auto=format&fit=crop"
                 }
-              ].map((review) => (
+              ].map((review, idx) => (
                 <div 
-                  key={review.id} 
-                  className="bg-white border border-gray-200 p-8 rounded-[8px] flex flex-col justify-between space-y-6 shadow-2xs hover:shadow-md transition-shadow"
+                  key={idx} 
+                  className="bg-white border border-gray-200 p-8 rounded-[8px] flex flex-col justify-between space-y-6 shadow-2xs hover:shadow-xl hover:border-[#FF623E] hover:scale-105 transition-all duration-300 w-[380px] shrink-0 cursor-pointer"
                 >
                   <div className="space-y-4">
                     <div className="flex text-amber-400 text-base gap-1">

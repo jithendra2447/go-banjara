@@ -347,78 +347,46 @@ export default function ShopPage() {
             </p>
           </div>
 
-          {/* Testimonial grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            
-            {/* Column 1 (Faded) */}
-            <div className="space-y-8 md:opacity-40 hover:opacity-100 transition duration-300">
-              {[TESTIMONIALS[0], TESTIMONIALS[3]].map((test, i) => (
-                <div key={i} className="bg-gray-50 border border-gray-100 p-8 rounded-2xl space-y-5 text-left shadow-2xs">
-                  <div className="flex gap-0.5">
-                    {Array.from({ length: test.rating }).map((_, s) => (
-                      <Star key={s} className="w-4 h-4 fill-[#FFB95E] text-[#FFB95E]" />
-                    ))}
+          {/* Continuous Marquee Wrapper with Linear Gradient Mask & Hover Pause */}
+          <div className="w-full relative overflow-hidden">
+            {/* Linear Gradient Fade Mask */}
+            <div 
+              style={{
+                position: "absolute",
+                inset: 0,
+                pointerEvents: "none",
+                zIndex: 10,
+                background: "linear-gradient(90.01deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 80%, #FFFFFF 100%)"
+              }}
+            />
+
+            {/* Continuous Marquee Track (Pauses on Hover) */}
+            <div className="flex gap-8 py-4 w-max animate-marquee hover:[animation-play-state:paused]">
+              {[...TESTIMONIALS, ...TESTIMONIALS].map((test, idx) => (
+                <div 
+                  key={idx} 
+                  className="bg-white border border-gray-200 p-8 rounded-2xl flex flex-col justify-between space-y-5 shadow-xs hover:shadow-xl hover:border-[#FF5B37] hover:scale-105 transition-all duration-300 w-[380px] shrink-0 cursor-pointer"
+                >
+                  <div className="space-y-4">
+                    <div className="flex text-amber-400 text-base gap-1">
+                      {Array.from({ length: test.rating }).map((_, s) => (
+                        <Star key={s} className="w-4 h-4 fill-amber-400 text-amber-400" />
+                      ))}
+                    </div>
+                    <p className="text-gray-700 font-medium italic text-[15px] leading-relaxed">
+                      {test.quote}
+                    </p>
                   </div>
-                  <p className="text-xs md:text-sm text-gray-505 font-medium italic leading-relaxed">
-                    {test.quote}
-                  </p>
-                  <div className="flex items-center gap-3.5 pt-2">
-                    <img src={test.avatar} alt={test.author} className="w-12 h-12 rounded-full object-cover shrink-0" />
+                  <div className="flex items-center gap-3.5 pt-4 border-t border-gray-100">
+                    <img src={test.avatar} alt={test.author} className="w-11 h-11 rounded-full object-cover shrink-0" />
                     <div>
-                      <h4 className="text-sm font-extrabold text-gray-800">{test.author}</h4>
-                      <p className="text-xs text-gray-400 font-semibold">{test.role}</p>
+                      <h4 className="text-[15px] font-bold text-gray-800 leading-none">{test.author}</h4>
+                      <p className="text-xs text-[#1D493E] font-semibold mt-1">{test.role}</p>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
-
-            {/* Column 2 (Active/Sharp) */}
-            <div className="space-y-8">
-              {[TESTIMONIALS[1], TESTIMONIALS[4]].map((test, i) => (
-                <div key={i} className="bg-white border border-gray-200 p-8 rounded-2xl space-y-5 text-left shadow-xs scale-102">
-                  <div className="flex gap-0.5">
-                    {Array.from({ length: test.rating }).map((_, s) => (
-                      <Star key={s} className="w-4 h-4 fill-[#FFB95E] text-[#FFB95E]" />
-                    ))}
-                  </div>
-                  <p className="text-xs md:text-sm text-gray-700 font-bold italic leading-relaxed">
-                    {test.quote}
-                  </p>
-                  <div className="flex items-center gap-3.5 pt-2">
-                    <img src={test.avatar} alt={test.author} className="w-12 h-12 rounded-full object-cover shrink-0" />
-                    <div>
-                      <h4 className="text-sm font-black text-gray-800">{test.author}</h4>
-                      <p className="text-xs text-[#1D493E]/60 font-black">{test.role}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Column 3 (Faded) */}
-            <div className="space-y-8 md:opacity-40 hover:opacity-100 transition duration-300">
-              {[TESTIMONIALS[2], TESTIMONIALS[5]].map((test, i) => (
-                <div key={i} className="bg-gray-50 border border-gray-100 p-8 rounded-2xl space-y-5 text-left shadow-2xs">
-                  <div className="flex gap-0.5">
-                    {Array.from({ length: test.rating }).map((_, s) => (
-                      <Star key={s} className="w-4 h-4 fill-[#FFB95E] text-[#FFB95E]" />
-                    ))}
-                  </div>
-                  <p className="text-xs md:text-sm text-gray-505 font-medium italic leading-relaxed">
-                    {test.quote}
-                  </p>
-                  <div className="flex items-center gap-3.5 pt-2">
-                    <img src={test.avatar} alt={test.author} className="w-12 h-12 rounded-full object-cover shrink-0" />
-                    <div>
-                      <h4 className="text-sm font-bold text-gray-800">{test.author}</h4>
-                      <p className="text-xs text-gray-400 font-semibold">{test.role}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
           </div>
         </div>
 

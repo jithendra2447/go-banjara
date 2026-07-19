@@ -11,6 +11,8 @@ export const AuthModal: React.FC = () => {
   const { isAuthOpen, setAuthOpen, login } = useCart();
   const [view, setView] = useState<AuthView>('login');
   const [otpFlowSource, setOtpFlowSource] = useState<'login' | 'signup'>('login');
+  const [scale, setScale] = useState(1);
+  const [isMobile, setIsMobile] = useState(false);
 
   // Input states
   const [email, setEmail] = useState('kumarsaiarja2468@gmail.com');
@@ -24,6 +26,24 @@ export const AuthModal: React.FC = () => {
   const [successMsg, setSuccessMsg] = useState('');
   const [loading, setLoading] = useState(false);
   const [otpCountdown, setOtpCountdown] = useState(30);
+
+  // Resize hook to proportionally scale down the modal on smaller viewports
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      if (mobile) {
+        setScale(1);
+      } else {
+        const widthScale = window.innerWidth / 1440;
+        const heightScale = window.innerHeight / 1024;
+        setScale(Math.min(1, widthScale, heightScale));
+      }
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // OTP Countdown timer
   useEffect(() => {
@@ -261,10 +281,21 @@ export const AuthModal: React.FC = () => {
 
       {/* Two-Column split modal box / Main Frame (Matches Figma specs 1440x1024 base wrapper style) */}
       <div 
-        className="relative z-10 flex flex-col md:flex-row items-center md:items-start justify-center animate-[scaleIn_0.3s_ease-out] w-full h-full max-h-[95vh] md:max-h-none md:w-[1440px] md:h-[1024px] overflow-y-auto md:overflow-visible p-6 md:pt-[60px] md:pr-[75px] md:pb-[60px] md:pl-[120px] md:gap-[24px]"
+        className="relative z-10 flex flex-col md:flex-row items-center md:items-start justify-center animate-[scaleIn_0.3s_ease-out] w-full h-full max-h-[95vh] md:max-h-none overflow-y-auto md:overflow-visible"
         style={{
           boxSizing: 'border-box',
           background: 'rgba(255, 252, 248, 1)',
+          transform: isMobile ? undefined : `scale(${scale})`,
+          transformOrigin: isMobile ? undefined : 'center center',
+          width: isMobile ? '100%' : '1440px',
+          height: isMobile ? 'auto' : '1024px',
+          paddingTop: isMobile ? '24px' : '60px',
+          paddingRight: isMobile ? '16px' : '75px',
+          paddingBottom: isMobile ? '24px' : '60px',
+          paddingLeft: isMobile ? '16px' : '120px',
+          gap: isMobile ? '16px' : '24px',
+          display: 'flex',
+          flexShrink: 0,
         }}
       >
         

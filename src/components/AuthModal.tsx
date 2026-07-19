@@ -1341,21 +1341,6 @@ export const AuthModal: React.FC = () => {
           
           {/* Llama Card Container (Figma specs: 587.9px x 587.9px, angle 0deg, 12px border-radius) */}
           <div className="relative select-none" style={{ width: '588px', height: '588px' }}>
-            {/* Background Rotated Card */}
-            <div 
-              style={{
-                position: 'absolute',
-                top: '10.08px',
-                left: '10.08px',
-                width: '567.83px',
-                height: '567.83px',
-                borderRadius: '12px',
-                background: 'rgba(204, 204, 204, 1)',
-                transform: 'rotate(-2.5deg)',
-                zIndex: 1,
-              }}
-            />
-
             {/* Main Llama Image Card */}
             <div 
               className="absolute flex items-center justify-center animate-fade-in"

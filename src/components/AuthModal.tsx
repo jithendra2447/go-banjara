@@ -335,7 +335,7 @@ export const AuthModal: React.FC = () => {
               margin: '0 auto',
             }}
           >
-            {/* Logo Brand Header (Figma specs: width 492, height 33, gap 10px) */}
+            {/* Logo Brand Header (Figma specs: width 148px, height 33px) */}
             <div 
               style={{
                 width: '492px',
@@ -343,21 +343,17 @@ export const AuthModal: React.FC = () => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                gap: '10px',
               }}
             >
-              <div 
-                className="rounded-full flex items-center justify-center shadow-sm"
-                style={{
-                  width: '33px',
+              <img 
+                src="/logo.png" 
+                alt="Go Banjara Logo" 
+                style={{ 
+                  width: '148px', 
                   height: '33px',
-                  background: '#FFFF80',
-                  border: '1px solid rgba(29, 73, 62, 0.15)',
-                }}
-              >
-                <BonjoMascot width={22} height={22} interactive={false} />
-              </div>
-              <span className="text-xl font-black text-[#1D493E] tracking-tight select-none">go banjāra</span>
+                  objectFit: 'contain'
+                }} 
+              />
             </div>
 
             {/* Title / Description */}
@@ -1288,7 +1284,7 @@ export const AuthModal: React.FC = () => {
               boxSizing: 'border-box',
             }}
           >
-            {/* Logo Brand Footer */}
+            {/* Logo Brand Footer (Figma specs: width 128px, height 28.3px) */}
             <div 
               style={{
                 width: '128px',
@@ -1296,21 +1292,17 @@ export const AuthModal: React.FC = () => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                gap: '8px',
               }}
             >
-              <div 
-                className="rounded-full flex items-center justify-center shadow-xs"
-                style={{
-                  width: '28.3px',
+              <img 
+                src="/logo.png" 
+                alt="Go Banjara Logo" 
+                style={{ 
+                  width: '128px', 
                   height: '28.3px',
-                  background: '#FFFF80',
-                  border: '1px solid rgba(29, 73, 62, 0.15)',
-                }}
-              >
-                <BonjoMascot width={18} height={18} interactive={false} />
-              </div>
-              <span className="text-sm font-black text-[#1D493E] tracking-tight select-none">go banjāra</span>
+                  objectFit: 'contain'
+                }} 
+              />
             </div>
             <p 
               style={{

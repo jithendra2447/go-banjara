@@ -318,28 +318,29 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 4. Overlapping Sticker Cards Section (1440x556px spec) */}
+      {/* 4. Overlapping Sticker Cards Section (Non-movable, Fits to screen) */}
       <section 
         style={{ 
           width: "100%", 
-          maxWidth: "1440px",
           height: "556px", 
           background: "rgba(255, 255, 255, 1)", 
           position: "relative",
           overflow: "hidden",
           boxSizing: "border-box"
         }}
-        className="mx-auto w-full shrink-0"
+        className="w-full shrink-0"
       >
-        {/* Cards Container (1709.57px x 418.33px, top: 251px) */}
+        {/* Cards Container (Static 1709.57px x 418.33px centered, non-scrollable, locked) */}
         <div 
           style={{ 
             width: "1709.5738525390625px", 
             height: "418.3321228027344px", 
             display: "flex", 
             alignItems: "center", 
-            overflowX: "auto",
-            scrollbarWidth: "none",
+            justifyContent: "center",
+            overflow: "hidden",
+            pointerEvents: "none",
+            userSelect: "none",
             boxSizing: "border-box",
             position: "absolute",
             top: "68px",
@@ -347,7 +348,6 @@ export default function AboutPage() {
             transform: "translateX(-50%)",
             opacity: 1
           }}
-          className="scrollbar-none"
         >
           {/* Card 1: Traveler / Go Banjara Card */}
           <div 

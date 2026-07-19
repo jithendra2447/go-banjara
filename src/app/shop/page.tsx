@@ -12,45 +12,45 @@ import { TrustBanner } from '@/components/TrustBanner';
 const TESTIMONIALS = [
   {
     rating: 5,
-    quote: "“The quality of the journal is incredible. It feels like a piece of art that I can actually take on my treks. Bonjo’s personality shines through the brand!”",
-    author: "Kiran Makwan",
-    role: "Verified Wanderer",
+    quote: "“The Zanskar expedition changed how I look at travel. Go Banjara didn't just organize a trek; they brought us into home-cooked meals with Himalayan villagers.”",
+    author: "Aarav Mehta",
+    role: "Kashmir Trekker",
     avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80"
   },
   {
     rating: 5,
-    quote: "“The quality of the journal is incredible. It feels like a piece of art that I can actually take on my treks. Bonjo’s personality shines through the brand!”",
-    author: "Kiran Makwan",
-    role: "Verified Wanderer",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80"
+    quote: "“The quality of the journal is incredible. It feels like a piece of art that I take on every expedition. Bonjo's personality shines through the brand!”",
+    author: "Rohan Deshmukh",
+    role: "Solo Nomad & Journaler",
+    avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=150&q=80"
   },
   {
     rating: 5,
-    quote: "“The quality of the journal is incredible. It feels like a piece of art that I can actually take on my treks. Bonjo’s personality shines through the brand!”",
-    author: "Kiran Makwan",
-    role: "Verified Wanderer",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80"
+    quote: "“Finding a travel community that respects remote trails and local ecosystems is rare. Go Banjara's team handled every mountain pass with absolute care.”",
+    author: "Priya Sharma",
+    role: "Spiti Explorer",
+    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80"
   },
   {
     rating: 5,
-    quote: "“The quality of the journal is incredible. It feels like a piece of art that I can actually take on my treks. Bonjo’s personality shines through the brand!”",
-    author: "Kiran Makwan",
-    role: "Verified Wanderer",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80"
+    quote: "“The enamel badges and brass compass gear are heirloom-grade. You can tell every sticker and cover was designed by people who actually live on the road.”",
+    author: "Vikram Sengupta",
+    role: "Gear Enthusiast",
+    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80"
   },
   {
     rating: 5,
-    quote: "“The quality of the journal is incredible. It feels like a piece of art that I can actually take on my treks. Bonjo’s personality shines through the brand!”",
-    author: "Kiran Makwan",
-    role: "Verified Wanderer",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80"
+    quote: "“Sailing the quiet backwaters with local boatmen gave me back a quiet peace I hadn't felt in years. Unforgettable, authentic Indian travel.”",
+    author: "Ananya Iyer",
+    role: "Kerala Backwaters Nomad",
+    avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&q=80"
   },
   {
     rating: 5,
-    quote: "“The quality of the journal is incredible. It feels like a piece of art that I can actually take on my treks. Bonjo’s personality shines through the brand!”",
-    author: "Kiran Makwan",
-    role: "Verified Wanderer",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80"
+    quote: "“No commercial tourist traps, no rushed itineraries. Just raw landscapes, campfire conversations, and a tribe of genuine wanderers.”",
+    author: "Devansh Verma",
+    role: "Highland Photographer",
+    avatar: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=150&q=80"
   }
 ];
 

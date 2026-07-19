@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { 
   Star, Compass, Users, MapPin, Sparkles, ArrowUpRight, HeartHandshake, Hammer 
@@ -10,30 +10,6 @@ import { TrustBanner } from '@/components/TrustBanner';
 export default function AboutPage() {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
   const [activeCard, setActiveCard] = useState<'mission' | 'vision'>('mission');
-  const [visibleRowIndices, setVisibleRowIndices] = useState<number[]>([0]);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const rowIndex = Number(entry.target.getAttribute('data-row-index'));
-          if (!isNaN(rowIndex)) {
-            if (entry.isIntersecting) {
-              setVisibleRowIndices((prev) => Array.from(new Set([...prev, rowIndex])));
-            } else {
-              setVisibleRowIndices((prev) => prev.filter((i) => i !== rowIndex));
-            }
-          }
-        });
-      },
-      { threshold: 0.2, rootMargin: "0px 0px -40px 0px" }
-    );
-
-    const rowElements = document.querySelectorAll('.timeline-row-item');
-    rowElements.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
 
   const toggleFaq = (idx: number) => {
     setOpenFaqIndex(openFaqIndex === idx ? null : idx);
@@ -930,15 +906,12 @@ export default function AboutPage() {
           </p>
         </div>
 
-        {/* 4 Rows of 3-Column Grid (Sticky Card Stacking Effect like Kalinq) */}
-        <div style={{ gap: "40px" }} className="flex flex-col w-full max-w-[1280px] mx-auto mt-4 relative">
+        {/* 4 Rows of 3-Column Grid (1280px x 450px spec per row, justifyContent: space-between) */}
+        <div style={{ gap: "32px" }} className="flex flex-col w-full max-w-[1280px] mx-auto mt-4">
           
-          {/* Row 1 (Sticky Stack 1) */}
+          {/* Row 1 (1280px x 450px, justifyContent: space-between) */}
           <div 
             style={{
-              position: "sticky",
-              top: "120px",
-              zIndex: 10,
               width: "1280px",
               maxWidth: "100%",
               height: "450px",
@@ -946,22 +919,17 @@ export default function AboutPage() {
               flexDirection: "row",
               alignItems: "center",
               justifyContent: "space-between",
-              background: "#FFFFFF",
-              borderRadius: "16px",
-              border: "1px solid rgba(0, 0, 0, 0.08)",
-              boxShadow: "0 -10px 30px rgba(0, 0, 0, 0.05), 0 15px 35px rgba(0, 0, 0, 0.08)",
-              boxSizing: "border-box",
-              marginBottom: "40px",
-              transition: "transform 0.4s ease, box-shadow 0.4s ease"
+              background: "rgba(255, 255, 255, 1)",
+              boxSizing: "border-box"
             }}
-            className="w-full mx-auto p-6"
+            className="w-full mx-auto"
           >
             {/* Col 1: Card 1 (Hikers - 302px x 380px) */}
             <div 
               style={{ 
                 width: "302px", 
                 height: "380px", 
-                borderRadius: "8px",
+                borderRadius: "4px",
                 overflow: "hidden",
                 boxShadow: "0 10px 20px rgba(0,0,0,0.08)",
                 flexShrink: 0
@@ -996,7 +964,7 @@ export default function AboutPage() {
                   justifyContent: "center",
                   gap: "10px",
                   background: "#EBF7ED",
-                  color: "rgba(0, 160, 35, 1)",
+                  color: "#00A63F",
                   fontFamily: "Faktum, sans-serif",
                   fontWeight: 600,
                   fontSize: "14px",
@@ -1055,7 +1023,7 @@ export default function AboutPage() {
               style={{ 
                 width: "302px", 
                 height: "380px", 
-                borderRadius: "8px",
+                borderRadius: "4px",
                 overflow: "hidden",
                 boxShadow: "0 10px 20px rgba(0,0,0,0.08)",
                 flexShrink: 0
@@ -1065,12 +1033,9 @@ export default function AboutPage() {
             </div>
           </div>
 
-          {/* Row 2 (Sticky Stack 2) */}
+          {/* Row 2 (1280px x 450px, justifyContent: space-between) */}
           <div 
             style={{
-              position: "sticky",
-              top: "150px",
-              zIndex: 20,
               width: "1280px",
               maxWidth: "100%",
               height: "450px",
@@ -1078,22 +1043,17 @@ export default function AboutPage() {
               flexDirection: "row",
               alignItems: "center",
               justifyContent: "space-between",
-              background: "#FFFFFF",
-              borderRadius: "16px",
-              border: "1px solid rgba(0, 0, 0, 0.08)",
-              boxShadow: "0 -10px 30px rgba(0, 0, 0, 0.06), 0 15px 35px rgba(0, 0, 0, 0.09)",
-              boxSizing: "border-box",
-              marginBottom: "40px",
-              transition: "transform 0.4s ease, box-shadow 0.4s ease"
+              background: "rgba(255, 255, 255, 1)",
+              boxSizing: "border-box"
             }}
-            className="w-full mx-auto p-6"
+            className="w-full mx-auto"
           >
             {/* Col 1: Card 2 (Green Explore - 302px x 380px) */}
             <div 
               style={{ 
                 width: "302px", 
                 height: "380px", 
-                borderRadius: "8px",
+                borderRadius: "4px",
                 overflow: "hidden",
                 boxShadow: "0 10px 20px rgba(0,0,0,0.08)",
                 flexShrink: 0
@@ -1130,7 +1090,7 @@ export default function AboutPage() {
                   justifyContent: "center",
                   gap: "10px",
                   background: "#EBF7ED",
-                  color: "rgba(0, 160, 35, 1)",
+                  color: "#00A63F",
                   fontFamily: "Faktum, sans-serif",
                   fontWeight: 600,
                   fontSize: "14px",
@@ -1190,7 +1150,7 @@ export default function AboutPage() {
               style={{ 
                 width: "302px", 
                 height: "380px", 
-                borderRadius: "8px",
+                borderRadius: "4px",
                 overflow: "hidden",
                 boxShadow: "0 10px 20px rgba(0,0,0,0.08)",
                 flexShrink: 0
@@ -1200,12 +1160,9 @@ export default function AboutPage() {
             </div>
           </div>
 
-          {/* Row 3 (Sticky Stack 3) */}
+          {/* Row 3 (1280px x 450px, justifyContent: space-between) */}
           <div 
             style={{
-              position: "sticky",
-              top: "180px",
-              zIndex: 30,
               width: "1280px",
               maxWidth: "100%",
               height: "450px",
@@ -1213,22 +1170,17 @@ export default function AboutPage() {
               flexDirection: "row",
               alignItems: "center",
               justifyContent: "space-between",
-              background: "#FFFFFF",
-              borderRadius: "16px",
-              border: "1px solid rgba(0, 0, 0, 0.08)",
-              boxShadow: "0 -10px 30px rgba(0, 0, 0, 0.07), 0 15px 35px rgba(0, 0, 0, 0.1)",
-              boxSizing: "border-box",
-              marginBottom: "40px",
-              transition: "transform 0.4s ease, box-shadow 0.4s ease"
+              background: "rgba(255, 255, 255, 1)",
+              boxSizing: "border-box"
             }}
-            className="w-full mx-auto p-6"
+            className="w-full mx-auto"
           >
             {/* Col 1: Card 7 (Cream Camel - 302px x 380px) */}
             <div 
               style={{ 
                 width: "302px", 
                 height: "380px", 
-                borderRadius: "8px",
+                borderRadius: "4px",
                 overflow: "hidden",
                 boxShadow: "0 10px 20px rgba(0,0,0,0.08)",
                 flexShrink: 0
@@ -1265,7 +1217,7 @@ export default function AboutPage() {
                   justifyContent: "center",
                   gap: "10px",
                   background: "#EBF7ED",
-                  color: "rgba(0, 160, 35, 1)",
+                  color: "#00A63F",
                   fontFamily: "Faktum, sans-serif",
                   fontWeight: 600,
                   fontSize: "14px",
@@ -1325,7 +1277,7 @@ export default function AboutPage() {
               style={{ 
                 width: "302px", 
                 height: "380px", 
-                borderRadius: "8px",
+                borderRadius: "4px",
                 overflow: "hidden",
                 boxShadow: "0 10px 20px rgba(0,0,0,0.08)",
                 flexShrink: 0
@@ -1335,12 +1287,9 @@ export default function AboutPage() {
             </div>
           </div>
 
-          {/* Row 4 (Sticky Stack 4) */}
+          {/* Row 4 (1280px x 450px, justifyContent: space-between) */}
           <div 
             style={{
-              position: "sticky",
-              top: "210px",
-              zIndex: 40,
               width: "1280px",
               maxWidth: "100%",
               height: "450px",
@@ -1348,22 +1297,17 @@ export default function AboutPage() {
               flexDirection: "row",
               alignItems: "center",
               justifyContent: "space-between",
-              background: "#FFFFFF",
-              borderRadius: "16px",
-              border: "1px solid rgba(0, 0, 0, 0.08)",
-              boxShadow: "0 -10px 30px rgba(0, 0, 0, 0.08), 0 15px 35px rgba(0, 0, 0, 0.12)",
-              boxSizing: "border-box",
-              marginBottom: "40px",
-              transition: "transform 0.4s ease, box-shadow 0.4s ease"
+              background: "rgba(255, 255, 255, 1)",
+              boxSizing: "border-box"
             }}
-            className="w-full mx-auto p-6"
+            className="w-full mx-auto"
           >
             {/* Col 1: Card 8 (Yellow Stickers - 302px x 380px) */}
             <div 
               style={{ 
                 width: "302px", 
                 height: "380px", 
-                borderRadius: "8px",
+                borderRadius: "4px",
                 overflow: "hidden",
                 boxShadow: "0 10px 20px rgba(0,0,0,0.08)",
                 flexShrink: 0
@@ -1400,7 +1344,7 @@ export default function AboutPage() {
                   justifyContent: "center",
                   gap: "10px",
                   background: "#EBF7ED",
-                  color: "rgba(0, 160, 35, 1)",
+                  color: "#00A63F",
                   fontFamily: "Faktum, sans-serif",
                   fontWeight: 600,
                   fontSize: "14px",
@@ -1460,7 +1404,7 @@ export default function AboutPage() {
               style={{ 
                 width: "302px", 
                 height: "380px", 
-                borderRadius: "8px",
+                borderRadius: "4px",
                 overflow: "hidden",
                 boxShadow: "0 10px 20px rgba(0,0,0,0.08)",
                 flexShrink: 0

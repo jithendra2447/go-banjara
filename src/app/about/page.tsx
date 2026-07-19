@@ -436,32 +436,45 @@ export default function AboutPage() {
                 Humps down,<br />surfs up!
               </h3>
             </div>
-            <div style={{ position: "absolute", bottom: "-20px", right: "-10px", width: "240px", height: "240px" }}>
-              <svg viewBox="0 0 200 200" fill="none" style={{ width: "100%", height: "100%" }}>
-                {/* Ears */}
-                <path d="M65,75 C58,35 68,25 74,30 L85,75 Z" fill="#FF623E" />
-                <path d="M125,75 L136,30 C142,25 152,35 145,75 Z" fill="#FF623E" />
+            <div style={{ position: "absolute", bottom: "-25px", right: "-15px", width: "250px", height: "250px" }}>
+              <svg viewBox="0 0 220 220" fill="none" style={{ width: "100%", height: "100%" }}>
+                {/* Outer White Border Outline */}
+                <g stroke="#FFFFFF" strokeWidth="10" strokeLinejoin="round" strokeLinecap="round">
+                  {/* Left Ear */}
+                  <path d="M55,85 C35,45 55,25 72,38 C82,48 85,75 85,85 Z" fill="#FF5733" />
+                  {/* Right Ear */}
+                  <path d="M142,85 C142,75 145,48 155,38 C172,25 192,45 172,85 Z" fill="#FF5733" />
+                  {/* Head & Neck */}
+                  <path d="M55,95 C50,85 177,85 172,95 L166,180 C161,210 66,210 61,180 Z" fill="#FF5733" />
+                </g>
 
-                {/* Head */}
-                <path d="M70,70 C70,60 140,60 140,70 L145,150 C145,175 65,175 65,150 Z" fill="#FF623E" />
+                {/* Orange Camel Body Fill */}
+                <g fill="#FF5733">
+                  <path d="M55,85 C35,45 55,25 72,38 C82,48 85,75 85,85 Z" />
+                  <path d="M142,85 C142,75 145,48 155,38 C172,25 192,45 172,85 Z" />
+                  <path d="M55,95 C50,85 177,85 172,95 L166,180 C161,210 66,210 61,180 Z" />
+                </g>
 
-                {/* Muzzle (white details) */}
-                <path d="M85,125 C85,115 125,115 125,125 L120,150 C120,158 90,158 90,150 Z" fill="#FF623E" />
-                <path d="M92,135 L118,135" stroke="#FFFFFF" strokeWidth="3" strokeLinecap="round" />
-                <path d="M105,142 L105,147 C100,147 98,149 98,149 M105,147 C110,147 112,149 112,149" stroke="#FFFFFF" strokeWidth="3" strokeLinecap="round" />
+                {/* White Snout / Muzzle Outline */}
+                <path d="M85,140 C85,120 142,120 142,140 C142,175 85,175 85,140 Z" fill="#FFFFFF" stroke="#FFFFFF" strokeWidth="4" />
+                <path d="M98,148 C106,160 121,160 129,148" stroke="#FF5733" strokeWidth="4" strokeLinecap="round" fill="none" />
+                <path d="M114,140 L114,152" stroke="#FF5733" strokeWidth="4" strokeLinecap="round" />
 
-                {/* Sunglasses */}
+                {/* Cool Sunglasses */}
                 <g>
-                  {/* Left Frame */}
-                  <path d="M72,92 C72,82 96,80 98,92 C100,102 78,110 72,92 Z" fill="#1D493E" stroke="#FFFFFF" strokeWidth="5.5" strokeLinejoin="round" />
-                  <path d="M76,88 A 6 6 0 0 1 88,84" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" opacity="0.6" />
+                  {/* White Sunglass Frame Structure */}
+                  <path d="M48,102 L179,102 C183,102 185,106 181,110 L167,143 C163,152 149,156 137,148 L114,126 L90,148 C78,156 64,152 60,143 L46,110 C42,106 44,102 48,102 Z" fill="#FFFFFF" />
+                  <path d="M48,98 L179,98" stroke="#FFFFFF" strokeWidth="8" strokeLinecap="round" />
 
-                  {/* Right Frame */}
-                  <path d="M112,92 C114,80 138,82 138,92 C132,110 110,102 112,92 Z" fill="#1D493E" stroke="#FFFFFF" strokeWidth="5.5" strokeLinejoin="round" />
-                  <path d="M116,88 A 6 6 0 0 1 128,84" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" opacity="0.6" />
+                  {/* Left Dark Green Lens */}
+                  <path d="M62,110 C62,106 92,106 92,112 C92,130 82,144 70,142 C62,140 62,122 62,110 Z" fill="#1D493E" />
+                  {/* Left Lens White Reflection Highlight */}
+                  <path d="M68,112 C68,110 80,110 82,114 C80,118 70,118 68,112 Z" fill="#FFFFFF" opacity="0.9" />
 
-                  {/* Bridge */}
-                  <path d="M94,92 L116,92" stroke="#FFFFFF" strokeWidth="5" strokeLinecap="round" />
+                  {/* Right Dark Green Lens */}
+                  <path d="M136,112 C136,106 166,106 166,110 C166,122 166,140 158,142 C146,144 136,130 136,112 Z" fill="#1D493E" />
+                  {/* Right Lens White Reflection Highlight */}
+                  <path d="M142,112 C142,110 154,110 156,114 C154,118 144,118 142,112 Z" fill="#FFFFFF" opacity="0.9" />
                 </g>
               </svg>
             </div>

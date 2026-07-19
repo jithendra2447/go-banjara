@@ -10,8 +10,6 @@ import {
 import { TrustBanner } from '@/components/TrustBanner';
 
 export default function ContactPage() {
-  // Tabs for the interactive form
-  const [activeTab, setActiveTab] = useState<'trip' | 'gear' | 'collab' | 'general'>('trip');
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
@@ -20,21 +18,15 @@ export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    phone: '',
-    tripType: 'Trek',
-    orderNumber: '',
-    company: '',
-    subject: '',
-    message: '',
-    preferredDate: '',
-    guestsCount: '2'
+    mobile: '',
+    address: ''
   });
 
   const toggleFaq = (index: number) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
@@ -48,14 +40,8 @@ export default function ContactPage() {
       setFormData({
         name: '',
         email: '',
-        phone: '',
-        tripType: 'Trek',
-        orderNumber: '',
-        company: '',
-        subject: '',
-        message: '',
-        preferredDate: '',
-        guestsCount: '2'
+        mobile: '',
+        address: ''
       });
       setTimeout(() => setFormSubmitted(false), 5000);
     }, 1200);
@@ -63,24 +49,24 @@ export default function ContactPage() {
 
   const FAQ_ITEMS = [
     {
-      question: "How quickly does your team respond to inquiries?",
-      answer: "Our team of travel coordinators and customer support representatives typically responds to all inquiries within 12 to 24 hours. For urgent booking issues or active expeditions, our support lines are open 24/7."
+      question: "What materials are the badges made from? Zinc alloy with glossy enamel fill.",
+      answer: "Lightweight, durable, and safe to pin on bags, jackets, or backpacks without damaging fabric."
     },
     {
-      question: "Can you customize travel itineraries for private groups?",
-      answer: "Absolutely! We design customized, slow-travel itineraries for corporate groups, families, and private adventurer tribes. Simply select 'Plan a Trip' in our contact form, specify your preferences, and we will build a tailored journey."
+      question: "How big are the stickers?",
+      answer: "Our stickers are standard 3x3 inches, printed on high-grade weatherproof vinyl with a matte finish."
     },
     {
-      question: "Can I customize the corporate bulk orders for apparel and badges?",
-      answer: "Yes, we specialize in high-quality custom apparel, premium enamel badges, and co-branded journals for corporate retreats, outdoor clubs, and events. Drop us a line under the 'Collaborations' tab."
+      question: "Do you ship across India?",
+      answer: "Yes, we ship to all pin codes across India with free standard delivery on all orders."
     },
     {
-      question: "Where is your Srinagar basecamp located and can I visit?",
-      answer: "Our Himalayan Basecamp is located at Houseboat Row 3, Dal Lake, Srinagar. We love hosting fellow wanderers! Please schedule an appointment via the form or email us in advance so we can prepare some fresh Kahwa for you."
+      question: "Can I return a product if I don't like it?",
+      answer: "Yes, we offer a hassle-free 7-day return policy for unused items in their original packaging."
     },
     {
-      question: "How can I collaborate with Go Banjara as a local guide or host?",
-      answer: "We are always looking to partner with authentic native guides, family homestay hosts, and local artisans. Select 'Collaborations & Partnerships' in the form and attach details about your location and experience."
+      question: "I have no reviews on this product. Is it safe to buy?",
+      answer: "Absolutely! All our products go through strict quality control, and we offer secure payment gateways along with customer support to assist you at every step."
     }
   ];
 
@@ -88,17 +74,16 @@ export default function ContactPage() {
     <div 
       style={{
         width: "100%",
-        maxWidth: "1440px",
-        minHeight: "2897px",
+        minHeight: "auto",
         background: "rgba(255, 255, 255, 1)",
         boxSizing: "border-box",
-        margin: "0 auto",
-        paddingBottom: "62px",
+        paddingTop: "0px",
+        paddingBottom: "24px",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "space-between",
+        justifyContent: "flex-start",
       }}
-      className="relative z-10"
+      className="relative z-10 w-full bg-white"
     >
       <div>
         {/* SECTION 1: HERO SECTION (Styled exactly to Figma specs 1440x220) */}
@@ -106,11 +91,9 @@ export default function ContactPage() {
           style={{
             width: "100%",
             maxWidth: "1440px",
-            minHeight: "220px",
-            paddingTop: "62px",
-            paddingBottom: "24px",
-            paddingLeft: "80px",
-            paddingRight: "80px",
+            minHeight: "140px",
+            paddingTop: "24px",
+            paddingBottom: "12px",
             background: "rgba(255, 255, 255, 1)",
             display: "flex",
             flexDirection: "column",
@@ -121,518 +104,624 @@ export default function ContactPage() {
           }}
           className="mx-auto text-center px-6 md:px-20"
         >
-          {/* Small orange badge */}
+          {/* Contact Us Badge (Figma Spec) */}
           <span 
             style={{ 
               display: "inline-flex", 
               alignItems: "center", 
               justifyContent: "center",
-              height: "24px",
-              padding: "0 12px",
-              borderRadius: "4px",
-              fontFamily: "'Faktum', 'Outfit', sans-serif",
-              fontWeight: 700,
-              fontSize: "12px",
+              width: "104px",
+              height: "18px",
+              background: "rgba(255, 98, 62, 1)",
+              color: "rgba(255, 255, 255, 1)",
+              fontFamily: "Faktum, sans-serif",
+              fontWeight: 600,
+              fontSize: "14px",
               lineHeight: "100%",
               letterSpacing: "1.2px",
               textTransform: "uppercase",
-              color: "rgba(255, 98, 62, 1)",
-              background: "rgba(255, 98, 62, 0.08)",
+              borderRadius: "2px",
             }}
           >
-            CONTACT US
+            Contact Us
           </span>
           
-          {/* Main Title Let's Get in Touch */}
+          {/* Main Title Let's Get in Touch (Figma Spec) */}
           <h1 
             style={{
-              fontFamily: "'Fraunces', serif",
+              width: "100%",
+              maxWidth: "1280px",
+              height: "52px",
+              fontFamily: "Fraunces, serif",
               fontWeight: 600,
-              fontSize: "40px",
-              lineHeight: "1.1",
-              letterSpacing: "-0.5px",
-              color: "#2C2C2C",
+              fontSize: "42px",
+              lineHeight: "100%",
+              letterSpacing: "0px",
+              color: "rgba(43, 43, 43, 1)",
               margin: 0,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center"
             }}
-            className="text-3xl md:text-[40px]"
+            className="text-3xl md:text-[42px]"
           >
             Let’s Get in Touch
           </h1>
 
-          {/* Subtitle with email link */}
+          {/* Subtitle with email link (Figma Spec) */}
           <p 
             style={{
-              fontFamily: "'Faktum', 'Outfit', sans-serif",
+              width: "100%",
+              maxWidth: "1280px",
+              height: "32px",
+              fontFamily: "Faktum, sans-serif",
               fontWeight: 500,
-              fontSize: "18px",
-              lineHeight: "24px",
-              color: "rgba(43, 43, 43, 0.9)",
+              fontSize: "24px",
+              lineHeight: "32px",
+              letterSpacing: "0px",
+              color: "rgba(43, 43, 43, 1)",
               margin: 0,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "6px"
             }}
-            className="text-sm md:text-[18px]"
+            className="text-base md:text-[24px]"
           >
             or Just reach out manually to{" "}
             <a 
               href="mailto:hello@gobanjara.com" 
-              className="text-[#3b82f6] hover:text-[#2563eb] underline underline-offset-4 font-semibold transition"
+              style={{
+                fontFamily: "Faktum, sans-serif",
+                fontWeight: 500,
+                fontSize: "24px",
+                lineHeight: "32px",
+                letterSpacing: "0px",
+                textDecoration: "underline",
+                textDecorationStyle: "solid",
+                color: "rgba(63, 136, 255, 1)",
+                transition: "opacity 0.2s"
+              }}
+              className="hover:opacity-80"
             >
               hello@gobanjara.com
             </a>
           </p>
         </section>
 
-        {/* SECTION 2: INTERACTIVE FORM & DIRECT INFO GRID */}
-        <section className="w-full px-6 md:px-20 py-10">
-          <div className="max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        {/* SECTION 2: FORM & IMAGE GRID (Figma spec 1440x817, padding 62px 80px) */}
+        <section 
+          style={{
+            width: "100%",
+            maxWidth: "1440px",
+            minHeight: "680px",
+            paddingTop: "12px",
+            paddingBottom: "12px",
+            background: "rgba(255, 255, 255, 1)",
+            boxSizing: "border-box",
+            margin: "0 auto"
+          }}
+          className="relative"
+        >
+          <div className="w-full max-w-[1280px] mx-auto flex flex-col md:flex-row gap-[48px] items-center justify-center min-h-[580px] px-4 md:px-0">
             
-            {/* Left Column: Direct Info Card & Mascot */}
-            <div className="lg:col-span-5 space-y-8">
-              <div className="bg-white border border-[#1D493E]/15 rounded-[24px] p-8 space-y-8 shadow-2xs">
-                <div className="space-y-2">
-                  <h3 className="font-serif font-bold text-2xl text-[#1D493E]">Direct Outposts</h3>
-                  <p className="text-sm text-[#1D493E]/70 font-medium">Skip the form and reach us directly via basecamp waves.</p>
-                </div>
-
-                <div className="space-y-6">
-                  <div className="flex gap-4">
-                    <div className="w-10 h-10 rounded-full bg-[#1D493E]/5 text-[#FF623E] flex items-center justify-center shrink-0">
-                      <Mail className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <h4 className="text-[10px] font-mono uppercase font-black tracking-wider text-gray-400">Email Basecamp</h4>
-                      <p className="text-[16px] font-bold text-[#1D493E] hover:text-[#FF623E] transition cursor-pointer">
-                        explore@gobanjara.com
-                      </p>
-                      <p className="text-xs text-gray-400">Response time: &lt; 12 hours</p>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-4">
-                    <div className="w-10 h-10 rounded-full bg-[#1D493E]/5 text-[#FF623E] flex items-center justify-center shrink-0">
-                      <Phone className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <h4 className="text-[10px] font-mono uppercase font-black tracking-wider text-gray-400">Satellite Hotline</h4>
-                      <p className="text-[16px] font-bold text-[#1D493E] hover:text-[#FF623E] transition cursor-pointer">
-                        +91 98450 12345
-                      </p>
-                      <p className="text-xs text-gray-400">Operating: Mon-Sat, 9AM - 6PM IST</p>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-4">
-                    <div className="w-10 h-10 rounded-full bg-[#1D493E]/5 text-[#FF623E] flex items-center justify-center shrink-0">
-                      <Clock className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <h4 className="text-[10px] font-mono uppercase font-black tracking-wider text-gray-400">Basecamp Hours</h4>
-                      <p className="text-[16px] font-bold text-[#1D493E]">
-                        Srinagar: Open 24 Hours
-                      </p>
-                      <p className="text-xs text-gray-400">Bengaluru: 10:00 AM – 7:00 PM IST</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="pt-4 border-t border-[#1D493E]/10 flex items-center gap-3.5">
-                  <div className="flex -space-x-2">
-                    <img className="w-8 h-8 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150" alt="Guide 1" />
-                    <img className="w-8 h-8 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=150" alt="Guide 2" />
-                    <img className="w-8 h-8 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=150" alt="Guide 3" />
-                  </div>
-                  <span className="text-xs font-semibold text-[#1D493E]/80">5 Active local guides on duty.</span>
-                </div>
+            {/* Left Column: Tilted Mascot Card with Soft Red Glow Behind (Height: 580px) */}
+            <div 
+              style={{
+                height: "580px",
+                width: "537px",
+                maxWidth: "100%"
+              }}
+              className="flex items-center justify-center relative select-none"
+            >
+              {/* Soft red glow background bubble */}
+              <div 
+                style={{
+                  position: "absolute",
+                  top: "-40px",
+                  left: "-40px",
+                  width: "160px",
+                  height: "160px",
+                  borderRadius: "9999px",
+                  background: "rgba(224, 84, 52, 0.3)",
+                  filter: "blur(48px)",
+                  zIndex: 0,
+                  pointerEvents: "none"
+                }}
+              />
+              <div 
+                style={{
+                  transform: "rotate(-2deg)",
+                  width: "100%",
+                  height: "580px",
+                  maxHeight: "100%",
+                  zIndex: 10,
+                  boxShadow: "0px 25px 50px -12px rgba(0, 0, 0, 0.25)",
+                  borderRadius: "12px"
+                }}
+                className="overflow-hidden transition-all duration-500 hover:rotate-0 hover:scale-102 cursor-pointer bg-white border border-[#1D493E]/10"
+              >
+                <img 
+                  src="/llama_mascot.png" 
+                  alt="Bonjo Llama Mascot" 
+                  style={{
+                    transform: "scale(1.4) translateY(24px) rotate(2deg)",
+                  }}
+                  className="w-full h-full object-cover"
+                />
               </div>
+            </div>
 
-              {/* Brand Ethos Card */}
-              <div className="border border-[#1D493E]/15 rounded-[24px] p-8 space-y-4 bg-white shadow-2xs">
-                <Compass className="w-8 h-8 text-[#FF623E] animate-spin-slow" />
-                <h4 className="font-serif font-bold text-lg text-[#1D493E]">The Nomad Promise</h4>
-                <p className="text-xs leading-relaxed text-slate-500 font-medium">
-                  We believe in slow, responsible travel that respects local communities, protects native trails, and brings you genuine local connections. Your safety and experiences are at the absolute center of everything we build.
+            {/* Right Column: Enquiry Form Card (Figma Spec scaled to fit screen: 487px x 580px) */}
+            {formSubmitted ? (
+              <div 
+                style={{
+                  width: "487px",
+                  maxWidth: "100%",
+                  height: "580px",
+                  padding: "20px",
+                  borderWidth: "1px",
+                  borderColor: "rgba(204, 204, 204, 1)",
+                  borderRadius: "4px",
+                  background: "rgba(255, 255, 255, 1)",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  boxSizing: "border-box",
+                  gap: "24px"
+                }}
+                className="shadow-xs"
+              >
+                <div className="w-16 h-16 bg-[#F3FFEF] text-[#1D493E] rounded-full flex items-center justify-center mx-auto border border-[#1D493E]/20 animate-bounce">
+                  <CheckCircle2 className="w-8 h-8 text-[#FF623E]" />
+                </div>
+                <h3 className="font-serif font-bold text-2xl text-[#1D493E]">Enquiry Dispatched!</h3>
+                <p className="text-sm text-slate-500 max-w-sm mx-auto font-medium text-center leading-relaxed">
+                  Your details have been registered. A Go Banjara expedition coordinator will contact you shortly to plan your journey.
                 </p>
               </div>
-            </div>
+            ) : (
+              <form 
+                onSubmit={handleSubmit}
+                style={{
+                  width: "487px",
+                  maxWidth: "100%",
+                  height: "580px",
+                  padding: "20px",
+                  borderWidth: "1px",
+                  borderColor: "rgba(204, 204, 204, 1)",
+                  borderRadius: "4px",
+                  background: "rgba(255, 255, 255, 1)",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxSizing: "border-box"
+                }}
+                className="shadow-xs text-left"
+              >
+                <style>{`
+                  .contact-form-input::placeholder, 
+                  .contact-form-textarea::placeholder {
+                    font-family: Faktum, sans-serif !important;
+                    font-weight: 500 !important;
+                    font-size: 20px !important;
+                    color: rgba(141, 141, 141, 1) !important;
+                    opacity: 1 !important;
+                  }
+                  .contact-form-input, .contact-form-textarea {
+                    font-size: 16px !important;
+                  }
+                `}</style>
 
-            {/* Right Column: Multi-tab Interactive Inquiry Form */}
-            <div className="lg:col-span-7 bg-white border-2 border-[#1D493E] rounded-[28px] shadow-[6px_6px_0px_0px_#1D493E] overflow-hidden">
-              {/* Tab headers */}
-              <div className="flex border-b border-[#1D493E]/10 bg-white">
-                <button 
-                  onClick={() => { setActiveTab('trip'); setFormSubmitted(false); }}
-                  className={`flex-1 py-4 text-center text-xs font-mono font-black uppercase tracking-wider transition ${
-                    activeTab === 'trip' 
-                      ? 'bg-white border-b-2 border-b-[#FF623E] text-[#FF623E]' 
-                      : 'text-[#1D493E]/60 hover:bg-gray-50 hover:text-[#1D493E]'
-                  }`}
-                >
-                  Plan a Trip
-                </button>
-                <button 
-                  onClick={() => { setActiveTab('gear'); setFormSubmitted(false); }}
-                  className={`flex-1 py-4 text-center text-xs font-mono font-black uppercase tracking-wider transition ${
-                    activeTab === 'gear' 
-                      ? 'bg-white border-b-2 border-b-[#FF623E] text-[#FF623E]' 
-                      : 'text-[#1D493E]/60 hover:bg-gray-50 hover:text-[#1D493E]'
-                  }`}
-                >
-                  Gear & Orders
-                </button>
-                <button 
-                  onClick={() => { setActiveTab('collab'); setFormSubmitted(false); }}
-                  className={`flex-1 py-4 text-center text-xs font-mono font-black uppercase tracking-wider transition ${
-                    activeTab === 'collab' 
-                      ? 'bg-white border-b-2 border-b-[#FF623E] text-[#FF623E]' 
-                      : 'text-[#1D493E]/60 hover:bg-gray-50 hover:text-[#1D493E]'
-                  }`}
-                >
-                  Collabs
-                </button>
-                <button 
-                  onClick={() => { setActiveTab('general'); setFormSubmitted(false); }}
-                  className={`flex-1 py-4 text-center text-xs font-mono font-black uppercase tracking-wider transition ${
-                    activeTab === 'general' 
-                      ? 'bg-white border-b-2 border-b-[#FF623E] text-[#FF623E]' 
-                      : 'text-[#1D493E]/60 hover:bg-gray-50 hover:text-[#1D493E]'
-                  }`}
-                >
-                  General
-                </button>
-              </div>
+                {/* Full Name */}
+                <div className="space-y-1">
+                  <label 
+                    style={{
+                      fontFamily: "Faktum, sans-serif",
+                      fontWeight: 500,
+                      fontSize: "18px",
+                      lineHeight: "100%",
+                      letterSpacing: "0px",
+                      color: "#2C2C2C",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "4px"
+                    }}
+                  >
+                    Full Name <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 700, fontSize: "18px", lineHeight: "100%", color: "#FF623E" }}>*</span>
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    placeholder="Enter your full name"
+                    style={{ 
+                      height: "53px",
+                      borderRadius: "4px",
+                      border: "1px solid rgba(204, 204, 204, 1)",
+                      background: "rgba(255, 255, 255, 1)"
+                    }}
+                    className="contact-form-input w-full px-4 font-medium text-gray-800 focus:outline-none focus:border-[#1D493E] transition"
+                  />
+                </div>
 
-              {/* Form Content Wrapper */}
-              <div className="p-8">
-                {formSubmitted ? (
-                  <div className="py-12 text-center space-y-4">
-                    <div className="w-16 h-16 bg-white text-[#1D493E] rounded-full flex items-center justify-center mx-auto border border-[#1D493E]/20">
-                      <CheckCircle2 className="w-8 h-8" />
-                    </div>
-                    <h3 className="font-serif font-bold text-2xl text-[#1D493E]">Message Dispatched!</h3>
-                    <p className="text-sm text-slate-500 max-w-sm mx-auto font-medium">
-                      Your query has successfully reached our basecamp routers. A nomad coordinator will coordinate with you shortly.
-                    </p>
+                {/* Email Address */}
+                <div className="space-y-1">
+                  <label 
+                    style={{
+                      fontFamily: "Faktum, sans-serif",
+                      fontWeight: 500,
+                      fontSize: "18px",
+                      lineHeight: "100%",
+                      letterSpacing: "0px",
+                      color: "#2C2C2C",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "4px"
+                    }}
+                  >
+                    Email Address <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 700, fontSize: "18px", lineHeight: "100%", color: "#FF623E" }}>*</span>
+                  </label>
+                  <input
+                    type="email"
+                    required
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    placeholder="Enter your email"
+                    style={{ 
+                      height: "53px",
+                      borderRadius: "4px",
+                      border: "1px solid rgba(204, 204, 204, 1)",
+                      background: "rgba(255, 255, 255, 1)"
+                    }}
+                    className="contact-form-input w-full px-4 font-medium text-gray-800 focus:outline-none focus:border-[#1D493E] transition"
+                  />
+                </div>
+
+                {/* Mobile Number */}
+                <div className="space-y-1">
+                  <label 
+                    style={{
+                      fontFamily: "Faktum, sans-serif",
+                      fontWeight: 500,
+                      fontSize: "18px",
+                      lineHeight: "100%",
+                      letterSpacing: "0px",
+                      color: "#2C2C2C",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "4px"
+                    }}
+                  >
+                    Mobile Number <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 700, fontSize: "18px", lineHeight: "100%", color: "#FF623E" }}>*</span>
+                  </label>
+                  <div 
+                    style={{ 
+                      height: "53px",
+                      borderRadius: "4px",
+                      border: "1px solid rgba(204, 204, 204, 1)",
+                      background: "rgba(255, 255, 255, 1)"
+                    }}
+                    className="flex overflow-hidden focus-within:border-[#1D493E]"
+                  >
+                    <span className="bg-[#1D493E]/5 border-r border-gray-300 text-slate-700 text-sm font-semibold px-4 flex items-center justify-center shrink-0">
+                      + 91
+                    </span>
+                    <input
+                      type="tel"
+                      required
+                      name="mobile"
+                      value={formData.mobile}
+                      onChange={handleInputChange}
+                      placeholder="9492906356"
+                      className="contact-form-input flex-1 px-4 bg-white font-medium text-gray-800 focus:outline-none"
+                    />
                   </div>
-                ) : (
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    
-                    {/* Common Fields: Name & Email */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                      <div className="space-y-2">
-                        <label className="text-[10px] font-mono font-black uppercase tracking-wider text-[#1D493E]/60 block text-left">
-                          Full Name
-                        </label>
-                        <input 
-                          type="text"
-                          name="name"
-                          required
-                          value={formData.name}
-                          onChange={handleInputChange}
-                          placeholder="Your Adventurous Name"
-                          className="w-full px-4 py-3 border border-[#1D493E]/20 rounded-xl bg-white text-xs font-bold text-[#1D493E] focus:outline-none focus:border-[#1D493E] text-center"
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <label className="text-[10px] font-mono font-black uppercase tracking-wider text-[#1D493E]/60 block text-left">
-                          Email Address
-                        </label>
-                        <input 
-                          type="email"
-                          name="email"
-                          required
-                          value={formData.email}
-                          onChange={handleInputChange}
-                          placeholder="nomad@explore.com"
-                          className="w-full px-4 py-3 border border-[#1D493E]/20 rounded-xl bg-white text-xs font-bold text-[#1D493E] focus:outline-none focus:border-[#1D493E] text-center"
-                        />
-                      </div>
-                    </div>
+                </div>
 
-                    {/* Conditional Fields based on active tab */}
-                    {activeTab === 'trip' && (
-                      <div className="space-y-6">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                          <div className="space-y-2">
-                            <label className="text-[10px] font-mono font-black uppercase tracking-wider text-[#1D493E]/60 block text-left">
-                              Select Trip Category
-                            </label>
-                            <select 
-                              name="tripType"
-                              value={formData.tripType}
-                              onChange={handleInputChange}
-                              className="w-full px-4 py-3 border border-[#1D493E]/20 rounded-xl bg-white text-xs font-bold text-[#1D493E] focus:outline-none focus:border-[#1D493E] text-center"
-                            >
-                              <option value="Trek">Mountain Trekking</option>
-                              <option value="Weekend">Weekend Escape</option>
-                              <option value="Road Trip">Road Trip Expedition</option>
-                              <option value="Camping">Scenic Camping</option>
-                            </select>
-                          </div>
-                          <div className="space-y-2">
-                            <label className="text-[10px] font-mono font-black uppercase tracking-wider text-[#1D493E]/60 block text-left">
-                              No of Guests
-                            </label>
-                            <input 
-                              type="number"
-                              name="guestsCount"
-                              min="1"
-                              value={formData.guestsCount}
-                              onChange={handleInputChange}
-                              className="w-full px-4 py-3 border border-[#1D493E]/20 rounded-xl bg-white text-xs font-bold text-[#1D493E] focus:outline-none focus:border-[#1D493E] text-center"
-                            />
-                          </div>
-                        </div>
+                {/* Complete Address */}
+                <div className="space-y-1">
+                  <label 
+                    style={{
+                      fontFamily: "Faktum, sans-serif",
+                      fontWeight: 500,
+                      fontSize: "18px",
+                      lineHeight: "100%",
+                      letterSpacing: "0px",
+                      color: "#2C2C2C",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "4px"
+                    }}
+                  >
+                    Complete Address <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 700, fontSize: "18px", lineHeight: "100%", color: "#FF623E" }}>*</span>
+                  </label>
+                  <textarea
+                    required
+                    name="address"
+                    value={formData.address}
+                    onChange={handleInputChange}
+                    placeholder="Type something specific here"
+                    style={{ 
+                      height: "115px", 
+                      resize: "none",
+                      borderRadius: "4px",
+                      border: "1px solid rgba(204, 204, 204, 1)",
+                      background: "rgba(255, 255, 255, 1)"
+                    }}
+                    className="contact-form-textarea w-full px-4 py-3 font-medium text-gray-800 focus:outline-none focus:border-[#1D493E] transition leading-relaxed"
+                  />
+                </div>
 
-                        <div className="space-y-2">
-                          <label className="text-[10px] font-mono font-black uppercase tracking-wider text-[#1D493E]/60 block text-left">
-                            Target Departure Date
-                          </label>
-                          <input 
-                            type="date"
-                            name="preferredDate"
-                            value={formData.preferredDate}
-                            onChange={handleInputChange}
-                            onClick={(e) => {
-                              try { e.currentTarget.showPicker(); } catch (err) {}
-                            }}
-                            onFocus={(e) => {
-                              try { e.currentTarget.showPicker(); } catch (err) {}
-                            }}
-                            style={{ textAlign: "center" }}
-                            className="w-full px-4 py-3 border border-[#1D493E]/20 rounded-xl bg-white text-xs font-bold text-[#1D493E] focus:outline-none focus:border-[#1D493E] text-center hide-calendar-picker-icon cursor-pointer"
-                          />
-                        </div>
-                      </div>
-                    )}
-
-                    {activeTab === 'gear' && (
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        <div className="space-y-2">
-                          <label className="text-[10px] font-mono font-black uppercase tracking-wider text-[#1D493E]/60 block text-left">
-                            Order Number (Optional)
-                          </label>
-                          <input 
-                            type="text"
-                            name="orderNumber"
-                            value={formData.orderNumber}
-                            onChange={handleInputChange}
-                            placeholder="e.g. #GB-8921"
-                            className="w-full px-4 py-3 border border-[#1D493E]/20 rounded-xl bg-white text-xs font-bold text-[#1D493E] focus:outline-none focus:border-[#1D493E] text-center"
-                          />
-                        </div>
-                        <div className="space-y-2">
-                          <label className="text-[10px] font-mono font-black uppercase tracking-wider text-[#1D493E]/60 block text-left">
-                            Hotline Subject
-                          </label>
-                          <input 
-                            type="text"
-                            name="subject"
-                            required
-                            value={formData.subject}
-                            onChange={handleInputChange}
-                            placeholder="e.g. Size Exchange / Missing Badges"
-                            className="w-full px-4 py-3 border border-[#1D493E]/20 rounded-xl bg-white text-xs font-bold text-[#1D493E] focus:outline-none focus:border-[#1D493E] text-center"
-                          />
-                        </div>
-                      </div>
-                    )}
-
-                    {activeTab === 'collab' && (
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        <div className="space-y-2">
-                          <label className="text-[10px] font-mono font-black uppercase tracking-wider text-[#1D493E]/60 block text-left">
-                            Company or Agency
-                          </label>
-                          <input 
-                            type="text"
-                            name="company"
-                            value={formData.company}
-                            onChange={handleInputChange}
-                            placeholder="Your Brand / Agency"
-                            className="w-full px-4 py-3 border border-[#1D493E]/20 rounded-xl bg-white text-xs font-bold text-[#1D493E] focus:outline-none focus:border-[#1D493E] text-center"
-                          />
-                        </div>
-                        <div className="space-y-2">
-                          <label className="text-[10px] font-mono font-black uppercase tracking-wider text-[#1D493E]/60 block text-left">
-                            Collaboration Scope
-                          </label>
-                          <select 
-                            name="subject"
-                            value={formData.subject}
-                            onChange={handleInputChange}
-                            className="w-full px-4 py-3 border border-[#1D493E]/20 rounded-xl bg-white text-xs font-bold text-[#1D493E] focus:outline-none focus:border-[#1D493E] text-center"
-                          >
-                            <option value="Local Guide Partnership">Local Guide Partnership</option>
-                            <option value="Artisan Homestay Host">Artisan Homestay Host</option>
-                            <option value="Corporate Custom Badges">Corporate Custom Badges</option>
-                            <option value="Creator / Sponsorship">Creator / Sponsorship</option>
-                          </select>
-                        </div>
-                      </div>
-                    )}
-
-                    {activeTab === 'general' && (
-                      <div className="space-y-2">
-                        <label className="text-[10px] font-mono font-black uppercase tracking-wider text-[#1D493E]/60 block text-left">
-                          Subject of Interest
-                        </label>
-                        <input 
-                          type="text"
-                          name="subject"
-                          required
-                          value={formData.subject}
-                          onChange={handleInputChange}
-                          placeholder="What would you like to talk about?"
-                          className="w-full px-4 py-3 border border-[#1D493E]/20 rounded-xl bg-white text-xs font-bold text-[#1D493E] focus:outline-none focus:border-[#1D493E] text-center"
-                        />
-                      </div>
-                    )}
-
-                    {/* Common Field: Message Box */}
-                    <div className="space-y-2 text-left">
-                      <label className="text-[10px] font-mono font-black uppercase tracking-wider text-[#1D493E]/60 block">
-                        Detailed Message
-                      </label>
-                      <textarea 
-                        name="message"
-                        required
-                        rows={4}
-                        value={formData.message}
-                        onChange={handleInputChange}
-                        placeholder="Detail your requirements, dates, or ideas here..."
-                        className="w-full px-4 py-3 border border-[#1D493E]/20 rounded-xl bg-white text-xs font-semibold text-[#1D493E] focus:outline-none focus:border-[#1D493E] leading-relaxed"
-                      />
-                    </div>
-
-                    {/* Submit Button */}
-                    <button 
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="w-full h-[55px] bg-[#1D493E] hover:bg-[#1D493E]/90 text-white rounded-xl font-bold transition flex items-center justify-center gap-2 cursor-pointer shadow-sm disabled:opacity-70"
-                    >
-                      {isSubmitting ? (
-                        <span>Transmitting Signals...</span>
-                      ) : (
-                        <>
-                          <span>Transmit Message</span>
-                          <Send className="w-4 h-4" />
-                        </>
-                      )}
-                    </button>
-
-                  </form>
-                )}
-              </div>
-            </div>
+                {/* Submit button */}
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  style={{ height: "53px" }}
+                  className="w-full bg-[#1D493E] hover:bg-[#1D493E]/90 text-white font-bold rounded-[4px] transition duration-200 cursor-pointer shadow-sm text-sm"
+                >
+                  {isSubmitting ? "Submitting..." : "Submit Enquiry"}
+                </button>
+              </form>
+            )}
 
           </div>
         </section>
 
-        {/* SECTION 3: BASECAMPS & HQ LOCATIONS MAP */}
-        <section className="w-full px-6 md:px-20 py-16 bg-white border-t border-b border-[#1D493E]/10">
-          <div className="max-w-[1280px] mx-auto space-y-12">
-            <div className="text-center space-y-3">
-              <span className="text-[10px] font-mono uppercase font-black tracking-widest text-[#FF623E] bg-[#FF623E]/10 px-2.5 py-0.5 rounded-[4px]">
-                Ground Operations
+        {/* SECTION 2.5: CUSTOM STATS BANNER (Figma spec 1440x145) */}
+        <section 
+          style={{
+            width: "100%",
+            maxWidth: "1440px",
+            minHeight: "145px",
+            height: "auto",
+            paddingTop: "24px",
+            paddingBottom: "24px",
+            background: "rgba(255, 255, 255, 1)",
+            boxSizing: "border-box",
+            margin: "0 auto",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            borderTop: "1px solid rgba(229, 231, 235, 1)",
+            borderBottom: "1px solid rgba(229, 231, 235, 1)"
+          }}
+          className="px-6 md:px-20"
+        >
+          <div 
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "100%",
+              maxWidth: "1280px"
+            }}
+            className="flex-wrap md:flex-nowrap gap-6 md:gap-[47px] w-full"
+          >
+            {/* Stat 1 */}
+            <div 
+              style={{
+                width: "177px",
+                height: "97px",
+                padding: "12px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "8px",
+                boxSizing: "border-box"
+              }}
+              className="text-center"
+            >
+              <span 
+                style={{ 
+                  fontFamily: "var(--font-sans)", 
+                  color: "rgba(43, 43, 43, 1)",
+                  fontWeight: 600
+                }}
+                className="text-[32px] leading-none"
+              >
+                10+
               </span>
-              <h2 className="font-serif font-bold text-3xl md:text-4xl text-[#1D493E]">Our Basecamps</h2>
-              <p className="text-sm text-slate-500 max-w-xl mx-auto font-medium">
-                Step off the road and walk into our physical sanctuaries. We design gear and coordinate treks here.
-              </p>
+              <span 
+                style={{ 
+                  fontFamily: "var(--font-sans)", 
+                  color: "rgba(43, 43, 43, 1)",
+                  fontWeight: 500
+                }}
+                className="text-[20px] whitespace-nowrap"
+              >
+                Travel Packages
+              </span>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              
-              {/* Srinagar Basecamp */}
-              <div className="bg-white border border-[#1D493E]/10 rounded-[24px] overflow-hidden shadow-2xs hover:shadow-lg transition duration-300">
-                <div className="h-48 relative bg-slate-100">
-                  <img 
-                    src="https://images.unsplash.com/photo-1566838318109-a86075b517a6?q=80&w=600&auto=format&fit=crop" 
-                    alt="Srinagar Basecamp" 
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute top-4 left-4 bg-[#FF623E] text-white text-[9px] font-mono uppercase font-black px-2 py-0.5 rounded">
-                    Expedition Base
-                  </div>
-                </div>
-                <div className="p-6 space-y-4 text-left">
-                  <div className="space-y-1">
-                    <h3 className="font-serif font-bold text-xl text-[#1D493E]">Srinagar Basecamp</h3>
-                    <p className="text-[11px] font-mono text-gray-400">34.0837° N, 74.7973° E</p>
-                  </div>
-                  <p className="text-xs text-slate-500 leading-relaxed font-medium">
-                    Houseboat Row 3, Dal Lake, Srinagar, J&K. This is where we finalize Kashmir permissions and check Himalayan weather conditions.
-                  </p>
-                  <div className="pt-2 flex items-center gap-2 text-xs font-bold text-[#1D493E]">
-                    <MapPin className="w-4 h-4 text-[#FF623E]" />
-                    <span>Dal Lake Outpost</span>
-                  </div>
-                </div>
-              </div>
+            {/* Separator */}
+            <div className="h-12 w-[1px] bg-gray-200 shrink-0 hidden md:block" />
 
-              {/* Bengaluru HQ */}
-              <div className="bg-white border border-[#1D493E]/10 rounded-[24px] overflow-hidden shadow-2xs hover:shadow-lg transition duration-300">
-                <div className="h-48 relative bg-slate-100">
-                  <img 
-                    src="https://images.unsplash.com/photo-1582298538104-fc2c0a5a0028?q=80&w=600&auto=format&fit=crop" 
-                    alt="Bengaluru Studio" 
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute top-4 left-4 bg-[#1D493E] text-white text-[9px] font-mono uppercase font-black px-2 py-0.5 rounded">
-                    Design Studio & HQ
-                  </div>
-                </div>
-                <div className="p-6 space-y-4 text-left">
-                  <div className="space-y-1">
-                    <h3 className="font-serif font-bold text-xl text-[#1D493E]">Bengaluru Studio</h3>
-                    <p className="text-[11px] font-mono text-gray-400">12.9716° N, 77.5946° E</p>
-                  </div>
-                  <p className="text-xs text-slate-500 leading-relaxed font-medium">
-                    42, Wind Tunnel Road, Murugeshpalya, Bengaluru, Karnataka. Design center for our enamel badges, journals, and street apparel.
-                  </p>
-                  <div className="pt-2 flex items-center gap-2 text-xs font-bold text-[#1D493E]">
-                    <MapPin className="w-4 h-4 text-[#FF623E]" />
-                    <span>Apparel & Design Lab</span>
-                  </div>
-                </div>
-              </div>
+            {/* Stat 2 */}
+            <div 
+              style={{
+                width: "177px",
+                height: "97px",
+                padding: "12px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "8px",
+                boxSizing: "border-box"
+              }}
+              className="text-center"
+            >
+              <span 
+                style={{ 
+                  fontFamily: "var(--font-sans)", 
+                  color: "rgba(43, 43, 43, 1)",
+                  fontWeight: 600
+                }}
+                className="text-[32px] leading-none"
+              >
+                15k+
+              </span>
+              <span 
+                style={{ 
+                  fontFamily: "var(--font-sans)", 
+                  color: "rgba(43, 43, 43, 1)",
+                  fontWeight: 500
+                }}
+                className="text-[20px] whitespace-nowrap"
+              >
+                Nomads Joined
+              </span>
+            </div>
 
-              {/* Leh Outpost */}
-              <div className="bg-white border border-[#1D493E]/10 rounded-[24px] overflow-hidden shadow-2xs hover:shadow-lg transition duration-300">
-                <div className="h-48 relative bg-slate-100">
-                  <img 
-                    src="https://images.unsplash.com/photo-1596701062351-df1f8d4cf783?q=80&w=600&auto=format&fit=crop" 
-                    alt="Leh Basecamp" 
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute top-4 left-4 bg-[#FF623E] text-white text-[9px] font-mono uppercase font-black px-2 py-0.5 rounded">
-                    Aviation & Gear Hub
-                  </div>
-                </div>
-                <div className="p-6 space-y-4 text-left">
-                  <div className="space-y-1">
-                    <h3 className="font-serif font-bold text-xl text-[#1D493E]">Leh Outpost</h3>
-                    <p className="text-[11px] font-mono text-gray-400">34.1526° N, 77.5771° E</p>
-                  </div>
-                  <p className="text-xs text-slate-500 leading-relaxed font-medium">
-                    Fort Road, Near Main Bazaar, Leh, Ladakh. Acclimatization camp, local motorcycle garages, and high-altitude rental gear center.
-                  </p>
-                  <div className="pt-2 flex items-center gap-2 text-xs font-bold text-[#1D493E]">
-                    <MapPin className="w-4 h-4 text-[#FF623E]" />
-                    <span>Ladakh Acclimatization Center</span>
-                  </div>
-                </div>
-              </div>
+            {/* Separator */}
+            <div className="h-12 w-[1px] bg-gray-200 shrink-0 hidden md:block" />
 
+            {/* Stat 3 */}
+            <div 
+              style={{
+                width: "177px",
+                height: "97px",
+                padding: "12px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "8px",
+                boxSizing: "border-box"
+              }}
+              className="text-center"
+            >
+              <span 
+                style={{ 
+                  fontFamily: "var(--font-sans)", 
+                  color: "rgba(43, 43, 43, 1)",
+                  fontWeight: 600
+                }}
+                className="text-[32px] leading-none"
+              >
+                24/7
+              </span>
+              <span 
+                style={{ 
+                  fontFamily: "var(--font-sans)", 
+                  color: "rgba(43, 43, 43, 1)",
+                  fontWeight: 500
+                }}
+                className="text-[20px] whitespace-nowrap"
+              >
+                On-road Support
+              </span>
+            </div>
+
+            {/* Separator */}
+            <div className="h-12 w-[1px] bg-gray-200 shrink-0 hidden md:block" />
+
+            {/* Stat 4 */}
+            <div 
+              style={{
+                width: "177px",
+                height: "97px",
+                padding: "12px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "8px",
+                boxSizing: "border-box"
+              }}
+              className="text-center"
+            >
+              <span 
+                style={{ 
+                  fontFamily: "var(--font-sans)", 
+                  color: "rgba(43, 43, 43, 1)",
+                  fontWeight: 600
+                }}
+                className="text-[32px] leading-none"
+              >
+                7+
+              </span>
+              <span 
+                style={{ 
+                  fontFamily: "var(--font-sans)", 
+                  color: "rgba(43, 43, 43, 1)",
+                  fontWeight: 500
+                }}
+                className="text-[20px] whitespace-nowrap"
+              >
+                Shop Products
+              </span>
+            </div>
+
+            {/* Separator */}
+            <div className="h-12 w-[1px] bg-gray-200 shrink-0 hidden md:block" />
+
+            {/* Stat 5 */}
+            <div 
+              style={{
+                width: "177px",
+                height: "97px",
+                padding: "12px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "8px",
+                boxSizing: "border-box"
+              }}
+              className="text-center"
+            >
+              <span 
+                style={{ 
+                  fontFamily: "var(--font-sans)", 
+                  color: "rgba(43, 43, 43, 1)",
+                  fontWeight: 600
+                }}
+                className="text-[32px] leading-none"
+              >
+                4.5+
+              </span>
+              <span 
+                style={{ 
+                  fontFamily: "var(--font-sans)", 
+                  color: "rgba(43, 43, 43, 1)",
+                  fontWeight: 500
+                }}
+                className="text-[20px] whitespace-nowrap"
+              >
+                Average trip rating
+              </span>
             </div>
           </div>
         </section>
 
-        {/* SECTION 4: FAQ ACCORDION SECTION (Matching exact styles of other pages) */}
-        <section className="w-full max-w-[1280px] bg-white rounded-[4px] py-16 px-6 flex flex-col gap-[32px] mx-auto border-t border-gray-100">
-          <div className="w-full h-auto flex flex-col gap-[12px] justify-center text-left mx-auto">
+        {/* SECTION 3: WE'D LOVE TO HEAR FROM YOU (Figma spec 1440x677, padding 62px 80px) */}
+        <section 
+          style={{
+            width: "100%",
+            maxWidth: "1440px",
+            paddingTop: "62px",
+            paddingBottom: "62px",
+            background: "rgba(255, 255, 255, 1)",
+            boxSizing: "border-box",
+            margin: "0 auto",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-start",
+            gap: "32px"
+          }}
+          className="px-6 md:px-20 text-left"
+        >
+          <div className="space-y-3">
             <span 
               style={{
-                fontFamily: "'Faktum', 'Outfit', sans-serif",
+                fontFamily: "Faktum, Outfit, sans-serif",
                 fontWeight: 600,
                 fontSize: "14px",
                 lineHeight: "100%",
@@ -644,7 +733,226 @@ export default function ContactPage() {
                 alignItems: "center",
                 justifyContent: "center",
                 height: "28px",
-                width: "fit-content",
+                padding: "0 16px",
+                borderRadius: "4px"
+              }}
+            >
+              Reach out to us
+            </span>
+            <h2 
+              style={{
+                fontFamily: "Fraunces, serif",
+                fontWeight: 600,
+                fontSize: "42px",
+                lineHeight: "100%",
+                letterSpacing: "0px",
+                color: "#2B2B2B"
+              }}
+              className="text-3xl md:text-[42px]"
+            >
+              We’d love to <span style={{ color: "#FF623E" }}>hear from you</span>
+            </h2>
+            <p 
+              style={{
+                fontFamily: "Faktum, Outfit, sans-serif",
+                fontWeight: 500,
+                fontSize: "18px",
+                lineHeight: "24px",
+                color: "rgba(43, 43, 43, 1)"
+              }}
+              className="text-base"
+            >
+              or Just reach out manually to{" "}
+              <a 
+                href="mailto:hello@gobanjara.com"
+                style={{
+                  color: "rgba(63, 136, 255, 1)",
+                  textDecoration: "underline"
+                }}
+                className="hover:opacity-85 transition"
+              >
+                hello@gobanjara.com
+              </a>
+            </p>
+          </div>
+
+          <div className="flex flex-col md:flex-row gap-[32px] w-full justify-between items-center mt-4">
+            
+            {/* Card 1: Email Support */}
+            <div 
+              style={{
+                background: "#F9F9F9",
+                borderRadius: "4px",
+                padding: "24px",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                width: "405.33px",
+                maxWidth: "100%",
+                height: "327px",
+                boxSizing: "border-box"
+              }}
+              className="border border-gray-100 shadow-2xs hover:shadow-xs transition duration-200"
+            >
+              <div className="space-y-6">
+                <div className="w-12 h-12 rounded-full border-[1.5px] border-[#FF623E] bg-white flex items-center justify-center text-[#FF623E]">
+                  <Compass className="w-6 h-6" />
+                </div>
+                <div className="space-y-2">
+                  <h3 style={{ fontFamily: "Faktum, Outfit, sans-serif", color: "#2B2B2B" }} className="font-bold text-xl">
+                    Email Support
+                  </h3>
+                  <p style={{ fontFamily: "Faktum, Outfit, sans-serif", color: "#666666" }} className="text-sm font-medium">
+                    Our team can respond in real time
+                  </p>
+                </div>
+              </div>
+              <div className="pt-6">
+                <a 
+                  href="mailto:hello@gobanjara.com"
+                  style={{
+                    fontFamily: "Faktum, Outfit, sans-serif",
+                    color: "rgba(63, 136, 255, 1)",
+                    textDecoration: "underline",
+                    fontSize: "14px",
+                    fontWeight: 600
+                  }}
+                  className="hover:opacity-80 transition block truncate"
+                >
+                  hello@gobanjara.com
+                </a>
+              </div>
+            </div>
+
+            {/* Card 2: Visit Our Office */}
+            <div 
+              style={{
+                background: "#F9F9F9",
+                borderRadius: "4px",
+                padding: "24px",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                width: "405.33px",
+                maxWidth: "100%",
+                height: "327px",
+                boxSizing: "border-box"
+              }}
+              className="border border-gray-100 shadow-2xs hover:shadow-xs transition duration-200"
+            >
+              <div className="space-y-6">
+                <div className="w-12 h-12 rounded-full border-[1.5px] border-[#FF623E] bg-white flex items-center justify-center text-[#FF623E]">
+                  <Compass className="w-6 h-6" />
+                </div>
+                <div className="space-y-2">
+                  <h3 style={{ fontFamily: "Faktum, Outfit, sans-serif", color: "#2B2B2B" }} className="font-bold text-xl">
+                    Visit Our Office
+                  </h3>
+                  <p style={{ fontFamily: "Faktum, Outfit, sans-serif", color: "#666666" }} className="text-sm font-medium">
+                    Visit our location in real time
+                  </p>
+                </div>
+              </div>
+              <div className="pt-6">
+                <a 
+                  href="https://maps.google.com/?q=1st+Floor,+DSR+Tranquil,+102,+Plot+%23+901,+Ayyappa+Society+Main+Rd,+SBH+Officers+Colony,+Mega+Hills,+Madhapur,+Hyderabad,+Telangana+500081"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    fontFamily: "Faktum, Outfit, sans-serif",
+                    color: "rgba(63, 136, 255, 1)",
+                    textDecoration: "underline",
+                    fontSize: "13px",
+                    fontWeight: 600,
+                    lineHeight: "1.5"
+                  }}
+                  className="hover:opacity-80 transition block text-left"
+                >
+                  1st Floor, DSR Tranquil, 102, Plot # 901, Ayyappa Society Main Rd, SBH Officers Colony, Mega Hills, Madhapur, Hyderabad, Telangana 500081
+                </a>
+              </div>
+            </div>
+
+            {/* Card 3: Call us directly */}
+            <div 
+              style={{
+                background: "#F9F9F9",
+                borderRadius: "4px",
+                padding: "24px",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                width: "405.33px",
+                maxWidth: "100%",
+                height: "327px",
+                boxSizing: "border-box"
+              }}
+              className="border border-gray-100 shadow-2xs hover:shadow-xs transition duration-200"
+            >
+              <div className="space-y-6">
+                <div className="w-12 h-12 rounded-full border-[1.5px] border-[#FF623E] bg-white flex items-center justify-center text-[#FF623E]">
+                  <Compass className="w-6 h-6" />
+                </div>
+                <div className="space-y-2">
+                  <h3 style={{ fontFamily: "Faktum, Outfit, sans-serif", color: "#2B2B2B" }} className="font-bold text-xl">
+                    Call us directly
+                  </h3>
+                  <p style={{ fontFamily: "Faktum, Outfit, sans-serif", color: "#666666" }} className="text-sm font-medium">
+                    Available during working hours
+                  </p>
+                </div>
+              </div>
+              <div className="pt-6">
+                <a 
+                  href="tel:+919489094392"
+                  style={{
+                    fontFamily: "Faktum, Outfit, sans-serif",
+                    color: "rgba(63, 136, 255, 1)",
+                    textDecoration: "underline",
+                    fontSize: "14px",
+                    fontWeight: 600
+                  }}
+                  className="hover:opacity-80 transition block"
+                >
+                  (+91) 9489094392
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <section 
+          style={{
+            width: "100%",
+            maxWidth: "1440px",
+            paddingTop: "42px",
+            paddingBottom: "42px",
+            background: "rgba(255, 255, 255, 1)",
+            boxSizing: "border-box",
+            margin: "0 auto",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-start",
+            gap: "24px"
+          }}
+          className="px-6 md:px-20 text-left border-t border-gray-100"
+        >
+          <div className="space-y-3">
+            <span 
+              style={{
+                fontFamily: "var(--font-sans)",
+                fontWeight: 600,
+                fontSize: "14px",
+                lineHeight: "100%",
+                letterSpacing: "1.2px",
+                textTransform: "uppercase",
+                color: "rgba(255, 98, 62, 1)",
+                background: "rgba(255, 98, 62, 0.1)",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                height: "28px",
                 padding: "0 16px",
                 borderRadius: "4px"
               }}
@@ -658,35 +966,22 @@ export default function ContactPage() {
                 fontSize: "42px",
                 lineHeight: "100%",
                 letterSpacing: "0px",
-                color: "rgba(29, 73, 62, 1)",
+                color: "#2B2B2B",
                 margin: 0
               }}
-              className="text-[28px] md:text-[42px]"
+              className="text-3xl md:text-[42px]"
             >
-              Inquiry Questions
+              Frequently asked questions
             </h2>
-            <p
-              style={{
-                fontFamily: "'Faktum', 'Outfit', sans-serif",
-                fontWeight: 500,
-                fontSize: "24px",
-                lineHeight: "32px",
-                color: "rgba(43, 43, 43, 1)",
-                margin: 0
-              }}
-              className="text-base md:text-[24px]"
-            >
-              Have quick doubts? Check our support log lines.
-            </p>
           </div>
 
-          <div className="w-full flex flex-col border-t border-slate-200">
+          <div className="w-full flex flex-col border-t border-gray-200 mt-2">
             {FAQ_ITEMS.map((faq, idx) => {
               const isOpen = openFaqIndex === idx;
               return (
                 <div 
                   key={idx} 
-                  className="w-full border-b-[2px] border-[rgba(204,204,204,0.54)] py-6 flex flex-col gap-4 text-left transition-colors duration-200"
+                  className="w-full border-b border-gray-200 py-5 flex flex-col text-left transition-colors duration-200"
                 >
                   <button 
                     onClick={() => toggleFaq(idx)}
@@ -694,33 +989,34 @@ export default function ContactPage() {
                   >
                     <span 
                       style={{
-                        fontFamily: "'Faktum', 'Outfit', sans-serif",
+                        fontFamily: "var(--font-sans)",
                         fontWeight: 600,
-                        fontSize: "24px",
-                        lineHeight: "32px",
-                        color: "rgba(43, 43, 43, 1)"
+                        fontSize: "18px",
+                        lineHeight: "26px",
+                        color: "#2C2C2C"
                       }}
-                      className="text-lg md:text-[24px]"
+                      className="text-base md:text-[18px]"
                     >
                       {faq.question}
                     </span>
                     {isOpen ? (
-                      <ChevronUp className="w-6 h-6 text-[#FF623E] shrink-0" />
+                      <span className="text-2xl font-semibold text-[#FF623E] select-none shrink-0 ml-4">−</span>
                     ) : (
-                      <ChevronDown className="w-6 h-6 text-[#1D493E] shrink-0" />
+                      <span className="text-2xl font-semibold text-[#1D493E] select-none shrink-0 ml-4">+</span>
                     )}
                   </button>
                   {isOpen && (
                     <p 
                       style={{
-                        fontFamily: "'Faktum', 'Outfit', sans-serif",
+                        fontFamily: "var(--font-sans)",
                         fontWeight: 500,
-                        fontSize: "18px",
-                        lineHeight: "28px",
-                        color: "rgba(43, 43, 43, 0.8)",
-                        margin: 0
+                        fontSize: "14px",
+                        lineHeight: "22px",
+                        color: "#666666",
+                        margin: 0,
+                        paddingTop: "8px"
                       }}
-                      className="text-sm md:text-[18px] animate-fade-in-up"
+                      className="text-sm animate-fade-in-up"
                     >
                       {faq.answer}
                     </p>
@@ -731,114 +1027,79 @@ export default function ContactPage() {
           </div>
         </section>
 
-        {/* SECTION 5: PRE-FOOTER NEWSLETTER/CTA SECTION (Section 10) */}
+        {/* SECTION 5: PRE-FOOTER NEWSLETTER/CTA SECTION (Figma spec 1440x342, padding 42px 80px) */}
         <section 
           style={{
             width: "100%",
-            maxWidth: "1280px",
+            maxWidth: "1440px",
+            paddingTop: "42px",
+            paddingBottom: "42px",
             background: "rgba(255, 255, 255, 1)",
             boxSizing: "border-box",
             margin: "0 auto",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "32px"
           }}
-          className="py-16 px-6"
+          className="px-6 md:px-20 text-center border-t border-gray-100"
         >
-          <div 
-            style={{
-              width: "100%",
-              height: "235px",
-              paddingTop: "24px",
-              paddingBottom: "24px",
-              gap: "24px",
-              borderRadius: "4px",
-              background: "rgba(255, 255, 255, 1)",
-              border: "1px solid rgba(141, 141, 141, 0.3)",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-              boxSizing: "border-box",
-            }}
-            className="px-6 md:px-20"
-          >
-            <div 
+          <div className="space-y-4 max-w-[1280px]">
+            <h2
               style={{
-                width: "100%",
-                maxWidth: "1280px",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: "16px",
-              }}
-            >
-              <h2
-                style={{
-                  fontFamily: "Fraunces, serif",
-                  fontWeight: 600,
-                  fontSize: "42px",
-                  lineHeight: "100%",
-                  letterSpacing: "0px",
-                  textAlign: "center",
-                  color: "#2B2B2B",
-                  maxWidth: "1280px",
-                  margin: 0,
-                }}
-                className="text-[28px] md:text-[42px]"
-              >
-                The <span style={{ color: "#FF5A36" }}>best adventures</span> find their way to your inbox.
-              </h2>
-              <p
-                style={{
-                  fontFamily: "Faktum, sans-serif",
-                  fontWeight: 500,
-                  fontSize: "24px",
-                  lineHeight: "32px",
-                  letterSpacing: "0px",
-                  textAlign: "center",
-                  color: "rgba(43, 43, 43, 1)",
-                  maxWidth: "1280px",
-                  margin: 0,
-                }}
-                className="text-base md:text-[24px]"
-              >
-                Hidden places, exclusive trip drops, curated gear, and stories from the road delivered before anyone else hears about them.
-              </p>
-            </div>
-
-            <Link
-              href="/travel"
-              style={{
-                width: "286px",
-                height: "55px",
-                paddingTop: "16px",
-                paddingBottom: "16px",
-                paddingLeft: "32px",
-                paddingRight: "32px",
-                borderRadius: "4px",
-                background: "rgba(29, 73, 62, 1)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                color: "#FFFFFF",
-                fontFamily: "'Faktum','Outfit',sans-serif",
-                fontWeight: 500,
-                fontSize: "18px",
+                fontFamily: "Fraunces, serif",
+                fontWeight: 600,
+                fontSize: "42px",
                 lineHeight: "100%",
                 letterSpacing: "0px",
-                textDecoration: "none",
-                transition: "opacity 0.2s",
+                color: "#2B2B2B",
+                margin: 0,
               }}
-              className="hover:opacity-90 inline-flex items-center gap-2 mt-4"
+              className="text-[28px] md:text-[42px]"
             >
-              <span>Reserve your tour now</span>
-              <span className="text-lg font-sans">↗</span>
-            </Link>
+              The <span style={{ color: "#FF623E" }}>best adventures</span> find their way to your inbox.
+            </h2>
+            <p
+              style={{
+                fontFamily: "Faktum, Outfit, sans-serif",
+                fontWeight: 500,
+                fontSize: "18px",
+                lineHeight: "26px",
+                color: "#666666",
+                maxWidth: "1000px",
+                margin: "0 auto",
+              }}
+              className="text-base"
+            >
+              Hidden places, exclusive trip drops, curated gear, and stories from the road delivered before anyone else hears about them.
+            </p>
           </div>
-        </section>
-      </div>
 
-      {/* SECTION 6: TRUST BANNER */}
-      <div className="w-full">
-        <TrustBanner />
+          <Link
+            href="/travel"
+            style={{
+              width: "286px",
+              height: "48px",
+              borderRadius: "4px",
+              background: "rgba(29, 73, 62, 1)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              color: "#FFFFFF",
+              fontFamily: "Faktum, Outfit, sans-serif",
+              fontWeight: 600,
+              fontSize: "16px",
+              lineHeight: "100%",
+              textDecoration: "none",
+              transition: "opacity 0.2s",
+            }}
+            className="hover:opacity-90 inline-flex items-center gap-2 cursor-pointer"
+          >
+            <span>Reserve your tour now</span>
+            <span className="text-lg font-sans">↗</span>
+          </Link>
+        </section>
       </div>
     </div>
   );

@@ -2105,118 +2105,129 @@ export default function AboutPage() {
       </section>
 
       {/* 9. FAQ Accordion Section (Exact match with Shop Page reference) */}
-      <section className="w-full bg-white py-[62px] px-6 md:px-[80px] mx-auto max-w-[1440px] shrink-0">
-        <div className="w-full max-w-[1280px] mx-auto flex flex-col gap-10 text-left">
-          {/* Header */}
-          <div className="text-left space-y-2.5">
-            <span className="inline-block text-[9px] font-black uppercase tracking-[0.15em] text-[#FF5B37] bg-[#FFEBE5] px-2.5 py-1 rounded-sm">
-              FAQ'S
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-serif font-medium text-[#2B2B2B]">
-              Frequently asked questions
-            </h2>
-          </div>
+      <section 
+        style={{
+          width: "100%",
+          maxWidth: "1440px",
+          paddingTop: "42px",
+          paddingBottom: "42px",
+          background: "rgba(255, 255, 255, 1)",
+          boxSizing: "border-box",
+          margin: "0 auto",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-start",
+          gap: "24px"
+        }}
+        className="px-6 md:px-20 text-left border-t border-gray-100 shrink-0"
+      >
+        <div className="space-y-3">
+          <span 
+            style={{
+              fontFamily: "Faktum, Outfit, sans-serif",
+              fontWeight: 600,
+              fontSize: "14px",
+              lineHeight: "100%",
+              letterSpacing: "1.2px",
+              textTransform: "uppercase",
+              color: "rgba(255, 98, 62, 1)",
+              background: "rgba(255, 98, 62, 0.1)",
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              height: "28px",
+              padding: "0 16px",
+              borderRadius: "4px"
+            }}
+          >
+            FAQ'S
+          </span>
+          <h2
+            style={{
+              fontFamily: "Fraunces, serif",
+              fontWeight: 600,
+              fontSize: "42px",
+              lineHeight: "100%",
+              letterSpacing: "0px",
+              color: "#2B2B2B",
+              margin: 0
+            }}
+            className="text-3xl md:text-[42px]"
+          >
+            Frequently asked questions
+          </h2>
+        </div>
 
-          {/* Accordion Rows matching Shop Page */}
-          <div className="w-full">
-            {[
-              {
-                question: "What materials are the badges made from? Zinc alloy with glossy enamel fill.",
-                answer: "Lightweight, durable, and safe to pin on bags, jackets, or backpacks without damaging fabric."
-              },
-              {
-                question: "How big are the stickers?",
-                answer: "Our premium die-cut vinyl stickers range from 2.5 to 3.5 inches, with weatherproof UV matte lamination."
-              },
-              {
-                question: "Do you ship across India?",
-                answer: "Yes! We offer express shipping across all states and union territories in India with tracking numbers provided via SMS & email."
-              },
-              {
-                question: "Can I return a product if I don't like it?",
-                answer: "We offer a hassle-free 7-day return and exchange policy for any unused products in original packaging."
-              },
-              {
-                question: "I have no reviews on this product. Is it safe to buy?",
-                answer: "Absolutely. All our gear is thoroughly field-tested by our collective of guides before listing, and backed by our quality guarantee."
-              }
-            ].map((item, idx) => {
-              const isOpen = openFaqIndex === idx;
-              return (
-                <div
-                  key={idx}
-                  style={{
-                    width: "100%",
-                    padding: "24px",
-                    borderBottom: "2px solid rgba(204, 204, 204, 0.54)",
-                    borderTop: idx === 0 ? "2px solid rgba(204, 204, 204, 0.54)" : "none",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "12px",
-                    boxSizing: "border-box",
-                  }}
-                  className="text-left"
+        <div className="w-full flex flex-col border-t border-gray-200 mt-2">
+          {[
+            {
+              question: "What materials are the badges made from? Zinc alloy with glossy enamel fill.",
+              answer: "Lightweight, durable, and safe to pin on bags, jackets, or backpacks without damaging fabric."
+            },
+            {
+              question: "How big are the stickers?",
+              answer: "Our premium die-cut vinyl stickers range from 2.5 to 3.5 inches, with weatherproof UV matte lamination."
+            },
+            {
+              question: "Do you ship across India?",
+              answer: "Yes! We offer express shipping across all states and union territories in India with tracking numbers provided via SMS & email."
+            },
+            {
+              question: "Can I return a product if I don't like it?",
+              answer: "We offer a hassle-free 7-day return and exchange policy for any unused products in original packaging."
+            },
+            {
+              question: "I have no reviews on this product. Is it safe to buy?",
+              answer: "Absolutely. All our gear is thoroughly field-tested by our collective of guides before listing, and backed by our quality guarantee."
+            }
+          ].map((item, idx) => {
+            const isOpen = openFaqIndex === idx;
+            return (
+              <div 
+                key={idx} 
+                className="w-full border-b border-gray-200 py-5 flex flex-col text-left transition-colors duration-200"
+              >
+                <button 
+                  onClick={() => toggleFaq(idx)}
+                  className="w-full flex justify-between items-center text-left focus:outline-none cursor-pointer"
                 >
-                  <button
-                    onClick={() => toggleFaq(idx)}
+                  <span 
                     style={{
-                      width: "100%",
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      background: "none",
-                      border: "none",
-                      padding: 0,
-                      cursor: "pointer",
-                      textAlign: "left",
+                      fontFamily: "Faktum, Outfit, sans-serif",
+                      fontWeight: 600,
+                      fontSize: "18px",
+                      lineHeight: "26px",
+                      color: "#2C2C2C"
                     }}
-                    className="group"
+                    className="text-base md:text-[18px]"
                   >
-                    <span
-                      style={{
-                        fontFamily: "Faktum, sans-serif",
-                        fontWeight: 500,
-                        fontSize: "20px",
-                        lineHeight: "32px",
-                        color: "rgba(43, 43, 43, 1)",
-                        margin: 0,
-                      }}
-                      className="text-base md:text-[20px]"
-                    >
-                      {item.question}
-                    </span>
-                    <span
-                      style={{
-                        fontSize: "24px",
-                        fontWeight: 500,
-                        color: "rgba(29, 73, 62, 1)",
-                        lineHeight: "100%",
-                        userSelect: "none",
-                      }}
-                      className="shrink-0"
-                    >
-                      {isOpen ? '—' : '+'}
-                    </span>
-                  </button>
-                  {isOpen && (
-                    <p
-                      style={{
-                        fontFamily: "Faktum, sans-serif",
-                        fontWeight: 500,
-                        fontSize: "20px",
-                        lineHeight: "32px",
-                        color: "rgba(141, 141, 141, 1)",
-                        margin: 0,
-                      }}
-                      className="text-sm md:text-[20px]"
-                    >
-                      {item.answer}
-                    </p>
+                    {item.question}
+                  </span>
+                  {isOpen ? (
+                    <span className="text-2xl font-semibold text-[#FF623E] select-none shrink-0 ml-4">−</span>
+                  ) : (
+                    <span className="text-2xl font-semibold text-[#1D493E] select-none shrink-0 ml-4">+</span>
                   )}
-                </div>
-              );
-            })}
-          </div>
+                </button>
+                {isOpen && (
+                  <p 
+                    style={{
+                      fontFamily: "Faktum, Outfit, sans-serif",
+                      fontWeight: 500,
+                      fontSize: "14px",
+                      lineHeight: "22px",
+                      color: "#666666",
+                      margin: 0,
+                      paddingTop: "8px"
+                    }}
+                    className="text-sm animate-fade-in-up"
+                  >
+                    {item.answer}
+                  </p>
+                )}
+              </div>
+            );
+          })}
         </div>
       </section>
 

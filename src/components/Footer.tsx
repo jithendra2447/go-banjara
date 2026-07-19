@@ -14,24 +14,52 @@ export const Footer: React.FC = () => {
   }
 
   return (
+    <div style={{ width: "100%", background: "rgba(29, 73, 62, 1)" }}>
     <footer
       style={{
         width: "100%",
-        boxSizing: "border-box",
+        maxWidth: "1440px",
+        minHeight: "606px",
+        height: "auto",
+        paddingTop: "42px",
+        paddingBottom: "42px",
+        paddingLeft: "80px",
+        paddingRight: "80px",
         background: "rgba(29, 73, 62, 1)",
+        boxSizing: "border-box",
+        margin: "0 auto",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
       }}
-      className="text-slate-200 border-t border-white/5 font-sans px-4 md:px-[80px] py-[42px] h-auto"
+      className="text-slate-200 border-t border-white/5 font-sans px-6 md:px-[80px]"
     >
       <div
-        style={{ width: "100%", maxWidth: "1280px", margin: "0 auto", display: "flex", flexDirection: "column", gap: "32px" }}
+        style={{
+          width: "100%",
+          maxWidth: "1280px",
+          margin: "0 auto",
+          display: "flex",
+          flexDirection: "column",
+        }}
       >
         {/* Main Footer Row */}
         <div
-          className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 items-start"
+          className="w-full flex flex-col md:flex-row justify-between items-start gap-8 md:h-[290px] h-auto flex-wrap lg:flex-nowrap"
         >
         
         {/* Brand, Logo & Description */}
-        <div className="flex flex-col gap-4 w-full max-w-[280px]">
+        <div 
+          style={{ 
+            width: "273px", 
+            height: "290px", 
+            gap: "24px", 
+            display: "flex", 
+            flexDirection: "column", 
+            boxSizing: "border-box" 
+          }}
+          className="w-full max-w-[273px] shrink-0"
+        >
           {/* Logo */}
           <img
             src="/logo-footer.png"
@@ -41,7 +69,7 @@ export const Footer: React.FC = () => {
           {/* Description */}
           <p
             style={{
-              fontFamily: "'Faktum', 'Outfit', sans-serif",
+              fontFamily: "var(--font-sans)",
               fontWeight: 500,
               color: "rgba(255, 255, 255, 1)",
               margin: 0,
@@ -53,11 +81,21 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Important Links */}
-        <div className="flex flex-col gap-3 w-full">
-          <h4 style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "26px", letterSpacing: "-0.1px", color: "rgba(255,255,255,0.8)", margin: 0 }}>Important Links</h4>
-          <ul style={{ display: "flex", flexDirection: "column", listStyle: "none", padding: 0, margin: 0 }}>
+        <div 
+          style={{ 
+            width: "273px", 
+            height: "290px", 
+            gap: "24px", 
+            display: "flex", 
+            flexDirection: "column", 
+            boxSizing: "border-box" 
+          }}
+          className="w-full max-w-[273px] shrink-0"
+        >
+          <h4 style={{ fontFamily: "var(--font-sans)", fontWeight: 500, fontSize: "18px", lineHeight: "26px", letterSpacing: "-0.1px", color: "rgba(255,255,255,0.8)", margin: 0 }}>Important Links</h4>
+          <ul style={{ display: "flex", flexDirection: "column", gap: "12px", listStyle: "none", padding: 0, margin: 0 }}>
             {[{ label: "Home", href: "/" }, { label: "Travel Packages", href: "/travel" }, { label: "About us", href: "/about" }, { label: "Shop", href: "/shop" }].map((item) => (
-              <li key={item.href} style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, color: "rgba(255, 255, 255, 1)" }} className="text-sm sm:text-base md:text-[20px] md:leading-[36px]">
+              <li key={item.href} style={{ fontFamily: "var(--font-sans)", fontWeight: 500, color: "rgba(255, 255, 255, 1)" }} className="text-sm sm:text-base md:text-[20px] md:leading-[36px]">
                 <Link href={item.href} className="hover:text-[#FFF080] transition-colors">{item.label}</Link>
               </li>
             ))}
@@ -65,9 +103,19 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Let us help */}
-        <div className="flex flex-col gap-3 w-full">
-          <h4 style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "26px", letterSpacing: "-0.1px", color: "rgba(255,255,255,0.8)", margin: 0 }}>Let us help</h4>
-          <ul style={{ display: "flex", flexDirection: "column", listStyle: "none", padding: 0, margin: 0 }}>
+        <div 
+          style={{ 
+            width: "231px", 
+            height: "290px", 
+            gap: "12px", 
+            display: "flex", 
+            flexDirection: "column", 
+            boxSizing: "border-box" 
+          }}
+          className="w-full max-w-[231px] shrink-0"
+        >
+          <h4 style={{ fontFamily: "var(--font-sans)", fontWeight: 500, fontSize: "18px", lineHeight: "26px", letterSpacing: "-0.1px", color: "rgba(255,255,255,0.8)", margin: 0 }}>Let us help</h4>
+          <ul style={{ display: "flex", flexDirection: "column", gap: "8px", listStyle: "none", padding: 0, margin: 0 }}>
             {[
               { label: "Your Account", href: "/profile" },
               { label: "Your Orders", href: "/profile" },
@@ -76,7 +124,7 @@ export const Footer: React.FC = () => {
               { label: "Privacy Policy", href: "/about" },
               { label: "Help Center", href: "/contact" },
             ].map((item) => (
-              <li key={item.label} style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, color: "rgba(255, 255, 255, 1)" }} className="text-sm sm:text-base md:text-[20px] md:leading-[36px]">
+              <li key={item.label} style={{ fontFamily: "var(--font-sans)", fontWeight: 500, color: "rgba(255, 255, 255, 1)" }} className="text-sm sm:text-base md:text-[20px] md:leading-[36px]">
                 <Link href={item.href} className="hover:text-[#FFF080] transition-colors">{item.label}</Link>
               </li>
             ))}
@@ -84,37 +132,53 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Contact us */}
-        <div className="flex flex-col gap-3 w-full">
-          <h4 style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "26px", letterSpacing: "-0.1px", color: "rgba(255,255,255,0.8)", margin: 0 }}>Contact us</h4>
+        <div 
+          style={{ 
+            width: "439px", 
+            height: "290px", 
+            gap: "12px", 
+            display: "flex", 
+            flexDirection: "column", 
+            boxSizing: "border-box" 
+          }}
+          className="w-full max-w-[439px] shrink-0"
+        >
+          <h4 style={{ fontFamily: "var(--font-sans)", fontWeight: 500, fontSize: "18px", lineHeight: "26px", letterSpacing: "-0.1px", color: "rgba(255,255,255,0.8)", margin: 0 }}>Contact us</h4>
           <ul style={{ display: "flex", flexDirection: "column", gap: "12px", listStyle: "none", padding: 0, margin: 0 }}>
             <li className="flex items-center gap-3">
               <img src="/icon-location.png" alt="Location" style={{ width: "42px", height: "42px", flexShrink: 0 }} />
-              <span style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, color: "rgba(255,255,255,1)" }} className="text-sm sm:text-base md:text-[20px] leading-tight">HITEC City, Hyderabad, Telangana, India</span>
+              <span style={{ fontFamily: "var(--font-sans)", fontWeight: 500, color: "rgba(255,255,255,1)" }} className="text-sm sm:text-base md:text-[20px] leading-tight">HITEC City, Hyderabad, Telangana, India</span>
             </li>
             <li className="flex items-center gap-3">
               <div style={{ width: "42px", height: "42px", background: "rgba(29,73,62,1)", borderRadius: "10px", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                 <img src="/icon-email.png" alt="Email" style={{ width: "22px", height: "22px" }} />
               </div>
-              <a href="mailto:services@gobanjara.com" style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, color: "rgba(255,255,255,1)" }} className="hover:text-[#FFF080] transition-colors text-sm sm:text-base md:text-[20px] leading-tight">services@gobanjara.com</a>
+              <a href="mailto:services@gobanjara.com" style={{ fontFamily: "var(--font-sans)", fontWeight: 500, color: "rgba(255,255,255,1)" }} className="hover:text-[#FFF080] transition-colors text-sm sm:text-base md:text-[20px] leading-tight">services@gobanjara.com</a>
             </li>
             <li className="flex items-center gap-3">
               <img src="/icon-phone.png" alt="Phone" style={{ width: "42px", height: "42px", flexShrink: 0 }} />
-              <a href="tel:+910123456789" style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, color: "rgba(255,255,255,1)" }} className="hover:text-[#FFF080] transition-colors text-sm sm:text-base md:text-[20px] leading-tight">+91 0123456789</a>
+              <a href="tel:+910123456789" style={{ fontFamily: "var(--font-sans)", fontWeight: 500, color: "rgba(255,255,255,1)" }} className="hover:text-[#FFF080] transition-colors text-sm sm:text-base md:text-[20px] leading-tight">+91 0123456789</a>
             </li>
             <li className="flex items-center gap-3">
               <img src="/icon-clock.png" alt="Hours" style={{ width: "42px", height: "42px", flexShrink: 0 }} />
-              <span style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, color: "rgba(255,255,255,1)" }} className="text-sm sm:text-base md:text-[20px] leading-tight">Mon–Sat, 10:00–19:00 IST</span>
+              <span style={{ fontFamily: "var(--font-sans)", fontWeight: 500, color: "rgba(255,255,255,1)" }} className="text-sm sm:text-base md:text-[20px] leading-tight">Mon–Sat, 10:00–19:00 IST</span>
             </li>
           </ul>
         </div>
 
         </div>
 
+        {/* Spacer: 56px */}
+        <div style={{ height: "56px" }} className="w-full hidden md:block shrink-0" />
+
         {/* Newsletter & Social Row */}
-        <div className="w-full flex flex-col md:flex-row justify-between items-start md:items-end gap-6 pt-4">
+        <div
+          style={{ height: "87px" }}
+          className="w-full flex flex-col md:flex-row justify-between items-start md:items-center gap-6 md:h-[87px] h-auto shrink-0 pt-8 md:pt-0"
+        >
           {/* Social Icons */}
           <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-            <span style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "100%", letterSpacing: "-0.1px", color: "rgba(255,255,255,1)" }}>Follow us on:</span>
+            <span style={{ fontFamily: "var(--font-sans)", fontWeight: 500, fontSize: "18px", lineHeight: "100%", letterSpacing: "-0.1px", color: "rgba(255,255,255,1)" }}>Follow us on:</span>
             <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "12px" }}>
               {/* Facebook */}
               <a href="#" style={{ width: "42px", height: "42px", borderRadius: "10px", background: "#3B5998", display: "flex", alignItems: "center", justifyContent: "center", color: "white", flexShrink: 0 }} className="hover:scale-105 transition-transform duration-200">
@@ -137,7 +201,7 @@ export const Footer: React.FC = () => {
 
           {/* Right: Newsletter Form */}
           <div className="flex flex-col gap-2 w-full max-w-[439px]">
-            <span style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(255,255,255,1)" }}>Stay connected by subscribing to our newsletter</span>
+            <span style={{ fontFamily: "var(--font-sans)", fontWeight: 500, fontSize: "18px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(255,255,255,1)" }}>Stay connected by subscribing to our newsletter</span>
             <form
               onSubmit={(e) => { e.preventDefault(); alert("Subscribed!"); }}
               style={{ height: "56px", display: "flex", flexDirection: "row", alignItems: "center", gap: "8px", borderRadius: "4px", padding: "8px", background: "white", border: "1px solid rgba(141, 141, 141, 1)", boxSizing: "border-box" }}
@@ -147,26 +211,38 @@ export const Footer: React.FC = () => {
                 type="email"
                 required
                 placeholder="Enter your email address"
-                style={{ flex: 1, background: "transparent", border: "none", outline: "none", fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, letterSpacing: "0px", color: "#1a2e29", paddingLeft: "8px" }}
+                style={{ flex: 1, background: "transparent", border: "none", outline: "none", fontFamily: "var(--font-sans)", fontWeight: 500, letterSpacing: "0px", color: "#1a2e29", paddingLeft: "8px" }}
                 className="placeholder-[rgba(141,141,141,1)] text-sm sm:text-base"
               />
-              <button type="submit" style={{ height: "40px", padding: "0 20px", background: "#1D493E", color: "white", borderRadius: "6px", fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 600, fontSize: "14px", border: "none", cursor: "pointer", flexShrink: 0 }}>
+              <button type="submit" style={{ height: "40px", padding: "0 20px", background: "#1D493E", color: "white", borderRadius: "6px", fontFamily: "var(--font-sans)", fontWeight: 600, fontSize: "14px", border: "none", cursor: "pointer", flexShrink: 0 }}>
                 Subscribe
               </button>
             </form>
           </div>
         </div>
 
-        {/* Divider */}
-        <div className="border-t border-white/10"></div>
+        {/* Spacer & Divider: 40px */}
+        <div style={{ height: "40px" }} className="w-full flex items-center hidden md:flex shrink-0">
+          <div className="border-t border-white/10 w-full"></div>
+        </div>
+        <div className="border-t border-white/10 w-full my-6 md:hidden"></div>
 
         {/* Copyrights Bar */}
         <div
-          className="w-full max-w-[1280px] flex flex-col sm:flex-row justify-between items-center gap-4 py-4"
+          style={{
+            height: "49px",
+            paddingTop: "12px",
+            paddingBottom: "12px",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            boxSizing: "border-box"
+          }}
+          className="w-full max-w-[1280px] flex-col sm:flex-row gap-4 md:h-[49px] h-auto shrink-0"
         >
           <span
             style={{
-              fontFamily: "'Faktum', 'Outfit', sans-serif",
+              fontFamily: "var(--font-sans)",
               fontWeight: 500,
               color: "rgba(255, 255, 255, 1)",
             }}
@@ -198,5 +274,6 @@ export const Footer: React.FC = () => {
 
       </div>
     </footer>
+    </div>
   );
 };

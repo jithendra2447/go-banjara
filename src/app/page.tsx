@@ -298,6 +298,7 @@ export default function Homepage() {
           loop
           muted
           playsInline
+          poster="/hero-combined.png?v=5"
           className="absolute inset-0 w-full h-full object-cover brightness-[0.75] contrast-[1.05]"
           style={{ transform: 'translateZ(0)' }}
         >

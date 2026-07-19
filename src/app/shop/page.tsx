@@ -421,90 +421,102 @@ export default function ShopPage() {
           </div>
         </div>
 
-        {/* FAQ Section (Padding: pt-[42px] pb-[24px]) */}
-        <div className="bg-white pt-[42px] pb-[24px] flex flex-col gap-[32px] w-full border-t border-slate-100 mt-8">
-          {/* Header */}
-          <div className="text-left space-y-2.5">
-            <span className="inline-block text-[9px] font-black uppercase tracking-[0.15em] text-[#FF5B37] bg-[#FFEBE5] px-2.5 py-1 rounded-sm">
+        {/* FAQ Section */}
+        <section 
+          style={{
+            width: "100%",
+            maxWidth: "1440px",
+            paddingTop: "42px",
+            paddingBottom: "42px",
+            background: "rgba(255, 255, 255, 1)",
+            boxSizing: "border-box",
+            margin: "0 auto",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-start",
+            gap: "24px"
+          }}
+          className="text-left border-t border-gray-100 mt-8 w-full"
+        >
+          <div className="space-y-3">
+            <span 
+              style={{
+                fontFamily: "Faktum, Outfit, sans-serif",
+                fontWeight: 600,
+                fontSize: "14px",
+                lineHeight: "100%",
+                letterSpacing: "1.2px",
+                textTransform: "uppercase",
+                color: "rgba(255, 98, 62, 1)",
+                background: "rgba(255, 98, 62, 0.1)",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                height: "28px",
+                padding: "0 16px",
+                borderRadius: "4px"
+              }}
+            >
               FAQ'S
             </span>
-            <h2 className="text-2xl sm:text-3xl font-serif font-medium text-[#2B2B2B]">
+            <h2
+              style={{
+                fontFamily: "Fraunces, serif",
+                fontWeight: 600,
+                fontSize: "42px",
+                lineHeight: "100%",
+                letterSpacing: "0px",
+                color: "#2B2B2B",
+                margin: 0
+              }}
+              className="text-3xl md:text-[42px]"
+            >
               Frequently asked questions
             </h2>
           </div>
 
-          {/* Accordion List */}
-          <div className="w-full">
+          <div className="w-full flex flex-col border-t border-gray-200 mt-2">
             {FAQ_ITEMS.map((item, idx) => {
               const isOpen = openFaqIdx === idx;
               return (
-                <div
-                  key={idx}
-                  style={{
-                    width: "100%",
-                    padding: "24px",
-                    borderBottom: "2px solid rgba(204, 204, 204, 0.54)",
-                    borderTop: idx === 0 ? "2px solid rgba(204, 204, 204, 0.54)" : "none",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "12px",
-                    boxSizing: "border-box",
-                  }}
-                  className="text-left"
+                <div 
+                  key={idx} 
+                  className="w-full border-b border-gray-200 py-5 flex flex-col text-left transition-colors duration-200"
                 >
-                  <button
+                  <button 
                     onClick={() => setOpenFaqIdx(isOpen ? null : idx)}
-                    style={{
-                      width: "100%",
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      background: "none",
-                      border: "none",
-                      padding: 0,
-                      cursor: "pointer",
-                      textAlign: "left",
-                    }}
-                    className="group"
+                    className="w-full flex justify-between items-center text-left focus:outline-none cursor-pointer"
                   >
-                    <span
+                    <span 
                       style={{
-                        fontFamily: "Faktum, sans-serif",
-                        fontWeight: 500,
-                        fontSize: "20px",
-                        lineHeight: "32px",
-                        color: "rgba(43, 43, 43, 1)",
-                        margin: 0,
+                        fontFamily: "Faktum, Outfit, sans-serif",
+                        fontWeight: 600,
+                        fontSize: "18px",
+                        lineHeight: "26px",
+                        color: "#2C2C2C"
                       }}
-                      className="text-base md:text-[20px]"
+                      className="text-base md:text-[18px]"
                     >
                       {item.question}
                     </span>
-                    <span
-                      style={{
-                        fontSize: "24px",
-                        fontWeight: 500,
-                        color: "rgba(29, 73, 62, 1)",
-                        lineHeight: "100%",
-                        userSelect: "none",
-                      }}
-                      className="shrink-0"
-                    >
-                      {isOpen ? '—' : '+'}
-                    </span>
+                    {isOpen ? (
+                      <span className="text-2xl font-semibold text-[#FF623E] select-none shrink-0 ml-4">−</span>
+                    ) : (
+                      <span className="text-2xl font-semibold text-[#1D493E] select-none shrink-0 ml-4">+</span>
+                    )}
                   </button>
-                  {/* Expandable answer */}
                   {isOpen && (
-                    <p
+                    <p 
                       style={{
-                        fontFamily: "Faktum, sans-serif",
+                        fontFamily: "Faktum, Outfit, sans-serif",
                         fontWeight: 500,
-                        fontSize: "20px",
-                        lineHeight: "32px",
-                        color: "rgba(141, 141, 141, 1)",
+                        fontSize: "14px",
+                        lineHeight: "22px",
+                        color: "#666666",
                         margin: 0,
+                        paddingTop: "8px"
                       }}
-                      className="text-sm md:text-[20px]"
+                      className="text-sm animate-fade-in-up"
                     >
                       {item.answer}
                     </p>
@@ -513,7 +525,7 @@ export default function ShopPage() {
               );
             })}
           </div>
-        </div>
+        </section>
 
         {/* Spacer */}
         <div style={{ height: "62px" }} className="shrink-0" />

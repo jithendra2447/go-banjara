@@ -405,6 +405,67 @@ export default function AboutPage() {
             <span style={{ position: "absolute", bottom: "100px", left: "35px", fontFamily: "Fraunces, serif", fontStyle: "italic", fontWeight: 500, fontSize: "36px", color: "#FAF9F6", transform: "rotate(-4deg)" }}>wild</span>
             <span style={{ position: "absolute", bottom: "40px", right: "30px", fontFamily: "Fraunces, serif", fontStyle: "italic", fontWeight: 500, fontSize: "36px", color: "#FAF9F6", transform: "rotate(-6deg)" }}>journey</span>
           </div>
+
+          {/* Card 3: Cream Camel Card */}
+          <div 
+            style={{ 
+              width: "301.99999443948394px", 
+              height: "379.99999300332416px", 
+              borderTopRightRadius: "4px",
+              borderBottomRightRadius: "4px",
+              borderBottomLeftRadius: "4px",
+              borderTopLeftRadius: "0px",
+              background: "#F4FBF4",
+              position: "relative",
+              boxShadow: "0 10px 20px rgba(0,0,0,0.15)",
+              transform: "rotate(-4deg)",
+              opacity: 1,
+              zIndex: 12,
+              marginLeft: "-35px",
+              flexShrink: 0,
+              padding: "24px",
+              boxSizing: "border-box",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              overflow: "hidden"
+            }}
+          >
+            <div>
+              <h3 style={{ fontFamily: "Fraunces, serif", fontWeight: 600, fontSize: "36px", lineHeight: "105%", color: "#1D493E", margin: 0, transform: "rotate(-2deg)" }}>
+                Humps down,<br />surfs up!
+              </h3>
+            </div>
+            <div style={{ position: "absolute", bottom: "-20px", right: "-10px", width: "240px", height: "240px" }}>
+              <svg viewBox="0 0 200 200" fill="none" style={{ width: "100%", height: "100%" }}>
+                {/* Ears */}
+                <path d="M65,75 C58,35 68,25 74,30 L85,75 Z" fill="#FF623E" />
+                <path d="M125,75 L136,30 C142,25 152,35 145,75 Z" fill="#FF623E" />
+
+                {/* Head */}
+                <path d="M70,70 C70,60 140,60 140,70 L145,150 C145,175 65,175 65,150 Z" fill="#FF623E" />
+
+                {/* Muzzle (white details) */}
+                <path d="M85,125 C85,115 125,115 125,125 L120,150 C120,158 90,158 90,150 Z" fill="#FF623E" />
+                <path d="M92,135 L118,135" stroke="#FFFFFF" strokeWidth="3" strokeLinecap="round" />
+                <path d="M105,142 L105,147 C100,147 98,149 98,149 M105,147 C110,147 112,149 112,149" stroke="#FFFFFF" strokeWidth="3" strokeLinecap="round" />
+
+                {/* Sunglasses */}
+                <g>
+                  {/* Left Frame */}
+                  <path d="M72,92 C72,82 96,80 98,92 C100,102 78,110 72,92 Z" fill="#1D493E" stroke="#FFFFFF" strokeWidth="5.5" strokeLinejoin="round" />
+                  <path d="M76,88 A 6 6 0 0 1 88,84" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" opacity="0.6" />
+
+                  {/* Right Frame */}
+                  <path d="M112,92 C114,80 138,82 138,92 C132,110 110,102 112,92 Z" fill="#1D493E" stroke="#FFFFFF" strokeWidth="5.5" strokeLinejoin="round" />
+                  <path d="M116,88 A 6 6 0 0 1 128,84" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" opacity="0.6" />
+
+                  {/* Bridge */}
+                  <path d="M94,92 L116,92" stroke="#FFFFFF" strokeWidth="5" strokeLinecap="round" />
+                </g>
+              </svg>
+            </div>
+          </div>
         </div>
       </section>
 

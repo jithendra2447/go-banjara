@@ -1776,12 +1776,29 @@ export default function AboutPage() {
       {/* 8. Customer Reviews / Captured Memories Section */}
       <section className="w-full bg-[#FFFFFF] py-[62px] px-6 md:px-[80px] mx-auto max-w-[1440px] shrink-0">
         <div className="w-full max-w-[1280px] mx-auto flex flex-col gap-10 text-left">
-          <div className="space-y-3">
+          {/* Header Box (1440px x 134px spec, space-between, padding 0 80px) */}
+          <div 
+            style={{
+              width: "1440px",
+              maxWidth: "100%",
+              height: "134px",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              borderRadius: "4px",
+              background: "rgba(255, 255, 255, 1)",
+              boxSizing: "border-box"
+            }}
+            className="text-left"
+          >
             <span 
               style={{
+                width: "165px",
+                height: "26px",
                 display: "inline-flex",
                 alignItems: "center",
                 justifyContent: "center",
+                gap: "10px",
                 background: "#FFEBE5",
                 color: "#FF623E",
                 fontFamily: "Faktum, sans-serif",
@@ -1789,20 +1806,38 @@ export default function AboutPage() {
                 fontSize: "14px",
                 lineHeight: "14px",
                 letterSpacing: "1.2px",
-                padding: "6px 12px",
                 borderRadius: "4px",
                 textTransform: "uppercase",
-                whiteSpace: "nowrap"
+                whiteSpace: "nowrap",
+                alignSelf: "flex-start"
               }}
             >
               CAPTURED MEMORIES
             </span>
 
-            <h2 className="text-3xl md:text-[42px] font-serif font-semibold text-[#2B2B2B] leading-tight">
-              Capture your adventurous travel <span className="text-[#FF623E]">Forever</span>
+            <h2 
+              style={{
+                fontFamily: "Fraunces, serif",
+                fontWeight: 600,
+                fontSize: "42px",
+                lineHeight: "42px",
+                color: "rgba(43, 43, 43, 1)",
+                margin: 0
+              }}
+            >
+              Capture your adventurous travel <span style={{ color: "#FF623E" }}>Forever</span>
             </h2>
 
-            <p className="text-lg md:text-[20px] font-sans font-medium text-[#2B2B2B]/75 max-w-[1000px]">
+            <p 
+              style={{
+                fontFamily: "Faktum, sans-serif",
+                fontWeight: 500,
+                fontSize: "20px",
+                lineHeight: "30px",
+                color: "rgba(43, 43, 43, 0.75)",
+                margin: 0
+              }}
+            >
               Curated journeys for the modern nomad, designed to push boundaries and discover India's hidden heart
             </p>
           </div>

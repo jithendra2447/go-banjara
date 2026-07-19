@@ -298,17 +298,10 @@ export default function Homepage() {
           loop
           muted
           playsInline
-          poster="/hero-combined.png?v=5"
           className="absolute inset-0 w-full h-full object-cover brightness-[0.75] contrast-[1.05]"
           style={{ transform: 'translateZ(0)' }}
         >
           <source src="/hero-video.mp4" type="video/mp4" />
-          {/* Fallback image */}
-          <img 
-            src="/hero-combined.png?v=5" 
-            alt="Hero Background Fallback" 
-            className="w-full h-full object-cover object-top"
-          />
         </video>
 
         {/* Dark overlay to make white text highly readable */}

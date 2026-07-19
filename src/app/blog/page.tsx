@@ -2,305 +2,945 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Search, Calendar, Clock, ArrowRight } from 'lucide-react';
 
+/* ─────────────────── DATA ─────────────────── */
 interface BlogPost {
   id: string;
   title: string;
-  excerpt: string;
-  category: 'Travel Logs' | 'Gear & Craft' | 'Guides' | 'Culture';
-  author: string;
   date: string;
   readTime: string;
   image: string;
-  featured?: boolean;
+  category: 'Travel Guide' | 'Tour Guide' | 'Most Popular';
 }
 
 const BLOG_POSTS: BlogPost[] = [
   {
-    id: 'zanskar-autumn-traverse',
-    title: 'Crossing Zanskar in Autumn: Cold Rivers & Warm Kitchens',
-    excerpt: 'As September closes the high passes, we walked 120km across frozen stream beds to document the ancient homestays of Padum.',
-    category: 'Travel Logs',
-    author: 'Bonjo & Team',
-    date: 'Oct 14, 2025',
-    readTime: '7 min read',
-    image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1000&auto=format&fit=crop',
-    featured: true
-  },
-  {
-    id: 'heritage-compass-design',
-    title: 'How We Designed the Heritage Brass Compass',
-    excerpt: 'Four prototypes, antique patina testing, and a magnetic needle calibrated for high-altitude accuracy in Ladakh.',
-    category: 'Gear & Craft',
-    author: 'Bonjo',
-    date: 'Nov 02, 2025',
+    id: 'ladakh-bike-trip-guide',
+    title: 'Ladakh Bike Trip Guide: Routes, Budget & Essential Tips for Riders',
+    date: 'Sunday, August 12, 2023',
     readTime: '5 min read',
-    image: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?q=80&w=800&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=800&auto=format&fit=crop',
+    category: 'Travel Guide',
   },
   {
-    id: 'spiti-packing-guide',
-    title: 'What Survives 3 Weeks in High-Altitude Spiti',
-    excerpt: 'Sub-zero nights, dust storms, and zero cellular signal. Here is our field-tested packing checklist for rugged Himalayan road trips.',
-    category: 'Guides',
-    author: 'Aarav Mehta',
-    date: 'Dec 18, 2025',
+    id: '7-day-leh-ladakh-itinerary-1',
+    title: '7-Day Leh Ladakh Itinerary for First-Time Travelers',
+    date: 'Sunday, August 12, 2023',
+    readTime: '5 min read',
+    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=800&auto=format&fit=crop',
+    category: 'Tour Guide',
+  },
+  {
+    id: '7-day-leh-ladakh-itinerary-2',
+    title: '7-Day Leh Ladakh Itinerary for First-Time Travelers',
+    date: 'Sunday, August 12, 2023',
+    readTime: '5 min read',
+    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=800&auto=format&fit=crop',
+    category: 'Most Popular',
+  },
+  {
+    id: 'ultimate-ladakh-travel-guide',
+    title: 'Ultimate Ladakh Travel Guide: Plan Your Perfect Himalayan Adventure',
+    date: 'Sunday, August 12, 2023',
+    readTime: '5 min read',
+    image: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=800&auto=format&fit=crop',
+    category: 'Travel Guide',
+  },
+  {
+    id: 'leh-ladakh-travel-guide-2026-1',
+    title: 'Leh Ladakh Travel Guide 2026: Best Time, Places & Complete Trip Planning',
+    date: 'Sunday, August 12, 2023',
+    readTime: '5 min read',
+    image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=800&auto=format&fit=crop',
+    category: 'Tour Guide',
+  },
+  {
+    id: 'leh-ladakh-travel-guide-2026-2',
+    title: 'Leh Ladakh Travel Guide 2026: Best Time, Places & Complete Trip Planning',
+    date: 'Sunday, August 12, 2023',
+    readTime: '5 min read',
+    image: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=800&auto=format&fit=crop',
+    category: 'Most Popular',
+  },
+  {
+    id: '7-day-leh-ladakh-first-time-1',
+    title: '7-Day Leh Ladakh Itinerary for First-Time Travelers',
+    date: 'Sunday, August 12, 2023',
+    readTime: '5 min read',
+    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=800&auto=format&fit=crop',
+    category: 'Travel Guide',
+  },
+  {
+    id: 'ladakh-bike-trip-routes-2',
+    title: 'Ladakh Bike Trip Guide: Routes, Budget & Essential Tips for Riders',
+    date: 'Sunday, August 12, 2023',
+    readTime: '5 min read',
+    image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=800&auto=format&fit=crop',
+    category: 'Tour Guide',
+  },
+  {
+    id: '7-day-leh-first-time-2',
+    title: '7-Day Leh Ladakh Itinerary for First-Time Travelers',
+    date: 'Sunday, August 12, 2023',
+    readTime: '5 min read',
+    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=800&auto=format&fit=crop',
+    category: 'Most Popular',
+  },
+  /* ── 6 more Travel Guide posts ── */
+  {
+    id: 'spiti-valley-travel-guide',
+    title: 'Spiti Valley Travel Guide: The Ultimate Road Trip Through Cold Desert',
+    date: 'Monday, September 4, 2023',
     readTime: '6 min read',
-    image: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=800&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=800&auto=format&fit=crop',
+    category: 'Travel Guide',
   },
   {
-    id: 'kerala-backwater-crafts',
-    title: 'Coir, Teak & Quiet Waters: The Artisans of Alleppey',
-    excerpt: 'Spending a week with master wooden boatbuilders whose family craft has remained unchanged for three generations.',
-    category: 'Culture',
-    author: 'Priya Sharma',
-    date: 'Jan 05, 2026',
+    id: 'kashmir-great-lakes-trek',
+    title: "Kashmir Great Lakes Trek: A Complete Trekker's Guide",
+    date: 'Tuesday, October 10, 2023',
     readTime: '8 min read',
-    image: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?q=80&w=800&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=800&auto=format&fit=crop',
+    category: 'Travel Guide',
   },
   {
-    id: 'stargazing-at-chandratal',
-    title: 'Stargazing at 14,100 Feet: A Night at Lake Chandratal',
-    excerpt: 'Watching the Milky Way arch over moonlit turquoise waters when the temperature hits negative ten degrees.',
-    category: 'Travel Logs',
-    author: 'Rohan Deshmukh',
-    date: 'Feb 12, 2026',
-    readTime: '4 min read',
-    image: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=800&auto=format&fit=crop'
+    id: 'manali-to-leh-highway',
+    title: 'Manali to Leh Highway: Everything You Need to Know Before You Go',
+    date: 'Friday, November 3, 2023',
+    readTime: '6 min read',
+    image: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=800&auto=format&fit=crop',
+    category: 'Travel Guide',
   },
   {
-    id: 'journaling-on-the-trail',
-    title: 'Why Keeping a Physical Travel Journal Changes How You Remember',
-    excerpt: 'In an era of instant phone snaps, taking ten minutes to ink a sketch and write down trail notes preserves real memory.',
-    category: 'Guides',
-    author: 'Ananya Iyer',
-    date: 'Mar 01, 2026',
+    id: 'coorg-travel-guide',
+    title: "Coorg Travel Guide: India's Scotland of the East",
+    date: 'Saturday, December 2, 2023',
     readTime: '5 min read',
-    image: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=800&auto=format&fit=crop'
-  }
+    image: 'https://images.unsplash.com/photo-1448375240586-882707db888b?q=80&w=800&auto=format&fit=crop',
+    category: 'Travel Guide',
+  },
+  {
+    id: 'rajasthan-road-trip',
+    title: 'Rajasthan Road Trip: Forts, Deserts & Camel Safaris',
+    date: 'Sunday, January 7, 2024',
+    readTime: '7 min read',
+    image: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=800&auto=format&fit=crop',
+    category: 'Travel Guide',
+  },
+  {
+    id: 'andaman-islands-guide',
+    title: 'Andaman Islands: Hidden Beaches & Underwater Adventures',
+    date: 'Monday, February 5, 2024',
+    readTime: '6 min read',
+    image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800&auto=format&fit=crop',
+    category: 'Travel Guide',
+  },
 ];
 
+const FAQ_ITEMS = [
+  {
+    question: 'What materials are the badges made from? Zinc alloy with glossy enamel fill.',
+    answer: 'Our collectible badges are stamped from premium zinc alloy with glossy enamel fill. They are lightweight, durable, and safe to pin on bags, jackets, or backpacks without damaging fabric.',
+  },
+  {
+    question: 'How big are the stickers?',
+    answer: 'Our stickers come in two sizes: 5cm × 5cm (standard) and 8cm × 8cm (large). Both are printed on premium weatherproof vinyl.',
+  },
+  {
+    question: 'Do you ship across India?',
+    answer: 'Yes! We offer free standard shipping across all major cities and towns in India. Delivery typically takes 4–7 business days.',
+  },
+  {
+    question: 'Can I return a product if I don\'t like it?',
+    answer: 'Absolutely. We offer a 30-day hassle-free return policy on all unused products in their original packaging. Just raise a return request from your profile page.',
+  },
+  {
+    question: 'I have no reviews on this product. Is it safe to buy?',
+    answer: 'Yes! Every product we sell is quality-checked by our team. Newer products may not have reviews yet, but they go through the same rigorous testing as our bestsellers.',
+  },
+];
+
+const POSTS_PER_PAGE = 9;
+
+/* ─────────────────── COMPONENT ─────────────────── */
 export default function BlogPage() {
-  const [selectedCategory, setSelectedCategory] = useState<string>('All');
-  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [activeTab, setActiveTab] = useState<'Travel Guide' | 'Tour Guide' | 'Most Popular'>('Travel Guide');
+  const [email, setEmail] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
 
-  const categories = ['All', 'Travel Logs', 'Gear & Craft', 'Guides', 'Culture'];
+  const tabs: ('Travel Guide' | 'Tour Guide' | 'Most Popular')[] = ['Travel Guide', 'Tour Guide', 'Most Popular'];
 
-  const filteredPosts = BLOG_POSTS.filter((post) => {
-    const matchesCategory = selectedCategory === 'All' || post.category === selectedCategory;
-    const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                          post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
+  const filtered = BLOG_POSTS.filter((p) => p.category === activeTab);
+  const totalPages = Math.max(1, Math.ceil(filtered.length / POSTS_PER_PAGE));
+  const paginated = filtered.slice((currentPage - 1) * POSTS_PER_PAGE, currentPage * POSTS_PER_PAGE);
 
-  const featuredPost = BLOG_POSTS.find((p) => p.featured) || BLOG_POSTS[0];
+  const handleTabChange = (tab: typeof activeTab) => {
+    setActiveTab(tab);
+    setCurrentPage(1);
+  };
 
   return (
-    <div className="w-full bg-[#FAFAFA] min-h-screen text-[#2B2B2B]">
-      {/* Header Banner */}
-      <section className="w-full bg-white border-b border-gray-200 py-16 px-6 md:px-20 text-center">
-        <div className="max-w-[1280px] mx-auto space-y-4">
-          <span 
+    <div
+      style={{
+        width: '100%',
+        background: 'rgba(255, 255, 255, 1)',
+        paddingBottom: '62px',
+      }}
+    >
+      {/* ── HERO SECTION ── */}
+      {/* Figma: 1440×308, pt:62 pr:80 pb:24 pl:80, gap:32 */}
+      <section
+        style={{
+          width: '100%',
+          maxWidth: '1440px',
+          minHeight: '308px',
+          height: 'auto',
+          background: 'rgba(255, 255, 255, 1)',
+          paddingTop: '62px',
+          paddingRight: '80px',
+          paddingBottom: '24px',
+          paddingLeft: '80px',
+          boxSizing: 'border-box',
+          margin: '0 auto',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '32px',
+          textAlign: 'center',
+        }}
+        className="px-6 md:px-[80px]"
+      >
+        {/* Text block — Figma: 1280×134, justify-content: space-between */}
+        <div
+          style={{
+            width: '100%',
+            maxWidth: '1280px',
+            height: 'auto',
+            minHeight: '134px',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            borderRadius: '4px',
+            background: 'rgba(255, 255, 255, 1)',
+            gap: '8px',
+          }}
+        >
+          {/* BLOGS label — Figma: 53×18, Faktum 600 14px 1.2px-tracking uppercase rgba(255,98,62,1) */}
+          <span
             style={{
-              display: "inline-flex",
-              alignItems: "center",
-              justifyContent: "center",
-              background: "#FFEBE5",
-              color: "#FF623E",
-              fontFamily: "Faktum, sans-serif",
+              display: 'inline-block',
+              width: '53px',
+              height: '18px',
+              fontFamily: 'Faktum, var(--font-sans), sans-serif',
               fontWeight: 600,
-              fontSize: "14px",
-              lineHeight: "14px",
-              letterSpacing: "1.2px",
-              padding: "6px 12px",
-              borderRadius: "4px",
-              textTransform: "uppercase"
+              fontSize: '14px',
+              lineHeight: '100%',
+              letterSpacing: '1.2px',
+              color: 'rgba(255, 98, 62, 1)',
+              textTransform: 'uppercase',
+              textAlign: 'center',
+              verticalAlign: 'middle',
             }}
           >
-            STORIES & DISPATCHES
+            BLOGS
           </span>
 
-          <h1 
+          {/* Title — Figma: 1280×52, Fraunces 600 42px lh:100% rgba(43,43,43,1) */}
+          <h1
             style={{
-              fontFamily: "Fraunces, serif",
+              width: '100%',
+              maxWidth: '1280px',
+              height: '52px',
+              fontFamily: 'Fraunces, Georgia, serif',
               fontWeight: 600,
-              fontSize: "48px",
-              lineHeight: "56px",
-              color: "rgba(43, 43, 43, 1)",
-              margin: 0
+              fontSize: '42px',
+              lineHeight: '100%',
+              letterSpacing: '0px',
+              color: 'rgba(43, 43, 43, 1)',
+              margin: 0,
+              textAlign: 'center',
+              verticalAlign: 'middle',
             }}
           >
-            Tales from the Open Trail
+            Insights &amp; Updates
           </h1>
 
-          <p 
+          {/* Subtitle — Figma: 1280×32, Faktum 500 24px lh:32px rgba(43,43,43,1) */}
+          <p
             style={{
-              fontFamily: "Faktum, sans-serif",
+              width: '100%',
+              maxWidth: '1280px',
+              height: '32px',
+              fontFamily: 'Faktum, var(--font-sans), sans-serif',
               fontWeight: 500,
-              fontSize: "20px",
-              lineHeight: "30px",
-              color: "rgba(43, 43, 43, 0.75)",
-              maxWidth: "760px",
-              margin: "0 auto"
+              fontSize: '24px',
+              lineHeight: '32px',
+              letterSpacing: '0px',
+              color: 'rgba(43, 43, 43, 1)',
+              margin: 0,
+              textAlign: 'center',
+              verticalAlign: 'middle',
             }}
           >
-            Real expedition notes, artisan deep-dives, gear design stories, and field guides written by our collective of nomads.
+            Follow my voices to discover unique voices, breathtaking landscapes &amp; unforgettable experiences
           </p>
         </div>
-      </section>
 
-      {/* Filter & Search Bar */}
-      <section className="w-full bg-white border-b border-gray-150 sticky top-[70px] z-20 py-4 px-6 md:px-20 shadow-2xs">
-        <div className="max-w-[1280px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          {/* Categories */}
-          <div className="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 scrollbar-none">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                className={`px-4 py-2 rounded-full text-sm font-semibold transition-all cursor-pointer whitespace-nowrap ${
-                  selectedCategory === cat
-                    ? 'bg-[#1D493E] text-white shadow-xs'
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-
-          {/* Search Box */}
-          <div className="relative w-full md:w-[320px]">
-            <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
+        {/* Subscribe form — Figma: 546×56, gap:8px, white bg */}
+        <form
+          onSubmit={(e) => { e.preventDefault(); alert(`Subscribed: ${email}`); }}
+          style={{
+            width: '546px',
+            maxWidth: '100%',
+            height: '56px',
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            gap: '8px',
+            background: 'rgba(255, 255, 255, 1)',
+            border: '1px solid rgba(200, 200, 200, 1)',
+            borderRadius: '6px',
+            boxSizing: 'border-box',
+            overflow: 'hidden',
+            padding: '0 0 0 0',
+          }}
+        >
+            {/* Input — Figma: 398×25, Faktum 500 20px lh:100% rgba(141,141,141,1) placeholder */}
             <input
-              type="text"
-              placeholder="Search stories & guides..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 rounded-full bg-gray-50 border border-gray-200 text-sm font-medium focus:outline-none focus:border-[#1D493E] focus:bg-white transition-all"
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email address"
+              style={{
+                width: '398px',
+                flex: 1,
+                height: '25px',
+                border: 'none',
+                outline: 'none',
+                paddingLeft: '16px',
+                paddingRight: '8px',
+                fontFamily: 'Faktum, var(--font-sans), sans-serif',
+                fontWeight: 500,
+                fontSize: '20px',
+                lineHeight: '100%',
+                letterSpacing: '0px',
+                verticalAlign: 'middle',
+                color: 'rgba(43, 43, 43, 1)',
+                background: 'transparent',
+              }}
+              className="placeholder:text-[rgba(141,141,141,1)] placeholder:font-[500] placeholder:text-[20px]"
             />
-          </div>
-        </div>
+            {/* Subscribe button — Figma: 124×47, pt:12 pr:24 pb:12 pl:24, radius:4, bg:rgba(29,73,62,1) */}
+            <button
+              type="submit"
+              style={{
+                width: '124px',
+                height: '47px',
+                paddingTop: '12px',
+                paddingBottom: '12px',
+                paddingLeft: '24px',
+                paddingRight: '24px',
+                gap: '8px',
+                borderRadius: '4px',
+                background: 'rgba(29, 73, 62, 1)',
+                color: 'rgba(255, 255, 255, 1)',
+                border: 'none',
+                fontFamily: 'Faktum, var(--font-sans), sans-serif',
+                fontWeight: 500,
+                fontSize: '16px',
+                lineHeight: '100%',
+                letterSpacing: '0px',
+                verticalAlign: 'middle',
+                cursor: 'pointer',
+                whiteSpace: 'nowrap',
+                flexShrink: 0,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                boxSizing: 'border-box',
+              }}
+            >
+              {/* Label — Figma: 76×20, Faktum 500 16px lh:100% rgba(255,255,255,1) */}
+              <span
+                style={{
+                  width: '76px',
+                  height: '20px',
+                  fontFamily: 'Faktum, var(--font-sans), sans-serif',
+                  fontWeight: 500,
+                  fontSize: '16px',
+                  lineHeight: '100%',
+                  letterSpacing: '0px',
+                  verticalAlign: 'middle',
+                  color: 'rgba(255, 255, 255, 1)',
+                  textAlign: 'center',
+                }}
+              >
+                Subscribe
+              </span>
+            </button>
+        </form>
       </section>
 
-      {/* Main Content */}
-      <main className="max-w-[1280px] mx-auto px-6 md:px-20 py-12 space-y-12">
-        {/* Featured Post */}
-        {selectedCategory === 'All' && !searchQuery && (
-          <div className="w-full bg-white border border-gray-200 rounded-[12px] overflow-hidden shadow-xs hover:shadow-md transition-shadow group grid grid-cols-1 md:grid-cols-12 gap-0">
-            <div className="md:col-span-7 h-[340px] md:h-[450px] overflow-hidden relative">
-              <img
-                src={featuredPost.image}
-                alt={featuredPost.title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-              <span className="absolute top-4 left-4 bg-[#FF623E] text-white font-semibold text-xs px-3 py-1 rounded-[4px] uppercase tracking-wider">
-                FEATURED DISPATCH
-              </span>
-            </div>
-
-            <div className="md:col-span-5 p-8 md:p-12 flex flex-col justify-between space-y-6">
-              <div className="space-y-4">
-                <div className="flex items-center gap-3 text-xs font-semibold text-gray-400 uppercase tracking-wider">
-                  <span className="text-[#1D493E] bg-[#EBF7ED] px-2.5 py-1 rounded-[4px]">
-                    {featuredPost.category}
-                  </span>
-                  <span>•</span>
-                  <span>{featuredPost.date}</span>
-                </div>
-
-                <h2 className="text-2xl md:text-3xl font-serif font-bold text-[#2B2B2B] leading-tight group-hover:text-[#FF623E] transition-colors">
-                  {featuredPost.title}
-                </h2>
-
-                <p className="text-gray-600 text-base font-medium leading-relaxed">
-                  {featuredPost.excerpt}
-                </p>
-              </div>
-
-              <div className="flex items-center justify-between pt-6 border-t border-gray-100">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-full bg-[#1D493E] text-white text-xs font-bold flex items-center justify-center">
-                    B
-                  </div>
-                  <span className="text-sm font-semibold text-gray-800">{featuredPost.author}</span>
-                </div>
-
-                <Link
-                  href={`/blog/${featuredPost.id}`}
-                  className="inline-flex items-center gap-1.5 text-sm font-bold text-[#1D493E] hover:text-[#FF623E] transition-colors"
-                >
-                  <span>Read Article</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Article Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredPosts.map((post) => (
-            <article
-              key={post.id}
-              className="bg-white border border-gray-200 rounded-[12px] overflow-hidden flex flex-col justify-between hover:shadow-md transition-shadow duration-300 group"
+      {/* ── TABS + GRID SECTION ── */}
+      {/* Figma: 1440×1590, pt:42 pr:80 pb:42 pl:80, gap:32, white */}
+      <section
+        style={{
+          width: '100%',
+          maxWidth: '1440px',
+          margin: '0 auto',
+          paddingTop: '42px',
+          paddingRight: '80px',
+          paddingBottom: '42px',
+          paddingLeft: '80px',
+          gap: '32px',
+          background: 'rgba(255, 255, 255, 1)',
+          display: 'flex',
+          flexDirection: 'column',
+          boxSizing: 'border-box',
+        }}
+        className="px-6 md:px-[80px]"
+      >
+        {/* Tab Bar — Figma: 1280×57, gap:10, border-bottom: 2px solid rgba(204,204,204,1) */}
+        <div
+          style={{
+            width: '100%',
+            maxWidth: '1280px',
+            height: '57px',
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'flex-end',
+            gap: '10px',
+            borderBottom: '2px solid rgba(204, 204, 204, 1)',
+            background: 'rgba(255, 255, 255, 1)',
+            boxSizing: 'border-box',
+          }}
+        >
+          {tabs.map((tab) => (
+            <button
+              key={tab}
+              onClick={() => handleTabChange(tab)}
+              style={{
+                width: activeTab === tab ? '166px' : 'auto',
+                height: '57px',
+                padding: '12px',
+                gap: '10px',
+                background: 'none',
+                border: 'none',
+                fontFamily: 'Faktum, var(--font-sans), sans-serif',
+                fontWeight: 500,
+                fontSize: '24px',
+                lineHeight: '100%',
+                letterSpacing: '0%',
+                color: activeTab === tab ? 'rgba(28, 68, 140, 1)' : 'rgba(43, 43, 43, 1)',
+                cursor: 'pointer',
+                borderBottom: activeTab === tab
+                  ? '3px solid rgba(28, 68, 140, 1)'
+                  : '3px solid transparent',
+                marginBottom: '-2px',
+                transition: 'all 0.2s ease',
+                whiteSpace: 'nowrap',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                boxSizing: 'border-box',
+              }}
             >
-              <div className="space-y-4">
-                <div className="h-[220px] overflow-hidden relative">
-                  <img
-                    src={post.image}
-                    alt={post.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <span className="absolute top-3 left-3 bg-white/90 backdrop-blur-xs text-[#1D493E] font-semibold text-xs px-2.5 py-1 rounded-[4px] shadow-xs">
-                    {post.category}
-                  </span>
-                </div>
-
-                <div className="p-6 space-y-3">
-                  <div className="flex items-center gap-3 text-xs font-semibold text-gray-400">
-                    <span className="flex items-center gap-1">
-                      <Calendar className="w-3.5 h-3.5" />
-                      {post.date}
-                    </span>
-                    <span>•</span>
-                    <span className="flex items-center gap-1">
-                      <Clock className="w-3.5 h-3.5" />
-                      {post.readTime}
-                    </span>
-                  </div>
-
-                  <h3 className="text-xl font-serif font-bold text-[#2B2B2B] leading-snug group-hover:text-[#FF623E] transition-colors">
-                    {post.title}
-                  </h3>
-
-                  <p className="text-gray-600 text-sm font-medium leading-relaxed line-clamp-3">
-                    {post.excerpt}
-                  </p>
-                </div>
-              </div>
-
-              <div className="p-6 pt-0 flex items-center justify-between border-t border-transparent">
-                <span className="text-xs font-semibold text-gray-500">By {post.author}</span>
-                <Link
-                  href={`/blog/${post.id}`}
-                  className="inline-flex items-center gap-1 text-xs font-bold text-[#1D493E] group-hover:text-[#FF623E] transition-colors"
-                >
-                  <span>Read story</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
-              </div>
-            </article>
+              {/* Label — Figma: 142×30, Faktum 500 24px lh:100% rgba(28,68,140,1) when active */}
+              <span
+                style={{
+                  width: activeTab === tab ? '142px' : 'auto',
+                  height: '30px',
+                  fontFamily: 'Faktum, var(--font-sans), sans-serif',
+                  fontWeight: 500,
+                  fontSize: '24px',
+                  lineHeight: '100%',
+                  letterSpacing: '0px',
+                  color: activeTab === tab ? 'rgba(28, 68, 140, 1)' : 'rgba(43, 43, 43, 1)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                {tab}
+              </span>
+            </button>
           ))}
         </div>
 
-        {filteredPosts.length === 0 && (
-          <div className="text-center py-20 bg-white border border-gray-200 rounded-[12px] space-y-4">
-            <h3 className="text-xl font-bold text-gray-700">No stories found</h3>
-            <p className="text-gray-500 text-sm">Try searching for different keywords or select another category.</p>
+        {/* 3-Column Card Grid — Figma: 1280×417.95, gap:32 */}
+        <div
+          style={{
+            width: '100%',
+            maxWidth: '1280px',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, 1fr)',
+            gap: '32px',
+            marginBottom: '32px',
+          }}
+          className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+        >
+          {paginated.map((post) => (
+            <Link
+              href={`/blog/${post.id}`}
+              key={post.id}
+              style={{ textDecoration: 'none', color: 'inherit' }}
+            >
+              {/* Card — Figma: 405.33×417.95, gap:24 */}
+              <article
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                  minHeight: '417.95px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '24px',
+                  cursor: 'pointer',
+                }}
+                className="group"
+              >
+                {/* Image */}
+                <div
+                  style={{
+                    width: '100%',
+                    height: '270px',
+                    overflow: 'hidden',
+                    background: '#e5e5e5',
+                    flexShrink: 0,
+                  }}
+                >
+                  <img
+                    src={post.image}
+                    alt={post.title}
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      transition: 'transform 0.4s ease',
+                    }}
+                    className="group-hover:scale-105"
+                  />
+                </div>
+                {/* Text block */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  {/* Title — Figma: 405.33×117, Fraunces 600 32px lh:100% rgba(43,43,43,1) */}
+                  <h3
+                    style={{
+                      width: '100%',
+                      height: '117px',
+                      fontFamily: 'Fraunces, Georgia, serif',
+                      fontWeight: 600,
+                      fontSize: '32px',
+                      lineHeight: '100%',
+                      letterSpacing: '0px',
+                      color: 'rgba(43, 43, 43, 1)',
+                      margin: 0,
+                      verticalAlign: 'middle',
+                      overflow: 'hidden',
+                    }}
+                    className="group-hover:text-[#1D493E]"
+                  >
+                    {post.title}
+                  </h3>
+
+                  {/* Meta — Figma: 405.33×32, Faktum 500 20px lh:32px rgba(43,43,43,0.8) */}
+                  <p
+                    style={{
+                      width: '100%',
+                      height: '32px',
+                      fontFamily: 'Faktum, var(--font-sans), sans-serif',
+                      fontWeight: 500,
+                      fontSize: '20px',
+                      lineHeight: '32px',
+                      letterSpacing: '0px',
+                      verticalAlign: 'middle',
+                      color: 'rgba(43, 43, 43, 0.8)',
+                      margin: 0,
+                      whiteSpace: 'nowrap',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                    }}
+                  >
+                    {post.date}&nbsp; -&nbsp;{post.readTime}
+                  </p>
+                </div>
+              </article>
+            </Link>
+          ))}
+        </div>
+
+        {/* Pagination — Figma: 1280×68, space-between, pt/pb:12, radius:12, border-top:1px, white */}
+        {totalPages > 0 && (
+          <div
+            style={{
+              width: '100%',
+              maxWidth: '1280px',
+              height: '68px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              paddingTop: '12px',
+              paddingBottom: '12px',
+              borderRadius: '12px',
+              borderTop: '1px solid rgba(204, 204, 204, 1)',
+              background: 'rgba(255, 255, 255, 1)',
+              boxSizing: 'border-box',
+            }}
+          >
+            {/* Page label — Figma: 102×25, Faktum 500 20px lh:100% rgba(43,43,43,1) */}
+            <span
+              style={{
+                width: '102px',
+                height: '25px',
+                fontFamily: 'Faktum, var(--font-sans), sans-serif',
+                fontWeight: 500,
+                fontSize: '20px',
+                lineHeight: '100%',
+                letterSpacing: '0%',
+                color: 'rgba(43, 43, 43, 1)',
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
+              Page {currentPage} of {totalPages}
+            </span>
+
+            {/* Pagination buttons — Figma: 245×44, gap:4px */}
+            <div
+              style={{
+                width: '245px',
+                height: '44px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '4px',
+              }}
+            >
+              {/* Prev arrow — Figma: 59×44, pt:12 pr:24 pb:12 pl:24, radius:4, border-right:1px */}
+              <button
+                onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                disabled={currentPage === 1}
+                style={{
+                  width: '59px',
+                  height: '44px',
+                  paddingTop: '12px',
+                  paddingBottom: '12px',
+                  paddingLeft: '24px',
+                  paddingRight: '24px',
+                  gap: '12px',
+                  borderRadius: '4px',
+                  border: 'none',
+                  borderRight: '1px solid rgba(204, 204, 204, 1)',
+                  background: 'rgba(255, 255, 255, 1)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: currentPage === 1 ? 'not-allowed' : 'pointer',
+                  opacity: currentPage === 1 ? 0.4 : 1,
+                  fontFamily: 'Faktum, var(--font-sans), sans-serif',
+                  fontWeight: 500,
+                  fontSize: '18px',
+                  lineHeight: '100%',
+                  color: 'rgba(29, 73, 62, 1)',
+                  boxSizing: 'border-box',
+                  flexShrink: 0,
+                }}
+              >
+                ←
+              </button>
+
+              {/* Page numbers — Figma: 59×44, Faktum 500 18px rgba(29,73,62,1) */}
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                <button
+                  key={page}
+                  onClick={() => setCurrentPage(page)}
+                  style={{
+                    width: '59px',
+                    height: '44px',
+                    paddingTop: '12px',
+                    paddingBottom: '12px',
+                    paddingLeft: '24px',
+                    paddingRight: '24px',
+                    gap: '12px',
+                    borderRadius: '4px',
+                    border: currentPage === page
+                      ? '1px solid rgba(29, 73, 62, 1)'
+                      : '1px solid transparent',
+                    borderRight: currentPage === page
+                      ? '1px solid rgba(29, 73, 62, 1)'
+                      : '1px solid rgba(204, 204, 204, 1)',
+                    background: 'rgba(255, 255, 255, 1)',
+                    fontFamily: 'Faktum, var(--font-sans), sans-serif',
+                    fontWeight: 500,
+                    fontSize: '18px',
+                    lineHeight: '100%',
+                    letterSpacing: '0%',
+                    color: 'rgba(29, 73, 62, 1)',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    transition: 'all 0.15s',
+                    boxSizing: 'border-box',
+                    flexShrink: 0,
+                  }}
+                >
+                  {/* Number — Figma: 11×23, Faktum 500 18px rgba(29,73,62,1) */}
+                  <span
+                    style={{
+                      width: '11px',
+                      height: '23px',
+                      fontFamily: 'Faktum, var(--font-sans), sans-serif',
+                      fontWeight: 500,
+                      fontSize: '18px',
+                      lineHeight: '100%',
+                      letterSpacing: '0%',
+                      color: 'rgba(29, 73, 62, 1)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    {page}
+                  </span>
+                </button>
+              ))}
+
+              {/* Next arrow — Figma: 59×44, same as prev */}
+              <button
+                onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                disabled={currentPage === totalPages}
+                style={{
+                  width: '59px',
+                  height: '44px',
+                  paddingTop: '12px',
+                  paddingBottom: '12px',
+                  paddingLeft: '24px',
+                  paddingRight: '24px',
+                  gap: '12px',
+                  borderRadius: '4px',
+                  border: 'none',
+                  borderRight: '1px solid rgba(204, 204, 204, 1)',
+                  background: 'rgba(255, 255, 255, 1)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: currentPage === totalPages ? 'not-allowed' : 'pointer',
+                  opacity: currentPage === totalPages ? 0.4 : 1,
+                  fontFamily: 'Faktum, var(--font-sans), sans-serif',
+                  fontWeight: 500,
+                  fontSize: '18px',
+                  lineHeight: '100%',
+                  color: 'rgba(29, 73, 62, 1)',
+                  boxSizing: 'border-box',
+                  flexShrink: 0,
+                }}
+              >
+                →
+              </button>
+            </div>
           </div>
         )}
-      </main>
+      </section>
+
+      {/* ── FAQ SECTION (matches shop page exactly) ── */}
+      <section
+        style={{
+          width: '100%',
+          maxWidth: '1440px',
+          margin: '0 auto',
+          paddingTop: '42px',
+          paddingBottom: '42px',
+          paddingLeft: '80px',
+          paddingRight: '80px',
+          background: 'rgba(255, 255, 255, 1)',
+          boxSizing: 'border-box',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '24px',
+        }}
+      >
+        {/* Header */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          {/* Label */}
+          <span
+            style={{
+              fontFamily: 'Faktum, var(--font-sans), sans-serif',
+              fontWeight: 600,
+              fontSize: '14px',
+              lineHeight: '100%',
+              letterSpacing: '1.2px',
+              textTransform: 'uppercase',
+              color: 'rgba(255, 98, 62, 1)',
+              background: 'rgba(255, 98, 62, 0.1)',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              height: '28px',
+              padding: '0 16px',
+              borderRadius: '4px',
+              width: 'fit-content',
+            }}
+          >
+            FAQ&apos;S
+          </span>
+
+          {/* Title */}
+          <h2
+            style={{
+              fontFamily: 'Fraunces, Georgia, serif',
+              fontWeight: 600,
+              fontSize: '42px',
+              lineHeight: '100%',
+              letterSpacing: '0px',
+              color: 'rgba(43, 43, 43, 1)',
+              margin: 0,
+            }}
+          >
+            Frequently asked questions
+          </h2>
+        </div>
+
+        {/* Accordion */}
+        <div style={{ width: '100%', display: 'flex', flexDirection: 'column', borderTop: '1px solid rgba(204, 204, 204, 1)' }}>
+          {FAQ_ITEMS.map((item, idx) => {
+            const isOpen = openFaq === idx;
+            return (
+              <div
+                key={idx}
+                style={{
+                  width: '100%',
+                  borderBottom: '1px solid rgba(204, 204, 204, 1)',
+                }}
+              >
+                <button
+                  onClick={() => setOpenFaq(isOpen ? null : idx)}
+                  style={{
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    padding: '20px 0',
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    textAlign: 'left',
+                    gap: '16px',
+                  }}
+                >
+                  <span
+                    style={{
+                      fontFamily: 'Faktum, var(--font-sans), sans-serif',
+                      fontWeight: 600,
+                      fontSize: '18px',
+                      lineHeight: '26px',
+                      color: 'rgba(44, 44, 44, 1)',
+                      flex: 1,
+                    }}
+                  >
+                    {item.question}
+                  </span>
+                  {isOpen ? (
+                    <span style={{ fontSize: '24px', fontWeight: 600, color: 'rgba(255, 98, 62, 1)', flexShrink: 0, lineHeight: 1 }}>−</span>
+                  ) : (
+                    <span style={{ fontSize: '24px', fontWeight: 600, color: 'rgba(29, 73, 62, 1)', flexShrink: 0, lineHeight: 1 }}>+</span>
+                  )}
+                </button>
+                {isOpen && (
+                  <p
+                    style={{
+                      fontFamily: 'Faktum, var(--font-sans), sans-serif',
+                      fontWeight: 500,
+                      fontSize: '14px',
+                      lineHeight: '22px',
+                      color: 'rgba(102, 102, 102, 1)',
+                      margin: 0,
+                      paddingBottom: '20px',
+                    }}
+                  >
+                    {item.answer}
+                  </p>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* ── CTA SECTION (matches screenshot) ── */}
+      <section
+        style={{
+          width: '100%',
+          background: 'rgba(255, 255, 255, 1)',
+          borderTop: '1px solid rgba(204, 204, 204, 1)',
+          paddingTop: '80px',
+          paddingBottom: '80px',
+          textAlign: 'center',
+          boxSizing: 'border-box',
+        }}
+      >
+        <div style={{ maxWidth: '760px', margin: '0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
+          {/* Heading */}
+          <h2
+            style={{
+              fontFamily: 'Fraunces, Georgia, serif',
+              fontWeight: 600,
+              fontSize: '42px',
+              lineHeight: '100%',
+              letterSpacing: '0px',
+              color: 'rgba(43, 43, 43, 1)',
+              margin: 0,
+              textAlign: 'center',
+            }}
+          >
+            The{' '}
+            <span style={{ color: 'rgba(255, 98, 62, 1)', fontStyle: 'italic' }}>best adventures</span>{' '}
+            find their way to your inbox.
+          </h2>
+
+          {/* Subtitle */}
+          <p
+            style={{
+              fontFamily: 'Faktum, var(--font-sans), sans-serif',
+              fontWeight: 500,
+              fontSize: '18px',
+              lineHeight: '28px',
+              color: 'rgba(43, 43, 43, 0.7)',
+              margin: 0,
+              textAlign: 'center',
+              maxWidth: '640px',
+            }}
+          >
+            Hidden places, exclusive trip drops, curated gear, and stories from the road delivered before anyone else hears about them.
+          </p>
+
+          {/* Button */}
+          <Link
+            href="/travel"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              background: 'rgba(29, 73, 62, 1)',
+              color: 'rgba(255, 255, 255, 1)',
+              padding: '14px 32px',
+              borderRadius: '6px',
+              fontFamily: 'Faktum, var(--font-sans), sans-serif',
+              fontWeight: 500,
+              fontSize: '16px',
+              lineHeight: '100%',
+              letterSpacing: '0px',
+              textDecoration: 'none',
+              marginTop: '8px',
+              transition: 'background 0.2s',
+            }}
+            className="hover:bg-[#163d33]"
+          >
+            Reserve your tour now ↗
+          </Link>
+        </div>
+      </section>
     </div>
   );
 }

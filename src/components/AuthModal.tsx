@@ -1366,7 +1366,7 @@ export const AuthModal: React.FC = () => {
 
             {/* Main Llama Image Card */}
             <div 
-              className="absolute bg-white border border-[#1D493E]/10 flex items-center justify-center"
+              className="absolute flex items-center justify-center"
               style={{
                 top: '0px',
                 left: '0px',
@@ -1375,7 +1375,6 @@ export const AuthModal: React.FC = () => {
                 borderRadius: '12px',
                 transform: 'rotate(0deg)',
                 boxShadow: '0px 27.27px 54.54px -13.09px rgba(0, 0, 0, 0.25)',
-                padding: '16px',
                 boxSizing: 'border-box',
                 zIndex: 2,
               }}
@@ -1383,7 +1382,7 @@ export const AuthModal: React.FC = () => {
               <img 
                 src="/llama_mascot.png" 
                 className="w-full h-full object-cover" 
-                style={{ borderRadius: '8px' }} 
+                style={{ borderRadius: '12px' }} 
                 alt="Go Banjara Mascot Llama" 
               />
               {/* Sticker 1: Top Left (Figma specs: 99.2x91, angle 15deg, top 0, left 32) */}

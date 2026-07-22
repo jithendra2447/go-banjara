@@ -112,7 +112,7 @@ const ARTICLES_DATABASE: Record<string, ArticleData> = {
         title: '4. Inner Line Permits (ILP) & Documentation 2026',
         content: [
           'All travelers visiting inner border areas—including Nubra Valley, Pangong Lake, Hanle, and Tso Moriri—must possess an official Inner Line Permit (ILP) issued by the LAHDC (Leh Autonomous Hill Development Council).',
-          'You can apply for the official permit online directly at the [Leh District Official Portal](https://leh.nic.in). Make sure to carry 6 to 8 hard copies of your ILP, original Driving License, Vehicle Registration (RC), Pollution Certificate (PUC), and valid Government Photo ID (Aadhaar or Passport).'
+          'You can apply for the official permit online directly at the Leh District Official Portal (leh.nic.in). Make sure to carry 6 to 8 hard copies of your ILP, original Driving License, Vehicle Registration (RC), Pollution Certificate (PUC), and valid Government Photo ID (Aadhaar or Passport).'
         ],
         highlight: 'Requirement Note: Self-driven non-local rental bikes (from Delhi or Manali) are NOT permitted inside Nubra Valley or Pangong. You must rent a Leh-registered motorcycle or travel with a licensed tour operator.',
         backlink: { label: 'Apply on Official Leh District Permit Portal (leh.nic.in)', url: 'https://leh.nic.in' }
@@ -122,7 +122,7 @@ const ARTICLES_DATABASE: Record<string, ArticleData> = {
         title: '5. Altitude Sickness (AMS) Prevention & Health Safety',
         content: [
           'Leh is situated at 11,500 feet above sea level. Ascending rapidly into high altitudes reduces atmospheric oxygen pressure. Adequate rest during the first 36 hours in Leh is non-negotiable.',
-          'Review the [National Health Authority Advisory on AMS](https://nhm.gov.in) before riding to high mountain passes like Khardung La (17,582 ft).'
+          'Review the National Health Authority Advisory on AMS (nhm.gov.in) before riding to high mountain passes like Khardung La (17,582 ft).'
         ],
         bullets: [
           'Stay Hydrated: Drink 4 to 5 liters of fluids (water, ORS, herbal tea) daily.',
@@ -394,62 +394,45 @@ export default function BlogPostDetail() {
       {/* ── ARTICLE CONTENT & SIDEBAR ── */}
       <div className="max-w-6xl mx-auto px-6 flex flex-col lg:flex-row gap-12 items-start">
         
-        {/* Table of Contents Sidebar (Sticky) */}
+        {/* Table of Contents Sidebar (Clean Native Styling) */}
         {article.toc.length > 0 && (
           <aside 
             style={{
-              backgroundColor: '#FAF9F6',
-              border: '1px solid #E5E0D5',
-              borderRadius: '20px',
+              background: 'rgba(255, 255, 255, 1)',
+              border: '1px solid rgba(204, 204, 204, 1)',
+              borderRadius: '6px',
+              boxSizing: 'border-box',
             }}
-            className="w-full lg:w-80 p-6 sticky top-28 shrink-0"
+            className="w-full lg:w-80 p-6 sticky top-28 shrink-0 select-none"
           >
             <h4 
-              style={{ fontFamily: '"Fraunces", serif', color: '#1D493E' }}
-              className="font-bold text-base mb-4 pb-2 border-b border-[#E5E0D5] flex items-center gap-2"
+              style={{
+                fontFamily: 'Fraunces, Georgia, serif',
+                fontWeight: 600,
+                fontSize: '20px',
+                color: 'rgba(43, 43, 43, 1)',
+                borderBottom: '1px solid rgba(204, 204, 204, 1)',
+              }}
+              className="pb-3 mb-4 flex items-center gap-2"
             >
               <Compass className="w-4 h-4 text-[#FF5A36]" />
-              Quick Navigation (TOC)
+              Table of Contents
             </h4>
-            <nav className="space-y-2 text-xs font-semibold text-[#526E65]">
+            <nav className="space-y-2 text-sm font-medium">
               {article.toc.map((item) => (
                 <a
                   key={item.id}
                   href={`#${item.id}`}
-                  className="block py-1 hover:text-[#1D493E] hover:underline transition line-clamp-1"
+                  style={{
+                    fontFamily: 'Faktum, var(--font-sans), sans-serif',
+                    color: 'rgba(43, 43, 43, 0.8)',
+                  }}
+                  className="block py-1 hover:text-[#1D493E] hover:font-bold transition"
                 >
                   {item.title}
                 </a>
               ))}
             </nav>
-
-            {/* CTA Promo Widget */}
-            <div 
-              style={{
-                backgroundColor: '#1D493E',
-                color: '#FFFFFF',
-                borderRadius: '16px',
-              }}
-              className="p-5 mt-6 space-y-3"
-            >
-              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#D3FFBF]">
-                <Zap className="w-4 h-4 text-[#FF5A36]" />
-                <span>Go Banjara Travel</span>
-              </div>
-              <h5 style={{ fontFamily: '"Fraunces", serif' }} className="font-bold text-base leading-tight">
-                Want a Fully Guided Ladakh Bike Expedition?
-              </h5>
-              <p className="text-xs text-white/80 leading-relaxed font-medium">
-                Includes Royal Enfield 450, backup vehicle, mechanic, permits & 3-star stay.
-              </p>
-              <Link 
-                href="/travel"
-                className="inline-flex items-center gap-2 w-full justify-center bg-white text-[#1D493E] hover:bg-[#FAF9F6] py-2.5 rounded-xl font-bold text-xs transition cursor-pointer"
-              >
-                <span>View Ladakh Packages</span>
-                <ChevronRight className="w-4 h-4" />
-              </Link>
-            </div>
           </aside>
         )}
 

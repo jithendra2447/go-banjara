@@ -211,29 +211,6 @@ function ProfilePageContent() {
         console.warn('MongoDB orders fetch notice:', err);
       }
 
-      // Default dummy order for testing
-      const dummyOrder: OrderHistoryItem = {
-        id: '4597534682159738',
-        date: '2026-07-06',
-        type: 'shop',
-        deliveryDate: 'MON, JULY 6TH',
-        paymentId: '4597534682159738',
-        status: 'Completed',
-        total: 22900,
-        items: [
-          {
-            name: 'Nomad Pro Canvas Pack',
-            price: 22900,
-            originalPrice: 22000,
-            discount: '16% off',
-            quantity: 1,
-            size: '45L',
-            color: 'Olive Drab',
-            image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500&h=500&fit=crop',
-          },
-        ],
-      };
-
       // Load real history from local storage if present
       const storageKey = `gb_history_${activeEmail || activePhone}`;
       const savedHistory = localStorage.getItem(storageKey);
@@ -243,13 +220,13 @@ function ProfilePageContent() {
           const realOrders = Array.isArray(parsed)
             ? parsed.filter((item: OrderHistoryItem) => item.id !== 'GB-928401-26' && item.id !== 'GB-748291-26')
             : [];
-          setHistory(realOrders.length > 0 ? realOrders : [dummyOrder]);
+          setHistory(realOrders);
         } catch (e) {
           console.error('Failed to parse history', e);
-          setHistory([dummyOrder]);
+          setHistory([]);
         }
       } else {
-        setHistory([dummyOrder]);
+        setHistory([]);
       }
     };
 
@@ -1415,7 +1392,7 @@ function ProfilePageContent() {
                 ) : (
                   <div className="divide-y divide-slate-200">
                     {history.map((order) => {
-                      const firstItem = order.items[0] || { name: 'Nomad Pro Canvas Pack', price: 22900, quantity: 1, size: '45L' };
+                      const firstItem = order.items[0] || { name: 'Go Banjara T-Shirt', price: 399, quantity: 1, size: 'M', image: '/go_banjara_tshirt.jpg' };
                       return (
                         <div 
                           key={order.id} 

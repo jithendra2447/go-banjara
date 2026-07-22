@@ -82,8 +82,8 @@ export async function POST(request: Request) {
       }
 
       if (!user) {
-        const defaultName = name || `Banjara User (${last10.slice(-4)})`;
-        const userEmail = email || `user_${cleanPhone}@gobanjara.com`;
+        const defaultName = name || 'Jithendra V';
+        const userEmail = email || `jithendra_${cleanPhone}@gobanjara.com`;
         
         try {
           user = await Promise.race([

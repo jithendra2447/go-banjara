@@ -487,9 +487,9 @@ export const AuthModal: React.FC = () => {
     } catch (err: any) {
       console.warn('OTP verify fallback active:', err.message);
       login({
-        name: name || (phone ? `User (${cleanPhone.slice(-4)})` : 'Banjara User'),
+        name: name || 'Jithendra V',
         phone: cleanPhone,
-        email: email || `user_${cleanPhone}@gobanjara.com`,
+        email: email || `jithendra_${cleanPhone}@gobanjara.com`,
         avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&h=100&fit=crop',
         authType: 'mobile',
       });

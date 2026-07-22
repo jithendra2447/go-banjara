@@ -73,8 +73,8 @@ export async function POST(request: Request) {
     }
 
     // Fallback user login when database is unreachable or registering user on the fly
-    const displayName = cleanInput.includes('@') ? cleanInput.split('@')[0] : `Banjara User (${last10.slice(-4)})`;
-    const userEmail = cleanInput.includes('@') ? cleanInput : `user_${cleanPhone}@gobanjara.com`;
+    const displayName = cleanInput.includes('@') ? cleanInput.split('@')[0] : 'Jithendra V';
+    const userEmail = cleanInput.includes('@') ? cleanInput : `jithendra_${cleanPhone}@gobanjara.com`;
 
     return NextResponse.json({
       success: true,

@@ -227,21 +227,26 @@ export default function BlogPage() {
             gap: '8px',
           }}
         >
-          {/* BLOGS label — Figma: 53×18, Faktum 600 14px 1.2px-tracking uppercase rgba(255,98,62,1) */}
+          {/* BLOGS label — Figma: Faktum 600 14px uppercase, color: rgba(255,98,62,1), background: rgba(255,98,62,0.08) */}
           <span
             style={{
-              display: 'inline-block',
-              width: '53px',
-              height: '18px',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              height: '32px',
+              padding: '6px 16px',
               fontFamily: 'Faktum, var(--font-sans), sans-serif',
               fontWeight: 600,
               fontSize: '14px',
               lineHeight: '100%',
               letterSpacing: '1.2px',
               color: 'rgba(255, 98, 62, 1)',
+              background: 'rgba(255, 98, 62, 0.08)',
+              borderRadius: '100px',
               textTransform: 'uppercase',
               textAlign: 'center',
               verticalAlign: 'middle',
+              boxSizing: 'border-box',
             }}
           >
             BLOGS

@@ -112,22 +112,25 @@ const ARTICLES_DATABASE: Record<string, ArticleData> = {
         title: '4. Inner Line Permits (ILP) & Documentation 2026',
         content: [
           'All travelers visiting inner border areas—including Nubra Valley, Pangong Lake, Hanle, and Tso Moriri—must possess an official Inner Line Permit (ILP) issued by the LAHDC (Leh Autonomous Hill Development Council).',
-          'Make sure to carry 6 to 8 hard copies of your ILP, original Driving License, Vehicle Registration (RC), Pollution Certificate (PUC), and valid Government Photo ID (Aadhaar or Passport).'
+          'You can apply for the official permit online directly at the [Leh District Official Portal](https://leh.nic.in). Make sure to carry 6 to 8 hard copies of your ILP, original Driving License, Vehicle Registration (RC), Pollution Certificate (PUC), and valid Government Photo ID (Aadhaar or Passport).'
         ],
-        highlight: 'Requirement Note: Self-driven non-local rental bikes (from Delhi or Manali) are NOT permitted inside Nubra Valley or Pangong. You must rent a Leh-registered motorcycle or travel with a licensed tour operator.'
+        highlight: 'Requirement Note: Self-driven non-local rental bikes (from Delhi or Manali) are NOT permitted inside Nubra Valley or Pangong. You must rent a Leh-registered motorcycle or travel with a licensed tour operator.',
+        backlink: { label: 'Apply on Official Leh District Permit Portal (leh.nic.in)', url: 'https://leh.nic.in' }
       },
       {
         id: 'ams-acclimatization',
         title: '5. Altitude Sickness (AMS) Prevention & Health Safety',
         content: [
-          'Leh is situated at 11,500 feet above sea level. Ascending rapidly into high altitudes reduces atmospheric oxygen pressure. Adequate rest during the first 36 hours in Leh is non-negotiable.'
+          'Leh is situated at 11,500 feet above sea level. Ascending rapidly into high altitudes reduces atmospheric oxygen pressure. Adequate rest during the first 36 hours in Leh is non-negotiable.',
+          'Review the [National Health Authority Advisory on AMS](https://nhm.gov.in) before riding to high mountain passes like Khardung La (17,582 ft).'
         ],
         bullets: [
           'Stay Hydrated: Drink 4 to 5 liters of fluids (water, ORS, herbal tea) daily.',
           'Pacing: Avoid heavy exertion or rapid climbing during the first two days.',
           'Medical Kit: Carry Diamox (after medical consultation), Painkillers, Oximeter, and Bandages.',
           'Oxygen Cylinder: Carry a portable oxygen canister for high passes like Khardung La or Chang La.'
-        ]
+        ],
+        backlink: { label: 'Check Live Himalayan Road Status on BRO Official Site (bro.gov.in)', url: 'https://bro.gov.in' }
       },
       {
         id: 'best-bikes',
@@ -153,7 +156,8 @@ const ARTICLES_DATABASE: Record<string, ArticleData> = {
           'Accommodation & Food: ₹1,200 – ₹2,500 / day (₹12,000 – ₹25,000 total)',
           'Permits & Wildlife Fees: ₹800 – ₹1,200',
           'Total Estimated Expense: ₹35,000 to ₹55,000 per rider'
-        ]
+        ],
+        backlink: { label: 'Check India Meteorological Department Weather Forecast (mausam.imd.gov.in)', url: 'https://mausam.imd.gov.in' }
       }
     ],
     faqs: [
@@ -340,7 +344,8 @@ export default function BlogPostDetail() {
           <div className="flex items-center gap-2">
             <img 
               src={article.author.avatar} 
-              alt={article.author.name}
+              alt={`${article.author.name} | Go Banjara Travel Specialist`}
+              title={`${article.author.name} | Go Banjara Team`}
               className="w-8 h-8 rounded-full object-cover border border-[#1D493E]/20"
             />
             <span className="font-semibold text-[#1D493E]">{article.author.name}</span>
@@ -363,7 +368,8 @@ export default function BlogPostDetail() {
         <div className="w-full h-[320px] md:h-[500px] rounded-3xl overflow-hidden shadow-xl border border-[#E5E0D5]">
           <img 
             src={article.heroImage} 
-            alt={article.title}
+            alt={`${article.title} | Go Banjara Himalayan Travel Guide`}
+            title={`${article.title} - Go Banjara Photography`}
             className="w-full h-full object-cover"
           />
         </div>
@@ -474,15 +480,52 @@ export default function BlogPostDetail() {
                   <div className="space-y-2">
                     <p>{section.highlight}</p>
                     {section.backlink && (
-                      <Link 
-                        href={section.backlink.url}
-                        className="inline-flex items-center gap-1.5 text-xs font-bold text-[#1D493E] underline hover:text-[#FF5A36] transition cursor-pointer"
-                      >
-                        <span>{section.backlink.label}</span>
-                        <ExternalLink className="w-3.5 h-3.5" />
-                      </Link>
+                      section.backlink.url.startsWith('http') ? (
+                        <a 
+                          href={section.backlink.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 text-xs font-bold text-[#1D493E] underline hover:text-[#FF5A36] transition cursor-pointer"
+                        >
+                          <span>{section.backlink.label}</span>
+                          <ExternalLink className="w-3.5 h-3.5" />
+                        </a>
+                      ) : (
+                        <Link 
+                          href={section.backlink.url}
+                          className="inline-flex items-center gap-1.5 text-xs font-bold text-[#1D493E] underline hover:text-[#FF5A36] transition cursor-pointer"
+                        >
+                          <span>{section.backlink.label}</span>
+                          <ChevronRight className="w-3.5 h-3.5" />
+                        </Link>
+                      )
                     )}
                   </div>
+                </div>
+              )}
+
+              {/* Standalone Backlink if no highlight box */}
+              {!section.highlight && section.backlink && (
+                <div className="my-3">
+                  {section.backlink.url.startsWith('http') ? (
+                    <a 
+                      href={section.backlink.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-[#1D493E] bg-[#FAF9F6] border border-[#E5E0D5] px-3.5 py-2 rounded-lg hover:bg-[#F4F1EA] transition cursor-pointer"
+                    >
+                      <span>{section.backlink.label}</span>
+                      <ExternalLink className="w-3.5 h-3.5 text-[#FF5A36]" />
+                    </a>
+                  ) : (
+                    <Link 
+                      href={section.backlink.url}
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-[#1D493E] bg-[#FAF9F6] border border-[#E5E0D5] px-3.5 py-2 rounded-lg hover:bg-[#F4F1EA] transition cursor-pointer"
+                    >
+                      <span>{section.backlink.label}</span>
+                      <ChevronRight className="w-3.5 h-3.5 text-[#1D493E]" />
+                    </Link>
+                  )}
                 </div>
               )}
 
@@ -504,7 +547,8 @@ export default function BlogPostDetail() {
                   <div className="w-full h-80 rounded-2xl overflow-hidden border border-[#E5E0D5] shadow-md">
                     <img 
                       src={section.image} 
-                      alt={section.title}
+                      alt={`${section.title} | Go Banjara Travel Guide`}
+                      title={`${section.title} - Go Banjara Photography`}
                       className="w-full h-full object-cover"
                     />
                   </div>
@@ -563,7 +607,8 @@ export default function BlogPostDetail() {
           >
             <img 
               src={article.author.avatar} 
-              alt={article.author.name}
+              alt={`${article.author.name} | Go Banjara Travel Author`}
+              title={`${article.author.name} | Go Banjara Team`}
               className="w-16 h-16 rounded-full object-cover border-2 border-[#1D493E]"
             />
             <div>
@@ -631,7 +676,8 @@ export default function BlogPostDetail() {
                 <div className="w-full h-48 overflow-hidden">
                   <img 
                     src={item.image} 
-                    alt={item.title}
+                    alt={`${item.title} | Go Banjara Blog`}
+                    title={`${item.title} - Go Banjara Story`}
                     className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
                   />
                 </div>

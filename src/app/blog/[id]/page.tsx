@@ -80,7 +80,7 @@ const ARTICLES_DATABASE: Record<string, ArticleData> = {
           'Riding a motorcycle through the Trans-Himalayan desert of Ladakh is a badge of honor for motorcycling enthusiasts worldwide. Spanning elevations above 11,000 feet, this adventure tests physical endurance, mental resilience, and riding skills against breathtaking mountain scenery.',
           'Whether you choose to navigate the hairpin bends of the Gata Loops, conquer Khardung La (17,582 ft), or watch the crystal waters of Pangong Tso change shade under the alpine sun, a Ladakh motorcycle expedition is a life-changing journey.'
         ],
-        highlight: 'Go Banjara Tip: Planning ahead with proper gear and acclimatization guarantees an unforgettable Himalayan ride. Explore our curated [Travel Packages](/travel) for fully supported group motorcycle expeditions.',
+        highlight: 'Go Banjara Tip: Planning ahead with proper gear and acclimatization guarantees an unforgettable Himalayan ride. Explore our curated Travel Packages for fully supported group motorcycle expeditions.',
         backlink: { label: 'Explore Go Banjara Himalayan Travel Packages', url: '/travel' }
       },
       {
@@ -251,11 +251,13 @@ export default function BlogPostDetail() {
   return (
     <div 
       style={{
-        backgroundColor: '#FFFFFF',
+        width: '100%',
+        background: 'rgba(255, 255, 255, 1)',
         minHeight: '100vh',
-        fontFamily: '"Outfit", sans-serif',
+        fontFamily: 'Faktum, var(--font-sans), sans-serif',
+        paddingBottom: '62px',
       }}
-      className="w-full pb-20 select-none"
+      className="w-full select-none"
     >
       {/* SEO Schema Structured Data */}
       <script
@@ -285,7 +287,7 @@ export default function BlogPostDetail() {
       />
 
       {/* ── BREADCRUMB & TOP NAV BAR ── */}
-      <div className="w-full bg-[#FAF9F6] border-b border-[#E5E0D5] py-4 px-6 md:px-[80px]">
+      <div className="w-full bg-white border-b border-[#E5E0D5] py-4 px-6 md:px-[80px]">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <Link 
             href="/blog"
@@ -318,23 +320,34 @@ export default function BlogPostDetail() {
 
       {/* ── ARTICLE HEADER ── */}
       <header className="max-w-4xl mx-auto px-6 pt-10 pb-6 text-center">
-        {/* Category Pill */}
+        {/* Category Pill — Figma: Faktum 600 14px uppercase, color: rgba(255,98,62,1), background: rgba(255,98,62,0.08) */}
         <span 
           style={{
-            backgroundColor: '#F4F1EA',
-            color: '#1D493E',
-            border: '1px solid #E5E0D5',
-            fontFamily: '"Outfit", sans-serif',
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: '32px',
+            padding: '6px 16px',
+            fontFamily: 'Faktum, var(--font-sans), sans-serif',
+            fontWeight: 600,
+            fontSize: '14px',
+            lineHeight: '100%',
+            letterSpacing: '1.2px',
+            color: 'rgba(255, 98, 62, 1)',
+            background: 'rgba(255, 98, 62, 0.08)',
+            borderRadius: '100px',
+            textTransform: 'uppercase',
+            textAlign: 'center',
+            marginBottom: '16px',
           }}
-          className="inline-block px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-4"
         >
           {article.category}
         </span>
 
-        {/* Title */}
+        {/* Title — Figma: Fraunces 600 42px lh:100% rgba(43,43,43,1) */}
         <h1 
-          style={{ fontFamily: '"Fraunces", serif', color: '#1D493E' }}
-          className="text-3xl md:text-5xl font-bold leading-tight md:leading-snug mb-6"
+          style={{ fontFamily: 'Fraunces, Georgia, serif', fontWeight: 600, color: 'rgba(43, 43, 43, 1)' }}
+          className="text-3xl md:text-5xl leading-tight md:leading-snug mb-6"
         >
           {article.title}
         </h1>
@@ -454,27 +467,32 @@ export default function BlogPostDetail() {
           {article.sections.map((section) => (
             <section key={section.id} id={section.id} className="space-y-4 pt-2">
               <h2 
-                style={{ fontFamily: '"Fraunces", serif', color: '#1D493E' }}
-                className="text-2xl font-bold border-b border-[#E5E0D5] pb-2"
+                style={{ fontFamily: 'Fraunces, Georgia, serif', fontWeight: 600, color: 'rgba(43, 43, 43, 1)' }}
+                className="text-2xl border-b border-[#E5E0D5] pb-2"
               >
                 {section.title}
               </h2>
 
               {section.content.map((paragraph, pIdx) => (
-                <p key={pIdx} className="text-base text-[#4A5568] leading-relaxed font-normal">
+                <p 
+                  key={pIdx} 
+                  style={{ fontFamily: 'Faktum, var(--font-sans), sans-serif', color: 'rgba(43, 43, 43, 0.9)' }}
+                  className="text-base leading-relaxed font-normal"
+                >
                   {paragraph}
                 </p>
               ))}
 
-              {/* Highlight Callout Box */}
+              {/* Highlight Callout Box — background: rgba(255,98,62,0.08) */}
               {section.highlight && (
                 <div 
                   style={{
-                    backgroundColor: '#F4F1EA',
-                    borderLeft: '4px solid #1D493E',
-                    borderRadius: '12px',
+                    background: 'rgba(255, 98, 62, 0.08)',
+                    borderLeft: '4px solid rgba(255, 98, 62, 1)',
+                    borderRadius: '8px',
+                    color: 'rgba(43, 43, 43, 1)',
                   }}
-                  className="p-5 my-4 text-sm font-semibold text-[#1D493E] flex items-start gap-3 shadow-sm"
+                  className="p-5 my-4 text-sm font-semibold flex items-start gap-3 shadow-sm"
                 >
                   <Sparkles className="w-5 h-5 text-[#FF5A36] shrink-0 mt-0.5" />
                   <div className="space-y-2">

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { CheckCircle2, ShieldCheck, Sparkles, CreditCard } from 'lucide-react';
+import { CheckCircle2, ShieldCheck, Sparkles, CreditCard, X } from 'lucide-react';
 import { useCart } from '@/components/providers';
 
 export const CheckoutModal: React.FC = () => {
@@ -107,44 +107,74 @@ export const CheckoutModal: React.FC = () => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-hidden font-sans">
-      {/* Backdrop */}
+      {/* Dark Overlay Backdrop */}
       <div 
-        className="absolute inset-0 bg-slate-900/70 backdrop-blur-md transition-opacity duration-300 animate-[fadeIn_0.2s_ease-out]"
+        className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300 animate-[fadeIn_0.2s_ease-out]"
         onClick={step !== 'processing' ? () => setCheckoutOpen(false) : undefined}
       />
 
-      {/* Content Container */}
-      <div className="relative w-full max-w-xl glass border border-primary-dark/10 rounded-[32px] shadow-2xl overflow-hidden z-10 transition-all duration-300 bg-white">
+      {/* Content Container - Signature Go Banjara Sand & Forest Green Theme */}
+      <div 
+        style={{
+          backgroundColor: '#FAF9F6',
+          borderRadius: '24px',
+          border: '1px solid #E2E8F0',
+          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+          fontFamily: '"Outfit", sans-serif',
+        }}
+        className="relative w-full max-w-lg overflow-hidden z-10 transition-all duration-300"
+      >
         
         {step === 'checkout' && (
-          <div className="p-8 text-left space-y-6">
-            <div className="flex justify-between items-center border-b border-primary-dark/10 pb-4">
+          <div className="p-6 md:p-8 text-left space-y-6">
+            <div className="flex justify-between items-center border-b border-[#E5E0D5] pb-4">
               <div>
-                <h3 className="text-2xl font-serif font-black text-primary-dark flex items-center gap-2">
-                  <CreditCard className="w-6 h-6 text-brand-orange" />
+                <h3 
+                  style={{ fontFamily: '"Fraunces", serif', color: '#1D493E' }}
+                  className="text-2xl font-bold flex items-center gap-2"
+                >
+                  <CreditCard className="w-6 h-6 text-[#FF5A36]" />
                   Checkout Summary
                 </h3>
-                <p className="text-xs text-primary-dark/60 mt-1">Review your items and complete secure payment</p>
+                <p className="text-xs text-[#526E65] mt-1 font-medium">Review your items and complete secure payment</p>
               </div>
               <button
+                type="button"
                 onClick={() => setCheckoutOpen(false)}
-                className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-primary-dark/60 hover:text-primary-dark"
+                className="w-9 h-9 rounded-full bg-[#EFECE6] hover:bg-[#E2DDD3] flex items-center justify-center text-[#1D493E] transition cursor-pointer"
+                aria-label="Close modal"
               >
-                ✕
+                <X className="w-5 h-5" />
               </button>
             </div>
 
             {/* Cart Items Review */}
             <div className="space-y-3 max-h-48 overflow-y-auto pr-1">
               {cart.map((item) => (
-                <div key={`${item.id}-${item.date || ''}`} className="flex justify-between items-center p-3 bg-brand-beige/20 rounded-2xl border border-primary-dark/5">
+                <div 
+                  key={`${item.id}-${item.date || ''}`} 
+                  style={{
+                    backgroundColor: '#F4F1EA',
+                    border: '1px solid #E5E0D5',
+                    borderRadius: '16px',
+                  }}
+                  className="flex justify-between items-center p-3.5"
+                >
                   <div>
-                    <span className="font-extrabold text-primary-dark text-sm block">{item.name}</span>
-                    <span className="text-xs text-primary-dark/60">
+                    <span 
+                      style={{ fontFamily: '"Fraunces", serif', color: '#1D493E' }}
+                      className="font-bold text-sm block"
+                    >
+                      {item.name}
+                    </span>
+                    <span className="text-xs text-[#526E65] font-medium">
                       Qty: {item.quantity} {item.size ? `| Size: ${item.size}` : ''} {item.guests ? `| Guests: ${item.guests}` : ''}
                     </span>
                   </div>
-                  <span className="font-black text-primary-dark text-sm">
+                  <span 
+                    style={{ color: '#1D493E' }}
+                    className="font-extrabold text-sm"
+                  >
                     ₹{(item.price * (item.guests || 1) * item.quantity).toLocaleString('en-IN')}
                   </span>
                 </div>
@@ -152,102 +182,152 @@ export const CheckoutModal: React.FC = () => {
             </div>
 
             {/* Billing Summary */}
-            <div className="bg-slate-50 p-4 rounded-2xl space-y-2 text-xs font-bold text-primary-dark/80">
+            <div 
+              style={{
+                backgroundColor: '#FFFFFF',
+                border: '1px solid #E5E0D5',
+                borderRadius: '16px',
+              }}
+              className="p-4 space-y-2 text-xs font-semibold text-[#526E65]"
+            >
               <div className="flex justify-between">
                 <span>Subtotal</span>
-                <span>₹{cartTotal.toLocaleString('en-IN')}</span>
+                <span className="text-[#1D493E] font-bold">₹{cartTotal.toLocaleString('en-IN')}</span>
               </div>
-              <div className="flex justify-between text-primary-dark/60">
+              <div className="flex justify-between">
                 <span>Estimated GST (5%)</span>
-                <span>₹{gst.toLocaleString('en-IN')}</span>
+                <span className="text-[#1D493E] font-bold">₹{gst.toLocaleString('en-IN')}</span>
               </div>
-              <div className="border-t border-slate-200 pt-2 flex justify-between text-base font-black text-primary-dark">
-                <span>Total Payable</span>
-                <span>₹{grandTotal.toLocaleString('en-IN')}</span>
+              <div className="border-t border-[#E5E0D5] pt-3 flex justify-between text-base">
+                <span style={{ fontFamily: '"Fraunces", serif', color: '#1D493E' }} className="font-bold">Total Payable</span>
+                <span style={{ color: '#1D493E' }} className="font-extrabold text-lg">₹{grandTotal.toLocaleString('en-IN')}</span>
               </div>
             </div>
 
             <button
+              type="button"
               onClick={handleProcessPayment}
               disabled={loading}
-              className="w-full bg-primary-dark hover:bg-brand-orange text-white py-4 rounded-2xl font-black transition duration-300 shadow-xl flex items-center justify-center gap-2 cursor-pointer"
+              style={{
+                backgroundColor: '#1D493E',
+                color: '#FFFFFF',
+                borderRadius: '12px',
+                height: '52px',
+              }}
+              className="w-full hover:bg-[#15342c] font-bold text-sm transition duration-300 shadow-md flex items-center justify-center gap-2 cursor-pointer active:scale-98"
             >
-              <ShieldCheck className="w-5 h-5" />
-              Pay ₹{grandTotal.toLocaleString('en-IN')} via Razorpay
+              <ShieldCheck className="w-5 h-5 text-white" />
+              <span>Pay ₹{grandTotal.toLocaleString('en-IN')} via Razorpay</span>
             </button>
           </div>
         )}
 
         {step === 'processing' && (
-          <div className="p-12 flex flex-col items-center justify-center text-center space-y-6 h-[380px]">
-            <div className="w-14 h-14 border-4 border-brand-orange border-t-transparent rounded-full animate-spin" />
+          <div className="p-10 flex flex-col items-center justify-center text-center space-y-6 min-h-[380px]">
+            <div className="relative flex items-center justify-center">
+              {/* Outer pulsing ring */}
+              <div className="w-20 h-20 rounded-full border-4 border-[#1D493E]/20 border-t-[#1D493E] animate-spin" />
+              {/* Center icon badge */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="text-2xl animate-pulse">🎒</span>
+              </div>
+            </div>
             <div>
-              <h3 className="text-xl font-serif font-black text-primary-dark">Processing Order...</h3>
-              <p className="text-xs text-primary-dark/60 mt-2 max-w-xs mx-auto leading-relaxed">
-                Saving payment details & syncing your booking with MongoDB Atlas database.
+              <h3 
+                style={{ fontFamily: '"Fraunces", serif', color: '#1D493E' }} 
+                className="text-2xl font-bold tracking-tight"
+              >
+                Processing Your Order...
+              </h3>
+              <p className="text-xs text-[#526E65] mt-2 max-w-xs mx-auto leading-relaxed font-medium">
+                Saving payment details & securing your booking in MongoDB Atlas. Bonjo is getting things ready!
               </p>
             </div>
           </div>
         )}
 
         {step === 'success' && (
-          <div className="p-8 text-center flex flex-col items-center space-y-6 overflow-y-auto max-h-[85vh]">
-            <div className="w-20 h-20 rounded-full bg-brand-beige flex items-center justify-center text-primary-dark animate-bounce border border-brand-yellow">
-              <CheckCircle2 className="w-12 h-12 text-primary-dark" />
+          <div className="p-6 md:p-8 text-center flex flex-col items-center space-y-6 overflow-y-auto max-h-[85vh]">
+            <div className="w-16 h-16 rounded-full bg-[#1D493E] flex items-center justify-center text-white shadow-lg animate-bounce">
+              <CheckCircle2 className="w-10 h-10 text-white" />
             </div>
             
             <div>
-              <h3 className="text-3xl font-serif font-black text-primary-dark flex items-center justify-center gap-2">
+              <h3 
+                style={{ fontFamily: '"Fraunces", serif', color: '#1D493E' }}
+                className="text-2xl md:text-3xl font-bold flex items-center justify-center gap-2"
+              >
                 Booking Confirmed!
-                <Sparkles className="w-6 h-6 text-brand-orange fill-brand-orange" />
+                <Sparkles className="w-6 h-6 text-[#FF5A36] fill-[#FF5A36]" />
               </h3>
-              <p className="text-primary-dark/70 mt-2 text-sm">
+              <p className="text-[#526E65] mt-2 text-xs md:text-sm font-medium max-w-md">
                 Your payment was captured successfully & saved into MongoDB Atlas! Welcome to the GO BANJARA tribe!
               </p>
             </div>
 
             {/* Receipt Card */}
-            <div className="w-full bg-brand-beige/30 rounded-3xl border border-primary-dark/10 p-6 text-left space-y-4">
-              <div className="flex justify-between border-b border-dashed border-primary-dark/10 pb-3 text-xs">
+            <div 
+              style={{
+                backgroundColor: '#F4F1EA',
+                border: '1px solid #E5E0D5',
+                borderRadius: '16px',
+              }}
+              className="w-full p-5 text-left space-y-4"
+            >
+              <div className="flex justify-between border-b border-dashed border-[#D5CFBF] pb-3 text-xs">
                 <div>
-                  <span className="text-[9px] uppercase font-black text-primary-dark/50 block">Order Reference</span>
-                  <span className="font-extrabold text-primary-dark">GB-{Math.floor(100000 + Math.random() * 900000)}-26</span>
+                  <span className="text-[10px] uppercase font-bold text-[#526E65] block">Order Reference</span>
+                  <span className="font-extrabold text-[#1D493E]">GB-{Math.floor(100000 + Math.random() * 900000)}-26</span>
                 </div>
                 <div className="text-right">
-                  <span className="text-[9px] uppercase font-black text-[#3399cc] block">Razorpay Payment ID</span>
-                  <span className="font-black text-primary-dark uppercase text-[11px]">{razorpayPaymentId}</span>
+                  <span className="text-[10px] uppercase font-bold text-[#526E65] block">Razorpay Payment ID</span>
+                  <span className="font-extrabold text-[#1D493E] uppercase text-[11px]">{razorpayPaymentId}</span>
                 </div>
               </div>
 
               {/* Items in Receipt */}
-              <div className="space-y-2 max-h-32 overflow-y-auto pr-1">
+              <div className="space-y-2.5 max-h-32 overflow-y-auto pr-1">
                 {cart.map((item) => (
                   <div key={`${item.id}-${item.date || ''}`} className="flex justify-between items-center text-xs">
                     <div>
-                      <span className="font-extrabold text-primary-dark">{item.name}</span>
-                      <span className="text-primary-dark/60 ml-1">x{item.quantity}</span>
-                      {item.type === 'travel' && <p className="text-[10px] text-brand-orange font-bold">Booking ({item.date})</p>}
+                      <span className="font-bold text-[#1D493E]">{item.name}</span>
+                      <span className="text-[#526E65] ml-1">x{item.quantity}</span>
+                      {item.type === 'travel' && <p className="text-[10px] text-[#FF5A36] font-bold">Booking ({item.date})</p>}
                     </div>
-                    <span className="font-extrabold text-primary-dark">
+                    <span className="font-extrabold text-[#1D493E]">
                       ₹{(item.price * (item.guests || 1) * item.quantity).toLocaleString('en-IN')}
                     </span>
                   </div>
                 ))}
               </div>
 
-              <div className="border-t border-primary-dark/10 pt-3 flex justify-between items-center text-sm font-black">
-                <span className="text-primary-dark/70">Total Paid (incl. GST)</span>
-                <span className="text-primary-dark text-base">₹{grandTotal.toLocaleString('en-IN')}</span>
+              <div className="border-t border-[#E5E0D5] pt-3 flex justify-between items-center text-sm">
+                <span className="text-[#526E65] font-semibold">Total Paid (incl. GST)</span>
+                <span className="text-[#1D493E] text-base font-black">₹{grandTotal.toLocaleString('en-IN')}</span>
               </div>
             </div>
 
-            <div className="bg-brand-yellow/10 border border-brand-yellow/30 p-4 rounded-2xl text-xs text-primary-dark/80 leading-relaxed text-left">
-              <strong>What&apos;s Next?</strong> A detailed itinerary and booking vouchers have been sent to your email. Your booking record has been synced with your account in MongoDB Atlas.
+            <div 
+              style={{
+                backgroundColor: '#FFFFFF',
+                border: '1px solid #E5E0D5',
+                borderRadius: '12px',
+              }}
+              className="p-4 text-xs text-[#526E65] leading-relaxed text-left"
+            >
+              <strong className="text-[#1D493E]">What&apos;s Next?</strong> A detailed itinerary and booking vouchers have been sent to your email. Your booking record has been synced with your account in MongoDB Atlas.
             </div>
 
             <button
+              type="button"
               onClick={handleFinish}
-              className="w-full bg-primary-dark hover:bg-brand-orange text-white py-4 rounded-xl font-extrabold transition duration-300 shadow-md cursor-pointer"
+              style={{
+                backgroundColor: '#1D493E',
+                color: '#FFFFFF',
+                borderRadius: '12px',
+                height: '50px',
+              }}
+              className="w-full hover:bg-[#15342c] font-bold text-sm transition duration-300 shadow-md cursor-pointer active:scale-98"
             >
               Continue Journey
             </button>

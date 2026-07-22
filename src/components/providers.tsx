@@ -99,7 +99,6 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const logout = () => {
     setUser(null);
     localStorage.removeItem('gb_user');
-    alert('Logged out successfully from Go Banjāra.');
   };
 
   const addToCart = (item: any, type: 'shop' | 'travel', date?: string, guests?: number, size?: string, quantity: number = 1) => {

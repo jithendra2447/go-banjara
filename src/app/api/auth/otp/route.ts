@@ -58,34 +58,55 @@ export async function POST(request: Request) {
       // Clear OTP store after verification
       otpStore.delete(cleanPhone);
 
-      // Find or create user in MongoDB Atlas
+      // Find or create user with fast indexed query & timeout fallback
       const last10 = cleanPhone.slice(-10);
       
-      let user = await prisma.user.findFirst({
-        where: {
-          OR: [
-            { phone: { contains: last10 } },
-            { phone: cleanPhone },
-            { phone: `+91${last10}` },
-            { phone: `+91 ${last10}` },
-            ...(email ? [{ email: email.toLowerCase() }] : []),
-          ]
-        }
-      });
+      let user: any = null;
+      try {
+        user = await Promise.race([
+          prisma.user.findFirst({
+            where: {
+              OR: [
+                { phone: cleanPhone },
+                { phone: last10 },
+                { phone: `+91${last10}` },
+                { phone: `+91 ${last10}` },
+                ...(email ? [{ email: email.toLowerCase() }] : []),
+              ]
+            }
+          }),
+          new Promise((_, reject) => setTimeout(() => reject(new Error('DB_TIMEOUT')), 1800))
+        ]);
+      } catch (dbErr) {
+        console.warn('Fast OTP DB lookup fallback:', dbErr);
+      }
 
       if (!user) {
         const defaultName = name || `Banjara User (${last10.slice(-4)})`;
         const userEmail = email || `user_${cleanPhone}@gobanjara.com`;
         
-        user = await prisma.user.create({
-          data: {
-            phone: cleanPhone,
-            email: userEmail,
+        try {
+          user = await Promise.race([
+            prisma.user.create({
+              data: {
+                phone: cleanPhone,
+                email: userEmail,
+                name: defaultName,
+                passwordHash: 'OTP_AUTH_VERIFIED',
+                role: 'USER',
+              }
+            }),
+            new Promise((_, reject) => setTimeout(() => reject(new Error('DB_CREATE_TIMEOUT')), 1800))
+          ]);
+        } catch (createErr) {
+          user = {
+            id: `usr_${cleanPhone}`,
             name: defaultName,
-            passwordHash: 'OTP_AUTH_VERIFIED',
+            email: userEmail,
+            phone: cleanPhone,
             role: 'USER',
-          }
-        });
+          };
+        }
       }
 
       return NextResponse.json({

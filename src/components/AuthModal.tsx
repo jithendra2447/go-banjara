@@ -451,29 +451,39 @@ export const AuthModal: React.FC = () => {
       }
 
       // If OTP Login flow
-      const res = await fetch('/api/auth/otp', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          action: 'verify', 
-          phone: cleanPhone, 
-          otp: fullOtp,
-          name: name || undefined,
-          email: email || undefined,
-        }),
-      });
-      const data = await res.json();
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 2500);
 
-      if (res.ok && data.success) {
-        login({
-          ...data.user,
-          avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&h=100&fit=crop',
-          authType: 'mobile',
+      try {
+        const res = await fetch('/api/auth/otp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          signal: controller.signal,
+          body: JSON.stringify({ 
+            action: 'verify', 
+            phone: cleanPhone, 
+            otp: fullOtp,
+            name: name || undefined,
+            email: email || undefined,
+          }),
         });
-        handleClose();
-        return;
+        clearTimeout(timeoutId);
+        const data = await res.json();
+
+        if (res.ok && data.success) {
+          login({
+            ...data.user,
+            avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&h=100&fit=crop',
+            authType: 'mobile',
+          });
+          handleClose();
+          return;
+        }
+        if (data.error) throw new Error(data.error);
+      } catch (fetchErr: any) {
+        clearTimeout(timeoutId);
+        throw fetchErr;
       }
-      if (data.error) throw new Error(data.error);
     } catch (err: any) {
       console.warn('OTP verify fallback active:', err.message);
       login({

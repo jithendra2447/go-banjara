@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { CartProvider } from "@/components/providers";
 import { Navbar } from "@/components/Navbar";
 import { CartDrawer } from "@/components/CartDrawer";
@@ -24,6 +25,7 @@ export default function RootLayout({
         className="antialiased min-h-screen bg-brand-beige text-primary-dark flex flex-col font-sans overflow-x-hidden relative"
         suppressHydrationWarning
       >
+        <Script src="https://accounts.google.com/gsi/client" strategy="lazyOnload" />
         <CartProvider>
           <Navbar />
           <main className="flex-1 pt-[90px]">{children}</main>

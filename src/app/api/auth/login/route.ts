@@ -11,32 +11,51 @@ async function hashPassword(password: string): Promise<string> {
 
 export async function POST(request: Request) {
   try {
-    const { email, password } = await request.json();
+    const { identifier, email, password } = await request.json();
+    const loginKey = identifier || email;
 
-    if (!email || !password) {
+    if (!loginKey || !password) {
       return NextResponse.json(
-        { success: false, error: 'Please enter both email and password.' },
+        { success: false, error: 'Please enter your mobile number/email and password.' },
         { status: 400 }
       );
     }
 
-    const user = await prisma.user.findUnique({
-      where: { email },
+    const cleanInput = loginKey.toLowerCase();
+    const cleanPhone = loginKey.replace(/\D/g, '');
+    const last10 = cleanPhone.slice(-10);
+
+    // Query candidate users matching email or phone
+    const candidateUsers = await prisma.user.findMany({
+      where: {
+        OR: [
+          { email: cleanInput },
+          ...(cleanPhone.length >= 10 ? [
+            { phone: { contains: last10 } },
+            { phone: cleanPhone },
+            { phone: `+91${last10}` },
+            { phone: `+91 ${last10}` },
+          ] : [])
+        ]
+      },
+      orderBy: { updatedAt: 'desc' }
     });
 
-    if (!user) {
+    if (!candidateUsers || candidateUsers.length === 0) {
       return NextResponse.json(
-        { success: false, error: 'No user account registered with this email address.' },
+        { success: false, error: 'No user account found matching this mobile number or email address.' },
         { status: 401 }
       );
     }
 
     const inputHash = await hashPassword(password);
 
-    // Validate matching password hashes
-    if (user.passwordHash !== inputHash) {
+    // Find the candidate record whose passwordHash matches inputHash
+    let matchedUser = candidateUsers.find((u: any) => u.passwordHash === inputHash);
+
+    if (!matchedUser) {
       return NextResponse.json(
-        { success: false, error: 'Invalid password. Please check your credentials and try again.' },
+        { success: false, error: 'Password is incorrect. Please check your credentials and try again.' },
         { status: 401 }
       );
     }
@@ -45,10 +64,15 @@ export async function POST(request: Request) {
       success: true,
       message: 'Login successful.',
       user: {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        role: user.role,
+        id: matchedUser.id,
+        name: matchedUser.name,
+        email: matchedUser.email,
+        phone: matchedUser.phone,
+        dob: matchedUser.dob || undefined,
+        gender: matchedUser.gender || undefined,
+        address: matchedUser.address || undefined,
+        pincode: matchedUser.pincode || undefined,
+        role: matchedUser.role,
       },
     });
   } catch (error: any) {

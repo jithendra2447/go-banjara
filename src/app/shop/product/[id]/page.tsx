@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
-import { Star, ShoppingCart, Check, Shield, Truck, Box } from 'lucide-react';
+import { Star, ShoppingCart, Check, Shield, Truck, Box, ArrowUpRight } from 'lucide-react';
 import { useCart } from '@/components/providers';
 import { PRODUCTS } from '@/data/products';
 import { Product } from '@/types';
@@ -37,14 +37,18 @@ export default function ProductDetailsPage() {
   const [productsList, setProductsList] = useState<Product[]>(PRODUCTS);
   const [product, setProduct] = useState<Product | null>(null);
   const [activeImg, setActiveImg] = useState<string>('');
-  const [activeImgIdx, setActiveImgIdx] = useState<number>(2); // Defaults to index 2 (centered flat badge view)
+  const [activeImgIdx, setActiveImgIdx] = useState<number>(2);
   const [quantity, setQuantity] = useState(1);
+  const [selectedSize, setSelectedSize] = useState<string>('M');
   const [pincode, setPincode] = useState('');
   const [pincodeMessage, setPincodeMessage] = useState<string | null>(null);
   const [addedToCartSuccess, setAddedToCartSuccess] = useState(false);
   const [openFaqIdx, setOpenFaqIdx] = useState<number | null>(0);
   const [recentlyViewed, setRecentlyViewed] = useState<Product[]>([]);
   const [activeTab, setActiveTab] = useState<'desc' | 'reviews'>('desc');
+  const [notifyModalOpen, setNotifyModalOpen] = useState(false);
+  const [notifyEmail, setNotifyEmail] = useState('');
+  const [notifySuccess, setNotifySuccess] = useState(false);
 
   // Load products list from LocalStorage/JSON on mount
   useEffect(() => {
@@ -129,12 +133,10 @@ export default function ProductDetailsPage() {
       price: product.price,
       image: product.image,
     };
-    addToCart(finalItem, 'shop');
-    router.push('/shop');
-    setTimeout(() => {
-      const checkoutBtn = document.getElementById('checkout-cta-btn') || document.querySelector('[data-checkout-trigger]');
-      if (checkoutBtn) (checkoutBtn as any).click();
-    }, 300);
+    for (let i = 0; i < quantity; i++) {
+      addToCart(finalItem, 'shop');
+    }
+    router.push('/cart');
   };
 
   const handleCheckPincode = (e: React.FormEvent) => {
@@ -640,146 +642,211 @@ export default function ProductDetailsPage() {
                 </div>
               </div>
 
-              {/* Quantity Selector (gap: 8px) */}
-              <div style={{ display: "flex", flexDirection: "column", gap: "8px", textAlign: "left", boxSizing: "border-box" }}>
-                <span style={{ fontFamily: "Faktum, sans-serif", fontSize: "16px", fontWeight: 500, lineHeight: "24px", color: "rgba(43, 43, 43, 1)", margin: 0 }}>Quantity</span>
-                <div 
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    border: "1px solid rgba(204, 204, 204, 0.54)",
-                    borderRadius: "4px",
-                    width: "max-content",
-                    height: "40px",
-                    backgroundColor: "#FFFFFF"
-                  }}
-                >
-                  <button
-                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
+              {/* Quantity + Size Row */}
+              <div style={{ display: "flex", alignItems: "flex-end", gap: "48px", flexWrap: "wrap" }}>
+
+                {/* Quantity Selector */}
+                <div style={{ display: "flex", flexDirection: "column", gap: "8px", textAlign: "left", boxSizing: "border-box" }}>
+                  <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: "16px", fontWeight: 500, lineHeight: "24px", color: "rgba(43, 43, 43, 1)", margin: 0 }}>Quantity</span>
+                  <div 
                     style={{
-                      width: "40px",
-                      height: "100%",
-                      border: "none",
-                      background: "none",
-                      fontSize: "18px",
-                      fontWeight: 600,
-                      color: "rgba(43, 43, 43, 1)",
-                      cursor: "pointer",
                       display: "flex",
                       alignItems: "center",
-                      justifyContent: "center",
-                      borderRight: "1px solid rgba(204, 204, 204, 0.54)"
+                      border: "1px solid rgba(204, 204, 204, 0.54)",
+                      borderRadius: "4px",
+                      width: "max-content",
+                      height: "44px",
+                      backgroundColor: "#FFFFFF"
                     }}
-                    className="hover:bg-slate-50 transition"
                   >
-                    −
-                  </button>
-                  <span style={{ minWidth: "48px", textAlign: "center", fontFamily: "Faktum, sans-serif", fontSize: "16px", fontWeight: 500, color: "rgba(43, 43, 43, 1)" }}>
-                    {quantity}
-                  </span>
-                  <button
-                    onClick={() => setQuantity(quantity + 1)}
-                    style={{
-                      width: "40px",
-                      height: "100%",
-                      border: "none",
-                      background: "none",
-                      fontSize: "18px",
-                      fontWeight: 600,
-                      color: "rgba(43, 43, 43, 1)",
-                      cursor: "pointer",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      borderLeft: "1px solid rgba(204, 204, 204, 0.54)"
-                    }}
-                    className="hover:bg-slate-50 transition"
-                  >
-                    +
-                  </button>
+                    <button
+                      onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                      style={{
+                        width: "44px",
+                        height: "100%",
+                        border: "none",
+                        background: "none",
+                        fontSize: "18px",
+                        fontWeight: 600,
+                        color: "rgba(43, 43, 43, 1)",
+                        cursor: "pointer",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        borderRight: "1px solid rgba(204, 204, 204, 0.54)",
+                        fontFamily: "'Outfit', sans-serif",
+                      }}
+                      className="hover:bg-slate-50 transition"
+                    >
+                      −
+                    </button>
+                    <span style={{ minWidth: "48px", textAlign: "center", fontFamily: "'Outfit', sans-serif", fontSize: "16px", fontWeight: 500, color: "rgba(43, 43, 43, 1)" }}>
+                      {quantity}
+                    </span>
+                    <button
+                      onClick={() => setQuantity(quantity + 1)}
+                      style={{
+                        width: "44px",
+                        height: "100%",
+                        border: "none",
+                        background: "none",
+                        fontSize: "18px",
+                        fontWeight: 600,
+                        color: "rgba(43, 43, 43, 1)",
+                        cursor: "pointer",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        borderLeft: "1px solid rgba(204, 204, 204, 0.54)",
+                        fontFamily: "'Outfit', sans-serif",
+                      }}
+                      className="hover:bg-slate-50 transition"
+                    >
+                      +
+                    </button>
+                  </div>
                 </div>
+
+                {/* Size Selector */}
+                <div style={{ display: "flex", flexDirection: "column", gap: "8px", textAlign: "left", boxSizing: "border-box" }}>
+                  <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: "16px", fontWeight: 500, lineHeight: "24px", color: "rgba(43, 43, 43, 1)", margin: 0 }}>Select Size</span>
+                  <div style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
+                    {['XS', 'S', 'M', 'L', 'XL', 'XXL'].map(size => {
+                      const isSelected = selectedSize === size;
+                      return (
+                        <button
+                          key={size}
+                          type="button"
+                          onClick={() => setSelectedSize(size)}
+                          style={{
+                            width: "44px",
+                            height: "44px",
+                            border: isSelected ? "2px solid #1D493E" : "1px solid rgba(204, 204, 204, 0.54)",
+                            borderRadius: "4px",
+                            background: isSelected ? "#1D493E" : "#FFFFFF",
+                            color: isSelected ? "#FFFFFF" : "rgba(43, 43, 43, 1)",
+                            fontFamily: "'Outfit', sans-serif",
+                            fontSize: "13px",
+                            fontWeight: isSelected ? 700 : 500,
+                            cursor: "pointer",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            transition: "all 0.15s ease",
+                          }}
+                          className={!isSelected ? "hover:border-[#1D493E] hover:text-[#1D493E] transition" : ""}
+                        >
+                          {size}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
               </div>
 
-              {/* Action Buttons (Height: 48px, gap: 12px) */}
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", width: "100%", height: "48px", boxSizing: "border-box" }}>
-                <button
-                  onClick={handleAddToCart}
-                  style={{
-                    width: "100%",
-                    height: "48px",
-                    border: "1px solid rgba(29, 73, 62, 1)",
-                    color: "rgba(29, 73, 62, 1)",
-                    backgroundColor: "#FFFFFF",
-                    borderRadius: "4px",
-                    fontFamily: "Faktum, sans-serif",
-                    fontWeight: 600,
-                    fontSize: "14px",
+              {/* Action Buttons */}
+              {product.inStock === false ? (
+                /* Out of Stock — show Notify button */
+                <div style={{ display: "flex", flexDirection: "column", gap: "8px", width: "100%" }}>
+                  <div style={{
                     display: "flex",
                     alignItems: "center",
-                    justifyContent: "center",
-                    gap: "10px",
-                    cursor: "pointer",
-                    boxSizing: "border-box"
-                  }}
-                  className="hover:bg-[#1D493E] hover:text-white transition-all duration-300 group"
-                >
-                  <span>Add to Cart</span>
-                  <svg 
-                    style={{ width: '28px', height: '28px' }} 
-                    viewBox="0 0 28 28" 
-                    fill="none" 
-                    strokeWidth="1.75" 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round"
-                    className="shrink-0"
-                  >
-                    <path 
-                      d="M4 5h3l2 11h11l2.5-9H14" 
-                      className="stroke-[#1D493E] group-hover:stroke-white transition-colors duration-300"
-                    />
-                    <path 
-                      d="M7.8 8.5H9.5" 
-                      className="stroke-[#1D493E] group-hover:stroke-white transition-colors duration-300"
-                    />
-                    <circle 
-                      cx="10.5" 
-                      cy="21.5" 
-                      r="2" 
-                      className="stroke-[#1D493E] group-hover:stroke-white transition-colors duration-300"
-                    />
-                    <circle 
-                      cx="17.5" 
-                      cy="21.5" 
-                      r="2" 
-                      className="stroke-[#1D493E] group-hover:stroke-white transition-colors duration-300"
-                    />
-                  </svg>
-                </button>
-                <button
-                  onClick={handleBuyNow}
-                  style={{
-                    width: "100%",
-                    height: "48px",
-                    backgroundColor: "rgba(29, 73, 62, 1)",
-                    color: "#FFFFFF",
-                    border: "none",
-                    borderRadius: "4px",
-                    fontFamily: "Faktum, sans-serif",
-                    fontWeight: 600,
-                    fontSize: "14px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
                     gap: "6px",
-                    cursor: "pointer",
-                    boxSizing: "border-box"
-                  }}
-                  className="hover:bg-[#15342c] transition-all duration-300"
-                >
-                  <span>Buy Now</span>
-                  <span style={{ fontSize: "16px" }}>↗</span>
-                </button>
-              </div>
+                    color: "rgba(239, 68, 68, 1)",
+                    fontFamily: "'Outfit', sans-serif",
+                    fontSize: "13px",
+                    fontWeight: 600,
+                  }}>
+                    <span>✕</span>
+                    <span>The Product is temporarily unavailable</span>
+                  </div>
+                  <button
+                    onClick={() => { setNotifyEmail(''); setNotifySuccess(false); setNotifyModalOpen(true); }}
+                    style={{
+                      width: "100%",
+                      height: "48px",
+                      border: "1px solid rgba(29, 73, 62, 1)",
+                      color: "rgba(29, 73, 62, 1)",
+                      backgroundColor: "#FFFFFF",
+                      borderRadius: "4px",
+                      fontFamily: "'Outfit', sans-serif",
+                      fontWeight: 600,
+                      fontSize: "14px",
+                      cursor: "pointer",
+                      boxSizing: "border-box",
+                    }}
+                    className="hover:bg-[#1D493E] hover:text-white transition-all duration-300"
+                  >
+                    Notify about availability
+                  </button>
+                </div>
+              ) : (
+                /* In Stock — normal Add to Cart + Buy Now */
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", width: "100%", height: "48px", boxSizing: "border-box" }}>
+                  <button
+                    onClick={handleAddToCart}
+                    style={{
+                      width: "100%",
+                      height: "48px",
+                      border: "1px solid rgba(29, 73, 62, 1)",
+                      color: "rgba(29, 73, 62, 1)",
+                      backgroundColor: "#FFFFFF",
+                      borderRadius: "4px",
+                      fontFamily: "Faktum, sans-serif",
+                      fontWeight: 600,
+                      fontSize: "14px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: "10px",
+                      cursor: "pointer",
+                      boxSizing: "border-box"
+                    }}
+                    className="hover:bg-[#1D493E] hover:text-white transition-all duration-300 group"
+                  >
+                    <span>Add to Cart</span>
+                    <svg
+                      style={{ width: '28px', height: '28px' }}
+                      viewBox="0 0 28 28"
+                      fill="none"
+                      strokeWidth="1.75"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="shrink-0"
+                    >
+                      <path d="M4 5h3l2 11h11l2.5-9H14" className="stroke-[#1D493E] group-hover:stroke-white transition-colors duration-300" />
+                      <path d="M7.8 8.5H9.5" className="stroke-[#1D493E] group-hover:stroke-white transition-colors duration-300" />
+                      <circle cx="10.5" cy="21.5" r="2" className="stroke-[#1D493E] group-hover:stroke-white transition-colors duration-300" />
+                      <circle cx="17.5" cy="21.5" r="2" className="stroke-[#1D493E] group-hover:stroke-white transition-colors duration-300" />
+                    </svg>
+                  </button>
+                  <button
+                    onClick={handleBuyNow}
+                    style={{
+                      width: "100%",
+                      height: "48px",
+                      backgroundColor: "rgba(29, 73, 62, 1)",
+                      color: "#FFFFFF",
+                      border: "none",
+                      borderRadius: "4px",
+                      fontFamily: "Faktum, sans-serif",
+                      fontWeight: 600,
+                      fontSize: "14px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: "6px",
+                      cursor: "pointer",
+                      boxSizing: "border-box"
+                    }}
+                    className="hover:bg-[#15342c] transition-all duration-300"
+                  >
+                    <span>Buy Now</span>
+                    <ArrowUpRight style={{ width: "18px", height: "18px" }} />
+                  </button>
+                </div>
+              )}
 
               {addedToCartSuccess && (
                 <p className="text-xs font-bold text-emerald-600 animate-pulse" style={{ margin: 0 }}>
@@ -1112,25 +1179,128 @@ export default function ProductDetailsPage() {
           </div>
         ) : (
           <div style={{ width: "100%", minHeight: "auto", paddingTop: "32px", boxSizing: "border-box" }}>
-            <section style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
-              <h2 style={{ fontFamily: "Fraunces, serif", fontWeight: 600, fontSize: "28px", color: "rgba(43, 43, 43, 1)", margin: 0 }}>Customer Reviews</h2>
-              {[
-                { author: "Karan S.", rating: 5, date: "May 12, 2026", text: "Amazing quality badge! It has a premium gloss and the clasp holds very strong on my backpack. Will buy more variants." },
-                { author: "Sneha M.", rating: 5, date: "April 28, 2026", text: "Looks exactly like the photo. High-quality details and very vibrant colors. Highly recommended!" }
-              ].map((rev, i) => (
-                <div key={i} style={{ paddingTop: i === 0 ? 0 : "16px", borderTop: i === 0 ? "none" : "1px solid rgba(246,243,238,1)" }}>
-                  <div style={{ display: "flex", justifyContent: "space-between" }}>
-                    <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 700, fontSize: "14px", color: "rgba(43, 43, 43, 1)" }}>{rev.author}</span>
-                    <span style={{ fontFamily: "Faktum, sans-serif", fontSize: "12px", color: "rgba(141, 141, 141, 1)" }}>{rev.date}</span>
-                  </div>
-                  <div style={{ display: "flex", gap: "2px", margin: "6px 0" }}>
-                    {[...Array(rev.rating)].map((_, idx) => (
-                      <Star key={idx} style={{ width: "14px", height: "14px", fill: "rgba(255,185,94,1)", color: "rgba(255,185,94,1)" }} />
+            <section style={{ display: "flex", flexDirection: "column", gap: "0px" }}>
+
+              {/* ── Rating Summary ── */}
+              <div style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "40px",
+                padding: "24px",
+                border: "1px solid rgba(204,204,204,0.4)",
+                borderRadius: "8px",
+                marginBottom: "16px",
+                flexWrap: "wrap",
+              }}>
+                {/* Left: big number */}
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "6px", minWidth: "90px" }}>
+                  <span style={{ fontFamily: "'Fraunces', serif", fontSize: "52px", fontWeight: 700, color: "rgba(43,43,43,1)", lineHeight: 1 }}>4.9</span>
+                  <div style={{ display: "flex", gap: "3px" }}>
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} style={{ width: "18px", height: "18px", fill: "#FF623E", color: "#FF623E" }} />
                     ))}
                   </div>
-                  <p style={{ fontFamily: "Faktum, sans-serif", fontSize: "14px", color: "rgba(100,100,100,1)", lineHeight: "1.6", margin: 0 }}>{rev.text}</p>
+                  <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: "13px", fontWeight: 500, color: "rgba(141,141,141,1)" }}>312 Reviews</span>
+                </div>
+
+                {/* Right: bar chart */}
+                <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "8px", minWidth: "200px" }}>
+                  {[
+                    { label: "05", pct: 98 },
+                    { label: "04", pct: 78 },
+                    { label: "03", pct: 55 },
+                    { label: "02", pct: 28 },
+                    { label: "01", pct: 10 },
+                  ].map(row => (
+                    <div key={row.label} style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                      <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: "13px", fontWeight: 500, color: "rgba(43,43,43,0.7)", width: "20px" }}>{row.label}</span>
+                      <div style={{ flex: 1, height: "10px", background: "rgba(204,204,204,0.25)", borderRadius: "100px", overflow: "hidden" }}>
+                        <div style={{ width: `${row.pct}%`, height: "100%", background: "#FF623E", borderRadius: "100px" }} />
+                      </div>
+                      <Star style={{ width: "14px", height: "14px", fill: "#FF623E", color: "#FF623E", flexShrink: 0 }} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* ── Individual Review Cards ── */}
+              {[
+                {
+                  author: "Kiran Makwan",
+                  avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=80&h=80&q=80",
+                  rating: 5,
+                  date: "July, 04th, 2026",
+                  text: "The quality of the journal is incredible. It feels like a piece of art that I can actually take on my treks. Bonjo's personality shines through the brand!",
+                },
+                {
+                  author: "Sneha M.",
+                  avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=80&h=80&q=80",
+                  rating: 5,
+                  date: "June, 18th, 2026",
+                  text: "Looks exactly like the photo. High-quality details and very vibrant colors. Highly recommended!",
+                },
+                {
+                  author: "Rohan Sharma",
+                  avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=80&h=80&q=80",
+                  rating: 5,
+                  date: "May, 30th, 2026",
+                  text: "Amazing quality! The premium gloss finish and the strong clasp hold up perfectly on my backpack. Will definitely buy more variants.",
+                },
+                {
+                  author: "Priya Nair",
+                  avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=80&h=80&q=80",
+                  rating: 5,
+                  date: "May, 12th, 2026",
+                  text: "Great product, super fast delivery! Exactly what I expected from Go Banjara — premium materials and beautiful design.",
+                },
+              ].map((rev, i) => (
+                <div key={i} style={{
+                  border: "1px solid rgba(204,204,204,0.4)",
+                  borderRadius: "8px",
+                  padding: "20px 24px",
+                  marginBottom: "12px",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "12px",
+                }}>
+                  {/* Top row: avatar + name + stars */}
+                  <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "16px" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                      <img
+                        src={rev.avatar}
+                        alt={rev.author}
+                        style={{ width: "48px", height: "48px", borderRadius: "50%", objectFit: "cover", flexShrink: 0 }}
+                      />
+                      <div>
+                        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                          <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: "15px", fontWeight: 700, color: "rgba(43,43,43,1)" }}>{rev.author}</span>
+                          <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: "10px", fontWeight: 700, color: "#1D493E", letterSpacing: "0.8px", textTransform: "uppercase" }}>✓ Verified</span>
+                        </div>
+                        <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: "12px", fontWeight: 400, color: "rgba(141,141,141,1)" }}>{rev.date}</span>
+                      </div>
+                    </div>
+                    {/* Stars — right aligned */}
+                    <div style={{ display: "flex", gap: "3px", flexShrink: 0 }}>
+                      {[...Array(rev.rating)].map((_, idx) => (
+                        <Star key={idx} style={{ width: "16px", height: "16px", fill: "#FF623E", color: "#FF623E" }} />
+                      ))}
+                    </div>
+                  </div>
+                  {/* Review text */}
+                  <p style={{
+                    fontFamily: "'Outfit', sans-serif",
+                    fontSize: "14px",
+                    fontWeight: 400,
+                    color: "rgba(43,43,43,0.75)",
+                    lineHeight: "1.7",
+                    margin: 0,
+                    fontStyle: "italic",
+                  }}>
+                    "{rev.text}"
+                  </p>
                 </div>
               ))}
+
             </section>
           </div>
         )}
@@ -1396,7 +1566,150 @@ export default function ProductDetailsPage() {
         </section>
 
       </main>
+
+      {/* Notify When Availability Modal */}
+      {notifyModalOpen && (
+        <div
+          style={{
+            position: 'fixed', inset: 0, zIndex: 99999,
+            background: 'rgba(0,0,0,0.45)', backdropFilter: 'blur(4px)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            padding: '16px',
+          }}
+          onClick={() => setNotifyModalOpen(false)}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              background: '#FFFFFF',
+              borderRadius: '12px',
+              padding: '28px 24px',
+              width: '100%',
+              maxWidth: '420px',
+              boxShadow: '0 20px 60px rgba(0,0,0,0.18)',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '16px',
+            }}
+          >
+            {notifySuccess ? (
+              /* Success state */
+              <div style={{ textAlign: 'center', padding: '16px 0' }}>
+                <div style={{ fontSize: '40px', marginBottom: '12px' }}>✅</div>
+                <h3 style={{ fontFamily: "'Fraunces', serif", fontWeight: 700, fontSize: '20px', color: '#1D493E', margin: '0 0 8px' }}>
+                  You&apos;re on the list!
+                </h3>
+                <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '14px', color: 'rgba(43,43,43,0.7)', margin: 0 }}>
+                  We&apos;ll notify you at <strong>{notifyEmail}</strong> as soon as this product is back in stock.
+                </p>
+                <button
+                  onClick={() => setNotifyModalOpen(false)}
+                  style={{
+                    marginTop: '20px',
+                    width: '100%',
+                    height: '46px',
+                    background: '#1D493E',
+                    color: '#FFF',
+                    border: 'none',
+                    borderRadius: '6px',
+                    fontFamily: "'Outfit', sans-serif",
+                    fontWeight: 700,
+                    fontSize: '15px',
+                    cursor: 'pointer',
+                  }}
+                >
+                  Done
+                </button>
+              </div>
+            ) : (
+              <>
+                {/* Title */}
+                <h3 style={{ fontFamily: "'Fraunces', serif", fontWeight: 700, fontSize: '22px', color: '#1D493E', margin: 0 }}>
+                  Notify when availability
+                </h3>
+                {/* Subtitle */}
+                <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '14px', color: 'rgba(43,43,43,0.72)', margin: 0, lineHeight: 1.5 }}>
+                  I want to receive a product availability notification by email
+                </p>
+                {/* Email Input */}
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '10px',
+                  border: '1px solid #CCCCCC',
+                  borderRadius: '6px',
+                  padding: '0 14px',
+                  height: '48px',
+                }}>
+                  <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="rgba(43,43,43,0.5)" strokeWidth="1.8">
+                    <rect x="2" y="4" width="20" height="16" rx="2" />
+                    <path d="m2 7 10 7 10-7" />
+                  </svg>
+                  <input
+                    type="email"
+                    placeholder="your@email.com"
+                    value={notifyEmail}
+                    onChange={(e) => setNotifyEmail(e.target.value)}
+                    style={{
+                      border: 'none',
+                      outline: 'none',
+                      flex: 1,
+                      fontFamily: "'Outfit', sans-serif",
+                      fontSize: '14px',
+                      color: '#2B2B2B',
+                      background: 'transparent',
+                    }}
+                  />
+                </div>
+                {/* Notify Me Button */}
+                <button
+                  onClick={() => {
+                    if (!notifyEmail.includes('@')) return;
+                    setNotifySuccess(true);
+                  }}
+                  style={{
+                    width: '100%',
+                    height: '48px',
+                    background: '#1D493E',
+                    color: '#FFF',
+                    border: 'none',
+                    borderRadius: '6px',
+                    fontFamily: "'Outfit', sans-serif",
+                    fontWeight: 700,
+                    fontSize: '16px',
+                    cursor: 'pointer',
+                    transition: 'background 0.2s',
+                  }}
+                  className="hover:bg-[#15342c]"
+                >
+                  Notify me
+                </button>
+                {/* Cancel */}
+                <button
+                  onClick={() => setNotifyModalOpen(false)}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    fontFamily: "'Outfit', sans-serif",
+                    fontSize: '14px',
+                    fontWeight: 600,
+                    color: 'rgba(43,43,43,0.6)',
+                    cursor: 'pointer',
+                    textAlign: 'center',
+                    padding: '4px',
+                  }}
+                  className="hover:text-[#1D493E] transition"
+                >
+                  Cancel
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+      )}
+
       <TrustBanner />
+
     </div>
   );
 }

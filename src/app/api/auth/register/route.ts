@@ -20,28 +20,48 @@ export async function POST(request: Request) {
       );
     }
 
-    const existingUser = await prisma.user.findUnique({
-      where: { email },
-    });
+    const cleanEmail = email.trim().toLowerCase();
+    const cleanPhone = phone ? phone.replace(/\D/g, '') : '';
+    const last10 = cleanPhone.slice(-10);
 
-    if (existingUser) {
-      return NextResponse.json(
-        { success: false, error: 'An account with this email address already exists.' },
-        { status: 400 }
-      );
-    }
+    // Check if user already exists by email OR phone suffix
+    let existingUser = await prisma.user.findFirst({
+      where: {
+        OR: [
+          { email: cleanEmail },
+          ...(cleanPhone.length >= 10 ? [
+            { phone: { contains: last10 } },
+            { phone: cleanPhone },
+          ] : [])
+        ]
+      }
+    });
 
     const passwordHash = await hashPassword(password);
 
-    const newUser = await prisma.user.create({
-      data: {
-        name,
-        email,
-        phone,
-        passwordHash,
-        role: 'USER',
-      },
-    });
+    let newUser;
+    if (existingUser) {
+      // Update existing record (e.g. created during OTP verification or previous step)
+      newUser = await prisma.user.update({
+        where: { id: existingUser.id },
+        data: {
+          name,
+          email: cleanEmail,
+          phone: cleanPhone || existingUser.phone,
+          passwordHash,
+        }
+      });
+    } else {
+      newUser = await prisma.user.create({
+        data: {
+          name,
+          email: cleanEmail,
+          phone: cleanPhone,
+          passwordHash,
+          role: 'USER',
+        },
+      });
+    }
 
     return NextResponse.json({
       success: true,

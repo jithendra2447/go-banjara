@@ -621,8 +621,8 @@ export default function KashmirDetails() {
 
               {/* Tab Contents: Itinerary Accordion */}
               {activeTab === 'itinerary' && (
-                <div className="space-y-6 text-left animate-in fade-in duration-300">
-                  <h3 className="text-xl font-serif font-light text-[#E05434] leading-snug mb-4">
+                <div className="space-y-3 text-left animate-in fade-in duration-300">
+                  <h3 className="text-xl font-serif font-light text-[#E05434] leading-snug mb-2">
                     A day-by-day breakdown of what to expect.
                   </h3>
                   <div className="space-y-4">
@@ -698,11 +698,10 @@ export default function KashmirDetails() {
                   </div>
                 </div>
               )}
-
             </div>
 
-            {/* RIGHT COLUMN: Weather & Integrated Booking Form (lg:col-span-4) */}
-            <div className="lg:col-span-4 space-y-6 text-left">
+            {/* RIGHT COLUMN: Weather & Integrated Booking Form (Floats and scrolls down with page) */}
+            <div className="lg:col-span-4 sticky top-[110px] self-start space-y-6 text-left z-20">
               
               {/* Weather Status Widget */}
               <div className="bg-[#1D493E] text-white p-5 rounded-[24px] border border-white/10 shadow-md space-y-4">

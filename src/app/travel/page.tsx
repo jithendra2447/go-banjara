@@ -79,7 +79,7 @@ const FAQ_ITEMS = [
 ];
 
 export default function HolidaysPortal() {
-  const { addToCart, setCartOpen } = useCart();
+  const { addToCart, setCartOpen, wishlist, toggleWishlist } = useCart();
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
   const toggleFaq = (index: number) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
@@ -104,6 +104,10 @@ export default function HolidaysPortal() {
   const [selectedDurations, setSelectedDurations] = useState<string[]>([]);
   const [selectedTravelTypes, setSelectedTravelTypes] = useState<string[]>([]);
   const [selectedInclusions, setSelectedInclusions] = useState<string[]>([]);
+
+  // Booking Form Modal State
+  const [bookingForm, setBookingForm] = useState({ name: '', phone: '', countryCode: '+91', travelers: '02', pickupLocation: '', message: '' });
+  const [bookingFormSuccess, setBookingFormSuccess] = useState(false);
 
   // Inquiry Modal Form State
   const [inquiryForm, setInquiryForm] = useState({ name: '', email: '', phone: '', notes: '' });
@@ -261,13 +265,13 @@ export default function HolidaysPortal() {
     return result;
   }, [packages, destinationSearch, activeCategory, sortBy, selectedDurations, selectedTravelTypes, selectedInclusions]);
 
-  // Handle checkout drawer opening
+  // Handle booking form modal opening
   const handleOpenBookingDrawer = (pkg: HolidayPackage) => {
     setActiveBookPkg(pkg);
-    setBookingDate(startDate || '2026-07-15');
-    setBookingGuests(Number(travelersInput) || 2);
-    setBookedSuccess(false);
+    setBookingForm({ name: '', phone: '', countryCode: '+91', travelers: String(Number(travelersInput) || 2).padStart(2, '0'), pickupLocation: '', message: '' });
+    setBookingFormSuccess(false);
   };
+
 
   // Handle cart addition
   const handleConfirmBooking = (e: React.FormEvent) => {
@@ -939,8 +943,67 @@ export default function HolidaysPortal() {
                   </div>
                 </div>
 
-
-
+                {/* Apply Button Row */}
+                <div
+                  style={{
+                    background: "#FFFFFF",
+                    borderColor: "rgba(204, 204, 204, 0.54)",
+                    borderStyle: "solid",
+                    borderWidth: "0px 1px 1px 1px",
+                    borderBottomLeftRadius: "4px",
+                    borderBottomRightRadius: "4px",
+                    padding: "12px 16px",
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    gap: "12px",
+                    boxShadow: "0px 4px 12px 0px rgba(0, 0, 0, 0.25)",
+                  }}
+                >
+                  {/* Clear All */}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSelectedDurations([]);
+                      setSelectedTravelTypes([]);
+                      setSelectedInclusions([]);
+                    }}
+                    style={{
+                      fontFamily: "'Outfit', sans-serif",
+                      fontWeight: 600,
+                      fontSize: "14px",
+                      color: "#1D493E",
+                      background: "transparent",
+                      border: "1px solid #1D493E",
+                      borderRadius: "4px",
+                      padding: "8px 20px",
+                      cursor: "pointer",
+                      letterSpacing: "0.3px",
+                    }}
+                    className="hover:bg-[#1D493E]/5 transition"
+                  >
+                    Clear All
+                  </button>
+                  {/* Apply */}
+                  <button
+                    type="button"
+                    onClick={() => setShowFiltersDropdown(false)}
+                    style={{
+                      fontFamily: "'Outfit', sans-serif",
+                      fontWeight: 700,
+                      fontSize: "14px",
+                      color: "#FFFFFF",
+                      background: "#1D493E",
+                      border: "none",
+                      borderRadius: "4px",
+                      padding: "8px 28px",
+                      cursor: "pointer",
+                      letterSpacing: "0.3px",
+                    }}
+                    className="hover:bg-[#15342c] transition"
+                  >
+                    Apply
+                  </button>
+                </div>
               </div>
             )}
           </div>
@@ -948,12 +1011,31 @@ export default function HolidaysPortal() {
 
         {/* 3-COLUMN CARD GRID (Full width layout with increased sizes) */}
         {filteredAndSortedPackages.length === 0 ? (
-          <div className="bg-white border border-gray-100 rounded-[20px] p-16 text-center max-w-2xl mx-auto space-y-4">
+          <div className="bg-white border border-gray-100 rounded-[12px] p-16 text-center max-w-2xl mx-auto space-y-5">
             <div className="w-14 h-14 rounded-full bg-gray-50 border border-gray-100 flex items-center justify-center mx-auto text-gray-400">
               <Info className="w-8 h-8" />
             </div>
-            <h3 className="text-lg font-bold text-[#1D493E]">No experiences match your search</h3>
-            <p className="text-sm text-gray-500 leading-relaxed font-semibold">
+            <h3
+              style={{
+                fontFamily: "'Fraunces', serif",
+                fontSize: "22px",
+                fontWeight: 600,
+                color: "#1D493E",
+                margin: 0,
+              }}
+            >
+              No experiences match your search
+            </h3>
+            <p
+              style={{
+                fontFamily: "'Outfit', sans-serif",
+                fontSize: "15px",
+                fontWeight: 400,
+                color: "rgba(43, 43, 43, 0.6)",
+                lineHeight: "1.6",
+                margin: 0,
+              }}
+            >
               Try typing a different destination name or changing your category tab.
             </p>
             <button
@@ -963,7 +1045,19 @@ export default function HolidaysPortal() {
                 setActiveCategory('All');
                 setSortBy('recommended');
               }}
-              className="px-6 py-3 rounded-full bg-[#1D493E] text-white text-xs font-bold shadow hover:bg-[#15342c] transition cursor-pointer"
+              style={{
+                fontFamily: "'Outfit', sans-serif",
+                fontSize: "14px",
+                fontWeight: 700,
+                background: "#1D493E",
+                color: "#FFFFFF",
+                border: "none",
+                borderRadius: "4px",
+                padding: "10px 28px",
+                cursor: "pointer",
+                letterSpacing: "0.3px",
+              }}
+              className="hover:bg-[#15342c] transition"
             >
               Reset Search
             </button>
@@ -1030,6 +1124,44 @@ export default function HolidaysPortal() {
                         Best Seller
                       </div>
                     )}
+
+                    {/* Wishlist Button (Top Right) */}
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        toggleWishlist({ id: pkg.id, name: pkg.name, price: pkg.price, image: pkg.image, type: 'travel' });
+                      }}
+                      style={{
+                        position: "absolute",
+                        top: "12px",
+                        right: "12px",
+                        width: "36px",
+                        height: "36px",
+                        borderRadius: "50%",
+                        backgroundColor: "rgba(255, 255, 255, 0.9)",
+                        backdropFilter: "blur(4px)",
+                        border: "none",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        cursor: "pointer",
+                        zIndex: 20,
+                        boxShadow: "0 2px 8px rgba(0, 0, 0, 0.12)",
+                      }}
+                      className="hover:scale-110 active:scale-95 group transition"
+                      title={Array.isArray(wishlist) && wishlist.some((w: any) => w.id === pkg.id) ? "Remove from wishlist" : "Add to wishlist"}
+                      aria-label="Wishlist package"
+                    >
+                      <Heart 
+                        className={`w-4 h-4 transition-colors ${
+                          Array.isArray(wishlist) && wishlist.some((w: any) => w.id === pkg.id)
+                            ? 'text-red-500 fill-red-500' 
+                            : 'text-slate-700 group-hover:text-red-500'
+                        }`} 
+                      />
+                    </button>
                   </Link>
 
                   {/* Card Content details */}
@@ -2075,234 +2207,184 @@ export default function HolidaysPortal() {
         </div>
       </section>
 
-      {/* 4. SLIDING CHECKOUT / BOOKING DRAWER */}
+      {/* BOOKING FORM MODAL */}
       {activeBookPkg && (
-        <div className="fixed inset-0 z-50 overflow-hidden">
-          <div 
-            onClick={() => setActiveBookPkg(null)}
-            className="absolute inset-0 bg-[#0A1D19]/40 backdrop-blur-md transition-opacity duration-500"
-          />
-
-          <div className="absolute inset-y-0 right-0 max-w-full flex pl-10">
-            <div className="w-screen max-w-md bg-[#FAF9F6] border-l-4 border-[#1D493E] shadow-2xl flex flex-col justify-between">
-              
-              <div className="p-6 border-b border-[#1D493E]/10 flex items-center justify-between bg-[#0A1D19] text-white">
-                <div className="space-y-0.5 text-left">
-                  <span className="text-[8px] font-mono text-[#FFFF80] uppercase tracking-widest font-black">Expedition Checkout</span>
-                  <h3 className="text-lg font-serif font-bold text-white leading-tight">Configure Your Stay</h3>
-                </div>
-                <button 
+        <div
+          className="fixed inset-0 z-[99999] flex items-center justify-center p-4"
+          style={{ background: 'rgba(0,0,0,0.45)', backdropFilter: 'blur(6px)' }}
+          onClick={() => setActiveBookPkg(null)}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              width: '100%',
+              maxWidth: '778px',
+              maxHeight: '90vh',
+              overflowY: 'auto',
+              background: 'rgba(255,255,255,1)',
+              borderRadius: '4px',
+              border: '1px solid rgba(204,204,204,1)',
+              padding: '24px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '24px',
+              boxSizing: 'border-box',
+              boxShadow: '0 20px 60px rgba(0,0,0,0.15)',
+            }}
+          >
+            {bookingFormSuccess ? (
+              /* Success State */
+              <div style={{ textAlign: 'center', padding: '48px 0' }}>
+                <div style={{ fontSize: '48px', marginBottom: '16px' }}>✅</div>
+                <h3 style={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 700, fontSize: '24px', color: '#1D493E', margin: '0 0 12px' }}>
+                  Enquiry Submitted!
+                </h3>
+                <p style={{ fontFamily: '"Outfit", sans-serif', fontSize: '15px', color: 'rgba(43,43,43,0.7)', margin: '0 0 28px', lineHeight: 1.6 }}>
+                  We&apos;ve received your booking request for <strong>{activeBookPkg.name}</strong>. Our team will contact you shortly.
+                </p>
+                <button
                   onClick={() => setActiveBookPkg(null)}
-                  className="p-2 rounded-full hover:bg-white/10 text-white/75 hover:text-white transition cursor-pointer"
+                  style={{ height: '48px', padding: '0 36px', background: '#1D493E', color: '#fff', border: 'none', borderRadius: '4px', fontFamily: '"Outfit", sans-serif', fontWeight: 700, fontSize: '15px', cursor: 'pointer' }}
                 >
-                  <X className="w-5 h-5" />
+                  Done
                 </button>
               </div>
-
-              <div className="flex-1 overflow-y-auto p-6 space-y-6 text-left">
-                <div className="flex gap-4 p-4 border border-[#1D493E]/10 bg-white rounded-2xl">
-                  <img src={activeBookPkg.image} alt={activeBookPkg.name} className="w-20 h-20 rounded-xl object-cover shrink-0" />
-                  <div className="space-y-1 overflow-hidden">
-                    <span className="text-[9px] font-mono font-black text-[#FF623E] uppercase">{activeBookPkg.destination} • {activeBookPkg.duration}</span>
-                    <h4 className="font-serif font-bold text-sm text-[#1D493E] truncate">{activeBookPkg.name}</h4>
-                    <span className="text-xs font-mono font-black text-[#1D493E]/70 block">₹{activeBookPkg.price.toLocaleString('en-IN')} <span className="text-[9px] text-gray-400 font-normal">/ person</span></span>
-                  </div>
-                </div>
-
-                <form onSubmit={handleConfirmBooking} className="space-y-6">
-                  <div className="space-y-2.5">
-                    <label className="text-[10px] font-mono font-black uppercase tracking-wider text-[#1D493E]/60 block flex items-center gap-2">
-                      <Calendar className="w-4 h-4 text-[#FF623E]" /> Confirm Travel Date
-                    </label>
-                    <input 
-                      type="date"
-                      required
-                      value={bookingDate}
-                      onChange={(e) => setBookingDate(e.target.value)}
-                      onClick={(e) => {
-                        try {
-                          e.currentTarget.showPicker();
-                        } catch (err) {}
-                      }}
-                      onFocus={(e) => {
-                        try {
-                          e.currentTarget.showPicker();
-                        } catch (err) {}
-                      }}
-                      style={{ textAlign: "center" }}
-                      className="w-full px-4 py-3 rounded-xl border-2 border-[#1D493E] bg-white text-xs font-bold text-[#1D493E] focus:outline-none text-center cursor-pointer hide-calendar-picker-icon"
-                    />
-                  </div>
-
-                  <div className="space-y-2.5">
-                    <label className="text-[10px] font-mono font-black uppercase tracking-wider text-[#1D493E]/60 block flex items-center gap-2">
-                      <Users className="w-4 h-4 text-[#FF623E]" /> Number of Guests
-                    </label>
-                    <div className="flex items-center justify-between p-3 border-2 border-[#1D493E] bg-white rounded-xl">
-                      <span className="text-xs font-bold">Total Travelers</span>
-                      <div className="flex items-center gap-4">
-                        <button
-                          type="button"
-                          onClick={() => setBookingGuests(prev => Math.max(1, prev - 1))}
-                          className="w-8 h-8 rounded-full border border-[#1D493E]/20 flex items-center justify-center hover:bg-gray-100 cursor-pointer"
-                        >
-                          <Minus className="w-4 h-4" />
-                        </button>
-                        <span className="text-sm font-black w-4 text-center">{bookingGuests}</span>
-                        <button
-                          type="button"
-                          onClick={() => setBookingGuests(prev => Math.min(10, prev + 1))}
-                          className="w-8 h-8 rounded-full border border-[#1D493E]/20 flex items-center justify-center hover:bg-gray-100 cursor-pointer"
-                        >
-                          <Plus className="w-4 h-4" />
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="p-4 rounded-xl bg-gray-50 border border-gray-100 space-y-2">
-                    <div className="flex items-start gap-2 text-[11px] text-gray-500">
-                      <ShieldCheck className="w-4 h-4 text-[#1D493E] mt-0.5 shrink-0" />
-                      <span>Flexible changes allowed up to 15 days before travel.</span>
-                    </div>
-                  </div>
-                </form>
-              </div>
-
-              <div className="p-6 border-t border-[#1D493E]/10 bg-white space-y-4 text-left">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <span className="text-[9px] font-mono font-black text-gray-400 uppercase tracking-wider block">Estimated Cost</span>
-                    <span className="text-[11px] text-gray-400 font-bold block">₹{activeBookPkg.price.toLocaleString('en-IN')} × {bookingGuests} guests</span>
-                  </div>
-                  <span className="text-2xl font-black font-mono text-[#1D493E]">
-                    ₹{(activeBookPkg.price * bookingGuests).toLocaleString('en-IN')}
-                  </span>
-                </div>
-
-                {bookedSuccess ? (
-                  <div className="w-full py-3.5 rounded-xl bg-[#f3faf5] border-2 border-[#1D493E] flex items-center justify-center gap-2 text-[#1D493E] font-bold text-xs">
-                    <CheckCircle2 className="w-5 h-5 text-[#1D493E] animate-bounce" />
-                    <span>Added to Steamer Trunk!</span>
-                  </div>
-                ) : (
-                  <button
-                    onClick={handleConfirmBooking}
-                    className="w-full py-4 rounded-xl bg-[#FF623E] hover:bg-[#c94527] border border-[#1D493E] text-white text-xs font-black uppercase tracking-widest transition shadow-[4px_4px_0px_0px_#1D493E] hover:translate-x-[-2px] hover:translate-y-[-2px] active:translate-x-[0px] active:translate-y-[0px] cursor-pointer"
-                  >
-                    Add to Steamer Trunk
-                  </button>
-                )}
-              </div>
-
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* 5. BESPOKE INQUIRY MODAL (FOR DETAILED CONTENT INQUIRIES) */}
-      {activeInquiryPkg && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div 
-            onClick={() => setActiveInquiryPkg(null)}
-            className="absolute inset-0 bg-[#0A1D19]/40 backdrop-blur-md transition-opacity duration-500 animate-in fade-in"
-          />
-
-          <div className="relative w-full max-w-lg bg-[#FAF9F6] border-4 border-[#1D493E] p-8 md:p-10 rounded-[32px] shadow-[8px_8px_0px_0px_#1D493E] overflow-hidden z-10 animate-in zoom-in-95 duration-300 text-left">
-            <button
-              onClick={() => setActiveInquiryPkg(null)}
-              className="absolute top-4 left-4 p-2 rounded-full hover:bg-gray-100 text-[#1D493E] transition border border-transparent hover:border-[#1D493E] cursor-pointer"
-            >
-              <X className="w-5 h-5" />
-            </button>
-
-            {inquirySuccess ? (
-              <div className="py-8 text-center space-y-6">
-                <div className="w-16 h-16 rounded-full bg-[#f3faf5] border-2 border-[#1D493E] flex items-center justify-center mx-auto shadow-sm">
-                  <CheckCircle2 className="w-8 h-8 text-[#1D493E]" />
-                </div>
-                <div className="space-y-2">
-                  <span className="text-[9px] font-mono font-black uppercase tracking-wider text-[#FF623E] bg-[#FF623E]/10 px-3 py-1 rounded-full">
-                    Inquiry Confirmed
-                  </span>
-                  <h3 className="text-3xl font-serif font-black text-[#1D493E]">Tribe Notification Sent</h3>
-                  <p className="text-[#1D493E]/70 text-xs md:text-sm leading-relaxed max-w-sm mx-auto font-semibold">
-                    We have received your custom slow-travel request for <strong className="text-[#1D493E]">{activeInquiryPkg.destination}</strong>. Our local curators will email you a hand-crafted bespoke itinerary draft within 24 hours.
-                  </p>
-                </div>
-              </div>
             ) : (
-              <div className="space-y-6">
-                <div className="text-center space-y-2">
-                  <span className="text-[9px] font-mono font-black uppercase tracking-[0.2em] text-[#FF623E] bg-[#FF623E]/10 px-3 py-1 rounded-full">
-                    Go Banjāra Bespoke
-                  </span>
-                  <h3 className="text-3xl font-serif font-bold text-[#1D493E] tracking-tight">
-                    Custom {activeInquiryPkg.destination} Inquiry
-                  </h3>
-                  <p className="text-[#1D493E]/70 text-xs leading-relaxed max-w-sm mx-auto font-semibold">
-                    Let our local coordinators design a slow, hand-crafted itinerary tailored strictly to your rhythm.
+              <>
+                {/* Title */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                  <h2 style={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 700, fontSize: '28px', color: 'rgba(43,43,43,1)', margin: 0 }}>
+                    {activeBookPkg.name} Booking
+                  </h2>
+                  <p style={{ fontFamily: '"Outfit", sans-serif', fontSize: '14px', color: 'rgba(43,43,43,0.55)', margin: 0 }}>
+                    You can reach us anytime
                   </p>
                 </div>
 
-                <form onSubmit={handleInquirySubmit} className="space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-1.5">
-                      <label className="text-[9px] font-mono font-black text-[#1D493E]/65 uppercase block">Full Name</label>
-                      <input 
-                        type="text" 
-                        required
-                        value={inquiryForm.name}
-                        onChange={(e) => setInquiryForm(prev => ({ ...prev, name: e.target.value }))}
-                        placeholder="e.g. Rohan Dev"
-                        className="w-full px-4 py-3 rounded-xl border-2 border-[#1D493E] bg-white text-xs font-bold text-[#1D493E]"
-                      />
-                    </div>
-                    <div className="space-y-1.5">
-                      <label className="text-[9px] font-mono font-black text-[#1D493E]/65 uppercase block">Email Address</label>
-                      <input 
-                        type="email" 
-                        required
-                        value={inquiryForm.email}
-                        onChange={(e) => setInquiryForm(prev => ({ ...prev, email: e.target.value }))}
-                        placeholder="e.g. rohan@domain.com"
-                        className="w-full px-4 py-3 rounded-xl border-2 border-[#1D493E] bg-white text-xs font-bold text-[#1D493E]"
-                      />
-                    </div>
-                  </div>
+                {/* Full Name */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  <label style={{ fontFamily: '"Outfit", sans-serif', fontWeight: 500, fontSize: '14px', color: 'rgba(43,43,43,1)' }}>Full Name</label>
+                  <input
+                    type="text"
+                    value={bookingForm.name}
+                    onChange={(e) => setBookingForm(p => ({ ...p, name: e.target.value }))}
+                    placeholder="Enter your full name"
+                    style={{
+                      height: '48px', padding: '0 14px', border: '1px solid rgba(204,204,204,1)',
+                      borderRadius: '4px', fontFamily: '"Outfit", sans-serif', fontSize: '14px',
+                      color: 'rgba(43,43,43,1)', outline: 'none', boxSizing: 'border-box', width: '100%',
+                    }}
+                  />
+                </div>
 
-                  <div className="space-y-1.5">
-                    <label className="text-[9px] font-mono font-black text-[#1D493E]/65 uppercase block">Phone Number</label>
-                    <input 
-                      type="tel" 
-                      required
-                      value={inquiryForm.phone}
-                      onChange={(e) => setInquiryForm(prev => ({ ...prev, phone: e.target.value }))}
-                      placeholder="e.g. +91 98765 43210"
-                      className="w-full px-4 py-3 rounded-xl border-2 border-[#1D493E] bg-white text-xs font-bold text-[#1D493E]"
+                {/* Contact Number */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  <label style={{ fontFamily: '"Outfit", sans-serif', fontWeight: 500, fontSize: '14px', color: 'rgba(43,43,43,1)' }}>Contact Number</label>
+                  <div style={{ display: 'flex', gap: '0', border: '1px solid rgba(204,204,204,1)', borderRadius: '4px', overflow: 'hidden' }}>
+                    <select
+                      value={bookingForm.countryCode}
+                      onChange={(e) => setBookingForm(p => ({ ...p, countryCode: e.target.value }))}
+                      style={{
+                        height: '48px', padding: '0 8px', border: 'none', borderRight: '1px solid rgba(204,204,204,1)',
+                        background: 'rgba(248,248,248,1)', fontFamily: '"Outfit", sans-serif', fontSize: '13px',
+                        color: 'rgba(43,43,43,1)', outline: 'none', cursor: 'pointer', minWidth: '80px',
+                      }}
+                    >
+                      <option value="+91">+91</option>
+                      <option value="+1">+1</option>
+                      <option value="+44">+44</option>
+                      <option value="+61">+61</option>
+                      <option value="+971">+971</option>
+                      <option value="+65">+65</option>
+                    </select>
+                    <input
+                      type="tel"
+                      value={bookingForm.phone}
+                      onChange={(e) => setBookingForm(p => ({ ...p, phone: e.target.value }))}
+                      placeholder="Your phone number"
+                      style={{
+                        flex: 1, height: '48px', padding: '0 14px', border: 'none',
+                        fontFamily: '"Outfit", sans-serif', fontSize: '14px',
+                        color: 'rgba(43,43,43,1)', outline: 'none',
+                      }}
                     />
                   </div>
+                </div>
 
-                  <div className="space-y-1.5">
-                    <label className="text-[9px] font-mono font-black text-[#1D493E]/65 uppercase block">Special Requests / Pace Preference</label>
-                    <textarea 
-                      value={inquiryForm.notes}
-                      onChange={(e) => setInquiryForm(prev => ({ ...prev, notes: e.target.value }))}
-                      placeholder="e.g. We prefer quiet nature walks, culinary sessions, and starting our excursions after 10:00 AM..."
-                      rows={3}
-                      className="w-full px-4 py-3 rounded-xl border-2 border-[#1D493E] bg-white text-xs font-medium text-[#1D493E] placeholder-gray-400 focus:outline-none"
-                    />
-                  </div>
+                {/* No of Travelers */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  <label style={{ fontFamily: '"Outfit", sans-serif', fontWeight: 500, fontSize: '14px', color: 'rgba(43,43,43,1)' }}>No of Travelers</label>
+                  <input
+                    type="number"
+                    min="1"
+                    max="50"
+                    value={bookingForm.travelers}
+                    onChange={(e) => setBookingForm(p => ({ ...p, travelers: e.target.value }))}
+                    style={{
+                      height: '48px', padding: '0 14px', border: '1px solid rgba(204,204,204,1)',
+                      borderRadius: '4px', fontFamily: '"Outfit", sans-serif', fontSize: '14px',
+                      color: 'rgba(43,43,43,1)', outline: 'none', boxSizing: 'border-box', width: '100%',
+                    }}
+                  />
+                </div>
 
-                  <button
-                    type="submit"
-                    disabled={isSubmittingInquiry}
-                    className="w-full py-4 rounded-2xl bg-[#FF623E] hover:bg-[#c94527] text-white text-[10px] font-black uppercase tracking-widest transition duration-300 shadow-[4px_4px_0px_0px_#1D493E] hover:translate-x-[-2px] hover:translate-y-[-2px] border border-[#1D493E] cursor-pointer"
+                {/* Pick up location */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  <label style={{ fontFamily: '"Outfit", sans-serif', fontWeight: 500, fontSize: '14px', color: 'rgba(43,43,43,1)' }}>Pick up location</label>
+                  <select
+                    value={bookingForm.pickupLocation}
+                    onChange={(e) => setBookingForm(p => ({ ...p, pickupLocation: e.target.value }))}
+                    style={{
+                      height: '48px', padding: '0 14px', border: '1px solid rgba(204,204,204,1)',
+                      borderRadius: '4px', fontFamily: '"Outfit", sans-serif', fontSize: '14px',
+                      color: bookingForm.pickupLocation ? 'rgba(43,43,43,1)' : 'rgba(43,43,43,0.4)',
+                      outline: 'none', background: '#fff', cursor: 'pointer', width: '100%', boxSizing: 'border-box',
+                    }}
                   >
-                    {isSubmittingInquiry ? 'Sending to Curators...' : 'Submit Inquiry Request'}
-                  </button>
-                </form>
-              </div>
+                    <option value="" disabled>Ex: Telangana</option>
+                    {['Andhra Pradesh','Arunachal Pradesh','Assam','Bihar','Chhattisgarh','Goa','Gujarat','Haryana','Himachal Pradesh','Jharkhand','Karnataka','Kerala','Madhya Pradesh','Maharashtra','Manipur','Meghalaya','Mizoram','Nagaland','Odisha','Punjab','Rajasthan','Sikkim','Tamil Nadu','Telangana','Tripura','Uttar Pradesh','Uttarakhand','West Bengal','Delhi','Jammu & Kashmir','Ladakh'].map(state => (
+                      <option key={state} value={state}>{state}</option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Message */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  <label style={{ fontFamily: '"Outfit", sans-serif', fontWeight: 500, fontSize: '14px', color: 'rgba(43,43,43,1)' }}>Message</label>
+                  <textarea
+                    value={bookingForm.message}
+                    onChange={(e) => setBookingForm(p => ({ ...p, message: e.target.value }))}
+                    placeholder="Tell us about your requirements"
+                    rows={4}
+                    style={{
+                      padding: '12px 14px', border: '1px solid rgba(204,204,204,1)',
+                      borderRadius: '4px', fontFamily: '"Outfit", sans-serif', fontSize: '14px',
+                      color: 'rgba(43,43,43,1)', outline: 'none', resize: 'vertical',
+                      boxSizing: 'border-box', width: '100%', lineHeight: 1.6,
+                    }}
+                  />
+                </div>
+
+                {/* Submit Button */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (!bookingForm.name || !bookingForm.phone) return;
+                    setBookingFormSuccess(true);
+                  }}
+                  style={{
+                    width: '100%', height: '52px',
+                    background: 'rgba(29,73,62,1)', color: '#fff',
+                    border: 'none', borderRadius: '4px',
+                    fontFamily: '"Outfit", sans-serif', fontWeight: 700,
+                    fontSize: '16px', cursor: 'pointer', letterSpacing: '0.02em',
+                    transition: 'background 0.2s',
+                  }}
+                  className="hover:bg-[#15342c]"
+                >
+                  Submit Enquiry
+                </button>
+              </>
             )}
           </div>
         </div>

@@ -77,7 +77,7 @@ const FAQ_ITEMS = [
 ];
 
 export default function Homepage() {
-  const { addToCart, setCartOpen } = useCart();
+  const { addToCart, setCartOpen, wishlist, toggleWishlist } = useCart();
 
   const [productsList, setProductsList] = useState<any[]>(PRODUCTS);
   const [packagesList, setPackagesList] = useState<any[]>(HOLIDAY_PACKAGES);
@@ -450,6 +450,42 @@ export default function Homepage() {
                       className="w-full h-full object-cover" 
                       style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
                     />
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        toggleWishlist({ id: pkg1.id, name: pkg1.name, price: pkg1.price, image: pkg1.image, type: 'travel' });
+                      }}
+                      style={{
+                        position: "absolute",
+                        top: "12px",
+                        right: "12px",
+                        width: "36px",
+                        height: "36px",
+                        borderRadius: "50%",
+                        backgroundColor: "rgba(255, 255, 255, 0.9)",
+                        backdropFilter: "blur(4px)",
+                        border: "none",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        cursor: "pointer",
+                        zIndex: 20,
+                        boxShadow: "0 2px 8px rgba(0, 0, 0, 0.12)",
+                      }}
+                      className="hover:scale-110 active:scale-95 group transition"
+                      title={Array.isArray(wishlist) && wishlist.some((w: any) => w.id === pkg1.id) ? "Remove from wishlist" : "Add to wishlist"}
+                      aria-label="Wishlist package"
+                    >
+                      <Heart 
+                        className={`w-4 h-4 transition-colors ${
+                          Array.isArray(wishlist) && wishlist.some((w: any) => w.id === pkg1.id)
+                            ? 'text-red-500 fill-red-500' 
+                            : 'text-slate-700 group-hover:text-red-500'
+                        }`} 
+                      />
+                    </button>
                   </div>
                   {/* Details */}
                   <div className="w-full md:w-1/2 pt-4 pb-4 px-4 flex flex-col justify-between md:h-full bg-white shrink-0 gap-6 md:gap-0">
@@ -537,6 +573,42 @@ export default function Homepage() {
                         className="w-full h-full object-cover" 
                         style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
                       />
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          toggleWishlist({ id: pkg.id, name: pkg.name, price: pkg.price, image: pkg.image, type: 'travel' });
+                        }}
+                        style={{
+                          position: "absolute",
+                          top: "12px",
+                          right: "12px",
+                          width: "36px",
+                          height: "36px",
+                          borderRadius: "50%",
+                          backgroundColor: "rgba(255, 255, 255, 0.9)",
+                          backdropFilter: "blur(4px)",
+                          border: "none",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          cursor: "pointer",
+                          zIndex: 20,
+                          boxShadow: "0 2px 8px rgba(0, 0, 0, 0.12)",
+                        }}
+                        className="hover:scale-110 active:scale-95 group transition"
+                        title={Array.isArray(wishlist) && wishlist.some((w: any) => w.id === pkg.id) ? "Remove from wishlist" : "Add to wishlist"}
+                        aria-label="Wishlist package"
+                      >
+                        <Heart 
+                          className={`w-4 h-4 transition-colors ${
+                            Array.isArray(wishlist) && wishlist.some((w: any) => w.id === pkg.id)
+                              ? 'text-red-500 fill-red-500' 
+                              : 'text-slate-700 group-hover:text-red-500'
+                          }`} 
+                        />
+                      </button>
                     </div>
                     {/* Details block with padding */}
                     <div className="flex-1 flex flex-col justify-between pt-4 pb-4 px-4 gap-6 md:gap-0">
@@ -860,32 +932,52 @@ export default function Homepage() {
                 >
                   {/* Image Container with Dots (Width: 339px, Height: 254px, Radius: 4px) */}
                   <div className="relative w-full md:h-[254px] rounded-[4px] overflow-hidden shrink-0">
-                    <img 
-                      src={deal.images[activeImageIndices[deal.id] || 0]} 
-                      alt={deal.name} 
-                      className="w-full h-full object-cover"
-                      style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
-                    />
-                    {/* Dots indicator */}
-                    <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
-                      {deal.images.map((_: string, dotIdx: number) => {
-                        const isActive = (activeImageIndices[deal.id] || 0) === dotIdx;
-                        return (
-                          <button
-                            key={dotIdx}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              e.preventDefault();
-                              setActiveImageIndices(prev => ({ ...prev, [deal.id]: dotIdx }));
-                            }}
-                            className={`w-1.5 h-1.5 rounded-full transition-all duration-200 cursor-pointer ${
-                              isActive ? 'bg-[#1D493E] scale-110' : 'bg-gray-300 hover:bg-gray-400'
-                            }`}
-                            aria-label={`Go to slide ${dotIdx + 1}`}
-                          />
-                        );
-                      })}
-                    </div>
+                    <Link href={`/shop/product/${deal.id}`} className="w-full h-full block cursor-pointer">
+                      <img 
+                        src={deal.images[activeImageIndices[deal.id] || 0]} 
+                        alt={deal.name} 
+                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                        style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
+                      />
+                    </Link>
+                    {/* Wishlist Button (Top Right) */}
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        toggleWishlist(mockProduct);
+                      }}
+                      style={{
+                        position: "absolute",
+                        top: "10px",
+                        right: "10px",
+                        width: "34px",
+                        height: "34px",
+                        borderRadius: "50%",
+                        backgroundColor: "rgba(255, 255, 255, 0.9)",
+                        backdropFilter: "blur(4px)",
+                        border: "none",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        cursor: "pointer",
+                        zIndex: 20,
+                        boxShadow: "0 2px 8px rgba(0, 0, 0, 0.12)",
+                      }}
+                      className="hover:scale-110 active:scale-95 group transition"
+                      title={Array.isArray(wishlist) && wishlist.some((w: any) => w.id === deal.id) ? "Remove from wishlist" : "Add to wishlist"}
+                      aria-label="Wishlist product"
+                    >
+                      <Heart 
+                        className={`w-4 h-4 transition-colors ${
+                          Array.isArray(wishlist) && wishlist.some((w: any) => w.id === deal.id)
+                            ? 'text-red-500 fill-red-500' 
+                            : 'text-slate-600 group-hover:text-red-500'
+                        }`} 
+                      />
+                    </button>
+
                   </div>
 
                   {/* Details Block */}
@@ -897,7 +989,9 @@ export default function Homepage() {
                     
                     {/* Title & Price Row */}
                     <div className="w-full h-auto min-h-[35px] flex justify-between items-center gap-2">
-                      <h4 className="text-[15px] md:text-[17px] font-sans font-semibold text-[#2B2B2B] truncate">{deal.name}</h4>
+                      <Link href={`/shop/product/${deal.id}`} className="truncate hover:text-[#1D493E] transition">
+                        <h4 className="text-[15px] md:text-[17px] font-sans font-semibold text-[#2B2B2B] truncate">{deal.name}</h4>
+                      </Link>
                       <div className="flex items-center gap-2.5 shrink-0">
                         <span className="text-gray-400 line-through text-xs font-medium">₹{deal.originalPrice}</span>
                         <span className="text-[15px] md:text-[17px] font-sans font-semibold text-[#2B2B2B]">₹{deal.price}</span>
@@ -1084,26 +1178,7 @@ export default function Homepage() {
                       className="w-full h-full object-cover"
                       style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
                     />
-                    {/* Dots indicator */}
-                    <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
-                      {prod.images.map((_: string, dotIdx: number) => {
-                        const isActive = (activeImageIndices[prod.id] || 0) === dotIdx;
-                        return (
-                          <button
-                            key={dotIdx}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              e.preventDefault();
-                              setActiveImageIndices(prev => ({ ...prev, [prod.id]: dotIdx }));
-                            }}
-                            className={`w-1.5 h-1.5 rounded-full transition-all duration-200 cursor-pointer ${
-                              isActive ? 'bg-[#1D493E] scale-110' : 'bg-gray-300 hover:bg-gray-400'
-                            }`}
-                            aria-label={`Go to slide ${dotIdx + 1}`}
-                          />
-                        );
-                      })}
-                    </div>
+
                   </div>
 
                   {/* Details Block */}
@@ -1281,10 +1356,10 @@ export default function Homepage() {
             </h2>
           </div>
           {/* 3-column Testimonial Grid matching Figma design */}
-          <div className="relative w-full max-w-[1440px] h-auto overflow-visible px-6 md:px-[80px]">
+          <div className="relative w-full max-w-[1440px] h-auto overflow-hidden px-6 md:px-[80px]">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 h-auto relative z-10">
-              {/* Column 1 (Faded) */}
-              <div className="space-y-8 md:opacity-40 hover:opacity-100 transition duration-300">
+              {/* Column 1 (Faded sides) */}
+              <div className="space-y-8 opacity-40 hover:opacity-100 transition-opacity duration-500">
                 {[
                   {
                     id: "rev-1",
@@ -1310,7 +1385,7 @@ export default function Homepage() {
                       ))}
                     </div>
                     <p className="text-gray-500 font-semibold italic text-xs md:text-sm leading-relaxed">
-                      “{review.text}”
+                      "{review.text}"
                     </p>
                     <div className="flex items-center gap-3.5 pt-2 border-t border-gray-100">
                       <img src={review.avatar} alt={review.name} className="w-12 h-12 rounded-full object-cover shrink-0" />
@@ -1324,7 +1399,7 @@ export default function Homepage() {
               </div>
 
               {/* Column 2 (Active/Sharp highlighted) */}
-              <div className="space-y-8">
+              <div className="space-y-8 scale-[1.03] z-20 relative">
                 {[
                   {
                     id: "rev-2",
@@ -1343,14 +1418,14 @@ export default function Homepage() {
                     stars: 5
                   }
                 ].map((review) => (
-                  <div key={review.id} className="bg-white border border-gray-200 p-8 rounded-2xl space-y-5 text-left shadow-xs scale-102">
+                  <div key={review.id} className="bg-white border border-gray-200 p-8 rounded-2xl space-y-5 text-left shadow-lg">
                     <div className="flex text-amber-400 text-sm gap-0.5">
                       {Array.from({ length: review.stars }).map((_, s) => (
                         <Star key={s} className="w-3.5 h-3.5 fill-current" />
                       ))}
                     </div>
                     <p className="text-gray-700 font-bold italic text-xs md:text-sm leading-relaxed">
-                      “{review.text}”
+                      "{review.text}"
                     </p>
                     <div className="flex items-center gap-3.5 pt-2 border-t border-gray-100">
                       <img src={review.avatar} alt={review.name} className="w-12 h-12 rounded-full object-cover shrink-0" />
@@ -1363,8 +1438,8 @@ export default function Homepage() {
                 ))}
               </div>
 
-              {/* Column 3 (Faded) */}
-              <div className="space-y-8 md:opacity-40 hover:opacity-100 transition duration-300">
+              {/* Column 3 (Faded sides) */}
+              <div className="space-y-8 opacity-40 hover:opacity-100 transition-opacity duration-500">
                 {[
                   {
                     id: "rev-5",
@@ -1390,7 +1465,7 @@ export default function Homepage() {
                       ))}
                     </div>
                     <p className="text-gray-500 font-semibold italic text-xs md:text-sm leading-relaxed">
-                      “{review.text}”
+                      "{review.text}"
                     </p>
                     <div className="flex items-center gap-3.5 pt-2 border-t border-gray-100">
                       <img src={review.avatar} alt={review.name} className="w-12 h-12 rounded-full object-cover shrink-0" />
@@ -1404,15 +1479,16 @@ export default function Homepage() {
               </div>
             </div>
 
-            {/* Edge fade overlay */}
+            {/* Edge fade overlay — white vignette bleeding in from left & right */}
             <div 
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1542px] h-[639px] pointer-events-none z-20 hidden lg:block"
-              style={{
-                background: 'linear-gradient(90deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 12%, rgba(255, 255, 255, 0) 88%, #FFFFFF 100%)'
-              }}
+              className="absolute inset-y-0 left-0 w-[120px] pointer-events-none z-30 hidden lg:block"
+              style={{ background: 'linear-gradient(90deg, #FFFFFF 0%, rgba(255,255,255,0) 100%)' }}
+            />
+            <div 
+              className="absolute inset-y-0 right-0 w-[120px] pointer-events-none z-30 hidden lg:block"
+              style={{ background: 'linear-gradient(270deg, #FFFFFF 0%, rgba(255,255,255,0) 100%)' }}
             />
           </div>
-
         </div>
       </section>
 

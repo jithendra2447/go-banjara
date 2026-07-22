@@ -2,11 +2,12 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import { CartItem } from '@/types';
 
 interface CartContextType {
   cart: CartItem[];
-  addToCart: (item: any, type: 'shop' | 'travel', date?: string, guests?: number, size?: string) => void;
+  addToCart: (item: any, type: 'shop' | 'travel', date?: string, guests?: number, size?: string, quantity?: number) => void;
   removeFromCart: (id: string) => void;
   updateQuantity: (id: string, quantity: number) => void;
   clearCart: () => void;
@@ -30,6 +31,7 @@ interface CartContextType {
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const pathname = usePathname();
   const [cart, setCart] = useState<CartItem[]>([]);
   const [wishlist, setWishlist] = useState<any[]>([]);
   const [isCartOpen, setCartOpen] = useState(false);
@@ -38,6 +40,13 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [mounted, setMounted] = useState(false);
   const [user, setUser] = useState<any>(null);
   const [isAuthOpen, setAuthOpen] = useState(false);
+
+  // Automatically close side drawers when navigating to a new page/route
+  useEffect(() => {
+    setCartOpen(false);
+    setWishlistOpen(false);
+    setCheckoutOpen(false);
+  }, [pathname]);
 
   // Load cart, wishlist, and user from LocalStorage on mount
   useEffect(() => {
@@ -93,7 +102,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     alert('Logged out successfully from Go Banjāra.');
   };
 
-  const addToCart = (item: any, type: 'shop' | 'travel', date?: string, guests?: number, size?: string) => {
+  const addToCart = (item: any, type: 'shop' | 'travel', date?: string, guests?: number, size?: string, quantity: number = 1) => {
     setCart((prev) => {
       // Create a unique cart item ID for shop items if a size is selected
       const cartItemId = type === 'shop' && size ? `${item.id}-${size}` : item.id;
@@ -106,7 +115,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (existingIdx > -1) {
         const updated = [...prev];
         if (type === 'shop') {
-          updated[existingIdx].quantity += 1;
+          updated[existingIdx].quantity += (quantity || 1);
         } else {
           // Update guests count for travel package
           updated[existingIdx].guests = (updated[existingIdx].guests || 0) + (guests || 1);
@@ -121,14 +130,13 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         price: item.price,
         image: item.image,
         type,
-        quantity: 1,
+        quantity: quantity || 1,
         date,
         guests: type === 'travel' ? guests : undefined,
         size: type === 'shop' ? size : undefined,
       };
       return [...prev, newItem];
     });
-    setCartOpen(true); // Auto-open cart drawer on add
   };
 
   const removeFromCart = (id: string) => {

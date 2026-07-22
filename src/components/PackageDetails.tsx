@@ -362,7 +362,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
         backgroundColor: "rgba(255, 255, 255, 1)",
         paddingBottom: "62px",
       }}
-      className="text-[#1D493E] min-h-screen font-sans relative overflow-x-hidden w-full"
+      className="text-[#1D493E] min-h-screen font-sans relative overflow-x-clip w-full"
     >
       {/* Dynamic ambient particles removed for solid white background */}
 
@@ -1375,7 +1375,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
 
               {/* TAB CONTENT: Itinerary */}
               {activeTab === 'itinerary' && pkg.itinerary && (
-                <div className="space-y-6 text-left animate-in fade-in duration-300 w-full">
+                <div className="space-y-4 text-left animate-in fade-in duration-300 w-full">
                   <h3 
                     style={{
                       height: "auto",
@@ -1385,7 +1385,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                       margin: 0,
                       boxSizing: "border-box",
                     }}
-                    className="text-left mb-6 text-2xl md:text-[42px] leading-tight w-full"
+                    className="text-left mb-3 text-2xl md:text-[42px] leading-tight w-full"
                   >
                     A day-by-day breakdown of what to expect. Every day is designed to balance discovery, culture, and recovery.
                   </h3>
@@ -1694,8 +1694,8 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
             )}
           </div>
 
-          {/* RIGHT COLUMN: Booking Sidebar Panel */}
-          <div className="sticky top-6 space-y-6 w-full lg:max-w-[411px]">
+          {/* RIGHT COLUMN: Booking Sidebar Panel (Floats and scrolls down with page) */}
+          <div className="sticky top-[110px] self-start space-y-6 w-full lg:max-w-[411px] z-20">
             
             {/* Secure Booking Board Card */}
             <div 

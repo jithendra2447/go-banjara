@@ -2,8 +2,9 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Star, ShoppingCart } from 'lucide-react';
+import { Star, ShoppingCart, Heart } from 'lucide-react';
 import { Product } from '@/types';
+import { useCart } from '@/components/providers';
 
 interface ProductCardProps {
   product: Product;
@@ -11,8 +12,11 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product, onAddToCart }: ProductCardProps) {
+  const { wishlist, toggleWishlist } = useCart();
   const [activeImgIdx, setActiveImgIdx] = useState(0);
   const [isAdded, setIsAdded] = useState(false);
+
+  const isWishlisted = Array.isArray(wishlist) && wishlist.some((w: any) => w.id === product.id);
 
   let img = product.image;
   if (!img || img === 'undefined' || img.trim() === '') {
@@ -115,33 +119,45 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
             }}
           />
         </Link>
-        {/* Dots indicator */}
-        <div style={{ position: "absolute", bottom: "10px", left: "50%", transform: "translateX(-50%)", display: "flex", gap: "6px", zIndex: 10 }}>
-          {images.map((_: string, dotIdx: number) => {
-            const isActive = activeImgIdx === dotIdx;
-            return (
-              <button
-                key={dotIdx}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  e.preventDefault();
-                  setActiveImgIdx(dotIdx);
-                }}
-                style={{
-                  width: "6px",
-                  height: "6px",
-                  borderRadius: "50%",
-                  backgroundColor: isActive ? "rgba(29, 73, 62, 1)" : "rgba(204, 204, 204, 1)",
-                  border: "none",
-                  padding: 0,
-                  cursor: "pointer",
-                  transition: "background-color 0.2s ease",
-                }}
-                aria-label={`Go to slide ${dotIdx + 1}`}
-              />
-            );
-          })}
-        </div>
+        {/* Wishlist Button (Top Right) */}
+        <button
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleWishlist(mockProduct);
+          }}
+          style={{
+            position: "absolute",
+            top: "10px",
+            right: "10px",
+            width: "34px",
+            height: "34px",
+            borderRadius: "50%",
+            backgroundColor: "rgba(255, 255, 255, 0.9)",
+            backdropFilter: "blur(4px)",
+            border: "none",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            cursor: "pointer",
+            zIndex: 20,
+            boxShadow: "0 2px 8px rgba(0, 0, 0, 0.12)",
+            transition: "all 0.2s ease",
+          }}
+          className="hover:scale-110 active:scale-95 group"
+          title={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
+          aria-label={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
+        >
+          <Heart 
+            className={`w-4 h-4 transition-colors ${
+              isWishlisted 
+                ? 'text-red-500 fill-red-500' 
+                : 'text-slate-600 group-hover:text-red-500'
+            }`} 
+          />
+        </button>
+
       </div>
 
       {/* Details Block (Width: 339px, Height: 350px) */}

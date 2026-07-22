@@ -1344,8 +1344,8 @@ export default function KeralaDetails() {
 
               {/* Tab Contents: Itinerary Accordion */}
               {modalActiveTab === 'itinerary' && (
-                <div className="space-y-6 text-left animate-in fade-in duration-300">
-                  <h3 className="text-lg font-serif font-light text-[#E05434] leading-snug mb-4">
+                <div className="space-y-3 text-left animate-in fade-in duration-300">
+                  <h3 className="text-lg font-serif font-light text-[#E05434] leading-snug mb-2">
                     A day-by-day breakdown of what to expect.
                   </h3>
                   <div className="space-y-4">

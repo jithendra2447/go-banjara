@@ -2,21 +2,24 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { 
-  Menu, X, Phone, Mail, MapPin, User, Heart 
+  Menu, X, Phone, Mail, MapPin, User, Heart, Package, LogOut, Check
 } from 'lucide-react';
 import { useCart } from '@/components/providers';
 
 export const Navbar: React.FC = () => {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [isTravelHovered, setIsTravelHovered] = useState(false);
   const [isShopHovered, setIsShopHovered] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [selectedMenuItem, setSelectedMenuItem] = useState<string>('profile');
   const pathname = usePathname();
   const { cartCount, setCartOpen, wishlist, setWishlistOpen, user, logout, setAuthOpen } = useCart();
   const [searchVal, setSearchVal] = useState('');
   const [isScrolled, setIsScrolled] = useState(false);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   useEffect(() => {
     if (pathname !== '/') {
@@ -149,7 +152,7 @@ export const Navbar: React.FC = () => {
 
             {/* Wishlist Button (Hidden to match Figma mockup) */}
             <button
-              onClick={() => setWishlistOpen(true)}
+              onClick={() => router.push('/profile?tab=wishlist')}
               className="hidden relative p-2.5 rounded-full transition-all duration-300 items-center justify-center hover:scale-105 cursor-pointer hover:bg-gray-50 text-[#1D493E]"
               aria-label="Wishlist"
             >
@@ -163,7 +166,7 @@ export const Navbar: React.FC = () => {
 
             {/* Shopping Cart Bag (Redesigned with SVG cart from Figma mockup) */}
             <button
-              onClick={() => setCartOpen(true)}
+              onClick={() => router.push('/cart')}
               className={`relative p-2.5 rounded-full transition-all duration-300 flex items-center justify-center hover:scale-105 cursor-pointer h-[47px] w-[47px] shrink-0 ${
                 isTransparent ? 'text-white hover:bg-white/10' : 'text-[#1D493E] hover:bg-gray-50'
               }`}
@@ -200,37 +203,240 @@ export const Navbar: React.FC = () => {
                   <span>{user.name.split(' ')[0]}</span>
                 </button>
                 {isProfileOpen && (
-                  <div className="absolute right-0 mt-2 w-52 bg-white border border-slate-100 rounded-2xl shadow-xl p-3.5 z-50 text-slate-800 space-y-2 text-xs font-semibold animate-fade-in">
-                    <div className="pb-2.5 border-b border-slate-100">
-                      <p className="font-black text-primary-dark uppercase text-[10px] tracking-wider">Account</p>
-                      <p className="text-primary-dark/85 font-extrabold truncate mt-0.5">{user.name}</p>
-                      {user.email && <p className="text-[10px] text-slate-400 font-semibold truncate">{user.email}</p>}
-                      {user.phone && <p className="text-[10px] text-slate-400 font-semibold truncate">+91 {user.phone}</p>}
-                    </div>
-                    <Link
-                      href="/profile"
-                      onClick={() => setIsProfileOpen(false)}
-                      className="w-full text-left p-2 hover:bg-slate-50 text-primary-dark rounded-xl transition font-black uppercase tracking-wider text-[10px] block"
-                    >
-                      View Profile
-                    </Link>
-                    {(user.role === 'ADMIN' || user.email?.toLowerCase().includes('admin')) && (
-                      <Link
-                        href="/admin"
-                        onClick={() => setIsProfileOpen(false)}
-                        className="w-full text-left p-2 hover:bg-slate-50 text-[#FF5B37] rounded-xl transition font-black uppercase tracking-wider text-[10px] block font-bold"
-                      >
-                        Admin Portal
-                      </Link>
-                    )}
+                  <div
+                    className="absolute right-0 mt-2 z-50 flex flex-col select-none animate-fade-in"
+                    style={{
+                      width: '309px',
+                      height: 'auto',
+                      padding: '8px',
+                      gap: '4px',
+                      borderRadius: '4px',
+                      background: 'rgba(255, 255, 255, 1)',
+                      border: '1px solid rgba(204, 204, 204, 1)',
+                      boxShadow: '0px 4px 12px 0px rgba(43, 43, 43, 0.25)',
+                      boxSizing: 'border-box',
+                    }}
+                  >
+                    {/* Item 1: My Profile */}
+                    {(() => {
+                      const isProfileActive = pathname === '/profile' && (!selectedMenuItem || selectedMenuItem === 'profile');
+                      return (
+                        <Link
+                          href="/profile"
+                          onClick={() => {
+                            setSelectedMenuItem('profile');
+                            setIsProfileOpen(false);
+                          }}
+                          className="flex items-center justify-between transition cursor-pointer"
+                          style={{
+                            width: '293px',
+                            height: '48px',
+                            padding: '12px',
+                            gap: '10px',
+                            borderRadius: '4px',
+                            background: isProfileActive ? 'rgba(29, 73, 62, 0.08)' : '#FFFFFF',
+                            textDecoration: 'none',
+                            boxSizing: 'border-box',
+                          }}
+                        >
+                          <div className="flex items-center gap-[10px]">
+                            <User className="w-5 h-5 text-[#1D493E]" />
+                            <span 
+                              style={{ 
+                                fontFamily: '"Faktum", "Outfit", sans-serif', 
+                                fontWeight: 500, 
+                                fontSize: '18px', 
+                                color: '#1D493E' 
+                              }}
+                            >
+                              My Profile
+                            </span>
+                          </div>
+                          {isProfileActive && (
+                            <Check className="w-5 h-5 text-[#1D493E]" />
+                          )}
+                        </Link>
+                      );
+                    })()}
+
+                    {/* Item 2: My Orders */}
+                    {(() => {
+                      const isOrdersActive = selectedMenuItem === 'orders';
+                      return (
+                        <Link
+                          href="/profile?tab=orders"
+                          onClick={() => {
+                            setSelectedMenuItem('orders');
+                            setIsProfileOpen(false);
+                          }}
+                          className="flex items-center justify-between transition cursor-pointer"
+                          style={{
+                            width: '293px',
+                            height: '48px',
+                            padding: '12px',
+                            gap: '10px',
+                            borderRadius: '4px',
+                            background: isOrdersActive ? 'rgba(29, 73, 62, 0.08)' : '#FFFFFF',
+                            textDecoration: 'none',
+                            boxSizing: 'border-box',
+                          }}
+                        >
+                          <div className="flex items-center gap-[10px]">
+                            <Package className="w-5 h-5 text-[#2B2B2B]" />
+                            <span 
+                              style={{ 
+                                fontFamily: '"Faktum", "Outfit", sans-serif', 
+                                fontWeight: 500, 
+                                fontSize: '18px', 
+                                color: isOrdersActive ? '#1D493E' : 'rgba(43, 43, 43, 1)' 
+                              }}
+                            >
+                              My Orders
+                            </span>
+                          </div>
+                          {isOrdersActive && <Check className="w-5 h-5 text-[#1D493E]" />}
+                        </Link>
+                      );
+                    })()}
+
+                    {/* Item 3: Saved Addresses */}
+                    {(() => {
+                      const isAddressesActive = selectedMenuItem === 'addresses';
+                      return (
+                        <Link
+                          href="/profile?tab=addresses"
+                          onClick={() => {
+                            setSelectedMenuItem('addresses');
+                            setIsProfileOpen(false);
+                          }}
+                          className="flex items-center justify-between transition cursor-pointer"
+                          style={{
+                            width: '293px',
+                            height: '48px',
+                            padding: '12px',
+                            gap: '10px',
+                            borderRadius: '4px',
+                            background: isAddressesActive ? 'rgba(29, 73, 62, 0.08)' : '#FFFFFF',
+                            textDecoration: 'none',
+                            boxSizing: 'border-box',
+                          }}
+                        >
+                          <div className="flex items-center gap-[10px]">
+                            <MapPin className="w-5 h-5 text-[#2B2B2B]" />
+                            <span 
+                              style={{ 
+                                fontFamily: '"Faktum", "Outfit", sans-serif', 
+                                fontWeight: 500, 
+                                fontSize: '18px', 
+                                color: isAddressesActive ? '#1D493E' : 'rgba(43, 43, 43, 1)' 
+                              }}
+                            >
+                              Saved Addresses
+                            </span>
+                          </div>
+                          {isAddressesActive && <Check className="w-5 h-5 text-[#1D493E]" />}
+                        </Link>
+                      );
+                    })()}
+
+                    {/* Item 4: My Wishlist */}
                     <button
                       onClick={() => {
-                        logout();
+                        setSelectedMenuItem('wishlist');
                         setIsProfileOpen(false);
+                        router.push('/profile?tab=wishlist');
                       }}
-                      className="w-full text-left p-2 hover:bg-rose-50 text-rose-600 rounded-xl transition font-black uppercase tracking-wider text-[10px] cursor-pointer block"
+                      className="flex items-center justify-between transition w-full text-left cursor-pointer border-none"
+                      style={{
+                        width: '293px',
+                        height: '48px',
+                        padding: '12px',
+                        gap: '10px',
+                        borderRadius: '4px',
+                        background: selectedMenuItem === 'wishlist' ? 'rgba(29, 73, 62, 0.08)' : '#FFFFFF',
+                        boxSizing: 'border-box',
+                      }}
                     >
-                      Sign Out
+                      <div className="flex items-center gap-[10px]">
+                        <Heart className="w-5 h-5 text-[#2B2B2B]" />
+                        <span 
+                          style={{ 
+                            fontFamily: '"Faktum", "Outfit", sans-serif', 
+                            fontWeight: 500, 
+                            fontSize: '18px', 
+                            color: selectedMenuItem === 'wishlist' ? '#1D493E' : 'rgba(43, 43, 43, 1)' 
+                          }}
+                        >
+                          My Wishlist
+                        </span>
+                      </div>
+                      {selectedMenuItem === 'wishlist' && <Check className="w-5 h-5 text-[#1D493E]" />}
+                    </button>
+
+                    {/* Item 5: My Cart */}
+                    <button
+                      onClick={() => {
+                        setSelectedMenuItem('cart');
+                        setIsProfileOpen(false);
+                        router.push('/cart');
+                      }}
+                      className="flex items-center justify-between transition w-full text-left cursor-pointer border-none"
+                      style={{
+                        width: '293px',
+                        height: '48px',
+                        padding: '12px',
+                        gap: '10px',
+                        borderRadius: '4px',
+                        background: selectedMenuItem === 'cart' ? 'rgba(29, 73, 62, 0.08)' : '#FFFFFF',
+                        boxSizing: 'border-box',
+                      }}
+                    >
+                      <div className="flex items-center gap-[10px]">
+                        <Package className="w-5 h-5 text-[#2B2B2B]" />
+                        <span 
+                          style={{ 
+                            fontFamily: '"Faktum", "Outfit", sans-serif', 
+                            fontWeight: 500, 
+                            fontSize: '18px', 
+                            color: selectedMenuItem === 'cart' ? '#1D493E' : 'rgba(43, 43, 43, 1)' 
+                          }}
+                        >
+                          My Cart
+                        </span>
+                      </div>
+                      {selectedMenuItem === 'cart' && <Check className="w-5 h-5 text-[#1D493E]" />}
+                    </button>
+
+                    {/* Item 5: Logout */}
+                    <button
+                      onClick={() => {
+                        setIsProfileOpen(false);
+                        setShowLogoutModal(true);
+                      }}
+                      className="flex items-center justify-between transition w-full text-left cursor-pointer border-none mt-auto hover:opacity-90"
+                      style={{
+                        width: '293px',
+                        height: '48px',
+                        padding: '12px',
+                        gap: '10px',
+                        borderRadius: '4px',
+                        background: 'rgba(255, 235, 235, 0.6)',
+                        boxSizing: 'border-box',
+                      }}
+                    >
+                      <div className="flex items-center gap-[10px]">
+                        <LogOut className="w-5 h-5 text-[#FF3B30]" />
+                        <span 
+                          style={{ 
+                            fontFamily: '"Faktum", "Outfit", sans-serif', 
+                            fontWeight: 500, 
+                            fontSize: '18px', 
+                            color: '#FF3B30' 
+                          }}
+                        >
+                          Logout
+                        </span>
+                      </div>
                     </button>
                   </div>
                 )}
@@ -596,7 +802,7 @@ export const Navbar: React.FC = () => {
                   <button
                     onClick={() => {
                       setIsOpen(false);
-                      logout();
+                      setShowLogoutModal(true);
                     }}
                     className="px-3 py-1.5 bg-rose-50 text-rose-600 rounded-xl text-[9px] font-black uppercase tracking-wider cursor-pointer"
                   >
@@ -632,6 +838,134 @@ export const Navbar: React.FC = () => {
                 <span>Login</span>
               </button>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* Account Logout Confirmation Modal */}
+      {showLogoutModal && (
+        <div 
+          className="fixed inset-0 z-[99999] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm select-none"
+          onClick={() => setShowLogoutModal(false)}
+        >
+          <div 
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              width: "100%",
+              maxWidth: "460px",
+              maxHeight: "90vh",
+              overflowY: "auto",
+              borderRadius: "12px",
+              border: "1px solid rgba(204, 204, 204, 1)",
+              backgroundColor: "#FFFFFF",
+              padding: "32px 28px 24px",
+              display: "flex",
+              flexDirection: "column",
+              gap: "20px",
+              boxSizing: "border-box",
+              boxShadow: "0px 20px 60px rgba(0, 0, 0, 0.18)",
+            }}
+            className="text-left"
+          >
+            {/* Icon + Title */}
+            <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+              <div style={{
+                width: "48px", height: "48px",
+                borderRadius: "50%",
+                background: "rgba(255, 40, 0, 0.08)",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                flexShrink: 0,
+              }}>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,40,0,1)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                  <polyline points="16 17 21 12 16 7" />
+                  <line x1="21" y1="12" x2="9" y2="12" />
+                </svg>
+              </div>
+              <h3 style={{
+                fontFamily: '"Fraunces", Georgia, serif',
+                fontWeight: 700,
+                fontSize: "22px",
+                color: "rgba(43, 43, 43, 1)",
+                margin: 0,
+              }}>
+                Log out of your account?
+              </h3>
+            </div>
+
+            {/* Body text */}
+            <p style={{
+              fontFamily: '"Outfit", sans-serif',
+              fontWeight: 400,
+              fontSize: "15px",
+              lineHeight: "1.6",
+              color: "rgba(43, 43, 43, 0.7)",
+              margin: 0,
+            }}>
+              You&apos;ll be returned to the Home screen after logging out. Any unsaved changes may be lost.
+            </p>
+
+            {/* Action Buttons Column */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "10px", width: "100%" }}>
+              {/* Logout Red Button */}
+              <button
+                type="button"
+                onClick={() => {
+                  setShowLogoutModal(false);
+                  logout();
+                  router.push('/shop');
+                }}
+                style={{
+                  width: "100%",
+                  height: "48px",
+                  borderRadius: "6px",
+                  backgroundColor: "rgba(255, 40, 0, 1)",
+                  color: "#FFFFFF",
+                  fontFamily: '"Outfit", sans-serif',
+                  fontWeight: 700,
+                  fontSize: "15px",
+                  border: "none",
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "8px",
+                  letterSpacing: "0.01em",
+                }}
+                className="hover:opacity-90 active:scale-[0.98] transition cursor-pointer"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                  <polyline points="16 17 21 12 16 7" />
+                  <line x1="21" y1="12" x2="9" y2="12" />
+                </svg>
+                Yes, Log Out
+              </button>
+
+              {/* Cancel Button */}
+              <button
+                type="button"
+                onClick={() => setShowLogoutModal(false)}
+                style={{
+                  width: "100%",
+                  height: "48px",
+                  borderRadius: "6px",
+                  backgroundColor: "rgba(255, 241, 239, 1)",
+                  color: "rgba(255, 40, 0, 1)",
+                  fontFamily: '"Outfit", sans-serif',
+                  fontWeight: 600,
+                  fontSize: "15px",
+                  border: "1px solid rgba(255, 200, 195, 1)",
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+                className="hover:bg-[#FFE5E0] active:scale-[0.98] transition cursor-pointer"
+              >
+                Cancel, Stay Logged In
+              </button>
+            </div>
           </div>
         </div>
       )}

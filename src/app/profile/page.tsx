@@ -88,30 +88,8 @@ function ProfilePageContent() {
     return isoStr;
   };
 
-  // History list with 1 dummy product order for testing
-  const [history, setHistory] = useState<OrderHistoryItem[]>([
-    {
-      id: '4597534682159738',
-      date: '2026-07-06',
-      type: 'shop',
-      deliveryDate: 'MON, JULY 6TH',
-      paymentId: '4597534682159738',
-      status: 'Completed',
-      total: 22900,
-      items: [
-        {
-          name: 'Nomad Pro Canvas Pack',
-          price: 22900,
-          originalPrice: 22000,
-          discount: '16% off',
-          quantity: 1,
-          size: '45L',
-          color: 'Olive Drab',
-          image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500&h=500&fit=crop',
-        },
-      ],
-    },
-  ]);
+  // History list of user orders (hydrated from localStorage or API)
+  const [history, setHistory] = useState<OrderHistoryItem[]>([]);
 
   // Saved Addresses State — always starts empty on SSR, hydrated from localStorage client-side
   const [addressList, setAddressList] = useState<Array<{
@@ -3046,16 +3024,91 @@ function ProfilePageContent() {
 
           {/* TAB 4: MY WISHLIST */}
           {activeTab === 'wishlist' && (() => {
-            const displayWishlist = wishlist.length > 0 ? wishlist : [
-              { id: 'w1', name: 'Nomad Pro Canvas Pack', variant: 'Olive Drab / 45L', discount: '16% off', price: 22900, originalPrice: 22000, image: '/nomad_pro_canvas_pack.jpg' },
-              { id: 'w2', name: 'Nomad Pro Canvas Pack', variant: 'Olive Drab / 45L', discount: '16% off', price: 22900, originalPrice: 22000, image: '/nomad_pro_canvas_pack.jpg' },
-              { id: 'w3', name: 'Nomad Pro Canvas Pack', variant: 'Olive Drab / 45L', discount: '16% off', price: 22900, originalPrice: 22000, image: '/nomad_pro_canvas_pack.jpg' },
-              { id: 'w4', name: 'Nomad Pro Canvas Pack', variant: 'Olive Drab / 45L', discount: '16% off', price: 22900, originalPrice: 22000, image: '/nomad_pro_canvas_pack.jpg' },
-              { id: 'w5', name: 'Nomad Pro Canvas Pack', variant: 'Olive Drab / 45L', discount: '16% off', price: 22900, originalPrice: 22000, image: '/nomad_pro_canvas_pack.jpg' },
-              { id: 'w6', name: 'Nomad Pro Canvas Pack', variant: 'Olive Drab / 45L', discount: '16% off', price: 22900, originalPrice: 22000, image: '/nomad_pro_canvas_pack.jpg' },
-            ];
+            const displayWishlist = wishlist;
+            const totalCount = wishlist.length;
 
-            const totalCount = wishlist.length > 0 ? wishlist.length : 10;
+            if (totalCount === 0) {
+              return (
+                <div style={{ display: "flex", flexDirection: "column", gap: "24px", width: "100%" }}>
+                  <h2 
+                    style={{
+                      fontFamily: 'Faktum, sans-serif',
+                      fontWeight: 700,
+                      fontSize: '20px',
+                      color: 'rgba(141, 141, 141, 1)',
+                      textTransform: 'uppercase',
+                      margin: 0,
+                    }}
+                  >
+                    MY WISHLIST (0)
+                  </h2>
+                  <div 
+                    style={{
+                      width: "100%",
+                      borderRadius: "8px",
+                      border: "1px solid rgba(204, 204, 204, 1)",
+                      background: "#FFFFFF",
+                      padding: "48px 24px",
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      textAlign: "center",
+                      gap: "16px",
+                      boxSizing: "border-box",
+                    }}
+                  >
+                    <div style={{
+                      width: "64px", height: "64px", borderRadius: "50%",
+                      backgroundColor: "rgba(29, 73, 62, 0.08)",
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                      color: "#1D493E",
+                    }}>
+                      <Heart style={{ width: "32px", height: "32px" }} />
+                    </div>
+                    <h3 style={{
+                      fontFamily: '"Fraunces", Georgia, serif',
+                      fontWeight: 700,
+                      fontSize: "22px",
+                      color: "#2B2B2B",
+                      margin: 0,
+                    }}>
+                      Your Wishlist is Empty
+                    </h3>
+                    <p style={{
+                      fontFamily: '"Outfit", sans-serif',
+                      fontSize: "15px",
+                      color: "rgba(43, 43, 43, 0.7)",
+                      maxWidth: "380px",
+                      margin: 0,
+                      lineHeight: "1.5",
+                    }}>
+                      Browse our collection and tap the heart icon on any product to save your favorite items here.
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => router.push('/shop/all')}
+                      style={{
+                        height: "46px",
+                        padding: "0 28px",
+                        borderRadius: "6px",
+                        backgroundColor: "rgba(29, 73, 62, 1)",
+                        color: "#FFFFFF",
+                        fontFamily: '"Outfit", sans-serif',
+                        fontWeight: 600,
+                        fontSize: "15px",
+                        border: "none",
+                        cursor: "pointer",
+                        marginTop: "8px",
+                      }}
+                      className="hover:bg-[#15372e] active:scale-95 transition cursor-pointer"
+                    >
+                      Explore Shop
+                    </button>
+                  </div>
+                </div>
+              );
+            }
 
             return (
               <div 
@@ -3095,7 +3148,7 @@ function ProfilePageContent() {
                   }}
                 >
                   {displayWishlist.map((item: any, idx: number) => {
-                    const itemImg = item.image || (item.images && item.images[0]) || '/nomad_pro_canvas_pack.jpg';
+                    const itemImg = item.image || (item.images && item.images[0]) || '/go_banjara_tshirt.jpg';
                     const isLast = idx === displayWishlist.length - 1;
                     const itemQty = wishlistQuantities[item.id] || 1;
                     const basePrice = item.price || 149;

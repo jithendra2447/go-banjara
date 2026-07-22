@@ -83,7 +83,7 @@ export async function POST(request: Request) {
         id: `usr_${cleanPhone || Date.now()}`,
         name: displayName,
         email: userEmail,
-        phone: cleanPhone || '9999999999',
+        phone: cleanPhone || '',
         role: 'USER',
       },
     });

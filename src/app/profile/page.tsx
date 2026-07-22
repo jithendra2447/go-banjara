@@ -159,14 +159,16 @@ function ProfilePageContent() {
     }
   }, [searchParams, router]);
 
-  // Sync initial form values from user or default fallback
+  // Sync initial form values from user
   useEffect(() => {
-    setEditName(user?.name || 'Jithendra Varma');
-    setEditEmail(user?.email || 'jv@geonixa.com');
-    setEditPhone(user?.phone || '9492906356');
-    setEditAddress(user?.address || 'H.No 45, Banjara Hills, Road No 4');
-    setEditPincode(user?.pincode || '500034');
-    setEditDob(user?.dob || '15/08/1997');
+    setEditName(user?.name || '');
+    setEditEmail(user?.email || '');
+    const rawPhone = user?.phone || '';
+    const cleanP = rawPhone.replace(/[^0-9]/g, '');
+    setEditPhone(cleanP === '9999999999' || cleanP === '9492906356' ? '' : rawPhone);
+    setEditAddress(user?.address || '');
+    setEditPincode(user?.pincode || '');
+    setEditDob(user?.dob || '');
     setEditGender(((user?.gender as any) || 'Male') as 'Male' | 'Female' | 'Others');
   }, [user]);
 

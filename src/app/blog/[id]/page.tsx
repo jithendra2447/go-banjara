@@ -466,42 +466,39 @@ export default function BlogPostDetail() {
                 </p>
               ))}
 
-              {/* Highlight Callout Box — background: rgba(255,98,62,0.08) */}
+              {/* Highlight Callout Box — Clean Native Editorial Style */}
               {section.highlight && (
                 <div 
                   style={{
                     background: 'rgba(255, 98, 62, 0.08)',
-                    borderLeft: '4px solid rgba(255, 98, 62, 1)',
-                    borderRadius: '8px',
+                    borderLeft: '3px solid rgba(255, 98, 62, 1)',
+                    borderRadius: '0 4px 4px 0',
                     color: 'rgba(43, 43, 43, 1)',
                   }}
-                  className="p-5 my-4 text-sm font-semibold flex items-start gap-3 shadow-sm"
+                  className="p-4 my-4 text-sm font-semibold space-y-2"
                 >
-                  <Sparkles className="w-5 h-5 text-[#FF5A36] shrink-0 mt-0.5" />
-                  <div className="space-y-2">
-                    <p>{section.highlight}</p>
-                    {section.backlink && (
-                      section.backlink.url.startsWith('http') ? (
-                        <a 
-                          href={section.backlink.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 text-xs font-bold text-[#1D493E] underline hover:text-[#FF5A36] transition cursor-pointer"
-                        >
-                          <span>{section.backlink.label}</span>
-                          <ExternalLink className="w-3.5 h-3.5" />
-                        </a>
-                      ) : (
-                        <Link 
-                          href={section.backlink.url}
-                          className="inline-flex items-center gap-1.5 text-xs font-bold text-[#1D493E] underline hover:text-[#FF5A36] transition cursor-pointer"
-                        >
-                          <span>{section.backlink.label}</span>
-                          <ChevronRight className="w-3.5 h-3.5" />
-                        </Link>
-                      )
-                    )}
-                  </div>
+                  <p>{section.highlight}</p>
+                  {section.backlink && (
+                    section.backlink.url.startsWith('http') ? (
+                      <a 
+                        href={section.backlink.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-xs font-bold text-[#1D493E] underline hover:text-[#FF5A36] transition cursor-pointer"
+                      >
+                        <span>{section.backlink.label}</span>
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </a>
+                    ) : (
+                      <Link 
+                        href={section.backlink.url}
+                        className="inline-flex items-center gap-1.5 text-xs font-bold text-[#1D493E] underline hover:text-[#FF5A36] transition cursor-pointer"
+                      >
+                        <span>{section.backlink.label}</span>
+                        <ChevronRight className="w-3.5 h-3.5" />
+                      </Link>
+                    )
+                  )}
                 </div>
               )}
 
@@ -513,7 +510,7 @@ export default function BlogPostDetail() {
                       href={section.backlink.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs font-bold text-[#1D493E] bg-[#FAF9F6] border border-[#E5E0D5] px-3.5 py-2 rounded-lg hover:bg-[#F4F1EA] transition cursor-pointer"
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-[#1D493E] hover:text-[#FF5A36] transition cursor-pointer"
                     >
                       <span>{section.backlink.label}</span>
                       <ExternalLink className="w-3.5 h-3.5 text-[#FF5A36]" />
@@ -521,7 +518,7 @@ export default function BlogPostDetail() {
                   ) : (
                     <Link 
                       href={section.backlink.url}
-                      className="inline-flex items-center gap-1.5 text-xs font-bold text-[#1D493E] bg-[#FAF9F6] border border-[#E5E0D5] px-3.5 py-2 rounded-lg hover:bg-[#F4F1EA] transition cursor-pointer"
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-[#1D493E] hover:text-[#FF5A36] transition cursor-pointer"
                     >
                       <span>{section.backlink.label}</span>
                       <ChevronRight className="w-3.5 h-3.5 text-[#1D493E]" />
@@ -532,10 +529,10 @@ export default function BlogPostDetail() {
 
               {/* Bullets List */}
               {section.bullets && section.bullets.length > 0 && (
-                <ul className="space-y-2.5 my-4">
+                <ul className="space-y-2 my-4">
                   {section.bullets.map((bullet, bIdx) => (
                     <li key={bIdx} className="flex items-start gap-2.5 text-sm font-medium text-[#2D3748]">
-                      <CheckCircle2 className="w-4 h-4 text-[#1D493E] shrink-0 mt-0.5" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#1D493E] shrink-0 mt-2" />
                       <span>{bullet}</span>
                     </li>
                   ))}
@@ -545,7 +542,7 @@ export default function BlogPostDetail() {
               {/* Inline Section Image */}
               {section.image && (
                 <div className="space-y-2 my-6">
-                  <div className="w-full h-80 rounded-2xl overflow-hidden border border-[#E5E0D5] shadow-md">
+                  <div className="w-full h-80 rounded-lg overflow-hidden border border-[#E5E0D5] shadow-sm">
                     <img 
                       src={section.image} 
                       alt={`${section.title} | Go Banjara Travel Guide`}
@@ -563,32 +560,23 @@ export default function BlogPostDetail() {
             </section>
           ))}
 
-          {/* Rider FAQs Accordion (SEO Schema) */}
+          {/* FAQs Section — Clean Divide-Y Native Theme */}
           {article.faqs && article.faqs.length > 0 && (
-            <section id="faqs" className="space-y-4 pt-6">
-              <h2 
-                style={{ fontFamily: '"Fraunces", serif', color: '#1D493E' }}
-                className="text-2xl font-bold border-b border-[#E5E0D5] pb-2 flex items-center gap-2"
+            <section id="faqs" className="space-y-4 pt-8">
+              <h3 
+                style={{ fontFamily: 'Fraunces, Georgia, serif', fontWeight: 600, color: 'rgba(43, 43, 43, 1)' }}
+                className="text-2xl border-b border-[#E5E0D5] pb-3"
               >
-                <HelpCircle className="w-6 h-6 text-[#FF5A36]" />
-                Frequently Asked Questions (Rider FAQs)
-              </h2>
+                Frequently Asked Questions
+              </h3>
 
-              <div className="space-y-3">
+              <div className="divide-y divide-slate-200">
                 {article.faqs.map((faq, fIdx) => (
-                  <div 
-                    key={fIdx}
-                    style={{
-                      backgroundColor: '#FAF9F6',
-                      border: '1px solid #E5E0D5',
-                      borderRadius: '16px',
-                    }}
-                    className="p-5 space-y-2"
-                  >
-                    <h4 style={{ fontFamily: '"Fraunces", serif', color: '#1D493E' }} className="font-bold text-base">
-                      Q: {faq.q}
+                  <div key={fIdx} className="py-4 space-y-1">
+                    <h4 style={{ fontFamily: 'Fraunces, Georgia, serif', fontWeight: 600, color: 'rgba(43, 43, 43, 1)' }} className="text-base">
+                      {faq.q}
                     </h4>
-                    <p className="text-sm text-[#4A5568] leading-relaxed font-medium">
+                    <p style={{ fontFamily: 'Faktum, var(--font-sans), sans-serif', color: 'rgba(43, 43, 43, 0.8)' }} className="text-sm leading-relaxed">
                       {faq.a}
                     </p>
                   </div>
@@ -597,28 +585,20 @@ export default function BlogPostDetail() {
             </section>
           )}
 
-          {/* Author Signature Box */}
-          <div 
-            style={{
-              backgroundColor: '#FAF9F6',
-              border: '1px solid #E5E0D5',
-              borderRadius: '20px',
-            }}
-            className="p-6 flex items-center gap-4 mt-12"
-          >
+          {/* Author Signature Line — Minimal Native Style */}
+          <div className="pt-8 border-t border-[#E5E0D5] flex items-center gap-4 mt-12">
             <img 
               src={article.author.avatar} 
               alt={`${article.author.name} | Go Banjara Travel Author`}
               title={`${article.author.name} | Go Banjara Team`}
-              className="w-16 h-16 rounded-full object-cover border-2 border-[#1D493E]"
+              className="w-12 h-12 rounded-full object-cover border border-slate-200"
             />
             <div>
-              <h4 style={{ fontFamily: '"Fraunces", serif', color: '#1D493E' }} className="font-bold text-lg">
+              <h4 style={{ fontFamily: 'Fraunces, Georgia, serif', fontWeight: 600, color: 'rgba(43, 43, 43, 1)' }} className="text-base">
                 Written by {article.author.name}
               </h4>
-              <p className="text-xs text-[#526E65] font-medium mt-0.5">{article.author.role}</p>
-              <p className="text-xs text-[#4A5568] mt-2">
-                Passionate about high-altitude expeditions, mountain culture, and curating authentic travel experiences across India.
+              <p style={{ fontFamily: 'Faktum, var(--font-sans), sans-serif', color: 'rgba(43, 43, 43, 0.6)' }} className="text-xs font-medium">
+                {article.author.role}
               </p>
             </div>
           </div>

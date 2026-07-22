@@ -3686,7 +3686,7 @@ function ProfilePageContent() {
 
                               <button
                                 type="button"
-                                onClick={() => removeFromCart(item.id)}
+                                onClick={() => removeFromCart(item.id, item.name)}
                                 style={{
                                   width: "47px",
                                   height: "47px",

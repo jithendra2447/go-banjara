@@ -3,12 +3,13 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
+import { X } from 'lucide-react';
 import { CartItem } from '@/types';
 
 interface CartContextType {
   cart: CartItem[];
   addToCart: (item: any, type: 'shop' | 'travel', date?: string, guests?: number, size?: string, quantity?: number) => void;
-  removeFromCart: (id: string) => void;
+  removeFromCart: (id: string, itemName?: string) => void;
   updateQuantity: (id: string, quantity: number) => void;
   clearCart: () => void;
   cartCount: number;
@@ -138,8 +139,22 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     });
   };
 
-  const removeFromCart = (id: string) => {
-    setCart((prev) => prev.filter((i) => i.id !== id));
+  const [cartToast, setCartToast] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (cartToast) {
+      const timer = setTimeout(() => setCartToast(null), 3500);
+      return () => clearTimeout(timer);
+    }
+  }, [cartToast]);
+
+  const removeFromCart = (id: string, customName?: string) => {
+    setCart((prev) => {
+      const itemToRemove = prev.find((i) => i.id === id);
+      const itemName = customName || itemToRemove?.name || 'Item';
+      setCartToast(`Removed ${itemName} from your cart.`);
+      return prev.filter((i) => i.id !== id);
+    });
   };
 
   const updateQuantity = (id: string, quantity: number) => {
@@ -205,6 +220,24 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setAuthOpen,
       }}
     >
+      {/* Global Go Banjāra Cart Toast Notification */}
+      {cartToast && (
+        <div 
+          className="fixed bottom-6 right-6 z-[999999] flex items-center gap-3 bg-[#1D493E] text-white px-5 py-3.5 rounded-lg shadow-2xl border border-[#D3FFBF]/30 animate-fade-in max-w-md"
+          style={{ fontFamily: '"Faktum", "Outfit", sans-serif' }}
+        >
+          <span className="text-xl">🎒</span>
+          <span className="text-sm font-medium flex-1 leading-snug">{cartToast}</span>
+          <button 
+            type="button"
+            onClick={() => setCartToast(null)}
+            className="text-white/70 hover:text-white transition p-1 cursor-pointer"
+            aria-label="Close notification"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+      )}
       {children}
     </CartContext.Provider>
   );

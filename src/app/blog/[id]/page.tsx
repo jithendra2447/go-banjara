@@ -286,16 +286,63 @@ export default function BlogPostDetail() {
         }}
       />
 
-      {/* ── BREADCRUMB & TOP NAV BAR ── */}
-      <div className="w-full bg-white border-b border-[#E5E0D5] py-4 px-6 md:px-[80px]">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <Link 
-            href="/blog"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-[#1D493E] hover:opacity-80 transition cursor-pointer"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            <span>Back to All Blogs</span>
-          </Link>
+      {/* ── BREADCRUMB BAR (Matching Go Banjara Shop/Product Breadcrumb Spec) ── */}
+      <div className="w-full bg-white border-b border-gray-200 py-3.5 px-6 md:px-[80px]">
+        <div className="max-w-[1280px] mx-auto flex items-center justify-between gap-4 flex-wrap">
+          <nav className="flex items-center gap-2 text-sm font-sans font-medium">
+            <Link 
+              href="/" 
+              style={{
+                fontFamily: "Faktum, sans-serif",
+                fontWeight: 500,
+                fontSize: "14px",
+                lineHeight: "20px",
+                color: "rgba(141, 141, 141, 1)",
+              }}
+              className="hover:text-[#1D493E] transition-colors"
+            >
+              Home
+            </Link>
+            <span style={{ color: "rgba(141, 141, 141, 1)", fontSize: "14px" }}>›</span>
+            <Link 
+              href="/blog" 
+              style={{
+                fontFamily: "Faktum, sans-serif",
+                fontWeight: 500,
+                fontSize: "14px",
+                lineHeight: "20px",
+                color: "rgba(141, 141, 141, 1)",
+              }}
+              className="hover:text-[#1D493E] transition-colors"
+            >
+              Blogs
+            </Link>
+            <span style={{ color: "rgba(141, 141, 141, 1)", fontSize: "14px" }}>›</span>
+            <span 
+              style={{
+                fontFamily: "Faktum, sans-serif",
+                fontWeight: 500,
+                fontSize: "14px",
+                lineHeight: "20px",
+                color: "rgba(141, 141, 141, 1)",
+              }}
+            >
+              {article.category}
+            </span>
+            <span style={{ color: "rgba(141, 141, 141, 1)", fontSize: "14px" }}>›</span>
+            <span 
+              style={{
+                fontFamily: "Faktum, sans-serif",
+                fontWeight: 500,
+                fontSize: "14px",
+                lineHeight: "20px",
+                color: "rgba(29, 73, 62, 1)",
+              }}
+              className="font-semibold line-clamp-1 max-w-[280px] sm:max-w-none"
+            >
+              {article.title}
+            </span>
+          </nav>
 
           <div className="flex items-center gap-3">
             <button
@@ -320,31 +367,14 @@ export default function BlogPostDetail() {
 
       {/* ── ARTICLE HEADER ── */}
       <header className="max-w-4xl mx-auto px-6 pt-10 pb-6 text-center">
-        {/* Category Pill — Figma: Faktum 600 14px uppercase, color: rgba(255,98,62,1), background: rgba(255,98,62,0.08) */}
-        <span 
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            height: '32px',
-            padding: '6px 16px',
-            fontFamily: 'Faktum, var(--font-sans), sans-serif',
-            fontWeight: 600,
-            fontSize: '14px',
-            lineHeight: '100%',
-            letterSpacing: '1.2px',
-            color: 'rgba(255, 98, 62, 1)',
-            background: 'rgba(255, 98, 62, 0.08)',
-            borderRadius: '100px',
-            textTransform: 'uppercase',
-            textAlign: 'center',
-            marginBottom: '16px',
-          }}
-        >
-          {article.category}
-        </span>
+        {/* Category Pill — Native Go Banjara Pill */}
+        <div className="w-[120px] min-w-[120px] h-[26px] flex items-center justify-center bg-[#FFEBE5] rounded-[4px] mb-4 mx-auto">
+          <span className="font-sans font-semibold text-[14px] leading-none tracking-[1.2px] text-[#FF623E] uppercase px-2">
+            {article.category}
+          </span>
+        </div>
 
-        {/* Title — Figma: Fraunces 600 42px lh:100% rgba(43,43,43,1) */}
+        {/* Title — Native Go Banjara Serif Heading */}
         <h1 
           style={{ fontFamily: 'Fraunces, Georgia, serif', fontWeight: 600, color: 'rgba(43, 43, 43, 1)' }}
           className="text-3xl md:text-5xl leading-tight md:leading-snug mb-6"
@@ -353,32 +383,26 @@ export default function BlogPostDetail() {
         </h1>
 
         {/* Author & Meta Row */}
-        <div className="flex items-center justify-center gap-4 text-xs md:text-sm text-[#526E65] font-medium border-y border-[#E5E0D5] py-3.5">
+        <div className="flex items-center justify-center gap-4 text-xs md:text-sm text-[#2B2B2B]/70 font-medium border-y border-gray-200 py-3.5">
           <div className="flex items-center gap-2">
             <img 
               src={article.author.avatar} 
               alt={`${article.author.name} | Go Banjara Travel Specialist`}
               title={`${article.author.name} | Go Banjara Team`}
-              className="w-8 h-8 rounded-full object-cover border border-[#1D493E]/20"
+              className="w-7 h-7 rounded-full object-cover border border-gray-200"
             />
-            <span className="font-semibold text-[#1D493E]">{article.author.name}</span>
+            <span className="font-semibold text-[#2B2B2B]">{article.author.name}</span>
           </div>
           <span>•</span>
-          <div className="flex items-center gap-1">
-            <Calendar className="w-4 h-4 text-[#1D493E]" />
-            <span>{article.date}</span>
-          </div>
+          <span>{article.date}</span>
           <span>•</span>
-          <div className="flex items-center gap-1">
-            <Clock className="w-4 h-4 text-[#1D493E]" />
-            <span>{article.readTime}</span>
-          </div>
+          <span>{article.readTime}</span>
         </div>
       </header>
 
       {/* ── HERO COVER IMAGE WITH CAPTION ── */}
       <div className="max-w-5xl mx-auto px-6 mb-12">
-        <div className="w-full h-[320px] md:h-[500px] rounded-3xl overflow-hidden shadow-xl border border-[#E5E0D5]">
+        <div className="w-full h-[320px] md:h-[500px] rounded-[4px] overflow-hidden bg-gray-100 border border-gray-150">
           <img 
             src={article.heroImage} 
             alt={`${article.title} | Go Banjara Himalayan Travel Guide`}
@@ -386,7 +410,7 @@ export default function BlogPostDetail() {
             className="w-full h-full object-cover"
           />
         </div>
-        <p className="text-center text-xs text-[#526E65] italic mt-3 font-medium">
+        <p className="text-center text-xs text-[#2B2B2B]/60 italic mt-3 font-medium">
           Riding through the majestic mountain corridors of Ladakh. Photo: Go Banjara Explorers
         </p>
       </div>
@@ -394,13 +418,13 @@ export default function BlogPostDetail() {
       {/* ── ARTICLE CONTENT & SIDEBAR ── */}
       <div className="max-w-6xl mx-auto px-6 flex flex-col lg:flex-row gap-12 items-start">
         
-        {/* Table of Contents Sidebar (Clean Native Styling) */}
+        {/* Table of Contents Sidebar (Native Go Banjara Theme) */}
         {article.toc.length > 0 && (
           <aside 
             style={{
               background: 'rgba(255, 255, 255, 1)',
               border: '1px solid rgba(204, 204, 204, 1)',
-              borderRadius: '6px',
+              borderRadius: '4px',
               boxSizing: 'border-box',
             }}
             className="w-full lg:w-80 p-6 sticky top-28 shrink-0 select-none"
@@ -413,12 +437,11 @@ export default function BlogPostDetail() {
                 color: 'rgba(43, 43, 43, 1)',
                 borderBottom: '1px solid rgba(204, 204, 204, 1)',
               }}
-              className="pb-3 mb-4 flex items-center gap-2"
+              className="pb-3 mb-4"
             >
-              <Compass className="w-4 h-4 text-[#FF5A36]" />
               Table of Contents
             </h4>
-            <nav className="space-y-2 text-sm font-medium">
+            <nav className="space-y-2.5 text-sm font-medium">
               {article.toc.map((item) => (
                 <a
                   key={item.id}
@@ -427,7 +450,7 @@ export default function BlogPostDetail() {
                     fontFamily: 'Faktum, var(--font-sans), sans-serif',
                     color: 'rgba(43, 43, 43, 0.8)',
                   }}
-                  className="block py-1 hover:text-[#1D493E] hover:font-bold transition"
+                  className="block py-1 hover:text-[#FF5A36] transition"
                 >
                   {item.title}
                 </a>
@@ -440,8 +463,8 @@ export default function BlogPostDetail() {
         <main className="flex-1 space-y-10 text-[#2B2B2B] leading-relaxed">
           {/* Excerpt Lead */}
           <p 
-            style={{ fontFamily: '"Fraunces", serif', color: '#1D493E' }}
-            className="text-xl font-medium leading-relaxed italic border-l-4 border-[#1D493E] pl-4 py-1"
+            style={{ fontFamily: 'Fraunces, Georgia, serif', color: 'rgba(43, 43, 43, 1)' }}
+            className="text-xl md:text-[22px] font-medium leading-relaxed italic border-l-4 border-[#1D493E] pl-4 py-1"
           >
             &ldquo;{article.excerpt}&rdquo;
           </p>
@@ -451,7 +474,7 @@ export default function BlogPostDetail() {
             <section key={section.id} id={section.id} className="space-y-4 pt-2">
               <h2 
                 style={{ fontFamily: 'Fraunces, Georgia, serif', fontWeight: 600, color: 'rgba(43, 43, 43, 1)' }}
-                className="text-2xl border-b border-[#E5E0D5] pb-2"
+                className="text-2xl border-b border-gray-200 pb-2"
               >
                 {section.title}
               </h2>
@@ -466,16 +489,16 @@ export default function BlogPostDetail() {
                 </p>
               ))}
 
-              {/* Highlight Callout Box — Clean Native Editorial Style */}
+              {/* Highlight Callout Box — Native Go Banjara Accent */}
               {section.highlight && (
                 <div 
                   style={{
-                    background: 'rgba(255, 98, 62, 0.08)',
-                    borderLeft: '3px solid rgba(255, 98, 62, 1)',
+                    background: 'rgba(255, 235, 232, 0.5)',
+                    borderLeft: '4px solid rgba(255, 98, 62, 1)',
                     borderRadius: '0 4px 4px 0',
                     color: 'rgba(43, 43, 43, 1)',
                   }}
-                  className="p-4 my-4 text-sm font-semibold space-y-2"
+                  className="p-5 my-5 text-sm font-semibold space-y-2"
                 >
                   <p>{section.highlight}</p>
                   {section.backlink && (
@@ -529,9 +552,9 @@ export default function BlogPostDetail() {
 
               {/* Bullets List */}
               {section.bullets && section.bullets.length > 0 && (
-                <ul className="space-y-2 my-4">
+                <ul className="space-y-2.5 my-4">
                   {section.bullets.map((bullet, bIdx) => (
-                    <li key={bIdx} className="flex items-start gap-2.5 text-sm font-medium text-[#2D3748]">
+                    <li key={bIdx} className="flex items-start gap-2.5 text-sm font-medium text-[#2B2B2B]">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#1D493E] shrink-0 mt-2" />
                       <span>{bullet}</span>
                     </li>
@@ -542,7 +565,7 @@ export default function BlogPostDetail() {
               {/* Inline Section Image */}
               {section.image && (
                 <div className="space-y-2 my-6">
-                  <div className="w-full h-80 rounded-lg overflow-hidden border border-[#E5E0D5] shadow-sm">
+                  <div className="w-full h-80 rounded-[4px] overflow-hidden border border-gray-150 shadow-sm">
                     <img 
                       src={section.image} 
                       alt={`${section.title} | Go Banjara Travel Guide`}
@@ -551,7 +574,7 @@ export default function BlogPostDetail() {
                     />
                   </div>
                   {section.imageCaption && (
-                    <p className="text-center text-xs text-[#526E65] italic font-medium">
+                    <p className="text-center text-xs text-[#2B2B2B]/60 italic font-medium">
                       {section.imageCaption}
                     </p>
                   )}
@@ -560,23 +583,27 @@ export default function BlogPostDetail() {
             </section>
           ))}
 
-          {/* FAQs Section — Clean Divide-Y Native Theme */}
+          {/* FAQs Section — Matching Go Banjara Accordion Theme */}
           {article.faqs && article.faqs.length > 0 && (
-            <section id="faqs" className="space-y-4 pt-8">
-              <h3 
-                style={{ fontFamily: 'Fraunces, Georgia, serif', fontWeight: 600, color: 'rgba(43, 43, 43, 1)' }}
-                className="text-2xl border-b border-[#E5E0D5] pb-3"
-              >
-                Frequently Asked Questions
-              </h3>
+            <section id="faqs" className="w-full pt-8 border-t border-gray-200">
+              <div className="mb-6">
+                <div className="w-[54px] h-[26px] flex items-center justify-center bg-[#FFEBE5] rounded-[4px] mb-2">
+                  <span className="font-sans font-semibold text-[14px] leading-none tracking-[1.2px] text-[#FF623E] uppercase">
+                    FAQ'S
+                  </span>
+                </div>
+                <h2 className="font-serif font-semibold text-2xl md:text-[36px] text-[#2B2B2B]">
+                  Frequently asked questions
+                </h2>
+              </div>
 
-              <div className="divide-y divide-slate-200">
+              <div className="w-full border-t border-gray-200 divide-y divide-gray-200">
                 {article.faqs.map((faq, fIdx) => (
-                  <div key={fIdx} className="py-4 space-y-1">
-                    <h4 style={{ fontFamily: 'Fraunces, Georgia, serif', fontWeight: 600, color: 'rgba(43, 43, 43, 1)' }} className="text-base">
+                  <div key={fIdx} className="py-5 text-left border-b border-gray-200 space-y-2">
+                    <h4 className="font-sans font-medium text-lg md:text-[20px] text-[#2B2B2B]">
                       {faq.q}
                     </h4>
-                    <p style={{ fontFamily: 'Faktum, var(--font-sans), sans-serif', color: 'rgba(43, 43, 43, 0.8)' }} className="text-sm leading-relaxed">
+                    <p className="font-sans font-medium text-base md:text-[18px] text-[#8D8D8D] leading-relaxed">
                       {faq.a}
                     </p>
                   </div>
@@ -586,12 +613,12 @@ export default function BlogPostDetail() {
           )}
 
           {/* Author Signature Line — Minimal Native Style */}
-          <div className="pt-8 border-t border-[#E5E0D5] flex items-center gap-4 mt-12">
+          <div className="pt-8 border-t border-gray-200 flex items-center gap-4 mt-12">
             <img 
               src={article.author.avatar} 
               alt={`${article.author.name} | Go Banjara Travel Author`}
               title={`${article.author.name} | Go Banjara Team`}
-              className="w-12 h-12 rounded-full object-cover border border-slate-200"
+              className="w-12 h-12 rounded-full object-cover border border-gray-200"
             />
             <div>
               <h4 style={{ fontFamily: 'Fraunces, Georgia, serif', fontWeight: 600, color: 'rgba(43, 43, 43, 1)' }} className="text-base">
@@ -605,18 +632,18 @@ export default function BlogPostDetail() {
         </main>
       </div>
 
-      {/* ── RELATED ARTICLES RECOMMENDATION ── */}
-      <section className="max-w-6xl mx-auto px-6 mt-20 pt-12 border-t border-[#E5E0D5]">
+      {/* ── RELATED ARTICLES RECOMMENDATION (Go Banjara Home Grid Spec) ── */}
+      <section className="max-w-6xl mx-auto px-6 mt-20 pt-12 border-t border-gray-200">
         <div className="flex justify-between items-end mb-8">
           <div>
-            <h3 style={{ fontFamily: '"Fraunces", serif', color: '#1D493E' }} className="text-2xl md:text-3xl font-bold">
+            <h3 style={{ fontFamily: 'Fraunces, Georgia, serif', color: 'rgba(43, 43, 43, 1)' }} className="text-2xl md:text-3xl font-semibold">
               Related Travel Guides
             </h3>
-            <p className="text-xs md:text-sm text-[#526E65] font-medium mt-1">Explore more curated stories &amp; itineraries</p>
+            <p className="text-xs md:text-sm text-[#2B2B2B]/70 font-medium mt-1">Explore more curated stories &amp; itineraries</p>
           </div>
           <Link 
             href="/blog"
-            className="inline-flex items-center gap-1 text-sm font-bold text-[#1D493E] hover:text-[#FF5A36] transition cursor-pointer"
+            className="inline-flex items-center gap-1 text-sm font-semibold text-[#1D493E] hover:text-[#FF5A36] transition cursor-pointer"
           >
             <span>View All Stories</span>
             <ChevronRight className="w-4 h-4" />
@@ -629,48 +656,40 @@ export default function BlogPostDetail() {
               id: '7-day-leh-ladakh-itinerary-1',
               title: '7-Day Leh Ladakh Itinerary for First-Time Travelers',
               date: 'August 12, 2023',
+              readTime: '5 min read',
               image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=600&auto=format&fit=crop',
             },
             {
               id: 'spiti-valley-travel-guide',
               title: 'Spiti Valley Travel Guide: Cold Desert Adventure',
               date: 'September 4, 2023',
+              readTime: '6 min read',
               image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=600&auto=format&fit=crop',
             },
             {
               id: 'kashmir-great-lakes-trek',
               title: "Kashmir Great Lakes Trek: Complete Trekker's Guide",
               date: 'October 10, 2023',
+              readTime: '7 min read',
               image: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=600&auto=format&fit=crop',
             },
           ].map((item) => (
-            <Link key={item.id} href={`/blog/${item.id}`} className="group block">
-              <div 
-                style={{
-                  backgroundColor: '#FAF9F6',
-                  border: '1px solid #E5E0D5',
-                  borderRadius: '20px',
-                  overflow: 'hidden',
-                }}
-                className="transition duration-300 group-hover:shadow-lg group-hover:-translate-y-1"
-              >
-                <div className="w-full h-48 overflow-hidden">
-                  <img 
-                    src={item.image} 
-                    alt={`${item.title} | Go Banjara Blog`}
-                    title={`${item.title} - Go Banjara Story`}
-                    className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
-                  />
-                </div>
-                <div className="p-5 space-y-2">
-                  <span className="text-[11px] font-bold text-[#526E65] uppercase tracking-wider">{item.date}</span>
-                  <h4 
-                    style={{ fontFamily: '"Fraunces", serif', color: '#1D493E' }}
-                    className="font-bold text-base group-hover:text-[#FF5A36] transition line-clamp-2"
-                  >
-                    {item.title}
-                  </h4>
-                </div>
+            <Link key={item.id} href={`/blog/${item.id}`} className="w-full flex flex-col gap-3 group block text-left">
+              <div className="relative w-full aspect-[16/10] overflow-hidden rounded-t-[4px] bg-gray-100 border border-gray-150">
+                <img 
+                  src={item.image} 
+                  alt={`${item.title} | Go Banjara Blog`}
+                  title={`${item.title} - Go Banjara Story`}
+                  className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
+                />
+              </div>
+              <div className="flex flex-col gap-1">
+                <h3 className="font-serif font-semibold text-lg text-[#2B2B2B] group-hover:text-[#FF5A36] transition-colors leading-snug">
+                  {item.title}
+                </h3>
+                <p className="font-sans font-medium text-xs text-[#2B2B2B]/60">
+                  {item.date} • {item.readTime}
+                </p>
               </div>
             </Link>
           ))}

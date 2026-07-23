@@ -76,10 +76,7 @@ export const SuggestedProducts: React.FC<SuggestedProductsProps> = ({ title }) =
         ))}
       </div>
 
-      {/* Progress Bar Indicator */}
-      <div className="w-full bg-[#EAEAEA] h-[4px] rounded-full overflow-hidden mt-8">
-        <div className="bg-[#1D493E] h-full w-1/3 rounded-full" />
-      </div>
+
 
       {/* View All Products Link */}
       <div className="flex justify-center mt-8">

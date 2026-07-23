@@ -2220,25 +2220,6 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                     loading="lazy"
                     className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300"
                   />
-                  {/* Slider dots overlay */}
-                  <div
-                    style={{
-                      position: "absolute",
-                      bottom: "12px",
-                      left: "0",
-                      right: "0",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      gap: "10px",
-                    }}
-                  >
-                    <div style={{ width: "12px", height: "6px", borderRadius: "100px", backgroundColor: "#1D493E" }} />
-                    <div style={{ width: "6px", height: "6px", borderRadius: "50%", backgroundColor: "rgba(255, 255, 255, 0.6)" }} />
-                    <div style={{ width: "6px", height: "6px", borderRadius: "50%", backgroundColor: "rgba(255, 255, 255, 0.6)" }} />
-                    <div style={{ width: "6px", height: "6px", borderRadius: "50%", backgroundColor: "rgba(255, 255, 255, 0.6)" }} />
-                    <div style={{ width: "6px", height: "6px", borderRadius: "50%", backgroundColor: "rgba(255, 255, 255, 0.6)" }} />
-                  </div>
                 </div>
 
                  {/* Product Content Block */}

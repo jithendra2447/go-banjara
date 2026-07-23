@@ -1062,10 +1062,7 @@ export default function Homepage() {
             })}
           </div>
 
-          {/* Bottom active state indicator line */}
-          <div className="w-full h-[4px] bg-gray-200 relative rounded-full overflow-hidden mt-6">
-            <div className="absolute left-0 top-0 h-full w-[40%] bg-[#1D493E] rounded-full" />
-          </div>
+
 
           {/* View all products footer */}
           <div className="text-center pt-4">

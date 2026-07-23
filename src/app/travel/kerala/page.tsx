@@ -929,24 +929,6 @@ export default function KeralaDetails() {
                           }`} 
                         />
                       </button>
-
-                      {/* Carousel Dots Center Overlay */}
-                      <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-1.5 z-10">
-                        {pkg.images.map((_, dotIdx) => (
-                          <button
-                            key={dotIdx}
-                            type="button"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              setCarouselIndexes(prev => ({ ...prev, [pkg.id]: dotIdx }));
-                            }}
-                            className={`w-1.5 h-1.5 rounded-full transition cursor-pointer ${
-                              activeImgIdx === dotIdx ? 'bg-white scale-125' : 'bg-white/40 hover:bg-white/70'
-                            }`}
-                          />
-                        ))}
-                      </div>
-
                     </div>
 
                     {/* Text Details */}

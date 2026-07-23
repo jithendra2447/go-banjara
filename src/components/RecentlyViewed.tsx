@@ -76,10 +76,7 @@ export const RecentlyViewed: React.FC = () => {
         ))}
       </div>
 
-      {/* Progress Bar Indicator */}
-      <div className="w-full bg-[#EAEAEA] h-[4px] rounded-full overflow-hidden">
-        <div className="bg-[#1D493E] h-full w-1/3 rounded-full" />
-      </div>
+
     </div>
   );
 };

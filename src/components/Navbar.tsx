@@ -8,6 +8,8 @@ import {
 } from 'lucide-react';
 import { useCart } from '@/components/providers';
 
+import { PRODUCTS } from '@/data/products';
+
 export const Navbar: React.FC = () => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
@@ -18,6 +20,7 @@ export const Navbar: React.FC = () => {
   const pathname = usePathname();
   const { cartCount, setCartOpen, wishlist, setWishlistOpen, user, logout, setAuthOpen } = useCart();
   const [searchVal, setSearchVal] = useState('');
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
 
@@ -41,9 +44,11 @@ export const Navbar: React.FC = () => {
   const isHomepage = pathname === '/';
   const isTransparent = isHomepage && !isScrolled;
 
-  const triggerSearch = () => {
-    if (searchVal.trim()) {
-      window.location.href = `/shop/all?search=${encodeURIComponent(searchVal.trim())}`;
+  const triggerSearch = (query?: string) => {
+    const q = (query !== undefined ? query : searchVal).trim();
+    if (q) {
+      setIsSearchFocused(false);
+      router.push(`/shop/all?search=${encodeURIComponent(q)}`);
     }
   };
 
@@ -52,6 +57,15 @@ export const Navbar: React.FC = () => {
       triggerSearch();
     }
   };
+
+  const searchResults = React.useMemo(() => {
+    if (!searchVal.trim()) return [];
+    const q = searchVal.toLowerCase().trim();
+    return PRODUCTS.filter(p => 
+      p.name.toLowerCase().includes(q) || 
+      p.category.toLowerCase().includes(q)
+    ).slice(0, 5);
+  }, [searchVal]);
 
   const navLinks = [
     { name: 'Travel Packages', path: '/travel' },
@@ -134,32 +148,101 @@ export const Navbar: React.FC = () => {
           <div className="flex items-center justify-end gap-2 sm:gap-3 lg:gap-4 h-[47px] shrink-0 flex-nowrap">
             
             {/* Search Input Box */}
-            <div className={`hidden md:flex items-center w-[215px] h-[47px] gap-[8px] rounded-[4px] p-[12px] transition-all duration-300 ${
-              isTransparent
-                ? 'bg-black/20 border border-white/20 text-white'
-                : 'bg-white border border-[#CCCCCC] text-slate-800'
-            }`}>
-              <button
-                onClick={triggerSearch}
-                className={`focus:outline-none shrink-0 transition-colors ${
-                  isTransparent ? 'text-white/80 hover:text-white' : 'text-[#8D8D8D] hover:text-[#1D493E]'
-                }`}
-                aria-label="Search"
-              >
-                <svg className="w-[20px] h-[20px]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-              </button>
-              <input
-                type="text"
-                placeholder="Search by products"
-                value={searchVal}
-                onChange={(e) => setSearchVal(e.target.value)}
-                onKeyDown={handleSearchKeyDown}
-                className={`w-[163px] h-[23px] bg-transparent text-[18px] leading-none focus:outline-none font-sans font-normal ${
-                  isTransparent ? 'placeholder-white/60 text-white' : 'placeholder-[#8D8D8D] text-slate-800'
-                }`}
-              />
+            <div className="relative hidden md:block">
+              <div className={`flex items-center w-[230px] h-[47px] gap-[8px] rounded-[4px] px-[12px] transition-all duration-300 ${
+                isTransparent
+                  ? 'bg-black/20 border border-white/20 text-white'
+                  : 'bg-white border border-[#CCCCCC] text-slate-800'
+              }`}>
+                <button
+                  type="button"
+                  onClick={() => triggerSearch()}
+                  className={`focus:outline-none shrink-0 transition-colors cursor-pointer ${
+                    isTransparent ? 'text-white/80 hover:text-white' : 'text-[#8D8D8D] hover:text-[#1D493E]'
+                  }`}
+                  aria-label="Search"
+                >
+                  <svg className="w-[20px] h-[20px]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                </button>
+                <input
+                  type="text"
+                  placeholder="Search by products"
+                  value={searchVal}
+                  onFocus={() => setIsSearchFocused(true)}
+                  onBlur={() => setTimeout(() => setIsSearchFocused(false), 200)}
+                  onChange={(e) => {
+                    setSearchVal(e.target.value);
+                    setIsSearchFocused(true);
+                  }}
+                  onKeyDown={handleSearchKeyDown}
+                  className={`w-full h-[23px] bg-transparent text-[15px] leading-none focus:outline-none font-sans font-normal ${
+                    isTransparent ? 'placeholder-white/60 text-white' : 'placeholder-[#8D8D8D] text-slate-800'
+                  }`}
+                />
+                {searchVal && (
+                  <button
+                    type="button"
+                    onClick={() => { setSearchVal(''); setIsSearchFocused(false); }}
+                    className="text-xs text-gray-400 hover:text-gray-600 px-1 cursor-pointer"
+                  >
+                    ✕
+                  </button>
+                )}
+              </div>
+
+              {/* Instant Live Search Results Popover */}
+              {isSearchFocused && searchVal.trim().length > 0 && (
+                <div className="absolute top-[52px] left-0 w-[300px] bg-white border border-gray-200 rounded-xl shadow-2xl z-50 overflow-hidden animate-fade-in text-left">
+                  <div className="p-2 text-[11px] font-bold text-gray-400 uppercase tracking-wider border-b border-gray-100 flex items-center justify-between">
+                    <span>Products ({searchResults.length})</span>
+                    <span className="text-[10px] text-gray-400 font-normal">Press Enter ↵</span>
+                  </div>
+                  {searchResults.length > 0 ? (
+                    <div className="max-h-[320px] overflow-y-auto divide-y divide-gray-50">
+                      {searchResults.map((item) => (
+                        <Link
+                          key={item.id}
+                          href={`/shop/product/${item.id}`}
+                          onClick={() => {
+                            setSearchVal('');
+                            setIsSearchFocused(false);
+                          }}
+                          className="flex items-center gap-3 p-2.5 hover:bg-slate-50 transition duration-150 group"
+                        >
+                          <img
+                            src={item.image}
+                            alt={item.name}
+                            className="w-10 h-10 object-cover rounded-md shrink-0 border border-slate-100"
+                          />
+                          <div className="flex-1 min-w-0">
+                            <p className="text-xs font-semibold text-slate-800 truncate group-hover:text-[#1D493E] transition">
+                              {item.name}
+                            </p>
+                            <span className="text-[10px] font-bold text-[#FF5A36]">
+                              ₹{item.price}
+                            </span>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="p-4 text-center text-xs text-gray-500">
+                      No products found matching "<span className="font-semibold text-slate-700">{searchVal}</span>"
+                    </div>
+                  )}
+
+                  <button
+                    type="button"
+                    onClick={() => triggerSearch()}
+                    className="w-full py-2.5 bg-slate-50 hover:bg-[#1D493E] text-[#1D493E] hover:text-white text-xs font-bold transition text-center border-t border-gray-100 cursor-pointer flex items-center justify-center gap-1.5"
+                  >
+                    <span>View all matching results</span>
+                    <span>→</span>
+                  </button>
+                </div>
+              )}
             </div>
 
             {/* Wishlist Button (Hidden to match Figma mockup) */}

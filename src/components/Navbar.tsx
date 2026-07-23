@@ -130,11 +130,11 @@ export const Navbar: React.FC = () => {
                       color: fallbackColor,
                       boxSizing: 'border-box',
                     }}
-                    className={`flex items-center justify-center px-3 xl:px-4 py-2.5 h-[42px] rounded-[4px] transition-all duration-200 shrink-0 ${activeClass}`}
+                    className={`flex items-center justify-center px-3.5 xl:px-4 py-3 h-[49px] rounded-[4px] transition-all duration-200 shrink-0 ${activeClass}`}
                   >
                     <span
                       className="flex items-center justify-center text-center whitespace-nowrap"
-                      style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "15px", lineHeight: "100%", letterSpacing: "0px", color: 'inherit' }}
+                      style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: 'inherit' }}
                     >
                       {link.name}
                     </span>

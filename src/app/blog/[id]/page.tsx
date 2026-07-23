@@ -189,9 +189,9 @@ const ARTICLES_DATABASE: Record<string, ArticleData> = {
       avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop',
     },
     heroImage: 'https://images.unsplash.com/photo-1526772662000-3f88f10405ff?q=80&w=1400&auto=format&fit=crop',
-    excerpt: '“I joined the Srinagar to Leh group expedition as a solo rider with no mountain experience. 10 days later, I came back with 7 lifelong brothers, unforgettable campfire memories at Pangong Tso, and the sheer pride of standing at 17,582 feet.”',
+    excerpt: '“I flew out from Hyderabad to join the Srinagar to Leh group expedition as a solo rider with no mountain experience. 10 days later, I came back with 7 lifelong brothers, unforgettable campfire memories at Pangong Tso, and the sheer pride of standing at 17,582 feet.”',
     toc: [
-      { id: 'the-decision', title: '1. The Solo Traveler’s Dilemma' },
+      { id: 'the-decision', title: '1. The Solo Traveler’s Dilemma from Hyderabad' },
       { id: 'group-camaraderie', title: '2. Meeting the Go Banjara Convoy in Srinagar' },
       { id: 'khardung-la-climb', title: '3. The Summit Push: Khardung La at 17,582 Feet' },
       { id: 'pangong-night', title: '4. Campfires & Stargazing at Pangong Tso' },
@@ -200,19 +200,19 @@ const ARTICLES_DATABASE: Record<string, ArticleData> = {
     sections: [
       {
         id: 'the-decision',
-        title: '1. The Solo Traveler’s Dilemma',
+        title: '1. The Solo Traveler’s Dilemma from Hyderabad',
         content: [
-          'Riding through the Himalayas had been on my bucket list for over six years. But as a solo working professional from Gujarat, the logistics felt overwhelming: how would I arrange spare clutch cables, handle mountain breakdowns, or navigate altitude sickness alone?',
-          'When I discovered Go Banjara’s fixed departure expeditions, everything clicked. Their trip coordinators walked me through altitude acclimatization, helped me select the Royal Enfield Himalayan 450, and equipped me with a Go Banjara Nomad Canvas duffel bag built for rugged luggage racks.'
+          'Riding through the Himalayas had been on my bucket list for over six years. But as a software engineer based in Hyderabad (Gachibowli), the logistics felt overwhelming: how would I arrange bike transport from Hyderabad, handle mountain breakdowns, or navigate altitude sickness alone?',
+          'When I discovered Go Banjara’s Hyderabad fixed departure group, everything clicked. Their team coordinated my flight from Rajiv Gandhi International Airport (HYD) to Srinagar, walked me through altitude acclimatization, helped me select the Royal Enfield Himalayan 450, and equipped me with a Go Banjara Nomad Canvas duffel bag built for rugged luggage racks.'
         ],
-        highlight: 'Traveler Insight: Booking a supported expedition gave me total peace of mind—knowing a backup vehicle with a dedicated mechanic and spare tires was trailing behind our convoy allowed us to focus purely on the ride.',
+        highlight: 'Hyderabad Traveler Insight: Booking a supported expedition with Go Banjara’s Hyderabad team gave me total peace of mind—knowing a backup vehicle with a dedicated mechanic and spare tires was trailing behind our convoy allowed us to focus purely on the ride.',
         backlink: { label: 'Explore Go Banjara Srinagar to Leh Fixed Departures', url: '/travel' }
       },
       {
         id: 'group-camaraderie',
         title: '2. Meeting the Go Banjara Convoy in Srinagar',
         content: [
-          'Our group of 8 riders met over authentic Kashmiri Wazwan in Srinagar. We came from completely different walks of life—software engineers, doctors, photographers, and bankers—united by a passion for the open road.',
+          'Our group of 8 riders met over authentic Kashmiri Wazwan in Srinagar. We came from completely different cities—Hyderabad, Bengaluru, Mumbai, and Delhi—united by a passion for the open road.',
           'Under the guidance of our lead captain, Rohan, we established riding protocols, formation signals, and daily altitude health checks with pulse oximeters.'
         ],
         image: 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=1200&auto=format&fit=crop',
@@ -226,6 +226,7 @@ const ARTICLES_DATABASE: Record<string, ArticleData> = {
           'Reaching the top yellow summit sign, seeing the prayer flags fluttering in the freezing wind, and celebrating with high-fives and hot butter tea with my group was an emotion I will carry forever.'
         ],
         bullets: [
+          'Direct flight & travel coordination from Hyderabad (HYD) to Srinagar basecamp',
           'Rode 1,200+ km of mountain roads across 5 high Himalayan passes',
           'Zero mechanical breakdowns left unassisted thanks to Go Banjara’s backup team',
           'Stayed in boutique homestays in Kargil, Leh, and Hunder Sand Dunes',
@@ -245,19 +246,19 @@ const ARTICLES_DATABASE: Record<string, ArticleData> = {
         id: 'key-takeaways',
         title: '5. Why Booking a Supported Group Expedition Changed Everything',
         content: [
-          'If you’re contemplating your first high-altitude mountain trip, don’t let fear hold you back. Go Banjara doesn’t just book hotels—they build real communities of outdoor enthusiasts.'
+          'If you’re contemplating your first high-altitude mountain trip from Hyderabad or any major city, don’t let fear hold you back. Go Banjara doesn’t just book hotels—they build real communities of outdoor enthusiasts.'
         ],
         backlink: { label: 'Shop Authentic Go Banjara Travel Badges & Apparel', url: '/shop' }
       }
     ],
     faqs: [
       {
-        q: 'How did you handle mountain sickness on the ride?',
-        a: 'We followed Go Banjara’s strict rest protocol on Day 1 in Leh, drank 4 liters of water daily, and checked our oxygen levels morning and night with the trip captain.'
+        q: 'How did you handle flight & bike logistics from Hyderabad?',
+        a: 'Go Banjara coordinated our flights from Hyderabad (HYD) to Srinagar and arranged safe motorcycle delivery right to the Srinagar hotel basecamp.'
       },
       {
-        q: 'Was it safe for solo travelers joining a group?',
-        a: '100% safe. More than half of our group joined solo, and by Day 2 everyone felt like family.'
+        q: 'Was it safe for solo travelers joining a group from Hyderabad?',
+        a: '100% safe. More than half of our group joined solo from different cities like Hyderabad and Bengaluru, and by Day 2 everyone felt like family.'
       }
     ]
   },
@@ -275,9 +276,9 @@ const ARTICLES_DATABASE: Record<string, ArticleData> = {
       avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop',
     },
     heroImage: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=1400&auto=format&fit=crop',
-    excerpt: '“After months of 60-hour corporate work weeks in Bengaluru, I needed a complete reset. Booking Go Banjara’s Spiti Valley homestay circuit gave me the quiet, beauty, and female traveler safety I was searching for.”',
+    excerpt: '“After months of 60-hour corporate work weeks in Hyderabad’s HITEC City, I needed a complete reset. Booking Go Banjara’s Spiti Valley homestay circuit gave me the quiet, beauty, and female traveler safety I was searching for.”',
     toc: [
-      { id: 'the-spark', title: '1. Escaping the City Grind' },
+      { id: 'the-spark', title: '1. Escaping Hyderabad’s Corporate Grind' },
       { id: 'homestay-magic', title: '2. Authentic Spitian Homestays & Local Culture' },
       { id: 'key-monastery', title: '3. Tea Sessions with Monks at Key Monastery' },
       { id: 'dhankar-trek', title: '4. Trekking to Lake Dhankar at 13,500 Feet' },
@@ -286,12 +287,12 @@ const ARTICLES_DATABASE: Record<string, ArticleData> = {
     sections: [
       {
         id: 'the-spark',
-        title: '1. Escaping the City Grind',
+        title: '1. Escaping Hyderabad’s Corporate Grind',
         content: [
-          'Working in tech in Bengaluru often leaves little room for reflection. In March, I decided to take a leap and book my first solo journey to the cold desert of Spiti Valley.',
-          'I was anxious about remote road conditions and safety. But Go Banjara’s team matched me with a small group of 6 like-minded slow travelers, led by an experienced female trip lead.'
+          'Working in tech in Hyderabad (HITEC City) often leaves little room for reflection. In March, I decided to take a leap and book my first solo journey to the cold desert of Spiti Valley.',
+          'I flew from Hyderabad to Chandigarh, where Go Banjara’s trip coordinators met our small group of 6 like-minded slow travelers, led by an experienced female trip captain.'
         ],
-        highlight: 'Priya’s Tip: Traveling with Go Banjara’s community means you get the freedom of solo exploration with the security of a verified local network.',
+        highlight: 'Priya’s Tip: Traveling with Go Banjara’s Hyderabad community means you get the freedom of solo exploration with the security of a verified local network.',
         backlink: { label: 'View Go Banjara Spiti Valley Packages', url: '/travel' }
       },
       {

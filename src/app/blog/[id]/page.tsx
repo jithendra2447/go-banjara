@@ -174,6 +174,743 @@ const ARTICLES_DATABASE: Record<string, ArticleData> = {
         a: 'Only POSTPAID mobile connections work in Ladakh. BSNL offers the widest coverage across remote areas, followed by Jio and Airtel in Leh town.'
       }
     ]
+  },
+
+  /* ── CUSTOMER PERSPECTIVE STORY 1 ── */
+  'customer-story-khardung-la-group': {
+    id: 'customer-story-khardung-la-group',
+    title: 'Conquering Khardung La & Pangong Tso: How 8 Strangers Became a Lifelong Go Banjara Tribe',
+    category: 'Customer Stories',
+    date: 'Wednesday, March 12, 2024',
+    readTime: '7 min read',
+    author: {
+      name: 'Kiran Makwan',
+      role: 'Verified Wanderer & Go Banjara Nomad',
+      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop',
+    },
+    heroImage: 'https://images.unsplash.com/photo-1526772662000-3f88f10405ff?q=80&w=1400&auto=format&fit=crop',
+    excerpt: '“I joined the Srinagar to Leh group expedition as a solo rider with no mountain experience. 10 days later, I came back with 7 lifelong brothers, unforgettable campfire memories at Pangong Tso, and the sheer pride of standing at 17,582 feet.”',
+    toc: [
+      { id: 'the-decision', title: '1. The Solo Traveler’s Dilemma' },
+      { id: 'group-camaraderie', title: '2. Meeting the Go Banjara Convoy in Srinagar' },
+      { id: 'khardung-la-climb', title: '3. The Summit Push: Khardung La at 17,582 Feet' },
+      { id: 'pangong-night', title: '4. Campfires & Stargazing at Pangong Tso' },
+      { id: 'key-takeaways', title: '5. Why Booking a Supported Group Expedition Changed Everything' },
+    ],
+    sections: [
+      {
+        id: 'the-decision',
+        title: '1. The Solo Traveler’s Dilemma',
+        content: [
+          'Riding through the Himalayas had been on my bucket list for over six years. But as a solo working professional from Gujarat, the logistics felt overwhelming: how would I arrange spare clutch cables, handle mountain breakdowns, or navigate altitude sickness alone?',
+          'When I discovered Go Banjara’s fixed departure expeditions, everything clicked. Their trip coordinators walked me through altitude acclimatization, helped me select the Royal Enfield Himalayan 450, and equipped me with a Go Banjara Nomad Canvas duffel bag built for rugged luggage racks.'
+        ],
+        highlight: 'Traveler Insight: Booking a supported expedition gave me total peace of mind—knowing a backup vehicle with a dedicated mechanic and spare tires was trailing behind our convoy allowed us to focus purely on the ride.',
+        backlink: { label: 'Explore Go Banjara Srinagar to Leh Fixed Departures', url: '/travel' }
+      },
+      {
+        id: 'group-camaraderie',
+        title: '2. Meeting the Go Banjara Convoy in Srinagar',
+        content: [
+          'Our group of 8 riders met over authentic Kashmiri Wazwan in Srinagar. We came from completely different walks of life—software engineers, doctors, photographers, and bankers—united by a passion for the open road.',
+          'Under the guidance of our lead captain, Rohan, we established riding protocols, formation signals, and daily altitude health checks with pulse oximeters.'
+        ],
+        image: 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=1200&auto=format&fit=crop',
+        imageCaption: 'The Go Banjara group gather at Sonamarg before ascending the Zoji La pass.'
+      },
+      {
+        id: 'khardung-la-climb',
+        title: '3. The Summit Push: Khardung La at 17,582 Feet',
+        content: [
+          'On Day 4, we tackled the legendary ascent to Khardung La. As the tarmac gave way to loose gravel and sub-zero slush near South Pullu, the support mechanic tuned our carburetors and adjusted tire pressures on the spot.',
+          'Reaching the top yellow summit sign, seeing the prayer flags fluttering in the freezing wind, and celebrating with high-fives and hot butter tea with my group was an emotion I will carry forever.'
+        ],
+        bullets: [
+          'Rode 1,200+ km of mountain roads across 5 high Himalayan passes',
+          'Zero mechanical breakdowns left unassisted thanks to Go Banjara’s backup team',
+          'Stayed in boutique homestays in Kargil, Leh, and Hunder Sand Dunes',
+          'Lifetime friendship with 7 incredible fellow wanderers'
+        ]
+      },
+      {
+        id: 'pangong-night',
+        title: '4. Campfires & Stargazing at Pangong Tso',
+        content: [
+          'Nothing compares to arriving at Pangong Tso as the afternoon sun turns the lake from turquoise to deep royal blue. That evening, wrapped in Go Banjara thermal fleece hoodies, our group sat around a roaring campfire singing old songs under the Milky Way canopy.'
+        ],
+        image: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1200&auto=format&fit=crop',
+        imageCaption: 'Pangong Tso lake illuminated under the high altitude night sky.'
+      },
+      {
+        id: 'key-takeaways',
+        title: '5. Why Booking a Supported Group Expedition Changed Everything',
+        content: [
+          'If you’re contemplating your first high-altitude mountain trip, don’t let fear hold you back. Go Banjara doesn’t just book hotels—they build real communities of outdoor enthusiasts.'
+        ],
+        backlink: { label: 'Shop Authentic Go Banjara Travel Badges & Apparel', url: '/shop' }
+      }
+    ],
+    faqs: [
+      {
+        q: 'How did you handle mountain sickness on the ride?',
+        a: 'We followed Go Banjara’s strict rest protocol on Day 1 in Leh, drank 4 liters of water daily, and checked our oxygen levels morning and night with the trip captain.'
+      },
+      {
+        q: 'Was it safe for solo travelers joining a group?',
+        a: '100% safe. More than half of our group joined solo, and by Day 2 everyone felt like family.'
+      }
+    ]
+  },
+
+  /* ── CUSTOMER PERSPECTIVE STORY 2 ── */
+  'customer-story-spiti-valley-solo': {
+    id: 'customer-story-spiti-valley-solo',
+    title: 'From Corporate Burnout to Spiti Valley Monasteries: Priya’s 9-Day Journey with Go Banjara',
+    category: 'Customer Stories',
+    date: 'Thursday, April 18, 2024',
+    readTime: '6 min read',
+    author: {
+      name: 'Priya Nair',
+      role: 'Solo Backpacker & Go Banjara Community Member',
+      avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop',
+    },
+    heroImage: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=1400&auto=format&fit=crop',
+    excerpt: '“After months of 60-hour corporate work weeks in Bengaluru, I needed a complete reset. Booking Go Banjara’s Spiti Valley homestay circuit gave me the quiet, beauty, and female traveler safety I was searching for.”',
+    toc: [
+      { id: 'the-spark', title: '1. Escaping the City Grind' },
+      { id: 'homestay-magic', title: '2. Authentic Spitian Homestays & Local Culture' },
+      { id: 'key-monastery', title: '3. Tea Sessions with Monks at Key Monastery' },
+      { id: 'dhankar-trek', title: '4. Trekking to Lake Dhankar at 13,500 Feet' },
+      { id: 'my-advice', title: '5. My Advice for Solo Female Travelers' },
+    ],
+    sections: [
+      {
+        id: 'the-spark',
+        title: '1. Escaping the City Grind',
+        content: [
+          'Working in tech in Bengaluru often leaves little room for reflection. In March, I decided to take a leap and book my first solo journey to the cold desert of Spiti Valley.',
+          'I was anxious about remote road conditions and safety. But Go Banjara’s team matched me with a small group of 6 like-minded slow travelers, led by an experienced female trip lead.'
+        ],
+        highlight: 'Priya’s Tip: Traveling with Go Banjara’s community means you get the freedom of solo exploration with the security of a verified local network.',
+        backlink: { label: 'View Go Banjara Spiti Valley Packages', url: '/travel' }
+      },
+      {
+        id: 'homestay-magic',
+        title: '2. Authentic Spitian Homestays & Local Culture',
+        content: [
+          'Instead of commercial hotels, we stayed in traditional mud-brick homestays in Kibber and Langza. We ate fresh sea-buckthorn tea, homemade butter roti, and listened to village elders share ancient folklore around wood-fired bukhari stoves.'
+        ],
+        image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop',
+        imageCaption: 'The snow-dusted peak of Mount Shilla towering over Langza village.'
+      },
+      {
+        id: 'key-monastery',
+        title: '3. Tea Sessions with Monks at Key Monastery',
+        content: [
+          'Sitting on the rooftop of 1,000-year-old Key Monastery overlooking the Spiti River while young monks chanted morning prayers was a spiritual awakening. It completely stripped away my corporate stress.'
+        ]
+      },
+      {
+        id: 'dhankar-trek',
+        title: '4. Trekking to Lake Dhankar at 13,500 Feet',
+        content: [
+          'On Day 6, our group hiked up the steep trail from Dhankar Fort to the turquoise glacial waters of Dhankar Lake. Walking behind our local guide Tenzin, we reached the high-altitude lake just as the wind died down, creating a mirror reflection of the peaks.'
+        ],
+        bullets: [
+          'Explored World’s Highest Post Office in Hikkim (sent 12 handwritten postcards)',
+          'Trekking in high-altitude dry climate with zero phone network distraction',
+          'Supported indigenous women-led homestay cooperatives in Kaza',
+          'Equipped with Go Banjara weatherproof travel backpacks'
+        ]
+      },
+      {
+        id: 'my-advice',
+        title: '5. My Advice for Solo Female Travelers',
+        content: [
+          'Don’t wait for friends’ schedules to align. Join a Go Banjara small group trip—it will redefine how you experience India.'
+        ],
+        backlink: { label: 'Explore Go Banjara Slow Travel Collections', url: '/travel' }
+      }
+    ],
+    faqs: [
+      {
+        q: 'Is Spiti Valley safe for solo female travelers?',
+        a: 'Extremely safe. Spitian people are gentle and warm. Traveling in a Go Banjara small group adds an extra layer of comfort.'
+      },
+      {
+        q: 'What clothes did you pack for cold weather?',
+        a: 'I packed 3 thermal base layers, a windproof fleece, heavy down jacket, woolen socks, and UV polarized sunglasses.'
+      }
+    ]
+  },
+
+  /* ── CUSTOMER PERSPECTIVE STORY 3 ── */
+  'customer-story-meghalaya-root-bridges': {
+    id: 'customer-story-meghalaya-root-bridges',
+    title: 'Trekking 3,500 Steps to the Double Decker Root Bridge: Rohan’s Meghalaya Group Story',
+    category: 'Customer Stories',
+    date: 'Monday, May 20, 2024',
+    readTime: '8 min read',
+    author: {
+      name: 'Amit Verma',
+      role: 'Adventure Enthusiast & Go Banjara Nomad',
+      avatar: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=200&h=200&fit=crop',
+    },
+    heroImage: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=1400&auto=format&fit=crop',
+    excerpt: '“Hiking deep into the rainforests of Cherrapunji, crossing suspension bridges over crystal rivers, and swimming in hidden waterfalls. Here is how our Go Banjara group explored the abode of clouds.”',
+    toc: [
+      { id: 'into-the-clouds', title: '1. Entering the Abode of Clouds' },
+      { id: 'the-3500-steps', title: '2. The 3,500-Step Descent to Nongriat' },
+      { id: 'root-bridges', title: '3. Standing Under the Double Decker Root Bridge' },
+      { id: 'dawki-waters', title: '4. Boating on the Crystal Waters of Dawki' },
+      { id: 'final-thoughts', title: '5. Why Go Banjara Made the Expedition Unforgettable' },
+    ],
+    sections: [
+      {
+        id: 'into-the-clouds',
+        title: '1. Entering the Abode of Clouds',
+        content: [
+          'Meghalaya has always intrigued me with its living architecture and mist-shrouded canyons. When Go Banjara announced their Northeast Monsoon Expedition, 10 of us signed up immediately.',
+          'From Shillong’s vibrant cafe culture to the roaring Nohkalikai Falls in Sohra, every day revealed a new landscape.'
+        ],
+        highlight: 'Amit’s Highlight: Swimming in natural turquoise pools behind Wei Sawdong falls while our Khasi guides prepared fresh bamboo rice for the group.',
+        backlink: { label: 'Check Go Banjara Northeast Packages', url: '/travel' }
+      },
+      {
+        id: 'the-3500-steps',
+        title: '2. The 3,500-Step Descent to Nongriat',
+        content: [
+          'The hike to Nongriat is a physical challenge: descending 3,500 steep concrete steps through dense jungle, crossing two high wire suspension bridges swaying over rushing turquoise rivers.'
+        ],
+        image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop',
+        imageCaption: 'Crossing a wire suspension bridge deep in the Khasi hills.'
+      },
+      {
+        id: 'root-bridges',
+        title: '3. Standing Under the Double Decker Root Bridge',
+        content: [
+          'Reaching the Jingkieng Double Decker Root Bridge felt like stepping into an ancient fantasy world. Grown over 250 years by Khasi tribal ancestors using living Ficus elastica tree roots, it stands as a monument to human harmony with nature.'
+        ]
+      },
+      {
+        id: 'dawki-waters',
+        title: '4. Boating on the Crystal Waters of Dawki',
+        content: [
+          'Our final stop was the Umngot River in Dawki. The water was so transparent that our wooden boats appeared to be floating on air over the pebble riverbed.'
+        ],
+        bullets: [
+          'Hiked 3,500+ steps into deep rainforest canyons',
+          'Swam in crystal-clear natural pools at Rainbow Falls',
+          'Stayed in eco-bamboo cottages run by local Khasi families',
+          'Equipped with Go Banjara waterproof gear and badges'
+        ]
+      },
+      {
+        id: 'final-thoughts',
+        title: '5. Why Go Banjara Made the Expedition Unforgettable',
+        content: [
+          'Go Banjara’s focus on responsible eco-tourism and small group dynamics turns standard holidays into deep, transformative experiences.'
+        ],
+        backlink: { label: 'Shop Go Banjara Collectible Badges & Gear', url: '/shop' }
+      }
+    ],
+    faqs: [
+      {
+        q: 'How difficult is the 3,500-step trek to Nongriat?',
+        a: 'It requires moderate physical fitness. Going down takes 1.5 hours, and climbing back up takes 2 to 2.5 hours with rest stops.'
+      },
+      {
+        q: 'What is the best month to visit Meghalaya?',
+        a: 'October to April for crystal-clear Dawki river boating and pleasant treks; June to September for dramatic waterfall views.'
+      }
+    ]
+  },
+
+  /* ── 7-DAY LEH LADAKH ITINERARY 1 ── */
+  '7-day-leh-ladakh-itinerary-1': {
+    id: '7-day-leh-ladakh-itinerary-1',
+    title: '7-Day Leh Ladakh Itinerary for First-Time Travelers',
+    category: 'Tour Guide',
+    date: 'Sunday, August 12, 2023',
+    readTime: '5 min read',
+    author: {
+      name: 'Go Banjara Team',
+      role: 'Destination Curators',
+      avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&h=200&fit=crop',
+    },
+    heroImage: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=1400&auto=format&fit=crop',
+    excerpt: 'A perfectly paced 7-day day-by-day itinerary covering Leh Palace, Sham Valley, Khardung La, Nubra Valley, and Pangong Tso lake for first-time Himalayan travelers.',
+    toc: [
+      { id: 'day1', title: 'Day 1: Arrival in Leh & Mandatory Acclimatization' },
+      { id: 'day2', title: 'Day 2: Sham Valley Exploration (Magnetic Hill & Sangam)' },
+      { id: 'day3', title: 'Day 3: Leh to Nubra Valley via Khardung La (17,582 ft)' },
+      { id: 'day4', title: 'Day 4: Nubra Valley to Pangong Tso Lake' },
+      { id: 'day5', title: 'Day 5: Pangong Tso to Leh via Chang La' },
+      { id: 'day6', title: 'Day 6: Monasteries & Souvenir Shopping in Leh' },
+      { id: 'day7', title: 'Day 7: Departure from Leh Airport' },
+    ],
+    sections: [
+      {
+        id: 'day1',
+        title: 'Day 1: Arrival in Leh & Mandatory Acclimatization',
+        content: [
+          'Fly into Kushok Bakula Rimpochee Airport (11,500 ft). Spend the entire day resting in your hotel to allow your body to adapt to low oxygen levels.'
+        ],
+        highlight: 'Crucial Rule: Do not climb stairs or exert yourself on Day 1. Drink plenty of warm fluids.',
+        backlink: { label: 'Book Go Banjara Leh Acclimatization Package', url: '/travel' }
+      },
+      {
+        id: 'day2',
+        title: 'Day 2: Sham Valley Exploration (Magnetic Hill & Sangam)',
+        content: [
+          'Visit Hall of Fame, Magnetic Hill gravity spot, and Sangam (confluence of Zanskar & Indus Rivers). Stop at Gurudwara Pathar Sahib for prasad.'
+        ]
+      },
+      {
+        id: 'day3',
+        title: 'Day 3: Leh to Nubra Valley via Khardung La (17,582 ft)',
+        content: [
+          'Drive across Khardung La, one of the highest motorable passes in the world. Descend into Nubra Valley and enjoy a Bactrian double-hump camel ride at Hunder Sand Dunes.'
+        ]
+      },
+      {
+        id: 'day4',
+        title: 'Day 4: Nubra Valley to Pangong Tso Lake',
+        content: [
+          'Take the scenic Shyok River route to Pangong Lake. Check into deluxe lakeside camps and witness the sunset over the turquoise waters.'
+        ]
+      },
+      {
+        id: 'day5',
+        title: 'Day 5: Pangong Tso to Leh via Chang La',
+        content: [
+          'Wake up for sunrise over Pangong Tso. Drive back to Leh crossing Chang La pass (17,590 ft), stopping at Thiksey Monastery.'
+        ]
+      },
+      {
+        id: 'day6',
+        title: 'Day 6: Monasteries & Souvenir Shopping in Leh',
+        content: [
+          'Explore Shanti Stupa, Leh Palace, and local Tibetan markets for pashmina shawls, aprons, and Go Banjara outdoor badges.'
+        ]
+      },
+      {
+        id: 'day7',
+        title: 'Day 7: Departure from Leh Airport',
+        content: [
+          'Transfer to Leh airport with unforgettable Himalayan memories.'
+        ]
+      }
+    ],
+    faqs: [
+      {
+        q: 'Are 7 days enough for a Leh trip?',
+        a: 'Yes, 7 days is the optimal timeframe for a flight-based Leh itinerary covering all major sights without rushing.'
+      }
+    ]
+  },
+
+  /* ── 7-DAY LEH LADAKH ITINERARY 2 & ALIASES ── */
+  '7-day-leh-ladakh-itinerary-2': {
+    id: '7-day-leh-ladakh-itinerary-2',
+    title: '7-Day Leh Ladakh Itinerary for First-Time Travelers',
+    category: 'Most Popular',
+    date: 'Sunday, August 12, 2023',
+    readTime: '5 min read',
+    author: {
+      name: 'Go Banjara Team',
+      role: 'Destination Curators',
+      avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&h=200&fit=crop',
+    },
+    heroImage: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=1400&auto=format&fit=crop',
+    excerpt: 'Discover our top-rated 7-day Leh Ladakh travel circuit featuring Khardung La, Nubra Valley, Pangong Tso, and cultural monastries.',
+    toc: [
+      { id: 'overview', title: '1. Complete 7-Day Circuit Summary' },
+      { id: 'highlights', title: '2. Top Trip Highlights & Permits' },
+    ],
+    sections: [
+      {
+        id: 'overview',
+        title: '1. Complete 7-Day Circuit Summary',
+        content: [
+          'This popular 7-day itinerary balances adventure with proper rest, ensuring you visit Khardung La, Nubra Valley, and Pangong Lake safely.'
+        ],
+        backlink: { label: 'Explore Go Banjara Himalayan Travel Packages', url: '/travel' }
+      },
+      {
+        id: 'highlights',
+        title: '2. Top Trip Highlights & Permits',
+        content: [
+          'Ensure you register online for your Inner Line Permit (ILP) at leh.nic.in before embarking on the trip.'
+        ]
+      }
+    ]
+  },
+
+  '7-day-leh-ladakh-first-time-1': {
+    id: '7-day-leh-ladakh-first-time-1',
+    title: '7-Day Leh Ladakh Itinerary for First-Time Travelers',
+    category: 'Travel Guide',
+    date: 'Sunday, August 12, 2023',
+    readTime: '5 min read',
+    author: {
+      name: 'Go Banjara Team',
+      role: 'Destination Curators',
+      avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&h=200&fit=crop',
+    },
+    heroImage: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=1400&auto=format&fit=crop',
+    excerpt: 'Essential 7-day trip planning guide for first-time travelers to Ladakh.',
+    toc: [{ id: 'guide', title: '1. First-Timer Travel Advice' }],
+    sections: [
+      {
+        id: 'guide',
+        title: '1. First-Timer Travel Advice',
+        content: [
+          'Pacing is everything in Ladakh. Take it slow, stay hydrated, and follow Go Banjara’s tested acclimatization advice.'
+        ],
+        backlink: { label: 'Check All Go Banjara Travel Packages', url: '/travel' }
+      }
+    ]
+  },
+
+  '7-day-leh-first-time-2': {
+    id: '7-day-leh-first-time-2',
+    title: '7-Day Leh Ladakh Itinerary for First-Time Travelers',
+    category: 'Most Popular',
+    date: 'Sunday, August 12, 2023',
+    readTime: '5 min read',
+    author: {
+      name: 'Go Banjara Team',
+      role: 'Destination Curators',
+      avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&h=200&fit=crop',
+    },
+    heroImage: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=1400&auto=format&fit=crop',
+    excerpt: 'Detailed 7-day high altitude guide for exploring Ladakh.',
+    toc: [{ id: 'guide', title: '1. Exploring Leh & Beyond' }],
+    sections: [
+      {
+        id: 'guide',
+        title: '1. Exploring Leh & Beyond',
+        content: [
+          'From high-altitude desert dunes to turquoise alpine lakes, discover why Leh is India’s ultimate mountain paradise.'
+        ]
+      }
+    ]
+  },
+
+  /* ── ULTIMATE LADAKH TRAVEL GUIDE ── */
+  'ultimate-ladakh-travel-guide': {
+    id: 'ultimate-ladakh-travel-guide',
+    title: 'Ultimate Ladakh Travel Guide: Plan Your Perfect Himalayan Adventure',
+    category: 'Travel Guide',
+    date: 'Sunday, August 12, 2023',
+    readTime: '5 min read',
+    author: {
+      name: 'Rohan Sharma',
+      role: 'Senior Expedition Lead',
+      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&h=200&fit=crop',
+    },
+    heroImage: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1400&auto=format&fit=crop',
+    excerpt: 'Comprehensive master guide for planning your trip to Leh Ladakh, covering transport, budget, packing, permits, and top sights.',
+    toc: [
+      { id: 'planning', title: '1. How to Plan Your Trip' },
+      { id: 'gear', title: '2. Packing Essentials' },
+    ],
+    sections: [
+      {
+        id: 'planning',
+        title: '1. How to Plan Your Trip',
+        content: [
+          'Planning a trip to Ladakh requires attention to acclimatization, permits, and season choices. June through September offers optimal weather.'
+        ],
+        backlink: { label: 'Explore Go Banjara Himalayan Travel Packages', url: '/travel' }
+      },
+      {
+        id: 'gear',
+        title: '2. Packing Essentials',
+        content: [
+          'Pack thermal base layers, windproof jacket, sturdy boots, sunglasses, power bank, and Go Banjara weatherproof travel gear.'
+        ],
+        backlink: { label: 'Shop Essential Outdoor Gear at Go Banjara Shop', url: '/shop' }
+      }
+    ]
+  },
+
+  /* ── LEH LADAKH TRAVEL GUIDE 2026 ── */
+  'leh-ladakh-travel-guide-2026-1': {
+    id: 'leh-ladakh-travel-guide-2026-1',
+    title: 'Leh Ladakh Travel Guide 2026: Best Time, Places & Complete Trip Planning',
+    category: 'Tour Guide',
+    date: 'Sunday, August 12, 2023',
+    readTime: '5 min read',
+    author: {
+      name: 'Go Banjara Team',
+      role: 'Destination Curators',
+      avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&h=200&fit=crop',
+    },
+    heroImage: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1400&auto=format&fit=crop',
+    excerpt: 'Updated rules, digital ILP online permit guidelines, and road advisories for 2026 travelers to Ladakh.',
+    toc: [{ id: 'updates', title: '1. 2026 Season Updates' }],
+    sections: [
+      {
+        id: 'updates',
+        title: '1. 2026 Season Updates',
+        content: [
+          'Inner Line Permits are now 100% digital via leh.nic.in. New paved roads connect Shyok to Hanle, making remote travel faster and smoother.'
+        ],
+        backlink: { label: 'Apply on Official Leh District Permit Portal (leh.nic.in)', url: 'https://leh.nic.in' }
+      }
+    ]
+  },
+
+  'leh-ladakh-travel-guide-2026-2': {
+    id: 'leh-ladakh-travel-guide-2026-2',
+    title: 'Leh Ladakh Travel Guide 2026: Best Time, Places & Complete Trip Planning',
+    category: 'Most Popular',
+    date: 'Sunday, August 12, 2023',
+    readTime: '5 min read',
+    author: {
+      name: 'Go Banjara Team',
+      role: 'Destination Curators',
+      avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&h=200&fit=crop',
+    },
+    heroImage: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1400&auto=format&fit=crop',
+    excerpt: '2026 travel trends and popular routes across Ladakh.',
+    toc: [{ id: 'trends', title: '1. 2026 Route Trends' }],
+    sections: [
+      {
+        id: 'trends',
+        title: '1. 2026 Route Trends',
+        content: [
+          'Hanle astronomical observatory and Umling La (19,024 ft) have become top trending destinations for 2026 expeditions.'
+        ]
+      }
+    ]
+  },
+
+  'ladakh-bike-trip-routes-2': {
+    id: 'ladakh-bike-trip-routes-2',
+    title: 'Ladakh Bike Trip Guide: Routes, Budget & Essential Tips for Riders',
+    category: 'Tour Guide',
+    date: 'Sunday, August 12, 2023',
+    readTime: '5 min read',
+    author: {
+      name: 'Rohan Sharma',
+      role: 'Senior Expedition Lead',
+      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&h=200&fit=crop',
+    },
+    heroImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1400&auto=format&fit=crop',
+    excerpt: 'Motorcycle route comparison and mechanical gear breakdown for Ladakh riders.',
+    toc: [{ id: 'gear', title: '1. Mechanical Spares & Maintenance' }],
+    sections: [
+      {
+        id: 'gear',
+        title: '1. Mechanical Spares & Maintenance',
+        content: [
+          'Always carry spare clutch cables, foot pumps, puncture repair kits, and extra engine oil when riding remote mountain passes.'
+        ]
+      }
+    ]
+  },
+
+  /* ── SPITI VALLEY ── */
+  'spiti-valley-travel-guide': {
+    id: 'spiti-valley-travel-guide',
+    title: 'Spiti Valley Travel Guide: The Ultimate Road Trip Through Cold Desert',
+    category: 'Travel Guide',
+    date: 'Monday, September 4, 2023',
+    readTime: '6 min read',
+    author: {
+      name: 'Priya Nair',
+      role: 'Solo Backpacker & Destination Curator',
+      avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop',
+    },
+    heroImage: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1400&auto=format&fit=crop',
+    excerpt: 'Discover the mystical cold desert of Spiti Valley. Complete guide to Kaza, Key Monastery, Chandratal Lake, Hikkim highest post office, and homestays.',
+    toc: [
+      { id: 'overview', title: '1. Introduction to Spiti Valley' },
+      { id: 'route', title: '2. Shimla vs Manali Route Comparison' },
+      { id: 'places', title: '3. Top Places to Visit in Spiti' },
+    ],
+    sections: [
+      {
+        id: 'overview',
+        title: '1. Introduction to Spiti Valley',
+        content: [
+          'Spiti Valley is a high-altitude cold desert mountain valley located in Himachal Pradesh. Known for ancient Tibetan monasteries, rugged gorges, and starry night skies, Spiti offers an authentic off-grid retreat.'
+        ],
+        highlight: 'Go Banjara Tip: Travel slow and stay in local village homestays in Kibber or Langza for an authentic cultural experience.',
+        backlink: { label: 'Explore Go Banjara Spiti Travel Packages', url: '/travel' }
+      },
+      {
+        id: 'route',
+        title: '2. Shimla vs Manali Route Comparison',
+        content: [
+          'Shimla to Kaza via Kinnaur (Gradual Acclimatization): Open year-round. Passes through Sarahan, Kalpa, Nako, and Tabo.',
+          'Manali to Kaza via Atal Tunnel & Kunzum Pass (High Adventure): Open June to October. Crosses Rohtang, Gramphu, and Kunzum La (14,931 ft).'
+        ]
+      },
+      {
+        id: 'places',
+        title: '3. Top Places to Visit in Spiti',
+        content: [
+          'Key Monastery (1,000 year old cliffside monastery), Hikkim (World’s highest post office at 14,567 ft), Langza (Fossil village), and Chandratal Crescent Lake.'
+        ],
+        backlink: { label: 'Shop Weatherproof Duffel Bags for Spiti Road Trips', url: '/shop' }
+      }
+    ],
+    faqs: [
+      {
+        q: 'When is the best time to visit Spiti Valley?',
+        a: 'May to October for open roads and green valleys; January to March for the famous Winter Spiti Snow Leopard expedition.'
+      }
+    ]
+  },
+
+  /* ── KASHMIR GREAT LAKES ── */
+  'kashmir-great-lakes-trek': {
+    id: 'kashmir-great-lakes-trek',
+    title: "Kashmir Great Lakes Trek: A Complete Trekker's Guide",
+    category: 'Travel Guide',
+    date: 'Tuesday, October 10, 2023',
+    readTime: '8 min read',
+    author: {
+      name: 'Go Banjara Team',
+      role: 'Trek Specialists',
+      avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&h=200&fit=crop',
+    },
+    heroImage: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1400&auto=format&fit=crop',
+    excerpt: 'Trek across 7 pristine alpine turquoise lakes in Kashmir. Complete guide covering route, fitness preparation, camps, and best month.',
+    toc: [
+      { id: 'overview', title: '1. Why KGL is India’s Prettiest Trek' },
+      { id: 'itinerary', title: '2. Day-by-Day Route Overview' },
+    ],
+    sections: [
+      {
+        id: 'overview',
+        title: '1. Why KGL is India’s Prettiest Trek',
+        content: [
+          'The Kashmir Great Lakes (KGL) trek takes you through pristine alpine meadows, snow-fed rivers, and 7 turquoise glacial lakes including Vishansar, Krishansar, Gadsar, Satsar, and Gangabal.'
+        ],
+        highlight: 'Go Banjara Tip: July to September is peak blooming season when the meadows of Sonamarg and Nichnai are covered in wild alpine flowers.',
+        backlink: { label: 'View Go Banjara Kashmir Trekking Expeditions', url: '/travel' }
+      },
+      {
+        id: 'itinerary',
+        title: '2. Day-by-Day Route Overview',
+        content: [
+          'Starting at Shitkadi near Sonamarg, the 75-km trek crosses Nichnai Pass (13,500 ft) and Gadsar Pass (13,750 ft) before ending at Naranag ruins.'
+        ]
+      }
+    ]
+  },
+
+  /* ── MANALI TO LEH HIGHWAY ── */
+  'manali-to-leh-highway': {
+    id: 'manali-to-leh-highway',
+    title: 'Manali to Leh Highway: Everything You Need to Know Before You Go',
+    category: 'Travel Guide',
+    date: 'Friday, November 3, 2023',
+    readTime: '6 min read',
+    author: {
+      name: 'Rohan Sharma',
+      role: 'Motorcycling Specialist',
+      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&h=200&fit=crop',
+    },
+    heroImage: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=1400&auto=format&fit=crop',
+    excerpt: 'Detailed guide for driving or riding the iconic 474 km Manali-Leh highway, including high passes, night stops, and fuel stations.',
+    toc: [{ id: 'highway', title: '1. Highway Stops & High Passes' }],
+    sections: [
+      {
+        id: 'highway',
+        title: '1. Highway Stops & High Passes',
+        content: [
+          'Covering 474 km across 5 high altitude passes (Rohtang, Baralacha La, Nakee La, Lachung La, Tanglang La), Jispa and Sarchu serve as popular night stopovers.'
+        ],
+        backlink: { label: 'Explore Supported Manali to Leh Expeditions', url: '/travel' }
+      }
+    ]
+  },
+
+  /* ── COORG ── */
+  'coorg-travel-guide': {
+    id: 'coorg-travel-guide',
+    title: "Coorg Travel Guide: India's Scotland of the East",
+    category: 'Travel Guide',
+    date: 'Saturday, December 2, 2023',
+    readTime: '5 min read',
+    author: {
+      name: 'Priya Nair',
+      role: 'Slow Travel Curator',
+      avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop',
+    },
+    heroImage: 'https://images.unsplash.com/photo-1448375240586-882707db888b?q=80&w=1400&auto=format&fit=crop',
+    excerpt: 'Escape to coffee plantations, misty hills, Abbey Falls, and Tibetan monasteries in Kodagu (Coorg).',
+    toc: [{ id: 'coorg', title: '1. Highlights of Kodagu' }],
+    sections: [
+      {
+        id: 'coorg',
+        title: '1. Highlights of Kodagu',
+        content: [
+          'Coorg offers lush coffee estates, spice plantations, Tadiandamol peak trekking, and the serene Golden Temple at Namdroling Monastery Bylakuppe.'
+        ],
+        backlink: { label: 'Check South India Heritage Packages', url: '/travel' }
+      }
+    ]
+  },
+
+  /* ── RAJASTHAN ── */
+  'rajasthan-road-trip': {
+    id: 'rajasthan-road-trip',
+    title: 'Rajasthan Road Trip: Forts, Deserts & Camel Safaris',
+    category: 'Travel Guide',
+    date: 'Sunday, January 7, 2024',
+    readTime: '7 min read',
+    author: {
+      name: 'Go Banjara Team',
+      role: 'Heritage Curators',
+      avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&h=200&fit=crop',
+    },
+    heroImage: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=1400&auto=format&fit=crop',
+    excerpt: 'Explore the golden sands of Jaisalmer, blue alleys of Jodhpur, pink palaces of Jaipur, and serene lakes of Udaipur.',
+    toc: [{ id: 'circuit', title: '1. The Royal Rajasthan Circuit' }],
+    sections: [
+      {
+        id: 'circuit',
+        title: '1. The Royal Rajasthan Circuit',
+        content: [
+          'A 10-day road trip through Jaipur, Pushkar, Jodhpur, Jaisalmer Sam Sand Dunes, and Udaipur offers an unforgettable glimpse into India’s royal history.'
+        ],
+        backlink: { label: 'View Rajasthan Heritage Packages', url: '/travel' }
+      }
+    ]
+  },
+
+  /* ── ANDAMAN ── */
+  'andaman-islands-guide': {
+    id: 'andaman-islands-guide',
+    title: 'Andaman Islands: Hidden Beaches & Underwater Adventures',
+    category: 'Travel Guide',
+    date: 'Monday, February 5, 2024',
+    readTime: '6 min read',
+    author: {
+      name: 'Go Banjara Team',
+      role: 'Island Specialists',
+      avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&h=200&fit=crop',
+    },
+    heroImage: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1400&auto=format&fit=crop',
+    excerpt: 'White sand beaches, turquoise waters, scuba diving in Havelock, and historical walks in Port Blair.',
+    toc: [{ id: 'andaman', title: '1. Island Hopping & Scuba Diving' }],
+    sections: [
+      {
+        id: 'andaman',
+        title: '1. Island Hopping & Scuba Diving',
+        content: [
+          'Visit Radhanagar Beach on Havelock Island (voted Asia’s best beach), scuba dive at Elephant Beach, and explore Ross Island coral reefs.'
+        ],
+        backlink: { label: 'Explore Andaman Island Packages', url: '/travel' }
+      }
+    ]
   }
 };
 

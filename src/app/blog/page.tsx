@@ -10,10 +10,34 @@ interface BlogPost {
   date: string;
   readTime: string;
   image: string;
-  category: 'Travel Guide' | 'Tour Guide' | 'Most Popular';
+  category: 'Travel Guide' | 'Tour Guide' | 'Most Popular' | 'Customer Stories';
 }
 
 const BLOG_POSTS: BlogPost[] = [
+  {
+    id: 'customer-story-khardung-la-group',
+    title: 'Conquering Khardung La & Pangong Tso: How 8 Strangers Became a Lifelong Go Banjara Tribe',
+    date: 'Wednesday, March 12, 2024',
+    readTime: '7 min read',
+    image: 'https://images.unsplash.com/photo-1526772662000-3f88f10405ff?q=80&w=800&auto=format&fit=crop',
+    category: 'Customer Stories',
+  },
+  {
+    id: 'customer-story-spiti-valley-solo',
+    title: 'From Corporate Burnout to Spiti Valley Monasteries: Priya’s 9-Day Journey with Go Banjara',
+    date: 'Thursday, April 18, 2024',
+    readTime: '6 min read',
+    image: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=800&auto=format&fit=crop',
+    category: 'Customer Stories',
+  },
+  {
+    id: 'customer-story-meghalaya-root-bridges',
+    title: 'Trekking 3,500 Steps to the Double Decker Root Bridge: Rohan’s Meghalaya Group Story',
+    date: 'Monday, May 20, 2024',
+    readTime: '8 min read',
+    image: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=800&auto=format&fit=crop',
+    category: 'Customer Stories',
+  },
   {
     id: 'ladakh-bike-trip-guide',
     title: 'Ladakh Bike Trip Guide: Routes, Budget & Essential Tips for Riders',
@@ -86,7 +110,6 @@ const BLOG_POSTS: BlogPost[] = [
     image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=800&auto=format&fit=crop',
     category: 'Most Popular',
   },
-  /* ── 6 more Travel Guide posts ── */
   {
     id: 'spiti-valley-travel-guide',
     title: 'Spiti Valley Travel Guide: The Ultimate Road Trip Through Cold Desert',
@@ -164,12 +187,12 @@ const POSTS_PER_PAGE = 9;
 
 /* ─────────────────── COMPONENT ─────────────────── */
 export default function BlogPage() {
-  const [activeTab, setActiveTab] = useState<'Travel Guide' | 'Tour Guide' | 'Most Popular'>('Travel Guide');
+  const [activeTab, setActiveTab] = useState<'Travel Guide' | 'Tour Guide' | 'Most Popular' | 'Customer Stories'>('Travel Guide');
   const [email, setEmail] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
-  const tabs: ('Travel Guide' | 'Tour Guide' | 'Most Popular')[] = ['Travel Guide', 'Tour Guide', 'Most Popular'];
+  const tabs: ('Travel Guide' | 'Tour Guide' | 'Most Popular' | 'Customer Stories')[] = ['Travel Guide', 'Tour Guide', 'Most Popular', 'Customer Stories'];
 
   const filtered = BLOG_POSTS.filter((p) => p.category === activeTab);
   const totalPages = Math.max(1, Math.ceil(filtered.length / POSTS_PER_PAGE));

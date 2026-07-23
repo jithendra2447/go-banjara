@@ -439,7 +439,7 @@ const ARTICLES_DATABASE: Record<string, ArticleData> = {
       role: 'Destination Curators',
       avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&h=200&fit=crop',
     },
-    heroImage: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=1400&auto=format&fit=crop',
+    heroImage: 'https://images.unsplash.com/photo-1581793745862-99fde7fa73d2?q=80&w=1400&auto=format&fit=crop',
     excerpt: 'A perfectly paced 7-day day-by-day itinerary covering Leh Palace, Sham Valley, Khardung La, Nubra Valley, and Pangong Tso lake for first-time Himalayan travelers.',
     toc: [
       { id: 'day1', title: 'Day 1: Arrival in Leh & Mandatory Acclimatization' },
@@ -523,7 +523,7 @@ const ARTICLES_DATABASE: Record<string, ArticleData> = {
       role: 'Destination Curators',
       avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&h=200&fit=crop',
     },
-    heroImage: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=1400&auto=format&fit=crop',
+    heroImage: 'https://images.unsplash.com/photo-1627894483216-2138af692e32?q=80&w=1400&auto=format&fit=crop',
     excerpt: 'Discover our top-rated 7-day Leh Ladakh travel circuit featuring Khardung La, Nubra Valley, Pangong Tso, and cultural monastries.',
     toc: [
       { id: 'overview', title: '1. Complete 7-Day Circuit Summary' },
@@ -559,7 +559,7 @@ const ARTICLES_DATABASE: Record<string, ArticleData> = {
       role: 'Destination Curators',
       avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&h=200&fit=crop',
     },
-    heroImage: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=1400&auto=format&fit=crop',
+    heroImage: 'https://images.unsplash.com/photo-1581793745862-99fde7fa73d2?q=80&w=1400&auto=format&fit=crop',
     excerpt: 'Essential 7-day trip planning guide for first-time travelers to Ladakh.',
     toc: [{ id: 'guide', title: '1. First-Timer Travel Advice' }],
     sections: [
@@ -585,7 +585,7 @@ const ARTICLES_DATABASE: Record<string, ArticleData> = {
       role: 'Destination Curators',
       avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&h=200&fit=crop',
     },
-    heroImage: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=1400&auto=format&fit=crop',
+    heroImage: 'https://images.unsplash.com/photo-1627894483216-2138af692e32?q=80&w=1400&auto=format&fit=crop',
     excerpt: 'Detailed 7-day high altitude guide for exploring Ladakh.',
     toc: [{ id: 'guide', title: '1. Exploring Leh & Beyond' }],
     sections: [
@@ -845,7 +845,7 @@ const ARTICLES_DATABASE: Record<string, ArticleData> = {
       role: 'Slow Travel Curator',
       avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop',
     },
-    heroImage: 'https://images.unsplash.com/photo-1448375240586-882707db888b?q=80&w=1400&auto=format&fit=crop',
+    heroImage: 'https://images.unsplash.com/photo-1587049352846-4a222e784d38?q=80&w=1400&auto=format&fit=crop',
     excerpt: 'Escape to coffee plantations, misty hills, Abbey Falls, and Tibetan monasteries in Kodagu (Coorg).',
     toc: [{ id: 'coorg', title: '1. Highlights of Kodagu' }],
     sections: [
@@ -872,7 +872,7 @@ const ARTICLES_DATABASE: Record<string, ArticleData> = {
       role: 'Heritage Curators',
       avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&h=200&fit=crop',
     },
-    heroImage: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=1400&auto=format&fit=crop',
+    heroImage: 'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?q=80&w=1400&auto=format&fit=crop',
     excerpt: 'Explore the golden sands of Jaisalmer, blue alleys of Jodhpur, pink palaces of Jaipur, and serene lakes of Udaipur.',
     toc: [{ id: 'circuit', title: '1. The Royal Rajasthan Circuit' }],
     sections: [
@@ -1224,56 +1224,56 @@ export default function BlogPostDetail() {
                   style={{
                     background: 'rgba(255, 235, 232, 0.5)',
                     borderLeft: '4px solid rgba(255, 98, 62, 1)',
-                    borderRadius: '0 4px 4px 0',
+                    borderRadius: '0 8px 8px 0',
                     color: 'rgba(43, 43, 43, 1)',
                   }}
-                  className="p-5 my-5 text-sm font-semibold space-y-2"
+                  className="p-5 my-5 text-sm font-semibold space-y-3"
                 >
-                  <p>{section.highlight}</p>
+                  <p className="text-base text-[#2B2B2B] font-medium leading-relaxed">{section.highlight}</p>
                   {section.backlink && (
                     section.backlink.url.startsWith('http') ? (
                       <a 
                         href={section.backlink.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-xs font-bold text-[#1D493E] underline hover:text-[#FF5A36] transition cursor-pointer"
+                        className="inline-flex items-center gap-2 px-4 py-2.5 rounded-md bg-[#1D493E] text-white hover:bg-[#FF5A36] text-xs md:text-sm font-bold transition-all shadow-xs cursor-pointer"
                       >
                         <span>{section.backlink.label}</span>
-                        <ExternalLink className="w-3.5 h-3.5" />
+                        <ExternalLink className="w-4 h-4 text-[#FF623E]" />
                       </a>
                     ) : (
                       <Link 
                         href={section.backlink.url}
-                        className="inline-flex items-center gap-1.5 text-xs font-bold text-[#1D493E] underline hover:text-[#FF5A36] transition cursor-pointer"
+                        className="inline-flex items-center gap-2 px-4 py-2.5 rounded-md bg-[#1D493E] text-white hover:bg-[#FF5A36] text-xs md:text-sm font-bold transition-all shadow-xs cursor-pointer"
                       >
                         <span>{section.backlink.label}</span>
-                        <ChevronRight className="w-3.5 h-3.5" />
+                        <ChevronRight className="w-4 h-4 text-white" />
                       </Link>
                     )
                   )}
                 </div>
               )}
 
-              {/* Standalone Backlink if no highlight box */}
+              {/* Standalone Backlink */}
               {!section.highlight && section.backlink && (
-                <div className="my-3">
+                <div className="my-5">
                   {section.backlink.url.startsWith('http') ? (
                     <a 
                       href={section.backlink.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs font-bold text-[#1D493E] hover:text-[#FF5A36] transition cursor-pointer"
+                      className="inline-flex items-center gap-2 px-4 py-2.5 rounded-md bg-[#F0F7F4] border border-[#1D493E]/20 text-[#1D493E] hover:bg-[#1D493E] hover:text-white text-xs md:text-sm font-bold transition-all shadow-xs cursor-pointer"
                     >
                       <span>{section.backlink.label}</span>
-                      <ExternalLink className="w-3.5 h-3.5 text-[#FF5A36]" />
+                      <ExternalLink className="w-4 h-4 text-[#FF623E]" />
                     </a>
                   ) : (
                     <Link 
                       href={section.backlink.url}
-                      className="inline-flex items-center gap-1.5 text-xs font-bold text-[#1D493E] hover:text-[#FF5A36] transition cursor-pointer"
+                      className="inline-flex items-center gap-2 px-4 py-2.5 rounded-md bg-[#F0F7F4] border border-[#1D493E]/20 text-[#1D493E] hover:bg-[#1D493E] hover:text-white text-xs md:text-sm font-bold transition-all shadow-xs cursor-pointer"
                     >
                       <span>{section.backlink.label}</span>
-                      <ChevronRight className="w-3.5 h-3.5 text-[#1D493E]" />
+                      <ChevronRight className="w-4 h-4 text-[#FF623E]" />
                     </Link>
                   )}
                 </div>
@@ -1294,7 +1294,7 @@ export default function BlogPostDetail() {
               {/* Inline Section Image */}
               {section.image && (
                 <div className="space-y-2 my-6">
-                  <div className="w-full h-80 rounded-[4px] overflow-hidden border border-gray-150 shadow-sm">
+                  <div className="w-full h-80 md:h-[420px] rounded-[6px] overflow-hidden border border-gray-200 shadow-sm">
                     <img 
                       src={section.image} 
                       alt={`${section.title} | Go Banjara Travel Guide`}
@@ -1303,7 +1303,7 @@ export default function BlogPostDetail() {
                     />
                   </div>
                   {section.imageCaption && (
-                    <p className="text-center text-xs text-[#2B2B2B]/60 italic font-medium">
+                    <p className="text-center text-xs text-[#2B2B2B]/70 italic font-medium pt-1">
                       {section.imageCaption}
                     </p>
                   )}

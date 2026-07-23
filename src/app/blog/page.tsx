@@ -28,7 +28,7 @@ const BLOG_POSTS: BlogPost[] = [
     title: 'From Corporate Burnout to Spiti Valley Monasteries: Priya’s 9-Day Journey with Go Banjara',
     date: 'Thursday, April 18, 2024',
     readTime: '6 min read',
-    image: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=800&auto=format&fit=crop',
     category: 'Customer Stories',
   },
   {
@@ -44,7 +44,7 @@ const BLOG_POSTS: BlogPost[] = [
     title: 'Ladakh Bike Trip Guide: Routes, Budget & Essential Tips for Riders',
     date: 'Sunday, August 12, 2023',
     readTime: '5 min read',
-    image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=800&auto=format&fit=crop',
     category: 'Travel Guide',
   },
   {
@@ -52,7 +52,7 @@ const BLOG_POSTS: BlogPost[] = [
     title: '7-Day Leh Ladakh Itinerary for First-Time Travelers',
     date: 'Sunday, August 12, 2023',
     readTime: '5 min read',
-    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1581793745862-99fde7fa73d2?q=80&w=800&auto=format&fit=crop',
     category: 'Tour Guide',
   },
   {
@@ -60,7 +60,7 @@ const BLOG_POSTS: BlogPost[] = [
     title: '7-Day Leh Ladakh Itinerary for First-Time Travelers',
     date: 'Sunday, August 12, 2023',
     readTime: '5 min read',
-    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1627894483216-2138af692e32?q=80&w=800&auto=format&fit=crop',
     category: 'Most Popular',
   },
   {
@@ -68,7 +68,7 @@ const BLOG_POSTS: BlogPost[] = [
     title: 'Ultimate Ladakh Travel Guide: Plan Your Perfect Himalayan Adventure',
     date: 'Sunday, August 12, 2023',
     readTime: '5 min read',
-    image: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=800&auto=format&fit=crop',
     category: 'Travel Guide',
   },
   {
@@ -76,7 +76,7 @@ const BLOG_POSTS: BlogPost[] = [
     title: 'Leh Ladakh Travel Guide 2026: Best Time, Places & Complete Trip Planning',
     date: 'Sunday, August 12, 2023',
     readTime: '5 min read',
-    image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1526772662000-3f88f10405ff?q=80&w=800&auto=format&fit=crop',
     category: 'Tour Guide',
   },
   {
@@ -84,7 +84,7 @@ const BLOG_POSTS: BlogPost[] = [
     title: 'Leh Ladakh Travel Guide 2026: Best Time, Places & Complete Trip Planning',
     date: 'Sunday, August 12, 2023',
     readTime: '5 min read',
-    image: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1627894483216-2138af692e32?q=80&w=800&auto=format&fit=crop',
     category: 'Most Popular',
   },
   {
@@ -92,7 +92,7 @@ const BLOG_POSTS: BlogPost[] = [
     title: '7-Day Leh Ladakh Itinerary for First-Time Travelers',
     date: 'Sunday, August 12, 2023',
     readTime: '5 min read',
-    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1581793745862-99fde7fa73d2?q=80&w=800&auto=format&fit=crop',
     category: 'Travel Guide',
   },
   {
@@ -100,7 +100,7 @@ const BLOG_POSTS: BlogPost[] = [
     title: 'Ladakh Bike Trip Guide: Routes, Budget & Essential Tips for Riders',
     date: 'Sunday, August 12, 2023',
     readTime: '5 min read',
-    image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=800&auto=format&fit=crop',
     category: 'Tour Guide',
   },
   {
@@ -108,7 +108,7 @@ const BLOG_POSTS: BlogPost[] = [
     title: '7-Day Leh Ladakh Itinerary for First-Time Travelers',
     date: 'Sunday, August 12, 2023',
     readTime: '5 min read',
-    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1627894483216-2138af692e32?q=80&w=800&auto=format&fit=crop',
     category: 'Most Popular',
   },
   {
@@ -116,7 +116,7 @@ const BLOG_POSTS: BlogPost[] = [
     title: 'Spiti Valley Travel Guide: The Ultimate Road Trip Through Cold Desert',
     date: 'Monday, September 4, 2023',
     readTime: '6 min read',
-    image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=800&auto=format&fit=crop',
     category: 'Travel Guide',
   },
   {
@@ -124,7 +124,7 @@ const BLOG_POSTS: BlogPost[] = [
     title: "Kashmir Great Lakes Trek: A Complete Trekker's Guide",
     date: 'Tuesday, October 10, 2023',
     readTime: '8 min read',
-    image: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1595815771614-ade9d652a65d?q=80&w=800&auto=format&fit=crop',
     category: 'Travel Guide',
   },
   {
@@ -140,7 +140,7 @@ const BLOG_POSTS: BlogPost[] = [
     title: "Coorg Travel Guide: India's Scotland of the East",
     date: 'Saturday, December 2, 2023',
     readTime: '5 min read',
-    image: 'https://images.unsplash.com/photo-1448375240586-882707db888b?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1587049352846-4a222e784d38?q=80&w=800&auto=format&fit=crop',
     category: 'Travel Guide',
   },
   {
@@ -148,7 +148,7 @@ const BLOG_POSTS: BlogPost[] = [
     title: 'Rajasthan Road Trip: Forts, Deserts & Camel Safaris',
     date: 'Sunday, January 7, 2024',
     readTime: '7 min read',
-    image: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?q=80&w=800&auto=format&fit=crop',
     category: 'Travel Guide',
   },
   {

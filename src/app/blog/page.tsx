@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 /* ─────────────────── DATA ─────────────────── */
 interface BlogPost {
@@ -431,74 +432,56 @@ export default function BlogPage() {
         }}
         className="px-6 md:px-[80px]"
       >
-        {/* Tab Bar — Figma: 1280×57, gap:10, border-bottom: 2px solid rgba(204,204,204,1) */}
+        {/* Tab Bar — Native Go Banjara Theme */}
         <div
           style={{
             width: '100%',
             maxWidth: '1280px',
-            height: '57px',
             display: 'flex',
             flexDirection: 'row',
             alignItems: 'flex-end',
-            gap: '10px',
-            borderBottom: '2px solid rgba(204, 204, 204, 1)',
+            gap: '16px',
+            borderBottom: '2px solid rgba(204, 204, 204, 0.6)',
             background: 'rgba(255, 255, 255, 1)',
             boxSizing: 'border-box',
+            overflowX: 'auto',
           }}
+          className="no-scrollbar"
         >
           {tabs.map((tab) => (
             <button
               key={tab}
               onClick={() => handleTabChange(tab)}
               style={{
-                width: activeTab === tab ? '166px' : 'auto',
-                height: '57px',
-                padding: '12px',
-                gap: '10px',
+                width: 'auto',
+                padding: '12px 16px',
                 background: 'none',
                 border: 'none',
                 fontFamily: 'Faktum, var(--font-sans), sans-serif',
-                fontWeight: 500,
-                fontSize: '24px',
-                lineHeight: '100%',
-                letterSpacing: '0%',
-                color: activeTab === tab ? 'rgba(28, 68, 140, 1)' : 'rgba(43, 43, 43, 1)',
+                fontWeight: 600,
+                fontSize: '20px',
+                lineHeight: '120%',
+                color: activeTab === tab ? 'rgba(29, 73, 62, 1)' : 'rgba(43, 43, 43, 0.6)',
                 cursor: 'pointer',
                 borderBottom: activeTab === tab
-                  ? '3px solid rgba(28, 68, 140, 1)'
+                  ? '3px solid rgba(29, 73, 62, 1)'
                   : '3px solid transparent',
                 marginBottom: '-2px',
                 transition: 'all 0.2s ease',
                 whiteSpace: 'nowrap',
-                display: 'flex',
+                display: 'inline-flex',
                 alignItems: 'center',
                 justifyContent: 'center',
+                outline: 'none',
                 boxSizing: 'border-box',
               }}
             >
-              {/* Label — Figma: 142×30, Faktum 500 24px lh:100% rgba(28,68,140,1) when active */}
-              <span
-                style={{
-                  width: activeTab === tab ? '142px' : 'auto',
-                  height: '30px',
-                  fontFamily: 'Faktum, var(--font-sans), sans-serif',
-                  fontWeight: 500,
-                  fontSize: '24px',
-                  lineHeight: '100%',
-                  letterSpacing: '0px',
-                  color: activeTab === tab ? 'rgba(28, 68, 140, 1)' : 'rgba(43, 43, 43, 1)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                {tab}
-              </span>
+              {tab}
             </button>
           ))}
         </div>
 
-        {/* 3-Column Card Grid — Figma: 1280×417.95, gap:32 */}
+        {/* 3-Column Card Grid */}
         <div
           style={{
             width: '100%',
@@ -516,26 +499,26 @@ export default function BlogPage() {
               key={post.id}
               style={{ textDecoration: 'none', color: 'inherit' }}
             >
-              {/* Card — Figma: 405.33×417.95, gap:24 */}
+              {/* Card */}
               <article
                 style={{
                   width: '100%',
-                  height: 'auto',
-                  minHeight: '417.95px',
+                  height: '100%',
                   display: 'flex',
                   flexDirection: 'column',
-                  gap: '24px',
+                  gap: '16px',
                   cursor: 'pointer',
                 }}
                 className="group"
               >
-                {/* Image */}
+                {/* Image — 16:10 aspect ratio */}
                 <div
                   style={{
                     width: '100%',
-                    height: '270px',
+                    aspectRatio: '16/10',
                     overflow: 'hidden',
                     background: '#e5e5e5',
+                    borderRadius: '6px',
                     flexShrink: 0,
                   }}
                 >
@@ -551,47 +534,38 @@ export default function BlogPage() {
                     className="group-hover:scale-105"
                   />
                 </div>
+
                 {/* Text block */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                  {/* Title — Figma: 405.33×117, Fraunces 600 32px lh:100% rgba(43,43,43,1) */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', flexGrow: 1, justifyContent: 'space-between' }}>
+                  {/* Title — Fraunces 600, fluid line height, no hardcoded height overlap */}
                   <h3
                     style={{
                       width: '100%',
-                      height: '117px',
                       fontFamily: 'Fraunces, Georgia, serif',
                       fontWeight: 600,
-                      fontSize: '32px',
-                      lineHeight: '100%',
-                      letterSpacing: '0px',
+                      fontSize: '22px',
+                      lineHeight: '1.35',
                       color: 'rgba(43, 43, 43, 1)',
                       margin: 0,
-                      verticalAlign: 'middle',
-                      overflow: 'hidden',
                     }}
-                    className="group-hover:text-[#1D493E]"
+                    className="group-hover:text-[#1D493E] transition-colors line-clamp-3"
                   >
                     {post.title}
                   </h3>
 
-                  {/* Meta — Figma: 405.33×32, Faktum 500 20px lh:32px rgba(43,43,43,0.8) */}
+                  {/* Meta — Date & Read Time */}
                   <p
                     style={{
                       width: '100%',
-                      height: '32px',
                       fontFamily: 'Faktum, var(--font-sans), sans-serif',
                       fontWeight: 500,
-                      fontSize: '20px',
-                      lineHeight: '32px',
-                      letterSpacing: '0px',
-                      verticalAlign: 'middle',
-                      color: 'rgba(43, 43, 43, 0.8)',
+                      fontSize: '14px',
+                      lineHeight: '1.4',
+                      color: 'rgba(43, 43, 43, 0.65)',
                       margin: 0,
-                      whiteSpace: 'nowrap',
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis',
                     }}
                   >
-                    {post.date}&nbsp; -&nbsp;{post.readTime}
+                    {post.date} &nbsp;•&nbsp; {post.readTime}
                   </p>
                 </div>
               </article>
@@ -599,173 +573,49 @@ export default function BlogPage() {
           ))}
         </div>
 
-        {/* Pagination — Figma: 1280×68, space-between, pt/pb:12, radius:12, border-top:1px, white */}
+        {/* Pagination Bar — Native Go Banjara Theme */}
         {totalPages > 0 && (
-          <div
-            style={{
-              width: '100%',
-              maxWidth: '1280px',
-              height: '68px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              paddingTop: '12px',
-              paddingBottom: '12px',
-              borderRadius: '12px',
-              borderTop: '1px solid rgba(204, 204, 204, 1)',
-              background: 'rgba(255, 255, 255, 1)',
-              boxSizing: 'border-box',
-            }}
-          >
-            {/* Page label — Figma: 102×25, Faktum 500 20px lh:100% rgba(43,43,43,1) */}
-            <span
-              style={{
-                width: '102px',
-                height: '25px',
-                fontFamily: 'Faktum, var(--font-sans), sans-serif',
-                fontWeight: 500,
-                fontSize: '20px',
-                lineHeight: '100%',
-                letterSpacing: '0%',
-                color: 'rgba(43, 43, 43, 1)',
-                display: 'flex',
-                alignItems: 'center',
-              }}
-            >
+          <div className="w-full max-w-[1280px] py-4 border-t border-gray-200 bg-white flex flex-col sm:flex-row items-center justify-between gap-4">
+            {/* Page info label */}
+            <span style={{ fontFamily: 'Faktum, var(--font-sans), sans-serif' }} className="text-sm md:text-base font-medium text-[#2B2B2B]">
               Page {currentPage} of {totalPages}
             </span>
 
-            {/* Pagination buttons — Figma: 245×44, gap:4px */}
-            <div
-              style={{
-                width: '245px',
-                height: '44px',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '4px',
-              }}
-            >
-              {/* Prev arrow — Figma: 59×44, pt:12 pr:24 pb:12 pl:24, radius:4, border-right:1px */}
+            {/* Pagination Controls */}
+            <div className="flex items-center gap-1.5">
+              {/* Prev Button */}
               <button
                 onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
                 disabled={currentPage === 1}
-                style={{
-                  width: '59px',
-                  height: '44px',
-                  paddingTop: '12px',
-                  paddingBottom: '12px',
-                  paddingLeft: '24px',
-                  paddingRight: '24px',
-                  gap: '12px',
-                  borderRadius: '4px',
-                  border: 'none',
-                  borderRight: '1px solid rgba(204, 204, 204, 1)',
-                  background: 'rgba(255, 255, 255, 1)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  cursor: currentPage === 1 ? 'not-allowed' : 'pointer',
-                  opacity: currentPage === 1 ? 0.4 : 1,
-                  fontFamily: 'Faktum, var(--font-sans), sans-serif',
-                  fontWeight: 500,
-                  fontSize: '18px',
-                  lineHeight: '100%',
-                  color: 'rgba(29, 73, 62, 1)',
-                  boxSizing: 'border-box',
-                  flexShrink: 0,
-                }}
+                className="w-9 h-9 flex items-center justify-center rounded-[6px] border border-gray-200 bg-white text-[#1D493E] hover:bg-[#FAF9F6] disabled:opacity-30 disabled:cursor-not-allowed transition cursor-pointer"
+                aria-label="Previous Page"
               >
-                ←
+                <ChevronLeft className="w-4 h-4 text-[#1D493E]" />
               </button>
 
-              {/* Page numbers — Figma: 59×44, Faktum 500 18px rgba(29,73,62,1) */}
+              {/* Page Number Buttons */}
               {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
                 <button
                   key={page}
                   onClick={() => setCurrentPage(page)}
-                  style={{
-                    width: '59px',
-                    height: '44px',
-                    paddingTop: '12px',
-                    paddingBottom: '12px',
-                    paddingLeft: '24px',
-                    paddingRight: '24px',
-                    gap: '12px',
-                    borderRadius: '4px',
-                    border: currentPage === page
-                      ? '1px solid rgba(29, 73, 62, 1)'
-                      : '1px solid transparent',
-                    borderRight: currentPage === page
-                      ? '1px solid rgba(29, 73, 62, 1)'
-                      : '1px solid rgba(204, 204, 204, 1)',
-                    background: 'rgba(255, 255, 255, 1)',
-                    fontFamily: 'Faktum, var(--font-sans), sans-serif',
-                    fontWeight: 500,
-                    fontSize: '18px',
-                    lineHeight: '100%',
-                    letterSpacing: '0%',
-                    color: 'rgba(29, 73, 62, 1)',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    transition: 'all 0.15s',
-                    boxSizing: 'border-box',
-                    flexShrink: 0,
-                  }}
+                  className={`w-9 h-9 flex items-center justify-center rounded-[6px] font-sans font-medium text-sm transition cursor-pointer ${
+                    currentPage === page
+                      ? 'bg-[#1D493E] text-white border border-[#1D493E] shadow-xs'
+                      : 'bg-white text-[#2B2B2B] border border-gray-200 hover:border-[#1D493E] hover:text-[#1D493E]'
+                  }`}
                 >
-                  {/* Number — Figma: 11×23, Faktum 500 18px rgba(29,73,62,1) */}
-                  <span
-                    style={{
-                      width: '11px',
-                      height: '23px',
-                      fontFamily: 'Faktum, var(--font-sans), sans-serif',
-                      fontWeight: 500,
-                      fontSize: '18px',
-                      lineHeight: '100%',
-                      letterSpacing: '0%',
-                      color: 'rgba(29, 73, 62, 1)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}
-                  >
-                    {page}
-                  </span>
+                  {page}
                 </button>
               ))}
 
-              {/* Next arrow — Figma: 59×44, same as prev */}
+              {/* Next Button */}
               <button
                 onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
                 disabled={currentPage === totalPages}
-                style={{
-                  width: '59px',
-                  height: '44px',
-                  paddingTop: '12px',
-                  paddingBottom: '12px',
-                  paddingLeft: '24px',
-                  paddingRight: '24px',
-                  gap: '12px',
-                  borderRadius: '4px',
-                  border: 'none',
-                  borderRight: '1px solid rgba(204, 204, 204, 1)',
-                  background: 'rgba(255, 255, 255, 1)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  cursor: currentPage === totalPages ? 'not-allowed' : 'pointer',
-                  opacity: currentPage === totalPages ? 0.4 : 1,
-                  fontFamily: 'Faktum, var(--font-sans), sans-serif',
-                  fontWeight: 500,
-                  fontSize: '18px',
-                  lineHeight: '100%',
-                  color: 'rgba(29, 73, 62, 1)',
-                  boxSizing: 'border-box',
-                  flexShrink: 0,
-                }}
+                className="w-9 h-9 flex items-center justify-center rounded-[6px] border border-gray-200 bg-white text-[#1D493E] hover:bg-[#FAF9F6] disabled:opacity-30 disabled:cursor-not-allowed transition cursor-pointer"
+                aria-label="Next Page"
               >
-                →
+                <ChevronRight className="w-4 h-4 text-[#1D493E]" />
               </button>
             </div>
           </div>

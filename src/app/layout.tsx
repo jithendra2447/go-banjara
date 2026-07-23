@@ -6,7 +6,6 @@ import { CartDrawer } from "@/components/CartDrawer";
 import { WishlistDrawer } from "@/components/WishlistDrawer";
 import { CheckoutModal } from "@/components/CheckoutModal";
 import { AuthModal } from "@/components/AuthModal";
-import ConnectTeamModal from "@/components/ConnectTeamModal";
 import { Footer } from "@/components/Footer";
 import "./globals.css";
 
@@ -35,7 +34,6 @@ export default function RootLayout({
           <WishlistDrawer />
           <CheckoutModal />
           <AuthModal />
-          <ConnectTeamModal />
         </CartProvider>
       </body>
     </html>

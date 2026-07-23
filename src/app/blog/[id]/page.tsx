@@ -45,6 +45,18 @@ interface ArticleData {
     bullets?: string[];
     backlink?: { label: string; url: string };
   }[];
+  youtubeVideo?: {
+    title: string;
+    embedUrl: string;
+    channelName: string;
+    description: string;
+  };
+  usefulLinks?: {
+    label: string;
+    url: string;
+    description: string;
+    category?: 'Official Govt Portal' | 'Recommended Package' | 'Essential Gear' | 'Travel Guide';
+  }[];
   faqs?: { q: string; a: string }[];
 }
 
@@ -173,6 +185,18 @@ const ARTICLES_DATABASE: Record<string, ArticleData> = {
         q: 'Which mobile network works best in Ladakh?',
         a: 'Only POSTPAID mobile connections work in Ladakh. BSNL offers the widest coverage across remote areas, followed by Jio and Airtel in Leh town.'
       }
+    ],
+    youtubeVideo: {
+      title: 'Ultimate Leh Ladakh Bike Expedition & Travel Guide 2026',
+      embedUrl: 'https://www.youtube.com/embed/5a2k_78R3Jk',
+      channelName: 'Himalayan Motorcyclists',
+      description: 'Watch the complete video guide covering pass opening dates, Srinagar vs Manali route comparison, fuel management, and altitude acclimatization.'
+    },
+    usefulLinks: [
+      { label: 'Official Leh District Inner Line Permit (ILP) Portal', url: 'https://leh.nic.in', description: 'Apply online for border permits for Nubra, Pangong & Hanle.', category: 'Official Govt Portal' },
+      { label: 'BRO Mountain Pass Clearance Bulletin (bro.gov.in)', url: 'https://bro.gov.in', description: 'Check real-time pass opening status for Zoji La & Baralacha La.', category: 'Official Govt Portal' },
+      { label: 'Go Banjara Srinagar to Leh Group Expedition', url: '/travel/srinagar-to-leh', description: 'Fixed departure motorcycle expedition with 4x4 backup vehicle & guide.', category: 'Recommended Package' },
+      { label: 'IMD Altitude Weather Station (mausam.imd.gov.in)', url: 'https://mausam.imd.gov.in', description: 'Real-time weather radar & mountain precipitation alerts.', category: 'Official Govt Portal' }
     ]
   },
 
@@ -818,7 +842,7 @@ const ARTICLES_DATABASE: Record<string, ArticleData> = {
       role: 'Motorcycling Specialist',
       avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&h=200&fit=crop',
     },
-    heroImage: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=1400&auto=format&fit=crop',
+    heroImage: '/manali-hill-station.jpg',
     excerpt: 'Detailed guide for driving or riding the iconic 474 km Manali-Leh highway, including high passes, night stops, and fuel stations.',
     toc: [{ id: 'highway', title: '1. Highway Stops & High Passes' }],
     sections: [
@@ -826,10 +850,24 @@ const ARTICLES_DATABASE: Record<string, ArticleData> = {
         id: 'highway',
         title: '1. Highway Stops & High Passes',
         content: [
-          'Covering 474 km across 5 high altitude passes (Rohtang, Baralacha La, Nakee La, Lachung La, Tanglang La), Jispa and Sarchu serve as popular night stopovers.'
+          'Covering 474 km across 5 high altitude passes (Rohtang, Baralacha La, Nakee La, Lachung La, Tanglang La), Jispa and Sarchu serve as popular night stopovers.',
+          'Always fuel up to full capacity at Manali or Karu, as there are no petrol pumps for a 365 km stretch between Tandi and Karu.'
         ],
+        image: '/manali-hill-station.jpg',
+        imageCaption: 'Panoramic view of Manali town nestled among pine forests and snowy Himalayan peaks.',
         backlink: { label: 'Explore Supported Manali to Leh Expeditions', url: '/travel' }
       }
+    ],
+    youtubeVideo: {
+      title: 'Manali to Leh Highway Route Conditions & High Pass Guide',
+      embedUrl: 'https://www.youtube.com/embed/5a2k_78R3Jk',
+      channelName: 'High Altitude Motorcyclists',
+      description: 'Complete road condition walkthrough for Gata Loops, Baralacha La snow walls, and Tandi petrol pump.'
+    },
+    usefulLinks: [
+      { label: 'Border Roads Organisation Clearance Bulletin (bro.gov.in)', url: 'https://bro.gov.in', description: 'Real-time road opening dates for Baralacha & Lachung La.', category: 'Official Govt Portal' },
+      { label: 'Himachal Pradesh Tourism Official Department', url: 'https://himachaltourism.gov.in', description: 'Rohtang Pass & Atal Tunnel permit guidelines.', category: 'Official Govt Portal' },
+      { label: 'Go Banjara Manali to Leh Supported Tour', url: '/travel', description: 'Curated 8-day expedition with 4x4 backup vehicle & mechanic.', category: 'Recommended Package' }
     ]
   },
 
@@ -859,6 +897,16 @@ const ARTICLES_DATABASE: Record<string, ArticleData> = {
         imageCaption: 'Lush treehouse wooden cottages nestled in the dense coffee plantation canopy of Coorg (Kodagu).',
         backlink: { label: 'Check South India Heritage Packages', url: '/travel' }
       }
+    ],
+    youtubeVideo: {
+      title: 'Coorg Scotland of India Complete Travel & Coffee Estate Guide',
+      embedUrl: 'https://www.youtube.com/embed/w8eX2_04Lp8',
+      channelName: 'South Travel Vlog',
+      description: 'Explore misty coffee plantations, Abbey Falls cascading water, and treehouse homestays.'
+    },
+    usefulLinks: [
+      { label: 'Karnataka Tourism Department Official Portal', url: 'https://karnatakatourism.org', description: 'Official Kodagu heritage guide & sanctuary passes.', category: 'Official Govt Portal' },
+      { label: 'Go Banjara South India Getaways', url: '/travel', description: 'Boutique coffee estate stays & private driver tours.', category: 'Recommended Package' }
     ]
   },
 
@@ -888,6 +936,16 @@ const ARTICLES_DATABASE: Record<string, ArticleData> = {
         imageCaption: 'Illuminated royal heritage fort palace nestled on the majestic hills of Rajasthan.',
         backlink: { label: 'View Rajasthan Heritage Packages', url: '/travel' }
       }
+    ],
+    youtubeVideo: {
+      title: 'Royal Rajasthan Road Trip: Forts, Palaces & Desert Safaris',
+      embedUrl: 'https://www.youtube.com/embed/0Cj0jL3_2Q0',
+      channelName: 'India Heritage Trails',
+      description: 'Experience Thar desert camel safaris, Jaisalmer fort walks, and illuminated palace nights.'
+    },
+    usefulLinks: [
+      { label: 'Rajasthan Tourism Official Government Portal', url: 'https://www.rajasthantourism.gov.in', description: 'Official fort ticket booking & cultural festival dates.', category: 'Official Govt Portal' },
+      { label: 'Go Banjara Royal Rajasthan Forts Package', url: '/travel', description: 'Curated 7-day desert safari and palace tour.', category: 'Recommended Package' }
     ]
   },
 
@@ -915,6 +973,16 @@ const ARTICLES_DATABASE: Record<string, ArticleData> = {
         ],
         backlink: { label: 'Explore Andaman Island Packages', url: '/travel' }
       }
+    ],
+    youtubeVideo: {
+      title: 'Andaman Islands Travel Guide: Havelock, Neil & Coral Scuba Diving',
+      embedUrl: 'https://www.youtube.com/embed/Q4X-Z2P388w',
+      channelName: 'Island Explorers',
+      description: 'Walkthrough of Radhanagar Beach, Makruzz ferry bookings, and scuba diving.'
+    },
+    usefulLinks: [
+      { label: 'Andaman & Nicobar Tourism Official Department', url: 'https://www.andaman.gov.in', description: 'Official ferry schedules & coral reef guidelines.', category: 'Official Govt Portal' },
+      { label: 'Go Banjara Andaman Scuba Expedition', url: '/travel', description: 'Curated 6-day island package with private transfers.', category: 'Recommended Package' }
     ]
   }
 };
@@ -1027,7 +1095,6 @@ export default function BlogPostDetail() {
           }),
         }}
       />
-
       {/* ── BREADCRUMB BAR (Matching Go Banjara Shop/Product Breadcrumb Spec) ── */}
       <div className="w-full bg-white border-b border-gray-200 py-3.5 px-6 md:px-[80px]">
         <div className="max-w-[1280px] mx-auto flex items-center justify-between gap-4 flex-wrap">
@@ -1207,7 +1274,7 @@ export default function BlogPostDetail() {
             <section key={section.id} id={section.id} className="space-y-4 pt-2">
               <h2 
                 style={{ fontFamily: 'Fraunces, Georgia, serif', fontWeight: 600, color: 'rgba(43, 43, 43, 1)' }}
-                className="text-2xl border-b border-gray-200 pb-2"
+                className="text-2xl md:text-3xl border-b border-gray-200 pb-2.5 mt-8 mb-4"
               >
                 {section.title}
               </h2>
@@ -1215,8 +1282,8 @@ export default function BlogPostDetail() {
               {section.content.map((paragraph, pIdx) => (
                 <p 
                   key={pIdx} 
-                  style={{ fontFamily: 'Faktum, var(--font-sans), sans-serif', color: 'rgba(43, 43, 43, 0.9)' }}
-                  className="text-base leading-relaxed font-normal"
+                  style={{ fontFamily: 'Faktum, var(--font-sans), sans-serif', color: 'rgba(43, 43, 43, 0.88)' }}
+                  className="text-base md:text-lg leading-relaxed font-normal mb-4"
                 >
                   {paragraph}
                 </p>
@@ -1315,6 +1382,78 @@ export default function BlogPostDetail() {
               )}
             </section>
           ))}
+
+          {/* Embedded YouTube Video Guide Section */}
+          {article.youtubeVideo && (
+            <section id="video-guide" className="my-10 p-6 md:p-8 rounded-xl bg-[#FAF9F6] border border-gray-200 space-y-5">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-red-600 flex items-center justify-center text-white shrink-0 shadow-xs">
+                  <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                  </svg>
+                </div>
+                <div>
+                  <span className="text-xs font-bold uppercase tracking-wider text-red-600 block">Featured Video Guide</span>
+                  <h3 className="font-serif font-semibold text-xl md:text-2xl text-[#2B2B2B]">{article.youtubeVideo.title}</h3>
+                </div>
+              </div>
+
+              <div className="w-full aspect-video rounded-lg overflow-hidden border border-gray-300 shadow-md">
+                <iframe
+                  src={article.youtubeVideo.embedUrl}
+                  title={article.youtubeVideo.title}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  className="w-full h-full border-0"
+                />
+              </div>
+              <p className="text-xs md:text-sm text-[#2B2B2B]/80 font-medium leading-relaxed">
+                {article.youtubeVideo.description} &bull; <span className="font-bold text-[#1D493E]">Channel: {article.youtubeVideo.channelName}</span>
+              </p>
+            </section>
+          )}
+
+          {/* Useful Resources & High Authority Links Card */}
+          {article.usefulLinks && article.usefulLinks.length > 0 && (
+            <section id="official-links" className="my-10 p-6 md:p-8 rounded-xl bg-[#F0F7F4] border border-[#1D493E]/20 space-y-5">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-[#1D493E] flex items-center justify-center text-white shrink-0 shadow-xs">
+                  <Compass className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#1D493E] block">Official Resources & Top Guides</span>
+                  <h3 className="font-serif font-semibold text-xl md:text-2xl text-[#1D493E]">Verified Portals & Important Links</h3>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {article.usefulLinks.map((link, lIdx) => (
+                  <a
+                    key={lIdx}
+                    href={link.url}
+                    target={link.url.startsWith('http') ? '_blank' : '_self'}
+                    rel="noopener noreferrer"
+                    className="p-4 bg-white rounded-lg border border-gray-200 hover:border-[#1D493E] hover:shadow-md transition flex flex-col justify-between group cursor-pointer"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between gap-2 mb-1.5">
+                        <span className="text-[10px] font-bold text-[#FF623E] uppercase tracking-wider bg-[#FF623E]/10 px-2 py-0.5 rounded-xs">
+                          {link.category || 'Official Portal'}
+                        </span>
+                        <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-[#1D493E] transition" />
+                      </div>
+                      <h4 className="text-sm md:text-base font-bold text-[#2B2B2B] group-hover:text-[#1D493E] transition leading-snug">
+                        {link.label}
+                      </h4>
+                      <p className="text-xs text-[#8D8D8D] mt-1.5 leading-relaxed">
+                        {link.description}
+                      </p>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </section>
+          )}
 
           {/* FAQs Section — Matching Go Banjara Accordion Theme */}
           {article.faqs && article.faqs.length > 0 && (

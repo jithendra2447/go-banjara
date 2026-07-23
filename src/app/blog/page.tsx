@@ -524,7 +524,8 @@ export default function BlogPage() {
                 >
                   <img
                     src={post.image}
-                    alt={post.title}
+                    alt={`Go Banjara Blog - ${post.title}`}
+                    title={`Go Banjara Blog - ${post.title}`}
                     style={{
                       width: '100%',
                       height: '100%',

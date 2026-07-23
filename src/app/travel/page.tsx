@@ -1109,7 +1109,8 @@ export default function HolidaysPortal() {
                   >
                     <img 
                       src={pkg.image} 
-                      alt={pkg.name} 
+                      alt={`Go Banjara Travel Package - ${pkg.name}`} 
+                      title={`Go Banjara Travel Package - ${pkg.name}`}
                       style={{
                         width: "100%",
                         height: "100%",

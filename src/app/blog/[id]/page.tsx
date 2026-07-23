@@ -346,15 +346,6 @@ export default function BlogPostDetail() {
 
           <div className="flex items-center gap-3">
             <button
-              onClick={() => setBookmarked(!bookmarked)}
-              className={`p-2 rounded-full border transition cursor-pointer ${
-                bookmarked ? 'bg-[#1D493E] text-white border-[#1D493E]' : 'bg-white text-[#1D493E] border-[#E5E0D5] hover:bg-[#FAF9F6]'
-              }`}
-              title={bookmarked ? 'Saved to bookmarks' : 'Bookmark article'}
-            >
-              <Bookmark className="w-4 h-4" />
-            </button>
-            <button
               onClick={handleShare}
               className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white text-[#1D493E] border border-[#E5E0D5] hover:bg-[#FAF9F6] text-xs font-semibold transition cursor-pointer"
             >
@@ -367,9 +358,9 @@ export default function BlogPostDetail() {
 
       {/* ── ARTICLE HEADER ── */}
       <header className="max-w-4xl mx-auto px-6 pt-10 pb-6 text-center">
-        {/* Category Pill — Native Go Banjara Pill */}
-        <div className="w-[120px] min-w-[120px] h-[26px] flex items-center justify-center bg-[#FFEBE5] rounded-[4px] mb-4 mx-auto">
-          <span className="font-sans font-semibold text-[14px] leading-none tracking-[1.2px] text-[#FF623E] uppercase px-2">
+        {/* Category Pill — Single-line Go Banjara Pill */}
+        <div className="inline-flex items-center justify-center h-[26px] bg-[#FFEBE5] rounded-[4px] px-3.5 mb-4 mx-auto whitespace-nowrap">
+          <span className="font-sans font-semibold text-[14px] leading-none tracking-[1.2px] text-[#FF623E] uppercase">
             {article.category}
           </span>
         </div>

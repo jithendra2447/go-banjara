@@ -132,7 +132,7 @@ const BLOG_POSTS: BlogPost[] = [
     title: 'Manali to Leh Highway: Everything You Need to Know Before You Go',
     date: 'Friday, November 3, 2023',
     readTime: '6 min read',
-    image: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=800&auto=format&fit=crop',
+    image: '/manali-hill-station.jpg',
     category: 'Travel Guide',
   },
   {
@@ -184,24 +184,39 @@ const FAQ_ITEMS = [
   },
 ];
 
-const POSTS_PER_PAGE = 9;
+const POSTS_PER_PAGE = 6;
 
 /* ─────────────────── COMPONENT ─────────────────── */
 export default function BlogPage() {
-  const [activeTab, setActiveTab] = useState<'Travel Guide' | 'Tour Guide' | 'Most Popular' | 'Customer Stories'>('Travel Guide');
+  type TabType = 'All' | 'Travel Guide' | 'Tour Guide' | 'Most Popular' | 'Customer Stories';
+  const [activeTab, setActiveTab] = useState<TabType>('All');
+  const [searchQuery, setSearchQuery] = useState('');
   const [email, setEmail] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
-  const tabs: ('Travel Guide' | 'Tour Guide' | 'Most Popular' | 'Customer Stories')[] = ['Travel Guide', 'Tour Guide', 'Most Popular', 'Customer Stories'];
+  const tabs: TabType[] = ['All', 'Travel Guide', 'Tour Guide', 'Most Popular', 'Customer Stories'];
 
-  const filtered = BLOG_POSTS.filter((p) => p.category === activeTab);
+  const filtered = BLOG_POSTS.filter((p) => {
+    const matchesTab = activeTab === 'All' || p.category === activeTab;
+    const matchesSearch = !searchQuery || p.title.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesTab && matchesSearch;
+  });
+
   const totalPages = Math.max(1, Math.ceil(filtered.length / POSTS_PER_PAGE));
   const paginated = filtered.slice((currentPage - 1) * POSTS_PER_PAGE, currentPage * POSTS_PER_PAGE);
 
-  const handleTabChange = (tab: typeof activeTab) => {
+  const handleTabChange = (tab: TabType) => {
     setActiveTab(tab);
     setCurrentPage(1);
+  };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    const element = document.getElementById('blog-grid');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
@@ -483,6 +498,7 @@ export default function BlogPage() {
 
         {/* 3-Column Card Grid */}
         <div
+          id="blog-grid"
           style={{
             width: '100%',
             maxWidth: '1280px',
@@ -560,8 +576,9 @@ export default function BlogPage() {
                       width: '100%',
                       fontFamily: 'Faktum, var(--font-sans), sans-serif',
                       fontWeight: 500,
-                      fontSize: '14px',
-                      lineHeight: '1.4',
+                      fontSize: '15px',
+                      lineHeight: '100%',
+                      letterSpacing: '0px',
                       color: 'rgba(43, 43, 43, 0.65)',
                       margin: 0,
                     }}
@@ -586,7 +603,7 @@ export default function BlogPage() {
             <div className="flex items-center gap-1.5">
               {/* Prev Button */}
               <button
-                onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
                 disabled={currentPage === 1}
                 className="w-9 h-9 flex items-center justify-center rounded-[6px] border border-gray-200 bg-white text-[#1D493E] hover:bg-[#FAF9F6] disabled:opacity-30 disabled:cursor-not-allowed transition cursor-pointer"
                 aria-label="Previous Page"
@@ -598,7 +615,7 @@ export default function BlogPage() {
               {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
                 <button
                   key={page}
-                  onClick={() => setCurrentPage(page)}
+                  onClick={() => handlePageChange(page)}
                   className={`w-9 h-9 flex items-center justify-center rounded-[6px] font-sans font-medium text-sm transition cursor-pointer ${
                     currentPage === page
                       ? 'bg-[#1D493E] text-white border border-[#1D493E] shadow-xs'
@@ -611,7 +628,7 @@ export default function BlogPage() {
 
               {/* Next Button */}
               <button
-                onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))}
                 disabled={currentPage === totalPages}
                 className="w-9 h-9 flex items-center justify-center rounded-[6px] border border-gray-200 bg-white text-[#1D493E] hover:bg-[#FAF9F6] disabled:opacity-30 disabled:cursor-not-allowed transition cursor-pointer"
                 aria-label="Next Page"

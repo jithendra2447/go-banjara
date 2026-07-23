@@ -1093,7 +1093,7 @@ export default function HolidaysPortal() {
                     boxSizing: "border-box",
                     position: "relative",
                   }}
-                  className="group h-auto min-h-[695px] pb-4"
+                  className="group h-auto pb-4"
                 >
                   {/* Card Image */}
                   <Link 
@@ -1173,7 +1173,7 @@ export default function HolidaysPortal() {
                       flexDirection: "column", 
                       justifyContent: "space-between", 
                       boxSizing: "border-box",
-                      gap: "20px"
+                      gap: "16px"
                     }}
                   >
                     
@@ -1187,7 +1187,7 @@ export default function HolidaysPortal() {
                         gap: "12px",
                         boxSizing: "border-box"
                       }}
-                      className="h-auto md:h-[183px]"
+                      className="h-auto"
                     >
                       {/* Category & Duration Row */}
                       <div 
@@ -1239,53 +1239,46 @@ export default function HolidaysPortal() {
                       </div>
 
                        {/* Title & Price Row */}
-                      <Link 
-                        href={pkg.link || `/travel/package/${pkg.id}`} 
-                        style={{ 
-                          width: "100%",
-                          display: "flex",
-                          flexDirection: "row",
-                          justifyContent: "space-between",
-                          alignItems: "center",
-                          textDecoration: "none",
-                        }}
-                        className="group h-auto min-h-[35px]"
-                      >
-                        <h3 
-                          style={{
-                            flex: 1,
-                            fontFamily: "'Faktum', 'Outfit', sans-serif",
-                            fontWeight: 600,
-                            fontSize: "24px",
-                            lineHeight: "30px",
-                            letterSpacing: "0px",
-                            color: "rgba(43, 43, 43, 1)",
-                            margin: 0,
-                          }}
-                          className="truncate block"
-                          title={pkg.name}
+                      <div className="w-full flex flex-col gap-1.5">
+                        <Link 
+                          href={pkg.link || `/travel/package/${pkg.id}`} 
+                          style={{ textDecoration: 'none', color: 'inherit' }}
+                          className="group/title"
                         >
-                          {pkg.name}
-                        </h3>
-                        <span 
-                          style={{
-                            flexShrink: 0,
-                            height: "35px",
-                            fontFamily: "'Faktum', 'Outfit', sans-serif",
-                            fontWeight: 600,
-                            fontSize: "28px",
-                            lineHeight: "35px",
-                            letterSpacing: "0px",
-                            color: "rgba(43, 43, 43, 1)",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "flex-end",
-                            marginLeft: "16px",
-                          }}
-                        >
-                          ₹{pkg.price.toLocaleString('en-IN')}/Person
-                        </span>
-                      </Link>
+                          <h3 
+                            style={{
+                              fontFamily: "'Fraunces', Georgia, serif",
+                              fontWeight: 600,
+                              fontSize: "22px",
+                              lineHeight: "1.3",
+                              color: "rgba(43, 43, 43, 1)",
+                              margin: 0,
+                            }}
+                            className="group-hover/title:text-[#1D493E] transition-colors"
+                          >
+                            {pkg.name}
+                          </h3>
+                        </Link>
+
+                        <div className="flex items-center justify-between gap-2 mt-0.5">
+                          <span 
+                            style={{
+                              fontFamily: "'Faktum', 'Outfit', sans-serif",
+                              fontWeight: 700,
+                              fontSize: "24px",
+                              lineHeight: "100%",
+                              color: "rgba(43, 43, 43, 1)",
+                            }}
+                          >
+                            ₹{pkg.price.toLocaleString('en-IN')}<span className="text-sm font-semibold text-gray-500">/Person</span>
+                          </span>
+                          {pkg.originalPrice && (
+                            <span className="text-xs font-medium text-gray-400 line-through">
+                              ₹{pkg.originalPrice.toLocaleString('en-IN')}
+                            </span>
+                          )}
+                        </div>
+                      </div>
 
                       {/* Description */}
                       <p 
@@ -1294,18 +1287,18 @@ export default function HolidaysPortal() {
                           maxWidth: "405.33px",
                           fontFamily: "'Faktum', 'Outfit', sans-serif",
                           fontWeight: 500,
-                          fontSize: "18px",
-                          lineHeight: "28px",
+                          fontSize: "15px",
+                          lineHeight: "22px",
                           letterSpacing: "0px",
                           color: "rgba(141, 141, 141, 1)",
                           margin: 0,
                           overflow: "hidden",
                           display: "-webkit-box",
-                          WebkitLineClamp: 3,
+                          WebkitLineClamp: 2,
                           WebkitBoxOrient: "vertical",
                           textOverflow: "ellipsis",
                         }}
-                        className="h-auto min-h-[84px]"
+                        className="h-auto"
                       >
                         {pkg.description}
                       </p>

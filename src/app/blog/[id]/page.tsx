@@ -60,7 +60,7 @@ const ARTICLES_DATABASE: Record<string, ArticleData> = {
       role: 'Senior Expedition Lead & Motorcycling Specialist',
       avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&h=200&fit=crop',
     },
-    heroImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1400&auto=format&fit=crop',
+    heroImage: '/ladakh-chadar-trek.jpg',
     excerpt: 'The ultimate SEO guide for motorcycling across Khardung La, Pangong Tso, and the Trans-Himalayan passes. Discover route comparisons, exact budget breakdowns, required permits, and gear packing essentials.',
     toc: [
       { id: 'overview', title: '1. Why Ride to Ladakh? (The Ultimate Himalayan Dream)' },
@@ -93,8 +93,8 @@ const ARTICLES_DATABASE: Record<string, ArticleData> = {
           'Manali to Leh Highway (474 km): High-thrill, rapid altitude climb via Rohtang Tunnel, Keylong, Baralacha La (16,040 ft), Lachung La, and Tanglang La (17,480 ft). Ideal for experienced mountain riders seeking pure adventure.',
           'Srinagar to Leh Highway (418 km): Gradual altitude ascension via Sonamarg, Zoji La pass, Drass (the 2nd coldest inhabited place on earth), Kargil, and Magnetic Hill. Highly recommended for first-timers to minimize Acute Mountain Sickness (AMS).'
         ],
-        image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=1200&auto=format&fit=crop',
-        imageCaption: 'The winding tarmac of the Srinagar-Leh highway cut into the rugged cliffside of Kashmir.',
+        image: '/ladakh-chadar-trek.jpg',
+        imageCaption: 'Go Banjara Explorers trekking through the frozen Zanskar river canyon in Ladakh.',
         backlink: { label: 'View Srinagar to Leh Fixed Departure Itinerary', url: '/travel/srinagar-to-leh' }
       },
       {

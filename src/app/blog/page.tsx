@@ -20,7 +20,7 @@ const BLOG_POSTS: BlogPost[] = [
     title: 'Conquering Khardung La & Pangong Tso: How 8 Strangers Became a Lifelong Go Banjara Tribe',
     date: 'Wednesday, March 12, 2024',
     readTime: '7 min read',
-    image: 'https://images.unsplash.com/photo-1526772662000-3f88f10405ff?q=80&w=800&auto=format&fit=crop',
+    image: '/ladakh-chadar-trek.jpg',
     category: 'Customer Stories',
   },
   {
@@ -44,7 +44,7 @@ const BLOG_POSTS: BlogPost[] = [
     title: 'Ladakh Bike Trip Guide: Routes, Budget & Essential Tips for Riders',
     date: 'Sunday, August 12, 2023',
     readTime: '5 min read',
-    image: 'https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=800&auto=format&fit=crop',
+    image: '/ladakh-chadar-trek.jpg',
     category: 'Travel Guide',
   },
   {
@@ -52,7 +52,7 @@ const BLOG_POSTS: BlogPost[] = [
     title: '7-Day Leh Ladakh Itinerary for First-Time Travelers',
     date: 'Sunday, August 12, 2023',
     readTime: '5 min read',
-    image: 'https://images.unsplash.com/photo-1581793745862-99fde7fa73d2?q=80&w=800&auto=format&fit=crop',
+    image: '/ladakh-chadar-trek.jpg',
     category: 'Tour Guide',
   },
   {

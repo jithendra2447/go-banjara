@@ -140,7 +140,7 @@ const BLOG_POSTS: BlogPost[] = [
     title: "Coorg Travel Guide: India's Scotland of the East",
     date: 'Saturday, December 2, 2023',
     readTime: '5 min read',
-    image: 'https://images.unsplash.com/photo-1587049352846-4a222e784d38?q=80&w=800&auto=format&fit=crop',
+    image: '/coorg-coffee-estate.jpg',
     category: 'Travel Guide',
   },
   {
@@ -148,7 +148,7 @@ const BLOG_POSTS: BlogPost[] = [
     title: 'Rajasthan Road Trip: Forts, Deserts & Camel Safaris',
     date: 'Sunday, January 7, 2024',
     readTime: '7 min read',
-    image: 'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?q=80&w=800&auto=format&fit=crop',
+    image: '/rajasthan-heritage-fort.jpg',
     category: 'Travel Guide',
   },
   {

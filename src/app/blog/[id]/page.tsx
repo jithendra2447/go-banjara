@@ -845,7 +845,7 @@ const ARTICLES_DATABASE: Record<string, ArticleData> = {
       role: 'Slow Travel Curator',
       avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop',
     },
-    heroImage: 'https://images.unsplash.com/photo-1587049352846-4a222e784d38?q=80&w=1400&auto=format&fit=crop',
+    heroImage: '/coorg-coffee-estate.jpg',
     excerpt: 'Escape to coffee plantations, misty hills, Abbey Falls, and Tibetan monasteries in Kodagu (Coorg).',
     toc: [{ id: 'coorg', title: '1. Highlights of Kodagu' }],
     sections: [
@@ -855,6 +855,8 @@ const ARTICLES_DATABASE: Record<string, ArticleData> = {
         content: [
           'Coorg offers lush coffee estates, spice plantations, Tadiandamol peak trekking, and the serene Golden Temple at Namdroling Monastery Bylakuppe.'
         ],
+        image: '/coorg-coffee-estate.jpg',
+        imageCaption: 'Lush treehouse wooden cottages nestled in the dense coffee plantation canopy of Coorg (Kodagu).',
         backlink: { label: 'Check South India Heritage Packages', url: '/travel' }
       }
     ]
@@ -872,7 +874,7 @@ const ARTICLES_DATABASE: Record<string, ArticleData> = {
       role: 'Heritage Curators',
       avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&h=200&fit=crop',
     },
-    heroImage: 'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?q=80&w=1400&auto=format&fit=crop',
+    heroImage: '/rajasthan-heritage-fort.jpg',
     excerpt: 'Explore the golden sands of Jaisalmer, blue alleys of Jodhpur, pink palaces of Jaipur, and serene lakes of Udaipur.',
     toc: [{ id: 'circuit', title: '1. The Royal Rajasthan Circuit' }],
     sections: [
@@ -882,6 +884,8 @@ const ARTICLES_DATABASE: Record<string, ArticleData> = {
         content: [
           'A 10-day road trip through Jaipur, Pushkar, Jodhpur, Jaisalmer Sam Sand Dunes, and Udaipur offers an unforgettable glimpse into India’s royal history.'
         ],
+        image: '/rajasthan-heritage-fort.jpg',
+        imageCaption: 'Illuminated royal heritage fort palace nestled on the majestic hills of Rajasthan.',
         backlink: { label: 'View Rajasthan Heritage Packages', url: '/travel' }
       }
     ]

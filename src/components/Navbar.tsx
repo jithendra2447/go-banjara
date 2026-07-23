@@ -92,7 +92,7 @@ export const Navbar: React.FC = () => {
             </Link>
 
             {/* Desktop Menu Links */}
-            <div className="hidden lg:flex items-center gap-1 xl:gap-2.5 h-[49px] flex-nowrap">
+            <div className="hidden lg:flex items-center gap-1 xl:gap-2.5 h-[49px] flex-nowrap" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
               {navLinks.map((link) => {
                 const active = isActive(link.path);
                 
@@ -100,15 +100,27 @@ export const Navbar: React.FC = () => {
                   ? (isTransparent ? 'bg-white/10 text-white' : 'bg-[#1D493E]/8 text-[#1D493E]')
                   : (isTransparent ? 'text-white/80 hover:text-white hover:bg-white/10' : 'text-[#535352] hover:text-[#1D493E] hover:bg-gray-50');
 
+                const fallbackColor = active
+                  ? (isTransparent ? '#FFFFFF' : '#1D493E')
+                  : (isTransparent ? 'rgba(255, 255, 255, 0.85)' : '#535352');
+
                 return (
                   <Link
                     key={link.path}
                     href={link.path}
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      textDecoration: 'none',
+                      color: fallbackColor,
+                      boxSizing: 'border-box',
+                    }}
                     className={`flex items-center justify-center px-3 xl:px-4 py-2.5 h-[42px] rounded-[4px] transition-all duration-200 shrink-0 ${activeClass}`}
                   >
                     <span
                       className="flex items-center justify-center text-center whitespace-nowrap"
-                      style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "15px", lineHeight: "100%", letterSpacing: "0px" }}
+                      style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "15px", lineHeight: "100%", letterSpacing: "0px", color: 'inherit' }}
                     >
                       {link.name}
                     </span>

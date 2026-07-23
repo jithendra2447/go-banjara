@@ -1370,6 +1370,8 @@ export default function BlogPostDetail() {
                       src={section.image} 
                       alt={`${section.title} | Go Banjara Travel Guide`}
                       title={`${section.title} - Go Banjara Photography`}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover"
                     />
                   </div>
@@ -1402,6 +1404,7 @@ export default function BlogPostDetail() {
                 <iframe
                   src={article.youtubeVideo.embedUrl}
                   title={article.youtubeVideo.title}
+                  loading="lazy"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
                   className="w-full h-full border-0"

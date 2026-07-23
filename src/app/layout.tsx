@@ -21,6 +21,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth overflow-x-hidden" style={{ overflowX: 'hidden' }} suppressHydrationWarning>
+      <head>
+        {/* Preconnect to external image & font CDNs for high-speed page load */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://images.unsplash.com" />
+        <link rel="dns-prefetch" href="https://images.unsplash.com" />
+      </head>
       <body
         className="antialiased min-h-screen bg-brand-beige text-primary-dark flex flex-col font-sans overflow-x-hidden relative"
         suppressHydrationWarning

@@ -79,20 +79,20 @@ export const Navbar: React.FC = () => {
     }`}>
       {/* 2. MAIN NAV BAR */}
       <nav className="h-[90px] flex items-center w-full">
-        <div className="max-w-[1440px] mx-auto px-4 md:px-[42px] pt-[20px] pb-[20px] w-full flex items-center justify-between h-full">
+        <div className="max-w-[1440px] mx-auto px-4 md:px-[42px] py-4 w-full flex items-center justify-between h-full flex-nowrap">
           
-          <div className="flex items-center gap-10">
-            {/* Logo (Direct Image from Figma Mockup) */}
+          <div className="flex items-center gap-4 lg:gap-8 xl:gap-10 shrink-0">
+            {/* Logo */}
             <Link href="/" className="flex items-center group shrink-0">
               <img
                 src={isTransparent ? "/logo-footer.png" : "/logo.png"}
                 alt="go banjāra logo"
-                className="h-[40px] sm:h-[48px] w-auto max-w-[160px] sm:max-w-[217px] object-contain transition-transform duration-300 group-hover:scale-102"
+                className="h-[38px] sm:h-[46px] w-auto max-w-[150px] sm:max-w-[200px] object-contain transition-transform duration-300 group-hover:scale-102"
               />
             </Link>
 
             {/* Desktop Menu Links */}
-            <div className="hidden xl:flex items-center gap-[10px] lg:gap-[16px] h-[49px]">
+            <div className="hidden lg:flex items-center gap-1 xl:gap-2.5 h-[49px] flex-nowrap">
               {navLinks.map((link) => {
                 const active = isActive(link.path);
                 
@@ -104,11 +104,11 @@ export const Navbar: React.FC = () => {
                   <Link
                     key={link.path}
                     href={link.path}
-                    className={`flex items-center justify-center px-[16px] py-[12px] h-[49px] rounded-[4px] transition-all duration-300 w-auto ${activeClass}`}
+                    className={`flex items-center justify-center px-3 xl:px-4 py-2.5 h-[42px] rounded-[4px] transition-all duration-200 shrink-0 ${activeClass}`}
                   >
                     <span
-                      className="flex items-center justify-center h-[25px] text-center w-auto whitespace-nowrap"
-                      style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", verticalAlign: "middle" }}
+                      className="flex items-center justify-center text-center whitespace-nowrap"
+                      style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "15px", lineHeight: "100%", letterSpacing: "0px" }}
                     >
                       {link.name}
                     </span>
@@ -119,7 +119,7 @@ export const Navbar: React.FC = () => {
           </div>
 
           {/* Right actions: Search Bar, Cart & Login */}
-          <div className="flex items-center justify-end gap-3 md:gap-[16px] xl:gap-[24px] h-[47px] shrink-0">
+          <div className="flex items-center justify-end gap-2 sm:gap-3 lg:gap-4 h-[47px] shrink-0 flex-nowrap">
             
             {/* Search Input Box */}
             <div className={`hidden md:flex items-center w-[215px] h-[47px] gap-[8px] rounded-[4px] p-[12px] transition-all duration-300 ${
@@ -472,7 +472,7 @@ export const Navbar: React.FC = () => {
             {/* Mobile menu Toggle */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className={`xl:hidden p-2 rounded-full transition-all duration-300 cursor-pointer ${
+              className={`lg:hidden p-2 rounded-full transition-all duration-300 cursor-pointer ${
                 isTransparent 
                   ? 'hover:bg-white/10 text-white' 
                   : 'hover:bg-gray-50 text-[#1D493E]'
@@ -763,7 +763,7 @@ export const Navbar: React.FC = () => {
       {/* Mobile Sidebar/Menu */}
       {isOpen && (
         <div 
-          className="xl:hidden border-t border-gray-100 absolute left-0 w-full shadow-xl transition-all duration-300 z-50 top-[90px]"
+          className="lg:hidden border-t border-gray-100 absolute left-0 w-full shadow-xl transition-all duration-300 z-50 top-[90px]"
           style={{ backgroundColor: 'rgba(255, 255, 255, 1)' }}
         >
           <div className="px-6 py-8 flex flex-col gap-8">

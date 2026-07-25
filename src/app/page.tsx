@@ -332,6 +332,25 @@ export default function Homepage() {
 
   // FAQ Accordion state
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+  const [activeOfferSlide, setActiveOfferSlide] = useState(0);
+  const [activeCategorySlide, setActiveCategorySlide] = useState(0);
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStartX(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX === null) return;
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchStartX - touchEndX;
+    if (diff > 30) {
+      setActiveOfferSlide(1);
+    } else if (diff < -30) {
+      setActiveOfferSlide(0);
+    }
+    setTouchStartX(null);
+  };
 
   const toggleFaq = (index: number) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
@@ -359,26 +378,26 @@ export default function Homepage() {
         <div className="absolute inset-0 bg-black/20 pointer-events-none z-10" />
 
         {/* 2. HERO CONTENT SECTION (Overlay on top of video, z-20) */}
-        <div className="absolute inset-0 flex flex-col justify-end pb-12 md:pb-[62px] z-20 bg-transparent animate-fade-in">
-          <div className="max-w-[1440px] mx-auto px-6 md:px-20 w-full flex flex-col md:flex-row md:items-end justify-between gap-8 md:gap-12">
+        <div className="absolute inset-0 flex flex-col justify-end pb-8 sm:pb-12 md:pb-16 lg:pb-20 z-20 bg-transparent animate-fade-in">
+          <div className="max-w-[390px] md:max-w-[1440px] mx-auto md:mx-auto px-[20px] sm:px-8 md:px-12 lg:px-16 xl:px-20 w-full flex flex-col md:flex-row md:items-end justify-between gap-[18px] md:gap-10 text-left">
             
             {/* Left side: Heading & Subtitle */}
-            <div className="flex flex-col gap-6 md:max-w-[850px] text-left">
-              <h1 className="text-4xl md:text-[62px] md:leading-[1.2] tracking-[-0.2px] font-semibold text-white font-sans">
+            <div className="flex flex-col gap-[18px] md:gap-6 max-w-[390px] md:max-w-[850px] text-left">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] xl:text-[62px] leading-tight md:leading-[1.15] tracking-[-0.2px] font-semibold text-white font-sans">
                 Hey! Let’s Escape from the <br className="hidden md:inline" />
                 Ordinary
               </h1>
-              <p className="text-sm md:text-[20px] md:leading-[32px] tracking-[0px] text-white/95 font-sans font-medium max-w-[650px]">
+              <p className="text-xs sm:text-sm md:text-base lg:text-[18px] xl:text-[20px] leading-relaxed md:leading-[28px] lg:leading-[32px] tracking-[0px] text-white/95 font-sans font-medium max-w-[350px] sm:max-w-[650px]">
                 We bridge the gap between soulful Indian travel and high end gear. <br className="hidden md:inline" />
                 curated for those who find home in the dust of the road
               </p>
             </div>
 
             {/* Right side: Two Buttons side-by-side */}
-            <div className="flex flex-row items-center gap-[16px] md:gap-[24px] justify-start shrink-0 pb-1">
+            <div className="flex flex-row items-center gap-[12px] sm:gap-4 md:gap-6 justify-start shrink-0 pb-1">
               <Link 
                 href="/shop"
-                className="hover:scale-[1.02] active:scale-[0.98] text-[#2B2B2B] bg-white hover:bg-white/90 transition-all duration-300 cursor-pointer flex items-center justify-center w-[150px] md:w-[177px] h-[55px]"
+                className="hover:scale-[1.02] active:scale-[0.98] text-[#2B2B2B] bg-white hover:bg-white/90 transition-all duration-300 cursor-pointer flex items-center justify-center w-[125px] sm:w-[150px] md:w-[177px] h-[44px] sm:h-[55px]"
                 style={{
                   borderRadius: "4px",
                   fontFamily: "'Faktum','Outfit',sans-serif",
@@ -394,7 +413,7 @@ export default function Homepage() {
               </Link>
               <Link 
                 href="/travel"
-                className="hover:bg-white/10 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 cursor-pointer flex items-center justify-center w-[190px] md:w-[215px] h-[55px] border border-white/30 text-white"
+                className="hover:bg-white/10 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 cursor-pointer flex items-center justify-center w-[202px] sm:w-[190px] md:w-[215px] h-[44px] sm:h-[55px] border border-white/30 text-white"
                 style={{
                   borderRadius: "4px",
                   background: "rgba(255, 255, 255, 0.1)",
@@ -417,8 +436,9 @@ export default function Homepage() {
       </div>
 
       {/* 3. DUAL CALL-TO-ACTIONS */}
-      <section className="max-w-[1440px] mx-auto px-6 md:px-20 pt-[20px] pb-[20px] bg-white relative z-35">
-        <div className="grid md:grid-cols-2 gap-8">
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-20 pt-[20px] pb-[20px] bg-white relative z-35">
+        {/* Desktop View (Side-by-side 2 columns, unchanged) */}
+        <div className="hidden md:grid md:grid-cols-2 gap-8">
           {/* Card 1 - Shop Gear (Left, Green) */}
           <div className="bg-[#1D493E] text-white p-6 rounded-[4px] flex flex-col justify-between gap-8 relative overflow-hidden group shadow-md border border-white/5">
             <div className="space-y-4 text-left">
@@ -463,11 +483,136 @@ export default function Homepage() {
             </div>
           </div>
         </div>
+
+        {/* Mobile View (Figma specs: w-430, h-221, padding 12px 20px, gap 12px, rounded 4px + 2 dots below) */}
+        <div className="block md:hidden w-full max-w-[430px] mx-auto">
+          {/* Card Frame with Touch Swipe Support */}
+          <div 
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+            className={`w-full h-[221px] rounded-[4px] p-[16px_20px] flex flex-col justify-between gap-[12px] text-left transition-all duration-300 shadow-md select-none touch-pan-y ${
+              activeOfferSlide === 0 ? 'bg-[#1D493E] text-white' : 'bg-[#FF5A36] text-white'
+            }`}
+            style={{ boxSizing: 'border-box' }}
+          >
+            {activeOfferSlide === 0 ? (
+              <>
+                <div className="flex flex-col gap-[12px] text-left w-full max-w-[366px] h-[121px]">
+                  <h2 
+                    style={{
+                      width: "100%",
+                      maxWidth: "366px",
+                      height: "25px",
+                      fontFamily: "'Faktum','Outfit',sans-serif",
+                      fontWeight: 600,
+                      fontSize: "20px",
+                      lineHeight: "100%",
+                      letterSpacing: "0px",
+                      color: "#FFFFFF",
+                      margin: 0,
+                      display: "flex",
+                      alignItems: "center",
+                      whiteSpace: "nowrap",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                    }}
+                  >
+                    Shop Travel Gear for Nomads
+                  </h2>
+                  <p 
+                    style={{
+                      fontFamily: "'Faktum','Outfit',sans-serif",
+                      fontWeight: 500,
+                      fontSize: "16px",
+                      lineHeight: "28px",
+                      letterSpacing: "0px",
+                      color: "rgba(255, 255, 255, 0.85)",
+                      margin: 0,
+                    }}
+                  >
+                    Explore our collection of hand-picked journals, weather-proof stickers and artisanal badges designed for the road
+                  </p>
+                </div>
+                <Link 
+                  href="/shop" 
+                  className="inline-flex items-center gap-2 text-white hover:opacity-80 transition cursor-pointer text-left mt-auto pb-1"
+                >
+                  <ArrowRight className="w-6 h-6 text-white" style={{ width: "24px", height: "24px" }} />
+                </Link>
+              </>
+            ) : (
+              <>
+                <div className="flex flex-col gap-[12px] text-left w-full max-w-[366px] h-[121px]">
+                  <h2 
+                    style={{
+                      width: "100%",
+                      maxWidth: "366px",
+                      height: "25px",
+                      fontFamily: "'Faktum','Outfit',sans-serif",
+                      fontWeight: 600,
+                      fontSize: "20px",
+                      lineHeight: "100%",
+                      letterSpacing: "0px",
+                      color: "#FFFFFF",
+                      margin: 0,
+                      display: "flex",
+                      alignItems: "center",
+                      whiteSpace: "nowrap",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                    }}
+                  >
+                    Book a Trip
+                  </h2>
+                  <p 
+                    style={{
+                      fontFamily: "'Faktum','Outfit',sans-serif",
+                      fontWeight: 500,
+                      fontSize: "16px",
+                      lineHeight: "28px",
+                      letterSpacing: "0px",
+                      color: "rgba(255, 255, 255, 0.90)",
+                      margin: 0,
+                    }}
+                  >
+                    Explore our collection of hand-picked journals, weather-proof stickers and artisanal badges designed for the road
+                  </p>
+                </div>
+                <Link 
+                  href="/travel" 
+                  className="inline-flex items-center gap-2 text-white hover:opacity-80 transition cursor-pointer text-left mt-auto pb-1"
+                >
+                  <ArrowRight className="w-6 h-6 text-white" style={{ width: "24px", height: "24px" }} />
+                </Link>
+              </>
+            )}
+          </div>
+
+          {/* Dots Pagination Below Card */}
+          <div className="flex items-center justify-center gap-3 mt-4">
+            <button
+              type="button"
+              onClick={() => setActiveOfferSlide(0)}
+              className={`transition-all duration-300 rounded-full cursor-pointer ${
+                activeOfferSlide === 0 ? 'w-6 h-2 bg-[#1D493E]' : 'w-2 h-2 bg-slate-300'
+              }`}
+              aria-label="Offer slide 1: Shop Travel Gear"
+            />
+            <button
+              type="button"
+              onClick={() => setActiveOfferSlide(1)}
+              className={`transition-all duration-300 rounded-full cursor-pointer ${
+                activeOfferSlide === 1 ? 'w-6 h-2 bg-[#FF5A36]' : 'w-2 h-2 bg-slate-300'
+              }`}
+              aria-label="Offer slide 2: Book a Trip"
+            />
+          </div>
+        </div>
       </section>
 
       {/* 4. DESTINATIONS SECTION */}
       <section className="bg-white pt-[20px] pb-0 relative z-10">
-        <div className="max-w-[1440px] mx-auto px-6 md:px-[80px] flex flex-col gap-[62px] text-center">
+        <div className="hidden md:flex max-w-[1440px] mx-auto px-6 md:px-[80px] flex-col gap-[62px] text-center">
           
           {/* Centered Header (Figma styled: serif title 42px, sans medium subtitle 24px) */}
           <div className="space-y-3.5 max-w-4xl mx-auto">
@@ -764,14 +909,137 @@ export default function Homepage() {
           </div>
 
         </div>
+
+        {/* Mobile Section 4 Container (Figma Specs: max-w 430, padding 12px 20px, gap 12px, bg white, card w:191px h:371px gap:8px) */}
+        <div className="block md:hidden w-full max-w-[430px] mx-auto py-[12px] px-[20px] bg-white">
+          {/* Header Row */}
+          <div className="flex items-center justify-between w-full mb-[12px]">
+            <h2 className="text-[22px] font-serif font-bold text-[#1D493E] leading-tight m-0">
+              Place worth the <span className="text-[#FF5A36]">detour</span>
+            </h2>
+            <Link 
+              href="/travel" 
+              className="w-10 h-10 rounded-full bg-[#1D493E] text-white flex items-center justify-center hover:opacity-90 transition shrink-0"
+              aria-label="Explore all destinations"
+            >
+              <ArrowRight className="w-5 h-5 text-white" />
+            </Link>
+          </div>
+
+          {/* Horizontal Card Carousel (Figma Card Specs: w:191px, h:371px, gap:8px) */}
+          <div className="flex gap-[12px] overflow-x-auto pb-2 scrollbar-none snap-x snap-mandatory">
+            {(() => {
+              const displayPkgs = packagesList && packagesList.length > 0 ? packagesList : HOLIDAY_PACKAGES;
+              return displayPkgs.map((pkg) => (
+                <div 
+                  key={pkg.id} 
+                  className="snap-start shrink-0 w-[191px] h-[371px] bg-white rounded-[4px] overflow-hidden flex flex-col gap-[8px] text-left select-none border border-gray-100"
+                  style={{ boxSizing: 'border-box' }}
+                >
+                  {/* Image Container with Wishlist Button (w:191px, h:268px) */}
+                  <div className="relative w-[191px] h-[268px] rounded-t-[4px] overflow-hidden shrink-0">
+                    <img 
+                      src={pkg.image} 
+                      alt={pkg.name} 
+                      className="w-full h-full object-cover" 
+                      style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
+                    />
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        toggleWishlist({ id: pkg.id, name: pkg.name, price: pkg.price, image: pkg.image, type: 'travel' });
+                      }}
+                      style={{
+                        position: "absolute",
+                        top: "8px",
+                        right: "8px",
+                        width: "30px",
+                        height: "30px",
+                        borderRadius: "50%",
+                        backgroundColor: "rgba(255, 255, 255, 0.9)",
+                        backdropFilter: "blur(4px)",
+                        border: "none",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        cursor: "pointer",
+                        zIndex: 20,
+                      }}
+                      className="hover:scale-110 active:scale-95 group transition"
+                    >
+                      <Heart 
+                        className={`w-3.5 h-3.5 transition-colors ${
+                          Array.isArray(wishlist) && wishlist.some((w: any) => w.id === pkg.id)
+                            ? 'text-red-500 fill-red-500' 
+                            : 'text-slate-700 group-hover:text-red-500'
+                        }`} 
+                      />
+                    </button>
+                  </div>
+
+                  {/* Content Container (Figma specs: w:191px, h:95px, gap:6px) */}
+                  <div className="flex flex-col gap-[6px] px-1 w-[191px] h-[95px] shrink-0 justify-between pb-1">
+                    {/* Category Tag + Duration Tag */}
+                    <div className="flex items-center justify-between w-full">
+                      <span className="bg-[#FF5A36] text-white px-1.5 py-0.5 rounded-[4px] text-[9px] font-bold">
+                        {pkg.category || 'Heritage'}
+                      </span>
+                      <span className="bg-[#1D493E] text-white px-1.5 py-0.5 rounded-[4px] text-[9px] font-bold">
+                        {pkg.durationDays || 5} Days
+                      </span>
+                    </div>
+
+                    {/* Title */}
+                    <h3 className="text-[13px] font-bold font-sans text-[#1D493E] leading-tight line-clamp-1 m-0" title={pkg.name}>
+                      {pkg.name}
+                    </h3>
+
+                    {/* Short Description */}
+                    <p className="text-[10px] font-sans font-normal text-gray-500 leading-tight line-clamp-2 m-0">
+                      {pkg.description || 'Explore royal palaces and shimmering lakeside vistas.'}
+                    </p>
+
+                    {/* Metadata Badges */}
+                    <div className="flex items-center gap-1 flex-wrap">
+                      <span className="bg-gray-100 text-gray-600 text-[8px] px-1 py-0.5 rounded-[2px] font-medium">
+                        {pkg.startPoint || 'Jaipur'}
+                      </span>
+                      <span className="bg-gray-100 text-gray-600 text-[8px] px-1 py-0.5 rounded-[2px] font-medium">
+                        {pkg.groupType || 'Private Trip'}
+                      </span>
+                      <span className="bg-gray-100 text-gray-600 text-[8px] px-1 py-0.5 rounded-[2px] font-medium">
+                        Next: {pkg.nextDeparture || 'Oct, 2026'}
+                      </span>
+                    </div>
+
+                    {/* Pricing */}
+                    <div className="flex items-baseline gap-1">
+                      <span className="line-through text-gray-400 text-[9px] font-normal">
+                        ₹{((pkg.price ?? 24500) * 1.4).toLocaleString('en-IN')}
+                      </span>
+                      <span className="text-[11px] font-bold font-sans text-[#1D493E]">
+                        ₹{(pkg.price ?? 24500).toLocaleString('en-IN')}/Person
+                      </span>
+                      <span className="text-[#FF5A36] text-[9px] font-semibold">
+                        30% off
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ));
+            })()}
+          </div>
+        </div>
       </section>
 
 
       {/* 5. TOP PRODUCT CATEGORIES */}
       <section className="bg-white relative z-10">
-        <div className="max-w-[1440px] mx-auto px-6 md:px-20 pt-2 pb-[32px] flex flex-col gap-[32px]">
-          
-          {/* Header Row (Flow Horizontal, Justify space-between, Width Fill 1280px, Height Hug 134px) */}
+        {/* Desktop View (100% untouched) */}
+        <div className="hidden md:flex max-w-[1440px] mx-auto px-6 md:px-20 pt-2 pb-[32px] flex-col gap-[32px]">
+          {/* Header Row */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-gray-100 text-left">
             <div className="space-y-3.5 text-left max-w-4xl">
               <div>
@@ -899,13 +1167,83 @@ export default function Homepage() {
           <div className="w-full h-[3px] bg-gray-200 relative rounded overflow-hidden mt-6">
             <div className="absolute left-0 top-0 h-full w-[33.3%] bg-[#1D493E] rounded" />
           </div>
+        </div>
 
+        {/* Mobile View (Figma Specs: w-430, height 311, padding 12px 20px, gap 12px, 8 dots below) */}
+        <div className="block md:hidden w-full max-w-[430px] mx-auto py-[12px] px-[20px] bg-white">
+          {/* Header */}
+          <div className="flex items-center justify-between w-full mb-[12px]">
+            <h2 className="text-[22px] font-serif font-bold text-[#1D493E] leading-tight m-0">
+              Top <span className="text-[#FF5A36]">Products</span>
+            </h2>
+            <Link 
+              href="/shop" 
+              className="w-10 h-10 rounded-full bg-[#1D493E] text-white flex items-center justify-center hover:opacity-90 transition shrink-0"
+              aria-label="View all products"
+            >
+              <ArrowRight className="w-5 h-5 text-white" />
+            </Link>
+          </div>
+
+          {/* Main Mobile Category Card with Image & Gradient Overlay */}
+          {(() => {
+            const categories = [
+              { name: "Stickers", price: "Starts from ₹93", image: "/around_the_world_sticker.jpg", link: "/shop?category=Stickers" },
+              { name: "Badges", price: "Starts from ₹199", image: "/around_the_world_sticker.jpg", link: "/shop?category=Badges" },
+              { name: "Fridge Magnets", price: "Starts from ₹199", image: "/around_the_world_sticker.jpg", link: "/shop?category=Magnets" },
+              { name: "Journals", price: "Starts from ₹299", image: "/around_the_world_sticker.jpg", link: "/shop?category=Journals" },
+              { name: "Patches", price: "Starts from ₹120", image: "/around_the_world_sticker.jpg", link: "/shop?category=Patches" },
+              { name: "Pins", price: "Starts from ₹85", image: "/around_the_world_sticker.jpg", link: "/shop?category=Pins" },
+              { name: "Keychains", price: "Starts from ₹99", image: "/around_the_world_sticker.jpg", link: "/shop?category=Keychains" },
+              { name: "T-Shirts", price: "Starts from ₹499", image: "/around_the_world_sticker.jpg", link: "/shop?category=Apparel" },
+            ];
+            const current = categories[activeCategorySlide % categories.length];
+            return (
+              <div>
+                <Link 
+                  href={current.link} 
+                  className="relative w-full h-[230px] rounded-[6px] overflow-hidden block group shadow-sm text-left"
+                >
+                  <img 
+                    src={current.image} 
+                    alt={current.name} 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                    style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
+                  />
+                  {/* Bottom Dark Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-4 text-white">
+                    <h4 className="text-[20px] font-bold font-sans leading-tight text-white m-0">
+                      {current.name}
+                    </h4>
+                    <p className="text-[13px] font-medium font-sans text-white/80 leading-tight m-0 mt-1">
+                      {current.price}
+                    </p>
+                  </div>
+                </Link>
+
+                {/* 8 Pagination Dots Below */}
+                <div className="flex items-center justify-center gap-1.5 mt-3">
+                  {categories.map((cat, idx) => (
+                    <button
+                      key={cat.name}
+                      type="button"
+                      onClick={() => setActiveCategorySlide(idx)}
+                      className={`transition-all duration-300 rounded-full cursor-pointer ${
+                        activeCategorySlide === idx ? 'w-4 h-1.5 bg-[#1D493E]' : 'w-1.5 h-1.5 bg-slate-300'
+                      }`}
+                      aria-label={`Category ${cat.name}`}
+                    />
+                  ))}
+                </div>
+              </div>
+            );
+          })()}
         </div>
       </section>
 
-
-      <div className="bg-[#FFFF80] text-[#1D493E] border-t border-b border-[#1D493E]/15 h-[78px] flex items-center overflow-hidden select-none relative z-10 py-[24px]">
-        <div className="flex items-center whitespace-nowrap gap-[10px] animate-marquee font-serif text-[24px] font-semibold uppercase leading-none tracking-[0px]">
+      {/* 6. MARQUEE BANNER (Figma specs: w:430, h:31px, padding 8px 20px, gap 10px) */}
+      <div className="bg-[#FFFF80] text-[#1D493E] border-t border-b border-[#1D493E]/15 h-[31px] sm:h-[78px] flex items-center overflow-hidden select-none relative z-10 py-[8px] sm:py-[24px] px-[20px]">
+        <div className="flex items-center whitespace-nowrap gap-[10px] animate-marquee font-serif text-[12px] sm:text-[24px] font-semibold uppercase leading-none tracking-[0px]">
           <span>✦</span><span>BOOK YOUR NEXT TRIP</span>
           <span>✦</span><span>SHOP TRAVEL GEAR</span>
           <span>✦</span><span>DARE TO TRAVEL</span>

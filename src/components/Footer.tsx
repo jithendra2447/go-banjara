@@ -23,8 +23,6 @@ export const Footer: React.FC = () => {
         height: "auto",
         paddingTop: "42px",
         paddingBottom: "42px",
-        paddingLeft: "80px",
-        paddingRight: "80px",
         background: "rgba(29, 73, 62, 1)",
         boxSizing: "border-box",
         margin: "0 auto",
@@ -32,7 +30,7 @@ export const Footer: React.FC = () => {
         flexDirection: "column",
         justifyContent: "space-between",
       }}
-      className="text-slate-200 border-t border-white/5 font-sans px-6 md:px-[80px]"
+      className="text-slate-200 border-t border-white/5 font-sans px-4 sm:px-8 md:px-12 lg:px-20"
     >
       <div
         style={{

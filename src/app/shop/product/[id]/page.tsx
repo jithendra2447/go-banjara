@@ -311,7 +311,7 @@ export default function ProductDetailsPage() {
           gap: "20px",
           boxSizing: "border-box"
         }}
-        className="px-6 md:px-[80px]"
+        className="px-4 sm:px-8 md:px-12 lg:px-20"
       >
         {/* Text Block (Label, Title, Subtitle) */}
         <div style={{ display: "flex", flexDirection: "column", gap: "10px", textAlign: "left" }}>

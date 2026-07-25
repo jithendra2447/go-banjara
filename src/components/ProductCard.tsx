@@ -78,23 +78,21 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
     <div 
       style={{
         width: "100%",
-        height: "628px",
         backgroundColor: "rgba(255, 255, 255, 1)",
         borderRadius: "4px",
         overflow: "hidden",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        gap: "24px",
         boxSizing: "border-box",
       }}
+      className="min-h-0 sm:min-h-[560px] h-full gap-3 sm:gap-4 p-2 sm:p-0 border sm:border-none border-slate-100 rounded-lg sm:rounded-none shadow-xs sm:shadow-none"
     >
-      {/* Image Container with Dots (Width: 339px, Height: 254px, Radius: 4px) */}
+      {/* Image Container */}
       <div 
         style={{
           position: "relative",
           width: "100%",
-          height: "254px",
           borderRadius: "4px",
           overflow: "hidden",
           flexShrink: 0,
@@ -103,6 +101,7 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
           alignItems: "center",
           justifyContent: "center",
         }}
+        className="h-[170px] sm:h-[254px]"
       >
         <Link 
           href={`/shop/product/${product.id}`}
@@ -133,8 +132,6 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
             position: "absolute",
             top: "10px",
             right: "10px",
-            width: "34px",
-            height: "34px",
             borderRadius: "50%",
             backgroundColor: "rgba(255, 255, 255, 0.9)",
             backdropFilter: "blur(4px)",
@@ -147,12 +144,12 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
             boxShadow: "0 2px 8px rgba(0, 0, 0, 0.12)",
             transition: "all 0.2s ease",
           }}
-          className="hover:scale-110 active:scale-95 group"
+          className="w-7 h-7 sm:w-[34px] sm:h-[34px] hover:scale-110 active:scale-95 group"
           title={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
           aria-label={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
         >
           <Heart 
-            className={`w-4 h-4 transition-colors ${
+            className={`w-3.5 h-3.5 sm:w-4 sm:h-4 transition-colors ${
               isWishlisted 
                 ? 'text-red-500 fill-red-500' 
                 : 'text-slate-600 group-hover:text-red-500'
@@ -162,70 +159,67 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
 
       </div>
 
-      {/* Details Block (Width: 339px, Height: 350px) */}
-      <div style={{ width: "100%", height: "350px", display: "flex", flexDirection: "column", justifyContent: "space-between", textAlign: "left", boxSizing: "border-box" }}>
-        {/* Category Tag */}
-        <span 
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            justifyContent: "center",
-            height: "28px",
-            borderRadius: "4px",
-            padding: "4px 8px",
-            fontFamily: "Faktum, sans-serif",
-            fontWeight: 500,
-            fontSize: "14px",
-            color: "rgba(255, 98, 62, 1)",
-            backgroundColor: "rgba(255, 98, 62, 0.08)",
-            alignSelf: "flex-start",
-          }}
-        >
-          {product.category}
-        </span>
+      {/* Details Block */}
+      <div className="w-full flex flex-col justify-between gap-2 sm:gap-3 text-left flex-1 h-auto sm:h-[350px]">
         
-        {/* Title & Price Row */}
-        <div style={{ width: "100%", height: "35px", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "8px" }}>
-          <h4 style={{ margin: 0, fontSize: "20px", fontFamily: "Faktum, sans-serif", fontWeight: 600, color: "rgba(43, 43, 43, 1)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-            <Link href={`/shop/product/${product.id}`} style={{ textDecoration: "none", color: "inherit" }}>
+        {/* Top Header: Category Tag & Price */}
+        <div className="flex flex-col gap-1.5 w-full">
+          <div className="flex items-center justify-between gap-2 w-full">
+            <span 
+              style={{
+                borderRadius: "4px",
+                fontFamily: "Faktum, sans-serif",
+                fontWeight: 500,
+                color: "rgba(255, 98, 62, 1)",
+                backgroundColor: "rgba(255, 98, 62, 0.08)",
+              }}
+              className="inline-flex items-center px-2 py-0.5 text-xs sm:text-sm h-6 sm:h-[28px]"
+            >
+              {product.category}
+            </span>
+
+            <div className="flex items-center gap-1.5 shrink-0">
+              {product.originalPrice && (
+                <span style={{ color: "rgba(141, 141, 141, 1)", textDecoration: "line-through" }} className="text-xs sm:text-[18px] font-medium font-sans">
+                  ₹{product.originalPrice}
+                </span>
+              )}
+              <span style={{ color: "rgba(43, 43, 43, 1)" }} className="text-base sm:text-[24px] font-semibold font-sans">
+                ₹{product.price}
+              </span>
+            </div>
+          </div>
+
+          <h4 className="m-0 text-sm sm:text-[20px] font-semibold text-slate-800 line-clamp-1 truncate font-sans">
+            <Link href={`/shop/product/${product.id}`} className="hover:text-[#1D493E] transition-colors">
               {product.name}
             </Link>
           </h4>
-          <div style={{ display: "flex", alignItems: "center", gap: "10px", flexShrink: 0 }}>
-            {product.originalPrice && (
-              <span style={{ color: "rgba(141, 141, 141, 1)", textDecoration: "line-through", fontSize: "18px", fontFamily: "Faktum, sans-serif", fontWeight: 500 }}>
-                ₹{product.originalPrice}
-              </span>
-            )}
-            <span style={{ fontSize: "24px", fontFamily: "Faktum, sans-serif", fontWeight: 600, color: "rgba(43, 43, 43, 1)" }}>
-              ₹{product.price}
-            </span>
-          </div>
         </div>
 
         {/* Rating Row */}
-        <div style={{ display: "flex", alignItems: "center", gap: "12px", height: "20px", flexShrink: 0 }}>
-          <div style={{ display: "flex", gap: "2px" }}>
-            <Star style={{ width: "20px", height: "20px", fill: "#FFC72C", color: "transparent" }} />
-            <Star style={{ width: "20px", height: "20px", fill: "#FFC72C", color: "transparent" }} />
-            <Star style={{ width: "20px", height: "20px", fill: "#FFC72C", color: "transparent" }} />
-            <Star style={{ width: "20px", height: "20px", fill: "#FFC72C", color: "transparent" }} />
-            <Star style={{ width: "20px", height: "20px", fill: "#FFC72C", color: "transparent" }} />
+        <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
+          <div className="flex gap-0.5">
+            <Star className="w-3.5 h-3.5 sm:w-5 sm:h-5 fill-[#FFC72C] text-transparent" />
+            <Star className="w-3.5 h-3.5 sm:w-5 sm:h-5 fill-[#FFC72C] text-transparent" />
+            <Star className="w-3.5 h-3.5 sm:w-5 sm:h-5 fill-[#FFC72C] text-transparent" />
+            <Star className="w-3.5 h-3.5 sm:w-5 sm:h-5 fill-[#FFC72C] text-transparent" />
+            <Star className="w-3.5 h-3.5 sm:w-5 sm:h-5 fill-[#FFC72C] text-transparent" />
           </div>
-          <span style={{ fontSize: "20px", fontFamily: "Faktum, sans-serif", fontWeight: 500, color: "rgba(43, 43, 43, 1)", lineHeight: "100%" }}>
-            ({reviewsCount} Reviews)
+          <span style={{ color: "rgba(43, 43, 43, 1)" }} className="text-xs sm:text-[18px] font-medium font-sans leading-none">
+            ({reviewsCount})
           </span>
         </div>
 
-        {/* Bought statistics */}
-        <p style={{ margin: 0, fontFamily: "Faktum, sans-serif", fontWeight: 500, fontSize: "20px", color: "rgba(141, 141, 141, 1)", height: "25px", display: "flex", alignItems: "center", flexShrink: 0 }}>
+        {/* Bought statistics (Hidden on Mobile to keep card compact) */}
+        <p style={{ margin: 0, color: "rgba(141, 141, 141, 1)" }} className="hidden sm:flex text-sm sm:text-[20px] font-medium items-center shrink-0">
           {boughtText}
         </p>
 
-        {/* Delivery text */}
-        <p style={{ margin: 0, fontFamily: "Faktum, sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "28px" }}>
+        {/* Delivery text (Hidden on Mobile to keep card compact) */}
+        <p style={{ margin: 0 }} className="hidden sm:block text-xs sm:text-[18px] leading-relaxed font-medium">
           <span style={{ color: "rgba(141, 141, 141, 1)" }}>FREE delivery as soon as </span>
-          <span style={{ color: "rgba(43, 43, 43, 1)" }}>Thu, 9 Apr, 7 am - 10 pm</span>
+          <span style={{ color: "rgba(43, 43, 43, 1)" }}>Thu, 9 Apr</span>
         </p>
 
         {/* Add to Cart Button */}
@@ -237,21 +231,19 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
           }}
           style={{
             width: "100%",
-            height: "60px",
-            padding: "16px 32px",
             borderRadius: "4px",
             border: "2px solid rgba(29, 73, 62, 1)",
             backgroundColor: "transparent",
             color: "rgba(29, 73, 62, 1)",
-            fontSize: "16px",
             fontWeight: "bold",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            gap: "8px",
+            gap: "6px",
             cursor: "pointer",
             transition: "all 0.2s ease",
           }}
+          className="h-[42px] sm:h-[60px] py-2 sm:py-4 px-3 sm:px-8 text-xs sm:text-base mt-auto shrink-0"
           onMouseEnter={(e) => {
             e.currentTarget.style.backgroundColor = "rgba(29, 73, 62, 1)";
             e.currentTarget.style.color = "white";
@@ -265,15 +257,14 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
             paths.forEach((p: any) => p.style.stroke = 'rgba(29, 73, 62, 1)');
           }}
         >
-          <span>{isAdded ? 'Added to Cart!' : 'Add to cart'}</span>
+          <span>{isAdded ? 'Added!' : 'Add to cart'}</span>
           <svg 
-            style={{ width: '28px', height: '28px' }} 
             viewBox="0 0 28 28" 
             fill="none" 
             strokeWidth="1.75" 
             strokeLinecap="round" 
             strokeLinejoin="round"
-            className="shrink-0"
+            className="w-4 h-4 sm:w-7 sm:h-7 shrink-0"
           >
             <path 
               d="M4 5h3l2 11h11l2.5-9H14" 

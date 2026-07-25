@@ -106,30 +106,47 @@ body {
 }
 
 /* Responsive Global Section Padding */
-@media (min-width: 768px) {
+@media (min-width: 1280px) {
   section {
-    padding-left: 80px !important;
-    padding-right: 80px !important;
+    padding-left: 80px;
+    padding-right: 80px;
+  }
+}
+@media (min-width: 768px) and (max-width: 1279px) {
+  section {
+    padding-left: 36px;
+    padding-right: 36px;
   }
 }
 @media (max-width: 767px) {
   section {
-    padding-left: 24px !important;
-    padding-right: 24px !important;
+    padding-left: 20px;
+    padding-right: 20px;
   }
 }
 section {
-  padding-top: 42px !important;
-  padding-bottom: 42px !important;
+  padding-top: 42px;
+  padding-bottom: 42px;
 }
 
-/* Locked Hero height rule to guarantee Figma proportions */
+/* Responsive Hero height rule (Mobile 430x932 viewport full screen video spec) */
 .hero-banner-height {
-  height: 600px !important;
+  height: 100vh;
+  min-height: 650px;
+  max-height: 932px;
 }
-@media (min-width: 768px) {
+@media (min-width: 640px) {
   .hero-banner-height {
-    height: 1024px !important;
+    height: 600px;
+    min-height: 540px;
+    max-height: none;
+  }
+}
+@media (min-width: 1024px) {
+  .hero-banner-height {
+    height: max(640px, min(100vh, 880px));
+    min-height: 640px;
+    max-height: none;
   }
 }
 

@@ -593,20 +593,12 @@ export const AuthModal: React.FC = () => {
         onClick={!loading ? handleClose : undefined}
       />
 
-      {/* Two-Column split modal box / Main Frame (Matches Figma specs 1440x1024 base wrapper style) */}
+      {/* Two-Column split modal box / Main Frame */}
       <div 
-        className="relative z-10 flex flex-col md:flex-row items-center md:items-start justify-center animate-[scaleIn_0.3s_ease-out] w-full h-full max-h-[95vh] md:max-h-none overflow-y-auto md:overflow-visible"
+        className="relative z-10 flex flex-col md:flex-row items-center justify-center animate-[scaleIn_0.3s_ease-out] w-full max-w-[1240px] max-h-[92vh] overflow-y-auto my-auto p-4 md:p-8"
         style={{
           boxSizing: 'border-box',
           background: 'rgba(255, 252, 248, 1)',
-          transform: isMobile ? undefined : `scale(${scale})`,
-          transformOrigin: isMobile ? undefined : 'center center',
-          width: isMobile ? '100%' : '1440px',
-          height: isMobile ? 'auto' : '1024px',
-          paddingTop: isMobile ? '24px' : '60px',
-          paddingRight: isMobile ? '16px' : '75px',
-          paddingBottom: isMobile ? '24px' : '60px',
-          paddingLeft: isMobile ? '16px' : '120px',
           gap: isMobile ? '16px' : '24px',
           display: 'flex',
           flexShrink: 0,
@@ -623,18 +615,17 @@ export const AuthModal: React.FC = () => {
           </button>
         )}
 
-        {/* LEFT COLUMN: AUTH FORMS (Specs: 556x960 for signup, 556x802 for login/OTP) */}
+        {/* LEFT COLUMN: AUTH FORMS */}
         <div 
-          className="w-full md:w-[556px] flex flex-col justify-between"
+          className="w-full max-w-[556px] flex flex-col justify-between"
           style={{
-            width: isMobile ? '100%' : '556px',
-            height: isMobile ? 'auto' : (view === 'signup' ? '980px' : '820px'),
+            height: 'auto',
+            minHeight: isMobile ? 'auto' : '650px',
             opacity: 1,
-            transform: 'rotate(0deg)',
             background: 'rgba(255, 255, 255, 1)',
             border: '1px solid rgba(204, 204, 204, 0.54)',
-            borderRadius: '4px',
-            padding: '24px 32px',
+            borderRadius: '8px',
+            padding: isMobile ? '20px 16px' : '28px 32px',
             boxSizing: 'border-box',
             gap: '20px',
             display: 'flex',
@@ -645,7 +636,7 @@ export const AuthModal: React.FC = () => {
           {/* Brand & Heading Header Block (Figma specs: width 492, height 110, gap 24px) */}
           <div 
             style={{
-              width: '492px',
+              width: '100%', maxWidth: '492px',
               height: '110px',
               display: 'flex',
               flexDirection: 'column',
@@ -658,7 +649,7 @@ export const AuthModal: React.FC = () => {
             {/* Logo Brand Header with Back Arrow Button */}
             <div 
               style={{
-                width: '492px',
+                width: '100%', maxWidth: '492px',
                 height: '33px',
                 display: 'flex',
                 alignItems: 'center',
@@ -696,7 +687,7 @@ export const AuthModal: React.FC = () => {
             {/* Title / Description */}
             <div 
               style={{
-                width: '492px',
+                width: '100%', maxWidth: '492px',
                 height: '53px',
                 display: 'flex',
                 flexDirection: 'column',
@@ -707,7 +698,7 @@ export const AuthModal: React.FC = () => {
             >
               <h2 
                 style={{
-                  width: '492px',
+                  width: '100%', maxWidth: '492px',
                   height: '25px',
                   fontFamily: '"Faktum", "Outfit", sans-serif',
                   fontWeight: 600,
@@ -731,7 +722,7 @@ export const AuthModal: React.FC = () => {
               </h2>
               <p 
                 style={{
-                  width: '492px',
+                  width: '100%', maxWidth: '492px',
                   height: '20px',
                   fontFamily: '"Faktum", "Outfit", sans-serif',
                   fontWeight: 500,
@@ -815,7 +806,7 @@ export const AuthModal: React.FC = () => {
                         setPhone(val);
                       }}
                       style={{
-                        width: '492px',
+                        width: '100%', maxWidth: '492px',
                         height: '53px',
                         borderRadius: '4px',
                         border: '1px solid rgba(204, 204, 204, 1)',
@@ -833,7 +824,7 @@ export const AuthModal: React.FC = () => {
 
                   {/* Password with Forgot Password link */}
                   <div className="space-y-1.5">
-                    <div className="flex justify-between items-center" style={{ width: '492px' }}>
+                    <div className="flex justify-between items-center" style={{ width: '100%', maxWidth: '492px' }}>
                       <label 
                         style={{
                           display: 'inline-flex',
@@ -885,7 +876,7 @@ export const AuthModal: React.FC = () => {
                     <div 
                       className="flex items-center"
                       style={{
-                        width: '492px',
+                        width: '100%', maxWidth: '492px',
                         height: '53px',
                         borderRadius: '4px',
                         border: passwordError ? '1px solid rgba(229, 62, 62, 1)' : '1px solid rgba(204, 204, 204, 1)',
@@ -947,7 +938,7 @@ export const AuthModal: React.FC = () => {
                   {/* Action Block */}
                   <div 
                     style={{
-                      width: '492px',
+                      width: '100%', maxWidth: '492px',
                       display: 'flex',
                       flexDirection: 'column',
                       gap: '12px',
@@ -960,7 +951,7 @@ export const AuthModal: React.FC = () => {
                     <button 
                       type="submit" disabled={loading}
                       style={{
-                        width: '492px',
+                        width: '100%', maxWidth: '492px',
                         height: '60px',
                         background: 'rgba(29, 73, 62, 1)',
                         color: '#FFFFFF',
@@ -1093,7 +1084,7 @@ export const AuthModal: React.FC = () => {
                       type="text" required placeholder="Enter your name" value={name}
                       onChange={(e) => setName(e.target.value)}
                       style={{
-                        width: '492px',
+                        width: '100%', maxWidth: '492px',
                         height: '53px',
                         borderRadius: '4px',
                         border: '1px solid rgba(204, 204, 204, 1)',
@@ -1145,7 +1136,7 @@ export const AuthModal: React.FC = () => {
                       type="email" required placeholder="Enter your email ID" value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       style={{
-                        width: '492px',
+                        width: '100%', maxWidth: '492px',
                         height: '53px',
                         borderRadius: '4px',
                         border: '1px solid rgba(204, 204, 204, 1)',
@@ -1163,7 +1154,7 @@ export const AuthModal: React.FC = () => {
 
                   {/* Enter Mobile Number Field with Inline Verify OTP trigger */}
                   <div className="space-y-2">
-                    <div className="flex justify-between items-center" style={{ width: '492px' }}>
+                    <div className="flex justify-between items-center" style={{ width: '100%', maxWidth: '492px' }}>
                       <label 
                         style={{
                           display: 'inline-flex',
@@ -1204,7 +1195,7 @@ export const AuthModal: React.FC = () => {
                     <div 
                       className="flex items-center"
                       style={{
-                        width: '492px',
+                        width: '100%', maxWidth: '492px',
                         height: '53px',
                         borderRadius: '4px',
                         border: isPhoneVerified ? '1px solid #10B981' : '1px solid rgba(204, 204, 204, 1)',
@@ -1312,7 +1303,7 @@ export const AuthModal: React.FC = () => {
                     <div 
                       className="flex items-center"
                       style={{
-                        width: '492px',
+                        width: '100%', maxWidth: '492px',
                         height: '53px',
                         borderRadius: '4px',
                         border: passwordError ? '1px solid rgba(229, 62, 62, 1)' : '1px solid rgba(204, 204, 204, 1)',
@@ -1371,7 +1362,7 @@ export const AuthModal: React.FC = () => {
                       </p>
                     )}
                     {/* Password Policy Realtime Indicators (Single Line) */}
-                    <div className="flex flex-wrap items-center gap-x-3 gap-y-1 pt-1.5" style={{ width: '492px' }}>
+                    <div className="flex flex-wrap items-center gap-x-3 gap-y-1 pt-1.5" style={{ width: '100%', maxWidth: '492px' }}>
                       <div className={`flex items-center gap-1 text-[12px] ${password.length >= 8 ? 'text-emerald-600 font-semibold' : 'text-slate-400'}`}>
                         <Check className={`w-3.5 h-3.5 ${password.length >= 8 ? 'text-emerald-600' : 'text-slate-300'}`} />
                         <span>At least 8 characters</span>
@@ -1394,7 +1385,7 @@ export const AuthModal: React.FC = () => {
                     {/* Action Block */}
                     <div 
                       style={{
-                        width: '492px',
+                        width: '100%', maxWidth: '492px',
                         display: 'flex',
                         flexDirection: 'column',
                         gap: '12px',
@@ -1407,7 +1398,7 @@ export const AuthModal: React.FC = () => {
                       <button 
                         type="submit" disabled={loading}
                         style={{
-                          width: '492px',
+                          width: '100%', maxWidth: '492px',
                           height: '60px',
                           background: 'rgba(29, 73, 62, 1)',
                           color: '#FFFFFF',
@@ -1521,7 +1512,7 @@ export const AuthModal: React.FC = () => {
                       <div 
                         className="flex items-center"
                         style={{
-                          width: '492px',
+                          width: '100%', maxWidth: '492px',
                           height: '53px',
                           borderRadius: '4px',
                           border: '1px solid rgba(204, 204, 204, 1)',
@@ -1570,7 +1561,7 @@ export const AuthModal: React.FC = () => {
                     <button 
                       type="submit" disabled={loading}
                       style={{
-                        width: '492px',
+                        width: '100%', maxWidth: '492px',
                         height: '60px',
                         background: 'rgba(29, 73, 62, 1)',
                         color: '#FFFFFF',
@@ -1644,7 +1635,7 @@ export const AuthModal: React.FC = () => {
                       {/* 6-Digit OTP Box Grid */}
                       <div 
                         style={{
-                          width: '492px',
+                          width: '100%', maxWidth: '492px',
                           display: 'flex',
                           justifyContent: 'space-between',
                           gap: '12px',
@@ -1719,7 +1710,7 @@ export const AuthModal: React.FC = () => {
                     <button 
                       type="submit" disabled={loading}
                       style={{
-                        width: '492px',
+                        width: '100%', maxWidth: '492px',
                         height: '60px',
                         background: 'rgba(29, 73, 62, 1)',
                         color: '#FFFFFF',
@@ -1762,7 +1753,7 @@ export const AuthModal: React.FC = () => {
                       type="email" required placeholder="Enter your email ID" value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       style={{
-                        width: '492px',
+                        width: '100%', maxWidth: '492px',
                         height: '53px',
                         borderRadius: '4px',
                         border: '1px solid rgba(204, 204, 204, 1)',
@@ -1792,7 +1783,7 @@ export const AuthModal: React.FC = () => {
                       type="password" required placeholder="••••••••" value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       style={{
-                        width: '492px',
+                        width: '100%', maxWidth: '492px',
                         height: '53px',
                         borderRadius: '4px',
                         border: '1px solid rgba(204, 204, 204, 1)',
@@ -1811,7 +1802,7 @@ export const AuthModal: React.FC = () => {
                   <button 
                     type="submit" disabled={loading}
                     style={{
-                      width: '492px',
+                      width: '100%', maxWidth: '492px',
                       height: '60px',
                       background: 'rgba(29, 73, 62, 1)',
                       color: '#FFFFFF',
@@ -1861,7 +1852,7 @@ export const AuthModal: React.FC = () => {
                       type="email" required placeholder="Enter your email ID" value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       style={{
-                        width: '492px',
+                        width: '100%', maxWidth: '492px',
                         height: '53px',
                         borderRadius: '4px',
                         border: '1px solid rgba(204, 204, 204, 1)',
@@ -1880,7 +1871,7 @@ export const AuthModal: React.FC = () => {
                   <button 
                     type="submit" disabled={loading}
                     style={{
-                      width: '492px',
+                      width: '100%', maxWidth: '492px',
                       height: '60px',
                       background: 'rgba(29, 73, 62, 1)',
                       color: '#FFFFFF',
@@ -1924,7 +1915,7 @@ export const AuthModal: React.FC = () => {
             {view !== 'forgot' && (
               <div 
                 style={{
-                  width: '492px',
+                  width: '100%', maxWidth: '492px',
                   height: '103px',
                   display: 'flex',
                   flexDirection: 'column',
@@ -1938,7 +1929,7 @@ export const AuthModal: React.FC = () => {
                 {/* Divider "or" (Figma specs: height 19px) */}
                 <div 
                   style={{
-                    width: '492px',
+                    width: '100%', maxWidth: '492px',
                     height: '19px',
                     display: 'flex',
                     alignItems: 'center',
@@ -1953,7 +1944,7 @@ export const AuthModal: React.FC = () => {
                 {/* Social Login Buttons (Figma specs: height 60px) */}
                 <div 
                   style={{
-                    width: '492px',
+                    width: '100%', maxWidth: '492px',
                     display: 'grid',
                     gridTemplateColumns: '1fr 1fr 1fr',
                     gap: '12px',
@@ -2042,7 +2033,7 @@ export const AuthModal: React.FC = () => {
           {/* Footer branding (Figma specs: width 492, height 54.3px, gap 8px) */}
           <div 
             style={{
-              width: '492px',
+              width: '100%', maxWidth: '492px',
               height: '54.3px',
               display: 'flex',
               flexDirection: 'column',
@@ -2075,7 +2066,7 @@ export const AuthModal: React.FC = () => {
             </div>
             <p 
               style={{
-                width: '492px',
+                width: '100%', maxWidth: '492px',
                 height: '18px',
                 fontFamily: '"Faktum", "Outfit", sans-serif',
                 fontWeight: 500,

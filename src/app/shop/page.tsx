@@ -137,7 +137,7 @@ export default function ShopPage() {
   ];
 
   const renderProductGrid = (items: Product[]) => (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[32px] w-full max-w-[1280px] mx-auto">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 xl:gap-[32px] w-full max-w-[1280px] mx-auto">
       {items.map((prod) => (
         <ProductCard
           key={prod.id}

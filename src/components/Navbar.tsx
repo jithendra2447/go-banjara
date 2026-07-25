@@ -95,18 +95,18 @@ export const Navbar: React.FC = () => {
       <nav className="h-[90px] flex items-center w-full">
         <div className="max-w-[1440px] mx-auto px-4 md:px-[42px] py-4 w-full flex items-center justify-between h-full flex-nowrap">
           
-          <div className="flex items-center gap-4 lg:gap-8 xl:gap-10 shrink-0">
+          <div className="flex items-center gap-2 lg:gap-4 xl:gap-8 min-w-0 shrink">
             {/* Logo */}
             <Link href="/" className="flex items-center group shrink-0">
               <img
                 src={isTransparent ? "/logo-footer.png" : "/logo.png"}
                 alt="go banjāra logo"
-                className="h-[38px] sm:h-[46px] w-auto max-w-[150px] sm:max-w-[200px] object-contain transition-transform duration-300 group-hover:scale-102"
+                className="h-[34px] sm:h-[42px] xl:h-[46px] w-auto max-w-[130px] sm:max-w-[170px] xl:max-w-[200px] object-contain transition-transform duration-300 group-hover:scale-102"
               />
             </Link>
 
             {/* Desktop Menu Links */}
-            <div className="hidden lg:flex items-center gap-1 xl:gap-2.5 h-[49px] flex-nowrap" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+            <div className="hidden lg:flex items-center gap-0.5 xl:gap-2 h-[49px] flex-nowrap">
               {navLinks.map((link) => {
                 const active = isActive(link.path);
                 
@@ -130,11 +130,11 @@ export const Navbar: React.FC = () => {
                       color: fallbackColor,
                       boxSizing: 'border-box',
                     }}
-                    className={`flex items-center justify-center px-3.5 xl:px-4 py-3 h-[49px] rounded-[4px] transition-all duration-200 shrink-0 ${activeClass}`}
+                    className={`flex items-center justify-center px-2.5 xl:px-4 py-2.5 h-[49px] rounded-[4px] transition-all duration-200 shrink-0 ${activeClass}`}
                   >
                     <span
-                      className="flex items-center justify-center text-center whitespace-nowrap"
-                      style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", letterSpacing: "0px", color: 'inherit' }}
+                      className="flex items-center justify-center text-center whitespace-nowrap text-[15px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px]"
+                      style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, lineHeight: "100%", letterSpacing: "0px", color: 'inherit' }}
                     >
                       {link.name}
                     </span>
@@ -145,11 +145,11 @@ export const Navbar: React.FC = () => {
           </div>
 
           {/* Right actions: Search Bar, Cart & Login */}
-          <div className="flex items-center justify-end gap-2 sm:gap-3 lg:gap-4 h-[47px] shrink-0 flex-nowrap">
+          <div className="flex items-center justify-end gap-1.5 sm:gap-2 lg:gap-3 xl:gap-4 h-[47px] shrink-0 flex-nowrap">
             
             {/* Search Input Box */}
             <div className="relative hidden md:block">
-              <div className={`flex items-center w-[230px] h-[47px] gap-[8px] rounded-[4px] px-[12px] transition-all duration-300 ${
+              <div className={`flex items-center w-[140px] lg:w-[180px] xl:w-[230px] h-[47px] gap-[8px] rounded-[4px] px-[10px] lg:px-[12px] transition-all duration-300 ${
                 isTransparent
                   ? 'bg-black/20 border border-white/20 text-white'
                   : 'bg-white border border-[#CCCCCC] text-slate-800'
@@ -540,13 +540,7 @@ export const Navbar: React.FC = () => {
               <button
                 onClick={() => setAuthOpen(true)}
                 style={{
-                  width: "90px",
                   height: "47px",
-                  paddingTop: "12px",
-                  paddingBottom: "12px",
-                  paddingLeft: "24px",
-                  paddingRight: "24px",
-                  gap: "8px",
                   borderRadius: "4px",
                   background: "rgba(29, 73, 62, 1)",
                   alignItems: "center",
@@ -556,11 +550,11 @@ export const Navbar: React.FC = () => {
                   flexShrink: 0,
                   transition: "background 0.2s",
                 }}
-                className="hidden sm:flex hover:opacity-90"
+                className="hidden sm:flex hover:opacity-90 px-4 xl:px-6 py-3 min-w-[80px] w-auto shrink-0"
                 onMouseEnter={e => (e.currentTarget.style.background = "rgba(22,55,47,1)")}
                 onMouseLeave={e => (e.currentTarget.style.background = "rgba(29,73,62,1)")}
               >
-                <span style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "16px", lineHeight: "100%", letterSpacing: "0px", color: "#FFFFFF" }}>Login</span>
+                <span style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "16px", lineHeight: "100%", letterSpacing: "0px", color: "#FFFFFF", whiteSpace: "nowrap" }}>Login</span>
               </button>
             )}
 

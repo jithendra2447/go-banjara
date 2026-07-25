@@ -378,31 +378,31 @@ export default function Homepage() {
         <div className="absolute inset-0 bg-black/20 pointer-events-none z-10" />
 
         {/* 2. HERO CONTENT SECTION (Overlay on top of video, z-20) */}
-        <div className="absolute inset-0 flex flex-col justify-end pb-8 sm:pb-12 md:pb-16 lg:pb-20 z-20 bg-transparent animate-fade-in">
-          <div className="max-w-[390px] md:max-w-[1440px] mx-auto md:mx-auto px-[20px] sm:px-8 md:px-12 lg:px-16 xl:px-20 w-full flex flex-col md:flex-row md:items-end justify-between gap-[18px] md:gap-10 text-left">
+        <div className="absolute inset-0 flex flex-col justify-end pb-4 sm:pb-8 md:pb-16 lg:pb-20 z-20 bg-transparent animate-fade-in">
+          <div className="max-w-full sm:max-w-[390px] md:max-w-[1440px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 w-full flex flex-col md:flex-row md:items-end justify-between gap-3 sm:gap-[18px] md:gap-10 text-left">
             
             {/* Left side: Heading & Subtitle */}
-            <div className="flex flex-col gap-[18px] md:gap-6 max-w-[390px] md:max-w-[850px] text-left">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] xl:text-[62px] leading-tight md:leading-[1.15] tracking-[-0.2px] font-semibold text-white font-sans">
+            <div className="flex flex-col gap-2 sm:gap-[18px] md:gap-6 max-w-full sm:max-w-[390px] md:max-w-[850px] text-left">
+              <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-[54px] xl:text-[62px] leading-tight md:leading-[1.15] tracking-[-0.2px] font-semibold text-white font-sans">
                 Hey! Let’s Escape from the <br className="hidden md:inline" />
                 Ordinary
               </h1>
-              <p className="text-xs sm:text-sm md:text-base lg:text-[18px] xl:text-[20px] leading-relaxed md:leading-[28px] lg:leading-[32px] tracking-[0px] text-white/95 font-sans font-medium max-w-[350px] sm:max-w-[650px]">
+              <p className="text-xs sm:text-sm md:text-base lg:text-[18px] xl:text-[20px] leading-relaxed md:leading-[28px] lg:leading-[32px] tracking-[0px] text-white/95 font-sans font-medium max-w-full sm:max-w-[650px]">
                 We bridge the gap between soulful Indian travel and high end gear. <br className="hidden md:inline" />
                 curated for those who find home in the dust of the road
               </p>
             </div>
 
             {/* Right side: Two Buttons side-by-side */}
-            <div className="flex flex-row items-center gap-[12px] sm:gap-4 md:gap-6 justify-start shrink-0 pb-1">
+            <div className="flex flex-row items-center gap-2 sm:gap-4 md:gap-6 justify-start shrink-0 pb-1 w-full sm:w-auto overflow-x-auto no-scrollbar">
               <Link 
                 href="/shop"
-                className="hover:scale-[1.02] active:scale-[0.98] text-[#2B2B2B] bg-white hover:bg-white/90 transition-all duration-300 cursor-pointer flex items-center justify-center w-[125px] sm:w-[150px] md:w-[177px] h-[44px] sm:h-[55px]"
+                className="hover:scale-[1.02] active:scale-[0.98] text-[#2B2B2B] bg-white hover:bg-white/90 transition-all duration-300 cursor-pointer flex items-center justify-center min-w-[110px] w-[125px] sm:w-[150px] md:w-[177px] h-[40px] sm:h-[55px] shrink-0"
                 style={{
                   borderRadius: "4px",
                   fontFamily: "'Faktum','Outfit',sans-serif",
                   fontWeight: 600,
-                  fontSize: "16px",
+                  fontSize: "14px",
                   lineHeight: "100%",
                   textDecoration: "none",
                   boxSizing: "border-box",
@@ -413,14 +413,14 @@ export default function Homepage() {
               </Link>
               <Link 
                 href="/travel"
-                className="hover:bg-white/10 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 cursor-pointer flex items-center justify-center w-[202px] sm:w-[190px] md:w-[215px] h-[44px] sm:h-[55px] border border-white/30 text-white"
+                className="hover:bg-white/10 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 cursor-pointer flex items-center justify-center min-w-[160px] w-[202px] sm:w-[190px] md:w-[215px] h-[40px] sm:h-[55px] border border-white/30 text-white shrink-0"
                 style={{
                   borderRadius: "4px",
                   background: "rgba(255, 255, 255, 0.1)",
                   backdropFilter: "blur(4px)",
                   fontFamily: "'Faktum','Outfit',sans-serif",
                   fontWeight: 600,
-                  fontSize: "16px",
+                  fontSize: "14px",
                   lineHeight: "100%",
                   textDecoration: "none",
                   boxSizing: "border-box",
@@ -926,22 +926,23 @@ export default function Homepage() {
             </Link>
           </div>
 
-          {/* Horizontal Card Carousel (Figma Card Specs: w:191px, h:371px, gap:8px) */}
-          <div className="flex gap-[12px] overflow-x-auto pb-2 scrollbar-none snap-x snap-mandatory">
+          {/* Horizontal Card Carousel */}
+          <div className="flex gap-[14px] overflow-x-auto pb-3 scrollbar-none snap-x snap-mandatory">
             {(() => {
               const displayPkgs = packagesList && packagesList.length > 0 ? packagesList : HOLIDAY_PACKAGES;
               return displayPkgs.map((pkg) => (
-                <div 
+                <Link 
                   key={pkg.id} 
-                  className="snap-start shrink-0 w-[191px] h-[371px] bg-white rounded-[4px] overflow-hidden flex flex-col gap-[8px] text-left select-none border border-gray-100"
+                  href={`/travel/package/${pkg.id}`}
+                  className="snap-start shrink-0 w-[200px] sm:w-[220px] bg-white rounded-[6px] overflow-hidden flex flex-col justify-between text-left select-none border border-gray-100/80 shadow-xs group cursor-pointer"
                   style={{ boxSizing: 'border-box' }}
                 >
-                  {/* Image Container with Wishlist Button (w:191px, h:268px) */}
-                  <div className="relative w-[191px] h-[268px] rounded-t-[4px] overflow-hidden shrink-0">
+                  {/* Image Container with Wishlist Button (h: 210px) */}
+                  <div className="relative w-full h-[210px] rounded-t-[6px] overflow-hidden shrink-0">
                     <img 
                       src={pkg.image} 
                       alt={pkg.name} 
-                      className="w-full h-full object-cover" 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
                       style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
                     />
                     <button
@@ -979,55 +980,55 @@ export default function Homepage() {
                     </button>
                   </div>
 
-                  {/* Content Container (Figma specs: w:191px, h:95px, gap:6px) */}
-                  <div className="flex flex-col gap-[6px] px-1 w-[191px] h-[95px] shrink-0 justify-between pb-1">
+                  {/* Content Container (Fluid height, no text clipping) */}
+                  <div className="flex flex-col gap-[6px] p-2.5 flex-1 justify-between bg-white">
                     {/* Category Tag + Duration Tag */}
                     <div className="flex items-center justify-between w-full">
-                      <span className="bg-[#FF5A36] text-white px-1.5 py-0.5 rounded-[4px] text-[9px] font-bold">
-                        {pkg.category || 'Heritage'}
+                      <span className="bg-[#FF5A36] text-white px-2 py-0.5 rounded-[4px] text-[10px] font-bold tracking-tight">
+                        {pkg.category || 'Road Trip'}
                       </span>
-                      <span className="bg-[#1D493E] text-white px-1.5 py-0.5 rounded-[4px] text-[9px] font-bold">
+                      <span className="bg-[#1D493E] text-white px-2 py-0.5 rounded-[4px] text-[10px] font-bold tracking-tight">
                         {pkg.durationDays || 5} Days
                       </span>
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-[13px] font-bold font-sans text-[#1D493E] leading-tight line-clamp-1 m-0" title={pkg.name}>
+                    <h3 className="text-[14px] font-bold font-sans text-[#1D493E] leading-snug line-clamp-1 m-0 pt-0.5" title={pkg.name}>
                       {pkg.name}
                     </h3>
 
                     {/* Short Description */}
-                    <p className="text-[10px] font-sans font-normal text-gray-500 leading-tight line-clamp-2 m-0">
+                    <p className="text-[11px] font-sans font-normal text-gray-500 leading-snug line-clamp-2 m-0">
                       {pkg.description || 'Explore royal palaces and shimmering lakeside vistas.'}
                     </p>
 
                     {/* Metadata Badges */}
-                    <div className="flex items-center gap-1 flex-wrap">
-                      <span className="bg-gray-100 text-gray-600 text-[8px] px-1 py-0.5 rounded-[2px] font-medium">
+                    <div className="flex items-center gap-1 flex-wrap pt-0.5">
+                      <span className="bg-gray-100 text-gray-600 text-[9px] px-1.5 py-0.5 rounded-[2px] font-medium">
                         {pkg.startPoint || 'Jaipur'}
                       </span>
-                      <span className="bg-gray-100 text-gray-600 text-[8px] px-1 py-0.5 rounded-[2px] font-medium">
+                      <span className="bg-gray-100 text-gray-600 text-[9px] px-1.5 py-0.5 rounded-[2px] font-medium">
                         {pkg.groupType || 'Private Trip'}
                       </span>
-                      <span className="bg-gray-100 text-gray-600 text-[8px] px-1 py-0.5 rounded-[2px] font-medium">
-                        Next: {pkg.nextDeparture || 'Oct, 2026'}
+                      <span className="bg-gray-100 text-gray-600 text-[9px] px-1.5 py-0.5 rounded-[2px] font-medium">
+                        Next: {pkg.nextDeparture || 'Aug, 2026'}
                       </span>
                     </div>
 
                     {/* Pricing */}
-                    <div className="flex items-baseline gap-1">
-                      <span className="line-through text-gray-400 text-[9px] font-normal">
+                    <div className="flex items-baseline gap-1 mt-1 pt-1 border-t border-gray-100">
+                      <span className="line-through text-gray-400 text-[10px] font-normal">
                         ₹{((pkg.price ?? 24500) * 1.4).toLocaleString('en-IN')}
                       </span>
-                      <span className="text-[11px] font-bold font-sans text-[#1D493E]">
+                      <span className="text-[12px] font-bold font-sans text-[#1D493E]">
                         ₹{(pkg.price ?? 24500).toLocaleString('en-IN')}/Person
                       </span>
-                      <span className="text-[#FF5A36] text-[9px] font-semibold">
+                      <span className="text-[#FF5A36] text-[10px] font-semibold">
                         30% off
                       </span>
                     </div>
                   </div>
-                </div>
+                </Link>
               ));
             })()}
           </div>

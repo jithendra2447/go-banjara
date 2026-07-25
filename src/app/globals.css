@@ -129,10 +129,10 @@ section {
   padding-bottom: 42px;
 }
 
-/* Responsive Hero height rule (Mobile 430x932 viewport full screen video spec) */
+/* Responsive Hero height rule (Dynamic viewport 100dvh for mobile browsers) */
 .hero-banner-height {
-  height: 100vh;
-  min-height: 650px;
+  height: 100dvh;
+  min-height: 520px;
   max-height: 932px;
 }
 @media (min-width: 640px) {

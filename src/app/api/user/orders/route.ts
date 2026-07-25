@@ -10,27 +10,26 @@ export async function GET(request: Request) {
     let orders: any[] = [];
     let bookings: any[] = [];
 
+    let userRecord = null;
+    const cleanEmail = email ? email.trim().toLowerCase() : undefined;
+
     if (userId && userId.length === 24) {
+      userRecord = await prisma.user.findUnique({ where: { id: userId } });
+    }
+    
+    if (!userRecord && cleanEmail) {
+      userRecord = await prisma.user.findUnique({ where: { email: cleanEmail } });
+    }
+
+    if (userRecord?.id) {
       orders = await prisma.order.findMany({
-        where: { userId },
+        where: { userId: userRecord.id },
         orderBy: { createdAt: 'desc' },
       });
       bookings = await prisma.booking.findMany({
-        where: { userId },
+        where: { userId: userRecord.id },
         orderBy: { createdAt: 'desc' },
       });
-    } else if (email) {
-      const dbUser = await prisma.user.findUnique({ where: { email } });
-      if (dbUser) {
-        orders = await prisma.order.findMany({
-          where: { userId: dbUser.id },
-          orderBy: { createdAt: 'desc' },
-        });
-        bookings = await prisma.booking.findMany({
-          where: { userId: dbUser.id },
-          orderBy: { createdAt: 'desc' },
-        });
-      }
     }
 
     return NextResponse.json({

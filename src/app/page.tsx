@@ -147,16 +147,66 @@ export default function Homepage() {
       }
     }
 
-    // 3. Load dynamic page content
-    const savedContent = localStorage.getItem('gb_admin_page_content');
-    if (savedContent) {
+    // 3. Load dynamic page content from cPanel CMS Engine
+    const loadCms = () => {
       try {
-        const parsed = JSON.parse(savedContent);
-        setPageContent(prev => ({ ...prev, ...parsed }));
+        const v2Cms = localStorage.getItem('gb_admin_page_content_v2');
+        if (v2Cms) {
+          const parsed = JSON.parse(v2Cms);
+          setPageContent(prev => ({
+            ...prev,
+            heroTitleLine1: parsed.homeHeroTitleLine1 || prev.heroTitleLine1,
+            heroTitleLine2: parsed.homeHeroTitleLine2 || prev.heroTitleLine2,
+            heroTitleLine3: parsed.homeHeroTitleLine3 || prev.heroTitleLine3,
+            heroSubtitle: parsed.homeHeroSubtitle || prev.heroSubtitle,
+            heroShopBtn: parsed.homeHeroShopBtn || prev.heroShopBtn,
+            heroTravelBtn: parsed.homeHeroTravelBtn || prev.heroTravelBtn,
+            mascotText: parsed.homeMascotText || prev.mascotText,
+            dealsTitle: parsed.homeDealsTitle || prev.dealsTitle,
+            dealsSub: parsed.homeDealsSub || prev.dealsSub,
+            sellingTitle: parsed.homeSellingTitle || prev.sellingTitle,
+            sellingSub: parsed.homeSellingSub || prev.sellingSub,
+            valuesTitle: parsed.homeValuesTitle || prev.valuesTitle,
+            valuesSub: parsed.homeValuesSub || prev.valuesSub,
+          }));
+          return;
+        }
+
+        const savedContent = localStorage.getItem('gb_admin_page_content');
+        if (savedContent) {
+          const parsed = JSON.parse(savedContent);
+          setPageContent(prev => ({ ...prev, ...parsed }));
+        }
       } catch (e) {
         console.error('Error loading page content:', e);
       }
-    }
+    };
+
+    loadCms();
+
+    const handleCmsUpdate = (e: any) => {
+      if (e.detail) {
+        setPageContent(prev => ({
+          ...prev,
+          heroTitleLine1: e.detail.homeHeroTitleLine1 || prev.heroTitleLine1,
+          heroTitleLine2: e.detail.homeHeroTitleLine2 || prev.heroTitleLine2,
+          heroTitleLine3: e.detail.homeHeroTitleLine3 || prev.heroTitleLine3,
+          heroSubtitle: e.detail.homeHeroSubtitle || prev.heroSubtitle,
+          heroShopBtn: e.detail.homeHeroShopBtn || prev.heroShopBtn,
+          heroTravelBtn: e.detail.homeHeroTravelBtn || prev.heroTravelBtn,
+          mascotText: e.detail.homeMascotText || prev.mascotText,
+          dealsTitle: e.detail.homeDealsTitle || prev.dealsTitle,
+          dealsSub: e.detail.homeDealsSub || prev.dealsSub,
+          sellingTitle: e.detail.homeSellingTitle || prev.sellingTitle,
+          sellingSub: e.detail.homeSellingSub || prev.sellingSub,
+          valuesTitle: e.detail.homeValuesTitle || prev.valuesTitle,
+          valuesSub: e.detail.homeValuesSub || prev.valuesSub,
+        }));
+      }
+    };
+
+    window.addEventListener('gb_cms_updated', handleCmsUpdate);
+    return () => window.removeEventListener('gb_cms_updated', handleCmsUpdate);
   }, []);
 
   const resolveProduct = (defaultId: string, fallbackName: string, fallbackCategory: string, fallbackImg: string, fallbackPrice: number, fallbackOrig: number) => {
@@ -298,6 +348,7 @@ export default function Homepage() {
           loop
           muted
           playsInline
+          preload="metadata"
           className="absolute inset-0 w-full h-full object-cover brightness-[0.75] contrast-[1.05]"
           style={{ transform: 'translateZ(0)' }}
         >

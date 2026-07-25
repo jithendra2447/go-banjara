@@ -6,9 +6,18 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { token, credential, name, email, avatar } = body;
 
-    const userEmail = email || 'user@gmail.com';
+    if (!email) {
+      return NextResponse.json(
+        { success: false, error: 'Email is required for Google authentication.' },
+        { status: 400 }
+      );
+    }
+
+    const userEmail = email.toLowerCase();
     const userName = name || 'Google User';
-    const userAvatar = avatar || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&h=100&fit=crop';
+    const userAvatar = avatar || '';
+
+    const isAdmin = userEmail === 'gobanjara.trd@gmail.com' || userEmail === 'admin@gobanjara.com';
 
     let user = await prisma.user.findUnique({
       where: { email: userEmail },
@@ -17,10 +26,10 @@ export async function POST(request: Request) {
     if (!user) {
       user = await prisma.user.create({
         data: {
-          email: userEmail,
+          email: userEmail.toLowerCase(),
           name: userName,
           passwordHash: 'GOOGLE_OAUTH_VERIFIED',
-          role: 'USER',
+          role: isAdmin ? 'ADMIN' : 'USER',
         },
       });
     }
@@ -33,7 +42,7 @@ export async function POST(request: Request) {
         name: user.name || userName,
         email: user.email,
         avatar: userAvatar,
-        role: user.role || 'USER',
+        role: isAdmin ? 'ADMIN' : (user.role || 'USER'),
         authType: 'google',
       },
     });

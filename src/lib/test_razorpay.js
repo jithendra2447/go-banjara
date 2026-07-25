@@ -1,7 +1,7 @@
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
-const keyId = 'rzp_live_SJ6c61Oqm7rmQV';
-const keySecret = '2N96zdStP52HdWMZ0djVlcT9';
+const keyId = 'rzp_live_THIa4glIjaqaZj';
+const keySecret = 'MZdFTE43Bh28TeTdmMRDDxo5';
 
 async function testRazorpay() {
   const authHeader = 'Basic ' + Buffer.from(`${keyId}:${keySecret}`).toString('base64');

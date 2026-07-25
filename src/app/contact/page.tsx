@@ -31,20 +31,34 @@ export default function ContactPage() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setFormSubmitted(true);
-      setFormData({
-        name: '',
-        email: '',
-        mobile: '',
-        address: ''
+
+    try {
+      await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          mobile: formData.mobile,
+          message: formData.address || 'Inquiry from Contact Us page',
+        }),
       });
-      setTimeout(() => setFormSubmitted(false), 5000);
-    }, 1200);
+    } catch (err) {
+      console.warn('Contact submission API notice:', err);
+    }
+
+    setIsSubmitting(false);
+    setFormSubmitted(true);
+    setFormData({
+      name: '',
+      email: '',
+      mobile: '',
+      address: ''
+    });
+    setTimeout(() => setFormSubmitted(false), 5000);
   };
 
   const FAQ_ITEMS = [

@@ -21,7 +21,7 @@ interface PackageDetailsProps {
 export default function PackageDetails({ customId }: PackageDetailsProps) {
   const params = useParams() as { id?: string };
   const router = useRouter();
-  const { addToCart } = useCart();
+  const { addToCart, toggleWishlist, wishlist } = useCart();
 
   const id = customId || params?.id || 'pkg-kashmir-classic';
 
@@ -48,10 +48,21 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
   const [pickupLocation, setPickupLocation] = useState('');
   const [enquiryMessage, setEnquiryMessage] = useState('');
   const [enquirySubmitted, setEnquirySubmitted] = useState(false);
-  const [saved, setSaved] = useState(false);
+
+  const saved = wishlist.some((i) => i.id === pkg?.id);
 
   const handleSaveForLater = () => {
-    setSaved(!saved);
+    if (!pkg) return;
+    toggleWishlist({
+      id: pkg.id,
+      name: pkg.name,
+      price: pkg.price || 15000,
+      image: pkg.image || (pkg.images && pkg.images[0]) || '/hero-image.jpg',
+      type: 'travel',
+      category: 'Travel Package',
+      destination: pkg.destination || 'India',
+      duration: pkg.duration || '5 Days',
+    });
   };
 
   useEffect(() => {

@@ -24,8 +24,8 @@ export async function POST(request: Request) {
     const cleanPhone = phone ? phone.replace(/\D/g, '') : '';
     const last10 = cleanPhone.slice(-10);
 
-    // Check if user already exists by email OR phone suffix
-    let existingUser = await prisma.user.findFirst({
+    // Check if user already exists by email OR phone
+    const existingUser = await prisma.user.findFirst({
       where: {
         OR: [
           { email: cleanEmail },
@@ -39,9 +39,9 @@ export async function POST(request: Request) {
 
     const passwordHash = await hashPassword(password);
 
-    let newUser;
-    if (existingUser) {
-      // Update existing record (e.g. created during OTP verification or previous step)
+    let newUser: any = null;
+    if (existingUser?.id) {
+      // Update existing user record with name & password
       newUser = await prisma.user.update({
         where: { id: existingUser.id },
         data: {
@@ -51,6 +51,7 @@ export async function POST(request: Request) {
           passwordHash,
         }
       });
+      console.log('Updated existing User in MongoDB Atlas:', newUser.id);
     } else {
       newUser = await prisma.user.create({
         data: {
@@ -61,6 +62,7 @@ export async function POST(request: Request) {
           role: 'USER',
         },
       });
+      console.log('Saved new User to MongoDB Atlas:', newUser.id);
     }
 
     return NextResponse.json({

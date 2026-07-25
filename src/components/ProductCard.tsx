@@ -111,6 +111,8 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
           <img 
             src={images[activeImgIdx]} 
             alt={product.name} 
+            loading="lazy"
+            decoding="async"
             style={{
               width: "100%",
               height: "100%",

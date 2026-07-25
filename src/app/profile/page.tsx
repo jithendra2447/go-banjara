@@ -61,7 +61,7 @@ function ProfilePageContent() {
   const [editPhone, setEditPhone] = useState('');
   const [editAddress, setEditAddress] = useState('');
   const [editPincode, setEditPincode] = useState('');
-  const [editDob, setEditDob] = useState('15/08/1997'); // Default date of birth
+  const [editDob, setEditDob] = useState('');
   const [editGender, setEditGender] = useState<'Male' | 'Female' | 'Others'>('Male'); // Default gender
   const [isEditing, setIsEditing] = useState(false);
   const [feedback, setFeedback] = useState({ type: '', message: '' });
@@ -69,13 +69,18 @@ function ProfilePageContent() {
   // Helper for DOB date picker conversion (DD/MM/YYYY <-> YYYY-MM-DD)
   const formatToInputDate = (dobStr: string) => {
     if (!dobStr) return '';
-    if (dobStr.includes('-')) return dobStr;
-    const parts = dobStr.split('/');
+    if (/^\d{4}-\d{2}-\d{2}$/.test(dobStr)) return dobStr;
+    const clean = dobStr.replace(/-/g, '/');
+    const parts = clean.split('/');
     if (parts.length === 3) {
-      const [day, month, year] = parts;
-      return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+      if (parts[0].length === 4) {
+        return `${parts[0]}-${parts[1].padStart(2, '0')}-${parts[2].padStart(2, '0')}`;
+      }
+      if (parts[2].length === 4) {
+        return `${parts[2]}-${parts[1].padStart(2, '0')}-${parts[0].padStart(2, '0')}`;
+      }
     }
-    return dobStr;
+    return '';
   };
 
   const formatFromInputDate = (isoStr: string) => {
@@ -100,25 +105,38 @@ function ProfilePageContent() {
     fullAddress: string;
   }>>([]);
 
-  // Hydrate addresses from localStorage on client mount (runs only once)
+  const [addressLoaded, setAddressLoaded] = useState(false);
+
+  // Hydrate addresses from localStorage for active user account only
   useEffect(() => {
-    const saved = localStorage.getItem('gb_saved_addresses');
+    if (!user?.email) {
+      setAddressList([]);
+      setAddressLoaded(true);
+      return;
+    }
+    const key = `gb_saved_addresses_${user.email}`;
+    const saved = localStorage.getItem(key);
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed) && parsed.length > 0) {
+        if (Array.isArray(parsed)) {
           setAddressList(parsed);
         }
       } catch (e) {
-        console.error('Failed to parse saved addresses from localStorage', e);
+        console.error('Failed to parse saved addresses', e);
       }
+    } else {
+      setAddressList([]);
     }
-  }, []);
+    setAddressLoaded(true);
+  }, [user?.email]);
 
-  // Persist addressList to localStorage whenever it changes
+  // Persist addressList to localStorage strictly for active user
   useEffect(() => {
-    localStorage.setItem('gb_saved_addresses', JSON.stringify(addressList));
-  }, [addressList]);
+    if (!addressLoaded || !user?.email) return;
+    const key = `gb_saved_addresses_${user.email}`;
+    localStorage.setItem(key, JSON.stringify(addressList));
+  }, [addressList, addressLoaded, user?.email]);
 
   const [openAddressMenuId, setOpenAddressMenuId] = useState<string | null>(null);
   const [isAddingAddress, setIsAddingAddress] = useState(false);
@@ -159,28 +177,74 @@ function ProfilePageContent() {
     }
   }, [searchParams, router]);
 
-  // Sync initial form values from user
+  // Sync initial form values from user & fetch full details from MongoDB Atlas
   useEffect(() => {
-    setEditName(user?.name || '');
-    setEditEmail(user?.email || '');
-    const rawPhone = user?.phone || '';
-    const cleanP = rawPhone.replace(/[^0-9]/g, '');
-    setEditPhone(cleanP === '9999999999' || cleanP === '9492906356' ? '' : rawPhone);
-    setEditAddress(user?.address || '');
-    setEditPincode(user?.pincode || '');
-    setEditDob(user?.dob || '');
-    setEditGender(((user?.gender as any) || 'Male') as 'Male' | 'Female' | 'Others');
-  }, [user]);
+    let activeUser = user;
+    if (!activeUser && typeof window !== 'undefined') {
+      try {
+        const saved = localStorage.getItem('gb_user');
+        if (saved) activeUser = JSON.parse(saved);
+      } catch (e) {}
+    }
+
+    const emailToFetch = activeUser?.email;
+    const idToFetch = activeUser?.id;
+
+    const cleanPhoneDigits = (p: any) => {
+      if (!p) return '';
+      const digits = String(p).replace(/\D/g, '');
+      return digits.length > 10 ? digits.slice(-10) : digits;
+    };
+
+    if (activeUser) {
+      if (activeUser.name) setEditName(activeUser.name);
+      if (activeUser.email) setEditEmail(activeUser.email);
+      setEditPhone(cleanPhoneDigits(activeUser.phone || ''));
+      if (activeUser.address) setEditAddress(activeUser.address);
+      if (activeUser.pincode) setEditPincode(activeUser.pincode);
+      if (activeUser.dob) setEditDob(activeUser.dob);
+      if (activeUser.gender) setEditGender(activeUser.gender as any);
+    }
+
+    if (!emailToFetch && !idToFetch) return;
+
+    // Always fetch latest profile from MongoDB Atlas
+    const query = emailToFetch ? `email=${encodeURIComponent(emailToFetch)}` : `userId=${idToFetch}`;
+    fetch(`/api/auth/profile?${query}`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.success && data.user) {
+          if (data.user.name) setEditName(data.user.name);
+          if (data.user.email) setEditEmail(data.user.email);
+          const pVal = cleanPhoneDigits(data.user.phone) || cleanPhoneDigits(activeUser?.phone) || '';
+          setEditPhone(pVal);
+          if (data.user.address) setEditAddress(data.user.address);
+          if (data.user.pincode) setEditPincode(data.user.pincode);
+          if (data.user.dob) setEditDob(data.user.dob);
+          if (data.user.gender) setEditGender(data.user.gender);
+
+          // Update global user context & localStorage so phone persists everywhere
+          login({
+            ...(activeUser || {}),
+            ...data.user,
+            phone: pVal,
+          });
+        }
+      })
+      .catch(err => console.warn('Failed to fetch profile from MongoDB Atlas:', err));
+  }, [user?.email, user?.id]);
 
   // Load orders history from MongoDB Atlas and local storage
   useEffect(() => {
-    const activeEmail = user?.email || 'jv@geonixa.com';
-    const activePhone = user?.phone || '9492906356';
+    const activeEmail = user?.email;
+    const activePhone = user?.phone;
     const activeId = user?.id;
+
+    if (!activeEmail && !activeId) return;
 
     const fetchMongoDBOrders = async () => {
       try {
-        const queryParam = activeId ? `userId=${activeId}` : `email=${activeEmail}`;
+        const queryParam = activeId ? `userId=${activeId}` : `email=${encodeURIComponent(activeEmail!)}`;
         const res = await fetch(`/api/user/orders?${queryParam}`);
         const data = await res.json();
 
@@ -3331,7 +3395,11 @@ function ProfilePageContent() {
                             {/* Add to Cart Button (52px x 47px, padding: 8px 12px, radius: 4px) */}
                             <button
                               type="button"
-                              onClick={() => addToCart(item, item.type || 'shop', undefined, undefined, undefined, itemQty)}
+                              onClick={() => {
+                                addToCart(item, item.type || 'shop', undefined, undefined, undefined, itemQty);
+                                toggleWishlist(item);
+                                setCartOpen(true);
+                              }}
                               style={{
                                 width: "52px",
                                 height: "47px",

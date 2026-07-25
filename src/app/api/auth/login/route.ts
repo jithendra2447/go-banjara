@@ -25,66 +25,71 @@ export async function POST(request: Request) {
     const cleanPhone = loginKey.replace(/\D/g, '');
     const last10 = cleanPhone.slice(-10);
 
-    // Query candidate users matching email or phone with fast indexed query
-    let candidateUsers: any[] = [];
-    try {
-      candidateUsers = await Promise.race([
-        prisma.user.findMany({
-          where: {
-            OR: [
-              { email: cleanInput },
-              ...(cleanPhone.length >= 10 ? [
-                { phone: cleanPhone },
-                { phone: last10 },
-                { phone: `+91${last10}` },
-                { phone: `+91 ${last10}` },
-              ] : [])
-            ]
-          },
-          orderBy: { updatedAt: 'desc' }
-        }),
-        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB_TIMEOUT')), 1800))
-      ]);
-    } catch (dbErr) {
-      console.warn('Login DB query fallback:', dbErr);
-    }
-
-    const inputHash = await hashPassword(password);
-
-    if (candidateUsers && candidateUsers.length > 0) {
-      const matchedUser = candidateUsers.find((u: any) => u.passwordHash === inputHash || u.role === 'USER');
-      if (matchedUser) {
-        return NextResponse.json({
-          success: true,
-          message: 'Login successful.',
-          user: {
-            id: matchedUser.id,
-            name: matchedUser.name,
-            email: matchedUser.email,
-            phone: matchedUser.phone || cleanPhone,
-            dob: matchedUser.dob || undefined,
-            gender: matchedUser.gender || undefined,
-            address: matchedUser.address || undefined,
-            pincode: matchedUser.pincode || undefined,
-            role: matchedUser.role || 'USER',
-          },
-        });
+    // Query user matching email or phone directly from MongoDB Atlas
+    const userRecord = await prisma.user.findFirst({
+      where: {
+        OR: [
+          { email: cleanInput },
+          ...(cleanPhone.length >= 10 ? [
+            { phone: cleanPhone },
+            { phone: last10 },
+            { phone: `+91${last10}` },
+            { phone: `+91 ${last10}` },
+          ] : [])
+        ]
       }
+    });
+
+    // If user is not found in MongoDB Atlas, reject login request cleanly
+    if (!userRecord) {
+      return NextResponse.json(
+        { success: false, error: 'No account found with this email/mobile number. Please sign up first.' },
+        { status: 404 }
+      );
     }
 
-    // Fallback user login when database is unreachable or registering user on the fly
-    const displayName = cleanInput.includes('@') ? cleanInput.split('@')[0] : 'Jithendra V';
-    const userEmail = cleanInput.includes('@') ? cleanInput : `jithendra_${cleanPhone}@gobanjara.com`;
+    // Verify password if a custom password hash is set
+    const inputHash = await hashPassword(password);
+    if (
+      userRecord.passwordHash &&
+      userRecord.passwordHash !== 'USER_SIGNED_UP' &&
+      userRecord.passwordHash !== 'USER_PROFILE_UPDATED' &&
+      userRecord.passwordHash !== inputHash
+    ) {
+      return NextResponse.json(
+        { success: false, error: 'Incorrect password. Please check your credentials and try again.' },
+        { status: 401 }
+      );
+    }
+
+    const isAdminEmail = cleanInput === 'gobanjara.trd@gmail.com' || cleanInput === 'admin@gobanjara.com';
+
+    // Persist latest login timestamp directly to MongoDB Atlas
+    try {
+      await prisma.user.update({
+        where: { id: userRecord.id },
+        data: {
+          lastLoginAt: new Date(),
+        },
+      });
+    } catch (updateErr) {
+      console.warn('MongoDB Atlas lastLoginAt update notice:', updateErr);
+    }
 
     return NextResponse.json({
       success: true,
       message: 'Login successful.',
       user: {
-        id: `usr_${cleanPhone || Date.now()}`,
-        name: displayName,
-        email: userEmail,
-        phone: cleanPhone || '',
-        role: 'USER',
+        id: userRecord.id,
+        name: userRecord.name,
+        email: userRecord.email,
+        phone: userRecord.phone || cleanPhone || '',
+        dob: userRecord.dob || '',
+        gender: userRecord.gender || 'Male',
+        address: userRecord.address || '',
+        pincode: userRecord.pincode || '',
+        role: isAdminEmail ? 'ADMIN' : (userRecord.role || 'USER'),
+        lastLoginAt: new Date().toISOString(),
       },
     });
   } catch (error: any) {

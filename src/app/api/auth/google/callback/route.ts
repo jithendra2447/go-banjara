@@ -9,7 +9,7 @@ export async function GET(request: Request) {
     return NextResponse.redirect(new URL('/?auth_error=google_cancelled', request.url));
   }
 
-  const clientId = process.env.GOOGLE_CLIENT_ID || '';
+  const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || process.env.GOOGLE_CLIENT_ID || '';
   const clientSecret = process.env.GOOGLE_CLIENT_SECRET || '';
   const redirectUri = `${new URL(request.url).origin}/api/auth/google/callback`;
 
@@ -47,30 +47,20 @@ export async function GET(request: Request) {
 
     // 3. Save REAL user profile in MongoDB Atlas database
     let user = null;
-    try {
-      user = await prisma.user.findUnique({
-        where: { email: googleUser.email },
-      });
-
-      if (!user) {
-        user = await prisma.user.create({
-          data: {
-            email: googleUser.email,
-            name: googleUser.name || 'Google User',
-            passwordHash: 'GOOGLE_OAUTH_VERIFIED',
-            role: 'USER',
-          },
-        });
-      }
-    } catch (dbErr) {
-      console.warn('Database user sync fallback active:', dbErr);
-      user = {
-        id: `usr_google_${Date.now()}`,
-        name: googleUser.name || 'Google User',
+    user = await prisma.user.upsert({
+      where: { email: googleUser.email },
+      update: {
+        name: googleUser.name || undefined,
+        lastLoginAt: new Date(),
+      },
+      create: {
         email: googleUser.email,
+        name: googleUser.name || 'Google User',
+        passwordHash: 'GOOGLE_OAUTH_VERIFIED',
         role: 'USER',
-      };
-    }
+        lastLoginAt: new Date(),
+      },
+    });
 
     // Redirect user back to app homepage with session params
     const successUrl = new URL('/profile', request.url);

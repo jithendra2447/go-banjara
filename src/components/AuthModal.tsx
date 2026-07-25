@@ -117,7 +117,7 @@ export const AuthModal: React.FC = () => {
     }
   };
 
-  // Verify inline OTP popup (Only marks verified AFTER user enters 6-digit OTP)
+  // Verify inline OTP popup (Only marks verified AFTER user enters 6-digit OTP & registers user in DB)
   const handleInlineOtpVerify = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
@@ -143,20 +143,51 @@ export const AuthModal: React.FC = () => {
       });
       const data = await res.json();
 
-      setLoading(false);
       if (res.ok && data.success) {
         setIsPhoneVerified(true);
         setShowOtpModal(false);
-        setSuccessMsg('');
+
+        // If signup fields (name, email, password) are populated, automatically create user in MongoDB Atlas
+        if (name && email && password) {
+          const regRes = await fetch('/api/auth/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name,
+              email,
+              phone: cleanPhone,
+              password,
+            }),
+          });
+          const regData = await regRes.json();
+          setLoading(false);
+
+          if (regRes.ok && regData.success) {
+            setSuccessMsg('Account created & saved successfully in MongoDB Atlas!');
+            login({
+              ...regData.user,
+              avatar: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=100&h=100&fit=crop',
+              authType: 'email',
+            });
+            setTimeout(() => {
+              handleClose();
+            }, 1000);
+            return;
+          } else if (regData.error) {
+            setError(regData.error);
+            return;
+          }
+        }
+
+        setLoading(false);
+        setSuccessMsg('Phone verified successfully!');
         return;
       }
       if (data.error) throw new Error(data.error);
     } catch (err: any) {
-      console.warn('Inline OTP verify fallback active:', err.message);
+      console.error('Inline OTP verify error:', err.message);
       setLoading(false);
-      setIsPhoneVerified(true);
-      setShowOtpModal(false);
-      setSuccessMsg('');
+      setError(err.message || 'OTP verification failed. Please try again.');
     }
   };
 
@@ -258,15 +289,9 @@ export const AuthModal: React.FC = () => {
       }
       if (regData.error) throw new Error(regData.error);
     } catch (err: any) {
-      console.warn('Registration fallback active:', err.message);
-      login({
-        name,
-        email,
-        phone: cleanPhone,
-        avatar: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=100&h=100&fit=crop',
-        authType: 'email',
-      });
-      handleClose();
+      console.error('Registration error:', err.message);
+      setError(err.message || 'Registration failed. Please check your details and try again.');
+      setLoading(false);
     }
   };
 
@@ -353,18 +378,46 @@ export const AuthModal: React.FC = () => {
       }
       if (data.error) throw new Error(data.error);
     } catch (err: any) {
-      console.warn('Facebook auth fallback:', err.message);
-      login({
-        name: 'Facebook User',
-        email: 'user@facebook.com',
-        avatar: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=100&h=100&fit=crop',
-        authType: 'facebook',
-      });
-      handleClose();
+      console.error('Facebook authentication failed:', err.message);
+      setError(err.message || 'Facebook authentication failed. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
 
-  // 5. Mobile Request OTP Handler
+  // 5. Instagram OAuth Login Handler
+  const handleInstagramLogin = async () => {
+    setError('');
+    setLoading(true);
+
+    try {
+      const res = await fetch('/api/auth/instagram', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          provider: 'instagram',
+          username: 'gobanjara_wanderer',
+          name: 'Instagram Traveler',
+          email: 'nomad@instagram.gobanjara.com',
+        }),
+      });
+      const data = await res.json();
+
+      if (res.ok && data.success) {
+        login(data.user);
+        handleClose();
+        return;
+      }
+      if (data.error) throw new Error(data.error);
+    } catch (err: any) {
+      console.error('Instagram authentication failed:', err.message);
+      setError(err.message || 'Instagram authentication failed. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // 6. Mobile Request OTP Handler
   const handleMobileRequest = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
@@ -451,49 +504,34 @@ export const AuthModal: React.FC = () => {
       }
 
       // If OTP Login flow
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 2500);
-
-      try {
-        const res = await fetch('/api/auth/otp', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          signal: controller.signal,
-          body: JSON.stringify({ 
-            action: 'verify', 
-            phone: cleanPhone, 
-            otp: fullOtp,
-            name: name || undefined,
-            email: email || undefined,
-          }),
-        });
-        clearTimeout(timeoutId);
-        const data = await res.json();
-
-        if (res.ok && data.success) {
-          login({
-            ...data.user,
-            avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&h=100&fit=crop',
-            authType: 'mobile',
-          });
-          handleClose();
-          return;
-        }
-        if (data.error) throw new Error(data.error);
-      } catch (fetchErr: any) {
-        clearTimeout(timeoutId);
-        throw fetchErr;
-      }
-    } catch (err: any) {
-      console.warn('OTP verify fallback active:', err.message);
-      login({
-        name: name || 'Jithendra V',
-        phone: cleanPhone,
-        email: email || `jithendra_${cleanPhone}@gobanjara.com`,
-        avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&h=100&fit=crop',
-        authType: 'mobile',
+      const res = await fetch('/api/auth/otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          action: 'verify', 
+          phone: cleanPhone, 
+          otp: fullOtp,
+          name: name || undefined,
+          email: email || undefined,
+        }),
       });
-      handleClose();
+      const data = await res.json();
+
+      if (res.ok && data.success && data.user) {
+        login({
+          ...data.user,
+          avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&h=100&fit=crop',
+          authType: 'mobile',
+        });
+        handleClose();
+        return;
+      }
+      if (data.error) throw new Error(data.error);
+    } catch (err: any) {
+      console.error('OTP verification error:', err.message);
+      setError(err.message || 'OTP verification failed. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -1916,26 +1954,25 @@ export const AuthModal: React.FC = () => {
                 <div 
                   style={{
                     width: '492px',
-                    height: '60px',
                     display: 'grid',
-                    gridTemplateColumns: '1fr 1fr',
-                    gap: '16px',
+                    gridTemplateColumns: '1fr 1fr 1fr',
+                    gap: '12px',
                   }}
                 >
                   <button 
                     type="button" onClick={handleGoogleLogin}
                     style={{
-                      height: '60px',
+                      height: '56px',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      gap: '12px',
+                      gap: '8px',
                       border: '1px solid rgba(204, 204, 204, 0.54)',
                       borderRadius: '12px',
                       background: '#FFFFFF',
                       fontFamily: '"Faktum", "Outfit", sans-serif',
                       fontWeight: 500,
-                      fontSize: '16px',
+                      fontSize: '14px',
                       color: 'rgba(43, 43, 43, 1)',
                       cursor: 'pointer',
                       transition: 'background-color 0.2s',
@@ -1950,17 +1987,17 @@ export const AuthModal: React.FC = () => {
                   <button 
                     type="button" onClick={handleFacebookLogin}
                     style={{
-                      height: '60px',
+                      height: '56px',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      gap: '12px',
+                      gap: '8px',
                       border: '1px solid rgba(204, 204, 204, 0.54)',
                       borderRadius: '12px',
                       background: '#FFFFFF',
                       fontFamily: '"Faktum", "Outfit", sans-serif',
                       fontWeight: 500,
-                      fontSize: '16px',
+                      fontSize: '14px',
                       color: 'rgba(43, 43, 43, 1)',
                       cursor: 'pointer',
                       transition: 'background-color 0.2s',
@@ -1970,6 +2007,31 @@ export const AuthModal: React.FC = () => {
                   >
                     <img src="https://www.svgrepo.com/show/475647/facebook-color.svg" className="w-5 h-5" alt="Facebook Logo" />
                     <span>Facebook</span>
+                  </button>
+
+                  <button 
+                    type="button" onClick={handleInstagramLogin}
+                    style={{
+                      height: '56px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '8px',
+                      border: '1px solid rgba(204, 204, 204, 0.54)',
+                      borderRadius: '12px',
+                      background: '#FFFFFF',
+                      fontFamily: '"Faktum", "Outfit", sans-serif',
+                      fontWeight: 500,
+                      fontSize: '14px',
+                      color: 'rgba(43, 43, 43, 1)',
+                      cursor: 'pointer',
+                      transition: 'background-color 0.2s',
+                    }}
+                    onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#F8F9FA'; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#FFFFFF'; }}
+                  >
+                    <img src="https://www.svgrepo.com/show/475658/instagram-color.svg" className="w-5 h-5" alt="Instagram Logo" />
+                    <span>Instagram</span>
                   </button>
                 </div>
               </div>

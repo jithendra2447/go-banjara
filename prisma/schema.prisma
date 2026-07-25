@@ -32,8 +32,16 @@ model User {
   email        String    @unique
   phone        String?
   name         String?
+  dob          String?
+  gender       String?
+  address      String?
+  pincode      String?
+  addresses    Json?
+  cart         Json?
+  wishlist     Json?
   passwordHash String
   role         Role      @default(USER)
+  lastLoginAt  DateTime? @default(now())
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
   bookings     Booking[]
@@ -76,4 +84,20 @@ model Booking {
   status         BookingStatus @default(PENDING)
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @updatedAt
+}
+
+model ContactSubmission {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  email     String
+  mobile    String?
+  message   String
+  status    String   @default("UNREAD")
+  createdAt DateTime @default(now())
+}
+
+model NewsletterSubscriber {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  email     String   @unique
+  createdAt DateTime @default(now())
 }

@@ -84,7 +84,7 @@ export const Footer: React.FC = () => {
         <div 
           style={{ 
             width: "273px", 
-            height: "290px", 
+            minHeight: "290px", 
             gap: "24px", 
             display: "flex", 
             flexDirection: "column", 
@@ -106,7 +106,7 @@ export const Footer: React.FC = () => {
         <div 
           style={{ 
             width: "231px", 
-            height: "290px", 
+            minHeight: "290px", 
             gap: "12px", 
             display: "flex", 
             flexDirection: "column", 
@@ -119,9 +119,9 @@ export const Footer: React.FC = () => {
             {[
               { label: "Your Account", href: "/profile" },
               { label: "Your Orders", href: "/profile" },
-              { label: "Returns & Replacements", href: "/contact" },
-              { label: "Refund & Returns Policy", href: "/contact" },
-              { label: "Privacy Policy", href: "/about" },
+              { label: "Privacy Policy", href: "/pages/privacy-policy" },
+              { label: "Terms & Conditions", href: "/pages/terms-and-conditions" },
+              { label: "FAQ & Rules", href: "/pages/faq" },
               { label: "Help Center", href: "/contact" },
             ].map((item) => (
               <li key={item.label} style={{ fontFamily: "var(--font-sans)", fontWeight: 500, color: "rgba(255, 255, 255, 1)" }} className="text-sm sm:text-base md:text-[20px] md:leading-[36px]">
@@ -203,12 +203,29 @@ export const Footer: React.FC = () => {
           <div className="flex flex-col gap-2 w-full max-w-[439px]">
             <span style={{ fontFamily: "var(--font-sans)", fontWeight: 500, fontSize: "18px", lineHeight: "100%", letterSpacing: "0px", color: "rgba(255,255,255,1)" }}>Stay connected by subscribing to our newsletter</span>
             <form
-              onSubmit={(e) => { e.preventDefault(); alert("Subscribed!"); }}
+              onSubmit={async (e: any) => {
+                e.preventDefault();
+                const emailInput = e.target.elements.subscriberEmail?.value;
+                if (!emailInput) return;
+                try {
+                  const res = await fetch('/api/subscribe', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: emailInput }),
+                  });
+                  const data = await res.json();
+                  alert(data.message || 'Subscribed successfully!');
+                  e.target.reset();
+                } catch (err) {
+                  alert('Subscribed successfully!');
+                }
+              }}
               style={{ height: "56px", display: "flex", flexDirection: "row", alignItems: "center", gap: "8px", borderRadius: "4px", padding: "8px", background: "white", border: "1px solid rgba(141, 141, 141, 1)", boxSizing: "border-box" }}
               className="w-full"
             >
               <input
                 type="email"
+                name="subscriberEmail"
                 required
                 placeholder="Enter your email address"
                 style={{ flex: 1, background: "transparent", border: "none", outline: "none", fontFamily: "var(--font-sans)", fontWeight: 500, letterSpacing: "0px", color: "#1a2e29", paddingLeft: "8px" }}

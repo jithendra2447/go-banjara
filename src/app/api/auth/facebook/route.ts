@@ -10,31 +10,20 @@ export async function POST(request: Request) {
     const userName = name || 'Facebook User';
     const userAvatar = avatar || 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=100&h=100&fit=crop';
 
-    let user = null;
-    try {
-      user = await prisma.user.findUnique({
-        where: { email: userEmail },
-      });
-
-      if (!user) {
-        user = await prisma.user.create({
-          data: {
-            email: userEmail,
-            name: userName,
-            passwordHash: 'FACEBOOK_OAUTH_VERIFIED',
-            role: 'USER',
-          },
-        });
-      }
-    } catch (dbErr) {
-      console.warn('Database user sync fallback active:', dbErr);
-      user = {
-        id: `usr_fb_${Date.now()}`,
-        name: userName,
+    const user = await prisma.user.upsert({
+      where: { email: userEmail },
+      update: {
+        name: userName || undefined,
+        lastLoginAt: new Date(),
+      },
+      create: {
         email: userEmail,
+        name: userName,
+        passwordHash: 'FACEBOOK_OAUTH_VERIFIED',
         role: 'USER',
-      };
-    }
+        lastLoginAt: new Date(),
+      },
+    });
 
     return NextResponse.json({
       success: true,

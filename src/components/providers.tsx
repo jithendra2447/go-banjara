@@ -49,56 +49,98 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setCheckoutOpen(false);
   }, [pathname]);
 
+  const [initialLoaded, setInitialLoaded] = useState(false);
+
   // Load cart, wishlist, and user from LocalStorage on mount
   useEffect(() => {
-    setMounted(true);
-    const savedCart = localStorage.getItem('gb_cart');
-    if (savedCart) {
+    const savedUserStr = localStorage.getItem('gb_user');
+    let loadedUser = null;
+    if (savedUserStr) {
       try {
-        setCart(JSON.parse(savedCart));
-      } catch (e) {
-        console.error('Failed to parse cart', e);
-      }
-    }
-    const savedWishlist = localStorage.getItem('gb_wishlist');
-    if (savedWishlist) {
-      try {
-        setWishlist(JSON.parse(savedWishlist));
-      } catch (e) {
-        console.error('Failed to parse wishlist', e);
-      }
-    }
-    const savedUser = localStorage.getItem('gb_user');
-    if (savedUser) {
-      try {
-        setUser(JSON.parse(savedUser));
+        loadedUser = JSON.parse(savedUserStr);
+        setUser(loadedUser);
       } catch (e) {
         console.error('Failed to parse user', e);
       }
     }
+
+    const storageSuffix = loadedUser?.email ? `_${loadedUser.email}` : '_guest';
+    const savedCart = localStorage.getItem(`gb_cart${storageSuffix}`);
+    if (savedCart) {
+      try {
+        const parsedCart = JSON.parse(savedCart);
+        if (Array.isArray(parsedCart)) setCart(parsedCart);
+      } catch (e) {
+        console.error('Failed to parse cart', e);
+      }
+    }
+
+    const savedWishlist = localStorage.getItem(`gb_wishlist${storageSuffix}`);
+    if (savedWishlist) {
+      try {
+        const parsedWishlist = JSON.parse(savedWishlist);
+        if (Array.isArray(parsedWishlist)) setWishlist(parsedWishlist);
+      } catch (e) {
+        console.error('Failed to parse wishlist', e);
+      }
+    }
+
+    setMounted(true);
+    setInitialLoaded(true);
   }, []);
 
   // Save cart to LocalStorage when it changes
   useEffect(() => {
-    if (mounted) {
-      localStorage.setItem('gb_cart', JSON.stringify(cart));
+    if (mounted && initialLoaded) {
+      const key = user?.email ? `gb_cart_${user.email}` : 'gb_cart_guest';
+      localStorage.setItem(key, JSON.stringify(cart));
     }
-  }, [cart, mounted]);
+  }, [cart, mounted, initialLoaded, user?.email]);
 
-  // Save wishlist to LocalStorage when it changes
+  // Save wishlist to LocalStorage and sync to database when it changes
   useEffect(() => {
-    if (mounted) {
-      localStorage.setItem('gb_wishlist', JSON.stringify(wishlist));
+    if (mounted && initialLoaded) {
+      const key = user?.email ? `gb_wishlist_${user.email}` : 'gb_wishlist_guest';
+      localStorage.setItem(key, JSON.stringify(wishlist));
+
+      if (user?.email) {
+        fetch('/api/auth/profile', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: user.email, wishlist }),
+        }).catch((err) => console.warn('Wishlist DB sync notice:', err));
+      }
     }
-  }, [wishlist, mounted]);
+  }, [wishlist, mounted, initialLoaded, user?.email]);
 
   const login = (userData: any) => {
     setUser(userData);
     localStorage.setItem('gb_user', JSON.stringify(userData));
+
+    // Instantly load account-scoped cart and wishlist for this user
+    if (userData?.email) {
+      try {
+        const savedCart = localStorage.getItem(`gb_cart_${userData.email}`);
+        if (savedCart) setCart(JSON.parse(savedCart));
+
+        const savedWishlist = localStorage.getItem(`gb_wishlist_${userData.email}`);
+        if (savedWishlist) {
+          setWishlist(JSON.parse(savedWishlist));
+        } else {
+          // If no account wishlist exists yet, inherit current guest wishlist
+          const guestWishlist = localStorage.getItem('gb_wishlist_guest');
+          if (guestWishlist) setWishlist(JSON.parse(guestWishlist));
+        }
+      } catch (e) {
+        console.error('Error hydrating user cart/wishlist on login:', e);
+      }
+    }
   };
 
   const logout = () => {
     setUser(null);
+    setCart([]);
+    setWishlist([]);
     localStorage.removeItem('gb_user');
   };
 

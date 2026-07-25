@@ -12,16 +12,97 @@ export const CheckoutModal: React.FC = () => {
     cartTotal,
     clearCart,
     user,
+    setAuthOpen,
   } = useCart();
 
-  const [step, setStep] = useState<'checkout' | 'processing' | 'success'>('checkout');
+  const [step, setStep] = useState<'checkout' | 'add_address' | 'processing' | 'success'>('checkout');
   const [razorpayPaymentId, setRazorpayPaymentId] = useState('');
   const [loading, setLoading] = useState(false);
+
+  // Address state management
+  const [addresses, setAddresses] = useState<Array<{
+    id: string;
+    type: string;
+    name: string;
+    phone: string;
+    fullAddress: string;
+  }>>([]);
+  const [selectedAddressId, setSelectedAddressId] = useState<string>('');
+
+  // Address Form State
+  const [addrName, setAddrName] = useState('');
+  const [addrPhone, setAddrPhone] = useState('');
+  const [addrPincode, setAddrPincode] = useState('');
+  const [addrStreet, setAddrStreet] = useState('');
+  const [addrCity, setAddrCity] = useState('');
+  const [addrType, setAddrType] = useState<'HOME' | 'WORK'>('HOME');
 
   const gst = Math.round(cartTotal * 0.05);
   const grandTotal = cartTotal + gst;
 
+  // Hydrate user addresses on checkout open
+  React.useEffect(() => {
+    if (isCheckoutOpen && user?.email) {
+      const key = `gb_saved_addresses_${user.email}`;
+      const saved = localStorage.getItem(key);
+      let list: any[] = [];
+      if (saved) {
+        try {
+          list = JSON.parse(saved);
+        } catch (e) {}
+      }
+      if (list.length === 0 && user.address) {
+        list = [{
+          id: `addr_${Date.now()}`,
+          type: 'HOME',
+          name: user.name || 'Valued Guest',
+          phone: user.phone || '',
+          fullAddress: `${user.address} ${user.pincode || ''}`.trim(),
+        }];
+      }
+      setAddresses(list);
+      if (list.length > 0) {
+        setSelectedAddressId(list[0].id);
+      }
+      setAddrName(user.name || '');
+      setAddrPhone(user.phone || '');
+    }
+  }, [isCheckoutOpen, user]);
+
   if (!isCheckoutOpen) return null;
+
+  const handleSaveNewAddress = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!addrStreet || !addrPincode) return;
+
+    const newAddrObj = {
+      id: `addr_${Date.now()}`,
+      type: addrType,
+      name: addrName || user?.name || 'Valued Guest',
+      phone: addrPhone || user?.phone || '',
+      fullAddress: `${addrStreet}, ${addrCity} - ${addrPincode}`.trim(),
+    };
+
+    const updated = [...addresses, newAddrObj];
+    setAddresses(updated);
+    setSelectedAddressId(newAddrObj.id);
+
+    if (user?.email) {
+      localStorage.setItem(`gb_saved_addresses_${user.email}`, JSON.stringify(updated));
+      // Save address to MongoDB Atlas
+      fetch('/api/auth/profile', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: user.email,
+          address: newAddrObj.fullAddress,
+          pincode: addrPincode,
+        }),
+      }).catch(err => console.warn('Address sync error:', err));
+    }
+
+    setStep('checkout');
+  };
 
   const loadRazorpayScript = () => {
     return new Promise((resolve) => {
@@ -44,7 +125,7 @@ export const CheckoutModal: React.FC = () => {
   ) => {
     // Persist order to MongoDB Atlas database via /api/payment/verify
     try {
-      await fetch('/api/payment/verify', {
+      const verifyRes = await fetch('/api/payment/verify', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -63,6 +144,10 @@ export const CheckoutModal: React.FC = () => {
             : undefined,
         }),
       });
+      const verifyData = await verifyRes.json();
+      if (verifyData.orderId) {
+        setRazorpayPaymentId(paymentId);
+      }
     } catch (err) {
       console.warn('MongoDB order persistence notice:', err);
     }
@@ -148,62 +233,60 @@ export const CheckoutModal: React.FC = () => {
       });
       const orderData = await res.json();
 
+      if (orderData.error || !orderData.success) {
+        throw new Error(orderData.error || orderData.message || 'Failed to initialize Razorpay checkout.');
+      }
+
       if (orderData.success && orderData.orderId && orderData.keyId) {
         const scriptLoaded = await loadRazorpayScript();
-        if (scriptLoaded && (window as any).Razorpay) {
-          const options = {
-            key: orderData.keyId,
-            amount: orderData.amount,
-            currency: orderData.currency || 'INR',
-            name: 'Go Banjara',
-            description: 'Payment for Travel & Lifestyle Order',
-            image: '/logo.png',
-            order_id: orderData.orderId,
-            handler: async function (response: any) {
-              setStep('processing');
-              const paymentId = response.razorpay_payment_id || `pay_${Date.now()}`;
-              setRazorpayPaymentId(paymentId);
-
-              // Verify signature & save order in MongoDB
-              await finalizePaymentVerification(
-                response.razorpay_order_id || orderData.orderId,
-                paymentId,
-                response.razorpay_signature || 'verified_signature'
-              );
-            },
-            prefill: {
-              name: user?.name || '',
-              email: user?.email || '',
-              contact: user?.phone || '',
-            },
-            theme: {
-              color: '#1D493E',
-            },
-            modal: {
-              ondismiss: function () {
-                setLoading(false);
-              },
-            },
-          };
-
-          const razorpayInstance = new (window as any).Razorpay(options);
-          razorpayInstance.open();
-          return;
+        if (!scriptLoaded || !(window as any).Razorpay) {
+          throw new Error('Failed to load Razorpay SDK script.');
         }
-      }
-    } catch (err) {
-      console.warn('Razorpay live checkout fallback active:', err);
-    }
 
-    // Fallback payment process if SDK or key sandbox
-    setStep('processing');
-    const generatedPayId = `pay_${Date.now()}_${Math.floor(1000 + Math.random() * 9000)}`;
-    setRazorpayPaymentId(generatedPayId);
-    await finalizePaymentVerification(
-      `order_${Date.now()}`,
-      generatedPayId,
-      'verified_signature'
-    );
+        const options = {
+          key: orderData.keyId,
+          amount: orderData.amount,
+          currency: orderData.currency || 'INR',
+          name: 'Go Banjara',
+          description: 'Payment for Travel & Lifestyle Order',
+          image: '/logo.png',
+          order_id: orderData.orderId,
+          handler: async function (response: any) {
+            setStep('processing');
+            const paymentId = response.razorpay_payment_id;
+            setRazorpayPaymentId(paymentId);
+
+            // Verify signature & save order in MongoDB Atlas
+            await finalizePaymentVerification(
+              response.razorpay_order_id || orderData.orderId,
+              paymentId,
+              response.razorpay_signature
+            );
+          },
+          prefill: {
+            name: user?.name || '',
+            email: user?.email || '',
+            contact: user?.phone || '',
+          },
+          theme: {
+            color: '#1D493E',
+          },
+          modal: {
+            ondismiss: function () {
+              setLoading(false);
+            },
+          },
+        };
+
+        const razorpayInstance = new (window as any).Razorpay(options);
+        razorpayInstance.open();
+        return;
+      }
+    } catch (err: any) {
+      console.error('Razorpay payment error:', err);
+      alert(`Payment Error: ${err.message || 'Payment initialization failed. Please check your Razorpay API keys.'}`);
+      setLoading(false);
+    }
   };
 
   const handleFinish = () => {
@@ -255,8 +338,45 @@ export const CheckoutModal: React.FC = () => {
               </button>
             </div>
 
+            {/* Delivery Address Section */}
+            <div className="space-y-2">
+              <label style={{ fontFamily: '"Fraunces", serif', color: '#1D493E' }} className="text-sm font-bold block">
+                Shipping & Delivery Address
+              </label>
+              {addresses.length > 0 ? (
+                <div className="bg-[#F4F1EA] border border-[#E5E0D5] rounded-xl p-3.5 flex justify-between items-center text-xs">
+                  <div>
+                    <span className="font-bold text-[#1D493E] block">
+                      Deliver To: {addresses.find(a => a.id === selectedAddressId)?.name || user?.name} ({addresses.find(a => a.id === selectedAddressId)?.phone || user?.phone})
+                    </span>
+                    <span className="text-[#526E65] font-medium block mt-0.5">
+                      {addresses.find(a => a.id === selectedAddressId)?.fullAddress}
+                    </span>
+                  </div>
+                  <button 
+                    type="button" 
+                    onClick={() => setStep('add_address')} 
+                    className="text-[#FF5A36] font-bold text-xs hover:underline cursor-pointer ml-2 whitespace-nowrap"
+                  >
+                    + Change / Add
+                  </button>
+                </div>
+              ) : (
+                <div className="bg-[#FFF4F2] border border-[#FFD0C7] rounded-xl p-3.5 flex justify-between items-center text-xs">
+                  <span className="font-bold text-[#D9381E]">⚠️ Delivery address required before checkout</span>
+                  <button 
+                    type="button" 
+                    onClick={() => setStep('add_address')} 
+                    className="bg-[#FF5A36] text-white px-3 py-1.5 rounded-lg font-bold cursor-pointer hover:bg-[#e04726]"
+                  >
+                    + Add Address
+                  </button>
+                </div>
+              )}
+            </div>
+
             {/* Cart Items Review */}
-            <div className="space-y-3 max-h-48 overflow-y-auto pr-1">
+            <div className="space-y-3 max-h-36 overflow-y-auto pr-1">
               {cart.map((item) => (
                 <div 
                   key={`${item.id}-${item.date || ''}`} 
@@ -324,9 +444,122 @@ export const CheckoutModal: React.FC = () => {
               className="w-full hover:bg-[#15342c] font-bold text-sm transition duration-300 shadow-md flex items-center justify-center gap-2 cursor-pointer active:scale-98"
             >
               <ShieldCheck className="w-5 h-5 text-white" />
-              <span>Pay ₹{grandTotal.toLocaleString('en-IN')} via Razorpay</span>
+              <span>{addresses.length === 0 ? 'Add Address to Continue' : `Pay ₹${grandTotal.toLocaleString('en-IN')} via Razorpay`}</span>
             </button>
           </div>
+        )}
+
+        {step === 'add_address' && (
+          <form onSubmit={handleSaveNewAddress} className="p-6 md:p-8 text-left space-y-4">
+            <div className="flex justify-between items-center border-b border-[#E5E0D5] pb-3">
+              <h3 style={{ fontFamily: '"Fraunces", serif', color: '#1D493E' }} className="text-xl font-bold">
+                Add Delivery Address
+              </h3>
+              <button
+                type="button"
+                onClick={() => setStep('checkout')}
+                className="w-8 h-8 rounded-full bg-[#EFECE6] flex items-center justify-center text-[#1D493E]"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3 text-xs">
+              <div>
+                <label className="font-bold text-[#1D493E] block mb-1">Full Name *</label>
+                <input 
+                  type="text"
+                  required
+                  value={addrName}
+                  onChange={(e) => setAddrName(e.target.value)}
+                  placeholder="Receiver's Name"
+                  className="w-full h-10 border border-slate-300 rounded-lg px-3 outline-none"
+                />
+              </div>
+              <div>
+                <label className="font-bold text-[#1D493E] block mb-1">Mobile Number *</label>
+                <input 
+                  type="tel"
+                  required
+                  value={addrPhone}
+                  onChange={(e) => setAddrPhone(e.target.value)}
+                  placeholder="10-digit Mobile"
+                  className="w-full h-10 border border-slate-300 rounded-lg px-3 outline-none"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="font-bold text-[#1D493E] text-xs block mb-1">House / Flat No / Street Address *</label>
+              <input 
+                type="text"
+                required
+                value={addrStreet}
+                onChange={(e) => setAddrStreet(e.target.value)}
+                placeholder="H.No 45, Banjara Hills, Road No 4"
+                className="w-full h-10 border border-slate-300 rounded-lg px-3 text-xs outline-none"
+              />
+            </div>
+
+            <div className="grid grid-cols-2 gap-3 text-xs">
+              <div>
+                <label className="font-bold text-[#1D493E] block mb-1">City / Town *</label>
+                <input 
+                  type="text"
+                  required
+                  value={addrCity}
+                  onChange={(e) => setAddrCity(e.target.value)}
+                  placeholder="Hyderabad"
+                  className="w-full h-10 border border-slate-300 rounded-lg px-3 outline-none"
+                />
+              </div>
+              <div>
+                <label className="font-bold text-[#1D493E] block mb-1">Pincode *</label>
+                <input 
+                  type="text"
+                  required
+                  value={addrPincode}
+                  onChange={(e) => setAddrPincode(e.target.value)}
+                  placeholder="500034"
+                  className="w-full h-10 border border-slate-300 rounded-lg px-3 outline-none"
+                />
+              </div>
+            </div>
+
+            <div className="flex gap-4 items-center pt-2">
+              <label className="text-xs font-bold text-[#1D493E]">Address Type:</label>
+              <button
+                type="button"
+                onClick={() => setAddrType('HOME')}
+                className={`px-3 py-1.5 rounded-lg text-xs font-bold cursor-pointer ${addrType === 'HOME' ? 'bg-[#1D493E] text-white' : 'bg-slate-200 text-slate-700'}`}
+              >
+                HOME
+              </button>
+              <button
+                type="button"
+                onClick={() => setAddrType('WORK')}
+                className={`px-3 py-1.5 rounded-lg text-xs font-bold cursor-pointer ${addrType === 'WORK' ? 'bg-[#1D493E] text-white' : 'bg-slate-200 text-slate-700'}`}
+              >
+                WORK
+              </button>
+            </div>
+
+            <div className="flex gap-3 pt-3">
+              <button
+                type="button"
+                onClick={() => setStep('checkout')}
+                className="w-1/3 h-11 border border-slate-300 rounded-xl font-bold text-xs text-slate-700"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="w-2/3 h-11 bg-[#1D493E] text-white rounded-xl font-bold text-xs hover:bg-[#15342c] cursor-pointer"
+              >
+                Save & Continue
+              </button>
+            </div>
+          </form>
         )}
 
         {step === 'processing' && (

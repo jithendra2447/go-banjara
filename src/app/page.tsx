@@ -1192,7 +1192,7 @@ export default function Homepage() {
           >
             <div 
               style={{ left: `${(activeCategorySlide % 3) * 33.333}%` }}
-              className="absolute top-0 h-full w-[33.333%] bg-[#1D493E] rounded-full transition-all duration-300 ease-out group-hover:bg-[#FF5A36]" 
+              className="absolute top-0 h-full w-[33.333%] bg-[#1D493E] rounded-full transition-all duration-300 ease-out" 
             />
           </div>
         </div>

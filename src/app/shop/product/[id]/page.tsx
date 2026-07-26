@@ -675,76 +675,35 @@ export default function ProductDetailsPage() {
                 </span>
               </div>
 
-              {/* Quantity + Size Row */}
-              <div style={{ display: "flex", alignItems: "flex-end", gap: "48px", flexWrap: "wrap" }}>
-
-                {/* Quantity Selector */}
-                <div style={{ display: "flex", flexDirection: "column", gap: "8px", textAlign: "left", boxSizing: "border-box" }}>
-                  <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: "16px", fontWeight: 500, lineHeight: "24px", color: "rgba(43, 43, 43, 1)", margin: 0 }}>Quantity</span>
-                  <div 
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      border: "1px solid rgba(204, 204, 204, 0.54)",
-                      borderRadius: "4px",
-                      width: "max-content",
-                      height: "44px",
-                      backgroundColor: "#FFFFFF"
-                    }}
-                  >
+              {/* Quantity, Size & Delivery Pincode Row (Compact & Side-by-Side) */}
+              <div className="flex items-end gap-3 w-full flex-wrap sm:flex-nowrap">
+                {/* Quantity Selector (Compact height: 36px) */}
+                <div className="flex flex-col gap-1 shrink-0">
+                  <span className="font-sans text-xs font-medium text-slate-500">Quantity</span>
+                  <div className="flex items-center border border-slate-200 rounded-[4px] h-9 bg-white">
                     <button
                       onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                      style={{
-                        width: "44px",
-                        height: "100%",
-                        border: "none",
-                        background: "none",
-                        fontSize: "18px",
-                        fontWeight: 600,
-                        color: "rgba(43, 43, 43, 1)",
-                        cursor: "pointer",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        borderRight: "1px solid rgba(204, 204, 204, 0.54)",
-                        fontFamily: "'Outfit', sans-serif",
-                      }}
-                      className="hover:bg-slate-50 transition"
+                      className="w-8 h-full flex items-center justify-center font-bold text-sm text-slate-700 border-r border-slate-200 hover:bg-slate-50 transition"
                     >
                       −
                     </button>
-                    <span style={{ minWidth: "48px", textAlign: "center", fontFamily: "'Outfit', sans-serif", fontSize: "16px", fontWeight: 500, color: "rgba(43, 43, 43, 1)" }}>
+                    <span className="w-8 text-center font-semibold text-xs text-slate-800">
                       {quantity}
                     </span>
                     <button
                       onClick={() => setQuantity(quantity + 1)}
-                      style={{
-                        width: "44px",
-                        height: "100%",
-                        border: "none",
-                        background: "none",
-                        fontSize: "18px",
-                        fontWeight: 600,
-                        color: "rgba(43, 43, 43, 1)",
-                        cursor: "pointer",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        borderLeft: "1px solid rgba(204, 204, 204, 0.54)",
-                        fontFamily: "'Outfit', sans-serif",
-                      }}
-                      className="hover:bg-slate-50 transition"
+                      className="w-8 h-full flex items-center justify-center font-bold text-sm text-slate-700 border-l border-slate-200 hover:bg-slate-50 transition"
                     >
                       +
                     </button>
                   </div>
                 </div>
 
-                {/* Size Selector (Hidden on mobile) */}
+                {/* Size Selector (If T-Shirt / Apparel) */}
                 {isTShirtProduct && (
-                  <div style={{ display: "flex", flexDirection: "column", gap: "8px", textAlign: "left", boxSizing: "border-box" }} className="hidden md:flex">
-                    <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: "16px", fontWeight: 500, lineHeight: "24px", color: "rgba(43, 43, 43, 1)", margin: 0 }}>Select Size</span>
-                    <div style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
+                  <div className="flex flex-col gap-1 shrink-0 hidden md:flex">
+                    <span className="font-sans text-xs font-medium text-slate-500">Select Size</span>
+                    <div className="flex items-center gap-1.5 flex-wrap">
                       {['XS', 'S', 'M', 'L', 'XL', 'XXL'].map(size => {
                         const isSelected = selectedSize === size;
                         return (
@@ -752,23 +711,11 @@ export default function ProductDetailsPage() {
                             key={size}
                             type="button"
                             onClick={() => setSelectedSize(size)}
-                            style={{
-                              width: "44px",
-                              height: "44px",
-                              border: isSelected ? "2px solid #1D493E" : "1px solid rgba(204, 204, 204, 0.54)",
-                              borderRadius: "4px",
-                              background: isSelected ? "#1D493E" : "#FFFFFF",
-                              color: isSelected ? "#FFFFFF" : "rgba(43, 43, 43, 1)",
-                              fontFamily: "'Outfit', sans-serif",
-                              fontSize: "13px",
-                              fontWeight: isSelected ? 700 : 500,
-                              cursor: "pointer",
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              transition: "all 0.15s ease",
-                            }}
-                            className={!isSelected ? "hover:border-[#1D493E] hover:text-[#1D493E] transition" : ""}
+                            className={`w-9 h-9 rounded-[4px] text-xs font-bold transition ${
+                              isSelected 
+                                ? "bg-[#1D493E] text-white border-2 border-[#1D493E]" 
+                                : "bg-white text-slate-700 border border-slate-200 hover:border-[#1D493E]"
+                            }`}
                           >
                             {size}
                           </button>
@@ -778,9 +725,35 @@ export default function ProductDetailsPage() {
                   </div>
                 )}
 
+                {/* Delivery Options / Pincode Box (Fills remaining right space beside Quantity) */}
+                <div className="flex flex-col gap-1 flex-1 min-w-[140px]">
+                  <span className="font-sans text-xs font-medium text-slate-500">Delivery options</span>
+                  <div className="relative flex items-center w-full">
+                    <input
+                      type="text"
+                      placeholder="Enter pincode"
+                      value={pincode}
+                      onChange={(e) => setPincode(e.target.value)}
+                      className="w-full h-9 pl-2.5 pr-14 border border-slate-200 rounded-[4px] text-xs font-sans text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#1D493E]"
+                    />
+                    <button
+                      type="button"
+                      onClick={handleCheckPincode as any}
+                      className="absolute right-2 text-xs font-bold text-blue-600 hover:text-blue-700"
+                    >
+                      Check
+                    </button>
+                  </div>
+                </div>
               </div>
 
-              {/* Action Buttons (Hidden on mobile because of Sticky Bottom CTA Bar) */}
+              {pincodeMessage && (
+                <span className={`text-xs font-semibold ${pincodeMessage.startsWith('✓') ? "text-emerald-600" : "text-red-500"}`}>
+                  {pincodeMessage}
+                </span>
+              )}
+
+              {/* Action Buttons */}
               {product.inStock === false ? (
                 /* Out of Stock — show Notify button */
                 <div style={{ display: "flex", flexDirection: "column", gap: "8px", width: "100%" }}>
@@ -888,64 +861,6 @@ export default function ProductDetailsPage() {
                   ✓ Product successfully added to your cart!
                 </p>
               )}
-
-              {/* Delivery option checks */}
-              <div style={{ display: "flex", flexDirection: "column", gap: "8px", textAlign: "left" }}>
-                <span style={{ fontFamily: "Faktum, sans-serif", fontSize: "14px", fontWeight: 500, color: "rgba(141, 141, 141, 1)" }}>
-                  Delivery options
-                </span>
-                <div style={{ position: "relative", display: "flex", alignItems: "center", width: "100%" }}>
-                  <input
-                    type="text"
-                    placeholder="Enter the pincode"
-                    value={pincode}
-                    onChange={(e) => setPincode(e.target.value)}
-                    style={{
-                      width: "100%",
-                      height: "40px",
-                      paddingLeft: "12px",
-                      paddingRight: "70px",
-                      border: "1px solid rgba(204, 204, 204, 1)",
-                      borderRadius: "4px",
-                      fontSize: "14px",
-                      fontFamily: "Faktum, sans-serif",
-                      color: "rgba(43, 43, 43, 1)",
-                      boxSizing: "border-box"
-                    }}
-                    className="placeholder-slate-400 focus:outline-none"
-                  />
-                  <button
-                    type="button"
-                    onClick={handleCheckPincode as any}
-                    style={{
-                      position: "absolute",
-                      right: "12px",
-                      color: "rgba(63, 136, 255, 1)",
-                      border: "none",
-                      background: "none",
-                      fontSize: "14px",
-                      fontFamily: "Faktum, sans-serif",
-                      fontWeight: 600,
-                      cursor: "pointer"
-                    }}
-                    className="hover:text-blue-600 transition"
-                  >
-                    Check
-                  </button>
-                </div>
-                <span style={{ fontFamily: "Faktum, sans-serif", fontSize: "12px", color: "rgba(141, 141, 141, 1)", fontWeight: 500 }} className="hidden md:block">
-                  Enter your pincode to know when it will be delivered to your doorstep
-                </span>
-                {pincodeMessage ? (
-                  <span style={{ fontFamily: "Faktum, sans-serif", fontSize: "14px", fontWeight: 600, color: pincodeMessage.startsWith('✓') ? "#10B981" : "#EF4444" }}>
-                    {pincodeMessage}
-                  </span>
-                ) : (
-                  <span style={{ fontFamily: "Faktum, sans-serif", fontSize: "14px", color: "rgba(141, 141, 141, 1)", fontWeight: 500 }}>
-                    FREE delivery as soon as <span style={{ color: "rgba(43, 43, 43, 1)", fontWeight: 600 }}>{getFutureDeliveryString()}</span>
-                  </span>
-                )}
-              </div>
 
               {/* Trust Badges (Hidden on mobile) */}
               <div 

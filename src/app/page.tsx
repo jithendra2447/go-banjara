@@ -687,7 +687,7 @@ export default function Homepage() {
                     </button>
                   </div>
                   {/* Details */}
-                  <div className="w-full md:w-1/2 pt-0 pb-0 px-0 flex flex-col justify-between md:h-full bg-white shrink-0 gap-5 md:gap-0">
+                  <div className="w-full md:w-1/2 py-5 sm:py-6 px-5 sm:px-6 flex flex-col justify-between md:h-full bg-white shrink-0 gap-5 md:gap-0">
                     {/* Top Group (Width: Fill, Height: 151px, Gap: 12px) */}
                     <div className="flex flex-col gap-2 min-h-[140px] shrink-0 w-full">
                       {/* Tags Container (Width: Fill, Height: Hug 28px, Justify: space-between) */}

@@ -910,10 +910,10 @@ export default function Homepage() {
 
         </div>
 
-        {/* Mobile Section 4 Container (Figma Specs: max-w 430, padding 12px 20px, gap 12px, bg white, card w:191px h:371px gap:8px) */}
-        <div className="block md:hidden w-full max-w-[430px] mx-auto py-[12px] px-[20px] bg-white">
+        {/* Mobile Section 4 Container (Reduced side padding px-[12px], card w:[185px] so next card is more visible) */}
+        <div className="block md:hidden w-full max-w-[430px] mx-auto py-[12px] px-[12px] bg-white">
           {/* Header Row */}
-          <div className="flex items-center justify-between w-full mb-[12px]">
+          <div className="flex items-center justify-between w-full mb-[12px] px-[4px]">
             <h2 className="text-[22px] font-serif font-bold text-[#1D493E] leading-tight m-0">
               Place worth the <span className="text-[#FF5A36]">detour</span>
             </h2>
@@ -927,18 +927,18 @@ export default function Homepage() {
           </div>
 
           {/* Horizontal Card Carousel */}
-          <div className="flex gap-[14px] overflow-x-auto pb-3 scrollbar-none snap-x snap-mandatory">
+          <div className="flex gap-[12px] overflow-x-auto pb-3 scrollbar-none snap-x snap-mandatory px-[4px]">
             {(() => {
               const displayPkgs = packagesList && packagesList.length > 0 ? packagesList : HOLIDAY_PACKAGES;
               return displayPkgs.map((pkg) => (
                 <Link 
                   key={pkg.id} 
                   href={`/travel/package/${pkg.id}`}
-                  className="snap-start shrink-0 w-[200px] sm:w-[220px] bg-white rounded-[6px] overflow-hidden flex flex-col justify-between text-left select-none border border-gray-100/80 shadow-xs group cursor-pointer"
+                  className="snap-start shrink-0 w-[185px] sm:w-[200px] bg-white rounded-[6px] overflow-hidden flex flex-col justify-between text-left select-none border border-gray-100/80 shadow-xs group cursor-pointer"
                   style={{ boxSizing: 'border-box' }}
                 >
-                  {/* Image Container with Wishlist Button (h: 210px) */}
-                  <div className="relative w-full h-[210px] rounded-t-[6px] overflow-hidden shrink-0">
+                  {/* Image Container with Wishlist Button (h: 190px) */}
+                  <div className="relative w-full h-[190px] rounded-t-[6px] overflow-hidden shrink-0">
                     <img 
                       src={pkg.image} 
                       alt={pkg.name} 
@@ -1267,8 +1267,9 @@ export default function Homepage() {
       </div>
 
       {/* 7. TODAY'S BEST DEALS FOR YOU */}
-      <section className="bg-white relative z-10">
-        <div className="max-w-[1440px] w-full mx-auto pt-[20px] pb-[20px] px-6 md:px-[80px] flex flex-col gap-[32px]">
+      <section className="bg-white text-left relative z-10 border-t border-gray-100 w-full">
+        {/* Desktop Container (hidden md:flex) */}
+        <div className="hidden md:flex max-w-[1440px] w-full mx-auto pt-[20px] pb-[20px] px-6 md:px-[80px] flex-col gap-[32px]">
           
           {/* Header Container */}
           <div className="w-full max-w-[1280px] h-auto mx-auto flex flex-col justify-between items-center bg-white rounded-[4px] text-center gap-4">
@@ -1452,8 +1453,6 @@ export default function Homepage() {
             })}
           </div>
 
-
-
           {/* View all products footer */}
           <div className="text-center pt-4">
             <Link 
@@ -1466,14 +1465,79 @@ export default function Homepage() {
               <ArrowRight className="w-6 h-6 text-[#1D493E] shrink-0" />
             </Link>
           </div>
+        </div>
 
+        {/* Mobile Figma Spec Container (block md:hidden) - w:430px max, gap:12px, padding:12px 20px */}
+        <div className="block md:hidden w-full max-w-[430px] mx-auto py-[12px] px-[20px] bg-white flex flex-col gap-[12px]">
+          {/* Header Row: Title + Round Green Arrow Button */}
+          <div className="flex items-center justify-between w-full h-[30px]">
+            <h2 className="text-[32px] font-serif font-semibold text-[#1D493E] leading-none m-0">
+              Today's <span className="text-[#FF5A36]">best deals</span>
+            </h2>
+            <Link 
+              href="/shop"
+              aria-label="View all products"
+              className="w-[30px] h-[30px] rounded-full bg-[#1D493E] text-white flex items-center justify-center hover:scale-105 active:scale-95 transition shrink-0"
+            >
+              <ArrowRight className="w-4 h-4 text-white" />
+            </Link>
+          </div>
+
+          {/* 2x2 Product Card Grid matching exact Figma screenshot */}
+          <div className="grid grid-cols-2 gap-[12px] w-full">
+            {[
+              resolveProduct("naturally-nomad-badge-1", "Naturally Nomad", "Badges", "/naturally_nomad_badge.png", 250, 300),
+              resolveProduct("naturally-nomad-badge-2", "Naturally Nomad", "Badges", "/naturally_nomad_badge.png", 250, 300),
+              resolveProduct("naturally-nomad-badge-3", "Naturally Nomad", "Badges", "/naturally_nomad_badge.png", 250, 300),
+              resolveProduct("naturally-nomad-badge-4", "Naturally Nomad", "Badges", "/naturally_nomad_badge.png", 250, 300)
+            ].map((deal, idx) => (
+              <div 
+                key={idx}
+                className="w-full flex flex-col gap-[8px] text-left"
+              >
+                <div className="w-full aspect-[4/3] rounded-[8px] overflow-hidden bg-gray-100 relative">
+                  <img 
+                    src={deal.images[0] || "/naturally_nomad_badge.png"} 
+                    alt={deal.name} 
+                    className="w-full h-full object-cover" 
+                  />
+                </div>
+                <span className="inline-flex items-center justify-center bg-[#FF5A36] text-white text-[10px] font-bold px-1.5 py-0.5 rounded-[3px] self-start uppercase">
+                  Badges
+                </span>
+                <h4 className="text-[14px] font-bold text-[#2B2B2B] leading-tight m-0 truncate">
+                  {deal.name}
+                </h4>
+                <div className="flex items-center gap-1 text-[13px]">
+                  <span className="text-gray-400 line-through text-[11px]">₹300</span>
+                  <span className="font-bold text-[#2B2B2B]">₹250</span>
+                  <span className="text-[#FF5A36] text-[11px] font-semibold">30% off</span>
+                </div>
+                <div className="flex items-center gap-1 text-[11px]">
+                  <div className="flex text-amber-400 gap-0.5">
+                    {[...Array(5)].map((_, s) => (
+                      <Star key={s} className="w-3 h-3 fill-current" />
+                    ))}
+                  </div>
+                  <span className="text-gray-500 font-medium">(120 Reviews)</span>
+                </div>
+                <p className="text-[11px] text-[#8D8D8D] font-medium m-0">
+                  200+ bought in past month
+                </p>
+                <p className="text-[10px] leading-tight m-0">
+                  <span className="text-[#8D8D8D]">FREE delivery as soon as </span>
+                  <span className="font-bold text-[#2B2B2B]">Thu, 9 Apr, 7am - 10 pm</span>
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
-      <section className="bg-white text-left relative z-10 border-t border-gray-100">
-        {/* Desktop Container (hidden md:block) */}
+
+      {/* 8. MOST SELLING PRODUCTS */}
+      <section className="bg-white text-left relative z-10 border-t border-gray-100 w-full">
+        {/* Desktop Container (hidden md:flex) */}
         <div className="hidden md:flex max-w-[1440px] mx-auto pt-[20px] pb-[20px] px-6 md:px-[80px] flex-col gap-[32px]">
-          
-          {/* Header Row (Flow Horizontal, Justify space-between, Width Fill, items-end) */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-2 text-left">
             <div className="space-y-3.5 text-left max-w-4xl">
               <h2 className="text-3xl md:text-[42px] font-serif font-semibold text-[#1D493E] leading-none">

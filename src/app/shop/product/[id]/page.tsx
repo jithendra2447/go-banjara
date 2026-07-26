@@ -514,10 +514,10 @@ export default function ProductDetailsPage() {
               {renderMediaContent(activeImgIdx, false)}
             </div>
 
-            {/* Mobile Swipeable Image Carousel */}
-            <div className="block md:hidden relative w-full rounded-[4px] border border-[rgba(204,204,204,1)] bg-white overflow-hidden">
+            {/* Mobile Swipeable Image Carousel (Compact 210px height on mobile) */}
+            <div className="block md:hidden relative w-full h-[210px] sm:h-[260px] rounded-[4px] border border-[rgba(204,204,204,1)] bg-white overflow-hidden">
               <div 
-                className="flex w-full overflow-x-auto snap-x snap-mandatory scrollbar-none"
+                className="flex w-full h-full overflow-x-auto snap-x snap-mandatory scrollbar-none"
                 onScroll={(e) => {
                   const scrollPos = e.currentTarget.scrollLeft;
                   const width = e.currentTarget.offsetWidth;
@@ -528,13 +528,13 @@ export default function ProductDetailsPage() {
                 }}
               >
                 {[...Array(6)].map((_, i) => (
-                  <div key={i} className="w-full flex-shrink-0 snap-center aspect-[4/3] flex items-center justify-center relative bg-white">
+                  <div key={i} className="w-full h-full flex-shrink-0 snap-center flex items-center justify-center relative bg-white p-2">
                     {renderMediaContent(i, false)}
                   </div>
                 ))}
               </div>
               {/* Pagination Dots */}
-              <div className="absolute bottom-2.5 left-0 right-0 flex items-center justify-center gap-1.5 pointer-events-none">
+              <div className="absolute bottom-2 left-0 right-0 flex items-center justify-center gap-1.5 pointer-events-none">
                 {[...Array(6)].map((_, i) => (
                   <div
                     key={i}
@@ -637,24 +637,7 @@ export default function ProductDetailsPage() {
                 </span>
               </div>
 
-              {/* Rating & Social Proof Row */}
-              <div className="flex items-center gap-2 flex-wrap text-xs font-sans">
-                <div className="flex items-center gap-1.5">
-                  <div className="flex gap-0.5">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-3.5 h-3.5 fill-[#FFC72C] text-transparent" />
-                    ))}
-                  </div>
-                  <span className="font-semibold text-[#2B2B2B]">4.9</span>
-                  <span className="text-slate-500 font-medium">({product.reviewsCount || 120} Reviews)</span>
-                </div>
-                <span className="text-slate-300">•</span>
-                <span className="text-slate-500 font-medium">
-                  {product.boughtCount || '200+ bought in past month'}
-                </span>
-              </div>
-
-              {/* Price & Discount Row */}
+              {/* Price & Discount Row (Positioned directly below Title & Badges Chip) */}
               <div className="flex items-center justify-start gap-2.5 w-full text-left">
                 <span style={{ fontFamily: "Faktum, sans-serif" }} className="text-xl sm:text-2xl md:text-[28px] font-bold text-[#2B2B2B]">
                   ₹{product.price.toLocaleString('en-IN')}
@@ -672,6 +655,23 @@ export default function ProductDetailsPage() {
                   className="text-[10px] sm:text-xs font-bold text-emerald-700 px-1.5 py-0.5 rounded-[3px]"
                 >
                   {discountPercent}% off
+                </span>
+              </div>
+
+              {/* Rating & Social Proof Row */}
+              <div className="flex items-center gap-2 flex-wrap text-xs font-sans">
+                <div className="flex items-center gap-1.5">
+                  <div className="flex gap-0.5">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-3.5 h-3.5 fill-[#FFC72C] text-transparent" />
+                    ))}
+                  </div>
+                  <span className="font-semibold text-[#2B2B2B]">4.9</span>
+                  <span className="text-slate-500 font-medium">({product.reviewsCount || 120} Reviews)</span>
+                </div>
+                <span className="text-slate-300">•</span>
+                <span className="text-slate-500 font-medium">
+                  {product.boughtCount || '200+ bought in past month'}
                 </span>
               </div>
 

@@ -1016,15 +1016,22 @@ export default function Homepage() {
                     </div>
 
                     {/* Pricing */}
-                    <div className="flex items-baseline gap-1 mt-1 pt-1 border-t border-gray-100">
-                      <span className="line-through text-gray-400 text-[10px] font-normal">
-                        ₹{((pkg.price ?? 24500) * 1.4).toLocaleString('en-IN')}
-                      </span>
-                      <span className="text-[12px] font-bold font-sans text-[#1D493E]">
-                        ₹{(pkg.price ?? 24500).toLocaleString('en-IN')}/Person
-                      </span>
-                      <span className="text-[#FF5A36] text-[10px] font-semibold">
-                        30% off
+                    <div className="flex flex-col gap-0.5 mt-1 pt-1 border-t border-gray-100 w-full text-left">
+                      <div className="flex items-baseline justify-between w-full">
+                        <div className="flex items-baseline gap-1">
+                          <span className="line-through text-gray-400 text-[10px] font-normal">
+                            ₹{Math.round((pkg.price ?? 24500) * 1.4).toLocaleString('en-IN')}
+                          </span>
+                          <span className="text-[12px] font-bold font-sans text-[#1D493E]">
+                            ₹{(pkg.price ?? 24500).toLocaleString('en-IN')}
+                          </span>
+                        </div>
+                        <span className="text-[#FF5A36] text-[10px] font-bold whitespace-nowrap">
+                          30% off
+                        </span>
+                      </div>
+                      <span className="text-[#8D8D8D] text-[9px] font-medium leading-none">
+                        per person
                       </span>
                     </div>
                   </div>
@@ -1769,8 +1776,8 @@ export default function Homepage() {
       </section>
 
       {/* 8.5 ORANGE HIGHLIGHT MARQUEE BANNER */}
-      <div className="bg-[#FF623E] text-white h-[78px] flex items-center overflow-hidden select-none relative z-10 w-full py-[24px]">
-        <div className="flex whitespace-nowrap gap-[10px] animate-marquee font-serif font-semibold text-[24px] leading-none uppercase text-white tracking-[0px]">
+      <div className="bg-[#FF623E] text-white h-[39px] md:h-[78px] flex items-center overflow-hidden select-none relative z-10 w-full py-[6px] md:py-[24px]">
+        <div className="flex whitespace-nowrap gap-[10px] animate-marquee font-serif font-semibold text-[14px] md:text-[24px] leading-none uppercase text-white tracking-[0px]">
           <span>✦ ESCAPE THE ORDINARY ✦ SHOP TRAVEL GEAR ✦ DARE TO TRAVEL ✦ ADVENTURE AWAITS ✦ MODERN NOMAD ✦ SHOP TRAVEL GEAR ✦ ESCAPE THE ORDINARY ✦ SHOP TRAVEL GEAR ✦ DARE TO TRAVEL ✦ ADVENTURE AWAITS ✦ MODERN NOMAD ✦ SHOP TRAVEL GEAR ✦ ESCAPE THE ORDINARY ✦ SHOP TRAVEL GEAR ✦ DARE TO TRAVEL ✦ ADVENTURE AWAITS ✦ MODERN NOMAD ✦ SHOP TRAVEL GEAR</span>
         </div>
       </div>

@@ -1382,7 +1382,7 @@ export default function Homepage() {
                   </div>
 
                   {/* Details Block */}
-                  <div className="w-full h-auto flex flex-col justify-between text-left gap-3 px-4">
+                  <div className="w-full h-auto flex flex-col justify-between text-left gap-3 px-0">
                     {/* Category Tag */}
                     <span className="inline-flex items-center justify-center h-[28px] rounded-[4px] px-[8px] py-[4px] text-[13px] font-sans font-medium text-[#FF623E] bg-[#FF623E]/8 self-start">
                       {deal.category}
@@ -1622,7 +1622,7 @@ export default function Homepage() {
                     />
                   </div>
 
-                  <div className="w-full h-auto flex flex-col justify-between text-left gap-3 px-4">
+                  <div className="w-full h-auto flex flex-col justify-between text-left gap-3 px-0">
                     <span className="inline-flex items-center justify-center h-[28px] rounded-[4px] px-[8px] py-[4px] text-[13px] font-sans font-medium text-[#FF623E] bg-[#FF623E]/8 self-start">
                       {prod.category}
                     </span>

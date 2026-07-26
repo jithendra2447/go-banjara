@@ -627,7 +627,7 @@ export default function Homepage() {
             <h2 className="text-3xl md:text-[42px] font-serif font-semibold text-[#1D493E] leading-none text-center">
               Featured&nbsp;<span className="text-[#FF5A36]">Holiday</span>&nbsp;Packages
             </h2>
-            <p className="text-gray-500 text-base md:text-[24px] md:leading-8 font-medium text-center max-w-2xl mx-auto">
+            <p className="text-[#2B2B2B]/80 text-base md:text-[20px] leading-relaxed font-medium text-center max-w-2xl mx-auto">
               A hand-picked map of the corners of India
             </p>
           </div>
@@ -1061,7 +1061,7 @@ export default function Homepage() {
               <h2 className="text-3xl md:text-[42px] font-serif font-semibold text-[#1D493E] leading-none">
                 <span className="text-[#FF5A36]">Travels</span>&nbsp;Essentials
               </h2>
-              <p className="text-gray-500 text-base md:text-[24px] md:leading-8 font-medium">
+              <p className="text-[#2B2B2B]/80 text-base md:text-[20px] leading-relaxed font-medium">
                 Curated gear for the modern nomad. From durable journal covers to the stickers that tell your story
               </p>
             </div>
@@ -1317,7 +1317,7 @@ export default function Homepage() {
             </h2>
             
             {/* Subtitle */}
-            <p className="w-full max-w-[1280px] h-auto flex items-center justify-center text-[#2B2B2B] text-base md:text-[24px] md:leading-[32px] font-medium text-center">
+            <p className="w-full max-w-[1280px] h-auto flex items-center justify-center text-[#2B2B2B]/80 text-base md:text-[20px] leading-[32px] font-medium text-center">
               A hand-picked map of the corners of India our community keeps coming back to
             </p>
           </div>
@@ -1590,7 +1590,7 @@ export default function Homepage() {
               <h2 className="text-3xl md:text-[42px] font-serif font-semibold text-[#1D493E] leading-none">
                 <span className="text-[#FF5A36]">Limited</span>&nbsp;Edition
               </h2>
-              <p className="text-gray-500 text-base md:text-[24px] md:leading-8 font-medium">
+              <p className="text-[#2B2B2B]/80 text-base md:text-[20px] leading-relaxed font-medium">
                 Curated gear for the modern nomad. From durable journal covers to the stickers that tell your story
               </p>
             </div>
@@ -2218,7 +2218,7 @@ export default function Homepage() {
             <h2 className="text-3xl md:text-[42px] font-serif font-semibold text-[#2B2B2B] leading-none h-auto flex items-center justify-center py-2">
               Follow Our&nbsp;<span className="text-[#FF5A36]">Journey</span>
             </h2>
-            <p className="text-[#2B2B2B] text-sm sm:text-base md:text-[24px] font-medium leading-relaxed md:leading-[32px] h-auto flex items-center justify-center">
+            <p className="text-[#2B2B2B]/80 text-sm sm:text-base md:text-[20px] font-medium leading-relaxed md:leading-[32px] h-auto flex items-center justify-center">
               Follow my voices to discover unique voices, breathtaking landscapes & unforgettable experiences
             </p>
           </div>
@@ -2565,7 +2565,7 @@ export default function Homepage() {
                 find their way to your inbox.
               </h2>
               <p
-                className="text-base sm:text-lg md:text-[24px] font-sans font-medium text-center text-[rgba(43,43,43,0.8)] max-w-[1280px] m-0"
+                className="text-base sm:text-lg md:text-[20px] font-sans font-medium text-center text-[rgba(43,43,43,0.8)] max-w-[1280px] m-0"
                 style={{
                   lineHeight: "1.4",
                   letterSpacing: "0px",

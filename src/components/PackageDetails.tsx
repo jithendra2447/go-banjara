@@ -600,23 +600,20 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                   maxWidth: "837px",
                   boxSizing: "border-box",
                 }}
-                className="text-left grid grid-cols-1 sm:grid-cols-2 gap-4"
+                className="text-left grid grid-cols-2 gap-2 sm:gap-4"
               >
                 {/* Fact 1 */}
                 <div 
                   style={{
-                    height: "46px",
                     display: "flex",
                     alignItems: "center",
                     gap: "8px",
                     boxSizing: "border-box",
                   }}
-                  className="w-full py-1"
+                  className="w-full py-1 h-auto min-h-[38px] sm:h-[46px]"
                 >
                   <div 
                     style={{ 
-                      width: "46px", 
-                      height: "46px", 
                       backgroundColor: "rgba(246, 243, 238, 1)",
                       borderRadius: "4px",
                       display: "flex",
@@ -624,8 +621,9 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                       justifyContent: "center",
                       flexShrink: 0,
                     }}
+                    className="w-8 h-8 sm:w-[46px] sm:h-[46px]"
                   >
-                    <MapPin className="w-5 h-5 text-[#2B2B2B]" />
+                    <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-[#2B2B2B]" />
                   </div>
                   <span 
                     style={{
@@ -635,7 +633,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                       display: "inline-flex",
                       alignItems: "center",
                     }}
-                    className="flex-1 text-sm sm:text-base md:text-[20px] leading-relaxed truncate"
+                    className="flex-1 text-xs sm:text-base md:text-[20px] leading-tight truncate"
                   >
                     {pkg.startPoint || 'Srinagar'}, {pkg.destination || 'Kashmir'}
                   </span>
@@ -644,18 +642,15 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                 {/* Fact 2 */}
                 <div 
                   style={{
-                    height: "46px",
                     display: "flex",
                     alignItems: "center",
                     gap: "8px",
                     boxSizing: "border-box",
                   }}
-                  className="w-full py-1"
+                  className="w-full py-1 h-auto min-h-[38px] sm:h-[46px]"
                 >
                   <div 
                     style={{ 
-                      width: "46px", 
-                      height: "46px", 
                       backgroundColor: "rgba(246, 243, 238, 1)",
                       borderRadius: "4px",
                       display: "flex",
@@ -663,8 +658,9 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                       justifyContent: "center",
                       flexShrink: 0,
                     }}
+                    className="w-8 h-8 sm:w-[46px] sm:h-[46px]"
                   >
-                    <Users className="w-5 h-5 text-[#2B2B2B]" />
+                    <Users className="w-4 h-4 sm:w-5 sm:h-5 text-[#2B2B2B]" />
                   </div>
                   <span 
                     style={{
@@ -674,7 +670,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                       display: "inline-flex",
                       alignItems: "center",
                     }}
-                    className="flex-1 text-sm sm:text-base md:text-[20px] leading-relaxed truncate"
+                    className="flex-1 text-xs sm:text-base md:text-[20px] leading-tight truncate"
                   >
                     {pkg.groupType || 'Curated group Trip'}
                   </span>
@@ -683,18 +679,15 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                 {/* Fact 3 */}
                 <div 
                   style={{
-                    height: "46px",
                     display: "flex",
                     alignItems: "center",
                     gap: "8px",
                     boxSizing: "border-box",
                   }}
-                  className="w-full py-1"
+                  className="w-full py-1 h-auto min-h-[38px] sm:h-[46px]"
                 >
                   <div 
                     style={{ 
-                      width: "46px", 
-                      height: "46px", 
                       backgroundColor: "rgba(246, 243, 238, 1)",
                       borderRadius: "4px",
                       display: "flex",
@@ -702,8 +695,9 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                       justifyContent: "center",
                       flexShrink: 0,
                     }}
+                    className="w-8 h-8 sm:w-[46px] sm:h-[46px]"
                   >
-                    <Compass className="w-5 h-5 text-[#2B2B2B]" />
+                    <Compass className="w-4 h-4 sm:w-5 sm:h-5 text-[#2B2B2B]" />
                   </div>
                   <span 
                     style={{
@@ -713,7 +707,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                       display: "inline-flex",
                       alignItems: "center",
                     }}
-                    className="flex-1 text-sm sm:text-base md:text-[20px] leading-relaxed truncate"
+                    className="flex-1 text-xs sm:text-base md:text-[20px] leading-tight truncate"
                   >
                     {pkg.difficulty || 'Moderate'} Difficulty
                   </span>
@@ -722,18 +716,15 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                 {/* Fact 4 */}
                 <div 
                   style={{
-                    height: "46px",
                     display: "flex",
                     alignItems: "center",
                     gap: "8px",
                     boxSizing: "border-box",
                   }}
-                  className="w-full py-1"
+                  className="w-full py-1 h-auto min-h-[38px] sm:h-[46px]"
                 >
                   <div 
                     style={{ 
-                      width: "46px", 
-                      height: "46px", 
                       backgroundColor: "rgba(246, 243, 238, 1)",
                       borderRadius: "4px",
                       display: "flex",
@@ -741,8 +732,9 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                       justifyContent: "center",
                       flexShrink: 0,
                     }}
+                    className="w-8 h-8 sm:w-[46px] sm:h-[46px]"
                   >
-                    <Calendar className="w-5 h-5 text-[#2B2B2B]" />
+                    <Calendar className="w-4 h-4 sm:w-5 sm:h-5 text-[#2B2B2B]" />
                   </div>
                   <span 
                     style={{
@@ -752,7 +744,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                       display: "inline-flex",
                       alignItems: "center",
                     }}
-                    className="flex-1 text-sm sm:text-base md:text-[20px] leading-relaxed truncate"
+                    className="flex-1 text-xs sm:text-base md:text-[20px] leading-tight truncate"
                   >
                     Next: {pkg.nextDeparture || 'Aug, 2026'}
                   </span>
@@ -764,20 +756,19 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                 style={{
                   width: "100%",
                   maxWidth: "837px",
-                  height: "67px",
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "space-between",
                   alignItems: "flex-start",
                 }}
-                className="text-left"
+                className="text-left gap-1 h-auto py-1"
               >
-                <div className="flex items-center gap-3 h-[30px]">
-                  <div className="flex text-[#E05434] gap-1">
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <div className="flex text-[#E05434] gap-0.5 sm:gap-1">
                     {[...Array(5)].map((_, i) => (
                       <Star
                         key={i}
-                        className={`w-4 h-4 fill-[#E05434] stroke-none ${
+                        className={`w-3.5 h-3.5 sm:w-4 sm:h-4 fill-[#E05434] stroke-none ${
                           i < Math.floor(pkg.rating) ? 'fill-[#E05434]' : 'fill-gray-200'
                         }`}
                       />
@@ -787,14 +778,11 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                     style={{
                       fontFamily: "'Faktum', 'Outfit', sans-serif",
                       fontWeight: 500,
-                      fontSize: "20px",
-                      lineHeight: "100%",
                       color: "rgba(43, 43, 43, 1)",
-                      height: "30px",
                       display: "inline-flex",
                       alignItems: "center",
                     }}
-                    className="leading-none"
+                    className="leading-none text-xs sm:text-base md:text-[20px]"
                   >
                     ({pkg.ratingCount || 312} reviews)
                   </span>
@@ -803,16 +791,13 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                   style={{
                     width: "100%",
                     maxWidth: "837px",
-                    height: "25px",
                     fontFamily: "'Faktum', 'Outfit', sans-serif",
                     fontWeight: 500,
-                    fontSize: "20px",
-                    lineHeight: "100%",
                     color: "rgba(141, 141, 141, 1)",
                     display: "inline-flex",
                     alignItems: "center",
                   }}
-                  className="leading-none"
+                  className="leading-none text-xs sm:text-base md:text-[20px]"
                 >
                   200+ bought in past month
                 </span>
@@ -829,7 +814,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                 display: "flex",
                 alignItems: "center",
               }}
-              className="text-left flex border-b border-gray-200 w-full overflow-x-auto whitespace-nowrap scrollbar-none gap-6 md:gap-[40px]"
+              className="text-left flex border-b border-gray-200 w-full overflow-x-auto whitespace-nowrap scrollbar-none gap-4 md:gap-[40px]"
             >
               {(['overview', 'itinerary', 'reviews'] as const).map((tab) => {
                 const isSelected = activeTab === tab;
@@ -843,25 +828,22 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                       display: "inline-flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      height: "54px",
-                      padding: "12px",
                       boxSizing: "border-box",
                       borderBottom: isSelected ? "3px solid rgba(28, 68, 140, 1)" : "3px solid transparent",
                       marginBottom: "-2px",
                       cursor: "pointer",
                     }}
-                    className="transition-all capitalize"
+                    className="transition-all capitalize h-[42px] sm:h-[54px] px-2 sm:px-3"
                   >
                     <span
                       style={{
                         fontFamily: "'Faktum', 'Outfit', sans-serif",
                         fontWeight: 500,
                         color: isSelected ? "rgba(28, 68, 140, 1)" : "rgba(43, 43, 43, 1)",
-                        height: "30px",
                         display: "inline-flex",
                         alignItems: "center",
                       }}
-                      className="text-sm sm:text-lg md:text-[24px]"
+                      className="text-xs sm:text-lg md:text-[24px]"
                     >
                       {label}
                     </span>

@@ -1816,12 +1816,12 @@ export default function Homepage() {
                 background: 'radial-gradient(circle, rgba(224, 84, 52, 0.3) 0%, rgba(224, 84, 52, 0) 70%)'
               }}
             />
-            <div className="relative hover:rotate-2 transition-transform duration-500 w-full max-w-[584px] aspect-square mx-auto md:mx-0 bg-transparent">
+            <div className="relative hover:rotate-2 transition-transform duration-500 w-full max-w-[584px] aspect-square mx-auto md:mx-0 bg-transparent rounded-[12px] overflow-hidden">
               <img 
                 src="/llama_mascot.png" 
                 alt="Bonjo Mascot" 
-                className="w-full h-full object-cover filter drop-shadow-[0_25px_30px_rgba(0,0,0,0.18)]"
-                style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
+                className="w-full h-full object-cover filter drop-shadow-[0_25px_30px_rgba(0,0,0,0.18)] rounded-[12px]"
+                style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)', borderRadius: '12px' }}
               />
             </div>
           </div>

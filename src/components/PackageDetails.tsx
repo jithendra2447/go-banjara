@@ -1357,20 +1357,6 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
               {/* TAB CONTENT: Itinerary */}
               {activeTab === 'itinerary' && pkg.itinerary && (
                 <div className="space-y-4 text-left animate-in fade-in duration-300 w-full">
-                  <h3 
-                    style={{
-                      height: "auto",
-                      fontFamily: "Fraunces, serif",
-                      fontWeight: 600,
-                      color: "rgba(43, 43, 43, 1)",
-                      margin: 0,
-                      boxSizing: "border-box",
-                    }}
-                    className="text-left mb-3 text-2xl md:text-[42px] leading-tight w-full"
-                  >
-                    A day-by-day breakdown of what to expect. Every day is designed to balance discovery, culture, and recovery.
-                  </h3>
-
                   <div 
                     style={{
                       height: "auto",
@@ -1689,16 +1675,15 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                 boxSizing: "border-box",
                 display: "flex",
                 flexDirection: "column",
-                gap: "32px",
                 justifyContent: "flex-start",
               }}
-              className="text-left w-full p-6"
+              className="text-left w-full p-4 sm:p-5 gap-3.5 sm:gap-4"
             >
               <div
                 style={{
                   display: "flex",
                   flexDirection: "column",
-                  gap: "12px",
+                  gap: "6px",
                   boxSizing: "border-box",
                 }}
                 className="w-full h-auto"
@@ -1707,11 +1692,9 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                   style={{
                     fontFamily: "Faktum, sans-serif",
                     fontWeight: 500,
-                    fontSize: "16px",
-                    lineHeight: "20px",
                     color: "rgba(141, 141, 141, 1)",
                   }}
-                  className="w-full inline-block"
+                  className="w-full inline-block text-xs sm:text-sm"
                 >
                   Tour Package Price
                 </span>
@@ -1720,11 +1703,9 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                     style={{
                       fontFamily: "Faktum, sans-serif",
                       fontWeight: 700,
-                      fontSize: "32px",
-                      lineHeight: "40px",
                       color: "rgba(43, 43, 43, 1)",
                     }}
-                    className="inline-block"
+                    className="inline-block text-2xl sm:text-3xl"
                   >
                     ₹{pkg.price.toLocaleString('en-IN')}
                   </span>
@@ -1732,11 +1713,9 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                     style={{
                       fontFamily: "Faktum, sans-serif",
                       fontWeight: 500,
-                      fontSize: "14px",
-                      lineHeight: "20px",
                       color: "rgba(141, 141, 141, 1)",
                     }}
-                    className="inline-block"
+                    className="inline-block text-xs sm:text-sm"
                   >
                     / per person
                   </span>
@@ -1746,34 +1725,26 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                         style={{
                           fontFamily: "Faktum, sans-serif",
                           fontWeight: 500,
-                          fontSize: "14px",
-                          lineHeight: "18px",
                           color: "rgba(141, 141, 141, 1)",
                           textDecoration: "line-through",
                         }}
-                        className="inline-block"
+                        className="inline-block text-xs sm:text-sm"
                       >
                         ₹{pkg.originalPrice.toLocaleString('en-IN')}
                       </span>
                       <span 
                         style={{
-                          width: "auto",
-                          minWidth: "57px",
-                          height: "20px",
-                          paddingLeft: "8px",
-                          paddingRight: "8px",
                           backgroundColor: "rgba(0, 160, 35, 0.08)",
                           color: "rgba(0, 160, 35, 1)",
                           fontFamily: "Faktum, sans-serif",
-                          fontWeight: 500,
-                          fontSize: "16px",
-                          lineHeight: "20px",
+                          fontWeight: 600,
                           borderRadius: "4px",
                           display: "inline-flex",
                           alignItems: "center",
                           justifyContent: "center",
                           whiteSpace: "nowrap",
                         }}
+                        className="text-xs px-2 py-0.5"
                       >
                         {discountPercent}% off
                       </span>
@@ -1787,7 +1758,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                 style={{
                   display: "flex",
                   flexDirection: "column",
-                  gap: "12px",
+                  gap: "6px",
                   boxSizing: "border-box",
                 }}
                 className="w-full h-auto"
@@ -1796,11 +1767,9 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                   style={{
                     fontFamily: "Faktum, sans-serif",
                     fontWeight: 500,
-                    fontSize: "16px",
-                    lineHeight: "23px",
                     color: "rgba(141, 141, 141, 1)",
                   }}
-                  className="w-full inline-block"
+                  className="w-full inline-block text-xs sm:text-sm"
                 >
                   Next Departures
                 </span>
@@ -1808,7 +1777,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                   style={{
                     display: "flex",
                     flexDirection: "column",
-                    gap: "12px",
+                    gap: "6px",
                     boxSizing: "border-box",
                   }}
                   className="w-full h-auto"
@@ -1821,28 +1790,20 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                         key={dept.value}
                         type="button"
                         onClick={() => setBookingDate(dept.value)}
-                        className="w-full flex justify-between items-center transition cursor-pointer"
+                        className="w-full flex justify-between items-center transition cursor-pointer hover:bg-slate-50 p-1 rounded-sm"
                         style={{
-                          height: "25px",
                           border: "none",
-                          background: "transparent",
-                          padding: 0,
-                          margin: 0,
-                          display: "flex",
-                          justifyContent: "space-between",
-                          alignItems: "center",
+                          background: isSelected ? "rgba(246, 243, 238, 0.6)" : "transparent",
                         }}
                       >
                         <span 
                           style={{
                             fontFamily: "Faktum, sans-serif",
                             fontWeight: isSelected ? 600 : 500,
-                            fontSize: "20px",
-                            lineHeight: "25px",
                             color: "rgba(43, 43, 43, 1)",
                             textAlign: "left",
                           }}
-                          className="inline-block"
+                          className="inline-block text-sm sm:text-base"
                         >
                           {dept.label}
                         </span>
@@ -1850,12 +1811,10 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                           style={{
                             fontFamily: "Faktum, sans-serif",
                             fontWeight: isSelected ? 600 : 500,
-                            fontSize: "20px",
-                            lineHeight: "25px",
                             color: "rgba(43, 43, 43, 1)",
                             textAlign: "right",
                           }}
-                          className="inline-block"
+                          className="inline-block text-sm sm:text-base font-semibold"
                         >
                           {seatsText}
                         </span>
@@ -1872,11 +1831,6 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                     type="submit"
                     style={{
                       backgroundColor: "rgba(29, 73, 62, 1)",
-                      height: "60px",
-                      paddingTop: "16px",
-                      paddingBottom: "16px",
-                      paddingLeft: "32px",
-                      paddingRight: "32px",
                       borderRadius: "4px",
                       border: "none",
                       color: "#FFFFFF",
@@ -1885,31 +1839,28 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                       alignItems: "center",
                       justifyContent: "center",
                     }}
-                    className="w-full hover:opacity-95 transition-opacity cursor-pointer flex items-center justify-center gap-2"
+                    className="w-full h-[46px] sm:h-[50px] px-4 hover:opacity-95 transition-opacity cursor-pointer flex items-center justify-center gap-2"
                   >
                     {bookedSuccess ? (
                       <span
                         style={{
                           fontFamily: "Faktum, sans-serif",
-                          fontWeight: 500,
-                          fontSize: "18px",
-                          lineHeight: "23px",
+                          fontWeight: 600,
                         }}
+                        className="text-sm sm:text-base"
                       >
                         Added to Cart!
                       </span>
                     ) : (
                       <>
-                        <Calendar style={{ width: "28px", height: "28px" }} className="shrink-0" />
+                        <Calendar className="w-5 h-5 shrink-0" />
                         <span
                           style={{
                             fontFamily: "Faktum, sans-serif",
-                            fontWeight: 500,
-                            fontSize: "18px",
-                            lineHeight: "23px",
+                            fontWeight: 600,
                             color: "rgba(255, 255, 255, 1)",
                           }}
-                          className="inline-block"
+                          className="inline-block text-sm sm:text-base"
                         >
                           Book this experience
                         </span>
@@ -1923,11 +1874,6 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                   onClick={handleSaveForLater}
                   style={{
                     backgroundColor: "transparent",
-                    height: "55px",
-                    paddingTop: "16px",
-                    paddingBottom: "16px",
-                    paddingLeft: "32px",
-                    paddingRight: "32px",
                     borderRadius: "4px",
                     border: "2px solid rgba(29, 73, 62, 1)",
                     boxSizing: "border-box",
@@ -1935,17 +1881,15 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                     alignItems: "center",
                     justifyContent: "center",
                   }}
-                  className="w-full hover:bg-[#1D493E]/5 transition cursor-pointer flex items-center justify-center gap-2"
+                  className="w-full h-[42px] sm:h-[46px] px-4 hover:bg-[#1D493E]/5 transition cursor-pointer flex items-center justify-center gap-2"
                 >
                   <span
                     style={{
                       fontFamily: "Faktum, sans-serif",
-                      fontWeight: 500,
-                      fontSize: "18px",
-                      lineHeight: "23px",
+                      fontWeight: 600,
                       color: "rgba(29, 73, 62, 1)",
                     }}
-                    className="inline-block text-center"
+                    className="inline-block text-center text-sm sm:text-base"
                   >
                     {saved ? 'Saved' : 'Save for later'}
                   </span>
@@ -1959,33 +1903,21 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                   justifyContent: "space-between",
                   alignItems: "center",
                   boxSizing: "border-box",
-                  marginTop: "8px",
                 }}
-                className="w-full flex justify-between items-center gap-2 mt-2"
+                className="w-full flex justify-between items-center gap-1 mt-1 pt-2 border-t border-gray-100"
               >
-                <div 
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    gap: "8px",
-                    boxSizing: "border-box",
-                  }}
-                  className="flex flex-col items-center gap-2 flex-1"
-                >
+                <div className="flex flex-col items-center gap-1 flex-1">
                   <div 
                     style={{ 
-                      width: "46px", 
-                      height: "46px", 
                       borderRadius: "4px", 
                       backgroundColor: "rgba(246, 243, 238, 1)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                     }}
-                    className="shrink-0"
+                    className="w-9 h-9 sm:w-10 sm:h-10 shrink-0"
                   >
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2B2B2B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B2B2B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <rect x="5" y="11" width="14" height="9" rx="2" />
                       <path d="M16 11V7a4 4 0 0 0-8 0v2" />
                       <line x1="12" y1="14" x2="12" y2="17" />
@@ -1997,35 +1929,24 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                       fontWeight: 500,
                       color: "rgba(43, 43, 43, 1)",
                     }}
-                    className="text-xs sm:text-sm text-center inline-block"
+                    className="text-[10px] sm:text-xs text-center inline-block"
                   >
                     Safe & Secure
                   </span>
                 </div>
 
-                <div 
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    gap: "8px",
-                    boxSizing: "border-box",
-                  }}
-                  className="flex flex-col items-center gap-2 flex-1"
-                >
+                <div className="flex flex-col items-center gap-1 flex-1">
                   <div 
                     style={{ 
-                      width: "46px", 
-                      height: "46px", 
                       borderRadius: "4px", 
                       backgroundColor: "rgba(246, 243, 238, 1)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                     }}
-                    className="shrink-0"
+                    className="w-9 h-9 sm:w-10 sm:h-10 shrink-0"
                   >
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2B2B2B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B2B2B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M12 4 A 8 8 0 1 1 4.5 13" />
                       <path d="M12 8v4l3 3" />
                     </svg>
@@ -2036,35 +1957,24 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                       fontWeight: 500,
                       color: "rgba(43, 43, 43, 1)",
                     }}
-                    className="text-xs sm:text-sm text-center inline-block"
+                    className="text-[10px] sm:text-xs text-center inline-block"
                   >
                     24/7 Support
                   </span>
                 </div>
 
-                <div 
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    gap: "8px",
-                    boxSizing: "border-box",
-                  }}
-                  className="flex flex-col items-center gap-2 flex-1"
-                >
+                <div className="flex flex-col items-center gap-1 flex-1">
                   <div 
                     style={{ 
-                      width: "46px", 
-                      height: "46px", 
                       borderRadius: "4px", 
                       backgroundColor: "rgba(246, 243, 238, 1)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                     }}
-                    className="shrink-0"
+                    className="w-9 h-9 sm:w-10 sm:h-10 shrink-0"
                   >
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2B2B2B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B2B2B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M12 3l2.5 5.5H21l-3.5 3.5" />
                       <path d="M18.5 19.5l-6.5-4-6.5 4 1.5-6.5-5-5h6.5L12 3" />
                     </svg>
@@ -2075,7 +1985,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                       fontWeight: 500,
                       color: "rgba(43, 43, 43, 1)",
                     }}
-                    className="text-xs sm:text-sm text-center inline-block"
+                    className="text-[10px] sm:text-xs text-center inline-block"
                   >
                     {pkg.rating.toFixed(1)}/5 Rating
                   </span>
@@ -2089,9 +1999,8 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                   fontWeight: 500,
                   color: "rgba(141, 141, 141, 1)",
                   boxSizing: "border-box",
-                  marginTop: "0px",
                 }}
-                className="w-full text-center inline-block text-xs sm:text-sm mt-1"
+                className="w-full text-center inline-block text-[11px] sm:text-xs mt-0.5"
               >
                 Free cancellation • 14 days before departure
               </span>
@@ -2101,262 +2010,6 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
           </div>
         </div>
       </div>
-
-      {/* Boutique Gear Recommendations section */}
-      {recommendedProducts.length > 0 && (
-        <section
-          style={{
-            width: "100%",
-            maxWidth: "1440px",
-            backgroundColor: "rgba(255, 255, 255, 1)",
-            boxSizing: "border-box",
-            display: "flex",
-            flexDirection: "column",
-            gap: "32px",
-          }}
-          className="relative z-10 mx-auto text-left w-full max-w-[1440px] px-4 md:px-[80px] py-[42px]"
-        >
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end w-full gap-4">
-             <div style={{ display: "flex", flexDirection: "column", gap: "12px" }} className="w-full max-w-[1029px]">
-              <h2
-                style={{
-                  fontFamily: "Fraunces, serif",
-                  fontWeight: 600,
-                  color: "#2B2B2B",
-                  margin: 0,
-                }}
-                className="text-2xl md:text-[42px] leading-tight"
-              >
-                Prepare for your <span style={{ color: "#FF5A36" }}>Journey</span>
-              </h2>
-              <p
-                style={{
-                  fontFamily: "Faktum, sans-serif",
-                  fontWeight: 500,
-                  color: "rgba(141, 141, 141, 1)",
-                  margin: 0,
-                }}
-                className="text-sm sm:text-base md:text-[20px] leading-normal"
-              >
-                Shop recommended travel gear and clothing items handpicked for your destination
-              </p>
-            </div>
-            <Link
-              href="/shop"
-              style={{
-                height: "68px",
-                paddingTop: "18px",
-                paddingBottom: "18px",
-                paddingLeft: "24px",
-                paddingRight: "24px",
-                borderRadius: "4px",
-                color: "rgba(29, 73, 62, 1)",
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "8px",
-                textDecoration: "none",
-                boxSizing: "border-box",
-              }}
-              className="hover:opacity-80 transition-opacity w-full sm:w-auto justify-start sm:justify-end text-[#1D493E] font-medium py-3 px-4"
-            >
-              <span
-                style={{
-                  fontFamily: "Faktum, sans-serif",
-                  fontWeight: 500,
-                  display: "inline-block",
-                }}
-                className="inline-block text-sm sm:text-base md:text-[20px]"
-              >
-                View all products
-              </span>
-              <ArrowUpRight style={{ width: "32px", height: "32px" }} className="text-[#1D493E] shrink-0" />
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-[32px] w-full mt-4">
-            {recommendedProducts.map((prod: any) => (
-              <div
-                key={prod.id}
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "12px",
-                  boxSizing: "border-box",
-                }}
-                className="w-full text-left"
-              >
-                <div
-                  style={{
-                    height: "250px",
-                    borderTopLeftRadius: "4px",
-                    borderTopRightRadius: "4px",
-                    overflow: "hidden",
-                    position: "relative",
-                  }}
-                  className="bg-slate-100 group cursor-pointer w-full"
-                >
-                  <img
-                    src={prod.image}
-                    alt={prod.name}
-                    loading="lazy"
-                    className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300"
-                  />
-                </div>
-
-                 {/* Product Content Block */}
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "32px",
-                    boxSizing: "border-box",
-                  }}
-                  className="w-full h-auto flex flex-col gap-6"
-                >
-                  {/* Category Badge */}
-                  <span
-                    style={{
-                      backgroundColor: "rgba(255, 240, 235, 1)",
-                      color: "rgba(255, 98, 62, 1)",
-                      fontFamily: "Faktum, sans-serif",
-                      fontWeight: 700,
-                      fontSize: "12px",
-                      padding: "4px 10px",
-                      borderRadius: "4px",
-                      alignSelf: "flex-start",
-                    }}
-                    className="tracking-wider uppercase"
-                  >
-                    {prod.category}
-                  </span>
-
-                  {/* Name & Price */}
-                  <div 
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      boxSizing: "border-box",
-                    }}
-                    className="w-full flex justify-between items-center gap-2"
-                  >
-                    <span
-                      style={{
-                        fontFamily: "Faktum, sans-serif",
-                        fontWeight: 600,
-                        color: "rgba(43, 43, 43, 1)",
-                      }}
-                      className="truncate flex-1 text-sm sm:text-base md:text-[20px] font-semibold text-[#2B2B2B]"
-                    >
-                      {prod.name}
-                    </span>
-                    <div className="flex items-center gap-2 shrink-0">
-                      {prod.originalPrice && (
-                        <span
-                          style={{
-                            fontFamily: "Faktum, sans-serif",
-                            fontWeight: 600,
-                            color: "rgba(141, 141, 141, 1)",
-                            textDecoration: "line-through",
-                          }}
-                          className="text-xs sm:text-sm text-gray-500 line-through inline-block font-semibold"
-                        >
-                          ₹{prod.originalPrice}
-                        </span>
-                      )}
-                      <span
-                        style={{
-                          fontFamily: "Faktum, sans-serif",
-                          fontWeight: 700,
-                          color: "rgba(43, 43, 43, 1)",
-                        }}
-                        className="text-sm sm:text-lg md:text-[28px] font-bold text-[#2B2B2B] inline-block"
-                      >
-                        ₹{prod.price}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Reviews & Bought count block */}
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: "12px",
-                      boxSizing: "border-box",
-                    }}
-                    className="w-full h-auto flex flex-col gap-3"
-                  >
-                    {/* Reviews */}
-                    <div className="flex items-center gap-2">
-                      <div className="flex text-[#FF5A36] gap-0.5">
-                        {[...Array(5)].map((_, i) => (
-                          <Star key={i} className="w-4 h-4 fill-[#FF5A36] stroke-none" />
-                        ))}
-                      </div>
-                      <span
-                        style={{
-                          fontFamily: "Faktum, sans-serif",
-                          fontWeight: 500,
-                          fontSize: "16px",
-                          color: "rgba(141, 141, 141, 1)",
-                        }}
-                      >
-                        ({prod.reviewsCount} Reviews)
-                      </span>
-                    </div>
-
-                    {/* Bought count */}
-                    <span
-                      style={{
-                        fontFamily: "Faktum, sans-serif",
-                        fontWeight: 500,
-                        fontSize: "16px",
-                        color: "rgba(141, 141, 141, 1)",
-                      }}
-                    >
-                      {prod.boughtCount}
-                    </span>
-                  </div>
-
-                  {/* Delivery */}
-                  <span
-                    style={{
-                      fontFamily: "Faktum, sans-serif",
-                      fontWeight: 500,
-                      color: "rgba(141, 141, 141, 1)",
-                      boxSizing: "border-box",
-                    }}
-                    className="w-full text-xs sm:text-sm md:text-base text-gray-500 leading-normal block"
-                  >
-                    FREE delivery as soon as{" "}
-                    <span style={{ color: "rgba(43, 43, 43, 1)", fontWeight: 500 }}>
-                      {getFutureDeliveryString()}
-                    </span>
-                  </span>
-
-                  {/* Add to Cart button */}
-                  <button
-                    onClick={() => handleProductAdd(prod)}
-                    style={{
-                      paddingTop: "16px",
-                      paddingBottom: "16px",
-                      paddingLeft: "32px",
-                      paddingRight: "32px",
-                      borderRadius: "4px",
-                      boxSizing: "border-box",
-                    }}
-                    className="w-full h-[60px] hover:bg-[#1D493E] hover:text-white transition-colors flex items-center justify-center gap-2 border-2 border-[#1D493E] rounded-[4px] bg-white text-[#1D493E] text-sm sm:text-base font-semibold"
-                  >
-                    {productAddedSuccess === prod.id ? 'Added!' : 'Add to cart'}
-                    <CartIcon size={24} className="shrink-0 group-hover:stroke-white" />
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
 
       {/* Newsletter / Booking CTA Banner (Matching Home page section design) */}
       <section

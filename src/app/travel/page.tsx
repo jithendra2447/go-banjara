@@ -398,7 +398,7 @@ export default function HolidaysPortal() {
       </div>
 
       {/* 1. AVAILABLE PACKAGES CONTENT SECTION */}
-      <section id="available-packages" className="max-w-[1440px] mx-auto px-3 sm:px-6 md:px-[80px] pt-4 sm:pt-10 pb-8 sm:pb-12 space-y-6 sm:space-y-10">
+      <section id="available-packages" className="max-w-[1440px] mx-auto px-3 sm:px-6 md:px-[80px] pt-1 sm:pt-10 pb-6 sm:pb-12 space-y-3 sm:space-y-10">
 
         {/* SEARCH WIDGET CARD */}
         <div 
@@ -582,7 +582,7 @@ export default function HolidaysPortal() {
             marginLeft: "auto",
             marginRight: "auto",
           }}
-          className="overflow-x-auto scrollbar-none pb-2 mt-3 sm:mt-8"
+          className="overflow-x-auto scrollbar-none pb-1 mt-0 sm:mt-8"
         >
           <div className="flex flex-row gap-2 sm:gap-3 items-center min-w-max p-1">
             {['All', 'Weekends', 'Treks', 'Road Trips', 'Camping'].map((cat) => {
@@ -629,9 +629,8 @@ export default function HolidaysPortal() {
             boxSizing: "border-box",
             marginLeft: "auto",
             marginRight: "auto",
-            marginTop: "48px",
           }}
-          className="flex flex-col md:flex-row gap-4 justify-between items-start md:items-center"
+          className="flex flex-col md:flex-row gap-4 justify-between items-start md:items-center mt-3 sm:mt-12"
         >
           <div 
             style={{ 
@@ -1313,25 +1312,21 @@ export default function HolidaysPortal() {
 
         {/* Load more button */}
         {filteredAndSortedPackages.length > visiblePackagesCount && (
-          <div className="pt-8 text-center">
+          <div className="pt-3 sm:pt-8 text-center">
             <button
               type="button"
-              onClick={() => setVisiblePackagesCount(prev => prev + 3)}
+              onClick={() => setVisiblePackagesCount(prev => prev + 6)}
               style={{
                 display: "inline-flex",
                 alignItems: "center",
                 justifyContent: "center",
-                padding: "18px 36px",
                 borderRadius: "8px",
-                border: "none",
+                border: "1px solid #1D493E",
                 fontFamily: "'Faktum', 'Outfit', sans-serif",
                 fontWeight: 600,
-                fontSize: "20px",
-                lineHeight: "28px",
-                color: "#1D493E",
                 cursor: "pointer",
               }}
-              className="bg-transparent hover:bg-[#EEF2F1] transition-colors duration-300"
+              className="bg-white text-[#1D493E] hover:bg-[#1D493E] hover:text-white px-5 py-2 sm:px-8 sm:py-3.5 text-xs sm:text-base md:text-[18px] transition-all duration-300 shadow-xs"
             >
               Load more
             </button>

@@ -620,15 +620,15 @@ export default function Homepage() {
           {/* Centered Header (Figma styled: serif title 42px, sans medium subtitle 24px) */}
           <div className="space-y-3.5 max-w-4xl mx-auto">
             <div className="flex justify-center">
-              <span className="inline-block text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-1 rounded-[4px] text-xs font-bold uppercase tracking-wider">
-                Destinations
+              <span className="inline-block text-[#FF623E] bg-[#FFEBE5] px-2.5 py-1 rounded-[4px] text-[14px] font-semibold uppercase tracking-[1.2px]">
+                CAPTURED MEMORIES
               </span>
             </div>
             <h2 className="text-3xl md:text-[42px] font-serif font-semibold text-[#1D493E] leading-none text-center">
-              Featured&nbsp;<span className="text-[#FF5A36]">Holiday</span>&nbsp;Packages
+              Capture your adventurous travel&nbsp;<span className="text-[#FF5A36]">Forever</span>
             </h2>
             <p className="text-[#2B2B2B]/80 text-base md:text-[20px] leading-relaxed font-medium text-center max-w-2xl mx-auto">
-              A hand-picked map of the corners of India
+              Curated journeys for the modern nomad, designed to push boundaries and discover India&apos;s hidden heart
             </p>
           </div>
 
@@ -1318,7 +1318,7 @@ export default function Homepage() {
             
             {/* Subtitle */}
             <p className="w-full max-w-[1280px] h-auto flex items-center justify-center text-[#2B2B2B]/80 text-base md:text-[20px] leading-[32px] font-medium text-center">
-              A hand-picked map of the corners of India our community keeps coming back to
+              Curated gear for the modern nomad. From durable journal covers to the stickers that tell your story
             </p>
           </div>
 

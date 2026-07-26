@@ -2543,7 +2543,7 @@ export default function Homepage() {
                 find their way to your inbox.
               </h2>
               <p
-                className="text-base sm:text-lg md:text-[20px] font-sans font-medium text-center text-[rgba(43,43,43,0.8)] max-w-[1280px] m-0"
+                className="text-base sm:text-lg md:text-[20px] font-sans font-medium text-center text-[rgba(43,43,43,0.8)] max-w-[1280px] m-0 md:whitespace-nowrap"
                 style={{
                   lineHeight: "1.4",
                   letterSpacing: "0px",

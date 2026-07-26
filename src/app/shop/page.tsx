@@ -569,7 +569,7 @@ export default function ShopPage() {
                   maxWidth: "900px",
                   margin: 0,
                 }}
-                className="text-xs sm:text-base md:text-[20px] leading-relaxed md:leading-[32px]"
+                className="text-xs sm:text-base md:text-[20px] leading-relaxed md:leading-[32px] md:whitespace-nowrap"
               >
                 Hidden places, exclusive trip drops, curated gear, and stories from the road delivered before anyone else hears about them.
               </p>

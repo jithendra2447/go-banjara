@@ -156,19 +156,27 @@ section {
   -webkit-appearance: none;
 }
 
-/* Universal Reset: Remove unwanted tap highlight box and sticky hover effects on mobile */
+/* Universal Reset: Remove unwanted tap highlight box, focus ring and sticky hover effects on mobile */
 *, *::before, *::after {
   -webkit-tap-highlight-color: transparent !important;
+  -webkit-touch-callout: none !important;
 }
 
-button, a {
-  outline: none;
+button, a, input, select, textarea, [role="button"] {
+  outline: none !important;
+  box-shadow: none !important;
   -webkit-tap-highlight-color: transparent !important;
 }
 
-/* Disable sticky hover effects on touch devices */
+button:focus, button:active, button:hover, button:focus-visible, button:focus-within,
+a:focus, a:active, a:hover, a:focus-visible, a:focus-within {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Disable sticky hover effects and background changes on touch devices */
 @media (hover: none) {
-  button:hover, a:hover {
+  button:hover, a:hover, div:hover {
     box-shadow: none !important;
     transform: none !important;
   }

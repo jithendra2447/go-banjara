@@ -426,25 +426,20 @@ export default function ShopPage() {
           style={{
             width: "100%",
             maxWidth: "1440px",
-            paddingTop: "42px",
-            paddingBottom: "42px",
             background: "rgba(255, 255, 255, 1)",
             boxSizing: "border-box",
             margin: "0 auto",
             display: "flex",
             flexDirection: "column",
-            justifyContent: "flex-start",
-            gap: "24px"
+            justifyContent: "flex-start"
           }}
-          className="text-left border-t border-gray-100 mt-8 w-full"
+          className="text-left border-t border-gray-100 mt-6 sm:mt-8 w-full py-4 sm:py-[42px] gap-4 sm:gap-[24px]"
         >
-          <div className="space-y-3">
+          <div className="space-y-2 sm:space-y-3">
             <span 
               style={{
                 fontFamily: "Faktum, Outfit, sans-serif",
                 fontWeight: 600,
-                fontSize: "14px",
-                lineHeight: "100%",
                 letterSpacing: "1.2px",
                 textTransform: "uppercase",
                 color: "rgba(255, 98, 62, 1)",
@@ -452,10 +447,9 @@ export default function ShopPage() {
                 display: "inline-flex",
                 alignItems: "center",
                 justifyContent: "center",
-                height: "28px",
-                padding: "0 16px",
                 borderRadius: "4px"
               }}
+              className="h-[22px] sm:h-[28px] px-2.5 sm:px-4 text-[11px] sm:text-[14px]"
             >
               FAQ'S
             </span>
@@ -463,45 +457,42 @@ export default function ShopPage() {
               style={{
                 fontFamily: "Fraunces, serif",
                 fontWeight: 600,
-                lineHeight: "1.1",
                 letterSpacing: "0px",
                 color: "#2B2B2B",
                 margin: 0
               }}
-              className="text-2xl sm:text-3xl md:text-[42px]"
+              className="text-xl sm:text-3xl md:text-[42px] leading-tight md:leading-[1.2]"
             >
               Frequently asked questions
             </h2>
           </div>
 
-          <div className="w-full flex flex-col border-t border-gray-200 mt-2">
+          <div className="w-full flex flex-col border-t border-gray-200 mt-1 sm:mt-2">
             {FAQ_ITEMS.map((item, idx) => {
               const isOpen = openFaqIdx === idx;
               return (
                 <div 
                   key={idx} 
-                  className="w-full border-b border-gray-200 py-5 flex flex-col text-left transition-colors duration-200"
+                  className="w-full border-b border-gray-200 py-3 sm:py-5 flex flex-col text-left transition-colors duration-200"
                 >
                   <button 
                     onClick={() => setOpenFaqIdx(isOpen ? null : idx)}
-                    className="w-full flex justify-between items-center text-left focus:outline-none cursor-pointer"
+                    className="w-full flex justify-between items-center text-left focus:outline-none cursor-pointer gap-2"
                   >
                     <span 
                       style={{
                         fontFamily: "Faktum, Outfit, sans-serif",
                         fontWeight: 600,
-                        fontSize: "18px",
-                        lineHeight: "26px",
                         color: "#2C2C2C"
                       }}
-                      className="text-base md:text-[18px]"
+                      className="text-xs sm:text-base md:text-[18px] leading-snug md:leading-[26px]"
                     >
                       {item.question}
                     </span>
                     {isOpen ? (
-                      <span className="text-2xl font-semibold text-[#FF623E] select-none shrink-0 ml-4">−</span>
+                      <span className="text-lg sm:text-2xl font-semibold text-[#FF623E] select-none shrink-0 ml-2">−</span>
                     ) : (
-                      <span className="text-2xl font-semibold text-[#1D493E] select-none shrink-0 ml-4">+</span>
+                      <span className="text-lg sm:text-2xl font-semibold text-[#1D493E] select-none shrink-0 ml-2">+</span>
                     )}
                   </button>
                   {isOpen && (
@@ -509,13 +500,10 @@ export default function ShopPage() {
                       style={{
                         fontFamily: "Faktum, Outfit, sans-serif",
                         fontWeight: 500,
-                        fontSize: "14px",
-                        lineHeight: "22px",
                         color: "#666666",
-                        margin: 0,
-                        paddingTop: "8px"
+                        margin: 0
                       }}
-                      className="text-sm animate-fade-in-up"
+                      className="text-[11px] sm:text-sm leading-relaxed md:leading-[22px] pt-1.5 sm:pt-2 animate-fade-in-up"
                     >
                       {item.answer}
                     </p>
@@ -527,17 +515,18 @@ export default function ShopPage() {
         </section>
 
         {/* Spacer */}
-        <div style={{ height: "62px" }} className="shrink-0" />
+        <div className="h-4 sm:h-[62px] shrink-0" />
 
-        {/* 13. NEWSLETTER / CTA SECTION — 1440×337, py-42, px-80, gap-32 */}
-        <div
+        {/* Section 12: Newsletter CTA Section */}
+        <section 
           style={{
             width: "100%",
-            paddingTop: "42px",
-            paddingBottom: "42px",
-            background: "#FFFFFF",
+            maxWidth: "1440px",
+            background: "rgba(255, 255, 255, 1)",
             boxSizing: "border-box",
+            margin: "0 auto"
           }}
+          className="py-4 sm:py-[42px] border-t border-gray-100"
         >
           <div
             style={{
@@ -546,61 +535,50 @@ export default function ShopPage() {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              gap: "32px",
               textAlign: "center",
               boxSizing: "border-box",
             }}
+            className="gap-3 sm:gap-[32px]"
           >
             {/* Text block */}
-            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
-              {/* Heading: Fraunces SemiBold 42px, lh 100%, #2B2B2B */}
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }} className="gap-2 sm:gap-[12px]">
+              {/* Heading */}
               <h2
                 style={{
                   fontFamily: "Fraunces, serif",
                   fontWeight: 600,
-                  fontSize: "42px",
-                  lineHeight: "100%",
                   letterSpacing: "0px",
                   textAlign: "center",
                   color: "#2B2B2B",
                   maxWidth: "1280px",
                   margin: 0,
                 }}
-                className="text-[28px] md:text-[42px]"
+                className="text-lg sm:text-3xl md:text-[42px] leading-tight md:leading-[1.2]"
               >
                 The{" "}
                 <span style={{ color: "#FF5A36" }}>best adventures</span>{" "}
                 find their way to your inbox.
               </h2>
-              {/* Subtitle: Faktum Medium 24px, lh 32px, rgba(43,43,43,1) */}
+              {/* Subtitle */}
               <p
                 style={{
                   fontFamily: "Faktum, sans-serif",
                   fontWeight: 500,
-                  fontSize: "24px",
-                  lineHeight: "32px",
-                  letterSpacing: "0px",
                   textAlign: "center",
-                  color: "rgba(43, 43, 43, 1)",
-                  maxWidth: "1280px",
+                  color: "rgba(43, 43, 43, 0.8)",
+                  maxWidth: "900px",
                   margin: 0,
                 }}
-                className="text-base md:text-[24px]"
+                className="text-xs sm:text-base md:text-[24px] leading-relaxed md:leading-[32px]"
               >
                 Hidden places, exclusive trip drops, curated gear, and stories from the road delivered before anyone else hears about them.
               </p>
             </div>
 
-            {/* Button: 286×55, pt-16 pr-32 pb-16 pl-32, radius-4, bg #1D493E */}
+            {/* Button */}
             <Link
               href="/travel"
               style={{
-                width: "286px",
-                height: "55px",
-                paddingTop: "16px",
-                paddingBottom: "16px",
-                paddingLeft: "32px",
-                paddingRight: "32px",
                 borderRadius: "4px",
                 background: "rgba(29, 73, 62, 1)",
                 display: "flex",
@@ -609,19 +587,17 @@ export default function ShopPage() {
                 color: "#FFFFFF",
                 fontFamily: "'Faktum','Outfit',sans-serif",
                 fontWeight: 500,
-                fontSize: "18px",
-                lineHeight: "100%",
                 letterSpacing: "0px",
                 textDecoration: "none",
                 transition: "opacity 0.2s",
               }}
-              className="hover:opacity-90 inline-flex items-center gap-2"
+              className="hover:opacity-90 inline-flex items-center gap-2 px-5 sm:px-8 py-2.5 sm:py-4 h-10 sm:h-[55px] w-auto sm:w-[286px] text-xs sm:text-[18px] shrink-0"
             >
               <span>Reserve your tour now</span>
-              <span className="text-lg font-sans">↗</span>
+              <span className="text-xs sm:text-lg font-sans">↗</span>
             </Link>
           </div>
-        </div>
+        </section>
 
       </main>
       <TrustBanner />

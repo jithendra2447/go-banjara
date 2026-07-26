@@ -222,6 +222,14 @@ export default function ProductDetailsPage() {
     ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100) 
     : 16; 
 
+  // Check if product is T-Shirt / Clothing / Apparel so size selector is shown ONLY for clothing
+  const isTShirtProduct = Boolean(
+    (product as any).hasSizes ||
+    ((product as any).sizes && (product as any).sizes.length > 0) ||
+    /t-?shirt|tee|apparel|clothing|hoodie|top/i.test(product.category || '') ||
+    /t-?shirt|tee|hoodie/i.test(product.name || '')
+  );
+
   // Dynamic mock variant images based on selected index
   const renderMediaContent = (index: number, isThumbnail: boolean = false) => {
     const mainImg = product?.image || '';
@@ -706,41 +714,43 @@ export default function ProductDetailsPage() {
                   </div>
                 </div>
 
-                {/* Size Selector */}
-                <div style={{ display: "flex", flexDirection: "column", gap: "8px", textAlign: "left", boxSizing: "border-box" }}>
-                  <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: "16px", fontWeight: 500, lineHeight: "24px", color: "rgba(43, 43, 43, 1)", margin: 0 }}>Select Size</span>
-                  <div style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
-                    {['XS', 'S', 'M', 'L', 'XL', 'XXL'].map(size => {
-                      const isSelected = selectedSize === size;
-                      return (
-                        <button
-                          key={size}
-                          type="button"
-                          onClick={() => setSelectedSize(size)}
-                          style={{
-                            width: "44px",
-                            height: "44px",
-                            border: isSelected ? "2px solid #1D493E" : "1px solid rgba(204, 204, 204, 0.54)",
-                            borderRadius: "4px",
-                            background: isSelected ? "#1D493E" : "#FFFFFF",
-                            color: isSelected ? "#FFFFFF" : "rgba(43, 43, 43, 1)",
-                            fontFamily: "'Outfit', sans-serif",
-                            fontSize: "13px",
-                            fontWeight: isSelected ? 700 : 500,
-                            cursor: "pointer",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            transition: "all 0.15s ease",
-                          }}
-                          className={!isSelected ? "hover:border-[#1D493E] hover:text-[#1D493E] transition" : ""}
-                        >
-                          {size}
-                        </button>
-                      );
-                    })}
+                {/* Size Selector (Shown ONLY for T-Shirts & Clothing/Apparel products) */}
+                {isTShirtProduct && (
+                  <div style={{ display: "flex", flexDirection: "column", gap: "8px", textAlign: "left", boxSizing: "border-box" }}>
+                    <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: "16px", fontWeight: 500, lineHeight: "24px", color: "rgba(43, 43, 43, 1)", margin: 0 }}>Select Size</span>
+                    <div style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
+                      {['XS', 'S', 'M', 'L', 'XL', 'XXL'].map(size => {
+                        const isSelected = selectedSize === size;
+                        return (
+                          <button
+                            key={size}
+                            type="button"
+                            onClick={() => setSelectedSize(size)}
+                            style={{
+                              width: "44px",
+                              height: "44px",
+                              border: isSelected ? "2px solid #1D493E" : "1px solid rgba(204, 204, 204, 0.54)",
+                              borderRadius: "4px",
+                              background: isSelected ? "#1D493E" : "#FFFFFF",
+                              color: isSelected ? "#FFFFFF" : "rgba(43, 43, 43, 1)",
+                              fontFamily: "'Outfit', sans-serif",
+                              fontSize: "13px",
+                              fontWeight: isSelected ? 700 : 500,
+                              cursor: "pointer",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              transition: "all 0.15s ease",
+                            }}
+                            className={!isSelected ? "hover:border-[#1D493E] hover:text-[#1D493E] transition" : ""}
+                          >
+                            {size}
+                          </button>
+                        );
+                      })}
+                    </div>
                   </div>
-                </div>
+                )}
 
               </div>
 

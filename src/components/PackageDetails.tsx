@@ -383,8 +383,8 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
           width: "100%",
           maxWidth: "1440px",
           height: "auto",
-          paddingTop: "42px",
-          paddingBottom: "16px",
+          paddingTop: "12px",
+          paddingBottom: "4px",
           boxSizing: "border-box",
         }}
         className="w-full max-w-[1440px] mx-auto text-left flex items-center px-4 md:px-[80px]"
@@ -460,8 +460,10 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
           boxSizing: "border-box",
           display: "flex",
           flexDirection: "column",
+          paddingTop: "0px",
+          paddingBottom: "0px",
         }}
-        className="relative z-10 mx-auto w-full px-4 md:px-[80px] pt-3 sm:pt-5 pb-4 sm:pb-6 gap-4 sm:gap-6"
+        className="relative z-10 mx-auto w-full px-4 md:px-[80px] pt-0 pb-0 gap-4 sm:gap-6"
       >
         {/* Image Gallery */}
         <div 

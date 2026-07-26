@@ -368,8 +368,8 @@ export default function Homepage() {
           muted
           playsInline
           preload="metadata"
-          className="absolute inset-0 w-full h-full object-cover brightness-[0.75] contrast-[1.05]"
-          style={{ transform: 'translateZ(0)' }}
+          className="absolute inset-0 w-full h-full object-cover scale-[1.08] brightness-[0.75] contrast-[1.05]"
+          style={{ transform: 'scale(1.08) translateZ(0)' }}
         >
           <source src="/hero-video.mp4" type="video/mp4" />
         </video>

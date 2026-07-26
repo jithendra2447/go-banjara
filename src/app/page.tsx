@@ -903,10 +903,10 @@ export default function Homepage() {
             </h2>
             <Link 
               href="/travel" 
-              className="w-10 h-10 rounded-full bg-[#1D493E] text-white flex items-center justify-center hover:opacity-90 transition shrink-0 group"
+              className="w-9 h-9 rounded-full bg-[#1D493E] text-white flex items-center justify-center hover:opacity-90 transition shrink-0 group"
               aria-label="View all packages"
             >
-              <ArrowUpRight className="w-5 h-5 text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
+              <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-0.5 transition-transform duration-300" />
             </Link>
           </div>
 
@@ -1177,10 +1177,10 @@ export default function Homepage() {
             </h2>
             <Link 
               href="/shop" 
-              className="w-10 h-10 rounded-full bg-[#1D493E] text-white flex items-center justify-center hover:opacity-90 transition shrink-0 group"
+              className="w-9 h-9 rounded-full bg-[#1D493E] text-white flex items-center justify-center hover:opacity-90 transition shrink-0 group"
               aria-label="View all products"
             >
-              <ArrowUpRight className="w-5 h-5 text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
+              <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-0.5 transition-transform duration-300" />
             </Link>
           </div>
 
@@ -1220,29 +1220,19 @@ export default function Homepage() {
                   </div>
                 </Link>
 
-                {/* Horizontal Progress Bar Indicator & Pagination Dots Below */}
-                <div className="flex flex-col gap-3 mt-3">
-                  <InteractiveProgressBar
-                    totalSlides={categories.length}
-                    activeSlide={activeCategorySlide}
-                    onSlideChange={(newIdx) => setActiveCategorySlide(newIdx)}
-                    height={6}
-                    title="Click or drag to select category"
-                  />
-
-                  <div className="flex items-center justify-center gap-1.5">
-                    {categories.map((cat, idx) => (
-                      <button
-                        key={cat.name}
-                        type="button"
-                        onClick={() => setActiveCategorySlide(idx)}
-                        className={`transition-all duration-300 rounded-full cursor-pointer ${
-                          activeCategorySlide === idx ? 'w-4 h-1.5 bg-[#1D493E]' : 'w-1.5 h-1.5 bg-slate-300'
-                        }`}
-                        aria-label={`Category ${cat.name}`}
-                      />
-                    ))}
-                  </div>
+                {/* Pagination Dots Below */}
+                <div className="flex items-center justify-center gap-1.5 mt-3">
+                  {categories.map((cat, idx) => (
+                    <button
+                      key={cat.name}
+                      type="button"
+                      onClick={() => setActiveCategorySlide(idx)}
+                      className={`transition-all duration-300 rounded-full cursor-pointer ${
+                        activeCategorySlide === idx ? 'w-4 h-1.5 bg-[#1D493E]' : 'w-1.5 h-1.5 bg-slate-300'
+                      }`}
+                      aria-label={`Category ${cat.name}`}
+                    />
+                  ))}
                 </div>
               </div>
             );
@@ -1480,7 +1470,7 @@ export default function Homepage() {
               className="w-[30px] h-[30px] rounded-full bg-[#1D493E] text-white flex items-center justify-center hover:scale-105 active:scale-95 transition shrink-0 group"
               aria-label="View all products"
             >
-              <ArrowUpRight className="w-4 h-4 text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
+              <ArrowRight className="w-3.5 h-3.5 text-white group-hover:translate-x-0.5 transition-transform duration-300" />
             </Link>
           </div>
 

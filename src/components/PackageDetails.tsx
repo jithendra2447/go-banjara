@@ -761,7 +761,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                   justifyContent: "space-between",
                   alignItems: "flex-start",
                 }}
-                className="text-left gap-1 h-auto py-1"
+                className="text-left gap-2.5 sm:gap-3.5 h-auto py-1 mt-1 sm:mt-2"
               >
                 <div className="flex items-center gap-2 sm:gap-3">
                   <div className="flex text-[#E05434] gap-0.5 sm:gap-1">
@@ -782,7 +782,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                       display: "inline-flex",
                       alignItems: "center",
                     }}
-                    className="leading-none text-xs sm:text-base md:text-[20px]"
+                    className="leading-normal text-xs sm:text-base md:text-[20px]"
                   >
                     ({pkg.ratingCount || 312} reviews)
                   </span>
@@ -797,7 +797,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                     display: "inline-flex",
                     alignItems: "center",
                   }}
-                  className="leading-none text-xs sm:text-base md:text-[20px]"
+                  className="leading-normal text-xs sm:text-base md:text-[20px]"
                 >
                   200+ bought in past month
                 </span>

@@ -2075,9 +2075,9 @@ export default function Homepage() {
           </div>
         </div>
 
-        {/* Mobile Figma Spec Container (block md:hidden) - w:430px max, gap:12px, padding:12px 20px */}
-        <div className="block md:hidden w-full max-w-[430px] mx-auto py-[12px] px-[20px] bg-white flex flex-col gap-[12px]">
-          <div className="flex flex-col gap-1 text-left">
+        {/* Mobile View Container with Infinite Marquee Scrolling (block md:hidden) */}
+        <div className="block md:hidden w-full py-[16px] bg-white flex flex-col gap-[12px] overflow-hidden">
+          <div className="flex flex-col gap-1 text-left px-5">
             <span className="text-[#FF623E] text-[10px] font-bold uppercase tracking-[1px]">
               REAL EXPERIENCES
             </span>
@@ -2085,21 +2085,86 @@ export default function Homepage() {
               What <span className="text-[#FF623E]">people say</span>
             </h2>
           </div>
-          <div className="bg-gray-50 border border-gray-100 p-4 rounded-xl flex flex-col gap-2.5 text-left">
-            <div className="flex text-amber-400 gap-0.5">
-              {[...Array(5)].map((_, s) => (
-                <Star key={s} className="w-3.5 h-3.5 fill-current" />
+          
+          {/* Infinite Marquee Ticker Track for Mobile */}
+          <div className="w-full overflow-hidden py-1">
+            <div className="flex gap-4 w-max animate-marquee hover:[animation-play-state:paused]">
+              {[
+                {
+                  name: "Kiran Makwan",
+                  subtitle: "Verified Wanderer",
+                  avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150&q=80",
+                  text: "Exploring Spiti Valley with Go Banjara was a life-changing journey. Flawless planning, cozy homestays, and a wonderful group of fellow travelers!",
+                  stars: 5
+                },
+                {
+                  name: "Rohan & Sneha",
+                  subtitle: "Honeymoon Travelers",
+                  avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&h=150&q=80",
+                  text: "The Meghalaya Caving & Waterfalls tour was pure magic! Everything was pre-arranged smoothly.",
+                  stars: 5
+                },
+                {
+                  name: "Vikramaditya S.",
+                  subtitle: "Motorcycle Expeditioner",
+                  avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&h=150&q=80",
+                  text: "Riding from Srinagar to Leh with Go Banjara back-up support was the best adventure of my life!",
+                  stars: 5
+                },
+                {
+                  name: "Priyanka Sen",
+                  subtitle: "Slow Traveler",
+                  avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&h=150&q=80",
+                  text: "The double-walled thermal flask keeps my tea steaming hot even at 14,000 feet in Ladakh.",
+                  stars: 5
+                },
+                {
+                  name: "Kiran Makwan",
+                  subtitle: "Verified Wanderer",
+                  avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150&q=80",
+                  text: "Exploring Spiti Valley with Go Banjara was a life-changing journey. Flawless planning, cozy homestays, and a wonderful group of fellow travelers!",
+                  stars: 5
+                },
+                {
+                  name: "Rohan & Sneha",
+                  subtitle: "Honeymoon Travelers",
+                  avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&h=150&q=80",
+                  text: "The Meghalaya Caving & Waterfalls tour was pure magic! Everything was pre-arranged smoothly.",
+                  stars: 5
+                },
+                {
+                  name: "Vikramaditya S.",
+                  subtitle: "Motorcycle Expeditioner",
+                  avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&h=150&q=80",
+                  text: "Riding from Srinagar to Leh with Go Banjara back-up support was the best adventure of my life!",
+                  stars: 5
+                },
+                {
+                  name: "Priyanka Sen",
+                  subtitle: "Slow Traveler",
+                  avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&h=150&q=80",
+                  text: "The double-walled thermal flask keeps my tea steaming hot even at 14,000 feet in Ladakh.",
+                  stars: 5
+                }
+              ].map((review, idx) => (
+                <div key={idx} className="bg-gray-50 border border-gray-100 p-4 rounded-[4px] flex flex-col justify-between gap-2.5 text-left w-[280px] shrink-0 shadow-xs">
+                  <div className="flex text-amber-400 gap-0.5">
+                    {[...Array(review.stars)].map((_, s) => (
+                      <Star key={s} className="w-3.5 h-3.5 fill-current" />
+                    ))}
+                  </div>
+                  <p className="text-gray-700 font-medium italic text-xs leading-relaxed m-0 line-clamp-3">
+                    "{review.text}"
+                  </p>
+                  <div className="flex items-center gap-2.5 pt-2 border-t border-gray-200/60 mt-auto">
+                    <img src={review.avatar} alt={review.name} className="w-7 h-7 rounded-full object-cover shrink-0" />
+                    <div>
+                      <h4 className="text-xs font-bold text-gray-800 m-0 leading-none">{review.name}</h4>
+                      <p className="text-[10px] text-[#1D493E] font-semibold m-0 mt-0.5">{review.subtitle}</p>
+                    </div>
+                  </div>
+                </div>
               ))}
-            </div>
-            <p className="text-gray-700 font-bold italic text-xs leading-relaxed m-0">
-              "Exploring Spiti Valley with Go Banjara was a life-changing journey. Flawless planning, cozy homestays, and a wonderful group of fellow travelers!"
-            </p>
-            <div className="flex items-center gap-2.5 pt-2 border-t border-gray-200/60">
-              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150&q=80" alt="Kiran" className="w-7 h-7 rounded-full object-cover shrink-0" />
-              <div>
-                <h4 className="text-xs font-black text-gray-800 m-0 leading-none">Kiran Makwan</h4>
-                <p className="text-[10px] text-[#1D493E]/60 font-semibold m-0 mt-0.5">Verified Wanderer</p>
-              </div>
             </div>
           </div>
         </div>

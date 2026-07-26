@@ -390,7 +390,7 @@ export default function HolidaysPortal() {
               color: "rgba(43, 43, 43, 1)",
               margin: 0,
             }}
-            className="text-xs sm:text-base md:text-[20px] leading-relaxed md:leading-[32px]"
+            className="hidden sm:block text-xs sm:text-base md:text-[20px] leading-relaxed md:leading-[32px]"
           >
             Curated journeys for the modern nomad, designed to push boundaries and discover India's hidden heart
           </p>

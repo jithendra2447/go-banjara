@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Star, ShoppingCart } from 'lucide-react';
+import { Star } from 'lucide-react';
 import { useCart } from '@/components/providers';
 import { PRODUCTS } from '@/data/products';
 import { Product } from '@/types';
@@ -82,6 +82,8 @@ export default function ShopPage() {
 
   const [productsList, setProductsList] = React.useState<Product[]>(PRODUCTS);
   const [openFaqIdx, setOpenFaqIdx] = React.useState<number | null>(0);
+  const [activeNewArrivalsSlide, setActiveNewArrivalsSlide] = React.useState(0);
+  const [activeLimitedEditionSlide, setActiveLimitedEditionSlide] = React.useState(0);
 
   React.useEffect(() => {
     const saved = localStorage.getItem('gb_admin_products_v3');
@@ -136,14 +138,15 @@ export default function ShopPage() {
     productsList.find(p => p.id === 'naturally-nomad-badge-2') || productsList[4] || productsList[0] || PRODUCTS[0],
   ];
 
-  const renderProductGrid = (items: Product[]) => (
+  const renderProductGrid = (items: Product[], activeSlideSetter?: (idx: number) => void) => (
     <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6 xl:gap-[32px] w-full max-w-[1280px] mx-auto">
-      {items.map((prod) => (
-        <ProductCard
-          key={prod.id}
-          product={prod}
-          onAddToCart={(p) => addToCart(p, 'shop')}
-        />
+      {items.map((prod, idx) => (
+        <div key={prod.id} onMouseEnter={() => activeSlideSetter && activeSlideSetter(idx)}>
+          <ProductCard
+            product={prod}
+            onAddToCart={(p) => addToCart(p, 'shop')}
+          />
+        </div>
       ))}
     </div>
   );
@@ -154,12 +157,9 @@ export default function ShopPage() {
       <header style={{ width: "100%", maxWidth: "1440px", display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: "white", boxSizing: "border-box" }} className="mx-auto px-4 sm:px-6 md:px-[80px] pt-4 sm:pt-[40px] md:pt-[62px] pb-2 sm:pb-[24px]">
         {/* Inner header container */}
         <div className="w-full max-w-[1280px] flex flex-col items-center gap-2 sm:gap-[16px] md:gap-[24px] bg-white rounded-[4px] py-1 sm:py-4 text-center shrink-0">
-          {/* Tag */}
-          <div className="h-[22px] sm:h-[26px] flex items-center justify-center shrink-0 bg-[#FFEBE5] rounded-[4px] px-2 sm:px-2.5">
-            <span className="font-sans font-semibold text-[11px] sm:text-[14px] leading-none tracking-[1px] text-[#FF623E] uppercase whitespace-nowrap">
-              Experience the Shopping
-            </span>
-          </div>
+          <span className="inline-block text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 py-1.5 rounded-sm">
+            EXPERIENCE THE SHOPPING
+          </span>
 
           {/* Heading */}
           <h1
@@ -217,25 +217,54 @@ export default function ShopPage() {
         <div style={{ paddingTop: "42px", paddingBottom: "42px", display: "flex", flexDirection: "column", width: "100%", backgroundColor: "white" }}>
           {/* Header */}
           <div className="text-left space-y-2.5">
-            <span className="inline-block text-[9px] font-black uppercase tracking-[0.15em] text-[#FF5B37] bg-[#FFEBE5] px-2.5 py-1 rounded-sm">
+            <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
               NEW STYLES
             </span>
-            <h2 className="text-2xl sm:text-3xl font-serif font-medium">
+            <h2 style={{ fontFamily: 'Fraunces, serif', fontWeight: 600, fontSize: '42px', lineHeight: '100%', letterSpacing: '0px' }} className="text-2xl md:text-[42px]">
               <span className="text-[#FF5B37]">New</span> <span className="text-[#2B2B2B]">Arrivals</span>
             </h2>
-            <p className="text-xs sm:text-sm font-sans text-slate-500 max-w-3xl leading-relaxed">
+            <p style={{ fontFamily: 'Faktum, sans-serif', fontWeight: 500, fontSize: '24px', lineHeight: '32px', letterSpacing: '0px' }} className="text-sm md:text-[24px] text-[#2B2B2B]/80">
               Curated gear for the modern nomad. From durable journal covers to the stickers that tell your story
             </p>
           </div>
           <div style={{ height: "62px" }} className="shrink-0" />
 
           {/* Grid */}
-          {renderProductGrid(newArrivals)}
-          <div style={{ height: "62px" }} className="shrink-0" />
+          {renderProductGrid(newArrivals, setActiveNewArrivalsSlide)}
+          <div style={{ height: "32px" }} className="shrink-0" />
 
-          {/* Progress / Scroll Indicator */}
-          <div className="w-full max-w-xs mx-auto h-[3px] bg-[#E2E8F0] rounded-full overflow-hidden">
-            <div className="w-[40%] h-full bg-[#1D493E] rounded-full"></div>
+          {/* Interactive Full-Width Progress Bar */}
+          <div 
+            onClick={(e) => {
+              const rect = e.currentTarget.getBoundingClientRect();
+              const clickX = e.clientX - rect.left;
+              const ratio = Math.max(0, Math.min(1, clickX / rect.width));
+              const newIdx = Math.min(3, Math.floor(ratio * 4));
+              setActiveNewArrivalsSlide(newIdx);
+            }}
+            onMouseMove={(e) => {
+              if (e.buttons === 1) {
+                const rect = e.currentTarget.getBoundingClientRect();
+                const clickX = e.clientX - rect.left;
+                const ratio = Math.max(0, Math.min(1, clickX / rect.width));
+                const newIdx = Math.min(3, Math.floor(ratio * 4));
+                setActiveNewArrivalsSlide(newIdx);
+              }
+            }}
+            onTouchMove={(e) => {
+              const rect = e.currentTarget.getBoundingClientRect();
+              const touchX = e.touches[0].clientX - rect.left;
+              const ratio = Math.max(0, Math.min(1, touchX / rect.width));
+              const newIdx = Math.min(3, Math.floor(ratio * 4));
+              setActiveNewArrivalsSlide(newIdx);
+            }}
+            className="w-full max-w-[1280px] mx-auto h-[8px] bg-gray-200 relative rounded-full overflow-hidden cursor-pointer group transition-all duration-300 shadow-inner select-none"
+            title="Click or drag to switch active product"
+          >
+            <div 
+              style={{ left: `${(activeNewArrivalsSlide % 4) * 25}%`, width: "25%" }}
+              className="absolute top-0 h-full bg-[#1D493E] rounded-full transition-all duration-300 ease-out pointer-events-none" 
+            />
           </div>
         </div>
 
@@ -243,13 +272,13 @@ export default function ShopPage() {
         <div style={{ paddingTop: "42px", paddingBottom: "42px", display: "flex", flexDirection: "column", width: "100%", backgroundColor: "white" }}>
           {/* Header */}
           <div className="text-left space-y-2.5">
-            <span className="inline-block text-[9px] font-black uppercase tracking-[0.15em] text-[#FF5B37] bg-[#FFEBE5] px-2.5 py-1 rounded-sm">
+            <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
               NEW STYLES
             </span>
-            <h2 className="text-2xl sm:text-3xl font-serif font-medium">
+            <h2 style={{ fontFamily: 'Fraunces, serif', fontWeight: 600, fontSize: '42px', lineHeight: '100%', letterSpacing: '0px' }} className="text-2xl md:text-[42px]">
               <span className="text-[#FF5B37]">Travels</span> <span className="text-[#2B2B2B]">Essentials</span>
             </h2>
-            <p className="text-xs sm:text-sm font-sans text-slate-500 max-w-3xl leading-relaxed">
+            <p style={{ fontFamily: 'Faktum, sans-serif', fontWeight: 500, fontSize: '24px', lineHeight: '32px', letterSpacing: '0px' }} className="text-sm md:text-[24px] text-[#2B2B2B]/80">
               Curated gear for the modern nomad. From durable journal covers to the stickers that tell your story
             </p>
           </div>
@@ -265,7 +294,7 @@ export default function ShopPage() {
           <div className="flex justify-center pt-0">
             <Link 
               href="/shop/travels-essentials" 
-              className="px-8 py-3 border border-slate-200 hover:border-[#1D493E] hover:text-[#1D493E] text-slate-500 rounded-lg font-bold text-xs uppercase tracking-wider transition-all duration-300 inline-block text-center"
+              className="inline-flex items-center gap-1.5 text-sm font-extrabold uppercase tracking-widest text-[#1D493E] hover:opacity-70 px-6 py-3 transition-all duration-300"
             >
               Load more
             </Link>
@@ -276,13 +305,13 @@ export default function ShopPage() {
         <div style={{ paddingTop: "42px", paddingBottom: "42px", display: "flex", flexDirection: "column", width: "100%", backgroundColor: "white" }}>
           {/* Header */}
           <div className="text-left space-y-2.5">
-            <span className="inline-block text-[9px] font-black uppercase tracking-[0.15em] text-[#FF5B37] bg-[#FFEBE5] px-2.5 py-1 rounded-sm">
+            <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
               NEW STYLES
             </span>
-            <h2 className="text-2xl sm:text-3xl font-serif font-medium">
+            <h2 style={{ fontFamily: 'Fraunces, serif', fontWeight: 600, fontSize: '42px', lineHeight: '100%', letterSpacing: '0px' }} className="text-2xl md:text-[42px]">
               <span className="text-[#FF5B37]">Limited</span> <span className="text-[#2B2B2B]">Edition</span>
             </h2>
-            <p className="text-xs sm:text-sm font-sans text-slate-500 max-w-3xl leading-relaxed">
+            <p style={{ fontFamily: 'Faktum, sans-serif', fontWeight: 500, fontSize: '24px', lineHeight: '32px', letterSpacing: '0px' }} className="text-sm md:text-[24px] text-[#2B2B2B]/80">
               Curated gear for the modern nomad. From durable journal covers to the stickers that tell your story
             </p>
           </div>
@@ -302,13 +331,13 @@ export default function ShopPage() {
         <div style={{ paddingTop: "42px", paddingBottom: "42px", display: "flex", flexDirection: "column", width: "100%", backgroundColor: "white" }}>
           {/* Header */}
           <div className="text-left space-y-2.5">
-            <span className="inline-block text-[9px] font-black uppercase tracking-[0.15em] text-[#FF5B37] bg-[#FFEBE5] px-2.5 py-1 rounded-sm">
+            <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
               NEW STYLES
             </span>
-            <h2 className="text-2xl sm:text-3xl font-serif font-medium">
+            <h2 style={{ fontFamily: 'Fraunces, serif', fontWeight: 600, fontSize: '42px', lineHeight: '100%', letterSpacing: '0px' }} className="text-2xl md:text-[42px]">
               <span className="text-[#FF5B37]">25% to 50% Discount</span> <span className="text-[#2B2B2B]">Sale</span>
             </h2>
-            <p className="text-xs sm:text-sm font-sans text-slate-500 max-w-3xl leading-relaxed">
+            <p style={{ fontFamily: 'Faktum, sans-serif', fontWeight: 500, fontSize: '24px', lineHeight: '32px', letterSpacing: '0px' }} className="text-sm md:text-[24px] text-[#2B2B2B]/80">
               Curated gear for the modern nomad. From durable journal covers to the stickers that tell your story
             </p>
           </div>
@@ -336,13 +365,13 @@ export default function ShopPage() {
         <div className="bg-white pt-[42px] pb-[24px] flex flex-col gap-[32px] w-full border-t border-slate-100 mt-8">
           {/* Header */}
           <div className="text-left space-y-2.5">
-            <span className="inline-block text-[9px] font-black uppercase tracking-[0.15em] text-[#FF5B37] bg-[#FFEBE5] px-2.5 py-1 rounded-sm">
+            <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
               CAPTURED MEMORIES
             </span>
-            <h2 className="text-2xl sm:text-3xl font-serif font-medium">
+            <h2 style={{ fontFamily: 'Fraunces, serif', fontWeight: 600, fontSize: '42px', lineHeight: '100%', letterSpacing: '0px' }} className="text-2xl md:text-[42px]">
               Capture your adventurous travel <span className="text-[#FF5B37]">Forever</span>
             </h2>
-            <p className="text-xs sm:text-sm font-sans text-slate-500 max-w-3xl leading-relaxed">
+            <p style={{ fontFamily: 'Faktum, sans-serif', fontWeight: 500, fontSize: '24px', lineHeight: '32px', letterSpacing: '0px' }} className="text-sm md:text-[24px] text-[#2B2B2B]/80">
               Curated journeys for the modern nomad, designed to push boundaries and discover India's hidden heart
             </p>
           </div>

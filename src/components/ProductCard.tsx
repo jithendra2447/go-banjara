@@ -2,9 +2,11 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Star, ShoppingCart, Heart } from 'lucide-react';
+import { Star, Heart } from 'lucide-react';
 import { Product } from '@/types';
 import { useCart } from '@/components/providers';
+import { useDeliveryDate } from '@/utils/dateUtils';
+import { CartIcon } from '@/components/CartIcon';
 
 interface ProductCardProps {
   product: Product;
@@ -15,6 +17,7 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
   const { wishlist, toggleWishlist } = useCart();
   const [activeImgIdx, setActiveImgIdx] = useState(0);
   const [isAdded, setIsAdded] = useState(false);
+  const deliveryDate = useDeliveryDate(6);
 
   const isWishlisted = Array.isArray(wishlist) && wishlist.some((w: any) => w.id === product.id);
 
@@ -141,7 +144,7 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
 
             <p className="text-[9px] leading-tight m-0 truncate">
               <span className="text-[#8D8D8D]">FREE delivery </span>
-              <span className="font-bold text-[#2B2B2B]">Thu, 9 Apr</span>
+              <span className="font-bold text-[#2B2B2B]">{deliveryDate}</span>
             </p>
           </div>
         </Link>
@@ -157,7 +160,7 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
             className="w-full h-[32px] rounded-[4px] border border-[#1D493E] text-[#1D493E] hover:bg-[#1D493E] hover:text-white text-[11px] font-bold transition flex items-center justify-center gap-1 cursor-pointer"
           >
             <span>{isAdded ? 'Added!' : 'Add to cart'}</span>
-            <ShoppingCart className="w-3.5 h-3.5" />
+            <CartIcon size={14} className="shrink-0" />
           </button>
         </div>
       </div>
@@ -304,7 +307,7 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
           {/* Delivery text */}
           <p style={{ margin: 0 }} className="text-[18px] leading-relaxed font-medium">
             <span style={{ color: "rgba(141, 141, 141, 1)" }}>FREE delivery as soon as </span>
-            <span style={{ color: "rgba(43, 43, 43, 1)" }}>Thu, 9 Apr</span>
+            <span style={{ color: "rgba(43, 43, 43, 1)" }}>{deliveryDate}</span>
           </p>
 
           {/* Add to Cart Button */}
@@ -343,35 +346,7 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
             }}
           >
             <span>{isAdded ? 'Added!' : 'Add to cart'}</span>
-            <svg 
-              viewBox="0 0 28 28" 
-              fill="none" 
-              strokeWidth="1.75" 
-              strokeLinecap="round" 
-              strokeLinejoin="round"
-              className="w-7 h-7 shrink-0"
-            >
-              <path 
-                d="M4 5h3l2 11h11l2.5-9H14" 
-                style={{ stroke: "rgba(29, 73, 62, 1)", transition: "stroke 0.2s ease" }}
-              />
-              <path 
-                d="M7.8 8.5H9.5" 
-                style={{ stroke: "rgba(29, 73, 62, 1)", transition: "stroke 0.2s ease" }}
-              />
-              <circle 
-                cx="10.5" 
-                cy="21.5" 
-                r="2" 
-                style={{ stroke: "rgba(29, 73, 62, 1)", transition: "stroke 0.2s ease" }}
-              />
-              <circle 
-                cx="17.5" 
-                cy="21.5" 
-                r="2" 
-                style={{ stroke: "rgba(29, 73, 62, 1)", transition: "stroke 0.2s ease" }}
-              />
-            </svg>
+            <CartIcon size={28} className="shrink-0" />
           </button>
         </div>
       </div>

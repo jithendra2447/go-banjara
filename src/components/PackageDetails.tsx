@@ -7,12 +7,14 @@ import {
   Calendar, Users, Check, ShoppingBag, Clock,
   Star, Compass, MapPin, Tag,
   Sun, Wind, ArrowLeft, Lock, ArrowUpRight,
-  ChevronDown, ShoppingCart
+  ChevronDown
 } from 'lucide-react';
 import { useCart } from '@/components/providers';
 import { AmbientVibe } from '@/components/AmbientVibe';
 import { PRODUCTS } from '@/data/products';
 import { HOLIDAY_PACKAGES } from '@/data/packages';
+import { CartIcon } from '@/components/CartIcon';
+import { getFutureDeliveryString } from '@/utils/dateUtils';
 
 interface PackageDetailsProps {
   customId?: string;
@@ -936,20 +938,8 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                   className="text-left justify-center w-full max-w-[837px] h-auto bg-white border border-gray-200/60 rounded-[4px] p-6 flex flex-col gap-6"
                 >
                   <div className="flex flex-col gap-[12px]">
-                    <span 
-                      style={{
-                        backgroundColor: "rgba(255, 240, 235, 1)",
-                        color: "rgba(255, 98, 62, 1)",
-                        fontFamily: "Faktum, sans-serif",
-                        fontWeight: 700,
-                        fontSize: "12px",
-                        padding: "4px 10px",
-                        borderRadius: "4px",
-                        alignSelf: "flex-start",
-                      }}
-                      className="tracking-wider uppercase"
-                    >
-                      Discover Your Path
+                    <span className="inline-block text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 py-1.5 rounded-sm">
+                      DISCOVER YOUR PATH
                     </span>
                     <h3>
                       Highlights
@@ -2359,7 +2349,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                   >
                     FREE delivery as soon as{" "}
                     <span style={{ color: "rgba(43, 43, 43, 1)", fontWeight: 500 }}>
-                      Thu, 9 Apr, 7 am - 10 pm
+                      {getFutureDeliveryString()}
                     </span>
                   </span>
 
@@ -2377,7 +2367,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                     className="w-full h-[60px] hover:bg-[#1D493E] hover:text-white transition-colors flex items-center justify-center gap-2 border-2 border-[#1D493E] rounded-[4px] bg-white text-[#1D493E] text-sm sm:text-base font-semibold"
                   >
                     {productAddedSuccess === prod.id ? 'Added!' : 'Add to cart'}
-                    <ShoppingCart className="w-[24px] h-[24px]" />
+                    <CartIcon size={24} className="shrink-0 group-hover:stroke-white" />
                   </button>
                 </div>
               </div>

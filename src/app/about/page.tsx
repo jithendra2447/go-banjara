@@ -90,7 +90,7 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-white font-sans text-[#2B2B2B] overflow-x-hidden">
+    <div className="min-h-screen flex flex-col bg-white font-sans text-[#2B2B2B] overflow-x-clip">
       
       {/* 1. Header Section (1440x252px spec) */}
       <header 
@@ -110,12 +110,9 @@ export default function AboutPage() {
         }}
         className="mx-auto px-6 md:px-[80px] border-b border-gray-100 shrink-0 w-full"
       >
-        {/* Label Tag */}
-        <div style={{ height: "26px", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "#FFEBE5", borderRadius: "4px", padding: "4px 10px" }} className="shrink-0">
-          <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 600, fontSize: "14px", letterSpacing: "1.2px", color: "#FF623E", textTransform: "uppercase" }}>
-            ABOUT GO BANJARA
-          </span>
-        </div>
+        <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
+          ABOUT GO BANJARA
+        </span>
 
         {/* Heading */}
         <h1 
@@ -207,7 +204,7 @@ export default function AboutPage() {
             <div className="pt-2">
               <Link 
                 href="/travel" 
-                className="inline-flex items-center justify-center w-[230px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[4px] bg-[#1D493E] hover:bg-[#15342c] text-white font-sans font-bold transition-all duration-300 shadow-sm cursor-pointer"
+                className="inline-flex items-center justify-center w-[230px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[4px] bg-[#1D493E] hover:bg-[#15342c] text-white font-sans font-bold transition-all duration-300 shadow-sm cursor-pointer group"
               >
                 <span>Explore with Bonjo</span>
                 <svg 
@@ -218,7 +215,7 @@ export default function AboutPage() {
                   strokeWidth="2.25" 
                   strokeLinecap="round" 
                   strokeLinejoin="round"
-                  className="shrink-0"
+                  className="shrink-0 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300"
                 >
                   <path d="M7 17l2.5-2.5" />
                   <path d="M12.5 11.5L17 7" />
@@ -323,14 +320,17 @@ export default function AboutPage() {
       <section 
         style={{ 
           width: "100%", 
-          height: "380px", 
+          minHeight: "440px", 
           background: "rgba(255, 255, 255, 1)", 
           position: "relative",
-          overflow: "hidden",
           boxSizing: "border-box",
-          zIndex: 10
+          zIndex: 10,
+          paddingTop: "30px",
+          paddingBottom: "30px",
+          display: "flex",
+          alignItems: "center"
         }}
-        className="w-full shrink-0"
+        className="w-full shrink-0 overflow-x-clip"
       >
         {/* Cards Container (Static 1709.57px x 418.33px centered) */}
         <div 
@@ -340,12 +340,10 @@ export default function AboutPage() {
             display: "flex", 
             alignItems: "center", 
             justifyContent: "center",
-            overflow: "hidden",
-            pointerEvents: "none",
             userSelect: "none",
             boxSizing: "border-box",
             position: "absolute",
-            top: "0px",
+            top: "10px",
             left: "50%",
             transform: "translateX(-50%)",
             opacity: 1
@@ -368,6 +366,7 @@ export default function AboutPage() {
               flexShrink: 0,
               overflow: "hidden"
             }}
+            className="cursor-pointer transition-all duration-300 ease-out hover:-translate-y-8 hover:z-50 hover:shadow-[0_25px_35px_rgba(0,0,0,0.25)]"
           >
             <img 
               src="/card-1-full.png" 
@@ -394,6 +393,7 @@ export default function AboutPage() {
               flexShrink: 0,
               overflow: "hidden"
             }}
+            className="cursor-pointer transition-all duration-300 ease-out hover:-translate-y-8 hover:z-50 hover:shadow-[0_25px_35px_rgba(0,0,0,0.25)]"
           >
             <img 
               src="/card-2-full.png" 
@@ -420,6 +420,7 @@ export default function AboutPage() {
               flexShrink: 0,
               overflow: "hidden"
             }}
+            className="cursor-pointer transition-all duration-300 ease-out hover:-translate-y-8 hover:z-50 hover:shadow-[0_25px_35px_rgba(0,0,0,0.25)]"
           >
             <img 
               src="/card-3-full.png" 
@@ -446,6 +447,7 @@ export default function AboutPage() {
               flexShrink: 0,
               overflow: "hidden"
             }}
+            className="cursor-pointer transition-all duration-300 ease-out hover:-translate-y-8 hover:z-50 hover:shadow-[0_25px_35px_rgba(0,0,0,0.25)]"
           >
             <img 
               src="/card-4-full.png" 
@@ -472,6 +474,7 @@ export default function AboutPage() {
               flexShrink: 0,
               overflow: "hidden"
             }}
+            className="cursor-pointer transition-all duration-300 ease-out hover:-translate-y-8 hover:z-50 hover:shadow-[0_25px_35px_rgba(0,0,0,0.25)]"
           >
             <img 
               src="/card-5-full.png" 
@@ -498,6 +501,7 @@ export default function AboutPage() {
               flexShrink: 0,
               overflow: "hidden"
             }}
+            className="cursor-pointer transition-all duration-300 ease-out hover:-translate-y-8 hover:z-50 hover:shadow-[0_25px_35px_rgba(0,0,0,0.25)]"
           >
             <img 
               src="/card-6-full.png" 
@@ -524,6 +528,7 @@ export default function AboutPage() {
               flexShrink: 0,
               overflow: "hidden"
             }}
+            className="cursor-pointer transition-all duration-300 ease-out hover:-translate-y-8 hover:z-50 hover:shadow-[0_25px_35px_rgba(0,0,0,0.25)]"
           >
             <img 
               src="/card-7-full.png" 
@@ -550,6 +555,7 @@ export default function AboutPage() {
               flexShrink: 0,
               overflow: "hidden"
             }}
+            className="cursor-pointer transition-all duration-300 ease-out hover:-translate-y-8 hover:z-50 hover:shadow-[0_25px_35px_rgba(0,0,0,0.25)]"
           >
             <img 
               src="/card-8-full.png" 
@@ -843,28 +849,7 @@ export default function AboutPage() {
         {/* Header (Exact Figma specs) */}
         <div style={{ width: "1280px", maxWidth: "100%", display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "12px" }} className="mx-auto">
           {/* Orange Badge (Single line 195px x 26px) */}
-          <span 
-            style={{
-              minWidth: "195px",
-              height: "26px",
-              paddingLeft: "12px",
-              paddingRight: "12px",
-              display: "inline-flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "10px",
-              background: "rgba(255, 98, 62, 1)",
-              color: "#FFFFFF",
-              fontFamily: "Faktum, sans-serif",
-              fontWeight: 600,
-              fontSize: "14px",
-              lineHeight: "14px",
-              letterSpacing: "1.2px",
-              borderRadius: "4px",
-              textTransform: "uppercase",
-              whiteSpace: "nowrap"
-            }}
-          >
+          <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
             OUR JOURNEY TIMELINE
           </span>
 
@@ -906,12 +891,16 @@ export default function AboutPage() {
           </p>
         </div>
 
-        {/* 4 Rows of 3-Column Grid (1280px x 450px spec per row, justifyContent: space-between) */}
-        <div style={{ gap: "32px" }} className="flex flex-col w-full max-w-[1280px] mx-auto mt-4">
+        {/* 4 Rows of Sticky Stacked Cards */}
+        <div className="relative flex flex-col w-full max-w-[1280px] mx-auto mt-6 pb-24">
           
-          {/* Row 1 (1280px x 450px, justifyContent: space-between) */}
+          {/* Row 1 - Card Stack 1 */}
           <div 
             style={{
+              position: "sticky",
+              top: "100px",
+              marginBottom: "80px",
+              zIndex: 10,
               width: "1280px",
               maxWidth: "100%",
               height: "450px",
@@ -919,8 +908,8 @@ export default function AboutPage() {
               flexDirection: "row",
               alignItems: "center",
               justifyContent: "space-between",
-              background: "rgba(255, 255, 255, 1)",
-              boxSizing: "border-box"
+              background: "#FFFFFF",
+              boxSizing: "border-box",
             }}
             className="w-full mx-auto"
           >
@@ -931,14 +920,13 @@ export default function AboutPage() {
                 height: "380px", 
                 borderRadius: "4px",
                 overflow: "hidden",
-                boxShadow: "0 10px 20px rgba(0,0,0,0.08)",
                 flexShrink: 0
               }}
             >
               <img src="/card-1-full.png" alt="Go Banjara Traveler Card 1" className="w-full h-full object-cover" />
             </div>
 
-            {/* Col 2: Center Text Card (482px x 334px spec, gap: 12px) */}
+            {/* Col 2: Center Text Card */}
             <div 
               style={{ 
                 width: "482px", 
@@ -1025,7 +1013,6 @@ export default function AboutPage() {
                 height: "380px", 
                 borderRadius: "4px",
                 overflow: "hidden",
-                boxShadow: "0 10px 20px rgba(0,0,0,0.08)",
                 flexShrink: 0
               }}
             >
@@ -1033,9 +1020,13 @@ export default function AboutPage() {
             </div>
           </div>
 
-          {/* Row 2 (1280px x 450px, justifyContent: space-between) */}
+          {/* Row 2 - Card Stack 2 */}
           <div 
             style={{
+              position: "sticky",
+              top: "140px",
+              marginBottom: "80px",
+              zIndex: 20,
               width: "1280px",
               maxWidth: "100%",
               height: "450px",
@@ -1043,8 +1034,8 @@ export default function AboutPage() {
               flexDirection: "row",
               alignItems: "center",
               justifyContent: "space-between",
-              background: "rgba(255, 255, 255, 1)",
-              boxSizing: "border-box"
+              background: "#FFFFFF",
+              boxSizing: "border-box",
             }}
             className="w-full mx-auto"
           >
@@ -1055,14 +1046,13 @@ export default function AboutPage() {
                 height: "380px", 
                 borderRadius: "4px",
                 overflow: "hidden",
-                boxShadow: "0 10px 20px rgba(0,0,0,0.08)",
                 flexShrink: 0
               }}
             >
               <img src="/card-2-full.png" alt="Explore Adventure Card 2" className="w-full h-full object-cover" />
             </div>
 
-            {/* Col 2: Center Text Card (482px x 334px spec, gap: 12px) */}
+            {/* Col 2: Center Text Card */}
             <div 
               style={{ 
                 width: "482px", 
@@ -1101,7 +1091,7 @@ export default function AboutPage() {
                   whiteSpace: "nowrap"
                 }}
               >
-                ABOUT GO BANJARA
+                OUR PHILOSOPHY
               </span>
               <h3 
                 style={{ 
@@ -1121,7 +1111,7 @@ export default function AboutPage() {
                   justifyContent: "center"
                 }}
               >
-                We don't sell trips. We hand you back a country you forgot.
+                Slower journeys, deeper roots, and stories that stay with you.
               </h3>
               <p 
                 style={{ 
@@ -1141,7 +1131,7 @@ export default function AboutPage() {
                   justifyContent: "center"
                 }}
               >
-                Go Banjara is a small collective of travelers, writers, makers and local guides quietly rebuilding what travel across India was supposed to feel like
+                We take the backroads, stay with local hosts, and design expeditions that respect the land and its people.
               </p>
             </div>
 
@@ -1152,7 +1142,6 @@ export default function AboutPage() {
                 height: "380px", 
                 borderRadius: "4px",
                 overflow: "hidden",
-                boxShadow: "0 10px 20px rgba(0,0,0,0.08)",
                 flexShrink: 0
               }}
             >
@@ -1160,9 +1149,13 @@ export default function AboutPage() {
             </div>
           </div>
 
-          {/* Row 3 (1280px x 450px, justifyContent: space-between) */}
+          {/* Row 3 - Card Stack 3 */}
           <div 
             style={{
+              position: "sticky",
+              top: "180px",
+              marginBottom: "80px",
+              zIndex: 30,
               width: "1280px",
               maxWidth: "100%",
               height: "450px",
@@ -1170,8 +1163,8 @@ export default function AboutPage() {
               flexDirection: "row",
               alignItems: "center",
               justifyContent: "space-between",
-              background: "rgba(255, 255, 255, 1)",
-              boxSizing: "border-box"
+              background: "#FFFFFF",
+              boxSizing: "border-box",
             }}
             className="w-full mx-auto"
           >
@@ -1182,14 +1175,13 @@ export default function AboutPage() {
                 height: "380px", 
                 borderRadius: "4px",
                 overflow: "hidden",
-                boxShadow: "0 10px 20px rgba(0,0,0,0.08)",
                 flexShrink: 0
               }}
             >
               <img src="/card-7-full.png" alt="Humps Down Surf's Up Card 7" className="w-full h-full object-cover" />
             </div>
 
-            {/* Col 2: Center Text Card (482px x 334px spec, gap: 12px) */}
+            {/* Col 2: Center Text Card */}
             <div 
               style={{ 
                 width: "482px", 
@@ -1228,7 +1220,7 @@ export default function AboutPage() {
                   whiteSpace: "nowrap"
                 }}
               >
-                ABOUT GO BANJARA
+                ARTISANAL GEAR
               </span>
               <h3 
                 style={{ 
@@ -1248,7 +1240,7 @@ export default function AboutPage() {
                   justifyContent: "center"
                 }}
               >
-                We don't sell trips. We hand you back a country you forgot.
+                Crafted for modern nomads who live life on the move.
               </h3>
               <p 
                 style={{ 
@@ -1268,7 +1260,7 @@ export default function AboutPage() {
                   justifyContent: "center"
                 }}
               >
-                Go Banjara is a small collective of travelers, writers, makers and local guides quietly rebuilding what travel across India was supposed to feel like
+                From weather-proof stickers to hand-bound expedition journals, every item is crafted with heritage quality.
               </p>
             </div>
 
@@ -1279,7 +1271,6 @@ export default function AboutPage() {
                 height: "380px", 
                 borderRadius: "4px",
                 overflow: "hidden",
-                boxShadow: "0 10px 20px rgba(0,0,0,0.08)",
                 flexShrink: 0
               }}
             >
@@ -1287,9 +1278,13 @@ export default function AboutPage() {
             </div>
           </div>
 
-          {/* Row 4 (1280px x 450px, justifyContent: space-between) */}
+          {/* Row 4 - Card Stack 4 */}
           <div 
             style={{
+              position: "sticky",
+              top: "220px",
+              marginBottom: "80px",
+              zIndex: 40,
               width: "1280px",
               maxWidth: "100%",
               height: "450px",
@@ -1297,8 +1292,8 @@ export default function AboutPage() {
               flexDirection: "row",
               alignItems: "center",
               justifyContent: "space-between",
-              background: "rgba(255, 255, 255, 1)",
-              boxSizing: "border-box"
+              background: "#FFFFFF",
+              boxSizing: "border-box",
             }}
             className="w-full mx-auto"
           >
@@ -1309,14 +1304,13 @@ export default function AboutPage() {
                 height: "380px", 
                 borderRadius: "4px",
                 overflow: "hidden",
-                boxShadow: "0 10px 20px rgba(0,0,0,0.08)",
                 flexShrink: 0
               }}
             >
               <img src="/card-8-full.png" alt="Yellow Stickers Card 8" className="w-full h-full object-cover" />
             </div>
 
-            {/* Col 2: Center Text Card (482px x 334px spec, gap: 12px) */}
+            {/* Col 2: Center Text Card */}
             <div 
               style={{ 
                 width: "482px", 
@@ -1355,7 +1349,7 @@ export default function AboutPage() {
                   whiteSpace: "nowrap"
                 }}
               >
-                ABOUT GO BANJARA
+                THE BANJARA TRIBE
               </span>
               <h3 
                 style={{ 
@@ -1375,7 +1369,7 @@ export default function AboutPage() {
                   justifyContent: "center"
                 }}
               >
-                We don't sell trips. We hand you back a country you forgot.
+                Join a growing collective of curious global explorers.
               </h3>
               <p 
                 style={{ 
@@ -1395,7 +1389,7 @@ export default function AboutPage() {
                   justifyContent: "center"
                 }}
               >
-                Go Banjara is a small collective of travelers, writers, makers and local guides quietly rebuilding what travel across India was supposed to feel like
+                Connect with like-minded wanderers, share trail notes, and write your next chapter with Go Banjara.
               </p>
             </div>
 
@@ -1406,7 +1400,6 @@ export default function AboutPage() {
                 height: "380px", 
                 borderRadius: "4px",
                 overflow: "hidden",
-                boxShadow: "0 10px 20px rgba(0,0,0,0.08)",
                 flexShrink: 0
               }}
             >
@@ -1791,27 +1784,7 @@ export default function AboutPage() {
             }}
             className="text-left"
           >
-            <span 
-              style={{
-                width: "165px",
-                height: "26px",
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "10px",
-                background: "#FFEBE5",
-                color: "#FF623E",
-                fontFamily: "Faktum, sans-serif",
-                fontWeight: 600,
-                fontSize: "14px",
-                lineHeight: "14px",
-                letterSpacing: "1.2px",
-                borderRadius: "4px",
-                textTransform: "uppercase",
-                whiteSpace: "nowrap",
-                alignSelf: "flex-start"
-              }}
-            >
+            <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
               CAPTURED MEMORIES
             </span>
 

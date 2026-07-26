@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Star, ShoppingCart } from 'lucide-react';
+import { Star } from 'lucide-react';
 import { useCart } from '@/components/providers';
 import { PRODUCTS } from '@/data/products';
 import { Product } from '@/types';

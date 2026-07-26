@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { 
   MapPin, Calendar, Users, Star, SlidersHorizontal, ArrowRight, X, Heart, Sparkles, 
@@ -104,6 +104,24 @@ export default function HolidaysPortal() {
   const [selectedDurations, setSelectedDurations] = useState<string[]>([]);
   const [selectedTravelTypes, setSelectedTravelTypes] = useState<string[]>([]);
   const [selectedInclusions, setSelectedInclusions] = useState<string[]>([]);
+
+  const filterDropdownRef = useRef<HTMLDivElement>(null);
+  const startDatePickerRef = useRef<HTMLInputElement>(null);
+  const endDatePickerRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (filterDropdownRef.current && !filterDropdownRef.current.contains(event.target as Node)) {
+        setShowFiltersDropdown(false);
+      }
+    };
+    if (showFiltersDropdown) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showFiltersDropdown]);
 
   // Booking Form Modal State
   const [bookingForm, setBookingForm] = useState({ name: '', phone: '', countryCode: '+91', travelers: '02', pickupLocation: '', message: '' });
@@ -331,7 +349,7 @@ export default function HolidaysPortal() {
           justifyContent: "center",
           alignItems: "center",
         }}
-        className="px-6 md:px-20 pt-10 pb-6"
+        className="px-6 md:px-20 pt-[62px] pb-[24px]"
       >
         {/* Header Title block */}
         <div 
@@ -345,7 +363,7 @@ export default function HolidaysPortal() {
             gap: "16px",
           }}
         >
-          <span className="inline-block text-[#FF623E] bg-[#FFEBE5] px-2.5 py-1 rounded-[4px] text-[14px] font-semibold uppercase tracking-[1.2px]">
+          <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
             CAPTURED MEMORIES
           </span>
           <h1 
@@ -430,7 +448,7 @@ export default function HolidaysPortal() {
                   type="text"
                   value={destinationSearch}
                   onChange={(e) => setDestinationSearch(e.target.value)}
-                  placeholder="eg. kerala, manali, araku, ladakh"
+                  placeholder="eg. Kerala, Manali"
                   style={{ 
                     flex: 1, 
                     background: "transparent", 
@@ -463,23 +481,20 @@ export default function HolidaysPortal() {
               </label>
               <div className="w-full flex flex-col sm:flex-row gap-3">
                 <div 
-                  className="flex-1 h-[56px] border border-[rgba(141,141,141,0.5)] rounded-[8px] px-3 sm:px-4 flex items-center gap-2 sm:gap-3 bg-white"
+                  className="flex-1 h-[56px] border border-[rgba(141,141,141,0.5)] rounded-[8px] px-3 sm:px-4 flex items-center gap-2 sm:gap-3 bg-white relative"
                 >
-                  <Calendar className="w-5 h-5 sm:w-6 sm:h-6 text-[rgba(141,141,141,1)] shrink-0" />
+                  <Calendar 
+                    className="w-5 h-5 sm:w-6 sm:h-6 text-[rgba(141,141,141,1)] shrink-0 cursor-pointer hover:text-[#1D493E] transition-colors" 
+                    onClick={() => {
+                      try {
+                        startDatePickerRef.current?.showPicker();
+                      } catch (err) {}
+                    }}
+                  />
                   <input
-                    type="date"
+                    type="text"
                     value={startDate}
                     onChange={(e) => setStartDate(e.target.value)}
-                    onClick={(e) => {
-                      try {
-                        e.currentTarget.showPicker();
-                      } catch (err) {}
-                    }}
-                    onFocus={(e) => {
-                      try {
-                        e.currentTarget.showPicker();
-                      } catch (err) {}
-                    }}
                     placeholder="dd/mm/yyyy"
                     style={{ 
                       flex: 1, 
@@ -492,30 +507,36 @@ export default function HolidaysPortal() {
                       letterSpacing: "0px", 
                       color: "rgba(43, 43, 43, 1)",
                       padding: 0,
-                      cursor: "pointer",
-                      textAlign: "center"
                     }}
-                    className="placeholder-[rgba(141,141,141,1)] hide-calendar-picker-icon text-sm sm:text-base md:text-[20px] w-full text-center"
+                    className="placeholder-[rgba(141,141,141,1)] text-sm sm:text-base md:text-[20px] w-full"
+                  />
+                  <input 
+                    ref={startDatePickerRef}
+                    type="date"
+                    className="sr-only opacity-0 absolute w-0 h-0 pointer-events-none"
+                    onChange={(e) => {
+                      if (e.target.value) {
+                        const [y, m, d] = e.target.value.split('-');
+                        setStartDate(`${d}/${m}/${y}`);
+                      }
+                    }}
                   />
                 </div>
                 <div 
-                  className="flex-1 h-[56px] border border-[rgba(141,141,141,0.5)] rounded-[8px] px-3 sm:px-4 flex items-center gap-2 sm:gap-3 bg-white"
+                  className="flex-1 h-[56px] border border-[rgba(141,141,141,0.5)] rounded-[8px] px-3 sm:px-4 flex items-center gap-2 sm:gap-3 bg-white relative"
                 >
-                  <Calendar className="w-5 h-5 sm:w-6 sm:h-6 text-[rgba(141,141,141,1)] shrink-0" />
+                  <Calendar 
+                    className="w-5 h-5 sm:w-6 sm:h-6 text-[rgba(141,141,141,1)] shrink-0 cursor-pointer hover:text-[#1D493E] transition-colors" 
+                    onClick={() => {
+                      try {
+                        endDatePickerRef.current?.showPicker();
+                      } catch (err) {}
+                    }}
+                  />
                   <input
-                    type="date"
+                    type="text"
                     value={endDate}
                     onChange={(e) => setEndDate(e.target.value)}
-                    onClick={(e) => {
-                      try {
-                        e.currentTarget.showPicker();
-                      } catch (err) {}
-                    }}
-                    onFocus={(e) => {
-                      try {
-                        e.currentTarget.showPicker();
-                      } catch (err) {}
-                    }}
                     placeholder="dd/mm/yyyy"
                     style={{ 
                       flex: 1, 
@@ -528,10 +549,19 @@ export default function HolidaysPortal() {
                       letterSpacing: "0px", 
                       color: "rgba(43, 43, 43, 1)",
                       padding: 0,
-                      cursor: "pointer",
-                      textAlign: "center"
                     }}
-                    className="placeholder-[rgba(141,141,141,1)] hide-calendar-picker-icon text-sm sm:text-base md:text-[20px] w-full text-center"
+                    className="placeholder-[rgba(141,141,141,1)] text-sm sm:text-base md:text-[20px] w-full"
+                  />
+                  <input 
+                    ref={endDatePickerRef}
+                    type="date"
+                    className="sr-only opacity-0 absolute w-0 h-0 pointer-events-none"
+                    onChange={(e) => {
+                      if (e.target.value) {
+                        const [y, m, d] = e.target.value.split('-');
+                        setEndDate(`${d}/${m}/${y}`);
+                      }
+                    }}
                   />
                 </div>
               </div>
@@ -600,7 +630,7 @@ export default function HolidaysPortal() {
           }}
           className="overflow-x-auto scrollbar-none pb-2"
         >
-          <div className="flex flex-row gap-3 items-center min-w-max">
+          <div className="flex flex-row gap-3 items-center min-w-max p-1">
             {['All', 'Weekends', 'Treks', 'Road Trips', 'Camping'].map((cat) => {
               const isActive = activeCategory === cat;
               return (
@@ -618,12 +648,17 @@ export default function HolidaysPortal() {
                     letterSpacing: "0px",
                     textAlign: "center",
                     cursor: "pointer",
-                    transition: "all 0.2s ease-in-out",
-                    border: isActive ? "none" : "1px solid rgba(141, 141, 141, 0.5)",
-                    background: isActive ? "rgba(29, 73, 62, 1)" : "rgba(255, 255, 255, 1)",
-                    color: isActive ? "rgba(255, 255, 255, 1)" : "rgba(43, 43, 43, 1)",
+                    transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                    border: isActive ? "1px solid #1D493E" : "1px solid rgba(141, 141, 141, 0.4)",
+                    background: isActive ? "#1D493E" : "#FFFFFF",
+                    color: isActive ? "#FFFFFF" : "#2B2B2B",
+                    boxShadow: isActive ? "0px 4px 12px rgba(29, 73, 62, 0.22)" : "none",
                   }}
-                  className="hover:scale-[1.02] active:scale-[0.98] h-auto px-5 py-2.5 sm:px-8 sm:py-3.5 text-base sm:text-lg md:text-[24px]"
+                  className={`h-auto px-5 py-2.5 sm:px-8 sm:py-3.5 text-base sm:text-lg md:text-[24px] select-none transition-all duration-300 ease-in-out active:scale-95 ${
+                    isActive
+                      ? 'hover:bg-[#15342c] hover:border-[#15342c]'
+                      : 'hover:border-[#1D493E] hover:text-[#1D493E] hover:bg-[#1D493E]/5 hover:shadow-sm hover:scale-[1.02]'
+                  }`}
                 >
                   {cat}
                 </button>
@@ -677,7 +712,7 @@ export default function HolidaysPortal() {
           </div>
           
           {/* Filters Toggle Dropdown */}
-          <div className="relative">
+          <div className="relative" ref={filterDropdownRef}>
             <button
               type="button"
               onClick={() => setShowFiltersDropdown(!showFiltersDropdown)}
@@ -704,34 +739,12 @@ export default function HolidaysPortal() {
 
             {showFiltersDropdown && (
               <div 
-                className="absolute right-0 top-full mt-2 z-40 text-left flex flex-col animate-in fade-in slide-in-from-top-2 duration-300 w-screen max-w-[912px] md:w-[912px] bg-transparent"
+                className="absolute right-0 top-full mt-2 z-40 text-left flex flex-col animate-in fade-in slide-in-from-top-2 duration-300 w-screen max-w-[912px] md:w-[912px] bg-white rounded-[4px] border border-[#CCCCCC]/60 shadow-[0px_8px_24px_rgba(0,0,0,0.15)] overflow-hidden"
               >
                 {/* 3 Columns Row */}
-                <div 
-                  style={{
-                    boxShadow: "0px 4px 12px 0px rgba(0, 0, 0, 0.25)",
-                    borderRadius: "4px",
-                  }}
-                  className="flex flex-col md:flex-row items-stretch w-full h-auto md:h-[286px] bg-transparent overflow-hidden"
-                >
+                <div className="flex flex-col md:flex-row items-stretch w-full bg-white">
                   {/* Column 1: Duration */}
-                  <div 
-                    style={{
-                      width: "304px",
-                      height: "286px",
-                      padding: "8px",
-                      background: "#FFFFFF",
-                      borderColor: "rgba(204, 204, 204, 0.54)",
-                      borderStyle: "solid",
-                      borderWidth: "1px 0px 1px 1px",
-                      borderTopLeftRadius: "4px",
-                      borderBottomLeftRadius: "4px",
-                      boxSizing: "border-box",
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: "4px",
-                    }}
-                  >
+                  <div className="w-full md:w-1/3 p-2 bg-white flex flex-col gap-1 border-b md:border-b-0 md:border-r border-[#CCCCCC]/40">
                     <span 
                       style={{ 
                         fontFamily: "'Faktum', 'Outfit', sans-serif",
@@ -786,21 +799,7 @@ export default function HolidaysPortal() {
                   </div>
 
                   {/* Column 2: Travel Type */}
-                  <div 
-                    style={{
-                      width: "304px",
-                      height: "286px",
-                      padding: "8px",
-                      background: "#FFFFFF",
-                      borderColor: "rgba(204, 204, 204, 0.54)",
-                      borderStyle: "solid",
-                      borderWidth: "1px 0px 1px 1px",
-                      boxSizing: "border-box",
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: "4px",
-                    }}
-                  >
+                  <div className="w-full md:w-1/3 p-2 bg-white flex flex-col gap-1 border-b md:border-b-0 md:border-r border-[#CCCCCC]/40">
                     <span 
                       style={{ 
                         fontFamily: "'Faktum', 'Outfit', sans-serif",
@@ -855,23 +854,7 @@ export default function HolidaysPortal() {
                   </div>
 
                   {/* Column 3: Includes */}
-                  <div 
-                    style={{
-                      width: "304px",
-                      height: "286px",
-                      padding: "8px",
-                      background: "#FFFFFF",
-                      borderColor: "rgba(204, 204, 204, 0.54)",
-                      borderStyle: "solid",
-                      borderWidth: "1px 1px 1px 1px",
-                      borderTopRightRadius: "4px",
-                      borderBottomRightRadius: "4px",
-                      boxSizing: "border-box",
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: "4px",
-                    }}
-                  >
+                  <div className="w-full md:w-1/3 p-2 bg-white flex flex-col gap-1">
                     <span 
                       style={{ 
                         fontFamily: "'Faktum', 'Outfit', sans-serif",
@@ -927,21 +910,7 @@ export default function HolidaysPortal() {
                 </div>
 
                 {/* Apply Button Row */}
-                <div
-                  style={{
-                    background: "#FFFFFF",
-                    borderColor: "rgba(204, 204, 204, 0.54)",
-                    borderStyle: "solid",
-                    borderWidth: "0px 1px 1px 1px",
-                    borderBottomLeftRadius: "4px",
-                    borderBottomRightRadius: "4px",
-                    padding: "12px 16px",
-                    display: "flex",
-                    justifyContent: "flex-end",
-                    gap: "12px",
-                    boxShadow: "0px 4px 12px 0px rgba(0, 0, 0, 0.25)",
-                  }}
-                >
+                <div className="w-full bg-white border-t border-[#CCCCCC]/40 px-5 py-3.5 flex justify-end gap-3 items-center">
                   {/* Clear All */}
                   <button
                     type="button"
@@ -962,7 +931,7 @@ export default function HolidaysPortal() {
                       cursor: "pointer",
                       letterSpacing: "0.3px",
                     }}
-                    className="hover:bg-[#1D493E]/5 transition"
+                    className="hover:bg-[#1D493E] hover:text-white active:scale-95 transition-all duration-300 shadow-sm"
                   >
                     Clear All
                   </button>
@@ -982,7 +951,7 @@ export default function HolidaysPortal() {
                       cursor: "pointer",
                       letterSpacing: "0.3px",
                     }}
-                    className="hover:bg-[#15342c] transition"
+                    className="hover:bg-[#15342c] hover:shadow-md hover:scale-[1.02] active:scale-95 transition-all duration-300"
                   >
                     Apply
                   </button>
@@ -1245,7 +1214,7 @@ export default function HolidaysPortal() {
                             color: "rgba(43, 43, 43, 1)",
                             margin: 0,
                           }}
-                          className="truncate block"
+                          className="truncate block hover:whitespace-normal hover:overflow-visible transition-all duration-300"
                           title={pkg.name}
                         >
                           {pkg.name}
@@ -1288,7 +1257,8 @@ export default function HolidaysPortal() {
                           WebkitBoxOrient: "vertical",
                           textOverflow: "ellipsis",
                         }}
-                        className="h-auto min-h-[84px]"
+                        className="h-auto min-h-[84px] hover:line-clamp-none hover:overflow-visible transition-all duration-300 cursor-pointer"
+                        title={pkg.description}
                       >
                         {pkg.description}
                       </p>
@@ -1368,7 +1338,7 @@ export default function HolidaysPortal() {
                           border: "none",
                           cursor: "pointer",
                         }}
-                        className="hover:bg-[#15342c] transition-colors"
+                        className="hover:bg-[#15342c] transition-colors duration-300"
                       >
                         Book Now
                       </button>
@@ -1380,8 +1350,6 @@ export default function HolidaysPortal() {
                           height: "55px",
                           borderRadius: "4px",
                           border: "1px solid rgba(29, 73, 62, 1)",
-                          background: "white",
-                          color: "rgba(29, 73, 62, 1)",
                           fontFamily: "'Faktum', 'Outfit', sans-serif",
                           fontWeight: 600,
                           fontSize: "16px",
@@ -1392,7 +1360,7 @@ export default function HolidaysPortal() {
                           justifyContent: "center",
                           textDecoration: "none",
                         }}
-                        className="hover:bg-gray-50 transition-colors"
+                        className="bg-white text-[#1D493E] hover:bg-[#EEF2F1] transition-colors duration-300"
                       >
                         Get details
                       </Link>
@@ -1412,29 +1380,20 @@ export default function HolidaysPortal() {
               type="button"
               onClick={() => setVisiblePackagesCount(prev => prev + 3)}
               style={{
-                width: "258px",
-                height: "68px",
-                paddingTop: "18px",
-                paddingRight: "36px",
-                paddingBottom: "18px",
-                paddingLeft: "36px",
-                gap: "8px",
                 display: "inline-flex",
                 alignItems: "center",
                 justifyContent: "center",
-                boxSizing: "border-box",
-                borderRadius: "4px",
-                border: "2px solid rgba(204, 204, 204, 1)",
-                backgroundColor: "rgba(255, 255, 255, 1)",
+                padding: "18px 36px",
+                borderRadius: "8px",
+                border: "none",
                 fontFamily: "'Faktum', 'Outfit', sans-serif",
                 fontWeight: 600,
                 fontSize: "20px",
                 lineHeight: "28px",
-                color: "rgba(29, 73, 62, 1)",
+                color: "#1D493E",
                 cursor: "pointer",
-                transition: "all 0.2s ease-in-out",
               }}
-              className="hover:bg-gray-50 active:scale-95"
+              className="bg-transparent hover:bg-[#EEF2F1] transition-colors duration-300"
             >
               Load more
             </button>
@@ -1490,24 +1449,8 @@ export default function HolidaysPortal() {
               boxSizing: "border-box"
             }}
           >
-            <span 
-              style={{
-                width: "176px",
-                height: "18px",
-                fontFamily: "'Faktum', 'Outfit', sans-serif",
-                color: "rgba(255, 98, 62, 1)",
-                fontWeight: 600,
-                fontSize: "14px",
-                lineHeight: "18px",
-                textTransform: "uppercase",
-                letterSpacing: "1.2px",
-                textAlign: "center",
-                margin: 0,
-                display: "block",
-                boxSizing: "border-box"
-              }}
-            >
-              Discover Your Path
+            <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
+              DISCOVER YOUR PATH
             </span>
             <h2 
               style={{
@@ -1843,7 +1786,7 @@ export default function HolidaysPortal() {
                   boxSizing: "border-box"
                 }}
               >
-                Captured Memories
+                CAPTURED MEMORIES
               </span>
             </div>
             <h2 

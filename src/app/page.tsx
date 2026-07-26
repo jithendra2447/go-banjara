@@ -4,13 +4,14 @@ import React, { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import { 
   MapPin, Calendar, Users, Star, ArrowRight, ShieldCheck, Compass, Heart, Sparkles, 
-  ChevronDown, ChevronUp, Check, ShoppingBag, ArrowUpRight, MessageSquare, Info, BookOpen,
-  ShoppingCart
+  ChevronDown, ChevronUp, Check, ShoppingBag, ArrowUpRight, MessageSquare, Info, BookOpen
 } from 'lucide-react';
 import { useCart } from '@/components/providers';
 import { HOLIDAY_PACKAGES } from '@/data/packages';
 import { PRODUCTS } from '@/data/products';
 import { BonjoMascot } from '@/components/BonjoMascot';
+import { CartIcon } from '@/components/CartIcon';
+import { getFutureDeliveryString } from '@/utils/dateUtils';
 
 // Static Blog/Diaries list
 const BLOG_POSTS = [
@@ -265,7 +266,7 @@ export default function Homepage() {
         rating: found.rating || 5,
         reviews: `${found.reviewsCount || 120} Reviews`,
         boughtText: found.boughtCount || "200+ bought in past month",
-        deliveryText: "FREE delivery as soon as Thu, 9 Apr, 7 am - 10 pm"
+        deliveryText: `FREE delivery as soon as ${getFutureDeliveryString()}`
       };
     }
     return {
@@ -279,7 +280,7 @@ export default function Homepage() {
       rating: 5,
       reviews: "120 Reviews",
       boughtText: "200+ bought in past month",
-      deliveryText: "FREE delivery as soon as Thu, 9 Apr, 7 am - 10 pm"
+      deliveryText: `FREE delivery as soon as ${getFutureDeliveryString()}`
     };
   };
 
@@ -334,6 +335,7 @@ export default function Homepage() {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
   const [activeOfferSlide, setActiveOfferSlide] = useState(0);
   const [activeCategorySlide, setActiveCategorySlide] = useState(0);
+  const [activeDealSlide, setActiveDealSlide] = useState(0);
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
 
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -412,13 +414,13 @@ export default function Homepage() {
             <div className="flex flex-row items-center gap-[12px] justify-start shrink-0 pb-1 w-full sm:w-auto overflow-x-auto no-scrollbar">
               <Link 
                 href="/shop"
-                className="hover:scale-[1.02] active:scale-[0.98] text-[#2B2B2B] bg-white hover:bg-white/90 transition-all duration-300 cursor-pointer flex items-center justify-center w-[125px] sm:w-[150px] md:w-[177px] h-[40px] sm:h-[55px] shrink-0 rounded-[4px] font-sans font-semibold text-[14px]"
+                className="hover:scale-[1.02] active:scale-[0.98] text-[#2B2B2B] bg-white transition-all duration-300 cursor-pointer flex items-center justify-center w-[125px] sm:w-[150px] md:w-[177px] h-[40px] sm:h-[55px] shrink-0 rounded-[4px] font-sans font-semibold text-[14px]"
               >
                 Shop Now
               </Link>
               <Link 
                 href="/travel"
-                className="hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 cursor-pointer flex items-center justify-center w-[202px] sm:w-[190px] md:w-[215px] h-[40px] sm:h-[55px] border border-white/80 text-white hover:bg-white hover:text-[#2B2B2B] shrink-0 rounded-[4px] bg-white/10 backdrop-blur-sm font-sans font-semibold text-[14px]"
+                className="hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 cursor-pointer flex items-center justify-center w-[202px] sm:w-[190px] md:w-[215px] h-[40px] sm:h-[55px] border border-white/80 text-white bg-white/10 shrink-0 rounded-[4px] backdrop-blur-sm font-sans font-semibold text-[14px]"
               >
                 See Travel Packages
               </Link>
@@ -445,11 +447,11 @@ export default function Homepage() {
             <div className="relative z-10">
               <Link 
                 href="/shop" 
-                className="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-[4px] bg-white/10 hover:bg-white/15 transition-all duration-300 cursor-pointer text-center"
+                className="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-[4px] bg-white/10 hover:bg-white/15 transition-all duration-300 cursor-pointer text-center group"
                 style={{ color: "rgba(255,255,255,1)", fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "16px", lineHeight: "100%", letterSpacing: "0px", verticalAlign: "middle", textDecoration: "none" }}
               >
                 <span>Explore Collections</span>
-                <ArrowUpRight className="w-4 h-4" />
+                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
               </Link>
             </div>
           </div>
@@ -467,11 +469,11 @@ export default function Homepage() {
             <div className="relative z-10">
               <Link 
                 href="/travel" 
-                className="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-[4px] bg-white/15 hover:bg-white/25 transition-all duration-300 cursor-pointer text-center"
+                className="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-[4px] bg-white/15 hover:bg-white/25 transition-all duration-300 cursor-pointer text-center group"
                 style={{ color: "rgba(255,255,255,1)", fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "16px", lineHeight: "100%", letterSpacing: "0px", verticalAlign: "middle", textDecoration: "none" }}
               >
                 <span>Find the Route</span>
-                <ArrowUpRight className="w-4 h-4" />
+                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
               </Link>
             </div>
           </div>
@@ -598,7 +600,7 @@ export default function Homepage() {
           {/* Centered Header (Figma styled: serif title 42px, sans medium subtitle 24px) */}
           <div className="space-y-3.5 max-w-4xl mx-auto">
             <div className="flex justify-center">
-              <span className="inline-block text-[#FF623E] bg-[#FFEBE5] px-2.5 py-1 rounded-[4px] text-[14px] font-semibold uppercase tracking-[1.2px]">
+              <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
                 DESTINATIONS
               </span>
             </div>
@@ -718,15 +720,15 @@ export default function Homepage() {
                     <div className="flex gap-3 w-full h-[55px] shrink-0 mt-0">
                       <Link 
                         href={`/travel/package/${pkg1.id}`} 
-                        className="flex-1 h-[55px] flex items-center justify-center rounded-[4px] bg-[#1D493E] hover:bg-[#15342c] transition cursor-pointer"
+                        className="flex-1 h-[55px] flex items-center justify-center rounded-[4px] bg-[#1D493E] hover:bg-[#15342c] transition-colors duration-300 cursor-pointer"
                         style={{ color: "#FFFFFF", fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "100%", letterSpacing: "0px", textDecoration: "none", verticalAlign: "middle" }}
                       >
                         Book Now
                       </Link>
                       <Link 
                         href={pkg1.link || `/travel/package/${pkg1.id}`} 
-                        className="flex-1 h-[55px] flex items-center justify-center rounded-[4px] border border-[#1D493E] text-center hover:bg-gray-50 transition"
-                        style={{ color: "rgba(29,73,62,1)", fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "100%", letterSpacing: "0px", textDecoration: "none" }}
+                        className="flex-1 h-[55px] flex items-center justify-center rounded-[4px] border border-[#1D493E] text-center bg-white text-[#1D493E] hover:bg-[#EEF2F1] transition-colors duration-300"
+                        style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "100%", letterSpacing: "0px", textDecoration: "none" }}
                       >
                         Get details
                       </Link>
@@ -843,15 +845,15 @@ export default function Homepage() {
                       <div className="flex gap-3 w-full h-[55px] shrink-0 mt-0">
                         <Link 
                           href={`/travel/package/${pkg.id}`} 
-                          className="flex-1 h-[55px] flex items-center justify-center rounded-[4px] bg-[#1D493E] hover:bg-[#15342c] transition cursor-pointer"
+                          className="flex-1 h-[55px] flex items-center justify-center rounded-[4px] bg-[#1D493E] hover:bg-[#15342c] transition-colors duration-300 cursor-pointer"
                           style={{ color: "#FFFFFF", fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "100%", letterSpacing: "0px", textDecoration: "none", verticalAlign: "middle" }}
                         >
                           Book Now
                         </Link>
                         <Link 
                           href={pkg.link || `/travel/package/${pkg.id}`} 
-                          className="flex-1 h-[55px] flex items-center justify-center rounded-[4px] border border-[#1D493E] text-center hover:bg-gray-50 transition"
-                          style={{ color: "rgba(29,73,62,1)", fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "100%", letterSpacing: "0px", textDecoration: "none" }}
+                          className="flex-1 h-[55px] flex items-center justify-center rounded-[4px] border border-[#1D493E] text-center bg-white text-[#1D493E] hover:bg-[#EEF2F1] transition-colors duration-300"
+                          style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "100%", letterSpacing: "0px", textDecoration: "none" }}
                         >
                           Get details
                         </Link>
@@ -1032,7 +1034,7 @@ export default function Homepage() {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 text-left">
             <div className="space-y-3.5 text-left max-w-4xl">
               <div>
-                <span className="inline-block text-[#FF623E] bg-[#FFEBE5] px-2.5 py-1 rounded-[4px] text-[14px] font-semibold uppercase tracking-[1.2px]">
+                <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
                   THE COLLECTION
                 </span>
               </div>
@@ -1227,19 +1229,41 @@ export default function Homepage() {
                   </div>
                 </Link>
 
-                {/* 8 Pagination Dots Below */}
-                <div className="flex items-center justify-center gap-1.5 mt-3">
-                  {categories.map((cat, idx) => (
-                    <button
-                      key={cat.name}
-                      type="button"
-                      onClick={() => setActiveCategorySlide(idx)}
-                      className={`transition-all duration-300 rounded-full cursor-pointer ${
-                        activeCategorySlide === idx ? 'w-4 h-1.5 bg-[#1D493E]' : 'w-1.5 h-1.5 bg-slate-300'
-                      }`}
-                      aria-label={`Category ${cat.name}`}
+                {/* Horizontal Progress Bar Indicator & Pagination Dots Below */}
+                <div className="flex flex-col gap-3 mt-3">
+                  <div 
+                    onClick={(e) => {
+                      const rect = e.currentTarget.getBoundingClientRect();
+                      const clickX = e.clientX - rect.left;
+                      const ratio = clickX / rect.width;
+                      const newIdx = Math.min(categories.length - 1, Math.floor(ratio * categories.length));
+                      setActiveCategorySlide(newIdx);
+                    }}
+                    className="w-full h-[6px] bg-gray-200 relative rounded-full overflow-hidden cursor-pointer"
+                    title="Click to select category"
+                  >
+                    <div 
+                      style={{ 
+                        width: `${100 / categories.length}%`,
+                        left: `${((activeCategorySlide % categories.length) / categories.length) * 100}%` 
+                      }}
+                      className="absolute top-0 h-full bg-[#1D493E] rounded-full transition-all duration-300 ease-out" 
                     />
-                  ))}
+                  </div>
+
+                  <div className="flex items-center justify-center gap-1.5">
+                    {categories.map((cat, idx) => (
+                      <button
+                        key={cat.name}
+                        type="button"
+                        onClick={() => setActiveCategorySlide(idx)}
+                        className={`transition-all duration-300 rounded-full cursor-pointer ${
+                          activeCategorySlide === idx ? 'w-4 h-1.5 bg-[#1D493E]' : 'w-1.5 h-1.5 bg-slate-300'
+                        }`}
+                        aria-label={`Category ${cat.name}`}
+                      />
+                    ))}
+                  </div>
                 </div>
               </div>
             );
@@ -1322,6 +1346,7 @@ export default function Homepage() {
               return (
                 <div 
                   key={deal.id} 
+                  onMouseEnter={() => setActiveDealSlide(idx)}
                   className={`bg-white rounded-[4px] w-full h-auto pb-4 flex flex-col justify-between gap-[16px] transition duration-300 overflow-hidden ${
                     idx >= 3 ? 'hidden md:flex' : 'flex'
                   }`}
@@ -1384,8 +1409,8 @@ export default function Homepage() {
                     
                     {/* Title & Price Row */}
                     <div className="w-full h-auto min-h-[35px] flex justify-between items-center gap-2">
-                      <Link href={`/shop/product/${deal.id}`} className="truncate hover:text-[#1D493E] transition">
-                        <h4 className="text-[15px] md:text-[17px] font-sans font-semibold text-[#2B2B2B] truncate">{deal.name}</h4>
+                      <Link href={`/shop/product/${deal.id}`} className="truncate hover:text-[#1D493E] transition" title={deal.name}>
+                        <h4 className="text-[15px] md:text-[17px] font-sans font-semibold text-[#2B2B2B] truncate hover:whitespace-normal hover:overflow-visible transition-all duration-300" title={deal.name}>{deal.name}</h4>
                       </Link>
                       <div className="flex items-center gap-2.5 shrink-0">
                         <span className="text-gray-400 line-through text-xs font-medium">₹{deal.originalPrice}</span>
@@ -1411,7 +1436,7 @@ export default function Homepage() {
                     {/* Delivery text */}
                     <p className="font-sans font-medium text-[11px] md:text-xs md:leading-[20px]">
                       <span className="text-[#8D8D8D]">FREE delivery as soon as </span>
-                      <span className="text-[#2B2B2B]">Thu, 9 Apr, 7 am - 10 pm</span>
+                      <span className="text-[#2B2B2B]">{getFutureDeliveryString()}</span>
                     </p>
 
                     {/* Add to Cart Button */}
@@ -1420,41 +1445,46 @@ export default function Homepage() {
                       className="w-full h-[48px] py-[10px] px-[20px] gap-[8px] rounded-[4px] border-2 border-[#1D493E] hover:bg-[#1D493E] hover:text-white text-[#1D493E] text-xs md:text-sm font-bold transition flex items-center justify-center cursor-pointer group"
                     >
                       <span>{addedProductId === deal.id ? 'Added to Cart!' : 'Add to cart'}</span>
-                      <svg 
-                        style={{ width: '20px', height: '20px' }} 
-                        viewBox="0 0 28 28" 
-                        fill="none" 
-                        strokeWidth="1.75" 
-                        strokeLinecap="round" 
-                        strokeLinejoin="round"
-                        className="shrink-0"
-                      >
-                        <path 
-                          d="M4 5h3l2 11h11l2.5-9H14" 
-                          className="stroke-[#2B2B2B] group-hover:stroke-white transition-colors duration-300"
-                        />
-                        <path 
-                          d="M7.8 8.5H9.5" 
-                          className="stroke-[#2B2B2B] group-hover:stroke-white transition-colors duration-300"
-                        />
-                        <circle 
-                          cx="10.5" 
-                          cy="21.5" 
-                          r="2" 
-                          className="stroke-[#1D493E] group-hover:stroke-white transition-colors duration-300"
-                        />
-                        <circle 
-                          cx="17.5" 
-                          cy="21.5" 
-                          r="2" 
-                          className="stroke-[#1D493E] group-hover:stroke-white transition-colors duration-300"
-                        />
-                      </svg>
+                      <CartIcon size={20} className="shrink-0" />
                     </button>
                   </div>
                 </div>
               );
             })}
+          </div>
+
+          {/* Horizontal Progress Bar Indicator Line (Interactive Click & Drag) */}
+          <div 
+            onClick={(e) => {
+              const rect = e.currentTarget.getBoundingClientRect();
+              const clickX = e.clientX - rect.left;
+              const ratio = Math.max(0, Math.min(1, clickX / rect.width));
+              const newIdx = Math.min(3, Math.floor(ratio * 4));
+              setActiveDealSlide(newIdx);
+            }}
+            onMouseMove={(e) => {
+              if (e.buttons === 1) {
+                const rect = e.currentTarget.getBoundingClientRect();
+                const clickX = e.clientX - rect.left;
+                const ratio = Math.max(0, Math.min(1, clickX / rect.width));
+                const newIdx = Math.min(3, Math.floor(ratio * 4));
+                setActiveDealSlide(newIdx);
+              }
+            }}
+            onTouchMove={(e) => {
+              const rect = e.currentTarget.getBoundingClientRect();
+              const touchX = e.touches[0].clientX - rect.left;
+              const ratio = Math.max(0, Math.min(1, touchX / rect.width));
+              const newIdx = Math.min(3, Math.floor(ratio * 4));
+              setActiveDealSlide(newIdx);
+            }}
+            className="w-full max-w-[1280px] mx-auto h-[8px] bg-gray-200 relative rounded-full overflow-hidden mt-8 mb-4 cursor-pointer group transition-all duration-300 shadow-inner select-none"
+            title="Click or drag to switch active deal product"
+          >
+            <div 
+              style={{ left: `${(activeDealSlide % 4) * 25}%`, width: "25%" }}
+              className="absolute top-0 h-full bg-[#1D493E] rounded-full transition-all duration-300 ease-out pointer-events-none" 
+            />
           </div>
 
           {/* View all products footer */}
@@ -1545,7 +1575,7 @@ export default function Homepage() {
                   </p>
                   <p className="text-[9px] leading-tight m-0 truncate">
                     <span className="text-[#8D8D8D]">FREE delivery </span>
-                    <span className="font-bold text-[#2B2B2B]">Thu, 9 Apr</span>
+                    <span className="font-bold text-[#2B2B2B]">{getFutureDeliveryString()}</span>
                   </p>
                 </div>
               </Link>
@@ -1559,17 +1589,12 @@ export default function Homepage() {
         {/* Desktop Container (hidden md:flex) */}
         <div className="hidden md:flex max-w-[1440px] mx-auto pt-[20px] pb-[20px] px-6 md:px-[80px] flex-col gap-[32px]">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-2 text-left">
-            <div className="space-y-3.5 text-left max-w-4xl">
-              <div>
-                <span className="inline-block text-[#FF623E] bg-[#FFEBE5] px-2.5 py-1 rounded-[4px] text-[14px] font-semibold uppercase tracking-[1.2px]">
-                  NEW STYLES
-                </span>
-              </div>
+            <div className="space-y-2 text-left max-w-4xl">
               <h2 className="text-3xl md:text-[42px] font-serif font-semibold text-[#1D493E] leading-none">
-                <span className="text-[#FF5A36]">Limited</span>&nbsp;Edition
+                Most&nbsp;<span className="text-[#FF5A36]">Selling Products</span>
               </h2>
               <p className="text-[#2B2B2B]/80 text-base md:text-[20px] leading-relaxed font-medium">
-                Curated gear for the modern nomad. From durable journal covers to the stickers that tell your story
+                A hand-picked map of the corners of India our community keeps coming back to
               </p>
             </div>
             <div className="shrink-0 pb-1">
@@ -1600,10 +1625,14 @@ export default function Homepage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[32px] w-full max-w-[1280px] mx-auto">
             {[
-              resolveProduct("naturally-nomad-badge-1", "Naturally Nomad", "Badges", "/naturally_nomad_badge.png", 139, 199),
-              resolveProduct("banjara-blue-slides-png", "Blue Mavin", "Slippers", "/blue_mavin_slides.jpg", 399, 599),
-              resolveProduct("explore-more-keychain-1", "Explore more", "Key Chains", "/explore_more_keychain.png", 149, 193),
-              resolveProduct("banjara-slides-1", "Banjara Slides", "Slippers", "/banjara_slides.jpg", 399, 599)
+              { id: "naturally-nomad-badge-1", name: "Naturally Nomad", category: "Badges", image: "/naturally_nomad_badge.png", price: 139, originalPrice: 199, rating: 5, reviews: "120 Reviews", boughtText: "200+ bought in past month" },
+              { id: "blue-mavin-slides-1", name: "Blue Mavin", category: "Slippers", image: "/blue_mavin_slides.jpg", price: 399, originalPrice: 599, rating: 5, reviews: "1k Reviews", boughtText: "500+ bought in past month" },
+              { id: "explore-more-keychain-1", name: "Explore more", category: "Key Chains", image: "/explore_more_keychain.png", price: 149, originalPrice: 193, rating: 5, reviews: "200 Reviews", boughtText: "100+ bought in past month" },
+              { id: "blue-mavin-slides-2", name: "Blue Mavin", category: "Slippers", image: "/blue_mavin_slides.jpg", price: 399, originalPrice: 599, rating: 5, reviews: "1k Reviews", boughtText: "500+ bought in past month" },
+              { id: "wakefit-pillows-1", name: "Wakefit Pillows", category: "Travel Pillows", image: "/wakefit_pillow.jpg", price: 139, originalPrice: 199, rating: 5, reviews: "120 Reviews", boughtText: "200+ bought in past month" },
+              { id: "fur-jaden-cw-1", name: "Fur Jaden C/W", category: "Backpacks", image: "/fur_jaden_backpack.jpg", price: 149, originalPrice: 193, rating: 5, reviews: "200 Reviews", boughtText: "100+ bought in past month" },
+              { id: "go-passport-cover-1", name: "Go Passport Cover", category: "Passport Covers", image: "/go_passport_cover.jpg", price: 399, originalPrice: 599, rating: 5, reviews: "1k Reviews", boughtText: "500+ bought in past month" },
+              { id: "wakefit-pillows-2", name: "Wakefit Pillows", category: "Travel Pillows", image: "/wakefit_pillow.jpg", price: 139, originalPrice: 199, rating: 5, reviews: "120 Reviews", boughtText: "200+ bought in past month" },
             ].map((prod) => {
               const mockProduct = {
                 id: prod.id,
@@ -1621,10 +1650,10 @@ export default function Homepage() {
                   key={prod.id} 
                   className="bg-white rounded-[4px] w-full h-auto pb-4 flex flex-col justify-between gap-[16px] group cursor-pointer"
                 >
-                  <div className="relative w-full md:h-[254px] rounded-[4px] overflow-hidden shrink-0">
+                  <div className="relative w-full md:h-[254px] rounded-[4px] overflow-hidden shrink-0 bg-gray-50">
                     <Link href={`/shop/product/${prod.id}`} className="w-full h-full block cursor-pointer">
                       <img 
-                        src={prod.images[activeImageIndices[prod.id] || 0]} 
+                        src={prod.image} 
                         alt={prod.name} 
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                         style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
@@ -1633,7 +1662,7 @@ export default function Homepage() {
                   </div>
 
                   <div className="w-full h-auto flex flex-col justify-between text-left gap-3 px-0">
-                    <span className="inline-flex items-center justify-center h-[28px] rounded-[4px] px-[8px] py-[4px] text-[13px] font-sans font-medium text-[#FF623E] bg-[#FF623E]/8 self-start">
+                    <span className="inline-flex items-center justify-center h-[28px] rounded-[4px] px-[10px] py-[4px] text-[13px] font-sans font-medium text-[#FF5A36] bg-[#FFEBE5] self-start">
                       {prod.category}
                     </span>
                     
@@ -1660,44 +1689,15 @@ export default function Homepage() {
 
                     <p className="font-sans font-medium text-[11px] md:text-xs md:leading-[20px]">
                       <span className="text-[#8D8D8D]">FREE delivery as soon as </span>
-                      <span className="text-[#2B2B2B]">Thu, 9 Apr, 7 am - 10 pm</span>
+                      <span className="text-[#2B2B2B] font-semibold">{getFutureDeliveryString()}</span>
                     </p>
 
                     <button
                       onClick={() => handleProductAdd(mockProduct)}
-                      className="w-full h-[48px] py-[10px] px-[20px] gap-[8px] rounded-[4px] border-2 border-[#1D493E] hover:bg-[#1D493E] hover:text-white text-[#1D493E] text-xs md:text-sm font-bold transition flex items-center justify-center cursor-pointer group"
+                      className="w-full h-[48px] py-[10px] px-[20px] gap-[8px] rounded-[4px] border border-[#1D493E] hover:bg-[#1D493E] hover:text-white text-[#1D493E] text-xs md:text-sm font-bold transition flex items-center justify-center cursor-pointer group"
                     >
                       <span>{addedProductId === prod.id ? 'Added to Cart!' : 'Add to cart'}</span>
-                      <svg 
-                        style={{ width: '20px', height: '20px' }} 
-                        viewBox="0 0 28 28" 
-                        fill="none" 
-                        strokeWidth="1.75" 
-                        strokeLinecap="round" 
-                        strokeLinejoin="round"
-                        className="shrink-0"
-                      >
-                        <path 
-                          d="M4 5h3l2 11h11l2.5-9H14" 
-                          className="stroke-[#2B2B2B] group-hover:stroke-white transition-colors duration-300"
-                        />
-                        <path 
-                          d="M7.8 8.5H9.5" 
-                          className="stroke-[#2B2B2B] group-hover:stroke-white transition-colors duration-300"
-                        />
-                        <circle 
-                          cx="10.5" 
-                          cy="21.5" 
-                          r="2" 
-                          className="stroke-[#1D493E] group-hover:stroke-white transition-colors duration-300"
-                        />
-                        <circle 
-                          cx="17.5" 
-                          cy="21.5" 
-                          r="2" 
-                          className="stroke-[#1D493E] group-hover:stroke-white transition-colors duration-300"
-                        />
-                      </svg>
+                      <CartIcon size={20} className="shrink-0" />
                     </button>
                   </div>
                 </div>
@@ -1782,7 +1782,7 @@ export default function Homepage() {
 
                   {/* Delivery Info */}
                   <p className="text-[8px] text-gray-500 m-0 leading-tight line-clamp-1">
-                    FREE delivery as soon as <span className="font-bold text-[#2B2B2B]">Thu, 9 Apr, 7am - 10 pm</span>
+                    FREE delivery as soon as <span className="font-bold text-[#2B2B2B]">{getFutureDeliveryString()}</span>
                   </p>
                 </div>
               </Link>
@@ -1882,10 +1882,10 @@ export default function Homepage() {
             <div className="pt-1">
               <Link 
                 href="/about" 
-                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-[4px] bg-[#1D493E] hover:bg-[#15342c] text-white font-sans font-bold text-[14px] transition shrink-0 self-start"
+                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-[4px] bg-[#1D493E] hover:bg-[#15342c] text-white font-sans font-bold text-[14px] transition shrink-0 self-start group"
               >
                 <span>Our Story</span>
-                <ArrowUpRight className="w-4 h-4 text-white" />
+                <ArrowUpRight className="w-4 h-4 text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
               </Link>
             </div>
           </div>
@@ -1916,7 +1916,7 @@ export default function Homepage() {
           {/* Header Row */}
           <div className="w-full max-w-[1440px] h-auto px-6 md:px-[80px] flex flex-col gap-2 text-left shrink-0">
             <div>
-              <span className="w-[153px] h-[18px] flex items-center font-sans font-semibold text-[14px] leading-none tracking-[1.2px] text-[#FF623E] uppercase">
+              <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
                 Real Experiences
               </span>
             </div>
@@ -2089,7 +2089,7 @@ export default function Homepage() {
         {/* Mobile View Container with Infinite Marquee Scrolling (block md:hidden) */}
         <div className="block md:hidden w-full py-[16px] bg-white flex flex-col gap-[12px] overflow-hidden">
           <div className="flex flex-col gap-1 text-left px-5">
-            <span className="text-[#FF623E] text-[10px] font-bold uppercase tracking-[1px]">
+            <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
               REAL EXPERIENCES
             </span>
             <h2 className="text-[22px] font-serif font-semibold text-[#1D493E] leading-tight m-0">

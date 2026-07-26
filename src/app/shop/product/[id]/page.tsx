@@ -3,12 +3,13 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
-import { Star, ShoppingCart, Check, Shield, Truck, Box, ArrowUpRight } from 'lucide-react';
+import { Star, Check, Shield, Truck, Box, ArrowUpRight } from 'lucide-react';
 import { useCart } from '@/components/providers';
 import { PRODUCTS } from '@/data/products';
 import { Product } from '@/types';
 import ProductCard from '@/components/ProductCard';
 import { TrustBanner } from '@/components/TrustBanner';
+import { getFutureDeliveryString } from '@/utils/dateUtils';
 
 const FAQ_ITEMS = [
   {
@@ -907,7 +908,7 @@ export default function ProductDetailsPage() {
                   </span>
                 ) : (
                   <span style={{ fontFamily: "Faktum, sans-serif", fontSize: "14px", color: "rgba(141, 141, 141, 1)", fontWeight: 500 }}>
-                    FREE delivery as soon as <span style={{ color: "rgba(43, 43, 43, 1)", fontWeight: 600 }}>Thu, 9 Apr, 7am - 10pm</span>
+                    FREE delivery as soon as <span style={{ color: "rgba(43, 43, 43, 1)", fontWeight: 600 }}>{getFutureDeliveryString()}</span>
                   </span>
                 )}
               </div>              {/* Trust Badges */}

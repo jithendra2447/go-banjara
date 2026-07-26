@@ -267,27 +267,7 @@ export default function BlogPage() {
           }}
         >
           {/* BLOGS label — Figma: Faktum 600 14px uppercase, color: rgba(255,98,62,1), background: rgba(255,98,62,0.08) */}
-          <span
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              height: '32px',
-              padding: '6px 16px',
-              fontFamily: 'Faktum, var(--font-sans), sans-serif',
-              fontWeight: 600,
-              fontSize: '14px',
-              lineHeight: '100%',
-              letterSpacing: '1.2px',
-              color: 'rgba(255, 98, 62, 1)',
-              background: 'rgba(255, 98, 62, 0.08)',
-              borderRadius: '100px',
-              textTransform: 'uppercase',
-              textAlign: 'center',
-              verticalAlign: 'middle',
-              boxSizing: 'border-box',
-            }}
-          >
+          <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
             BLOGS
           </span>
 

@@ -24,6 +24,7 @@ export const AuthModal: React.FC = () => {
   const [isPhoneVerified, setIsPhoneVerified] = useState(false);
   const [showOtpModal, setShowOtpModal] = useState(false);
   const [otpSent, setOtpSent] = useState(false);
+  const [bannerSlide, setBannerSlide] = useState(0);
   
   // Feedback states
   const [error, setError] = useState('');
@@ -989,26 +990,6 @@ export const AuthModal: React.FC = () => {
                         flexWrap: 'wrap',
                       }}
                     >
-                      <button 
-                        type="button"
-                        onClick={() => switchView('mobile_otp')}
-                        style={{
-                          fontFamily: '"Faktum", "Outfit", sans-serif',
-                          fontWeight: 500,
-                          fontSize: '16px',
-                          color: 'rgba(89, 153, 255, 1)',
-                          background: 'none',
-                          border: 'none',
-                          padding: 0,
-                          cursor: 'pointer',
-                          textDecoration: 'underline',
-                        }}
-                      >
-                        Verify with Mobile OTP
-                      </button>
-
-                      <span style={{ color: 'rgba(204, 204, 204, 1)' }}>|</span>
-
                       <p 
                         style={{
                           fontFamily: '"Faktum", "Outfit", sans-serif',
@@ -1824,7 +1805,7 @@ export const AuthModal: React.FC = () => {
                       boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
                       boxSizing: 'border-box',
                     }}
-                    onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#E05434'; }}
+                    onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#173A31'; }}
                     onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'rgba(29, 73, 62, 1)'; }}
                   >
                     {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Sign In'}
@@ -1893,7 +1874,7 @@ export const AuthModal: React.FC = () => {
                       boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
                       boxSizing: 'border-box',
                     }}
-                    onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#E05434'; }}
+                    onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#173A31'; }}
                     onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'rgba(29, 73, 62, 1)'; }}
                   >
                     {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Send Reset Link'}
@@ -1946,7 +1927,7 @@ export const AuthModal: React.FC = () => {
                   style={{
                     width: '100%', maxWidth: '492px',
                     display: 'grid',
-                    gridTemplateColumns: '1fr 1fr 1fr',
+                    gridTemplateColumns: '1fr 1fr',
                     gap: '12px',
                   }}
                 >
@@ -1998,31 +1979,6 @@ export const AuthModal: React.FC = () => {
                   >
                     <img src="https://www.svgrepo.com/show/475647/facebook-color.svg" className="w-5 h-5" alt="Facebook Logo" />
                     <span>Facebook</span>
-                  </button>
-
-                  <button 
-                    type="button" onClick={handleInstagramLogin}
-                    style={{
-                      height: '56px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: '8px',
-                      border: '1px solid rgba(204, 204, 204, 0.54)',
-                      borderRadius: '12px',
-                      background: '#FFFFFF',
-                      fontFamily: '"Faktum", "Outfit", sans-serif',
-                      fontWeight: 500,
-                      fontSize: '14px',
-                      color: 'rgba(43, 43, 43, 1)',
-                      cursor: 'pointer',
-                      transition: 'background-color 0.2s',
-                    }}
-                    onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#F8F9FA'; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#FFFFFF'; }}
-                  >
-                    <img src="https://www.svgrepo.com/show/475658/instagram-color.svg" className="w-5 h-5" alt="Instagram Logo" />
-                    <span>Instagram</span>
                   </button>
                 </div>
               </div>
@@ -2133,12 +2089,12 @@ export const AuthModal: React.FC = () => {
                 zIndex: 2,
               }}
             >
-              {/* Clean original edge-to-edge mascot image */}
+              {/* Clean original edge-to-edge mascot image with dynamic slide */}
               <img 
-                src="/llama_mascot.png" 
-                className="w-full h-full object-cover" 
+                src={bannerSlide === 0 ? "/llama_mascot.png" : "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=800&q=80"} 
+                className="w-full h-full object-cover transition-opacity duration-300" 
                 style={{ borderRadius: '12px' }} 
-                alt="Go Banjara Mascot Llama" 
+                alt="Go Banjara Banner" 
               />
             </div>
 
@@ -2224,7 +2180,7 @@ export const AuthModal: React.FC = () => {
                 textAlign: 'left',
               }}
             >
-              Start Shopping Today
+              {bannerSlide === 0 ? "Start Shopping Today" : "Explore Curated Trips"}
             </h3>
             <p 
               style={{
@@ -2238,17 +2194,27 @@ export const AuthModal: React.FC = () => {
                 margin: 0,
               }}
             >
-              Get personalized shopping and customization experience.
-              <br />
-              When you sign in to your account
+              {bannerSlide === 0 ? (
+                <>
+                  Get personalized shopping and customization experience.
+                  <br />
+                  When you sign in to your account
+                </>
+              ) : (
+                <>
+                  Discover authentic travel itineraries & community expeditions.
+                  <br />
+                  Across scenic destinations in India
+                </>
+              )}
             </p>
             
-            {/* Figma Dots Carousel Indicator (Specs: width 54px, height 12px, gap 4px, radius 2px, padding 4px 8px, bg #FFFFFF) */}
+            {/* Figma Dots Carousel Indicator with click interaction */}
             <div 
               style={{
                 width: '54px',
                 height: '12px',
-                gap: '4px',
+                gap: '8px',
                 borderRadius: '2px',
                 paddingTop: '4px',
                 paddingRight: '8px',
@@ -2263,22 +2229,36 @@ export const AuthModal: React.FC = () => {
                 opacity: 1,
               }}
             >
-              <span 
+              <button 
+                type="button"
+                onClick={() => setBannerSlide(0)}
+                aria-label="Slide 1"
                 style={{
-                  width: '12px',
+                  width: bannerSlide === 0 ? '16px' : '12px',
                   height: '4px',
                   borderRadius: '2px',
-                  background: 'rgba(29, 73, 62, 1)',
+                  background: bannerSlide === 0 ? 'rgba(29, 73, 62, 1)' : 'rgba(224, 224, 224, 1)',
                   display: 'inline-block',
+                  border: 'none',
+                  padding: 0,
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
                 }}
               />
-              <span 
+              <button 
+                type="button"
+                onClick={() => setBannerSlide(1)}
+                aria-label="Slide 2"
                 style={{
-                  width: '22px',
+                  width: bannerSlide === 1 ? '16px' : '12px',
                   height: '4px',
                   borderRadius: '2px',
-                  background: 'rgba(224, 224, 224, 1)',
+                  background: bannerSlide === 1 ? 'rgba(29, 73, 62, 1)' : 'rgba(224, 224, 224, 1)',
                   display: 'inline-block',
+                  border: 'none',
+                  padding: 0,
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
                 }}
               />
             </div>

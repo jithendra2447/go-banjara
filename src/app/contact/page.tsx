@@ -106,7 +106,7 @@ export default function ContactPage() {
             width: "100%",
             maxWidth: "1440px",
             minHeight: "140px",
-            paddingTop: "24px",
+            paddingTop: "62px",
             paddingBottom: "12px",
             background: "rgba(255, 255, 255, 1)",
             display: "flex",
@@ -119,25 +119,8 @@ export default function ContactPage() {
           className="mx-auto text-center px-6 md:px-20"
         >
           {/* Contact Us Badge (Figma Spec) */}
-          <span 
-            style={{ 
-              display: "inline-flex", 
-              alignItems: "center", 
-              justifyContent: "center",
-              width: "104px",
-              height: "18px",
-              background: "rgba(255, 98, 62, 1)",
-              color: "rgba(255, 255, 255, 1)",
-              fontFamily: "Faktum, sans-serif",
-              fontWeight: 600,
-              fontSize: "14px",
-              lineHeight: "100%",
-              letterSpacing: "1.2px",
-              textTransform: "uppercase",
-              borderRadius: "2px",
-            }}
-          >
-            Contact Us
+          <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
+            CONTACT US
           </span>
           
           {/* Main Title Let's Get in Touch (Figma Spec) */}
@@ -219,49 +202,38 @@ export default function ContactPage() {
         >
           <div className="w-full max-w-[1280px] mx-auto flex flex-col md:flex-row gap-[48px] items-center justify-center min-h-[580px] px-4 md:px-0">
             
-            {/* Left Column: Tilted Mascot Card with Soft Red Glow Behind (Height: 580px) */}
+            {/* Left Column: Bonjo Mascot Card (About Us Style Effect) */}
             <div 
               style={{
                 height: "580px",
                 width: "537px",
                 maxWidth: "100%"
               }}
-              className="flex items-center justify-center relative select-none"
+              className="flex items-center justify-center relative select-none group"
             >
-              {/* Soft red glow background bubble */}
+              {/* Soft radial glow background bubble */}
               <div 
+                className="absolute -top-[40px] -left-[40px] w-[220px] h-[220px] pointer-events-none" 
                 style={{
-                  position: "absolute",
-                  top: "-40px",
-                  left: "-40px",
-                  width: "160px",
-                  height: "160px",
-                  borderRadius: "9999px",
-                  background: "rgba(224, 84, 52, 0.3)",
-                  filter: "blur(48px)",
-                  zIndex: 0,
-                  pointerEvents: "none"
+                  background: 'radial-gradient(circle, rgba(224, 84, 52, 0.35) 0%, rgba(224, 84, 52, 0) 70%)',
+                  zIndex: 0
                 }}
               />
               <div 
                 style={{
-                  transform: "rotate(-2deg)",
                   width: "100%",
                   height: "580px",
                   maxHeight: "100%",
                   zIndex: 10,
-                  boxShadow: "0px 25px 50px -12px rgba(0, 0, 0, 0.25)",
                   borderRadius: "12px"
                 }}
-                className="overflow-hidden transition-all duration-500 hover:rotate-0 hover:scale-102 cursor-pointer bg-white border border-[#1D493E]/10"
+                className="relative overflow-hidden transition-all duration-500 hover:rotate-2 cursor-pointer bg-transparent rounded-[12px]"
               >
                 <img 
                   src="/llama_mascot.png" 
                   alt="Bonjo Llama Mascot" 
-                  style={{
-                    transform: "scale(1.4) translateY(24px) rotate(2deg)",
-                  }}
-                  className="w-full h-full object-cover"
+                  style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)', borderRadius: '12px' }}
+                  className="w-full h-full object-cover filter drop-shadow-[0_25px_35px_rgba(0,0,0,0.2)] rounded-[12px] group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
             </div>

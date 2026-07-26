@@ -20,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth overflow-x-hidden" style={{ overflowX: 'hidden' }} suppressHydrationWarning>
+    <html lang="en" className="scroll-smooth overflow-x-clip" style={{ overflowX: 'clip' }} suppressHydrationWarning>
       <head>
         {/* Preconnect to external image & font CDNs for high-speed page load */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -33,7 +33,7 @@ export default function RootLayout({
         <link rel="preload" href="/hero-video.mp4" as="video" type="video/mp4" />
       </head>
       <body
-        className="antialiased min-h-screen bg-brand-beige text-primary-dark flex flex-col font-sans overflow-x-hidden relative"
+        className="antialiased min-h-screen bg-brand-beige text-primary-dark flex flex-col font-sans overflow-x-clip relative"
         suppressHydrationWarning
       >
         <Script src="https://accounts.google.com/gsi/client" strategy="lazyOnload" />

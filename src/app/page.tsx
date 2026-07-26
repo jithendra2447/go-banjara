@@ -504,7 +504,7 @@ export default function Homepage() {
           <div 
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
-            className={`w-full h-[282px] rounded-[4px] p-[20px] flex flex-col justify-between gap-[18px] text-left transition-all duration-300 shadow-md touch-pan-y ${
+            className={`w-full h-[282px] rounded-[4px] p-[20px] flex flex-col justify-between gap-[18px] text-left transition-all duration-300 shadow-md select-none touch-pan-y ${
               activeOfferSlide === 0 ? 'bg-[#1D493E] text-white' : 'bg-[#FF5A36] text-white'
             }`}
             style={{ boxSizing: 'border-box' }}
@@ -626,8 +626,8 @@ export default function Homepage() {
             <h2 className="text-3xl md:text-[42px] font-serif font-semibold text-[#1D493E] leading-none text-center">
               Place worth the <span className="text-[#FF5A36]">detour</span>
             </h2>
-            <p className="text-gray-500 text-base md:text-[24px] md:leading-8 font-medium text-center max-w-3xl mx-auto">
-              A hand-picked map of the corners of India our community keeps coming back to
+            <p className="text-gray-500 text-base md:text-[24px] md:leading-8 font-medium text-center max-w-2xl mx-auto">
+              A hand-picked map of the corners of India
             </p>
           </div>
 
@@ -757,14 +757,14 @@ export default function Homepage() {
               );
             })()}
 
-            {/* Standard 3-Column Grid Cards (Bottom Row) */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-[32px] w-full">
+            {/* Standard Grid Cards (Bottom Row) */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
               {(() => {
                 const displayPkgs = packagesList && packagesList.length > 0 ? packagesList : HOLIDAY_PACKAGES;
-                return displayPkgs.slice(1, 4).map((pkg) => (
-                  <div key={pkg.id} className="bg-white rounded-[4px] border border-gray-100 shadow-xs flex flex-col text-left overflow-hidden min-h-[695px]">
+                return displayPkgs.slice(1, 3).map((pkg) => (
+                  <div key={pkg.id} className="bg-white rounded-[4px] shadow-xs flex flex-col text-left md:h-[778px] overflow-hidden">
                     {/* Image (Flushed with top, left, and right edges) */}
-                    <div className="relative w-full h-[249px] overflow-hidden shrink-0">
+                    <div className="relative w-full h-[200px] md:h-[384px] overflow-hidden shrink-0">
                       <img 
                         src={pkg.image} 
                         alt={pkg.name} 
@@ -809,54 +809,70 @@ export default function Homepage() {
                       </button>
                     </div>
                     {/* Details block with padding */}
-                    <div className="flex-1 flex flex-col justify-between p-4 gap-4">
-                      {/* Top Group */}
-                      <div className="flex flex-col gap-2 shrink-0 w-full">
-                        {/* Tags Container */}
+                    <div className="flex-1 flex flex-col justify-between pt-4 pb-4 px-4 gap-6 md:gap-0">
+                      {/* Top Group (Width: Fill, Height: 151px, Gap: 12px) */}
+                      <div className="flex flex-col gap-2 min-h-[140px] shrink-0 w-full">
+                        {/* Tags Container (Width: Fill, Height: Hug 28px, Justify: space-between) */}
                         <div className="flex justify-between items-center w-full h-[28px] shrink-0">
                           <span className="text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-0.5 rounded-[4px] text-xs font-bold">{pkg.category || 'Road Trip'}</span>
-                          <span className="bg-[#E7F3EF] text-[#1D493E] px-2.5 py-0.5 rounded-[4px] text-xs font-bold">{pkg.durationDays} days</span>
+                          <span className="bg-gray-100 text-gray-600 px-2.5 py-0.5 rounded-[4px] text-xs font-bold">{pkg.durationDays} days</span>
                         </div>
-                        <div className="flex justify-between items-baseline gap-2 mt-1">
-                          <h3 className="text-xl font-sans font-bold text-[#1D493E] leading-tight truncate flex-1" title={pkg.name}>{pkg.name}</h3>
-                          <span className="text-lg font-sans font-bold text-[#1D493E] shrink-0">₹{(pkg.price ?? 0).toLocaleString('en-IN')}/Person</span>
+                        <div className="flex justify-between items-baseline gap-4">
+                          <h3 className="text-2xl md:text-[32px] font-sans font-bold text-[#1D493E] leading-tight truncate flex-1" title={pkg.name}>{pkg.name}</h3>
+                          <span className="text-xl md:text-[24px] font-sans font-bold text-[#1D493E] shrink-0">₹{(pkg.price ?? 0).toLocaleString('en-IN')}/Person</span>
                         </div>
-                        <p className="font-sans font-medium text-sm text-[#8D8D8D] w-full line-clamp-2 shrink-0 mt-1">
+                        <p className="font-sans font-medium text-sm sm:text-base md:text-[20px] md:leading-[32px] text-[#8D8D8D] w-full max-w-[616px] md:h-[64px] overflow-hidden line-clamp-2 shrink-0">
                           {pkg.description}
                         </p>
                       </div>
 
-                      {/* 2x2 Meta Details Grid */}
-                      <div className="grid grid-cols-2 gap-2 border-t border-gray-100 pt-3 shrink-0">
-                        <div className="flex items-center gap-2 p-1.5 bg-[#FAF9F6] rounded-[4px]">
-                          <MapPin className="w-4 h-4 text-[#1D493E] shrink-0" />
-                          <span className="text-xs font-medium text-[#2B2B2B] truncate">Starts from {pkg.startPoint || 'Srinagar'}</span>
+                      {/* Details Grid Block (Width: 616px, Height: 140px, Justify: space-between) */}
+                      <div className="w-full max-w-[616px] h-auto flex flex-col sm:flex-row justify-between border-t border-gray-200 pt-3 shrink-0 gap-4 sm:gap-0">
+                        {/* Column 1 (Width: 308px, Height: 140px, Gap: space-between) */}
+                        <div className="w-full sm:w-[50%] lg:w-[308px] flex flex-col gap-2 sm:gap-0 justify-between shrink-0">
+                          <div className="w-full sm:max-w-[308px] h-auto min-h-[50px] flex items-center gap-[8px] shrink-0 py-2">
+                            <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
+                              <MapPin className="w-4 h-4 text-[#1D493E]" />
+                            </div>
+                            <span className="font-sans font-medium text-xs sm:text-sm md:text-[20px] leading-normal text-[#2B2B2B] align-middle">Starts from {pkg.startPoint || 'Srinagar'}</span>
+                          </div>
+                          <div className="w-full sm:max-w-[308px] h-auto min-h-[50px] flex items-center gap-[8px] shrink-0 py-2">
+                            <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
+                              <ArrowUpRight className="w-4 h-4 text-[#1D493E]" />
+                            </div>
+                            <span className="font-sans font-medium text-xs sm:text-sm md:text-[20px] leading-normal text-[#2B2B2B] align-middle">{pkg.difficulty || 'Moderate'} Difficulty</span>
+                          </div>
                         </div>
-                        <div className="flex items-center gap-2 p-1.5 bg-[#FAF9F6] rounded-[4px]">
-                          <Users className="w-4 h-4 text-[#1D493E] shrink-0" />
-                          <span className="text-xs font-medium text-[#2B2B2B] truncate">{pkg.groupType || 'Curated group Trip'}</span>
-                        </div>
-                        <div className="flex items-center gap-2 p-1.5 bg-[#FAF9F6] rounded-[4px]">
-                          <ArrowUpRight className="w-4 h-4 text-[#1D493E] shrink-0" />
-                          <span className="text-xs font-medium text-[#2B2B2B] truncate">{pkg.difficulty || 'Moderate'} Difficulty</span>
-                        </div>
-                        <div className="flex items-center gap-2 p-1.5 bg-[#FAF9F6] rounded-[4px]">
-                          <Calendar className="w-4 h-4 text-[#1D493E] shrink-0" />
-                          <span className="text-xs font-medium text-[#2B2B2B] truncate">Next: {pkg.nextDeparture || 'Aug, 2026'}</span>
+                        {/* Column 2 (Width: 308px, Height: 140px, Gap: space-between) */}
+                        <div className="w-full sm:w-[50%] lg:w-[308px] flex flex-col gap-2 sm:gap-0 justify-between shrink-0">
+                          <div className="w-full sm:max-w-[308px] h-auto min-h-[50px] flex items-center gap-[8px] shrink-0 py-2">
+                            <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
+                              <Users className="w-4 h-4 text-[#1D493E]" />
+                            </div>
+                            <span className="font-sans font-medium text-xs sm:text-sm md:text-[20px] leading-normal text-[#2B2B2B] align-middle">{pkg.groupType || 'Curated group Trip'}</span>
+                          </div>
+                          <div className="w-full sm:max-w-[308px] h-auto min-h-[50px] flex items-center gap-[8px] shrink-0 py-2">
+                            <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
+                              <Calendar className="w-4 h-4 text-[#1D493E]" />
+                            </div>
+                            <span className="font-sans font-medium text-xs sm:text-sm md:text-[20px] leading-normal text-[#2B2B2B] align-middle">Next: {pkg.nextDeparture || 'Aug, 2026'}</span>
+                          </div>
                         </div>
                       </div>
 
-                      {/* Buttons */}
-                      <div className="flex gap-3 w-full h-[46px] shrink-0 mt-2">
+                      {/* Buttons (Width: Fill 624px, Height: Hug 55px, Gap: 12px) */}
+                      <div className="flex gap-3 w-full h-[55px] shrink-0 mt-0">
                         <Link 
                           href={`/travel/package/${pkg.id}`} 
-                          className="flex-1 h-[46px] flex items-center justify-center rounded-[4px] bg-[#1D493E] hover:bg-[#15342c] transition cursor-pointer text-white font-medium text-sm"
+                          className="flex-1 h-[55px] flex items-center justify-center rounded-[4px] bg-[#1D493E] hover:bg-[#15342c] transition cursor-pointer"
+                          style={{ color: "#FFFFFF", fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "100%", letterSpacing: "0px", textDecoration: "none", verticalAlign: "middle" }}
                         >
                           Book Now
                         </Link>
                         <Link 
                           href={pkg.link || `/travel/package/${pkg.id}`} 
-                          className="flex-1 h-[46px] flex items-center justify-center rounded-[4px] border border-[#1D493E] text-[#1D493E] hover:bg-gray-50 transition font-medium text-sm"
+                          className="flex-1 h-[55px] flex items-center justify-center rounded-[4px] border border-[#1D493E] text-center hover:bg-gray-50 transition"
+                          style={{ color: "rgba(29,73,62,1)", fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "100%", letterSpacing: "0px", textDecoration: "none" }}
                         >
                           Get details
                         </Link>
@@ -867,16 +883,29 @@ export default function Homepage() {
               })()}
             </div>
 
-            {/* Centered Destinations Footer Link (Pill Container styled) */}
-            <div className="flex justify-center mt-6 mb-0">
+            {/* Centered Destinations Footer Link (Figma style: 331x68px, padding 18x36px, radius 4px, NO BORDER) */}
+            <div className="flex justify-center mt-4 mb-0">
               <Link 
                 href="/travel" 
-                className="inline-flex items-center justify-center px-8 py-4 gap-2 rounded-[6px] bg-[#EEF4F2] hover:bg-[#e2ece8] text-[#1D493E] transition-all duration-300 cursor-pointer group"
+                className="inline-flex items-center justify-center w-full max-w-[331px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[4px] bg-transparent text-[#1D493E] hover:opacity-80 transition-all duration-300 cursor-pointer group"
               >
-                <span className="font-sans font-bold text-base md:text-lg leading-none">
+                <span className="h-[25px] flex items-center justify-center font-sans font-medium text-sm sm:text-base md:text-[20px] leading-none">
                   Explore all destinations
                 </span>
-                <ArrowUpRight className="w-5 h-5 text-[#1D493E] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                <svg 
+                  style={{ width: '32px', height: '32px' }}
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2.25" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"
+                  className="shrink-0"
+                >
+                  <path d="M7 17l2.5-2.5" />
+                  <path d="M12.5 11.5L17 7" />
+                  <path d="M7 7h10v10" />
+                </svg>
               </Link>
             </div>
           </div>

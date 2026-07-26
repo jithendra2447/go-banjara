@@ -162,6 +162,7 @@ a[role="button"],
 .btn-interactive {
   transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease !important;
   cursor: pointer !important;
+  user-select: none !important;
 }
 
 button:hover:not(:disabled), 
@@ -176,11 +177,5 @@ a[role="button"]:active,
 .btn-interactive:active {
   transform: translateY(1px) scale(0.985);
   box-shadow: 0 1px 4px rgba(29, 73, 62, 0.08) !important;
-}
-
-/* Allow full text selection & screenshots on mobile and desktop */
-*, ::before, ::after {
-  -webkit-user-select: auto;
-  user-select: auto;
 }
 

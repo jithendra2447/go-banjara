@@ -2333,13 +2333,13 @@ export default function Homepage() {
         <div className="hidden md:flex w-full max-w-[1440px] h-auto bg-white rounded-[4px] pt-[28px] pb-[28px] md:px-[80px] px-6 flex-col gap-[32px] mx-auto">
           {/* Header */}
           <div className="w-full max-w-[1280px] h-auto flex flex-col gap-[12px] justify-center text-left">
-            <div className="h-[26px] inline-flex items-center justify-center bg-[#FFEBE5] rounded-[4px] px-3 self-start">
-              <span className="font-sans font-semibold text-[14px] leading-none tracking-[1.2px] text-[#FF623E] uppercase whitespace-nowrap">
-                Frequently Asked Questions
+            <div className="w-[54px] h-[26px] flex items-center justify-center bg-[#FFEBE5] rounded-[4px]">
+              <span className="font-sans font-semibold text-[14px] leading-none tracking-[1.2px] text-[#FF623E] uppercase">
+                FAQ'S
               </span>
             </div>
-            <h2 className="w-full max-w-[541px] h-auto flex items-center font-serif font-semibold text-3xl md:text-[42px] leading-[1] tracking-[0px] text-[#2B2B2B] py-2">
-              Got Questions?&nbsp;<span className="text-[#FF5A36]">We&apos;ve Got Answers.</span>
+            <h2 className="w-full h-auto flex items-center font-serif font-semibold text-3xl md:text-[42px] leading-tight tracking-[0px] text-[#2B2B2B] py-2">
+              Frequently asked questions
             </h2>
           </div>
 
@@ -2373,10 +2373,15 @@ export default function Homepage() {
 
         {/* Mobile Figma Spec Container (block md:hidden) - w:430px max, gap:12px, padding:12px 20px */}
         <div className="block md:hidden w-full max-w-[430px] mx-auto py-[12px] px-[20px] bg-white flex flex-col gap-[12px]">
-          <div className="h-[26px] inline-flex items-center justify-center bg-[#FFEBE5] rounded-[4px] px-3 self-start">
-            <span className="font-sans font-semibold text-[12px] leading-none tracking-[1.2px] text-[#FF623E] uppercase whitespace-nowrap">
-              Frequently Asked Questions
-            </span>
+          <div className="flex flex-col gap-2 text-left">
+            <div className="w-[54px] h-[26px] flex items-center justify-center bg-[#FFEBE5] rounded-[4px]">
+              <span className="font-sans font-semibold text-[12px] leading-none tracking-[1.2px] text-[#FF623E] uppercase">
+                FAQ'S
+              </span>
+            </div>
+            <h2 className="text-[26px] sm:text-[32px] font-serif font-semibold text-[#2B2B2B] leading-tight text-left m-0">
+              Frequently asked questions
+            </h2>
           </div>
 
           <div className="w-full flex flex-col divide-y divide-gray-100">

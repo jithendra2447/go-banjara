@@ -1479,8 +1479,8 @@ export default function Homepage() {
         {/* Mobile Figma Spec Container (block md:hidden) - w:430px max, gap:12px, padding:12px 20px */}
         <div className="block md:hidden w-full max-w-[430px] mx-auto py-[12px] px-[20px] bg-white flex flex-col gap-[12px]">
           {/* Header Row: Title + Round Green Arrow Button */}
-          <div className="flex items-center justify-between w-full h-[30px]">
-            <h2 className="text-[32px] font-serif font-semibold text-[#1D493E] leading-none m-0">
+          <div className="flex items-center justify-between w-full h-auto min-h-[30px]">
+            <h2 className="text-[22px] sm:text-[26px] font-serif font-semibold text-[#1D493E] leading-tight m-0">
               Today's <span className="text-[#FF5A36]">best deals</span>
             </h2>
             <Link 
@@ -1500,44 +1500,47 @@ export default function Homepage() {
               resolveProduct("naturally-nomad-badge-3", "Naturally Nomad", "Badges", "/naturally_nomad_badge.png", 250, 300),
               resolveProduct("naturally-nomad-badge-4", "Naturally Nomad", "Badges", "/naturally_nomad_badge.png", 250, 300)
             ].map((deal, idx) => (
-              <div 
+              <Link
                 key={idx}
-                className="w-full flex flex-col gap-[8px] text-left"
+                href={`/shop/product/${deal.id}`}
+                className="w-full bg-white rounded-[4px] flex flex-col gap-[6px] text-left overflow-hidden border border-gray-100/80 shadow-2xs group cursor-pointer"
               >
-                <div className="w-full aspect-[4/3] rounded-[8px] overflow-hidden bg-gray-100 relative">
+                <div className="relative w-full h-[130px] rounded-[4px] overflow-hidden bg-gray-50 shrink-0">
                   <img 
                     src={deal.images[0] || "/naturally_nomad_badge.png"} 
                     alt={deal.name} 
-                    className="w-full h-full object-cover" 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" 
                   />
                 </div>
-                <span className="inline-flex items-center justify-center bg-[#FF5A36] text-white text-[10px] font-bold px-1.5 py-0.5 rounded-[3px] self-start uppercase">
-                  Badges
-                </span>
-                <h4 className="text-[14px] font-bold text-[#2B2B2B] leading-tight m-0 truncate">
-                  {deal.name}
-                </h4>
-                <div className="flex items-center gap-1 text-[13px]">
-                  <span className="text-gray-400 line-through text-[11px]">₹300</span>
-                  <span className="font-bold text-[#2B2B2B]">₹250</span>
-                  <span className="text-[#FF5A36] text-[11px] font-semibold">30% off</span>
-                </div>
-                <div className="flex items-center gap-1 text-[11px]">
-                  <div className="flex text-amber-400 gap-0.5">
-                    {[...Array(5)].map((_, s) => (
-                      <Star key={s} className="w-3 h-3 fill-current" />
-                    ))}
+                <div className="flex flex-col gap-[4px] px-1.5 pb-2">
+                  <span className="bg-[#FF5A36] text-white text-[9px] font-bold px-1.5 py-0.5 rounded-[3px] self-start uppercase">
+                    Badges
+                  </span>
+                  <h4 className="text-[12px] font-bold text-[#2B2B2B] leading-tight m-0 truncate">
+                    {deal.name}
+                  </h4>
+                  <div className="flex items-center gap-1 text-[11px] pt-0.5">
+                    <span className="text-gray-400 line-through text-[9px]">₹300</span>
+                    <span className="font-bold text-[#2B2B2B]">₹250</span>
+                    <span className="text-[#FF5A36] text-[9px] font-semibold whitespace-nowrap">30% off</span>
                   </div>
-                  <span className="text-gray-500 font-medium">(120 Reviews)</span>
+                  <div className="flex items-center gap-1 text-[10px]">
+                    <div className="flex text-amber-400 gap-0.5">
+                      {[...Array(5)].map((_, s) => (
+                        <Star key={s} className="w-2.5 h-2.5 fill-current" />
+                      ))}
+                    </div>
+                    <span className="text-gray-500 font-medium text-[9px]">(120 Reviews)</span>
+                  </div>
+                  <p className="text-[9px] text-[#8D8D8D] font-medium m-0 truncate">
+                    200+ bought in past month
+                  </p>
+                  <p className="text-[9px] leading-tight m-0 truncate">
+                    <span className="text-[#8D8D8D]">FREE delivery </span>
+                    <span className="font-bold text-[#2B2B2B]">Thu, 9 Apr</span>
+                  </p>
                 </div>
-                <p className="text-[11px] text-[#8D8D8D] font-medium m-0">
-                  200+ bought in past month
-                </p>
-                <p className="text-[10px] leading-tight m-0">
-                  <span className="text-[#8D8D8D]">FREE delivery as soon as </span>
-                  <span className="font-bold text-[#2B2B2B]">Thu, 9 Apr, 7am - 10 pm</span>
-                </p>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -1695,8 +1698,8 @@ export default function Homepage() {
         {/* Mobile Figma Spec Container (block md:hidden) - w:430px max, gap:12px, padding:12px 20px */}
         <div className="block md:hidden w-full max-w-[430px] mx-auto py-[12px] px-[20px] bg-white flex flex-col gap-[12px]">
           {/* Header Row: Title + Round Green Arrow Button */}
-          <div className="flex items-center justify-between w-full h-[30px]">
-            <h2 className="text-[26px] font-serif font-semibold text-[#1D493E] leading-none m-0">
+          <div className="flex items-center justify-between w-full h-auto min-h-[30px]">
+            <h2 className="text-[22px] sm:text-[26px] font-serif font-semibold text-[#1D493E] leading-tight m-0">
               Most <span className="text-[#FF5A36]">Selling</span>
             </h2>
             <Link 

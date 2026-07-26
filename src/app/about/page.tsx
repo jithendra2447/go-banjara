@@ -2296,34 +2296,27 @@ export default function AboutPage() {
             </p>
           </div>
 
-          {/* Button: 286×55, pt-16 pr-32 pb-16 pl-32, radius-4, bg #1D493E */}
           <Link
             href="/travel"
             style={{
-              width: "286px",
               height: "55px",
-              paddingTop: "16px",
-              paddingBottom: "16px",
-              paddingLeft: "32px",
-              paddingRight: "32px",
+              padding: "18px 36px",
+              gap: "8px",
               borderRadius: "4px",
-              background: "rgba(29, 73, 62, 1)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
+              background: "#1D493E",
               color: "#FFFFFF",
-              fontFamily: "'Faktum','Outfit',sans-serif",
+              fontFamily: "'Faktum', 'Outfit', sans-serif",
               fontWeight: 500,
               fontSize: "18px",
               lineHeight: "100%",
               letterSpacing: "0px",
+              border: "none",
               textDecoration: "none",
-              transition: "opacity 0.2s",
             }}
-            className="hover:opacity-90 inline-flex items-center gap-2"
+            className="group hover:bg-[#15342c] transition-all duration-300 inline-flex items-center justify-center gap-2"
           >
             <span>Reserve your tour now</span>
-            <span className="text-lg font-sans">↗</span>
+            <span className="text-lg font-sans group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300">↗</span>
           </Link>
         </div>
       </div>

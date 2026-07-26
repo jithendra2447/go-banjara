@@ -825,9 +825,10 @@ export default function BlogPage() {
               marginTop: '8px',
               transition: 'background 0.2s',
             }}
-            className="hover:bg-[#163d33]"
+            className="group hover:bg-[#163d33] inline-flex items-center justify-center gap-2 transition-all duration-300"
           >
-            Reserve your tour now ↗
+            <span>Reserve your tour now</span>
+            <span className="text-lg group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300">↗</span>
           </Link>
         </div>
       </section>

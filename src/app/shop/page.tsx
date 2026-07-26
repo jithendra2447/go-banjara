@@ -205,7 +205,7 @@ export default function ShopPage() {
           <div className="flex justify-center pt-0">
             <Link
               href="/shop/all"
-              className="flex items-center gap-1.5 text-xs sm:text-sm font-extrabold uppercase tracking-widest text-[#1D493E] hover:opacity-80 transition-opacity duration-300 group"
+              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-extrabold uppercase tracking-widest text-[#1D493E] bg-transparent hover:bg-gray-200/80 rounded-[8px] px-6 py-3 transition-all duration-300 group"
             >
               <span>View all products</span>
               <span className="text-base font-semibold group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300">↗</span>
@@ -324,7 +324,7 @@ export default function ShopPage() {
           <div className="flex justify-center pt-0">
             <Link
               href="/shop/discount-sale"
-              className="flex items-center gap-1.5 text-xs sm:text-sm font-extrabold uppercase tracking-widest text-[#1D493E] hover:opacity-80 transition-opacity duration-300 group"
+              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-extrabold uppercase tracking-widest text-[#1D493E] bg-transparent hover:bg-gray-200/80 rounded-[8px] px-6 py-3 transition-all duration-300 group"
             >
               <span>View all products</span>
               <span className="text-base font-semibold group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300">↗</span>
@@ -579,22 +579,16 @@ export default function ShopPage() {
             <Link
               href="/travel"
               style={{
-                borderRadius: "4px",
-                background: "rgba(29, 73, 62, 1)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                color: "#FFFFFF",
-                fontFamily: "'Faktum','Outfit',sans-serif",
-                fontWeight: 500,
+                fontFamily: "Outfit, sans-serif",
+                fontWeight: 600,
+                lineHeight: "1",
                 letterSpacing: "0px",
                 textDecoration: "none",
-                transition: "opacity 0.2s",
               }}
-              className="hover:opacity-90 inline-flex items-center gap-2 px-5 sm:px-8 py-2.5 sm:py-4 h-10 sm:h-[55px] w-auto sm:w-[286px] text-xs sm:text-[18px] shrink-0"
+              className="group inline-flex items-center justify-center gap-2 px-5 sm:px-8 py-2.5 sm:py-4 h-10 sm:h-[55px] w-auto sm:w-[286px] text-xs sm:text-[18px] shrink-0 bg-[#1D493E] hover:bg-[#15342c] text-white rounded-[4px] shadow-sm transition-all duration-300 cursor-pointer"
             >
               <span>Reserve your tour now</span>
-              <span className="text-xs sm:text-lg font-sans">↗</span>
+              <span className="text-xs sm:text-lg font-sans group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300">↗</span>
             </Link>
           </div>
         </section>

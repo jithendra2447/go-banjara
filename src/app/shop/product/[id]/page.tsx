@@ -1541,7 +1541,7 @@ export default function ProductDetailsPage() {
               textDecoration: "none",
               boxSizing: "border-box",
             }}
-            className="hover:bg-[rgba(29,73,62,0.9)] transition-colors"
+            className="group hover:bg-[#15342c] transition-all duration-300"
           >
             <span style={{
               fontFamily: "Faktum, sans-serif",
@@ -1553,13 +1553,16 @@ export default function ProductDetailsPage() {
             }}>
               Reserve your tour now
             </span>
-            <span style={{
-              fontFamily: "Faktum, sans-serif",
-              fontWeight: 600,
-              fontSize: "16px",
-              lineHeight: "100%",
-              color: "#FFFFFF",
-            }}>
+            <span 
+              style={{
+                fontFamily: "Faktum, sans-serif",
+                fontWeight: 600,
+                fontSize: "16px",
+                lineHeight: "100%",
+                color: "#FFFFFF",
+              }}
+              className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300 inline-block"
+            >
               ↗
             </span>
           </Link>

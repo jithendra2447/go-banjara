@@ -982,10 +982,10 @@ export default function CartPage() {
               cursor: "pointer",
               transition: "all 0.2s ease",
             }}
-            className="hover:bg-[#15342c] active:scale-95 cursor-pointer shadow-sm mt-2"
+            className="group hover:bg-[#15342c] active:scale-95 cursor-pointer shadow-sm mt-2 transition-all duration-300"
           >
             <span>Reserve your tour now</span>
-            <span className="text-lg">↗</span>
+            <span className="text-lg group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300">↗</span>
           </Link>
         </div>
       </section>

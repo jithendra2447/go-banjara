@@ -82,10 +82,10 @@ export const SuggestedProducts: React.FC<SuggestedProductsProps> = ({ title }) =
       <div className="flex justify-center mt-8">
         <Link 
           href="/shop"
-          className="flex items-center gap-2 font-sans font-semibold text-base text-[#1D493E] hover:text-[#15342c] transition group cursor-pointer"
+          className="inline-flex items-center justify-center gap-2 font-sans font-medium text-base text-[#1D493E] bg-transparent hover:bg-gray-200/80 rounded-[8px] px-6 py-3 transition-all duration-300 group cursor-pointer"
         >
           <span>View all products</span>
-          <span className="text-xl transition-transform group-hover:translate-x-1 group-hover:-translate-y-1">↗</span>
+          <span className="text-xl group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300">↗</span>
         </Link>
       </div>
     </div>

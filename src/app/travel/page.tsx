@@ -988,17 +988,10 @@ export default function HolidaysPortal() {
                 <div 
                   key={pkg.id}
                   style={{
-                    width: "100%",
-                    maxWidth: "405.33px",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "24px",
-                    borderRadius: "4px",
-                    background: "rgba(255, 255, 255, 1)",
                     boxSizing: "border-box",
                     position: "relative",
                   }}
-                  className="group h-auto min-h-0 sm:min-h-[695px] pb-0"
+                  className="group w-full max-w-[191px] sm:max-w-[405.33px] h-[371px] sm:h-auto flex flex-col gap-1.5 sm:gap-6 bg-white rounded-[4px] p-0"
                 >
                   {/* Card Image */}
                   <Link 
@@ -1007,10 +1000,10 @@ export default function HolidaysPortal() {
                       display: "block", 
                       position: "relative", 
                       width: "100%", 
-                      height: "249.44px",
                       borderRadius: "4px",
                       overflow: "hidden"
                     }}
+                    className="h-[190px] sm:h-[249.44px] shrink-0"
                   >
                     <img 
                       src={pkg.image} 
@@ -1026,7 +1019,7 @@ export default function HolidaysPortal() {
 
                     {/* Best Seller Overlay */}
                     {pkg.isBestSeller && (
-                      <div className="absolute top-4 left-4 bg-[#FF623E] text-white font-bold text-[10px] px-3.5 py-1.5 rounded-xs shadow-sm uppercase tracking-wider z-10">
+                      <div className="absolute top-2 left-2 sm:top-4 sm:left-4 bg-[#FF623E] text-white font-bold text-[9px] sm:text-[10px] px-2 py-0.5 sm:px-3.5 sm:py-1.5 rounded-xs shadow-sm uppercase tracking-wider z-10">
                         Best Seller
                       </div>
                     )}
@@ -1041,10 +1034,8 @@ export default function HolidaysPortal() {
                       }}
                       style={{
                         position: "absolute",
-                        top: "12px",
-                        right: "12px",
-                        width: "36px",
-                        height: "36px",
+                        top: "8px",
+                        right: "8px",
                         borderRadius: "50%",
                         backgroundColor: "rgba(255, 255, 255, 0.9)",
                         backdropFilter: "blur(4px)",
@@ -1056,12 +1047,12 @@ export default function HolidaysPortal() {
                         zIndex: 20,
                         boxShadow: "0 2px 8px rgba(0, 0, 0, 0.12)",
                       }}
-                      className="hover:scale-110 active:scale-95 group transition"
+                      className="w-7 h-7 sm:w-9 sm:h-9 hover:scale-110 active:scale-95 group transition"
                       title={Array.isArray(wishlist) && wishlist.some((w: any) => w.id === pkg.id) ? "Remove from wishlist" : "Add to wishlist"}
                       aria-label="Wishlist package"
                     >
                       <Heart 
-                        className={`w-4 h-4 transition-colors ${
+                        className={`w-3.5 h-3.5 sm:w-4 sm:h-4 transition-colors ${
                           Array.isArray(wishlist) && wishlist.some((w: any) => w.id === pkg.id)
                             ? 'text-red-500 fill-red-500' 
                             : 'text-slate-700 group-hover:text-red-500'
@@ -1076,23 +1067,20 @@ export default function HolidaysPortal() {
                       flex: 1, 
                       display: "flex", 
                       flexDirection: "column", 
-                      justifyContent: "space-between", 
                       boxSizing: "border-box",
-                      gap: "20px"
                     }}
+                    className="gap-[6px] sm:gap-5 justify-between"
                   >
                     
-                    {/* Upper block with badges, title, description */}
+                    {/* Badges, title, description, tags */}
                     <div 
                       style={{ 
                         width: "100%",
-                        maxWidth: "405.33px",
                         display: "flex", 
                         flexDirection: "column", 
-                        gap: "12px",
                         boxSizing: "border-box"
                       }}
-                      className="h-auto md:h-[183px]"
+                      className="gap-[6px] sm:gap-3 h-auto md:h-[183px]"
                     >
                       {/* Category & Duration Row */}
                       <div 
@@ -1103,91 +1091,64 @@ export default function HolidaysPortal() {
                           justifyContent: "space-between", 
                           alignItems: "center" 
                         }}
-                        className="h-auto min-h-[24px] sm:h-[28px]"
+                        className="h-auto"
                       >
                         <span 
                           style={{
-                            borderRadius: "4px",
+                            borderRadius: "3px",
                             fontFamily: "'Faktum', 'Outfit', sans-serif",
-                            fontWeight: 600,
-                            color: "rgba(255, 98, 62, 1)",
-                            background: "rgba(255, 98, 62, 0.1)",
-                            textTransform: "uppercase",
-                            letterSpacing: "0.5px",
+                            fontWeight: 700,
+                            letterSpacing: "0.3px",
                             display: "inline-flex",
                             alignItems: "center",
                           }}
-                          className="px-2 py-0.5 sm:px-3 sm:py-1 text-[10px] sm:text-xs"
+                          className="bg-[#FF623E] text-white text-[9px] sm:text-xs px-1.5 py-0.5 sm:px-3 sm:py-1 whitespace-nowrap"
                         >
                           {displayCategory}
                         </span>
                         <span 
                           style={{
-                            borderRadius: "4px",
+                            borderRadius: "3px",
                             fontFamily: "'Faktum', 'Outfit', sans-serif",
-                            fontWeight: 600,
-                            color: "rgba(29, 73, 62, 1)",
-                            background: "rgba(29, 73, 62, 0.1)",
-                            textTransform: "uppercase",
-                            letterSpacing: "0.5px",
+                            fontWeight: 700,
+                            letterSpacing: "0.3px",
                             display: "inline-flex",
                             alignItems: "center",
                           }}
-                          className="px-2 py-0.5 sm:px-3 sm:py-1 text-[10px] sm:text-xs"
+                          className="bg-[#1D493E] text-white text-[9px] sm:text-xs px-1.5 py-0.5 sm:px-3 sm:py-1 whitespace-nowrap"
                         >
-                          {pkg.durationDays} days
+                          {pkg.durationDays} Days
                         </span>
                       </div>
 
-                      {/* Title & Price Row */}
+                      {/* Title */}
                       <Link 
                         href={pkg.link || `/travel/package/${pkg.id}`} 
                         style={{ 
                           width: "100%",
-                          display: "flex",
-                          flexDirection: "row",
-                          justifyContent: "space-between",
-                          alignItems: "center",
                           textDecoration: "none",
                         }}
-                        className="group h-auto gap-2"
+                        className="group"
                       >
                         <h3 
                           style={{
-                            flex: 1,
                             fontFamily: "'Faktum', 'Outfit', sans-serif",
-                            fontWeight: 600,
+                            fontWeight: 700,
                             letterSpacing: "0px",
                             color: "rgba(43, 43, 43, 1)",
                             margin: 0,
                           }}
-                          className="text-xs sm:text-lg md:text-[24px] truncate block leading-tight hover:whitespace-normal transition-all duration-300"
+                          className="text-[12px] sm:text-lg md:text-[24px] truncate block leading-tight hover:whitespace-normal transition-all duration-300"
                           title={pkg.name}
                         >
                           {pkg.name}
                         </h3>
-                        <span 
-                          style={{
-                            flexShrink: 0,
-                            fontFamily: "'Faktum', 'Outfit', sans-serif",
-                            fontWeight: 600,
-                            letterSpacing: "0px",
-                            color: "rgba(43, 43, 43, 1)",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "flex-end",
-                          }}
-                          className="text-xs sm:text-lg md:text-[28px]"
-                        >
-                          ₹{pkg.price.toLocaleString('en-IN')}/Person
-                        </span>
                       </Link>
 
                       {/* Description */}
                       <p 
                         style={{
                           width: "100%",
-                          maxWidth: "405.33px",
                           fontFamily: "'Faktum', 'Outfit', sans-serif",
                           fontWeight: 500,
                           color: "rgba(141, 141, 141, 1)",
@@ -1198,11 +1159,40 @@ export default function HolidaysPortal() {
                           WebkitBoxOrient: "vertical",
                           textOverflow: "ellipsis",
                         }}
-                        className="text-xs sm:text-sm md:text-[18px] leading-snug sm:leading-[28px] hover:line-clamp-none hover:overflow-visible transition-all duration-300 cursor-pointer"
+                        className="text-[10px] sm:text-sm md:text-[18px] leading-tight sm:leading-[28px] hover:line-clamp-none hover:overflow-visible transition-all duration-300 cursor-pointer"
                         title={pkg.description}
                       >
                         {pkg.description}
                       </p>
+
+                      {/* Horizontal Tags Row */}
+                      <div className="flex flex-wrap gap-1 mt-0.5">
+                        <span className="bg-[#F6F3EE] text-[#666666] text-[8px] sm:text-xs px-1 py-0.5 rounded-[2px] font-medium">
+                          {pkg.startPoint || 'Jaipur'}
+                        </span>
+                        <span className="bg-[#F6F3EE] text-[#666666] text-[8px] sm:text-xs px-1 py-0.5 rounded-[2px] font-medium">
+                          {pkg.groupType || 'Private Trip'}
+                        </span>
+                        <span className="bg-[#F6F3EE] text-[#666666] text-[8px] sm:text-xs px-1 py-0.5 rounded-[2px] font-medium">
+                          Next: {pkg.nextDeparture || 'Oct, 2026'}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Pricing Row */}
+                    <div className="flex items-center gap-1 mt-auto flex-wrap">
+                      <span className="line-through text-gray-400 text-[9px] sm:text-sm font-normal">
+                        ₹{Math.round(pkg.price * 1.3).toLocaleString('en-IN')}
+                      </span>
+                      <span 
+                        style={{ fontFamily: "'Faktum', 'Outfit', sans-serif" }}
+                        className="font-bold text-[12px] sm:text-lg md:text-[28px] text-[#2B2B2B]"
+                      >
+                        ₹{pkg.price.toLocaleString('en-IN')}/Person
+                      </span>
+                      <span className="text-[#FF623E] text-[9px] sm:text-xs font-bold whitespace-nowrap">
+                        30% off
+                      </span>
                     </div>
 
                     {/* 2x2 Details Grid (Hidden on Mobile) */}
@@ -1251,16 +1241,14 @@ export default function HolidaysPortal() {
                       </div>
                     </div>
 
-                    {/* Bottom Action buttons */}
+                    {/* Bottom Action buttons (Desktop Only) */}
                     <div 
                       style={{ 
                         width: "100%",
                         maxWidth: "405.33px",
-                        display: "flex", 
-                        gap: "6px",
                         boxSizing: "border-box"
                       }}
-                      className="h-[36px] sm:h-[55px]"
+                      className="hidden sm:flex gap-6 h-[55px]"
                     >
                       <button
                         type="button"
@@ -1277,7 +1265,7 @@ export default function HolidaysPortal() {
                           border: "none",
                           cursor: "pointer",
                         }}
-                        className="h-full text-[10px] sm:text-[16px] whitespace-nowrap px-1 hover:bg-[#15342c] transition-colors duration-300 flex items-center justify-center"
+                        className="h-full text-[16px] hover:bg-[#15342c] transition-colors duration-300 flex items-center justify-center"
                       >
                         Book Now
                       </button>
@@ -1297,7 +1285,7 @@ export default function HolidaysPortal() {
                           justifyContent: "center",
                           textDecoration: "none",
                         }}
-                        className="h-full text-[10px] sm:text-[16px] whitespace-nowrap px-1 bg-white text-[#1D493E] hover:bg-[#EEF2F1] transition-colors duration-300"
+                        className="h-full text-[16px] bg-white text-[#1D493E] hover:bg-[#EEF2F1] transition-colors duration-300"
                       >
                         Get details
                       </Link>

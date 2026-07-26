@@ -978,9 +978,8 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                       background: "rgba(255, 255, 255, 1)",
                       display: "flex",
                       flexDirection: "column",
-                      gap: "12px",
                     }}
-                    className="text-left w-full"
+                    className="text-left w-full gap-2 sm:gap-3"
                   >
                     <span 
                       style={{
@@ -988,14 +987,12 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                         color: "rgba(0, 160, 35, 1)",
                         fontFamily: "Faktum, sans-serif",
                         fontWeight: 600,
-                        fontSize: "14px",
                         lineHeight: "100%",
                         letterSpacing: "1.2px",
                         textTransform: "uppercase",
-                        padding: "4px 10px",
-                        borderRadius: "4px",
                         alignSelf: "flex-start",
                       }}
+                      className="text-[11px] sm:text-xs px-2.5 py-1 rounded-[4px]"
                     >
                       DO'S
                     </span>
@@ -1005,11 +1002,11 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                         fontWeight: 600,
                         color: "rgba(43, 43, 43, 1)",
                       }}
-                      className="leading-none mb-2 font-sans text-2xl md:text-[42px]"
+                      className="leading-tight mb-1 font-sans text-xl sm:text-2xl md:text-[36px]"
                     >
                       What's Included
                     </h3>
-                    <ul className="list-disc pl-5">
+                    <ul className="list-disc pl-5 space-y-1 sm:space-y-1.5">
                       {richInclusions.map((inc: string, i: number) => (
                         <li 
                           key={i} 
@@ -1018,7 +1015,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                             fontWeight: 500,
                             color: "rgba(43, 43, 43, 1)",
                           }}
-                          className="leading-relaxed font-sans text-sm sm:text-base md:text-[20px] md:leading-[32px]"
+                          className="leading-relaxed font-sans text-xs sm:text-sm md:text-[18px] md:leading-[28px]"
                         >
                           {inc}
                         </li>
@@ -1032,7 +1029,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                       width: "100%",
                       maxWidth: "837px",
                       height: "0px",
-                      borderTop: "2px solid rgba(204, 204, 204, 1)",
+                      borderTop: "1px solid rgba(204, 204, 204, 0.8)",
                       opacity: 1,
                     }}
                   />
@@ -1045,9 +1042,8 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                       background: "rgba(255, 255, 255, 1)",
                       display: "flex",
                       flexDirection: "column",
-                      gap: "12px",
                     }}
-                    className="text-left w-full"
+                    className="text-left w-full gap-2 sm:gap-3"
                   >
                     <span 
                       style={{
@@ -1055,14 +1051,12 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                         color: "rgba(255, 98, 62, 1)",
                         fontFamily: "Faktum, sans-serif",
                         fontWeight: 600,
-                        fontSize: "14px",
                         lineHeight: "100%",
                         letterSpacing: "1.2px",
                         textTransform: "uppercase",
-                        padding: "4px 10px",
-                        borderRadius: "4px",
                         alignSelf: "flex-start",
                       }}
+                      className="text-[11px] sm:text-xs px-2.5 py-1 rounded-[4px]"
                     >
                       DON'TS
                     </span>
@@ -1072,11 +1066,11 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                         fontWeight: 600,
                         color: "rgba(43, 43, 43, 1)",
                       }}
-                      className="leading-none mb-2 font-sans text-2xl md:text-[42px]"
+                      className="leading-tight mb-1 font-sans text-xl sm:text-2xl md:text-[36px]"
                     >
                       Not Included
                     </h3>
-                    <ul className="list-disc pl-5">
+                    <ul className="list-disc pl-5 space-y-1 sm:space-y-1.5">
                       {exclusions.map((exc: string, i: number) => (
                         <li 
                           key={i} 
@@ -1085,7 +1079,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                             fontWeight: 500,
                             color: "rgba(43, 43, 43, 1)",
                           }}
-                          className="leading-relaxed font-sans text-sm sm:text-base md:text-[20px] md:leading-[32px]"
+                          className="leading-relaxed font-sans text-xs sm:text-sm md:text-[18px] md:leading-[28px]"
                         >
                           {exc}
                         </li>
@@ -1099,7 +1093,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                       width: "100%",
                       maxWidth: "837px",
                       height: "0px",
-                      borderTop: "2px solid rgba(204, 204, 204, 1)",
+                      borderTop: "1px solid rgba(204, 204, 204, 0.8)",
                       opacity: 1,
                     }}
                   />
@@ -1112,21 +1106,20 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                        background: "rgba(255, 255, 255, 1)",
                        display: "flex",
                        flexDirection: "column",
-                       gap: "12px",
                      }}
-                     className="text-left w-full"
+                     className="text-left w-full gap-2 sm:gap-3"
                    >
                      <h3 
                        style={{
                          fontFamily: "Fraunces, serif",
                          fontWeight: 600,
                        }}
-                       className="leading-none mb-2 font-sans text-2xl md:text-[42px]"
+                       className="leading-tight mb-1 font-sans text-xl sm:text-2xl md:text-[36px]"
                      >
                        <span style={{ color: "rgba(255, 98, 62, 1)" }}>Packing</span>{" "}
                        <span style={{ color: "rgba(43, 43, 43, 1)" }}>List</span>
                      </h3>
-                     <ul className="list-disc pl-5">
+                     <ul className="list-disc pl-5 space-y-1 sm:space-y-1.5">
                        {packingList.map((pk: string, i: number) => (
                          <li 
                            key={i} 
@@ -1135,7 +1128,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                              fontWeight: 500,
                              color: "rgba(43, 43, 43, 1)",
                            }}
-                           className="leading-relaxed font-sans text-sm sm:text-base md:text-[20px] md:leading-[32px]"
+                           className="leading-relaxed font-sans text-xs sm:text-sm md:text-[18px] md:leading-[28px]"
                          >
                            {pk}
                          </li>
@@ -1149,7 +1142,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                       width: "100%",
                       maxWidth: "837px",
                       height: "0px",
-                      borderTop: "2px solid rgba(204, 204, 204, 1)",
+                      borderTop: "1px solid rgba(204, 204, 204, 0.8)",
                       opacity: 1,
                     }}
                   />
@@ -1161,52 +1154,49 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                       maxWidth: "837px",
                       display: "flex",
                       flexDirection: "column",
-                      gap: "12px",
                     }}
-                    className="text-left w-full"
+                    className="text-left w-full gap-2 sm:gap-3"
                   >
                     <h3 
                       style={{
                         fontFamily: "Fraunces, serif",
                         fontWeight: 600,
                       }}
-                      className="leading-none mb-2 font-sans text-2xl md:text-[42px]"
+                      className="leading-tight mb-1 font-sans text-xl sm:text-2xl md:text-[36px]"
                     >
                       <span style={{ color: "rgba(43, 43, 43, 1)" }}>Know your</span>{" "}
                       <span style={{ color: "rgba(255, 98, 62, 1)" }}>Guide</span>
                     </h3>
                     
                     {/* Badge & Rating Row */}
-                    <div className="flex flex-wrap justify-between items-center gap-4 mt-2">
+                    <div className="flex flex-wrap justify-between items-center gap-3 mt-1">
                       <span 
                         style={{
                           backgroundColor: "rgba(255, 240, 235, 1)",
                           color: "rgba(255, 98, 62, 1)",
                           fontFamily: "Faktum, sans-serif",
                           fontWeight: 600,
-                          fontSize: "14px",
                           lineHeight: "100%",
                           letterSpacing: "1.2px",
                           textTransform: "uppercase",
-                          padding: "4px 10px",
-                          borderRadius: "4px",
                         }}
+                        className="text-[11px] sm:text-xs px-2.5 py-1 rounded-[4px]"
                       >
                         Your Lead Guide
                       </span>
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-1.5 sm:gap-2">
                         <div className="flex text-[#FF623E] gap-0.5">
                           {[...Array(5)].map((_, i) => (
-                            <Star key={i} className="w-5 h-5 fill-[#FF623E] stroke-none" />
+                            <Star key={i} className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-[#FF623E] stroke-none" />
                           ))}
                         </div>
                         <span 
                           style={{
                             fontFamily: "Faktum, sans-serif",
                             fontWeight: 500,
-                            fontSize: "16px",
                             color: "rgba(43, 43, 43, 1)",
                           }}
+                          className="text-xs sm:text-sm md:text-[16px]"
                         >
                           {guide.rating.toFixed(2)} ({guide.trips} Trips)
                         </span>
@@ -1214,15 +1204,13 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                     </div>
 
                     {/* Guide details panel */}
-                    <div className="flex flex-col md:flex-row gap-6 mt-4 items-start w-full">
+                    <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mt-2 items-start w-full">
                       <div 
                         style={{
-                          width: "180px",
-                          height: "180px",
                           borderRadius: "4px",
                           overflow: "hidden",
                         }}
-                        className="shrink-0 bg-slate-100 mx-auto md:mx-0"
+                        className="w-[120px] h-[120px] sm:w-[180px] sm:h-[180px] shrink-0 bg-slate-100 mx-auto sm:mx-0"
                       >
                         <img
                           src={guide.image}
@@ -1231,16 +1219,15 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                           className="w-full h-full object-cover"
                         />
                       </div>
-                      <div className="flex-1 space-y-3 w-full">
+                      <div className="flex-1 space-y-2 w-full">
                         <h4 
                           style={{
                             fontFamily: "Faktum, sans-serif",
                             fontWeight: 600,
-                            fontSize: "28px",
                             lineHeight: "120%",
                             color: "rgba(43, 43, 43, 1)",
                           }}
-                          className="text-center md:text-left"
+                          className="text-center sm:text-left text-lg sm:text-2xl md:text-[28px]"
                         >
                           {guide.name}
                         </h4>
@@ -1250,7 +1237,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                             fontWeight: 500,
                             color: "rgba(43, 43, 43, 1)",
                           }}
-                          className="text-sm sm:text-base md:text-[20px] md:leading-[32px] text-center md:text-left"
+                          className="text-xs sm:text-sm md:text-[18px] md:leading-[28px] text-center sm:text-left"
                         >
                           {guide.bio}
                         </p>

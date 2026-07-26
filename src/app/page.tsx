@@ -1976,8 +1976,9 @@ export default function Homepage() {
       </section>
 
       {/* 10. TRAVEL DIARIES / STORIES */}
-      <section className="bg-white pt-[28px] pb-[16px] text-left relative z-10 border-t border-gray-100 w-full">
-        <div className="w-full max-w-[1280px] mx-auto px-6 md:px-0 flex flex-col gap-[32px]">
+      <section className="bg-white text-left relative z-10 border-t border-gray-100 w-full">
+        {/* Desktop Container (hidden md:block) */}
+        <div className="hidden md:flex max-w-[1280px] mx-auto pt-[28px] pb-[16px] px-6 md:px-0 flex-col gap-[32px]">
           
           {/* Header Container */}
           <div className="w-full max-w-[1280px] h-auto flex flex-col justify-center items-center gap-[12px] text-center shrink-0">
@@ -2002,7 +2003,6 @@ export default function Homepage() {
                 href={`/blog`}
                 className="w-full max-w-[624px] h-auto flex flex-col gap-[24px] group block text-left shrink-0"
               >
-                {/* Image Wrapper */}
                 <div className="relative w-full h-auto aspect-[16/10] overflow-hidden rounded-t-[4px] rounded-b-none bg-gray-100 border border-gray-150 shrink-0">
                   <img 
                     src={post.image} 
@@ -2011,7 +2011,6 @@ export default function Homepage() {
                     style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
                   />
                 </div>
-                {/* Text Content */}
                 <div className="w-full h-auto flex flex-col gap-[4px] shrink-0">
                   <h3 className="w-full h-auto flex items-start overflow-hidden font-serif font-semibold text-xl sm:text-2xl md:text-[32px] leading-snug tracking-[0px] text-[#2B2B2B] group-hover:text-[#FF5A36] transition-colors">
                     {post.title}
@@ -2036,54 +2035,145 @@ export default function Homepage() {
               <ArrowUpRight className="w-[24px] h-[24px] shrink-0" strokeWidth={2} />
             </Link>
           </div>
+        </div>
 
+        {/* Mobile Figma Spec Container (block md:hidden) - w:430px max, gap:12px, padding:12px 20px */}
+        <div className="block md:hidden w-full max-w-[430px] mx-auto py-[12px] px-[20px] bg-white flex flex-col gap-[12px]">
+          {/* Header Row: Title + Round Green Arrow Button */}
+          <div className="flex items-center justify-between w-full h-[30px]">
+            <h2 className="text-[32px] font-serif font-semibold text-[#1D493E] leading-none m-0">
+              Blogs
+            </h2>
+            <Link 
+              href="/blog"
+              aria-label="View all blogs"
+              className="w-[30px] h-[30px] rounded-full bg-[#1D493E] text-white flex items-center justify-center hover:scale-105 active:scale-95 transition shrink-0"
+            >
+              <ArrowRight className="w-4 h-4 text-white" />
+            </Link>
+          </div>
+
+          {/* 2 Horizontal Blog Cards */}
+          <div className="flex flex-col gap-[12px] w-full">
+            {BLOG_POSTS.slice(0, 2).map((post) => (
+              <Link 
+                key={post.id}
+                href="/blog"
+                className="flex flex-row gap-[12px] items-center w-full bg-white rounded-[6px] overflow-hidden text-left group cursor-pointer"
+              >
+                <div className="w-[130px] h-[130px] rounded-[8px] overflow-hidden bg-gray-100 shrink-0">
+                  <img 
+                    src={post.image} 
+                    alt={post.title} 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    style={{ imageRendering: '-webkit-optimize-contrast' }}
+                  />
+                </div>
+                <div className="flex flex-col justify-between h-[130px] py-1 text-left flex-1 min-w-0">
+                  <h3 className="text-[14px] font-serif font-bold text-[#2B2B2B] leading-tight line-clamp-3 group-hover:text-[#FF5A36] transition-colors m-0">
+                    {post.title}
+                  </h3>
+                  <p className="text-[11px] text-gray-500 font-medium m-0">
+                    {post.date} - {post.readTime}
+                  </p>
+                  <span className="text-[13px] text-[#4A85FF] font-semibold hover:underline">
+                    Read more
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* 11. FAQ ACCORDION SECTION (Matching Shop page design) */}
-      <section className="w-full max-w-[1440px] h-auto bg-white rounded-[4px] pt-[28px] pb-[28px] md:px-[80px] px-6 flex flex-col gap-[32px] mx-auto">
-        {/* Header */}
-        <div className="w-full max-w-[1280px] h-auto flex flex-col gap-[12px] justify-center text-left">
-          <div className="w-[54px] h-[26px] flex items-center justify-center bg-[#FFEBE5] rounded-[4px]">
-            <span className="w-[46px] h-[18px] flex items-center justify-center font-sans font-semibold text-[14px] leading-none tracking-[1.2px] text-[#FF623E] uppercase">
-              FAQ'S
-            </span>
+      <section className="bg-white text-left relative z-10 border-t border-gray-100 w-full">
+        {/* Desktop Container (hidden md:block) */}
+        <div className="hidden md:flex w-full max-w-[1440px] h-auto bg-white rounded-[4px] pt-[28px] pb-[28px] md:px-[80px] px-6 flex-col gap-[32px] mx-auto">
+          {/* Header */}
+          <div className="w-full max-w-[1280px] h-auto flex flex-col gap-[12px] justify-center text-left">
+            <div className="w-[54px] h-[26px] flex items-center justify-center bg-[#FFEBE5] rounded-[4px]">
+              <span className="w-[46px] h-[18px] flex items-center justify-center font-sans font-semibold text-[14px] leading-none tracking-[1.2px] text-[#FF623E] uppercase">
+                FAQ'S
+              </span>
+            </div>
+            <h2 className="w-full max-w-[541px] h-auto flex items-center font-serif font-semibold text-3xl md:text-[42px] leading-[1] tracking-[0px] text-[#2B2B2B] py-2">
+              Frequently asked questions
+            </h2>
           </div>
-          <h2 className="w-full max-w-[541px] h-auto flex items-center font-serif font-semibold text-3xl md:text-[42px] leading-[1] tracking-[0px] text-[#2B2B2B] py-2">
-            Frequently asked questions
-          </h2>
+
+          {/* Accordion List */}
+          <div className="w-full border-t border-slate-200 divide-y divide-slate-200">
+            {FAQ_ITEMS.map((item, idx) => {
+              const isOpen = openFaqIndex === idx;
+              return (
+                <div key={idx} className="py-5 text-left border-b border-slate-200">
+                  <button
+                    onClick={() => toggleFaq(idx)}
+                    className="w-full flex justify-between items-center text-left gap-4 cursor-pointer group"
+                  >
+                    <span className="w-full h-auto py-2 flex items-center font-sans font-medium text-sm sm:text-base md:text-[20px] leading-normal tracking-[0px] text-[#2B2B2B]">
+                      {item.question}
+                    </span>
+                    <span className="text-xl font-medium text-[#1D493E] shrink-0 leading-none select-none">
+                      {isOpen ? '—' : '+'}
+                    </span>
+                  </button>
+                  {isOpen && (
+                    <p className="mt-3 w-full h-auto py-1 font-sans font-medium text-sm sm:text-base md:text-[20px] leading-normal tracking-[0px] text-[#8D8D8D] animate-fade-in">
+                      {item.answer}
+                    </p>
+                  )}
+                </div>
+              );
+            })}
+          </div>
         </div>
 
-        {/* Accordion List */}
-        <div className="w-full border-t border-slate-200 divide-y divide-slate-200">
-          {FAQ_ITEMS.map((item, idx) => {
-            const isOpen = openFaqIndex === idx;
-            return (
-              <div key={idx} className="py-5 text-left border-b border-slate-200">
-                <button
-                  onClick={() => toggleFaq(idx)}
-                  className="w-full flex justify-between items-center text-left gap-4 cursor-pointer group"
-                >
-                  <span className="w-full h-auto py-2 flex items-center font-sans font-medium text-sm sm:text-base md:text-[20px] leading-normal tracking-[0px] text-[#2B2B2B]">
-                    {item.question}
-                  </span>
-                  <span className="text-xl font-medium text-[#1D493E] shrink-0 leading-none select-none">
-                    {isOpen ? '—' : '+'}
-                  </span>
-                </button>
-                {/* Expandable answer */}
-                {isOpen && (
-                  <p className="mt-3 w-full h-auto py-1 font-sans font-medium text-sm sm:text-base md:text-[20px] leading-normal tracking-[0px] text-[#8D8D8D] animate-fade-in">
-                    {item.answer}
-                  </p>
-                )}
-              </div>
-            );
-          })}
+        {/* Mobile Figma Spec Container (block md:hidden) - w:430px max, gap:12px, padding:12px 20px */}
+        <div className="block md:hidden w-full max-w-[430px] mx-auto py-[12px] px-[20px] bg-white flex flex-col gap-[12px]">
+          <h2 className="text-[32px] font-serif font-semibold text-[#1D493E] leading-none text-left m-0">
+            FAQ’s
+          </h2>
+
+          <div className="w-full flex flex-col divide-y divide-gray-100">
+            {[
+              {
+                q: "What materials are the badges made from? Zinc alloy with glossy enamel fill.",
+                a: "Lightweight, durable, and safe to pin on bags, jackets, or backpacks without damaging fabric."
+              },
+              { q: "How big are the stickers?", a: "Our vinyl stickers range between 3 to 4 inches in size, ideal for laptops, water bottles, and helmets." },
+              { q: "Do you ship across India?", a: "Yes, we provide free express shipping all across India on orders above ₹499." },
+              { q: "Can I return a product if I don't like it?", a: "We offer a 7-day hassle-free return and exchange policy for all unused products." },
+              { q: "I have no reviews on this product. Is it safe to buy?", a: "All Go Banjara products undergo strict quality checks and come with 100% verified customer guarantee." }
+            ].map((faq, idx) => {
+              const isOpen = openFaqIndex === idx || idx === 0;
+              return (
+                <div key={idx} className="py-3 text-left">
+                  <button
+                    onClick={() => toggleFaq(idx)}
+                    className="w-full flex justify-between items-center text-left gap-3 cursor-pointer"
+                  >
+                    <span className="text-[14px] font-medium text-[#2B2B2B] leading-snug">
+                      {faq.q}
+                    </span>
+                    {isOpen ? (
+                      <ChevronUp className="w-4 h-4 text-[#1D493E] shrink-0" />
+                    ) : (
+                      <ChevronDown className="w-4 h-4 text-[#1D493E] shrink-0" />
+                    )}
+                  </button>
+                  {isOpen && (
+                    <p className="mt-2 text-[12px] font-medium text-gray-400 leading-relaxed m-0 animate-fade-in">
+                      {faq.a}
+                    </p>
+                  )}
+                </div>
+              );
+            })}
+          </div>
         </div>
       </section>
-
-
 
       {/* 12. SERVICES TO HELP YOU SHOP */}
       <section className="w-full max-w-[1440px] bg-white pt-[28px] pb-[28px] md:px-[80px] px-6 flex flex-col gap-[32px] mx-auto">
@@ -2101,7 +2191,6 @@ export default function Homepage() {
 
         {/* Cards Grid */}
         <div className="w-full max-w-[1280px] h-auto grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-row gap-[32px] mx-auto">
-
           {/* Card 1: FAQ */}
           <div className="w-full lg:w-[296px] h-auto flex flex-col gap-[24px] rounded-[4px] bg-white">
             <div className="w-full h-[250px] rounded-tl-[4px] rounded-tr-[4px] overflow-hidden">
@@ -2145,96 +2234,116 @@ export default function Homepage() {
               <p className="w-full h-auto font-sans font-medium text-sm sm:text-base md:text-[20px] leading-normal tracking-[0px] text-[rgba(43,43,43,0.8)]">Pay with multiple cards seamlessly and without interruption</p>
             </div>
           </div>
-
         </div>
       </section>
 
-      {/* 13. NEWSLETTER / CTA SECTION — 1440×337, py-42, px-80, gap-32 */}
-      <section className="w-full py-[42px] px-6 md:px-[80px] bg-white">
-        <div
-          style={{
-            maxWidth: "1440px",
-            margin: "0 auto",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: "32px",
-            textAlign: "center",
-          }}
-        >
-          {/* Text block */}
-          <div className="flex flex-col items-center gap-[12px] w-full">
-            {/* Heading: Fraunces SemiBold 42px, lh 100%, #2B2B2B */}
-            <h2
-              className="text-3xl md:text-[42px] font-serif font-semibold text-center text-[#2B2B2B] max-w-[1280px] m-0"
-              style={{
-                lineHeight: "120%",
-                letterSpacing: "0px",
-              }}
-            >
-              The{" "}
-              <span style={{ color: "#FF5A36" }}>best adventures</span>{" "}
-              find their way to your inbox.
-            </h2>
-            {/* Subtitle: Faktum Medium 24px, lh 32px, rgba(43,43,43,1) */}
-            <p
-              className="text-base sm:text-lg md:text-[24px] font-sans font-medium text-center text-[rgba(43,43,43,0.8)] max-w-[1280px] m-0"
-              style={{
-                lineHeight: "1.4",
-                letterSpacing: "0px",
-              }}
-            >
-              Hidden places, exclusive trip drops, curated gear, and stories from the road delivered before anyone else hears about them.
-            </p>
-          </div>
+      {/* 13. NEWSLETTER / CTA SECTION */}
+      <section className="bg-white text-left relative z-10 border-t border-gray-100 w-full">
+        {/* Desktop Container (hidden md:block) */}
+        <div className="hidden md:flex w-full py-[42px] px-6 md:px-[80px] bg-white">
+          <div
+            style={{
+              maxWidth: "1440px",
+              margin: "0 auto",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "32px",
+              textAlign: "center",
+            }}
+          >
+            <div className="flex flex-col items-center gap-[12px] w-full">
+              <h2
+                className="text-3xl md:text-[42px] font-serif font-semibold text-center text-[#2B2B2B] max-w-[1280px] m-0"
+                style={{
+                  lineHeight: "120%",
+                  letterSpacing: "0px",
+                }}
+              >
+                The{" "}
+                <span style={{ color: "#FF5A36" }}>best adventures</span>{" "}
+                find their way to your inbox.
+              </h2>
+              <p
+                className="text-base sm:text-lg md:text-[24px] font-sans font-medium text-center text-[rgba(43,43,43,0.8)] max-w-[1280px] m-0"
+                style={{
+                  lineHeight: "1.4",
+                  letterSpacing: "0px",
+                }}
+              >
+                Hidden places, exclusive trip drops, curated gear, and stories from the road delivered before anyone else hears about them.
+              </p>
+            </div>
 
-          {/* Buttons row */}
-          <div className="flex flex-col sm:flex-row gap-3 w-full max-w-[584px] justify-center items-center">
-            {/* Book Now */}
+            <div className="flex flex-col sm:flex-row gap-3 w-full max-w-[584px] justify-center items-center">
+              <Link
+                href="/travel"
+                style={{
+                  paddingTop: "16px",
+                  paddingBottom: "16px",
+                  paddingLeft: "32px",
+                  paddingRight: "32px",
+                  gap: "8px",
+                  background: "rgba(29, 73, 62, 1)",
+                  color: "#FFFFFF",
+                  fontFamily: "'Faktum','Outfit',sans-serif",
+                  fontWeight: 500,
+                  fontSize: "18px",
+                  lineHeight: "100%",
+                  letterSpacing: "0px",
+                  verticalAlign: "middle",
+                  textDecoration: "none",
+                  transition: "opacity 0.2s",
+                }}
+                className="w-full sm:w-[286px] h-[55px] flex items-center justify-center rounded-[4px] hover:opacity-90"
+              >
+                Book Now
+              </Link>
+              <Link
+                href="/shop"
+                style={{
+                  paddingTop: "16px",
+                  paddingBottom: "16px",
+                  paddingLeft: "32px",
+                  paddingRight: "32px",
+                  gap: "8px",
+                  border: "2px solid rgba(29, 73, 62, 1)",
+                  background: "transparent",
+                  color: "rgba(29, 73, 62, 1)",
+                  fontFamily: "'Faktum','Outfit',sans-serif",
+                  fontWeight: 500,
+                  fontSize: "18px",
+                  lineHeight: "100%",
+                  letterSpacing: "0px",
+                  verticalAlign: "middle",
+                  textDecoration: "none",
+                  transition: "opacity 0.2s",
+                }}
+                className="w-full sm:w-[286px] h-[55px] flex items-center justify-center rounded-[4px] hover:opacity-90"
+              >
+                Explore collection
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Figma Spec Container (block md:hidden) - w:430px max, h:180px, gap:12px, padding:12px 20px 62px 20px */}
+        <div className="block md:hidden w-full max-w-[430px] mx-auto pt-[12px] px-[20px] pb-[62px] bg-white flex flex-col gap-[12px] items-center text-center">
+          <h2 className="text-[24px] font-serif font-bold text-[#1D493E] leading-snug m-0 max-w-[390px]">
+            The <span className="text-[#FF5A36]">best adventures</span> find their way to you inbox
+          </h2>
+
+          {/* Buttons Row */}
+          <div className="flex items-center justify-center gap-[12px] pt-1">
             <Link
               href="/travel"
-              style={{
-                paddingTop: "16px",
-                paddingBottom: "16px",
-                paddingLeft: "32px",
-                paddingRight: "32px",
-                gap: "8px",
-                background: "rgba(29, 73, 62, 1)",
-                color: "#FFFFFF",
-                fontFamily: "'Faktum','Outfit',sans-serif",
-                fontWeight: 500,
-                fontSize: "18px",
-                lineHeight: "100%",
-                letterSpacing: "0px",
-                verticalAlign: "middle",
-                textDecoration: "none",
-                transition: "opacity 0.2s",
-              }}
-              className="w-full sm:w-[286px] h-[55px] flex items-center justify-center rounded-[4px] hover:opacity-90"
+              className="w-[125px] h-[40px] bg-[#1D493E] text-white font-sans font-bold text-[14px] rounded-[4px] flex items-center justify-center hover:opacity-90 transition"
             >
               Book Now
             </Link>
-            {/* Explore collection */}
             <Link
               href="/shop"
-              style={{
-                paddingTop: "16px",
-                paddingBottom: "16px",
-                paddingLeft: "32px",
-                paddingRight: "32px",
-                gap: "8px",
-                border: "2px solid rgba(29, 73, 62, 1)",
-                background: "transparent",
-                color: "rgba(29, 73, 62, 1)",
-                fontFamily: "'Faktum','Outfit',sans-serif",
-                fontWeight: 500,
-                fontSize: "18px",
-                lineHeight: "100%",
-                letterSpacing: "0px",
-                textDecoration: "none",
-                transition: "background 0.2s",
-              }}
-              className="w-full sm:w-[286px] h-[55px] flex items-center justify-center rounded-[4px] hover:bg-[#1D493E]/5"
+              className="w-[160px] h-[40px] border border-[#1D493E] text-[#1D493E] font-sans font-medium text-[14px] rounded-[4px] flex items-center justify-center bg-transparent hover:bg-[#1D493E]/5 transition"
             >
               Explore collection
             </Link>

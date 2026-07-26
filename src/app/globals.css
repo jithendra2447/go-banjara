@@ -36,7 +36,9 @@ a, a:visited, a:hover, a:active {
   --animate-marquee-reverse: marquee-reverse 30s linear infinite;
 }
 
-/* Universal 4px Corner Radius Policy for Buttons, Links, Inputs & Cards */
+/* Universal 4px Corner Radius Policy for Buttons, Links, Inputs, Cards & Images */
+img,
+picture,
 button,
 a.btn,
 .btn,
@@ -49,12 +51,15 @@ div[class*="rounded-xl"],
 div[class*="rounded-2xl"],
 div[class*="rounded-3xl"],
 div[class*="rounded-lg"],
-div[class*="rounded-md"] {
+div[class*="rounded-md"],
+div[class*="rounded-sm"],
+div[class*="rounded-["] {
   border-radius: 4px !important;
 }
 
 /* Retain full round pills/circles for avatars and circular icons */
 .rounded-full,
+img.rounded-full,
 [class*="rounded-full"] {
   border-radius: 9999px !important;
 }

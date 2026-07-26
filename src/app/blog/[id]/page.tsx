@@ -1559,7 +1559,7 @@ export default function BlogPostDetail() {
                 />
               </div>
               <div className="flex flex-col gap-1">
-                <h3 className="font-serif font-semibold text-lg text-[#2B2B2B] group-hover:text-[#FF5A36] transition-colors leading-snug">
+                <h3 className="font-serif font-semibold text-lg text-[#2B2B2B] leading-snug">
                   {item.title}
                 </h3>
                 <p className="font-sans font-medium text-xs text-[#2B2B2B]/60">

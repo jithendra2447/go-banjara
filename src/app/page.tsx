@@ -937,11 +937,11 @@ export default function Homepage() {
                 <Link 
                   key={pkg.id} 
                   href={`/travel/package/${pkg.id}`}
-                  className="snap-start shrink-0 w-[185px] sm:w-[200px] bg-[#F6F3EE] rounded-[6px] overflow-hidden flex flex-col justify-between text-left select-none group cursor-pointer"
+                  className="snap-start shrink-0 w-[185px] sm:w-[200px] bg-[#F6F3EE] rounded-[4px] overflow-hidden flex flex-col justify-between text-left select-none group cursor-pointer"
                   style={{ boxSizing: 'border-box' }}
                 >
                   {/* Image Container with Wishlist Button (h: 190px) */}
-                  <div className="relative w-full h-[190px] rounded-t-[6px] overflow-hidden shrink-0">
+                  <div className="relative w-full h-[190px] rounded-[4px] overflow-hidden shrink-0">
                     <img 
                       src={pkg.image} 
                       alt={pkg.name} 
@@ -1213,7 +1213,7 @@ export default function Homepage() {
               <div>
                 <Link 
                   href={current.link} 
-                  className="relative w-full h-[230px] rounded-[6px] overflow-hidden block group shadow-sm text-left"
+                  className="relative w-full h-[230px] rounded-[4px] overflow-hidden block group shadow-sm text-left"
                 >
                   <img 
                     src={current.image} 
@@ -2198,7 +2198,7 @@ export default function Homepage() {
                 href={`/blog`}
                 className="w-full max-w-[624px] h-auto flex flex-col gap-[24px] group block text-left shrink-0"
               >
-                <div className="relative w-full h-auto aspect-[16/10] overflow-hidden rounded-t-[4px] rounded-b-none bg-gray-100 border border-gray-150 shrink-0">
+                <div className="relative w-full h-auto aspect-[16/10] overflow-hidden rounded-[4px] bg-gray-100 border border-gray-150 shrink-0">
                   <img 
                     src={post.image} 
                     alt={post.title} 
@@ -2207,7 +2207,7 @@ export default function Homepage() {
                   />
                 </div>
                 <div className="w-full h-auto flex flex-col gap-[4px] shrink-0">
-                  <h3 className="w-full h-auto flex items-start overflow-hidden font-serif font-semibold text-xl sm:text-2xl md:text-[32px] leading-snug tracking-[0px] text-[#2B2B2B] group-hover:text-[#FF5A36] transition-colors">
+                  <h3 className="w-full h-auto flex items-start overflow-hidden font-serif font-semibold text-xl sm:text-2xl md:text-[32px] leading-snug tracking-[0px] text-[#2B2B2B] transition-colors">
                     {post.title}
                   </h3>
                   <p className="w-full h-auto flex items-center font-sans font-medium text-sm sm:text-base md:text-[20px] leading-[32px] tracking-[0px] text-[#2B2B2B]/80">
@@ -2265,7 +2265,7 @@ export default function Homepage() {
                   />
                 </div>
                 <div className="flex flex-col justify-between h-[130px] py-1 text-left flex-1 min-w-0">
-                  <h3 className="text-[14px] font-serif font-bold text-[#2B2B2B] leading-tight line-clamp-3 group-hover:text-[#FF5A36] transition-colors m-0">
+                  <h3 className="text-[14px] font-serif font-bold text-[#2B2B2B] leading-tight line-clamp-3 transition-colors m-0">
                     {post.title}
                   </h3>
                   <p className="text-[11px] text-gray-500 font-medium m-0">

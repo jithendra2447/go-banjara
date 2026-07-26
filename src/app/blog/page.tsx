@@ -557,7 +557,7 @@ export default function BlogPage() {
                       color: 'rgba(43, 43, 43, 1)',
                       margin: 0,
                     }}
-                    className="group-hover:text-[#1D493E] transition-colors line-clamp-3"
+                    className="line-clamp-3"
                   >
                     {post.title}
                   </h3>

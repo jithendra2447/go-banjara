@@ -640,7 +640,7 @@ export default function Homepage() {
               const pkg1 = displayPkgs[0];
               if (!pkg1) return null;
               return (
-                <div className="bg-[#F6F3EE] rounded-[4px] shadow-xs flex flex-col md:flex-row gap-0 w-full overflow-hidden md:h-[394px] text-left">
+                <div className="bg-[#F6F3EE] rounded-[4px] flex flex-col md:flex-row gap-0 w-full overflow-hidden md:h-[394px] text-left">
                   {/* Image */}
                   <div className="relative h-[280px] md:h-full w-full md:w-1/2 shrink-0 overflow-hidden">
                     <img 
@@ -687,7 +687,7 @@ export default function Homepage() {
                     </button>
                   </div>
                   {/* Details */}
-                  <div className="w-full md:w-1/2 pt-0 pb-0 px-5 sm:px-6 flex flex-col justify-between md:h-full bg-white shrink-0 gap-5 md:gap-0">
+                  <div className="w-full md:w-1/2 pt-0 pb-0 px-0 flex flex-col justify-between md:h-full bg-white shrink-0 gap-5 md:gap-0">
                     {/* Top Group (Width: Fill, Height: 151px, Gap: 12px) */}
                     <div className="flex flex-col gap-2 min-h-[140px] shrink-0 w-full">
                       {/* Tags Container (Width: Fill, Height: Hug 28px, Justify: space-between) */}
@@ -763,7 +763,7 @@ export default function Homepage() {
               {(() => {
                 const displayPkgs = packagesList && packagesList.length > 0 ? packagesList : HOLIDAY_PACKAGES;
                 return displayPkgs.slice(1, 3).map((pkg) => (
-                  <div key={pkg.id} className="bg-white rounded-[4px] shadow-xs flex flex-col text-left md:h-[778px] overflow-hidden">
+                  <div key={pkg.id} className="bg-[#F6F3EE] rounded-[4px] flex flex-col text-left md:h-[778px] overflow-hidden">
                     {/* Image (Flushed with top, left, and right edges) */}
                     <div className="relative w-full h-[200px] md:h-[384px] overflow-hidden shrink-0">
                       <img 
@@ -810,7 +810,7 @@ export default function Homepage() {
                       </button>
                     </div>
                     {/* Details block with padding */}
-                    <div className="flex-1 flex flex-col justify-between py-5 sm:py-6 px-0 gap-5 md:gap-0">
+                    <div className="flex-1 flex flex-col justify-between py-5 sm:py-6 px-5 sm:px-6 bg-white gap-5 md:gap-0">
                       {/* Top Group (Width: Fill, Height: 151px, Gap: 12px) */}
                       <div className="flex flex-col gap-2 min-h-[140px] shrink-0 w-full">
                         {/* Tags Container (Width: Fill, Height: Hug 28px, Justify: space-between) */}
@@ -937,7 +937,7 @@ export default function Homepage() {
                 <Link 
                   key={pkg.id} 
                   href={`/travel/package/${pkg.id}`}
-                  className="snap-start shrink-0 w-[185px] sm:w-[200px] bg-white rounded-[6px] overflow-hidden flex flex-col justify-between text-left select-none border border-gray-100/80 shadow-xs group cursor-pointer"
+                  className="snap-start shrink-0 w-[185px] sm:w-[200px] bg-[#F6F3EE] rounded-[6px] overflow-hidden flex flex-col justify-between text-left select-none group cursor-pointer"
                   style={{ boxSizing: 'border-box' }}
                 >
                   {/* Image Container with Wishlist Button (h: 190px) */}
@@ -1051,7 +1051,7 @@ export default function Homepage() {
         {/* Desktop View (100% untouched) */}
         <div className="hidden md:flex max-w-[1440px] mx-auto px-6 md:px-20 pt-2 pb-[32px] flex-col gap-[32px]">
           {/* Header Row */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-gray-100 text-left">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 text-left">
             <div className="space-y-3.5 text-left max-w-4xl">
               <div>
                 <span className="inline-block text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-1 rounded-[4px] text-xs font-bold uppercase tracking-wider">
@@ -1102,7 +1102,7 @@ export default function Homepage() {
               className="group mx-auto"
             >
               <div 
-                style={{ height: "237.63px", width: "100%", borderRadius: "4px", overflow: "hidden", backgroundColor: "#FAF9F6", border: "1px solid rgba(229, 231, 235, 0.5)" }}
+                style={{ height: "237.63px", width: "100%", borderRadius: "4px", overflow: "hidden", backgroundColor: "#FAF9F6" }}
               >
                 <img 
                   src="/around_the_world_sticker.jpg" 
@@ -1128,7 +1128,7 @@ export default function Homepage() {
               className="group mx-auto"
             >
               <div 
-                style={{ height: "237.63px", width: "100%", borderRadius: "4px", overflow: "hidden", backgroundColor: "#FAF9F6", border: "1px solid rgba(229, 231, 235, 0.5)" }}
+                style={{ height: "237.63px", width: "100%", borderRadius: "4px", overflow: "hidden", backgroundColor: "#FAF9F6" }}
               >
                 <img 
                   src="/around_the_world_sticker.jpg" 
@@ -1154,7 +1154,7 @@ export default function Homepage() {
               className="group mx-auto"
             >
               <div 
-                style={{ height: "237.63px", width: "100%", borderRadius: "4px", overflow: "hidden", backgroundColor: "#FAF9F6", border: "1px solid rgba(229, 231, 235, 0.5)" }}
+                style={{ height: "237.63px", width: "100%", borderRadius: "4px", overflow: "hidden", backgroundColor: "#FAF9F6" }}
               >
                 <img 
                   src="/around_the_world_sticker.jpg" 
@@ -1253,7 +1253,7 @@ export default function Homepage() {
       </section>
 
       {/* 6. MARQUEE BANNER (Figma specs: w:430, h:31px, padding 8px 20px, gap 10px) */}
-      <div className="bg-[#FFFF80] text-[#1D493E] border-t border-b border-[#1D493E]/15 h-[31px] sm:h-[78px] flex items-center overflow-hidden select-none relative z-10 py-[8px] sm:py-[24px] px-[20px]">
+      <div className="bg-[#FFFF80] text-[#1D493E] h-[31px] sm:h-[78px] flex items-center overflow-hidden select-none relative z-10 py-[8px] sm:py-[24px] px-[20px]">
         <div className="flex items-center whitespace-nowrap gap-[10px] animate-marquee font-serif text-[12px] sm:text-[24px] font-semibold uppercase leading-none tracking-[0px]">
           <span>✦</span><span>BOOK YOUR NEXT TRIP</span>
           <span>✦</span><span>SHOP TRAVEL GEAR</span>
@@ -1277,7 +1277,7 @@ export default function Homepage() {
       </div>
 
       {/* 7. TODAY'S BEST DEALS FOR YOU */}
-      <section className="bg-white text-left relative z-10 border-t border-gray-100 w-full">
+      <section className="bg-white text-left relative z-10 w-full">
         {/* Desktop Container (hidden md:flex) */}
         <div className="hidden md:flex max-w-[1440px] w-full mx-auto pt-[20px] pb-[20px] px-6 md:px-[80px] flex-col gap-[32px]">
           
@@ -1327,7 +1327,7 @@ export default function Homepage() {
               return (
                 <div 
                   key={deal.id} 
-                  className={`bg-white rounded-[4px] w-full h-auto pb-4 flex flex-col justify-between gap-[16px] hover:shadow-xs transition duration-300 overflow-hidden ${
+                  className={`bg-white rounded-[4px] w-full h-auto pb-4 flex flex-col justify-between gap-[16px] transition duration-300 overflow-hidden ${
                     idx >= 3 ? 'hidden md:flex' : 'flex'
                   }`}
                 >
@@ -1364,7 +1364,6 @@ export default function Homepage() {
                         justifyContent: "center",
                         cursor: "pointer",
                         zIndex: 20,
-                        boxShadow: "0 2px 8px rgba(0, 0, 0, 0.12)",
                       }}
                       className="hover:scale-110 active:scale-95 group transition"
                       title={Array.isArray(wishlist) && wishlist.some((w: any) => w.id === deal.id) ? "Remove from wishlist" : "Add to wishlist"}
@@ -1504,7 +1503,7 @@ export default function Homepage() {
               <Link
                 key={idx}
                 href={`/shop/product/${deal.id}`}
-                className="w-full bg-white rounded-[4px] flex flex-col gap-[6px] text-left overflow-hidden border border-gray-100/80 shadow-2xs group cursor-pointer"
+                className="w-full bg-white rounded-[4px] flex flex-col gap-[6px] text-left overflow-hidden group cursor-pointer"
               >
                 <div className="relative w-full h-[130px] rounded-[4px] overflow-hidden bg-gray-50 shrink-0">
                   <img 
@@ -1548,7 +1547,7 @@ export default function Homepage() {
       </section>
 
       {/* 8. MOST SELLING PRODUCTS */}
-      <section className="bg-white text-left relative z-10 border-t border-gray-100 w-full">
+      <section className="bg-white text-left relative z-10 w-full">
         {/* Desktop Container (hidden md:flex) */}
         <div className="hidden md:flex max-w-[1440px] mx-auto pt-[20px] pb-[20px] px-6 md:px-[80px] flex-col gap-[32px]">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-2 text-left">
@@ -1611,7 +1610,7 @@ export default function Homepage() {
               return (
                 <div 
                   key={prod.id} 
-                  className="bg-white rounded-[4px] w-full h-auto pb-4 flex flex-col justify-between gap-[16px] hover:shadow-xs transition duration-300 overflow-hidden flex"
+                  className="bg-white rounded-[4px] w-full h-auto pb-4 flex flex-col justify-between gap-[16px] flex"
                 >
                   <div className="relative w-full md:h-[254px] rounded-[4px] overflow-hidden shrink-0">
                     <img 
@@ -1723,7 +1722,7 @@ export default function Homepage() {
               <Link 
                 key={`${prod.id}-${idx}`}
                 href={`/shop/product/${prod.id}`}
-                className="w-full bg-white rounded-[4px] flex flex-col gap-[8px] text-left overflow-hidden border border-gray-100/80 shadow-2xs group cursor-pointer"
+                className="w-full bg-white rounded-[4px] flex flex-col gap-[8px] text-left overflow-hidden group cursor-pointer"
                 style={{ boxSizing: 'border-box' }}
               >
                 {/* Product Image */}
@@ -1899,7 +1898,7 @@ export default function Homepage() {
       </section>
 
       {/* 9.5 REVIEWS SECTION (3-column grid matching Figma design) */}
-      <section className="bg-white text-left relative z-10 border-t border-gray-100 w-full">
+      <section className="bg-white text-left relative z-10 w-full">
         {/* Desktop Container (hidden md:block) */}
         <div className="hidden md:flex max-w-[1440px] w-full mx-auto pt-[28px] flex-col gap-[32px]">
           
@@ -1981,7 +1980,7 @@ export default function Homepage() {
                     stars: 5
                   }
                 ].map((review, idx) => (
-                  <div key={idx} className="bg-white border border-gray-200 p-6 rounded-2xl flex flex-col justify-between space-y-4 shadow-sm hover:shadow-xl hover:border-[#FF623E] hover:scale-105 transition-all duration-300 w-[360px] shrink-0 cursor-pointer text-left">
+                  <div key={idx} className="bg-white p-6 rounded-2xl flex flex-col justify-between space-y-4 hover:scale-105 transition-all duration-300 w-[360px] shrink-0 cursor-pointer text-left">
                     <div className="flex text-amber-400 text-sm gap-1">
                       {Array.from({ length: review.stars }).map((_, s) => (
                         <Star key={s} className="w-3.5 h-3.5 fill-current" />
@@ -2053,7 +2052,7 @@ export default function Homepage() {
                     stars: 5
                   }
                 ].map((review, idx) => (
-                  <div key={idx} className="bg-white border border-gray-200 p-6 rounded-2xl flex flex-col justify-between space-y-4 shadow-sm hover:shadow-xl hover:border-[#FF623E] hover:scale-105 transition-all duration-300 w-[360px] shrink-0 cursor-pointer text-left">
+                  <div key={idx} className="bg-white p-6 rounded-2xl flex flex-col justify-between space-y-4 hover:scale-105 transition-all duration-300 w-[360px] shrink-0 cursor-pointer text-left">
                     <div className="flex text-amber-400 text-sm gap-1">
                       {Array.from({ length: review.stars }).map((_, s) => (
                         <Star key={s} className="w-3.5 h-3.5 fill-current" />
@@ -2148,7 +2147,7 @@ export default function Homepage() {
                   stars: 5
                 }
               ].map((review, idx) => (
-                <div key={idx} className="bg-gray-50 border border-gray-100 p-4 rounded-[4px] flex flex-col justify-between gap-2.5 text-left w-[280px] shrink-0 shadow-xs">
+                <div key={idx} className="bg-gray-50 p-4 rounded-[4px] flex flex-col justify-between gap-2.5 text-left w-[280px] shrink-0">
                   <div className="flex text-amber-400 gap-0.5">
                     {[...Array(review.stars)].map((_, s) => (
                       <Star key={s} className="w-3.5 h-3.5 fill-current" />
@@ -2172,7 +2171,7 @@ export default function Homepage() {
       </section>
 
       {/* 10. TRAVEL DIARIES / STORIES */}
-      <section className="bg-white text-left relative z-10 border-t border-gray-100 w-full">
+      <section className="bg-white text-left relative z-10 w-full">
         {/* Desktop Container (hidden md:block) */}
         <div className="hidden md:flex max-w-[1280px] mx-auto pt-[28px] pb-[16px] px-6 md:px-0 flex-col gap-[32px]">
           
@@ -2283,7 +2282,7 @@ export default function Homepage() {
       </section>
 
       {/* 11. FAQ ACCORDION SECTION (Matching Shop page design) */}
-      <section className="bg-white text-left relative z-10 border-t border-gray-100 w-full">
+      <section className="bg-white text-left relative z-10 w-full">
         {/* Desktop Container (hidden md:block) */}
         <div className="hidden md:flex w-full max-w-[1440px] h-auto bg-white rounded-[4px] pt-[28px] pb-[28px] md:px-[80px] px-6 flex-col gap-[32px] mx-auto">
           {/* Header */}
@@ -2372,7 +2371,7 @@ export default function Homepage() {
       </section>
 
       {/* 12. SERVICES TO HELP YOU SHOP */}
-      <section className="bg-white text-left relative z-10 border-t border-gray-100 w-full">
+      <section className="bg-white text-left relative z-10 w-full">
         {/* Desktop Container (hidden md:flex) */}
         <div className="hidden md:flex w-full max-w-[1440px] bg-white pt-[28px] pb-[28px] md:px-[80px] px-6 flex-col gap-[32px] mx-auto">
           {/* Header */}
@@ -2486,7 +2485,7 @@ export default function Homepage() {
       </section>
 
       {/* 13. NEWSLETTER / CTA SECTION */}
-      <section className="bg-white text-left relative z-10 border-t border-gray-100 w-full">
+      <section className="bg-white text-left relative z-10 w-full">
         {/* Desktop Container (hidden md:block) */}
         <div className="hidden md:flex w-full py-[42px] px-6 md:px-[80px] bg-white">
           <div

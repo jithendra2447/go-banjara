@@ -299,7 +299,7 @@ export default function ProductDetailsPage() {
 
   return (
     <div className="bg-white min-h-screen pb-0 flex flex-col items-center font-sans text-[#2B2B2B]">
-      {/* Page Header (Width: 1440px, dynamic height, Background: white) */}
+      {/* Page Header (Width: 1440px, dynamic height, Background: white) - Hidden on Mobile */}
       <header 
         style={{
           width: "100%",
@@ -307,12 +307,11 @@ export default function ProductDetailsPage() {
           paddingTop: "20px",
           paddingBottom: "16px",
           background: "rgba(255, 255, 255, 1)",
-          display: "flex",
           flexDirection: "column",
           gap: "20px",
           boxSizing: "border-box"
         }}
-        className="px-4 sm:px-8 md:px-12 lg:px-20"
+        className="hidden md:flex px-4 sm:px-8 md:px-12 lg:px-20"
       >
         {/* Text Block (Label, Title, Subtitle) */}
         <div style={{ display: "flex", flexDirection: "column", gap: "10px", textAlign: "left" }}>
@@ -453,13 +452,12 @@ export default function ProductDetailsPage() {
           width: "100%",
           maxWidth: "1440px",
           paddingTop: "8px",
-          paddingBottom: "0px",
           display: "flex",
           flexDirection: "column",
           gap: "16px",
           boxSizing: "border-box"
         }}
-        className="w-full mx-auto px-6 md:px-[80px]"
+        className="w-full mx-auto px-3 sm:px-6 md:px-[80px] pb-20 md:pb-0"
       >
         
         {/* Product Details Section (Width: 1280px, gap: 24px, Background: white) */}
@@ -1711,6 +1709,34 @@ export default function ProductDetailsPage() {
           </div>
         </div>
       )}
+
+      {/* Mobile Fixed Bottom Sticky CTA Bar for instant ordering */}
+      <div className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-slate-200 px-4 py-3 flex items-center gap-3 md:hidden shadow-[0_-4px_16px_rgba(0,0,0,0.12)]">
+        {product.inStock === false ? (
+          <button
+            onClick={() => { setNotifyEmail(''); setNotifySuccess(false); setNotifyModalOpen(true); }}
+            className="w-full h-12 border border-[#1D493E] text-[#1D493E] font-bold text-sm rounded-[4px] flex items-center justify-center"
+          >
+            Notify about availability
+          </button>
+        ) : (
+          <>
+            <button
+              onClick={handleAddToCart}
+              className="flex-1 h-12 border border-[#1D493E] text-[#1D493E] font-bold text-sm rounded-[4px] flex items-center justify-center gap-2 active:bg-[#1D493E] active:text-white transition-colors"
+            >
+              <span>Add to Cart</span>
+            </button>
+            <button
+              onClick={handleBuyNow}
+              className="flex-1 h-12 bg-[#1D493E] text-white font-bold text-sm rounded-[4px] flex items-center justify-center gap-1.5 active:bg-[#15342c] transition-colors"
+            >
+              <span>Buy Now</span>
+              <ArrowUpRight style={{ width: "16px", height: "16px" }} />
+            </button>
+          </>
+        )}
+      </div>
 
       <TrustBanner />
 

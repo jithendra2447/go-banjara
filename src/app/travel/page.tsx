@@ -1099,52 +1099,48 @@ export default function HolidaysPortal() {
                       <div 
                         style={{ 
                           width: "100%",
-                          height: "28px",
                           display: "flex", 
                           flexDirection: "row", 
                           justifyContent: "space-between", 
                           alignItems: "center" 
                         }}
+                        className="h-auto min-h-[24px] sm:h-[28px]"
                       >
                         <span 
                           style={{
-                            padding: "4px 12px",
                             borderRadius: "4px",
                             fontFamily: "'Faktum', 'Outfit', sans-serif",
                             fontWeight: 600,
-                            fontSize: "14px",
                             color: "rgba(255, 98, 62, 1)",
                             background: "rgba(255, 98, 62, 0.1)",
                             textTransform: "uppercase",
                             letterSpacing: "0.5px",
                             display: "inline-flex",
                             alignItems: "center",
-                            height: "100%",
                           }}
+                          className="px-2 py-0.5 sm:px-3 sm:py-1 text-[10px] sm:text-xs"
                         >
                           {displayCategory}
                         </span>
                         <span 
                           style={{
-                            padding: "4px 12px",
                             borderRadius: "4px",
                             fontFamily: "'Faktum', 'Outfit', sans-serif",
                             fontWeight: 600,
-                            fontSize: "14px",
                             color: "rgba(29, 73, 62, 1)",
                             background: "rgba(29, 73, 62, 0.1)",
                             textTransform: "uppercase",
                             letterSpacing: "0.5px",
                             display: "inline-flex",
                             alignItems: "center",
-                            height: "100%",
                           }}
+                          className="px-2 py-0.5 sm:px-3 sm:py-1 text-[10px] sm:text-xs"
                         >
                           {pkg.durationDays} days
                         </span>
                       </div>
 
-                       {/* Title & Price Row */}
+                      {/* Title & Price Row */}
                       <Link 
                         href={pkg.link || `/travel/package/${pkg.id}`} 
                         style={{ 
@@ -1155,20 +1151,18 @@ export default function HolidaysPortal() {
                           alignItems: "center",
                           textDecoration: "none",
                         }}
-                        className="group h-auto min-h-[35px]"
+                        className="group h-auto gap-2"
                       >
                         <h3 
                           style={{
                             flex: 1,
                             fontFamily: "'Faktum', 'Outfit', sans-serif",
                             fontWeight: 600,
-                            fontSize: "24px",
-                            lineHeight: "30px",
                             letterSpacing: "0px",
                             color: "rgba(43, 43, 43, 1)",
                             margin: 0,
                           }}
-                          className="truncate block hover:whitespace-normal hover:overflow-visible transition-all duration-300"
+                          className="text-xs sm:text-lg md:text-[24px] truncate block leading-tight hover:whitespace-normal transition-all duration-300"
                           title={pkg.name}
                         >
                           {pkg.name}
@@ -1176,18 +1170,15 @@ export default function HolidaysPortal() {
                         <span 
                           style={{
                             flexShrink: 0,
-                            height: "35px",
                             fontFamily: "'Faktum', 'Outfit', sans-serif",
                             fontWeight: 600,
-                            fontSize: "28px",
-                            lineHeight: "35px",
                             letterSpacing: "0px",
                             color: "rgba(43, 43, 43, 1)",
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "flex-end",
-                            marginLeft: "16px",
                           }}
+                          className="text-xs sm:text-lg md:text-[28px]"
                         >
                           ₹{pkg.price.toLocaleString('en-IN')}/Person
                         </span>
@@ -1200,32 +1191,29 @@ export default function HolidaysPortal() {
                           maxWidth: "405.33px",
                           fontFamily: "'Faktum', 'Outfit', sans-serif",
                           fontWeight: 500,
-                          fontSize: "18px",
-                          lineHeight: "28px",
-                          letterSpacing: "0px",
                           color: "rgba(141, 141, 141, 1)",
                           margin: 0,
                           overflow: "hidden",
                           display: "-webkit-box",
-                          WebkitLineClamp: 3,
+                          WebkitLineClamp: 2,
                           WebkitBoxOrient: "vertical",
                           textOverflow: "ellipsis",
                         }}
-                        className="h-auto min-h-[84px] hover:line-clamp-none hover:overflow-visible transition-all duration-300 cursor-pointer"
+                        className="text-xs sm:text-sm md:text-[18px] leading-snug sm:leading-[28px] hover:line-clamp-none hover:overflow-visible transition-all duration-300 cursor-pointer"
                         title={pkg.description}
                       >
                         {pkg.description}
                       </p>
                     </div>
 
-                    {/* 2x2 Details Grid */}
+                    {/* 2x2 Details Grid (Hidden on Mobile) */}
                     <div 
                       style={{ 
                         width: "100%",
                         maxWidth: "405.33px",
                         boxSizing: "border-box"
                       }}
-                      className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-2"
+                      className="hidden sm:grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-2"
                     >
                       <div style={{ display: "flex", alignItems: "center", gap: "12px", height: "56px", boxSizing: "border-box" }}>
                         <div style={{ width: "46px", height: "46px", borderRadius: "4px", background: "rgba(246, 243, 238, 1)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
@@ -1269,30 +1257,28 @@ export default function HolidaysPortal() {
                       style={{ 
                         width: "100%",
                         maxWidth: "405.33px",
-                        height: "55px",
                         display: "flex", 
-                        gap: "12px",
+                        gap: "8px",
                         boxSizing: "border-box"
                       }}
+                      className="h-[40px] sm:h-[55px]"
                     >
                       <button
                         type="button"
                         onClick={() => handleOpenBookingDrawer(pkg)}
                         style={{
                           flex: 1,
-                          height: "55px",
                           borderRadius: "4px",
                           background: "rgba(29, 73, 62, 1)",
                           color: "white",
                           fontFamily: "'Faktum', 'Outfit', sans-serif",
                           fontWeight: 600,
-                          fontSize: "16px",
                           textTransform: "uppercase",
                           letterSpacing: "0.5px",
                           border: "none",
                           cursor: "pointer",
                         }}
-                        className="hover:bg-[#15342c] transition-colors duration-300"
+                        className="h-full text-xs sm:text-[16px] hover:bg-[#15342c] transition-colors duration-300"
                       >
                         Book Now
                       </button>
@@ -1301,12 +1287,10 @@ export default function HolidaysPortal() {
                         href={pkg.link || `/travel/package/${pkg.id}`}
                         style={{
                           flex: 1,
-                          height: "55px",
                           borderRadius: "4px",
                           border: "1px solid rgba(29, 73, 62, 1)",
                           fontFamily: "'Faktum', 'Outfit', sans-serif",
                           fontWeight: 600,
-                          fontSize: "16px",
                           textTransform: "uppercase",
                           letterSpacing: "0.5px",
                           display: "flex",
@@ -1314,7 +1298,7 @@ export default function HolidaysPortal() {
                           justifyContent: "center",
                           textDecoration: "none",
                         }}
-                        className="bg-white text-[#1D493E] hover:bg-[#EEF2F1] transition-colors duration-300"
+                        className="h-full text-xs sm:text-[16px] bg-white text-[#1D493E] hover:bg-[#EEF2F1] transition-colors duration-300"
                       >
                         Get details
                       </Link>

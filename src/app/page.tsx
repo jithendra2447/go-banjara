@@ -383,11 +383,25 @@ export default function Homepage() {
             
             {/* Left side: Heading & Subtitle */}
             <div className="flex flex-col gap-2 sm:gap-[18px] md:gap-6 max-w-full sm:max-w-[390px] md:max-w-[850px] text-left">
-              <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-[54px] xl:text-[62px] leading-tight md:leading-[1.15] tracking-[-0.2px] font-semibold text-white font-sans">
-                Hey! Let’s Escape from the <br className="hidden md:inline" />
-                Ordinary
+              <h1 
+                style={{
+                  fontFamily: "'Faktum','Outfit',sans-serif",
+                  fontWeight: 600,
+                  letterSpacing: "-0.2px",
+                }}
+                className="text-[32px] md:text-[54px] xl:text-[62px] leading-[100%] text-white"
+              >
+                Hey! Let’s Escape from <br className="hidden md:inline" />
+                the Ordinary
               </h1>
-              <p className="text-xs sm:text-sm md:text-base lg:text-[18px] xl:text-[20px] leading-relaxed md:leading-[28px] lg:leading-[32px] tracking-[0px] text-white/95 font-sans font-medium max-w-full sm:max-w-[650px]">
+              <p 
+                style={{
+                  fontFamily: "'Faktum','Outfit',sans-serif",
+                  fontWeight: 500,
+                  letterSpacing: "0px",
+                }}
+                className="text-[14px] md:text-[18px] lg:text-[20px] leading-[24px] md:leading-[28px] lg:leading-[32px] text-white/95 max-w-full sm:max-w-[650px]"
+              >
                 We bridge the gap between soulful Indian travel and high end gear. <br className="hidden md:inline" />
                 curated for those who find home in the dust of the road
               </p>
@@ -484,37 +498,30 @@ export default function Homepage() {
           </div>
         </div>
 
-        {/* Mobile View (Figma specs: w-430, h-221, padding 12px 20px, gap 12px, rounded 4px + 2 dots below) */}
-        <div className="block md:hidden w-full max-w-[430px] mx-auto">
+        {/* Mobile View (Figma specs: w-390, h-282, padding 20px, gap 18px, rounded 4px + 2 dots below) */}
+        <div className="block md:hidden w-full max-w-[390px] mx-auto px-[20px]">
           {/* Card Frame with Touch Swipe Support */}
           <div 
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
-            className={`w-full h-[221px] rounded-[4px] p-[16px_20px] flex flex-col justify-between gap-[12px] text-left transition-all duration-300 shadow-md select-none touch-pan-y ${
+            className={`w-full h-[282px] rounded-[4px] p-[20px] flex flex-col justify-between gap-[18px] text-left transition-all duration-300 shadow-md select-none touch-pan-y ${
               activeOfferSlide === 0 ? 'bg-[#1D493E] text-white' : 'bg-[#FF5A36] text-white'
             }`}
             style={{ boxSizing: 'border-box' }}
           >
             {activeOfferSlide === 0 ? (
               <>
-                <div className="flex flex-col gap-[12px] text-left w-full max-w-[366px] h-[121px]">
+                <div className="flex flex-col gap-[18px] text-left w-full h-[180px]">
                   <h2 
                     style={{
                       width: "100%",
-                      maxWidth: "366px",
-                      height: "25px",
                       fontFamily: "'Faktum','Outfit',sans-serif",
                       fontWeight: 600,
-                      fontSize: "20px",
-                      lineHeight: "100%",
+                      fontSize: "22px",
+                      lineHeight: "120%",
                       letterSpacing: "0px",
                       color: "#FFFFFF",
                       margin: 0,
-                      display: "flex",
-                      alignItems: "center",
-                      whiteSpace: "nowrap",
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
                     }}
                   >
                     Shop Travel Gear for Nomads
@@ -523,8 +530,8 @@ export default function Homepage() {
                     style={{
                       fontFamily: "'Faktum','Outfit',sans-serif",
                       fontWeight: 500,
-                      fontSize: "16px",
-                      lineHeight: "28px",
+                      fontSize: "15px",
+                      lineHeight: "26px",
                       letterSpacing: "0px",
                       color: "rgba(255, 255, 255, 0.85)",
                       margin: 0,
@@ -535,31 +542,25 @@ export default function Homepage() {
                 </div>
                 <Link 
                   href="/shop" 
-                  className="inline-flex items-center gap-2 text-white hover:opacity-80 transition cursor-pointer text-left mt-auto pb-1"
+                  className="inline-flex items-center gap-2 text-white font-sans font-bold text-[16px] hover:opacity-80 transition cursor-pointer text-left mt-auto"
                 >
-                  <ArrowRight className="w-6 h-6 text-white" style={{ width: "24px", height: "24px" }} />
+                  <span>Shop Now</span>
+                  <ArrowRight className="w-5 h-5 text-white" />
                 </Link>
               </>
             ) : (
               <>
-                <div className="flex flex-col gap-[12px] text-left w-full max-w-[366px] h-[121px]">
+                <div className="flex flex-col gap-[18px] text-left w-full h-[180px]">
                   <h2 
                     style={{
                       width: "100%",
-                      maxWidth: "366px",
-                      height: "25px",
                       fontFamily: "'Faktum','Outfit',sans-serif",
                       fontWeight: 600,
-                      fontSize: "20px",
-                      lineHeight: "100%",
+                      fontSize: "22px",
+                      lineHeight: "120%",
                       letterSpacing: "0px",
                       color: "#FFFFFF",
                       margin: 0,
-                      display: "flex",
-                      alignItems: "center",
-                      whiteSpace: "nowrap",
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
                     }}
                   >
                     Book a Trip
@@ -568,8 +569,8 @@ export default function Homepage() {
                     style={{
                       fontFamily: "'Faktum','Outfit',sans-serif",
                       fontWeight: 500,
-                      fontSize: "16px",
-                      lineHeight: "28px",
+                      fontSize: "15px",
+                      lineHeight: "26px",
                       letterSpacing: "0px",
                       color: "rgba(255, 255, 255, 0.90)",
                       margin: 0,
@@ -580,9 +581,10 @@ export default function Homepage() {
                 </div>
                 <Link 
                   href="/travel" 
-                  className="inline-flex items-center gap-2 text-white hover:opacity-80 transition cursor-pointer text-left mt-auto pb-1"
+                  className="inline-flex items-center gap-2 text-white font-sans font-bold text-[16px] hover:opacity-80 transition cursor-pointer text-left mt-auto"
                 >
-                  <ArrowRight className="w-6 h-6 text-white" style={{ width: "24px", height: "24px" }} />
+                  <span>See Travel Packages</span>
+                  <ArrowRight className="w-5 h-5 text-white" />
                 </Link>
               </>
             )}
@@ -1776,7 +1778,7 @@ export default function Homepage() {
       </section>
 
       {/* 8.5 ORANGE HIGHLIGHT MARQUEE BANNER */}
-      <div className="bg-[#FF623E] text-white h-[39px] md:h-[78px] flex items-center overflow-hidden select-none relative z-10 w-full py-[6px] md:py-[24px]">
+      <div className="bg-[#FF623E] text-white h-[39px] md:h-[78px] flex items-center overflow-hidden select-none relative z-10 w-full py-[12px] px-[20px] md:py-[24px] md:px-[80px]">
         <div className="flex whitespace-nowrap gap-[10px] animate-marquee font-serif font-semibold text-[14px] md:text-[24px] leading-none uppercase text-white tracking-[0px]">
           <span>✦ ESCAPE THE ORDINARY ✦ SHOP TRAVEL GEAR ✦ DARE TO TRAVEL ✦ ADVENTURE AWAITS ✦ MODERN NOMAD ✦ SHOP TRAVEL GEAR ✦ ESCAPE THE ORDINARY ✦ SHOP TRAVEL GEAR ✦ DARE TO TRAVEL ✦ ADVENTURE AWAITS ✦ MODERN NOMAD ✦ SHOP TRAVEL GEAR ✦ ESCAPE THE ORDINARY ✦ SHOP TRAVEL GEAR ✦ DARE TO TRAVEL ✦ ADVENTURE AWAITS ✦ MODERN NOMAD ✦ SHOP TRAVEL GEAR</span>
         </div>

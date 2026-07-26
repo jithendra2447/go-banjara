@@ -109,7 +109,7 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
             </button>
           </div>
 
-          <div className="flex flex-col gap-[4px] p-2 bg-white">
+          <div className="flex flex-col gap-[4px] py-2 px-0 bg-white">
             <span className="bg-[#FF5A36] text-white px-1.5 py-0.5 rounded-[3px] text-[9px] font-bold self-start leading-none uppercase">
               {product.category || 'Badges'}
             </span>
@@ -147,7 +147,7 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
         </Link>
 
         {/* Compact Add to Cart Button */}
-        <div className="px-2 pb-2 pt-0 bg-white">
+        <div className="px-0 pb-0 pt-0 bg-white">
           <button
             onClick={() => {
               onAddToCart(mockProduct);
@@ -243,8 +243,8 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
           </button>
         </div>
 
-        {/* Details Block */}
-        <div className="w-full flex flex-col justify-between gap-3 text-left flex-1 h-[350px]">
+        {/* Details Block - 0px horizontal padding */}
+        <div className="w-full flex flex-col justify-between gap-3 text-left flex-1 h-[350px] px-0">
           
           {/* Top Header: Category Tag & Price */}
           <div className="flex flex-col gap-1.5 w-full">
@@ -327,7 +327,7 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
               cursor: "pointer",
               transition: "all 0.2s ease",
             }}
-            className="h-[60px] py-4 px-8 text-base mt-auto shrink-0"
+            className="h-[60px] py-4 px-4 text-base mt-auto shrink-0"
             onMouseEnter={(e) => {
               e.currentTarget.style.backgroundColor = "rgba(29, 73, 62, 1)";
               e.currentTarget.style.color = "white";

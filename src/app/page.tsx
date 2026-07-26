@@ -894,12 +894,12 @@ export default function Homepage() {
 
         </div>
 
-        {/* Mobile Section 4 Container (Reduced side padding px-[12px], card w:[185px] so next card is more visible) */}
-        <div className="block md:hidden w-full max-w-[430px] mx-auto py-[12px] px-[12px] bg-white">
+        {/* Mobile Section 4 Container (block md:hidden) - w:430px max, py:12px px:20px, gap:12px */}
+        <div className="block md:hidden w-full max-w-[430px] mx-auto py-[12px] px-[20px] bg-white flex flex-col gap-[12px]">
           {/* Header Row */}
-          <div className="flex items-center justify-between w-full mb-[12px] px-[4px]">
+          <div className="flex items-center justify-between w-full">
             <h2 className="text-[22px] font-serif font-bold text-[#1D493E] leading-tight m-0">
-              Featured&nbsp;<span className="text-[#FF5A36]">Holiday</span>&nbsp;Packages
+              Place worth the&nbsp;<span className="text-[#FF5A36]">detour</span>
             </h2>
             <Link 
               href="/travel" 
@@ -910,18 +910,18 @@ export default function Homepage() {
             </Link>
           </div>
 
-          {/* Horizontal Card Carousel */}
-          <div className="flex gap-[12px] overflow-x-auto pb-3 scrollbar-none snap-x snap-mandatory px-[4px]">
+          {/* 2-Row Horizontal Scrollable Grid */}
+          <div className="grid grid-rows-2 grid-flow-col gap-[12px] overflow-x-auto pb-2 scrollbar-none snap-x snap-mandatory">
             {(() => {
               const displayPkgs = packagesList && packagesList.length > 0 ? packagesList : HOLIDAY_PACKAGES;
               return displayPkgs.map((pkg) => (
                 <Link 
                   key={pkg.id} 
                   href={`/travel/package/${pkg.id}`}
-                  className="snap-start shrink-0 w-[185px] sm:w-[200px] bg-[#F6F3EE] rounded-[4px] overflow-hidden flex flex-col justify-between text-left select-none group cursor-pointer"
+                  className="snap-start shrink-0 w-[185px] sm:w-[200px] bg-[#F6F3EE] rounded-[4px] overflow-hidden flex flex-col justify-between text-left select-none group cursor-pointer border border-gray-100"
                   style={{ boxSizing: 'border-box' }}
                 >
-                  {/* Image Container with Wishlist Button (h: 190px) */}
+                  {/* Image Container with Wishlist Button */}
                   <div className="relative w-full h-[190px] rounded-[4px] overflow-hidden shrink-0">
                     <img 
                       src={pkg.image} 
@@ -964,7 +964,7 @@ export default function Homepage() {
                     </button>
                   </div>
 
-                  {/* Content Container (Fluid height, no text clipping) */}
+                  {/* Content Container */}
                   <div className="flex flex-col gap-[6px] p-2.5 flex-1 justify-between bg-white">
                     {/* Category Tag + Duration Tag */}
                     <div className="flex items-center justify-between w-full">
@@ -995,7 +995,7 @@ export default function Homepage() {
                         {pkg.groupType || 'Private Trip'}
                       </span>
                       <span className="bg-gray-100 text-gray-600 text-[9px] px-1.5 py-0.5 rounded-[2px] font-medium">
-                        Next: {pkg.nextDeparture || 'Aug, 2026'}
+                        Next: {pkg.nextDeparture || 'Oct, 2026'}
                       </span>
                     </div>
 

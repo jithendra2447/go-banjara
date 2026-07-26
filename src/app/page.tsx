@@ -466,7 +466,7 @@ export default function Homepage() {
             <div className="relative z-10">
               <Link 
                 href="/shop" 
-                className="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-xl bg-white/10 hover:bg-white/15 transition-all duration-300 cursor-pointer text-center"
+                className="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-[4px] bg-white/10 hover:bg-white/15 transition-all duration-300 cursor-pointer text-center"
                 style={{ color: "rgba(255,255,255,1)", fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "16px", lineHeight: "100%", letterSpacing: "0px", verticalAlign: "middle", textDecoration: "none" }}
               >
                 <span>Explore Collections</span>
@@ -488,7 +488,7 @@ export default function Homepage() {
             <div className="relative z-10">
               <Link 
                 href="/travel" 
-                className="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-xl bg-white/15 hover:bg-white/25 transition-all duration-300 cursor-pointer text-center"
+                className="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-[4px] bg-white/15 hover:bg-white/25 transition-all duration-300 cursor-pointer text-center"
                 style={{ color: "rgba(255,255,255,1)", fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "16px", lineHeight: "100%", letterSpacing: "0px", verticalAlign: "middle", textDecoration: "none" }}
               >
                 <span>Find the Route</span>

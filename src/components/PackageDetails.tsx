@@ -456,15 +456,12 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
         style={{
           width: "100%",
           maxWidth: "1440px",
-          paddingTop: "32px",
-          paddingBottom: "42px",
           backgroundColor: "rgba(255, 255, 255, 1)",
           boxSizing: "border-box",
           display: "flex",
           flexDirection: "column",
-          gap: "32px",
         }}
-        className="relative z-10 mx-auto w-full px-4 md:px-[80px]"
+        className="relative z-10 mx-auto w-full px-4 md:px-[80px] pt-3 sm:pt-5 pb-4 sm:pb-6 gap-4 sm:gap-6"
       >
         {/* Image Gallery */}
         <div 
@@ -507,22 +504,21 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
 
         {/* Details Section */}
         <div 
-          className="w-full grid grid-cols-1 lg:grid-cols-[1fr_411px] gap-8 lg:gap-[32px] items-start"
+          className="w-full grid grid-cols-1 lg:grid-cols-[1fr_411px] gap-6 lg:gap-[32px] items-start"
         >
           
           {/* LEFT COLUMN: Travel package details */}
-          <div className="text-left space-y-[32px] w-full">
+          <div className="text-left space-y-4 w-full">
             
-            {/* Main Details content container with exact 32px gap */}
+            {/* Main Details content container with compact gap */}
             <div 
               style={{
                 width: "100%",
                 maxWidth: "837px",
                 display: "flex",
                 flexDirection: "column",
-                gap: "32px",
               }}
-              className="text-left"
+              className="text-left gap-3.5 sm:gap-4"
             >
               {/* Category & Duration Row */}
               <div className="flex justify-between items-center text-[10px] font-black uppercase font-mono">

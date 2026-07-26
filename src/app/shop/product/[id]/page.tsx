@@ -514,8 +514,8 @@ export default function ProductDetailsPage() {
               {renderMediaContent(activeImgIdx, false)}
             </div>
 
-            {/* Mobile Swipeable Image Carousel (Compact 210px height on mobile) */}
-            <div className="block md:hidden relative w-full h-[210px] sm:h-[260px] rounded-[4px] border border-[rgba(204,204,204,1)] bg-white overflow-hidden">
+            {/* Mobile Swipeable Image Carousel (No border outline) */}
+            <div className="block md:hidden relative w-full h-[210px] sm:h-[260px] rounded-[4px] border-0 bg-white overflow-hidden">
               <div 
                 className="flex w-full h-full overflow-x-auto snap-x snap-mandatory scrollbar-none"
                 onScroll={(e) => {
@@ -528,7 +528,7 @@ export default function ProductDetailsPage() {
                 }}
               >
                 {[...Array(6)].map((_, i) => (
-                  <div key={i} className="w-full h-full flex-shrink-0 snap-center flex items-center justify-center relative bg-white p-2">
+                  <div key={i} className="w-full h-full flex-shrink-0 snap-center flex items-center justify-center relative bg-white">
                     {renderMediaContent(i, false)}
                   </div>
                 ))}

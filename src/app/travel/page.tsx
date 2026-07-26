@@ -991,7 +991,7 @@ export default function HolidaysPortal() {
                     boxSizing: "border-box",
                     position: "relative",
                   }}
-                  className="group w-full max-w-[191px] sm:max-w-[405.33px] h-[371px] sm:h-auto flex flex-col gap-1.5 sm:gap-6 bg-white rounded-[4px] p-0"
+                  className="group w-full max-w-[191px] sm:max-w-[405.33px] h-auto flex flex-col gap-1.5 sm:gap-6 bg-white rounded-[4px] p-0"
                 >
                   {/* Card Image */}
                   <Link 
@@ -1069,7 +1069,7 @@ export default function HolidaysPortal() {
                       flexDirection: "column", 
                       boxSizing: "border-box",
                     }}
-                    className="gap-[6px] sm:gap-5 justify-between"
+                    className="gap-[6px] sm:gap-5 justify-start"
                   >
                     
                     {/* Badges, title, description, tags */}
@@ -1180,7 +1180,7 @@ export default function HolidaysPortal() {
                     </div>
 
                     {/* Pricing Row */}
-                    <div className="flex items-center gap-1 mt-auto flex-wrap">
+                    <div className="flex items-center gap-1 sm:mt-auto flex-wrap mt-1">
                       <span className="line-through text-gray-400 text-[9px] sm:text-sm font-normal">
                         ₹{Math.round(pkg.price * 1.3).toLocaleString('en-IN')}
                       </span>

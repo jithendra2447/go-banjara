@@ -412,35 +412,13 @@ export default function Homepage() {
             <div className="flex flex-row items-center gap-[12px] justify-start shrink-0 pb-1 w-full sm:w-auto overflow-x-auto no-scrollbar">
               <Link 
                 href="/shop"
-                className="hover:scale-[1.02] active:scale-[0.98] text-[#2B2B2B] bg-white hover:bg-white/90 transition-all duration-300 cursor-pointer flex items-center justify-center w-[125px] sm:w-[150px] md:w-[177px] h-[40px] sm:h-[55px] shrink-0"
-                style={{
-                  borderRadius: "4px",
-                  fontFamily: "'Faktum','Outfit',sans-serif",
-                  fontWeight: 600,
-                  fontSize: "14px",
-                  lineHeight: "100%",
-                  textDecoration: "none",
-                  boxSizing: "border-box",
-                  whiteSpace: "nowrap",
-                }}
+                className="hover:scale-[1.02] active:scale-[0.98] text-[#2B2B2B] bg-white hover:bg-white/90 transition-all duration-300 cursor-pointer flex items-center justify-center w-[125px] sm:w-[150px] md:w-[177px] h-[40px] sm:h-[55px] shrink-0 rounded-[4px] font-sans font-semibold text-[14px]"
               >
                 Shop Now
               </Link>
               <Link 
                 href="/travel"
-                className="hover:bg-white/10 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 cursor-pointer flex items-center justify-center w-[202px] sm:w-[190px] md:w-[215px] h-[40px] sm:h-[55px] border border-white/30 text-white shrink-0"
-                style={{
-                  borderRadius: "4px",
-                  background: "rgba(255, 255, 255, 0.1)",
-                  backdropFilter: "blur(4px)",
-                  fontFamily: "'Faktum','Outfit',sans-serif",
-                  fontWeight: 600,
-                  fontSize: "14px",
-                  lineHeight: "100%",
-                  textDecoration: "none",
-                  boxSizing: "border-box",
-                  whiteSpace: "nowrap",
-                }}
+                className="hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 cursor-pointer flex items-center justify-center w-[202px] sm:w-[190px] md:w-[215px] h-[40px] sm:h-[55px] border border-white/80 text-white hover:bg-white hover:text-[#2B2B2B] shrink-0 rounded-[4px] bg-white/10 backdrop-blur-sm font-sans font-semibold text-[14px]"
               >
                 See Travel Packages
               </Link>
@@ -627,7 +605,7 @@ export default function Homepage() {
             <h2 className="text-3xl md:text-[42px] font-serif font-semibold text-[#1D493E] leading-none text-center">
               Place worth the&nbsp;<span className="text-[#FF5A36]">detour</span>
             </h2>
-            <p className="text-[#2B2B2B]/80 text-base md:text-[20px] leading-relaxed font-medium text-center max-w-2xl mx-auto">
+            <p className="text-[#2B2B2B]/80 text-base md:text-[20px] leading-relaxed font-medium text-center max-w-[1280px] md:whitespace-nowrap mx-auto">
               A hand-picked map of the corners of India our community keeps coming back to
             </p>
           </div>
@@ -2578,48 +2556,13 @@ export default function Homepage() {
             <div className="flex flex-col sm:flex-row gap-3 w-full max-w-[584px] justify-center items-center">
               <Link
                 href="/travel"
-                style={{
-                  paddingTop: "16px",
-                  paddingBottom: "16px",
-                  paddingLeft: "32px",
-                  paddingRight: "32px",
-                  gap: "8px",
-                  background: "rgba(29, 73, 62, 1)",
-                  color: "#FFFFFF",
-                  fontFamily: "'Faktum','Outfit',sans-serif",
-                  fontWeight: 500,
-                  fontSize: "18px",
-                  lineHeight: "100%",
-                  letterSpacing: "0px",
-                  verticalAlign: "middle",
-                  textDecoration: "none",
-                  transition: "opacity 0.2s",
-                }}
-                className="w-full sm:w-[286px] h-[55px] flex items-center justify-center rounded-[4px] hover:opacity-90"
+                className="w-full sm:w-[286px] h-[55px] flex items-center justify-center rounded-[4px] bg-[#1D493E] text-white border-2 border-[#1D493E] hover:bg-[#1D493E]/90 transition-all duration-300 font-sans font-medium text-[18px]"
               >
                 Book Now
               </Link>
               <Link
                 href="/shop"
-                style={{
-                  paddingTop: "16px",
-                  paddingBottom: "16px",
-                  paddingLeft: "32px",
-                  paddingRight: "32px",
-                  gap: "8px",
-                  border: "2px solid rgba(29, 73, 62, 1)",
-                  background: "transparent",
-                  color: "rgba(29, 73, 62, 1)",
-                  fontFamily: "'Faktum','Outfit',sans-serif",
-                  fontWeight: 500,
-                  fontSize: "18px",
-                  lineHeight: "100%",
-                  letterSpacing: "0px",
-                  verticalAlign: "middle",
-                  textDecoration: "none",
-                  transition: "opacity 0.2s",
-                }}
-                className="w-full sm:w-[286px] h-[55px] flex items-center justify-center rounded-[4px] hover:opacity-90"
+                className="w-full sm:w-[286px] h-[55px] flex items-center justify-center rounded-[4px] bg-transparent text-[#1D493E] border-2 border-[#1D493E] hover:bg-[#1D493E] hover:text-white transition-all duration-300 font-sans font-medium text-[18px]"
               >
                 Explore collection
               </Link>
@@ -2637,13 +2580,13 @@ export default function Homepage() {
           <div className="flex items-center justify-center gap-[12px] pt-1">
             <Link
               href="/travel"
-              className="w-[125px] h-[40px] bg-[#1D493E] text-white font-sans font-bold text-[14px] rounded-[4px] flex items-center justify-center hover:opacity-90 transition"
+              className="w-[125px] h-[40px] bg-[#1D493E] text-white font-sans font-bold text-[14px] rounded-[4px] flex items-center justify-center border border-[#1D493E] hover:bg-[#1D493E]/90 transition"
             >
               Book Now
             </Link>
             <Link
               href="/shop"
-              className="w-[160px] h-[40px] border border-[#1D493E] text-[#1D493E] font-sans font-medium text-[14px] rounded-[4px] flex items-center justify-center bg-transparent hover:bg-[#1D493E]/5 transition"
+              className="w-[160px] h-[40px] border border-[#1D493E] text-[#1D493E] font-sans font-medium text-[14px] rounded-[4px] flex items-center justify-center bg-transparent hover:bg-[#1D493E] hover:text-white transition"
             >
               Explore collection
             </Link>

@@ -494,7 +494,7 @@ export default function ProductDetailsPage() {
             }}
             className="w-full"
           >
-            {/* Main Showcase Box (Aspect 3:2 on all screen sizes) */}
+            {/* Desktop Single Image Showcase */}
             <div 
               style={{
                 position: "relative",
@@ -508,22 +508,53 @@ export default function ProductDetailsPage() {
                 overflow: "hidden",
                 boxSizing: "border-box"
               }}
-              className="w-full flex-1"
+              className="hidden md:flex w-full flex-1"
             >
               {renderMediaContent(activeImgIdx, false)}
             </div>
+
+            {/* Mobile Swipeable Image Carousel */}
+            <div className="block md:hidden relative w-full rounded-[4px] border border-[rgba(204,204,204,1)] bg-white overflow-hidden">
+              <div 
+                className="flex w-full overflow-x-auto snap-x snap-mandatory scrollbar-none"
+                onScroll={(e) => {
+                  const scrollPos = e.currentTarget.scrollLeft;
+                  const width = e.currentTarget.offsetWidth;
+                  if (width > 0) {
+                    const newIdx = Math.round(scrollPos / width);
+                    if (newIdx !== activeImgIdx) setActiveImgIdx(newIdx);
+                  }
+                }}
+              >
+                {[...Array(6)].map((_, i) => (
+                  <div key={i} className="w-full flex-shrink-0 snap-center aspect-[4/3] flex items-center justify-center relative bg-white">
+                    {renderMediaContent(i, false)}
+                  </div>
+                ))}
+              </div>
+              {/* Pagination Dots */}
+              <div className="absolute bottom-2.5 left-0 right-0 flex items-center justify-center gap-1.5 pointer-events-none">
+                {[...Array(6)].map((_, i) => (
+                  <div
+                    key={i}
+                    className={`h-1.5 rounded-full transition-all duration-300 ${
+                      activeImgIdx === i ? "w-4 bg-[#1D493E]" : "w-1.5 bg-slate-300"
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
             
-            {/* Thumbnails Row (Width: 624px, Height: 92px, gap: 12px) */}
+            {/* Thumbnails Row (Hidden on mobile, visible on desktop) */}
             <div 
               style={{
-                display: "flex",
                 justifyContent: "space-between",
                 gap: "12px",
                 width: "100%",
                 height: "92px",
                 boxSizing: "border-box"
               }}
-              className="w-full overflow-x-auto md:overflow-visible"
+              className="hidden md:flex w-full overflow-x-auto md:overflow-visible"
             >
               {[...Array(6)].map((_, i) => (
                 <button
@@ -581,7 +612,7 @@ export default function ProductDetailsPage() {
                 boxSizing: "border-box",
                 opacity: 1,
               }}
-              className="w-full text-left font-sans text-[#2B2B2B] px-4 py-2 md:py-2 md:px-[24px] rounded-none md:rounded-[4px] border-0 md:border border-[rgba(204,204,204,1)]"
+              className="w-full text-left font-sans text-[#2B2B2B] p-4 sm:p-5 md:py-4 md:px-[24px] rounded-xl md:rounded-[4px] border border-slate-200/80 md:border-[rgba(204,204,204,1)] shadow-xs bg-white"
             >
               {/* Title & Category Tag Row */}
               <div className="flex items-start justify-between gap-3 w-full">

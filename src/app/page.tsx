@@ -888,7 +888,7 @@ export default function Homepage() {
             <div className="flex justify-center mt-4 mb-0">
               <Link 
                 href="/travel" 
-                className="inline-flex items-center justify-center w-full max-w-[331px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[8px] bg-transparent hover:bg-gray-100/90 text-[#1D493E] transition-all duration-300 cursor-pointer group"
+                className="inline-flex items-center justify-center w-full max-w-[331px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[8px] bg-transparent hover:bg-gray-200/80 text-[#1D493E] transition-all duration-300 cursor-pointer group"
               >
                 <span className="h-[25px] flex items-center justify-center font-sans font-medium text-sm sm:text-base md:text-[20px] leading-none">
                   Explore all destinations
@@ -1068,7 +1068,7 @@ export default function Homepage() {
             <div className="shrink-0 pb-1">
               <Link 
                 href="/shop" 
-                className="inline-flex items-center justify-center w-full max-w-[275px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[8px] bg-transparent hover:bg-gray-100/90 text-[#1D493E] transition-all duration-300 cursor-pointer group"
+                className="inline-flex items-center justify-center w-full max-w-[275px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[8px] bg-transparent hover:bg-gray-200/80 text-[#1D493E] transition-all duration-300 cursor-pointer group"
               >
                 <span className="h-[25px] flex items-center justify-center font-sans font-medium text-sm sm:text-base md:text-[20px] leading-none">
                   View all products
@@ -1483,7 +1483,7 @@ export default function Homepage() {
           <div className="text-center pt-4">
             <Link 
               href="/shop" 
-              className="inline-flex items-center justify-center w-[275px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[8px] bg-transparent hover:bg-gray-100/90 text-[#1D493E] transition-all duration-300 cursor-pointer group"
+              className="inline-flex items-center justify-center w-[275px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[8px] bg-transparent hover:bg-gray-200/80 text-[#1D493E] transition-all duration-300 cursor-pointer group"
             >
               <span className="w-[163px] h-[25px] flex items-center justify-center font-sans font-medium text-[20px] leading-none">
                 View all products
@@ -1583,7 +1583,7 @@ export default function Homepage() {
             <div className="shrink-0 pb-1">
               <Link 
                 href="/shop"
-                className="inline-flex items-center justify-center w-[275px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[8px] bg-transparent hover:bg-gray-100/90 text-[#1D493E] transition-all duration-300 cursor-pointer group"
+                className="inline-flex items-center justify-center w-[275px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[8px] bg-transparent hover:bg-gray-200/80 text-[#1D493E] transition-all duration-300 cursor-pointer group"
               >
                 <span className="w-[163px] h-[25px] flex items-center justify-center font-sans font-medium text-[20px] leading-none">
                   View all products
@@ -2241,7 +2241,7 @@ export default function Homepage() {
           <div className="text-center h-[68px] flex items-center justify-center shrink-0">
             <Link 
               href="/blog" 
-              className="inline-flex items-center justify-center w-[185px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[8px] bg-transparent hover:bg-gray-100/90 text-[#1D493E] transition-all duration-300 cursor-pointer group"
+              className="inline-flex items-center justify-center w-[185px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[8px] bg-transparent hover:bg-gray-200/80 text-[#1D493E] transition-all duration-300 cursor-pointer group"
             >
               <span className="font-sans font-medium text-sm sm:text-base md:text-[20px] leading-none whitespace-nowrap">
                 View all

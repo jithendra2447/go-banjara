@@ -467,7 +467,7 @@ export default function ProductDetailsPage() {
           gap: "16px",
           boxSizing: "border-box"
         }}
-        className="w-full mx-auto px-3 sm:px-6 md:px-[80px] pb-20 md:pb-0"
+        className="w-full mx-auto px-3 sm:px-6 md:px-[80px] pb-0 md:pb-0"
       >
         
         {/* Product Details Section (Width: 1280px, gap: 24px, Background: white) */}
@@ -952,13 +952,11 @@ export default function ProductDetailsPage() {
         {/* Tab Bar */}
         <div
           style={{
-            width: "100%",
-            height: "48px",
             borderBottom: "2px solid rgba(204, 204, 204, 1)",
             backgroundColor: "rgba(255, 255, 255, 1)",
-            boxSizing: "border-box",
-            marginTop: "24px"
+            boxSizing: "border-box"
           }}
+          className="w-full h-10 sm:h-12 mt-1 sm:mt-4"
         >
           <div className="flex gap-4 sm:gap-8 md:gap-12 h-full items-end">
 
@@ -969,7 +967,7 @@ export default function ProductDetailsPage() {
                 cursor: "pointer",
                 background: "none",
                 border: "none",
-                padding: "0 0 8px 0",
+                padding: "0 0 6px 0",
                 borderBottom: activeTab === 'desc' ? "3px solid rgba(28, 68, 140, 1)" : "3px solid transparent",
                 marginBottom: "-2px",
                 transition: "border-color 0.2s"
@@ -981,7 +979,7 @@ export default function ProductDetailsPage() {
                 lineHeight: "100%",
                 color: activeTab === 'desc' ? "rgba(28, 68, 140, 1)" : "rgba(43, 43, 43, 1)",
                 transition: "color 0.2s"
-              }} className="text-base sm:text-xl md:text-[24px]">Product Description</span>
+              }} className="text-sm sm:text-xl md:text-[24px]">Product Description</span>
             </button>
 
             {/* Reviews Tab */}
@@ -991,7 +989,7 @@ export default function ProductDetailsPage() {
                 cursor: "pointer",
                 background: "none",
                 border: "none",
-                padding: "0 0 8px 0",
+                padding: "0 0 6px 0",
                 borderBottom: activeTab === 'reviews' ? "3px solid rgba(28, 68, 140, 1)" : "3px solid transparent",
                 marginBottom: "-2px",
                 transition: "border-color 0.2s"
@@ -1003,7 +1001,7 @@ export default function ProductDetailsPage() {
                 lineHeight: "100%",
                 color: activeTab === 'reviews' ? "rgba(28, 68, 140, 1)" : "rgba(43, 43, 43, 1)",
                 transition: "color 0.2s"
-              }} className="text-base sm:text-xl md:text-[24px]">Reviews</span>
+              }} className="text-sm sm:text-xl md:text-[24px]">Reviews</span>
             </button>
 
           </div>
@@ -1017,7 +1015,7 @@ export default function ProductDetailsPage() {
               minHeight: "auto",
               boxSizing: "border-box",
             }}
-            className="flex flex-col gap-3 sm:gap-6 md:gap-[32px] w-full pt-1"
+            className="flex flex-col gap-2 sm:gap-5 md:gap-[32px] w-full pt-2"
           >
 
             {/* Overview of Product */}
@@ -1035,11 +1033,11 @@ export default function ProductDetailsPage() {
                 fontWeight: 600,
                 letterSpacing: "0px",
                 color: "rgba(43, 43, 43, 1)",
-                margin: "0 0 8px 0"
-              }} className="text-lg sm:text-2xl md:text-[32px]">
+                margin: "0 0 6px 0"
+              }} className="text-base sm:text-2xl md:text-[32px]">
                 Overview of the <span style={{ color: "rgba(255, 98, 62, 1)" }}>Product</span>
               </h2>
-              <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: "8px", boxSizing: "border-box" }}>
+              <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: "6px", boxSizing: "border-box" }}>
                 <p style={{
                   fontFamily: "Faktum, sans-serif",
                   fontWeight: 500,
@@ -1059,13 +1057,13 @@ export default function ProductDetailsPage() {
             </section>
 
             {/* Product Highlights */}
-            <section style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+            <section style={{ display: "flex", flexDirection: "column", gap: "8px" }} className="mt-1 sm:mt-0">
               <div>
-                <span style={{ display: "inline-block", fontSize: "9px", fontWeight: 900, textTransform: "uppercase", letterSpacing: "0.15em", color: "rgba(255, 98, 62, 1)", backgroundColor: "rgba(255, 235, 229, 1)", padding: "3px 8px", borderRadius: "2px" }}>
+                <span style={{ display: "inline-block", fontSize: "9px", fontWeight: 900, textTransform: "uppercase", letterSpacing: "0.15em", color: "rgba(255, 98, 62, 1)", backgroundColor: "rgba(255, 235, 229, 1)", padding: "2px 6px", borderRadius: "2px" }}>
                   SPECIFICATIONS
                 </span>
               </div>
-              <h2 style={{ fontFamily: "Fraunces, serif", fontWeight: 600, color: "rgba(43, 43, 43, 1)", margin: 0 }} className="text-lg sm:text-2xl md:text-[28px]">
+              <h2 style={{ fontFamily: "Fraunces, serif", fontWeight: 600, color: "rgba(43, 43, 43, 1)", margin: 0 }} className="text-base sm:text-2xl md:text-[28px]">
                 Product <span style={{ color: "rgba(255, 98, 62, 1)" }}>Highlights</span>
               </h2>
               <div 
@@ -1292,7 +1290,7 @@ export default function ProductDetailsPage() {
             width: "100%",
             boxSizing: "border-box"
           }}
-          className="py-6 sm:py-10 md:pt-14 text-center border-t border-slate-200/60 flex flex-col items-center gap-4 sm:gap-7 w-full px-2 sm:px-0"
+          className="pt-5 pb-3 sm:py-10 md:pt-14 text-center border-t border-slate-200/60 flex flex-col items-center gap-4 sm:gap-7 w-full px-2 sm:px-0"
         >
           {/* Text block */}
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>

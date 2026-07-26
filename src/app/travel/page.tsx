@@ -1093,7 +1093,7 @@ export default function HolidaysPortal() {
                     boxSizing: "border-box",
                     position: "relative",
                   }}
-                  className="group h-auto min-h-[695px] pb-4"
+                  className="group h-auto min-h-[695px] pb-0"
                 >
                   {/* Card Image */}
                   <Link 

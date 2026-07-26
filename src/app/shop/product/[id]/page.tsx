@@ -502,7 +502,6 @@ export default function ProductDetailsPage() {
                 borderRadius: "4px",
                 border: "1.05px solid rgba(204, 204, 204, 1)",
                 backgroundColor: "#FFFFFF",
-                display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 overflow: "hidden",

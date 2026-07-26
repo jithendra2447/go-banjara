@@ -888,7 +888,7 @@ export default function Homepage() {
             <div className="flex justify-center mt-4 mb-0">
               <Link 
                 href="/travel" 
-                className="inline-flex items-center justify-center w-full max-w-[331px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[4px] bg-transparent text-[#1D493E] hover:opacity-80 transition-all duration-300 cursor-pointer group"
+                className="inline-flex items-center justify-center w-full max-w-[331px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[8px] bg-transparent hover:bg-gray-100/90 text-[#1D493E] transition-all duration-300 cursor-pointer group"
               >
                 <span className="h-[25px] flex items-center justify-center font-sans font-medium text-sm sm:text-base md:text-[20px] leading-none">
                   Explore all destinations
@@ -901,7 +901,7 @@ export default function Homepage() {
                   strokeWidth="2.25" 
                   strokeLinecap="round" 
                   strokeLinejoin="round"
-                  className="shrink-0"
+                  className="shrink-0 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300"
                 >
                   <path d="M7 17l2.5-2.5" />
                   <path d="M12.5 11.5L17 7" />
@@ -1067,8 +1067,8 @@ export default function Homepage() {
             </div>
             <div className="shrink-0 pb-1">
               <Link 
-                href="/shop"
-                className="inline-flex items-center justify-center w-full max-w-[275px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[4px] bg-transparent text-[#1D493E] hover:opacity-80 transition-all duration-300 cursor-pointer group"
+                href="/shop" 
+                className="inline-flex items-center justify-center w-full max-w-[275px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[8px] bg-transparent hover:bg-gray-100/90 text-[#1D493E] transition-all duration-300 cursor-pointer group"
               >
                 <span className="h-[25px] flex items-center justify-center font-sans font-medium text-sm sm:text-base md:text-[20px] leading-none">
                   View all products
@@ -1081,7 +1081,7 @@ export default function Homepage() {
                   strokeWidth="2.25" 
                   strokeLinecap="round" 
                   strokeLinejoin="round"
-                  className="shrink-0"
+                  className="shrink-0 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300"
                 >
                   <path d="M7 17l2.5-2.5" />
                   <path d="M12.5 11.5L17 7" />
@@ -1483,12 +1483,12 @@ export default function Homepage() {
           <div className="text-center pt-4">
             <Link 
               href="/shop" 
-              className="inline-flex items-center justify-center w-[275px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[4px] bg-transparent text-[#1D493E] hover:opacity-80 transition-all duration-300 cursor-pointer group"
+              className="inline-flex items-center justify-center w-[275px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[8px] bg-transparent hover:bg-gray-100/90 text-[#1D493E] transition-all duration-300 cursor-pointer group"
             >
               <span className="w-[163px] h-[25px] flex items-center justify-center font-sans font-medium text-[20px] leading-none">
                 View all products
               </span>
-              <ArrowRight className="w-6 h-6 text-[#1D493E] shrink-0" />
+              <ArrowRight className="w-6 h-6 text-[#1D493E] shrink-0 group-hover:translate-x-1 transition-transform duration-300" />
             </Link>
           </div>
         </div>
@@ -1583,7 +1583,7 @@ export default function Homepage() {
             <div className="shrink-0 pb-1">
               <Link 
                 href="/shop"
-                className="inline-flex items-center justify-center w-[275px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[4px] bg-transparent text-[#1D493E] hover:opacity-80 transition-all duration-300 cursor-pointer group"
+                className="inline-flex items-center justify-center w-[275px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[8px] bg-transparent hover:bg-gray-100/90 text-[#1D493E] transition-all duration-300 cursor-pointer group"
               >
                 <span className="w-[163px] h-[25px] flex items-center justify-center font-sans font-medium text-[20px] leading-none">
                   View all products
@@ -1596,7 +1596,7 @@ export default function Homepage() {
                   strokeWidth="2.25" 
                   strokeLinecap="round" 
                   strokeLinejoin="round"
-                  className="shrink-0"
+                  className="shrink-0 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300"
                 >
                   <path d="M7 17l2.5-2.5" />
                   <path d="M12.5 11.5L17 7" />
@@ -1852,7 +1852,7 @@ export default function Homepage() {
             <div className="pt-2">
               <Link 
                 href="/about" 
-                className="inline-flex items-center justify-center w-[204px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[4px] bg-[#1D493E] hover:bg-[#15342c] text-white font-sans font-bold transition-all duration-300 shadow-sm cursor-pointer"
+                className="inline-flex items-center justify-center w-[204px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[4px] bg-[#1D493E] hover:bg-[#15342c] text-white font-sans font-bold transition-all duration-300 shadow-sm cursor-pointer group"
               >
                 <span>Our Story</span>
                 <svg 
@@ -1863,7 +1863,7 @@ export default function Homepage() {
                   strokeWidth="2.25" 
                   strokeLinecap="round" 
                   strokeLinejoin="round"
-                  className="shrink-0"
+                  className="shrink-0 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300"
                 >
                   <path d="M7 17l2.5-2.5" />
                   <path d="M12.5 11.5L17 7" />
@@ -2241,12 +2241,12 @@ export default function Homepage() {
           <div className="text-center h-[68px] flex items-center justify-center shrink-0">
             <Link 
               href="/blog" 
-              className="inline-flex items-center justify-center w-[185px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[4px] bg-transparent text-[#1D493E] hover:opacity-80 transition-all duration-300 cursor-pointer group"
+              className="inline-flex items-center justify-center w-[185px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[8px] bg-transparent hover:bg-gray-100/90 text-[#1D493E] transition-all duration-300 cursor-pointer group"
             >
               <span className="font-sans font-medium text-sm sm:text-base md:text-[20px] leading-none whitespace-nowrap">
                 View all
               </span>
-              <ArrowUpRight className="w-[24px] h-[24px] shrink-0" strokeWidth={2} />
+              <ArrowUpRight className="w-[24px] h-[24px] shrink-0 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" strokeWidth={2} />
             </Link>
           </div>
         </div>

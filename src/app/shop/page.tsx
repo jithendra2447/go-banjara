@@ -205,10 +205,10 @@ export default function ShopPage() {
           <div className="flex justify-center pt-0">
             <Link
               href="/shop/all"
-              className="flex items-center gap-1.5 text-xs sm:text-sm font-extrabold uppercase tracking-widest text-[#1D493E] hover:text-[#FF5B37] transition-colors duration-300 group"
+              className="flex items-center gap-1.5 text-xs sm:text-sm font-extrabold uppercase tracking-widest text-[#1D493E] hover:opacity-80 transition-opacity duration-300 group"
             >
               <span>View all products</span>
-              <span className="text-base font-semibold group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300">↗</span>
+              <span className="text-base font-semibold group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300">↗</span>
             </Link>
           </div>
         </div>
@@ -324,10 +324,10 @@ export default function ShopPage() {
           <div className="flex justify-center pt-0">
             <Link
               href="/shop/discount-sale"
-              className="flex items-center gap-1.5 text-xs sm:text-sm font-extrabold uppercase tracking-widest text-[#1D493E] hover:text-[#FF5B37] transition-colors duration-300 group"
+              className="flex items-center gap-1.5 text-xs sm:text-sm font-extrabold uppercase tracking-widest text-[#1D493E] hover:opacity-80 transition-opacity duration-300 group"
             >
               <span>View all products</span>
-              <span className="text-base font-semibold group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300">↗</span>
+              <span className="text-base font-semibold group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300">↗</span>
             </Link>
           </div>
         </div>

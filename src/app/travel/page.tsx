@@ -334,7 +334,7 @@ export default function HolidaysPortal() {
   const featuredTour = packages.find(p => p.id === 'pkg-kashmir-classic') || packages[0];
 
   return (
-    <div className="min-h-screen bg-white text-[#1D493E] font-sans antialiased pb-20 relative">
+    <div className="min-h-screen bg-white text-[#1D493E] font-sans antialiased pb-0 relative">
       
       {/* Header Section wrapper */}
       <div
@@ -349,7 +349,7 @@ export default function HolidaysPortal() {
           justifyContent: "center",
           alignItems: "center",
         }}
-        className="px-6 md:px-20 pt-[62px] pb-[24px]"
+        className="px-4 sm:px-6 md:px-20 pt-6 sm:pt-[62px] pb-4 sm:pb-[24px]"
       >
         {/* Header Title block */}
         <div 
@@ -360,10 +360,10 @@ export default function HolidaysPortal() {
             flexDirection: "column",
             alignItems: "center",
             margin: "0 auto",
-            gap: "16px",
+            gap: "12px",
           }}
         >
-          <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
+          <span className="inline-flex items-center justify-center h-[24px] sm:h-[26px] w-fit text-[10px] sm:text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-2.5 sm:px-3 rounded-[4px]">
             CAPTURED MEMORIES
           </span>
           <h1 
@@ -375,7 +375,7 @@ export default function HolidaysPortal() {
               color: "rgba(29, 73, 62, 1)",
               margin: 0,
             }}
-            className="text-3xl md:text-[42px] leading-tight"
+            className="text-xl sm:text-3xl md:text-[42px] leading-tight"
           >
             Capture your adventurous travel&nbsp;<span style={{ color: "rgba(255, 98, 62, 1)", fontWeight: 600 }}>Forever</span>
           </h1>
@@ -390,7 +390,7 @@ export default function HolidaysPortal() {
               color: "rgba(43, 43, 43, 1)",
               margin: 0,
             }}
-            className="text-sm sm:text-base md:text-[20px] leading-relaxed md:leading-[32px]"
+            className="text-xs sm:text-base md:text-[20px] leading-relaxed md:leading-[32px]"
           >
             Curated journeys for the modern nomad, designed to push boundaries and discover India's hidden heart
           </p>
@@ -398,9 +398,9 @@ export default function HolidaysPortal() {
       </div>
 
       {/* 1. AVAILABLE PACKAGES CONTENT SECTION */}
-      <section id="available-packages" className="max-w-[1440px] mx-auto px-5 md:px-[80px] pt-10 pb-12 space-y-10">
+      <section id="available-packages" className="max-w-[1440px] mx-auto px-3 sm:px-6 md:px-[80px] pt-4 sm:pt-10 pb-8 sm:pb-12 space-y-6 sm:space-y-10">
 
-        {/* SEARCH WIDGET CARD (Spans full width, styled to match exact Figma specs) */}
+        {/* SEARCH WIDGET CARD */}
         <div 
           style={{
             width: "100%",
@@ -408,13 +408,12 @@ export default function HolidaysPortal() {
             borderRadius: "12px",
             border: "1px solid rgba(255, 98, 62, 1)",
             boxShadow: "0px 4px 12px 0px rgba(255, 98, 62, 0.24)",
-            padding: "24px",
             background: "rgba(255, 255, 255, 1)",
             boxSizing: "border-box",
             marginLeft: "auto",
             marginRight: "auto",
           }}
-          className="text-left relative z-30 h-auto"
+          className="text-left relative z-30 h-auto p-3.5 sm:p-6"
         >
           <div className="w-full flex flex-col md:flex-row gap-6 items-stretch md:items-center">
             
@@ -1402,88 +1401,67 @@ export default function HolidaysPortal() {
 
       </section>
 
-      {/* 2. HOW TO BOOK YOUR TOUR SECTION (1440x806px) */}
+      {/* 2. HOW TO BOOK YOUR TOUR SECTION */}
       <section 
         style={{
           width: "100%",
           maxWidth: "1440px",
-          height: "806px",
-          paddingTop: "42px",
-          paddingRight: "80px",
-          paddingBottom: "42px",
-          paddingLeft: "80px",
-          display: "flex",
-          flexDirection: "column",
-          gap: "32px",
           backgroundColor: "rgba(255, 255, 255, 1)",
           boxSizing: "border-box",
           margin: "0 auto",
           position: "relative",
           zIndex: 10
         }}
+        className="py-8 sm:py-[42px] px-4 sm:px-8 md:px-[80px] flex flex-col gap-6 sm:gap-8 h-auto min-h-fit"
       >
         <div 
           style={{
             width: "100%",
             maxWidth: "1280px",
-            height: "100%",
             margin: "0 auto",
             display: "flex",
             flexDirection: "column",
-            gap: "32px",
             boxSizing: "border-box"
           }}
+          className="gap-6 sm:gap-8 h-auto"
         >
           
-          {/* Header block (1280x134px, space-between) */}
+          {/* Header block */}
           <div 
             style={{
               width: "100%",
               maxWidth: "1280px",
-              height: "134px",
               display: "flex",
               flexDirection: "column",
-              justifyContent: "space-between",
               alignItems: "center",
               margin: "0 auto",
               boxSizing: "border-box"
             }}
+            className="gap-2 sm:gap-4 h-auto text-center"
           >
-            <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
+            <span className="inline-flex items-center justify-center h-[24px] sm:h-[26px] w-fit text-[10px] sm:text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-2.5 sm:px-3 rounded-[4px]">
               DISCOVER YOUR PATH
             </span>
             <h2 
               style={{
-                width: "100%",
-                maxWidth: "1280px",
-                height: "52px",
                 fontFamily: "'Fraunces', serif",
                 fontWeight: 600,
-                fontSize: "42px",
-                lineHeight: "52px",
                 letterSpacing: "0px",
                 color: "#1D493E",
-                textAlign: "center",
                 margin: 0,
-                boxSizing: "border-box"
               }}
+              className="text-xl sm:text-3xl md:text-[42px] leading-tight text-center w-full"
             >
               How to book your <span style={{ color: "rgba(255, 98, 62, 1)", fontWeight: 600 }}>Tour</span>
             </h2>
             <p 
               style={{
-                width: "100%",
-                maxWidth: "1280px",
-                height: "32px",
                 fontFamily: "'Faktum', 'Outfit', sans-serif",
-                fontSize: "24px",
-                lineHeight: "32px",
                 color: "rgba(43, 43, 43, 1)",
                 margin: 0,
                 fontWeight: 500,
-                textAlign: "center",
-                boxSizing: "border-box"
               }}
+              className="text-xs sm:text-base md:text-[24px] leading-relaxed text-center w-full max-w-[1280px]"
             >
               Curated journeys for the modern nomad, designed to push boundaries and discover India's hidden heart
             </p>
@@ -1493,30 +1471,22 @@ export default function HolidaysPortal() {
             style={{
               width: "100%",
               maxWidth: "1280px",
-              height: "556px",
-              display: "grid",
-              gridTemplateColumns: "repeat(2, 1fr)",
-              gap: "32px",
-              alignItems: "center",
               boxSizing: "border-box"
             }}
+            className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 items-center h-auto"
           >
             
-            {/* Left side: Large featured Srinagar to Leh Card matching Figma */}
+            {/* Left side: Large featured Srinagar to Leh Card */}
             <Link 
               href="/travel/srinagar-to-leh" 
               style={{
-                display: "block",
-                width: "100%",
-                maxWidth: "624px",
-                height: "556px",
                 borderRadius: "16px",
                 overflow: "hidden",
                 border: "1px solid rgba(0,0,0,0.1)",
                 position: "relative",
                 boxSizing: "border-box"
               }}
-              className="group"
+              className="group relative w-full max-w-[624px] h-[340px] sm:h-[450px] md:h-[556px] shadow-md mx-auto block text-left"
             >
               <img 
                 src="/travel-leh-2.jpg" 
@@ -1525,31 +1495,22 @@ export default function HolidaysPortal() {
               />
 
               {/* Best Seller red badge */}
-              <div className="absolute top-6 left-6 bg-[#FF623E] text-white font-bold text-[10px] px-3.5 py-1.5 rounded-xs shadow-md uppercase tracking-wider z-10">
+              <div className="absolute top-4 left-4 sm:top-6 sm:left-6 bg-[#FF623E] text-white font-bold text-[9px] sm:text-[10px] px-2.5 py-1 sm:px-3.5 sm:py-1.5 rounded-xs shadow-md uppercase tracking-wider z-10">
                 Best Seller
               </div>
 
-               {/* Card overlay details with bottom container matching Figma */}
+               {/* Card overlay details */}
               <div 
                 style={{
-                  position: "absolute",
-                  bottom: "16px",
-                  left: "16px",
-                  width: "592px",
-                  height: "135px",
-                  background: "rgba(255, 255, 255, 0.1)",
+                  background: "rgba(255, 255, 255, 0.15)",
                   backdropFilter: "blur(12px)",
                   WebkitBackdropFilter: "blur(12px)",
                   borderRadius: "4px",
-                  padding: "12px",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "10px",
                   border: "1px solid rgba(255, 255, 255, 0.2)",
                   boxSizing: "border-box",
                   textShadow: "0 1px 2px rgba(0, 0, 0, 0.4)",
                 }}
-                className="text-left"
+                className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 p-3 sm:p-4 flex flex-col gap-1.5 sm:gap-2 text-left"
               >
                 <div 
                   style={{ 
@@ -1563,10 +1524,10 @@ export default function HolidaysPortal() {
                     style={{
                       fontFamily: "'Faktum', 'Outfit', sans-serif",
                       fontWeight: 600,
-                      fontSize: "24px",
                       lineHeight: "1",
                       margin: 0,
                     }}
+                    className="text-base sm:text-xl md:text-[24px]"
                   >
                     Srinagar to Leh
                   </h3>
@@ -1574,9 +1535,9 @@ export default function HolidaysPortal() {
                     style={{
                       fontFamily: "'Faktum', 'Outfit', sans-serif",
                       fontWeight: 600,
-                      fontSize: "24px",
                       lineHeight: "1",
                     }}
+                    className="text-sm sm:text-xl md:text-[24px]"
                   >
                     ₹22,900/Person
                   </span>
@@ -1585,29 +1546,24 @@ export default function HolidaysPortal() {
                   style={{
                     fontFamily: "'Faktum', 'Outfit', sans-serif",
                     fontWeight: 500,
-                    fontSize: "18px",
-                    lineHeight: "26px",
                     color: "#FFFFFF",
                     margin: 0,
                   }}
+                  className="text-xs sm:text-base md:text-[18px] leading-snug sm:leading-[26px]"
                 >
                   Experience the iconic highway journey crossing high mountain passes and sapphire lakes.
                 </p>
               </div>
             </Link>
 
-            {/* Right side: 4 step list matching Figma */}
+            {/* Right side: 4 step list */}
             <div 
               style={{
                 width: "100%",
                 maxWidth: "624px",
-                height: "556px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
                 boxSizing: "border-box"
               }}
-              className="text-left"
+              className="text-left flex flex-col gap-4 sm:gap-6 justify-between h-auto"
             >
               {[
                 { num: '01', title: 'Choose a package', desc: 'Select the best tour package that matches your schedule and lifestyle' },
@@ -1618,82 +1574,56 @@ export default function HolidaysPortal() {
                 <div 
                   key={step.num} 
                   style={{
-                    width: "624px",
-                    height: "115px",
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "flex-start",
-                    gap: "24px",
+                    width: "100%",
                     boxSizing: "border-box"
                   }}
+                  className="flex flex-row items-start gap-3 sm:gap-6"
                 >
                   <div 
                     style={{
-                      width: "88px",
-                      height: "86px",
                       backgroundColor: "#FAF9F6",
                       border: "1px solid rgba(0,0,0,0.06)",
                       borderRadius: "4px",
-                      padding: "24px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      flexShrink: 0,
                       boxSizing: "border-box"
                     }}
+                    className="w-11 h-11 sm:w-[88px] sm:h-[86px] p-2 sm:p-6 flex items-center justify-center shrink-0"
                   >
                     <span
                       style={{
-                        width: "40px",
-                        height: "38px",
                         fontFamily: "'Fragment Mono SC', 'Fragment Mono', 'Courier New', monospace",
                         fontWeight: 400,
-                        fontSize: "32px",
-                        lineHeight: "32px",
                         color: "rgba(43, 43, 43, 1)",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
                       }}
+                      className="text-base sm:text-[32px] leading-none"
                     >
                       {step.num}
                     </span>
                   </div>
                   <div 
                     style={{
-                      width: "512px",
-                      height: "115px",
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "space-between",
                       boxSizing: "border-box"
                     }}
+                    className="flex-1 flex flex-col justify-between gap-1 sm:gap-2"
                   >
                     <h4 
                       style={{
-                        width: "512px",
-                        height: "39px",
                         fontFamily: "'Fraunces', serif",
                         fontWeight: 600,
-                        fontSize: "32px",
-                        lineHeight: "39px",
                         color: "rgba(43, 43, 43, 1)",
                         margin: 0,
                       }}
+                      className="text-base sm:text-2xl md:text-[32px] leading-tight"
                     >
                       {step.title}
                     </h4>
                     <p 
                       style={{
-                        width: "512px",
-                        height: "64px",
                         fontFamily: "'Faktum', 'Outfit', sans-serif",
                         fontWeight: 500,
-                        fontSize: "20px",
-                        lineHeight: "32px",
                         color: "rgba(43, 43, 43, 1)",
                         margin: 0,
                       }}
+                      className="text-xs sm:text-base md:text-[20px] leading-relaxed"
                     >
                       {step.desc}
                     </p>
@@ -1707,135 +1637,82 @@ export default function HolidaysPortal() {
         </div>
       </section>
 
-      {/* 3. CAPTURED MEMORIES TESTIMONIALS SECTION (1440x912.5px) */}
+      {/* 3. CAPTURED MEMORIES TESTIMONIALS SECTION */}
       <section 
         style={{
           width: "100%",
           maxWidth: "1440px",
-          height: "912.5px",
-          paddingTop: "42px",
-          paddingRight: "80px",
-          paddingBottom: "42px",
-          paddingLeft: "80px",
-          display: "flex",
-          flexDirection: "column",
-          gap: "32px",
           backgroundColor: "rgba(255, 255, 255, 1)",
           boxSizing: "border-box",
           margin: "0 auto",
           position: "relative",
           zIndex: 10
         }}
+        className="py-8 sm:py-[42px] px-4 sm:px-8 md:px-[80px] flex flex-col gap-6 sm:gap-8 h-auto min-h-fit"
       >
         <div 
           style={{
             width: "100%",
             maxWidth: "1280px",
-            height: "100%",
             margin: "0 auto",
             display: "flex",
             flexDirection: "column",
-            gap: "32px",
             boxSizing: "border-box"
           }}
+          className="gap-4 sm:gap-8 h-auto"
         >
           
-          {/* Header block (1280x134px, space-between, left-aligned) */}
+          {/* Header block */}
           <div 
             style={{
               width: "100%",
               maxWidth: "1280px",
-              height: "134px",
               display: "flex",
               flexDirection: "column",
-              justifyContent: "space-between",
               alignItems: "flex-start",
               margin: "0 auto",
               boxSizing: "border-box"
             }}
+            className="gap-2 sm:gap-4 h-auto text-left"
           >
-            <div 
-              style={{
-                width: "185px",
-                height: "26px",
-                backgroundColor: "rgba(255, 98, 62, 0.08)",
-                borderRadius: "4px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                boxSizing: "border-box",
-                flexShrink: 0
-              }}
-            >
-              <span 
-                style={{
-                  width: "177px",
-                  height: "18px",
-                  fontFamily: "'Faktum', 'Outfit', sans-serif",
-                  color: "rgba(255, 98, 62, 1)",
-                  fontWeight: 600,
-                  fontSize: "14px",
-                  lineHeight: "18px",
-                  textTransform: "uppercase",
-                  letterSpacing: "1.2px",
-                  textAlign: "center",
-                  margin: 0,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  boxSizing: "border-box"
-                }}
-              >
-                CAPTURED MEMORIES
-              </span>
-            </div>
+            <span className="inline-flex items-center justify-center h-[24px] sm:h-[26px] w-fit text-[10px] sm:text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-2.5 sm:px-3 rounded-[4px]">
+              CAPTURED MEMORIES
+            </span>
             <h2 
               style={{
-                width: "100%",
-                maxWidth: "1280px",
-                height: "52px",
                 fontFamily: "'Fraunces', serif",
                 fontWeight: 600,
-                fontSize: "42px",
-                lineHeight: "52px",
                 letterSpacing: "0px",
                 color: "#1D493E",
-                textAlign: "left",
                 margin: 0,
-                boxSizing: "border-box"
               }}
+              className="text-xl sm:text-3xl md:text-[42px] leading-tight text-left w-full"
             >
               Capture your adventurous travel <span style={{ color: "rgba(255, 98, 62, 1)", fontWeight: 600 }}>Forever</span>
             </h2>
             <p 
               style={{
-                width: "100%",
-                maxWidth: "1280px",
-                height: "32px",
                 fontFamily: "'Faktum', 'Outfit', sans-serif",
-                fontSize: "24px",
-                lineHeight: "32px",
                 color: "rgba(43, 43, 43, 1)",
                 margin: 0,
                 fontWeight: 500,
-                textAlign: "left",
-                boxSizing: "border-box"
               }}
+              className="text-xs sm:text-base md:text-[24px] leading-relaxed text-left w-full max-w-[1280px]"
             >
               Curated journeys for the modern nomad, designed to push boundaries and discover India's hidden heart
             </p>
           </div>
 
-          {/* Reviews Container Wrapper (1558px x 662.5px spec with Linear Gradient Overlay & 2 Stacked Marquees) */}
+          {/* Reviews Container Wrapper */}
           <div 
             style={{
-              width: "1558px",
-              maxWidth: "100%",
-              minHeight: "662.5px",
+              width: "100%",
+              maxWidth: "1558px",
               position: "relative",
               overflow: "hidden",
               margin: "0 auto"
             }}
+            className="py-2 h-auto min-h-fit"
           >
             {/* Linear Gradient Fade Overlay */}
             <div 
@@ -1911,42 +1788,38 @@ export default function HolidaysPortal() {
         </div>
       </section>
 
-      {/* 3.5 FAQ ACCORDION SECTION (Matching Blog page fonts and styles) */}
+      {/* 3.5 FAQ ACCORDION SECTION */}
       <section
         style={{
           width: '100%',
           maxWidth: '1440px',
           margin: '0 auto',
-          paddingTop: '42px',
-          paddingBottom: '42px',
-          paddingLeft: '80px',
-          paddingRight: '80px',
           background: 'rgba(255, 255, 255, 1)',
           boxSizing: 'border-box',
           display: 'flex',
           flexDirection: 'column',
-          gap: '24px',
         }}
+        className="py-6 sm:py-10 md:py-14 px-4 sm:px-8 md:px-[80px] gap-4 sm:gap-6 border-t border-slate-200/60"
       >
         {/* Header */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           {/* Label */}
           <span
             style={{
               fontFamily: 'Faktum, var(--font-sans), sans-serif',
               fontWeight: 600,
-              fontSize: '14px',
+              fontSize: '10px',
               lineHeight: '100%',
-              letterSpacing: '1.2px',
+              letterSpacing: '1px',
               textTransform: 'uppercase',
               color: 'rgba(255, 98, 62, 1)',
               background: 'rgba(255, 98, 62, 0.1)',
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
-              height: '28px',
-              padding: '0 16px',
-              borderRadius: '4px',
+              height: '24px',
+              padding: '0 10px',
+              borderRadius: '2px',
               width: 'fit-content',
             }}
           >
@@ -1958,28 +1831,24 @@ export default function HolidaysPortal() {
             style={{
               fontFamily: 'Fraunces, Georgia, serif',
               fontWeight: 600,
-              fontSize: '42px',
-              lineHeight: '100%',
               letterSpacing: '0px',
               color: 'rgba(43, 43, 43, 1)',
               margin: 0,
             }}
+            className="text-lg sm:text-2xl md:text-[42px] font-semibold text-[#2B2B2B]"
           >
             Frequently asked questions
           </h2>
         </div>
 
         {/* Accordion */}
-        <div style={{ width: '100%', display: 'flex', flexDirection: 'column', borderTop: '1px solid rgba(204, 204, 204, 1)' }}>
+        <div style={{ width: '100%', display: 'flex', flexDirection: 'column', borderTop: '1px solid rgba(204, 204, 204, 0.6)' }}>
           {FAQ_ITEMS.map((item, idx) => {
             const isOpen = openFaqIndex === idx;
             return (
               <div
                 key={idx}
-                style={{
-                  width: '100%',
-                  borderBottom: '1px solid rgba(204, 204, 204, 1)',
-                }}
+                className="py-3 sm:py-4 border-b border-slate-200/60 w-full flex flex-col"
               >
                 <button
                   onClick={() => toggleFaq(idx)}
@@ -1988,45 +1857,36 @@ export default function HolidaysPortal() {
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
-                    padding: '20px 0',
                     background: 'none',
                     border: 'none',
+                    padding: 0,
                     cursor: 'pointer',
                     textAlign: 'left',
-                    gap: '16px',
+                    gap: '12px',
                   }}
                 >
                   <span
                     style={{
                       fontFamily: 'Faktum, var(--font-sans), sans-serif',
-                      fontWeight: 500,
-                      fontSize: '20px',
-                      lineHeight: '32px',
                       color: 'rgba(43, 43, 43, 1)',
-                      flex: 1,
-                      maxWidth: '1196px',
                     }}
+                    className="text-xs sm:text-base md:text-[20px] font-medium leading-snug flex-1"
                   >
                     {item.question}
                   </span>
                   {isOpen ? (
-                    <span style={{ fontSize: '24px', fontWeight: 600, color: 'rgba(255, 98, 62, 1)', flexShrink: 0, lineHeight: 1 }}>−</span>
+                    <span style={{ fontWeight: 600, color: 'rgba(255, 98, 62, 1)', flexShrink: 0, lineHeight: 1 }} className="text-base sm:text-2xl">−</span>
                   ) : (
-                    <span style={{ fontSize: '24px', fontWeight: 600, color: 'rgba(29, 73, 62, 1)', flexShrink: 0, lineHeight: 1 }}>+</span>
+                    <span style={{ fontWeight: 600, color: 'rgba(29, 73, 62, 1)', flexShrink: 0, lineHeight: 1 }} className="text-base sm:text-2xl">+</span>
                   )}
                 </button>
                 {isOpen && (
                   <p
                     style={{
                       fontFamily: 'Faktum, var(--font-sans), sans-serif',
-                      fontWeight: 500,
-                      fontSize: '20px',
-                      lineHeight: '32px',
                       color: 'rgba(141, 141, 141, 1)',
-                      margin: 0,
-                      maxWidth: '1196px',
-                      paddingBottom: '20px',
                     }}
+                    className="text-xs sm:text-sm md:text-[20px] leading-relaxed mt-2"
                   >
                     {item.answer}
                   </p>
@@ -2037,16 +1897,14 @@ export default function HolidaysPortal() {
         </div>
       </section>
 
-      {/* 3.7 NEWSLETTER / CTA SECTION (Matching Home page fonts and styles) */}
+      {/* 3.7 NEWSLETTER / CTA SECTION */}
       <section
         style={{
           width: "100%",
-          paddingTop: "42px",
-          paddingBottom: "42px",
           background: "#FFFFFF",
           borderTop: "1px solid rgba(29, 73, 62, 0.1)",
         }}
-        className="relative z-10 px-6 md:px-20"
+        className="relative z-10 py-6 sm:py-10 md:py-14 px-4 sm:px-8 md:px-20 text-center"
       >
         <div
           style={{
@@ -2055,25 +1913,23 @@ export default function HolidaysPortal() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            gap: "32px",
             textAlign: "center",
           }}
+          className="gap-4 sm:gap-7 w-full"
         >
           {/* Text block */}
-          <div className="flex flex-col items-center gap-[12px] w-full">
+          <div className="flex flex-col items-center gap-2 sm:gap-3 w-full">
             {/* Heading */}
             <h2
               style={{
                 fontFamily: "Fraunces, serif",
-                fontWeight: 600,
-                lineHeight: "1.2",
                 letterSpacing: "0px",
                 textAlign: "center",
                 color: "#2B2B2B",
                 maxWidth: "1280px",
                 margin: 0,
               }}
-              className="text-2xl sm:text-3xl md:text-[42px]"
+              className="text-lg sm:text-2xl md:text-[42px] font-semibold leading-tight"
             >
               The{" "}
               <span style={{ color: "#FF5A36" }}>best adventures</span>{" "}
@@ -2083,14 +1939,13 @@ export default function HolidaysPortal() {
             <p
               style={{
                 fontFamily: "Faktum, sans-serif",
-                fontWeight: 500,
                 letterSpacing: "0px",
                 textAlign: "center",
-                color: "rgba(43, 43, 43, 1)",
+                color: "rgba(43, 43, 43, 0.8)",
                 maxWidth: "1280px",
                 margin: 0,
               }}
-              className="text-sm sm:text-base md:text-[20px] leading-relaxed md:leading-[32px] md:whitespace-nowrap"
+              className="text-xs sm:text-sm md:text-[20px] leading-relaxed"
             >
               Hidden places, exclusive trip drops, curated gear, and stories from the road delivered before anyone else hears about them.
             </p>
@@ -2104,25 +1959,10 @@ export default function HolidaysPortal() {
                 bookingEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
               }
             }}
-            style={{
-              height: "55px",
-              padding: "18px 36px",
-              gap: "8px",
-              borderRadius: "4px",
-              background: "#1D493E",
-              color: "#FFFFFF",
-              fontFamily: "'Faktum', 'Outfit', sans-serif",
-              fontWeight: 500,
-              fontSize: "18px",
-              lineHeight: "100%",
-              letterSpacing: "0px",
-              border: "none",
-              cursor: "pointer",
-            }}
-            className="group hover:bg-[#15342c] transition-all duration-300 inline-flex items-center justify-center gap-2 w-full max-w-[286px]"
+            className="w-full max-w-[280px] h-10 sm:h-[55px] rounded-[4px] bg-[#1D493E] text-white flex items-center justify-center gap-2 hover:bg-[#15342c] transition-all duration-300 text-xs sm:text-base font-semibold shadow-xs border-none cursor-pointer group"
           >
             <span>Reserve your tour now</span>
-            <span className="text-lg font-sans group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300">↗</span>
+            <span className="text-sm sm:text-lg font-sans group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300">↗</span>
           </button>
         </div>
       </section>

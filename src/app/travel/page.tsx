@@ -1258,10 +1258,10 @@ export default function HolidaysPortal() {
                         width: "100%",
                         maxWidth: "405.33px",
                         display: "flex", 
-                        gap: "8px",
+                        gap: "6px",
                         boxSizing: "border-box"
                       }}
-                      className="h-[40px] sm:h-[55px]"
+                      className="h-[36px] sm:h-[55px]"
                     >
                       <button
                         type="button"
@@ -1278,7 +1278,7 @@ export default function HolidaysPortal() {
                           border: "none",
                           cursor: "pointer",
                         }}
-                        className="h-full text-xs sm:text-[16px] hover:bg-[#15342c] transition-colors duration-300"
+                        className="h-full text-[10px] sm:text-[16px] whitespace-nowrap px-1 hover:bg-[#15342c] transition-colors duration-300 flex items-center justify-center"
                       >
                         Book Now
                       </button>
@@ -1298,7 +1298,7 @@ export default function HolidaysPortal() {
                           justifyContent: "center",
                           textDecoration: "none",
                         }}
-                        className="h-full text-xs sm:text-[16px] bg-white text-[#1D493E] hover:bg-[#EEF2F1] transition-colors duration-300"
+                        className="h-full text-[10px] sm:text-[16px] whitespace-nowrap px-1 bg-white text-[#1D493E] hover:bg-[#EEF2F1] transition-colors duration-300"
                       >
                         Get details
                       </Link>

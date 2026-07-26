@@ -922,10 +922,10 @@ export default function Homepage() {
             </h2>
             <Link 
               href="/travel" 
-              className="w-10 h-10 rounded-full bg-[#1D493E] text-white flex items-center justify-center hover:opacity-90 transition shrink-0"
-              aria-label="Explore all destinations"
+              className="w-10 h-10 rounded-full bg-[#1D493E] text-white flex items-center justify-center hover:opacity-90 transition shrink-0 group"
+              aria-label="View all packages"
             >
-              <ArrowRight className="w-5 h-5 text-white" />
+              <ArrowUpRight className="w-5 h-5 text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
             </Link>
           </div>
 
@@ -1206,10 +1206,10 @@ export default function Homepage() {
             </h2>
             <Link 
               href="/shop" 
-              className="w-10 h-10 rounded-full bg-[#1D493E] text-white flex items-center justify-center hover:opacity-90 transition shrink-0"
+              className="w-10 h-10 rounded-full bg-[#1D493E] text-white flex items-center justify-center hover:opacity-90 transition shrink-0 group"
               aria-label="View all products"
             >
-              <ArrowRight className="w-5 h-5 text-white" />
+              <ArrowUpRight className="w-5 h-5 text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
             </Link>
           </div>
 
@@ -1488,7 +1488,20 @@ export default function Homepage() {
               <span className="w-[163px] h-[25px] flex items-center justify-center font-sans font-medium text-[20px] leading-none">
                 View all products
               </span>
-              <ArrowRight className="w-6 h-6 text-[#1D493E] shrink-0 group-hover:translate-x-1 transition-transform duration-300" />
+              <svg 
+                style={{ width: '32px', height: '32px' }}
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2.25" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+                className="shrink-0 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300"
+              >
+                <path d="M7 17l2.5-2.5" />
+                <path d="M12.5 11.5L17 7" />
+                <path d="M7 7h10v10" />
+              </svg>
             </Link>
           </div>
         </div>
@@ -1502,10 +1515,10 @@ export default function Homepage() {
             </h2>
             <Link 
               href="/shop"
+              className="w-[30px] h-[30px] rounded-full bg-[#1D493E] text-white flex items-center justify-center hover:scale-105 active:scale-95 transition shrink-0 group"
               aria-label="View all products"
-              className="w-[30px] h-[30px] rounded-full bg-[#1D493E] text-white flex items-center justify-center hover:scale-105 active:scale-95 transition shrink-0"
             >
-              <ArrowRight className="w-4 h-4 text-white" />
+              <ArrowUpRight className="w-4 h-4 text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
             </Link>
           </div>
 
@@ -2246,7 +2259,20 @@ export default function Homepage() {
               <span className="font-sans font-medium text-sm sm:text-base md:text-[20px] leading-none whitespace-nowrap">
                 View all
               </span>
-              <ArrowUpRight className="w-[24px] h-[24px] shrink-0 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" strokeWidth={2} />
+              <svg 
+                style={{ width: '32px', height: '32px' }}
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2.25" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+                className="shrink-0 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300"
+              >
+                <path d="M7 17l2.5-2.5" />
+                <path d="M12.5 11.5L17 7" />
+                <path d="M7 7h10v10" />
+              </svg>
             </Link>
           </div>
         </div>

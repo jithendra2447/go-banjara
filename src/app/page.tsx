@@ -11,6 +11,7 @@ import { HOLIDAY_PACKAGES } from '@/data/packages';
 import { PRODUCTS } from '@/data/products';
 import { BonjoMascot } from '@/components/BonjoMascot';
 import { CartIcon } from '@/components/CartIcon';
+import { InteractiveProgressBar } from '@/components/InteractiveProgressBar';
 import { getFutureDeliveryString } from '@/utils/dateUtils';
 
 // Static Blog/Diaries list
@@ -1157,24 +1158,14 @@ export default function Homepage() {
             </Link>
           </div>
 
-          {/* Bottom active state indicator line (Interactive 8px height bar) */}
-          <div 
-            onClick={(e) => {
-              const rect = e.currentTarget.getBoundingClientRect();
-              const clickX = e.clientX - rect.left;
-              const ratio = clickX / rect.width;
-              if (ratio < 0.333) setActiveCategorySlide(0);
-              else if (ratio < 0.666) setActiveCategorySlide(1);
-              else setActiveCategorySlide(2);
-            }}
-            className="w-full h-[8px] bg-gray-200 relative rounded-full overflow-hidden mt-6 cursor-pointer group transition-all duration-300 shadow-inner"
-            title="Click to interact and select category"
-          >
-            <div 
-              style={{ left: `${(activeCategorySlide % 3) * 33.333}%` }}
-              className="absolute top-0 h-full w-[33.333%] bg-[#1D493E] rounded-full transition-all duration-300 ease-out" 
-            />
-          </div>
+          {/* Bottom active state indicator line (Interactive Full-Width Bar) */}
+          <InteractiveProgressBar
+            totalSlides={3}
+            activeSlide={activeCategorySlide}
+            onSlideChange={(newIdx) => setActiveCategorySlide(newIdx)}
+            className="mt-6"
+            title="Click or drag to switch category"
+          />
         </div>
 
         {/* Mobile View (Figma Specs: w-430, height 311, padding 12px 20px, gap 12px, 8 dots below) */}
@@ -1231,25 +1222,13 @@ export default function Homepage() {
 
                 {/* Horizontal Progress Bar Indicator & Pagination Dots Below */}
                 <div className="flex flex-col gap-3 mt-3">
-                  <div 
-                    onClick={(e) => {
-                      const rect = e.currentTarget.getBoundingClientRect();
-                      const clickX = e.clientX - rect.left;
-                      const ratio = clickX / rect.width;
-                      const newIdx = Math.min(categories.length - 1, Math.floor(ratio * categories.length));
-                      setActiveCategorySlide(newIdx);
-                    }}
-                    className="w-full h-[6px] bg-gray-200 relative rounded-full overflow-hidden cursor-pointer"
-                    title="Click to select category"
-                  >
-                    <div 
-                      style={{ 
-                        width: `${100 / categories.length}%`,
-                        left: `${((activeCategorySlide % categories.length) / categories.length) * 100}%` 
-                      }}
-                      className="absolute top-0 h-full bg-[#1D493E] rounded-full transition-all duration-300 ease-out" 
-                    />
-                  </div>
+                  <InteractiveProgressBar
+                    totalSlides={categories.length}
+                    activeSlide={activeCategorySlide}
+                    onSlideChange={(newIdx) => setActiveCategorySlide(newIdx)}
+                    height={6}
+                    title="Click or drag to select category"
+                  />
 
                   <div className="flex items-center justify-center gap-1.5">
                     {categories.map((cat, idx) => (
@@ -1453,39 +1432,14 @@ export default function Homepage() {
             })}
           </div>
 
-          {/* Horizontal Progress Bar Indicator Line (Interactive Click & Drag) */}
-          <div 
-            onClick={(e) => {
-              const rect = e.currentTarget.getBoundingClientRect();
-              const clickX = e.clientX - rect.left;
-              const ratio = Math.max(0, Math.min(1, clickX / rect.width));
-              const newIdx = Math.min(3, Math.floor(ratio * 4));
-              setActiveDealSlide(newIdx);
-            }}
-            onMouseMove={(e) => {
-              if (e.buttons === 1) {
-                const rect = e.currentTarget.getBoundingClientRect();
-                const clickX = e.clientX - rect.left;
-                const ratio = Math.max(0, Math.min(1, clickX / rect.width));
-                const newIdx = Math.min(3, Math.floor(ratio * 4));
-                setActiveDealSlide(newIdx);
-              }
-            }}
-            onTouchMove={(e) => {
-              const rect = e.currentTarget.getBoundingClientRect();
-              const touchX = e.touches[0].clientX - rect.left;
-              const ratio = Math.max(0, Math.min(1, touchX / rect.width));
-              const newIdx = Math.min(3, Math.floor(ratio * 4));
-              setActiveDealSlide(newIdx);
-            }}
-            className="w-full max-w-[1280px] mx-auto h-[8px] bg-gray-200 relative rounded-full overflow-hidden mt-8 mb-4 cursor-pointer group transition-all duration-300 shadow-inner select-none"
+          {/* Horizontal Progress Bar Indicator Line (Interactive Click & Drag - Full Width) */}
+          <InteractiveProgressBar
+            totalSlides={4}
+            activeSlide={activeDealSlide}
+            onSlideChange={(newIdx) => setActiveDealSlide(newIdx)}
+            className="w-full mt-8 mb-4"
             title="Click or drag to switch active deal product"
-          >
-            <div 
-              style={{ left: `${(activeDealSlide % 4) * 25}%`, width: "25%" }}
-              className="absolute top-0 h-full bg-[#1D493E] rounded-full transition-all duration-300 ease-out pointer-events-none" 
-            />
-          </div>
+          />
 
           {/* View all products footer */}
           <div className="text-center pt-4">

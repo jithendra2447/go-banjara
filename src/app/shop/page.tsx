@@ -8,6 +8,7 @@ import { PRODUCTS } from '@/data/products';
 import { Product } from '@/types';
 import ProductCard from '@/components/ProductCard';
 import { TrustBanner } from '@/components/TrustBanner';
+import { InteractiveProgressBar } from '@/components/InteractiveProgressBar';
 
 const TESTIMONIALS = [
   {
@@ -82,8 +83,11 @@ export default function ShopPage() {
 
   const [productsList, setProductsList] = React.useState<Product[]>(PRODUCTS);
   const [openFaqIdx, setOpenFaqIdx] = React.useState<number | null>(0);
+  const [activeMainGridSlide, setActiveMainGridSlide] = React.useState(0);
   const [activeNewArrivalsSlide, setActiveNewArrivalsSlide] = React.useState(0);
+  const [activeTravelsEssentialsSlide, setActiveTravelsEssentialsSlide] = React.useState(0);
   const [activeLimitedEditionSlide, setActiveLimitedEditionSlide] = React.useState(0);
+  const [activeDiscountSaleSlide, setActiveDiscountSaleSlide] = React.useState(0);
 
   React.useEffect(() => {
     const saved = localStorage.getItem('gb_admin_products_v3');
@@ -196,8 +200,16 @@ export default function ShopPage() {
         
         {/* Main 4x2 product grid directly below the EXPERIENCE THE SHOPPING header */}
         <div style={{ backgroundColor: "white" }} className="py-3 sm:py-[42px] flex flex-col w-full">
-          {renderProductGrid(mainGridProducts.slice(0, 4))}
-          <div className="h-4 sm:h-[62px] shrink-0" />
+          {renderProductGrid(mainGridProducts.slice(0, 4), setActiveMainGridSlide)}
+          <div style={{ height: "24px" }} className="shrink-0" />
+          <InteractiveProgressBar
+            totalSlides={4}
+            activeSlide={activeMainGridSlide}
+            onSlideChange={(newIdx) => setActiveMainGridSlide(newIdx)}
+            className="w-full my-4"
+            title="Click or drag to switch active product"
+          />
+          <div className="h-4 sm:h-[32px] shrink-0" />
           {renderProductGrid(mainGridProducts.slice(4, 8))}
           <div style={{ height: "62px" }} className="shrink-0" />
 
@@ -234,38 +246,13 @@ export default function ShopPage() {
           <div style={{ height: "32px" }} className="shrink-0" />
 
           {/* Interactive Full-Width Progress Bar */}
-          <div 
-            onClick={(e) => {
-              const rect = e.currentTarget.getBoundingClientRect();
-              const clickX = e.clientX - rect.left;
-              const ratio = Math.max(0, Math.min(1, clickX / rect.width));
-              const newIdx = Math.min(3, Math.floor(ratio * 4));
-              setActiveNewArrivalsSlide(newIdx);
-            }}
-            onMouseMove={(e) => {
-              if (e.buttons === 1) {
-                const rect = e.currentTarget.getBoundingClientRect();
-                const clickX = e.clientX - rect.left;
-                const ratio = Math.max(0, Math.min(1, clickX / rect.width));
-                const newIdx = Math.min(3, Math.floor(ratio * 4));
-                setActiveNewArrivalsSlide(newIdx);
-              }
-            }}
-            onTouchMove={(e) => {
-              const rect = e.currentTarget.getBoundingClientRect();
-              const touchX = e.touches[0].clientX - rect.left;
-              const ratio = Math.max(0, Math.min(1, touchX / rect.width));
-              const newIdx = Math.min(3, Math.floor(ratio * 4));
-              setActiveNewArrivalsSlide(newIdx);
-            }}
-            className="w-full max-w-[1280px] mx-auto h-[8px] bg-gray-200 relative rounded-full overflow-hidden cursor-pointer group transition-all duration-300 shadow-inner select-none"
+          <InteractiveProgressBar
+            totalSlides={4}
+            activeSlide={activeNewArrivalsSlide}
+            onSlideChange={(newIdx) => setActiveNewArrivalsSlide(newIdx)}
+            className="w-full"
             title="Click or drag to switch active product"
-          >
-            <div 
-              style={{ left: `${(activeNewArrivalsSlide % 4) * 25}%`, width: "25%" }}
-              className="absolute top-0 h-full bg-[#1D493E] rounded-full transition-all duration-300 ease-out pointer-events-none" 
-            />
-          </div>
+          />
         </div>
 
         {/* Section 2: Travels Essentials */}
@@ -285,8 +272,16 @@ export default function ShopPage() {
           <div style={{ height: "62px" }} className="shrink-0" />
 
           {/* Grid Rows */}
-          {renderProductGrid(travelsEssentials.slice(0, 4))}
-          <div style={{ height: "62px" }} className="shrink-0" />
+          {renderProductGrid(travelsEssentials.slice(0, 4), setActiveTravelsEssentialsSlide)}
+          <div style={{ height: "24px" }} className="shrink-0" />
+          <InteractiveProgressBar
+            totalSlides={4}
+            activeSlide={activeTravelsEssentialsSlide}
+            onSlideChange={(newIdx) => setActiveTravelsEssentialsSlide(newIdx)}
+            className="w-full my-4"
+            title="Click or drag to switch active product"
+          />
+          <div style={{ height: "32px" }} className="shrink-0" />
           {renderProductGrid(travelsEssentials.slice(4, 8))}
           <div style={{ height: "62px" }} className="shrink-0" />
 
@@ -318,13 +313,17 @@ export default function ShopPage() {
           <div style={{ height: "62px" }} className="shrink-0" />
 
           {/* Grid */}
-          {renderProductGrid(limitedEdition)}
-          <div style={{ height: "62px" }} className="shrink-0" />
+          {renderProductGrid(limitedEdition, setActiveLimitedEditionSlide)}
+          <div style={{ height: "32px" }} className="shrink-0" />
 
-          {/* Progress / Scroll Indicator */}
-          <div className="w-full max-w-xs mx-auto h-[3px] bg-[#E2E8F0] rounded-full overflow-hidden">
-            <div className="w-[40%] h-full bg-[#1D493E] rounded-full"></div>
-          </div>
+          {/* Full-Width Interactive Progress Bar */}
+          <InteractiveProgressBar
+            totalSlides={Math.min(4, limitedEdition.length || 4)}
+            activeSlide={activeLimitedEditionSlide}
+            onSlideChange={(newIdx) => setActiveLimitedEditionSlide(newIdx)}
+            className="w-full"
+            title="Click or drag to switch active product"
+          />
         </div>
 
         {/* Section 4: 25% to 50% Discount Sale */}
@@ -344,8 +343,16 @@ export default function ShopPage() {
           <div style={{ height: "62px" }} className="shrink-0" />
 
           {/* Grid Rows */}
-          {renderProductGrid(travelsEssentials.slice(0, 4))}
-          <div style={{ height: "62px" }} className="shrink-0" />
+          {renderProductGrid(travelsEssentials.slice(0, 4), setActiveDiscountSaleSlide)}
+          <div style={{ height: "24px" }} className="shrink-0" />
+          <InteractiveProgressBar
+            totalSlides={4}
+            activeSlide={activeDiscountSaleSlide}
+            onSlideChange={(newIdx) => setActiveDiscountSaleSlide(newIdx)}
+            className="w-full my-4"
+            title="Click or drag to switch active product"
+          />
+          <div style={{ height: "32px" }} className="shrink-0" />
           {renderProductGrid(travelsEssentials.slice(4, 8))}
           <div style={{ height: "62px" }} className="shrink-0" />
 

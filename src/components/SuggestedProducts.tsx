@@ -1,10 +1,11 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import ProductCard from '@/components/ProductCard';
 import { PRODUCTS } from '@/data/products';
 import { useCart } from '@/components/providers';
+import { InteractiveProgressBar } from '@/components/InteractiveProgressBar';
 
 interface SuggestedProductsProps {
   title?: string;
@@ -12,6 +13,7 @@ interface SuggestedProductsProps {
 
 export const SuggestedProducts: React.FC<SuggestedProductsProps> = ({ title }) => {
   const { addToCart } = useCart();
+  const [activeSlide, setActiveSlide] = useState(0);
   const suggestedItems = PRODUCTS.slice(0, 4);
 
   return (
@@ -67,16 +69,24 @@ export const SuggestedProducts: React.FC<SuggestedProductsProps> = ({ title }) =
 
       {/* Products Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
-        {suggestedItems.map((prod) => (
-          <ProductCard 
-            key={prod.id} 
-            product={prod} 
-            onAddToCart={(item) => addToCart(item, 'shop')} 
-          />
+        {suggestedItems.map((prod, idx) => (
+          <div key={prod.id} onMouseEnter={() => setActiveSlide(idx)}>
+            <ProductCard 
+              product={prod} 
+              onAddToCart={(item) => addToCart(item, 'shop')} 
+            />
+          </div>
         ))}
       </div>
 
-
+      {/* Interactive Full-Width Progress Bar */}
+      <InteractiveProgressBar
+        totalSlides={suggestedItems.length}
+        activeSlide={activeSlide}
+        onSlideChange={(newIdx) => setActiveSlide(newIdx)}
+        className="w-full mt-8"
+        title="Click or drag to switch active product"
+      />
 
       {/* View All Products Link */}
       <div className="flex justify-center mt-8">

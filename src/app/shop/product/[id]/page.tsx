@@ -223,12 +223,14 @@ export default function ProductDetailsPage() {
     : 16; 
 
   // Check if product is T-Shirt / Clothing / Apparel so size selector is shown ONLY for clothing
-  const isTShirtProduct = Boolean(
-    (product as any).hasSizes ||
-    ((product as any).sizes && (product as any).sizes.length > 0) ||
-    /t-?shirt|tee|apparel|clothing|hoodie|top/i.test(product.category || '') ||
-    /t-?shirt|tee|hoodie/i.test(product.name || '')
-  );
+  const categoryLower = (product?.category || '').toLowerCase();
+  const nameLower = (product?.name || '').toLowerCase();
+  const itemTypeLower = ((product as any)?.itemType || '').toLowerCase();
+
+  const isTShirtProduct = 
+    /t-?shirt|tee|topwear|apparel|clothing|hoodie|top/i.test(categoryLower) ||
+    /t-?shirt|tee|topwear|apparel|clothing|hoodie|top/i.test(nameLower) ||
+    /t-?shirt|tee|topwear|apparel|clothing|hoodie|top/i.test(itemTypeLower);
 
   // Dynamic mock variant images based on selected index
   const renderMediaContent = (index: number, isThumbnail: boolean = false) => {
@@ -653,8 +655,8 @@ export default function ProductDetailsPage() {
               </div>
 
               {/* Price & Discount Row */}
-              <div className="flex items-center gap-2.5 w-full">
-                <span style={{ fontFamily: "Faktum, sans-serif" }} className="text-2xl sm:text-3xl md:text-[32px] font-bold text-[#2B2B2B]">
+              <div className="flex items-center justify-start gap-2.5 w-full text-left">
+                <span style={{ fontFamily: "Faktum, sans-serif" }} className="text-xl sm:text-2xl md:text-[28px] font-bold text-[#2B2B2B]">
                   ₹{product.price.toLocaleString('en-IN')}
                 </span>
                 {product.originalPrice && (
@@ -667,7 +669,7 @@ export default function ProductDetailsPage() {
                     fontFamily: "Faktum, sans-serif",
                     backgroundColor: "rgba(22, 163, 74, 0.08)",
                   }}
-                  className="text-[11px] sm:text-xs font-bold text-emerald-700 px-2 py-0.5 rounded-[3px]"
+                  className="text-[10px] sm:text-xs font-bold text-emerald-700 px-1.5 py-0.5 rounded-[3px]"
                 >
                   {discountPercent}% off
                 </span>

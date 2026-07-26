@@ -2337,9 +2337,16 @@ export default function Homepage() {
                 FAQ'S
               </span>
             </div>
-            <h2 className="w-full max-w-[541px] h-auto flex items-center font-serif font-semibold text-3xl md:text-[42px] leading-[1] tracking-[0px] text-[#2B2B2B] py-2">
-              Got Questions?&nbsp;<span className="text-[#FF5A36]">We&apos;ve Got Answers.</span>
-            </h2>
+            <div className="flex flex-row gap-6 font-serif font-semibold text-3xl md:text-[42px] leading-[1.15] tracking-[0px] py-2">
+              <div className="flex flex-col text-[#2B2B2B]">
+                <span>Got</span>
+                <span>Questions?</span>
+              </div>
+              <div className="flex flex-col text-[#FF5A36]">
+                <span>We&apos;ve Got</span>
+                <span>Answers.</span>
+              </div>
+            </div>
           </div>
 
           {/* Accordion List */}

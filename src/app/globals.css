@@ -64,6 +64,15 @@ img.rounded-full,
   border-radius: 9999px !important;
 }
 
+/* 12px Corner Radius for Mascot Image & Special Highlight Cards */
+img[src*="llama_mascot"],
+.mascot-img,
+.rounded-12,
+div[class*="rounded-[12px]"],
+img[class*="rounded-[12px]"] {
+  border-radius: 12px !important;
+}
+
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-8px); }

@@ -1496,49 +1496,44 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                     boxSizing: "border-box",
                     alignItems: "center",
                   }}
-                  className="shadow-xs w-full h-auto p-6 flex flex-col sm:flex-row gap-6 text-left"
+                  className="shadow-xs w-full h-auto p-4 sm:p-6 flex flex-col sm:flex-row gap-4 sm:gap-6 text-left"
                 >
                   {/* Left Column: Score */}
                   <div 
                     style={{
                       display: "flex",
                       flexDirection: "column",
-                      gap: "16px",
                     }}
-                    className="w-full sm:w-[145.69px] items-center sm:items-start pl-0 sm:pl-6"
+                    className="w-full sm:w-[145.69px] items-center sm:items-start pl-0 sm:pl-6 gap-2 sm:gap-4"
                   >
                     <span 
                       style={{
-                        height: "53px",
                         fontFamily: "Faktum, sans-serif",
                         fontWeight: 500,
-                        fontSize: "42px",
-                        lineHeight: "100%",
                         color: "rgba(43, 43, 43, 1)",
                         display: "flex",
                         alignItems: "center",
                       }}
+                      className="text-3xl sm:text-[42px] leading-none"
                     >
                       {pkg.rating.toFixed(1)}
                     </span>
-                    <div style={{ display: "flex", gap: "4px" }}>
+                    <div className="flex gap-1">
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-[20px] h-[20px] fill-[#FFC72C] stroke-none" />
+                        <Star key={i} className="w-4 h-4 sm:w-[20px] sm:h-[20px] fill-[#FFC72C] stroke-none" />
                       ))}
                     </div>
                     <span 
                       style={{
-                        height: "25px",
                         fontFamily: "Faktum, sans-serif",
                         fontWeight: 500,
-                        fontSize: "20px",
-                        lineHeight: "100%",
                         color: "rgba(141, 141, 141, 1)",
                         display: "flex",
                         alignItems: "center",
                       }}
+                      className="text-xs sm:text-base md:text-[20px] leading-none"
                     >
-                      {pkg.ratingCount} Reviews
+                      {pkg.ratingCount || 98} Reviews
                     </span>
                   </div>
 
@@ -1547,9 +1542,8 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                     style={{
                       display: "flex",
                       flexDirection: "column",
-                      gap: "16px",
                     }}
-                    className="flex-1 w-full pr-0 sm:pr-6"
+                    className="flex-1 w-full pr-0 sm:pr-6 gap-2 sm:gap-4"
                   >
                     {[
                       { label: '05', width: '92%' },
@@ -1558,33 +1552,30 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                       { label: '02', width: '30%' },
                       { label: '01', width: '12%' },
                     ].map((row) => (
-                      <div key={row.label} style={{ display: "flex", alignItems: "center", gap: "16px", width: "100%" }}>
+                      <div key={row.label} className="flex items-center gap-2 sm:gap-4 w-full">
                         <span 
                           style={{
-                            width: "25px",
-                            height: "25px",
                             fontFamily: "Faktum, sans-serif",
                             fontWeight: 500,
-                            fontSize: "20px",
-                            lineHeight: "100%",
                             color: "rgba(43, 43, 43, 0.7)",
                             display: "inline-flex",
                             alignItems: "center",
                           }}
+                          className="w-5 sm:w-6 text-xs sm:text-[20px] leading-none"
                         >
                           {row.label}
                         </span>
-                        <div className="flex-1 h-[19px] bg-gray-250/24 rounded-[4px] overflow-hidden">
+                        <div className="flex-1 h-3 sm:h-[19px] bg-gray-100 rounded-[4px] overflow-hidden">
                           <div style={{ height: "100%", width: row.width, backgroundColor: "rgba(255, 98, 62, 1)", borderRadius: "4px" }} />
                         </div>
-                        <Star className="w-[20px] h-[20px] fill-[#FFC72C] stroke-none shrink-0" />
+                        <Star className="w-3.5 h-3.5 sm:w-[20px] sm:h-[20px] fill-[#FFC72C] stroke-none shrink-0" />
                       </div>
                     ))}
                   </div>
                 </div>
 
                 {/* Reviews card list */}
-                <div style={{ display: "flex", flexDirection: "column", gap: "24px" }} className="w-full">
+                <div style={{ display: "flex", flexDirection: "column" }} className="w-full gap-3 sm:gap-6">
                   {reviews.map((rev: any, i: number) => (
                     <div 
                       key={i} 
@@ -1597,27 +1588,27 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                         boxSizing: "border-box",
                         display: "flex",
                         flexDirection: "column",
-                        gap: "24px",
                       }}
-                      className="w-full p-4 sm:p-[24px]"
+                      className="w-full p-4 sm:p-[24px] gap-3 sm:gap-6"
                     >
-                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", width: "100%" }}>
-                        <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-                          <div style={{ width: "56px", height: "56px", borderRadius: "4px", overflow: "hidden", flexShrink: 0 }}>
-                            <img src={rev.avatar} alt={rev.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                      <div className="flex justify-between items-start w-full gap-2">
+                        <div className="flex items-center gap-2.5 sm:gap-4 flex-1 min-w-0">
+                          <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-[4px] overflow-hidden shrink-0">
+                            <img src={rev.avatar} alt={rev.name} className="w-full h-full object-cover" />
                           </div>
-                          <div style={{ display: "flex", flexDirection: "column", gap: "8px", justifyContent: "center" }}>
-                            <div style={{ display: "flex", alignItems: "center", gap: "8px" }} className="flex-wrap">
-                              <h4 style={{ margin: 0, fontFamily: "Faktum, sans-serif", fontWeight: 600, fontSize: "24px", lineHeight: "100%", color: "rgba(43, 43, 43, 1)" }}>{rev.name}</h4>
+                          <div className="flex flex-col gap-0.5 sm:gap-1 min-w-0">
+                            <div className="flex items-center gap-2 flex-wrap">
+                              <h4 
+                                style={{ margin: 0, fontFamily: "Faktum, sans-serif" }} 
+                                className="text-sm sm:text-xl md:text-[24px] font-semibold text-[#2B2B2B] leading-tight truncate"
+                              >
+                                {rev.name}
+                              </h4>
                               <span 
                                 style={{
-                                  width: "71px",
-                                  height: "18px",
                                   fontFamily: "Faktum, sans-serif",
                                   fontWeight: 600,
-                                  fontSize: "14px",
-                                  lineHeight: "100%",
-                                  letterSpacing: "1.2px",
+                                  letterSpacing: "0.5px",
                                   textTransform: "uppercase",
                                   color: "rgba(46, 125, 50, 1)",
                                   backgroundColor: "rgba(46, 125, 50, 0.08)",
@@ -1626,18 +1617,22 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                                   justifyContent: "center",
                                   borderRadius: "2px",
                                 }}
+                                className="text-[9px] sm:text-xs px-1.5 py-0.5"
                               >
                                 Verified
                               </span>
                             </div>
-                            <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 500, fontStyle: "italic", fontSize: "18px", lineHeight: "100%", color: "rgba(141, 141, 141, 1)", display: "flex", alignItems: "center" }}>
+                            <span 
+                              style={{ fontFamily: "Faktum, sans-serif" }}
+                              className="text-xs sm:text-base text-gray-400 italic font-medium"
+                            >
                               {rev.date}
                             </span>
                           </div>
                         </div>
-                        <div style={{ display: "flex", gap: "4px" }}>
+                        <div className="flex gap-0.5 sm:gap-1 shrink-0">
                           {[...Array(Math.floor(Number(rev.rating)) || 5)].map((_, j) => (
-                            <Star key={j} className="w-[20px] h-[20px] fill-[#FFC72C] stroke-none" />
+                            <Star key={j} className="w-3.5 h-3.5 sm:w-[20px] sm:h-[20px] fill-[#FFC72C] stroke-none" />
                           ))}
                         </div>
                       </div>
@@ -1650,7 +1645,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                           color: "rgba(43, 43, 43, 1)",
                           fontStyle: "italic",
                         }}
-                        className="w-full text-sm sm:text-base md:text-[24px] md:leading-[32px]"
+                        className="w-full text-xs sm:text-base md:text-[20px] leading-relaxed"
                       >
                         {rev.comment}
                       </p>

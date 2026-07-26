@@ -962,26 +962,24 @@ export default function ProductDetailsPage() {
             backgroundColor: "rgba(255, 255, 255, 1)",
             display: "flex",
             flexDirection: "column",
-            gap: "20px",
+            gap: "16px",
             boxSizing: "border-box",
-            padding: "24px",
             border: "1px solid rgba(204, 204, 204, 1)",
             borderRadius: "4px",
             marginTop: "0px"
           }}
+          className="p-4 sm:p-6"
         >
-          <span style={{ fontFamily: "Faktum, sans-serif", fontSize: "16px", fontWeight: 600, color: "rgba(43, 43, 43, 1)" }}>
+          <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 600, color: "rgba(43, 43, 43, 1)" }} className="text-sm sm:text-base">
             Product Specifications
           </span>
           <div
             style={{
               width: "100%",
-              display: "grid",
-              gap: "24px",
               borderTop: "1px solid rgba(204, 204, 204, 0.54)",
-              paddingTop: "20px"
+              paddingTop: "16px"
             }}
-            className="grid grid-cols-2 md:grid-cols-4"
+            className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6"
           >
             {productSpecs.map((sp) => (
               <div
@@ -989,30 +987,29 @@ export default function ProductDetailsPage() {
                 style={{
                   display: "flex",
                   flexDirection: "column",
-                  gap: "6px",
-                  fontSize: "14px",
+                  gap: "4px",
                   fontFamily: "Faktum, sans-serif"
                 }}
               >
-                <span style={{ color: "rgba(141, 141, 141, 1)", fontWeight: 500, textTransform: "uppercase", fontSize: "12px", letterSpacing: "0.5px" }}>{sp.label}</span>
-                <span style={{ color: "rgba(43, 43, 43, 1)", fontWeight: 600, fontSize: "16px" }}>{sp.value}</span>
+                <span style={{ color: "rgba(141, 141, 141, 1)", fontWeight: 500, textTransform: "uppercase", letterSpacing: "0.5px" }} className="text-[10px] sm:text-xs">{sp.label}</span>
+                <span style={{ color: "rgba(43, 43, 43, 1)", fontWeight: 600 }} className="text-xs sm:text-base">{sp.value}</span>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Tab Bar — width: 1280, height: 54px, gap: 24px */}
+        {/* Tab Bar */}
         <div
           style={{
             width: "100%",
-            height: "54px",
+            height: "48px",
             borderBottom: "2px solid rgba(204, 204, 204, 1)",
             backgroundColor: "rgba(255, 255, 255, 1)",
             boxSizing: "border-box",
-            marginTop: "32px"
+            marginTop: "24px"
           }}
         >
-          <div style={{ display: "flex", gap: "48px", height: "100%", alignItems: "flex-end" }}>
+          <div className="flex gap-4 sm:gap-8 md:gap-12 h-full items-end">
 
             {/* Product Description Tab */}
             <button
@@ -1021,7 +1018,7 @@ export default function ProductDetailsPage() {
                 cursor: "pointer",
                 background: "none",
                 border: "none",
-                padding: "0 0 10px 0",
+                padding: "0 0 8px 0",
                 borderBottom: activeTab === 'desc' ? "3px solid rgba(28, 68, 140, 1)" : "3px solid transparent",
                 marginBottom: "-2px",
                 transition: "border-color 0.2s"
@@ -1030,12 +1027,10 @@ export default function ProductDetailsPage() {
               <span style={{
                 fontFamily: "Faktum, sans-serif",
                 fontWeight: 500,
-                fontSize: "24px",
                 lineHeight: "100%",
-                letterSpacing: "0px",
                 color: activeTab === 'desc' ? "rgba(28, 68, 140, 1)" : "rgba(43, 43, 43, 1)",
                 transition: "color 0.2s"
-              }}>Product Description</span>
+              }} className="text-base sm:text-xl md:text-[24px]">Product Description</span>
             </button>
 
             {/* Reviews Tab */}
@@ -1045,7 +1040,7 @@ export default function ProductDetailsPage() {
                 cursor: "pointer",
                 background: "none",
                 border: "none",
-                padding: "0 0 10px 0",
+                padding: "0 0 8px 0",
                 borderBottom: activeTab === 'reviews' ? "3px solid rgba(28, 68, 140, 1)" : "3px solid transparent",
                 marginBottom: "-2px",
                 transition: "border-color 0.2s"
@@ -1054,12 +1049,10 @@ export default function ProductDetailsPage() {
               <span style={{
                 fontFamily: "Faktum, sans-serif",
                 fontWeight: 500,
-                fontSize: "24px",
                 lineHeight: "100%",
-                letterSpacing: "0px",
                 color: activeTab === 'reviews' ? "rgba(28, 68, 140, 1)" : "rgba(43, 43, 43, 1)",
                 transition: "color 0.2s"
-              }}>Reviews</span>
+              }} className="text-base sm:text-xl md:text-[24px]">Reviews</span>
             </button>
 
           </div>
@@ -1090,36 +1083,26 @@ export default function ProductDetailsPage() {
               <h2 style={{
                 fontFamily: "Fraunces, serif",
                 fontWeight: 600,
-                fontSize: "32px",
-                lineHeight: "120%",
                 letterSpacing: "0px",
                 color: "rgba(43, 43, 43, 1)",
-                margin: "0 0 16px 0"
-              }}>
+                margin: "0 0 12px 0"
+              }} className="text-xl sm:text-2xl md:text-[32px]">
                 Overview of the <span style={{ color: "rgba(255, 98, 62, 1)" }}>Product</span>
               </h2>
-              <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: "16px", boxSizing: "border-box" }}>
+              <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: "12px", boxSizing: "border-box" }}>
                 <p style={{
                   fontFamily: "Faktum, sans-serif",
                   fontWeight: 500,
-                  fontSize: "18px",
-                  lineHeight: "32px",
-                  letterSpacing: "0px",
                   color: "rgba(43, 43, 43, 1)",
                   margin: 0,
-                  textAlign: "justify"
-                }}>Designed for the digital nomads and the barefoot explorers, the Naturally Nomad badge is more than just an accessory it&apos;s a mark of identity. Whether you&apos;re working from a cafe in Dharamshala or hitchhiking through the Spiti Valley, this badge represents the freedom to move and the courage to belong nowhere and everywhere at once.
+                }} className="text-sm sm:text-base md:text-[18px] leading-relaxed md:leading-[32px]">Designed for the digital nomads and the barefoot explorers, the Naturally Nomad badge is more than just an accessory it&apos;s a mark of identity. Whether you&apos;re working from a cafe in Dharamshala or hitchhiking through the Spiti Valley, this badge represents the freedom to move and the courage to belong nowhere and everywhere at once.
                 </p>
                 <p style={{
                   fontFamily: "Faktum, sans-serif",
                   fontWeight: 500,
-                  fontSize: "18px",
-                  lineHeight: "32px",
-                  letterSpacing: "0px",
                   color: "rgba(43, 43, 43, 1)",
                   margin: 0,
-                  textAlign: "justify"
-                }}>
+                }} className="text-sm sm:text-base md:text-[18px] leading-relaxed md:leading-[32px]">
                   Crafted with high-grade hard enamel, the colors are deep and durable, reflecting the rugged nature of travel. The minimalist aesthetic ensures it pairs perfectly with your denim jacket, your trusty rucksack, or even your camera strap. Every stroke in the design is inspired by the rolling hills of the Western Ghats and the clear skies of the Himalayas.
                 </p>
               </div>
@@ -1132,11 +1115,11 @@ export default function ProductDetailsPage() {
                   SPECIFICATIONS
                 </span>
               </div>
-              <h2 style={{ fontFamily: "Fraunces, serif", fontWeight: 600, fontSize: "28px", color: "rgba(43, 43, 43, 1)", margin: 0 }}>
+              <h2 style={{ fontFamily: "Fraunces, serif", fontWeight: 600, color: "rgba(43, 43, 43, 1)", margin: 0 }} className="text-xl sm:text-2xl md:text-[28px]">
                 Product <span style={{ color: "rgba(255, 98, 62, 1)" }}>Highlights</span>
               </h2>
               <div 
-                className="grid grid-cols-1 md:grid-cols-3 gap-x-[32px] gap-y-[16px] w-full"
+                className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 md:gap-x-[32px] md:gap-y-[16px] w-full"
               >
                 {highlights.map((hl, i) => (
                   <div key={i} style={{
@@ -1164,12 +1147,10 @@ export default function ProductDetailsPage() {
                     <span style={{
                       fontFamily: "Faktum, sans-serif",
                       fontWeight: 500,
-                      fontSize: "16px",
-                      lineHeight: "26px",
                       letterSpacing: "0px",
                       color: "rgba(43, 43, 43, 1)",
                       verticalAlign: "middle"
-                    }}>{hl}</span>
+                    }} className="text-sm md:text-[16px] leading-snug md:leading-[26px]">{hl}</span>
                   </div>
                 ))}
               </div>
@@ -1177,29 +1158,20 @@ export default function ProductDetailsPage() {
 
           </div>
         ) : (
-          <div style={{ width: "100%", minHeight: "auto", paddingTop: "32px", boxSizing: "border-box" }}>
+          <div style={{ width: "100%", minHeight: "auto", paddingTop: "24px", boxSizing: "border-box" }}>
             <section style={{ display: "flex", flexDirection: "column", gap: "0px" }}>
 
               {/* ── Rating Summary ── */}
-              <div style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "40px",
-                padding: "24px",
-                border: "1px solid rgba(204,204,204,0.4)",
-                borderRadius: "8px",
-                marginBottom: "16px",
-                flexWrap: "wrap",
-              }}>
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-10 p-4 sm:p-6 border border-gray-200 rounded-lg mb-4 w-full">
                 {/* Left: big number */}
-                <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "6px", minWidth: "90px" }}>
-                  <span style={{ fontFamily: "'Fraunces', serif", fontSize: "52px", fontWeight: 700, color: "rgba(43,43,43,1)", lineHeight: 1 }}>4.9</span>
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "4px", minWidth: "90px" }}>
+                  <span style={{ fontFamily: "'Fraunces', serif", fontSize: "44px", fontWeight: 700, color: "rgba(43,43,43,1)", lineHeight: 1 }} className="sm:text-[52px]">4.9</span>
                   <div style={{ display: "flex", gap: "3px" }}>
                     {[...Array(5)].map((_, i) => (
-                      <Star key={i} style={{ width: "18px", height: "18px", fill: "#FF623E", color: "#FF623E" }} />
+                      <Star key={i} style={{ width: "16px", height: "16px", fill: "#FF623E", color: "#FF623E" }} />
                     ))}
                   </div>
-                  <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: "13px", fontWeight: 500, color: "rgba(141,141,141,1)" }}>312 Reviews</span>
+                  <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: "12px", fontWeight: 500, color: "rgba(141,141,141,1)" }}>312 Reviews</span>
                 </div>
 
                 {/* Right: bar chart */}
@@ -1316,7 +1288,7 @@ export default function ProductDetailsPage() {
               Similar <span className="text-[#FF5A36]">Products</span>
             </h2>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[32px] w-full">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 lg:gap-[32px] w-full">
             {fallbackSimilarProducts.map((prod) => (
               <ProductCard
                 key={prod.id}
@@ -1340,7 +1312,7 @@ export default function ProductDetailsPage() {
                 Recently <span className="text-[#FF5A36]">Viewed</span>
               </h2>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[32px] w-full">
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 lg:gap-[32px] w-full">
               {recentlyViewed.map((prod) => (
                 <ProductCard
                   key={prod.id}

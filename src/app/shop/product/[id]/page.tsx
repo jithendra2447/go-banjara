@@ -744,7 +744,7 @@ export default function ProductDetailsPage() {
 
               </div>
 
-              {/* Action Buttons */}
+              {/* Action Buttons (Hidden on mobile because of Sticky Bottom CTA Bar) */}
               {product.inStock === false ? (
                 /* Out of Stock — show Notify button */
                 <div style={{ display: "flex", flexDirection: "column", gap: "8px", width: "100%" }}>
@@ -781,8 +781,8 @@ export default function ProductDetailsPage() {
                   </button>
                 </div>
               ) : (
-                /* In Stock — normal Add to Cart + Buy Now */
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", width: "100%", height: "48px", boxSizing: "border-box" }}>
+                /* In Stock — normal Add to Cart + Buy Now (Desktop only, Mobile uses Sticky Bottom Bar) */
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", width: "100%", height: "48px", boxSizing: "border-box" }} className="hidden md:grid">
                   <button
                     onClick={handleAddToCart}
                     style={{
@@ -897,7 +897,7 @@ export default function ProductDetailsPage() {
                     Check
                   </button>
                 </div>
-                <span style={{ fontFamily: "Faktum, sans-serif", fontSize: "12px", color: "rgba(141, 141, 141, 1)", fontWeight: 500 }}>
+                <span style={{ fontFamily: "Faktum, sans-serif", fontSize: "12px", color: "rgba(141, 141, 141, 1)", fontWeight: 500 }} className="hidden md:block">
                   Enter your pincode to know when it will be delivered to your doorstep
                 </span>
                 {pincodeMessage ? (
@@ -1102,7 +1102,7 @@ export default function ProductDetailsPage() {
                   fontWeight: 500,
                   color: "rgba(43, 43, 43, 1)",
                   margin: 0,
-                }} className="text-sm sm:text-base md:text-[18px] leading-relaxed md:leading-[32px]">
+                }} className="hidden md:block text-sm sm:text-base md:text-[18px] leading-relaxed md:leading-[32px]">
                   Crafted with high-grade hard enamel, the colors are deep and durable, reflecting the rugged nature of travel. The minimalist aesthetic ensures it pairs perfectly with your denim jacket, your trusty rucksack, or even your camera strap. Every stroke in the design is inspired by the rolling hills of the Western Ghats and the clear skies of the Himalayas.
                 </p>
               </div>
@@ -1228,12 +1228,12 @@ export default function ProductDetailsPage() {
                 <div key={i} style={{
                   border: "1px solid rgba(204,204,204,0.4)",
                   borderRadius: "8px",
-                  padding: "20px 24px",
+                  padding: "16px 20px",
                   marginBottom: "12px",
                   display: "flex",
                   flexDirection: "column",
                   gap: "12px",
-                }}>
+                }} className={i >= 2 ? "hidden md:flex" : "flex"}>
                   {/* Top row: avatar + name + stars */}
                   <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "16px" }}>
                     <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>

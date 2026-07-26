@@ -1098,6 +1098,7 @@ export default function Homepage() {
             {/* Category 1: Stickers */}
             <Link 
               href="/shop?category=Stickers" 
+              onMouseEnter={() => setActiveCategorySlide(0)}
               style={{ width: "100%", maxWidth: "405.33px", height: "328.63px", display: "flex", flexDirection: "column", textDecoration: "none" }}
               className="group mx-auto"
             >
@@ -1124,6 +1125,7 @@ export default function Homepage() {
             {/* Category 2: Badges */}
             <Link 
               href="/shop?category=Badges" 
+              onMouseEnter={() => setActiveCategorySlide(1)}
               style={{ width: "100%", maxWidth: "405.33px", height: "328.63px", display: "flex", flexDirection: "column", textDecoration: "none" }}
               className="group mx-auto"
             >
@@ -1150,6 +1152,7 @@ export default function Homepage() {
             {/* Category 3: Fridge Magnets */}
             <Link 
               href="/shop?category=Magnets" 
+              onMouseEnter={() => setActiveCategorySlide(2)}
               style={{ width: "100%", maxWidth: "405.33px", height: "328.63px", display: "flex", flexDirection: "column", textDecoration: "none" }}
               className="group mx-auto"
             >
@@ -1174,9 +1177,23 @@ export default function Homepage() {
             </Link>
           </div>
 
-          {/* Bottom active state indicator line */}
-          <div className="w-full h-[3px] bg-gray-200 relative rounded overflow-hidden mt-6">
-            <div className="absolute left-0 top-0 h-full w-[33.3%] bg-[#1D493E] rounded" />
+          {/* Bottom active state indicator line (Interactive 8px height bar) */}
+          <div 
+            onClick={(e) => {
+              const rect = e.currentTarget.getBoundingClientRect();
+              const clickX = e.clientX - rect.left;
+              const ratio = clickX / rect.width;
+              if (ratio < 0.333) setActiveCategorySlide(0);
+              else if (ratio < 0.666) setActiveCategorySlide(1);
+              else setActiveCategorySlide(2);
+            }}
+            className="w-full h-[8px] bg-gray-200 relative rounded-full overflow-hidden mt-6 cursor-pointer group transition-all duration-300 shadow-inner"
+            title="Click to interact and select category"
+          >
+            <div 
+              style={{ left: `${(activeCategorySlide % 3) * 33.333}%` }}
+              className="absolute top-0 h-full w-[33.333%] bg-[#1D493E] rounded-full transition-all duration-300 ease-out group-hover:bg-[#FF5A36]" 
+            />
           </div>
         </div>
 
@@ -2198,7 +2215,7 @@ export default function Homepage() {
                 href={`/blog`}
                 className="w-full max-w-[624px] h-auto flex flex-col gap-[24px] group block text-left shrink-0"
               >
-                <div className="relative w-full h-auto aspect-[16/10] overflow-hidden rounded-[4px] bg-gray-100 border border-gray-150 shrink-0">
+                <div className="relative w-full h-auto aspect-[16/10] overflow-hidden rounded-[4px] bg-gray-100 shrink-0">
                   <img 
                     src={post.image} 
                     alt={post.title} 

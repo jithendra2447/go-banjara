@@ -1202,7 +1202,7 @@ export default function BlogPostDetail() {
 
       {/* ── HERO COVER IMAGE WITH CAPTION ── */}
       <div className="max-w-5xl mx-auto px-6 mb-12">
-        <div className="w-full h-[320px] md:h-[500px] rounded-[4px] overflow-hidden bg-gray-100 border border-gray-150">
+        <div className="w-full h-[320px] md:h-[500px] rounded-[4px] overflow-hidden bg-gray-100">
           <img 
             src={article.heroImage} 
             alt={`${article.title} | Go Banjara Himalayan Travel Guide`}
@@ -1365,7 +1365,7 @@ export default function BlogPostDetail() {
               {/* Inline Section Image */}
               {section.image && (
                 <div className="space-y-2 my-6">
-                  <div className="w-full h-80 md:h-[420px] rounded-[6px] overflow-hidden border border-gray-200 shadow-sm">
+                  <div className="w-full h-80 md:h-[420px] rounded-[4px] overflow-hidden">
                     <img 
                       src={section.image} 
                       alt={`${section.title} | Go Banjara Travel Guide`}
@@ -1400,7 +1400,7 @@ export default function BlogPostDetail() {
                 </div>
               </div>
 
-              <div className="w-full aspect-video rounded-lg overflow-hidden border border-gray-300 shadow-md">
+              <div className="w-full aspect-video rounded-[4px] overflow-hidden">
                 <iframe
                   src={article.youtubeVideo.embedUrl}
                   title={article.youtubeVideo.title}
@@ -1550,7 +1550,7 @@ export default function BlogPostDetail() {
             },
           ].map((item) => (
             <Link key={item.id} href={`/blog/${item.id}`} className="w-full flex flex-col gap-3 group block text-left">
-              <div className="relative w-full aspect-[16/10] overflow-hidden rounded-t-[4px] bg-gray-100 border border-gray-150">
+              <div className="relative w-full aspect-[16/10] overflow-hidden rounded-[4px] bg-gray-100">
                 <img 
                   src={item.image} 
                   alt={`${item.title} | Go Banjara Blog`}

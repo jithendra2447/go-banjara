@@ -499,15 +499,7 @@ export default function BlogPage() {
         {/* 3-Column Card Grid */}
         <div
           id="blog-grid"
-          style={{
-            width: '100%',
-            maxWidth: '1280px',
-            display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: '32px',
-            marginBottom: '32px',
-          }}
-          className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-[32px] mb-[32px] w-full max-w-[1280px]"
         >
           {paginated.map((post) => (
             <Link

@@ -184,7 +184,7 @@ export default function ShopPage() {
               color: "rgba(43, 43, 43, 1)",
               textAlign: "center",
             }}
-            className="text-xs sm:text-base md:text-[24px] leading-relaxed md:leading-[32px] w-full max-w-[900px]"
+            className="text-xs sm:text-base md:text-[20px] leading-relaxed md:leading-[32px] w-full max-w-[900px]"
           >
             Discover curated travel experiences, gear that keeps up with you, and a community of free-spirited explorers across India.
           </p>
@@ -569,7 +569,7 @@ export default function ShopPage() {
                   maxWidth: "900px",
                   margin: 0,
                 }}
-                className="text-xs sm:text-base md:text-[24px] leading-relaxed md:leading-[32px]"
+                className="text-xs sm:text-base md:text-[20px] leading-relaxed md:leading-[32px]"
               >
                 Hidden places, exclusive trip drops, curated gear, and stories from the road delivered before anyone else hears about them.
               </p>

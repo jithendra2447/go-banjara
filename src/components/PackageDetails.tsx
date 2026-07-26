@@ -373,9 +373,8 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
     <div 
       style={{
         backgroundColor: "rgba(255, 255, 255, 1)",
-        paddingBottom: "62px",
       }}
-      className="text-[#1D493E] min-h-screen font-sans relative overflow-x-clip w-full"
+      className="text-[#1D493E] min-h-screen font-sans relative overflow-x-clip w-full pb-0"
     >
       {/* Dynamic ambient particles removed for solid white background */}
 
@@ -2012,7 +2011,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
           width: "100%",
           background: "#FFFFFF",
         }}
-        className="relative z-10 w-full px-4 md:px-[80px] py-[42px] bg-white border-t border-[#1D493E]/10"
+        className="relative z-10 w-full px-4 md:px-[80px] py-4 sm:py-8 bg-white border-t border-[#1D493E]/10"
       >
         <div
           style={{
@@ -2021,9 +2020,9 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            gap: "32px",
             textAlign: "center",
           }}
+          className="gap-4 sm:gap-6"
         >
           {/* Text block */}
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
@@ -2061,7 +2060,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
             </p>
           </div>
 
-          {/* Button: 286×55, pt-16 pr-32 pb-16 pl-32, radius-4, bg #1D493E */}
+          {/* Button: Compact sleek CTA */}
           <button
             type="button"
             onClick={() => {
@@ -2071,10 +2070,6 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
               }
             }}
             style={{
-              paddingTop: "16px",
-              paddingBottom: "16px",
-              paddingLeft: "32px",
-              paddingRight: "32px",
               borderRadius: "4px",
               background: "rgba(29, 73, 62, 1)",
               display: "flex",
@@ -2087,10 +2082,10 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
               transition: "opacity 0.2s",
               cursor: "pointer",
             }}
-            className="hover:opacity-90 w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#1D493E] text-white py-4 px-8 rounded-[4px] font-semibold text-sm sm:text-base"
+            className="hover:opacity-90 w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#1D493E] text-white h-[44px] sm:h-[50px] px-6 sm:px-8 rounded-[4px] font-semibold text-sm sm:text-base"
           >
             <span>Reserve your tour now</span>
-            <span className="text-lg font-sans">↗</span>
+            <span className="text-base sm:text-lg font-sans">↗</span>
           </button>
         </div>
       </section>

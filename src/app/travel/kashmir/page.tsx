@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Calendar, Users, ArrowLeft, Check, ShoppingBag, CloudSnow, Wind, Tag, Star, Compass } from 'lucide-react';
 import { useCart } from '@/components/providers';
 import { AmbientVibe } from '@/components/AmbientVibe';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import { PRODUCTS } from '@/data/products';
 import { HOLIDAY_PACKAGES } from '@/data/packages';
 
@@ -380,6 +381,9 @@ export default function KashmirDetails() {
 
   return (
     <div className="bg-[#FAF9F6] text-[#1D493E] min-h-screen font-sans relative overflow-x-hidden">
+      {/* Breadcrumbs */}
+      <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Travel Page', href: '/travel' }, { label: 'Kashmir Classic Tour' }]} />
+
       {/* Falling snow canvas particle effect */}
       <AmbientVibe effect="snowfall" />
 

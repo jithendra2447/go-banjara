@@ -2332,9 +2332,9 @@ export default function Homepage() {
         <div className="hidden md:flex w-full max-w-[1440px] h-auto bg-white rounded-[4px] pt-[28px] pb-[28px] md:px-[80px] px-6 flex-col gap-[32px] mx-auto">
           {/* Header */}
           <div className="w-full max-w-[1280px] h-auto flex flex-col gap-[12px] justify-center text-left">
-            <div className="w-[54px] h-[26px] flex items-center justify-center bg-[#FFEBE5] rounded-[4px]">
-              <span className="w-[46px] h-[18px] flex items-center justify-center font-sans font-semibold text-[14px] leading-none tracking-[1.2px] text-[#FF623E] uppercase">
-                FAQ'S
+            <div className="h-[26px] inline-flex items-center justify-center bg-[#FFEBE5] rounded-[4px] px-3 self-start">
+              <span className="font-sans font-semibold text-[14px] leading-none tracking-[1.2px] text-[#FF623E] uppercase whitespace-nowrap">
+                Frequently Asked Questions
               </span>
             </div>
             <div className="flex flex-row gap-6 font-serif font-semibold text-3xl md:text-[42px] leading-[1.15] tracking-[0px] py-2">
@@ -2379,9 +2379,11 @@ export default function Homepage() {
 
         {/* Mobile Figma Spec Container (block md:hidden) - w:430px max, gap:12px, padding:12px 20px */}
         <div className="block md:hidden w-full max-w-[430px] mx-auto py-[12px] px-[20px] bg-white flex flex-col gap-[12px]">
-          <h2 className="text-[32px] font-serif font-semibold text-[#1D493E] leading-none text-left m-0">
-            FAQ’s
-          </h2>
+          <div className="h-[26px] inline-flex items-center justify-center bg-[#FFEBE5] rounded-[4px] px-3 self-start">
+            <span className="font-sans font-semibold text-[12px] leading-none tracking-[1.2px] text-[#FF623E] uppercase whitespace-nowrap">
+              Frequently Asked Questions
+            </span>
+          </div>
 
           <div className="w-full flex flex-col divide-y divide-gray-100">
             {[
@@ -2447,7 +2449,7 @@ export default function Homepage() {
               </div>
               <div className="w-full h-auto flex flex-col gap-[12px]">
                 <h3 className="font-sans font-semibold text-lg sm:text-xl md:text-[28px] leading-snug tracking-[0px] text-[#2B2B2B]">Frequently Asked Questions (FAQ)</h3>
-                <p className="w-full h-auto font-sans font-medium text-sm sm:text-base md:text-[20px] leading-normal tracking-[0px] text-[rgba(43,43,43,0.8)]">See what are the commonly asked questions by our costumers</p>
+                <p className="w-full h-auto font-sans font-medium text-sm sm:text-base md:text-[20px] leading-normal tracking-[0px] text-[rgba(43,43,43,0.8)]">See what are the commonly asked questions by our customers</p>
               </div>
             </div>
 

@@ -687,7 +687,7 @@ export default function Homepage() {
                     </button>
                   </div>
                   {/* Details */}
-                  <div className="w-full md:w-1/2 pt-4 pb-4 px-0 flex flex-col justify-between md:h-full bg-white shrink-0 gap-6 md:gap-0">
+                  <div className="w-full md:w-1/2 p-5 sm:p-6 flex flex-col justify-between md:h-full bg-white shrink-0 gap-5 md:gap-0">
                     {/* Top Group (Width: Fill, Height: 151px, Gap: 12px) */}
                     <div className="flex flex-col gap-2 min-h-[140px] shrink-0 w-full">
                       {/* Tags Container (Width: Fill, Height: Hug 28px, Justify: space-between) */}
@@ -704,9 +704,9 @@ export default function Homepage() {
                       </p>
                     </div>
                     {/* Details Grid Block (Width: 616px, Height: 140px, Justify: space-between) */}
-                    <div className="w-full max-w-[616px] h-auto flex flex-col sm:flex-row justify-between border-t border-gray-200 pt-3 shrink-0 gap-4 sm:gap-0">
+                    <div className="w-full max-w-[616px] h-auto flex flex-col sm:flex-row justify-between border-t border-gray-200 pt-3 shrink-0 gap-4 sm:gap-6">
                       {/* Column 1 (Width: 308px, Height: 140px, Gap: space-between) */}
-                      <div className="w-full sm:w-[50%] lg:w-[308px] flex flex-col gap-2 sm:gap-0 justify-between shrink-0">
+                      <div className="w-full sm:w-[48%] lg:w-[308px] flex flex-col gap-2 sm:gap-0 justify-between shrink-0">
                         <div className="w-full sm:max-w-[308px] h-auto min-h-[50px] flex items-center gap-[8px] shrink-0 py-2">
                           <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
                             <MapPin className="w-4 h-4 text-[#1D493E]" />
@@ -721,7 +721,7 @@ export default function Homepage() {
                         </div>
                       </div>
                       {/* Column 2 (Width: 308px, Height: 140px, Gap: space-between) */}
-                      <div className="w-full sm:w-[50%] lg:w-[308px] flex flex-col gap-2 sm:gap-0 justify-between shrink-0">
+                      <div className="w-full sm:w-[48%] lg:w-[308px] flex flex-col gap-2 sm:gap-0 justify-between shrink-0">
                         <div className="w-full sm:max-w-[308px] h-auto min-h-[50px] flex items-center gap-[8px] shrink-0 py-2">
                           <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
                             <Users className="w-4 h-4 text-[#1D493E]" />
@@ -810,7 +810,7 @@ export default function Homepage() {
                       </button>
                     </div>
                     {/* Details block with padding */}
-                    <div className="flex-1 flex flex-col justify-between pt-4 pb-4 px-0 gap-6 md:gap-0">
+                    <div className="flex-1 flex flex-col justify-between p-5 sm:p-6 gap-5 md:gap-0">
                       {/* Top Group (Width: Fill, Height: 151px, Gap: 12px) */}
                       <div className="flex flex-col gap-2 min-h-[140px] shrink-0 w-full">
                         {/* Tags Container (Width: Fill, Height: Hug 28px, Justify: space-between) */}
@@ -828,9 +828,9 @@ export default function Homepage() {
                       </div>
 
                       {/* Details Grid Block (Width: 616px, Height: 140px, Justify: space-between) */}
-                      <div className="w-full max-w-[616px] h-auto flex flex-col sm:flex-row justify-between border-t border-gray-200 pt-3 shrink-0 gap-4 sm:gap-0">
+                      <div className="w-full max-w-[616px] h-auto flex flex-col sm:flex-row justify-between border-t border-gray-200 pt-3 shrink-0 gap-4 sm:gap-6">
                         {/* Column 1 (Width: 308px, Height: 140px, Gap: space-between) */}
-                        <div className="w-full sm:w-[50%] lg:w-[308px] flex flex-col gap-2 sm:gap-0 justify-between shrink-0">
+                        <div className="w-full sm:w-[48%] lg:w-[308px] flex flex-col gap-2 sm:gap-0 justify-between shrink-0">
                           <div className="w-full sm:max-w-[308px] h-auto min-h-[50px] flex items-center gap-[8px] shrink-0 py-2">
                             <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
                               <MapPin className="w-4 h-4 text-[#1D493E]" />
@@ -845,7 +845,7 @@ export default function Homepage() {
                           </div>
                         </div>
                         {/* Column 2 (Width: 308px, Height: 140px, Gap: space-between) */}
-                        <div className="w-full sm:w-[50%] lg:w-[308px] flex flex-col gap-2 sm:gap-0 justify-between shrink-0">
+                        <div className="w-full sm:w-[48%] lg:w-[308px] flex flex-col gap-2 sm:gap-0 justify-between shrink-0">
                           <div className="w-full sm:max-w-[308px] h-auto min-h-[50px] flex items-center gap-[8px] shrink-0 py-2">
                             <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
                               <Users className="w-4 h-4 text-[#1D493E]" />

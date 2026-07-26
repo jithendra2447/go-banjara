@@ -361,13 +361,14 @@ export default function Homepage() {
       
       {/* 1. HERO VIDEO BACKGROUND LAYER (z-20, sits behind metrics bar z-35) */}
       <div className="relative hero-banner-height w-full z-20 overflow-hidden">
-        {/* HTML5 Video Element */}
+        {/* HTML5 Video Element with Instant Poster & Preload */}
         <video
           autoPlay
           loop
           muted
           playsInline
-          preload="metadata"
+          preload="auto"
+          poster="/hero-poster.jpg"
           className="absolute inset-0 w-full h-full object-cover scale-[1.08] brightness-[0.75] contrast-[1.05]"
           style={{ transform: 'scale(1.08) translateZ(0)' }}
         >

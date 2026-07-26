@@ -27,6 +27,10 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://images.unsplash.com" />
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
+
+        {/* High priority preloads for instant 0s video & poster rendering */}
+        <link rel="preload" href="/hero-poster.jpg" as="image" fetchPriority="high" />
+        <link rel="preload" href="/hero-video.mp4" as="video" type="video/mp4" />
       </head>
       <body
         className="antialiased min-h-screen bg-brand-beige text-primary-dark flex flex-col font-sans overflow-x-hidden relative"

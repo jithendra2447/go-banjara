@@ -15,7 +15,7 @@ export const Footer: React.FC = () => {
 
   return (
     <div style={{ width: "100%", background: "rgba(29, 73, 62, 1)" }}>
-      {/* Desktop Footer (hidden md:block) */}
+      {/* Desktop Footer (hidden md:flex) */}
       <footer
         style={{
           width: "100%",
@@ -27,7 +27,6 @@ export const Footer: React.FC = () => {
           background: "rgba(29, 73, 62, 1)",
           boxSizing: "border-box",
           margin: "0 auto",
-          display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
         }}

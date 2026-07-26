@@ -2211,7 +2211,7 @@ export default function Homepage() {
               { q: "Can I return a product if I don't like it?", a: "We offer a 7-day hassle-free return and exchange policy for all unused products." },
               { q: "I have no reviews on this product. Is it safe to buy?", a: "All Go Banjara products undergo strict quality checks and come with 100% verified customer guarantee." }
             ].map((faq, idx) => {
-              const isOpen = openFaqIndex === idx || idx === 0;
+              const isOpen = openFaqIndex === idx;
               return (
                 <div key={idx} className="py-3 text-left">
                   <button
@@ -2240,63 +2240,115 @@ export default function Homepage() {
       </section>
 
       {/* 12. SERVICES TO HELP YOU SHOP */}
-      <section className="w-full max-w-[1440px] bg-white pt-[28px] pb-[28px] md:px-[80px] px-6 flex flex-col gap-[32px] mx-auto">
-        {/* Header */}
-        <div className="w-full max-w-[1280px] h-auto flex flex-col gap-[12px] justify-center text-left mx-auto">
-          <div className="w-[54px] h-[26px] flex items-center justify-center bg-[#FFEBE5] rounded-[4px]">
-            <span className="font-sans font-semibold text-[14px] leading-none tracking-[1.2px] text-[#FF623E] uppercase">
-              Real
-            </span>
+      <section className="bg-white text-left relative z-10 border-t border-gray-100 w-full">
+        {/* Desktop Container (hidden md:flex) */}
+        <div className="hidden md:flex w-full max-w-[1440px] bg-white pt-[28px] pb-[28px] md:px-[80px] px-6 flex-col gap-[32px] mx-auto">
+          {/* Header */}
+          <div className="w-full max-w-[1280px] h-auto flex flex-col gap-[12px] justify-center text-left mx-auto">
+            <div className="w-[54px] h-[26px] flex items-center justify-center bg-[#FFEBE5] rounded-[4px]">
+              <span className="font-sans font-semibold text-[14px] leading-none tracking-[1.2px] text-[#FF623E] uppercase">
+                Real
+              </span>
+            </div>
+            <h2 className="font-serif font-semibold text-3xl md:text-[42px] leading-[1] tracking-[0px] text-[#2B2B2B] py-2">
+              Services to help you <span className="text-[#FF623E]">shop</span>
+            </h2>
           </div>
-          <h2 className="font-serif font-semibold text-3xl md:text-[42px] leading-[1] tracking-[0px] text-[#2B2B2B] py-2">
-            Services to help you <span className="text-[#FF623E]">shop</span>
-          </h2>
+
+          {/* Cards Grid */}
+          <div className="w-full max-w-[1280px] h-auto grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-row gap-[32px] mx-auto">
+            {/* Card 1: FAQ */}
+            <div className="w-full lg:w-[296px] h-auto flex flex-col gap-[24px] rounded-[4px] bg-white">
+              <div className="w-full h-[250px] rounded-tl-[4px] rounded-tr-[4px] overflow-hidden">
+                <img src="/service-faq.png" alt="FAQ illustration" className="w-full h-full object-cover" />
+              </div>
+              <div className="w-full h-auto flex flex-col gap-[12px]">
+                <h3 className="font-sans font-semibold text-lg sm:text-xl md:text-[28px] leading-snug tracking-[0px] text-[#2B2B2B]">Frequently Asked Questions (FAQ)</h3>
+                <p className="w-full h-auto font-sans font-medium text-sm sm:text-base md:text-[20px] leading-normal tracking-[0px] text-[rgba(43,43,43,0.8)]">See what are the commonly asked questions by our costumers</p>
+              </div>
+            </div>
+
+            {/* Card 2: Home Delivery */}
+            <div className="w-full lg:w-[296px] h-auto flex flex-col gap-[24px] rounded-[4px] bg-white">
+              <div className="w-full h-[250px] rounded-tl-[4px] rounded-tr-[4px] overflow-hidden">
+                <img src="/service-delivery.png" alt="Home delivery illustration" className="w-full h-full object-cover" />
+              </div>
+              <div className="w-full h-auto flex flex-col gap-[12px]">
+                <h3 className="font-sans font-semibold text-lg sm:text-xl md:text-[28px] leading-snug tracking-[0px] text-[#2B2B2B]">Home Delivery Options available</h3>
+                <p className="w-full h-auto font-sans font-medium text-sm sm:text-base md:text-[20px] leading-normal tracking-[0px] text-[rgba(43,43,43,0.8)]">Pay with multiple cards seamlessly and without interruption</p>
+              </div>
+            </div>
+
+            {/* Card 3: Secure Payment */}
+            <div className="w-full lg:w-[296px] h-auto flex flex-col gap-[24px] rounded-[4px] bg-white">
+              <div className="w-full h-[250px] rounded-tl-[4px] rounded-tr-[4px] overflow-hidden">
+                <img src="/service-payment.png" alt="Secure payment illustration" className="w-full h-full object-cover" />
+              </div>
+              <div className="w-full h-auto flex flex-col gap-[12px]">
+                <h3 className="font-sans font-semibold text-lg sm:text-xl md:text-[28px] leading-snug tracking-[0px] text-[#2B2B2B]">Secure Online Payment Process</h3>
+                <p className="w-full h-auto font-sans font-medium text-sm sm:text-base md:text-[20px] leading-normal tracking-[0px] text-[rgba(43,43,43,0.8)]">Pay with multiple cards seamlessly and without interruption</p>
+              </div>
+            </div>
+
+            {/* Card 4: Open Box Delivery */}
+            <div className="w-full lg:w-[296px] h-auto flex flex-col gap-[24px] rounded-[4px] bg-white">
+              <div className="w-full h-[250px] rounded-tl-[4px] rounded-tr-[4px] overflow-hidden">
+                <img src="/service-openbox.png" alt="Open box delivery illustration" className="w-full h-full object-cover" />
+              </div>
+              <div className="w-full h-auto flex flex-col gap-[12px]">
+                <h3 className="font-sans font-semibold text-lg sm:text-xl md:text-[28px] leading-snug tracking-[0px] text-[#2B2B2B]">Open Box Delivery</h3>
+                <p className="w-full h-auto font-sans font-medium text-sm sm:text-base md:text-[20px] leading-normal tracking-[0px] text-[rgba(43,43,43,0.8)]">Pay with multiple cards seamlessly and without interruption</p>
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* Cards Grid */}
-        <div className="w-full max-w-[1280px] h-auto grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-row gap-[32px] mx-auto">
-          {/* Card 1: FAQ */}
-          <div className="w-full lg:w-[296px] h-auto flex flex-col gap-[24px] rounded-[4px] bg-white">
-            <div className="w-full h-[250px] rounded-tl-[4px] rounded-tr-[4px] overflow-hidden">
-              <img src="/service-faq.png" alt="FAQ illustration" className="w-full h-full object-cover" />
-            </div>
-            <div className="w-full h-auto flex flex-col gap-[12px]">
-              <h3 className="font-sans font-semibold text-lg sm:text-xl md:text-[28px] leading-snug tracking-[0px] text-[#2B2B2B]">Frequently Asked Questions (FAQ)</h3>
-              <p className="w-full h-auto font-sans font-medium text-sm sm:text-base md:text-[20px] leading-normal tracking-[0px] text-[rgba(43,43,43,0.8)]">See what are the commonly asked questions by our costumers</p>
-            </div>
-          </div>
+        {/* Mobile Figma Spec Container (block md:hidden) - w:430px max, gap:12px, padding:12px 20px */}
+        <div className="block md:hidden w-full max-w-[430px] mx-auto py-[12px] px-[20px] bg-white flex flex-col gap-[12px]">
+          <h2 className="text-[32px] font-serif font-semibold text-[#1D493E] leading-none text-left m-0">
+            Services to help you <span className="text-[#FF5A36]">shop</span>
+          </h2>
 
-          {/* Card 2: Home Delivery */}
-          <div className="w-full lg:w-[296px] h-auto flex flex-col gap-[24px] rounded-[4px] bg-white">
-            <div className="w-full h-[250px] rounded-tl-[4px] rounded-tr-[4px] overflow-hidden">
-              <img src="/service-delivery.png" alt="Home delivery illustration" className="w-full h-full object-cover" />
-            </div>
-            <div className="w-full h-auto flex flex-col gap-[12px]">
-              <h3 className="font-sans font-semibold text-lg sm:text-xl md:text-[28px] leading-snug tracking-[0px] text-[#2B2B2B]">Home Delivery Options available</h3>
-              <p className="w-full h-auto font-sans font-medium text-sm sm:text-base md:text-[20px] leading-normal tracking-[0px] text-[rgba(43,43,43,0.8)]">Pay with multiple cards seamlessly and without interruption</p>
-            </div>
-          </div>
-
-          {/* Card 3: Secure Payment */}
-          <div className="w-full lg:w-[296px] h-auto flex flex-col gap-[24px] rounded-[4px] bg-white">
-            <div className="w-full h-[250px] rounded-tl-[4px] rounded-tr-[4px] overflow-hidden">
-              <img src="/service-payment.png" alt="Secure payment illustration" className="w-full h-full object-cover" />
-            </div>
-            <div className="w-full h-auto flex flex-col gap-[12px]">
-              <h3 className="font-sans font-semibold text-lg sm:text-xl md:text-[28px] leading-snug tracking-[0px] text-[#2B2B2B]">Secure Online Payment Process</h3>
-              <p className="w-full h-auto font-sans font-medium text-sm sm:text-base md:text-[20px] leading-normal tracking-[0px] text-[rgba(43,43,43,0.8)]">Pay with multiple cards seamlessly and without interruption</p>
-            </div>
-          </div>
-
-          {/* Card 4: Open Box Delivery */}
-          <div className="w-full lg:w-[296px] h-auto flex flex-col gap-[24px] rounded-[4px] bg-white">
-            <div className="w-full h-[250px] rounded-tl-[4px] rounded-tr-[4px] overflow-hidden">
-              <img src="/service-openbox.png" alt="Open box delivery illustration" className="w-full h-full object-cover" />
-            </div>
-            <div className="w-full h-auto flex flex-col gap-[12px]">
-              <h3 className="font-sans font-semibold text-lg sm:text-xl md:text-[28px] leading-snug tracking-[0px] text-[#2B2B2B]">Open Box Delivery</h3>
-              <p className="w-full h-auto font-sans font-medium text-sm sm:text-base md:text-[20px] leading-normal tracking-[0px] text-[rgba(43,43,43,0.8)]">Pay with multiple cards seamlessly and without interruption</p>
-            </div>
+          <div className="grid grid-cols-2 gap-[12px] w-full">
+            {[
+              {
+                title: "Frequently Asked Questions (FAQ)",
+                desc: "See commonly asked questions",
+                img: "/service-faq.png"
+              },
+              {
+                title: "Home Delivery Options",
+                desc: "Multiple payment cards seamlessly",
+                img: "/service-delivery.png"
+              },
+              {
+                title: "Secure Online Payment",
+                desc: "100% encrypted checkout process",
+                img: "/service-payment.png"
+              },
+              {
+                title: "Open Box Delivery",
+                desc: "Verify before you receive",
+                img: "/service-openbox.png"
+              }
+            ].map((srv, idx) => (
+              <div 
+                key={idx}
+                className="w-full bg-white border border-gray-100 rounded-[8px] overflow-hidden flex flex-col gap-2 text-left shadow-2xs"
+              >
+                <div className="w-full aspect-[4/3] bg-gray-100 overflow-hidden">
+                  <img src={srv.img} alt={srv.title} className="w-full h-full object-cover" />
+                </div>
+                <div className="p-2.5 flex flex-col gap-1">
+                  <h4 className="text-[13px] font-sans font-bold text-[#2B2B2B] leading-tight m-0">
+                    {srv.title}
+                  </h4>
+                  <p className="text-[11px] font-sans font-medium text-gray-400 leading-snug m-0">
+                    {srv.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>

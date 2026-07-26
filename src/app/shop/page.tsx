@@ -179,7 +179,7 @@ export default function ShopPage() {
             Some journeys change where you go. Others change who you are.
           </h1>
 
-          {/* Subtitle */}
+          {/* Subtitle (Hidden on mobile) */}
           <p
             style={{
               margin: 0,
@@ -188,7 +188,7 @@ export default function ShopPage() {
               color: "rgba(43, 43, 43, 1)",
               textAlign: "center",
             }}
-            className="text-xs sm:text-base md:text-[20px] leading-relaxed md:leading-[32px] w-full max-w-[900px]"
+            className="hidden md:block text-xs sm:text-base md:text-[20px] leading-relaxed md:leading-[32px] w-full max-w-[900px]"
           >
             Discover curated travel experiences, gear that keeps up with you, and a community of free-spirited explorers across India.
           </p>
@@ -228,18 +228,18 @@ export default function ShopPage() {
         {/* Section 1: New Arrivals */}
         <div style={{ paddingTop: "42px", paddingBottom: "42px", display: "flex", flexDirection: "column", width: "100%", backgroundColor: "white" }}>
           {/* Header */}
-          <div className="text-left space-y-2.5">
+          <div className="text-left space-y-1.5 md:space-y-2.5">
             <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
               NEW STYLES
             </span>
-            <h2 style={{ fontFamily: 'Fraunces, serif', fontWeight: 600, fontSize: '42px', lineHeight: '100%', letterSpacing: '0px' }} className="text-2xl md:text-[42px]">
+            <h2 style={{ fontFamily: 'Fraunces, serif', fontWeight: 600, letterSpacing: '0px' }} className="text-2xl sm:text-3xl md:text-[42px] leading-tight md:leading-[100%]">
               <span className="text-[#FF5B37]">New</span> <span className="text-[#2B2B2B]">Arrivals</span>
             </h2>
-            <p style={{ fontFamily: 'Faktum, sans-serif', fontWeight: 500, fontSize: '24px', lineHeight: '32px', letterSpacing: '0px' }} className="text-sm md:text-[24px] text-[#2B2B2B]/80">
+            <p style={{ fontFamily: 'Faktum, sans-serif', fontWeight: 500, letterSpacing: '0px' }} className="hidden md:block text-sm md:text-[24px] text-[#2B2B2B]/80 leading-relaxed">
               Curated gear for the modern nomad. From durable journal covers to the stickers that tell your story
             </p>
           </div>
-          <div style={{ height: "62px" }} className="shrink-0" />
+          <div className="h-3 md:h-[62px] shrink-0" />
 
           {/* Grid */}
           {renderProductGrid(newArrivals, setActiveNewArrivalsSlide)}
@@ -258,18 +258,18 @@ export default function ShopPage() {
         {/* Section 2: Travels Essentials */}
         <div style={{ paddingTop: "42px", paddingBottom: "42px", display: "flex", flexDirection: "column", width: "100%", backgroundColor: "white" }}>
           {/* Header */}
-          <div className="text-left space-y-2.5">
+          <div className="text-left space-y-1.5 md:space-y-2.5">
             <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
               NEW STYLES
             </span>
-            <h2 style={{ fontFamily: 'Fraunces, serif', fontWeight: 600, fontSize: '42px', lineHeight: '100%', letterSpacing: '0px' }} className="text-2xl md:text-[42px]">
+            <h2 style={{ fontFamily: 'Fraunces, serif', fontWeight: 600, letterSpacing: '0px' }} className="text-2xl sm:text-3xl md:text-[42px] leading-tight md:leading-[100%]">
               <span className="text-[#FF5B37]">Travels</span> <span className="text-[#2B2B2B]">Essentials</span>
             </h2>
-            <p style={{ fontFamily: 'Faktum, sans-serif', fontWeight: 500, fontSize: '24px', lineHeight: '32px', letterSpacing: '0px' }} className="text-sm md:text-[24px] text-[#2B2B2B]/80">
+            <p style={{ fontFamily: 'Faktum, sans-serif', fontWeight: 500, letterSpacing: '0px' }} className="hidden md:block text-sm md:text-[24px] text-[#2B2B2B]/80 leading-relaxed">
               Curated gear for the modern nomad. From durable journal covers to the stickers that tell your story
             </p>
           </div>
-          <div style={{ height: "62px" }} className="shrink-0" />
+          <div className="h-3 md:h-[62px] shrink-0" />
 
           {/* Grid Rows */}
           {renderProductGrid(travelsEssentials.slice(0, 4), setActiveTravelsEssentialsSlide)}
@@ -299,18 +299,18 @@ export default function ShopPage() {
         {/* Section 3: Limited Edition */}
         <div style={{ paddingTop: "42px", paddingBottom: "42px", display: "flex", flexDirection: "column", width: "100%", backgroundColor: "white" }}>
           {/* Header */}
-          <div className="text-left space-y-2.5">
+          <div className="text-left space-y-1.5 md:space-y-2.5">
             <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
               NEW STYLES
             </span>
-            <h2 style={{ fontFamily: 'Fraunces, serif', fontWeight: 600, fontSize: '42px', lineHeight: '100%', letterSpacing: '0px' }} className="text-2xl md:text-[42px]">
+            <h2 style={{ fontFamily: 'Fraunces, serif', fontWeight: 600, letterSpacing: '0px' }} className="text-2xl sm:text-3xl md:text-[42px] leading-tight md:leading-[100%]">
               <span className="text-[#FF5B37]">Limited</span> <span className="text-[#2B2B2B]">Edition</span>
             </h2>
-            <p style={{ fontFamily: 'Faktum, sans-serif', fontWeight: 500, fontSize: '24px', lineHeight: '32px', letterSpacing: '0px' }} className="text-sm md:text-[24px] text-[#2B2B2B]/80">
+            <p style={{ fontFamily: 'Faktum, sans-serif', fontWeight: 500, letterSpacing: '0px' }} className="hidden md:block text-sm md:text-[24px] text-[#2B2B2B]/80 leading-relaxed">
               Curated gear for the modern nomad. From durable journal covers to the stickers that tell your story
             </p>
           </div>
-          <div style={{ height: "62px" }} className="shrink-0" />
+          <div className="h-3 md:h-[62px] shrink-0" />
 
           {/* Grid */}
           {renderProductGrid(limitedEdition, setActiveLimitedEditionSlide)}
@@ -329,18 +329,18 @@ export default function ShopPage() {
         {/* Section 4: 25% to 50% Discount Sale */}
         <div style={{ paddingTop: "42px", paddingBottom: "42px", display: "flex", flexDirection: "column", width: "100%", backgroundColor: "white" }}>
           {/* Header */}
-          <div className="text-left space-y-2.5">
+          <div className="text-left space-y-1.5 md:space-y-2.5">
             <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
               NEW STYLES
             </span>
-            <h2 style={{ fontFamily: 'Fraunces, serif', fontWeight: 600, fontSize: '42px', lineHeight: '100%', letterSpacing: '0px' }} className="text-2xl md:text-[42px]">
+            <h2 style={{ fontFamily: 'Fraunces, serif', fontWeight: 600, letterSpacing: '0px' }} className="text-2xl sm:text-3xl md:text-[42px] leading-tight md:leading-[100%]">
               <span className="text-[#FF5B37]">25% to 50% Discount</span> <span className="text-[#2B2B2B]">Sale</span>
             </h2>
-            <p style={{ fontFamily: 'Faktum, sans-serif', fontWeight: 500, fontSize: '24px', lineHeight: '32px', letterSpacing: '0px' }} className="text-sm md:text-[24px] text-[#2B2B2B]/80">
+            <p style={{ fontFamily: 'Faktum, sans-serif', fontWeight: 500, letterSpacing: '0px' }} className="hidden md:block text-sm md:text-[24px] text-[#2B2B2B]/80 leading-relaxed">
               Curated gear for the modern nomad. From durable journal covers to the stickers that tell your story
             </p>
           </div>
-          <div style={{ height: "62px" }} className="shrink-0" />
+          <div className="h-3 md:h-[62px] shrink-0" />
 
           {/* Grid Rows */}
           {renderProductGrid(travelsEssentials.slice(0, 4), setActiveDiscountSaleSlide)}
@@ -371,14 +371,14 @@ export default function ShopPage() {
         {/* Testimonials Section (Captured Memories) (Padding: pt-[42px] pb-[24px]) */}
         <div className="bg-white pt-[42px] pb-[24px] flex flex-col gap-[32px] w-full border-t border-slate-100 mt-8">
           {/* Header */}
-          <div className="text-left space-y-2.5">
+          <div className="text-left space-y-1.5 md:space-y-2.5">
             <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
               CAPTURED MEMORIES
             </span>
-            <h2 style={{ fontFamily: 'Fraunces, serif', fontWeight: 600, fontSize: '42px', lineHeight: '100%', letterSpacing: '0px' }} className="text-2xl md:text-[42px]">
+            <h2 style={{ fontFamily: 'Fraunces, serif', fontWeight: 600, letterSpacing: '0px' }} className="text-2xl sm:text-3xl md:text-[42px] leading-tight md:leading-[100%]">
               Capture your adventurous travel <span className="text-[#FF5B37]">Forever</span>
             </h2>
-            <p style={{ fontFamily: 'Faktum, sans-serif', fontWeight: 500, fontSize: '24px', lineHeight: '32px', letterSpacing: '0px' }} className="text-sm md:text-[24px] text-[#2B2B2B]/80">
+            <p style={{ fontFamily: 'Faktum, sans-serif', fontWeight: 500, letterSpacing: '0px' }} className="hidden md:block text-sm md:text-[24px] text-[#2B2B2B]/80 leading-relaxed">
               Curated journeys for the modern nomad, designed to push boundaries and discover India's hidden heart
             </p>
           </div>

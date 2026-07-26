@@ -465,8 +465,8 @@ export default function HolidaysPortal() {
               </div>
             </div>
 
-            {/* Field 2: Date Range */}
-            <div className="flex-1 md:flex-[1.8] flex flex-col gap-2">
+            {/* Field 2: Date */}
+            <div className="flex-1 md:flex-[1] flex flex-col gap-2">
               <label style={{ 
                 fontFamily: "'Faktum', 'Outfit', sans-serif", 
                 fontWeight: 500, 
@@ -478,91 +478,47 @@ export default function HolidaysPortal() {
               }} className="text-sm sm:text-base md:text-[20px]">
                 Date
               </label>
-              <div className="w-full flex flex-col sm:flex-row gap-3">
-                <div 
-                  className="flex-1 h-[56px] border border-[rgba(141,141,141,0.5)] rounded-[8px] px-3 sm:px-4 flex items-center gap-2 sm:gap-3 bg-white relative"
-                >
-                  <Calendar 
-                    className="w-5 h-5 sm:w-6 sm:h-6 text-[rgba(141,141,141,1)] shrink-0 cursor-pointer hover:text-[#1D493E] transition-colors" 
-                    onClick={() => {
-                      try {
-                        startDatePickerRef.current?.showPicker();
-                      } catch (err) {}
-                    }}
-                  />
-                  <input
-                    type="text"
-                    value={startDate}
-                    onChange={(e) => setStartDate(e.target.value)}
-                    placeholder="dd/mm/yyyy"
-                    style={{ 
-                      flex: 1, 
-                      background: "transparent", 
-                      border: "none", 
-                      outline: "none", 
-                      fontFamily: "'Faktum', 'Outfit', sans-serif", 
-                      fontWeight: 500, 
-                      lineHeight: "100%", 
-                      letterSpacing: "0px", 
-                      color: "rgba(43, 43, 43, 1)",
-                      padding: 0,
-                    }}
-                    className="placeholder-[rgba(141,141,141,1)] text-sm sm:text-base md:text-[20px] w-full"
-                  />
-                  <input 
-                    ref={startDatePickerRef}
-                    type="date"
-                    className="sr-only opacity-0 absolute w-0 h-0 pointer-events-none"
-                    onChange={(e) => {
-                      if (e.target.value) {
-                        const [y, m, d] = e.target.value.split('-');
-                        setStartDate(`${d}/${m}/${y}`);
-                      }
-                    }}
-                  />
-                </div>
-                <div 
-                  className="flex-1 h-[56px] border border-[rgba(141,141,141,0.5)] rounded-[8px] px-3 sm:px-4 flex items-center gap-2 sm:gap-3 bg-white relative"
-                >
-                  <Calendar 
-                    className="w-5 h-5 sm:w-6 sm:h-6 text-[rgba(141,141,141,1)] shrink-0 cursor-pointer hover:text-[#1D493E] transition-colors" 
-                    onClick={() => {
-                      try {
-                        endDatePickerRef.current?.showPicker();
-                      } catch (err) {}
-                    }}
-                  />
-                  <input
-                    type="text"
-                    value={endDate}
-                    onChange={(e) => setEndDate(e.target.value)}
-                    placeholder="dd/mm/yyyy"
-                    style={{ 
-                      flex: 1, 
-                      background: "transparent", 
-                      border: "none", 
-                      outline: "none", 
-                      fontFamily: "'Faktum', 'Outfit', sans-serif", 
-                      fontWeight: 500, 
-                      lineHeight: "100%", 
-                      letterSpacing: "0px", 
-                      color: "rgba(43, 43, 43, 1)",
-                      padding: 0,
-                    }}
-                    className="placeholder-[rgba(141,141,141,1)] text-sm sm:text-base md:text-[20px] w-full"
-                  />
-                  <input 
-                    ref={endDatePickerRef}
-                    type="date"
-                    className="sr-only opacity-0 absolute w-0 h-0 pointer-events-none"
-                    onChange={(e) => {
-                      if (e.target.value) {
-                        const [y, m, d] = e.target.value.split('-');
-                        setEndDate(`${d}/${m}/${y}`);
-                      }
-                    }}
-                  />
-                </div>
+              <div 
+                className="w-full h-[56px] border border-[rgba(141,141,141,0.5)] rounded-[8px] px-3 sm:px-4 flex items-center gap-2 sm:gap-3 bg-white relative"
+              >
+                <Calendar 
+                  className="w-5 h-5 sm:w-6 sm:h-6 text-[rgba(141,141,141,1)] shrink-0 cursor-pointer hover:text-[#1D493E] transition-colors" 
+                  onClick={() => {
+                    try {
+                      startDatePickerRef.current?.showPicker();
+                    } catch (err) {}
+                  }}
+                />
+                <input
+                  type="text"
+                  value={startDate}
+                  onChange={(e) => setStartDate(e.target.value)}
+                  placeholder="dd/mm/yyyy"
+                  style={{ 
+                    flex: 1, 
+                    background: "transparent", 
+                    border: "none", 
+                    outline: "none", 
+                    fontFamily: "'Faktum', 'Outfit', sans-serif", 
+                    fontWeight: 500, 
+                    lineHeight: "100%", 
+                    letterSpacing: "0px", 
+                    color: "rgba(43, 43, 43, 1)",
+                    padding: 0,
+                  }}
+                  className="placeholder-[rgba(141,141,141,1)] text-sm sm:text-base md:text-[20px] w-full"
+                />
+                <input 
+                  ref={startDatePickerRef}
+                  type="date"
+                  className="sr-only opacity-0 absolute w-0 h-0 pointer-events-none"
+                  onChange={(e) => {
+                    if (e.target.value) {
+                      const [y, m, d] = e.target.value.split('-');
+                      setStartDate(`${d}/${m}/${y}`);
+                    }
+                  }}
+                />
               </div>
             </div>
 

@@ -171,7 +171,7 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
           overflow: "hidden",
           boxSizing: "border-box",
         }}
-        className="hidden sm:flex min-h-[560px] h-full flex-col justify-between gap-4 p-0 border-none rounded-none shadow-none"
+        className="hidden sm:flex min-h-[560px] h-full flex-col justify-between gap-4 p-0 border-none rounded-none shadow-none group cursor-pointer"
       >
         {/* Image Container */}
         <div 
@@ -197,6 +197,7 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
               alt={product.name} 
               loading="lazy"
               decoding="async"
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
               style={{
                 width: "100%",
                 height: "100%",

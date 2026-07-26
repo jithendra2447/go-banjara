@@ -625,7 +625,7 @@ export default function Homepage() {
               </span>
             </div>
             <h2 className="text-3xl md:text-[42px] font-serif font-semibold text-[#1D493E] leading-none text-center">
-              Place worth the <span className="text-[#FF5A36]">detour</span>
+              Featured&nbsp;<span className="text-[#FF5A36]">Holiday</span>&nbsp;Packages
             </h2>
             <p className="text-gray-500 text-base md:text-[24px] md:leading-8 font-medium text-center max-w-2xl mx-auto">
               A hand-picked map of the corners of India
@@ -918,7 +918,7 @@ export default function Homepage() {
           {/* Header Row */}
           <div className="flex items-center justify-between w-full mb-[12px] px-[4px]">
             <h2 className="text-[22px] font-serif font-bold text-[#1D493E] leading-tight m-0">
-              Place worth the <span className="text-[#FF5A36]">detour</span>
+              Featured&nbsp;<span className="text-[#FF5A36]">Holiday</span>&nbsp;Packages
             </h2>
             <Link 
               href="/travel" 
@@ -1059,7 +1059,7 @@ export default function Homepage() {
                 </span>
               </div>
               <h2 className="text-3xl md:text-[42px] font-serif font-semibold text-[#1D493E] leading-none">
-                Shop from our <span className="text-[#FF5A36]">Top Product Categories</span>
+                Explore&nbsp;<span className="text-[#FF5A36]">Travel Essentials</span>
               </h2>
               <p className="text-gray-500 text-base md:text-[24px] md:leading-8 font-medium">
                 A hand-picked map of the corners of India our community keeps coming back to
@@ -1202,7 +1202,7 @@ export default function Homepage() {
           {/* Header */}
           <div className="flex items-center justify-between w-full mb-[12px]">
             <h2 className="text-[22px] font-serif font-bold text-[#1D493E] leading-tight m-0">
-              Top <span className="text-[#FF5A36]">Products</span>
+              Top&nbsp;<span className="text-[#FF5A36]">Products</span>
             </h2>
             <Link 
               href="/shop" 
@@ -1310,7 +1310,7 @@ export default function Homepage() {
             {/* Title */}
             <h2 className="w-full max-w-[1280px] h-auto flex items-center justify-center text-[32px] md:text-[42px] font-serif font-semibold text-[#1D493E] leading-none text-center">
               {pageContent.dealsTitle.includes("best deals") ? (
-                <>Today's{" "}<span className="text-[#FF5A36]">best deals</span>{" "}for you</>
+                <>Today&apos;s&nbsp;<span className="text-[#FF5A36]">best deals</span>&nbsp;for you</>
               ) : (
                 pageContent.dealsTitle
               )}
@@ -1354,7 +1354,7 @@ export default function Homepage() {
                       <img 
                         src={deal.images[activeImageIndices[deal.id] || 0]} 
                         alt={deal.name} 
-                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                         style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
                       />
                     </Link>
@@ -1498,7 +1498,7 @@ export default function Homepage() {
           {/* Header Row: Title + Round Green Arrow Button */}
           <div className="flex items-center justify-between w-full h-auto min-h-[30px]">
             <h2 className="text-[22px] sm:text-[26px] font-serif font-semibold text-[#1D493E] leading-tight m-0">
-              Today's <span className="text-[#FF5A36]">best deals</span>
+              Today&apos;s&nbsp;<span className="text-[#FF5A36]">best deals</span>
             </h2>
             <Link 
               href="/shop"
@@ -1627,15 +1627,17 @@ export default function Homepage() {
               return (
                 <div 
                   key={prod.id} 
-                  className="bg-white rounded-[4px] w-full h-auto pb-4 flex flex-col justify-between gap-[16px] flex"
+                  className="bg-white rounded-[4px] w-full h-auto pb-4 flex flex-col justify-between gap-[16px] group cursor-pointer"
                 >
                   <div className="relative w-full md:h-[254px] rounded-[4px] overflow-hidden shrink-0">
-                    <img 
-                      src={prod.images[activeImageIndices[prod.id] || 0]} 
-                      alt={prod.name} 
-                      className="w-full h-full object-cover"
-                      style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
-                    />
+                    <Link href={`/shop/product/${prod.id}`} className="w-full h-full block cursor-pointer">
+                      <img 
+                        src={prod.images[activeImageIndices[prod.id] || 0]} 
+                        alt={prod.name} 
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                        style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
+                      />
+                    </Link>
                   </div>
 
                   <div className="w-full h-auto flex flex-col justify-between text-left gap-3 px-0">
@@ -1927,7 +1929,7 @@ export default function Homepage() {
               </span>
             </div>
             <h2 className="text-3xl md:text-[42px] font-serif font-semibold text-[#1D493E] leading-none w-full max-w-[1280px] h-auto flex items-center py-2">
-              What <span className="text-[#FF623E]">people say</span> about products
+              What&nbsp;<span className="text-[#FF623E]">people say</span>&nbsp;about products
             </h2>
           </div>
           
@@ -2099,7 +2101,7 @@ export default function Homepage() {
               REAL EXPERIENCES
             </span>
             <h2 className="text-[22px] font-serif font-semibold text-[#1D493E] leading-tight m-0">
-              What <span className="text-[#FF623E]">people say</span>
+              What&nbsp;<span className="text-[#FF623E]">people say</span>
             </h2>
           </div>
           
@@ -2200,7 +2202,7 @@ export default function Homepage() {
               </span>
             </div>
             <h2 className="text-3xl md:text-[42px] font-serif font-semibold text-[#2B2B2B] leading-none h-auto flex items-center justify-center py-2">
-              Travel Tales from the curious Explorer
+              Follow Our&nbsp;<span className="text-[#FF5A36]">Journey</span>
             </h2>
             <p className="text-[#2B2B2B] text-sm sm:text-base md:text-[24px] font-medium leading-relaxed md:leading-[32px] h-auto flex items-center justify-center">
               Follow my voices to discover unique voices, breathtaking landscapes & unforgettable experiences
@@ -2310,7 +2312,7 @@ export default function Homepage() {
               </span>
             </div>
             <h2 className="w-full max-w-[541px] h-auto flex items-center font-serif font-semibold text-3xl md:text-[42px] leading-[1] tracking-[0px] text-[#2B2B2B] py-2">
-              Frequently asked questions
+              Got Questions?&nbsp;<span className="text-[#FF5A36]">We&apos;ve Got Answers.</span>
             </h2>
           </div>
 
@@ -2399,7 +2401,7 @@ export default function Homepage() {
               </span>
             </div>
             <h2 className="font-serif font-semibold text-3xl md:text-[42px] leading-[1] tracking-[0px] text-[#2B2B2B] py-2">
-              Services to help you <span className="text-[#FF623E]">shop</span>
+              Join the&nbsp;<span className="text-[#FF5A36]">Banjara Tribe</span>
             </h2>
           </div>
 

@@ -345,25 +345,8 @@ export default function HolidaysPortal() {
             gap: "16px",
           }}
         >
-          <span 
-            style={{ 
-              display: "inline-flex", 
-              alignItems: "center", 
-              justifyContent: "center",
-              height: "28px",
-              padding: "0 16px",
-              borderRadius: "4px",
-              fontFamily: "'Faktum', 'Outfit', sans-serif",
-              fontWeight: 600,
-              fontSize: "14px",
-              lineHeight: "100%",
-              letterSpacing: "1.2px",
-              textTransform: "uppercase",
-              color: "rgba(255, 98, 62, 1)",
-              background: "rgba(255, 98, 62, 0.1)",
-            }}
-          >
-            Discover Your Path
+          <span className="inline-block text-[#FF623E] bg-[#FFEBE5] px-2.5 py-1 rounded-[4px] text-[14px] font-semibold uppercase tracking-[1.2px]">
+            CAPTURED MEMORIES
           </span>
           <h1 
             style={{
@@ -376,7 +359,7 @@ export default function HolidaysPortal() {
             }}
             className="text-3xl md:text-[42px] leading-tight"
           >
-            Available <span style={{ color: "rgba(255, 98, 62, 1)", fontWeight: 600 }}>Packages</span>
+            Capture your adventurous travel&nbsp;<span style={{ color: "rgba(255, 98, 62, 1)", fontWeight: 600 }}>Forever</span>
           </h1>
           <p 
             style={{

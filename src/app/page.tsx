@@ -1463,29 +1463,15 @@ export default function Homepage() {
               <span className="w-[163px] h-[25px] flex items-center justify-center font-sans font-medium text-[20px] leading-none">
                 View all products
               </span>
-              <svg 
-                style={{ width: '32px', height: '32px' }}
-                viewBox="0 0 24 24" 
-                fill="none" 
-                stroke="currentColor" 
-                strokeWidth="2.25" 
-                strokeLinecap="round" 
-                strokeLinejoin="round"
-                className="shrink-0"
-              >
-                <path d="M7 17l2.5-2.5" />
-                <path d="M12.5 11.5L17 7" />
-                <path d="M7 7h10v10" />
-              </svg>
+              <ArrowRight className="w-6 h-6 text-[#1D493E] shrink-0" />
             </Link>
           </div>
 
         </div>
       </section>
-
-      {/* 8. MOST SELLING PRODUCTS */}
-      <section className="bg-white pt-[20px] pb-[20px] text-left relative z-10 border-t border-gray-100">
-        <div className="max-w-[1440px] mx-auto px-6 md:px-[80px] flex flex-col gap-[32px]">
+      <section className="bg-white text-left relative z-10 border-t border-gray-100">
+        {/* Desktop Container (hidden md:block) */}
+        <div className="hidden md:flex max-w-[1440px] mx-auto pt-[20px] pb-[20px] px-6 md:px-[80px] flex-col gap-[32px]">
           
           {/* Header Row (Flow Horizontal, Justify space-between, Width Fill, items-end) */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-2 text-left">
@@ -1532,13 +1518,8 @@ export default function Homepage() {
               resolveProduct("naturally-nomad-badge-1", "Naturally Nomad", "Badges", "/naturally_nomad_badge.png", 139, 199),
               resolveProduct("banjara-blue-slides-png", "Blue Mavin", "Slippers", "/blue_mavin_slides.jpg", 399, 599),
               resolveProduct("explore-more-keychain-1", "Explore more", "Key Chains", "/explore_more_keychain.png", 149, 193),
-              resolveProduct("banjara-slides-1", "Banjara Slides", "Slippers", "/banjara_slides.jpg", 399, 599),
-              resolveProduct("wakefit-pillow-1", "Wakefit Pillows", "Travel Pillows", "/wakefit_pillow.jpg", 139, 199),
-              resolveProduct("fur-jaden-backpack-1", "Fur Jaden C/W", "Backpacks", "/fur_jaden_backpack.jpg", 149, 193),
-              resolveProduct("go-passport-cover-1", "Go Passport Cover", "Passport Covers", "/go_passport_cover.jpg", 399, 599),
-              resolveProduct("banjara-luggage-tag-1", "Banjara Luggage Tag", "Luggage Tags", "/banjara_luggage_tag.jpg", 139, 199)
-            ].map((prod, idx) => {
-              // Mock product object for cart action
+              resolveProduct("banjara-slides-1", "Banjara Slides", "Slippers", "/banjara_slides.jpg", 399, 599)
+            ].map((prod) => {
               const mockProduct = {
                 id: prod.id,
                 name: prod.name,
@@ -1553,11 +1534,8 @@ export default function Homepage() {
               return (
                 <div 
                   key={prod.id} 
-                  className={`bg-white rounded-[4px] w-full h-auto pb-4 flex flex-col justify-between gap-[16px] hover:shadow-xs transition duration-300 overflow-hidden ${
-                    idx >= 3 ? 'hidden md:flex' : 'flex'
-                  }`}
+                  className="bg-white rounded-[4px] w-full h-auto pb-4 flex flex-col justify-between gap-[16px] hover:shadow-xs transition duration-300 overflow-hidden flex"
                 >
-                  {/* Image Container with Dots (Width: 339px, Height: 254px, Radius: 4px) */}
                   <div className="relative w-full md:h-[254px] rounded-[4px] overflow-hidden shrink-0">
                     <img 
                       src={prod.images[activeImageIndices[prod.id] || 0]} 
@@ -1565,17 +1543,13 @@ export default function Homepage() {
                       className="w-full h-full object-cover"
                       style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
                     />
-
                   </div>
 
-                  {/* Details Block */}
                   <div className="w-full h-auto flex flex-col justify-between text-left gap-3 px-4">
-                    {/* Category Tag */}
                     <span className="inline-flex items-center justify-center h-[28px] rounded-[4px] px-[8px] py-[4px] text-[13px] font-sans font-medium text-[#FF623E] bg-[#FF623E]/8 self-start">
                       {prod.category}
                     </span>
                     
-                    {/* Title & Price Row */}
                     <div className="w-full h-auto min-h-[35px] flex justify-between items-center gap-2">
                       <h4 className="text-[15px] md:text-[17px] font-sans font-semibold text-[#2B2B2B] truncate">{prod.name}</h4>
                       <div className="flex items-center gap-2.5 shrink-0">
@@ -1584,7 +1558,6 @@ export default function Homepage() {
                       </div>
                     </div>
 
-                    {/* Rating Row */}
                     <div className="flex items-center gap-[12px] h-[20px] shrink-0">
                       <div className="flex text-amber-400 gap-0.5">
                         <Star className="w-3.5 h-3.5 md:w-[18px] md:h-[18px] fill-current" />
@@ -1596,16 +1569,13 @@ export default function Homepage() {
                       <span className="text-xs md:text-sm font-sans font-medium text-[#2B2B2B] leading-none">({prod.reviews})</span>
                     </div>
 
-                    {/* Bought statistics */}
                     <p className="font-sans font-medium text-xs md:text-sm leading-none text-[#8D8D8D] h-[25px] flex items-center shrink-0">{prod.boughtText}</p>
 
-                    {/* Delivery text */}
                     <p className="font-sans font-medium text-[11px] md:text-xs md:leading-[20px]">
                       <span className="text-[#8D8D8D]">FREE delivery as soon as </span>
                       <span className="text-[#2B2B2B]">Thu, 9 Apr, 7 am - 10 pm</span>
                     </p>
 
-                    {/* Add to Cart Button */}
                     <button
                       onClick={() => handleProductAdd(mockProduct)}
                       className="w-full h-[48px] py-[10px] px-[20px] gap-[8px] rounded-[4px] border-2 border-[#1D493E] hover:bg-[#1D493E] hover:text-white text-[#1D493E] text-xs md:text-sm font-bold transition flex items-center justify-center cursor-pointer group"
@@ -1647,7 +1617,90 @@ export default function Homepage() {
               );
             })}
           </div>
+        </div>
 
+        {/* Mobile Figma Spec Container (block md:hidden) - w:430px max, gap:12px, padding:12px 20px */}
+        <div className="block md:hidden w-full max-w-[430px] mx-auto py-[12px] px-[20px] bg-white flex flex-col gap-[12px]">
+          {/* Header Row: Title + Round Green Arrow Button */}
+          <div className="flex items-center justify-between w-full h-[30px]">
+            <h2 className="text-[26px] font-serif font-semibold text-[#1D493E] leading-none m-0">
+              Most <span className="text-[#FF5A36]">Selling</span>
+            </h2>
+            <Link 
+              href="/shop"
+              aria-label="View all most selling products"
+              className="w-[30px] h-[30px] rounded-full bg-[#1D493E] text-white flex items-center justify-center hover:scale-105 active:scale-95 transition shrink-0"
+            >
+              <ArrowRight className="w-4 h-4 text-white" />
+            </Link>
+          </div>
+
+          {/* 2x2 Product Grid */}
+          <div className="grid grid-cols-2 gap-[12px] w-full">
+            {[
+              resolveProduct("naturally-nomad-badge-1", "Naturally Nomad", "Badges", "/naturally_nomad_badge.png", 139, 199),
+              resolveProduct("explore-more-keychain-1", "Naturally Nomad", "Badges", "/naturally_nomad_badge.png", 139, 199),
+              resolveProduct("go-banjara-tshirt-1", "Naturally Nomad", "Badges", "/naturally_nomad_badge.png", 139, 199),
+              resolveProduct("prod-badge-around", "Naturally Nomad", "Badges", "/around_the_world_sticker.jpg", 139, 199)
+            ].map((prod, idx) => (
+              <Link 
+                key={`${prod.id}-${idx}`}
+                href={`/shop/product/${prod.id}`}
+                className="w-full bg-white rounded-[4px] flex flex-col gap-[8px] text-left overflow-hidden border border-gray-100/80 shadow-2xs group cursor-pointer"
+                style={{ boxSizing: 'border-box' }}
+              >
+                {/* Product Image */}
+                <div className="relative w-full h-[130px] rounded-[4px] overflow-hidden bg-gray-50 shrink-0">
+                  <img 
+                    src={prod.images[0] || prod.image} 
+                    alt={prod.name} 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    style={{ imageRendering: '-webkit-optimize-contrast' }}
+                  />
+                </div>
+
+                {/* Card Info Content */}
+                <div className="flex flex-col gap-[4px] px-1.5 pb-2">
+                  {/* Tag */}
+                  <span className="bg-[#FF5A36] text-white px-1.5 py-0.5 rounded-[3px] text-[9px] font-bold self-start leading-none">
+                    Badges
+                  </span>
+
+                  {/* Title */}
+                  <h4 className="text-[12px] font-bold text-[#2B2B2B] leading-tight line-clamp-1 m-0">
+                    {prod.name || "Naturally Nomad"}
+                  </h4>
+
+                  {/* Price Row */}
+                  <div className="flex items-baseline gap-1 pt-0.5">
+                    <span className="line-through text-gray-400 text-[9px]">₹300</span>
+                    <span className="text-[11px] font-bold text-[#2B2B2B]">₹250</span>
+                    <span className="text-[#FF5A36] text-[9px] font-semibold">30% off</span>
+                  </div>
+
+                  {/* Rating Stars */}
+                  <div className="flex items-center gap-1">
+                    <div className="flex text-amber-400 gap-0.5">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="w-2.5 h-2.5 fill-current" />
+                      ))}
+                    </div>
+                    <span className="text-[8px] text-gray-500 font-medium">(120 Reviews)</span>
+                  </div>
+
+                  {/* Subtext */}
+                  <p className="text-[8px] text-gray-400 font-medium m-0 leading-tight">
+                    200+ bought in past month
+                  </p>
+
+                  {/* Delivery Info */}
+                  <p className="text-[8px] text-gray-500 m-0 leading-tight line-clamp-1">
+                    FREE delivery as soon as <span className="font-bold text-[#2B2B2B]">Thu, 9 Apr, 7am - 10 pm</span>
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -1659,11 +1712,11 @@ export default function Homepage() {
       </div>
 
       {/* 9. MEET BONJO SECTION (Brand story) */}
-      <section className="max-w-[1440px] w-full mx-auto px-6 md:px-[80px] pt-[28px] pb-[28px] bg-white relative overflow-visible">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-[32px] items-center w-full">
+      <section className="bg-white relative overflow-visible">
+        {/* Desktop Container (hidden md:grid) */}
+        <div className="hidden md:grid grid-cols-2 gap-[32px] items-center w-full max-w-[1440px] mx-auto px-6 md:px-[80px] pt-[28px] pb-[28px]">
           {/* Left Column: Image with slight rotation and glow */}
           <div className="relative">
-            {/* Soft glow background */}
             <div 
               className="absolute -top-[40px] -left-[40px] w-[192px] h-[192px] pointer-events-none" 
               style={{
@@ -1725,11 +1778,53 @@ export default function Homepage() {
             </div>
           </div>
         </div>
+
+        {/* Mobile Figma Spec Container (block md:hidden) - w:430px max, gap:24px, padding:12px 20px */}
+        <div className="block md:hidden w-full max-w-[430px] mx-auto py-[12px] px-[20px] bg-white flex flex-col gap-[24px]">
+          {/* Top Text Content */}
+          <div className="flex flex-col gap-[12px] text-left">
+            <span className="inline-flex items-center text-[#FF623E] bg-[#FF623E]/8 px-2 py-0.5 rounded-[4px] text-[10px] font-bold uppercase tracking-[1px] self-start leading-none">
+              THE BANJARA SOUL
+            </span>
+            <h2 className="text-[32px] font-serif font-semibold text-[#1D493E] leading-none m-0">
+              Meet Bonjo.
+            </h2>
+            <p className="text-[13px] text-[#2B2B2B] leading-relaxed font-sans font-medium m-0">
+              Go Banjara was born from a frustration travel in India had become a checklist. Same cafés, same photo spots, same three-day Goa loop. We wanted something slower, closer to the ground, and honest about the places it visited.
+            </p>
+            <div className="pt-1">
+              <Link 
+                href="/about" 
+                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-[4px] bg-[#1D493E] hover:bg-[#15342c] text-white font-sans font-bold text-[14px] transition shrink-0 self-start"
+              >
+                <span>Our Story</span>
+                <ArrowUpRight className="w-4 h-4 text-white" />
+              </Link>
+            </div>
+          </div>
+
+          {/* Bottom Image Content with Glow */}
+          <div className="relative w-full flex justify-center items-center">
+            <div 
+              className="absolute -top-4 -left-2 w-[160px] h-[160px] pointer-events-none" 
+              style={{
+                background: 'radial-gradient(circle, rgba(224, 84, 52, 0.35) 0%, rgba(224, 84, 52, 0) 70%)'
+              }}
+            />
+            <img 
+              src="/llama_mascot.png" 
+              alt="Bonjo Mascot" 
+              className="relative z-10 w-full max-w-[320px] aspect-square object-cover rounded-[12px] shadow-lg hover:rotate-2 transition duration-500"
+              style={{ imageRendering: '-webkit-optimize-contrast' }}
+            />
+          </div>
+        </div>
       </section>
 
       {/* 9.5 REVIEWS SECTION (3-column grid matching Figma design) */}
-      <section className="bg-white pt-[28px] pb-0 text-left relative z-10 border-t border-gray-100 w-full">
-        <div className="max-w-[1440px] w-full mx-auto flex flex-col gap-[32px]">
+      <section className="bg-white text-left relative z-10 border-t border-gray-100 w-full">
+        {/* Desktop Container (hidden md:block) */}
+        <div className="hidden md:flex max-w-[1440px] w-full mx-auto pt-[28px] flex-col gap-[32px]">
           
           {/* Header Row */}
           <div className="w-full max-w-[1440px] h-auto px-6 md:px-[80px] flex flex-col gap-2 text-left shrink-0">
@@ -1742,6 +1837,7 @@ export default function Homepage() {
               What <span className="text-[#FF623E]">people say</span> about products
             </h2>
           </div>
+          
           {/* 3-column Testimonial Grid matching Figma design */}
           <div className="relative w-full max-w-[1440px] h-auto overflow-hidden px-6 md:px-[80px]">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 h-auto relative z-10">

@@ -1054,15 +1054,15 @@ export default function Homepage() {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 text-left">
             <div className="space-y-3.5 text-left max-w-4xl">
               <div>
-                <span className="inline-block text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-1 rounded-[4px] text-xs font-bold uppercase tracking-wider">
-                  The Collection
+                <span className="inline-block text-[#FF623E] bg-[#FFEBE5] px-2.5 py-1 rounded-[4px] text-[14px] font-semibold uppercase tracking-[1.2px]">
+                  NEW STYLES
                 </span>
               </div>
               <h2 className="text-3xl md:text-[42px] font-serif font-semibold text-[#1D493E] leading-none">
-                Explore&nbsp;<span className="text-[#FF5A36]">Travel Essentials</span>
+                <span className="text-[#FF5A36]">Travels</span>&nbsp;Essentials
               </h2>
               <p className="text-gray-500 text-base md:text-[24px] md:leading-8 font-medium">
-                A hand-picked map of the corners of India our community keeps coming back to
+                Curated gear for the modern nomad. From durable journal covers to the stickers that tell your story
               </p>
             </div>
             <div className="shrink-0 pb-1">
@@ -1582,15 +1582,16 @@ export default function Homepage() {
         <div className="hidden md:flex max-w-[1440px] mx-auto pt-[20px] pb-[20px] px-6 md:px-[80px] flex-col gap-[32px]">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-2 text-left">
             <div className="space-y-3.5 text-left max-w-4xl">
+              <div>
+                <span className="inline-block text-[#FF623E] bg-[#FFEBE5] px-2.5 py-1 rounded-[4px] text-[14px] font-semibold uppercase tracking-[1.2px]">
+                  NEW STYLES
+                </span>
+              </div>
               <h2 className="text-3xl md:text-[42px] font-serif font-semibold text-[#1D493E] leading-none">
-                {pageContent.sellingTitle.includes("Selling Products") ? (
-                  <>Most <span className="text-[#FF5A36]">Selling Products</span></>
-                ) : (
-                  pageContent.sellingTitle
-                )}
+                <span className="text-[#FF5A36]">Limited</span>&nbsp;Edition
               </h2>
               <p className="text-gray-500 text-base md:text-[24px] md:leading-8 font-medium">
-                {pageContent.sellingSub}
+                Curated gear for the modern nomad. From durable journal covers to the stickers that tell your story
               </p>
             </div>
             <div className="shrink-0 pb-1">

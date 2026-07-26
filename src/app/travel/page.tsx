@@ -581,11 +581,10 @@ export default function HolidaysPortal() {
             boxSizing: "border-box",
             marginLeft: "auto",
             marginRight: "auto",
-            marginTop: "32px",
           }}
-          className="overflow-x-auto scrollbar-none pb-2"
+          className="overflow-x-auto scrollbar-none pb-2 mt-3 sm:mt-8"
         >
-          <div className="flex flex-row gap-3 items-center min-w-max p-1">
+          <div className="flex flex-row gap-2 sm:gap-3 items-center min-w-max p-1">
             {['All', 'Weekends', 'Treks', 'Road Trips', 'Camping'].map((cat) => {
               const isActive = activeCategory === cat;
               return (
@@ -609,7 +608,7 @@ export default function HolidaysPortal() {
                     color: isActive ? "#FFFFFF" : "#2B2B2B",
                     boxShadow: isActive ? "0px 4px 12px rgba(29, 73, 62, 0.22)" : "none",
                   }}
-                  className={`h-auto px-5 py-2.5 sm:px-8 sm:py-3.5 text-base sm:text-lg md:text-[24px] select-none transition-all duration-300 ease-in-out active:scale-95 ${
+                  className={`h-auto px-3.5 py-1.5 sm:px-8 sm:py-3.5 text-xs sm:text-lg md:text-[24px] font-semibold select-none transition-all duration-300 ease-in-out active:scale-95 ${
                     isActive
                       ? 'hover:bg-[#15342c] hover:border-[#15342c]'
                       : 'hover:border-[#1D493E] hover:text-[#1D493E] hover:bg-[#1D493E]/5 hover:shadow-sm hover:scale-[1.02]'

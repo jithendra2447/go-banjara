@@ -1033,14 +1033,14 @@ export default function Homepage() {
             <div className="space-y-3.5 text-left max-w-4xl">
               <div>
                 <span className="inline-block text-[#FF623E] bg-[#FFEBE5] px-2.5 py-1 rounded-[4px] text-[14px] font-semibold uppercase tracking-[1.2px]">
-                  NEW STYLES
+                  THE COLLECTION
                 </span>
               </div>
               <h2 className="text-3xl md:text-[42px] font-serif font-semibold text-[#1D493E] leading-none">
-                <span className="text-[#FF5A36]">Travels</span>&nbsp;Essentials
+                Shop from our&nbsp;<span className="text-[#FF5A36]">Top Product Categories</span>
               </h2>
-              <p className="text-[#2B2B2B]/80 text-base md:text-[20px] leading-relaxed font-medium">
-                Curated gear for the modern nomad. From durable journal covers to the stickers that tell your story
+              <p className="text-[#2B2B2B]/80 text-base md:text-[20px] leading-relaxed font-medium md:whitespace-nowrap">
+                A hand-picked map of the corners of India our community keeps coming back to
               </p>
             </div>
             <div className="shrink-0 pb-1">

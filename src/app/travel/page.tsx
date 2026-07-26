@@ -413,7 +413,7 @@ export default function HolidaysPortal() {
             marginLeft: "auto",
             marginRight: "auto",
           }}
-          className="text-left relative z-30 h-auto p-3.5 sm:p-6"
+          className="hidden md:block text-left relative z-30 h-auto p-3.5 sm:p-6"
         >
           <div className="w-full flex flex-col md:flex-row gap-6 items-stretch md:items-center">
             
@@ -666,7 +666,7 @@ export default function HolidaysPortal() {
           </div>
           
           {/* Filters Toggle Dropdown */}
-          <div className="relative" ref={filterDropdownRef}>
+          <div className="relative hidden md:block" ref={filterDropdownRef}>
             <button
               type="button"
               onClick={() => setShowFiltersDropdown(!showFiltersDropdown)}

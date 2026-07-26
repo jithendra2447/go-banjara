@@ -810,7 +810,7 @@ export default function Homepage() {
                       </button>
                     </div>
                     {/* Details block with padding */}
-                    <div className="flex-1 flex flex-col justify-between p-5 sm:p-6 gap-5 md:gap-0">
+                    <div className="flex-1 flex flex-col justify-between py-5 sm:py-6 px-0 gap-5 md:gap-0">
                       {/* Top Group (Width: Fill, Height: 151px, Gap: 12px) */}
                       <div className="flex flex-col gap-2 min-h-[140px] shrink-0 w-full">
                         {/* Tags Container (Width: Fill, Height: Hug 28px, Justify: space-between) */}

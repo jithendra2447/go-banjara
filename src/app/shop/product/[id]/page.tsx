@@ -583,70 +583,64 @@ export default function ProductDetailsPage() {
               }}
               className="w-full text-left font-sans text-[#2B2B2B] px-4 py-2 md:py-2 md:px-[24px] rounded-none md:rounded-[4px] border-0 md:border border-[rgba(204,204,204,1)]"
             >
-              {/* Title & Tag Row */}
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                <h2 style={{ fontFamily: "Faktum, sans-serif", fontSize: "28px", fontWeight: 600, color: "rgba(43, 43, 43, 1)", margin: 0 }}>
+              {/* Title & Category Tag Row */}
+              <div className="flex items-start justify-between gap-3 w-full">
+                <h2 style={{ fontFamily: "Faktum, sans-serif", margin: 0 }} className="text-lg sm:text-xl md:text-[28px] font-semibold text-[#2B2B2B] leading-snug">
                   {product.name}
                 </h2>
                 <span 
                   style={{
                     fontFamily: "Faktum, sans-serif",
                     fontWeight: 600,
-                    fontSize: "12px",
+                    fontSize: "11px",
                     color: "rgba(255, 98, 62, 1)",
                     backgroundColor: "rgba(255, 98, 62, 0.08)",
-                    padding: "4px 8px",
+                    padding: "3px 8px",
                     borderRadius: "4px",
                     textTransform: "uppercase"
                   }}
+                  className="shrink-0 mt-0.5"
                 >
                   {product.category}
                 </span>
               </div>
 
-              {/* Price & Rating Row */}
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", width: "100%" }}>
-                {/* Left: Price & Discount */}
-                <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                  <span style={{ fontSize: "32px", fontFamily: "Faktum, sans-serif", fontWeight: 600, color: "rgba(43, 43, 43, 1)" }}>
-                    ₹{product.price.toLocaleString('en-IN')}
-                  </span>
-                  {product.originalPrice && (
-                    <span style={{ fontSize: "14px", fontFamily: "Faktum, sans-serif", fontWeight: 500, color: "rgba(141, 141, 141, 1)", textDecoration: "line-through" }}>
-                      ₹{product.originalPrice.toLocaleString('en-IN')}
-                    </span>
-                  )}
-                  <span 
-                    style={{
-                      fontSize: "12px",
-                      fontFamily: "Faktum, sans-serif",
-                      fontWeight: 600,
-                      color: "rgba(22, 163, 74, 1)",
-                      backgroundColor: "rgba(22, 163, 74, 0.08)",
-                      padding: "2px 6px",
-                      borderRadius: "2px"
-                    }}
-                  >
-                    {discountPercent}% off
-                  </span>
-                </div>
-
-                {/* Right: Stars & Reviews */}
-                <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-                    <div style={{ display: "flex", gap: "2px" }}>
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} style={{ width: "16px", height: "16px", fill: "#FFC72C", color: "transparent" }} />
-                      ))}
-                    </div>
-                    <span style={{ fontSize: "14px", fontFamily: "Faktum, sans-serif", fontWeight: 500, color: "rgba(43, 43, 43, 1)" }}>
-                      ({product.reviewsCount || 120} Reviews)
-                    </span>
+              {/* Rating & Social Proof Row */}
+              <div className="flex items-center gap-2 flex-wrap text-xs font-sans">
+                <div className="flex items-center gap-1.5">
+                  <div className="flex gap-0.5">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-3.5 h-3.5 fill-[#FFC72C] text-transparent" />
+                    ))}
                   </div>
-                  <span style={{ fontSize: "12px", fontFamily: "Faktum, sans-serif", fontWeight: 500, color: "rgba(141, 141, 141, 1)", marginTop: "4px" }}>
-                    {product.boughtCount || '200+ bought in past month'}
-                  </span>
+                  <span className="font-semibold text-[#2B2B2B]">4.9</span>
+                  <span className="text-slate-500 font-medium">({product.reviewsCount || 120} Reviews)</span>
                 </div>
+                <span className="text-slate-300">•</span>
+                <span className="text-slate-500 font-medium">
+                  {product.boughtCount || '200+ bought in past month'}
+                </span>
+              </div>
+
+              {/* Price & Discount Row */}
+              <div className="flex items-center gap-2.5 w-full">
+                <span style={{ fontFamily: "Faktum, sans-serif" }} className="text-2xl sm:text-3xl md:text-[32px] font-bold text-[#2B2B2B]">
+                  ₹{product.price.toLocaleString('en-IN')}
+                </span>
+                {product.originalPrice && (
+                  <span style={{ fontFamily: "Faktum, sans-serif" }} className="text-xs sm:text-sm text-slate-400 line-through font-medium">
+                    ₹{product.originalPrice.toLocaleString('en-IN')}
+                  </span>
+                )}
+                <span 
+                  style={{
+                    fontFamily: "Faktum, sans-serif",
+                    backgroundColor: "rgba(22, 163, 74, 0.08)",
+                  }}
+                  className="text-[11px] sm:text-xs font-bold text-emerald-700 px-2 py-0.5 rounded-[3px]"
+                >
+                  {discountPercent}% off
+                </span>
               </div>
 
               {/* Quantity + Size Row */}
@@ -714,9 +708,9 @@ export default function ProductDetailsPage() {
                   </div>
                 </div>
 
-                {/* Size Selector (Shown ONLY for T-Shirts & Clothing/Apparel products) */}
+                {/* Size Selector (Hidden on mobile) */}
                 {isTShirtProduct && (
-                  <div style={{ display: "flex", flexDirection: "column", gap: "8px", textAlign: "left", boxSizing: "border-box" }}>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "8px", textAlign: "left", boxSizing: "border-box" }} className="hidden md:flex">
                     <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: "16px", fontWeight: 500, lineHeight: "24px", color: "rgba(43, 43, 43, 1)", margin: 0 }}>Select Size</span>
                     <div style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
                       {['XS', 'S', 'M', 'L', 'XL', 'XXL'].map(size => {
@@ -791,8 +785,8 @@ export default function ProductDetailsPage() {
                   </button>
                 </div>
               ) : (
-                /* In Stock — normal Add to Cart + Buy Now (Desktop only, Mobile uses Sticky Bottom Bar) */
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", width: "100%", height: "48px", boxSizing: "border-box" }} className="hidden md:grid">
+                /* In Stock — normal Add to Cart + Buy Now */
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", width: "100%", height: "48px", boxSizing: "border-box" }} className="grid grid-cols-2 gap-3 w-full h-[48px]">
                   <button
                     onClick={handleAddToCart}
                     style={{
@@ -919,11 +913,11 @@ export default function ProductDetailsPage() {
                     FREE delivery as soon as <span style={{ color: "rgba(43, 43, 43, 1)", fontWeight: 600 }}>{getFutureDeliveryString()}</span>
                   </span>
                 )}
-              </div>              {/* Trust Badges */}
-              {/* Trust Badges */}
+              </div>
+
+              {/* Trust Badges (Hidden on mobile) */}
               <div 
                 style={{
-                  display: "grid",
                   gridTemplateColumns: "repeat(3, 1fr)",
                   gap: "12px",
                   paddingTop: "16px",
@@ -932,7 +926,7 @@ export default function ProductDetailsPage() {
                   boxSizing: "border-box",
                   marginTop: "8px"
                 }}
-                className="w-full text-center"
+                className="hidden md:grid w-full text-center"
               >
                 <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
                   <div style={{ width: "46px", height: "46px", borderRadius: "4px", backgroundColor: "rgba(246, 243, 238, 1)", display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -1691,34 +1685,6 @@ export default function ProductDetailsPage() {
           </div>
         </div>
       )}
-
-      {/* Mobile Fixed Bottom Sticky CTA Bar for instant ordering */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-slate-200 px-4 py-3 flex items-center gap-3 md:hidden shadow-[0_-4px_16px_rgba(0,0,0,0.12)]">
-        {product.inStock === false ? (
-          <button
-            onClick={() => { setNotifyEmail(''); setNotifySuccess(false); setNotifyModalOpen(true); }}
-            className="w-full h-12 border border-[#1D493E] text-[#1D493E] font-bold text-sm rounded-[4px] flex items-center justify-center"
-          >
-            Notify about availability
-          </button>
-        ) : (
-          <>
-            <button
-              onClick={handleAddToCart}
-              className="flex-1 h-12 border border-[#1D493E] text-[#1D493E] font-bold text-sm rounded-[4px] flex items-center justify-center gap-2 active:bg-[#1D493E] active:text-white transition-colors"
-            >
-              <span>Add to Cart</span>
-            </button>
-            <button
-              onClick={handleBuyNow}
-              className="flex-1 h-12 bg-[#1D493E] text-white font-bold text-sm rounded-[4px] flex items-center justify-center gap-1.5 active:bg-[#15342c] transition-colors"
-            >
-              <span>Buy Now</span>
-              <ArrowUpRight style={{ width: "16px", height: "16px" }} />
-            </button>
-          </>
-        )}
-      </div>
 
       <TrustBanner />
 

@@ -151,12 +151,12 @@ export default function ShopPage() {
   return (
     <div className="bg-white min-h-screen pb-0 flex flex-col items-center">
       {/* Header Section */}
-      <header style={{ width: "100%", maxWidth: "1440px", display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: "white", boxSizing: "border-box" }} className="mx-auto px-6 md:px-[80px] pt-[40px] md:pt-[62px] pb-[24px]">
+      <header style={{ width: "100%", maxWidth: "1440px", display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: "white", boxSizing: "border-box" }} className="mx-auto px-4 sm:px-6 md:px-[80px] pt-4 sm:pt-[40px] md:pt-[62px] pb-2 sm:pb-[24px]">
         {/* Inner header container */}
-        <div className="w-full max-w-[1280px] flex flex-col items-center gap-[16px] md:gap-[24px] bg-white rounded-[4px] py-4 text-center shrink-0">
+        <div className="w-full max-w-[1280px] flex flex-col items-center gap-2 sm:gap-[16px] md:gap-[24px] bg-white rounded-[4px] py-1 sm:py-4 text-center shrink-0">
           {/* Tag */}
-          <div className="h-[26px] flex items-center justify-center shrink-0 bg-[#FFEBE5] rounded-[4px] px-2.5">
-            <span className="font-sans font-semibold text-[14px] leading-none tracking-[1.2px] text-[#FF623E] uppercase whitespace-nowrap">
+          <div className="h-[22px] sm:h-[26px] flex items-center justify-center shrink-0 bg-[#FFEBE5] rounded-[4px] px-2 sm:px-2.5">
+            <span className="font-sans font-semibold text-[11px] sm:text-[14px] leading-none tracking-[1px] text-[#FF623E] uppercase whitespace-nowrap">
               Experience the Shopping
             </span>
           </div>
@@ -170,7 +170,7 @@ export default function ShopPage() {
               color: "rgba(43, 43, 43, 1)",
               textAlign: "center",
             }}
-            className="text-2xl sm:text-3xl md:text-[42px] leading-tight md:leading-[1.2] w-full max-w-[1280px]"
+            className="text-lg sm:text-3xl md:text-[42px] leading-tight md:leading-[1.2] w-full max-w-[1280px]"
           >
             Some journeys change where you go. Others change who you are.
           </h1>
@@ -184,7 +184,7 @@ export default function ShopPage() {
               color: "rgba(43, 43, 43, 1)",
               textAlign: "center",
             }}
-            className="text-sm sm:text-base md:text-[24px] leading-relaxed md:leading-[32px] w-full max-w-[900px]"
+            className="text-xs sm:text-base md:text-[24px] leading-relaxed md:leading-[32px] w-full max-w-[900px]"
           >
             Discover curated travel experiences, gear that keeps up with you, and a community of free-spirited explorers across India.
           </p>
@@ -192,12 +192,12 @@ export default function ShopPage() {
       </header>
 
       {/* Main Sections Container (Width: 1440px, Side Padding: 80px) */}
-      <main className="w-full max-w-[1440px] mx-auto mt-0 px-6 md:px-[80px]">
+      <main className="w-full max-w-[1440px] mx-auto mt-0 px-4 sm:px-6 md:px-[80px]">
         
         {/* Main 4x2 product grid directly below the EXPERIENCE THE SHOPPING header */}
-        <div style={{ paddingTop: "42px", paddingBottom: "42px", display: "flex", flexDirection: "column", width: "100%", backgroundColor: "white" }}>
+        <div style={{ backgroundColor: "white" }} className="py-3 sm:py-[42px] flex flex-col w-full">
           {renderProductGrid(mainGridProducts.slice(0, 4))}
-          <div style={{ height: "62px" }} className="shrink-0" />
+          <div className="h-4 sm:h-[62px] shrink-0" />
           {renderProductGrid(mainGridProducts.slice(4, 8))}
           <div style={{ height: "62px" }} className="shrink-0" />
 
@@ -361,29 +361,29 @@ export default function ShopPage() {
             />
 
             {/* 2 Stacked Marquee Rows (Row 1 Left, Row 2 Right, Pauses on Hover) */}
-            <div className="flex flex-col gap-6 py-2">
+            <div className="flex flex-col gap-4 sm:gap-6 py-2">
               {/* Row 1 (Left Scrolling) */}
-              <div className="flex gap-8 py-2 w-max animate-marquee hover:[animation-play-state:paused]">
+              <div className="flex gap-4 sm:gap-8 py-2 w-max animate-marquee hover:[animation-play-state:paused]">
                 {[...TESTIMONIALS, ...TESTIMONIALS].map((test, idx) => (
                   <div 
                     key={idx} 
-                    className="bg-white border border-gray-200 p-6 rounded-2xl flex flex-col justify-between space-y-4 shadow-xs hover:shadow-xl hover:border-[#FF5B37] hover:scale-105 transition-all duration-300 w-[380px] shrink-0 cursor-pointer"
+                    className="bg-white border border-gray-200 p-4 sm:p-6 rounded-2xl flex flex-col justify-between space-y-3 sm:space-y-4 shadow-xs hover:shadow-xl hover:border-[#FF5B37] hover:scale-105 transition-all duration-300 w-[270px] sm:w-[380px] shrink-0 cursor-pointer"
                   >
-                    <div className="space-y-3">
-                      <div className="flex text-amber-400 text-sm gap-1">
+                    <div className="space-y-2 sm:space-y-3">
+                      <div className="flex text-amber-400 text-xs sm:text-sm gap-1">
                         {Array.from({ length: test.rating }).map((_, s) => (
-                          <Star key={s} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                          <Star key={s} className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-amber-400 text-amber-400" />
                         ))}
                       </div>
-                      <p className="text-gray-700 font-medium italic text-[15px] leading-relaxed">
+                      <p className="text-gray-700 font-medium italic text-xs sm:text-[15px] leading-relaxed">
                         {test.quote}
                       </p>
                     </div>
-                    <div className="flex items-center gap-3 pt-3 border-t border-gray-100">
-                      <img src={test.avatar} alt={test.author} className="w-10 h-10 rounded-full object-cover shrink-0" />
+                    <div className="flex items-center gap-2.5 sm:gap-3 pt-2.5 sm:pt-3 border-t border-gray-100">
+                      <img src={test.avatar} alt={test.author} className="w-8 h-8 sm:w-10 sm:h-10 rounded-full object-cover shrink-0" />
                       <div>
-                        <h4 className="text-[15px] font-bold text-gray-800 leading-none">{test.author}</h4>
-                        <p className="text-xs text-[#1D493E] font-semibold mt-0.5">{test.role}</p>
+                        <h4 className="text-xs sm:text-[15px] font-bold text-gray-800 leading-none">{test.author}</h4>
+                        <p className="text-[10px] sm:text-xs text-[#1D493E] font-semibold mt-0.5">{test.role}</p>
                       </div>
                     </div>
                   </div>
@@ -391,27 +391,27 @@ export default function ShopPage() {
               </div>
 
               {/* Row 2 (Right Reverse Scrolling) */}
-              <div className="flex gap-8 py-2 w-max animate-marquee-reverse hover:[animation-play-state:paused]">
+              <div className="flex gap-4 sm:gap-8 py-2 w-max animate-marquee-reverse hover:[animation-play-state:paused]">
                 {[...TESTIMONIALS.slice().reverse(), ...TESTIMONIALS.slice().reverse()].map((test, idx) => (
                   <div 
                     key={idx} 
-                    className="bg-white border border-gray-200 p-6 rounded-2xl flex flex-col justify-between space-y-4 shadow-xs hover:shadow-xl hover:border-[#FF5B37] hover:scale-105 transition-all duration-300 w-[380px] shrink-0 cursor-pointer"
+                    className="bg-white border border-gray-200 p-4 sm:p-6 rounded-2xl flex flex-col justify-between space-y-3 sm:space-y-4 shadow-xs hover:shadow-xl hover:border-[#FF5B37] hover:scale-105 transition-all duration-300 w-[270px] sm:w-[380px] shrink-0 cursor-pointer"
                   >
-                    <div className="space-y-3">
-                      <div className="flex text-amber-400 text-sm gap-1">
+                    <div className="space-y-2 sm:space-y-3">
+                      <div className="flex text-amber-400 text-xs sm:text-sm gap-1">
                         {Array.from({ length: test.rating }).map((_, s) => (
-                          <Star key={s} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                          <Star key={s} className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-amber-400 text-amber-400" />
                         ))}
                       </div>
-                      <p className="text-gray-700 font-medium italic text-[15px] leading-relaxed">
+                      <p className="text-gray-700 font-medium italic text-xs sm:text-[15px] leading-relaxed">
                         {test.quote}
                       </p>
                     </div>
-                    <div className="flex items-center gap-3 pt-3 border-t border-gray-100">
-                      <img src={test.avatar} alt={test.author} className="w-10 h-10 rounded-full object-cover shrink-0" />
+                    <div className="flex items-center gap-2.5 sm:gap-3 pt-2.5 sm:pt-3 border-t border-gray-100">
+                      <img src={test.avatar} alt={test.author} className="w-8 h-8 sm:w-10 sm:h-10 rounded-full object-cover shrink-0" />
                       <div>
-                        <h4 className="text-[15px] font-bold text-gray-800 leading-none">{test.author}</h4>
-                        <p className="text-xs text-[#1D493E] font-semibold mt-0.5">{test.role}</p>
+                        <h4 className="text-xs sm:text-[15px] font-bold text-gray-800 leading-none">{test.author}</h4>
+                        <p className="text-[10px] sm:text-xs text-[#1D493E] font-semibold mt-0.5">{test.role}</p>
                       </div>
                     </div>
                   </div>
@@ -463,13 +463,12 @@ export default function ShopPage() {
               style={{
                 fontFamily: "Fraunces, serif",
                 fontWeight: 600,
-                fontSize: "42px",
-                lineHeight: "100%",
+                lineHeight: "1.1",
                 letterSpacing: "0px",
                 color: "#2B2B2B",
                 margin: 0
               }}
-              className="text-3xl md:text-[42px]"
+              className="text-2xl sm:text-3xl md:text-[42px]"
             >
               Frequently asked questions
             </h2>

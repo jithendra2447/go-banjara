@@ -2049,6 +2049,35 @@ export default function Homepage() {
             />
           </div>
         </div>
+
+        {/* Mobile Figma Spec Container (block md:hidden) - w:430px max, gap:12px, padding:12px 20px */}
+        <div className="block md:hidden w-full max-w-[430px] mx-auto py-[12px] px-[20px] bg-white flex flex-col gap-[12px]">
+          <div className="flex flex-col gap-1 text-left">
+            <span className="text-[#FF623E] text-[10px] font-bold uppercase tracking-[1px]">
+              REAL EXPERIENCES
+            </span>
+            <h2 className="text-[22px] font-serif font-semibold text-[#1D493E] leading-tight m-0">
+              What <span className="text-[#FF623E]">people say</span>
+            </h2>
+          </div>
+          <div className="bg-gray-50 border border-gray-100 p-4 rounded-xl flex flex-col gap-2.5 text-left">
+            <div className="flex text-amber-400 gap-0.5">
+              {[...Array(5)].map((_, s) => (
+                <Star key={s} className="w-3.5 h-3.5 fill-current" />
+              ))}
+            </div>
+            <p className="text-gray-700 font-bold italic text-xs leading-relaxed m-0">
+              "Exploring Spiti Valley with Go Banjara was a life-changing journey. Flawless planning, cozy homestays, and a wonderful group of fellow travelers!"
+            </p>
+            <div className="flex items-center gap-2.5 pt-2 border-t border-gray-200/60">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150&q=80" alt="Kiran" className="w-7 h-7 rounded-full object-cover shrink-0" />
+              <div>
+                <h4 className="text-xs font-black text-gray-800 m-0 leading-none">Kiran Makwan</h4>
+                <p className="text-[10px] text-[#1D493E]/60 font-semibold m-0 mt-0.5">Verified Wanderer</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* 10. TRAVEL DIARIES / STORIES */}

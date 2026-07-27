@@ -1363,24 +1363,22 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                       borderTop: "1px solid rgba(204, 204, 204, 0.8)",
                       opacity: 1,
                     }}
-                    className="hidden md:block my-6"
+                    className="block my-4 sm:my-6"
                   />
 
-                  {/* Commonly asked questions - Web Desktop Section */}
+                  {/* Commonly asked questions Section */}
                   <div 
                     style={{
                       width: "100%",
                       maxWidth: "837px",
-                      minHeight: "590px",
                       display: "flex",
                       flexDirection: "column",
-                      gap: "32px",
                       opacity: 1,
                       borderRadius: "4px",
                     }}
-                    className="hidden md:flex text-left w-full mt-4"
+                    className="flex text-left w-full mt-2 sm:mt-4 gap-4 sm:gap-8"
                   >
-                    <div className="flex flex-col gap-3">
+                    <div className="flex flex-col gap-2 sm:gap-3">
                       <span 
                         style={{
                           backgroundColor: "rgba(255, 240, 235, 1)",
@@ -1403,7 +1401,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                           fontFamily: "Fraunces, serif",
                           fontWeight: 600,
                         }}
-                        className="leading-tight text-[42px]"
+                        className="leading-tight text-xl sm:text-3xl md:text-[42px]"
                       >
                         <span style={{ color: "rgba(43, 43, 43, 1)" }}>Commonly asked</span>{" "}
                         <span style={{ color: "rgba(255, 98, 62, 1)" }}>questions</span>
@@ -1415,11 +1413,11 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                       {faqs.map((faq: any, idx: number) => {
                         const isOpen = openFaqIdx === idx;
                         return (
-                          <div key={idx} className="border-b border-gray-200/80 py-4.5 w-full">
+                          <div key={idx} className="border-b border-gray-200/80 py-3 sm:py-4.5 w-full">
                             <button
                               type="button"
                               onClick={() => setOpenFaqIdx(isOpen ? null : idx)}
-                              className="w-full flex justify-between items-center text-left py-2 hover:opacity-90 transition cursor-pointer"
+                              className="w-full flex justify-between items-center text-left py-1.5 sm:py-2 hover:opacity-90 transition cursor-pointer gap-2"
                             >
                               <span 
                                 style={{
@@ -1427,11 +1425,11 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                                   fontWeight: 600,
                                   color: "rgba(43, 43, 43, 1)",
                                 }}
-                                className="text-[20px] leading-[130%]"
+                                className="text-sm sm:text-base md:text-[20px] leading-[130%]"
                               >
                                 {faq.q}
                               </span>
-                              <span className="text-[#2B2B2B] text-2xl font-light pl-4 select-none shrink-0">
+                              <span className="text-[#2B2B2B] text-xl sm:text-2xl font-light pl-2 select-none shrink-0">
                                 {isOpen ? '−' : '+'}
                               </span>
                             </button>
@@ -1442,7 +1440,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                                   fontWeight: 500,
                                   color: "rgba(141, 141, 141, 1)",
                                 }}
-                                className="mt-2 text-[18px] leading-[28px]"
+                                className="mt-1.5 sm:mt-2 text-xs sm:text-sm md:text-[18px] md:leading-[28px]"
                               >
                                 {faq.a}
                               </p>

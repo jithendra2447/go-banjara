@@ -100,23 +100,19 @@ export default function ContactPage() {
       className="relative z-10 w-full bg-white"
     >
       <div>
-        {/* SECTION 1: HERO SECTION (Styled exactly to Figma specs 1440x220) */}
+        {/* SECTION 1: HERO SECTION (Mobile 430x112 | Desktop 1440x220) */}
         <section 
           style={{
             width: "100%",
-            maxWidth: "1440px",
-            minHeight: "140px",
-            paddingTop: "62px",
-            paddingBottom: "12px",
             background: "rgba(255, 255, 255, 1)",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            gap: "10px",
+            opacity: 1,
             boxSizing: "border-box"
           }}
-          className="mx-auto text-center px-6 md:px-20"
+          className="mx-auto text-center w-full max-w-[430px] md:max-w-[1440px] px-[20px] py-[12px] md:pt-[62px] md:pb-[12px] md:px-20 gap-2 md:gap-[10px] min-h-[112px] md:min-h-[140px]"
         >
           {/* Contact Us Badge (Figma Spec) */}
           <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
@@ -128,11 +124,8 @@ export default function ContactPage() {
             style={{
               width: "100%",
               maxWidth: "1280px",
-              height: "52px",
               fontFamily: "Fraunces, serif",
               fontWeight: 600,
-              fontSize: "42px",
-              lineHeight: "100%",
               letterSpacing: "0px",
               color: "rgba(43, 43, 43, 1)",
               margin: 0,
@@ -140,7 +133,7 @@ export default function ContactPage() {
               alignItems: "center",
               justifyContent: "center"
             }}
-            className="text-3xl md:text-[42px]"
+            className="text-2xl sm:text-3xl md:text-[42px] leading-tight text-center h-auto min-h-[32px] md:h-[52px]"
           >
             Let’s Get in Touch
           </h1>
@@ -150,36 +143,33 @@ export default function ContactPage() {
             style={{
               width: "100%",
               maxWidth: "1280px",
-              height: "32px",
               fontFamily: "Faktum, sans-serif",
               fontWeight: 500,
-              fontSize: "24px",
-              lineHeight: "32px",
               letterSpacing: "0px",
               color: "rgba(43, 43, 43, 1)",
               margin: 0,
               display: "flex",
+              flexDirection: "row",
+              flexWrap: "wrap",
               alignItems: "center",
               justifyContent: "center",
-              gap: "6px"
+              gap: "4px"
             }}
-            className="text-base md:text-[24px]"
+            className="text-xs sm:text-base md:text-[24px] leading-relaxed md:leading-[32px] text-center h-auto min-h-[24px] md:h-[32px]"
           >
-            or Just reach out manually to{" "}
+            <span>Just reach out manually to</span>{" "}
             <a 
               href="mailto:hello@gobanjara.com" 
               style={{
                 fontFamily: "Faktum, sans-serif",
                 fontWeight: 500,
-                fontSize: "24px",
-                lineHeight: "32px",
                 letterSpacing: "0px",
                 textDecoration: "underline",
                 textDecorationStyle: "solid",
                 color: "rgba(63, 136, 255, 1)",
                 transition: "opacity 0.2s"
               }}
-              className="hover:opacity-80"
+              className="hover:opacity-80 text-xs sm:text-base md:text-[24px]"
             >
               hello@gobanjara.com
             </a>
@@ -205,11 +195,9 @@ export default function ContactPage() {
             {/* Left Column: Bonjo Mascot Card (About Us Style Effect) */}
             <div 
               style={{
-                height: "580px",
-                width: "537px",
                 maxWidth: "100%"
               }}
-              className="flex items-center justify-center relative select-none group"
+              className="flex items-center justify-center relative select-none group w-full max-w-[537px] h-[280px] sm:h-[400px] md:h-[580px]"
             >
               {/* Soft radial glow background bubble */}
               <div 
@@ -222,12 +210,11 @@ export default function ContactPage() {
               <div 
                 style={{
                   width: "100%",
-                  height: "580px",
                   maxHeight: "100%",
                   zIndex: 10,
                   borderRadius: "12px"
                 }}
-                className="relative overflow-hidden transition-all duration-500 hover:rotate-2 cursor-pointer bg-transparent rounded-[12px]"
+                className="relative overflow-hidden transition-all duration-500 hover:rotate-2 cursor-pointer bg-transparent rounded-[12px] h-full"
               >
                 <img 
                   src="/llama_mascot.png" 
@@ -242,9 +229,7 @@ export default function ContactPage() {
             {formSubmitted ? (
               <div 
                 style={{
-                  width: "487px",
                   maxWidth: "100%",
-                  height: "580px",
                   padding: "20px",
                   borderWidth: "1px",
                   borderColor: "rgba(204, 204, 204, 1)",
@@ -257,7 +242,7 @@ export default function ContactPage() {
                   boxSizing: "border-box",
                   gap: "24px"
                 }}
-                className="shadow-xs"
+                className="shadow-xs w-full max-w-[487px] h-auto min-h-[400px] md:h-[580px]"
               >
                 <div className="w-16 h-16 bg-[#F3FFEF] text-[#1D493E] rounded-full flex items-center justify-center mx-auto border border-[#1D493E]/20 animate-bounce">
                   <CheckCircle2 className="w-8 h-8 text-[#FF623E]" />
@@ -271,9 +256,7 @@ export default function ContactPage() {
               <form 
                 onSubmit={handleSubmit}
                 style={{
-                  width: "487px",
                   maxWidth: "100%",
-                  height: "580px",
                   padding: "20px",
                   borderWidth: "1px",
                   borderColor: "rgba(204, 204, 204, 1)",
@@ -284,7 +267,7 @@ export default function ContactPage() {
                   justifyContent: "space-between",
                   boxSizing: "border-box"
                 }}
-                className="shadow-xs text-left"
+                className="shadow-xs text-left w-full max-w-[487px] h-auto md:h-[580px] gap-4 md:gap-0"
               >
                 <style>{`
                   .contact-form-input::placeholder, 

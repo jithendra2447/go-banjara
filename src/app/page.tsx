@@ -865,29 +865,14 @@ export default function Homepage() {
               })()}
             </div>
 
-            {/* Centered Destinations Footer Link (Figma style: 331x68px, padding 18x36px, radius 4px, NO BORDER) */}
-            <div className="flex justify-center mt-4 mb-0">
+            {/* Centered Destinations Footer Link */}
+            <div className="flex justify-center mt-6 mb-0">
               <Link 
                 href="/travel" 
-                className="inline-flex items-center justify-center w-full max-w-[331px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[8px] bg-transparent hover:bg-gray-200/80 text-[#1D493E] transition-all duration-300 cursor-pointer group"
+                className="inline-flex items-center justify-center gap-2.5 h-[55px] px-8 sm:px-10 rounded-[8px] bg-[#EEF2F1] text-[#1D493E] font-sans font-semibold text-base sm:text-lg md:text-[18px] hover:bg-[#1D493E] hover:text-white transition-all duration-300 shadow-xs cursor-pointer group"
               >
-                <span className="h-[25px] flex items-center justify-center font-sans font-medium text-sm sm:text-base md:text-[20px] leading-none">
-                  Explore all destinations
-                </span>
-                <svg 
-                  style={{ width: '32px', height: '32px' }}
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="2.25" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round"
-                  className="shrink-0 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300"
-                >
-                  <path d="M7 17l2.5-2.5" />
-                  <path d="M12.5 11.5L17 7" />
-                  <path d="M7 7h10v10" />
-                </svg>
+                <span>Explore all destinations</span>
+                <ArrowUpRight className="w-5 h-5 text-[#1D493E] group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />
               </Link>
             </div>
           </div>

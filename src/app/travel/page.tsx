@@ -1315,7 +1315,7 @@ export default function HolidaysPortal() {
             <button
               type="button"
               onClick={() => setVisiblePackagesCount(prev => prev + 6)}
-              className="inline-flex items-center justify-center gap-2.5 h-[55px] px-8 sm:px-10 rounded-[8px] border border-[#1D493E]/20 bg-[#EEF2F1] text-[#1D493E] font-sans font-semibold text-base sm:text-lg md:text-[18px] hover:bg-[#1D493E] hover:text-white hover:border-[#1D493E] transition-all duration-300 shadow-xs cursor-pointer group"
+              className="inline-flex items-center justify-center gap-2.5 h-[55px] px-8 sm:px-10 rounded-[8px] bg-[#EEF2F1] text-[#1D493E] font-sans font-semibold text-base sm:text-lg md:text-[18px] hover:bg-[#1D493E] hover:text-white transition-all duration-300 shadow-xs cursor-pointer group"
             >
               <span>Load more</span>
               <ArrowUpRight className="w-5 h-5 text-[#1D493E] group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />

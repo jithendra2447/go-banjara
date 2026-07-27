@@ -291,16 +291,26 @@ export default function BlogPage() {
       >
         {/* Tab Bar */}
         <div
-          className="w-full max-w-[1280px] flex flex-row items-end gap-3 md:gap-[16px] border-b-2 border-gray-200 bg-white box-border overflow-x-auto no-scrollbar scrollbar-none pb-0.5"
+          className="w-full max-w-[1280px] flex flex-row items-end gap-3 md:gap-[16px] border-b-2 border-gray-200 bg-white box-border overflow-x-auto no-scrollbar scrollbar-none pb-0"
         >
           {tabs.map((tab) => (
             <button
               key={tab}
               onClick={() => handleTabChange(tab)}
-              className={`px-3 md:px-4 py-2 text-xs sm:text-sm md:text-[20px] font-sans font-semibold cursor-pointer border-none bg-none whitespace-nowrap transition-all outline-none border-b-2 -mb-[2px] ${
+              style={{
+                borderRadius: 0,
+                borderTop: 'none',
+                borderLeft: 'none',
+                borderRight: 'none',
+                borderBottom: activeTab === tab ? '2px solid #1D493E' : '2px solid transparent',
+                marginBottom: '-2px',
+                background: 'transparent',
+                outline: 'none',
+              }}
+              className={`px-3 md:px-4 py-2 text-xs sm:text-sm md:text-[20px] font-sans font-semibold cursor-pointer whitespace-nowrap transition-colors ${
                 activeTab === tab
-                  ? 'text-[#1D493E] border-[#1D493E]'
-                  : 'text-[#2B2B2B]/60 border-transparent hover:text-[#1D493E]'
+                  ? 'text-[#1D493E]'
+                  : 'text-[#2B2B2B]/60 hover:text-[#1D493E]'
               }`}
             >
               {tab}

@@ -1420,6 +1420,14 @@ export default function HolidaysPortal() {
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.01] transition duration-700 opacity-95"
               />
 
+              {/* Black linear gradient layer */}
+              <div 
+                style={{
+                  background: "linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.45) 50%, rgba(0, 0, 0, 0.85) 100%)"
+                }}
+                className="absolute inset-0 z-0 pointer-events-none"
+              />
+
               {/* Best Seller red badge */}
               <div className="absolute top-4 left-4 sm:top-6 sm:left-6 bg-[#FF623E] text-white font-bold text-[9px] sm:text-[10px] px-2.5 py-1 sm:px-3.5 sm:py-1.5 rounded-xs shadow-md uppercase tracking-wider z-10">
                 Best Seller

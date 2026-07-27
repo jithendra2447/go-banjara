@@ -668,74 +668,114 @@ export default function AboutPage() {
           </p>
         </div>
 
-        {/* Mobile Vertical Cards Stack (Figma 430x4494 Spec) */}
-        <div className="flex flex-col gap-3 w-full md:hidden py-1">
-          {/* Card 1 */}
-          <div className="w-full h-[320px] rounded-[4px] overflow-hidden">
-            <img src="/card-1-full.png" alt="Card 1" className="w-full h-full object-cover" />
+        {/* Mobile Vertical Cards Stack with Sticky Overlay Stacking Effect */}
+        <div className="flex flex-col gap-8 w-full md:hidden py-4">
+          {/* Mobile Stack Row 1 */}
+          <div 
+            style={{
+              position: "sticky",
+              top: "70px",
+              zIndex: 10,
+            }}
+            className="w-full bg-white rounded-[12px] p-3 shadow-lg border border-gray-100 flex flex-col gap-3 mb-6"
+          >
+            {/* Card 1 */}
+            <div className="w-full h-[280px] rounded-[6px] overflow-hidden">
+              <img src="/card-1-full.png" alt="Card 1" className="w-full h-full object-cover" />
+            </div>
+
+            {/* Center Text 1 */}
+            <div className="w-full bg-[#F8F8F8] p-4 rounded-[6px] flex flex-col items-center text-center gap-2 border border-gray-100">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-[#00A63F] bg-[#EBF7ED] px-2.5 py-0.5 rounded">THE START</span>
+              <h3 className="text-base font-serif font-bold text-[#2B2B2B] leading-snug m-0">We don't sell trips; we return a country you forgot.</h3>
+              <p className="text-xs font-sans text-[#2B2B2B]/75 leading-relaxed m-0">Go Banjara is a collective of travelers and local guides rebuilding the essence of travel in India.</p>
+            </div>
+
+            {/* Card 3 */}
+            <div className="w-full h-[280px] rounded-[6px] overflow-hidden">
+              <img src="/card-3-full.png" alt="Card 3" className="w-full h-full object-cover" />
+            </div>
           </div>
 
-          {/* Center Text 1 */}
-          <div className="w-full bg-[#F8F8F8] p-5 rounded-[4px] flex flex-col items-center text-center gap-2 border border-gray-100">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-[#00A63F] bg-[#EBF7ED] px-2.5 py-0.5 rounded">THE START</span>
-            <h3 className="text-lg font-serif font-bold text-[#2B2B2B] leading-snug m-0">We don't sell trips; we return a country you forgot.</h3>
-            <p className="text-xs font-sans text-[#2B2B2B]/75 leading-relaxed m-0">Go Banjara is a collective of travelers and local guides rebuilding the essence of travel in India.</p>
+          {/* Mobile Stack Row 2 */}
+          <div 
+            style={{
+              position: "sticky",
+              top: "90px",
+              zIndex: 20,
+            }}
+            className="w-full bg-white rounded-[12px] p-3 shadow-lg border border-gray-100 flex flex-col gap-3 mb-6"
+          >
+            {/* Card 2 */}
+            <div className="w-full h-[280px] rounded-[6px] overflow-hidden">
+              <img src="/card-2-full.png" alt="Card 2" className="w-full h-full object-cover" />
+            </div>
+
+            {/* Center Text 2 */}
+            <div className="w-full bg-[#F8F8F8] p-4 rounded-[6px] flex flex-col items-center text-center gap-2 border border-gray-100">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-[#00A63F] bg-[#EBF7ED] px-2.5 py-0.5 rounded">OUR PHILOSOPHY</span>
+              <h3 className="text-base font-serif font-bold text-[#2B2B2B] leading-snug m-0">Slower journeys, deeper roots, and stories that stay with you.</h3>
+              <p className="text-xs font-sans text-[#2B2B2B]/75 leading-relaxed m-0">We take the backroads, stay with local hosts, and design expeditions that respect the land.</p>
+            </div>
+
+            {/* Card 4 */}
+            <div className="w-full h-[280px] rounded-[6px] overflow-hidden">
+              <img src="/card-4-full.png" alt="Card 4" className="w-full h-full object-cover" />
+            </div>
           </div>
 
-          {/* Card 3 */}
-          <div className="w-full h-[320px] rounded-[4px] overflow-hidden">
-            <img src="/card-3-full.png" alt="Card 3" className="w-full h-full object-cover" />
+          {/* Mobile Stack Row 3 */}
+          <div 
+            style={{
+              position: "sticky",
+              top: "110px",
+              zIndex: 30,
+            }}
+            className="w-full bg-white rounded-[12px] p-3 shadow-lg border border-gray-100 flex flex-col gap-3 mb-6"
+          >
+            {/* Card 7 */}
+            <div className="w-full h-[280px] rounded-[6px] overflow-hidden">
+              <img src="/card-7-full.png" alt="Card 7" className="w-full h-full object-cover" />
+            </div>
+
+            {/* Center Text 3 */}
+            <div className="w-full bg-[#F8F8F8] p-4 rounded-[6px] flex flex-col items-center text-center gap-2 border border-gray-100">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-[#00A63F] bg-[#EBF7ED] px-2.5 py-0.5 rounded">ARTISANAL GEAR</span>
+              <h3 className="text-base font-serif font-bold text-[#2B2B2B] leading-snug m-0">Crafted for modern nomads who live life on the move.</h3>
+              <p className="text-xs font-sans text-[#2B2B2B]/75 leading-relaxed m-0">From weather-proof stickers to hand-bound expedition journals, every item is crafted with heritage quality.</p>
+            </div>
+
+            {/* Card 5 */}
+            <div className="w-full h-[280px] rounded-[6px] overflow-hidden">
+              <img src="/card-5-full.png" alt="Card 5" className="w-full h-full object-cover" />
+            </div>
           </div>
 
-          {/* Card 2 */}
-          <div className="w-full h-[320px] rounded-[4px] overflow-hidden">
-            <img src="/card-2-full.png" alt="Card 2" className="w-full h-full object-cover" />
-          </div>
+          {/* Mobile Stack Row 4 */}
+          <div 
+            style={{
+              position: "sticky",
+              top: "130px",
+              zIndex: 40,
+            }}
+            className="w-full bg-white rounded-[12px] p-3 shadow-lg border border-gray-100 flex flex-col gap-3 mb-6"
+          >
+            {/* Card 8 */}
+            <div className="w-full h-[280px] rounded-[6px] overflow-hidden">
+              <img src="/card-8-full.png" alt="Card 8" className="w-full h-full object-cover" />
+            </div>
 
-          {/* Center Text 2 */}
-          <div className="w-full bg-[#F8F8F8] p-5 rounded-[4px] flex flex-col items-center text-center gap-2 border border-gray-100">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-[#00A63F] bg-[#EBF7ED] px-2.5 py-0.5 rounded">OUR PHILOSOPHY</span>
-            <h3 className="text-lg font-serif font-bold text-[#2B2B2B] leading-snug m-0">Slower journeys, deeper roots, and stories that stay with you.</h3>
-            <p className="text-xs font-sans text-[#2B2B2B]/75 leading-relaxed m-0">We take the backroads, stay with local hosts, and design expeditions that respect the land.</p>
-          </div>
+            {/* Center Text 4 */}
+            <div className="w-full bg-[#F8F8F8] p-4 rounded-[6px] flex flex-col items-center text-center gap-2 border border-gray-100">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-[#00A63F] bg-[#EBF7ED] px-2.5 py-0.5 rounded">THE BANJARA TRIBE</span>
+              <h3 className="text-base font-serif font-bold text-[#2B2B2B] leading-snug m-0">Join a growing collective of curious global explorers.</h3>
+              <p className="text-xs font-sans text-[#2B2B2B]/75 leading-relaxed m-0">Connect with like-minded wanderers, share trail notes, and write your next chapter with Go Banjara.</p>
+            </div>
 
-          {/* Card 4 */}
-          <div className="w-full h-[320px] rounded-[4px] overflow-hidden">
-            <img src="/card-4-full.png" alt="Card 4" className="w-full h-full object-cover" />
-          </div>
-
-          {/* Card 7 */}
-          <div className="w-full h-[320px] rounded-[4px] overflow-hidden">
-            <img src="/card-7-full.png" alt="Card 7" className="w-full h-full object-cover" />
-          </div>
-
-          {/* Center Text 3 */}
-          <div className="w-full bg-[#F8F8F8] p-5 rounded-[4px] flex flex-col items-center text-center gap-2 border border-gray-100">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-[#00A63F] bg-[#EBF7ED] px-2.5 py-0.5 rounded">ARTISANAL GEAR</span>
-            <h3 className="text-lg font-serif font-bold text-[#2B2B2B] leading-snug m-0">Crafted for modern nomads who live life on the move.</h3>
-            <p className="text-xs font-sans text-[#2B2B2B]/75 leading-relaxed m-0">From weather-proof stickers to hand-bound expedition journals, every item is crafted with heritage quality.</p>
-          </div>
-
-          {/* Card 5 */}
-          <div className="w-full h-[320px] rounded-[4px] overflow-hidden">
-            <img src="/card-5-full.png" alt="Card 5" className="w-full h-full object-cover" />
-          </div>
-
-          {/* Card 8 */}
-          <div className="w-full h-[320px] rounded-[4px] overflow-hidden">
-            <img src="/card-8-full.png" alt="Card 8" className="w-full h-full object-cover" />
-          </div>
-
-          {/* Center Text 4 */}
-          <div className="w-full bg-[#F8F8F8] p-5 rounded-[4px] flex flex-col items-center text-center gap-2 border border-gray-100">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-[#00A63F] bg-[#EBF7ED] px-2.5 py-0.5 rounded">THE BANJARA TRIBE</span>
-            <h3 className="text-lg font-serif font-bold text-[#2B2B2B] leading-snug m-0">Join a growing collective of curious global explorers.</h3>
-            <p className="text-xs font-sans text-[#2B2B2B]/75 leading-relaxed m-0">Connect with like-minded wanderers, share trail notes, and write your next chapter with Go Banjara.</p>
-          </div>
-
-          {/* Card 6 */}
-          <div className="w-full h-[320px] rounded-[4px] overflow-hidden">
-            <img src="/card-6-full.png" alt="Card 6" className="w-full h-full object-cover" />
+            {/* Card 6 */}
+            <div className="w-full h-[280px] rounded-[6px] overflow-hidden">
+              <img src="/card-6-full.png" alt="Card 6" className="w-full h-full object-cover" />
+            </div>
           </div>
         </div>
 

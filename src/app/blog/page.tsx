@@ -228,248 +228,80 @@ export default function BlogPage() {
       }}
     >
       {/* ── HERO SECTION ── */}
-      {/* Figma: 1440×308, pt:62 pr:80 pb:24 pl:80, gap:32 */}
+      {/* Mobile: 430px max, pt:24 pr:20 pb:24 pl:20, gap:20 | Desktop: 1440x308, pt:62 pr:80 pb:24 pl:80, gap:32 */}
       <section
         style={{
           width: '100%',
-          maxWidth: '1440px',
-          minHeight: '308px',
-          height: 'auto',
           background: 'rgba(255, 255, 255, 1)',
-          paddingTop: '62px',
-          paddingRight: '80px',
-          paddingBottom: '24px',
-          paddingLeft: '80px',
           boxSizing: 'border-box',
-          margin: '0 auto',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '32px',
-          textAlign: 'center',
         }}
-        className="px-6 md:px-[80px]"
+        className="mx-auto w-full max-w-[430px] md:max-w-[1440px] px-[20px] md:px-[80px] pt-[24px] md:pt-[62px] pb-[24px] flex flex-col items-center gap-5 md:gap-[32px] text-center"
       >
-        {/* Text block — Figma: 1280×134, justify-content: space-between */}
-        <div
-          style={{
-            width: '100%',
-            maxWidth: '1280px',
-            height: 'auto',
-            minHeight: '134px',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            borderRadius: '4px',
-            background: 'rgba(255, 255, 255, 1)',
-            gap: '8px',
-          }}
-        >
-          {/* BLOGS label — Figma: Faktum 600 14px uppercase, color: rgba(255,98,62,1), background: rgba(255,98,62,0.08) */}
+        {/* Text block */}
+        <div className="w-full max-w-[1280px] flex flex-col items-center justify-between gap-2 md:gap-[8px]">
+          {/* BLOGS label */}
           <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
             BLOGS
           </span>
 
-          {/* Title — Figma: 1280×52, Fraunces 600 42px lh:100% rgba(43,43,43,1) */}
-          <h1
-            style={{
-              width: '100%',
-              maxWidth: '1280px',
-              height: '52px',
-              fontFamily: 'Fraunces, Georgia, serif',
-              fontWeight: 600,
-              fontSize: '42px',
-              lineHeight: '100%',
-              letterSpacing: '0px',
-              color: 'rgba(43, 43, 43, 1)',
-              margin: 0,
-              textAlign: 'center',
-              verticalAlign: 'middle',
-            }}
-          >
+          {/* Title */}
+          <h1 className="text-2xl sm:text-3xl md:text-[42px] font-serif font-semibold text-[#2B2B2B] leading-tight md:leading-[100%] m-0 w-full text-center">
             Insights &amp; Updates
           </h1>
 
-          {/* Subtitle — Figma: 1280×32, Faktum 500 24px lh:32px rgba(43,43,43,1) */}
-          <p
-            style={{
-              width: '100%',
-              maxWidth: '1280px',
-              height: '32px',
-              fontFamily: 'Faktum, var(--font-sans), sans-serif',
-              fontWeight: 500,
-              fontSize: '24px',
-              lineHeight: '32px',
-              letterSpacing: '0px',
-              color: 'rgba(43, 43, 43, 1)',
-              margin: 0,
-              textAlign: 'center',
-              verticalAlign: 'middle',
-            }}
-          >
-            Follow my voices to discover unique voices, breathtaking landscapes &amp; unforgettable experiences
+          {/* Subtitle */}
+          <p className="text-xs sm:text-base md:text-[24px] font-sans font-medium text-[#2B2B2B] leading-relaxed md:leading-[32px] m-0 w-full text-center">
+            Follow our stories to discover unique voices, breathtaking landscapes &amp; unforgettable experiences
           </p>
         </div>
 
-        {/* Subscribe form — Figma: 546×56, gap:8px, white bg */}
+        {/* Subscribe form */}
         <form
           onSubmit={(e) => { e.preventDefault(); alert(`Subscribed: ${email}`); }}
-          style={{
-            width: '546px',
-            maxWidth: '100%',
-            height: '56px',
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-            gap: '8px',
-            background: 'rgba(255, 255, 255, 1)',
-            border: '1px solid rgba(200, 200, 200, 1)',
-            borderRadius: '6px',
-            boxSizing: 'border-box',
-            overflow: 'hidden',
-            padding: '0 0 0 0',
-          }}
+          className="w-full max-w-[390px] md:max-w-[546px] h-[48px] md:h-[56px] flex flex-row items-center gap-2 bg-white border border-gray-300 rounded-[6px] box-border overflow-hidden p-1"
         >
-            {/* Input — Figma: 398×25, Faktum 500 20px lh:100% rgba(141,141,141,1) placeholder */}
-            <input
-              type="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email address"
-              style={{
-                width: '398px',
-                flex: 1,
-                height: '25px',
-                border: 'none',
-                outline: 'none',
-                paddingLeft: '16px',
-                paddingRight: '8px',
-                fontFamily: 'Faktum, var(--font-sans), sans-serif',
-                fontWeight: 500,
-                fontSize: '20px',
-                lineHeight: '100%',
-                letterSpacing: '0px',
-                verticalAlign: 'middle',
-                color: 'rgba(43, 43, 43, 1)',
-                background: 'transparent',
-              }}
-              className="placeholder:text-[rgba(141,141,141,1)] placeholder:font-[500] placeholder:text-[20px]"
-            />
-            {/* Subscribe button — Figma: 124×47, pt:12 pr:24 pb:12 pl:24, radius:4, bg:rgba(29,73,62,1) */}
-            <button
-              type="submit"
-              style={{
-                width: '124px',
-                height: '47px',
-                paddingTop: '12px',
-                paddingBottom: '12px',
-                paddingLeft: '24px',
-                paddingRight: '24px',
-                gap: '8px',
-                borderRadius: '4px',
-                background: 'rgba(29, 73, 62, 1)',
-                color: 'rgba(255, 255, 255, 1)',
-                border: 'none',
-                fontFamily: 'Faktum, var(--font-sans), sans-serif',
-                fontWeight: 500,
-                fontSize: '16px',
-                lineHeight: '100%',
-                letterSpacing: '0px',
-                verticalAlign: 'middle',
-                cursor: 'pointer',
-                whiteSpace: 'nowrap',
-                flexShrink: 0,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                boxSizing: 'border-box',
-              }}
-            >
-              {/* Label — Figma: 76×20, Faktum 500 16px lh:100% rgba(255,255,255,1) */}
-              <span
-                style={{
-                  width: '76px',
-                  height: '20px',
-                  fontFamily: 'Faktum, var(--font-sans), sans-serif',
-                  fontWeight: 500,
-                  fontSize: '16px',
-                  lineHeight: '100%',
-                  letterSpacing: '0px',
-                  verticalAlign: 'middle',
-                  color: 'rgba(255, 255, 255, 1)',
-                  textAlign: 'center',
-                }}
-              >
-                Subscribe
-              </span>
-            </button>
+          {/* Input */}
+          <input
+            type="email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter your email address"
+            className="flex-1 h-full border-none outline-none px-3 font-sans font-medium text-xs sm:text-sm md:text-[20px] text-[#2B2B2B] placeholder:text-[#8D8D8D] bg-transparent"
+          />
+          {/* Subscribe button */}
+          <button
+            type="submit"
+            className="h-full px-4 md:px-6 bg-[#1D493E] text-white rounded-[4px] border-none font-sans font-medium text-xs md:text-[16px] cursor-pointer flex items-center justify-center shrink-0 hover:bg-[#163d33] transition-colors"
+          >
+            <span>Subscribe</span>
+          </button>
         </form>
       </section>
 
       {/* ── TABS + GRID SECTION ── */}
-      {/* Figma: 1440×1590, pt:42 pr:80 pb:42 pl:80, gap:32, white */}
+      {/* Mobile: 430px max, pt:12 pr:20 pb:24 pl:20, gap:20 | Desktop: 1440x1590, pt:42 pr:80 pb:42 pl:80, gap:32 */}
       <section
         style={{
           width: '100%',
-          maxWidth: '1440px',
-          margin: '0 auto',
-          paddingTop: '42px',
-          paddingRight: '80px',
-          paddingBottom: '42px',
-          paddingLeft: '80px',
-          gap: '32px',
           background: 'rgba(255, 255, 255, 1)',
-          display: 'flex',
-          flexDirection: 'column',
           boxSizing: 'border-box',
         }}
-        className="px-6 md:px-[80px]"
+        className="mx-auto w-full max-w-[430px] md:max-w-[1440px] px-[20px] md:px-[80px] py-[12px] md:py-[42px] flex flex-col gap-5 md:gap-[32px]"
       >
-        {/* Tab Bar — Native Go Banjara Theme */}
+        {/* Tab Bar */}
         <div
-          style={{
-            width: '100%',
-            maxWidth: '1280px',
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'flex-end',
-            gap: '16px',
-            borderBottom: '2px solid rgba(204, 204, 204, 0.6)',
-            background: 'rgba(255, 255, 255, 1)',
-            boxSizing: 'border-box',
-            overflowX: 'auto',
-          }}
-          className="no-scrollbar"
+          className="w-full max-w-[1280px] flex flex-row items-end gap-3 md:gap-[16px] border-b-2 border-gray-200 bg-white box-border overflow-x-auto no-scrollbar scrollbar-none pb-0.5"
         >
           {tabs.map((tab) => (
             <button
               key={tab}
               onClick={() => handleTabChange(tab)}
-              style={{
-                width: 'auto',
-                padding: '12px 16px',
-                background: 'none',
-                border: 'none',
-                fontFamily: 'Faktum, var(--font-sans), sans-serif',
-                fontWeight: 600,
-                fontSize: '20px',
-                lineHeight: '120%',
-                color: activeTab === tab ? 'rgba(29, 73, 62, 1)' : 'rgba(43, 43, 43, 0.6)',
-                cursor: 'pointer',
-                borderBottom: activeTab === tab
-                  ? '3px solid rgba(29, 73, 62, 1)'
-                  : '3px solid transparent',
-                marginBottom: '-2px',
-                transition: 'all 0.2s ease',
-                whiteSpace: 'nowrap',
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                outline: 'none',
-                boxSizing: 'border-box',
-              }}
+              className={`px-3 md:px-4 py-2 text-xs sm:text-sm md:text-[20px] font-sans font-semibold cursor-pointer border-none bg-none whitespace-nowrap transition-all outline-none border-b-2 -mb-[2px] ${
+                activeTab === tab
+                  ? 'text-[#1D493E] border-[#1D493E]'
+                  : 'text-[#2B2B2B]/60 border-transparent hover:text-[#1D493E]'
+              }`}
             >
               {tab}
             </button>
@@ -479,82 +311,35 @@ export default function BlogPage() {
         {/* 3-Column Card Grid */}
         <div
           id="blog-grid"
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-[32px] mb-[32px] w-full max-w-[1280px]"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-[32px] mb-4 md:mb-[32px] w-full max-w-[1280px]"
         >
           {paginated.map((post) => (
             <Link
               href={`/blog/${post.id}`}
               key={post.id}
-              style={{ textDecoration: 'none', color: 'inherit' }}
+              className="no-underline text-inherit block group"
             >
               {/* Card */}
-              <article
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '16px',
-                  cursor: 'pointer',
-                }}
-                className="group"
-              >
+              <article className="w-full h-full flex flex-col gap-3 md:gap-[16px] cursor-pointer">
                 {/* Image — 16:10 aspect ratio */}
-                <div
-                  style={{
-                    width: '100%',
-                    aspectRatio: '16/10',
-                    overflow: 'hidden',
-                    background: '#e5e5e5',
-                    borderRadius: '6px',
-                    flexShrink: 0,
-                  }}
-                >
+                <div className="w-full aspect-[16/10] overflow-hidden bg-gray-200 rounded-[6px] shrink-0">
                   <img
                     src={post.image}
                     alt={`Go Banjara Blog - ${post.title}`}
                     title={`Go Banjara Blog - ${post.title}`}
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover',
-                      transition: 'transform 0.4s ease',
-                    }}
-                    className="group-hover:scale-105"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
 
                 {/* Text block */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', flexGrow: 1, justifyContent: 'space-between' }}>
-                  {/* Title — Fraunces 600, fluid line height, no hardcoded height overlap */}
-                  <h3
-                    style={{
-                      width: '100%',
-                      fontFamily: 'Fraunces, Georgia, serif',
-                      fontWeight: 600,
-                      fontSize: '22px',
-                      lineHeight: '1.35',
-                      color: 'rgba(43, 43, 43, 1)',
-                      margin: 0,
-                    }}
-                    className="line-clamp-3"
-                  >
+                <div className="flex flex-col gap-1.5 md:gap-[8px] flex-grow justify-between">
+                  {/* Title */}
+                  <h3 className="w-full font-serif font-semibold text-base sm:text-lg md:text-[22px] leading-snug md:leading-[1.35] text-[#2B2B2B] m-0 line-clamp-3 group-hover:text-[#FF623E] transition-colors">
                     {post.title}
                   </h3>
 
                   {/* Meta — Date & Read Time */}
-                  <p
-                    style={{
-                      width: '100%',
-                      fontFamily: 'Faktum, var(--font-sans), sans-serif',
-                      fontWeight: 500,
-                      fontSize: '15px',
-                      lineHeight: '100%',
-                      letterSpacing: '0px',
-                      color: 'rgba(43, 43, 43, 0.65)',
-                      margin: 0,
-                    }}
-                  >
+                  <p className="w-full font-sans font-medium text-xs md:text-[15px] text-[#2B2B2B]/65 m-0">
                     {post.date} &nbsp;•&nbsp; {post.readTime}
                   </p>
                 </div>
@@ -563,11 +348,11 @@ export default function BlogPage() {
           ))}
         </div>
 
-        {/* Pagination Bar — Native Go Banjara Theme */}
+        {/* Pagination Bar */}
         {totalPages > 0 && (
-          <div className="w-full max-w-[1280px] py-4 border-t border-gray-200 bg-white flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="w-full max-w-[1280px] py-4 border-t border-gray-200 bg-white flex flex-col sm:flex-row items-center justify-between gap-3">
             {/* Page info label */}
-            <span style={{ fontFamily: 'Faktum, var(--font-sans), sans-serif' }} className="text-sm md:text-base font-medium text-[#2B2B2B]">
+            <span className="font-sans text-xs md:text-base font-medium text-[#2B2B2B]">
               Page {currentPage} of {totalPages}
             </span>
 
@@ -577,7 +362,7 @@ export default function BlogPage() {
               <button
                 onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
                 disabled={currentPage === 1}
-                className="w-9 h-9 flex items-center justify-center rounded-[6px] border border-gray-200 bg-white text-[#1D493E] hover:bg-[#FAF9F6] disabled:opacity-30 disabled:cursor-not-allowed transition cursor-pointer"
+                className="w-8 h-8 md:w-9 md:h-9 flex items-center justify-center rounded-[6px] border border-gray-200 bg-white text-[#1D493E] hover:bg-[#FAF9F6] disabled:opacity-30 disabled:cursor-not-allowed transition cursor-pointer"
                 aria-label="Previous Page"
               >
                 <ChevronLeft className="w-4 h-4 text-[#1D493E]" />
@@ -588,7 +373,7 @@ export default function BlogPage() {
                 <button
                   key={page}
                   onClick={() => handlePageChange(page)}
-                  className={`w-9 h-9 flex items-center justify-center rounded-[6px] font-sans font-medium text-sm transition cursor-pointer ${
+                  className={`w-8 h-8 md:w-9 md:h-9 flex items-center justify-center rounded-[6px] font-sans font-medium text-xs md:text-sm transition cursor-pointer ${
                     currentPage === page
                       ? 'bg-[#1D493E] text-white border border-[#1D493E] shadow-xs'
                       : 'bg-white text-[#2B2B2B] border border-gray-200 hover:border-[#1D493E] hover:text-[#1D493E]'
@@ -602,7 +387,7 @@ export default function BlogPage() {
               <button
                 onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))}
                 disabled={currentPage === totalPages}
-                className="w-9 h-9 flex items-center justify-center rounded-[6px] border border-gray-200 bg-white text-[#1D493E] hover:bg-[#FAF9F6] disabled:opacity-30 disabled:cursor-not-allowed transition cursor-pointer"
+                className="w-8 h-8 md:w-9 md:h-9 flex items-center justify-center rounded-[6px] border border-gray-200 bg-white text-[#1D493E] hover:bg-[#FAF9F6] disabled:opacity-30 disabled:cursor-not-allowed transition cursor-pointer"
                 aria-label="Next Page"
               >
                 <ChevronRight className="w-4 h-4 text-[#1D493E]" />
@@ -612,123 +397,50 @@ export default function BlogPage() {
         )}
       </section>
 
-      {/* ── FAQ SECTION (matches shop page exactly) ── */}
+      {/* ── FAQ SECTION ── */}
+      {/* Mobile: 430px max, px:20 py:24, gap:12 | Desktop: 1440, px:80 py:42, gap:24 */}
       <section
         style={{
           width: '100%',
-          maxWidth: '1440px',
-          margin: '0 auto',
-          paddingTop: '42px',
-          paddingBottom: '42px',
-          paddingLeft: '80px',
-          paddingRight: '80px',
           background: 'rgba(255, 255, 255, 1)',
           boxSizing: 'border-box',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '24px',
         }}
+        className="mx-auto w-full max-w-[430px] md:max-w-[1440px] px-[20px] md:px-[80px] py-[24px] md:py-[42px] flex flex-col gap-3 md:gap-[24px]"
       >
         {/* Header */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+        <div className="flex flex-col gap-2 md:gap-[12px]">
           {/* Label */}
-          <span
-            style={{
-              fontFamily: 'Faktum, var(--font-sans), sans-serif',
-              fontWeight: 600,
-              fontSize: '14px',
-              lineHeight: '100%',
-              letterSpacing: '1.2px',
-              textTransform: 'uppercase',
-              color: 'rgba(255, 98, 62, 1)',
-              background: 'rgba(255, 98, 62, 0.1)',
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              height: '28px',
-              padding: '0 16px',
-              borderRadius: '4px',
-              width: 'fit-content',
-            }}
-          >
+          <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
             FAQ&apos;S
           </span>
 
           {/* Title */}
-          <h2
-            style={{
-              fontFamily: 'Fraunces, Georgia, serif',
-              fontWeight: 600,
-              fontSize: '42px',
-              lineHeight: '100%',
-              letterSpacing: '0px',
-              color: 'rgba(43, 43, 43, 1)',
-              margin: 0,
-            }}
-          >
+          <h2 className="text-xl sm:text-2xl md:text-[42px] font-serif font-semibold text-[#2B2B2B] leading-tight md:leading-[100%] m-0">
             Frequently asked questions
           </h2>
         </div>
 
         {/* Accordion */}
-        <div style={{ width: '100%', display: 'flex', flexDirection: 'column', borderTop: '1px solid rgba(204, 204, 204, 1)' }}>
+        <div className="w-full flex flex-col border-t border-gray-300">
           {FAQ_ITEMS.map((item, idx) => {
             const isOpen = openFaq === idx;
             return (
-              <div
-                key={idx}
-                style={{
-                  width: '100%',
-                  borderBottom: '1px solid rgba(204, 204, 204, 1)',
-                }}
-              >
+              <div key={idx} className="w-full border-b border-gray-300">
                 <button
                   onClick={() => setOpenFaq(isOpen ? null : idx)}
-                  style={{
-                    width: '100%',
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    padding: '20px 0',
-                    background: 'none',
-                    border: 'none',
-                    cursor: 'pointer',
-                    textAlign: 'left',
-                    gap: '16px',
-                  }}
+                  className="w-full flex justify-between items-center py-4 md:py-[20px] bg-none border-none cursor-pointer text-left gap-4"
                 >
-                  <span
-                    style={{
-                      fontFamily: 'Faktum, var(--font-sans), sans-serif',
-                      fontWeight: 500,
-                      fontSize: '20px',
-                      lineHeight: '32px',
-                      color: 'rgba(43, 43, 43, 1)',
-                      flex: 1,
-                      maxWidth: '1196px',
-                    }}
-                  >
+                  <span className="font-sans font-medium text-sm sm:text-base md:text-[20px] leading-snug md:leading-[32px] text-[#2B2B2B] flex-1">
                     {item.question}
                   </span>
                   {isOpen ? (
-                    <span style={{ fontSize: '24px', fontWeight: 600, color: 'rgba(255, 98, 62, 1)', flexShrink: 0, lineHeight: 1 }}>−</span>
+                    <span className="text-base md:text-[24px] font-bold text-[#FF623E] shrink-0 leading-none">▲</span>
                   ) : (
-                    <span style={{ fontSize: '24px', fontWeight: 600, color: 'rgba(29, 73, 62, 1)', flexShrink: 0, lineHeight: 1 }}>+</span>
+                    <span className="text-base md:text-[24px] font-bold text-[#1D493E] shrink-0 leading-none">▼</span>
                   )}
                 </button>
                 {isOpen && (
-                  <p
-                    style={{
-                      fontFamily: 'Faktum, var(--font-sans), sans-serif',
-                      fontWeight: 500,
-                      fontSize: '20px',
-                      lineHeight: '32px',
-                      color: 'rgba(141, 141, 141, 1)',
-                      margin: 0,
-                      maxWidth: '1196px',
-                      paddingBottom: '20px',
-                    }}
-                  >
+                  <p className="font-sans font-medium text-xs sm:text-sm md:text-[20px] leading-relaxed md:leading-[32px] text-[#8D8D8D] m-0 pb-4 md:pb-[20px]">
                     {item.answer}
                   </p>
                 )}
@@ -738,77 +450,35 @@ export default function BlogPage() {
         </div>
       </section>
 
-      {/* ── CTA SECTION (matches screenshot) ── */}
+      {/* ── CTA SECTION ── */}
       <section
         style={{
           width: '100%',
           background: 'rgba(255, 255, 255, 1)',
-          borderTop: '1px solid rgba(204, 204, 204, 1)',
-          paddingTop: '80px',
-          paddingBottom: '80px',
-          textAlign: 'center',
           boxSizing: 'border-box',
         }}
+        className="mx-auto w-full max-w-[430px] md:max-w-[1440px] px-[20px] md:px-[80px] py-[32px] md:py-[80px] text-center border-t border-gray-200"
       >
-        <div style={{ maxWidth: '760px', margin: '0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
+        <div className="max-w-[760px] mx-auto flex flex-col items-center gap-3 md:gap-[20px]">
           {/* Heading */}
-          <h2
-            style={{
-              fontFamily: 'Fraunces, Georgia, serif',
-              fontWeight: 600,
-              fontSize: '42px',
-              lineHeight: '100%',
-              letterSpacing: '0px',
-              color: 'rgba(43, 43, 43, 1)',
-              margin: 0,
-              textAlign: 'center',
-            }}
-          >
+          <h2 className="text-xl sm:text-2xl md:text-[42px] font-serif font-semibold text-[#2B2B2B] leading-tight md:leading-[100%] m-0 text-center">
             The{' '}
-            <span style={{ color: 'rgba(255, 98, 62, 1)', fontStyle: 'italic' }}>best adventures</span>{' '}
+            <span className="text-[#FF623E] font-serif font-semibold italic">best adventures</span>{' '}
             find their way to your inbox.
           </h2>
 
           {/* Subtitle */}
-          <p
-            style={{
-              fontFamily: 'Faktum, var(--font-sans), sans-serif',
-              fontWeight: 500,
-              fontSize: '18px',
-              lineHeight: '28px',
-              color: 'rgba(43, 43, 43, 0.7)',
-              margin: 0,
-              textAlign: 'center',
-              maxWidth: '640px',
-            }}
-          >
+          <p className="text-xs sm:text-base md:text-[18px] font-sans font-medium text-[#2B2B2B]/70 leading-relaxed m-0 text-center max-w-[640px]">
             Hidden places, exclusive trip drops, curated gear, and stories from the road delivered before anyone else hears about them.
           </p>
 
           {/* Button */}
           <Link
             href="/travel"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '8px',
-              background: 'rgba(29, 73, 62, 1)',
-              color: 'rgba(255, 255, 255, 1)',
-              padding: '14px 32px',
-              borderRadius: '6px',
-              fontFamily: 'Faktum, var(--font-sans), sans-serif',
-              fontWeight: 500,
-              fontSize: '16px',
-              lineHeight: '100%',
-              letterSpacing: '0px',
-              textDecoration: 'none',
-              marginTop: '8px',
-              transition: 'background 0.2s',
-            }}
-            className="group hover:bg-[#163d33] inline-flex items-center justify-center gap-2 transition-all duration-300"
+            className="group inline-flex items-center justify-center gap-2 bg-[#1D493E] text-white px-6 md:px-8 py-3 md:py-[14px] rounded-[6px] font-sans font-medium text-xs md:text-[16px] no-underline mt-2 hover:bg-[#163d33] transition-all duration-300"
           >
             <span>Reserve your tour now</span>
-            <span className="text-lg group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300">↗</span>
+            <span className="text-base md:text-lg group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300">↗</span>
           </Link>
         </div>
       </section>

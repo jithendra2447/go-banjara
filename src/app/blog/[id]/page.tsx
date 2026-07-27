@@ -1095,101 +1095,67 @@ export default function BlogPostDetail() {
           }),
         }}
       />
-      {/* ── BREADCRUMB BAR (Matching Go Banjara Shop/Product Breadcrumb Spec) ── */}
-      <div className="w-full bg-white border-b border-gray-200 py-3.5 px-6 md:px-[80px]">
-        <div className="max-w-[1280px] mx-auto flex items-center justify-between gap-4 flex-wrap">
-          <nav className="flex items-center gap-2 text-sm font-sans font-medium">
+      {/* ── BREADCRUMB BAR ── */}
+      <div className="w-full bg-white border-b border-gray-200 py-3 md:py-3.5 px-4 md:px-[80px]">
+        <div className="max-w-[1280px] mx-auto flex items-center justify-between gap-3 flex-wrap">
+          <nav className="flex items-center gap-1.5 md:gap-2 text-xs md:text-sm font-sans font-medium overflow-x-auto no-scrollbar scrollbar-none py-1">
             <Link 
               href="/" 
-              style={{
-                fontFamily: "Faktum, sans-serif",
-                fontWeight: 500,
-                fontSize: "14px",
-                lineHeight: "20px",
-                color: "rgba(141, 141, 141, 1)",
-              }}
-              className="hover:text-[#1D493E] transition-colors"
+              className="text-[#8D8D8D] hover:text-[#1D493E] transition-colors whitespace-nowrap"
             >
               Home
             </Link>
-            <span style={{ color: "rgba(141, 141, 141, 1)", fontSize: "14px" }}>›</span>
+            <span className="text-[#8D8D8D] text-xs">›</span>
             <Link 
               href="/blog" 
-              style={{
-                fontFamily: "Faktum, sans-serif",
-                fontWeight: 500,
-                fontSize: "14px",
-                lineHeight: "20px",
-                color: "rgba(141, 141, 141, 1)",
-              }}
-              className="hover:text-[#1D493E] transition-colors"
+              className="text-[#8D8D8D] hover:text-[#1D493E] transition-colors whitespace-nowrap"
             >
               Blogs
             </Link>
-            <span style={{ color: "rgba(141, 141, 141, 1)", fontSize: "14px" }}>›</span>
-            <span 
-              style={{
-                fontFamily: "Faktum, sans-serif",
-                fontWeight: 500,
-                fontSize: "14px",
-                lineHeight: "20px",
-                color: "rgba(141, 141, 141, 1)",
-              }}
-            >
+            <span className="text-[#8D8D8D] text-xs">›</span>
+            <span className="text-[#8D8D8D] whitespace-nowrap">
               {article.category}
             </span>
-            <span style={{ color: "rgba(141, 141, 141, 1)", fontSize: "14px" }}>›</span>
-            <span 
-              style={{
-                fontFamily: "Faktum, sans-serif",
-                fontWeight: 500,
-                fontSize: "14px",
-                lineHeight: "20px",
-                color: "rgba(29, 73, 62, 1)",
-              }}
-              className="font-semibold line-clamp-1 max-w-[280px] sm:max-w-none"
-            >
+            <span className="text-[#8D8D8D] text-xs">›</span>
+            <span className="text-[#1D493E] font-semibold line-clamp-1 max-w-[160px] sm:max-w-[280px] md:max-w-none">
               {article.title}
             </span>
           </nav>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             <button
               onClick={handleShare}
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white text-[#1D493E] border border-[#E5E0D5] hover:bg-[#FAF9F6] text-xs font-semibold transition cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white text-[#1D493E] border border-[#E5E0D5] hover:bg-[#FAF9F6] text-xs font-semibold transition cursor-pointer"
             >
               <Share2 className="w-3.5 h-3.5" />
-              <span>{copied ? 'Link Copied!' : 'Share Article'}</span>
+              <span>{copied ? 'Link Copied!' : 'Share'}</span>
             </button>
           </div>
         </div>
       </div>
 
       {/* ── ARTICLE HEADER ── */}
-      <header className="max-w-4xl mx-auto px-6 pt-10 pb-6 text-center">
-        {/* Category Pill — Single-line Go Banjara Pill */}
-        <div className="inline-flex items-center justify-center h-[26px] bg-[#FFEBE5] rounded-[4px] px-3.5 mb-4 mx-auto whitespace-nowrap">
-          <span className="font-sans font-semibold text-[14px] leading-none tracking-[1.2px] text-[#FF623E] uppercase">
+      <header className="w-full max-w-[430px] md:max-w-4xl mx-auto px-[20px] md:px-6 pt-6 md:pt-10 pb-4 md:pb-6 text-left md:text-center">
+        {/* Category Pill */}
+        <div className="inline-flex items-center justify-center h-[26px] bg-[#FFEBE5] rounded-[4px] px-3 mb-3 md:mb-4 md:mx-auto whitespace-nowrap">
+          <span className="font-sans font-semibold text-[12px] md:text-[14px] leading-none tracking-[1.2px] text-[#FF623E] uppercase">
             {article.category}
           </span>
         </div>
 
-        {/* Title — Native Go Banjara Serif Heading */}
-        <h1 
-          style={{ fontFamily: 'Fraunces, Georgia, serif', fontWeight: 600, color: 'rgba(43, 43, 43, 1)' }}
-          className="text-3xl md:text-5xl leading-tight md:leading-snug mb-6"
-        >
+        {/* Title */}
+        <h1 className="text-xl sm:text-3xl md:text-5xl font-serif font-semibold text-[#2B2B2B] leading-tight md:leading-snug mb-4 md:mb-6">
           {article.title}
         </h1>
 
         {/* Author & Meta Row */}
-        <div className="flex items-center justify-center gap-4 text-xs md:text-sm text-[#2B2B2B]/70 font-medium border-y border-gray-200 py-3.5">
+        <div className="flex flex-wrap items-center md:justify-center gap-2 md:gap-4 text-xs md:text-sm text-[#2B2B2B]/70 font-medium border-y border-gray-200 py-3">
           <div className="flex items-center gap-2">
             <img 
               src={article.author.avatar} 
               alt={`${article.author.name} | Go Banjara Travel Specialist`}
               title={`${article.author.name} | Go Banjara Team`}
-              className="w-7 h-7 rounded-full object-cover border border-gray-200"
+              className="w-6 h-6 md:w-7 md:h-7 rounded-full object-cover border border-gray-200"
             />
             <span className="font-semibold text-[#2B2B2B]">{article.author.name}</span>
           </div>
@@ -1201,8 +1167,8 @@ export default function BlogPostDetail() {
       </header>
 
       {/* ── HERO COVER IMAGE WITH CAPTION ── */}
-      <div className="max-w-5xl mx-auto px-6 mb-12">
-        <div className="w-full h-[320px] md:h-[500px] rounded-[4px] overflow-hidden bg-gray-100">
+      <div className="w-full max-w-[430px] md:max-w-5xl mx-auto px-[20px] md:px-6 mb-6 md:mb-12">
+        <div className="w-full h-[220px] sm:h-[320px] md:h-[500px] rounded-[4px] overflow-hidden bg-gray-100">
           <img 
             src={article.heroImage} 
             alt={`${article.title} | Go Banjara Himalayan Travel Guide`}
@@ -1210,47 +1176,26 @@ export default function BlogPostDetail() {
             className="w-full h-full object-cover"
           />
         </div>
-        <p className="text-center text-xs text-[#2B2B2B]/60 italic mt-3 font-medium">
+        <p className="text-center text-xs text-[#2B2B2B]/60 italic mt-2 md:mt-3 font-medium">
           Riding through the majestic mountain corridors of Ladakh. Photo: Go Banjara Explorers
         </p>
       </div>
 
       {/* ── ARTICLE CONTENT & SIDEBAR ── */}
-      <div className="max-w-6xl mx-auto px-6 flex flex-col lg:flex-row gap-12 items-start">
+      <div className="w-full max-w-[430px] md:max-w-6xl mx-auto px-[20px] md:px-6 flex flex-col lg:flex-row gap-6 md:gap-12 items-start">
         
-        {/* Table of Contents Sidebar (Native Go Banjara Theme) */}
+        {/* Table of Contents Sidebar */}
         {article.toc.length > 0 && (
-          <aside 
-            style={{
-              background: 'rgba(255, 255, 255, 1)',
-              border: '1px solid rgba(204, 204, 204, 1)',
-              borderRadius: '4px',
-              boxSizing: 'border-box',
-            }}
-            className="w-full lg:w-80 p-6 sticky top-28 shrink-0 select-none"
-          >
-            <h4 
-              style={{
-                fontFamily: 'Fraunces, Georgia, serif',
-                fontWeight: 600,
-                fontSize: '20px',
-                color: 'rgba(43, 43, 43, 1)',
-                borderBottom: '1px solid rgba(204, 204, 204, 1)',
-              }}
-              className="pb-3 mb-4"
-            >
+          <aside className="w-full lg:w-80 p-4 md:p-6 bg-white border border-gray-300 rounded-[4px] lg:sticky lg:top-28 shrink-0 select-none mb-4 lg:mb-0">
+            <h4 className="font-serif font-semibold text-lg md:text-[20px] text-[#2B2B2B] border-b border-gray-300 pb-2 md:pb-3 mb-3 md:mb-4">
               Table of Contents
             </h4>
-            <nav className="space-y-2.5 text-sm font-medium">
+            <nav className="space-y-2 text-xs sm:text-sm font-medium">
               {article.toc.map((item) => (
                 <a
                   key={item.id}
                   href={`#${item.id}`}
-                  style={{
-                    fontFamily: 'Faktum, var(--font-sans), sans-serif',
-                    color: 'rgba(43, 43, 43, 0.8)',
-                  }}
-                  className="block py-1 hover:text-[#FF5A36] transition"
+                  className="block py-1 text-[#2B2B2B]/80 hover:text-[#FF623E] transition-colors"
                 >
                   {item.title}
                 </a>
@@ -1260,65 +1205,50 @@ export default function BlogPostDetail() {
         )}
 
         {/* Main Article Body */}
-        <main className="flex-1 space-y-10 text-[#2B2B2B] leading-relaxed">
+        <main className="flex-1 space-y-6 md:space-y-10 text-[#2B2B2B] leading-relaxed w-full">
           {/* Excerpt Lead */}
-          <p 
-            style={{ fontFamily: 'Fraunces, Georgia, serif', color: 'rgba(43, 43, 43, 1)' }}
-            className="text-xl md:text-[22px] font-medium leading-relaxed italic border-l-4 border-[#1D493E] pl-4 py-1"
-          >
+          <p className="text-base sm:text-xl md:text-[22px] font-serif font-medium leading-relaxed italic border-l-4 border-[#1D493E] pl-3 md:pl-4 py-1 text-[#2B2B2B]">
             &ldquo;{article.excerpt}&rdquo;
           </p>
 
           {/* Sections */}
           {article.sections.map((section) => (
-            <section key={section.id} id={section.id} className="space-y-4 pt-2">
-              <h2 
-                style={{ fontFamily: 'Fraunces, Georgia, serif', fontWeight: 600, color: 'rgba(43, 43, 43, 1)' }}
-                className="text-2xl md:text-3xl border-b border-gray-200 pb-2.5 mt-8 mb-4"
-              >
+            <section key={section.id} id={section.id} className="space-y-3 md:space-y-4 pt-2">
+              <h2 className="font-serif font-semibold text-lg sm:text-2xl md:text-3xl text-[#2B2B2B] border-b border-gray-200 pb-2 mt-6 md:mt-8 mb-3 md:mb-4">
                 {section.title}
               </h2>
 
               {section.content.map((paragraph, pIdx) => (
                 <p 
                   key={pIdx} 
-                  style={{ fontFamily: 'Faktum, var(--font-sans), sans-serif', color: 'rgba(43, 43, 43, 0.88)' }}
-                  className="text-base md:text-lg leading-relaxed font-normal mb-4"
+                  className="font-sans text-xs sm:text-base md:text-lg leading-relaxed text-[#2B2B2B]/90 font-normal mb-3 md:mb-4"
                 >
                   {paragraph}
                 </p>
               ))}
 
-              {/* Highlight Callout Box — Native Go Banjara Accent */}
+              {/* Highlight Callout Box */}
               {section.highlight && (
-                <div 
-                  style={{
-                    background: 'rgba(255, 235, 232, 0.5)',
-                    borderLeft: '4px solid rgba(255, 98, 62, 1)',
-                    borderRadius: '0 8px 8px 0',
-                    color: 'rgba(43, 43, 43, 1)',
-                  }}
-                  className="p-5 my-5 text-sm font-semibold space-y-3"
-                >
-                  <p className="text-base text-[#2B2B2B] font-medium leading-relaxed">{section.highlight}</p>
+                <div className="p-4 md:p-5 my-4 md:my-5 text-xs sm:text-sm font-semibold space-y-3 bg-[#FFEBE5]/50 border-l-4 border-[#FF623E] rounded-r-lg text-[#2B2B2B]">
+                  <p className="text-xs sm:text-base text-[#2B2B2B] font-medium leading-relaxed m-0">{section.highlight}</p>
                   {section.backlink && (
                     section.backlink.url.startsWith('http') ? (
                       <a 
                         href={section.backlink.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-4 py-2.5 rounded-md bg-[#1D493E] text-white hover:bg-[#FF5A36] text-xs md:text-sm font-bold transition-all shadow-xs cursor-pointer"
+                        className="inline-flex items-center gap-2 px-3.5 py-2 rounded-md bg-[#1D493E] text-white hover:bg-[#FF5A36] text-xs md:text-sm font-bold transition-all shadow-xs cursor-pointer no-underline mt-1"
                       >
                         <span>{section.backlink.label}</span>
-                        <ExternalLink className="w-4 h-4 text-[#FF623E]" />
+                        <ExternalLink className="w-3.5 h-3.5 text-[#FF623E]" />
                       </a>
                     ) : (
                       <Link 
                         href={section.backlink.url}
-                        className="inline-flex items-center gap-2 px-4 py-2.5 rounded-md bg-[#1D493E] text-white hover:bg-[#FF5A36] text-xs md:text-sm font-bold transition-all shadow-xs cursor-pointer"
+                        className="inline-flex items-center gap-2 px-3.5 py-2 rounded-md bg-[#1D493E] text-white hover:bg-[#FF5A36] text-xs md:text-sm font-bold transition-all shadow-xs cursor-pointer no-underline mt-1"
                       >
                         <span>{section.backlink.label}</span>
-                        <ChevronRight className="w-4 h-4 text-white" />
+                        <ChevronRight className="w-3.5 h-3.5 text-white" />
                       </Link>
                     )
                   )}
@@ -1327,24 +1257,24 @@ export default function BlogPostDetail() {
 
               {/* Standalone Backlink */}
               {!section.highlight && section.backlink && (
-                <div className="my-5">
+                <div className="my-4">
                   {section.backlink.url.startsWith('http') ? (
                     <a 
                       href={section.backlink.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-4 py-2.5 rounded-md bg-[#F0F7F4] border border-[#1D493E]/20 text-[#1D493E] hover:bg-[#1D493E] hover:text-white text-xs md:text-sm font-bold transition-all shadow-xs cursor-pointer"
+                      className="inline-flex items-center gap-2 px-3.5 py-2 rounded-md bg-[#F0F7F4] border border-[#1D493E]/20 text-[#1D493E] hover:bg-[#1D493E] hover:text-white text-xs md:text-sm font-bold transition-all shadow-xs cursor-pointer no-underline"
                     >
                       <span>{section.backlink.label}</span>
-                      <ExternalLink className="w-4 h-4 text-[#FF623E]" />
+                      <ExternalLink className="w-3.5 h-3.5 text-[#FF623E]" />
                     </a>
                   ) : (
                     <Link 
                       href={section.backlink.url}
-                      className="inline-flex items-center gap-2 px-4 py-2.5 rounded-md bg-[#F0F7F4] border border-[#1D493E]/20 text-[#1D493E] hover:bg-[#1D493E] hover:text-white text-xs md:text-sm font-bold transition-all shadow-xs cursor-pointer"
+                      className="inline-flex items-center gap-2 px-3.5 py-2 rounded-md bg-[#F0F7F4] border border-[#1D493E]/20 text-[#1D493E] hover:bg-[#1D493E] hover:text-white text-xs md:text-sm font-bold transition-all shadow-xs cursor-pointer no-underline"
                     >
                       <span>{section.backlink.label}</span>
-                      <ChevronRight className="w-4 h-4 text-[#FF623E]" />
+                      <ChevronRight className="w-3.5 h-3.5 text-[#FF623E]" />
                     </Link>
                   )}
                 </div>
@@ -1352,10 +1282,10 @@ export default function BlogPostDetail() {
 
               {/* Bullets List */}
               {section.bullets && section.bullets.length > 0 && (
-                <ul className="space-y-2.5 my-4">
+                <ul className="space-y-2 my-3 pl-0">
                   {section.bullets.map((bullet, bIdx) => (
-                    <li key={bIdx} className="flex items-start gap-2.5 text-sm font-medium text-[#2B2B2B]">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#1D493E] shrink-0 mt-2" />
+                    <li key={bIdx} className="flex items-start gap-2 text-xs sm:text-sm font-medium text-[#2B2B2B]">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#1D493E] shrink-0 mt-1.5" />
                       <span>{bullet}</span>
                     </li>
                   ))}
@@ -1364,8 +1294,8 @@ export default function BlogPostDetail() {
 
               {/* Inline Section Image */}
               {section.image && (
-                <div className="space-y-2 my-6">
-                  <div className="w-full h-80 md:h-[420px] rounded-[4px] overflow-hidden">
+                <div className="space-y-2 my-4 md:my-6">
+                  <div className="w-full h-56 sm:h-80 md:h-[420px] rounded-[4px] overflow-hidden bg-gray-100">
                     <img 
                       src={section.image} 
                       alt={`${section.title} | Go Banjara Travel Guide`}
@@ -1387,16 +1317,16 @@ export default function BlogPostDetail() {
 
           {/* Embedded YouTube Video Guide Section */}
           {article.youtubeVideo && (
-            <section id="video-guide" className="my-10 p-6 md:p-8 rounded-xl bg-[#FAF9F6] border border-gray-200 space-y-5">
+            <section id="video-guide" className="my-8 md:my-10 p-4 md:p-8 rounded-xl bg-[#FAF9F6] border border-gray-200 space-y-4">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-red-600 flex items-center justify-center text-white shrink-0 shadow-xs">
-                  <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-red-600 flex items-center justify-center text-white shrink-0 shadow-xs">
+                  <svg className="w-4 h-4 md:w-5 md:h-5 fill-current" viewBox="0 0 24 24">
                     <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
                   </svg>
                 </div>
                 <div>
-                  <span className="text-xs font-bold uppercase tracking-wider text-red-600 block">Featured Video Guide</span>
-                  <h3 className="font-serif font-semibold text-xl md:text-2xl text-[#2B2B2B]">{article.youtubeVideo.title}</h3>
+                  <span className="text-[10px] md:text-xs font-bold uppercase tracking-wider text-red-600 block">Featured Video Guide</span>
+                  <h3 className="font-serif font-semibold text-base md:text-2xl text-[#2B2B2B]">{article.youtubeVideo.title}</h3>
                 </div>
               </div>
 
@@ -1418,37 +1348,37 @@ export default function BlogPostDetail() {
 
           {/* Useful Resources & High Authority Links Card */}
           {article.usefulLinks && article.usefulLinks.length > 0 && (
-            <section id="official-links" className="my-10 p-6 md:p-8 rounded-xl bg-[#F0F7F4] border border-[#1D493E]/20 space-y-5">
+            <section id="official-links" className="my-8 md:my-10 p-4 md:p-8 rounded-xl bg-[#F0F7F4] border border-[#1D493E]/20 space-y-4">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-[#1D493E] flex items-center justify-center text-white shrink-0 shadow-xs">
-                  <Compass className="w-5 h-5 text-white" />
+                <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#1D493E] flex items-center justify-center text-white shrink-0 shadow-xs">
+                  <Compass className="w-4 h-4 md:w-5 md:h-5 text-white" />
                 </div>
                 <div>
-                  <span className="text-xs font-bold uppercase tracking-wider text-[#1D493E] block">Official Resources & Top Guides</span>
-                  <h3 className="font-serif font-semibold text-xl md:text-2xl text-[#1D493E]">Verified Portals & Important Links</h3>
+                  <span className="text-[10px] md:text-xs font-bold uppercase tracking-wider text-[#1D493E] block">Official Resources & Top Guides</span>
+                  <h3 className="font-serif font-semibold text-base md:text-2xl text-[#1D493E]">Verified Portals & Important Links</h3>
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
                 {article.usefulLinks.map((link, lIdx) => (
                   <a
                     key={lIdx}
                     href={link.url}
                     target={link.url.startsWith('http') ? '_blank' : '_self'}
                     rel="noopener noreferrer"
-                    className="p-4 bg-white rounded-lg border border-gray-200 hover:border-[#1D493E] hover:shadow-md transition flex flex-col justify-between group cursor-pointer"
+                    className="p-3 md:p-4 bg-white rounded-lg border border-gray-200 hover:border-[#1D493E] hover:shadow-md transition flex flex-col justify-between group cursor-pointer no-underline"
                   >
                     <div>
-                      <div className="flex items-center justify-between gap-2 mb-1.5">
+                      <div className="flex items-center justify-between gap-2 mb-1">
                         <span className="text-[10px] font-bold text-[#FF623E] uppercase tracking-wider bg-[#FF623E]/10 px-2 py-0.5 rounded-xs">
                           {link.category || 'Official Portal'}
                         </span>
-                        <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-[#1D493E] transition" />
+                        <ExternalLink className="w-3.5 h-3.5 text-gray-400 group-hover:text-[#1D493E] transition" />
                       </div>
-                      <h4 className="text-sm md:text-base font-bold text-[#2B2B2B] group-hover:text-[#1D493E] transition leading-snug">
+                      <h4 className="text-xs sm:text-sm md:text-base font-bold text-[#2B2B2B] group-hover:text-[#1D493E] transition leading-snug">
                         {link.label}
                       </h4>
-                      <p className="text-xs text-[#8D8D8D] mt-1.5 leading-relaxed">
+                      <p className="text-xs text-[#8D8D8D] mt-1 leading-relaxed">
                         {link.description}
                       </p>
                     </div>
@@ -1458,27 +1388,27 @@ export default function BlogPostDetail() {
             </section>
           )}
 
-          {/* FAQs Section — Matching Go Banjara Accordion Theme */}
+          {/* FAQs Section */}
           {article.faqs && article.faqs.length > 0 && (
-            <section id="faqs" className="w-full pt-8 border-t border-gray-200">
-              <div className="mb-6">
-                <div className="w-[54px] h-[26px] flex items-center justify-center bg-[#FFEBE5] rounded-[4px] mb-2">
-                  <span className="font-sans font-semibold text-[14px] leading-none tracking-[1.2px] text-[#FF623E] uppercase">
+            <section id="faqs" className="w-full pt-6 md:pt-8 border-t border-gray-200">
+              <div className="mb-4 md:mb-6">
+                <div className="inline-flex items-center justify-center h-[26px] bg-[#FFEBE5] rounded-[4px] px-3 mb-2">
+                  <span className="font-sans font-semibold text-[12px] md:text-[14px] leading-none tracking-[1.2px] text-[#FF623E] uppercase">
                     FAQ'S
                   </span>
                 </div>
-                <h2 className="font-serif font-semibold text-2xl md:text-[36px] text-[#2B2B2B]">
+                <h2 className="font-serif font-semibold text-xl md:text-[36px] text-[#2B2B2B]">
                   Frequently asked questions
                 </h2>
               </div>
 
               <div className="w-full border-t border-gray-200 divide-y divide-gray-200">
                 {article.faqs.map((faq, fIdx) => (
-                  <div key={fIdx} className="py-5 text-left border-b border-gray-200 space-y-2">
-                    <h4 className="font-sans font-medium text-lg md:text-[20px] text-[#2B2B2B]">
+                  <div key={fIdx} className="py-3.5 md:py-5 text-left border-b border-gray-200 space-y-1.5">
+                    <h4 className="font-sans font-medium text-sm sm:text-base md:text-[20px] text-[#2B2B2B]">
                       {faq.q}
                     </h4>
-                    <p className="font-sans font-medium text-base md:text-[18px] text-[#8D8D8D] leading-relaxed">
+                    <p className="font-sans font-medium text-xs sm:text-sm md:text-[18px] text-[#8D8D8D] leading-relaxed">
                       {faq.a}
                     </p>
                   </div>
@@ -1487,19 +1417,19 @@ export default function BlogPostDetail() {
             </section>
           )}
 
-          {/* Author Signature Line — Minimal Native Style */}
-          <div className="pt-8 border-t border-gray-200 flex items-center gap-4 mt-12">
+          {/* Author Signature Line */}
+          <div className="pt-6 md:pt-8 border-t border-gray-200 flex items-center gap-3 md:gap-4 mt-8 md:mt-12">
             <img 
               src={article.author.avatar} 
               alt={`${article.author.name} | Go Banjara Travel Author`}
               title={`${article.author.name} | Go Banjara Team`}
-              className="w-12 h-12 rounded-full object-cover border border-gray-200"
+              className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover border border-gray-200"
             />
             <div>
-              <h4 style={{ fontFamily: 'Fraunces, Georgia, serif', fontWeight: 600, color: 'rgba(43, 43, 43, 1)' }} className="text-base">
+              <h4 className="font-serif font-semibold text-sm md:text-base text-[#2B2B2B]">
                 Written by {article.author.name}
               </h4>
-              <p style={{ fontFamily: 'Faktum, var(--font-sans), sans-serif', color: 'rgba(43, 43, 43, 0.6)' }} className="text-xs font-medium">
+              <p className="font-sans font-medium text-xs text-[#2B2B2B]/60">
                 {article.author.role}
               </p>
             </div>
@@ -1507,25 +1437,25 @@ export default function BlogPostDetail() {
         </main>
       </div>
 
-      {/* ── RELATED ARTICLES RECOMMENDATION (Go Banjara Home Grid Spec) ── */}
-      <section className="max-w-6xl mx-auto px-6 mt-20 pt-12 border-t border-gray-200">
-        <div className="flex justify-between items-end mb-8">
+      {/* ── RELATED ARTICLES RECOMMENDATION ── */}
+      <section className="w-full max-w-[430px] md:max-w-6xl mx-auto px-[20px] md:px-6 mt-12 md:mt-20 pt-8 md:pt-12 border-t border-gray-200">
+        <div className="flex justify-between items-end mb-6 md:mb-8">
           <div>
-            <h3 style={{ fontFamily: 'Fraunces, Georgia, serif', color: 'rgba(43, 43, 43, 1)' }} className="text-2xl md:text-3xl font-semibold">
+            <h3 className="font-serif font-semibold text-lg sm:text-2xl md:text-3xl text-[#2B2B2B]">
               Related Travel Guides
             </h3>
-            <p className="text-xs md:text-sm text-[#2B2B2B]/70 font-medium mt-1">Explore more curated stories &amp; itineraries</p>
+            <p className="text-xs md:text-sm text-[#2B2B2B]/70 font-medium mt-0.5">Explore more curated stories &amp; itineraries</p>
           </div>
           <Link 
             href="/blog"
-            className="inline-flex items-center gap-1 text-sm font-semibold text-[#1D493E] hover:text-[#FF5A36] transition cursor-pointer"
+            className="inline-flex items-center gap-1 text-xs md:text-sm font-semibold text-[#1D493E] hover:text-[#FF5A36] transition cursor-pointer"
           >
-            <span>View All Stories</span>
-            <ChevronRight className="w-4 h-4" />
+            <span>View All</span>
+            <ChevronRight className="w-3.5 h-3.5 md:w-4 md:h-4" />
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
           {[
             {
               id: '7-day-leh-ladakh-itinerary-1',
@@ -1549,17 +1479,17 @@ export default function BlogPostDetail() {
               image: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=600&auto=format&fit=crop',
             },
           ].map((item) => (
-            <Link key={item.id} href={`/blog/${item.id}`} className="w-full flex flex-col gap-3 group block text-left">
+            <Link key={item.id} href={`/blog/${item.id}`} className="w-full flex flex-col gap-2 md:gap-3 group block text-left no-underline">
               <div className="relative w-full aspect-[16/10] overflow-hidden rounded-[4px] bg-gray-100">
                 <img 
                   src={item.image} 
                   alt={`${item.title} | Go Banjara Blog`}
                   title={`${item.title} - Go Banjara Story`}
-                  className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
+                  className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-300"
                 />
               </div>
               <div className="flex flex-col gap-1">
-                <h3 className="font-serif font-semibold text-lg text-[#2B2B2B] leading-snug">
+                <h3 className="font-serif font-semibold text-sm sm:text-base md:text-lg text-[#2B2B2B] leading-snug group-hover:text-[#FF623E] transition-colors">
                   {item.title}
                 </h3>
                 <p className="font-sans font-medium text-xs text-[#2B2B2B]/60">

@@ -2202,7 +2202,6 @@ export const AuthModal: React.FC = () => {
           style={{
             width: '633px',
             height: view === 'signup' ? '980px' : '820px',
-            display: 'flex',
             flexDirection: 'column',
             gap: '24px',
             boxSizing: 'border-box',

@@ -307,7 +307,7 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
           {/* Delivery text */}
           <p style={{ margin: 0 }} className="text-[18px] leading-relaxed font-medium">
             <span style={{ color: "rgba(141, 141, 141, 1)" }}>FREE delivery as soon as </span>
-            <span style={{ color: "rgba(43, 43, 43, 1)" }}>{deliveryDate}</span>
+            <span style={{ color: "rgba(43, 43, 43, 1)", fontWeight: 700 }}>{deliveryDate}</span>
           </p>
 
           {/* Add to Cart Button */}

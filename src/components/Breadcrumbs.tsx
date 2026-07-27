@@ -22,13 +22,13 @@ export default function Breadcrumbs({ items, className = '' }: BreadcrumbsProps)
         width: "100%",
         maxWidth: "1440px",
         height: "auto",
-        paddingTop: "12px",
-        paddingBottom: "8px",
+        paddingTop: "16px",
+        paddingBottom: "12px",
         boxSizing: "border-box",
       }}
       className={`w-full max-w-[1440px] mx-auto text-left flex items-center px-4 md:px-[80px] ${className}`}
     >
-      <div className="flex flex-wrap items-center gap-1.5 md:gap-[12px]">
+      <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 sm:gap-3">
         {items.map((item, idx) => {
           const isLast = idx === items.length - 1;
           return (
@@ -40,7 +40,7 @@ export default function Breadcrumbs({ items, className = '' }: BreadcrumbsProps)
                     fontWeight: 500,
                     color: "rgba(141, 141, 141, 1)",
                   }}
-                  className="text-xs sm:text-sm md:text-[24px]"
+                  className="text-sm sm:text-base md:text-[20px] select-none"
                 >
                   &gt;
                 </span>
@@ -51,11 +51,10 @@ export default function Breadcrumbs({ items, className = '' }: BreadcrumbsProps)
                   style={{
                     fontFamily: "'Faktum', 'Outfit', sans-serif",
                     fontWeight: 500,
-                    letterSpacing: "0px",
                     color: "rgba(141, 141, 141, 1)",
                     textDecoration: "none",
                   }}
-                  className="hover:opacity-80 transition-opacity text-xs sm:text-sm md:text-[24px] leading-relaxed"
+                  className="hover:opacity-80 transition-opacity text-sm sm:text-base md:text-[20px] leading-normal"
                 >
                   {item.label}
                 </Link>
@@ -63,12 +62,12 @@ export default function Breadcrumbs({ items, className = '' }: BreadcrumbsProps)
                 <span 
                   style={{
                     fontFamily: "'Faktum', 'Outfit', sans-serif",
-                    fontWeight: 500,
-                    letterSpacing: "0px",
+                    fontWeight: 600,
                     color: "rgba(63, 136, 255, 1)",
                     textDecoration: "underline",
+                    textUnderlineOffset: "3px",
                   }}
-                  className="truncate max-w-[200px] sm:max-w-[400px] text-xs sm:text-sm md:text-[24px] leading-relaxed"
+                  className="truncate max-w-[250px] sm:max-w-[450px] text-sm sm:text-base md:text-[20px] leading-normal"
                 >
                   {item.label}
                 </span>
@@ -76,7 +75,7 @@ export default function Breadcrumbs({ items, className = '' }: BreadcrumbsProps)
             </React.Fragment>
           );
         })}
-      </div>
+      </nav>
     </div>
   );
 }

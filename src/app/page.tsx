@@ -12,7 +12,7 @@ import { PRODUCTS } from '@/data/products';
 import { BonjoMascot } from '@/components/BonjoMascot';
 import { CartIcon } from '@/components/CartIcon';
 import { InteractiveProgressBar } from '@/components/InteractiveProgressBar';
-import { getFutureDeliveryString } from '@/utils/dateUtils';
+import { getFutureDeliveryString, getFutureDateString } from '@/utils/dateUtils';
 
 // Static Blog/Diaries list
 const BLOG_POSTS = [
@@ -1371,21 +1371,23 @@ export default function Homepage() {
 
                   {/* Details Block */}
                   <div className="w-full h-auto flex flex-col justify-between text-left gap-3 px-0">
-                    {/* Category Tag */}
-                    <span className="inline-flex items-center justify-center h-[28px] rounded-[4px] px-[8px] py-[4px] text-[13px] font-sans font-medium text-[#FF623E] bg-[#FF623E]/8 self-start">
-                      {deal.category}
-                    </span>
-                    
-                    {/* Title & Price Row */}
-                    <div className="w-full h-auto min-h-[35px] flex justify-between items-center gap-2">
-                      <Link href={`/shop/product/${deal.id}`} className="truncate hover:text-[#1D493E] transition" title={deal.name}>
-                        <h4 className="text-[15px] md:text-[17px] font-sans font-semibold text-[#2B2B2B] truncate hover:whitespace-normal hover:overflow-visible transition-all duration-300" title={deal.name}>{deal.name}</h4>
-                      </Link>
-                      <div className="flex items-center gap-2.5 shrink-0">
-                        <span className="text-gray-400 line-through text-xs font-medium">₹{deal.originalPrice}</span>
-                        <span className="text-[15px] md:text-[17px] font-sans font-semibold text-[#2B2B2B]">₹{deal.price}</span>
+                    {/* Top Row: Category Tag & Price */}
+                    <div className="flex items-center justify-between gap-2 w-full">
+                      <span className="inline-flex items-center justify-center h-[28px] rounded-[4px] px-[8px] py-[4px] text-[13px] font-sans font-medium text-[#FF623E] bg-[#FF623E]/8">
+                        {deal.category}
+                      </span>
+                      <div className="flex items-center gap-2 shrink-0">
+                        {deal.originalPrice && (
+                          <span className="text-gray-400 line-through text-xs font-medium">₹{deal.originalPrice}</span>
+                        )}
+                        <span className="text-[16px] md:text-[18px] font-sans font-bold text-[#2B2B2B]">₹{deal.price}</span>
                       </div>
                     </div>
+                    
+                    {/* Title (Own Row) */}
+                    <Link href={`/shop/product/${deal.id}`} className="truncate hover:text-[#1D493E] transition" title={deal.name}>
+                      <h4 className="text-[16px] md:text-[18px] font-sans font-bold text-[#2B2B2B] truncate leading-tight m-0" title={deal.name}>{deal.name}</h4>
+                    </Link>
 
                     {/* Rating Row */}
                     <div className="flex items-center gap-[12px] h-[20px] shrink-0">
@@ -1396,7 +1398,7 @@ export default function Homepage() {
                         <Star className="w-3.5 h-3.5 md:w-[18px] md:h-[18px] fill-current" />
                         <Star className="w-3.5 h-3.5 md:w-[18px] md:h-[18px] fill-current" />
                       </div>
-                      <span className="text-xs md:text-sm font-sans font-medium text-[#2B2B2B] leading-none">({deal.reviews})</span>
+                      <span className="text-xs md:text-sm font-sans font-medium text-[#2B2B2B] leading-none">({(deal.reviews || "200").replace(/ Reviews/gi, '')})</span>
                     </div>
 
                     {/* Bought statistics */}
@@ -1405,7 +1407,7 @@ export default function Homepage() {
                     {/* Delivery text */}
                     <p className="font-sans font-medium text-[11px] md:text-xs md:leading-[20px]">
                       <span className="text-[#8D8D8D]">FREE delivery as soon as </span>
-                      <span className="text-[#2B2B2B]">{getFutureDeliveryString()}</span>
+                      <span className="text-[#2B2B2B] font-bold">{getFutureDateString()}</span>
                     </p>
 
                     {/* Add to Cart Button */}
@@ -1458,68 +1460,46 @@ export default function Homepage() {
           </div>
         </div>
 
-        {/* Mobile Figma Spec Container (block md:hidden) - w:430px max, gap:12px, padding:12px 20px */}
+        {/* Mobile View Section 7 */}
         <div className="block md:hidden w-full max-w-[430px] mx-auto py-[12px] px-[20px] bg-white flex flex-col gap-[12px]">
-          {/* Header Row: Title + Round Green Arrow Button */}
           <div className="flex items-center justify-between w-full h-auto min-h-[30px]">
-            <h2 className="text-[22px] sm:text-[26px] font-serif font-semibold text-[#1D493E] leading-tight m-0">
-              Today&apos;s&nbsp;<span className="text-[#FF5A36]">best deals</span>
+            <h2 className="text-[22px] font-serif font-bold text-[#1D493E] leading-tight m-0">
+              Today&apos;s <span className="text-[#FF5A36]">best deals</span>
             </h2>
-            <Link 
-              href="/shop"
-              className="w-[30px] h-[30px] rounded-full bg-[#1D493E] text-white flex items-center justify-center hover:scale-105 active:scale-95 transition shrink-0 group"
-              aria-label="View all products"
-            >
-              <ArrowRight className="w-3.5 h-3.5 text-white group-hover:translate-x-0.5 transition-transform duration-300" />
+            <Link href="/shop" className="w-8 h-8 rounded-full bg-[#1D493E] text-white flex items-center justify-center">
+              <ArrowRight className="w-4 h-4 text-white" />
             </Link>
           </div>
-
-          {/* 2x2 Product Card Grid matching exact Figma screenshot */}
           <div className="grid grid-cols-2 gap-[12px] w-full">
             {[
-              resolveProduct("naturally-nomad-badge-1", "Naturally Nomad", "Badges", "/naturally_nomad_badge.png", 250, 300),
-              resolveProduct("naturally-nomad-badge-2", "Naturally Nomad", "Badges", "/naturally_nomad_badge.png", 250, 300),
-              resolveProduct("naturally-nomad-badge-3", "Naturally Nomad", "Badges", "/naturally_nomad_badge.png", 250, 300),
-              resolveProduct("naturally-nomad-badge-4", "Naturally Nomad", "Badges", "/naturally_nomad_badge.png", 250, 300)
+              resolveProduct("naturally-nomad-badge-1", "Naturally Nomad", "Badges", "/naturally_nomad_badge.png", 139, 199),
+              resolveProduct("explore-more-keychain-1", "Explore more", "Key Chains", "/explore_more_keychain.png", 149, 193),
+              resolveProduct("go-banjara-tshirt-1", "Go Banjara", "T-Shirts", "/go_banjara_tshirt.jpg", 399, 599),
+              resolveProduct("prod-badge-around", "Naturally Nomad", "Badges", "/around_the_world_sticker.jpg", 139, 199)
             ].map((deal, idx) => (
-              <Link
-                key={idx}
-                href={`/shop/product/${deal.id}`}
-                className="w-full bg-white rounded-[4px] flex flex-col gap-[6px] text-left overflow-hidden group cursor-pointer"
-              >
+              <Link key={`mob-deal-${deal.id}-${idx}`} href={`/shop/product/${deal.id}`} className="w-full bg-white rounded-[4px] flex flex-col gap-[6px] text-left overflow-hidden group">
                 <div className="relative w-full h-[130px] rounded-[4px] overflow-hidden bg-gray-50 shrink-0">
-                  <img 
-                    src={deal.images[0] || "/naturally_nomad_badge.png"} 
-                    alt={deal.name} 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" 
-                  />
+                  <img src={deal.images[0] || deal.image} alt={deal.name} className="w-full h-full object-cover" />
                 </div>
-                <div className="flex flex-col gap-[4px] px-1.5 pb-2">
-                  <span className="bg-[#FF5A36] text-white text-[9px] font-bold px-1.5 py-0.5 rounded-[3px] self-start uppercase">
-                    Badges
+                <div className="flex flex-col gap-[4px] px-1 pb-1.5">
+                  <span className="bg-[#FF5A36] text-white px-1.5 py-0.5 rounded-[3px] text-[9px] font-bold self-start uppercase">
+                    {deal.category}
                   </span>
-                  <h4 className="text-[12px] font-bold text-[#2B2B2B] leading-tight m-0 truncate">
-                    {deal.name}
-                  </h4>
-                  <div className="flex items-center gap-1 text-[11px] pt-0.5">
-                    <span className="text-gray-400 line-through text-[9px]">₹300</span>
-                    <span className="font-bold text-[#2B2B2B]">₹250</span>
-                    <span className="text-[#FF5A36] text-[9px] font-semibold whitespace-nowrap">30% off</span>
+                  <h4 className="text-[12px] font-bold text-[#2B2B2B] leading-tight m-0 truncate">{deal.name}</h4>
+                  <div className="flex items-center gap-1 text-[11px]">
+                    <span className="text-gray-400 line-through text-[9px]">₹{deal.originalPrice}</span>
+                    <span className="font-bold text-[#2B2B2B]">₹{deal.price}</span>
                   </div>
                   <div className="flex items-center gap-1 text-[10px]">
                     <div className="flex text-amber-400 gap-0.5">
-                      {[...Array(5)].map((_, s) => (
-                        <Star key={s} className="w-2.5 h-2.5 fill-current" />
-                      ))}
+                      {[...Array(5)].map((_, s) => <Star key={s} className="w-2.5 h-2.5 fill-current" />)}
                     </div>
-                    <span className="text-gray-500 font-medium text-[9px]">(120 Reviews)</span>
+                    <span className="text-gray-500 font-medium text-[9px]">({(deal.reviews || "200").replace(/ Reviews/gi, '')})</span>
                   </div>
-                  <p className="text-[9px] text-[#8D8D8D] font-medium m-0 truncate">
-                    200+ bought in past month
-                  </p>
+                  <p className="text-[9px] text-[#8D8D8D] font-medium m-0 truncate">{deal.boughtText}</p>
                   <p className="text-[9px] leading-tight m-0 truncate">
                     <span className="text-[#8D8D8D]">FREE delivery </span>
-                    <span className="font-bold text-[#2B2B2B]">{getFutureDeliveryString()}</span>
+                    <span className="font-bold text-[#2B2B2B]">{getFutureDateString()}</span>
                   </p>
                 </div>
               </Link>
@@ -1569,14 +1549,14 @@ export default function Homepage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[32px] w-full max-w-[1280px] mx-auto">
             {[
-              { id: "naturally-nomad-badge-1", name: "Naturally Nomad", category: "Badges", image: "/naturally_nomad_badge.png", price: 139, originalPrice: 199, rating: 5, reviews: "120 Reviews", boughtText: "200+ bought in past month" },
-              { id: "blue-mavin-slides-1", name: "Blue Mavin", category: "Slippers", image: "/blue_mavin_slides.jpg", price: 399, originalPrice: 599, rating: 5, reviews: "1k Reviews", boughtText: "500+ bought in past month" },
-              { id: "explore-more-keychain-1", name: "Explore more", category: "Key Chains", image: "/explore_more_keychain.png", price: 149, originalPrice: 193, rating: 5, reviews: "200 Reviews", boughtText: "100+ bought in past month" },
-              { id: "blue-mavin-slides-2", name: "Blue Mavin", category: "Slippers", image: "/blue_mavin_slides.jpg", price: 399, originalPrice: 599, rating: 5, reviews: "1k Reviews", boughtText: "500+ bought in past month" },
-              { id: "wakefit-pillows-1", name: "Wakefit Pillows", category: "Travel Pillows", image: "/wakefit_pillow.jpg", price: 139, originalPrice: 199, rating: 5, reviews: "120 Reviews", boughtText: "200+ bought in past month" },
-              { id: "fur-jaden-cw-1", name: "Fur Jaden C/W", category: "Backpacks", image: "/fur_jaden_backpack.jpg", price: 149, originalPrice: 193, rating: 5, reviews: "200 Reviews", boughtText: "100+ bought in past month" },
-              { id: "go-passport-cover-1", name: "Go Passport Cover", category: "Passport Covers", image: "/go_passport_cover.jpg", price: 399, originalPrice: 599, rating: 5, reviews: "1k Reviews", boughtText: "500+ bought in past month" },
-              { id: "wakefit-pillows-2", name: "Wakefit Pillows", category: "Travel Pillows", image: "/wakefit_pillow.jpg", price: 139, originalPrice: 199, rating: 5, reviews: "120 Reviews", boughtText: "200+ bought in past month" },
+              { id: "naturally-nomad-badge-1", name: "Naturally Nomad", category: "Badges", image: "/naturally_nomad_badge.png", price: 139, originalPrice: 199, rating: 5, reviews: "120", boughtText: "200+ bought in past month" },
+              { id: "blue-mavin-slides-1", name: "Blue Mavin", category: "Slippers", image: "/blue_mavin_slides.jpg", price: 399, originalPrice: 599, rating: 5, reviews: "1k", boughtText: "500+ bought in past month" },
+              { id: "explore-more-keychain-1", name: "Explore more", category: "Key Chains", image: "/explore_more_keychain.png", price: 149, originalPrice: 193, rating: 5, reviews: "200", boughtText: "100+ bought in past month" },
+              { id: "blue-mavin-slides-2", name: "Blue Mavin", category: "Slippers", image: "/blue_mavin_slides.jpg", price: 399, originalPrice: 599, rating: 5, reviews: "1k", boughtText: "500+ bought in past month" },
+              { id: "wakefit-pillows-1", name: "Wakefit Pillows", category: "Travel Pillows", image: "/wakefit_pillow.jpg", price: 139, originalPrice: 199, rating: 5, reviews: "120", boughtText: "200+ bought in past month" },
+              { id: "fur-jaden-cw-1", name: "Fur Jaden C/W", category: "Backpacks", image: "/fur_jaden_backpack.jpg", price: 149, originalPrice: 193, rating: 5, reviews: "200", boughtText: "100+ bought in past month" },
+              { id: "go-passport-cover-1", name: "Go Passport Cover", category: "Passport Covers", image: "/go_passport_cover.jpg", price: 399, originalPrice: 599, rating: 5, reviews: "1k", boughtText: "500+ bought in past month" },
+              { id: "wakefit-pillows-2", name: "Wakefit Pillows", category: "Travel Pillows", image: "/wakefit_pillow.jpg", price: 139, originalPrice: 199, rating: 5, reviews: "120", boughtText: "200+ bought in past month" },
             ].map((prod) => {
               const mockProduct = {
                 id: prod.id,
@@ -1606,18 +1586,25 @@ export default function Homepage() {
                   </div>
 
                   <div className="w-full h-auto flex flex-col justify-between text-left gap-3 px-0">
-                    <span className="inline-flex items-center justify-center h-[28px] rounded-[4px] px-[10px] py-[4px] text-[13px] font-sans font-medium text-[#FF5A36] bg-[#FFEBE5] self-start">
-                      {prod.category}
-                    </span>
-                    
-                    <div className="w-full h-auto min-h-[35px] flex justify-between items-center gap-2">
-                      <h4 className="text-[15px] md:text-[17px] font-sans font-semibold text-[#2B2B2B] truncate">{prod.name}</h4>
-                      <div className="flex items-center gap-2.5 shrink-0">
-                        <span className="text-gray-400 line-through text-xs font-medium">₹{prod.originalPrice}</span>
-                        <span className="text-[15px] md:text-[17px] font-sans font-semibold text-[#2B2B2B]">₹{prod.price}</span>
+                    {/* Top Row: Category Tag & Price */}
+                    <div className="flex items-center justify-between gap-2 w-full">
+                      <span className="inline-flex items-center justify-center h-[28px] rounded-[4px] px-[10px] py-[4px] text-[13px] font-sans font-medium text-[#FF5A36] bg-[#FFEBE5]">
+                        {prod.category}
+                      </span>
+                      <div className="flex items-center gap-2 shrink-0">
+                        {prod.originalPrice && (
+                          <span className="text-gray-400 line-through text-sm font-medium">₹{prod.originalPrice}</span>
+                        )}
+                        <span className="text-[16px] md:text-[18px] font-sans font-bold text-[#2B2B2B]">₹{prod.price}</span>
                       </div>
                     </div>
+                    
+                    {/* Title (Own Row) */}
+                    <Link href={`/shop/product/${prod.id}`} className="truncate hover:text-[#1D493E] transition" title={prod.name}>
+                      <h4 className="text-[16px] md:text-[18px] font-sans font-bold text-[#2B2B2B] truncate leading-tight m-0" title={prod.name}>{prod.name}</h4>
+                    </Link>
 
+                    {/* Rating Row */}
                     <div className="flex items-center gap-[12px] h-[20px] shrink-0">
                       <div className="flex text-amber-400 gap-0.5">
                         <Star className="w-3.5 h-3.5 md:w-[18px] md:h-[18px] fill-current" />
@@ -1626,19 +1613,22 @@ export default function Homepage() {
                         <Star className="w-3.5 h-3.5 md:w-[18px] md:h-[18px] fill-current" />
                         <Star className="w-3.5 h-3.5 md:w-[18px] md:h-[18px] fill-current" />
                       </div>
-                      <span className="text-xs md:text-sm font-sans font-medium text-[#2B2B2B] leading-none">({prod.reviews})</span>
+                      <span className="text-xs md:text-sm font-sans font-medium text-[#2B2B2B] leading-none">({(prod.reviews || "200").replace(/ Reviews/gi, '')})</span>
                     </div>
 
+                    {/* Bought statistics */}
                     <p className="font-sans font-medium text-xs md:text-sm leading-none text-[#8D8D8D] h-[25px] flex items-center shrink-0">{prod.boughtText}</p>
 
+                    {/* Delivery text */}
                     <p className="font-sans font-medium text-[11px] md:text-xs md:leading-[20px]">
                       <span className="text-[#8D8D8D]">FREE delivery as soon as </span>
-                      <span className="text-[#2B2B2B] font-semibold">{getFutureDeliveryString()}</span>
+                      <span className="text-[#2B2B2B] font-bold">{getFutureDateString()}</span>
                     </p>
 
+                    {/* Add to Cart Button */}
                     <button
                       onClick={() => handleProductAdd(mockProduct)}
-                      className="w-full h-[48px] py-[10px] px-[20px] gap-[8px] rounded-[4px] border border-[#1D493E] hover:bg-[#1D493E] hover:text-white text-[#1D493E] text-xs md:text-sm font-bold transition flex items-center justify-center cursor-pointer group"
+                      className="w-full h-[48px] py-[10px] px-[20px] gap-[8px] rounded-[4px] border-2 border-[#1D493E] hover:bg-[#1D493E] hover:text-white text-[#1D493E] text-xs md:text-sm font-bold transition flex items-center justify-center cursor-pointer group"
                     >
                       <span>{addedProductId === prod.id ? 'Added to Cart!' : 'Add to cart'}</span>
                       <CartIcon size={20} className="shrink-0" />

@@ -9,6 +9,7 @@ import { Product } from '@/types';
 import ProductCard from '@/components/ProductCard';
 import { TrustBanner } from '@/components/TrustBanner';
 import { InteractiveProgressBar } from '@/components/InteractiveProgressBar';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 const TESTIMONIALS = [
   {
@@ -157,6 +158,15 @@ export default function ShopPage() {
 
   return (
     <div className="bg-white min-h-screen pb-0 flex flex-col items-center">
+      {/* Breadcrumbs Navigation */}
+      <Breadcrumbs
+        items={[
+          { label: 'Home', href: '/' },
+          { label: 'Shop Page', href: '/shop' },
+          { label: 'Product Categories' },
+        ]}
+      />
+
       {/* Header Section */}
       <header style={{ width: "100%", maxWidth: "1440px", display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: "white", boxSizing: "border-box" }} className="mx-auto px-4 sm:px-6 md:px-[80px] pt-4 sm:pt-[40px] md:pt-[62px] pb-2 sm:pb-[24px]">
         {/* Inner header container */}
@@ -197,7 +207,9 @@ export default function ShopPage() {
 
       {/* Main Sections Container (Width: 1440px, Side Padding: 80px) */}
       <main className="w-full max-w-[1440px] mx-auto mt-0 px-4 sm:px-6 md:px-[80px]">
-        
+
+
+
         {/* Main 4x2 product grid directly below the EXPERIENCE THE SHOPPING header */}
         <div style={{ backgroundColor: "white" }} className="py-3 sm:py-[42px] flex flex-col w-full">
           {renderProductGrid(mainGridProducts.slice(0, 4), setActiveMainGridSlide)}

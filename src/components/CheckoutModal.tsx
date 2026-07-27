@@ -145,11 +145,18 @@ export const CheckoutModal: React.FC = () => {
         }),
       });
       const verifyData = await verifyRes.json();
+      if (!verifyRes.ok || !verifyData.success) {
+        throw new Error(verifyData.error || 'Payment signature verification failed.');
+      }
       if (verifyData.orderId) {
         setRazorpayPaymentId(paymentId);
       }
-    } catch (err) {
-      console.warn('MongoDB order persistence notice:', err);
+    } catch (err: any) {
+      console.error('Payment verification error:', err);
+      alert(`Payment Verification Error: ${err.message || 'Verification failed. Please contact support if amount was deducted.'}`);
+      setLoading(false);
+      setStep('checkout');
+      return;
     }
 
     // Persist order details to history storage

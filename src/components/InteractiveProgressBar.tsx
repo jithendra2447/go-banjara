@@ -129,39 +129,7 @@ export const InteractiveProgressBar: React.FC<InteractiveProgressBarProps> = ({
     }
   };
 
-  return (
-    <div
-      ref={trackRef}
-      onPointerDown={handlePointerDown}
-      onPointerMove={handlePointerMove}
-      onPointerUp={handlePointerUp}
-      onPointerCancel={handlePointerUp}
-      style={{
-        backgroundColor: trackColor,
-        height: `${height}px`,
-      }}
-      className={`w-full max-w-[1280px] mx-auto relative rounded-full overflow-hidden cursor-pointer group transition-all duration-300 shadow-inner select-none ${
-        isDragging ? 'cursor-grabbing h-[10px]' : 'hover:h-[10px] cursor-grab'
-      } ${className}`}
-      title={title}
-      aria-label="Carousel scroll bar"
-      role="slider"
-      aria-valuenow={Math.round(thumbLeftPercent)}
-      aria-valuemin={0}
-      aria-valuemax={100}
-    >
-      <div
-        style={{
-          left: `${thumbLeftPercent}%`,
-          width: `${thumbWidthPercent}%`,
-          backgroundColor: barColor,
-        }}
-        className={`absolute top-0 h-full rounded-full transition-all ${
-          isDragging ? 'duration-75 shadow-md scale-y-110' : 'duration-300 ease-out'
-        } pointer-events-none`}
-      />
-    </div>
-  );
+  return null;
 };
 
 export default InteractiveProgressBar;

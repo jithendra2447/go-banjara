@@ -27,6 +27,7 @@ export async function POST(request: Request) {
         amount: Math.round(amount * 100), // in paise
         currency: 'INR',
         receipt: `receipt_order_${Date.now()}`,
+        payment_capture: 1, // Automatically capture payment to prevent auto-refunds
       }),
     });
 

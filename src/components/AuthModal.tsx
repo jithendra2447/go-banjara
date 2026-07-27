@@ -4,6 +4,8 @@ import React, { useState, useEffect } from 'react';
 import { X, AlertCircle, CheckCircle, Loader2, Check, Eye, EyeOff, ArrowLeft } from 'lucide-react';
 import { useCart } from '@/components/providers';
 import { BonjoMascot } from '@/components/BonjoMascot';
+import { auth } from '@/lib/firebase';
+import { sendPasswordResetEmail } from 'firebase/auth';
 
 type AuthView = 'login' | 'signup' | 'forgot' | 'mobile_otp' | 'email_login';
 
@@ -32,6 +34,10 @@ export const AuthModal: React.FC = () => {
   const [successMsg, setSuccessMsg] = useState('');
   const [loading, setLoading] = useState(false);
   const [otpCountdown, setOtpCountdown] = useState(30);
+
+  // Forgot Password flow states
+  const [forgotStep, setForgotStep] = useState<'input' | 'reset_password'>('input');
+  const [newPassword, setNewPassword] = useState('');
 
   // Resize hook to proportionally scale down the modal on smaller viewports
   useEffect(() => {
@@ -75,6 +81,8 @@ export const AuthModal: React.FC = () => {
     setIsPhoneVerified(false);
     setShowOtpModal(false);
     setOtpSent(false);
+    setForgotStep('input');
+    setNewPassword('');
   };
 
   const switchView = (targetView: AuthView) => {
@@ -536,16 +544,90 @@ export const AuthModal: React.FC = () => {
     }
   };
 
-  // 7. Forgot Password Submission
+  // 7. Forgot Password & Reset Handlers
   const handleForgotSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    setSuccessMsg('');
     setLoading(true);
+
     const targetKey = email || phone;
-    setTimeout(() => {
+    if (!targetKey) {
+      setError('Please enter your email address or mobile number.');
       setLoading(false);
-      setSuccessMsg(`Password reset instructions/OTP sent to ${targetKey || 'your mobile/email'}.`);
-    }, 1000);
+      return;
+    }
+
+    try {
+      const res = await fetch('/api/auth/forgot', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ identifier: targetKey, email }),
+      });
+      const data = await res.json();
+
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || 'No user account found matching this email/phone.');
+      }
+
+      if (targetKey.includes('@')) {
+        try {
+          await sendPasswordResetEmail(auth, targetKey);
+        } catch (fbErr: any) {
+          console.warn('Firebase reset email notice:', fbErr.message);
+        }
+      }
+
+      setForgotStep('reset_password');
+      setSuccessMsg(`Account verified for ${targetKey}! Please enter your new password below.`);
+    } catch (err: any) {
+      console.error('Forgot password error:', err);
+      setError(err.message || 'Failed to process password reset request.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleResetPasswordSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+    setSuccessMsg('');
+
+    const targetKey = email || phone;
+    if (!targetKey || !newPassword) {
+      setError('Please enter your new password.');
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const res = await fetch('/api/auth/reset-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          identifier: targetKey,
+          newPassword,
+        }),
+      });
+      const data = await res.json();
+
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || 'Failed to update password.');
+      }
+
+      setSuccessMsg('Password updated successfully in MongoDB Atlas! Redirecting to login...');
+      setTimeout(() => {
+        setForgotStep('input');
+        setNewPassword('');
+        switchView('login');
+      }, 1500);
+    } catch (err: any) {
+      console.error('Reset password submit error:', err);
+      setError(err.message || 'Failed to reset password. Ensure password requirements are met.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   // OTP character shifts
@@ -1826,64 +1908,137 @@ export const AuthModal: React.FC = () => {
             {/* E. FORGOT PASSWORD VIEW */}
             {view === 'forgot' && (
               <div className="space-y-6">
-                <form onSubmit={handleForgotSubmit} className="space-y-4">
-                  <div className="space-y-1.5">
-                    <label className="block text-xs font-semibold text-slate-800">Email Address</label>
-                    <input 
-                      type="email" required placeholder="Enter your email ID" value={email}
-                      onChange={(e) => setEmail(e.target.value)}
+                {forgotStep === 'input' ? (
+                  <form onSubmit={handleForgotSubmit} className="space-y-4">
+                    <div className="space-y-1.5">
+                      <label className="block text-xs font-semibold text-slate-800">Email Address or Mobile Number</label>
+                      <input 
+                        type="text" required placeholder="Enter registered Email or 10-digit Mobile" value={email || phone}
+                        onChange={(e) => {
+                          const val = e.target.value;
+                          if (val.includes('@') || /[a-zA-Z]/.test(val)) {
+                            setEmail(val);
+                          } else {
+                            setPhone(val);
+                            setEmail(val);
+                          }
+                        }}
+                        style={{
+                          width: '100%', maxWidth: '492px',
+                          height: '53px',
+                          borderRadius: '4px',
+                          border: '1px solid rgba(204, 204, 204, 1)',
+                          background: 'rgba(255, 255, 255, 1)',
+                          padding: '0 16px',
+                          outline: 'none',
+                          boxSizing: 'border-box',
+                          fontFamily: '"Faktum", "Outfit", sans-serif',
+                          fontWeight: 500,
+                          fontSize: '18px',
+                          color: 'rgba(43, 43, 43, 1)',
+                        }}
+                      />
+                    </div>
+
+                    <button 
+                      type="submit" disabled={loading}
                       style={{
                         width: '100%', maxWidth: '492px',
-                        height: '53px',
+                        height: '60px',
+                        background: 'rgba(29, 73, 62, 1)',
+                        color: '#FFFFFF',
+                        border: 'none',
                         borderRadius: '4px',
-                        border: '1px solid rgba(204, 204, 204, 1)',
-                        background: 'rgba(255, 255, 255, 1)',
-                        padding: '0 16px',
-                        outline: 'none',
-                        boxSizing: 'border-box',
+                        paddingTop: '16px',
+                        paddingRight: '32px',
+                        paddingBottom: '16px',
+                        paddingLeft: '32px',
+                        gap: '8px',
                         fontFamily: '"Faktum", "Outfit", sans-serif',
-                        fontWeight: 500,
-                        fontSize: '20px',
-                        color: 'rgba(43, 43, 43, 1)',
+                        fontWeight: 600,
+                        fontSize: '18px',
+                        lineHeight: '100%',
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                        boxSizing: 'border-box',
                       }}
-                    />
-                  </div>
+                      onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#173A31'; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'rgba(29, 73, 62, 1)'; }}
+                    >
+                      {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Verify Account'}
+                    </button>
+                  </form>
+                ) : (
+                  <form onSubmit={handleResetPasswordSubmit} className="space-y-4">
+                    <div className="space-y-1.5">
+                      <label className="block text-xs font-semibold text-slate-800">Enter New Password</label>
+                      <div className="relative">
+                        <input 
+                          type={showPassword ? 'text' : 'password'} required placeholder="Enter new strong password" value={newPassword}
+                          onChange={(e) => setNewPassword(e.target.value)}
+                          style={{
+                            width: '100%', maxWidth: '492px',
+                            height: '53px',
+                            borderRadius: '4px',
+                            border: '1px solid rgba(204, 204, 204, 1)',
+                            background: 'rgba(255, 255, 255, 1)',
+                            padding: '0 16px',
+                            outline: 'none',
+                            boxSizing: 'border-box',
+                            fontFamily: '"Faktum", "Outfit", sans-serif',
+                            fontWeight: 500,
+                            fontSize: '18px',
+                            color: 'rgba(43, 43, 43, 1)',
+                          }}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowPassword(!showPassword)}
+                          className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-700"
+                        >
+                          {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                        </button>
+                      </div>
+                      <p className="text-[11px] text-slate-500 font-medium">Must be at least 8 chars with 1 uppercase letter, 1 number & 1 special character.</p>
+                    </div>
 
-                  <button 
-                    type="submit" disabled={loading}
-                    style={{
-                      width: '100%', maxWidth: '492px',
-                      height: '60px',
-                      background: 'rgba(29, 73, 62, 1)',
-                      color: '#FFFFFF',
-                      border: 'none',
-                      borderRadius: '4px',
-                      paddingTop: '16px',
-                      paddingRight: '32px',
-                      paddingBottom: '16px',
-                      paddingLeft: '32px',
-                      gap: '8px',
-                      fontFamily: '"Faktum", "Outfit", sans-serif',
-                      fontWeight: 600,
-                      fontSize: '18px',
-                      lineHeight: '100%',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-                      boxSizing: 'border-box',
-                    }}
-                    onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#173A31'; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'rgba(29, 73, 62, 1)'; }}
-                  >
-                    {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Send Reset Link'}
-                  </button>
-                </form>
+                    <button 
+                      type="submit" disabled={loading}
+                      style={{
+                        width: '100%', maxWidth: '492px',
+                        height: '60px',
+                        background: 'rgba(29, 73, 62, 1)',
+                        color: '#FFFFFF',
+                        border: 'none',
+                        borderRadius: '4px',
+                        paddingTop: '16px',
+                        paddingRight: '32px',
+                        paddingBottom: '16px',
+                        paddingLeft: '32px',
+                        gap: '8px',
+                        fontFamily: '"Faktum", "Outfit", sans-serif',
+                        fontWeight: 600,
+                        fontSize: '18px',
+                        lineHeight: '100%',
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                        boxSizing: 'border-box',
+                      }}
+                    >
+                      {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Set New Password'}
+                    </button>
+                  </form>
+                )}
 
                 <div className="text-center">
                   <button 
-                    onClick={() => setView('email_login')}
+                    onClick={() => { setForgotStep('input'); setView('email_login'); }}
                     className="text-xs font-black text-[#1D493E] hover:underline cursor-pointer block mx-auto"
                   >
                     Back to Log In

@@ -47,7 +47,7 @@ export function TrustBanner() {
 
   return (
     <div 
-      className="w-full relative z-10 overflow-hidden bg-[#FFFF80] border-y border-[#1D493E]/15 h-[56px] sm:h-[78px] flex items-center"
+      className="w-full relative z-10 overflow-hidden bg-[#FFFF80] border-y border-[#1D493E]/15 h-[56px] sm:h-[78px] flex items-center mt-8 sm:mt-12 md:mt-16 mb-4 md:mb-8"
     >
       {/* Edge Vignette Masks */}
       <div 

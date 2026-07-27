@@ -2494,12 +2494,13 @@ function ProfilePageContent() {
                       setIsAddingAddress(true);
                     }}
                     style={{
-                      width: "297px",
-                      height: "73px",
+                      width: "100%",
+                      maxWidth: "297px",
+                      height: "52px",
                       borderRadius: "4px",
                       border: "1px dashed rgba(63, 136, 255, 1)",
                       background: "rgba(63, 136, 255, 0.08)",
-                      padding: "24px",
+                      padding: "12px 16px",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
@@ -2507,7 +2508,7 @@ function ProfilePageContent() {
                       color: "rgba(63, 136, 255, 1)",
                       fontFamily: '"Faktum", "Outfit", sans-serif',
                       fontWeight: 600,
-                      fontSize: "16px",
+                      fontSize: "14px",
                       lineHeight: "100%",
                       letterSpacing: "0.5px",
                       textTransform: "uppercase",
@@ -2516,7 +2517,7 @@ function ProfilePageContent() {
                     }}
                     className="hover:opacity-85 transition cursor-pointer"
                   >
-                    <span className="text-xl font-normal">+</span>
+                    <span className="text-lg font-normal">+</span>
                     <span>ADD A NEW ADDRESS</span>
                   </button>
 
@@ -3044,251 +3045,319 @@ function ProfilePageContent() {
                     const totalOrigPrice = baseOrigPrice * itemQty;
 
                     return (
-                      <div 
-                        key={item.id || idx}
-                        style={{
-                          width: "100%",
-                          padding: "10px 10px",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "space-between",
-                          gap: "20px",
-                          borderBottom: isLast ? "none" : "1px solid rgba(204, 204, 204, 1)",
-                          background: "#FFFFFF",
-                          boxSizing: "border-box",
-                        }}
-                      >
-                        {/* Left Side: Thumbnail & Product Info */}
-                        <div style={{ display: "flex", alignItems: "center", gap: "20px", minWidth: 0 }}>
-                          <img 
-                            src={itemImg} 
-                            alt={item.name}
-                            style={{
-                              width: "165px",
-                              height: "110px",
-                              borderRadius: "4px",
-                              objectFit: "cover",
-                              flexShrink: 0,
-                              imageRendering: '-webkit-optimize-contrast',
-                            }}
-                          />
-                          <div style={{ display: "flex", flexDirection: "column", gap: "12px", minWidth: 0 }}>
-                            <h3 
-                              style={{ 
-                                fontFamily: "Faktum, sans-serif", 
-                                fontWeight: 600, 
-                                fontSize: "20px", 
-                                lineHeight: "110%",
-                                color: "rgba(43, 43, 43, 1)", 
-                                margin: 0 
-                              }}
-                            >
-                              {item.name}
-                            </h3>
-                            <p 
-                              style={{ 
-                                fontFamily: "Faktum, sans-serif", 
-                                fontWeight: 500, 
-                                fontSize: "14px", 
-                                lineHeight: "100%",
-                                color: "rgba(141, 141, 141, 1)", 
-                                margin: 0 
-                              }}
-                            >
-                              {item.variant || "Olive Drab / 45L"}
-                            </p>
-                            <span 
-                              style={{
-                                display: "inline-flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                width: "fit-content",
-                                height: "22px",
-                                padding: "0 8px",
-                                borderRadius: "4px",
-                                backgroundColor: "rgba(0, 160, 35, 0.1)",
-                                color: "rgba(0, 160, 35, 1)",
-                                fontFamily: "Faktum, sans-serif",
-                                fontWeight: 500,
-                                fontSize: "13px",
-                                lineHeight: "100%",
-                              }}
-                            >
-                              {item.discount || "16% off"}
-                            </span>
-                          </div>
-                        </div>
-
-                        {/* Middle: Quantity Stepper Component [- | 1 | +] */}
-                        <div 
-                          style={{
-                            display: "flex",
-                            alignItems: "center",
-                            height: "38px",
-                            backgroundColor: "#F7F6F2",
-                            borderRadius: "6px",
-                            border: "1px solid rgba(225, 223, 218, 1)",
-                            overflow: "hidden",
-                            userSelect: "none",
-                            margin: "0 auto",
-                            flexShrink: 0,
-                          }}
-                        >
-                          <button
-                            type="button"
-                            onClick={() => {
-                              setWishlistQuantities(prev => {
-                                const curr = prev[item.id] || 1;
-                                return { ...prev, [item.id]: Math.max(1, curr - 1) };
-                              });
-                            }}
-                            style={{
-                              width: "36px",
-                              height: "100%",
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              background: "transparent",
-                              border: "none",
-                              borderRight: "1px solid rgba(220, 220, 215, 0.8)",
-                              cursor: "pointer",
-                              color: "#2B2B2B",
-                              fontSize: "18px",
-                              fontWeight: 500,
-                            }}
-                            className="hover:bg-black/5 active:scale-95 transition"
-                            aria-label="Decrease quantity"
-                          >
-                            -
-                          </button>
-                          <div 
-                            style={{
-                              width: "42px",
-                              height: "100%",
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              fontFamily: "Faktum, sans-serif",
-                              fontWeight: 600,
-                              fontSize: "15px",
-                              color: "#2B2B2B",
-                            }}
-                          >
-                            {wishlistQuantities[item.id] || 1}
-                          </div>
-                          <button
-                            type="button"
-                            onClick={() => {
-                              setWishlistQuantities(prev => {
-                                const curr = prev[item.id] || 1;
-                                return { ...prev, [item.id]: curr + 1 };
-                              });
-                            }}
-                            style={{
-                              width: "36px",
-                              height: "100%",
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              background: "transparent",
-                              border: "none",
-                              borderLeft: "1px solid rgba(220, 220, 215, 0.8)",
-                              cursor: "pointer",
-                              color: "#2B2B2B",
-                              fontSize: "18px",
-                              fontWeight: 500,
-                            }}
-                            className="hover:bg-black/5 active:scale-95 transition"
-                            aria-label="Increase quantity"
-                          >
-                            +
-                          </button>
-                        </div>
-
-                        {/* Right Side: Price, Cart Button & Delete Trash Icon */}
-                        <div style={{ display: "flex", alignItems: "center", gap: "24px", flexShrink: 0 }}>
-                          {/* Price Block (Shifted left with marginRight) */}
-                          <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "6px", marginRight: "16px" }}>
-                            <span 
-                              style={{ 
-                                fontFamily: "Faktum, sans-serif", 
-                                fontWeight: 700, 
-                                fontSize: "26px", 
-                                lineHeight: "100%",
-                                color: "rgba(43, 43, 43, 1)" 
-                              }}
-                            >
-                              ₹{totalPrice.toLocaleString('en-IN')}
-                            </span>
-                            <span 
-                              style={{ 
-                                fontFamily: "Faktum, sans-serif", 
-                                fontWeight: 400, 
-                                fontSize: "14px", 
-                                lineHeight: "100%",
-                                color: "rgba(141, 141, 141, 1)", 
-                                textDecoration: "line-through" 
-                              }}
-                            >
-                              ₹{totalOrigPrice.toLocaleString('en-IN')}
-                            </span>
-                          </div>
-
-                          {/* Action Buttons Group (Cart Button + Delete Button) */}
-                          <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                            {/* Add to Cart Button (52px x 47px, padding: 8px 12px, radius: 4px) */}
-                            <button
-                              type="button"
-                              onClick={() => {
-                                addToCart(item, item.type || 'shop', undefined, undefined, undefined, itemQty);
-                                toggleWishlist(item);
-                                setCartOpen(true);
-                              }}
-                              style={{
-                                width: "52px",
-                                height: "47px",
-                                borderRadius: "4px",
-                                padding: "8px 12px",
-                                backgroundColor: "rgba(245, 245, 245, 1)",
-                                border: "1px solid rgba(229, 231, 235, 1)",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                cursor: "pointer",
-                                transition: "all 0.2s ease",
-                              }}
-                              className="hover:bg-[#1D493E]/10 hover:border-[#1D493E]/30 active:scale-95 cursor-pointer group"
-                              title="Add to Cart"
-                              aria-label="Add item to cart"
-                            >
-                              <ShoppingBag style={{ width: "20px", height: "20px", color: "rgba(43, 43, 43, 1)" }} className="group-hover:text-[#1D493E] transition-colors" />
-                            </button>
-
-                            {/* Delete Trash Button */}
+                      <React.Fragment key={item.id || idx}>
+                        {/* Mobile View (block md:hidden) */}
+                        <div className="block md:hidden w-full p-3 border-b border-[#CCCCCC] bg-white last:border-b-0 space-y-3">
+                          {/* Top Row: Thumbnail + Info + Delete Trash Icon */}
+                          <div className="flex items-start justify-between gap-2.5">
+                            <div className="flex items-center gap-2.5 min-w-0 flex-1">
+                              <img 
+                                src={itemImg} 
+                                alt={item.name}
+                                className="w-[70px] h-[70px] rounded-[4px] object-cover shrink-0"
+                              />
+                              <div className="flex flex-col gap-1 min-w-0 flex-1">
+                                <h3 className="font-sans font-semibold text-sm text-[#2B2B2B] truncate m-0">{item.name}</h3>
+                                <p className="font-sans text-xs text-[#8D8D8D] m-0">{item.variant || "Olive Drab / 45L"}</p>
+                                <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[11px] font-semibold text-[#137333] bg-[#E6F4EA] w-fit">
+                                  {item.discount || "16% off"}
+                                </span>
+                              </div>
+                            </div>
+                            {/* Trash button */}
                             <button
                               type="button"
                               onClick={() => toggleWishlist(item)}
+                              className="p-1.5 rounded text-rose-500 hover:bg-rose-50 transition shrink-0"
+                              title="Remove from wishlist"
+                            >
+                              <Trash2 className="w-4 h-4 text-rose-500" />
+                            </button>
+                          </div>
+
+                          {/* Bottom Row: Stepper on left, Price & Add to Cart on right */}
+                          <div className="flex items-center justify-between gap-2 pt-1 border-t border-slate-100">
+                            {/* Stepper */}
+                            <div className="flex items-center h-8 bg-[#F7F6F2] rounded border border-[#E1DFDA] overflow-hidden">
+                              <button
+                                type="button"
+                                onClick={() => setWishlistQuantities(prev => ({ ...prev, [item.id]: Math.max(1, (prev[item.id] || 1) - 1) }))}
+                                className="w-7 h-full flex items-center justify-center text-sm font-bold text-[#2B2B2B] hover:bg-black/5"
+                              >
+                                -
+                              </button>
+                              <span className="w-8 text-center text-xs font-bold text-[#2B2B2B]">{itemQty}</span>
+                              <button
+                                type="button"
+                                onClick={() => setWishlistQuantities(prev => ({ ...prev, [item.id]: (prev[item.id] || 1) + 1 }))}
+                                className="w-7 h-full flex items-center justify-center text-sm font-bold text-[#2B2B2B] hover:bg-black/5"
+                              >
+                                +
+                              </button>
+                            </div>
+
+                            {/* Price & Add to Cart Button */}
+                            <div className="flex items-center gap-3">
+                              <div className="flex flex-col items-end">
+                                <span className="font-sans font-bold text-base text-[#2B2B2B]">₹{totalPrice.toLocaleString('en-IN')}</span>
+                                <span className="font-sans text-xs text-[#8D8D8D] line-through">₹{totalOrigPrice.toLocaleString('en-IN')}</span>
+                              </div>
+
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  addToCart(item, item.type || 'shop', undefined, undefined, undefined, itemQty);
+                                  toggleWishlist(item);
+                                  setCartOpen(true);
+                                }}
+                                className="h-8 px-3 rounded bg-[#1D493E] text-white font-sans font-semibold text-xs flex items-center gap-1.5 hover:bg-[#15372e] transition"
+                              >
+                                <ShoppingBag className="w-3.5 h-3.5" />
+                                <span>Add</span>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Desktop View (hidden md:flex) */}
+                        <div 
+                          className="hidden md:flex w-full items-center justify-between gap-5 p-2.5 bg-white box-border"
+                          style={{
+                            borderBottom: isLast ? "none" : "1px solid rgba(204, 204, 204, 1)",
+                          }}
+                        >
+                          {/* Left Side: Thumbnail & Product Info */}
+                          <div style={{ display: "flex", alignItems: "center", gap: "20px", minWidth: 0 }}>
+                            <img 
+                              src={itemImg} 
+                              alt={item.name}
                               style={{
-                                width: "47px",
-                                height: "47px",
+                                width: "165px",
+                                height: "110px",
                                 borderRadius: "4px",
-                                backgroundColor: "rgba(253, 242, 242, 1)",
-                                border: "1px solid rgba(254, 226, 226, 1)",
+                                objectFit: "cover",
+                                flexShrink: 0,
+                                imageRendering: '-webkit-optimize-contrast',
+                              }}
+                            />
+                            <div style={{ display: "flex", flexDirection: "column", gap: "12px", minWidth: 0 }}>
+                              <h3 
+                                style={{ 
+                                  fontFamily: "Faktum, sans-serif", 
+                                  fontWeight: 600, 
+                                  fontSize: "20px", 
+                                  lineHeight: "110%",
+                                  color: "rgba(43, 43, 43, 1)", 
+                                  margin: 0 
+                                }}
+                              >
+                                {item.name}
+                              </h3>
+                              <p 
+                                style={{ 
+                                  fontFamily: "Faktum, sans-serif", 
+                                  fontWeight: 500, 
+                                  fontSize: "14px", 
+                                  lineHeight: "100%",
+                                  color: "rgba(141, 141, 141, 1)", 
+                                  margin: 0 
+                                }}
+                              >
+                                {item.variant || "Olive Drab / 45L"}
+                              </p>
+                              <span 
+                                style={{
+                                  display: "inline-flex",
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                                  width: "fit-content",
+                                  height: "22px",
+                                  padding: "0 8px",
+                                  borderRadius: "4px",
+                                  backgroundColor: "rgba(0, 160, 35, 0.1)",
+                                  color: "rgba(0, 160, 35, 1)",
+                                  fontFamily: "Faktum, sans-serif",
+                                  fontWeight: 500,
+                                  fontSize: "13px",
+                                  lineHeight: "100%",
+                                }}
+                              >
+                                {item.discount || "16% off"}
+                              </span>
+                            </div>
+                          </div>
+
+                          {/* Middle: Quantity Stepper Component [- | 1 | +] */}
+                          <div 
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              height: "38px",
+                              backgroundColor: "#F7F6F2",
+                              borderRadius: "6px",
+                              border: "1px solid rgba(225, 223, 218, 1)",
+                              overflow: "hidden",
+                              userSelect: "none",
+                              margin: "0 auto",
+                              flexShrink: 0,
+                            }}
+                          >
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setWishlistQuantities(prev => {
+                                  const curr = prev[item.id] || 1;
+                                  return { ...prev, [item.id]: Math.max(1, curr - 1) };
+                                });
+                              }}
+                              style={{
+                                width: "36px",
+                                height: "100%",
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
+                                background: "transparent",
+                                border: "none",
+                                borderRight: "1px solid rgba(220, 220, 215, 0.8)",
                                 cursor: "pointer",
-                                transition: "all 0.2s ease",
+                                color: "#2B2B2B",
+                                fontSize: "18px",
+                                fontWeight: 500,
                               }}
-                              className="hover:bg-red-100 active:scale-95 cursor-pointer"
-                              title="Remove from Wishlist"
-                              aria-label="Remove item from wishlist"
+                              className="hover:bg-black/5 active:scale-95 transition"
+                              aria-label="Decrease quantity"
                             >
-                              <Trash2 style={{ width: "18px", height: "18px", color: "rgba(239, 68, 68, 1)" }} />
+                              -
+                            </button>
+                            <div 
+                              style={{
+                                width: "42px",
+                                height: "100%",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                fontFamily: "Faktum, sans-serif",
+                                fontWeight: 600,
+                                fontSize: "15px",
+                                color: "#2B2B2B",
+                              }}
+                            >
+                              {wishlistQuantities[item.id] || 1}
+                            </div>
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setWishlistQuantities(prev => {
+                                  const curr = prev[item.id] || 1;
+                                  return { ...prev, [item.id]: curr + 1 };
+                                });
+                              }}
+                              style={{
+                                width: "36px",
+                                height: "100%",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                background: "transparent",
+                                border: "none",
+                                borderLeft: "1px solid rgba(220, 220, 215, 0.8)",
+                                cursor: "pointer",
+                                color: "#2B2B2B",
+                                fontSize: "18px",
+                                fontWeight: 500,
+                              }}
+                              className="hover:bg-black/5 active:scale-95 transition"
+                              aria-label="Increase quantity"
+                            >
+                              +
                             </button>
                           </div>
+
+                          {/* Right Side: Price, Cart Button & Delete Trash Icon */}
+                          <div style={{ display: "flex", alignItems: "center", gap: "24px", flexShrink: 0 }}>
+                            {/* Price Block (Shifted left with marginRight) */}
+                            <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "6px", marginRight: "16px" }}>
+                              <span 
+                                style={{ 
+                                  fontFamily: "Faktum, sans-serif", 
+                                  fontWeight: 700, 
+                                  fontSize: "26px", 
+                                  lineHeight: "100%",
+                                  color: "rgba(43, 43, 43, 1)" 
+                                }}
+                              >
+                                ₹{totalPrice.toLocaleString('en-IN')}
+                              </span>
+                              <span 
+                                style={{ 
+                                  fontFamily: "Faktum, sans-serif", 
+                                  fontWeight: 400, 
+                                  fontSize: "14px", 
+                                  lineHeight: "100%",
+                                  color: "rgba(141, 141, 141, 1)", 
+                                  textDecoration: "line-through" 
+                                }}
+                              >
+                                ₹{totalOrigPrice.toLocaleString('en-IN')}
+                              </span>
+                            </div>
+
+                            {/* Action Buttons Group (Cart Button + Delete Button) */}
+                            <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                              {/* Add to Cart Button (52px x 47px, padding: 8px 12px, radius: 4px) */}
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  addToCart(item, item.type || 'shop', undefined, undefined, undefined, itemQty);
+                                  toggleWishlist(item);
+                                  setCartOpen(true);
+                                }}
+                                style={{
+                                  width: "52px",
+                                  height: "47px",
+                                  borderRadius: "4px",
+                                  padding: "8px 12px",
+                                  backgroundColor: "rgba(245, 245, 245, 1)",
+                                  border: "1px solid rgba(229, 231, 235, 1)",
+                                  display: "flex",
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                                  cursor: "pointer",
+                                  transition: "all 0.2s ease",
+                                }}
+                                className="hover:bg-[#1D493E]/10 hover:border-[#1D493E]/30 active:scale-95 cursor-pointer group"
+                                title="Add to Cart"
+                                aria-label="Add item to cart"
+                              >
+                                <ShoppingBag style={{ width: "20px", height: "20px", color: "rgba(43, 43, 43, 1)" }} className="group-hover:text-[#1D493E] transition-colors" />
+                              </button>
+
+                              {/* Delete Trash Button */}
+                              <button
+                                type="button"
+                                onClick={() => toggleWishlist(item)}
+                                style={{
+                                  width: "47px",
+                                  height: "47px",
+                                  borderRadius: "4px",
+                                  backgroundColor: "rgba(253, 242, 242, 1)",
+                                  border: "1px solid rgba(254, 226, 226, 1)",
+                                  display: "flex",
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                                  cursor: "pointer",
+                                  transition: "all 0.2s ease",
+                                }}
+                                className="hover:bg-red-100 hover:border-red-300 active:scale-95 cursor-pointer group"
+                                title="Remove from wishlist"
+                                aria-label="Remove item from wishlist"
+                              >
+                                <Trash2 style={{ width: "20px", height: "20px", color: "rgba(255, 59, 48, 1)" }} />
+                              </button>
+                            </div>
+                          </div>
                         </div>
-                      </div>
+                      </React.Fragment>
                     );
                   })}
                 </div>

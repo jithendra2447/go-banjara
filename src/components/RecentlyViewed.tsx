@@ -15,17 +15,7 @@ export const RecentlyViewed: React.FC = () => {
 
   return (
     <div 
-      style={{
-        width: "100%",
-        maxWidth: "1440px",
-        margin: "0 auto",
-        padding: "42px 80px",
-        backgroundColor: "rgba(255, 255, 255, 1)",
-        display: "flex",
-        flexDirection: "column",
-        gap: "32px",
-        boxSizing: "border-box",
-      }}
+      className="w-full max-w-[430px] md:max-w-[1440px] mx-auto px-[20px] md:px-[80px] py-6 md:py-[42px] bg-white flex flex-col gap-4 md:gap-8 box-border"
     >
       <div className="flex flex-col gap-2">
         {/* Top Tag Pill */}
@@ -52,21 +42,14 @@ export const RecentlyViewed: React.FC = () => {
 
         {/* Section Title */}
         <h2 
-          style={{
-            fontFamily: '"Fraunces", Georgia, serif',
-            fontWeight: 600,
-            fontSize: "36px",
-            lineHeight: "110%",
-            color: "rgba(43, 43, 43, 1)",
-            margin: "4px 0 0 0",
-          }}
+          className="font-serif font-semibold text-2xl md:text-[36px] text-[#2B2B2B] leading-tight m-0 mt-1"
         >
           Recently <span style={{ color: "rgba(255, 98, 62, 1)" }}>Viewed</span>
         </h2>
       </div>
 
       {/* Products Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
         {displayItems.map((prod, idx) => (
           <ProductCard 
             key={prod.id || idx} 

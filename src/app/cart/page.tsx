@@ -526,7 +526,6 @@ export default function CartPage() {
                   {cart.map((item: any, idx: number) => {
                     const itemKey = getItemKey(item, idx);
                     const itemImg = item.image || '/nomad_pro_canvas_pack.jpg';
-                    const isLast = idx === cart.length - 1;
                     const isSelected = selectedKeys.has(itemKey);
                     const originalPrice = item.originalPrice || Math.round((item.price || 0) * 1.25);
                     const discountPct = item.discount || (originalPrice > item.price ? Math.round(((originalPrice - item.price) / originalPrice) * 100) : 20);
@@ -534,238 +533,319 @@ export default function CartPage() {
                     return (
                       <div 
                         key={itemKey}
+                        className="w-full p-3 sm:p-4 md:px-5 md:py-4 border-b border-[#CCCCCC] last:border-b-0 bg-white transition-colors duration-200"
                         style={{
-                          width: "100%",
-                          padding: "16px 20px",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "space-between",
-                          gap: "16px",
-                          borderBottom: isLast ? "none" : "1px solid rgba(204, 204, 204, 1)",
                           background: isSelected ? "#FFFFFF" : "#FAF9F6",
-                          boxSizing: "border-box",
-                          transition: "background-color 0.2s ease",
                         }}
                       >
-                        {/* Checkbox */}
-                        <input 
-                          type="checkbox"
-                          checked={isSelected}
-                          onChange={() => handleToggleItem(itemKey)}
-                          className="w-5 h-5 accent-[#1D493E] rounded cursor-pointer shrink-0"
-                        />
+                        {/* MOBILE CART ITEM LAYOUT (block md:hidden) */}
+                        <div className="flex md:hidden flex-col gap-3 w-full">
+                          {/* Top Row: Checkbox + Product Image + Details + Action Icons */}
+                          <div className="flex items-start gap-3 w-full">
+                            <input 
+                              type="checkbox"
+                              checked={isSelected}
+                              onChange={() => handleToggleItem(itemKey)}
+                              className="w-5 h-5 accent-[#1D493E] rounded cursor-pointer shrink-0 mt-1"
+                            />
+                            <img 
+                              src={itemImg} 
+                              alt={item.name}
+                              className="w-[70px] h-[70px] rounded-[6px] object-cover shrink-0 border border-gray-200"
+                            />
+                            <div className="flex flex-col flex-1 min-w-0">
+                              <h3 className="font-sans font-semibold text-sm text-[#2B2B2B] leading-snug line-clamp-2 m-0">
+                                {item.name}
+                              </h3>
+                              <p className="text-xs text-gray-500 font-medium m-0 mt-0.5">
+                                {item.size ? `Olive Drab / ${item.size}` : item.type === 'travel' ? `Guests: ${item.guests || 1}` : "Olive Drab / 45L"}
+                              </p>
+                              <span className="inline-block w-fit px-1.5 py-0.5 rounded text-[10px] font-semibold bg-[#E6F4EA] text-[#137333] mt-1">
+                                {discountPct}% off
+                              </span>
+                            </div>
 
-                        {/* Product Thumbnail & Description */}
-                        <div style={{ display: "flex", alignItems: "center", gap: "16px", flex: 1, minWidth: 0 }}>
-                          <img 
-                            src={itemImg} 
-                            alt={item.name}
-                            style={{
-                              width: "140px",
-                              height: "90px",
-                              borderRadius: "4px",
-                              objectFit: "cover",
-                              flexShrink: 0,
-                              opacity: isSelected ? 1 : 0.65,
-                            }}
+                            {/* Wishlist & Delete Action Icons */}
+                            <div className="flex flex-col items-end gap-1.5 shrink-0">
+                              <button
+                                type="button"
+                                onClick={() => handleAttemptDelete(item)}
+                                className="p-1.5 rounded-full text-red-500 hover:bg-red-50 transition cursor-pointer"
+                                title="Remove item"
+                              >
+                                <Trash2 className="w-4 h-4" />
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => handleMoveToWishlist(item)}
+                                className="p-1.5 rounded-full text-[#FF5A36] hover:bg-red-50 transition cursor-pointer"
+                                title="Move to Wishlist"
+                              >
+                                <Heart className="w-4 h-4 fill-[#FF5A36]" />
+                              </button>
+                            </div>
+                          </div>
+
+                          {/* Bottom Row: Stepper [- qty +] on left, Price on right */}
+                          <div className="flex items-center justify-between pt-2 border-t border-gray-100 w-full">
+                            <div className="grid grid-cols-3 w-[104px] h-[34px] bg-[#F7F6F2] rounded-[6px] border border-[#E1DFDA] overflow-hidden select-none">
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  if ((item.quantity || 1) <= 1) {
+                                    handleAttemptDelete(item);
+                                  } else {
+                                    updateQuantity(item.id, (item.quantity || 1) - 1);
+                                  }
+                                }}
+                                className="w-full h-full flex items-center justify-center border-r border-[#DCDCD7] text-[#2B2B2B] text-base font-semibold active:bg-black/5"
+                              >
+                                -
+                              </button>
+                              <div className="w-full h-full flex items-center justify-center font-sans font-semibold text-xs text-[#2B2B2B]">
+                                {item.quantity || 1}
+                              </div>
+                              <button
+                                type="button"
+                                onClick={() => updateQuantity(item.id, (item.quantity || 1) + 1)}
+                                className="w-full h-full flex items-center justify-center border-l border-[#DCDCD7] text-[#2B2B2B] text-base font-semibold active:bg-black/5"
+                              >
+                                +
+                              </button>
+                            </div>
+
+                            <div className="flex items-baseline gap-1.5">
+                              <span className="font-sans font-bold text-lg text-[#2B2B2B]">
+                                ₹{((item.price || 0) * (item.quantity || 1)).toLocaleString('en-IN')}
+                              </span>
+                              <span className="font-sans text-xs text-gray-400 line-through">
+                                ₹{(originalPrice * (item.quantity || 1)).toLocaleString('en-IN')}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* DESKTOP CART ITEM LAYOUT (hidden md:flex) - 100% Untouched original specs */}
+                        <div className="hidden md:flex items-center justify-between gap-4 w-full">
+                          {/* Checkbox */}
+                          <input 
+                            type="checkbox"
+                            checked={isSelected}
+                            onChange={() => handleToggleItem(itemKey)}
+                            className="w-5 h-5 accent-[#1D493E] rounded cursor-pointer shrink-0"
                           />
-                          <div style={{ display: "flex", flexDirection: "column", gap: "6px", minWidth: 0 }}>
-                            <h3 
-                              style={{ 
-                                fontFamily: '"Faktum", sans-serif', 
-                                fontWeight: 600, 
-                                fontSize: "18px", 
-                                lineHeight: "120%",
-                                color: isSelected ? "rgba(43, 43, 43, 1)" : "rgba(141, 141, 141, 1)", 
-                                margin: 0 
-                              }}
-                            >
-                              {item.name}
-                            </h3>
-                            <p 
-                              style={{ 
-                                fontFamily: '"Faktum", sans-serif', 
-                                fontWeight: 500, 
-                                fontSize: "13px", 
-                                color: "rgba(141, 141, 141, 1)", 
-                                margin: 0 
-                              }}
-                            >
-                              {item.size ? `Olive Drab / ${item.size}` : item.type === 'travel' ? `Guests: ${item.guests || 1}` : "Olive Drab / 45L"}
-                            </p>
-                            <span 
+
+                          {/* Product Thumbnail & Description */}
+                          <div style={{ display: "flex", alignItems: "center", gap: "16px", flex: 1, minWidth: 0 }}>
+                            <img 
+                              src={itemImg} 
+                              alt={item.name}
                               style={{
-                                display: "inline-block",
-                                width: "fit-content",
-                                padding: "2px 8px",
+                                width: "140px",
+                                height: "90px",
                                 borderRadius: "4px",
-                                backgroundColor: isSelected ? "rgba(230, 244, 234, 1)" : "rgba(240, 240, 240, 1)",
-                                color: isSelected ? "rgba(19, 115, 51, 1)" : "rgba(120, 120, 120, 1)",
+                                objectFit: "cover",
+                                flexShrink: 0,
+                                opacity: isSelected ? 1 : 0.65,
+                              }}
+                            />
+                            <div style={{ display: "flex", flexDirection: "column", gap: "6px", minWidth: 0 }}>
+                              <h3 
+                                style={{ 
+                                  fontFamily: '"Faktum", sans-serif', 
+                                  fontWeight: 600, 
+                                  fontSize: "18px", 
+                                  lineHeight: "120%",
+                                  color: isSelected ? "rgba(43, 43, 43, 1)" : "rgba(141, 141, 141, 1)", 
+                                  margin: 0 
+                                }}
+                              >
+                                {item.name}
+                              </h3>
+                              <p 
+                                style={{ 
+                                  fontFamily: '"Faktum", sans-serif', 
+                                  fontWeight: 500, 
+                                  fontSize: "13px", 
+                                  color: "rgba(141, 141, 141, 1)", 
+                                  margin: 0 
+                                }}
+                              >
+                                {item.size ? `Olive Drab / ${item.size}` : item.type === 'travel' ? `Guests: ${item.guests || 1}` : "Olive Drab / 45L"}
+                              </p>
+                              <span 
+                                style={{
+                                  display: "inline-block",
+                                  width: "fit-content",
+                                  padding: "2px 8px",
+                                  borderRadius: "4px",
+                                  backgroundColor: isSelected ? "rgba(230, 244, 234, 1)" : "rgba(240, 240, 240, 1)",
+                                  color: isSelected ? "rgba(19, 115, 51, 1)" : "rgba(120, 120, 120, 1)",
+                                  fontFamily: '"Faktum", sans-serif',
+                                  fontWeight: 600,
+                                  fontSize: "12px",
+                                }}
+                              >
+                                {discountPct}% off
+                              </span>
+                            </div>
+                          </div>
+
+                          {/* Stepper [- | qty | +] */}
+                          <div 
+                            style={{
+                              display: "grid",
+                              gridTemplateColumns: "1fr 1fr 1fr",
+                              width: "114px",
+                              height: "38px",
+                              backgroundColor: "#F7F6F2",
+                              borderRadius: "6px",
+                              border: "1px solid rgba(225, 223, 218, 1)",
+                              overflow: "hidden",
+                              userSelect: "none",
+                              flexShrink: 0,
+                            }}
+                          >
+                            <button
+                              type="button"
+                              onClick={() => {
+                                if ((item.quantity || 1) <= 1) {
+                                  handleAttemptDelete(item);
+                                } else {
+                                  updateQuantity(item.id, (item.quantity || 1) - 1);
+                                }
+                              }}
+                              style={{
+                                width: "100%",
+                                height: "100%",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                background: "transparent",
+                                border: "none",
+                                borderRight: "1px solid rgba(220, 220, 215, 0.8)",
+                                cursor: "pointer",
+                                color: "#2B2B2B",
+                                fontSize: "18px",
+                                fontWeight: 500,
+                              }}
+                              className="hover:bg-black/5 active:scale-95 transition cursor-pointer"
+                              aria-label="Decrease quantity"
+                            >
+                              -
+                            </button>
+                            <div 
+                              style={{
+                                width: "100%",
+                                height: "100%",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                fontFamily: '"Faktum", sans-serif',
+                                fontWeight: 600,
+                                fontSize: "15px",
+                                color: "#2B2B2B",
+                              }}
+                            >
+                              {item.quantity || 1}
+                            </div>
+                            <button
+                              type="button"
+                              onClick={() => updateQuantity(item.id, (item.quantity || 1) + 1)}
+                              style={{
+                                width: "100%",
+                                height: "100%",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                background: "transparent",
+                                border: "none",
+                                borderLeft: "1px solid rgba(220, 220, 215, 0.8)",
+                                cursor: "pointer",
+                                color: "#2B2B2B",
+                                fontSize: "18px",
+                                fontWeight: 500,
+                              }}
+                              className="hover:bg-black/5 active:scale-95 transition cursor-pointer"
+                              aria-label="Increase quantity"
+                            >
+                              +
+                            </button>
+                          </div>
+
+                          {/* Price section */}
+                          <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", flexShrink: 0, minWidth: "90px" }}>
+                            <span 
+                              style={{ 
+                                fontFamily: '"Faktum", sans-serif', 
+                                fontWeight: 700, 
+                                fontSize: "22px", 
+                                color: isSelected ? "rgba(43, 43, 43, 1)" : "rgba(141, 141, 141, 1)" 
+                              }}
+                            >
+                              ₹{((item.price || 0) * (item.quantity || 1)).toLocaleString('en-IN')}
+                            </span>
+                            <span 
+                              style={{ 
+                                fontFamily: '"Faktum", sans-serif', 
+                                fontWeight: 400, 
+                                fontSize: "13px", 
+                                textDecoration: "line-through",
+                                color: "rgba(141, 141, 141, 1)" 
+                              }}
+                            >
+                              ₹{(originalPrice * (item.quantity || 1)).toLocaleString('en-IN')}
+                            </span>
+                          </div>
+
+                          {/* Action Buttons: Move to Wishlist + Trash Delete */}
+                          <div style={{ display: "flex", alignItems: "center", gap: "8px", flexShrink: 0 }}>
+                            <button
+                              type="button"
+                              onClick={() => handleMoveToWishlist(item)}
+                              style={{
+                                height: "36px",
+                                padding: "0 10px",
+                                borderRadius: "4px",
+                                backgroundColor: "rgba(255, 235, 232, 1)",
+                                border: "1px solid rgba(255, 200, 190, 1)",
+                                display: "flex",
+                                alignItems: "center",
+                                gap: "6px",
+                                cursor: "pointer",
+                                color: "rgba(255, 90, 54, 1)",
                                 fontFamily: '"Faktum", sans-serif',
                                 fontWeight: 600,
                                 fontSize: "12px",
+                                whiteSpace: "nowrap",
                               }}
+                              className="hover:bg-red-100 active:scale-95 transition cursor-pointer"
+                              title="Move to Wishlist"
                             >
-                              {discountPct}% off
-                            </span>
+                              <Heart style={{ width: "14px", height: "14px", fill: "rgba(255, 90, 54, 1)", color: "rgba(255, 90, 54, 1)" }} />
+                              <span>Move to Wishlist</span>
+                            </button>
+
+                            <button
+                              type="button"
+                              onClick={() => handleAttemptDelete(item)}
+                              style={{
+                                width: "36px",
+                                height: "36px",
+                                borderRadius: "4px",
+                                backgroundColor: "rgba(253, 242, 242, 1)",
+                                border: "1px solid rgba(254, 226, 226, 1)",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                cursor: "pointer",
+                              }}
+                              className="hover:bg-red-100 active:scale-95 transition cursor-pointer"
+                              title="Delete Item"
+                            >
+                              <Trash2 style={{ width: "16px", height: "16px", color: "rgba(239, 68, 68, 1)" }} />
+                            </button>
                           </div>
-                        </div>
-
-                        {/* Stepper [- | qty | +] */}
-                        <div 
-                          style={{
-                            display: "grid",
-                            gridTemplateColumns: "1fr 1fr 1fr",
-                            width: "114px",
-                            height: "38px",
-                            backgroundColor: "#F7F6F2",
-                            borderRadius: "6px",
-                            border: "1px solid rgba(225, 223, 218, 1)",
-                            overflow: "hidden",
-                            userSelect: "none",
-                            flexShrink: 0,
-                          }}
-                        >
-                          <button
-                            type="button"
-                            onClick={() => {
-                              if ((item.quantity || 1) <= 1) {
-                                handleAttemptDelete(item);
-                              } else {
-                                updateQuantity(item.id, (item.quantity || 1) - 1);
-                              }
-                            }}
-                            style={{
-                              width: "100%",
-                              height: "100%",
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              background: "transparent",
-                              border: "none",
-                              borderRight: "1px solid rgba(220, 220, 215, 0.8)",
-                              cursor: "pointer",
-                              color: "#2B2B2B",
-                              fontSize: "18px",
-                              fontWeight: 500,
-                            }}
-                            className="hover:bg-black/5 active:scale-95 transition cursor-pointer"
-                            aria-label="Decrease quantity"
-                          >
-                            -
-                          </button>
-                          <div 
-                            style={{
-                              width: "100%",
-                              height: "100%",
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              fontFamily: '"Faktum", sans-serif',
-                              fontWeight: 600,
-                              fontSize: "15px",
-                              color: "#2B2B2B",
-                            }}
-                          >
-                            {item.quantity || 1}
-                          </div>
-                          <button
-                            type="button"
-                            onClick={() => updateQuantity(item.id, (item.quantity || 1) + 1)}
-                            style={{
-                              width: "100%",
-                              height: "100%",
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              background: "transparent",
-                              border: "none",
-                              borderLeft: "1px solid rgba(220, 220, 215, 0.8)",
-                              cursor: "pointer",
-                              color: "#2B2B2B",
-                              fontSize: "18px",
-                              fontWeight: 500,
-                            }}
-                            className="hover:bg-black/5 active:scale-95 transition cursor-pointer"
-                            aria-label="Increase quantity"
-                          >
-                            +
-                          </button>
-                        </div>
-
-                        {/* Price section */}
-                        <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", flexShrink: 0, minWidth: "90px" }}>
-                          <span 
-                            style={{ 
-                              fontFamily: '"Faktum", sans-serif', 
-                              fontWeight: 700, 
-                              fontSize: "22px", 
-                              color: isSelected ? "rgba(43, 43, 43, 1)" : "rgba(141, 141, 141, 1)" 
-                            }}
-                          >
-                            ₹{((item.price || 0) * (item.quantity || 1)).toLocaleString('en-IN')}
-                          </span>
-                          <span 
-                            style={{ 
-                              fontFamily: '"Faktum", sans-serif', 
-                              fontWeight: 400, 
-                              fontSize: "13px", 
-                              textDecoration: "line-through",
-                              color: "rgba(141, 141, 141, 1)" 
-                            }}
-                          >
-                            ₹{(originalPrice * (item.quantity || 1)).toLocaleString('en-IN')}
-                          </span>
-                        </div>
-
-                        {/* Action Buttons: Move to Wishlist + Trash Delete */}
-                        <div style={{ display: "flex", alignItems: "center", gap: "8px", flexShrink: 0 }}>
-                          <button
-                            type="button"
-                            onClick={() => handleMoveToWishlist(item)}
-                            style={{
-                              height: "36px",
-                              padding: "0 10px",
-                              borderRadius: "4px",
-                              backgroundColor: "rgba(255, 235, 232, 1)",
-                              border: "1px solid rgba(255, 200, 190, 1)",
-                              display: "flex",
-                              alignItems: "center",
-                              gap: "6px",
-                              cursor: "pointer",
-                              color: "rgba(255, 90, 54, 1)",
-                              fontFamily: '"Faktum", sans-serif',
-                              fontWeight: 600,
-                              fontSize: "12px",
-                              whiteSpace: "nowrap",
-                            }}
-                            className="hover:bg-red-100 active:scale-95 transition cursor-pointer"
-                            title="Move to Wishlist"
-                          >
-                            <Heart style={{ width: "14px", height: "14px", fill: "rgba(255, 90, 54, 1)", color: "rgba(255, 90, 54, 1)" }} />
-                            <span className="hidden md:inline">Move to Wishlist</span>
-                          </button>
-
-                          <button
-                            type="button"
-                            onClick={() => handleAttemptDelete(item)}
-                            style={{
-                              width: "36px",
-                              height: "36px",
-                              borderRadius: "4px",
-                              backgroundColor: "rgba(253, 242, 242, 1)",
-                              border: "1px solid rgba(254, 226, 226, 1)",
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              cursor: "pointer",
-                              flexShrink: 0,
-                            }}
-                            className="hover:bg-red-100 active:scale-95 transition cursor-pointer"
-                            title="Remove from Cart"
-                          >
-                            <Trash2 style={{ width: "16px", height: "16px", color: "rgba(239, 68, 68, 1)" }} />
-                          </button>
                         </div>
                       </div>
                     );
@@ -885,40 +965,25 @@ export default function CartPage() {
       </div>
 
       {/* Suggested Products Section */}
-      <div className="w-full max-w-[1440px] mx-auto px-20">
+      <div className="w-full max-w-[430px] md:max-w-[1440px] mx-auto px-[20px] md:px-[80px]">
         <SuggestedProducts />
       </div>
 
       {/* Recently Viewed Section */}
-      <div className="w-full max-w-[1440px] mx-auto">
+      <div className="w-full max-w-[430px] md:max-w-[1440px] mx-auto">
         <RecentlyViewed />
       </div>
 
       {/* Newsletter / Adventure Inbox Banner */}
-      <section className="w-full bg-white py-16 px-4 md:px-8 border-t border-gray-100 select-none">
-        <div className="max-w-[1440px] mx-auto text-center flex flex-col items-center gap-6">
+      <section className="w-full bg-white py-10 md:py-16 px-[20px] md:px-[80px] border-t border-gray-100 select-none">
+        <div className="max-w-[430px] md:max-w-[1440px] mx-auto text-center flex flex-col items-center gap-4 md:gap-6">
           <h2 
-            style={{
-              fontFamily: '"Fraunces", Georgia, serif',
-              fontWeight: 600,
-              fontSize: "36px",
-              lineHeight: "120%",
-              color: "rgba(43, 43, 43, 1)",
-              margin: 0,
-            }}
+            className="font-serif font-semibold text-2xl sm:text-3xl md:text-[36px] text-[#2B2B2B] leading-tight m-0"
           >
             The <span style={{ color: "rgba(255, 98, 62, 1)" }}>best adventures</span> find their way to your inbox.
           </h2>
           <p 
-            style={{
-              fontFamily: '"Faktum", sans-serif',
-              fontWeight: 500,
-              fontSize: "18px",
-              lineHeight: "140%",
-              color: "rgba(141, 141, 141, 1)",
-              margin: 0,
-              maxWidth: "800px",
-            }}
+            className="font-sans font-medium text-xs sm:text-base md:text-[18px] text-[#8D8D8D] leading-relaxed m-0 max-w-[800px]"
           >
             Hidden places, exclusive trip drops, curated gear, and stories from the road delivered before anyone else hears about them.
           </p>

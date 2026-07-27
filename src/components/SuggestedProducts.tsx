@@ -41,34 +41,20 @@ export const SuggestedProducts: React.FC<SuggestedProductsProps> = ({ title }) =
 
       {/* Section Title */}
       <h2 
-        style={{
-          fontFamily: '"Fraunces", Georgia, serif',
-          fontWeight: 600,
-          fontSize: "36px",
-          lineHeight: "110%",
-          color: "rgba(43, 43, 43, 1)",
-          margin: "12px 0 6px 0",
-        }}
+        className="font-serif font-semibold text-2xl md:text-[36px] text-[#2B2B2B] leading-tight my-2"
       >
         Suggested <span style={{ color: "rgba(255, 98, 62, 1)" }}>Products</span> for you
       </h2>
 
       {/* Subtitle */}
       <p 
-        style={{
-          fontFamily: '"Faktum", sans-serif',
-          fontWeight: 500,
-          fontSize: "18px",
-          lineHeight: "130%",
-          color: "rgba(141, 141, 141, 1)",
-          margin: 0,
-        }}
+        className="font-sans font-medium text-xs sm:text-base md:text-[18px] text-[#8D8D8D] m-0"
       >
         Based upon your activities
       </p>
 
       {/* Products Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
+      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 mt-6 md:mt-8">
         {suggestedItems.map((prod, idx) => (
           <div key={prod.id} onMouseEnter={() => setActiveSlide(idx)}>
             <ProductCard 

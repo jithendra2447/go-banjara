@@ -381,132 +381,51 @@ function ProfilePageContent() {
   return (
     <div className="w-full min-h-screen bg-white" style={{ background: 'rgba(255, 255, 255, 1)' }}>
       
-      {/* Header Container matching exact Figma Specs (width: 1440, height: 194, gap: 24, padding: 62px 80px 24px 80px) */}
+      {/* Header Container matching exact Figma Specs */}
       <div 
-        className="w-full bg-white select-none"
-        style={{
-          width: '100%',
-          maxWidth: '1440px',
-          height: '194px',
-          paddingTop: '62px',
-          paddingRight: '80px',
-          paddingBottom: '24px',
-          paddingLeft: '80px',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '24px',
-          background: 'rgba(255, 255, 255, 1)',
-          boxSizing: 'border-box',
-          margin: '0 auto',
-          opacity: 1,
-        }}
+        className="w-full bg-white select-none mx-auto max-w-[430px] md:max-w-[1440px] px-[20px] md:px-[80px] pt-[24px] md:pt-[62px] pb-[16px] md:pb-[24px] flex flex-col gap-3 md:gap-[24px]"
       >
         <h1 
-          style={{
-            width: '100%',
-            maxWidth: '1280px',
-            height: '52px',
-            fontFamily: '"Fraunces", Georgia, serif',
-            fontWeight: 600,
-            fontSize: '42px',
-            lineHeight: '100%',
-            letterSpacing: '0px',
-            color: 'rgba(43, 43, 43, 1)',
-            margin: 0,
-            display: 'flex',
-            alignItems: 'center',
-            opacity: 1,
-          }}
+          className="text-xl sm:text-2xl md:text-[42px] font-serif font-semibold text-[#2B2B2B] leading-tight md:leading-[100%] m-0 w-full"
         >
           Profile Account Information
         </h1>
         <div 
-          className="flex items-center select-none"
-          style={{
-            width: '100%',
-            maxWidth: '1280px',
-            height: '32px',
-            gap: '12px',
-            opacity: 1,
-            boxSizing: 'border-box',
-          }}
+          className="flex items-center gap-2 text-xs md:text-sm font-sans select-none overflow-x-auto no-scrollbar scrollbar-none py-1"
         >
           <span 
-            className="cursor-pointer hover:underline" 
+            className="cursor-pointer hover:underline text-[#8D8D8D] font-medium whitespace-nowrap" 
             onClick={() => router.push('/')}
-            style={{
-              fontFamily: '"Faktum", "Outfit", sans-serif',
-              fontWeight: 500,
-              fontSize: '16px',
-              lineHeight: '22px',
-              letterSpacing: '0px',
-              color: 'rgba(141, 141, 141, 1)',
-            }}
           >
             Home
           </span>
-          <ChevronRight className="w-4 h-4 text-[#8D8D8D] inline" />
+          <ChevronRight className="w-3.5 h-3.5 md:w-4 md:h-4 text-[#8D8D8D] shrink-0" />
           <span 
-            className={`cursor-pointer ${activeTab === 'profile' ? 'font-semibold text-slate-800' : 'hover:underline text-slate-400'}`}
+            className={`cursor-pointer whitespace-nowrap ${activeTab === 'profile' ? 'font-semibold text-slate-800' : 'hover:underline text-slate-400'}`}
             onClick={() => setActiveTab('profile')}
-            style={{ 
-              fontFamily: '"Faktum", "Outfit", sans-serif',
-              fontWeight: activeTab === 'profile' ? 600 : 500,
-              fontSize: '16px',
-              lineHeight: '22px',
-              letterSpacing: '0px',
-              color: activeTab === 'profile' ? 'rgba(43, 43, 43, 1)' : 'rgba(141, 141, 141, 1)',
-            }}
           >
             My Profile
           </span>
           {activeTab === 'orders' && (
             <>
-              <ChevronRight className="w-4 h-4 text-[#8D8D8D] inline" />
-              <span 
-                style={{ 
-                  fontFamily: '"Faktum", sans-serif',
-                  fontWeight: 600,
-                  fontSize: '16px',
-                  lineHeight: '22px',
-                  letterSpacing: '0px',
-                  color: 'rgba(43, 43, 43, 1)',
-                }}
-              >
+              <ChevronRight className="w-3.5 h-3.5 md:w-4 md:h-4 text-[#8D8D8D] shrink-0" />
+              <span className="font-semibold text-[#2B2B2B] whitespace-nowrap">
                 My Orders
               </span>
             </>
           )}
           {activeTab === 'wishlist' && (
             <>
-              <ChevronRight className="w-4 h-4 text-[#8D8D8D] inline" />
-              <span 
-                style={{ 
-                  fontFamily: '"Faktum", sans-serif',
-                  fontWeight: 600,
-                  fontSize: '16px',
-                  lineHeight: '22px',
-                  letterSpacing: '0px',
-                  color: 'rgba(43, 43, 43, 1)',
-                }}
-              >
+              <ChevronRight className="w-3.5 h-3.5 md:w-4 md:h-4 text-[#8D8D8D] shrink-0" />
+              <span className="font-semibold text-[#2B2B2B] whitespace-nowrap">
                 My Wishlist
               </span>
             </>
           )}
           {activeTab === 'cart' && (
             <>
-              <ChevronRight className="w-4 h-4 text-[#8D8D8D] inline" />
-              <span 
-                style={{ 
-                  fontFamily: '"Faktum", sans-serif',
-                  fontWeight: 600,
-                  fontSize: '16px',
-                  lineHeight: '22px',
-                  letterSpacing: '0px',
-                  color: 'rgba(43, 43, 43, 1)',
-                }}
-              >
+              <ChevronRight className="w-3.5 h-3.5 md:w-4 md:h-4 text-[#8D8D8D] shrink-0" />
+              <span className="font-semibold text-[#2B2B2B] whitespace-nowrap">
                 My Cart
               </span>
             </>
@@ -516,14 +435,9 @@ function ProfilePageContent() {
 
       {/* Main Form Body Container */}
       <div 
-        className="w-full mx-auto px-4 sm:px-6 lg:px-[80px]"
-        style={{
-          maxWidth: '1440px',
-          paddingBottom: '24px',
-          boxSizing: 'border-box',
-        }}
+        className="w-full mx-auto max-w-[430px] md:max-w-[1440px] px-[20px] md:px-[80px] pb-12"
       >
-        <div className="flex flex-col lg:flex-row gap-[20px] items-start w-full">
+        <div className="flex flex-col lg:flex-row gap-5 lg:gap-[20px] items-start w-full">
         
         {/* Navigation Sidebar Card */}
         <div 

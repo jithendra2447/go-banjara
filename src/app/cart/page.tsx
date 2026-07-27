@@ -306,17 +306,7 @@ export default function CartPage() {
 
       {/* Header Container matching exact Figma Specs */}
       <div 
-        className="w-full bg-white select-none"
-        style={{
-          width: '100%',
-          maxWidth: '1440px',
-          margin: '0 auto',
-          padding: '40px 80px 32px 80px',
-          boxSizing: 'border-box',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '12px',
-        }}
+        className="w-full bg-white select-none mx-auto max-w-[430px] md:max-w-[1440px] px-[20px] md:px-[80px] pt-[24px] md:pt-[40px] pb-[20px] md:pb-[32px] flex flex-col gap-3"
       >
         {/* Top Tag Pill */}
         <span 
@@ -341,57 +331,31 @@ export default function CartPage() {
         </span>
 
         {/* Title & Items in Cart Row */}
-        <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4 w-full">
+        <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 md:gap-4 w-full">
           <h1 
-            style={{
-              fontFamily: '"Fraunces", Georgia, serif',
-              fontWeight: 600,
-              fontSize: '36px',
-              lineHeight: '110%',
-              color: '#2B2B2B',
-              margin: 0,
-            }}
+            className="text-xl sm:text-2xl md:text-[36px] font-serif font-semibold text-[#2B2B2B] leading-tight md:leading-[110%] m-0"
           >
             Shop Product in all <span style={{ color: "rgba(255, 98, 62, 1)" }}>Categories</span>
           </h1>
 
           <span 
-            style={{
-              fontFamily: '"Faktum", "Outfit", sans-serif',
-              fontWeight: 500,
-              fontSize: '18px',
-              lineHeight: '100%',
-              color: '#3B82F6',
-            }}
+            className="font-sans font-medium text-xs sm:text-sm md:text-[18px] text-[#3B82F6]"
           >
             {selectedKeys.size} {selectedKeys.size === 1 ? 'Item' : 'Items'} selected ({totalCount} in cart)
           </span>
         </div>
 
         {/* Breadcrumb path */}
-        <div className="flex items-center gap-2 text-sm font-sans mt-1">
+        <div className="flex items-center gap-2 text-xs md:text-sm font-sans mt-1">
           <Link 
             href="/" 
-            className="hover:text-slate-800 transition cursor-pointer"
-            style={{ 
-              fontFamily: '"Faktum", sans-serif',
-              fontWeight: 500,
-              fontSize: '16px',
-              lineHeight: '22px',
-              color: 'rgba(141, 141, 141, 1)',
-            }}
+            className="hover:text-slate-800 transition cursor-pointer text-[#8D8D8D] font-medium"
           >
             Home
           </Link>
-          <ChevronRight className="w-4 h-4 text-[#8D8D8D] inline" />
+          <ChevronRight className="w-3.5 h-3.5 md:w-4 md:h-4 text-[#8D8D8D] inline" />
           <span 
-            style={{ 
-              fontFamily: '"Faktum", sans-serif',
-              fontWeight: 600,
-              fontSize: '16px',
-              lineHeight: '22px',
-              color: 'rgba(43, 43, 43, 1)',
-            }}
+            className="font-semibold text-[#2B2B2B]"
           >
             Shopping cart
           </span>
@@ -400,15 +364,9 @@ export default function CartPage() {
 
       {/* Main Content Area */}
       <div 
-        style={{
-          width: '100%',
-          maxWidth: '1440px',
-          margin: '0 auto',
-          padding: '0 80px 48px 80px',
-          boxSizing: 'border-box',
-        }}
+        className="w-full mx-auto max-w-[430px] md:max-w-[1440px] px-[20px] md:px-[80px] pb-12"
       >
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '32px', width: '100%' }}>
+        <div className="flex flex-col gap-6 md:gap-[32px] w-full">
           {cart.length === 0 ? (
             <div 
               style={{

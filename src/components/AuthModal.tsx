@@ -678,7 +678,7 @@ export const AuthModal: React.FC = () => {
 
       {/* Two-Column split modal box / Main Frame */}
       <div 
-        className="relative z-10 flex flex-col md:flex-row items-center justify-center animate-[scaleIn_0.3s_ease-out] w-full max-w-[1240px] max-h-[92vh] overflow-y-auto my-auto p-4 md:p-8"
+        className="relative z-10 flex flex-col md:flex-row items-center justify-center animate-[scaleIn_0.3s_ease-out] w-full max-w-[430px] md:max-w-[1240px] max-h-[95vh] md:max-h-[92vh] overflow-y-auto my-auto p-3 sm:p-4 md:p-8"
         style={{
           boxSizing: 'border-box',
           background: 'rgba(255, 252, 248, 1)',
@@ -692,7 +692,7 @@ export const AuthModal: React.FC = () => {
         {!loading && (
           <button 
             onClick={handleClose}
-            className="absolute top-6 right-6 p-2 rounded-full hover:bg-slate-100 text-slate-400 hover:text-[#1D493E] transition cursor-pointer z-50"
+            className="absolute top-4 right-4 md:top-6 md:right-6 p-2 rounded-full hover:bg-slate-100 text-slate-400 hover:text-[#1D493E] transition cursor-pointer z-50"
           >
             <X className="w-5 h-5" />
           </button>
@@ -700,7 +700,7 @@ export const AuthModal: React.FC = () => {
 
         {/* LEFT COLUMN: AUTH FORMS */}
         <div 
-          className="w-full max-w-[556px] flex flex-col justify-between"
+          className="w-full max-w-[430px] md:max-w-[556px] flex flex-col justify-between"
           style={{
             height: 'auto',
             minHeight: isMobile ? 'auto' : '650px',
@@ -708,22 +708,22 @@ export const AuthModal: React.FC = () => {
             background: 'rgba(255, 255, 255, 1)',
             border: '1px solid rgba(204, 204, 204, 0.54)',
             borderRadius: '8px',
-            padding: isMobile ? '20px 16px' : '28px 32px',
+            padding: isMobile ? '16px 14px' : '28px 32px',
             boxSizing: 'border-box',
-            gap: '20px',
+            gap: '16px',
             display: 'flex',
             flexDirection: 'column',
           }}
         >
           
-          {/* Brand & Heading Header Block (Figma specs: width 492, height 110, gap 24px) */}
+          {/* Brand & Heading Header Block */}
           <div 
             style={{
               width: '100%', maxWidth: '492px',
-              height: '110px',
+              minHeight: isMobile ? 'auto' : '110px',
               display: 'flex',
               flexDirection: 'column',
-              gap: '24px',
+              gap: isMobile ? '12px' : '24px',
               alignItems: 'center',
               justifyContent: 'center',
               margin: '0 auto',

@@ -279,7 +279,19 @@ export default function ShopPage() {
           </div>
 
           {/* Grid */}
-          {renderProductGrid(newArrivals)}
+          {renderProductGrid(newArrivals, setActiveNewArrivalsSlide, activeNewArrivalsSlide)}
+
+          {/* Progress Bar (Figma Specs: Width: 1280px, Height: 8px, Radius: 24px) */}
+          <div className="w-full max-w-[1280px] mx-auto hidden md:block pt-2">
+            <InteractiveProgressBar
+              totalSlides={newArrivals.length}
+              activeSlide={activeNewArrivalsSlide}
+              onSlideChange={(idx) => setActiveNewArrivalsSlide(idx)}
+              height={8}
+              trackColor="#EAEAEA"
+              barColor="#1D493E"
+            />
+          </div>
         </div>
 
         {/* Section 2: Travels Essentials (Figma Specs: 1440x1687px, pt:42px, pb:42px, gap:32px) */}
@@ -330,7 +342,19 @@ export default function ShopPage() {
           </div>
 
           {/* Grid */}
-          {renderProductGrid(limitedEdition)}
+          {renderProductGrid(limitedEdition, setActiveLimitedEditionSlide, activeLimitedEditionSlide)}
+
+          {/* Progress Bar (Figma Specs: Width: 1280px, Height: 8px, Radius: 24px) */}
+          <div className="w-full max-w-[1280px] mx-auto hidden md:block pt-2">
+            <InteractiveProgressBar
+              totalSlides={limitedEdition.length}
+              activeSlide={activeLimitedEditionSlide}
+              onSlideChange={(idx) => setActiveLimitedEditionSlide(idx)}
+              height={8}
+              trackColor="#EAEAEA"
+              barColor="#1D493E"
+            />
+          </div>
         </div>
 
         {/* Section 4: 25% to 50% Discount Sale (Figma Specs: 1440x1687px, pt:42px, pb:42px, gap:32px) */}

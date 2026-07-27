@@ -1107,17 +1107,17 @@ export const AuthModal: React.FC = () => {
 
             {view === 'signup' && (
               <div className="w-full">
-                <form onSubmit={handleEmailSignup} className="space-y-3.5">
-                  <div className="space-y-2">
+                <form onSubmit={handleEmailSignup} className="space-y-2.5 md:space-y-3.5">
+                  <div className="space-y-1">
                     <label 
                       style={{
                         display: 'inline-flex',
                         alignItems: 'center',
                         gap: '2px',
-                        height: '23px',
+                        height: isMobile ? '18px' : '23px',
                         fontFamily: '"Faktum", "Outfit", sans-serif',
                         fontWeight: 500,
-                        fontSize: '18px',
+                        fontSize: isMobile ? '13px' : '18px',
                         lineHeight: '100%',
                         color: 'rgba(43, 43, 43, 1)',
                         margin: 0,
@@ -1145,31 +1145,31 @@ export const AuthModal: React.FC = () => {
                       onChange={(e) => setName(e.target.value)}
                       style={{
                         width: '100%', maxWidth: '492px',
-                        height: '53px',
+                        height: isMobile ? '42px' : '53px',
                         borderRadius: '4px',
                         border: '1px solid rgba(204, 204, 204, 1)',
                         background: 'rgba(255, 255, 255, 1)',
-                        padding: '0 16px',
+                        padding: '0 12px',
                         outline: 'none',
                         boxSizing: 'border-box',
                         fontFamily: '"Faktum", "Outfit", sans-serif',
                         fontWeight: 500,
-                        fontSize: '20px',
+                        fontSize: isMobile ? '14px' : '20px',
                         color: 'rgba(43, 43, 43, 1)',
                       }}
                     />
                   </div>
 
-                  <div className="space-y-2">
+                  <div className="space-y-1">
                     <label 
                       style={{
                         display: 'inline-flex',
                         alignItems: 'center',
                         gap: '2px',
-                        height: '23px',
+                        height: isMobile ? '18px' : '23px',
                         fontFamily: '"Faktum", "Outfit", sans-serif',
                         fontWeight: 500,
-                        fontSize: '18px',
+                        fontSize: isMobile ? '13px' : '18px',
                         lineHeight: '100%',
                         color: 'rgba(43, 43, 43, 1)',
                         margin: 0,
@@ -1197,33 +1197,33 @@ export const AuthModal: React.FC = () => {
                       onChange={(e) => setEmail(e.target.value)}
                       style={{
                         width: '100%', maxWidth: '492px',
-                        height: '53px',
+                        height: isMobile ? '42px' : '53px',
                         borderRadius: '4px',
                         border: '1px solid rgba(204, 204, 204, 1)',
                         background: 'rgba(255, 255, 255, 1)',
-                        padding: '0 16px',
+                        padding: '0 12px',
                         outline: 'none',
                         boxSizing: 'border-box',
                         fontFamily: '"Faktum", "Outfit", sans-serif',
                         fontWeight: 500,
-                        fontSize: '20px',
+                        fontSize: isMobile ? '14px' : '20px',
                         color: 'rgba(43, 43, 43, 1)',
                       }}
                     />
                   </div>
 
                   {/* Enter Mobile Number Field with Inline Verify OTP trigger */}
-                  <div className="space-y-2">
+                  <div className="space-y-1">
                     <div className="flex justify-between items-center" style={{ width: '100%', maxWidth: '492px' }}>
                       <label 
                         style={{
                           display: 'inline-flex',
                           alignItems: 'center',
                           gap: '2px',
-                          height: '23px',
+                          height: isMobile ? '18px' : '23px',
                           fontFamily: '"Faktum", "Outfit", sans-serif',
                           fontWeight: 500,
-                          fontSize: '18px',
+                          fontSize: isMobile ? '13px' : '18px',
                           lineHeight: '100%',
                           color: 'rgba(43, 43, 43, 1)',
                           margin: 0,
@@ -1256,7 +1256,7 @@ export const AuthModal: React.FC = () => {
                       className="flex items-center"
                       style={{
                         width: '100%', maxWidth: '492px',
-                        height: '53px',
+                        height: isMobile ? '42px' : '53px',
                         borderRadius: '4px',
                         border: isPhoneVerified ? '1px solid #10B981' : '1px solid rgba(204, 204, 204, 1)',
                         background: 'rgba(255, 255, 255, 1)',
@@ -1267,7 +1267,7 @@ export const AuthModal: React.FC = () => {
                       <div 
                         style={{
                           height: '100%',
-                          padding: '0 16px',
+                          padding: isMobile ? '0 10px' : '0 16px',
                           background: 'rgba(240, 240, 240, 1)',
                           borderRight: '1px solid rgba(204, 204, 204, 1)',
                           display: 'flex',
@@ -1275,7 +1275,7 @@ export const AuthModal: React.FC = () => {
                           justifyContent: 'center',
                           fontFamily: '"Faktum", "Outfit", sans-serif',
                           fontWeight: 500,
-                          fontSize: '20px',
+                          fontSize: isMobile ? '14px' : '20px',
                           color: 'rgba(43, 43, 43, 1)',
                           userSelect: 'none',
                         }}
@@ -1294,10 +1294,10 @@ export const AuthModal: React.FC = () => {
                           border: 'none',
                           outline: 'none',
                           background: 'transparent',
-                          padding: '0 16px',
+                          padding: '0 12px',
                           fontFamily: '"Faktum", "Outfit", sans-serif',
                           fontWeight: 500,
-                          fontSize: '20px',
+                          fontSize: isMobile ? '14px' : '20px',
                           color: 'rgba(43, 43, 43, 1)',
                         }}
                       />
@@ -1307,13 +1307,13 @@ export const AuthModal: React.FC = () => {
                           onClick={handleTriggerInlineOtp}
                           style={{
                             height: '100%',
-                            padding: '0 16px',
+                            padding: '0 12px',
                             background: 'rgba(29, 73, 62, 1)',
                             color: '#FFFFFF',
                             border: 'none',
                             fontFamily: '"Faktum", "Outfit", sans-serif',
                             fontWeight: 600,
-                            fontSize: '14px',
+                            fontSize: isMobile ? '12px' : '14px',
                             cursor: 'pointer',
                             whiteSpace: 'nowrap',
                             transition: 'background-color 0.2s',
@@ -1328,16 +1328,16 @@ export const AuthModal: React.FC = () => {
                   </div>
 
                   {/* Create Password Input Box */}
-                  <div className="space-y-2">
+                  <div className="space-y-1">
                     <label 
                       style={{
                         display: 'inline-flex',
                         alignItems: 'center',
                         gap: '2px',
-                        height: '23px',
+                        height: isMobile ? '18px' : '23px',
                         fontFamily: '"Faktum", "Outfit", sans-serif',
                         fontWeight: 500,
-                        fontSize: '18px',
+                        fontSize: isMobile ? '13px' : '18px',
                         lineHeight: '100%',
                         color: 'rgba(43, 43, 43, 1)',
                         margin: 0,
@@ -1364,7 +1364,7 @@ export const AuthModal: React.FC = () => {
                       className="flex items-center"
                       style={{
                         width: '100%', maxWidth: '492px',
-                        height: '53px',
+                        height: isMobile ? '42px' : '53px',
                         borderRadius: '4px',
                         border: passwordError ? '1px solid rgba(229, 62, 62, 1)' : '1px solid rgba(204, 204, 204, 1)',
                         background: 'rgba(255, 255, 255, 1)',
@@ -1388,10 +1388,10 @@ export const AuthModal: React.FC = () => {
                           border: 'none',
                           outline: 'none',
                           background: 'transparent',
-                          padding: '0 16px',
+                          padding: '0 12px',
                           fontFamily: '"Faktum", "Outfit", sans-serif',
                           fontWeight: 500,
-                          fontSize: '20px',
+                          fontSize: isMobile ? '14px' : '20px',
                           color: 'rgba(43, 43, 43, 1)',
                         }}
                       />
@@ -1401,7 +1401,7 @@ export const AuthModal: React.FC = () => {
                         className="text-slate-400 hover:text-slate-700 p-1.5 focus:outline-none transition cursor-pointer"
                         title={showPassword ? "Hide password" : "Show password"}
                       >
-                        {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                        {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                       </button>
                     </div>
                     {passwordError && (
@@ -1409,34 +1409,34 @@ export const AuthModal: React.FC = () => {
                         style={{
                           fontFamily: '"Faktum", "Outfit", sans-serif',
                           fontWeight: 500,
-                          fontSize: '13px',
+                          fontSize: '12px',
                           color: 'rgba(229, 62, 62, 1)',
                           margin: '4px 0 0 0',
                           display: 'flex',
                           alignItems: 'center',
-                          gap: '6px',
+                          gap: '4px',
                         }}
                       >
-                        <AlertCircle className="w-4 h-4" />
+                        <AlertCircle className="w-3.5 h-3.5" />
                         Password must be at least 8 characters with 1 capital letter, 1 number, and 1 special character.
                       </p>
                     )}
                     {/* Password Policy Realtime Indicators (Single Line) */}
-                    <div className="flex flex-wrap items-center gap-x-3 gap-y-1 pt-1.5" style={{ width: '100%', maxWidth: '492px' }}>
-                      <div className={`flex items-center gap-1 text-[12px] ${password.length >= 8 ? 'text-emerald-600 font-semibold' : 'text-slate-400'}`}>
-                        <Check className={`w-3.5 h-3.5 ${password.length >= 8 ? 'text-emerald-600' : 'text-slate-300'}`} />
+                    <div className="flex flex-wrap items-center gap-x-2.5 gap-y-0.5 pt-1" style={{ width: '100%', maxWidth: '492px' }}>
+                      <div className={`flex items-center gap-1 text-[11px] md:text-[12px] ${password.length >= 8 ? 'text-emerald-600 font-semibold' : 'text-slate-400'}`}>
+                        <Check className={`w-3 h-3 ${password.length >= 8 ? 'text-emerald-600' : 'text-slate-300'}`} />
                         <span>At least 8 characters</span>
                       </div>
-                      <div className={`flex items-center gap-1 text-[12px] ${/[A-Z]/.test(password) ? 'text-emerald-600 font-semibold' : 'text-slate-400'}`}>
-                        <Check className={`w-3.5 h-3.5 ${/[A-Z]/.test(password) ? 'text-emerald-600' : 'text-slate-300'}`} />
+                      <div className={`flex items-center gap-1 text-[11px] md:text-[12px] ${/[A-Z]/.test(password) ? 'text-emerald-600 font-semibold' : 'text-slate-400'}`}>
+                        <Check className={`w-3 h-3 ${/[A-Z]/.test(password) ? 'text-emerald-600' : 'text-slate-300'}`} />
                         <span>1 capital letter (A-Z)</span>
                       </div>
-                      <div className={`flex items-center gap-1 text-[12px] ${/[0-9]/.test(password) ? 'text-emerald-600 font-semibold' : 'text-slate-400'}`}>
-                        <Check className={`w-3.5 h-3.5 ${/[0-9]/.test(password) ? 'text-emerald-600' : 'text-slate-300'}`} />
+                      <div className={`flex items-center gap-1 text-[11px] md:text-[12px] ${/[0-9]/.test(password) ? 'text-emerald-600 font-semibold' : 'text-slate-400'}`}>
+                        <Check className={`w-3 h-3 ${/[0-9]/.test(password) ? 'text-emerald-600' : 'text-slate-300'}`} />
                         <span>1 number (0-9)</span>
                       </div>
-                      <div className={`flex items-center gap-1 text-[12px] ${/[^A-Za-z0-9]/.test(password) ? 'text-emerald-600 font-semibold' : 'text-slate-400'}`}>
-                        <Check className={`w-3.5 h-3.5 ${/[^A-Za-z0-9]/.test(password) ? 'text-emerald-600' : 'text-slate-300'}`} />
+                      <div className={`flex items-center gap-1 text-[11px] md:text-[12px] ${/[^A-Za-z0-9]/.test(password) ? 'text-emerald-600 font-semibold' : 'text-slate-400'}`}>
+                        <Check className={`w-3 h-3 ${/[^A-Za-z0-9]/.test(password) ? 'text-emerald-600' : 'text-slate-300'}`} />
                         <span>1 special character (@#$!)</span>
                       </div>
                     </div>
@@ -1448,30 +1448,27 @@ export const AuthModal: React.FC = () => {
                         width: '100%', maxWidth: '492px',
                         display: 'flex',
                         flexDirection: 'column',
-                        gap: '12px',
+                        gap: '8px',
                         alignItems: 'center',
                         justifyContent: 'center',
                         margin: '0 auto',
-                        paddingTop: '8px',
+                        paddingTop: '4px',
                       }}
                     >
                       <button 
                         type="submit" disabled={loading}
                         style={{
                           width: '100%', maxWidth: '492px',
-                          height: '60px',
+                          height: isMobile ? '44px' : '60px',
                           background: 'rgba(29, 73, 62, 1)',
                           color: '#FFFFFF',
                           border: 'none',
                           borderRadius: '4px',
-                          paddingTop: '16px',
-                          paddingRight: '32px',
-                          paddingBottom: '16px',
-                          paddingLeft: '32px',
+                          padding: isMobile ? '10px 16px' : '16px 32px',
                           gap: '8px',
                           fontFamily: '"Faktum", "Outfit", sans-serif',
                           fontWeight: 600,
-                          fontSize: '18px',
+                          fontSize: isMobile ? '14px' : '18px',
                           lineHeight: '100%',
                           cursor: 'pointer',
                           display: 'flex',
@@ -1489,7 +1486,7 @@ export const AuthModal: React.FC = () => {
 
                       <div 
                         style={{
-                          height: '32px',
+                          height: isMobile ? '24px' : '32px',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
@@ -1499,8 +1496,8 @@ export const AuthModal: React.FC = () => {
                           style={{
                             fontFamily: '"Faktum", "Outfit", sans-serif',
                             fontWeight: 500,
-                            fontSize: '18px',
-                            lineHeight: '32px',
+                            fontSize: isMobile ? '13px' : '18px',
+                            lineHeight: isMobile ? '20px' : '32px',
                             color: 'rgba(141, 141, 141, 1)',
                             margin: 0,
                           }}
@@ -1512,8 +1509,8 @@ export const AuthModal: React.FC = () => {
                             style={{
                               fontFamily: '"Faktum", "Outfit", sans-serif',
                               fontWeight: 500,
-                              fontSize: '18px',
-                              lineHeight: '32px',
+                              fontSize: isMobile ? '13px' : '18px',
+                              lineHeight: isMobile ? '20px' : '32px',
                               color: 'rgba(29, 73, 62, 1)',
                               background: 'none',
                               border: 'none',
@@ -1533,20 +1530,20 @@ export const AuthModal: React.FC = () => {
 
             {/* C. ENTER MOBILE NUMBER & OTP VERIFY VIEW */}
             {view === 'mobile_otp' && (
-              <div className="space-y-6">
+              <div className="space-y-4">
                 {!otpSent ? (
                   /* Step 1: Enter Mobile Number */
-                  <form onSubmit={handleMobileRequest} className="space-y-6">
-                    <div className="space-y-2">
+                  <form onSubmit={handleMobileRequest} className="space-y-4">
+                    <div className="space-y-1">
                       <label 
                         style={{
                           display: 'inline-flex',
                           alignItems: 'center',
                           gap: '2px',
-                          height: '23px',
+                          height: isMobile ? '18px' : '23px',
                           fontFamily: '"Faktum", "Outfit", sans-serif',
                           fontWeight: 500,
-                          fontSize: '18px',
+                          fontSize: isMobile ? '13px' : '18px',
                           lineHeight: '100%',
                           color: 'rgba(43, 43, 43, 1)',
                           margin: 0,
@@ -1573,7 +1570,7 @@ export const AuthModal: React.FC = () => {
                         className="flex items-center"
                         style={{
                           width: '100%', maxWidth: '492px',
-                          height: '53px',
+                          height: isMobile ? '42px' : '53px',
                           borderRadius: '4px',
                           border: '1px solid rgba(204, 204, 204, 1)',
                           background: 'rgba(255, 255, 255, 1)',
@@ -1584,7 +1581,7 @@ export const AuthModal: React.FC = () => {
                         <div 
                           style={{
                             height: '100%',
-                            padding: '0 16px',
+                            padding: isMobile ? '0 10px' : '0 16px',
                             background: 'rgba(240, 240, 240, 1)',
                             borderRight: '1px solid rgba(204, 204, 204, 1)',
                             display: 'flex',
@@ -1592,7 +1589,7 @@ export const AuthModal: React.FC = () => {
                             justifyContent: 'center',
                             fontFamily: '"Faktum", "Outfit", sans-serif',
                             fontWeight: 500,
-                            fontSize: '20px',
+                            fontSize: isMobile ? '14px' : '20px',
                             color: 'rgba(43, 43, 43, 1)',
                             userSelect: 'none',
                           }}
@@ -1608,10 +1605,10 @@ export const AuthModal: React.FC = () => {
                             border: 'none',
                             outline: 'none',
                             background: 'transparent',
-                            padding: '0 16px',
+                            padding: '0 12px',
                             fontFamily: '"Faktum", "Outfit", sans-serif',
                             fontWeight: 500,
-                            fontSize: '20px',
+                            fontSize: isMobile ? '14px' : '20px',
                             color: 'rgba(43, 43, 43, 1)',
                           }}
                         />
@@ -1622,14 +1619,14 @@ export const AuthModal: React.FC = () => {
                       type="submit" disabled={loading}
                       style={{
                         width: '100%', maxWidth: '492px',
-                        height: '60px',
+                        height: isMobile ? '44px' : '60px',
                         background: 'rgba(29, 73, 62, 1)',
                         color: '#FFFFFF',
                         border: 'none',
                         borderRadius: '4px',
                         fontFamily: '"Faktum", "Outfit", sans-serif',
                         fontWeight: 600,
-                        fontSize: '18px',
+                        fontSize: isMobile ? '14px' : '18px',
                         cursor: 'pointer',
                         display: 'flex',
                         alignItems: 'center',

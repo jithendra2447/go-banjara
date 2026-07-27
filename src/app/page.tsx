@@ -1080,8 +1080,11 @@ export default function Homepage() {
             <Link 
               href="/shop?category=Stickers" 
               onMouseEnter={() => setActiveCategorySlide(0)}
-              style={{ width: "100%", maxWidth: "405.33px", height: "328.63px", display: "flex", flexDirection: "column", textDecoration: "none" }}
-              className="group mx-auto"
+              onClick={() => setActiveCategorySlide(0)}
+              style={{ width: "100%", maxWidth: "405.33px", minHeight: "328.63px", display: "flex", flexDirection: "column", textDecoration: "none" }}
+              className={`group mx-auto p-3 rounded-xl transition-all duration-300 cursor-pointer ${
+                activeCategorySlide === 0 ? 'ring-2 ring-[#FF5B37] scale-[1.02] shadow-xl' : ''
+              }`}
             >
               <div 
                 style={{ height: "237.63px", width: "100%", borderRadius: "4px", overflow: "hidden", backgroundColor: "#FAF9F6" }}
@@ -1107,8 +1110,11 @@ export default function Homepage() {
             <Link 
               href="/shop?category=Badges" 
               onMouseEnter={() => setActiveCategorySlide(1)}
-              style={{ width: "100%", maxWidth: "405.33px", height: "328.63px", display: "flex", flexDirection: "column", textDecoration: "none" }}
-              className="group mx-auto"
+              onClick={() => setActiveCategorySlide(1)}
+              style={{ width: "100%", maxWidth: "405.33px", minHeight: "328.63px", display: "flex", flexDirection: "column", textDecoration: "none" }}
+              className={`group mx-auto p-3 rounded-xl transition-all duration-300 cursor-pointer ${
+                activeCategorySlide === 1 ? 'ring-2 ring-[#FF5B37] scale-[1.02] shadow-xl' : ''
+              }`}
             >
               <div 
                 style={{ height: "237.63px", width: "100%", borderRadius: "4px", overflow: "hidden", backgroundColor: "#FAF9F6" }}
@@ -1134,8 +1140,11 @@ export default function Homepage() {
             <Link 
               href="/shop?category=Magnets" 
               onMouseEnter={() => setActiveCategorySlide(2)}
-              style={{ width: "100%", maxWidth: "405.33px", height: "328.63px", display: "flex", flexDirection: "column", textDecoration: "none" }}
-              className="group mx-auto"
+              onClick={() => setActiveCategorySlide(2)}
+              style={{ width: "100%", maxWidth: "405.33px", minHeight: "328.63px", display: "flex", flexDirection: "column", textDecoration: "none" }}
+              className={`group mx-auto p-3 rounded-xl transition-all duration-300 cursor-pointer ${
+                activeCategorySlide === 2 ? 'ring-2 ring-[#FF5B37] scale-[1.02] shadow-xl' : ''
+              }`}
             >
               <div 
                 style={{ height: "237.63px", width: "100%", borderRadius: "4px", overflow: "hidden", backgroundColor: "#FAF9F6" }}
@@ -1156,6 +1165,18 @@ export default function Homepage() {
                 </p>
               </div>
             </Link>
+          </div>
+
+          {/* Progress Bar (Figma Specs: Width: 1280px, Height: 8px, Radius: 24px) */}
+          <div className="w-full max-w-[1280px] mx-auto pt-2 px-2 sm:px-0">
+            <InteractiveProgressBar
+              totalSlides={3}
+              activeSlide={activeCategorySlide}
+              onSlideChange={(idx) => setActiveCategorySlide(idx)}
+              height={8}
+              trackColor="#EAEAEA"
+              barColor="#1D493E"
+            />
           </div>
 
         </div>
@@ -1308,9 +1329,10 @@ export default function Homepage() {
                 <div 
                   key={deal.id} 
                   onMouseEnter={() => setActiveDealSlide(idx)}
-                  className={`bg-white rounded-[4px] w-full h-auto pb-4 flex flex-col justify-between gap-[16px] transition duration-300 overflow-hidden group cursor-pointer ${
-                    idx >= 3 ? 'hidden md:flex' : 'flex'
-                  }`}
+                  onClick={() => setActiveDealSlide(idx)}
+                  className={`bg-white rounded-[12px] w-full h-auto p-2 pb-4 flex flex-col justify-between gap-[16px] transition-all duration-300 overflow-hidden group cursor-pointer ${
+                    activeDealSlide === idx ? 'ring-2 ring-[#FF5B37] scale-[1.02] shadow-xl' : ''
+                  } ${idx >= 3 ? 'hidden md:flex' : 'flex'}`}
                 >
                   {/* Image Container with Dots (Width: 339px, Height: 254px, Radius: 4px) */}
                   <div className="relative w-full md:h-[254px] rounded-[4px] overflow-hidden shrink-0">
@@ -1414,6 +1436,18 @@ export default function Homepage() {
                 </div>
               );
             })}
+          </div>
+
+          {/* Progress Bar (Figma Specs: Width: 1280px, Height: 8px, Radius: 24px) */}
+          <div className="w-full max-w-[1280px] mx-auto pt-2 px-2 sm:px-0">
+            <InteractiveProgressBar
+              totalSlides={4}
+              activeSlide={activeDealSlide}
+              onSlideChange={(idx) => setActiveDealSlide(idx)}
+              height={8}
+              trackColor="#EAEAEA"
+              barColor="#1D493E"
+            />
           </div>
 
           {/* View all products footer */}

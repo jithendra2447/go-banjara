@@ -307,7 +307,7 @@ export default function ShopPage() {
           <div className="flex justify-center pt-2">
             <Link 
               href="/shop/travels-essentials" 
-              className="inline-flex items-center justify-center px-8 py-3.5 rounded-[8px] bg-[#EEF2F1] text-[#1D493E] hover:bg-[#1D493E] hover:text-white font-sans font-semibold text-base sm:text-lg md:text-[18px] transition-all duration-300 shadow-xs cursor-pointer"
+              className="inline-flex items-center justify-center px-8 py-3.5 rounded-[12px] bg-transparent hover:bg-[#EEF2F1] text-[#1D493E] font-sans font-semibold text-base sm:text-lg md:text-[18px] transition-all duration-300 cursor-pointer"
             >
               Load more
             </Link>

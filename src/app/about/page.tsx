@@ -99,7 +99,7 @@ export default function AboutPage() {
           background: "rgba(255, 255, 255, 1)",
           boxSizing: "border-box",
         }}
-        className="mx-auto w-full max-w-[430px] md:max-w-[1440px] px-[20px] py-[12px] md:pt-[62px] md:pb-[24px] md:px-[80px] border-b border-gray-100 shrink-0 flex flex-col items-center justify-center gap-2 md:gap-[10px] min-h-[166px] md:min-h-[252px]"
+        className="mx-auto w-full max-w-[430px] md:max-w-[1440px] px-[20px] py-[12px] md:pt-[62px] md:pb-[24px] md:px-[80px] shrink-0 flex flex-col items-center justify-center gap-2 md:gap-[10px] min-h-[166px] md:min-h-[252px]"
       >
         <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
           ABOUT GO BANJARA
@@ -207,7 +207,7 @@ export default function AboutPage() {
           background: "rgba(255, 255, 255, 1)",
           boxSizing: "border-box",
         }}
-        className="mx-auto w-full max-w-[430px] md:max-w-[1440px] px-[20px] py-[12px] md:py-[24px] md:px-[80px] border-t border-b border-gray-200 shrink-0"
+        className="mx-auto w-full max-w-[430px] md:max-w-[1440px] px-[20px] py-[12px] md:py-[24px] md:px-[80px] shrink-0"
       >
         {/* Mobile 2x2 Grid Layout (Figma Spec 430x208) */}
         <div className="grid grid-cols-2 gap-y-3 gap-x-0 w-full md:hidden relative py-1">

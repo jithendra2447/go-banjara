@@ -129,7 +129,31 @@ export const InteractiveProgressBar: React.FC<InteractiveProgressBarProps> = ({
     }
   };
 
-  return null;
+  return (
+    <div 
+      className={`relative w-full cursor-pointer select-none py-2 ${className}`}
+      title={title}
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onPointerUp={handlePointerUp}
+    >
+      <div 
+        ref={trackRef}
+        style={{ backgroundColor: trackColor, height: `${height}px` }}
+        className="w-full rounded-full overflow-hidden relative"
+      >
+        <div 
+          style={{ 
+            backgroundColor: barColor, 
+            width: `${thumbWidthPercent}%`, 
+            left: `${thumbLeftPercent}%`,
+            height: '100%' 
+          }} 
+          className="absolute top-0 rounded-full transition-all duration-150 ease-out" 
+        />
+      </div>
+    </div>
+  );
 };
 
 export default InteractiveProgressBar;

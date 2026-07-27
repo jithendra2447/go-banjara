@@ -143,30 +143,40 @@ export default function ShopPage() {
     productsList.find(p => p.id === 'naturally-nomad-badge-2') || productsList[4] || productsList[0] || PRODUCTS[0],
   ];
 
-  const renderProductGrid = (items: Product[], activeSlideSetter?: (idx: number) => void) => (
+  const discountSaleProducts = React.useMemo(() => {
+    const discounted = productsList.filter(p => p.originalPrice && p.originalPrice > p.price);
+    return discounted.length >= 4 ? discounted : [...discounted, ...travelsEssentials].slice(0, 8);
+  }, [productsList, travelsEssentials]);
+
+  const renderProductGrid = (
+    items: Product[],
+    activeSlideSetter?: (idx: number) => void,
+    activeSlideIndex: number = -1
+  ) => (
     <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6 xl:gap-[32px] w-full max-w-[1280px] mx-auto">
-      {items.map((prod, idx) => (
-        <div key={prod.id} onMouseEnter={() => activeSlideSetter && activeSlideSetter(idx)}>
-          <ProductCard
-            product={prod}
-            onAddToCart={(p) => addToCart(p, 'shop')}
-          />
-        </div>
-      ))}
+      {items.map((prod, idx) => {
+        const isActive = activeSlideIndex === idx;
+        return (
+          <div 
+            key={prod.id} 
+            onMouseEnter={() => activeSlideSetter && activeSlideSetter(idx)}
+            onClick={() => activeSlideSetter && activeSlideSetter(idx)}
+            className={`transition-all duration-300 rounded-xl cursor-pointer ${
+              isActive ? 'ring-2 ring-[#FF5B37] shadow-xl scale-[1.02]' : ''
+            }`}
+          >
+            <ProductCard
+              product={prod}
+              onAddToCart={(p) => addToCart(p, 'shop')}
+            />
+          </div>
+        );
+      })}
     </div>
   );
 
   return (
     <div className="bg-white min-h-screen pb-0 flex flex-col items-center">
-      {/* Breadcrumbs Navigation */}
-      <Breadcrumbs
-        items={[
-          { label: 'Home', href: '/' },
-          { label: 'Shop Page', href: '/shop' },
-          { label: 'Product Categories' },
-        ]}
-      />
-
       {/* Header Section */}
       <header style={{ width: "100%", maxWidth: "1440px", display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: "white", boxSizing: "border-box" }} className="mx-auto px-4 sm:px-6 md:px-[80px] pt-4 sm:pt-[40px] md:pt-[62px] pb-2 sm:pb-[24px]">
         {/* Inner header container */}
@@ -208,11 +218,9 @@ export default function ShopPage() {
       {/* Main Sections Container (Width: 1440px, Side Padding: 80px) */}
       <main className="w-full max-w-[430px] md:max-w-[1440px] mx-auto mt-0 px-[20px] md:px-[80px]">
 
-
-
         {/* Main 4x2 product grid directly below the EXPERIENCE THE SHOPPING header */}
         <div style={{ backgroundColor: "white" }} className="py-3 sm:py-[42px] flex flex-col w-full">
-          {renderProductGrid(mainGridProducts.slice(0, 4), setActiveMainGridSlide)}
+          {renderProductGrid(mainGridProducts.slice(0, 4), setActiveMainGridSlide, activeMainGridSlide)}
           <div style={{ height: "24px" }} className="shrink-0" />
           <InteractiveProgressBar
             totalSlides={4}
@@ -254,7 +262,7 @@ export default function ShopPage() {
           <div className="h-3 md:h-[62px] shrink-0" />
 
           {/* Grid */}
-          {renderProductGrid(newArrivals, setActiveNewArrivalsSlide)}
+          {renderProductGrid(newArrivals, setActiveNewArrivalsSlide, activeNewArrivalsSlide)}
           <div style={{ height: "32px" }} className="shrink-0" />
 
           {/* Interactive Full-Width Progress Bar */}
@@ -284,7 +292,7 @@ export default function ShopPage() {
           <div className="h-3 md:h-[62px] shrink-0" />
 
           {/* Grid Rows */}
-          {renderProductGrid(travelsEssentials.slice(0, 4), setActiveTravelsEssentialsSlide)}
+          {renderProductGrid(travelsEssentials.slice(0, 4), setActiveTravelsEssentialsSlide, activeTravelsEssentialsSlide)}
           <div style={{ height: "24px" }} className="shrink-0" />
           <InteractiveProgressBar
             totalSlides={4}
@@ -325,7 +333,7 @@ export default function ShopPage() {
           <div className="h-3 md:h-[62px] shrink-0" />
 
           {/* Grid */}
-          {renderProductGrid(limitedEdition, setActiveLimitedEditionSlide)}
+          {renderProductGrid(limitedEdition, setActiveLimitedEditionSlide, activeLimitedEditionSlide)}
           <div style={{ height: "32px" }} className="shrink-0" />
 
           {/* Full-Width Interactive Progress Bar */}
@@ -355,7 +363,7 @@ export default function ShopPage() {
           <div className="h-3 md:h-[62px] shrink-0" />
 
           {/* Grid Rows */}
-          {renderProductGrid(travelsEssentials.slice(0, 4), setActiveDiscountSaleSlide)}
+          {renderProductGrid(discountSaleProducts.slice(0, 4), setActiveDiscountSaleSlide, activeDiscountSaleSlide)}
           <div style={{ height: "24px" }} className="shrink-0" />
           <InteractiveProgressBar
             totalSlides={4}
@@ -365,7 +373,7 @@ export default function ShopPage() {
             title="Click or drag to switch active product"
           />
           <div style={{ height: "32px" }} className="shrink-0" />
-          {renderProductGrid(travelsEssentials.slice(4, 8))}
+          {renderProductGrid(discountSaleProducts.slice(4, 8))}
           <div style={{ height: "62px" }} className="shrink-0" />
 
           {/* Centered View All Link */}
@@ -381,7 +389,7 @@ export default function ShopPage() {
         </div>
 
         {/* Testimonials Section (Captured Memories) (Padding: pt-[42px] pb-[24px]) */}
-        <div className="bg-white pt-[42px] pb-[24px] flex flex-col gap-[32px] w-full border-t border-slate-100 mt-8">
+        <div className="bg-white pt-[42px] pb-[24px] flex flex-col gap-[32px] w-full mt-8">
           {/* Header */}
           <div className="text-left space-y-1.5 md:space-y-2.5">
             <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
@@ -481,7 +489,7 @@ export default function ShopPage() {
             flexDirection: "column",
             justifyContent: "flex-start"
           }}
-          className="text-left border-t border-gray-100 mt-6 sm:mt-8 w-full py-4 sm:py-[42px] gap-4 sm:gap-[24px]"
+          className="text-left mt-6 sm:mt-8 w-full py-4 sm:py-[42px] gap-4 sm:gap-[24px]"
         >
           <div className="space-y-2 sm:space-y-3">
             <span 

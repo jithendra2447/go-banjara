@@ -89,7 +89,7 @@ export const Navbar: React.FC = () => {
     <header className={`w-full z-50 flex flex-col fixed top-0 left-0 transition-all duration-300 ${
       isTransparent
         ? 'bg-transparent border-b border-white/10'
-        : 'bg-white backdrop-blur-[12px] border-b border-[#CCCCCC]'
+        : 'bg-white backdrop-blur-[12px] border-b border-transparent shadow-xs'
     }`}>
       {/* 2. MAIN NAV BAR */}
       <nav className="h-[90px] flex items-center w-full">

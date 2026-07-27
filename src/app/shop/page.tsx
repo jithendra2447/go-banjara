@@ -282,7 +282,7 @@ export default function ShopPage() {
           {renderProductGrid(newArrivals, setActiveNewArrivalsSlide, activeNewArrivalsSlide)}
 
           {/* Progress Bar (Figma Specs: Width: 1280px, Height: 8px, Radius: 24px) */}
-          <div className="w-full max-w-[1280px] mx-auto hidden md:block pt-2">
+          <div className="w-full max-w-[1280px] mx-auto pt-2 px-2 sm:px-0">
             <InteractiveProgressBar
               totalSlides={newArrivals.length}
               activeSlide={activeNewArrivalsSlide}
@@ -345,7 +345,7 @@ export default function ShopPage() {
           {renderProductGrid(limitedEdition, setActiveLimitedEditionSlide, activeLimitedEditionSlide)}
 
           {/* Progress Bar (Figma Specs: Width: 1280px, Height: 8px, Radius: 24px) */}
-          <div className="w-full max-w-[1280px] mx-auto hidden md:block pt-2">
+          <div className="w-full max-w-[1280px] mx-auto pt-2 px-2 sm:px-0">
             <InteractiveProgressBar
               totalSlides={limitedEdition.length}
               activeSlide={activeLimitedEditionSlide}

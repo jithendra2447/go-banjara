@@ -161,9 +161,7 @@ export default function ShopPage() {
             key={prod.id} 
             onMouseEnter={() => activeSlideSetter && activeSlideSetter(idx)}
             onClick={() => activeSlideSetter && activeSlideSetter(idx)}
-            className={`transition-all duration-300 rounded-xl cursor-pointer ${
-              isActive ? 'ring-2 ring-[#FF5B37] shadow-xl scale-[1.02]' : ''
-            }`}
+            className="transition-all duration-300 rounded-xl cursor-pointer"
           >
             <ProductCard
               product={prod}

@@ -175,11 +175,29 @@ export default function ShopPage() {
 
   return (
     <div className="bg-white min-h-screen pb-0 flex flex-col items-center">
-      {/* Header Section */}
-      <header style={{ width: "100%", maxWidth: "1440px", display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: "white", boxSizing: "border-box" }} className="mx-auto px-4 sm:px-6 md:px-[80px] pt-4 sm:pt-[40px] md:pt-[62px] pb-2 sm:pb-[24px]">
+      {/* Header Section (Desktop Figma Specs: 1440x252px, pt:62px, pr:80px, pb:24px, pl:80px, gap:10px) */}
+      <header 
+        style={{ 
+          width: "100%", 
+          maxWidth: "1440px", 
+          minHeight: "252px",
+          display: "flex", 
+          flexDirection: "column",
+          justifyContent: "center", 
+          alignItems: "center", 
+          backgroundColor: "white", 
+          boxSizing: "border-box",
+          paddingTop: "62px",
+          paddingRight: "80px",
+          paddingBottom: "24px",
+          paddingLeft: "80px",
+          gap: "10px"
+        }} 
+        className="mx-auto hidden md:flex"
+      >
         {/* Inner header container */}
-        <div className="w-full max-w-[1280px] flex flex-col items-center gap-2 sm:gap-[16px] md:gap-[24px] bg-white rounded-[4px] py-1 sm:py-4 text-center shrink-0">
-          <span className="inline-block text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 py-1.5 rounded-sm">
+        <div className="w-full max-w-[1280px] flex flex-col items-center gap-[10px] bg-white text-center shrink-0">
+          <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
             EXPERIENCE THE SHOPPING
           </span>
 
@@ -197,7 +215,7 @@ export default function ShopPage() {
             Some journeys change where you go. Others change who you are.
           </h1>
 
-          {/* Subtitle (Hidden on mobile) */}
+          {/* Subtitle */}
           <p
             style={{
               margin: 0,
@@ -206,20 +224,30 @@ export default function ShopPage() {
               color: "rgba(43, 43, 43, 1)",
               textAlign: "center",
             }}
-            className="hidden md:block text-xs sm:text-base md:text-[20px] leading-relaxed md:leading-[32px] w-full max-w-[900px]"
+            className="text-xs sm:text-base md:text-[20px] leading-relaxed md:leading-[32px] w-full max-w-[900px]"
           >
             Discover curated travel experiences, gear that keeps up with you, and a community of free-spirited explorers across India.
           </p>
         </div>
       </header>
 
+      {/* Mobile Header (block md:hidden) */}
+      <header className="flex md:hidden flex-col items-center gap-2 pt-4 pb-2 px-4 bg-white text-center">
+        <span className="inline-flex items-center justify-center h-[24px] text-[10px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-2.5 rounded-[4px]">
+          EXPERIENCE THE SHOPPING
+        </span>
+        <h1 className="text-xl font-serif font-bold text-[#2B2B2B] leading-tight m-0">
+          Some journeys change where you go. Others change who you are.
+        </h1>
+      </header>
+
       {/* Main Sections Container (Width: 1440px, Side Padding: 80px) */}
       <main className="w-full max-w-[430px] md:max-w-[1440px] mx-auto mt-0 px-[20px] md:px-[80px]">
 
-        {/* Main 4x2 product grid directly below the EXPERIENCE THE SHOPPING header */}
-        <div style={{ backgroundColor: "white" }} className="py-3 sm:py-[42px] flex flex-col w-full">
+        {/* Main 4x2 product grid (Figma Specs: 1440x1522px, pt:42px, pb:42px, gap:62px) */}
+        <div style={{ backgroundColor: "white", paddingTop: "42px", paddingBottom: "42px" }} className="flex flex-col w-full">
           {renderProductGrid(mainGridProducts.slice(0, 4))}
-          <div className="h-4 sm:h-[32px] shrink-0" />
+          <div className="h-6 sm:h-[32px] shrink-0" />
           {renderProductGrid(mainGridProducts.slice(4, 8))}
           <div style={{ height: "62px" }} className="shrink-0" />
 
@@ -227,7 +255,7 @@ export default function ShopPage() {
           <div className="flex justify-center pt-0">
             <Link
               href="/shop/all"
-              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-extrabold uppercase tracking-widest text-[#1D493E] bg-transparent hover:bg-gray-200/80 rounded-[8px] px-6 py-3 transition-all duration-300 group"
+              className="inline-flex items-center gap-2 text-xs sm:text-sm font-extrabold uppercase tracking-widest text-[#1D493E] bg-transparent hover:bg-gray-100 rounded-[8px] px-6 py-3 transition-all duration-300 group"
             >
               <span>View all products</span>
               <span className="text-base font-semibold group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300">↗</span>
@@ -235,8 +263,8 @@ export default function ShopPage() {
           </div>
         </div>
         
-        {/* Section 1: New Arrivals */}
-        <div style={{ paddingTop: "42px", paddingBottom: "42px", display: "flex", flexDirection: "column", width: "100%", backgroundColor: "white" }}>
+        {/* Section 1: New Arrivals (Figma Specs: 1440x918px, pt:42px, pb:42px, gap:32px) */}
+        <div style={{ paddingTop: "42px", paddingBottom: "42px", display: "flex", flexDirection: "column", width: "100%", backgroundColor: "white", gap: "32px" }}>
           {/* Header */}
           <div className="text-left space-y-1.5 md:space-y-2.5">
             <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
@@ -249,14 +277,13 @@ export default function ShopPage() {
               Curated gear for the modern nomad. From durable journal covers to the stickers that tell your story
             </p>
           </div>
-          <div className="h-3 md:h-[62px] shrink-0" />
 
           {/* Grid */}
           {renderProductGrid(newArrivals)}
         </div>
 
-        {/* Section 2: Travels Essentials */}
-        <div style={{ paddingTop: "42px", paddingBottom: "42px", display: "flex", flexDirection: "column", width: "100%", backgroundColor: "white" }}>
+        {/* Section 2: Travels Essentials (Figma Specs: 1440x1687px, pt:42px, pb:42px, gap:32px) */}
+        <div style={{ paddingTop: "42px", paddingBottom: "42px", display: "flex", flexDirection: "column", width: "100%", backgroundColor: "white", gap: "32px" }}>
           {/* Header */}
           <div className="text-left space-y-1.5 md:space-y-2.5">
             <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
@@ -269,27 +296,26 @@ export default function ShopPage() {
               Curated gear for the modern nomad. From durable journal covers to the stickers that tell your story
             </p>
           </div>
-          <div className="h-3 md:h-[62px] shrink-0" />
 
           {/* Grid Rows */}
-          {renderProductGrid(travelsEssentials.slice(0, 4))}
-          <div style={{ height: "32px" }} className="shrink-0" />
-          {renderProductGrid(travelsEssentials.slice(4, 8))}
-          <div style={{ height: "62px" }} className="shrink-0" />
+          <div className="flex flex-col gap-6 sm:gap-[32px] w-full">
+            {renderProductGrid(travelsEssentials.slice(0, 4))}
+            {renderProductGrid(travelsEssentials.slice(4, 8))}
+          </div>
 
           {/* Centered Load More Button */}
-          <div className="flex justify-center pt-0">
+          <div className="flex justify-center pt-2">
             <Link 
               href="/shop/travels-essentials" 
-              className="inline-flex items-center gap-1.5 text-sm font-extrabold uppercase tracking-widest text-[#1D493E] hover:opacity-70 px-6 py-3 transition-all duration-300"
+              className="inline-flex items-center justify-center px-8 py-3.5 rounded-[8px] bg-[#EEF2F1] text-[#1D493E] hover:bg-[#1D493E] hover:text-white font-sans font-semibold text-base sm:text-lg md:text-[18px] transition-all duration-300 shadow-xs cursor-pointer"
             >
               Load more
             </Link>
           </div>
         </div>
 
-        {/* Section 3: Limited Edition */}
-        <div style={{ paddingTop: "42px", paddingBottom: "42px", display: "flex", flexDirection: "column", width: "100%", backgroundColor: "white" }}>
+        {/* Section 3: Limited Edition (Figma Specs: 1440x918px, pt:42px, pb:42px, gap:32px) */}
+        <div style={{ paddingTop: "42px", paddingBottom: "42px", display: "flex", flexDirection: "column", width: "100%", backgroundColor: "white", gap: "32px" }}>
           {/* Header */}
           <div className="text-left space-y-1.5 md:space-y-2.5">
             <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
@@ -302,14 +328,13 @@ export default function ShopPage() {
               Curated gear for the modern nomad. From durable journal covers to the stickers that tell your story
             </p>
           </div>
-          <div className="h-3 md:h-[62px] shrink-0" />
 
           {/* Grid */}
           {renderProductGrid(limitedEdition)}
         </div>
 
-        {/* Section 4: 25% to 50% Discount Sale */}
-        <div style={{ paddingTop: "42px", paddingBottom: "42px", display: "flex", flexDirection: "column", width: "100%", backgroundColor: "white" }}>
+        {/* Section 4: 25% to 50% Discount Sale (Figma Specs: 1440x1687px, pt:42px, pb:42px, gap:32px) */}
+        <div style={{ paddingTop: "42px", paddingBottom: "42px", display: "flex", flexDirection: "column", width: "100%", backgroundColor: "white", gap: "32px" }}>
           {/* Header */}
           <div className="text-left space-y-1.5 md:space-y-2.5">
             <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
@@ -322,19 +347,18 @@ export default function ShopPage() {
               Curated gear for the modern nomad. From durable journal covers to the stickers that tell your story
             </p>
           </div>
-          <div className="h-3 md:h-[62px] shrink-0" />
 
           {/* Grid Rows */}
-          {renderProductGrid(discountSaleProducts.slice(0, 4))}
-          <div style={{ height: "32px" }} className="shrink-0" />
-          {renderProductGrid(discountSaleProducts.slice(4, 8))}
-          <div style={{ height: "62px" }} className="shrink-0" />
+          <div className="flex flex-col gap-6 sm:gap-[32px] w-full">
+            {renderProductGrid(discountSaleProducts.slice(0, 4))}
+            {renderProductGrid(discountSaleProducts.slice(4, 8))}
+          </div>
 
           {/* Centered View All Link */}
-          <div className="flex justify-center pt-0">
+          <div className="flex justify-center pt-2">
             <Link
               href="/shop/discount-sale"
-              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-extrabold uppercase tracking-widest text-[#1D493E] bg-transparent hover:bg-gray-200/80 rounded-[8px] px-6 py-3 transition-all duration-300 group"
+              className="inline-flex items-center gap-2 text-xs sm:text-sm font-extrabold uppercase tracking-widest text-[#1D493E] bg-transparent hover:bg-gray-100 rounded-[8px] px-6 py-3 transition-all duration-300 group"
             >
               <span>View all products</span>
               <span className="text-base font-semibold group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300">↗</span>

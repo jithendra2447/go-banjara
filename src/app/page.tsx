@@ -621,13 +621,13 @@ export default function Homepage() {
               const pkg1 = displayPkgs[0];
               if (!pkg1) return null;
               return (
-                <div className="bg-[#F6F3EE] rounded-[4px] flex flex-col md:flex-row gap-0 w-full overflow-hidden md:h-[394px] text-left">
+                <div className="bg-[#F6F3EE] rounded-[4px] flex flex-col md:flex-row gap-0 w-full overflow-hidden md:h-[394px] text-left group cursor-pointer">
                   {/* Image */}
                   <div className="relative h-[280px] md:h-full w-full md:w-1/2 shrink-0 overflow-hidden">
                     <img 
                       src={pkg1.image} 
                       alt={pkg1.name} 
-                      className="w-full h-full object-cover" 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" 
                       style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
                     />
                     <button
@@ -744,13 +744,13 @@ export default function Homepage() {
               {(() => {
                 const displayPkgs = packagesList && packagesList.length > 0 ? packagesList : HOLIDAY_PACKAGES;
                 return displayPkgs.slice(1, 3).map((pkg) => (
-                  <div key={pkg.id} className="bg-[#F6F3EE] rounded-[4px] flex flex-col text-left md:h-[778px] overflow-hidden">
+                  <div key={pkg.id} className="bg-[#F6F3EE] rounded-[4px] flex flex-col text-left md:h-[778px] overflow-hidden group cursor-pointer">
                     {/* Image (Flushed with top, left, and right edges) */}
                     <div className="relative w-full h-[200px] md:h-[384px] overflow-hidden shrink-0">
                       <img 
                         src={pkg.image} 
                         alt={pkg.name} 
-                        className="w-full h-full object-cover" 
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" 
                         style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
                       />
                       <button
@@ -1316,7 +1316,7 @@ export default function Homepage() {
                 <div 
                   key={deal.id} 
                   onMouseEnter={() => setActiveDealSlide(idx)}
-                  className={`bg-white rounded-[4px] w-full h-auto pb-4 flex flex-col justify-between gap-[16px] transition duration-300 overflow-hidden ${
+                  className={`bg-white rounded-[4px] w-full h-auto pb-4 flex flex-col justify-between gap-[16px] transition duration-300 overflow-hidden group cursor-pointer ${
                     idx >= 3 ? 'hidden md:flex' : 'flex'
                   }`}
                 >

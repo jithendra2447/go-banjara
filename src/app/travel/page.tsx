@@ -667,29 +667,39 @@ export default function HolidaysPortal() {
           
           {/* Filters Toggle Dropdown */}
           <div className="relative hidden md:block" ref={filterDropdownRef}>
-            <button
-              type="button"
-              onClick={() => setShowFiltersDropdown(!showFiltersDropdown)}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "10px",
-                height: "46px",
-                padding: "0 20px",
-                borderRadius: "8px",
-                border: "1px solid rgba(141, 141, 141, 0.5)",
-                background: "white",
-                fontFamily: "'Faktum', 'Outfit', sans-serif",
-                fontWeight: 500,
-                fontSize: "16px",
-                color: "rgba(43, 43, 43, 1)",
-                cursor: "pointer",
-              }}
-              className="hover:border-gray-400 transition-colors"
-            >
-              <span>Filters</span>
-              <ChevronDown style={{ width: "16px", height: "16px", color: "rgba(141, 141, 141, 1)" }} />
-            </button>
+            {(() => {
+              const hasActiveFilters = selectedDurations.length > 0 || selectedTravelTypes.length > 0 || selectedInclusions.length > 0;
+              const isSelected = showFiltersDropdown || hasActiveFilters;
+              return (
+                <button
+                  type="button"
+                  onClick={() => setShowFiltersDropdown(!showFiltersDropdown)}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "10px",
+                    height: "46px",
+                    padding: "0 20px",
+                    borderRadius: "8px",
+                    border: isSelected ? "1.5px solid #1D493E" : "1px solid rgba(141, 141, 141, 0.5)",
+                    background: isSelected ? "#EEF2F1" : "white",
+                    fontFamily: "'Faktum', 'Outfit', sans-serif",
+                    fontWeight: isSelected ? 600 : 500,
+                    fontSize: "16px",
+                    color: isSelected ? "#1D493E" : "rgba(43, 43, 43, 1)",
+                    cursor: "pointer",
+                  }}
+                  className="transition-colors"
+                >
+                  <span>Filters{hasActiveFilters ? ` (${selectedDurations.length + selectedTravelTypes.length + selectedInclusions.length})` : ''}</span>
+                  {showFiltersDropdown ? (
+                    <ChevronUp style={{ width: "16px", height: "16px", color: isSelected ? "#1D493E" : "rgba(141, 141, 141, 1)" }} />
+                  ) : (
+                    <ChevronDown style={{ width: "16px", height: "16px", color: isSelected ? "#1D493E" : "rgba(141, 141, 141, 1)" }} />
+                  )}
+                </button>
+              );
+            })()}
 
             {showFiltersDropdown && (
               <div 

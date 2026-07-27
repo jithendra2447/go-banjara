@@ -1546,8 +1546,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 11. Trust Banner */}
-      <TrustBanner />
     </div>
   );
 }

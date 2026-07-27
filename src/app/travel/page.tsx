@@ -353,7 +353,7 @@ export default function HolidaysPortal() {
           justifyContent: "center",
           alignItems: "center",
         }}
-        className="px-4 sm:px-6 md:px-20 pt-6 sm:pt-[62px] pb-4 sm:pb-[24px]"
+        className="w-full mx-auto max-w-[430px] md:max-w-[1440px] px-[20px] md:px-[80px] pt-6 sm:pt-[62px] pb-4 sm:pb-[24px]"
       >
         {/* Header Title block */}
         <div 

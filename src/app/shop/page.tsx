@@ -206,7 +206,7 @@ export default function ShopPage() {
       </header>
 
       {/* Main Sections Container (Width: 1440px, Side Padding: 80px) */}
-      <main className="w-full max-w-[1440px] mx-auto mt-0 px-4 sm:px-6 md:px-[80px]">
+      <main className="w-full max-w-[430px] md:max-w-[1440px] mx-auto mt-0 px-[20px] md:px-[80px]">
 
 
 

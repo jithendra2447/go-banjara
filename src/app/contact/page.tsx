@@ -176,28 +176,25 @@ export default function ContactPage() {
           </p>
         </section>
 
-        {/* SECTION 2: FORM & IMAGE GRID (Figma spec 1440x817, padding 62px 80px) */}
+        {/* SECTION 2: FORM & IMAGE GRID (Mobile 430x925 | Figma spec 1440x817) */}
         <section 
           style={{
             width: "100%",
-            maxWidth: "1440px",
-            minHeight: "680px",
-            paddingTop: "12px",
-            paddingBottom: "12px",
             background: "rgba(255, 255, 255, 1)",
             boxSizing: "border-box",
-            margin: "0 auto"
+            margin: "0 auto",
+            opacity: 1,
           }}
-          className="relative"
+          className="relative w-full max-w-[430px] md:max-w-[1440px] px-[20px] py-[12px] md:py-[12px] md:px-0"
         >
-          <div className="w-full max-w-[1280px] mx-auto flex flex-col md:flex-row gap-[48px] items-center justify-center min-h-[580px] px-4 md:px-0">
+          <div className="w-full max-w-[1280px] mx-auto flex flex-col md:flex-row gap-6 md:gap-[48px] items-center justify-center min-h-auto md:min-h-[580px]">
             
             {/* Left Column: Bonjo Mascot Card (About Us Style Effect) */}
             <div 
               style={{
                 maxWidth: "100%"
               }}
-              className="flex items-center justify-center relative select-none group w-full max-w-[537px] h-[280px] sm:h-[400px] md:h-[580px]"
+              className="flex items-center justify-center relative select-none group w-full max-w-[390px] md:max-w-[537px] aspect-square md:aspect-auto h-auto md:h-[580px]"
             >
               {/* Soft radial glow background bubble */}
               <div 
@@ -214,7 +211,7 @@ export default function ContactPage() {
                   zIndex: 10,
                   borderRadius: "12px"
                 }}
-                className="relative overflow-hidden transition-all duration-500 hover:rotate-2 cursor-pointer bg-transparent rounded-[12px] h-full"
+                className="relative overflow-hidden transition-all duration-500 hover:rotate-2 cursor-pointer bg-transparent rounded-[12px] w-full h-full"
               >
                 <img 
                   src="/llama_mascot.png" 
@@ -242,7 +239,7 @@ export default function ContactPage() {
                   boxSizing: "border-box",
                   gap: "24px"
                 }}
-                className="shadow-xs w-full max-w-[487px] h-auto min-h-[400px] md:h-[580px]"
+                className="shadow-xs w-full max-w-[390px] md:max-w-[487px] h-auto min-h-[400px] md:h-[580px]"
               >
                 <div className="w-16 h-16 bg-[#F3FFEF] text-[#1D493E] rounded-full flex items-center justify-center mx-auto border border-[#1D493E]/20 animate-bounce">
                   <CheckCircle2 className="w-8 h-8 text-[#FF623E]" />
@@ -267,7 +264,7 @@ export default function ContactPage() {
                   justifyContent: "space-between",
                   boxSizing: "border-box"
                 }}
-                className="shadow-xs text-left w-full max-w-[487px] h-auto md:h-[580px] gap-4 md:gap-0"
+                className="shadow-xs text-left w-full max-w-[390px] md:max-w-[487px] h-auto md:h-[580px] gap-4 md:gap-0"
               >
                 <style>{`
                   .contact-form-input::placeholder, 
@@ -283,147 +280,156 @@ export default function ContactPage() {
                   }
                 `}</style>
 
-                {/* Full Name */}
-                <div className="space-y-1">
-                  <label 
-                    style={{
-                      fontFamily: "Faktum, sans-serif",
-                      fontWeight: 500,
-                      fontSize: "18px",
-                      lineHeight: "100%",
-                      letterSpacing: "0px",
-                      color: "#2C2C2C",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "4px"
-                    }}
-                  >
-                    Full Name <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 700, fontSize: "18px", lineHeight: "100%", color: "#FF623E" }}>*</span>
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    placeholder="Enter your full name"
-                    style={{ 
-                      height: "53px",
-                      borderRadius: "4px",
-                      border: "1px solid rgba(204, 204, 204, 1)",
-                      background: "rgba(255, 255, 255, 1)"
-                    }}
-                    className="contact-form-input w-full px-4 font-medium text-gray-800 focus:outline-none focus:border-[#1D493E] transition"
-                  />
-                </div>
-
-                {/* Email Address */}
-                <div className="space-y-1">
-                  <label 
-                    style={{
-                      fontFamily: "Faktum, sans-serif",
-                      fontWeight: 500,
-                      fontSize: "18px",
-                      lineHeight: "100%",
-                      letterSpacing: "0px",
-                      color: "#2C2C2C",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "4px"
-                    }}
-                  >
-                    Email Address <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 700, fontSize: "18px", lineHeight: "100%", color: "#FF623E" }}>*</span>
-                  </label>
-                  <input
-                    type="email"
-                    required
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    placeholder="Enter your email"
-                    style={{ 
-                      height: "53px",
-                      borderRadius: "4px",
-                      border: "1px solid rgba(204, 204, 204, 1)",
-                      background: "rgba(255, 255, 255, 1)"
-                    }}
-                    className="contact-form-input w-full px-4 font-medium text-gray-800 focus:outline-none focus:border-[#1D493E] transition"
-                  />
-                </div>
-
-                {/* Mobile Number */}
-                <div className="space-y-1">
-                  <label 
-                    style={{
-                      fontFamily: "Faktum, sans-serif",
-                      fontWeight: 500,
-                      fontSize: "18px",
-                      lineHeight: "100%",
-                      letterSpacing: "0px",
-                      color: "#2C2C2C",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "4px"
-                    }}
-                  >
-                    Mobile Number <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 700, fontSize: "18px", lineHeight: "100%", color: "#FF623E" }}>*</span>
-                  </label>
-                  <div 
-                    style={{ 
-                      height: "53px",
-                      borderRadius: "4px",
-                      border: "1px solid rgba(204, 204, 204, 1)",
-                      background: "rgba(255, 255, 255, 1)"
-                    }}
-                    className="flex overflow-hidden focus-within:border-[#1D493E]"
-                  >
-                    <span className="bg-[#1D493E]/5 border-r border-gray-300 text-slate-700 text-sm font-semibold px-4 flex items-center justify-center shrink-0">
-                      + 91
-                    </span>
+                {/* Input Fields Wrapper Container (Mobile spec 366x392 | gap 24px) */}
+                <div 
+                  style={{
+                    width: "100%",
+                    opacity: 1,
+                  }}
+                  className="flex flex-col gap-[24px] md:gap-[16px] w-full max-w-[366px] md:max-w-full mx-auto"
+                >
+                  {/* Full Name */}
+                  <div className="space-y-1">
+                    <label 
+                      style={{
+                        fontFamily: "Faktum, sans-serif",
+                        fontWeight: 500,
+                        fontSize: "18px",
+                        lineHeight: "100%",
+                        letterSpacing: "0px",
+                        color: "#2C2C2C",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "4px"
+                      }}
+                    >
+                      Full Name <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 700, fontSize: "18px", lineHeight: "100%", color: "#FF623E" }}>*</span>
+                    </label>
                     <input
-                      type="tel"
+                      type="text"
                       required
-                      name="mobile"
-                      value={formData.mobile}
+                      name="name"
+                      value={formData.name}
                       onChange={handleInputChange}
-                      placeholder="9492906356"
-                      className="contact-form-input flex-1 px-4 bg-white font-medium text-gray-800 focus:outline-none"
+                      placeholder="Enter your full name"
+                      style={{ 
+                        height: "53px",
+                        borderRadius: "4px",
+                        border: "1px solid rgba(204, 204, 204, 1)",
+                        background: "rgba(255, 255, 255, 1)"
+                      }}
+                      className="contact-form-input w-full px-4 font-medium text-gray-800 focus:outline-none focus:border-[#1D493E] transition"
                     />
                   </div>
-                </div>
 
-                {/* Complete Address */}
-                <div className="space-y-1">
-                  <label 
-                    style={{
-                      fontFamily: "Faktum, sans-serif",
-                      fontWeight: 500,
-                      fontSize: "18px",
-                      lineHeight: "100%",
-                      letterSpacing: "0px",
-                      color: "#2C2C2C",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "4px"
-                    }}
-                  >
-                    Complete Address <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 700, fontSize: "18px", lineHeight: "100%", color: "#FF623E" }}>*</span>
-                  </label>
-                  <textarea
-                    required
-                    name="address"
-                    value={formData.address}
-                    onChange={handleInputChange}
-                    placeholder="Type something specific here"
-                    style={{ 
-                      height: "115px", 
-                      resize: "none",
-                      borderRadius: "4px",
-                      border: "1px solid rgba(204, 204, 204, 1)",
-                      background: "rgba(255, 255, 255, 1)"
-                    }}
-                    className="contact-form-textarea w-full px-4 py-3 font-medium text-gray-800 focus:outline-none focus:border-[#1D493E] transition leading-relaxed"
-                  />
+                  {/* Email Address */}
+                  <div className="space-y-1">
+                    <label 
+                      style={{
+                        fontFamily: "Faktum, sans-serif",
+                        fontWeight: 500,
+                        fontSize: "18px",
+                        lineHeight: "100%",
+                        letterSpacing: "0px",
+                        color: "#2C2C2C",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "4px"
+                      }}
+                    >
+                      Email Address <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 700, fontSize: "18px", lineHeight: "100%", color: "#FF623E" }}>*</span>
+                    </label>
+                    <input
+                      type="email"
+                      required
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      placeholder="Enter your email"
+                      style={{ 
+                        height: "53px",
+                        borderRadius: "4px",
+                        border: "1px solid rgba(204, 204, 204, 1)",
+                        background: "rgba(255, 255, 255, 1)"
+                      }}
+                      className="contact-form-input w-full px-4 font-medium text-gray-800 focus:outline-none focus:border-[#1D493E] transition"
+                    />
+                  </div>
+
+                  {/* Mobile Number */}
+                  <div className="space-y-1">
+                    <label 
+                      style={{
+                        fontFamily: "Faktum, sans-serif",
+                        fontWeight: 500,
+                        fontSize: "18px",
+                        lineHeight: "100%",
+                        letterSpacing: "0px",
+                        color: "#2C2C2C",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "4px"
+                      }}
+                    >
+                      Mobile Number <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 700, fontSize: "18px", lineHeight: "100%", color: "#FF623E" }}>*</span>
+                    </label>
+                    <div 
+                      style={{ 
+                        height: "53px",
+                        borderRadius: "4px",
+                        border: "1px solid rgba(204, 204, 204, 1)",
+                        background: "rgba(255, 255, 255, 1)"
+                      }}
+                      className="flex overflow-hidden focus-within:border-[#1D493E]"
+                    >
+                      <span className="bg-[#1D493E]/5 border-r border-gray-300 text-slate-700 text-sm font-semibold px-4 flex items-center justify-center shrink-0">
+                        + 91
+                      </span>
+                      <input
+                        type="tel"
+                        required
+                        name="mobile"
+                        value={formData.mobile}
+                        onChange={handleInputChange}
+                        placeholder="9492906356"
+                        className="contact-form-input flex-1 px-4 bg-white font-medium text-gray-800 focus:outline-none"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Complete Address */}
+                  <div className="space-y-1">
+                    <label 
+                      style={{
+                        fontFamily: "Faktum, sans-serif",
+                        fontWeight: 500,
+                        fontSize: "18px",
+                        lineHeight: "100%",
+                        letterSpacing: "0px",
+                        color: "#2C2C2C",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "4px"
+                      }}
+                    >
+                      Complete Address <span style={{ fontFamily: "Faktum, sans-serif", fontWeight: 700, fontSize: "18px", lineHeight: "100%", color: "#FF623E" }}>*</span>
+                    </label>
+                    <textarea
+                      required
+                      name="address"
+                      value={formData.address}
+                      onChange={handleInputChange}
+                      placeholder="Type something specific here"
+                      style={{ 
+                        height: "115px", 
+                        resize: "none",
+                        borderRadius: "4px",
+                        border: "1px solid rgba(204, 204, 204, 1)",
+                        background: "rgba(255, 255, 255, 1)"
+                      }}
+                      className="contact-form-textarea w-full px-4 py-3 font-medium text-gray-800 focus:outline-none focus:border-[#1D493E] transition leading-relaxed"
+                    />
+                  </div>
                 </div>
 
                 {/* Submit button */}
@@ -441,26 +447,48 @@ export default function ContactPage() {
           </div>
         </section>
 
-        {/* SECTION 2.5: CUSTOM STATS BANNER (Figma spec 1440x145) */}
+        {/* SECTION 2.5: CUSTOM STATS BANNER (Mobile 430x208 2x2 Grid | Desktop 1440x145 Bar) */}
         <section 
           style={{
             width: "100%",
-            maxWidth: "1440px",
-            minHeight: "145px",
-            height: "auto",
-            paddingTop: "24px",
-            paddingBottom: "24px",
             background: "rgba(255, 255, 255, 1)",
             boxSizing: "border-box",
             margin: "0 auto",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            borderTop: "1px solid rgba(229, 231, 235, 1)",
-            borderBottom: "1px solid rgba(229, 231, 235, 1)"
+            opacity: 1,
           }}
-          className="px-6 md:px-20"
+          className="w-full max-w-[430px] md:max-w-[1440px] px-[20px] py-[12px] md:py-[24px] md:px-20 border-t border-b border-gray-200"
         >
+          {/* Mobile 2x2 Grid Layout (Figma Spec 430x208) */}
+          <div className="grid grid-cols-2 gap-y-3 gap-x-0 w-full md:hidden relative py-1">
+            {/* Horizontal divider line */}
+            <div className="absolute top-1/2 left-0 right-0 h-[1px] bg-gray-200 -translate-y-1/2 pointer-events-none" />
+            
+            {/* Stat 1 */}
+            <div className="flex flex-col items-center justify-center py-2 px-1 text-center border-r border-gray-200">
+              <span style={{ fontFamily: "Faktum, sans-serif" }} className="text-2xl font-bold text-[#2B2B2B] leading-tight">10+</span>
+              <span style={{ fontFamily: "Faktum, sans-serif" }} className="text-xs font-medium text-[#2B2B2B] mt-1">Travel Packages</span>
+            </div>
+
+            {/* Stat 2 */}
+            <div className="flex flex-col items-center justify-center py-2 px-1 text-center">
+              <span style={{ fontFamily: "Faktum, sans-serif" }} className="text-2xl font-bold text-[#2B2B2B] leading-tight">15k+</span>
+              <span style={{ fontFamily: "Faktum, sans-serif" }} className="text-xs font-medium text-[#2B2B2B] mt-1">Nomads Joined</span>
+            </div>
+
+            {/* Stat 3 */}
+            <div className="flex flex-col items-center justify-center py-2 px-1 text-center border-r border-gray-200">
+              <span style={{ fontFamily: "Faktum, sans-serif" }} className="text-2xl font-bold text-[#2B2B2B] leading-tight">24/7</span>
+              <span style={{ fontFamily: "Faktum, sans-serif" }} className="text-xs font-medium text-[#2B2B2B] mt-1">On-road Support</span>
+            </div>
+
+            {/* Stat 4 */}
+            <div className="flex flex-col items-center justify-center py-2 px-1 text-center">
+              <span style={{ fontFamily: "Faktum, sans-serif" }} className="text-2xl font-bold text-[#2B2B2B] leading-tight">7+</span>
+              <span style={{ fontFamily: "Faktum, sans-serif" }} className="text-xs font-medium text-[#2B2B2B] mt-1">Shop Products</span>
+            </div>
+          </div>
+
+          {/* Desktop Single Row Bar (Untouched) */}
           <div 
             style={{
               display: "flex",
@@ -469,7 +497,7 @@ export default function ContactPage() {
               width: "100%",
               maxWidth: "1280px"
             }}
-            className="flex-wrap md:flex-nowrap gap-6 md:gap-[47px] w-full"
+            className="hidden md:flex flex-nowrap gap-[47px] w-full mx-auto"
           >
             {/* Stat 1 */}
             <div 
@@ -670,123 +698,68 @@ export default function ContactPage() {
           </div>
         </section>
 
-        {/* SECTION 3: WE'D LOVE TO HEAR FROM YOU (Figma spec 1440x677, padding 62px 80px) */}
+        {/* SECTION 3: WE'D LOVE TO HEAR FROM YOU (Mobile 430x913 | Desktop 1440x677) */}
         <section 
           style={{
             width: "100%",
-            maxWidth: "1440px",
-            paddingTop: "62px",
-            paddingBottom: "62px",
             background: "rgba(255, 255, 255, 1)",
             boxSizing: "border-box",
             margin: "0 auto",
             display: "flex",
             flexDirection: "column",
             justifyContent: "flex-start",
-            gap: "32px"
+            opacity: 1,
           }}
-          className="px-6 md:px-20 text-left"
+          className="w-full max-w-[430px] md:max-w-[1440px] px-[20px] py-[12px] md:py-[62px] md:px-20 text-left gap-3 md:gap-8"
         >
-          <div className="space-y-3">
-            <span 
-              style={{
-                fontFamily: "Faktum, Outfit, sans-serif",
-                fontWeight: 600,
-                fontSize: "14px",
-                lineHeight: "100%",
-                letterSpacing: "1.2px",
-                textTransform: "uppercase",
-                color: "rgba(255, 98, 62, 1)",
-                background: "rgba(255, 98, 62, 0.1)",
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                height: "28px",
-                padding: "0 16px",
-                borderRadius: "4px"
-              }}
-            >
-              Reach out to us
-            </span>
+          {/* Header Title */}
+          <div className="space-y-1">
             <h2 
               style={{
                 fontFamily: "Fraunces, serif",
                 fontWeight: 600,
-                fontSize: "42px",
-                lineHeight: "100%",
                 letterSpacing: "0px",
-                color: "#2B2B2B"
               }}
-              className="text-3xl md:text-[42px]"
+              className="text-2xl sm:text-3xl md:text-[42px] leading-tight text-[#2B2B2B]"
             >
               We’d love to <span style={{ color: "#FF623E" }}>hear from you</span>
             </h2>
-            <p 
-              style={{
-                fontFamily: "Faktum, Outfit, sans-serif",
-                fontWeight: 500,
-                fontSize: "18px",
-                lineHeight: "24px",
-                color: "rgba(43, 43, 43, 1)"
-              }}
-              className="text-base"
-            >
-              or Just reach out manually to{" "}
-              <a 
-                href="mailto:hello@gobanjara.com"
-                style={{
-                  color: "rgba(63, 136, 255, 1)",
-                  textDecoration: "underline"
-                }}
-                className="hover:opacity-85 transition"
-              >
-                hello@gobanjara.com
-              </a>
-            </p>
           </div>
 
-          <div className="flex flex-col md:flex-row gap-[32px] w-full justify-between items-center mt-4">
+          <div className="flex flex-col md:flex-row gap-3 md:gap-[32px] w-full justify-between items-center mt-1 md:mt-4">
             
             {/* Card 1: Email Support */}
             <div 
               style={{
                 background: "#F9F9F9",
                 borderRadius: "4px",
-                padding: "24px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                width: "405.33px",
-                maxWidth: "100%",
-                height: "327px",
                 boxSizing: "border-box"
               }}
-              className="border border-gray-100 shadow-2xs hover:shadow-xs transition duration-200"
+              className="w-full max-w-[390px] md:w-[405px] h-auto md:h-[327px] p-4 md:p-6 flex flex-col justify-between gap-4 md:gap-0 border border-gray-100/80 shadow-2xs text-left"
             >
-              <div className="space-y-6">
-                <div className="w-12 h-12 rounded-full border-[1.5px] border-[#FF623E] bg-white flex items-center justify-center text-[#FF623E]">
-                  <Compass className="w-6 h-6" />
+              <div className="space-y-3 md:space-y-6">
+                <div className="w-9 h-9 md:w-12 md:h-12 rounded-[4px] border border-gray-200 bg-white flex items-center justify-center text-[#FF623E]">
+                  <Compass className="w-5 h-5 md:w-6 md:h-6" />
                 </div>
-                <div className="space-y-2">
-                  <h3 style={{ fontFamily: "Faktum, Outfit, sans-serif", color: "#2B2B2B" }} className="font-bold text-xl">
+                <div className="space-y-1 md:space-y-2">
+                  <h3 style={{ fontFamily: "Faktum, Outfit, sans-serif", color: "#2B2B2B" }} className="font-bold text-base md:text-xl">
                     Email Support
                   </h3>
-                  <p style={{ fontFamily: "Faktum, Outfit, sans-serif", color: "#666666" }} className="text-sm font-medium">
+                  <p style={{ fontFamily: "Faktum, Outfit, sans-serif", color: "#666666" }} className="text-xs md:text-sm font-medium">
                     Our team can respond in real time
                   </p>
                 </div>
               </div>
-              <div className="pt-6">
+              <div className="pt-2 md:pt-6">
                 <a 
                   href="mailto:hello@gobanjara.com"
                   style={{
                     fontFamily: "Faktum, Outfit, sans-serif",
                     color: "rgba(63, 136, 255, 1)",
                     textDecoration: "underline",
-                    fontSize: "14px",
                     fontWeight: 600
                   }}
-                  className="hover:opacity-80 transition block truncate"
+                  className="hover:opacity-80 transition block truncate text-xs md:text-[14px]"
                 >
                   hello@gobanjara.com
                 </a>
@@ -798,31 +771,24 @@ export default function ContactPage() {
               style={{
                 background: "#F9F9F9",
                 borderRadius: "4px",
-                padding: "24px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                width: "405.33px",
-                maxWidth: "100%",
-                height: "327px",
                 boxSizing: "border-box"
               }}
-              className="border border-gray-100 shadow-2xs hover:shadow-xs transition duration-200"
+              className="w-full max-w-[390px] md:w-[405px] h-auto md:h-[327px] p-4 md:p-6 flex flex-col justify-between gap-4 md:gap-0 border border-gray-100/80 shadow-2xs text-left"
             >
-              <div className="space-y-6">
-                <div className="w-12 h-12 rounded-full border-[1.5px] border-[#FF623E] bg-white flex items-center justify-center text-[#FF623E]">
-                  <Compass className="w-6 h-6" />
+              <div className="space-y-3 md:space-y-6">
+                <div className="w-9 h-9 md:w-12 md:h-12 rounded-[4px] border border-gray-200 bg-white flex items-center justify-center text-[#FF623E]">
+                  <Compass className="w-5 h-5 md:w-6 md:h-6" />
                 </div>
-                <div className="space-y-2">
-                  <h3 style={{ fontFamily: "Faktum, Outfit, sans-serif", color: "#2B2B2B" }} className="font-bold text-xl">
+                <div className="space-y-1 md:space-y-2">
+                  <h3 style={{ fontFamily: "Faktum, Outfit, sans-serif", color: "#2B2B2B" }} className="font-bold text-base md:text-xl">
                     Visit Our Office
                   </h3>
-                  <p style={{ fontFamily: "Faktum, Outfit, sans-serif", color: "#666666" }} className="text-sm font-medium">
+                  <p style={{ fontFamily: "Faktum, Outfit, sans-serif", color: "#666666" }} className="text-xs md:text-sm font-medium">
                     Visit our location in real time
                   </p>
                 </div>
               </div>
-              <div className="pt-6">
+              <div className="pt-2 md:pt-6">
                 <a 
                   href="https://maps.google.com/?q=1st+Floor,+DSR+Tranquil,+102,+Plot+%23+901,+Ayyappa+Society+Main+Rd,+SBH+Officers+Colony,+Mega+Hills,+Madhapur,+Hyderabad,+Telangana+500081"
                   target="_blank"
@@ -831,11 +797,10 @@ export default function ContactPage() {
                     fontFamily: "Faktum, Outfit, sans-serif",
                     color: "rgba(63, 136, 255, 1)",
                     textDecoration: "underline",
-                    fontSize: "13px",
                     fontWeight: 600,
                     lineHeight: "1.5"
                   }}
-                  className="hover:opacity-80 transition block text-left"
+                  className="hover:opacity-80 transition block text-left text-xs md:text-[13px]"
                 >
                   1st Floor, DSR Tranquil, 102, Plot # 901, Ayyappa Society Main Rd, SBH Officers Colony, Mega Hills, Madhapur, Hyderabad, Telangana 500081
                 </a>
@@ -847,41 +812,33 @@ export default function ContactPage() {
               style={{
                 background: "#F9F9F9",
                 borderRadius: "4px",
-                padding: "24px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                width: "405.33px",
-                maxWidth: "100%",
-                height: "327px",
                 boxSizing: "border-box"
               }}
-              className="border border-gray-100 shadow-2xs hover:shadow-xs transition duration-200"
+              className="w-full max-w-[390px] md:w-[405px] h-auto md:h-[327px] p-4 md:p-6 flex flex-col justify-between gap-4 md:gap-0 border border-gray-100/80 shadow-2xs text-left"
             >
-              <div className="space-y-6">
-                <div className="w-12 h-12 rounded-full border-[1.5px] border-[#FF623E] bg-white flex items-center justify-center text-[#FF623E]">
-                  <Compass className="w-6 h-6" />
+              <div className="space-y-3 md:space-y-6">
+                <div className="w-9 h-9 md:w-12 md:h-12 rounded-[4px] border border-gray-200 bg-white flex items-center justify-center text-[#FF623E]">
+                  <Compass className="w-5 h-5 md:w-6 md:h-6" />
                 </div>
-                <div className="space-y-2">
-                  <h3 style={{ fontFamily: "Faktum, Outfit, sans-serif", color: "#2B2B2B" }} className="font-bold text-xl">
+                <div className="space-y-1 md:space-y-2">
+                  <h3 style={{ fontFamily: "Faktum, Outfit, sans-serif", color: "#2B2B2B" }} className="font-bold text-base md:text-xl">
                     Call us directly
                   </h3>
-                  <p style={{ fontFamily: "Faktum, Outfit, sans-serif", color: "#666666" }} className="text-sm font-medium">
+                  <p style={{ fontFamily: "Faktum, Outfit, sans-serif", color: "#666666" }} className="text-xs md:text-sm font-medium">
                     Available during working hours
                   </p>
                 </div>
               </div>
-              <div className="pt-6">
+              <div className="pt-2 md:pt-6">
                 <a 
                   href="tel:+919489094392"
                   style={{
                     fontFamily: "Faktum, Outfit, sans-serif",
                     color: "rgba(63, 136, 255, 1)",
                     textDecoration: "underline",
-                    fontSize: "14px",
                     fontWeight: 600
                   }}
-                  className="hover:opacity-80 transition block"
+                  className="hover:opacity-80 transition block text-xs md:text-[14px]"
                 >
                   (+91) 9489094392
                 </a>
@@ -891,101 +848,73 @@ export default function ContactPage() {
           </div>
         </section>
 
+        {/* SECTION 4: FAQ SECTION (Mobile 430x582 | Desktop 1440x400) */}
         <section 
           style={{
             width: "100%",
-            maxWidth: "1440px",
-            paddingTop: "42px",
-            paddingBottom: "42px",
             background: "rgba(255, 255, 255, 1)",
             boxSizing: "border-box",
             margin: "0 auto",
             display: "flex",
             flexDirection: "column",
             justifyContent: "flex-start",
-            gap: "24px"
+            opacity: 1
           }}
-          className="px-6 md:px-20 text-left border-t border-gray-100"
+          className="w-full max-w-[430px] md:max-w-[1440px] px-[20px] py-[12px] md:py-[42px] md:px-20 text-left gap-3 md:gap-6 border-t border-gray-100"
         >
-          <div className="space-y-3">
-            <span 
-              style={{
-                fontFamily: "var(--font-sans)",
-                fontWeight: 600,
-                fontSize: "14px",
-                lineHeight: "100%",
-                letterSpacing: "1.2px",
-                textTransform: "uppercase",
-                color: "rgba(255, 98, 62, 1)",
-                background: "rgba(255, 98, 62, 0.1)",
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                height: "28px",
-                padding: "0 16px",
-                borderRadius: "4px"
-              }}
-            >
-              FAQ'S
-            </span>
+          {/* Header Title */}
+          <div className="space-y-1">
             <h2
               style={{
                 fontFamily: "Fraunces, serif",
                 fontWeight: 600,
-                fontSize: "42px",
-                lineHeight: "100%",
                 letterSpacing: "0px",
                 color: "#2B2B2B",
                 margin: 0
               }}
-              className="text-3xl md:text-[42px]"
+              className="text-2xl sm:text-3xl md:text-[42px]"
             >
-              Frequently asked questions
+              FAQ’s
             </h2>
           </div>
 
-          <div className="w-full flex flex-col border-t border-gray-200 mt-2">
+          <div className="w-full flex flex-col border-t border-gray-200 mt-1">
             {FAQ_ITEMS.map((faq, idx) => {
               const isOpen = openFaqIndex === idx;
               return (
                 <div 
                   key={idx} 
-                  className="w-full border-b border-gray-200 py-5 flex flex-col text-left transition-colors duration-200"
+                  className="w-full border-b border-gray-200 py-3.5 md:py-5 flex flex-col text-left transition-colors duration-200"
                 >
                   <button 
                     onClick={() => toggleFaq(idx)}
-                    className="w-full flex justify-between items-center text-left focus:outline-none cursor-pointer"
+                    className="w-full flex justify-between items-center text-left focus:outline-none cursor-pointer gap-3"
                   >
                     <span 
                       style={{
-                        fontFamily: "var(--font-sans)",
+                        fontFamily: "Faktum, sans-serif",
                         fontWeight: 600,
-                        fontSize: "18px",
-                        lineHeight: "26px",
                         color: "#2C2C2C"
                       }}
-                      className="text-base md:text-[18px]"
+                      className="text-sm sm:text-base md:text-[18px] leading-snug"
                     >
                       {faq.question}
                     </span>
                     {isOpen ? (
-                      <span className="text-2xl font-semibold text-[#FF623E] select-none shrink-0 ml-4">−</span>
+                      <ChevronUp className="w-5 h-5 text-[#2B2B2B] shrink-0" />
                     ) : (
-                      <span className="text-2xl font-semibold text-[#1D493E] select-none shrink-0 ml-4">+</span>
+                      <ChevronDown className="w-5 h-5 text-[#2B2B2B] shrink-0" />
                     )}
                   </button>
                   {isOpen && (
                     <p 
                       style={{
-                        fontFamily: "var(--font-sans)",
+                        fontFamily: "Faktum, sans-serif",
                         fontWeight: 500,
-                        fontSize: "14px",
-                        lineHeight: "22px",
                         color: "#666666",
                         margin: 0,
-                        paddingTop: "8px"
                       }}
-                      className="text-sm animate-fade-in-up"
+                      className="text-xs sm:text-sm pt-2 leading-relaxed animate-fade-in-up"
                     >
                       {faq.answer}
                     </p>
@@ -996,13 +925,10 @@ export default function ContactPage() {
           </div>
         </section>
 
-        {/* SECTION 5: PRE-FOOTER NEWSLETTER/CTA SECTION (Figma spec 1440x342, padding 42px 80px) */}
+        {/* SECTION 5: PRE-FOOTER NEWSLETTER/CTA SECTION (Mobile 430x182 | Desktop 1440x342) */}
         <section 
           style={{
             width: "100%",
-            maxWidth: "1440px",
-            paddingTop: "42px",
-            paddingBottom: "42px",
             background: "rgba(255, 255, 255, 1)",
             boxSizing: "border-box",
             margin: "0 auto",
@@ -1010,24 +936,22 @@ export default function ContactPage() {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            gap: "32px"
+            opacity: 1
           }}
-          className="px-6 md:px-20 text-center border-t border-gray-100"
+          className="w-full max-w-[430px] md:max-w-[1440px] px-[20px] pt-[12px] pb-[62px] md:py-[42px] md:px-20 text-center gap-3 md:gap-[32px] border-t border-gray-100"
         >
-          <div className="space-y-4 max-w-[1280px]">
+          <div className="space-y-2 md:space-y-4 max-w-[1280px]">
             <h2
               style={{
                 fontFamily: "Fraunces, serif",
                 fontWeight: 600,
-                fontSize: "42px",
-                lineHeight: "100%",
                 letterSpacing: "0px",
                 color: "#2B2B2B",
                 margin: 0,
               }}
-              className="text-[28px] md:text-[42px]"
+              className="text-xl sm:text-2xl md:text-[42px] leading-tight"
             >
-              The <span style={{ color: "#FF623E" }}>best adventures</span> find their way to your inbox.
+              The <span style={{ color: "#FF623E" }}>best adventures</span> find their way to you inbox
             </h2>
             <p
               style={{
@@ -1039,7 +963,7 @@ export default function ContactPage() {
                 maxWidth: "1000px",
                 margin: "0 auto",
               }}
-              className="text-base"
+              className="hidden md:block text-base"
             >
               Hidden places, exclusive trip drops, curated gear, and stories from the road delivered before anyone else hears about them.
             </p>
@@ -1048,19 +972,14 @@ export default function ContactPage() {
           <Link
             href="/travel"
             style={{
-              height: "55px",
-              padding: "18px 36px",
-              gap: "8px",
               borderRadius: "4px",
               background: "#1D493E",
               color: "#FFFFFF",
               fontFamily: "'Faktum', 'Outfit', sans-serif",
               fontWeight: 600,
-              fontSize: "16px",
-              lineHeight: "100%",
               textDecoration: "none",
             }}
-            className="group hover:bg-[#15342c] transition-all duration-300 inline-flex items-center justify-center gap-2 cursor-pointer"
+            className="group hover:bg-[#15342c] transition-all duration-300 inline-flex items-center justify-center gap-2 cursor-pointer h-[48px] md:h-[55px] px-6 md:px-[36px] text-sm md:text-[16px] mt-1 md:mt-0"
           >
             <span>Reserve your tour now</span>
             <span className="text-lg font-sans group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300">↗</span>

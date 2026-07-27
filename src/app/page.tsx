@@ -1083,7 +1083,7 @@ export default function Homepage() {
               onClick={() => setActiveCategorySlide(0)}
               style={{ width: "100%", maxWidth: "405.33px", minHeight: "328.63px", display: "flex", flexDirection: "column", textDecoration: "none" }}
               className={`group mx-auto p-3 rounded-xl transition-all duration-300 cursor-pointer ${
-                activeCategorySlide === 0 ? 'ring-2 ring-[#FF5B37] scale-[1.02] shadow-xl' : ''
+                activeCategorySlide === 0 ? 'scale-[1.02] shadow-xl' : ''
               }`}
             >
               <div 
@@ -1113,7 +1113,7 @@ export default function Homepage() {
               onClick={() => setActiveCategorySlide(1)}
               style={{ width: "100%", maxWidth: "405.33px", minHeight: "328.63px", display: "flex", flexDirection: "column", textDecoration: "none" }}
               className={`group mx-auto p-3 rounded-xl transition-all duration-300 cursor-pointer ${
-                activeCategorySlide === 1 ? 'ring-2 ring-[#FF5B37] scale-[1.02] shadow-xl' : ''
+                activeCategorySlide === 1 ? 'scale-[1.02] shadow-xl' : ''
               }`}
             >
               <div 
@@ -1143,7 +1143,7 @@ export default function Homepage() {
               onClick={() => setActiveCategorySlide(2)}
               style={{ width: "100%", maxWidth: "405.33px", minHeight: "328.63px", display: "flex", flexDirection: "column", textDecoration: "none" }}
               className={`group mx-auto p-3 rounded-xl transition-all duration-300 cursor-pointer ${
-                activeCategorySlide === 2 ? 'ring-2 ring-[#FF5B37] scale-[1.02] shadow-xl' : ''
+                activeCategorySlide === 2 ? 'scale-[1.02] shadow-xl' : ''
               }`}
             >
               <div 
@@ -1331,7 +1331,7 @@ export default function Homepage() {
                   onMouseEnter={() => setActiveDealSlide(idx)}
                   onClick={() => setActiveDealSlide(idx)}
                   className={`bg-white rounded-[12px] w-full h-auto p-2 pb-4 flex flex-col justify-between gap-[16px] transition-all duration-300 overflow-hidden group cursor-pointer ${
-                    activeDealSlide === idx ? 'ring-2 ring-[#FF5B37] scale-[1.02] shadow-xl' : ''
+                    activeDealSlide === idx ? 'scale-[1.02] shadow-xl' : ''
                   } ${idx >= 3 ? 'hidden md:flex' : 'flex'}`}
                 >
                   {/* Image Container with Dots (Width: 339px, Height: 254px, Radius: 4px) */}

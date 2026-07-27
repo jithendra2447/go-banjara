@@ -366,8 +366,8 @@ export default function ShopPage() {
           </div>
         </div>
 
-        {/* Testimonials Section (Captured Memories) (Padding: pt-[42px] pb-[24px]) */}
-        <div className="bg-white pt-[42px] pb-[24px] flex flex-col gap-[32px] w-full mt-8">
+        {/* Testimonials Section (Captured Memories) (Figma Specs: 1440x912px, pt:42px, pb:42px, gap:32px) */}
+        <div style={{ paddingTop: "42px", paddingBottom: "42px", display: "flex", flexDirection: "column", width: "100%", backgroundColor: "white", gap: "32px" }}>
           {/* Header */}
           <div className="text-left space-y-1.5 md:space-y-2.5">
             <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
@@ -455,7 +455,7 @@ export default function ShopPage() {
           </div>
         </div>
 
-        {/* FAQ Section */}
+        {/* FAQ Section (Figma Specs: 1440x642px, pt:42px, pb:42px, gap:32px) */}
         <section 
           style={{
             width: "100%",
@@ -465,26 +465,15 @@ export default function ShopPage() {
             margin: "0 auto",
             display: "flex",
             flexDirection: "column",
-            justifyContent: "flex-start"
+            justifyContent: "flex-start",
+            paddingTop: "42px",
+            paddingBottom: "42px",
+            gap: "32px"
           }}
-          className="text-left mt-6 sm:mt-8 w-full py-4 sm:py-[42px] gap-4 sm:gap-[24px]"
+          className="text-left w-full"
         >
-          <div className="space-y-2 sm:space-y-3">
-            <span 
-              style={{
-                fontFamily: "Faktum, Outfit, sans-serif",
-                fontWeight: 600,
-                letterSpacing: "1.2px",
-                textTransform: "uppercase",
-                color: "rgba(255, 98, 62, 1)",
-                background: "rgba(255, 98, 62, 0.1)",
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                borderRadius: "4px"
-              }}
-              className="h-[22px] sm:h-[28px] px-2.5 sm:px-4 text-[11px] sm:text-[14px]"
-            >
+          <div className="space-y-1.5 md:space-y-2.5">
+            <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
               FAQ'S
             </span>
             <h2
@@ -551,80 +540,75 @@ export default function ShopPage() {
         {/* Spacer */}
         <div className="h-4 sm:h-[62px] shrink-0" />
 
-        {/* Section 12: Newsletter CTA Section */}
+        {/* Section 12: Newsletter CTA Section (Figma Specs: 1440x342px, pt:42px, pb:42px, gap:32px) */}
         <section 
           style={{
             width: "100%",
             maxWidth: "1440px",
+            minHeight: "342px",
             background: "rgba(255, 255, 255, 1)",
             boxSizing: "border-box",
-            margin: "0 auto"
+            margin: "0 auto",
+            paddingTop: "42px",
+            paddingBottom: "42px",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "32px"
           }}
-          className="py-4 sm:py-[42px] border-t border-gray-100"
+          className="w-full text-center"
         >
-          <div
-            style={{
-              maxWidth: "1280px",
-              margin: "0 auto",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              textAlign: "center",
-              boxSizing: "border-box",
-            }}
-            className="gap-3 sm:gap-[32px]"
-          >
-            {/* Text block */}
-            <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }} className="gap-2 sm:gap-[12px]">
-              {/* Heading */}
-              <h2
-                style={{
-                  fontFamily: "Fraunces, serif",
-                  fontWeight: 600,
-                  letterSpacing: "0px",
-                  textAlign: "center",
-                  color: "#2B2B2B",
-                  maxWidth: "1280px",
-                  margin: 0,
-                }}
-                className="text-lg sm:text-3xl md:text-[42px] leading-tight md:leading-[1.2]"
-              >
-                The{" "}
-                <span style={{ color: "#FF5A36" }}>best adventures</span>{" "}
-                find their way to your inbox.
-              </h2>
-              {/* Subtitle */}
-              <p
-                style={{
-                  fontFamily: "Faktum, sans-serif",
-                  fontWeight: 500,
-                  textAlign: "center",
-                  color: "rgba(43, 43, 43, 0.8)",
-                  maxWidth: "900px",
-                  margin: 0,
-                }}
-                className="text-xs sm:text-base md:text-[20px] leading-relaxed md:leading-[32px] md:whitespace-nowrap"
-              >
-                Hidden places, exclusive trip drops, curated gear, and stories from the road delivered before anyone else hears about them.
-              </p>
-            </div>
-
-            {/* Button */}
-            <Link
-              href="/travel"
+          {/* Text block */}
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }} className="gap-2 sm:gap-[12px]">
+            {/* Heading */}
+            <h2
               style={{
-                fontFamily: "Outfit, sans-serif",
+                fontFamily: "Fraunces, serif",
                 fontWeight: 600,
-                lineHeight: "1",
                 letterSpacing: "0px",
-                textDecoration: "none",
+                textAlign: "center",
+                color: "#2B2B2B",
+                maxWidth: "1280px",
+                margin: 0,
               }}
-              className="group inline-flex items-center justify-center gap-2 px-5 sm:px-8 py-2.5 sm:py-4 h-10 sm:h-[55px] w-auto sm:w-[286px] text-xs sm:text-[18px] shrink-0 bg-[#1D493E] hover:bg-[#15342c] text-white rounded-[4px] shadow-sm transition-all duration-300 cursor-pointer"
+              className="text-lg sm:text-3xl md:text-[42px] leading-tight md:leading-[1.2]"
             >
-              <span>Reserve your tour now</span>
-              <span className="text-xs sm:text-lg font-sans group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300">↗</span>
-            </Link>
+              The{" "}
+              <span style={{ color: "#FF5A36" }}>best adventures</span>{" "}
+              find their way to your inbox.
+            </h2>
+            {/* Subtitle */}
+            <p
+              style={{
+                fontFamily: "Faktum, sans-serif",
+                fontWeight: 500,
+                textAlign: "center",
+                color: "rgba(43, 43, 43, 0.8)",
+                maxWidth: "900px",
+                margin: 0,
+              }}
+              className="text-xs sm:text-base md:text-[20px] leading-relaxed md:leading-[32px]"
+            >
+              Hidden places, exclusive trip drops, curated gear, and stories from the road delivered before anyone else hears about them.
+            </p>
           </div>
+
+          {/* Button */}
+          <Link
+            href="/travel"
+            style={{
+              fontFamily: "Outfit, sans-serif",
+              fontWeight: 600,
+              lineHeight: "1",
+              letterSpacing: "0px",
+              textDecoration: "none",
+            }}
+            className="inline-flex items-center justify-center gap-2 text-sm sm:text-base bg-[#1D493E] hover:bg-[#15372e] text-white rounded-[6px] px-6 py-3.5 transition-all duration-300 shadow-sm group"
+          >
+            <span>Reserve your tour now</span>
+            <span className="text-base font-semibold group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300">↗</span>
+          </Link>
         </section>
 
       </main>

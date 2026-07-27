@@ -14,7 +14,7 @@ export interface BreadcrumbsProps {
 }
 
 export default function Breadcrumbs({ items, className = '' }: BreadcrumbsProps) {
-  if (!items || items.length === 0) return null;
+  return null;
 
   return (
     <div 

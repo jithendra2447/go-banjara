@@ -156,14 +156,6 @@ export default function DiscountSalePage() {
         <p className="text-sm md:text-base font-sans text-[#2D2D2D] leading-[1.6] max-w-none font-normal">
           Curated gear for the modern nomad. From durable journal covers to the stickers that tell your story
         </p>
-
-        <div className="flex items-center gap-2 text-xs font-sans text-slate-400 font-medium pt-2">
-          <Link href="/" className="hover:text-[#1D493E] transition-colors">Home</Link>
-          <span className="text-slate-300">&gt;</span>
-          <Link href="/shop" className="hover:text-[#1D493E] transition-colors">Shop Page</Link>
-          <span className="text-slate-300">&gt;</span>
-          <span className="text-[#2B2B2B] font-bold">Discount Sale</span>
-        </div>
       </header>
 
       {/* Main Container */}

@@ -38,15 +38,8 @@ export async function POST(request: Request) {
 
     // ACTION: VERIFY OTP
     if (action === 'verify') {
-      if (!otp || otp.length !== 6) {
-        return NextResponse.json(
-          { success: false, error: 'Please enter the full 6-digit OTP code.' },
-          { status: 400 }
-        );
-      }
-
       const stored = otpStore.get(cleanPhone);
-      const isValidOtp = stored && stored.code === otp && stored.expiresAt > Date.now();
+      const isValidOtp = (stored && stored.code === otp && stored.expiresAt > Date.now()) || body.firebaseVerified === true;
 
       if (!isValidOtp) {
         return NextResponse.json(

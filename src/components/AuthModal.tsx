@@ -5,7 +5,7 @@ import { X, AlertCircle, CheckCircle, Loader2, Check, Eye, EyeOff, ArrowLeft } f
 import { useCart } from '@/components/providers';
 import { BonjoMascot } from '@/components/BonjoMascot';
 import { auth } from '@/lib/firebase';
-import { sendPasswordResetEmail } from 'firebase/auth';
+import { sendPasswordResetEmail, RecaptchaVerifier, GoogleAuthProvider, signInWithPopup, signInWithPhoneNumber } from 'firebase/auth';
 
 type AuthView = 'login' | 'signup' | 'forgot' | 'mobile_otp' | 'email_login';
 
@@ -38,6 +38,7 @@ export const AuthModal: React.FC = () => {
   // Forgot Password flow states
   const [forgotStep, setForgotStep] = useState<'input' | 'reset_password'>('input');
   const [newPassword, setNewPassword] = useState('');
+  const [confirmationResult, setConfirmationResult] = useState<any>(null);
 
   // Resize hook to proportionally scale down the modal on smaller viewports
   useEffect(() => {
@@ -109,20 +110,29 @@ export const AuthModal: React.FC = () => {
     setOtp(Array(6).fill(''));
     setLoading(true);
     try {
-      await fetch('/api/auth/otp', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'send', phone: cleanPhone }),
-      });
-      setLoading(false);
+      let verifier = (window as any).recaptchaVerifier;
+      if (!verifier) {
+        verifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+          size: 'invisible',
+        });
+        (window as any).recaptchaVerifier = verifier;
+      }
+
+      const formattedPhone = `+91${cleanPhone}`;
+      const confirmation = await signInWithPhoneNumber(auth, formattedPhone, verifier);
+      setConfirmationResult(confirmation);
+
       setOtpCountdown(30);
-      setSuccessMsg(`OTP sent to +91 ${cleanPhone}. (Use 123456 to verify)`);
+      setSuccessMsg(`OTP sent to +91 ${cleanPhone}. Please check your phone.`);
       setShowOtpModal(true);
     } catch (err: any) {
-      setLoading(false);
+      console.error('Firebase SMS OTP request failed:', err);
+      // Fallback for dev mode
       setOtpCountdown(30);
       setSuccessMsg(`OTP sent to +91 ${cleanPhone}. (Use 123456 to verify)`);
       setShowOtpModal(true);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -141,6 +151,11 @@ export const AuthModal: React.FC = () => {
     setLoading(true);
 
     try {
+      // 1. First verify via Firebase confirmationResult if present
+      if (confirmationResult) {
+        await confirmationResult.confirm(fullOtp);
+      }
+
       const res = await fetch('/api/auth/otp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -148,6 +163,7 @@ export const AuthModal: React.FC = () => {
           action: 'verify',
           phone: cleanPhone,
           otp: fullOtp,
+          firebaseVerified: !!confirmationResult,
         }),
       });
       const data = await res.json();
@@ -305,62 +321,42 @@ export const AuthModal: React.FC = () => {
   };
 
   // 3. Google OAuth Login Handler
-  const handleGoogleLogin = () => {
+  const handleGoogleLogin = async () => {
     setError('');
     setLoading(true);
 
-    const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || '154057731894-ttk17iu2npc898tu3u8057o22geq4eer.apps.googleusercontent.com';
+    try {
+      const provider = new GoogleAuthProvider();
+      const result = await signInWithPopup(auth, provider);
+      const firebaseUser = result.user;
 
-    if (typeof window !== 'undefined' && (window as any).google?.accounts?.oauth2) {
-      try {
-        const tokenClient = (window as any).google.accounts.oauth2.initTokenClient({
-          client_id: clientId,
-          scope: 'email profile openid',
-          callback: async (tokenResponse: any) => {
-            if (tokenResponse.access_token) {
-              try {
-                const userRes = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
-                  headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
-                });
-                const googleUser = await userRes.json();
+      const dbRes = await fetch('/api/auth/google', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: firebaseUser.email,
+          name: firebaseUser.displayName,
+          avatar: firebaseUser.photoURL,
+        }),
+      });
+      const dbData = await dbRes.json();
 
-                const dbRes = await fetch('/api/auth/google', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({
-                    email: googleUser.email,
-                    name: googleUser.name,
-                    avatar: googleUser.picture,
-                  }),
-                });
-                const dbData = await dbRes.json();
-
-                if (dbData.success) {
-                  setSuccessMsg(`Welcome ${googleUser.name || 'Traveler'}! Saved to MongoDB Atlas.`);
-                  login(dbData.user);
-                  setTimeout(() => {
-                    handleClose();
-                  }, 1000);
-                  return;
-                }
-              } catch (err) {
-                console.warn('Failed to sync Google user profile:', err);
-              }
-            }
-          },
-        });
-        tokenClient.requestAccessToken();
-        setLoading(false);
+      if (dbData.success) {
+        setSuccessMsg(`Welcome ${firebaseUser.displayName || 'Traveler'}! Saved to MongoDB Atlas.`);
+        login(dbData.user);
+        setTimeout(() => {
+          handleClose();
+        }, 1000);
         return;
-      } catch (gErr) {
-        console.warn('Google Token Client init error:', gErr);
+      } else {
+        throw new Error(dbData.error || 'Sync failed');
       }
+    } catch (err: any) {
+      console.error('Google Sign-in Error:', err);
+      setError(err.message || 'Google Sign-in failed.');
+    } finally {
+      setLoading(false);
     }
-
-    const redirectUri = `${window.location.origin}/api/auth/google/callback`;
-    const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&response_type=code&scope=openid%20email%20profile&prompt=select_account`;
-    
-    window.location.href = googleAuthUrl;
   };
 
   // 4. Facebook OAuth Login Handler
@@ -441,24 +437,26 @@ export const AuthModal: React.FC = () => {
     setLoading(true);
 
     try {
-      const res = await fetch('/api/auth/otp', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'send', phone: cleanPhone }),
-      });
-      const data = await res.json();
-
-      if (res.ok && data.success) {
-        setLoading(false);
-        setOtpCountdown(30);
-        setOtpSent(true);
-        setSuccessMsg(`OTP sent to +91 ${cleanPhone}. (Use 123456 to verify)`);
-        setView('mobile_otp');
-        return;
+      let verifier = (window as any).recaptchaVerifier;
+      if (!verifier) {
+        verifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+          size: 'invisible',
+        });
+        (window as any).recaptchaVerifier = verifier;
       }
-      if (data.error) throw new Error(data.error);
+
+      const formattedPhone = `+91${cleanPhone}`;
+      const confirmation = await signInWithPhoneNumber(auth, formattedPhone, verifier);
+      setConfirmationResult(confirmation);
+
+      setLoading(false);
+      setOtpCountdown(30);
+      setOtpSent(true);
+      setSuccessMsg(`OTP sent to +91 ${cleanPhone}. Please check your phone.`);
+      setView('mobile_otp');
     } catch (err: any) {
-      console.warn('OTP send fallback active:', err.message);
+      console.warn('Firebase SMS OTP request failed, fallback active:', err.message);
+      // Fallback for dev mode
       setLoading(false);
       setOtpCountdown(30);
       setOtpSent(true);
@@ -482,6 +480,11 @@ export const AuthModal: React.FC = () => {
     setLoading(true);
 
     try {
+      // 1. Verify via Firebase confirmationResult if present
+      if (confirmationResult) {
+        await confirmationResult.confirm(fullOtp);
+      }
+
       // If registration flow, finalize account creation in MongoDB Atlas
       if (otpFlowSource === 'signup') {
         const regRes = await fetch('/api/auth/register', {
@@ -522,6 +525,7 @@ export const AuthModal: React.FC = () => {
           otp: fullOtp,
           name: name || undefined,
           email: email || undefined,
+          firebaseVerified: !!confirmationResult,
         }),
       });
       const data = await res.json();
@@ -666,6 +670,7 @@ export const AuthModal: React.FC = () => {
         background: '#FFFFFF',
       }}
     >
+      <div id="recaptcha-container" className="hidden"></div>
       
       {/* Backdrop */}
       <div 

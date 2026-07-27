@@ -439,9 +439,9 @@ function ProfilePageContent() {
       >
         <div className="flex flex-col lg:flex-row gap-5 lg:gap-[20px] items-start w-full">
         
-        {/* Navigation Sidebar Card */}
+        {/* Navigation Sidebar Card (Hidden on mobile as tabs are in the header; 100% visible on desktop) */}
         <div 
-          className="w-full lg:w-[320px] flex-shrink-0 flex flex-col justify-between select-none"
+          className="hidden lg:flex w-[320px] flex-shrink-0 flex-col justify-between select-none"
           style={{
             padding: '12px',
             gap: '16px',
@@ -654,15 +654,7 @@ function ProfilePageContent() {
 
         {/* Right Details Form Panel - Single Screen Optimized */}
         <div 
-          className="w-full flex-1 min-w-0 flex flex-col justify-between select-none"
-          style={{
-            maxWidth: '936px',
-            padding: '20px',
-            borderRadius: '4px',
-            border: '1px solid rgba(204, 204, 204, 1)',
-            background: 'rgba(255, 255, 255, 1)',
-            boxSizing: 'border-box',
-          }}
+          className="w-full flex-1 min-w-0 flex flex-col justify-between select-none p-3.5 sm:p-5 md:p-6 rounded-[4px] border border-[#CCCCCC] bg-white box-border max-w-[430px] lg:max-w-[936px] mx-auto lg:mx-0"
         >
           {/* TAB 1: PROFILE MANAGEMENT */}
           {activeTab === 'profile' && (

@@ -491,13 +491,10 @@ export default function ContactPage() {
           {/* Desktop Single Row Bar (Untouched) */}
           <div 
             style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
               width: "100%",
               maxWidth: "1280px"
             }}
-            className="hidden md:flex flex-nowrap gap-[47px] w-full mx-auto"
+            className="hidden md:flex items-center justify-center flex-nowrap gap-[47px] w-full mx-auto"
           >
             {/* Stat 1 */}
             <div 

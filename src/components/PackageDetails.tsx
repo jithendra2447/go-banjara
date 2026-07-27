@@ -2113,13 +2113,10 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
           maxWidth: "1440px",
           padding: "42px 80px",
           margin: "0 auto",
-          display: "flex",
-          flexDirection: "column",
-          gap: "32px",
           opacity: 1,
           boxSizing: "border-box",
         }}
-        className="hidden md:flex bg-white relative z-10 border-t border-[#1D493E]/10"
+        className="hidden md:flex flex-col gap-8 bg-white relative z-10 border-t border-[#1D493E]/10"
       >
         {/* Header Row */}
         <div className="flex flex-col gap-1.5 text-left w-full">

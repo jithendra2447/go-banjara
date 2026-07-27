@@ -15,6 +15,8 @@ import { PRODUCTS } from '@/data/products';
 import { HOLIDAY_PACKAGES } from '@/data/packages';
 import { CartIcon } from '@/components/CartIcon';
 import { getFutureDeliveryString } from '@/utils/dateUtils';
+import ProductCard from '@/components/ProductCard';
+import { InteractiveProgressBar } from '@/components/InteractiveProgressBar';
 
 interface PackageDetailsProps {
   customId?: string;
@@ -36,7 +38,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
 
   const [activeTab, setActiveTab] = useState<'overview' | 'itinerary' | 'reviews'>('overview');
   const [expandedDayIdx, setExpandedDayIdx] = useState<number | null>(0);
-  const [openFaqIdx, setOpenFaqIdx] = useState<number | null>(null);
+  const [openFaqIdx, setOpenFaqIdx] = useState<number | null>(0);
   const [activePhotoIdx, setActivePhotoIdx] = useState(0);
 
   // Live Simulated Weather State
@@ -50,6 +52,8 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
   const [pickupLocation, setPickupLocation] = useState('');
   const [enquiryMessage, setEnquiryMessage] = useState('');
   const [enquirySubmitted, setEnquirySubmitted] = useState(false);
+  const [addedProductIds, setAddedProductIds] = useState<string[]>([]);
+  const [activeJourneySlide, setActiveJourneySlide] = useState(0);
 
   const saved = wishlist.some((i) => i.id === pkg?.id);
 
@@ -246,6 +250,69 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
     setTimeout(() => setProductAddedSuccess(null), 2500);
   };
 
+  const recommendedGear = [
+    {
+      id: 'naturally-nomad-badge-1',
+      name: 'Naturally Nomad',
+      category: 'Badges',
+      originalPrice: 199,
+      price: 139,
+      rating: 5,
+      reviewsCount: 120,
+      boughtCount: '200+ bought in past month',
+      image: '/naturally_nomad_badge.png',
+    },
+    {
+      id: 'blue-mavin-slides-1',
+      name: 'Blue Mavin',
+      category: 'Slippers',
+      originalPrice: 599,
+      price: 399,
+      rating: 5,
+      reviewsCount: 1000,
+      boughtCount: '500+ bought in past month',
+      image: '/blue_mavin_slides.jpg',
+    },
+    {
+      id: 'explore-more-keychain-1',
+      name: 'Explore more',
+      category: 'Key Chains',
+      originalPrice: 193,
+      price: 149,
+      rating: 5,
+      reviewsCount: 200,
+      boughtCount: '100+ bought in past month',
+      image: '/explore_more_keychain.png',
+    },
+    {
+      id: 'blue-mavin-slides-2',
+      name: 'Blue Mavin',
+      category: 'Slippers',
+      originalPrice: 599,
+      price: 399,
+      rating: 5,
+      reviewsCount: 1000,
+      boughtCount: '500+ bought in past month',
+      image: '/banjara_blue_slides.png',
+    },
+  ];
+
+  const handleAddRecommendedToCart = (prod: any) => {
+    addToCart({
+      id: prod.id,
+      name: prod.title,
+      price: prod.price,
+      image: prod.image,
+      category: prod.category,
+      rating: prod.rating,
+    }, 'shop', undefined, 1);
+
+    setAddedProductIds((prev) => [...prev, prod.id]);
+    setTimeout(() => {
+      setAddedProductIds((prev) => prev.filter((id) => id !== prod.id));
+    }, 2500);
+  };
+
   // Recommended products list
   const isColdPlace = ['kashmir', 'himachal'].includes((pkg.destination || '').toLowerCase());
   const targetProductIds = ['naturally-nomad-badge-1', 'blue-mavin-slides-1', 'explore-more-keychain-1', 'blue-mavin-slides-2'];
@@ -301,7 +368,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
         'Personal first-aid kit and light swimwear'
       ]);
 
-  const faqs = pkg.faqs || (isColdPlace 
+  const defaultFaqs = isColdPlace 
     ? [
         {
           q: 'What standard are the accommodations? (Hotels, homestays, tents)',
@@ -314,6 +381,14 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
         {
           q: 'What is the standard group size for this tour?',
           a: 'We focus on highly curated, small-group experiences. Typical group size is between 8 to 12 travelers per batch.'
+        },
+        {
+          q: 'What is the cancellation and refund policy?',
+          a: 'We offer flexible cancellation policies with 100% refund or trip transfer up to 14 days before your scheduled departure.'
+        },
+        {
+          q: 'Is medical emergency support provided on the trip?',
+          a: 'Yes, all our expedition leads are certified in Wilderness First Aid and carry full emergency medical kits and first-aid support.'
         }
       ]
     : [
@@ -328,8 +403,44 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
         {
           q: 'What is the group size for the trip?',
           a: 'Our tours are typically customized private slots or intimate small groups of 6 to 10 travelers to ensure comfort and care.'
+        },
+        {
+          q: 'What is the cancellation and refund policy?',
+          a: 'We offer flexible cancellation policies with 100% refund or trip transfer up to 14 days before your scheduled departure.'
+        },
+        {
+          q: 'Is medical emergency support provided on the trip?',
+          a: 'Yes, all our guides are certified in Wilderness First Aid and carry full emergency medical kits and first-aid support.'
         }
-      ]);
+      ];
+
+  const supplementaryFaqs = [
+    {
+      q: 'What is the cancellation and refund policy?',
+      a: 'We offer flexible cancellation policies with 100% refund or trip transfer up to 14 days before your scheduled departure date.'
+    },
+    {
+      q: 'What is the standard group size for this tour?',
+      a: 'We focus on highly curated, small-group experiences. Typical group size is between 6 to 12 travelers per batch to ensure care.'
+    },
+    {
+      q: 'Is medical emergency support provided on the trip?',
+      a: 'Yes, all our guides are certified in Wilderness First Aid, and our support team carries full medical emergency kits and first-aid support.'
+    }
+  ];
+
+  let initialFaqs = (pkg.faqs && pkg.faqs.length > 0) ? pkg.faqs : defaultFaqs;
+  if (initialFaqs.length < 4) {
+    const existingQ = new Set(initialFaqs.map((f: any) => f.q.toLowerCase()));
+    for (const sup of supplementaryFaqs) {
+      if (!existingQ.has(sup.q.toLowerCase())) {
+        initialFaqs = [...initialFaqs, sup];
+        existingQ.add(sup.q.toLowerCase());
+      }
+      if (initialFaqs.length >= 5) break;
+    }
+  }
+  const faqs = initialFaqs;
 
   const reviews = pkg.reviews || [
     {
@@ -912,14 +1023,12 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                     width: "100%",
                     maxWidth: "837px",
                     background: "rgba(255, 255, 255, 1)",
-                    borderRadius: "4px",
-                    padding: "32px",
                     boxSizing: "border-box",
                   }}
-                  className="text-left justify-center w-full max-w-[837px] h-auto bg-white border border-gray-200/60 rounded-[4px] p-6 flex flex-col gap-6"
+                  className="text-left justify-center w-full max-w-[837px] h-auto bg-white flex flex-col gap-6"
                 >
                   <div className="flex flex-col gap-[12px]">
-                    <span className="inline-block text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 py-1.5 rounded-sm">
+                    <span className="inline-block w-fit self-start text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 py-1.5 rounded-sm">
                       DISCOVER YOUR PATH
                     </span>
                     <h3>
@@ -1242,6 +1351,105 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                           {guide.bio}
                         </p>
                       </div>
+                    </div>
+                  </div>
+
+                  {/* Separation Line */}
+                  <div
+                    style={{
+                      width: "100%",
+                      maxWidth: "837px",
+                      height: "0px",
+                      borderTop: "1px solid rgba(204, 204, 204, 0.8)",
+                      opacity: 1,
+                    }}
+                    className="hidden md:block my-6"
+                  />
+
+                  {/* Commonly asked questions - Web Desktop Section */}
+                  <div 
+                    style={{
+                      width: "100%",
+                      maxWidth: "837px",
+                      minHeight: "590px",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "32px",
+                      opacity: 1,
+                      borderRadius: "4px",
+                    }}
+                    className="hidden md:flex text-left w-full mt-4"
+                  >
+                    <div className="flex flex-col gap-3">
+                      <span 
+                        style={{
+                          backgroundColor: "rgba(255, 240, 235, 1)",
+                          color: "rgba(255, 98, 62, 1)",
+                          fontFamily: "Faktum, sans-serif",
+                          fontWeight: 600,
+                          fontSize: "12px",
+                          lineHeight: "100%",
+                          letterSpacing: "1.2px",
+                          textTransform: "uppercase",
+                          padding: "4px 10px",
+                          borderRadius: "4px",
+                          alignSelf: "flex-start",
+                        }}
+                      >
+                        CAQ'S
+                      </span>
+                      <h3 
+                        style={{
+                          fontFamily: "Fraunces, serif",
+                          fontWeight: 600,
+                        }}
+                        className="leading-tight text-[42px]"
+                      >
+                        <span style={{ color: "rgba(43, 43, 43, 1)" }}>Commonly asked</span>{" "}
+                        <span style={{ color: "rgba(255, 98, 62, 1)" }}>questions</span>
+                      </h3>
+                    </div>
+
+                    {/* Accordion container */}
+                    <div className="flex flex-col border-t border-gray-200/80 w-full">
+                      {faqs.map((faq: any, idx: number) => {
+                        const isOpen = openFaqIdx === idx;
+                        return (
+                          <div key={idx} className="border-b border-gray-200/80 py-4.5 w-full">
+                            <button
+                              type="button"
+                              onClick={() => setOpenFaqIdx(isOpen ? null : idx)}
+                              className="w-full flex justify-between items-center text-left py-2 hover:opacity-90 transition cursor-pointer"
+                            >
+                              <span 
+                                style={{
+                                  fontFamily: "Faktum, sans-serif",
+                                  fontWeight: 600,
+                                  color: "rgba(43, 43, 43, 1)",
+                                }}
+                                className="text-[20px] leading-[130%]"
+                              >
+                                {faq.q}
+                              </span>
+                              <span className="text-[#2B2B2B] text-2xl font-light pl-4 select-none shrink-0">
+                                {isOpen ? '−' : '+'}
+                              </span>
+                            </button>
+                            {isOpen && (
+                              <p 
+                                style={{
+                                  fontFamily: "Faktum, sans-serif",
+                                  fontWeight: 500,
+                                  color: "rgba(141, 141, 141, 1)",
+                                }}
+                                className="mt-2 text-[18px] leading-[28px]"
+                              >
+                                {faq.a}
+                              </p>
+                            )}
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
 
@@ -1899,6 +2107,83 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
           </div>
         </div>
       </div>
+
+      {/* Prepare for your Journey Section - Web Desktop Version Only */}
+      <section
+        style={{
+          width: "100%",
+          maxWidth: "1440px",
+          padding: "42px 80px",
+          margin: "0 auto",
+          display: "flex",
+          flexDirection: "column",
+          gap: "32px",
+          opacity: 1,
+          boxSizing: "border-box",
+        }}
+        className="hidden md:flex bg-white relative z-10 border-t border-[#1D493E]/10"
+      >
+        {/* Header Row */}
+        <div className="flex flex-col gap-1.5 text-left w-full">
+          <h2 className="text-[36px] font-semibold leading-tight font-serif">
+            <span style={{ color: "#2B2B2B", fontFamily: "Fraunces, serif" }}>Prepare for your</span>{" "}
+            <span style={{ color: "#FF623E", fontFamily: "Fraunces, serif" }}>Journey</span>
+          </h2>
+          <p 
+            style={{ fontFamily: "Faktum, sans-serif" }}
+            className="text-[18px] font-medium text-[#2B2B2B]/80"
+          >
+            Shop recommended travel gear and clothing items handpicked for your destination
+          </p>
+        </div>
+
+        {/* 4 Product Cards Grid using ProductCard component */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full mt-2">
+          {recommendedGear.map((prod, idx) => (
+            <div key={prod.id} onMouseEnter={() => setActiveJourneySlide(idx)}>
+              <ProductCard 
+                product={prod as any} 
+                onAddToCart={(item) => addToCart(item, 'shop', undefined, 1)} 
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* Interactive Full-Width Progress Bar */}
+        <InteractiveProgressBar
+          totalSlides={recommendedGear.length}
+          activeSlide={activeJourneySlide}
+          onSlideChange={(newIdx) => setActiveJourneySlide(newIdx)}
+          className="w-full mt-6 mb-2"
+          title="Click or drag to switch active product"
+        />
+
+        {/* View All Products Interaction Button (Exact homepage footer button) */}
+        <div className="text-center pt-2">
+          <Link 
+            href="/shop" 
+            className="inline-flex items-center justify-center w-[275px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[8px] bg-transparent hover:bg-gray-200/80 text-[#1D493E] transition-all duration-300 cursor-pointer group"
+          >
+            <span className="w-[163px] h-[25px] flex items-center justify-center font-sans font-medium text-[20px] leading-none">
+              View all products
+            </span>
+            <svg 
+              style={{ width: '32px', height: '32px' }}
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="2.25" 
+              strokeLinecap="round" 
+              strokeLinejoin="round"
+              className="shrink-0 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300"
+            >
+              <path d="M7 17l2.5-2.5" />
+              <path d="M12.5 11.5L17 7" />
+              <path d="M7 7h10v10" />
+            </svg>
+          </Link>
+        </div>
+      </section>
 
       {/* Newsletter / Booking CTA Banner (Matching Home page section design) */}
       <section

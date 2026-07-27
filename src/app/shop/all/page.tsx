@@ -156,8 +156,8 @@ function AllProductsContent() {
           </span>
         </div>
 
-        <h1 className="text-4xl md:text-[44px] font-serif text-[#1A1A1A] tracking-tight leading-[1.15] max-w-none font-medium">
-          Shop Product in all <span className="text-[#FF5B37]">Categories</span>
+        <h1 className="text-3xl sm:text-4xl md:text-[44px] font-serif text-[#1A1A1A] tracking-tight leading-[1.15] max-w-none font-medium">
+          Shop Products in All <span className="text-[#FF5B37]">Categories</span>
         </h1>
 
         <p className="text-sm md:text-base font-sans text-[#2D2D2D] leading-[1.6] max-w-none font-normal">
@@ -176,10 +176,10 @@ function AllProductsContent() {
       {/* Main Container */}
       <main className="w-full max-w-[1440px] mx-auto mt-0 px-6 md:px-[80px] flex flex-col gap-10">
         
-        {/* Filter and Sort Toolbar */}
-        <div className="flex flex-row items-center justify-between gap-6 border-b border-slate-100 pb-8 pt-4 w-full">
+        {/* Filter and Sort Toolbar (Responsive flex-col on mobile, flex-row on sm+) */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-6 border-b border-slate-100 pb-4 sm:pb-8 pt-4 w-full">
           {/* Results count (Left) */}
-          <div className="text-sm sm:text-base text-slate-800 font-medium flex flex-col gap-1 text-left">
+          <div className="text-xs sm:text-base text-slate-800 font-medium flex flex-col gap-1 text-left">
             <div>
               Showing {sortedProducts.length} results
               {searchQuery && (
@@ -201,11 +201,11 @@ function AllProductsContent() {
           </div>
 
           {/* Interactive Filters & Sort (Right) */}
-          <div className="flex items-center gap-3 shrink-0">
+          <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto justify-between sm:justify-end">
             {/* Filters Button */}
             <button
               onClick={() => setIsDrawerOpen(true)}
-              className="flex items-center gap-2 px-4 py-2 border border-slate-300 rounded-lg text-sm font-medium text-slate-700 bg-white hover:border-slate-400 cursor-pointer transition-colors"
+              className="flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-3 sm:px-4 py-2 border border-slate-300 rounded-lg text-xs sm:text-sm font-medium text-slate-700 bg-white hover:border-slate-400 cursor-pointer transition-colors"
             >
               <span>Filters</span>
               {selectedCount > 0 && (

@@ -149,8 +149,8 @@ export default function TravelsEssentialsPage() {
           </span>
         </div>
 
-        <h1 className="text-4xl md:text-[44px] font-serif text-[#1A1A1A] tracking-tight leading-[1.15] max-w-none font-medium">
-          Shop Product in travels <span className="text-[#FF5B37]">Essentials</span>
+        <h1 className="text-3xl sm:text-4xl md:text-[44px] font-serif text-[#1A1A1A] tracking-tight leading-[1.15] max-w-none font-medium">
+          Shop Products in Travel <span className="text-[#FF5B37]">Essentials</span>
         </h1>
 
         <p className="text-sm md:text-base font-sans text-[#2D2D2D] leading-[1.6] max-w-none font-normal">
@@ -162,26 +162,26 @@ export default function TravelsEssentialsPage() {
           <span className="text-slate-300">&gt;</span>
           <Link href="/shop" className="hover:text-[#1D493E] transition-colors">Shop Page</Link>
           <span className="text-slate-300">&gt;</span>
-          <span className="text-[#2B2B2B] font-bold">Travels Essentials</span>
+          <span className="text-[#2B2B2B] font-bold">Travel Essentials</span>
         </div>
       </header>
 
       {/* Main Container */}
       <main className="w-full max-w-[1440px] mx-auto mt-0 px-6 md:px-[80px] flex flex-col gap-10">
         
-        {/* Filter and Sort Toolbar */}
-        <div className="flex flex-row items-center justify-between gap-6 border-b border-slate-100 pb-8 pt-4 w-full">
+        {/* Filter and Sort Toolbar (Responsive flex-col on mobile, flex-row on sm+) */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-6 border-b border-slate-100 pb-4 sm:pb-8 pt-4 w-full">
           {/* Results count (Left) */}
-          <div className="text-sm sm:text-base text-slate-800 font-medium">
+          <div className="text-xs sm:text-base text-slate-800 font-medium text-left">
             Showing all {sortedProducts.length} results
           </div>
 
           {/* Interactive Filters & Sort (Right) */}
-          <div className="flex items-center gap-3 shrink-0">
+          <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto justify-between sm:justify-end">
             {/* Filters Button */}
             <button
               onClick={() => setIsDrawerOpen(true)}
-              className="flex items-center gap-2 px-4 py-2 border border-slate-300 rounded-lg text-sm font-medium text-slate-700 bg-white hover:border-slate-400 cursor-pointer transition-colors"
+              className="flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-3 sm:px-4 py-2 border border-slate-300 rounded-lg text-xs sm:text-sm font-medium text-slate-700 bg-white hover:border-slate-400 cursor-pointer transition-colors"
             >
               <span>Filters</span>
               {selectedCount > 0 && (
@@ -189,25 +189,25 @@ export default function TravelsEssentialsPage() {
                   {selectedCount}
                 </span>
               )}
-              <svg className="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
               </svg>
             </button>
 
             {/* Custom Sort Select dropdown */}
-            <div className="relative">
+            <div className="relative flex-1 sm:flex-none min-w-[140px]">
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="appearance-none pr-10 pl-4 py-2 border border-slate-300 rounded-lg text-sm font-medium text-slate-700 bg-white hover:border-slate-400 focus:outline-none cursor-pointer transition-colors"
+                className="w-full appearance-none pr-8 sm:pr-10 pl-3 sm:pl-4 py-2 border border-slate-300 rounded-lg text-xs sm:text-sm font-medium text-slate-700 bg-white hover:border-slate-400 focus:outline-none cursor-pointer transition-colors"
               >
                 <option value="default">Default sorting</option>
                 <option value="price-asc">Sort by price: Low to High</option>
                 <option value="price-desc">Sort by price: High to Low</option>
                 <option value="reviews">Sort by: Popularity</option>
               </select>
-              <div className="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-500">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <div className="absolute right-2.5 sm:right-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-500">
+                <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                 </svg>
               </div>

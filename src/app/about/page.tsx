@@ -641,14 +641,14 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 6. OUR JOURNEY TIMELINE / ABOUT GO BANJARA Section (Mobile 430x4494 | Desktop 1440x2146px spec) */}
+      {/* 6. OUR JOURNEY TIMELINE / ABOUT GO BANJARA Section */}
       <section 
         style={{
           width: "100%",
           background: "rgba(255, 255, 255, 1)",
           boxSizing: "border-box",
         }}
-        className="mx-auto w-full max-w-[430px] md:max-w-[1440px] px-[20px] py-[12px] md:py-[42px] md:px-[80px] shrink-0 flex flex-col gap-3 md:gap-[32px] min-h-auto md:min-h-[2146px]"
+        className="mx-auto w-full max-w-[430px] md:max-w-[1440px] px-[20px] py-[12px] md:pt-[42px] md:pb-6 md:px-[80px] shrink-0 flex flex-col gap-3 md:gap-[32px] min-h-auto"
       >
         {/* Header (Exact Figma specs) */}
         <div className="w-full max-w-[1280px] mx-auto flex flex-col items-start gap-2 md:gap-[12px]">
@@ -779,8 +779,8 @@ export default function AboutPage() {
           </div>
         </div>
 
-        {/* 4 Rows of Sticky Stacked Cards (Desktop Untouched) */}
-        <div className="hidden md:flex flex-col w-full max-w-[1280px] mx-auto mt-6 pb-24">
+        {/* 4 Rows of Sticky Stacked Cards */}
+        <div className="hidden md:flex flex-col w-full max-w-[1280px] mx-auto mt-6 pb-6">
           
           {/* Row 1 - Card Stack 1 */}
           <div 
@@ -811,7 +811,7 @@ export default function AboutPage() {
                 flexShrink: 0
               }}
             >
-              <img src="/card-1-full.png" alt="Go Banjara Traveler Card 1" className="w-full h-full object-cover" />
+              <img src="/card-1-full.png" alt="Go Banjara Traveler Card 1" className="w-full h-full object-cover scale-[1.04] origin-center" />
             </div>
 
             {/* Col 2: Center Text Card */}
@@ -904,7 +904,7 @@ export default function AboutPage() {
                 flexShrink: 0
               }}
             >
-              <img src="/card-3-full.png" alt="Humps Down Surf's Up Card 3" className="w-full h-full object-cover" />
+              <img src="/card-3-full.png" alt="Humps Down Surf's Up Card 3" className="w-full h-full object-cover scale-[1.04] origin-center" />
             </div>
           </div>
 
@@ -937,7 +937,7 @@ export default function AboutPage() {
                 flexShrink: 0
               }}
             >
-              <img src="/card-2-full.png" alt="Explore Adventure Card 2" className="w-full h-full object-cover" />
+              <img src="/card-2-full.png" alt="Explore Adventure Card 2" className="w-full h-full object-cover scale-[1.04] origin-center" />
             </div>
 
             {/* Col 2: Center Text Card */}
@@ -1033,7 +1033,7 @@ export default function AboutPage() {
                 flexShrink: 0
               }}
             >
-              <img src="/card-4-full.png" alt="Yellow Stickers Card 4" className="w-full h-full object-cover" />
+              <img src="/card-4-full.png" alt="Yellow Stickers Card 4" className="w-full h-full object-cover scale-[1.04] origin-center" />
             </div>
           </div>
 
@@ -1066,7 +1066,7 @@ export default function AboutPage() {
                 flexShrink: 0
               }}
             >
-              <img src="/card-7-full.png" alt="Humps Down Surf's Up Card 7" className="w-full h-full object-cover" />
+              <img src="/card-7-full.png" alt="Humps Down Surf's Up Card 7" className="w-full h-full object-cover scale-[1.04] origin-center" />
             </div>
 
             {/* Col 2: Center Text Card */}
@@ -1162,7 +1162,7 @@ export default function AboutPage() {
                 flexShrink: 0
               }}
             >
-              <img src="/card-5-full.png" alt="Go Banjara Traveler Card 5" className="w-full h-full object-cover" />
+              <img src="/card-5-full.png" alt="Go Banjara Traveler Card 5" className="w-full h-full object-cover scale-[1.04] origin-center" />
             </div>
           </div>
 
@@ -1171,7 +1171,7 @@ export default function AboutPage() {
             style={{
               position: "sticky",
               top: "220px",
-              marginBottom: "80px",
+              marginBottom: "0px",
               zIndex: 40,
               width: "1280px",
               maxWidth: "100%",
@@ -1195,7 +1195,7 @@ export default function AboutPage() {
                 flexShrink: 0
               }}
             >
-              <img src="/card-8-full.png" alt="Yellow Stickers Card 8" className="w-full h-full object-cover" />
+              <img src="/card-8-full.png" alt="Yellow Stickers Card 8" className="w-full h-full object-cover scale-[1.04] origin-center" />
             </div>
 
             {/* Col 2: Center Text Card */}
@@ -1291,21 +1291,21 @@ export default function AboutPage() {
                 flexShrink: 0
               }}
             >
-              <img src="/card-6-full.png" alt="Explore Adventure Card 6" className="w-full h-full object-cover" />
+              <img src="/card-6-full.png" alt="Explore Adventure Card 6" className="w-full h-full object-cover scale-[1.04] origin-center" />
             </div>
           </div>
 
         </div>
       </section>
 
-      {/* 7. BRAND PHILOSOPHY / SIX WORDS WE LIVE BY Section (Mobile 430x1826 | Desktop 1440x1168px spec) */}
+      {/* 7. BRAND PHILOSOPHY / SIX WORDS WE LIVE BY Section */}
       <section 
         style={{
           width: "100%",
           background: "rgba(255, 255, 255, 1)",
           boxSizing: "border-box",
         }}
-        className="mx-auto w-full max-w-[430px] md:max-w-[1440px] px-[20px] py-[12px] md:py-[42px] md:px-[80px] shrink-0 flex flex-col gap-6 md:gap-[32px] min-h-auto md:min-h-[1168px]"
+        className="mx-auto w-full max-w-[430px] md:max-w-[1440px] px-[20px] py-[12px] md:py-10 md:px-[80px] shrink-0 flex flex-col gap-6 md:gap-[32px] min-h-auto"
       >
         {/* Header Box */}
         <div className="w-full max-w-[1280px] mx-auto text-left md:text-center flex flex-col items-start md:items-center gap-2 md:gap-3">

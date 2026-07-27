@@ -1,5 +1,6 @@
 # Project Rules
 
-## Mobile-Only Scope Rule
-- **Strict Rule**: Apply all future design, layout, and component modifications strictly to the **mobile version** (`block md:hidden`, `sm:hidden`, or mobile responsive breakpoints).
-- **Desktop/Web Preservation**: Do NOT modify desktop/web layouts (`hidden md:flex`, `hidden sm:block`, desktop containers). Keep desktop code 100% untouched.
+## Desktop Modification Scope Rule
+- **Desktop Focus**: Apply all upcoming design, layout, and component modifications strictly to the **desktop version** (`hidden md:flex`, `hidden sm:block`, `hidden lg:flex`, or desktop container breakpoints).
+- **Mobile Layout Preservation**: Do NOT modify or break mobile responsive layouts (`block md:hidden`, `lg:hidden`, mobile containers). Keep mobile code 100% safe and intact.
+

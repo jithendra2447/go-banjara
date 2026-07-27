@@ -337,9 +337,6 @@ export default function HolidaysPortal() {
   return (
     <div className="min-h-screen bg-white text-[#1D493E] font-sans antialiased pb-0 relative">
       
-      {/* Breadcrumbs */}
-      <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Travel Page' }]} />
-      
       {/* Header Section wrapper */}
       <div
         style={{

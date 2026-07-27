@@ -381,9 +381,6 @@ export default function KashmirDetails() {
 
   return (
     <div className="bg-[#FAF9F6] text-[#1D493E] min-h-screen font-sans relative overflow-x-hidden">
-      {/* Breadcrumbs */}
-      <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Travel Page', href: '/travel' }, { label: 'Kashmir Classic Tour' }]} />
-
       {/* Falling snow canvas particle effect */}
       <AmbientVibe effect="snowfall" />
 

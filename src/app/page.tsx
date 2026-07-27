@@ -669,18 +669,18 @@ export default function Homepage() {
                   </div>
                   {/* Details (Top & Bottom padding removed, Left & Right padding retained) */}
                   <div className="w-full md:w-1/2 py-0 px-5 sm:px-6 flex flex-col justify-between md:h-full bg-white shrink-0 gap-5 md:gap-0">
-                    {/* Top Group (Width: Fill, Height: 151px, Gap: 12px) */}
-                    <div className="flex flex-col gap-2 min-h-[140px] shrink-0 w-full">
+                    {/* Top Group (Width: 616px, Height: 151px, Gap: 12px) */}
+                    <div className="flex flex-col gap-[12px] min-h-[151px] shrink-0 w-full max-w-[616px]">
                       {/* Tags Container (Width: Fill, Height: Hug 28px, Justify: space-between) */}
                       <div className="flex justify-between items-center w-full h-[28px] shrink-0">
                         <span className="text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-0.5 rounded-[4px] text-xs font-bold">{pkg1.category || 'Road Trip'}</span>
-                        <span className="bg-gray-100 text-gray-600 px-2.5 py-0.5 rounded-[4px] text-xs font-bold">{pkg1.durationDays} days</span>
+                        <span className="bg-[#EBF7ED] text-[#00A63F] px-2.5 py-0.5 rounded-[4px] text-xs font-bold">{pkg1.durationDays} days</span>
                       </div>
                       <div className="flex justify-between items-baseline gap-4">
                         <h3 className="text-xl md:text-[24px] font-sans font-bold text-[#1D493E] leading-tight truncate flex-1" title={pkg1.name}>{pkg1.name}</h3>
                         <span className="text-xl md:text-[24px] font-sans font-bold text-[#1D493E] shrink-0">₹{(pkg1.price ?? 0).toLocaleString('en-IN')}/Person</span>
                       </div>
-                      <p className="font-sans font-medium text-sm sm:text-base md:text-[20px] md:leading-[32px] text-[#8D8D8D] w-full max-w-[616px] md:h-[64px] overflow-hidden line-clamp-2 shrink-0">
+                      <p className="font-sans font-medium text-sm sm:text-base md:text-[18px] md:leading-[28px] text-[#8D8D8D] w-full max-w-[616px] md:h-[64px] overflow-hidden line-clamp-2 shrink-0">
                         {pkg1.description}
                       </p>
                     </div>
@@ -792,18 +792,18 @@ export default function Homepage() {
                     </div>
                     {/* Details block with left & right padding removed */}
                     <div className="flex-1 flex flex-col justify-between py-5 sm:py-6 px-0 bg-white gap-5 md:gap-0">
-                      {/* Top Group (Width: Fill, Height: 151px, Gap: 12px) */}
-                      <div className="flex flex-col gap-2 min-h-[140px] shrink-0 w-full">
+                      {/* Top Group (Width: 616px, Height: 151px, Gap: 12px) */}
+                      <div className="flex flex-col gap-[12px] min-h-[151px] shrink-0 w-full max-w-[616px]">
                         {/* Tags Container (Width: Fill, Height: Hug 28px, Justify: space-between) */}
                         <div className="flex justify-between items-center w-full h-[28px] shrink-0">
                           <span className="text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-0.5 rounded-[4px] text-xs font-bold">{pkg.category || 'Road Trip'}</span>
-                          <span className="bg-gray-100 text-gray-600 px-2.5 py-0.5 rounded-[4px] text-xs font-bold">{pkg.durationDays} days</span>
+                          <span className="bg-[#EBF7ED] text-[#00A63F] px-2.5 py-0.5 rounded-[4px] text-xs font-bold">{pkg.durationDays} days</span>
                         </div>
                         <div className="flex justify-between items-baseline gap-4">
                           <h3 className="text-xl md:text-[24px] font-sans font-bold text-[#1D493E] leading-tight truncate flex-1" title={pkg.name}>{pkg.name}</h3>
                           <span className="text-xl md:text-[24px] font-sans font-bold text-[#1D493E] shrink-0">₹{(pkg.price ?? 0).toLocaleString('en-IN')}/Person</span>
                         </div>
-                        <p className="font-sans font-medium text-sm sm:text-base md:text-[20px] md:leading-[32px] text-[#8D8D8D] w-full max-w-[616px] md:h-[64px] overflow-hidden line-clamp-2 shrink-0">
+                        <p className="font-sans font-medium text-sm sm:text-base md:text-[18px] md:leading-[28px] text-[#8D8D8D] w-full max-w-[616px] md:h-[64px] overflow-hidden line-clamp-2 shrink-0">
                           {pkg.description}
                         </p>
                       </div>

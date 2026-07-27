@@ -654,7 +654,7 @@ function ProfilePageContent() {
 
         {/* Right Details Form Panel - Single Screen Optimized */}
         <div 
-          className="w-full flex-1 min-w-0 flex flex-col justify-between select-none p-3.5 sm:p-5 md:p-6 rounded-[4px] border border-[#CCCCCC] bg-white box-border max-w-[430px] lg:max-w-[936px] mx-auto lg:mx-0"
+          className="w-full flex-1 min-w-0 flex flex-col justify-between select-none p-3 sm:p-5 md:p-6 rounded-[8px] border border-[#CCCCCC] bg-white box-border max-w-[380px] lg:max-w-[936px] mx-auto lg:mx-0"
         >
           {/* TAB 1: PROFILE MANAGEMENT */}
           {activeTab === 'profile' && (
@@ -709,20 +709,13 @@ function ProfilePageContent() {
                 </div>
               )}
 
-              <form onSubmit={handleProfileUpdate} className="flex flex-col justify-between space-y-4">
+              <form onSubmit={handleProfileUpdate} className="flex flex-col justify-between space-y-3.5">
                 
-                <div className="space-y-3">
+                <div className="space-y-2.5">
                   {/* Full Name Field */}
                   <div className="space-y-1">
                     <label 
-                      style={{
-                        fontFamily: '"Faktum", "Outfit", sans-serif',
-                        fontWeight: 500,
-                        fontSize: '15px',
-                        color: 'rgba(43, 43, 43, 1)',
-                        display: 'flex',
-                        alignItems: 'center',
-                      }}
+                      className="font-sans font-medium text-xs md:text-[15px] text-[#2B2B2B] flex items-center"
                     >
                       Full Name
                       <span className="text-red-500 ml-1">*</span>
@@ -733,34 +726,14 @@ function ProfilePageContent() {
                       placeholder="Enter your full name"
                       value={editName}
                       onChange={(e) => setEditName(e.target.value)}
-                      style={{
-                        width: '100%',
-                        height: '44px',
-                        borderRadius: '4px',
-                        border: '1px solid rgba(204, 204, 204, 1)',
-                        background: '#FFFFFF',
-                        padding: '0 14px',
-                        outline: 'none',
-                        boxSizing: 'border-box',
-                        fontFamily: '"Outfit", sans-serif',
-                        fontWeight: 500,
-                        fontSize: '16px',
-                        color: 'rgba(43, 43, 43, 1)',
-                      }}
+                      className="w-full h-10 md:h-[44px] rounded-[4px] border border-[#CCCCCC] bg-white px-3 outline-none font-sans font-medium text-xs md:text-[15px] text-[#2B2B2B]"
                     />
                   </div>
 
                   {/* Email Address Field */}
                   <div className="space-y-1">
                     <label 
-                      style={{
-                        fontFamily: '"Faktum", "Outfit", sans-serif',
-                        fontWeight: 500,
-                        fontSize: '15px',
-                        color: 'rgba(43, 43, 43, 1)',
-                        display: 'flex',
-                        alignItems: 'center',
-                      }}
+                      className="font-sans font-medium text-xs md:text-[15px] text-[#2B2B2B] flex items-center"
                     >
                       Email Address
                       <span className="text-red-500 ml-1">*</span>
@@ -771,65 +744,23 @@ function ProfilePageContent() {
                       placeholder="Enter your email address"
                       value={editEmail}
                       onChange={(e) => setEditEmail(e.target.value)}
-                      style={{
-                        width: '100%',
-                        height: '44px',
-                        borderRadius: '4px',
-                        border: '1px solid rgba(204, 204, 204, 1)',
-                        background: '#FFFFFF',
-                        padding: '0 14px',
-                        outline: 'none',
-                        boxSizing: 'border-box',
-                        fontFamily: '"Outfit", sans-serif',
-                        fontWeight: 500,
-                        fontSize: '16px',
-                        color: 'rgba(43, 43, 43, 1)',
-                      }}
+                      className="w-full h-10 md:h-[44px] rounded-[4px] border border-[#CCCCCC] bg-white px-3 outline-none font-sans font-medium text-xs md:text-[15px] text-[#2B2B2B]"
                     />
                   </div>
 
                   {/* Mobile Number Field */}
                   <div className="space-y-1">
                     <label 
-                      style={{
-                        fontFamily: '"Faktum", "Outfit", sans-serif',
-                        fontWeight: 500,
-                        fontSize: '15px',
-                        color: 'rgba(43, 43, 43, 1)',
-                        display: 'flex',
-                        alignItems: 'center',
-                      }}
+                      className="font-sans font-medium text-xs md:text-[15px] text-[#2B2B2B] flex items-center"
                     >
                       Mobile Number
                       <span className="text-red-500 ml-1">*</span>
                     </label>
                     <div 
-                      className="flex items-center" 
-                      style={{ 
-                        width: '100%', 
-                        height: '44px', 
-                        borderRadius: '4px', 
-                        border: '1px solid rgba(204, 204, 204, 1)', 
-                        background: '#FFFFFF',
-                        overflow: 'hidden',
-                        boxSizing: 'border-box',
-                      }}
+                      className="flex items-center w-full h-10 md:h-[44px] rounded-[4px] border border-[#CCCCCC] bg-white overflow-hidden" 
                     >
                       <div 
-                        style={{ 
-                          height: '100%', 
-                          padding: '0 14px', 
-                          background: 'rgba(240, 240, 240, 1)', 
-                          borderRight: '1px solid rgba(204, 204, 204, 1)', 
-                          display: 'flex', 
-                          alignItems: 'center', 
-                          justifyContent: 'center', 
-                          fontFamily: '"Faktum", "Outfit", sans-serif', 
-                          fontWeight: 500, 
-                          fontSize: '15px', 
-                          color: 'rgba(43, 43, 43, 1)',
-                          userSelect: 'none',
-                        }}
+                        className="h-full px-3 bg-[#F0F0F0] border-r border-[#CCCCCC] flex items-center justify-center font-sans font-medium text-xs md:text-[15px] text-[#2B2B2B] select-none"
                       >
                         +91
                       </div>
@@ -839,18 +770,7 @@ function ProfilePageContent() {
                         placeholder="Enter mobile number"
                         value={editPhone}
                         onChange={(e) => setEditPhone(e.target.value.replace(/\D/g, ''))}
-                        style={{
-                          flex: 1,
-                          height: '100%',
-                          border: 'none',
-                          outline: 'none',
-                          background: 'transparent',
-                          padding: '0 14px',
-                          fontFamily: '"Outfit", sans-serif',
-                          fontWeight: 500,
-                          fontSize: '16px',
-                          color: 'rgba(43, 43, 43, 1)',
-                        }}
+                        className="flex-1 h-full border-none outline-none bg-transparent px-3 font-sans font-medium text-xs md:text-[15px] text-[#2B2B2B]"
                       />
                     </div>
                   </div>
@@ -858,14 +778,7 @@ function ProfilePageContent() {
                   {/* DOB Field */}
                   <div className="space-y-1">
                     <label 
-                      style={{
-                        fontFamily: '"Faktum", "Outfit", sans-serif',
-                        fontWeight: 500,
-                        fontSize: '15px',
-                        color: 'rgba(43, 43, 43, 1)',
-                        display: 'flex',
-                        alignItems: 'center',
-                      }}
+                      className="font-sans font-medium text-xs md:text-[15px] text-[#2B2B2B] flex items-center"
                     >
                       DOB
                       <span className="text-red-500 ml-1">*</span>
@@ -877,36 +790,15 @@ function ProfilePageContent() {
                         max={new Date().toISOString().split('T')[0]}
                         value={formatToInputDate(editDob)}
                         onChange={(e) => setEditDob(formatFromInputDate(e.target.value))}
-                        className="w-full cursor-pointer"
-                        style={{
-                          height: '44px',
-                          borderRadius: '4px',
-                          border: '1px solid rgba(204, 204, 204, 1)',
-                          background: '#FFFFFF',
-                          paddingLeft: '14px',
-                          paddingRight: '14px',
-                          outline: 'none',
-                          boxSizing: 'border-box',
-                          fontFamily: '"Outfit", sans-serif',
-                          fontWeight: 500,
-                          fontSize: '16px',
-                          color: 'rgba(43, 43, 43, 1)',
-                        }}
+                        className="w-full h-10 md:h-[44px] rounded-[4px] border border-[#CCCCCC] bg-white px-3 outline-none font-sans font-medium text-xs md:text-[15px] text-[#2B2B2B] cursor-pointer"
                       />
                     </div>
                   </div>
 
                   {/* Gender Field */}
-                  <div className="space-y-2">
+                  <div className="space-y-1.5">
                     <label 
-                      style={{
-                        fontFamily: '"Faktum", "Outfit", sans-serif',
-                        fontWeight: 500,
-                        fontSize: '15px',
-                        color: 'rgba(43, 43, 43, 1)',
-                        display: 'flex',
-                        alignItems: 'center',
-                      }}
+                      className="font-sans font-medium text-xs md:text-[15px] text-[#2B2B2B] flex items-center"
                     >
                       Gender
                       <span className="text-red-500 ml-1">*</span>
@@ -916,22 +808,17 @@ function ProfilePageContent() {
                         <div 
                           key={gender}
                           onClick={() => setEditGender(gender)}
-                          className="flex items-center justify-between px-3.5 py-2 rounded border transition cursor-pointer"
+                          className="flex items-center justify-between px-3 py-2 rounded border transition cursor-pointer h-9 md:h-[44px]"
                           style={{
                             background: editGender === gender ? 'rgba(29, 73, 62, 0.08)' : '#FFFFFF',
                             borderColor: editGender === gender ? '#1D493E' : 'rgba(204, 204, 204, 1)',
                             borderRadius: '4px',
-                            height: '44px',
-                            fontFamily: '"Outfit", sans-serif',
-                            fontWeight: 500,
-                            fontSize: '16px',
-                            color: 'rgba(43, 43, 43, 1)',
                           }}
                         >
-                          <div className="flex items-center gap-3">
+                          <div className="flex items-center gap-2.5">
                             {/* Custom Radio Circle */}
                             <div 
-                              className="w-4 h-4 rounded-full border-2 flex items-center justify-center transition"
+                              className="w-3.5 h-3.5 rounded-full border-2 flex items-center justify-center transition shrink-0"
                               style={{
                                 borderColor: editGender === gender ? '#1D493E' : 'rgba(141, 141, 141, 1)',
                                 background: '#FFFFFF',
@@ -939,15 +826,15 @@ function ProfilePageContent() {
                             >
                               {editGender === gender && (
                                 <div 
-                                  className="w-2 h-2 rounded-full"
+                                  className="w-1.5 h-1.5 rounded-full"
                                   style={{ background: '#1D493E' }}
                                 />
                               )}
                             </div>
-                            <span>{gender}</span>
+                            <span className="font-sans font-medium text-xs md:text-[15px] text-[#2B2B2B]">{gender}</span>
                           </div>
                           {editGender === gender && (
-                            <Check className="w-4 h-4 text-[#1D493E]" />
+                            <Check className="w-3.5 h-3.5 text-[#1D493E]" />
                           )}
                         </div>
                       ))}

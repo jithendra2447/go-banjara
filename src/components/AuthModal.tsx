@@ -661,28 +661,28 @@ export const AuthModal: React.FC = () => {
 
   return (
     <div 
-      className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto font-sans"
+      className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto font-sans bg-white"
       style={{
-        background: 'rgba(255, 252, 248, 1)',
+        background: '#FFFFFF',
       }}
     >
       
       {/* Backdrop */}
       <div 
-        className="absolute inset-0 transition-opacity duration-300"
+        className="absolute inset-0 transition-opacity duration-300 bg-white"
         style={{
-          background: 'rgba(255, 252, 248, 1)',
+          background: '#FFFFFF',
         }}
         onClick={!loading ? handleClose : undefined}
       />
 
       {/* Two-Column split modal box / Main Frame */}
       <div 
-        className="relative z-10 flex flex-col md:flex-row items-center justify-center animate-[scaleIn_0.3s_ease-out] w-full max-w-[430px] md:max-w-[1240px] max-h-[95vh] md:max-h-[92vh] overflow-y-auto my-auto p-3 sm:p-4 md:p-8"
+        className="relative z-10 flex flex-col md:flex-row items-center justify-center animate-[scaleIn_0.3s_ease-out] w-full max-w-[380px] md:max-w-[1240px] max-h-[95vh] md:max-h-[92vh] overflow-y-auto my-auto p-3.5 sm:p-4 md:p-8 bg-white"
         style={{
           boxSizing: 'border-box',
-          background: 'rgba(255, 252, 248, 1)',
-          gap: isMobile ? '16px' : '24px',
+          background: '#FFFFFF',
+          gap: isMobile ? '12px' : '24px',
           display: 'flex',
           flexShrink: 0,
         }}
@@ -692,7 +692,7 @@ export const AuthModal: React.FC = () => {
         {!loading && (
           <button 
             onClick={handleClose}
-            className="absolute top-4 right-4 md:top-6 md:right-6 p-2 rounded-full hover:bg-slate-100 text-slate-400 hover:text-[#1D493E] transition cursor-pointer z-50"
+            className="absolute top-3 right-3 md:top-6 md:right-6 p-2 rounded-full hover:bg-slate-100 text-slate-400 hover:text-[#1D493E] transition cursor-pointer z-50"
           >
             <X className="w-5 h-5" />
           </button>
@@ -700,17 +700,17 @@ export const AuthModal: React.FC = () => {
 
         {/* LEFT COLUMN: AUTH FORMS */}
         <div 
-          className="w-full max-w-[430px] md:max-w-[556px] flex flex-col justify-between"
+          className="w-full max-w-[380px] md:max-w-[556px] flex flex-col justify-between bg-white"
           style={{
             height: 'auto',
             minHeight: isMobile ? 'auto' : '650px',
             opacity: 1,
-            background: 'rgba(255, 255, 255, 1)',
+            background: '#FFFFFF',
             border: '1px solid rgba(204, 204, 204, 0.54)',
             borderRadius: '8px',
             padding: isMobile ? '16px 14px' : '28px 32px',
             boxSizing: 'border-box',
-            gap: '16px',
+            gap: '14px',
             display: 'flex',
             flexDirection: 'column',
           }}

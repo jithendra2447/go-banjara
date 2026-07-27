@@ -1272,8 +1272,8 @@ export default function Homepage() {
           {/* Header Container */}
           <div className="w-full max-w-[1280px] h-auto mx-auto flex flex-col justify-between items-center bg-white rounded-[4px] text-center gap-4">
             {/* Tag */}
-            <div className="flex items-center justify-center h-[18px]">
-              <span className="inline-flex items-center justify-center text-[#FF623E] bg-[#FF623E]/8 px-2.5 py-0.5 rounded-[4px] text-[14px] font-semibold uppercase tracking-[1.2px] leading-none">
+            <div className="flex items-center justify-center">
+              <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
                 Most People Like
               </span>
             </div>
@@ -1757,7 +1757,7 @@ export default function Homepage() {
           {/* Right Column: Text & Content */}
           <div className="flex flex-col gap-[24px] md:gap-[32px] w-full max-w-[644px] h-auto text-left justify-center py-6 md:py-0">
             <div className="flex flex-col gap-[12px]">
-              <span className="inline-flex items-center justify-center text-[#FF623E] bg-[#FF623E]/8 px-2.5 py-0.5 rounded-[4px] text-[14px] font-semibold uppercase tracking-[1.2px] leading-none self-start">
+              <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px] self-start">
                 The Banjara Soul
               </span>
               <h2 className="text-4xl md:text-[62px] font-serif font-bold text-[#1D493E] leading-none w-full max-w-[644px] h-auto flex items-center py-2">
@@ -2245,11 +2245,9 @@ export default function Homepage() {
         <div className="hidden md:flex w-full max-w-[1440px] h-auto bg-white rounded-[4px] pt-[28px] pb-[28px] md:px-[80px] px-6 flex-col gap-[32px] mx-auto">
           {/* Header */}
           <div className="w-full max-w-[1280px] h-auto flex flex-col gap-[12px] justify-center text-left">
-            <div className="w-[54px] h-[26px] flex items-center justify-center bg-[#FFEBE5] rounded-[4px]">
-              <span className="font-sans font-semibold text-[14px] leading-none tracking-[1.2px] text-[#FF623E] uppercase">
-                FAQ'S
-              </span>
-            </div>
+            <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
+              FAQ'S
+            </span>
             <h2 className="w-full h-auto flex items-center font-serif font-semibold text-3xl md:text-[42px] leading-tight tracking-[0px] text-[#2B2B2B] py-2">
               Frequently asked questions
             </h2>
@@ -2341,11 +2339,9 @@ export default function Homepage() {
         <div className="hidden md:flex w-full max-w-[1440px] bg-white pt-[28px] pb-[28px] md:px-[80px] px-6 flex-col gap-[32px] mx-auto">
           {/* Header */}
           <div className="w-full max-w-[1280px] h-auto flex flex-col gap-[12px] justify-center text-left mx-auto">
-            <div className="w-[54px] h-[26px] flex items-center justify-center bg-[#FFEBE5] rounded-[4px]">
-              <span className="font-sans font-semibold text-[14px] leading-none tracking-[1.2px] text-[#FF623E] uppercase">
-                Real
-              </span>
-            </div>
+            <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
+              THE BANJARA TRIBE
+            </span>
             <h2 className="font-serif font-semibold text-3xl md:text-[42px] leading-[1] tracking-[0px] text-[#2B2B2B] py-2">
               Join the&nbsp;<span className="text-[#FF5A36]">Banjara Tribe</span>
             </h2>

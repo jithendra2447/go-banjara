@@ -1082,9 +1082,7 @@ export default function Homepage() {
               onMouseEnter={() => setActiveCategorySlide(0)}
               onClick={() => setActiveCategorySlide(0)}
               style={{ width: "100%", maxWidth: "405.33px", minHeight: "328.63px", display: "flex", flexDirection: "column", textDecoration: "none" }}
-              className={`group mx-auto p-3 rounded-xl transition-all duration-300 cursor-pointer ${
-                activeCategorySlide === 0 ? 'scale-[1.02] shadow-xl' : ''
-              }`}
+              className="group mx-auto p-3 rounded-xl cursor-pointer"
             >
               <div 
                 style={{ height: "237.63px", width: "100%", borderRadius: "4px", overflow: "hidden", backgroundColor: "#FAF9F6" }}
@@ -1112,9 +1110,7 @@ export default function Homepage() {
               onMouseEnter={() => setActiveCategorySlide(1)}
               onClick={() => setActiveCategorySlide(1)}
               style={{ width: "100%", maxWidth: "405.33px", minHeight: "328.63px", display: "flex", flexDirection: "column", textDecoration: "none" }}
-              className={`group mx-auto p-3 rounded-xl transition-all duration-300 cursor-pointer ${
-                activeCategorySlide === 1 ? 'scale-[1.02] shadow-xl' : ''
-              }`}
+              className="group mx-auto p-3 rounded-xl cursor-pointer"
             >
               <div 
                 style={{ height: "237.63px", width: "100%", borderRadius: "4px", overflow: "hidden", backgroundColor: "#FAF9F6" }}
@@ -1142,9 +1138,7 @@ export default function Homepage() {
               onMouseEnter={() => setActiveCategorySlide(2)}
               onClick={() => setActiveCategorySlide(2)}
               style={{ width: "100%", maxWidth: "405.33px", minHeight: "328.63px", display: "flex", flexDirection: "column", textDecoration: "none" }}
-              className={`group mx-auto p-3 rounded-xl transition-all duration-300 cursor-pointer ${
-                activeCategorySlide === 2 ? 'scale-[1.02] shadow-xl' : ''
-              }`}
+              className="group mx-auto p-3 rounded-xl cursor-pointer"
             >
               <div 
                 style={{ height: "237.63px", width: "100%", borderRadius: "4px", overflow: "hidden", backgroundColor: "#FAF9F6" }}
@@ -1330,9 +1324,7 @@ export default function Homepage() {
                   key={deal.id} 
                   onMouseEnter={() => setActiveDealSlide(idx)}
                   onClick={() => setActiveDealSlide(idx)}
-                  className={`bg-white rounded-[12px] w-full h-auto p-2 pb-4 flex flex-col justify-between gap-[16px] transition-all duration-300 overflow-hidden group cursor-pointer ${
-                    activeDealSlide === idx ? 'scale-[1.02] shadow-xl' : ''
-                  } ${idx >= 3 ? 'hidden md:flex' : 'flex'}`}
+                  className={`bg-white rounded-[12px] w-full h-auto p-2 pb-4 flex flex-col justify-between gap-[16px] overflow-hidden group cursor-pointer ${idx >= 3 ? 'hidden md:flex' : 'flex'}`}
                 >
                   {/* Image Container with Dots (Width: 339px, Height: 254px, Radius: 4px) */}
                   <div className="relative w-full md:h-[254px] rounded-[4px] overflow-hidden shrink-0">

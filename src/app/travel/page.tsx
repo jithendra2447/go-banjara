@@ -1311,23 +1311,14 @@ export default function HolidaysPortal() {
 
         {/* Load more button */}
         {filteredAndSortedPackages.length > visiblePackagesCount && (
-          <div className="pt-3 sm:pt-8 text-center">
+          <div className="pt-6 sm:pt-10 flex justify-center items-center">
             <button
               type="button"
               onClick={() => setVisiblePackagesCount(prev => prev + 6)}
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                borderRadius: "8px",
-                border: "1px solid #1D493E",
-                fontFamily: "'Faktum', 'Outfit', sans-serif",
-                fontWeight: 600,
-                cursor: "pointer",
-              }}
-              className="bg-white text-[#1D493E] hover:bg-[#1D493E] hover:text-white px-5 py-2 sm:px-8 sm:py-3.5 text-xs sm:text-base md:text-[18px] transition-all duration-300 shadow-xs"
+              className="inline-flex items-center justify-center gap-2.5 h-[55px] px-8 sm:px-10 rounded-[8px] border border-[#1D493E]/20 bg-[#EEF2F1] text-[#1D493E] font-sans font-semibold text-base sm:text-lg md:text-[18px] hover:bg-[#1D493E] hover:text-white hover:border-[#1D493E] transition-all duration-300 shadow-xs cursor-pointer group"
             >
-              Load more
+              <span>Load more</span>
+              <ArrowUpRight className="w-5 h-5 text-[#1D493E] group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />
             </button>
           </div>
         )}

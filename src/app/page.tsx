@@ -1778,7 +1778,7 @@ export default function Homepage() {
             <div className="pt-2">
               <Link 
                 href="/about" 
-                className="inline-flex items-center justify-center w-[204px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[4px] bg-[#1D493E] hover:bg-[#15342c] text-white font-sans font-bold transition-all duration-300 shadow-sm cursor-pointer group"
+                className="inline-flex items-center justify-center w-fit h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[4px] bg-[#1D493E] hover:bg-[#15342c] text-white font-sans font-bold transition-all duration-300 shadow-sm cursor-pointer group"
               >
                 <span>Our Story</span>
                 <svg 
@@ -2490,13 +2490,13 @@ export default function Homepage() {
             <div className="flex flex-col sm:flex-row gap-3 w-full max-w-[584px] justify-center items-center">
               <Link
                 href="/travel"
-                className="w-full sm:w-[286px] h-[55px] flex items-center justify-center rounded-[4px] bg-[#1D493E] text-white border-2 border-[#1D493E] hover:bg-[#1D493E]/90 transition-all duration-300 font-sans font-medium text-[18px]"
+                className="w-full sm:w-fit px-8 h-[55px] flex items-center justify-center rounded-[4px] bg-[#1D493E] text-white border-2 border-[#1D493E] hover:bg-[#1D493E]/90 transition-all duration-300 font-sans font-medium text-[18px]"
               >
                 Book Now
               </Link>
               <Link
                 href="/shop"
-                className="w-full sm:w-[286px] h-[55px] flex items-center justify-center rounded-[4px] bg-transparent text-[#1D493E] border-2 border-[#1D493E] hover:bg-[#1D493E] hover:text-white transition-all duration-300 font-sans font-medium text-[18px]"
+                className="w-full sm:w-fit px-8 h-[55px] flex items-center justify-center rounded-[4px] bg-transparent text-[#1D493E] border-2 border-[#1D493E] hover:bg-[#1D493E] hover:text-white transition-all duration-300 font-sans font-medium text-[18px]"
               >
                 Explore collection
               </Link>

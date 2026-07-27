@@ -677,7 +677,7 @@ export default function Homepage() {
                         <span className="bg-gray-100 text-gray-600 px-2.5 py-0.5 rounded-[4px] text-xs font-bold">{pkg1.durationDays} days</span>
                       </div>
                       <div className="flex justify-between items-baseline gap-4">
-                        <h3 className="text-2xl md:text-[32px] font-sans font-bold text-[#1D493E] leading-tight truncate flex-1" title={pkg1.name}>{pkg1.name}</h3>
+                        <h3 className="text-xl md:text-[24px] font-sans font-bold text-[#1D493E] leading-tight truncate flex-1" title={pkg1.name}>{pkg1.name}</h3>
                         <span className="text-xl md:text-[24px] font-sans font-bold text-[#1D493E] shrink-0">₹{(pkg1.price ?? 0).toLocaleString('en-IN')}/Person</span>
                       </div>
                       <p className="font-sans font-medium text-sm sm:text-base md:text-[20px] md:leading-[32px] text-[#8D8D8D] w-full max-w-[616px] md:h-[64px] overflow-hidden line-clamp-2 shrink-0">
@@ -800,7 +800,7 @@ export default function Homepage() {
                           <span className="bg-gray-100 text-gray-600 px-2.5 py-0.5 rounded-[4px] text-xs font-bold">{pkg.durationDays} days</span>
                         </div>
                         <div className="flex justify-between items-baseline gap-4">
-                          <h3 className="text-2xl md:text-[32px] font-sans font-bold text-[#1D493E] leading-tight truncate flex-1" title={pkg.name}>{pkg.name}</h3>
+                          <h3 className="text-xl md:text-[24px] font-sans font-bold text-[#1D493E] leading-tight truncate flex-1" title={pkg.name}>{pkg.name}</h3>
                           <span className="text-xl md:text-[24px] font-sans font-bold text-[#1D493E] shrink-0">₹{(pkg.price ?? 0).toLocaleString('en-IN')}/Person</span>
                         </div>
                         <p className="font-sans font-medium text-sm sm:text-base md:text-[20px] md:leading-[32px] text-[#8D8D8D] w-full max-w-[616px] md:h-[64px] overflow-hidden line-clamp-2 shrink-0">
@@ -1778,23 +1778,10 @@ export default function Homepage() {
             <div className="pt-2">
               <Link 
                 href="/about" 
-                className="inline-flex items-center justify-center w-fit h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[4px] bg-[#1D493E] hover:bg-[#15342c] text-white font-sans font-bold transition-all duration-300 shadow-sm cursor-pointer group"
+                className="inline-flex items-center justify-center h-[55px] px-6 md:px-8 gap-2 rounded-[4px] bg-[#1D493E] hover:bg-[#15342c] text-white font-sans font-medium text-base md:text-[18px] transition-all duration-300 shadow-sm cursor-pointer group w-fit"
               >
                 <span>Our Story</span>
-                <svg 
-                  style={{ width: '32px', height: '32px' }}
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="2.25" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round"
-                  className="shrink-0 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300"
-                >
-                  <path d="M7 17l2.5-2.5" />
-                  <path d="M12.5 11.5L17 7" />
-                  <path d="M7 7h10v10" />
-                </svg>
+                <ArrowUpRight className="w-5 h-5 text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
               </Link>
             </div>
           </div>

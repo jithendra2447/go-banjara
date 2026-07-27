@@ -7,7 +7,6 @@ import {
   Check, CheckCircle2, Info, Plus, Minus, Map, ShieldCheck, ArrowUpDown, Globe, ChevronDown, ChevronUp, Compass, ArrowUpRight
 } from 'lucide-react';
 import { useCart } from '@/components/providers';
-import Breadcrumbs from '@/components/Breadcrumbs';
 
 import { HOLIDAY_PACKAGES, HolidayPackage } from '@/data/packages';
 

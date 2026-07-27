@@ -9,7 +9,6 @@ import { Product } from '@/types';
 import ProductCard from '@/components/ProductCard';
 import { TrustBanner } from '@/components/TrustBanner';
 import { InteractiveProgressBar } from '@/components/InteractiveProgressBar';
-import Breadcrumbs from '@/components/Breadcrumbs';
 
 const TESTIMONIALS = [
   {

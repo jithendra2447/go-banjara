@@ -661,7 +661,7 @@ export const AuthModal: React.FC = () => {
 
   return (
     <div 
-      className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto font-sans bg-white"
+      className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden font-sans"
       style={{
         background: '#FFFFFF',
       }}
@@ -678,7 +678,7 @@ export const AuthModal: React.FC = () => {
 
       {/* Two-Column split modal box / Main Frame */}
       <div 
-        className="relative z-10 flex flex-col md:flex-row items-center justify-center animate-[scaleIn_0.3s_ease-out] w-full max-w-[380px] md:max-w-[1240px] max-h-[95vh] md:max-h-[92vh] overflow-y-auto my-auto p-3.5 sm:p-4 md:p-8 bg-white"
+        className="relative z-10 flex flex-col md:flex-row items-center justify-center animate-[scaleIn_0.3s_ease-out] w-full max-w-[380px] md:max-w-[1240px] max-h-screen md:max-h-[96vh] overflow-hidden p-3.5 sm:p-4 md:p-8 bg-white"
         style={{
           boxSizing: 'border-box',
           background: '#FFFFFF',
@@ -700,10 +700,10 @@ export const AuthModal: React.FC = () => {
 
         {/* LEFT COLUMN: AUTH FORMS */}
         <div 
-          className="w-full max-w-[380px] md:max-w-[556px] flex flex-col justify-between bg-white"
+          className="w-full max-w-[380px] md:max-w-[556px] flex flex-col justify-between bg-white overflow-y-auto"
           style={{
             height: 'auto',
-            minHeight: isMobile ? 'auto' : '650px',
+            maxHeight: isMobile ? '92vh' : 'calc(96vh - 64px)',
             opacity: 1,
             background: '#FFFFFF',
             border: '1px solid rgba(204, 204, 204, 0.54)',
@@ -2192,52 +2192,57 @@ export const AuthModal: React.FC = () => {
 
         {/* RIGHT COLUMN: BRAND MASCOT CARD */}
         <div 
-          className="hidden md:flex flex-col justify-center items-center text-center select-none"
+          className="hidden md:flex flex-col justify-center items-center text-center select-none flex-shrink-0 overflow-hidden"
           style={{
-            width: '633px',
-            height: view === 'signup' ? '980px' : '820px',
+            width: '50%',
+            maxWidth: '633px',
+            alignSelf: 'stretch',
             flexDirection: 'column',
             gap: '24px',
             boxSizing: 'border-box',
             background: 'rgba(255, 252, 248, 1)',
+            borderRadius: '8px',
+            padding: '24px 20px',
           }}
         >
           
-          {/* Figma Stacked Mascot Llama Hero (Solid Gray Back Card + Tilted Edge-to-Edge Mascot Image + Badges) */}
-          <div className="relative select-none" style={{ width: '588px', height: '588px' }}>
-            {/* 1. Back Gray Card (Rectangle 10: 567.83px x 567.83px, radius 12px, bg rgba(204, 204, 204, 1)) */}
+          {/* Figma Stacked Mascot Llama Hero — scaled to fit */}
+          <div 
+            className="relative select-none flex-shrink-0"
+            style={{ 
+              width: '100%',
+              maxWidth: '420px',
+              aspectRatio: '1 / 1',
+              margin: '0 auto',
+            }}
+          >
+            {/* 1. Back Gray Card */}
             <div 
               style={{
                 position: 'absolute',
-                top: '0px',
-                left: '0px',
-                width: '567.83px',
-                height: '567.83px',
+                inset: 0,
                 borderRadius: '12px',
                 background: 'rgba(204, 204, 204, 1)',
-                opacity: 1,
-                transform: 'rotate(0deg)',
                 zIndex: 1,
               }}
             />
 
-            {/* 2. Front Tilted Mascot Image Card (Tilted 3deg, radius 12px, shadow 0px 27px 55px rgba(0,0,0,0.25)) */}
+            {/* 2. Front Tilted Mascot Image Card */}
             <div 
               className="absolute animate-fade-in"
               style={{
-                top: '18px',
-                left: '10px',
-                width: '567.83px',
-                height: '567.83px',
+                top: '3%',
+                left: '2%',
+                width: '96%',
+                height: '96%',
                 borderRadius: '12px',
                 overflow: 'hidden',
                 transform: 'rotate(3deg)',
                 transformOrigin: 'center center',
-                boxShadow: '0px 27.27px 54.54px -13.09px rgba(0, 0, 0, 0.25)',
+                boxShadow: '0px 27px 55px -13px rgba(0, 0, 0, 0.25)',
                 zIndex: 2,
               }}
             >
-              {/* Clean original edge-to-edge mascot image with dynamic slide */}
               <img 
                 src={bannerSlide === 0 ? "/llama_mascot.png" : "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=800&q=80"} 
                 className="w-full h-full object-cover transition-opacity duration-300" 
@@ -2246,14 +2251,14 @@ export const AuthModal: React.FC = () => {
               />
             </div>
 
-            {/* Top-Left Circular Badge (Figma specs: float top half above card edge, top -42px, left 42px, rotate 15deg) */}
+            {/* Top-Left Circular Badge */}
             <div
               style={{
                 position: 'absolute',
-                top: '-42px',
-                left: '42px',
-                width: '99.19px',
-                height: '91px',
+                top: '-7%',
+                left: '7%',
+                width: '17%',
+                height: '17%',
                 transform: 'rotate(15deg)',
                 borderRadius: '50%',
                 overflow: 'hidden',
@@ -2275,14 +2280,14 @@ export const AuthModal: React.FC = () => {
               />
             </div>
 
-            {/* Bottom-Right Circular Badge (Figma specs: width 124px, height 120px, top 469.12px, left 508px) */}
+            {/* Bottom-Right Circular Badge */}
             <div
               style={{
                 position: 'absolute',
-                top: '469.12px',
-                left: '508px',
-                width: '124px',
-                height: '120px',
+                bottom: '-5%',
+                right: '-3%',
+                width: '21%',
+                height: '21%',
                 borderRadius: '50%',
                 overflow: 'hidden',
                 zIndex: 10,
@@ -2307,22 +2312,22 @@ export const AuthModal: React.FC = () => {
           {/* Description Text */}
           <div 
             style={{
-              width: '567.83px',
-              height: '132px',
+              width: '100%',
+              maxWidth: '480px',
               display: 'flex',
               flexDirection: 'column',
-              gap: '12px',
+              gap: '8px',
               alignItems: 'flex-start',
               justifyContent: 'center',
+              padding: '0 8px',
             }}
           >
             <h3 
               style={{
-                width: '567.83px',
                 fontFamily: '"Faktum", "Outfit", sans-serif',
                 fontWeight: 500,
-                fontSize: '20px',
-                lineHeight: '32px',
+                fontSize: '18px',
+                lineHeight: '28px',
                 color: 'rgba(43, 43, 43, 1)',
                 margin: 0,
                 textAlign: 'left',
@@ -2332,49 +2337,31 @@ export const AuthModal: React.FC = () => {
             </h3>
             <p 
               style={{
-                width: '567.83px',
                 fontFamily: '"Faktum", "Outfit", sans-serif',
                 fontWeight: 500,
-                fontSize: '18px',
-                lineHeight: '28px',
+                fontSize: '15px',
+                lineHeight: '22px',
                 color: 'rgba(141, 141, 141, 1)',
                 textAlign: 'left',
                 margin: 0,
               }}
             >
               {bannerSlide === 0 ? (
-                <>
-                  Get personalized shopping and customization experience.
-                  <br />
-                  When you sign in to your account
-                </>
+                <>Get personalized shopping and customization experience.</>
               ) : (
-                <>
-                  Discover authentic travel itineraries & community expeditions.
-                  <br />
-                  Across scenic destinations in India
-                </>
+                <>Discover authentic travel itineraries &amp; community expeditions.</>
               )}
             </p>
             
-            {/* Figma Dots Carousel Indicator with click interaction */}
+            {/* Dots Carousel Indicator */}
             <div 
               style={{
-                width: '54px',
-                height: '12px',
                 gap: '8px',
-                borderRadius: '2px',
                 paddingTop: '4px',
-                paddingRight: '8px',
-                paddingBottom: '4px',
-                paddingLeft: '8px',
-                background: 'rgba(255, 255, 255, 1)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'flex-start',
                 marginTop: '4px',
-                boxSizing: 'border-box',
-                opacity: 1,
               }}
             >
               <button 

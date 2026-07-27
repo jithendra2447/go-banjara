@@ -1929,20 +1929,25 @@ export default function Homepage() {
                     stars: 5
                   }
                 ].map((review, idx) => (
-                  <div key={idx} className="bg-white p-6 rounded-2xl flex flex-col justify-between space-y-4 hover:scale-105 transition-all duration-300 w-[360px] shrink-0 cursor-pointer text-left">
-                    <div className="flex text-amber-400 text-sm gap-1">
-                      {Array.from({ length: review.stars }).map((_, s) => (
-                        <Star key={s} className="w-3.5 h-3.5 fill-current" />
-                      ))}
+                  <div 
+                    key={idx} 
+                    className="bg-white border border-gray-200 p-3.5 sm:p-6 rounded-[8px] flex flex-col justify-between space-y-2.5 sm:space-y-4 shadow-2xs hover:shadow-xl hover:border-[#FF623E] hover:scale-105 transition-all duration-300 w-[260px] sm:w-[380px] shrink-0 cursor-pointer text-left"
+                  >
+                    <div className="space-y-2 sm:space-y-3">
+                      <div className="flex text-amber-400 text-xs sm:text-sm gap-0.5 sm:gap-1">
+                        {Array.from({ length: review.stars }).map((_, s) => (
+                          <Star key={s} className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-amber-400 text-amber-400" />
+                        ))}
+                      </div>
+                      <p className="text-gray-700 font-medium italic text-xs sm:text-[15px] leading-snug sm:leading-relaxed">
+                        "{review.text}"
+                      </p>
                     </div>
-                    <p className="text-gray-700 font-medium italic text-xs md:text-sm leading-relaxed">
-                      "{review.text}"
-                    </p>
-                    <div className="flex items-center gap-3.5 pt-3 border-t border-gray-100">
-                      <img src={review.avatar} alt={review.name} className="w-10 h-10 rounded-full object-cover shrink-0" />
+                    <div className="flex items-center gap-2.5 sm:gap-3 pt-2 sm:pt-3 border-t border-gray-100">
+                      <img src={review.avatar} alt={review.name} className="w-8 h-8 sm:w-10 sm:h-10 rounded-full object-cover shrink-0" />
                       <div>
-                        <h4 className="text-sm font-bold text-gray-800 leading-none">{review.name}</h4>
-                        <p className="text-xs text-[#1D493E] font-semibold mt-0.5">{review.subtitle}</p>
+                        <h4 className="text-xs sm:text-[15px] font-bold text-gray-800 leading-none">{review.name}</h4>
+                        <p className="text-[10px] sm:text-xs text-gray-400 font-medium mt-0.5">{review.subtitle}</p>
                       </div>
                     </div>
                   </div>
@@ -2001,20 +2006,25 @@ export default function Homepage() {
                     stars: 5
                   }
                 ].map((review, idx) => (
-                  <div key={idx} className="bg-white p-6 rounded-2xl flex flex-col justify-between space-y-4 hover:scale-105 transition-all duration-300 w-[360px] shrink-0 cursor-pointer text-left">
-                    <div className="flex text-amber-400 text-sm gap-1">
-                      {Array.from({ length: review.stars }).map((_, s) => (
-                        <Star key={s} className="w-3.5 h-3.5 fill-current" />
-                      ))}
+                  <div 
+                    key={idx} 
+                    className="bg-white border border-gray-200 p-3.5 sm:p-6 rounded-[8px] flex flex-col justify-between space-y-2.5 sm:space-y-4 shadow-2xs hover:shadow-xl hover:border-[#FF623E] hover:scale-105 transition-all duration-300 w-[260px] sm:w-[380px] shrink-0 cursor-pointer text-left"
+                  >
+                    <div className="space-y-2 sm:space-y-3">
+                      <div className="flex text-amber-400 text-xs sm:text-sm gap-0.5 sm:gap-1">
+                        {Array.from({ length: review.stars }).map((_, s) => (
+                          <Star key={s} className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-amber-400 text-amber-400" />
+                        ))}
+                      </div>
+                      <p className="text-gray-700 font-medium italic text-xs sm:text-[15px] leading-snug sm:leading-relaxed">
+                        "{review.text}"
+                      </p>
                     </div>
-                    <p className="text-gray-700 font-medium italic text-xs md:text-sm leading-relaxed">
-                      "{review.text}"
-                    </p>
-                    <div className="flex items-center gap-3.5 pt-3 border-t border-gray-100">
-                      <img src={review.avatar} alt={review.name} className="w-10 h-10 rounded-full object-cover shrink-0" />
+                    <div className="flex items-center gap-2.5 sm:gap-3 pt-2 sm:pt-3 border-t border-gray-100">
+                      <img src={review.avatar} alt={review.name} className="w-8 h-8 sm:w-10 sm:h-10 rounded-full object-cover shrink-0" />
                       <div>
-                        <h4 className="text-sm font-bold text-gray-800 leading-none">{review.name}</h4>
-                        <p className="text-xs text-[#1D493E] font-semibold mt-0.5">{review.subtitle}</p>
+                        <h4 className="text-xs sm:text-[15px] font-bold text-gray-800 leading-none">{review.name}</h4>
+                        <p className="text-[10px] sm:text-xs text-gray-400 font-medium mt-0.5">{review.subtitle}</p>
                       </div>
                     </div>
                   </div>
@@ -2096,20 +2106,25 @@ export default function Homepage() {
                   stars: 5
                 }
               ].map((review, idx) => (
-                <div key={idx} className="bg-gray-50 p-4 rounded-[4px] flex flex-col justify-between gap-2.5 text-left w-[280px] shrink-0">
-                  <div className="flex text-amber-400 gap-0.5">
-                    {[...Array(review.stars)].map((_, s) => (
-                      <Star key={s} className="w-3.5 h-3.5 fill-current" />
-                    ))}
+                <div 
+                  key={idx} 
+                  className="bg-white border border-gray-200 p-3.5 rounded-[8px] flex flex-col justify-between space-y-2.5 shadow-2xs hover:shadow-xl hover:border-[#FF623E] hover:scale-105 transition-all duration-300 w-[260px] shrink-0 cursor-pointer text-left"
+                >
+                  <div className="space-y-2">
+                    <div className="flex text-amber-400 text-xs gap-0.5">
+                      {Array.from({ length: review.stars }).map((_, s) => (
+                        <Star key={s} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                      ))}
+                    </div>
+                    <p className="text-gray-700 font-medium italic text-xs leading-relaxed m-0 line-clamp-3">
+                      "{review.text}"
+                    </p>
                   </div>
-                  <p className="text-gray-700 font-medium italic text-xs leading-relaxed m-0 line-clamp-3">
-                    "{review.text}"
-                  </p>
-                  <div className="flex items-center gap-2.5 pt-2 border-t border-gray-200/60 mt-auto">
-                    <img src={review.avatar} alt={review.name} className="w-7 h-7 rounded-full object-cover shrink-0" />
+                  <div className="flex items-center gap-2.5 pt-2 border-t border-gray-100 mt-auto">
+                    <img src={review.avatar} alt={review.name} className="w-8 h-8 rounded-full object-cover shrink-0" />
                     <div>
-                      <h4 className="text-xs font-bold text-gray-800 m-0 leading-none">{review.name}</h4>
-                      <p className="text-[10px] text-[#1D493E] font-semibold m-0 mt-0.5">{review.subtitle}</p>
+                      <h4 className="text-xs font-bold text-gray-800 leading-none m-0">{review.name}</h4>
+                      <p className="text-[10px] text-gray-400 font-medium m-0 mt-0.5">{review.subtitle}</p>
                     </div>
                   </div>
                 </div>

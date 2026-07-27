@@ -100,7 +100,7 @@ img[class*="rounded-[12px]"] {
 }
 
 :root {
-  --background: #F3FFEF; /* Earthy Beige as background */
+  --background: #FFFFFF; /* Pure White background */
   --foreground: #1D493E; /* Dark Green as default text color */
 }
 

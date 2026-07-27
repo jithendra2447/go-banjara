@@ -847,18 +847,18 @@ export const AuthModal: React.FC = () => {
             {/* A. WELCOME BACK / MOBILE OR EMAIL + PASSWORD LOGIN VIEW */}
             {view === 'login' && (
               <div className="space-y-6">
-                <form onSubmit={handleEmailLogin} className="space-y-4">
+                <form onSubmit={handleEmailLogin} className="space-y-3 md:space-y-4">
                   {/* Enter Mobile Number or Email ID */}
-                  <div className="space-y-1.5">
+                  <div className="space-y-1">
                     <label 
                       style={{
                         display: 'inline-flex',
                         alignItems: 'center',
                         gap: '2px',
-                        height: '23px',
+                        height: isMobile ? '18px' : '23px',
                         fontFamily: '"Faktum", "Outfit", sans-serif',
                         fontWeight: 500,
-                        fontSize: '18px',
+                        fontSize: isMobile ? '13px' : '18px',
                         lineHeight: '100%',
                         color: 'rgba(43, 43, 43, 1)',
                         margin: 0,
@@ -890,33 +890,33 @@ export const AuthModal: React.FC = () => {
                       }}
                       style={{
                         width: '100%', maxWidth: '492px',
-                        height: '53px',
+                        height: isMobile ? '42px' : '53px',
                         borderRadius: '4px',
                         border: '1px solid rgba(204, 204, 204, 1)',
                         background: 'rgba(255, 255, 255, 1)',
-                        padding: '0 16px',
+                        padding: '0 12px',
                         outline: 'none',
                         boxSizing: 'border-box',
                         fontFamily: '"Faktum", "Outfit", sans-serif',
                         fontWeight: 500,
-                        fontSize: '20px',
+                        fontSize: isMobile ? '14px' : '20px',
                         color: 'rgba(43, 43, 43, 1)',
                       }}
                     />
                   </div>
 
                   {/* Password with Forgot Password link */}
-                  <div className="space-y-1.5">
+                  <div className="space-y-1">
                     <div className="flex justify-between items-center" style={{ width: '100%', maxWidth: '492px' }}>
                       <label 
                         style={{
                           display: 'inline-flex',
                           alignItems: 'center',
                           gap: '2px',
-                          height: '23px',
+                          height: isMobile ? '18px' : '23px',
                           fontFamily: '"Faktum", "Outfit", sans-serif',
                           fontWeight: 500,
-                          fontSize: '18px',
+                          fontSize: isMobile ? '13px' : '18px',
                           lineHeight: '100%',
                           color: 'rgba(43, 43, 43, 1)',
                           margin: 0,
@@ -945,7 +945,7 @@ export const AuthModal: React.FC = () => {
                         style={{
                           fontFamily: '"Faktum", "Outfit", sans-serif',
                           fontWeight: 500,
-                          fontSize: '16px',
+                          fontSize: isMobile ? '12px' : '16px',
                           color: 'rgba(89, 153, 255, 1)',
                           background: 'none',
                           border: 'none',
@@ -960,7 +960,7 @@ export const AuthModal: React.FC = () => {
                       className="flex items-center"
                       style={{
                         width: '100%', maxWidth: '492px',
-                        height: '53px',
+                        height: isMobile ? '42px' : '53px',
                         borderRadius: '4px',
                         border: passwordError ? '1px solid rgba(229, 62, 62, 1)' : '1px solid rgba(204, 204, 204, 1)',
                         background: 'rgba(255, 255, 255, 1)',
@@ -983,10 +983,10 @@ export const AuthModal: React.FC = () => {
                           border: 'none',
                           outline: 'none',
                           background: 'transparent',
-                          padding: '0 16px',
+                          padding: '0 12px',
                           fontFamily: '"Faktum", "Outfit", sans-serif',
                           fontWeight: 500,
-                          fontSize: '20px',
+                          fontSize: isMobile ? '14px' : '20px',
                           color: 'rgba(43, 43, 43, 1)',
                         }}
                       />
@@ -996,7 +996,7 @@ export const AuthModal: React.FC = () => {
                         className="text-slate-400 hover:text-slate-700 p-1.5 focus:outline-none transition cursor-pointer"
                         title={showPassword ? "Hide password" : "Show password"}
                       >
-                        {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                        {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                       </button>
                     </div>
                     {passwordError && (
@@ -1004,15 +1004,15 @@ export const AuthModal: React.FC = () => {
                         style={{
                           fontFamily: '"Faktum", "Outfit", sans-serif',
                           fontWeight: 500,
-                          fontSize: '13px',
+                          fontSize: '12px',
                           color: 'rgba(229, 62, 62, 1)',
-                          margin: '6px 0 0 0',
+                          margin: '4px 0 0 0',
                           display: 'flex',
                           alignItems: 'center',
-                          gap: '6px',
+                          gap: '4px',
                         }}
                       >
-                        <AlertCircle className="w-4 h-4" />
+                        <AlertCircle className="w-3.5 h-3.5" />
                         Password is incorrect. Please check your credentials and try again.
                       </p>
                     )}
@@ -1024,30 +1024,27 @@ export const AuthModal: React.FC = () => {
                       width: '100%', maxWidth: '492px',
                       display: 'flex',
                       flexDirection: 'column',
-                      gap: '12px',
+                      gap: '8px',
                       alignItems: 'center',
                       justifyContent: 'center',
                       margin: '0 auto',
-                      paddingTop: '8px',
+                      paddingTop: '4px',
                     }}
                   >
                     <button 
                       type="submit" disabled={loading}
                       style={{
                         width: '100%', maxWidth: '492px',
-                        height: '60px',
+                        height: isMobile ? '44px' : '60px',
                         background: 'rgba(29, 73, 62, 1)',
                         color: '#FFFFFF',
                         border: 'none',
                         borderRadius: '4px',
-                        paddingTop: '16px',
-                        paddingRight: '32px',
-                        paddingBottom: '16px',
-                        paddingLeft: '32px',
+                        padding: isMobile ? '10px 16px' : '16px 32px',
                         gap: '8px',
                         fontFamily: '"Faktum", "Outfit", sans-serif',
                         fontWeight: 600,
-                        fontSize: '18px',
+                        fontSize: isMobile ? '14px' : '18px',
                         lineHeight: '100%',
                         cursor: 'pointer',
                         display: 'flex',
@@ -1068,7 +1065,7 @@ export const AuthModal: React.FC = () => {
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        gap: '12px',
+                        gap: '8px',
                         flexWrap: 'wrap',
                       }}
                     >
@@ -1076,8 +1073,8 @@ export const AuthModal: React.FC = () => {
                         style={{
                           fontFamily: '"Faktum", "Outfit", sans-serif',
                           fontWeight: 500,
-                          fontSize: '18px',
-                          lineHeight: '32px',
+                          fontSize: isMobile ? '13px' : '18px',
+                          lineHeight: isMobile ? '20px' : '32px',
                           color: 'rgba(141, 141, 141, 1)',
                           margin: 0,
                         }}
@@ -1089,8 +1086,8 @@ export const AuthModal: React.FC = () => {
                           style={{
                             fontFamily: '"Faktum", "Outfit", sans-serif',
                             fontWeight: 500,
-                            fontSize: '18px',
-                            lineHeight: '32px',
+                            fontSize: isMobile ? '13px' : '18px',
+                            lineHeight: isMobile ? '20px' : '32px',
                             color: 'rgba(29, 73, 62, 1)',
                             background: 'none',
                             border: 'none',
@@ -2089,17 +2086,17 @@ export const AuthModal: React.FC = () => {
                   <button 
                     type="button" onClick={handleGoogleLogin}
                     style={{
-                      height: '56px',
+                      height: isMobile ? '42px' : '56px',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       gap: '8px',
                       border: '1px solid rgba(204, 204, 204, 0.54)',
-                      borderRadius: '12px',
+                      borderRadius: '4px',
                       background: '#FFFFFF',
                       fontFamily: '"Faktum", "Outfit", sans-serif',
                       fontWeight: 500,
-                      fontSize: '14px',
+                      fontSize: isMobile ? '13px' : '14px',
                       color: 'rgba(43, 43, 43, 1)',
                       cursor: 'pointer',
                       transition: 'background-color 0.2s',
@@ -2107,24 +2104,24 @@ export const AuthModal: React.FC = () => {
                     onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#F8F9FA'; }}
                     onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#FFFFFF'; }}
                   >
-                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" className="w-5 h-5" alt="Google Logo" />
+                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" className="w-4 h-4 md:w-5 md:h-5" alt="Google Logo" />
                     <span>Google</span>
                   </button>
 
                   <button 
                     type="button" onClick={handleFacebookLogin}
                     style={{
-                      height: '56px',
+                      height: isMobile ? '42px' : '56px',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       gap: '8px',
                       border: '1px solid rgba(204, 204, 204, 0.54)',
-                      borderRadius: '12px',
+                      borderRadius: '4px',
                       background: '#FFFFFF',
                       fontFamily: '"Faktum", "Outfit", sans-serif',
                       fontWeight: 500,
-                      fontSize: '14px',
+                      fontSize: isMobile ? '13px' : '14px',
                       color: 'rgba(43, 43, 43, 1)',
                       cursor: 'pointer',
                       transition: 'background-color 0.2s',
@@ -2132,7 +2129,7 @@ export const AuthModal: React.FC = () => {
                     onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#F8F9FA'; }}
                     onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#FFFFFF'; }}
                   >
-                    <img src="https://www.svgrepo.com/show/475647/facebook-color.svg" className="w-5 h-5" alt="Facebook Logo" />
+                    <img src="https://www.svgrepo.com/show/475647/facebook-color.svg" className="w-4 h-4 md:w-5 md:h-5" alt="Facebook Logo" />
                     <span>Facebook</span>
                   </button>
                 </div>

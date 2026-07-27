@@ -411,17 +411,17 @@ export default function Homepage() {
               </p>
             </div>
 
-            {/* Right side: Two Buttons side-by-side (gap: 12px, w: 125px / 202px) */}
-            <div className="flex flex-row items-center gap-[12px] justify-start shrink-0 pb-1 w-full sm:w-auto overflow-x-auto no-scrollbar">
+            {/* Right side: Two Buttons side-by-side (responsive equal height & clean alignment) */}
+            <div className="flex flex-row items-center gap-3 justify-start shrink-0 pb-1 w-full sm:w-auto">
               <Link 
                 href="/shop"
-                className="hover:scale-[1.02] active:scale-[0.98] text-[#2B2B2B] bg-white transition-all duration-300 cursor-pointer flex items-center justify-center w-[125px] sm:w-[150px] md:w-[177px] h-[40px] sm:h-[55px] shrink-0 rounded-[4px] font-sans font-semibold text-[14px]"
+                className="hover:scale-[1.02] active:scale-[0.98] text-[#2B2B2B] bg-white transition-all duration-300 cursor-pointer flex items-center justify-center flex-1 sm:flex-initial sm:w-[150px] md:w-[177px] h-[44px] sm:h-[55px] shrink-0 rounded-[4px] border border-white font-sans font-semibold text-[14px] px-3 text-center"
               >
                 Shop Now
               </Link>
               <Link 
                 href="/travel"
-                className="hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 cursor-pointer flex items-center justify-center w-[202px] sm:w-[190px] md:w-[215px] h-[40px] sm:h-[55px] border border-white/80 text-white bg-white/10 shrink-0 rounded-[4px] backdrop-blur-sm font-sans font-semibold text-[14px]"
+                className="hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 cursor-pointer flex items-center justify-center flex-1 sm:flex-initial sm:w-[190px] md:w-[215px] h-[44px] sm:h-[55px] border border-white/80 text-white bg-white/10 shrink-0 rounded-[4px] backdrop-blur-sm font-sans font-semibold text-[14px] px-3 text-center"
               >
                 See Travel Packages
               </Link>

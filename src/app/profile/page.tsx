@@ -167,6 +167,9 @@ function ProfilePageContent() {
   // Orders Pagination State
   const [ordersCurrentPage, setOrdersCurrentPage] = useState(1);
 
+  // Mobile Navigation Dropdown State
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   // Sync tab from URL query params
   useEffect(() => {
     const tabParam = searchParams.get('tab') as ProfileTab;
@@ -437,55 +440,84 @@ function ProfilePageContent() {
       <div 
         className="w-full mx-auto max-w-[430px] md:max-w-[1440px] px-[20px] md:px-[80px] pb-12"
       >
-        {/* Mobile Navigation List (Visible only on mobile lg:hidden matching design spec) */}
-        <div className="block lg:hidden w-full max-w-[430px] mx-auto mb-4 bg-white border border-[#CCCCCC] rounded-[8px] overflow-hidden p-2 space-y-1">
+        {/* Mobile Navigation Dropdown/Accordion Card (Visible only on mobile lg:hidden) */}
+        <div className="block lg:hidden w-full max-w-[430px] mx-auto mb-4 bg-white border border-[#CCCCCC] rounded-[8px] overflow-hidden select-none">
+          {/* Header showing Active Tab + Dropdown arrow */}
           <button
-            onClick={() => setActiveTab('profile')}
-            className={`w-full flex items-center gap-3.5 px-4 py-3 rounded-[4px] transition cursor-pointer text-left ${activeTab === 'profile' ? 'bg-[#1D493E]/10 text-[#1D493E] font-bold' : 'text-[#2B2B2B] font-medium hover:bg-slate-50'}`}
+            type="button"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="w-full flex items-center justify-between px-4 py-3 bg-white text-[#1D493E] font-bold text-base cursor-pointer hover:bg-slate-50 transition"
           >
-            <User className={`w-5 h-5 ${activeTab === 'profile' ? 'text-[#1D493E]' : 'text-[#2B2B2B]'}`} />
-            <span className="font-sans text-base">My Profile</span>
+            <div className="flex items-center gap-3">
+              {activeTab === 'profile' && <User className="w-5 h-5 text-[#1D493E]" />}
+              {activeTab === 'orders' && <Package className="w-5 h-5 text-[#1D493E]" />}
+              {activeTab === 'addresses' && <MapPin className="w-5 h-5 text-[#1D493E]" />}
+              {activeTab === 'wishlist' && <Heart className="w-5 h-5 text-[#1D493E]" />}
+              <span className="capitalize font-semibold text-[#1D493E]">
+                {activeTab === 'profile' && 'My Profile'}
+                {activeTab === 'orders' && 'My Orders'}
+                {activeTab === 'addresses' && 'Saved Addresses'}
+                {activeTab === 'wishlist' && 'My Wishlist'}
+              </span>
+            </div>
+            <div className="flex items-center gap-1.5 text-xs text-slate-500 font-medium">
+              <span>{mobileMenuOpen ? 'Hide Menu' : 'Change Menu'}</span>
+              <ChevronDown className={`w-4 h-4 text-[#1D493E] transition-transform duration-200 ${mobileMenuOpen ? 'rotate-180' : ''}`} />
+            </div>
           </button>
 
-          <button
-            onClick={() => setActiveTab('orders')}
-            className={`w-full flex items-center gap-3.5 px-4 py-3 rounded-[4px] transition cursor-pointer text-left ${activeTab === 'orders' ? 'bg-[#1D493E]/10 text-[#1D493E] font-bold' : 'text-[#2B2B2B] font-medium hover:bg-slate-50'}`}
-          >
-            <Package className={`w-5 h-5 ${activeTab === 'orders' ? 'text-[#1D493E]' : 'text-[#2B2B2B]'}`} />
-            <span className="font-sans text-base">My Orders</span>
-          </button>
+          {/* Expanded Menu Options */}
+          {mobileMenuOpen && (
+            <div className="p-2 space-y-1 border-t border-[#CCCCCC] bg-slate-50/50 animate-fade-in">
+              <button
+                onClick={() => { setActiveTab('profile'); setMobileMenuOpen(false); }}
+                className={`w-full flex items-center gap-3.5 px-4 py-2.5 rounded-[4px] transition cursor-pointer text-left ${activeTab === 'profile' ? 'bg-[#1D493E] text-white font-bold' : 'text-[#2B2B2B] font-medium hover:bg-white'}`}
+              >
+                <User className={`w-5 h-5 ${activeTab === 'profile' ? 'text-white' : 'text-[#2B2B2B]'}`} />
+                <span className="font-sans text-base">My Profile</span>
+              </button>
 
-          <button
-            onClick={() => setActiveTab('addresses')}
-            className={`w-full flex items-center gap-3.5 px-4 py-3 rounded-[4px] transition cursor-pointer text-left ${activeTab === 'addresses' ? 'bg-[#1D493E]/10 text-[#1D493E] font-bold' : 'text-[#2B2B2B]'}`}
-          >
-            <MapPin className={`w-5 h-5 ${activeTab === 'addresses' ? 'text-[#1D493E]' : 'text-[#2B2B2B]'}`} />
-            <span className="font-sans text-base">Saved Addresses</span>
-          </button>
+              <button
+                onClick={() => { setActiveTab('orders'); setMobileMenuOpen(false); }}
+                className={`w-full flex items-center gap-3.5 px-4 py-2.5 rounded-[4px] transition cursor-pointer text-left ${activeTab === 'orders' ? 'bg-[#1D493E] text-white font-bold' : 'text-[#2B2B2B] font-medium hover:bg-white'}`}
+              >
+                <Package className={`w-5 h-5 ${activeTab === 'orders' ? 'text-white' : 'text-[#2B2B2B]'}`} />
+                <span className="font-sans text-base">My Orders</span>
+              </button>
 
-          <button
-            onClick={() => setActiveTab('wishlist')}
-            className={`w-full flex items-center gap-3.5 px-4 py-3 rounded-[4px] transition cursor-pointer text-left ${activeTab === 'wishlist' ? 'bg-[#1D493E]/10 text-[#1D493E] font-bold' : 'text-[#2B2B2B] font-medium hover:bg-slate-50'}`}
-          >
-            <Heart className={`w-5 h-5 ${activeTab === 'wishlist' ? 'text-[#1D493E]' : 'text-[#2B2B2B]'}`} />
-            <span className="font-sans text-base">My Wishlist</span>
-          </button>
+              <button
+                onClick={() => { setActiveTab('addresses'); setMobileMenuOpen(false); }}
+                className={`w-full flex items-center gap-3.5 px-4 py-2.5 rounded-[4px] transition cursor-pointer text-left ${activeTab === 'addresses' ? 'bg-[#1D493E] text-white font-bold' : 'text-[#2B2B2B] font-medium hover:bg-white'}`}
+              >
+                <MapPin className={`w-5 h-5 ${activeTab === 'addresses' ? 'text-white' : 'text-[#2B2B2B]'}`} />
+                <span className="font-sans text-base">Saved Addresses</span>
+              </button>
 
-          <button
-            onClick={() => router.push('/cart')}
-            className="w-full flex items-center gap-3.5 px-4 py-3 rounded-[4px] transition cursor-pointer text-left text-[#2B2B2B] font-medium hover:bg-slate-50"
-          >
-            <ShoppingBag className="w-5 h-5 text-[#2B2B2B]" />
-            <span className="font-sans text-base">My Cart</span>
-          </button>
+              <button
+                onClick={() => { setActiveTab('wishlist'); setMobileMenuOpen(false); }}
+                className={`w-full flex items-center gap-3.5 px-4 py-2.5 rounded-[4px] transition cursor-pointer text-left ${activeTab === 'wishlist' ? 'bg-[#1D493E] text-white font-bold' : 'text-[#2B2B2B] font-medium hover:bg-white'}`}
+              >
+                <Heart className={`w-5 h-5 ${activeTab === 'wishlist' ? 'text-white' : 'text-[#2B2B2B]'}`} />
+                <span className="font-sans text-base">My Wishlist</span>
+              </button>
 
-          <button
-            onClick={() => setShowLogoutModal(true)}
-            className="w-full flex items-center gap-3.5 px-4 py-3 rounded-[4px] transition cursor-pointer text-left bg-[#FFF0EF] text-[#FF3B30] font-semibold mt-1"
-          >
-            <LogOut className="w-5 h-5 text-[#FF3B30]" />
-            <span className="font-sans text-base">Logout</span>
-          </button>
+              <button
+                onClick={() => { router.push('/cart'); setMobileMenuOpen(false); }}
+                className="w-full flex items-center gap-3.5 px-4 py-2.5 rounded-[4px] transition cursor-pointer text-left text-[#2B2B2B] font-medium hover:bg-white"
+              >
+                <ShoppingBag className="w-5 h-5 text-[#2B2B2B]" />
+                <span className="font-sans text-base">My Cart</span>
+              </button>
+
+              <button
+                onClick={() => { setShowLogoutModal(true); setMobileMenuOpen(false); }}
+                className="w-full flex items-center gap-3.5 px-4 py-2.5 rounded-[4px] transition cursor-pointer text-left bg-[#FFF0EF] text-[#FF3B30] font-semibold mt-1"
+              >
+                <LogOut className="w-5 h-5 text-[#FF3B30]" />
+                <span className="font-sans text-base">Logout</span>
+              </button>
+            </div>
+          )}
         </div>
 
         <div className="flex flex-col lg:flex-row gap-5 lg:gap-[20px] items-start w-full">
@@ -980,17 +1012,17 @@ function ProfilePageContent() {
                       background: 'rgba(29, 73, 62, 1)',
                       color: '#FFFFFF',
                       border: 'none',
-                      padding: '0 20px',
                       fontFamily: '"Faktum", "Outfit", sans-serif',
                       fontWeight: 600,
                       fontSize: '13px',
                       cursor: 'pointer',
                       transition: 'background-color 0.2s',
                     }}
+                    className="px-3 sm:px-5 flex-shrink-0 whitespace-nowrap"
                     onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#173A31'; }}
                     onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'rgba(29, 73, 62, 1)'; }}
                   >
-                    Search Orders
+                    Search<span className="hidden sm:inline"> Orders</span>
                   </button>
                 </div>
 

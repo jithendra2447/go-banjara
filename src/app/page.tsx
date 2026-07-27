@@ -1158,14 +1158,6 @@ export default function Homepage() {
             </Link>
           </div>
 
-          {/* Bottom active state indicator line (Interactive Full-Width Bar) */}
-          <InteractiveProgressBar
-            totalSlides={3}
-            activeSlide={activeCategorySlide}
-            onSlideChange={(newIdx) => setActiveCategorySlide(newIdx)}
-            className="mt-6"
-            title="Click or drag to switch category"
-          />
         </div>
 
         {/* Mobile View (Figma Specs: w-430, height 311, padding 12px 20px, gap 12px, 8 dots below) */}
@@ -1423,15 +1415,6 @@ export default function Homepage() {
               );
             })}
           </div>
-
-          {/* Horizontal Progress Bar Indicator Line (Interactive Click & Drag - Full Width) */}
-          <InteractiveProgressBar
-            totalSlides={4}
-            activeSlide={activeDealSlide}
-            onSlideChange={(newIdx) => setActiveDealSlide(newIdx)}
-            className="w-full mt-8 mb-4"
-            title="Click or drag to switch active deal product"
-          />
 
           {/* View all products footer */}
           <div className="text-center pt-4">

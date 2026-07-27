@@ -218,15 +218,7 @@ export default function ShopPage() {
 
         {/* Main 4x2 product grid directly below the EXPERIENCE THE SHOPPING header */}
         <div style={{ backgroundColor: "white" }} className="py-3 sm:py-[42px] flex flex-col w-full">
-          {renderProductGrid(mainGridProducts.slice(0, 4), setActiveMainGridSlide, activeMainGridSlide)}
-          <div style={{ height: "24px" }} className="shrink-0" />
-          <InteractiveProgressBar
-            totalSlides={4}
-            activeSlide={activeMainGridSlide}
-            onSlideChange={(newIdx) => setActiveMainGridSlide(newIdx)}
-            className="w-full my-4"
-            title="Click or drag to switch active product"
-          />
+          {renderProductGrid(mainGridProducts.slice(0, 4))}
           <div className="h-4 sm:h-[32px] shrink-0" />
           {renderProductGrid(mainGridProducts.slice(4, 8))}
           <div style={{ height: "62px" }} className="shrink-0" />
@@ -260,17 +252,7 @@ export default function ShopPage() {
           <div className="h-3 md:h-[62px] shrink-0" />
 
           {/* Grid */}
-          {renderProductGrid(newArrivals, setActiveNewArrivalsSlide, activeNewArrivalsSlide)}
-          <div style={{ height: "32px" }} className="shrink-0" />
-
-          {/* Interactive Full-Width Progress Bar */}
-          <InteractiveProgressBar
-            totalSlides={4}
-            activeSlide={activeNewArrivalsSlide}
-            onSlideChange={(newIdx) => setActiveNewArrivalsSlide(newIdx)}
-            className="w-full"
-            title="Click or drag to switch active product"
-          />
+          {renderProductGrid(newArrivals)}
         </div>
 
         {/* Section 2: Travels Essentials */}
@@ -290,15 +272,7 @@ export default function ShopPage() {
           <div className="h-3 md:h-[62px] shrink-0" />
 
           {/* Grid Rows */}
-          {renderProductGrid(travelsEssentials.slice(0, 4), setActiveTravelsEssentialsSlide, activeTravelsEssentialsSlide)}
-          <div style={{ height: "24px" }} className="shrink-0" />
-          <InteractiveProgressBar
-            totalSlides={4}
-            activeSlide={activeTravelsEssentialsSlide}
-            onSlideChange={(newIdx) => setActiveTravelsEssentialsSlide(newIdx)}
-            className="w-full my-4"
-            title="Click or drag to switch active product"
-          />
+          {renderProductGrid(travelsEssentials.slice(0, 4))}
           <div style={{ height: "32px" }} className="shrink-0" />
           {renderProductGrid(travelsEssentials.slice(4, 8))}
           <div style={{ height: "62px" }} className="shrink-0" />
@@ -331,17 +305,7 @@ export default function ShopPage() {
           <div className="h-3 md:h-[62px] shrink-0" />
 
           {/* Grid */}
-          {renderProductGrid(limitedEdition, setActiveLimitedEditionSlide, activeLimitedEditionSlide)}
-          <div style={{ height: "32px" }} className="shrink-0" />
-
-          {/* Full-Width Interactive Progress Bar */}
-          <InteractiveProgressBar
-            totalSlides={Math.min(4, limitedEdition.length || 4)}
-            activeSlide={activeLimitedEditionSlide}
-            onSlideChange={(newIdx) => setActiveLimitedEditionSlide(newIdx)}
-            className="w-full"
-            title="Click or drag to switch active product"
-          />
+          {renderProductGrid(limitedEdition)}
         </div>
 
         {/* Section 4: 25% to 50% Discount Sale */}
@@ -361,15 +325,7 @@ export default function ShopPage() {
           <div className="h-3 md:h-[62px] shrink-0" />
 
           {/* Grid Rows */}
-          {renderProductGrid(discountSaleProducts.slice(0, 4), setActiveDiscountSaleSlide, activeDiscountSaleSlide)}
-          <div style={{ height: "24px" }} className="shrink-0" />
-          <InteractiveProgressBar
-            totalSlides={4}
-            activeSlide={activeDiscountSaleSlide}
-            onSlideChange={(newIdx) => setActiveDiscountSaleSlide(newIdx)}
-            className="w-full my-4"
-            title="Click or drag to switch active product"
-          />
+          {renderProductGrid(discountSaleProducts.slice(0, 4))}
           <div style={{ height: "32px" }} className="shrink-0" />
           {renderProductGrid(discountSaleProducts.slice(4, 8))}
           <div style={{ height: "62px" }} className="shrink-0" />

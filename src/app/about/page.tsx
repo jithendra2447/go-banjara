@@ -938,7 +938,9 @@ export default function AboutPage() {
                 borderRadius: "4px",
                 overflow: "hidden",
                 flexShrink: 0,
-                position: "relative"
+                position: "relative",
+                transform: "translateZ(0)",
+                WebkitTransform: "translateZ(0)"
               }}
             >
               <img src="/card-2-full.png" alt="Explore Adventure Card 2" className="w-full object-cover scale-[1.04] origin-center" style={{ position: "absolute", bottom: 0, left: 0, width: "100%", height: "560px", objectFit: "cover", objectPosition: "center bottom" }} />
@@ -1035,7 +1037,9 @@ export default function AboutPage() {
                 borderRadius: "4px",
                 overflow: "hidden",
                 flexShrink: 0,
-                position: "relative"
+                position: "relative",
+                transform: "translateZ(0)",
+                WebkitTransform: "translateZ(0)"
               }}
             >
               <img src="/card-4-full.png" alt="Yellow Stickers Card 4" className="w-full object-cover scale-[1.04] origin-center" style={{ position: "absolute", bottom: 0, left: 0, width: "100%", height: "560px", objectFit: "cover", objectPosition: "center bottom" }} />
@@ -1198,7 +1202,9 @@ export default function AboutPage() {
                 borderRadius: "4px",
                 overflow: "hidden",
                 flexShrink: 0,
-                position: "relative"
+                position: "relative",
+                transform: "translateZ(0)",
+                WebkitTransform: "translateZ(0)"
               }}
             >
               <img src="/card-8-full.png" alt="Yellow Stickers Card 8" className="w-full object-cover scale-[1.04] origin-center" style={{ position: "absolute", bottom: 0, left: 0, width: "100%", height: "560px", objectFit: "cover", objectPosition: "center bottom" }} />
@@ -1295,7 +1301,9 @@ export default function AboutPage() {
                 borderRadius: "4px",
                 overflow: "hidden",
                 flexShrink: 0,
-                position: "relative"
+                position: "relative",
+                transform: "translateZ(0)",
+                WebkitTransform: "translateZ(0)"
               }}
             >
               <img src="/card-6-full.png" alt="Explore Adventure Card 6" className="w-full object-cover scale-[1.04] origin-center" style={{ position: "absolute", bottom: 0, left: 0, width: "100%", height: "560px", objectFit: "cover", objectPosition: "center bottom" }} />

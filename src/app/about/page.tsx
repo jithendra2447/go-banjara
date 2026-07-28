@@ -26,13 +26,13 @@ export default function AboutPage() {
   React.useEffect(() => {
     const handleScroll = () => {
       if (row2Ref.current) {
-        setHideRow1(row2Ref.current.getBoundingClientRect().top <= 105);
+        setHideRow1(row2Ref.current.getBoundingClientRect().top <= 100);
       }
       if (row3Ref.current) {
-        setHideRow2(row3Ref.current.getBoundingClientRect().top <= 105);
+        setHideRow2(row3Ref.current.getBoundingClientRect().top <= 100);
       }
       if (row4Ref.current) {
-        setHideRow3(row4Ref.current.getBoundingClientRect().top <= 105);
+        setHideRow3(row4Ref.current.getBoundingClientRect().top <= 100);
       }
     };
 

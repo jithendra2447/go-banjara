@@ -289,9 +289,10 @@ export default function BlogPage() {
         }}
         className="mx-auto w-full max-w-[430px] md:max-w-[1440px] px-[20px] md:px-[80px] py-[12px] md:py-[42px] flex flex-col gap-5 md:gap-[32px]"
       >
-        {/* Tab Bar */}
+        {/* Tab Bar — underline tab style (Product Description / Reviews style) */}
         <div
-          className="w-full max-w-[1280px] flex flex-row items-end gap-3 md:gap-[16px] border-b-2 border-gray-200 bg-white box-border overflow-x-auto no-scrollbar scrollbar-none pb-0"
+          className="w-full max-w-[1280px] flex flex-row items-end gap-0 bg-white box-border overflow-x-auto no-scrollbar"
+          style={{ borderBottom: '1.5px solid #E5E7EB' }}
         >
           {tabs.map((tab) => (
             <button
@@ -299,18 +300,19 @@ export default function BlogPage() {
               onClick={() => handleTabChange(tab)}
               style={{
                 borderRadius: 0,
-                borderTop: 'none',
-                borderLeft: 'none',
-                borderRight: 'none',
-                borderBottom: activeTab === tab ? '2px solid #1D493E' : '2px solid transparent',
-                marginBottom: '-2px',
+                border: 'none',
+                borderBottom: activeTab === tab ? '2.5px solid #1D493E' : '2.5px solid transparent',
+                marginBottom: '-1.5px',
                 background: 'transparent',
                 outline: 'none',
+                padding: '10px 20px',
+                cursor: 'pointer',
+                transition: 'color 0.18s ease, border-color 0.18s ease',
               }}
-              className={`px-3 md:px-4 py-2 text-xs sm:text-sm md:text-[20px] font-sans font-semibold cursor-pointer whitespace-nowrap transition-colors ${
+              className={`text-xs sm:text-sm md:text-[17px] font-sans font-semibold whitespace-nowrap ${
                 activeTab === tab
                   ? 'text-[#1D493E]'
-                  : 'text-[#2B2B2B]/60 hover:text-[#1D493E]'
+                  : 'text-[#6B7280] hover:text-[#1D493E]'
               }`}
             >
               {tab}

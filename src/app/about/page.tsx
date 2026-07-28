@@ -934,10 +934,11 @@ export default function AboutPage() {
                 height: "380px", 
                 borderRadius: "4px",
                 overflow: "hidden",
-                flexShrink: 0
+                flexShrink: 0,
+                position: "relative"
               }}
             >
-              <img src="/card-2-full.png" alt="Explore Adventure Card 2" className="w-full h-full object-cover scale-[1.04] origin-center" style={{ marginTop: "-38px", height: "calc(100% + 45px)" }} />
+              <img src="/card-2-full.png" alt="Explore Adventure Card 2" className="w-full object-cover scale-[1.04] origin-center" style={{ position: "absolute", bottom: 0, left: 0, width: "100%", height: "460px", objectFit: "cover", objectPosition: "center bottom" }} />
             </div>
 
             {/* Col 2: Center Text Card */}
@@ -1030,10 +1031,11 @@ export default function AboutPage() {
                 height: "380px", 
                 borderRadius: "4px",
                 overflow: "hidden",
-                flexShrink: 0
+                flexShrink: 0,
+                position: "relative"
               }}
             >
-              <img src="/card-4-full.png" alt="Yellow Stickers Card 4" className="w-full h-full object-cover scale-[1.04] origin-center" style={{ marginTop: "-38px", height: "calc(100% + 45px)" }} />
+              <img src="/card-4-full.png" alt="Yellow Stickers Card 4" className="w-full object-cover scale-[1.04] origin-center" style={{ position: "absolute", bottom: 0, left: 0, width: "100%", height: "460px", objectFit: "cover", objectPosition: "center bottom" }} />
             </div>
           </div>
 
@@ -1192,10 +1194,11 @@ export default function AboutPage() {
                 height: "380px", 
                 borderRadius: "4px",
                 overflow: "hidden",
-                flexShrink: 0
+                flexShrink: 0,
+                position: "relative"
               }}
             >
-              <img src="/card-8-full.png" alt="Yellow Stickers Card 8" className="w-full h-full object-cover scale-[1.04] origin-center" style={{ marginTop: "-38px", height: "calc(100% + 45px)" }} />
+              <img src="/card-8-full.png" alt="Yellow Stickers Card 8" className="w-full object-cover scale-[1.04] origin-center" style={{ position: "absolute", bottom: 0, left: 0, width: "100%", height: "460px", objectFit: "cover", objectPosition: "center bottom" }} />
             </div>
 
             {/* Col 2: Center Text Card */}
@@ -1288,10 +1291,11 @@ export default function AboutPage() {
                 height: "380px", 
                 borderRadius: "4px",
                 overflow: "hidden",
-                flexShrink: 0
+                flexShrink: 0,
+                position: "relative"
               }}
             >
-              <img src="/card-6-full.png" alt="Explore Adventure Card 6" className="w-full h-full object-cover scale-[1.04] origin-center" style={{ marginTop: "-38px", height: "calc(100% + 45px)" }} />
+              <img src="/card-6-full.png" alt="Explore Adventure Card 6" className="w-full object-cover scale-[1.04] origin-center" style={{ position: "absolute", bottom: 0, left: 0, width: "100%", height: "460px", objectFit: "cover", objectPosition: "center bottom" }} />
             </div>
           </div>
 

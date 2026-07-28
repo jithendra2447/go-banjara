@@ -937,7 +937,7 @@ export default function AboutPage() {
                 flexShrink: 0
               }}
             >
-              <img src="/card-2-full.png" alt="Explore Adventure Card 2" className="w-full h-full object-cover scale-[1.04] origin-center" style={{ objectPosition: 'center bottom' }} />
+              <img src="/card-2-full.png" alt="Explore Adventure Card 2" className="w-full h-full object-cover scale-[1.04] origin-center" style={{ marginTop: "-38px", height: "calc(100% + 45px)" }} />
             </div>
 
             {/* Col 2: Center Text Card */}
@@ -1033,7 +1033,7 @@ export default function AboutPage() {
                 flexShrink: 0
               }}
             >
-              <img src="/card-4-full.png" alt="Yellow Stickers Card 4" className="w-full h-full object-cover scale-[1.04] origin-center" style={{ objectPosition: 'center bottom' }} />
+              <img src="/card-4-full.png" alt="Yellow Stickers Card 4" className="w-full h-full object-cover scale-[1.04] origin-center" style={{ marginTop: "-38px", height: "calc(100% + 45px)" }} />
             </div>
           </div>
 
@@ -1195,7 +1195,7 @@ export default function AboutPage() {
                 flexShrink: 0
               }}
             >
-              <img src="/card-8-full.png" alt="Yellow Stickers Card 8" className="w-full h-full object-cover scale-[1.04] origin-center" style={{ objectPosition: 'center bottom' }} />
+              <img src="/card-8-full.png" alt="Yellow Stickers Card 8" className="w-full h-full object-cover scale-[1.04] origin-center" style={{ marginTop: "-38px", height: "calc(100% + 45px)" }} />
             </div>
 
             {/* Col 2: Center Text Card */}
@@ -1291,7 +1291,7 @@ export default function AboutPage() {
                 flexShrink: 0
               }}
             >
-              <img src="/card-6-full.png" alt="Explore Adventure Card 6" className="w-full h-full object-cover scale-[1.04] origin-center" style={{ objectPosition: 'center bottom' }} />
+              <img src="/card-6-full.png" alt="Explore Adventure Card 6" className="w-full h-full object-cover scale-[1.04] origin-center" style={{ marginTop: "-38px", height: "calc(100% + 45px)" }} />
             </div>
           </div>
 

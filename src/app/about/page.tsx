@@ -15,6 +15,21 @@ export default function AboutPage() {
     setOpenFaqIndex(openFaqIndex === idx ? null : idx);
   };
 
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  React.useEffect(() => {
+    const handleScroll = () => {
+      if (!containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      setScrollProgress(-rect.top);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const FAQ_ITEMS = [
     {
       question: "How do I book a travel package?",
@@ -783,7 +798,7 @@ export default function AboutPage() {
         </div>
 
         {/* 4 Rows of Sticky Stacked Cards */}
-        <div className="hidden md:flex flex-col w-full max-w-[1280px] mx-auto mt-6 pb-6">
+        <div ref={containerRef} className="hidden md:flex flex-col w-full max-w-[1280px] mx-auto mt-6 pb-6">
           
           {/* Row 1 - Card Stack 1 */}
           <div 
@@ -801,6 +816,9 @@ export default function AboutPage() {
               justifyContent: "space-between",
               background: "#FFFFFF",
               boxSizing: "border-box",
+              opacity: scrollProgress >= 630 ? 0 : 1,
+              visibility: scrollProgress >= 630 ? "hidden" : "visible",
+              transition: "opacity 0.3s ease, visibility 0.3s ease",
             }}
             className="w-full mx-auto"
           >
@@ -927,6 +945,9 @@ export default function AboutPage() {
               justifyContent: "space-between",
               background: "#FFFFFF",
               boxSizing: "border-box",
+              opacity: scrollProgress >= 1160 ? 0 : 1,
+              visibility: scrollProgress >= 1160 ? "hidden" : "visible",
+              transition: "opacity 0.3s ease, visibility 0.3s ease",
             }}
             className="w-full mx-auto"
           >
@@ -1062,6 +1083,9 @@ export default function AboutPage() {
               justifyContent: "space-between",
               background: "#FFFFFF",
               boxSizing: "border-box",
+              opacity: scrollProgress >= 1690 ? 0 : 1,
+              visibility: scrollProgress >= 1690 ? "hidden" : "visible",
+              transition: "opacity 0.3s ease, visibility 0.3s ease",
             }}
             className="w-full mx-auto"
           >
@@ -1180,7 +1204,7 @@ export default function AboutPage() {
             style={{
               position: "sticky",
               top: "100px",
-              marginBottom: "420px",
+              marginBottom: "0px",
               zIndex: 40,
               width: "1280px",
               maxWidth: "100%",

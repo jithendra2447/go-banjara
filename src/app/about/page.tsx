@@ -89,6 +89,9 @@ export default function AboutPage() {
     }
   ];
 
+  const row1 = [REVIEWS[0], REVIEWS[1], REVIEWS[2], REVIEWS[0], REVIEWS[1], REVIEWS[2]];
+  const row2 = [REVIEWS[3], REVIEWS[4], REVIEWS[5], REVIEWS[3], REVIEWS[4], REVIEWS[5]];
+
   return (
     <div className="min-h-screen flex flex-col bg-white font-sans text-[#2B2B2B] overflow-x-clip">
       
@@ -938,7 +941,7 @@ export default function AboutPage() {
                 position: "relative"
               }}
             >
-              <img src="/card-2-full.png" alt="Explore Adventure Card 2" className="w-full object-cover scale-[1.04] origin-center" style={{ position: "absolute", bottom: 0, left: 0, width: "100%", height: "460px", objectFit: "cover", objectPosition: "center bottom" }} />
+              <img src="/card-2-full.png" alt="Explore Adventure Card 2" className="w-full object-cover scale-[1.04] origin-center" style={{ position: "absolute", bottom: 0, left: 0, width: "100%", height: "560px", objectFit: "cover", objectPosition: "center bottom" }} />
             </div>
 
             {/* Col 2: Center Text Card */}
@@ -1035,7 +1038,7 @@ export default function AboutPage() {
                 position: "relative"
               }}
             >
-              <img src="/card-4-full.png" alt="Yellow Stickers Card 4" className="w-full object-cover scale-[1.04] origin-center" style={{ position: "absolute", bottom: 0, left: 0, width: "100%", height: "460px", objectFit: "cover", objectPosition: "center bottom" }} />
+              <img src="/card-4-full.png" alt="Yellow Stickers Card 4" className="w-full object-cover scale-[1.04] origin-center" style={{ position: "absolute", bottom: 0, left: 0, width: "100%", height: "560px", objectFit: "cover", objectPosition: "center bottom" }} />
             </div>
           </div>
 
@@ -1198,7 +1201,7 @@ export default function AboutPage() {
                 position: "relative"
               }}
             >
-              <img src="/card-8-full.png" alt="Yellow Stickers Card 8" className="w-full object-cover scale-[1.04] origin-center" style={{ position: "absolute", bottom: 0, left: 0, width: "100%", height: "460px", objectFit: "cover", objectPosition: "center bottom" }} />
+              <img src="/card-8-full.png" alt="Yellow Stickers Card 8" className="w-full object-cover scale-[1.04] origin-center" style={{ position: "absolute", bottom: 0, left: 0, width: "100%", height: "560px", objectFit: "cover", objectPosition: "center bottom" }} />
             </div>
 
             {/* Col 2: Center Text Card */}
@@ -1295,7 +1298,7 @@ export default function AboutPage() {
                 position: "relative"
               }}
             >
-              <img src="/card-6-full.png" alt="Explore Adventure Card 6" className="w-full object-cover scale-[1.04] origin-center" style={{ position: "absolute", bottom: 0, left: 0, width: "100%", height: "460px", objectFit: "cover", objectPosition: "center bottom" }} />
+              <img src="/card-6-full.png" alt="Explore Adventure Card 6" className="w-full object-cover scale-[1.04] origin-center" style={{ position: "absolute", bottom: 0, left: 0, width: "100%", height: "560px", objectFit: "cover", objectPosition: "center bottom" }} />
             </div>
           </div>
 
@@ -1431,14 +1434,53 @@ export default function AboutPage() {
             ))}
           </div>
 
-          {/* Desktop Marquee Carousel (Untouched) */}
+          {/* Desktop Marquee Carousel */}
           <div className="hidden md:block w-full overflow-hidden relative">
+            {/* Left and Right Fade Mask overlays */}
+            <div 
+              className="absolute inset-y-0 left-0 w-[100px] sm:w-[180px] pointer-events-none z-30"
+              style={{ background: 'linear-gradient(90deg, #FFFFFF 0%, rgba(255,255,255,0) 100%)' }}
+            />
+            <div 
+              className="absolute inset-y-0 right-0 w-[100px] sm:w-[180px] pointer-events-none z-30"
+              style={{ background: 'linear-gradient(270deg, #FFFFFF 0%, rgba(255,255,255,0) 100%)' }}
+            />
+
             <div className="flex flex-col gap-6 py-2">
+              {/* Row 1 (Left Infinite Scrolling) */}
               <div className="flex gap-8 py-2 w-max animate-marquee hover:[animation-play-state:paused]">
-                {REVIEWS.map((review, idx) => (
+                {row1.map((review, idx) => (
                   <div 
-                    key={idx} 
-                    className="bg-white border border-gray-200 p-6 rounded-[8px] flex flex-col justify-between space-y-4 shadow-2xs hover:shadow-xl hover:border-[#FF623E] hover:scale-105 transition-all duration-300 w-[380px] shrink-0 cursor-pointer"
+                    key={`r1-${idx}`} 
+                    className="bg-white border border-gray-200 p-6 rounded-[8px] flex flex-col justify-between space-y-4 shadow-2xs hover:shadow-xl hover:border-[#FF623E] hover:scale-105 transition-all duration-300 w-[380px] shrink-0 cursor-pointer text-left"
+                  >
+                    <div className="space-y-3">
+                      <div className="flex text-amber-400 text-sm gap-1">
+                        {Array.from({ length: 5 }).map((_, s) => (
+                          <Star key={s} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                        ))}
+                      </div>
+                      <p className="text-gray-700 font-medium italic text-[15px] leading-relaxed">
+                        “{review.text}”
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-3 pt-3 border-t border-gray-100">
+                      <img src={review.avatar} alt={review.name} className="w-10 h-10 rounded-full object-cover shrink-0" />
+                      <div>
+                        <h4 className="text-[15px] font-bold text-gray-800 leading-none">{review.name}</h4>
+                        <p className="text-xs text-gray-400 font-medium mt-0.5">{review.subtitle}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Row 2 (Right Reverse Infinite Scrolling) */}
+              <div className="flex gap-8 py-2 w-max animate-marquee-reverse hover:[animation-play-state:paused]">
+                {row2.map((review, idx) => (
+                  <div 
+                    key={`r2-${idx}`} 
+                    className="bg-white border border-gray-200 p-6 rounded-[8px] flex flex-col justify-between space-y-4 shadow-2xs hover:shadow-xl hover:border-[#FF623E] hover:scale-105 transition-all duration-300 w-[380px] shrink-0 cursor-pointer text-left"
                   >
                     <div className="space-y-3">
                       <div className="flex text-amber-400 text-sm gap-1">
@@ -1512,9 +1554,9 @@ export default function AboutPage() {
                     {item.question}
                   </span>
                   {isOpen ? (
-                    <span className="text-lg text-[#FF623E] select-none shrink-0 font-bold">▲</span>
+                    <span className="text-lg sm:text-2xl font-semibold text-[#FF623E] select-none shrink-0 ml-2">−</span>
                   ) : (
-                    <span className="text-lg text-[#1D493E] select-none shrink-0 font-bold">▼</span>
+                    <span className="text-lg sm:text-2xl font-semibold text-[#1D493E] select-none shrink-0 ml-2">+</span>
                   )}
                 </button>
                 {isOpen && (

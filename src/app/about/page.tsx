@@ -783,7 +783,7 @@ export default function AboutPage() {
         </div>
 
         {/* 4 Rows of Sticky Stacked Cards */}
-        <div className="hidden md:flex flex-col w-full max-w-[1280px] mx-auto mt-6 pb-6">
+        <div className="hidden md:flex flex-col w-full max-w-[1280px] mx-auto mt-6 pb-[240px]">
           
           {/* Row 1 - Card Stack 1 */}
           <div 

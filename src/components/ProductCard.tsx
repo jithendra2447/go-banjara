@@ -88,7 +88,7 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
               alt={product.name} 
               loading="lazy"
               decoding="async"
-              className="w-full h-full object-cover transition-transform duration-300"
+              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
               style={{ imageRendering: '-webkit-optimize-contrast' }}
             />
             {/* Wishlist Heart */}
@@ -200,7 +200,7 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
               alt={product.name} 
               loading="lazy"
               decoding="async"
-              className="w-full h-full object-cover transition-transform duration-500 ease-out"
+              className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
               style={{
                 width: "100%",
                 height: "100%",

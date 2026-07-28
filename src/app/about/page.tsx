@@ -782,16 +782,12 @@ export default function AboutPage() {
           </div>
         </div>
 
-        {/* 4 Rows of Sticky Stacked Cards */}
-        <div className="hidden md:flex flex-col w-full max-w-[1280px] mx-auto mt-6 pb-[240px]">
+        {/* 4 Rows of Cards (Figma Spec: 1280x1896, gap 32px) */}
+        <div className="hidden md:flex flex-col w-full max-w-[1280px] mx-auto mt-6 pb-6 gap-[32px]" style={{ height: "1896px" }}>
           
           {/* Row 1 - Card Stack 1 */}
           <div 
             style={{
-              position: "sticky",
-              top: "100px",
-              marginBottom: "80px",
-              zIndex: 10,
               width: "1280px",
               maxWidth: "100%",
               height: "450px",
@@ -914,10 +910,6 @@ export default function AboutPage() {
           {/* Row 2 - Card Stack 2 */}
           <div 
             style={{
-              position: "sticky",
-              top: "100px",
-              marginBottom: "80px",
-              zIndex: 20,
               width: "1280px",
               maxWidth: "100%",
               height: "450px",
@@ -1049,10 +1041,6 @@ export default function AboutPage() {
           {/* Row 3 - Card Stack 3 */}
           <div 
             style={{
-              position: "sticky",
-              top: "100px",
-              marginBottom: "80px",
-              zIndex: 30,
               width: "1280px",
               maxWidth: "100%",
               height: "450px",
@@ -1178,10 +1166,6 @@ export default function AboutPage() {
           {/* Row 4 - Card Stack 4 */}
           <div 
             style={{
-              position: "sticky",
-              top: "100px",
-              marginBottom: "0px",
-              zIndex: 40,
               width: "1280px",
               maxWidth: "100%",
               height: "450px",

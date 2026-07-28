@@ -15,31 +15,6 @@ export default function AboutPage() {
     setOpenFaqIndex(openFaqIndex === idx ? null : idx);
   };
 
-  const row2Ref = React.useRef<HTMLDivElement>(null);
-  const row3Ref = React.useRef<HTMLDivElement>(null);
-  const row4Ref = React.useRef<HTMLDivElement>(null);
-
-  const [hideRow1, setHideRow1] = useState(false);
-  const [hideRow2, setHideRow2] = useState(false);
-  const [hideRow3, setHideRow3] = useState(false);
-
-  React.useEffect(() => {
-    const handleScroll = () => {
-      if (row2Ref.current) {
-        setHideRow1(row2Ref.current.getBoundingClientRect().top <= 100);
-      }
-      if (row3Ref.current) {
-        setHideRow2(row3Ref.current.getBoundingClientRect().top <= 100);
-      }
-      if (row4Ref.current) {
-        setHideRow3(row4Ref.current.getBoundingClientRect().top <= 100);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
 
 
@@ -818,7 +793,7 @@ export default function AboutPage() {
             style={{
               position: "sticky",
               top: "100px",
-              marginBottom: "80px",
+              marginBottom: "0px",
               zIndex: 10,
               width: "1280px",
               maxWidth: "100%",
@@ -829,9 +804,6 @@ export default function AboutPage() {
               justifyContent: "space-between",
               background: "#FFFFFF",
               boxSizing: "border-box",
-              opacity: hideRow1 ? 0 : 1,
-              visibility: hideRow1 ? "hidden" : "visible",
-              transition: "opacity 0.25s ease, visibility 0.25s ease",
             }}
             className="w-full mx-auto"
           >
@@ -944,11 +916,11 @@ export default function AboutPage() {
 
           {/* Row 2 - Card Stack 2 */}
           <div 
-            ref={row2Ref}
+
             style={{
               position: "sticky",
               top: "100px",
-              marginBottom: "80px",
+              marginBottom: "0px",
               zIndex: 20,
               width: "1280px",
               maxWidth: "100%",
@@ -959,9 +931,6 @@ export default function AboutPage() {
               justifyContent: "space-between",
               background: "#FFFFFF",
               boxSizing: "border-box",
-              opacity: hideRow2 ? 0 : 1,
-              visibility: hideRow2 ? "hidden" : "visible",
-              transition: "opacity 0.25s ease, visibility 0.25s ease",
             }}
             className="w-full mx-auto"
           >
@@ -1083,11 +1052,11 @@ export default function AboutPage() {
 
           {/* Row 3 - Card Stack 3 */}
           <div 
-            ref={row3Ref}
+
             style={{
               position: "sticky",
               top: "100px",
-              marginBottom: "80px",
+              marginBottom: "0px",
               zIndex: 30,
               width: "1280px",
               maxWidth: "100%",
@@ -1098,9 +1067,6 @@ export default function AboutPage() {
               justifyContent: "space-between",
               background: "#FFFFFF",
               boxSizing: "border-box",
-              opacity: hideRow3 ? 0 : 1,
-              visibility: hideRow3 ? "hidden" : "visible",
-              transition: "opacity 0.25s ease, visibility 0.25s ease",
             }}
             className="w-full mx-auto"
           >
@@ -1216,7 +1182,7 @@ export default function AboutPage() {
 
           {/* Row 4 - Card Stack 4 */}
           <div 
-            ref={row4Ref}
+
             style={{
               position: "sticky",
               top: "100px",

@@ -560,10 +560,7 @@ export default function ShopPage() {
           </div>
         </section>
 
-        {/* Spacer */}
-        <div className="h-4 sm:h-[62px] shrink-0" />
-
-        {/* Section 12: Newsletter CTA Section (Figma Specs: 1440x342px, pt:42px, pb:42px, gap:32px) */}
+{/* Section 12: Newsletter CTA Section (Figma Specs: 1440x342px, pt:42px, pb:42px, gap:32px) */}
         <section 
           style={{
             width: "100%",
@@ -573,7 +570,7 @@ export default function ShopPage() {
             boxSizing: "border-box",
             margin: "0 auto",
             paddingTop: "42px",
-            paddingBottom: "42px",
+            paddingBottom: "0",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",

@@ -917,7 +917,7 @@ export default function AboutPage() {
           <div 
             style={{
               position: "sticky",
-              top: "100px",
+              top: "140px",
               marginBottom: "80px",
               zIndex: 20,
               width: "1280px",
@@ -1052,7 +1052,7 @@ export default function AboutPage() {
           <div 
             style={{
               position: "sticky",
-              top: "100px",
+              top: "180px",
               marginBottom: "80px",
               zIndex: 30,
               width: "1280px",
@@ -1181,7 +1181,7 @@ export default function AboutPage() {
           <div 
             style={{
               position: "sticky",
-              top: "100px",
+              top: "220px",
               marginBottom: "0px",
               zIndex: 40,
               width: "1280px",

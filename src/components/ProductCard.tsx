@@ -171,7 +171,6 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
           width: "100%",
           backgroundColor: "rgba(255, 255, 255, 1)",
           borderRadius: "4px",
-          overflow: "hidden",
           boxSizing: "border-box",
         }}
         className="hidden sm:flex min-h-[560px] h-full flex-col justify-between gap-4 p-0 border-none rounded-none shadow-none group cursor-pointer"
@@ -182,25 +181,24 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
             position: "relative",
             width: "100%",
             borderRadius: "4px",
-            overflow: "hidden",
             flexShrink: 0,
             backgroundColor: "rgba(245, 245, 245, 1)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
           }}
-          className="h-[254px]"
+          className="h-[254px] overflow-hidden"
         >
           <Link 
             href={`/shop/product/${product.id}`}
-            style={{ width: "100%", height: "100%", display: "block" }}
+            style={{ width: "100%", height: "100%", display: "block", overflow: "hidden" }}
           >
             <img 
               src={images[activeImgIdx]} 
               alt={product.name} 
               loading="lazy"
               decoding="async"
-              className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+              className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
               style={{
                 width: "100%",
                 height: "100%",

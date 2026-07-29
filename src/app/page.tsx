@@ -2512,7 +2512,7 @@ export default function Homepage() {
               </Link>
               <Link
                 href="/shop"
-                className="w-full sm:w-fit px-8 h-[55px] flex items-center justify-center rounded-[4px] bg-transparent text-[#1D493E] border-2 border-[#1D493E] hover:bg-[#1D493E] hover:text-white transition-all duration-300 font-sans font-medium text-[18px]"
+                className="w-full sm:w-fit px-8 h-[55px] flex items-center justify-center rounded-[4px] bg-[#1D493E] text-white font-sans font-medium text-[18px] hover:opacity-90 transition-opacity"
               >
                 Explore collection
               </Link>
@@ -2530,13 +2530,13 @@ export default function Homepage() {
           <div className="flex items-center justify-center gap-[12px] pt-1">
             <Link
               href="/travel"
-              className="w-[125px] h-[40px] bg-[#1D493E] text-white font-sans font-bold text-[14px] rounded-[4px] flex items-center justify-center border border-[#1D493E] hover:bg-[#1D493E]/90 transition"
+              className="w-[125px] h-[40px] bg-[#1D493E] text-white font-sans font-bold text-[14px] rounded-[4px] flex items-center justify-center border border-[#1D493E] hover:opacity-90 transition"
             >
               Book Now
             </Link>
             <Link
               href="/shop"
-              className="w-[160px] h-[40px] border border-[#1D493E] text-[#1D493E] font-sans font-medium text-[14px] rounded-[4px] flex items-center justify-center bg-transparent hover:bg-[#1D493E] hover:text-white transition"
+              className="w-[160px] h-[40px] border border-[#1D493E] text-[#1D493E] font-sans font-medium text-[14px] rounded-[4px] flex items-center justify-center bg-transparent hover:opacity-80 transition"
             >
               Explore collection
             </Link>

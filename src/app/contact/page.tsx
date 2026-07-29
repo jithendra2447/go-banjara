@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { 
   MapPin, Mail, Phone, Calendar, Clock, Star, ArrowUpRight, 
   CheckCircle2, Send, ShieldCheck, Compass, MessageSquare, 
-  ChevronDown, ChevronUp, Users, Heart
+  ChevronDown, ChevronUp, Users, Heart, Plus, Minus
 } from 'lucide-react';
 import { TrustBanner } from '@/components/TrustBanner';
 
@@ -898,9 +898,9 @@ export default function ContactPage() {
                       {faq.question}
                     </span>
                     {isOpen ? (
-                      <ChevronUp className="w-5 h-5 text-[#2B2B2B] shrink-0" />
+                      <Minus className="w-5 h-5 text-[#FF623E] shrink-0" />
                     ) : (
-                      <ChevronDown className="w-5 h-5 text-[#2B2B2B] shrink-0" />
+                      <Plus className="w-5 h-5 text-[#1D493E] shrink-0" />
                     )}
                   </button>
                   {isOpen && (

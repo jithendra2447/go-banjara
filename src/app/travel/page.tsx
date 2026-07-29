@@ -1840,9 +1840,9 @@ export default function HolidaysPortal() {
                     {item.question}
                   </span>
                   {isOpen ? (
-                    <span style={{ fontWeight: 600, color: 'rgba(255, 98, 62, 1)', flexShrink: 0, lineHeight: 1 }} className="text-base sm:text-2xl">−</span>
+                    <Minus className="w-5 h-5 md:w-6 md:h-6 shrink-0 text-[#FF623E]" />
                   ) : (
-                    <span style={{ fontWeight: 600, color: 'rgba(29, 73, 62, 1)', flexShrink: 0, lineHeight: 1 }} className="text-base sm:text-2xl">+</span>
+                    <Plus className="w-5 h-5 md:w-6 md:h-6 shrink-0 text-[#1D493E]" />
                   )}
                 </button>
                 {isOpen && (

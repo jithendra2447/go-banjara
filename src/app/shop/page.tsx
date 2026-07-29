@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Star } from 'lucide-react';
+import { Star, Plus, Minus } from 'lucide-react';
 import { useCart } from '@/components/providers';
 import { PRODUCTS } from '@/data/products';
 import { Product } from '@/types';
@@ -536,9 +536,9 @@ export default function ShopPage() {
                       {item.question}
                     </span>
                     {isOpen ? (
-                      <span className="text-lg sm:text-2xl font-semibold text-[#FF623E] select-none shrink-0 ml-2">−</span>
+                      <Minus className="w-5 h-5 md:w-6 md:h-6 shrink-0 text-[#FF623E]" />
                     ) : (
-                      <span className="text-lg sm:text-2xl font-semibold text-[#1D493E] select-none shrink-0 ml-2">+</span>
+                      <Plus className="w-5 h-5 md:w-6 md:h-6 shrink-0 text-[#1D493E]" />
                     )}
                   </button>
                   {isOpen && (

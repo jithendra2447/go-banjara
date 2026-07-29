@@ -4,7 +4,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import { 
   MapPin, Calendar, Users, Star, ArrowRight, ShieldCheck, Compass, Heart, Sparkles, 
-  ChevronDown, ChevronUp, Check, ShoppingBag, ArrowUpRight, MessageSquare, Info, BookOpen
+  ChevronDown, ChevronUp, Check, ShoppingBag, ArrowUpRight, MessageSquare, Info, BookOpen, Plus, Minus
 } from 'lucide-react';
 import { useCart } from '@/components/providers';
 import { HOLIDAY_PACKAGES } from '@/data/packages';
@@ -2327,9 +2327,9 @@ export default function Homepage() {
                       {faq.q}
                     </span>
                     {isOpen ? (
-                      <ChevronUp className="w-4 h-4 text-[#1D493E] shrink-0" />
+                      <Minus className="w-5 h-5 text-[#FF623E] shrink-0" />
                     ) : (
-                      <ChevronDown className="w-4 h-4 text-[#1D493E] shrink-0" />
+                      <Plus className="w-5 h-5 text-[#1D493E] shrink-0" />
                     )}
                   </button>
                   {isOpen && (

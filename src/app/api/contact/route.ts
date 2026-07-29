@@ -22,20 +22,20 @@ export async function POST(request: Request) {
       },
     });
 
-    // Forward to Google Sheets Webhook if configured
+    // Forward to Google Sheets Webhook via GET (Apps Script requires GET from external servers)
     if (process.env.GOOGLE_SHEETS_WEBHOOK_URL) {
       try {
-        await fetch(process.env.GOOGLE_SHEETS_WEBHOOK_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            formType: 'CONTACT_US',
-            name,
-            email: email.toLowerCase(),
-            mobile: mobile || '',
-            message,
-            submittedAt: new Date().toISOString(),
-          }),
+        const params = new URLSearchParams({
+          formType: 'CONTACT_US',
+          name: name || '',
+          email: email.toLowerCase(),
+          mobile: mobile || '',
+          message: message || '',
+          submittedAt: new Date().toISOString(),
+        });
+        await fetch(`${process.env.GOOGLE_SHEETS_WEBHOOK_URL}?${params.toString()}`, {
+          method: 'GET',
+          redirect: 'follow',
         });
       } catch (sheetErr) {
         console.warn('Google Sheets Webhook Sync Notice:', sheetErr);

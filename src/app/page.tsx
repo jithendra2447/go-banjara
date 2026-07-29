@@ -1334,7 +1334,7 @@ export default function Homepage() {
                   key={deal.id} 
                   onMouseEnter={() => setActiveDealSlide(idx)}
                   onClick={() => setActiveDealSlide(idx)}
-                  className="w-[280px] sm:w-[300px] lg:w-[calc((100%-96px)/4)] shrink-0 snap-start bg-white rounded-[12px] h-auto p-2 pb-4 flex flex-col justify-between gap-[16px] overflow-hidden group cursor-pointer"
+                  className="w-[280px] sm:w-[300px] lg:w-[calc((100%-96px)/4)] shrink-0 min-w-[280px] lg:min-w-[calc((100%-96px)/4)] snap-start bg-white rounded-[12px] h-auto p-2 pb-4 flex flex-col justify-between gap-[16px] overflow-hidden group cursor-pointer"
                 >
                   {/* Image Container with Dots (Width: 339px, Height: 254px, Radius: 4px) */}
                   <div className="relative w-full md:h-[254px] rounded-[4px] overflow-hidden shrink-0">

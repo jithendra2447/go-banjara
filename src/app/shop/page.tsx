@@ -87,7 +87,8 @@ export default function ShopPage() {
   const [activeNewArrivalsSlide, setActiveNewArrivalsSlide] = React.useState(0);
   const [activeTravelsEssentialsSlide, setActiveTravelsEssentialsSlide] = React.useState(0);
   const [activeLimitedEditionSlide, setActiveLimitedEditionSlide] = React.useState(0);
-  const [activeDiscountSaleSlide, setActiveDiscountSaleSlide] = React.useState(0);
+  const [visibleTravelsCount, setVisibleTravelsCount] = React.useState(4);
+  const [visibleDiscountCount, setVisibleDiscountCount] = React.useState(4);
 
   React.useEffect(() => {
     const saved = localStorage.getItem('gb_admin_products_v3');
@@ -310,19 +311,25 @@ export default function ShopPage() {
 
           {/* Grid Rows */}
           <div className="flex flex-col gap-6 sm:gap-[32px] w-full">
-            {renderProductGrid(travelsEssentials.slice(0, 4))}
-            {renderProductGrid(travelsEssentials.slice(4, 8))}
+            {Array.from({ length: Math.ceil(visibleTravelsCount / 4) }).map((_, i) => (
+              <React.Fragment key={i}>
+                {renderProductGrid(travelsEssentials.slice(i * 4, (i + 1) * 4))}
+              </React.Fragment>
+            ))}
           </div>
 
           {/* Centered Load More Button */}
-          <div className="flex justify-center pt-2">
-            <Link 
-              href="/shop/travels-essentials" 
-              className="inline-flex items-center justify-center px-8 py-3.5 rounded-[12px] bg-transparent hover:bg-[#EEF2F1] text-[#1D493E] font-sans font-semibold text-base sm:text-lg md:text-[18px] transition-all duration-300 cursor-pointer"
-            >
-              Load more
-            </Link>
-          </div>
+          {travelsEssentials.length > visibleTravelsCount && (
+            <div className="flex justify-center pt-2">
+              <button 
+                type="button"
+                onClick={() => setVisibleTravelsCount(prev => prev + 4)}
+                className="inline-flex items-center justify-center px-8 py-3.5 rounded-[12px] bg-transparent hover:bg-[#EEF2F1] text-[#1D493E] font-sans font-semibold text-base sm:text-lg md:text-[18px] transition-all duration-300 cursor-pointer border-none"
+              >
+                Load more
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Section 3: Limited Edition (Figma Specs: 1440x918px, pt:42px, pb:42px, gap:32px) */}

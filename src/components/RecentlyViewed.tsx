@@ -4,6 +4,7 @@ import React from 'react';
 import ProductCard from '@/components/ProductCard';
 import { PRODUCTS } from '@/data/products';
 import { useCart } from '@/components/providers';
+import { DragCarousel } from '@/components/DragCarousel';
 
 export const RecentlyViewed: React.FC = () => {
   const { addToCart, wishlist } = useCart();
@@ -48,18 +49,17 @@ export const RecentlyViewed: React.FC = () => {
         </h2>
       </div>
 
-      {/* Products Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
+      {/* Products Carousel */}
+      <DragCarousel totalItems={displayItems.length} itemWidth={320}>
         {displayItems.map((prod, idx) => (
-          <ProductCard 
-            key={prod.id || idx} 
-            product={prod} 
-            onAddToCart={(item) => addToCart(item, 'shop')} 
-          />
+          <div key={prod.id || idx} className="w-[280px] sm:w-[300px] shrink-0 snap-start">
+            <ProductCard 
+              product={prod} 
+              onAddToCart={(item) => addToCart(item, 'shop')} 
+            />
+          </div>
         ))}
-      </div>
-
-
+      </DragCarousel>
     </div>
   );
 };

@@ -1,11 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import ProductCard from '@/components/ProductCard';
 import { PRODUCTS } from '@/data/products';
 import { useCart } from '@/components/providers';
-import { InteractiveProgressBar } from '@/components/InteractiveProgressBar';
+import { DragCarousel } from '@/components/DragCarousel';
 
 interface SuggestedProductsProps {
   title?: string;
@@ -13,7 +13,6 @@ interface SuggestedProductsProps {
 
 export const SuggestedProducts: React.FC<SuggestedProductsProps> = ({ title }) => {
   const { addToCart } = useCart();
-  const [activeSlide, setActiveSlide] = useState(0);
   const suggestedItems = PRODUCTS.slice(0, 4);
 
   return (
@@ -53,26 +52,17 @@ export const SuggestedProducts: React.FC<SuggestedProductsProps> = ({ title }) =
         Based upon your activities
       </p>
 
-      {/* Products Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 mt-6 md:mt-8">
-        {suggestedItems.map((prod, idx) => (
-          <div key={prod.id} onMouseEnter={() => setActiveSlide(idx)}>
+      {/* Products Carousel */}
+      <DragCarousel totalItems={suggestedItems.length} itemWidth={320} className="mt-6 md:mt-8">
+        {suggestedItems.map((prod) => (
+          <div key={prod.id} className="w-[280px] sm:w-[300px] shrink-0 snap-start">
             <ProductCard 
               product={prod} 
               onAddToCart={(item) => addToCart(item, 'shop')} 
             />
           </div>
         ))}
-      </div>
-
-      {/* Interactive Full-Width Progress Bar */}
-      <InteractiveProgressBar
-        totalSlides={suggestedItems.length}
-        activeSlide={activeSlide}
-        onSlideChange={(newIdx) => setActiveSlide(newIdx)}
-        className="w-full mt-8"
-        title="Click or drag to switch active product"
-      />
+      </DragCarousel>
 
       {/* View All Products Link */}
       <div className="flex justify-center mt-8">

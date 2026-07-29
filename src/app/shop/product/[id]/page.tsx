@@ -8,6 +8,7 @@ import { useCart } from '@/components/providers';
 import { PRODUCTS } from '@/data/products';
 import { Product } from '@/types';
 import ProductCard from '@/components/ProductCard';
+import { DragCarousel } from '@/components/DragCarousel';
 import { TrustBanner } from '@/components/TrustBanner';
 import { getFutureDeliveryString } from '@/utils/dateUtils';
 
@@ -1238,6 +1239,59 @@ export default function ProductDetailsPage() {
             <span>Reserve your tour now</span>
             <ArrowUpRight style={{ width: "16px", height: "16px" }} />
           </Link>
+        </section>
+
+        {/* Similar Products Section */}
+        <section 
+          className="w-full max-w-[1280px] mx-auto px-[20px] md:px-0 py-8 md:py-16 select-none text-left"
+          style={{ boxSizing: "border-box" }}
+        >
+          {/* Top Tag Pill */}
+          <span 
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              height: "24px",
+              padding: "0 10px",
+              borderRadius: "4px",
+              backgroundColor: "rgba(255, 235, 232, 1)",
+              color: "rgba(255, 90, 54, 1)",
+              fontFamily: '"Faktum", sans-serif',
+              fontWeight: 600,
+              fontSize: "12px",
+              lineHeight: "100%",
+              letterSpacing: "0.5px",
+              textTransform: "uppercase",
+            }}
+          >
+            SIMILAR TO THIS ITEM
+          </span>
+
+          {/* Section Title */}
+          <h2 
+            className="font-serif font-semibold text-2xl md:text-[36px] text-[#2B2B2B] leading-tight my-2"
+          >
+            Similar <span style={{ color: "rgba(255, 98, 62, 1)" }}>Products</span>
+          </h2>
+
+          {/* Subtitle */}
+          <p 
+            className="font-sans font-medium text-xs sm:text-base md:text-[18px] text-[#8D8D8D] m-0"
+          >
+            Other premium collectibles from our shop
+          </p>
+
+          {/* Products Carousel */}
+          <DragCarousel totalItems={fallbackSimilarProducts.length} itemWidth={320} className="mt-6 md:mt-8">
+            {fallbackSimilarProducts.map((prod) => (
+              <div key={prod.id} className="w-[280px] sm:w-[300px] shrink-0 snap-start">
+                <ProductCard 
+                  product={prod} 
+                  onAddToCart={(item) => addToCart(item, 'shop')} 
+                />
+              </div>
+            ))}
+          </DragCarousel>
         </section>
 
       </main>

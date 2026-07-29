@@ -7,6 +7,7 @@ import { useCart } from '@/components/providers';
 import { PRODUCTS } from '@/data/products';
 import { Product } from '@/types';
 import ProductCard from '@/components/ProductCard';
+import { DragCarousel } from '@/components/DragCarousel';
 import { TrustBanner } from '@/components/TrustBanner';
 import { InteractiveProgressBar } from '@/components/InteractiveProgressBar';
 
@@ -159,6 +160,32 @@ export default function ShopPage() {
     return discounted.length >= 4 ? discounted : [...discounted, ...travelsEssentials].slice(0, 8);
   }, [productsList, travelsEssentials]);
 
+  const renderProductCarousel = (
+    items: Product[],
+    activeSlideSetter: (idx: number) => void,
+    activeSlideIndex: number
+  ) => {
+    return (
+      <DragCarousel totalItems={items.length} itemWidth={320} className="w-full max-w-[1280px] mx-auto">
+        {items.map((prod, idx) => {
+          return (
+            <div 
+              key={prod.id} 
+              onMouseEnter={() => activeSlideSetter(idx)}
+              onClick={() => activeSlideSetter(idx)}
+              className="w-[280px] sm:w-[300px] shrink-0 snap-start transition-all duration-300 rounded-xl cursor-pointer"
+            >
+              <ProductCard
+                product={prod}
+                onAddToCart={(p) => addToCart(p, 'shop')}
+              />
+            </div>
+          );
+        })}
+      </DragCarousel>
+    );
+  };
+
   const renderProductGrid = (
     items: Product[],
     activeSlideSetter?: (idx: number) => void,
@@ -295,21 +322,8 @@ export default function ShopPage() {
             </p>
           </div>
 
-          {/* Grid */}
-          {renderProductGrid(newArrivals, setActiveNewArrivalsSlide, activeNewArrivalsSlide, newArrivalsScrollRef)}
-
-          {/* Progress Bar (Figma Specs: Width: 1280px, Height: 8px, Radius: 24px) */}
-          <div className="w-full max-w-[1280px] mx-auto pt-2 px-2 sm:px-0">
-            <InteractiveProgressBar
-              scrollRef={newArrivalsScrollRef}
-              totalSlides={newArrivals.length}
-              activeSlide={activeNewArrivalsSlide}
-              onSlideChange={(idx) => setActiveNewArrivalsSlide(idx)}
-              height={8}
-              trackColor="#EAEAEA"
-              barColor="#1D493E"
-            />
-          </div>
+          {/* Carousel */}
+          {renderProductCarousel(newArrivals, setActiveNewArrivalsSlide, activeNewArrivalsSlide)}
         </div>
 
         {/* Section 2: Travels Essentials (Figma Specs: 1440x1687px, pt:42px, pb:42px, gap:32px) */}
@@ -365,21 +379,8 @@ export default function ShopPage() {
             </p>
           </div>
 
-          {/* Grid */}
-          {renderProductGrid(limitedEdition, setActiveLimitedEditionSlide, activeLimitedEditionSlide, limitedEditionScrollRef)}
-
-          {/* Progress Bar (Figma Specs: Width: 1280px, Height: 8px, Radius: 24px) */}
-          <div className="w-full max-w-[1280px] mx-auto pt-2 px-2 sm:px-0">
-            <InteractiveProgressBar
-              scrollRef={limitedEditionScrollRef}
-              totalSlides={limitedEdition.length}
-              activeSlide={activeLimitedEditionSlide}
-              onSlideChange={(idx) => setActiveLimitedEditionSlide(idx)}
-              height={8}
-              trackColor="#EAEAEA"
-              barColor="#1D493E"
-            />
-          </div>
+          {/* Carousel */}
+          {renderProductCarousel(limitedEdition, setActiveLimitedEditionSlide, activeLimitedEditionSlide)}
         </div>
 
         {/* Section 4: 25% to 50% Discount Sale (Figma Specs: 1440x1687px, pt:42px, pb:42px, gap:32px) */}

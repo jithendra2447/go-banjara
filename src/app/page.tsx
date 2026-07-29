@@ -12,6 +12,7 @@ import { PRODUCTS } from '@/data/products';
 import { BonjoMascot } from '@/components/BonjoMascot';
 import { CartIcon } from '@/components/CartIcon';
 import { InteractiveProgressBar } from '@/components/InteractiveProgressBar';
+import { DragCarousel } from '@/components/DragCarousel';
 import { getFutureDeliveryString, getFutureDateString } from '@/utils/dateUtils';
 
 // Static Blog/Diaries list
@@ -76,6 +77,17 @@ const FAQ_ITEMS = [
     question: "What materials are the badges made from?",
     answer: "Zinc alloy with glossy enamel fill. Lightweight, durable, and safe to pin on bags, jackets, or backpacks without damaging fabric."
   }
+];
+
+const HOME_CATEGORIES = [
+  { name: "Stickers", price: "Starts from ₹93", image: "/around_the_world_sticker.jpg", link: "/shop?category=Stickers" },
+  { name: "Badges", price: "Starts from ₹199", image: "/around_the_world_sticker.jpg", link: "/shop?category=Badges" },
+  { name: "Fridge Magnets", price: "Starts from ₹199", image: "/around_the_world_sticker.jpg", link: "/shop?category=Magnets" },
+  { name: "Journals", price: "Starts from ₹299", image: "/around_the_world_sticker.jpg", link: "/shop?category=Journals" },
+  { name: "Patches", price: "Starts from ₹120", image: "/around_the_world_sticker.jpg", link: "/shop?category=Patches" },
+  { name: "Pins", price: "Starts from ₹85", image: "/around_the_world_sticker.jpg", link: "/shop?category=Pins" },
+  { name: "Keychains", price: "Starts from ₹99", image: "/around_the_world_sticker.jpg", link: "/shop?category=Keychains" },
+  { name: "T-Shirts", price: "Starts from ₹499", image: "/around_the_world_sticker.jpg", link: "/shop?category=Apparel" },
 ];
 
 export default function Homepage() {
@@ -1075,108 +1087,37 @@ export default function Homepage() {
             </div>
           </div>
 
-          <div 
-            ref={topCategoriesScrollRef as any}
-            style={{ width: "100%", maxWidth: "1280px", gap: "32px" }}
-            className="flex md:grid md:grid-cols-3 mx-auto text-left overflow-x-auto scrollbar-none snap-x snap-mandatory pb-4 pt-1 px-1 scroll-smooth"
-          >
-            {/* Category 1: Stickers */}
-            <Link 
-              href="/shop?category=Stickers" 
-              onMouseEnter={() => setActiveCategorySlide(0)}
-              onClick={() => setActiveCategorySlide(0)}
-              style={{ width: "100%", maxWidth: "405.33px", minHeight: "328.63px", display: "flex", flexDirection: "column", textDecoration: "none" }}
-              className="w-[280px] sm:w-[340px] md:w-auto shrink-0 md:shrink snap-start group mx-auto p-3 rounded-xl cursor-pointer"
-            >
-              <div 
-                style={{ height: "237.63px", width: "100%", borderRadius: "4px", overflow: "hidden", backgroundColor: "#FAF9F6" }}
+          <DragCarousel totalItems={HOME_CATEGORIES.length} itemWidth={340} className="w-full max-w-[1280px] mx-auto">
+            {HOME_CATEGORIES.map((cat, idx) => (
+              <Link 
+                key={cat.name}
+                href={cat.link} 
+                onMouseEnter={() => setActiveCategorySlide(idx)}
+                onClick={() => setActiveCategorySlide(idx)}
+                style={{ width: "340px", minHeight: "328.63px", display: "flex", flexDirection: "column", textDecoration: "none" }}
+                className="shrink-0 snap-start group mx-auto p-3 rounded-xl cursor-pointer"
               >
-                <img 
-                  src="/around_the_world_sticker.jpg" 
-                  alt="Stickers" 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                  style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
-                />
-              </div>
-              <div style={{ display: "flex", flexDirection: "column", gap: "12px", paddingTop: "24px", height: "91px", boxSizing: "border-box" }}>
-                <h4 style={{ fontFamily: "Faktum, sans-serif", fontWeight: 600, fontSize: "24px", height: "30px", lineHeight: "100%", color: "rgba(43, 43, 43, 1)", margin: 0, display: "flex", alignItems: "center" }}>
-                  Stickers
-                </h4>
-                <p style={{ fontFamily: "Faktum, sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", color: "#8D8D8D", margin: 0, display: "flex", alignItems: "center" }}>
-                  Starts from ₹93
-                </p>
-              </div>
-            </Link>
-
-            {/* Category 2: Badges */}
-            <Link 
-              href="/shop?category=Badges" 
-              onMouseEnter={() => setActiveCategorySlide(1)}
-              onClick={() => setActiveCategorySlide(1)}
-              style={{ width: "100%", maxWidth: "405.33px", minHeight: "328.63px", display: "flex", flexDirection: "column", textDecoration: "none" }}
-              className="w-[280px] sm:w-[340px] md:w-auto shrink-0 md:shrink snap-start group mx-auto p-3 rounded-xl cursor-pointer"
-            >
-              <div 
-                style={{ height: "237.63px", width: "100%", borderRadius: "4px", overflow: "hidden", backgroundColor: "#FAF9F6" }}
-              >
-                <img 
-                  src="/around_the_world_sticker.jpg" 
-                  alt="Badges" 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                  style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
-                />
-              </div>
-              <div style={{ display: "flex", flexDirection: "column", gap: "12px", paddingTop: "24px", height: "91px", boxSizing: "border-box" }}>
-                <h4 style={{ fontFamily: "Faktum, sans-serif", fontWeight: 600, fontSize: "24px", height: "30px", lineHeight: "100%", color: "rgba(43, 43, 43, 1)", margin: 0, display: "flex", alignItems: "center" }}>
-                  Badges
-                </h4>
-                <p style={{ fontFamily: "Faktum, sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", color: "#8D8D8D", margin: 0, display: "flex", alignItems: "center" }}>
-                  Starts from ₹199
-                </p>
-              </div>
-            </Link>
-
-            {/* Category 3: Fridge Magnets */}
-            <Link 
-              href="/shop?category=Magnets" 
-              onMouseEnter={() => setActiveCategorySlide(2)}
-              onClick={() => setActiveCategorySlide(2)}
-              style={{ width: "100%", maxWidth: "405.33px", minHeight: "328.63px", display: "flex", flexDirection: "column", textDecoration: "none" }}
-              className="w-[280px] sm:w-[340px] md:w-auto shrink-0 md:shrink snap-start group mx-auto p-3 rounded-xl cursor-pointer"
-            >
-              <div 
-                style={{ height: "237.63px", width: "100%", borderRadius: "4px", overflow: "hidden", backgroundColor: "#FAF9F6" }}
-              >
-                <img 
-                  src="/around_the_world_sticker.jpg" 
-                  alt="Fridge Magnets" 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                  style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
-                />
-              </div>
-              <div style={{ display: "flex", flexDirection: "column", gap: "12px", paddingTop: "24px", height: "91px", boxSizing: "border-box" }}>
-                <h4 style={{ fontFamily: "Faktum, sans-serif", fontWeight: 600, fontSize: "24px", height: "30px", lineHeight: "100%", color: "rgba(43, 43, 43, 1)", margin: 0, display: "flex", alignItems: "center" }}>
-                  Fridge Magnets
-                </h4>
-                <p style={{ fontFamily: "Faktum, sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", color: "#8D8D8D", margin: 0, display: "flex", alignItems: "center" }}>
-                  Starts from ₹199
-                </p>
-              </div>
-            </Link>
-          </div>
-
-          {/* Progress Bar (Figma Specs: Width: 1280px, Height: 8px, Radius: 24px) */}
-          <div className="w-full max-w-[1280px] mx-auto pt-2 px-2 sm:px-0">
-            <InteractiveProgressBar
-              scrollRef={topCategoriesScrollRef}
-              totalSlides={3}
-              activeSlide={activeCategorySlide}
-              onSlideChange={(idx) => setActiveCategorySlide(idx)}
-              height={8}
-              trackColor="#EAEAEA"
-              barColor="#1D493E"
-            />
-          </div>
+                <div 
+                  style={{ height: "237.63px", width: "100%", borderRadius: "4px", overflow: "hidden", backgroundColor: "#FAF9F6" }}
+                >
+                  <img 
+                    src={cat.image} 
+                    alt={cat.name} 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                    style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
+                  />
+                </div>
+                <div style={{ display: "flex", flexDirection: "column", gap: "12px", paddingTop: "24px", height: "91px", boxSizing: "border-box" }}>
+                  <h4 style={{ fontFamily: "Faktum, sans-serif", fontWeight: 600, fontSize: "24px", height: "30px", lineHeight: "100%", color: "rgba(43, 43, 43, 1)", margin: 0, display: "flex", alignItems: "center" }}>
+                    {cat.name}
+                  </h4>
+                  <p style={{ fontFamily: "Faktum, sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "100%", color: "#8D8D8D", margin: 0, display: "flex", alignItems: "center" }}>
+                    {cat.price}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </DragCarousel>
 
         </div>
 
@@ -1305,10 +1246,7 @@ export default function Homepage() {
             </p>
           </div>
 
-          <div 
-            ref={dealsScrollRef as any}
-            className="flex gap-[32px] w-full max-w-[1280px] mx-auto overflow-x-auto scrollbar-none snap-x snap-mandatory pb-4 pt-1 px-1 scroll-smooth"
-          >
+          <DragCarousel totalItems={6} itemWidth={300} className="w-full max-w-[1280px] mx-auto">
             {[
               resolveProduct("naturally-nomad-badge-1", "Naturally Nomad", "Badges", "/naturally_nomad_badge.png", 139, 199),
               resolveProduct("explore-more-keychain-1", "Explore more", "Key Chains", "/explore_more_keychain.png", 149, 193),
@@ -1334,7 +1272,7 @@ export default function Homepage() {
                   key={deal.id} 
                   onMouseEnter={() => setActiveDealSlide(idx)}
                   onClick={() => setActiveDealSlide(idx)}
-                  className="w-[280px] sm:w-[300px] lg:w-[calc((100%-96px)/4)] shrink-0 min-w-[280px] lg:min-w-[calc((100%-96px)/4)] snap-start bg-white rounded-[12px] h-auto p-2 pb-4 flex flex-col justify-between gap-[16px] overflow-hidden group cursor-pointer"
+                  className="w-[280px] sm:w-[300px] shrink-0 snap-start bg-white rounded-[12px] h-auto p-2 pb-4 flex flex-col justify-between gap-[16px] overflow-hidden group cursor-pointer"
                 >
                   {/* Image Container with Dots (Width: 339px, Height: 254px, Radius: 4px) */}
                   <div className="relative w-full md:h-[254px] rounded-[4px] overflow-hidden shrink-0">
@@ -1438,20 +1376,7 @@ export default function Homepage() {
                 </div>
               );
             })}
-          </div>
-
-          {/* Progress Bar (Figma Specs: Width: 1280px, Height: 8px, Radius: 24px) */}
-          <div className="w-full max-w-[1280px] mx-auto pt-2 px-2 sm:px-0">
-            <InteractiveProgressBar
-              scrollRef={dealsScrollRef}
-              totalSlides={6}
-              activeSlide={activeDealSlide}
-              onSlideChange={(idx) => setActiveDealSlide(idx)}
-              height={8}
-              trackColor="#EAEAEA"
-              barColor="#1D493E"
-            />
-          </div>
+          </DragCarousel>
 
           {/* View all products footer */}
           <div className="text-center pt-4">

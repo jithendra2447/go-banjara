@@ -2523,7 +2523,8 @@ export default function Homepage() {
               </Link>
               <Link
                 href="/shop"
-                className="w-full sm:w-fit px-8 h-[55px] flex items-center justify-center rounded-[4px] bg-[#1D493E] text-white font-sans font-medium text-[18px] hover:opacity-90 transition-opacity"
+                style={{ width: "286px", height: "55px", paddingTop: "16px", paddingBottom: "16px", paddingLeft: "32px", paddingRight: "32px", gap: "8px", borderRadius: "4px", borderWidth: "2px", boxSizing: "border-box" }}
+                className="hidden md:flex items-center justify-center border-2 border-[#1D493E] bg-white text-[#1D493E] hover:bg-[#1D493E] hover:text-white transition-all duration-300 font-sans font-medium text-[18px] text-center"
               >
                 Explore collection
               </Link>

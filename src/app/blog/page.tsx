@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { ChevronLeft, ChevronRight, ChevronDown } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Plus, Minus } from 'lucide-react';
 
 /* ─────────────────── DATA ─────────────────── */
 interface BlogPost {
@@ -445,11 +445,11 @@ export default function BlogPage() {
                   <span className="font-sans font-medium text-sm sm:text-base md:text-[20px] leading-snug md:leading-[32px] text-[#2B2B2B] flex-1">
                     {item.question}
                   </span>
-                  <ChevronDown 
-                    className={`w-5 h-5 md:w-6 md:h-6 shrink-0 transition-transform duration-300 ${
-                      isOpen ? 'rotate-180 text-[#FF623E]' : 'text-[#1D493E]'
-                    }`} 
-                  />
+                  {isOpen ? (
+                    <Minus className="w-5 h-5 md:w-6 md:h-6 shrink-0 text-[#FF623E]" />
+                  ) : (
+                    <Plus className="w-5 h-5 md:w-6 md:h-6 shrink-0 text-[#1D493E]" />
+                  )}
                 </button>
                 {isOpen && (
                   <p className="font-sans font-medium text-xs sm:text-sm md:text-[20px] leading-relaxed md:leading-[32px] text-[#8D8D8D] m-0 pb-4 md:pb-[20px]">

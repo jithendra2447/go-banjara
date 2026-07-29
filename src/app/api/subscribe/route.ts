@@ -30,6 +30,26 @@ export async function POST(request: Request) {
       data: { email: cleanEmail },
     });
 
+    // Forward to Google Sheets Webhook if configured
+    if (process.env.GOOGLE_SHEETS_WEBHOOK_URL) {
+      try {
+        await fetch(process.env.GOOGLE_SHEETS_WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            formType: 'NEWSLETTER_SUBSCRIBE',
+            name: 'Subscriber',
+            email: cleanEmail,
+            mobile: '',
+            message: 'Subscribed to newsletter',
+            submittedAt: new Date().toISOString(),
+          }),
+        });
+      } catch (sheetErr) {
+        console.warn('Google Sheets Webhook Sync Notice:', sheetErr);
+      }
+    }
+
     return NextResponse.json({
       success: true,
       message: 'Subscribed successfully to GO BANJARA updates!',

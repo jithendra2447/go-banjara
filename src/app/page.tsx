@@ -339,6 +339,9 @@ export default function Homepage() {
   const [activeDealSlide, setActiveDealSlide] = useState(0);
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
 
+  const topCategoriesScrollRef = React.useRef<HTMLDivElement>(null);
+  const dealsScrollRef = React.useRef<HTMLDivElement>(null);
+
   const handleTouchStart = (e: React.TouchEvent) => {
     setTouchStartX(e.touches[0].clientX);
   };
@@ -1073,8 +1076,9 @@ export default function Homepage() {
           </div>
 
           <div 
+            ref={topCategoriesScrollRef as any}
             style={{ width: "100%", maxWidth: "1280px", gap: "32px" }}
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mx-auto text-left"
+            className="flex md:grid md:grid-cols-3 mx-auto text-left overflow-x-auto scrollbar-none snap-x snap-mandatory pb-4 pt-1 px-1 scroll-smooth"
           >
             {/* Category 1: Stickers */}
             <Link 
@@ -1082,7 +1086,7 @@ export default function Homepage() {
               onMouseEnter={() => setActiveCategorySlide(0)}
               onClick={() => setActiveCategorySlide(0)}
               style={{ width: "100%", maxWidth: "405.33px", minHeight: "328.63px", display: "flex", flexDirection: "column", textDecoration: "none" }}
-              className="group mx-auto p-3 rounded-xl cursor-pointer"
+              className="w-[280px] sm:w-[340px] md:w-auto shrink-0 md:shrink snap-start group mx-auto p-3 rounded-xl cursor-pointer"
             >
               <div 
                 style={{ height: "237.63px", width: "100%", borderRadius: "4px", overflow: "hidden", backgroundColor: "#FAF9F6" }}
@@ -1110,7 +1114,7 @@ export default function Homepage() {
               onMouseEnter={() => setActiveCategorySlide(1)}
               onClick={() => setActiveCategorySlide(1)}
               style={{ width: "100%", maxWidth: "405.33px", minHeight: "328.63px", display: "flex", flexDirection: "column", textDecoration: "none" }}
-              className="group mx-auto p-3 rounded-xl cursor-pointer"
+              className="w-[280px] sm:w-[340px] md:w-auto shrink-0 md:shrink snap-start group mx-auto p-3 rounded-xl cursor-pointer"
             >
               <div 
                 style={{ height: "237.63px", width: "100%", borderRadius: "4px", overflow: "hidden", backgroundColor: "#FAF9F6" }}
@@ -1138,7 +1142,7 @@ export default function Homepage() {
               onMouseEnter={() => setActiveCategorySlide(2)}
               onClick={() => setActiveCategorySlide(2)}
               style={{ width: "100%", maxWidth: "405.33px", minHeight: "328.63px", display: "flex", flexDirection: "column", textDecoration: "none" }}
-              className="group mx-auto p-3 rounded-xl cursor-pointer"
+              className="w-[280px] sm:w-[340px] md:w-auto shrink-0 md:shrink snap-start group mx-auto p-3 rounded-xl cursor-pointer"
             >
               <div 
                 style={{ height: "237.63px", width: "100%", borderRadius: "4px", overflow: "hidden", backgroundColor: "#FAF9F6" }}
@@ -1164,6 +1168,7 @@ export default function Homepage() {
           {/* Progress Bar (Figma Specs: Width: 1280px, Height: 8px, Radius: 24px) */}
           <div className="w-full max-w-[1280px] mx-auto pt-2 px-2 sm:px-0">
             <InteractiveProgressBar
+              scrollRef={topCategoriesScrollRef}
               totalSlides={3}
               activeSlide={activeCategorySlide}
               onSlideChange={(idx) => setActiveCategorySlide(idx)}
@@ -1300,12 +1305,17 @@ export default function Homepage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[32px] w-full max-w-[1280px] mx-auto">
+          <div 
+            ref={dealsScrollRef as any}
+            className="flex lg:grid lg:grid-cols-4 gap-[32px] w-full max-w-[1280px] mx-auto overflow-x-auto scrollbar-none snap-x snap-mandatory pb-4 pt-1 px-1 scroll-smooth"
+          >
             {[
               resolveProduct("naturally-nomad-badge-1", "Naturally Nomad", "Badges", "/naturally_nomad_badge.png", 139, 199),
               resolveProduct("explore-more-keychain-1", "Explore more", "Key Chains", "/explore_more_keychain.png", 149, 193),
               resolveProduct("go-banjara-tshirt-1", "Go Banjara", "T-Shirts", "/go_banjara_tshirt.jpg", 399, 599),
-              resolveProduct("prod-badge-around", "Naturally Nomad", "Badges", "/around_the_world_sticker.jpg", 139, 199)
+              resolveProduct("prod-badge-around", "Naturally Nomad", "Badges", "/around_the_world_sticker.jpg", 139, 199),
+              resolveProduct("blue-mavin-slides-1", "Blue Mavin", "Slippers", "/blue_mavin_slides.jpg", 399, 599),
+              resolveProduct("wakefit-pillow-1", "Wakefit Pillow", "Travel Pillows", "/wakefit_pillow.jpg", 139, 199),
             ].map((deal, idx) => {
               // Mock product object for cart action
               const mockProduct = {
@@ -1324,7 +1334,7 @@ export default function Homepage() {
                   key={deal.id} 
                   onMouseEnter={() => setActiveDealSlide(idx)}
                   onClick={() => setActiveDealSlide(idx)}
-                  className={`bg-white rounded-[12px] w-full h-auto p-2 pb-4 flex flex-col justify-between gap-[16px] overflow-hidden group cursor-pointer ${idx >= 3 ? 'hidden md:flex' : 'flex'}`}
+                  className="w-[280px] sm:w-[300px] lg:w-[calc((100%-96px)/4)] shrink-0 snap-start bg-white rounded-[12px] h-auto p-2 pb-4 flex flex-col justify-between gap-[16px] overflow-hidden group cursor-pointer"
                 >
                   {/* Image Container with Dots (Width: 339px, Height: 254px, Radius: 4px) */}
                   <div className="relative w-full md:h-[254px] rounded-[4px] overflow-hidden shrink-0">
@@ -1433,7 +1443,8 @@ export default function Homepage() {
           {/* Progress Bar (Figma Specs: Width: 1280px, Height: 8px, Radius: 24px) */}
           <div className="w-full max-w-[1280px] mx-auto pt-2 px-2 sm:px-0">
             <InteractiveProgressBar
-              totalSlides={4}
+              scrollRef={dealsScrollRef}
+              totalSlides={6}
               activeSlide={activeDealSlide}
               onSlideChange={(idx) => setActiveDealSlide(idx)}
               height={8}

@@ -253,13 +253,19 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
             <div className="flex items-center justify-between gap-2 w-full">
               <span 
                 style={{
+                  height: "28px",
                   borderRadius: "4px",
+                  padding: "4px 10px",
                   fontFamily: "Faktum, sans-serif",
                   fontWeight: 500,
                   color: "rgba(255, 98, 62, 1)",
                   backgroundColor: "rgba(255, 98, 62, 0.08)",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  boxSizing: "border-box",
                 }}
-                className="inline-flex items-center px-2 py-0.5 text-sm h-[28px]"
+                className="text-xs sm:text-sm whitespace-nowrap"
               >
                 {product.category}
               </span>

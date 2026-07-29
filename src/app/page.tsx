@@ -1846,7 +1846,16 @@ export default function Homepage() {
           {/* Header Row */}
           <div className="w-full max-w-[1440px] h-auto px-6 md:px-[80px] flex flex-col gap-2 text-left shrink-0">
             <div>
-              <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
+              <span 
+                style={{
+                  minWidth: "161px",
+                  height: "26px",
+                  borderRadius: "2px",
+                  padding: "4px 12px",
+                  boxSizing: "border-box",
+                }}
+                className="inline-flex items-center justify-center text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5]"
+              >
                 Real Experiences
               </span>
             </div>

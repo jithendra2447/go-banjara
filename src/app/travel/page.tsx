@@ -1364,36 +1364,19 @@ export default function HolidaysPortal() {
             <button
               type="button"
               onClick={() => setVisiblePackagesCount(prev => prev + 6)}
-              className="hidden md:inline-flex items-center justify-center h-[68px] px-[36px] gap-[8px] rounded-[8px] bg-transparent hover:bg-gray-200/80 text-[#1D493E] transition-all duration-300 cursor-pointer group border-none"
+              className="hidden md:inline-flex items-center justify-center h-[68px] px-[36px] rounded-[8px] bg-transparent hover:bg-gray-200/80 text-[#1D493E] transition-all duration-300 cursor-pointer border-none"
               style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 500, fontSize: '20px' }}
             >
               <span>Load more</span>
-              <svg
-                style={{ width: '32px', height: '32px' }}
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.25"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="shrink-0 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300"
-              >
-                <path d="M7 17l2.5-2.5" />
-                <path d="M12.5 11.5L17 7" />
-                <path d="M7 7h10v10" />
-              </svg>
             </button>
             {/* Mobile version */}
             <button
               type="button"
               onClick={() => setVisiblePackagesCount(prev => prev + 6)}
-              className="md:hidden inline-flex items-center justify-center gap-2 bg-transparent text-[#1D493E] px-5 py-2 text-sm font-semibold border-none cursor-pointer"
+              className="md:hidden inline-flex items-center justify-center bg-transparent text-[#1D493E] px-5 py-2 text-sm font-semibold border-none cursor-pointer"
               style={{ fontFamily: "'Faktum', 'Outfit', sans-serif" }}
             >
               <span>Load more</span>
-              <svg style={{ width: '18px', height: '18px' }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M7 17l2.5-2.5" /><path d="M12.5 11.5L17 7" /><path d="M7 7h10v10" />
-              </svg>
             </button>
           </div>
         )}

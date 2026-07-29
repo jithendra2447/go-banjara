@@ -1379,7 +1379,7 @@ export default function AboutPage() {
           ].map((card, idx) => (
             <div 
               key={idx}
-              className="w-full bg-[#F8F8F8] rounded-[6px] p-5 md:p-[24px] flex flex-col justify-between gap-4 border border-gray-100/80 shadow-2xs hover:shadow-md transition-all duration-300 min-h-[220px] md:min-h-[427px]"
+              className="w-full bg-[#F8F8F8] rounded-[6px] p-5 md:p-[24px] flex flex-col justify-between gap-4 border border-gray-100/80 shadow-2xs min-h-[220px] md:min-h-[427px]"
             >
               <div className="flex flex-col items-start gap-3 md:gap-[24px] w-full">
                 {/* White square compass icon emblem */}

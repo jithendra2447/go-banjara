@@ -626,7 +626,7 @@ export default function Homepage() {
               return (
                 <div className="bg-[#F6F3EE] rounded-[4px] flex flex-col md:flex-row gap-0 w-full overflow-hidden md:h-[394px] text-left group cursor-pointer">
                   {/* Image */}
-                  <div className="relative h-[280px] md:h-full w-full md:w-1/2 shrink-0 overflow-hidden">
+                  <div className="relative h-[280px] md:h-full w-full md:w-1/2 shrink-0 overflow-hidden rounded-[4px] md:rounded-none">
                     <img 
                       src={pkg1.image} 
                       alt={pkg1.name} 
@@ -2153,8 +2153,8 @@ export default function Homepage() {
           
           {/* Header Container */}
           <div className="w-full max-w-[1280px] h-auto flex flex-col justify-center items-center gap-[12px] text-center shrink-0">
-            <div className="h-[18px] flex items-center justify-center">
-              <span style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 600, fontSize: "14px", lineHeight: "100%", letterSpacing: "1.2px", color: "rgba(255, 98, 62, 1)", background: "rgba(255, 98, 62, 0.1)", borderRadius: "4px", textTransform: "uppercase", width: "53px", height: "18px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <div className="hidden md:flex h-[26px] items-center justify-center">
+              <span style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 600, fontSize: "14px", lineHeight: "100%", letterSpacing: "1.2px", color: "rgba(255, 98, 62, 1)", background: "rgba(255, 98, 62, 0.1)", borderRadius: "2px", textTransform: "uppercase", width: "61px", height: "26px", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", padding: "4px" }}>
                 BLOGS
               </span>
             </div>

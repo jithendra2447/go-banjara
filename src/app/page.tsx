@@ -2524,7 +2524,7 @@ export default function Homepage() {
               <Link
                 href="/shop"
                 style={{ width: "286px", height: "55px", paddingTop: "16px", paddingBottom: "16px", paddingLeft: "32px", paddingRight: "32px", gap: "8px", borderRadius: "4px", borderWidth: "2px", boxSizing: "border-box" }}
-                className="hidden md:flex items-center justify-center border-2 border-[#1D493E] bg-white text-[#1D493E] hover:bg-[#1D493E] hover:text-white transition-all duration-300 font-sans font-medium text-[18px] text-center"
+                className="hidden md:flex items-center justify-center border-2 border-[#1D493E] bg-white text-[#1D493E] font-sans font-medium text-[18px] text-center cursor-pointer"
               >
                 Explore collection
               </Link>

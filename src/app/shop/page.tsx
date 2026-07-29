@@ -90,6 +90,9 @@ export default function ShopPage() {
   const [visibleTravelsCount, setVisibleTravelsCount] = React.useState(4);
   const [visibleDiscountCount, setVisibleDiscountCount] = React.useState(4);
 
+  const newArrivalsScrollRef = React.useRef<HTMLDivElement>(null);
+  const limitedEditionScrollRef = React.useRef<HTMLDivElement>(null);
+
   React.useEffect(() => {
     const saved = localStorage.getItem('gb_admin_products_v3');
     if (saved) {
@@ -151,27 +154,33 @@ export default function ShopPage() {
   const renderProductGrid = (
     items: Product[],
     activeSlideSetter?: (idx: number) => void,
-    activeSlideIndex: number = -1
-  ) => (
-    <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6 xl:gap-[32px] w-full max-w-[1280px] mx-auto">
-      {items.map((prod, idx) => {
-        const isActive = activeSlideIndex === idx;
-        return (
-          <div 
-            key={prod.id} 
-            onMouseEnter={() => activeSlideSetter && activeSlideSetter(idx)}
-            onClick={() => activeSlideSetter && activeSlideSetter(idx)}
-            className="transition-all duration-300 rounded-xl cursor-pointer"
-          >
-            <ProductCard
-              product={prod}
-              onAddToCart={(p) => addToCart(p, 'shop')}
-            />
-          </div>
-        );
-      })}
-    </div>
-  );
+    activeSlideIndex: number = -1,
+    scrollContainerRef?: React.RefObject<HTMLDivElement | null>
+  ) => {
+    return (
+      <div 
+        ref={scrollContainerRef as any}
+        className="flex lg:grid lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6 xl:gap-[32px] w-full max-w-[1280px] mx-auto overflow-x-auto scrollbar-none snap-x snap-mandatory pb-4 pt-1 px-1 scroll-smooth"
+        style={{ WebkitOverflowScrolling: 'touch' }}
+      >
+        {items.map((prod, idx) => {
+          return (
+            <div 
+              key={prod.id} 
+              onMouseEnter={() => activeSlideSetter && activeSlideSetter(idx)}
+              onClick={() => activeSlideSetter && activeSlideSetter(idx)}
+              className="w-[280px] sm:w-[320px] lg:w-auto shrink-0 lg:shrink snap-start transition-all duration-300 rounded-xl cursor-pointer"
+            >
+              <ProductCard
+                product={prod}
+                onAddToCart={(p) => addToCart(p, 'shop')}
+              />
+            </div>
+          );
+        })}
+      </div>
+    );
+  };
 
   return (
     <div className="bg-white min-h-screen pb-0 flex flex-col items-center">
@@ -279,11 +288,12 @@ export default function ShopPage() {
           </div>
 
           {/* Grid */}
-          {renderProductGrid(newArrivals, setActiveNewArrivalsSlide, activeNewArrivalsSlide)}
+          {renderProductGrid(newArrivals, setActiveNewArrivalsSlide, activeNewArrivalsSlide, newArrivalsScrollRef)}
 
           {/* Progress Bar (Figma Specs: Width: 1280px, Height: 8px, Radius: 24px) */}
           <div className="w-full max-w-[1280px] mx-auto pt-2 px-2 sm:px-0">
             <InteractiveProgressBar
+              scrollRef={newArrivalsScrollRef}
               totalSlides={newArrivals.length}
               activeSlide={activeNewArrivalsSlide}
               onSlideChange={(idx) => setActiveNewArrivalsSlide(idx)}
@@ -348,11 +358,12 @@ export default function ShopPage() {
           </div>
 
           {/* Grid */}
-          {renderProductGrid(limitedEdition, setActiveLimitedEditionSlide, activeLimitedEditionSlide)}
+          {renderProductGrid(limitedEdition, setActiveLimitedEditionSlide, activeLimitedEditionSlide, limitedEditionScrollRef)}
 
           {/* Progress Bar (Figma Specs: Width: 1280px, Height: 8px, Radius: 24px) */}
           <div className="w-full max-w-[1280px] mx-auto pt-2 px-2 sm:px-0">
             <InteractiveProgressBar
+              scrollRef={limitedEditionScrollRef}
               totalSlides={limitedEdition.length}
               activeSlide={activeLimitedEditionSlide}
               onSlideChange={(idx) => setActiveLimitedEditionSlide(idx)}

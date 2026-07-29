@@ -346,7 +346,7 @@ export default function BlogPage() {
                 {/* Text block */}
                 <div className="flex flex-col gap-1.5 md:gap-[8px] flex-grow justify-between">
                   {/* Title */}
-                  <h3 className="w-full font-serif font-semibold text-base sm:text-lg md:text-[22px] leading-snug md:leading-[1.35] text-[#2B2B2B] m-0 line-clamp-3 group-hover:text-[#FF623E] transition-colors">
+                  <h3 className="w-full font-serif font-semibold text-base sm:text-lg md:text-[22px] leading-snug md:leading-[1.35] text-[#2B2B2B] m-0 line-clamp-3">
                     {post.title}
                   </h3>
 

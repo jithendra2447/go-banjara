@@ -1151,31 +1151,41 @@ export default function HolidaysPortal() {
                       >
                         <span 
                           style={{
-                            borderRadius: "4px",
+                            minWidth: "80px",
+                            height: "28px",
+                            borderRadius: "2px",
+                            padding: "4px 8px",
                             fontFamily: "'Faktum', 'Outfit', sans-serif",
                             fontWeight: 500,
                             letterSpacing: "0px",
                             display: "inline-flex",
                             alignItems: "center",
+                            justifyContent: "center",
                             backgroundColor: "rgba(255, 98, 62, 0.08)",
                             color: "rgba(255, 98, 62, 1)",
+                            boxSizing: "border-box",
                           }}
-                          className="text-[13px] md:text-[14px] px-2.5 py-1 whitespace-nowrap"
+                          className="text-[13px] md:text-[14px] whitespace-nowrap"
                         >
                           {displayCategory}
                         </span>
                         <span 
                           style={{
+                            minWidth: "58px",
+                            height: "28px",
                             borderRadius: "4px",
+                            padding: "4px 8px",
                             fontFamily: "'Faktum', 'Outfit', sans-serif",
                             fontWeight: 500,
                             letterSpacing: "0px",
                             display: "inline-flex",
                             alignItems: "center",
+                            justifyContent: "center",
                             backgroundColor: "rgba(29, 73, 62, 0.08)",
                             color: "#1D493E",
+                            boxSizing: "border-box",
                           }}
-                          className="text-[13px] md:text-[14px] px-2.5 py-1 whitespace-nowrap"
+                          className="text-[13px] md:text-[14px] whitespace-nowrap"
                         >
                           {pkg.durationDays} days
                         </span>

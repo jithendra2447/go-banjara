@@ -177,7 +177,7 @@ export default function ShopPage() {
               key={prod.id} 
               onMouseEnter={() => activeSlideSetter && activeSlideSetter(idx)}
               onClick={() => activeSlideSetter && activeSlideSetter(idx)}
-              className="w-[280px] sm:w-[320px] lg:w-auto shrink-0 lg:shrink snap-start transition-all duration-300 rounded-xl cursor-pointer"
+              className="w-[280px] sm:w-[300px] lg:w-[calc((100%-96px)/4)] shrink-0 snap-start transition-all duration-300 rounded-xl cursor-pointer"
             >
               <ProductCard
                 product={prod}

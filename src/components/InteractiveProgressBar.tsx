@@ -104,7 +104,7 @@ export const InteractiveProgressBar: React.FC<InteractiveProgressBarProps> = ({
     [scrollRef, totalSlides, onSlideChange]
   );
 
-  // Mouse Drag handling with global window listeners
+  // Mouse hover & drag move handling
   const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
     setIsDragging(true);
     e.currentTarget.setPointerCapture(e.pointerId);
@@ -113,7 +113,7 @@ export const InteractiveProgressBar: React.FC<InteractiveProgressBarProps> = ({
   };
 
   const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (!isDragging) return;
+    // Smooth scroll as cursor moves across the bar (both hover move & drag move)
     const ratio = getRatioFromPointer(e.clientX);
     applyRatio(ratio);
   };
@@ -149,7 +149,7 @@ export const InteractiveProgressBar: React.FC<InteractiveProgressBarProps> = ({
             left: `${thumbLeftPercent}%`,
             height: '100%' 
           }} 
-          className="absolute top-0 rounded-full transition-all duration-150 ease-out" 
+          className="absolute top-0 rounded-full transition-all duration-100 ease-out" 
         />
       </div>
     </div>

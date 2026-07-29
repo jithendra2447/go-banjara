@@ -1136,7 +1136,7 @@ export default function HolidaysPortal() {
                         gap: "12px",
                         boxSizing: "border-box"
                       }}
-                      className="hidden sm:flex h-[183px]"
+                      className="hidden sm:flex"
                     >
                       {/* Category & Duration Row */}
                       <div 

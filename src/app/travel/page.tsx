@@ -1127,15 +1127,16 @@ export default function HolidaysPortal() {
                     className="gap-[6px] sm:gap-5 justify-start"
                   >
                     
-                    {/* Badges, title, description, tags */}
+                    {/* Badges, title, description, tags — Exact 405.33px x 183px spec, gap 12px */}
                     <div 
                       style={{ 
                         width: "100%",
                         display: "flex", 
                         flexDirection: "column", 
+                        gap: "12px",
                         boxSizing: "border-box"
                       }}
-                      className="gap-[6px] sm:gap-3 h-auto md:h-[183px]"
+                      className="hidden sm:flex h-[183px]"
                     >
                       {/* Category & Duration Row */}
                       <div 
@@ -1150,29 +1151,33 @@ export default function HolidaysPortal() {
                       >
                         <span 
                           style={{
-                            borderRadius: "3px",
+                            borderRadius: "4px",
                             fontFamily: "'Faktum', 'Outfit', sans-serif",
-                            fontWeight: 700,
-                            letterSpacing: "0.3px",
+                            fontWeight: 500,
+                            letterSpacing: "0px",
                             display: "inline-flex",
                             alignItems: "center",
+                            backgroundColor: "rgba(255, 98, 62, 0.08)",
+                            color: "rgba(255, 98, 62, 1)",
                           }}
-                          className="bg-[#FF623E] text-white text-[9px] sm:text-xs px-1.5 py-0.5 sm:px-3 sm:py-1 whitespace-nowrap"
+                          className="text-[13px] md:text-[14px] px-2.5 py-1 whitespace-nowrap"
                         >
                           {displayCategory}
                         </span>
                         <span 
                           style={{
-                            borderRadius: "3px",
+                            borderRadius: "4px",
                             fontFamily: "'Faktum', 'Outfit', sans-serif",
-                            fontWeight: 700,
-                            letterSpacing: "0.3px",
+                            fontWeight: 500,
+                            letterSpacing: "0px",
                             display: "inline-flex",
                             alignItems: "center",
+                            backgroundColor: "rgba(29, 73, 62, 0.08)",
+                            color: "#1D493E",
                           }}
-                          className="bg-[#1D493E] text-white text-[9px] sm:text-xs px-1.5 py-0.5 sm:px-3 sm:py-1 whitespace-nowrap"
+                          className="text-[13px] md:text-[14px] px-2.5 py-1 whitespace-nowrap"
                         >
-                          {pkg.durationDays} Days
+                          {pkg.durationDays} days
                         </span>
                       </div>
 

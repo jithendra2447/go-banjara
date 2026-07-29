@@ -2371,8 +2371,8 @@ export default function Homepage() {
           <div className="w-full max-w-[1280px] h-auto grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-row gap-[32px] mx-auto">
             {/* Card 1: FAQ */}
             <div className="w-full lg:w-[296px] h-auto flex flex-col gap-[24px] rounded-[4px] bg-white">
-              <div className="w-full h-[250px] rounded-tl-[4px] rounded-tr-[4px] overflow-hidden">
-                <img src="/service-faq.png" alt="FAQ illustration" className="w-full h-full object-cover" />
+              <div className="w-full h-[250px] rounded-[4px] overflow-hidden">
+                <img src="/service-faq.png" alt="FAQ illustration" className="w-full h-full object-cover rounded-[4px]" />
               </div>
               <div className="w-full h-auto flex flex-col gap-[12px]">
                 <h3 className="font-sans font-semibold text-lg sm:text-xl md:text-[28px] leading-snug tracking-[0px] text-[#2B2B2B]">Frequently Asked Questions (FAQ)</h3>
@@ -2382,8 +2382,8 @@ export default function Homepage() {
 
             {/* Card 2: Home Delivery */}
             <div className="w-full lg:w-[296px] h-auto flex flex-col gap-[24px] rounded-[4px] bg-white">
-              <div className="w-full h-[250px] rounded-tl-[4px] rounded-tr-[4px] overflow-hidden">
-                <img src="/service-delivery.png" alt="Home delivery illustration" className="w-full h-full object-cover" />
+              <div className="w-full h-[250px] rounded-[4px] overflow-hidden">
+                <img src="/service-delivery.png" alt="Home delivery illustration" className="w-full h-full object-cover rounded-[4px]" />
               </div>
               <div className="w-full h-auto flex flex-col gap-[12px]">
                 <h3 className="font-sans font-semibold text-lg sm:text-xl md:text-[28px] leading-snug tracking-[0px] text-[#2B2B2B]">Home Delivery Options available</h3>
@@ -2393,8 +2393,8 @@ export default function Homepage() {
 
             {/* Card 3: Secure Payment */}
             <div className="w-full lg:w-[296px] h-auto flex flex-col gap-[24px] rounded-[4px] bg-white">
-              <div className="w-full h-[250px] rounded-tl-[4px] rounded-tr-[4px] overflow-hidden">
-                <img src="/service-payment.png" alt="Secure payment illustration" className="w-full h-full object-cover" />
+              <div className="w-full h-[250px] rounded-[4px] overflow-hidden">
+                <img src="/service-payment.png" alt="Secure payment illustration" className="w-full h-full object-cover rounded-[4px]" />
               </div>
               <div className="w-full h-auto flex flex-col gap-[12px]">
                 <h3 className="font-sans font-semibold text-lg sm:text-xl md:text-[28px] leading-snug tracking-[0px] text-[#2B2B2B]">Secure Online Payment Process</h3>
@@ -2404,8 +2404,8 @@ export default function Homepage() {
 
             {/* Card 4: Open Box Delivery */}
             <div className="w-full lg:w-[296px] h-auto flex flex-col gap-[24px] rounded-[4px] bg-white">
-              <div className="w-full h-[250px] rounded-tl-[4px] rounded-tr-[4px] overflow-hidden">
-                <img src="/service-openbox.png" alt="Open box delivery illustration" className="w-full h-full object-cover" />
+              <div className="w-full h-[250px] rounded-[4px] overflow-hidden">
+                <img src="/service-openbox.png" alt="Open box delivery illustration" className="w-full h-full object-cover rounded-[4px]" />
               </div>
               <div className="w-full h-auto flex flex-col gap-[12px]">
                 <h3 className="font-sans font-semibold text-lg sm:text-xl md:text-[28px] leading-snug tracking-[0px] text-[#2B2B2B]">Open Box Delivery</h3>

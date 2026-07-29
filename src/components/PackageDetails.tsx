@@ -202,11 +202,10 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
     setIsEnquiryModalOpen(true);
   };
 
-  const handleEnquirySubmit = (e: React.FormEvent) => {
+  const handleEnquirySubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Save to localStorage
-    const newEnquiry = {
+    const enquiryData = {
       packageName: pkg.name,
       date: bookingDate,
       name: enquiryName,
@@ -217,9 +216,26 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
       createdAt: new Date().toISOString(),
     };
 
+    // Save to localStorage (local backup)
     const existing = JSON.parse(localStorage.getItem('gb_booking_enquiries') || '[]');
-    existing.push(newEnquiry);
+    existing.push(enquiryData);
     localStorage.setItem('gb_booking_enquiries', JSON.stringify(existing));
+
+    // Save to MongoDB + Google Sheets via /api/contact
+    try {
+      await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: enquiryName || 'Traveler',
+          email: `booking@gobanjara.com`,
+          mobile: `${phonePrefix} ${enquiryPhone}`,
+          message: `[TRAVEL BOOKING - ${pkg.name}] Pickup: ${pickupLocation}, Guests: ${enquiryGuests}, Date: ${bookingDate}. Message: ${enquiryMessage}`,
+        }),
+      });
+    } catch (err) {
+      console.warn('Enquiry save notice:', err);
+    }
 
     setEnquirySubmitted(true);
     setTimeout(() => {

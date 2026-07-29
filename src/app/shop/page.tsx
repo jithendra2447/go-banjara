@@ -126,6 +126,10 @@ export default function ShopPage() {
     productsList.find(p => p.id === 'explore-more-keychain-1') || productsList[1] || PRODUCTS[1],
     productsList.find(p => p.id === 'go-banjara-tshirt-1') || productsList[2] || PRODUCTS[2],
     productsList.find(p => p.id === 'naturally-nomad-badge-2') || productsList[4] || productsList[0] || PRODUCTS[0],
+    productsList.find(p => p.id === 'blue-mavin-slides-1') || productsList[10] || PRODUCTS[10],
+    productsList.find(p => p.id === 'wakefit-pillow-1') || productsList[12] || PRODUCTS[12],
+    productsList.find(p => p.id === 'fur-jaden-backpack-1') || productsList[14] || PRODUCTS[14],
+    productsList.find(p => p.id === 'go-passport-cover-1') || productsList[15] || PRODUCTS[15],
   ];
 
   const travelsEssentials = [
@@ -144,6 +148,10 @@ export default function ShopPage() {
     productsList.find(p => p.id === 'explore-more-keychain-1') || productsList[1] || PRODUCTS[1],
     productsList.find(p => p.id === 'go-banjara-tshirt-1') || productsList[2] || PRODUCTS[2],
     productsList.find(p => p.id === 'naturally-nomad-badge-2') || productsList[4] || productsList[0] || PRODUCTS[0],
+    productsList.find(p => p.id === 'explore-more-keychain-2') || productsList[5] || productsList[1] || PRODUCTS[1],
+    productsList.find(p => p.id === 'go-banjara-tshirt-3') || productsList[6] || productsList[2] || PRODUCTS[2],
+    productsList.find(p => p.id === 'blue-mavin-slides-2') || productsList[11] || PRODUCTS[11],
+    productsList.find(p => p.id === 'wakefit-pillow-2') || productsList[13] || PRODUCTS[13],
   ];
 
   const discountSaleProducts = React.useMemo(() => {
@@ -160,7 +168,7 @@ export default function ShopPage() {
     return (
       <div 
         ref={scrollContainerRef as any}
-        className="flex lg:grid lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6 xl:gap-[32px] w-full max-w-[1280px] mx-auto overflow-x-auto scrollbar-none snap-x snap-mandatory pb-4 pt-1 px-1 scroll-smooth"
+        className="flex gap-3 sm:gap-6 xl:gap-[32px] w-full max-w-[1280px] mx-auto overflow-x-auto scrollbar-none snap-x snap-mandatory pb-4 pt-1 px-1 scroll-smooth"
         style={{ WebkitOverflowScrolling: 'touch' }}
       >
         {items.map((prod, idx) => {

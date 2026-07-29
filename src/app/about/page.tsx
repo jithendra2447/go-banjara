@@ -321,13 +321,13 @@ export default function AboutPage() {
           background: "rgba(255, 255, 255, 1)", 
           position: "relative",
           boxSizing: "border-box",
-          zIndex: 10,
+          zIndex: 30,
         }}
-        className="w-full shrink-0 overflow-hidden min-h-[174px] md:min-h-[440px] h-[174px] md:h-[440px] flex items-center justify-center relative py-0 md:py-[30px]"
+        className="w-full shrink-0 overflow-visible min-h-[174px] md:min-h-[440px] h-[174px] md:h-[440px] flex items-center justify-center relative py-0 md:py-[30px]"
       >
         {/* Cards Container (Scaled to 174px height on Mobile, 418px on Desktop) */}
         <div 
-          className="flex items-center justify-center relative select-none scale-[0.42] sm:scale-[0.55] md:scale-100 origin-center transition-transform duration-300 pointer-events-auto"
+          className="flex items-center justify-center relative select-none scale-[0.42] sm:scale-[0.55] md:scale-100 origin-center transition-transform duration-300 pointer-events-auto translate-y-[20px] md:translate-y-[90px]"
           style={{ 
             width: "1709px", 
             height: "418px", 

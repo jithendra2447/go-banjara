@@ -1307,7 +1307,7 @@ export default function Homepage() {
 
           <div 
             ref={dealsScrollRef as any}
-            className="flex lg:grid lg:grid-cols-4 gap-[32px] w-full max-w-[1280px] mx-auto overflow-x-auto scrollbar-none snap-x snap-mandatory pb-4 pt-1 px-1 scroll-smooth"
+            className="flex gap-[32px] w-full max-w-[1280px] mx-auto overflow-x-auto scrollbar-none snap-x snap-mandatory pb-4 pt-1 px-1 scroll-smooth"
           >
             {[
               resolveProduct("naturally-nomad-badge-1", "Naturally Nomad", "Badges", "/naturally_nomad_badge.png", 139, 199),

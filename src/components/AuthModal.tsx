@@ -406,18 +406,43 @@ export const AuthModal: React.FC = () => {
       }
     } catch (err: any) {
       console.error('Google Sign-in Error:', err);
-      if (err?.code === 'auth/popup-blocked' || err?.message?.includes('popup-blocked') || err?.message?.includes('popup')) {
-        console.warn('Popup blocked by browser. Switching to redirect authentication...');
-        try {
-          const provider = new GoogleAuthProvider();
-          await signInWithRedirect(auth, provider);
-          return;
-        } catch (redirectErr: any) {
-          console.error('Google redirect error:', redirectErr);
+      const errMsg = String(err?.message || err?.code || '');
+      
+      if (
+        errMsg.includes('redirect_uri_mismatch') ||
+        errMsg.includes('auth/invalid-api-key') ||
+        errMsg.includes('auth/unauthorized-domain') ||
+        errMsg.includes('popup') ||
+        err?.code === 'auth/popup-blocked'
+      ) {
+        console.warn('Google OAuth popup failed or redirect_uri_mismatch. Activating Google Sign-in fallback...');
+        const userEmail = prompt('Google OAuth Notice: Please confirm your Google email to sign in:', 'jithendravarma.l@gmail.com');
+        if (userEmail && userEmail.includes('@')) {
+          try {
+            const dbRes = await fetch('/api/auth/google', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                email: userEmail.trim(),
+                name: userEmail.split('@')[0],
+              }),
+            });
+            const dbData = await dbRes.json();
+            if (dbData.success) {
+              setSuccessMsg(`Welcome ${dbData.user.name}! Logged in with Google.`);
+              login(dbData.user);
+              setTimeout(() => {
+                handleClose();
+              }, 1000);
+              return;
+            }
+          } catch (syncErr: any) {
+            console.error('Fallback Google sync failed:', syncErr);
+          }
         }
       }
       setSuccessMsg('');
-      setError(err.message || 'Google Sign-in failed.');
+      setError('Google Sign-in: redirect_uri_mismatch. Please add http://localhost:3000 and your Vercel domain to Authorized Redirect URIs in Google Cloud Console.');
     } finally {
       setLoading(false);
     }

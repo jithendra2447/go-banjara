@@ -7,6 +7,7 @@ import {
   Check, CheckCircle2, Info, Plus, Minus, Map, ShieldCheck, ArrowUpDown, Globe, ChevronDown, ChevronUp, Compass, ArrowUpRight
 } from 'lucide-react';
 import { useCart } from '@/components/providers';
+import { FAQSection } from '@/components/FAQSection';
 
 import { HOLIDAY_PACKAGES, HolidayPackage } from '@/data/packages';
 
@@ -55,6 +56,13 @@ const TESTIMONIALS = [
   }
 ];
 
+const getPackageLink = (pkg: { id: string; link?: string }) => {
+  if (pkg.link && pkg.link !== '/travel' && pkg.link !== '/travel/' && pkg.link !== '#' && !pkg.link.endsWith('/travel')) {
+    return pkg.link;
+  }
+  return `/travel/package/${pkg.id}`;
+};
+
 const FAQ_ITEMS = [
   {
     question: "What is Go Banjara?",
@@ -73,7 +81,7 @@ const FAQ_ITEMS = [
     answer: "Yes, community empowerment is at our core. 15% of all travel package revenues go directly to supporting local family homestays, native mountain guides, and indigenous craft cooperatives in Kashmir and Kerala."
   },
   {
-    question: "What materials are the badges made from? Zinc alloy with glossy enamel fill.",
+    question: "What materials are the badges made from?",
     answer: "All our collectible badges are stamped from premium zinc alloy with glossy enamel fill and butterfly clutch backings, built to last a lifetime of rugged exploration."
   }
 ];
@@ -139,7 +147,7 @@ export default function HolidaysPortal() {
       const saved = localStorage.getItem('gb_admin_packages');
       let parsed = saved ? JSON.parse(saved) : [];
       
-      // Ensure all default packages exist in parsed
+      // Ensure all default packages exist in parsed without overwriting admin edits
       let merged = [...parsed];
       let needsSave = false;
       HOLIDAY_PACKAGES.forEach(hp => {
@@ -148,38 +156,13 @@ export default function HolidaysPortal() {
           merged.push(hp);
           needsSave = true;
         } else {
-          // Always sync the name, description, category, and other layout-critical fields from default packages
+          // Fill in any missing critical fields without overwriting user edits
           const item = merged[foundIdx];
-          if (
-            item.name !== hp.name || 
-            item.description !== hp.description || 
-            item.price === undefined || 
-            !item.routeList || 
-            !item.itinerary
-          ) {
-            merged[foundIdx] = {
-              ...item,
-              name: hp.name,
-              description: hp.description,
-              category: hp.category,
-              durationDays: hp.durationDays,
-              duration: hp.duration
-            };
+          if (item.price === undefined || !item.routeList || !item.itinerary) {
+            merged[foundIdx] = { ...hp, ...item };
             needsSave = true;
           }
         }
-      });
-
-      // Force update the link and image for the Srinagar-to-Leh package
-      merged = merged.map((p: any) => {
-        if (p.id === 'pkg-kashmir-classic') {
-          if (p.link !== '/travel/srinagar-to-leh' || p.image !== '/travel-leh-6.jpg') {
-            p.link = '/travel/srinagar-to-leh';
-            p.image = '/travel-leh-6.jpg';
-            needsSave = true;
-          }
-        }
-        return p;
       });
 
       if (!saved || needsSave) {
@@ -191,6 +174,24 @@ export default function HolidaysPortal() {
       setPackages(HOLIDAY_PACKAGES);
       localStorage.setItem('gb_admin_packages', JSON.stringify(HOLIDAY_PACKAGES));
     }
+
+    const handleUpdate = (evt?: any) => {
+      try {
+        const saved = evt?.detail ? evt.detail : JSON.parse(localStorage.getItem('gb_admin_packages') || '[]');
+        if (Array.isArray(saved) && saved.length > 0) {
+          setPackages(saved);
+        }
+      } catch (e) {
+        console.error('Error handling travel page live update:', e);
+      }
+    };
+
+    window.addEventListener('gb_packages_updated', handleUpdate);
+    window.addEventListener('storage', handleUpdate);
+    return () => {
+      window.removeEventListener('gb_packages_updated', handleUpdate);
+      window.removeEventListener('storage', handleUpdate);
+    };
   }, []);
 
   // Filter & Sort Logic
@@ -321,13 +322,25 @@ export default function HolidaysPortal() {
   };
 
   // Handle inquiry submit
-  const handleInquirySubmit = (e: React.FormEvent) => {
+  const handleInquirySubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmittingInquiry(true);
-    setTimeout(() => {
-      setIsSubmittingInquiry(false);
-      setInquirySuccess(true);
-    }, 1500);
+    try {
+      await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: inquiryForm.name || 'Traveler',
+          email: inquiryForm.email || 'booking@gobanjara.com',
+          mobile: inquiryForm.phone || '',
+          message: `[INQUIRY - ${activeInquiryPkg?.name || 'Travel Package'}] ${inquiryForm.notes || 'No extra notes'}`,
+        }),
+      });
+    } catch (err) {
+      console.warn('Inquiry save notice:', err);
+    }
+    setIsSubmittingInquiry(false);
+    setInquirySuccess(true);
   };
 
   // Find the featured package for "How to book your Tour" (Srinagar to Leh)
@@ -1050,7 +1063,7 @@ export default function HolidaysPortal() {
                 >
                   {/* Card Image */}
                   <Link 
-                    href={pkg.link || `/travel/package/${pkg.id}`} 
+                    href={getPackageLink(pkg)} 
                     style={{ 
                       display: "block", 
                       position: "relative", 
@@ -1194,7 +1207,7 @@ export default function HolidaysPortal() {
                       {/* Title & Price Row (Figma Layout) */}
                       <div className="flex items-baseline justify-between w-full gap-2">
                         <Link 
-                          href={pkg.link || `/travel/package/${pkg.id}`} 
+                          href={getPackageLink(pkg)} 
                           style={{ textDecoration: "none" }}
                           className="group flex-1 min-w-0"
                         >
@@ -1250,7 +1263,7 @@ export default function HolidaysPortal() {
                       }}
                       className="hidden sm:grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-2"
                     >
-                      <div style={{ display: "flex", alignItems: "center", gap: "12px", height: "56px", boxSizing: "border-box" }}>
+                      <div style={{ display: "flex", flex: 1, alignItems: "center", gap: "12px", height: "56px", boxSizing: "border-box" }}>
                         <div style={{ width: "46px", height: "46px", borderRadius: "4px", background: "rgba(246, 243, 238, 1)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                           <MapPin style={{ width: "28px", height: "28px", color: "rgba(43, 43, 43, 1)" }} />
                         </div>
@@ -1259,7 +1272,7 @@ export default function HolidaysPortal() {
                         </span>
                       </div>
                       
-                      <div style={{ display: "flex", alignItems: "center", gap: "12px", height: "56px", boxSizing: "border-box" }}>
+                      <div style={{ display: "flex", flex: 1, alignItems: "center", gap: "12px", height: "56px", boxSizing: "border-box" }}>
                         <div style={{ width: "46px", height: "46px", borderRadius: "4px", background: "rgba(246, 243, 238, 1)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                           <Users style={{ width: "28px", height: "28px", color: "rgba(43, 43, 43, 1)" }} />
                         </div>
@@ -1268,7 +1281,7 @@ export default function HolidaysPortal() {
                         </span>
                       </div>
 
-                      <div style={{ display: "flex", alignItems: "center", gap: "12px", height: "56px", boxSizing: "border-box" }}>
+                      <div style={{ display: "flex", flex: 1, alignItems: "center", gap: "12px", height: "56px", boxSizing: "border-box" }}>
                         <div style={{ width: "46px", height: "46px", borderRadius: "4px", background: "rgba(246, 243, 238, 1)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                           <ArrowUpRight style={{ width: "28px", height: "28px", color: "rgba(43, 43, 43, 1)" }} />
                         </div>
@@ -1277,7 +1290,7 @@ export default function HolidaysPortal() {
                         </span>
                       </div>
 
-                      <div style={{ display: "flex", alignItems: "center", gap: "12px", height: "56px", boxSizing: "border-box" }}>
+                      <div style={{ display: "flex", flex: 1, alignItems: "center", gap: "12px", height: "56px", boxSizing: "border-box" }}>
                         <div style={{ width: "46px", height: "46px", borderRadius: "4px", background: "rgba(246, 243, 238, 1)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                           <Calendar style={{ width: "28px", height: "28px", color: "rgba(43, 43, 43, 1)" }} />
                         </div>
@@ -1294,7 +1307,7 @@ export default function HolidaysPortal() {
                         maxWidth: "405.33px",
                         boxSizing: "border-box"
                       }}
-                      className="hidden sm:flex gap-6 h-[55px]"
+                      className="hidden sm:flex gap-3 h-[55px]"
                     >
                       <button
                         type="button"
@@ -1317,7 +1330,7 @@ export default function HolidaysPortal() {
                       </button>
                       
                       <Link 
-                        href={pkg.link || `/travel/package/${pkg.id}`}
+                        href={getPackageLink(pkg)}
                         style={{
                           flex: 1,
                           borderRadius: "4px",
@@ -1763,113 +1776,92 @@ export default function HolidaysPortal() {
         </div>
       </section>
 
-      {/* 3.5 FAQ ACCORDION SECTION */}
-      <section
+      {/* 3.4 WHY CHOOSE GO BANJARA TRUST SECTION */}
+      <section 
         style={{
-          width: '100%',
-          maxWidth: '1440px',
-          margin: '0 auto',
-          background: 'rgba(255, 255, 255, 1)',
-          boxSizing: 'border-box',
-          display: 'flex',
-          flexDirection: 'column',
+          width: "100%",
+          maxWidth: "1440px",
+          backgroundColor: "#FAF9F6",
+          borderTop: "1px solid #E5E0D5",
+          borderBottom: "1px solid #E5E0D5",
+          boxSizing: "border-box",
+          margin: "0 auto",
+          position: "relative",
+          zIndex: 10
         }}
-        className="py-6 sm:py-10 md:py-14 px-4 sm:px-8 md:px-[80px] gap-4 sm:gap-6 border-t border-slate-200/60"
+        className="py-12 sm:py-16 px-4 sm:px-8 md:px-[80px]"
       >
-        {/* Header */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          {/* Label */}
-          <span
-            style={{
-              fontFamily: 'Faktum, var(--font-sans), sans-serif',
-              fontWeight: 600,
-              fontSize: '10px',
-              lineHeight: '100%',
-              letterSpacing: '1px',
-              textTransform: 'uppercase',
-              color: 'rgba(255, 98, 62, 1)',
-              background: 'rgba(255, 98, 62, 0.1)',
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              height: '24px',
-              padding: '0 10px',
-              borderRadius: '2px',
-              width: 'fit-content',
-            }}
-          >
-            FAQ&apos;S
-          </span>
+        <div className="max-w-[1280px] mx-auto space-y-10 text-center">
+          <div className="space-y-3">
+            <span className="inline-flex items-center justify-center h-[26px] text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
+              WHY TRAVEL WITH US
+            </span>
+            <h2 
+              style={{ fontFamily: "'Fraunces', serif" }}
+              className="text-2xl sm:text-3xl md:text-[40px] font-semibold text-[#1D493E]"
+            >
+              Crafted for the <span className="text-[#FF623E]">Conscious Nomad</span>
+            </h2>
+            <p className="text-sm sm:text-base md:text-[18px] text-[#2B2B2B] max-w-2xl mx-auto font-medium">
+              We handle every detail—permits, stays, transfers, and guides—so you can immerse yourself fully in the journey.
+            </p>
+          </div>
 
-          {/* Title */}
-          <h2
-            style={{
-              fontFamily: 'Fraunces, Georgia, serif',
-              fontWeight: 600,
-              letterSpacing: '0px',
-              color: 'rgba(43, 43, 43, 1)',
-              margin: 0,
-            }}
-            className="text-lg sm:text-2xl md:text-[42px] font-semibold text-[#2B2B2B]"
-          >
-            Frequently asked questions
-          </h2>
-        </div>
-
-        {/* Accordion */}
-        <div style={{ width: '100%', display: 'flex', flexDirection: 'column', borderTop: '1px solid rgba(204, 204, 204, 0.6)' }}>
-          {FAQ_ITEMS.map((item, idx) => {
-            const isOpen = openFaqIndex === idx;
-            return (
-              <div
-                key={idx}
-                className="py-3 sm:py-4 border-b border-slate-200/60 w-full flex flex-col"
-              >
-                <button
-                  onClick={() => toggleFaq(idx)}
-                  style={{
-                    width: '100%',
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    background: 'none',
-                    border: 'none',
-                    padding: 0,
-                    cursor: 'pointer',
-                    textAlign: 'left',
-                    gap: '12px',
-                  }}
-                >
-                  <span
-                    style={{
-                      fontFamily: 'Faktum, var(--font-sans), sans-serif',
-                      color: 'rgba(43, 43, 43, 1)',
-                    }}
-                    className="text-xs sm:text-base md:text-[20px] font-medium leading-snug flex-1"
-                  >
-                    {item.question}
-                  </span>
-                  {isOpen ? (
-                    <Minus className="w-5 h-5 md:w-6 md:h-6 shrink-0 text-[#FF623E]" />
-                  ) : (
-                    <Plus className="w-5 h-5 md:w-6 md:h-6 shrink-0 text-[#1D493E]" />
-                  )}
-                </button>
-                {isOpen && (
-                  <p
-                    style={{
-                      fontFamily: 'Faktum, var(--font-sans), sans-serif',
-                      color: 'rgba(141, 141, 141, 1)',
-                    }}
-                    className="text-xs sm:text-sm md:text-[20px] leading-relaxed mt-2"
-                  >
-                    {item.answer}
-                  </p>
-                )}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
+            <div className="bg-white border border-[#E5E0D5] p-6 rounded-2xl space-y-3 shadow-xs hover:border-[#1D493E] transition">
+              <div className="w-12 h-12 rounded-xl bg-[#1D493E]/10 flex items-center justify-center text-[#1D493E]">
+                <ShieldCheck className="w-6 h-6" />
               </div>
-            );
-          })}
+              <h3 style={{ fontFamily: "'Fraunces', serif" }} className="text-lg font-bold text-[#1D493E]">
+                Certified Safety Standards
+              </h3>
+              <p className="text-xs sm:text-sm text-gray-600 leading-relaxed font-medium">
+                Wilderness first-responders, oxygen support, and 24/7 mountain assistance on all high-altitude routes.
+              </p>
+            </div>
+
+            <div className="bg-white border border-[#E5E0D5] p-6 rounded-2xl space-y-3 shadow-xs hover:border-[#1D493E] transition">
+              <div className="w-12 h-12 rounded-xl bg-[#FF623E]/10 flex items-center justify-center text-[#FF623E]">
+                <Compass className="w-6 h-6" />
+              </div>
+              <h3 style={{ fontFamily: "'Fraunces', serif" }} className="text-lg font-bold text-[#1D493E]">
+                Authentic Boutique Stays
+              </h3>
+              <p className="text-xs sm:text-sm text-gray-600 leading-relaxed font-medium">
+                Hand-picked family homestays, riverside eco-tents, and boutique heritage properties with authentic local cuisine.
+              </p>
+            </div>
+
+            <div className="bg-white border border-[#E5E0D5] p-6 rounded-2xl space-y-3 shadow-xs hover:border-[#1D493E] transition">
+              <div className="w-12 h-12 rounded-xl bg-[#1D493E]/10 flex items-center justify-center text-[#1D493E]">
+                <MapPin className="w-6 h-6" />
+              </div>
+              <h3 style={{ fontFamily: "'Fraunces', serif" }} className="text-lg font-bold text-[#1D493E]">
+                Hidden Offbeat Trails
+              </h3>
+              <p className="text-xs sm:text-sm text-gray-600 leading-relaxed font-medium">
+                Native mountain guides lead you to secluded lakes, secret viewpoints, and living root bridges away from tourist crowds.
+              </p>
+            </div>
+
+            <div className="bg-white border border-[#E5E0D5] p-6 rounded-2xl space-y-3 shadow-xs hover:border-[#1D493E] transition">
+              <div className="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-700">
+                <Globe className="w-6 h-6" />
+              </div>
+              <h3 style={{ fontFamily: "'Fraunces', serif" }} className="text-lg font-bold text-[#1D493E]">
+                Community Impact
+              </h3>
+              <p className="text-xs sm:text-sm text-gray-600 leading-relaxed font-medium">
+                15% of all package revenues go directly to supporting mountain families, indigenous artisans, and eco-conservation.
+              </p>
+            </div>
+          </div>
         </div>
+      </section>
+
+      {/* 3.5 FAQ ACCORDION SECTION */}
+      <section className="w-full bg-white text-left relative z-10">
+        <FAQSection items={FAQ_ITEMS} />
       </section>
 
       {/* 3.7 NEWSLETTER / CTA SECTION */}
@@ -1877,7 +1869,6 @@ export default function HolidaysPortal() {
         style={{
           width: "100%",
           background: "#FFFFFF",
-          borderTop: "1px solid rgba(29, 73, 62, 0.1)",
         }}
         className="relative z-10 py-6 sm:py-10 md:py-14 px-4 sm:px-8 md:px-20 text-center"
       >
@@ -1937,7 +1928,19 @@ export default function HolidaysPortal() {
             className="w-full max-w-[280px] h-10 sm:h-[55px] rounded-[4px] bg-[#1D493E] text-white flex items-center justify-center gap-2 hover:bg-[#15342c] transition-all duration-300 text-xs sm:text-base font-semibold shadow-xs border-none cursor-pointer group"
           >
             <span>Reserve your tour now</span>
-            <span className="text-sm sm:text-lg font-sans group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300">↗</span>
+            <svg 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="2.25" 
+              strokeLinecap="round" 
+              strokeLinejoin="round"
+              className="w-5 h-5 shrink-0 transform transition-transform duration-300 ease-out group-hover:translate-x-1.5 group-hover:-translate-y-1.5"
+            >
+              <path d="M7 17l2.5-2.5" />
+              <path d="M12.5 11.5L17 7" />
+              <path d="M7 7h10v10" />
+            </svg>
           </button>
         </div>
       </section>
@@ -2103,8 +2106,22 @@ export default function HolidaysPortal() {
                 {/* Submit Button */}
                 <button
                   type="button"
-                  onClick={() => {
+                  onClick={async () => {
                     if (!bookingForm.name || !bookingForm.phone) return;
+                    try {
+                      await fetch('/api/contact', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                          name: bookingForm.name || 'Traveler',
+                          email: 'booking@gobanjara.com',
+                          mobile: `${bookingForm.countryCode || '+91'} ${bookingForm.phone}`,
+                          message: `[TRAVEL BOOKING - ${activeBookPkg?.name || 'Travel Package'}] Pickup: ${bookingForm.pickupLocation || 'N/A'}, Guests: ${bookingForm.travelers || '01'}. Message: ${bookingForm.message || 'None'}`,
+                        }),
+                      });
+                    } catch (err) {
+                      console.warn('Booking enquiry save error:', err);
+                    }
                     setBookingFormSuccess(true);
                   }}
                   style={{

@@ -7,13 +7,14 @@ import {
   Calendar, Users, Check, ShoppingBag, Clock,
   Star, Compass, MapPin, Tag,
   Sun, Wind, ArrowLeft, Lock, ArrowUpRight,
-  ChevronDown
+  ChevronDown, Edit3, Upload, Save
 } from 'lucide-react';
 import { useCart } from '@/components/providers';
 import { AmbientVibe } from '@/components/AmbientVibe';
 import { PRODUCTS } from '@/data/products';
 import { HOLIDAY_PACKAGES } from '@/data/packages';
 import { CartIcon } from '@/components/CartIcon';
+import { PackageEditorModal } from '@/components/PackageEditorModal';
 import { getFutureDeliveryString } from '@/utils/dateUtils';
 import ProductCard from '@/components/ProductCard';
 import { InteractiveProgressBar } from '@/components/InteractiveProgressBar';
@@ -52,6 +53,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
   const [pickupLocation, setPickupLocation] = useState('');
   const [enquiryMessage, setEnquiryMessage] = useState('');
   const [enquirySubmitted, setEnquirySubmitted] = useState(false);
+  const [isSubmittingEnquiry, setIsSubmittingEnquiry] = useState(false);
   const [addedProductIds, setAddedProductIds] = useState<string[]>([]);
   const [activeJourneySlide, setActiveJourneySlide] = useState(0);
 
@@ -69,6 +71,38 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
       destination: pkg.destination || 'India',
       duration: pkg.duration || '5 Days',
     });
+  };
+
+  const [isEditingPkg, setIsEditingPkg] = useState(false);
+  const [editingPkgData, setEditingPkgData] = useState<any>(null);
+
+  const handleSaveEditedPackageOnDetails = (updatedPkgData: any) => {
+    if (!updatedPkgData) return;
+
+    let currentList: any[] = [];
+    const saved = localStorage.getItem('gb_admin_packages');
+    if (saved) {
+      try {
+        currentList = JSON.parse(saved);
+      } catch (err) {}
+    }
+    if (!Array.isArray(currentList) || currentList.length === 0) {
+      currentList = [...HOLIDAY_PACKAGES];
+    }
+
+    const idx = currentList.findIndex((p: any) => p.id === updatedPkgData.id);
+    if (idx !== -1) {
+      currentList[idx] = updatedPkgData;
+    } else {
+      currentList = [updatedPkgData, ...currentList];
+    }
+
+    localStorage.setItem('gb_admin_packages', JSON.stringify(currentList));
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('gb_packages_updated', { detail: currentList }));
+    }
+    setPkg(updatedPkgData);
+    setIsEditingPkg(false);
   };
 
   useEffect(() => {
@@ -98,25 +132,18 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
         }
       }
 
-      const staticPkg = HOLIDAY_PACKAGES.find((p) => p.id === id);
-      let foundPkg = staticPkg || null;
-
-      if (!foundPkg) {
-        const saved = localStorage.getItem('gb_admin_packages');
-        if (saved) {
-          try {
-            const parsed = JSON.parse(saved);
-            if (Array.isArray(parsed) && parsed.length > 0) {
-              const matched = parsed.find((p) => p.id === id);
-              if (matched) {
-                foundPkg = matched;
-              }
-            }
-          } catch (e) {
-            console.error('Error parsing admin packages:', e);
-          }
-        }
-      }
+      // Check admin list first, then fallback to static list
+      const matchedPkg = list.find((p: any) => 
+        p.id === id || 
+        p.id?.toLowerCase() === id?.toLowerCase() ||
+        p.name?.toLowerCase().replace(/\s+/g, '-') === id?.toLowerCase()
+      ) || HOLIDAY_PACKAGES.find((p: any) => 
+        p.id === id || 
+        p.id?.toLowerCase() === id?.toLowerCase() ||
+        p.name?.toLowerCase().replace(/\s+/g, '-') === id?.toLowerCase()
+      ) || null;
+      
+      let foundPkg = matchedPkg;
 
       if (foundPkg) {
         setPkg(foundPkg);
@@ -162,6 +189,32 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
     } catch (e) {
       console.error(e);
     }
+
+    const handleUpdate = () => {
+      try {
+        const saved = localStorage.getItem('gb_admin_packages');
+        if (!saved) return;
+        const list = JSON.parse(saved);
+        if (!Array.isArray(list)) return;
+        const updatedPkg = list.find((p: any) => 
+          p.id === id || 
+          p.id?.toLowerCase() === id?.toLowerCase() ||
+          p.name?.toLowerCase().replace(/\s+/g, '-') === id?.toLowerCase()
+        );
+        if (updatedPkg) {
+          setPkg(updatedPkg);
+        }
+      } catch (e) {
+        console.error('Error handling live package update:', e);
+      }
+    };
+
+    window.addEventListener('gb_packages_updated', handleUpdate);
+    window.addEventListener('storage', handleUpdate);
+    return () => {
+      window.removeEventListener('gb_packages_updated', handleUpdate);
+      window.removeEventListener('storage', handleUpdate);
+    };
   }, [id]);
 
   // Live Weather fluctuation
@@ -205,9 +258,10 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
   const handleEnquirySubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    const packageName = pkg?.name || 'Travel Expedition';
     const enquiryData = {
-      packageName: pkg.name,
-      date: bookingDate,
+      packageName,
+      date: bookingDate || 'Flexible',
       name: enquiryName,
       phone: `${phonePrefix} ${enquiryPhone}`,
       guests: enquiryGuests,
@@ -217,11 +271,15 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
     };
 
     // Save to localStorage (local backup)
-    const existing = JSON.parse(localStorage.getItem('gb_booking_enquiries') || '[]');
-    existing.push(enquiryData);
-    localStorage.setItem('gb_booking_enquiries', JSON.stringify(existing));
+    try {
+      const existing = JSON.parse(localStorage.getItem('gb_booking_enquiries') || '[]');
+      existing.push(enquiryData);
+      localStorage.setItem('gb_booking_enquiries', JSON.stringify(existing));
+    } catch (e) {
+      console.warn('LocalStorage save notice:', e);
+    }
 
-    // Save to MongoDB + Google Sheets via /api/contact
+    // Save to Database + Admin via /api/contact
     try {
       await fetch('/api/contact', {
         method: 'POST',
@@ -230,7 +288,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
           name: enquiryName || 'Traveler',
           email: `booking@gobanjara.com`,
           mobile: `${phonePrefix} ${enquiryPhone}`,
-          message: `[TRAVEL BOOKING - ${pkg.name}] Pickup: ${pickupLocation}, Guests: ${enquiryGuests}, Date: ${bookingDate}. Message: ${enquiryMessage}`,
+          message: `[TRAVEL BOOKING - ${packageName}] Pickup: ${pickupLocation || 'N/A'}, Guests: ${enquiryGuests || '01'}, Date: ${bookingDate || 'Flexible'}. Message: ${enquiryMessage || 'None'}`,
         }),
       });
     } catch (err) {
@@ -346,7 +404,10 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
       : 'sun-breeze';
 
   // Fallback defaults for detailed package layouts
-  const galleryImages = pkg.images || [pkg.image, pkg.image, pkg.image, pkg.image, pkg.image, pkg.image];
+  const rawImages = Array.isArray(pkg.images) && pkg.images.length > 0 ? pkg.images : [pkg.image || '/travel-leh-6.jpg'];
+  const galleryImages = rawImages.length >= 6 
+    ? rawImages.slice(0, 6) 
+    : [...rawImages, ...Array(6 - rawImages.length).fill(rawImages[0] || pkg.image || '/travel-leh-6.jpg')];
   const words = (pkg.name || '').split(' ');
   const mainPart = words.slice(0, -1).join(' ');
   const lastWord = words[words.length - 1] || '';
@@ -516,10 +577,10 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
           boxSizing: "border-box",
           display: "flex",
           flexDirection: "column",
-          paddingTop: "0px",
+          paddingTop: "32px",
           paddingBottom: "0px",
         }}
-        className="relative z-10 mx-auto w-full px-4 md:px-[80px] pt-0 pb-0 gap-4 sm:gap-6"
+        className="relative z-10 mx-auto w-full px-4 md:px-[80px] pt-6 md:pt-8 pb-0 gap-4 sm:gap-6"
       >
         {/* Image Gallery */}
         <div 
@@ -539,14 +600,15 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
               <div
                 key={idx}
                 style={{ borderRadius: "4px" }}
-                className="relative overflow-hidden border border-[#1D493E]/10 bg-slate-900 group cursor-pointer w-full h-full aspect-[3/2] md:aspect-auto"
+                className="relative overflow-hidden bg-slate-900 group cursor-pointer w-full h-full aspect-[3/2] md:aspect-auto rounded-[4px]"
                 onClick={() => setActivePhotoIdx(idx)}
               >
                 <img
                   src={img}
                   alt={`${pkg.name} gallery image ${idx + 1}`}
                   loading="lazy"
-                  className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500 opacity-90"
+                  style={{ borderRadius: "4px" }}
+                  className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500 opacity-90 rounded-[4px]"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                 <div className="absolute bottom-4 left-4 right-4 text-left opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white pointer-events-none">
@@ -612,16 +674,30 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
 
               {/* Title & Price Row */}
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                <h1 
-                  style={{
-                    fontFamily: "'Faktum', 'Outfit', sans-serif",
-                    fontWeight: 600,
-                    color: "rgba(43, 43, 43, 1)",
-                  }}
-                  className="text-left text-xl sm:text-2xl md:text-[28px] leading-tight"
-                >
-                  {pkg.name}
-                </h1>
+                <div className="flex items-center gap-3 flex-wrap">
+                  <h1 
+                    style={{
+                      fontFamily: "'Faktum', 'Outfit', sans-serif",
+                      fontWeight: 600,
+                      color: "rgba(43, 43, 43, 1)",
+                    }}
+                    className="text-left text-xl sm:text-2xl md:text-[28px] leading-tight"
+                  >
+                    {pkg.name}
+                  </h1>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setEditingPkgData({ ...pkg });
+                      setIsEditingPkg(true);
+                    }}
+                    className="px-3 py-1.5 bg-[#1D493E]/10 hover:bg-[#1D493E] text-[#1D493E] hover:text-white rounded-lg text-xs font-bold transition flex items-center gap-1.5 cursor-pointer shrink-0"
+                    title="Edit Package Details"
+                  >
+                    <Edit3 className="w-3.5 h-3.5" />
+                    <span>Edit Package</span>
+                  </button>
+                </div>
                 <span 
                   style={{
                     fontFamily: "'Faktum', 'Outfit', sans-serif",
@@ -858,52 +934,71 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
               </div>
             </div>
 
-            {/* Navigation Tabs */}
+            {/* Navigation Tabs Container */}
             <div 
               style={{
                 width: "100%",
                 maxWidth: "837px",
-                borderBottom: "2px solid rgba(204, 204, 204, 1)",
-                background: "rgba(255, 255, 255, 1)",
-                display: "flex",
-                alignItems: "center",
+                position: "relative",
               }}
-              className="text-left flex border-b border-gray-200 w-full overflow-x-auto whitespace-nowrap scrollbar-none gap-4 md:gap-[40px]"
+              className="text-left w-full"
             >
-              {(['overview', 'itinerary', 'reviews'] as const).map((tab) => {
-                const isSelected = activeTab === tab;
-                const label = tab === 'overview' ? 'Overview' : tab === 'itinerary' ? 'Itinerary' : 'Reviews';
-                return (
-                  <button
-                    key={tab}
-                    type="button"
-                    onClick={() => setActiveTab(tab)}
-                    style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      boxSizing: "border-box",
-                      borderBottom: isSelected ? "3px solid rgba(28, 68, 140, 1)" : "3px solid transparent",
-                      marginBottom: "-2px",
-                      cursor: "pointer",
-                    }}
-                    className="transition-all capitalize h-[42px] sm:h-[54px] px-2 sm:px-3"
-                  >
-                    <span
+              {/* Full-width Gray Base Line */}
+              <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#CCCCCC]/60 z-0" />
+
+              {/* Buttons flex row */}
+              <div className="flex items-center w-full overflow-x-auto whitespace-nowrap scrollbar-none gap-6 md:gap-[40px] relative z-10">
+                {(['overview', 'itinerary', 'reviews'] as const).map((tab) => {
+                  const isSelected = activeTab === tab;
+                  const label = tab === 'overview' ? 'Overview' : tab === 'itinerary' ? 'Itinerary' : 'Reviews';
+                  return (
+                    <button
+                      key={tab}
+                      type="button"
+                      onClick={() => setActiveTab(tab)}
                       style={{
-                        fontFamily: "'Faktum', 'Outfit', sans-serif",
-                        fontWeight: 500,
-                        color: isSelected ? "rgba(28, 68, 140, 1)" : "rgba(43, 43, 43, 1)",
                         display: "inline-flex",
                         alignItems: "center",
+                        justifyContent: "center",
+                        boxSizing: "border-box",
+                        background: "transparent",
+                        border: "none",
+                        padding: "8px 0",
+                        cursor: "pointer",
+                        position: "relative",
                       }}
-                      className="text-xs sm:text-lg md:text-[24px]"
+                      className="transition-all capitalize whitespace-nowrap"
                     >
-                      {label}
-                    </span>
-                  </button>
-                );
-              })}
+                      <span
+                        style={{
+                          fontFamily: "'Faktum', 'Outfit', sans-serif",
+                          fontWeight: 500,
+                          color: isSelected ? "rgba(28, 68, 140, 1)" : "rgba(43, 43, 43, 1)",
+                          display: "inline-flex",
+                          alignItems: "center",
+                          transition: "color 0.2s ease",
+                        }}
+                        className="text-xs sm:text-lg md:text-[24px]"
+                      >
+                        {label}
+                      </span>
+                      {isSelected && (
+                        <span
+                          style={{
+                            position: "absolute",
+                            bottom: 0,
+                            left: 0,
+                            right: 0,
+                            height: "3px",
+                            backgroundColor: "rgba(28, 68, 140, 1)",
+                            zIndex: 20,
+                          }}
+                        />
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
 
             {/* TAB CONTENT: Overview */}
@@ -949,17 +1044,6 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                     {pkg.description || `Spiti Valley sits at 12,500 feet in the cold desert of Himachal Pradesh...`}
                   </p>
                 </div>
-
-                {/* Separation Line */}
-                <div
-                  style={{
-                    width: "100%",
-                    maxWidth: "837px",
-                    height: "0px",
-                    borderTop: "2px solid rgba(204, 204, 204, 1)",
-                    opacity: 1,
-                  }}
-                />
 
                 {/* Highlights Section */}
                 <div
@@ -1011,17 +1095,6 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                       ))}
                     </div>
                   </div>
-
-                  {/* Separation Line */}
-                  <div
-                    style={{
-                      width: "100%",
-                      maxWidth: "837px",
-                      height: "0px",
-                      borderTop: "2px solid rgba(204, 204, 204, 1)",
-                      opacity: 1,
-                    }}
-                  />
 
                   {/* What's Included */}
                   <div
@@ -1076,17 +1149,6 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                     </ul>
                   </div>
 
-                  {/* Separation Line */}
-                  <div
-                    style={{
-                      width: "100%",
-                      maxWidth: "837px",
-                      height: "0px",
-                      borderTop: "1px solid rgba(204, 204, 204, 0.8)",
-                      opacity: 1,
-                    }}
-                  />
-
                   {/* Not Included */}
                   <div
                     style={{
@@ -1140,17 +1202,6 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                     </ul>
                   </div>
 
-                  {/* Separation Line */}
-                  <div
-                    style={{
-                      width: "100%",
-                      maxWidth: "837px",
-                      height: "0px",
-                      borderTop: "1px solid rgba(204, 204, 204, 0.8)",
-                      opacity: 1,
-                    }}
-                  />
-
                    {/* Packing List */}
                    <div 
                      style={{
@@ -1188,17 +1239,6 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                        ))}
                      </ul>
                    </div>
-
-                  {/* Separation Line */}
-                  <div
-                    style={{
-                      width: "100%",
-                      maxWidth: "837px",
-                      height: "0px",
-                      borderTop: "1px solid rgba(204, 204, 204, 0.8)",
-                      opacity: 1,
-                    }}
-                  />
 
                   {/* Know your Guide */}
                   <div 
@@ -2060,7 +2100,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
           opacity: 1,
           boxSizing: "border-box",
         }}
-        className="hidden md:flex flex-col gap-8 bg-white relative z-10 border-t border-[#1D493E]/10"
+        className="hidden md:flex flex-col gap-8 bg-white relative z-10"
       >
         {/* Header Row */}
         <div className="flex flex-col gap-1.5 text-left w-full">
@@ -2101,7 +2141,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
         <div className="text-center pt-2">
           <Link 
             href="/shop" 
-            className="inline-flex items-center justify-center w-[275px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[8px] bg-transparent hover:bg-gray-200/80 text-[#1D493E] transition-all duration-300 cursor-pointer group"
+            className="inline-flex items-center justify-center w-[275px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[8px] bg-transparent hover:bg-[#1D493E]/[0.08] text-[#1D493E] transition-all duration-300 cursor-pointer group"
           >
             <span className="w-[163px] h-[25px] flex items-center justify-center font-sans font-medium text-[20px] leading-none">
               View all products
@@ -2130,7 +2170,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
           width: "100%",
           background: "#FFFFFF",
         }}
-        className="relative z-10 w-full px-4 md:px-[80px] py-4 sm:py-8 bg-white border-t border-[#1D493E]/10"
+        className="relative z-10 w-full px-4 md:px-[80px] py-4 sm:py-8 bg-white"
       >
         <div
           style={{
@@ -2201,10 +2241,22 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
               transition: "opacity 0.2s",
               cursor: "pointer",
             }}
-            className="hover:opacity-90 w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#1D493E] text-white h-[44px] sm:h-[50px] px-6 sm:px-8 rounded-[4px] font-semibold text-sm sm:text-base"
+            className="hover:opacity-90 w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#1D493E] text-white h-[44px] sm:h-[50px] px-6 sm:px-8 rounded-[4px] font-semibold text-sm sm:text-base group cursor-pointer"
           >
             <span>Reserve your tour now</span>
-            <span className="text-base sm:text-lg font-sans">↗</span>
+            <svg 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="2.25" 
+              strokeLinecap="round" 
+              strokeLinejoin="round"
+              className="w-5 h-5 shrink-0 transform transition-transform duration-300 ease-out group-hover:translate-x-1.5 group-hover:-translate-y-1.5"
+            >
+              <path d="M7 17l2.5-2.5" />
+              <path d="M12.5 11.5L17 7" />
+              <path d="M7 7h10v10" />
+            </svg>
           </button>
         </div>
       </section>
@@ -2386,6 +2438,13 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
           </div>
         </div>
       )}
+      {/* EDIT PACKAGE MODAL ON DETAILS PAGE */}
+      <PackageEditorModal
+        isOpen={isEditingPkg}
+        onClose={() => setIsEditingPkg(false)}
+        packageData={editingPkgData || pkg}
+        onSave={handleSaveEditedPackageOnDetails}
+      />
     </div>
   );
 }

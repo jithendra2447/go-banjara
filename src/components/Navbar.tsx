@@ -18,6 +18,12 @@ export const Navbar: React.FC = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [selectedMenuItem, setSelectedMenuItem] = useState<string>('profile');
   const pathname = usePathname();
+
+  // Hide Navbar completely on admin pages
+  if (pathname?.startsWith('/admin')) {
+    return null;
+  }
+
   const { cartCount, setCartOpen, wishlist, setWishlistOpen, user, logout, setAuthOpen } = useCart();
   const [searchVal, setSearchVal] = useState('');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
@@ -86,7 +92,7 @@ export const Navbar: React.FC = () => {
   };
 
   return (
-    <header className={`w-full z-50 flex flex-col fixed top-0 left-0 transition-all duration-300 ${
+    <header data-site-nav="true" className={`w-full z-50 flex flex-col fixed top-0 left-0 transition-all duration-300 ${
       isTransparent
         ? 'bg-transparent border-b border-white/10'
         : 'bg-white backdrop-blur-[12px] border-b border-transparent shadow-xs'
@@ -148,7 +154,7 @@ export const Navbar: React.FC = () => {
           <div className="flex items-center justify-end gap-1.5 sm:gap-2 lg:gap-3 xl:gap-4 h-[47px] shrink-0 flex-nowrap">
             
             {/* Search Input Box */}
-            <div className="relative hidden md:block">
+            <div className="relative hidden lg:block">
               <div className={`flex items-center w-[140px] lg:w-[180px] xl:w-[230px] h-[47px] gap-[8px] rounded-[4px] px-[10px] lg:px-[12px] transition-all duration-300 ${
                 isTransparent
                   ? 'bg-black/20 border border-white/20 text-white'
@@ -194,13 +200,13 @@ export const Navbar: React.FC = () => {
 
               {/* Instant Live Search Results Popover */}
               {isSearchFocused && searchVal.trim().length > 0 && (
-                <div className="absolute top-[52px] left-0 w-[300px] bg-white border border-gray-200 rounded-xl shadow-2xl z-50 overflow-hidden animate-fade-in text-left">
-                  <div className="p-2 text-[11px] font-bold text-gray-400 uppercase tracking-wider border-b border-gray-100 flex items-center justify-between">
+                <div className="absolute top-[52px] left-0 w-[320px] sm:w-[340px] bg-white border border-gray-200 rounded-[8px] shadow-2xl z-50 overflow-hidden animate-fade-in text-left">
+                  <div className="px-4 py-3 text-[11px] font-bold text-[#8D8D8D] uppercase tracking-[1.2px] border-b border-gray-100 flex items-center justify-between font-sans">
                     <span>Products ({searchResults.length})</span>
-                    <span className="text-[10px] text-gray-400 font-normal">Press Enter ↵</span>
+                    <span className="text-[10px] text-[#8D8D8D] font-medium tracking-wider">Press Enter ↵</span>
                   </div>
                   {searchResults.length > 0 ? (
-                    <div className="max-h-[320px] overflow-y-auto divide-y divide-gray-50">
+                    <div className="max-h-[340px] overflow-y-auto divide-y divide-gray-100/60">
                       {searchResults.map((item) => (
                         <Link
                           key={item.id}
@@ -209,18 +215,24 @@ export const Navbar: React.FC = () => {
                             setSearchVal('');
                             setIsSearchFocused(false);
                           }}
-                          className="flex items-center gap-3 p-2.5 hover:bg-slate-50 transition duration-150 group"
+                          className="flex items-center gap-3.5 px-4 py-3 hover:bg-[#1D493E]/[0.04] transition-colors duration-150 group"
                         >
                           <img
                             src={item.image}
                             alt={item.name}
-                            className="w-10 h-10 object-cover rounded-md shrink-0 border border-slate-100"
+                            className="w-12 h-12 object-cover rounded-[6px] shrink-0 border border-gray-100"
                           />
                           <div className="flex-1 min-w-0">
-                            <p className="text-xs font-semibold text-slate-800 truncate group-hover:text-[#1D493E] transition">
+                            <p 
+                              style={{ fontFamily: '"Faktum", "Outfit", sans-serif' }}
+                              className="text-[14px] font-semibold text-[#2B2B2B] truncate group-hover:text-[#1D493E] transition-colors duration-150"
+                            >
                               {item.name}
                             </p>
-                            <span className="text-[10px] font-bold text-[#FF5A36]">
+                            <span 
+                              style={{ fontFamily: '"Faktum", "Outfit", sans-serif' }}
+                              className="text-[13px] font-bold text-[#FF623E] block mt-0.5"
+                            >
                               ₹{item.price}
                             </span>
                           </div>
@@ -228,18 +240,22 @@ export const Navbar: React.FC = () => {
                       ))}
                     </div>
                   ) : (
-                    <div className="p-4 text-center text-xs text-gray-500">
-                      No products found matching "<span className="font-semibold text-slate-700">{searchVal}</span>"
+                    <div 
+                      style={{ fontFamily: '"Outfit", sans-serif' }}
+                      className="p-5 text-center text-xs text-[#8D8D8D]"
+                    >
+                      No products found matching &ldquo;<span className="font-semibold text-[#2B2B2B]">{searchVal}</span>&rdquo;
                     </div>
                   )}
 
                   <button
                     type="button"
                     onClick={() => triggerSearch()}
-                    className="w-full py-2.5 bg-slate-50 hover:bg-[#1D493E] text-[#1D493E] hover:text-white text-xs font-bold transition text-center border-t border-gray-100 cursor-pointer flex items-center justify-center gap-1.5"
+                    style={{ fontFamily: '"Faktum", "Outfit", sans-serif' }}
+                    className="w-full h-[44px] bg-[#F7F9F8] hover:bg-[#1D493E] text-[#1D493E] hover:text-white text-[13px] font-bold transition-all duration-200 text-center border-t border-gray-100 cursor-pointer flex items-center justify-center gap-2 group"
                   >
                     <span>View all matching results</span>
-                    <span>→</span>
+                    <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
                   </button>
                 </div>
               )}
@@ -933,6 +949,19 @@ export const Navbar: React.FC = () => {
       {showLogoutModal && (
         <div 
           className="fixed inset-0 z-[99999] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm select-none"
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            width: '100vw',
+            height: '100vh',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 99999,
+          }}
           onClick={() => setShowLogoutModal(false)}
         >
           <div 
@@ -951,8 +980,9 @@ export const Navbar: React.FC = () => {
               gap: "20px",
               boxSizing: "border-box",
               boxShadow: "0px 20px 60px rgba(0, 0, 0, 0.18)",
+              margin: "auto",
             }}
-            className="text-left"
+            className="text-left animate-in fade-in zoom-in-95 duration-200"
           >
             {/* Icon + Title */}
             <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>

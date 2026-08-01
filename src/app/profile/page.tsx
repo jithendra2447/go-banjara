@@ -1278,9 +1278,9 @@ function ProfilePageContent() {
               {/* Orders List Outer Container */}
               <div 
                 style={{
-                  border: '1px solid rgba(204, 204, 204, 1)',
+                  border: history.length > 0 ? '1px solid rgba(204, 204, 204, 1)' : 'none',
                   borderRadius: '6px',
-                  background: '#FFFFFF',
+                  background: 'transparent',
                   overflow: 'hidden',
                 }}
               >
@@ -2031,9 +2031,9 @@ function ProfilePageContent() {
                 maxWidth: "936px",
                 height: "auto",
                 borderRadius: "4px",
-                border: "1px solid rgba(204, 204, 204, 1)",
-                background: "rgba(255, 255, 255, 1)",
-                padding: "24px",
+                border: "none",
+                background: "transparent",
+                padding: "0px",
                 display: "flex",
                 flexDirection: "column",
                 gap: "32px",
@@ -2574,7 +2574,7 @@ function ProfilePageContent() {
                     style={{
                       width: "100%",
                       borderRadius: "4px",
-                      border: "1px solid rgba(204, 204, 204, 1)",
+                      border: addressList.length > 0 ? "1px solid rgba(204, 204, 204, 1)" : "none",
                       backgroundColor: "rgba(255, 255, 255, 1)",
                       overflow: "hidden",
                       display: "flex",
@@ -2966,8 +2966,8 @@ function ProfilePageContent() {
                     style={{
                       width: "100%",
                       borderRadius: "8px",
-                      border: "1px solid rgba(204, 204, 204, 1)",
-                      background: "#FFFFFF",
+                      border: "none",
+                      background: "transparent",
                       padding: "48px 24px",
                       display: "flex",
                       flexDirection: "column",
@@ -3749,6 +3749,19 @@ function ProfilePageContent() {
         {showLogoutModal && (
           <div
             className="fixed inset-0 z-[99999] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm select-none"
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              width: '100vw',
+              height: '100vh',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              zIndex: 99999,
+            }}
             onClick={() => setShowLogoutModal(false)}
           >
             <div
@@ -3756,6 +3769,8 @@ function ProfilePageContent() {
               style={{
                 width: "100%",
                 maxWidth: "460px",
+                maxHeight: "90vh",
+                overflowY: "auto",
                 borderRadius: "12px",
                 border: "1px solid rgba(204, 204, 204, 1)",
                 backgroundColor: "#FFFFFF",
@@ -3765,7 +3780,9 @@ function ProfilePageContent() {
                 gap: "20px",
                 boxSizing: "border-box",
                 boxShadow: "0px 20px 60px rgba(0, 0, 0, 0.18)",
+                margin: "auto",
               }}
+              className="text-left animate-in fade-in zoom-in-95 duration-200"
             >
               {/* Icon + Title */}
               <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>

@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
-import { Star, Check, Shield, Truck, Box, ArrowUpRight } from 'lucide-react';
+import { Star, Check, Shield, Truck, Box, ArrowUpRight, Edit3, Upload, Save } from 'lucide-react';
 import { useCart } from '@/components/providers';
 import { PRODUCTS } from '@/data/products';
 import { Product } from '@/types';
@@ -52,6 +52,38 @@ export default function ProductDetailsPage() {
   const [notifyEmail, setNotifyEmail] = useState('');
   const [notifySuccess, setNotifySuccess] = useState(false);
 
+  const [isEditingProd, setIsEditingProd] = useState(false);
+  const [editingProdData, setEditingProdData] = useState<any>(null);
+  const [activeEditorTab, setActiveEditorTab] = useState<'basic' | 'specs' | 'reviews' | 'faqs'>('basic');
+
+  const handleSaveEditedProductOnDetails = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!editingProdData) return;
+
+    let currentList: any[] = [];
+    const saved = localStorage.getItem('gb_admin_products_v3');
+    if (saved) {
+      try {
+        currentList = JSON.parse(saved);
+      } catch (err) {}
+    }
+    if (!Array.isArray(currentList) || currentList.length === 0) {
+      currentList = [...PRODUCTS];
+    }
+
+    const idx = currentList.findIndex((p: any) => p.id === editingProdData.id);
+    if (idx !== -1) {
+      currentList[idx] = editingProdData;
+    } else {
+      currentList = [editingProdData, ...currentList];
+    }
+
+    localStorage.setItem('gb_admin_products_v3', JSON.stringify(currentList));
+    setProduct(editingProdData);
+    setProductsList(currentList);
+    setIsEditingProd(false);
+  };
+
   // Load products list from LocalStorage/JSON on mount
   useEffect(() => {
     let list = PRODUCTS;
@@ -68,7 +100,11 @@ export default function ProductDetailsPage() {
       }
     }
 
-    const found = list.find((p) => p.id === id);
+    const found = list.find((p) => 
+      p.id === id || 
+      p.id?.toLowerCase() === id?.toLowerCase() ||
+      p.name?.toLowerCase().replace(/\s+/g, '-') === id?.toLowerCase()
+    );
     if (found) {
       setProduct(found);
       setActiveImg(found.image);
@@ -206,16 +242,14 @@ export default function ProductDetailsPage() {
     }
   };
 
-  const productSpecs = getSpecs();
+  const productSpecs = product.specs && product.specs.length > 0 ? product.specs : getSpecs();
 
-  // Highlights list - exact text match
-  const highlights = [
-    'Overnight camping under Milky Way at Chandratal Lake',
-    'Overnight camping under Milky Way at Chandratal Lake',
-    'Overnight camping under Milky Way at Chandratal Lake',
-    'Overnight camping under Milky Way at Chandratal Lake',
-    'Overnight camping under Milky Way at Chandratal Lake',
-    'Overnight camping under Milky Way at Chandratal Lake'
+  // Dynamic or fallback highlights list
+  const highlights = product.highlights && product.highlights.length > 0 ? product.highlights : [
+    'Hand-crafted premium quality finish',
+    'Weatherproof and ultra-durable materials',
+    'Designed for digital nomads and explorers',
+    '100% authentic Banjāra Originals gear'
   ];
 
   // Calculate discount percentage
@@ -409,7 +443,7 @@ export default function ProductDetailsPage() {
                 position: "relative",
                 width: "100%",
                 borderRadius: "4px",
-                border: "1.05px solid rgba(204, 204, 204, 1)",
+                border: "none",
                 backgroundColor: "#FFFFFF",
                 alignItems: "center",
                 justifyContent: "center",
@@ -524,9 +558,23 @@ export default function ProductDetailsPage() {
             >
               {/* Title & Category Tag Row */}
               <div className="flex items-start justify-between gap-3 w-full">
-                <h2 style={{ fontFamily: "Faktum, sans-serif", margin: 0 }} className="text-lg sm:text-xl md:text-[28px] font-semibold text-[#2B2B2B] leading-snug">
-                  {product.name}
-                </h2>
+                <div className="flex items-center gap-2 flex-1 min-w-0 flex-wrap">
+                  <h2 style={{ fontFamily: "Faktum, sans-serif", margin: 0 }} className="text-lg sm:text-xl md:text-[28px] font-semibold text-[#2B2B2B] leading-snug">
+                    {product.name}
+                  </h2>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setEditingProdData({ ...product });
+                      setIsEditingProd(true);
+                    }}
+                    className="px-3 py-1.5 bg-[#1D493E]/10 hover:bg-[#1D493E] text-[#1D493E] hover:text-white rounded-lg text-xs font-bold transition flex items-center gap-1.5 cursor-pointer shrink-0"
+                    title="Edit Product Details"
+                  >
+                    <Edit3 className="w-3.5 h-3.5" />
+                    <span>Edit Product</span>
+                  </button>
+                </div>
                 <span 
                   style={{
                     fontFamily: "Faktum, sans-serif",
@@ -587,10 +635,10 @@ export default function ProductDetailsPage() {
                 {/* Quantity Selector (Compact height: 36px) */}
                 <div className="flex flex-col gap-1 shrink-0">
                   <span className="font-sans text-xs font-medium text-slate-500">Quantity</span>
-                  <div className="flex items-center border border-slate-200 rounded-[4px] h-9 bg-white">
+                  <div className="flex items-center border border-slate-200 rounded-[4px] h-9 bg-white overflow-hidden">
                     <button
                       onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                      className="w-8 h-full flex items-center justify-center font-bold text-sm text-slate-700 border-r border-slate-200 hover:bg-slate-50 transition"
+                      className="w-8 h-full flex items-center justify-center font-bold text-sm text-slate-700 border-r border-slate-200 hover:bg-[#1D493E]/[0.08] hover:text-[#1D493E] active:bg-[#1D493E]/[0.15] transition-all cursor-pointer"
                     >
                       −
                     </button>
@@ -599,7 +647,7 @@ export default function ProductDetailsPage() {
                     </span>
                     <button
                       onClick={() => setQuantity(quantity + 1)}
-                      className="w-8 h-full flex items-center justify-center font-bold text-sm text-slate-700 border-l border-slate-200 hover:bg-slate-50 transition"
+                      className="w-8 h-full flex items-center justify-center font-bold text-sm text-slate-700 border-l border-slate-200 hover:bg-[#1D493E]/[0.08] hover:text-[#1D493E] active:bg-[#1D493E]/[0.15] transition-all cursor-pointer"
                     >
                       +
                     </button>
@@ -618,10 +666,10 @@ export default function ProductDetailsPage() {
                             key={size}
                             type="button"
                             onClick={() => setSelectedSize(size)}
-                            className={`w-9 h-9 rounded-[4px] text-xs font-bold transition ${
+                            className={`w-9 h-9 rounded-[4px] text-xs font-bold transition cursor-pointer ${
                               isSelected 
                                 ? "bg-[#1D493E] text-white border-2 border-[#1D493E]" 
-                                : "bg-white text-slate-700 border border-slate-200 hover:border-[#1D493E]"
+                                : "bg-white text-slate-700 border border-slate-200 hover:border-[#1D493E] hover:bg-[#1D493E]/[0.08] hover:text-[#1D493E]"
                             }`}
                           >
                             {size}
@@ -641,12 +689,12 @@ export default function ProductDetailsPage() {
                       placeholder="Enter pincode"
                       value={pincode}
                       onChange={(e) => setPincode(e.target.value)}
-                      className="w-full h-9 pl-2.5 pr-14 border border-slate-200 rounded-[4px] text-xs font-sans text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#1D493E]"
+                      className="w-full h-9 pl-2.5 pr-16 border border-slate-200 rounded-[4px] text-xs font-sans text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#1D493E]"
                     />
                     <button
                       type="button"
                       onClick={handleCheckPincode as any}
-                      className="absolute right-2 text-xs font-bold text-blue-600 hover:text-blue-700"
+                      className="absolute right-1 px-2.5 py-1 rounded-[4px] text-xs font-bold text-[#1D493E] hover:bg-[#1D493E]/[0.08] transition-all cursor-pointer"
                     >
                       Check
                     </button>
@@ -691,7 +739,7 @@ export default function ProductDetailsPage() {
                       cursor: "pointer",
                       boxSizing: "border-box",
                     }}
-                    className="hover:bg-[#1D493E] hover:text-white transition-all duration-300"
+                    className="hover:bg-[#1D493E]/[0.08] hover:border-[#1D493E] active:scale-[0.98] transition-all duration-200 cursor-pointer"
                   >
                     Notify about availability
                   </button>
@@ -718,11 +766,11 @@ export default function ProductDetailsPage() {
                       cursor: "pointer",
                       boxSizing: "border-box"
                     }}
-                    className="hover:bg-[#1D493E] hover:text-white transition-all duration-300 group"
+                    className="hover:bg-[#1D493E]/[0.08] hover:border-[#1D493E] active:scale-[0.98] transition-all duration-200 group cursor-pointer"
                   >
-                    <span>Add to Cart</span>
+                    <span className="text-[#1D493E] font-semibold">Add to Cart</span>
                     <svg
-                      style={{ width: '28px', height: '28px' }}
+                      style={{ width: '24px', height: '24px' }}
                       viewBox="0 0 28 28"
                       fill="none"
                       strokeWidth="1.75"
@@ -730,10 +778,10 @@ export default function ProductDetailsPage() {
                       strokeLinejoin="round"
                       className="shrink-0"
                     >
-                      <path d="M4 5h3l2 11h11l2.5-9H14" className="stroke-[#1D493E] group-hover:stroke-white transition-colors duration-300" />
-                      <path d="M7.8 8.5H9.5" className="stroke-[#1D493E] group-hover:stroke-white transition-colors duration-300" />
-                      <circle cx="10.5" cy="21.5" r="2" className="stroke-[#1D493E] group-hover:stroke-white transition-colors duration-300" />
-                      <circle cx="17.5" cy="21.5" r="2" className="stroke-[#1D493E] group-hover:stroke-white transition-colors duration-300" />
+                      <path d="M4 5h3l2 11h11l2.5-9H14" className="stroke-[#1D493E] transition-colors duration-200" />
+                      <path d="M7.8 8.5H9.5" className="stroke-[#1D493E] transition-colors duration-200" />
+                      <circle cx="10.5" cy="21.5" r="2" className="stroke-[#1D493E] transition-colors duration-200" />
+                      <circle cx="17.5" cy="21.5" r="2" className="stroke-[#1D493E] transition-colors duration-200" />
                     </svg>
                   </button>
                   <button
@@ -755,10 +803,10 @@ export default function ProductDetailsPage() {
                       cursor: "pointer",
                       boxSizing: "border-box"
                     }}
-                    className="hover:bg-[#15342c] transition-all duration-300"
+                    className="group hover:bg-[#15342c] hover:shadow-md active:scale-[0.98] transition-all duration-200 cursor-pointer"
                   >
                     <span>Buy Now</span>
-                    <ArrowUpRight style={{ width: "18px", height: "18px" }} />
+                    <ArrowUpRight className="w-[18px] h-[18px] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" style={{ width: "18px", height: "18px" }} />
                   </button>
                 </div>
               )}
@@ -782,27 +830,27 @@ export default function ProductDetailsPage() {
                 }}
                 className="hidden md:grid w-full text-center"
               >
-                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
-                  <div style={{ width: "46px", height: "46px", borderRadius: "4px", backgroundColor: "rgba(246, 243, 238, 1)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    <Shield className="w-[14px] h-[14px] text-[#2B2B2B] stroke-[1.75]" />
+                <div className="flex flex-col items-center gap-2 group cursor-pointer transition-all duration-200 hover:scale-105">
+                  <div className="w-[46px] h-[46px] rounded-[4px] bg-[rgba(246,243,238,1)] flex items-center justify-center group-hover:bg-[#1D493E]/[0.1] transition-colors duration-200">
+                    <Shield className="w-[14px] h-[14px] text-[#2B2B2B] group-hover:text-[#1D493E] stroke-[1.75] transition-colors duration-200" />
                   </div>
-                  <span style={{ fontSize: "12px", fontFamily: "Faktum, sans-serif", fontWeight: 500, color: "rgba(43, 43, 43, 1)" }}>
+                  <span className="text-[12px] font-sans font-medium text-[rgba(43,43,43,1)] group-hover:text-[#1D493E] transition-colors duration-200">
                     Safe Payment
                   </span>
                 </div>
-                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
-                  <div style={{ width: "46px", height: "46px", borderRadius: "4px", backgroundColor: "rgba(246, 243, 238, 1)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    <Truck className="w-[14px] h-[14px] text-[#2B2B2B] stroke-[1.75]" />
+                <div className="flex flex-col items-center gap-2 group cursor-pointer transition-all duration-200 hover:scale-105">
+                  <div className="w-[46px] h-[46px] rounded-[4px] bg-[rgba(246,243,238,1)] flex items-center justify-center group-hover:bg-[#1D493E]/[0.1] transition-colors duration-200">
+                    <Truck className="w-[14px] h-[14px] text-[#2B2B2B] group-hover:text-[#1D493E] stroke-[1.75] transition-colors duration-200" />
                   </div>
-                  <span style={{ fontSize: "12px", fontFamily: "Faktum, sans-serif", fontWeight: 500, color: "rgba(43, 43, 43, 1)" }}>
+                  <span className="text-[12px] font-sans font-medium text-[rgba(43,43,43,1)] group-hover:text-[#1D493E] transition-colors duration-200">
                     Free & fast Shipping
                   </span>
                 </div>
-                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
-                  <div style={{ width: "46px", height: "46px", borderRadius: "4px", backgroundColor: "rgba(246, 243, 238, 1)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    <Box className="w-[14px] h-[14px] text-[#2B2B2B] stroke-[1.75]" />
+                <div className="flex flex-col items-center gap-2 group cursor-pointer transition-all duration-200 hover:scale-105">
+                  <div className="w-[46px] h-[46px] rounded-[4px] bg-[rgba(246,243,238,1)] flex items-center justify-center group-hover:bg-[#1D493E]/[0.1] transition-colors duration-200">
+                    <Box className="w-[14px] h-[14px] text-[#2B2B2B] group-hover:text-[#1D493E] stroke-[1.75] transition-colors duration-200" />
                   </div>
-                  <span style={{ fontSize: "12px", fontFamily: "Faktum, sans-serif", fontWeight: 500, color: "rgba(43, 43, 43, 1)" }}>
+                  <span className="text-[12px] font-sans font-medium text-[rgba(43,43,43,1)] group-hover:text-[#1D493E] transition-colors duration-200">
                     2 - 5 days Delivery
                   </span>
                 </div>
@@ -857,16 +905,19 @@ export default function ProductDetailsPage() {
         </div>
 
         {/* Tab Bar */}
-        <div
+        {/* Navigation Tabs Container */}
+        <div 
           style={{
-            borderBottom: "2px solid rgba(204, 204, 204, 1)",
-            backgroundColor: "rgba(255, 255, 255, 1)",
-            boxSizing: "border-box"
+            position: "relative",
+            width: "100%",
           }}
-          className="w-full h-10 sm:h-12 mt-1 sm:mt-4"
+          className="w-full mt-1 sm:mt-4"
         >
-          <div className="flex gap-4 sm:gap-8 md:gap-12 h-full items-end">
+          {/* Full-width Gray Base Line */}
+          <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#CCCCCC]/60 z-0" />
 
+          {/* Buttons flex row */}
+          <div className="flex gap-4 sm:gap-8 md:gap-12 items-center relative z-10">
             {/* Product Description Tab */}
             <button
               onClick={() => setActiveTab('desc')}
@@ -874,10 +925,8 @@ export default function ProductDetailsPage() {
                 cursor: "pointer",
                 background: "none",
                 border: "none",
-                padding: "0 0 6px 0",
-                borderBottom: activeTab === 'desc' ? "3px solid rgba(28, 68, 140, 1)" : "3px solid transparent",
-                marginBottom: "-2px",
-                transition: "border-color 0.2s"
+                padding: "8px 0",
+                position: "relative",
               }}
             >
               <span style={{
@@ -887,6 +936,19 @@ export default function ProductDetailsPage() {
                 color: activeTab === 'desc' ? "rgba(28, 68, 140, 1)" : "rgba(43, 43, 43, 1)",
                 transition: "color 0.2s"
               }} className="text-sm sm:text-xl md:text-[24px]">Product Description</span>
+              {activeTab === 'desc' && (
+                <span
+                  style={{
+                    position: "absolute",
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    height: "3px",
+                    backgroundColor: "rgba(28, 68, 140, 1)",
+                    zIndex: 20,
+                  }}
+                />
+              )}
             </button>
 
             {/* Reviews Tab */}
@@ -896,10 +958,8 @@ export default function ProductDetailsPage() {
                 cursor: "pointer",
                 background: "none",
                 border: "none",
-                padding: "0 0 6px 0",
-                borderBottom: activeTab === 'reviews' ? "3px solid rgba(28, 68, 140, 1)" : "3px solid transparent",
-                marginBottom: "-2px",
-                transition: "border-color 0.2s"
+                padding: "8px 0",
+                position: "relative",
               }}
             >
               <span style={{
@@ -909,8 +969,20 @@ export default function ProductDetailsPage() {
                 color: activeTab === 'reviews' ? "rgba(28, 68, 140, 1)" : "rgba(43, 43, 43, 1)",
                 transition: "color 0.2s"
               }} className="text-sm sm:text-xl md:text-[24px]">Reviews</span>
+              {activeTab === 'reviews' && (
+                <span
+                  style={{
+                    position: "absolute",
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    height: "3px",
+                    backgroundColor: "rgba(28, 68, 140, 1)",
+                    zIndex: 20,
+                  }}
+                />
+              )}
             </button>
-
           </div>
         </div>
 
@@ -950,15 +1022,9 @@ export default function ProductDetailsPage() {
                   fontWeight: 500,
                   color: "rgba(43, 43, 43, 1)",
                   margin: 0,
-                }} className="text-xs sm:text-base md:text-[18px] leading-relaxed md:leading-[32px]">Designed for the digital nomads and the barefoot explorers, the Naturally Nomad badge is more than just an accessory it&apos;s a mark of identity. Whether you&apos;re working from a cafe in Dharamshala or hitchhiking through the Spiti Valley, this badge represents the freedom to move and the courage to belong nowhere and everywhere at once.
-                </p>
-                <p style={{
-                  fontFamily: "Faktum, sans-serif",
-                  fontWeight: 500,
-                  color: "rgba(43, 43, 43, 1)",
-                  margin: 0,
-                }} className="hidden md:block text-sm sm:text-base md:text-[18px] leading-relaxed md:leading-[32px]">
-                  Crafted with high-grade hard enamel, the colors are deep and durable, reflecting the rugged nature of travel. The minimalist aesthetic ensures it pairs perfectly with your denim jacket, your trusty rucksack, or even your camera strap. Every stroke in the design is inspired by the rolling hills of the Western Ghats and the clear skies of the Himalayas.
+                  whiteSpace: "pre-line"
+                }} className="text-xs sm:text-base md:text-[18px] leading-relaxed md:leading-[32px]">
+                  {product.description || `Designed for the digital nomads and the barefoot explorers, the ${product.name} is more than just an accessory it's a mark of identity. Whether you're working from a cafe in Dharamshala or hitchhiking through the Spiti Valley, this badge represents the freedom to move and the courage to belong nowhere and everywhere at once.`}
                 </p>
               </div>
             </section>
@@ -967,7 +1033,7 @@ export default function ProductDetailsPage() {
             <section style={{ display: "flex", flexDirection: "column", gap: "8px" }} className="mt-1 sm:mt-0">
               <div>
                 <span style={{ display: "inline-block", fontSize: "9px", fontWeight: 900, textTransform: "uppercase", letterSpacing: "0.15em", color: "rgba(255, 98, 62, 1)", backgroundColor: "rgba(255, 235, 229, 1)", padding: "2px 6px", borderRadius: "2px" }}>
-                  SPECIFICATIONS
+                  HIGHLIGHTS
                 </span>
               </div>
               <h2 style={{ fontFamily: "Fraunces, serif", fontWeight: 600, color: "rgba(43, 43, 43, 1)", margin: 0 }} className="text-base sm:text-2xl md:text-[28px]">
@@ -1234,10 +1300,22 @@ export default function ProductDetailsPage() {
           {/* Button */}
           <Link
             href="/travel"
-            className="w-full max-w-[280px] h-10 sm:h-[52px] rounded-[4px] bg-[#1D493E] text-white flex items-center justify-center gap-2 hover:bg-[#15342c] transition-all duration-300 text-xs sm:text-base font-semibold shadow-xs no-underline"
+            className="w-full max-w-[280px] h-10 sm:h-[52px] rounded-[4px] bg-[#1D493E] text-white flex items-center justify-center gap-2 hover:bg-[#15342c] transition-all duration-300 text-xs sm:text-base font-semibold shadow-xs no-underline group cursor-pointer"
           >
             <span>Reserve your tour now</span>
-            <ArrowUpRight style={{ width: "16px", height: "16px" }} />
+            <svg 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="2.25" 
+              strokeLinecap="round" 
+              strokeLinejoin="round"
+              className="w-5 h-5 shrink-0 transform transition-transform duration-300 ease-out group-hover:translate-x-1.5 group-hover:-translate-y-1.5"
+            >
+              <path d="M7 17l2.5-2.5" />
+              <path d="M12.5 11.5L17 7" />
+              <path d="M7 7h10v10" />
+            </svg>
           </Link>
         </section>
 
@@ -1433,6 +1511,473 @@ export default function ProductDetailsPage() {
                 </button>
               </>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* EDIT PRODUCT MODAL ON PRODUCT DETAILS PAGE */}
+      {isEditingProd && editingProdData && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center z-[99999] p-4 font-sans text-left">
+          <div className="bg-white border border-[#E5E0D5] rounded-2xl p-6 sm:p-8 max-w-2xl w-full shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between border-b border-[#E5E0D5] pb-4">
+              <div>
+                <h3 className="text-lg font-bold text-[#1D493E]">
+                  Edit Product Details
+                </h3>
+                <p className="text-xs text-gray-500 font-medium">Update basic info, specifications, reviews, and FAQs</p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsEditingProd(false)}
+                className="text-[#8D8D8D] hover:text-[#2B2B2B] font-bold text-sm cursor-pointer p-1"
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Modal Tabs Container */}
+            <div className="flex gap-2 p-1.5 bg-[#FAF9F6] border border-[#E5E0D5] rounded-xl overflow-x-auto">
+              {[
+                { id: 'basic', label: '1. Basic Info' },
+                { id: 'specs', label: '2. Specifications' },
+                { id: 'reviews', label: '3. Reviews' },
+                { id: 'faqs', label: '4. FAQs' },
+              ].map(tab => (
+                <button
+                  key={tab.id}
+                  type="button"
+                  onClick={() => setActiveEditorTab(tab.id as any)}
+                  className={`flex-1 py-2 px-3 rounded-lg text-xs font-bold transition whitespace-nowrap cursor-pointer ${
+                    activeEditorTab === tab.id
+                      ? 'bg-[#1D493E] text-white shadow-xs'
+                      : 'text-[#2B2B2B] hover:bg-gray-200/60'
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+
+            <form onSubmit={handleSaveEditedProductOnDetails} className="space-y-5">
+              {/* TAB 1: BASIC INFO */}
+              {activeEditorTab === 'basic' && (
+                <div className="space-y-4">
+                  <div className="space-y-1">
+                    <label className="text-[11px] font-bold text-[#1D493E] uppercase tracking-wider">Product Name</label>
+                    <input
+                      type="text"
+                      required
+                      value={editingProdData.name || ''}
+                      onChange={(e) => setEditingProdData({ ...editingProdData, name: e.target.value })}
+                      className="w-full p-3 bg-[#FAF9F6] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-1">
+                      <label className="text-[11px] font-bold text-[#1D493E] uppercase tracking-wider">Price (₹)</label>
+                      <input
+                        type="number"
+                        required
+                        value={editingProdData.price || 0}
+                        onChange={(e) => setEditingProdData({ ...editingProdData, price: parseFloat(e.target.value) || 0 })}
+                        className="w-full p-3 bg-[#FAF9F6] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <label className="text-[11px] font-bold text-[#1D493E] uppercase tracking-wider">Original Price (₹)</label>
+                      <input
+                        type="number"
+                        value={editingProdData.originalPrice || ''}
+                        onChange={(e) => setEditingProdData({ ...editingProdData, originalPrice: parseFloat(e.target.value) || 0 })}
+                        className="w-full p-3 bg-[#FAF9F6] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-[11px] font-bold text-[#1D493E] uppercase tracking-wider">Category</label>
+                    <input
+                      type="text"
+                      value={editingProdData.category || ''}
+                      onChange={(e) => setEditingProdData({ ...editingProdData, category: e.target.value })}
+                      className="w-full p-3 bg-[#FAF9F6] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-[11px] font-bold text-[#1D493E] uppercase tracking-wider flex items-center justify-between">
+                      <span>Cover Image</span>
+                      <span className="text-[10px] text-[#8D8D8D] font-normal">URL or Local Upload</span>
+                    </label>
+                    <div className="flex gap-2">
+                      <input
+                        type="text"
+                        placeholder="Paste image URL (https://...)"
+                        value={editingProdData.image || ''}
+                        onChange={(e) => setEditingProdData({ ...editingProdData, image: e.target.value })}
+                        className="flex-1 p-3 bg-[#FAF9F6] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
+                      />
+                      <label className="px-4 py-3 bg-[#1D493E]/10 hover:bg-[#1D493E] text-[#1D493E] hover:text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5 cursor-pointer shrink-0">
+                        <Upload className="w-4 h-4" />
+                        <span>Upload Photo</span>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          className="hidden"
+                          onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            if (file) {
+                              const reader = new FileReader();
+                              reader.onload = (uploadEvt) => {
+                                const res = uploadEvt.target?.result as string;
+                                if (res) setEditingProdData({ ...editingProdData, image: res });
+                              };
+                              reader.readAsDataURL(file);
+                            }
+                          }}
+                        />
+                      </label>
+                    </div>
+                    {editingProdData.image && (
+                      <div className="relative w-full h-32 rounded-xl overflow-hidden border border-[#E5E0D5] bg-[#FAF9F6]">
+                        <img src={editingProdData.image} alt="Product Preview" className="w-full h-full object-cover" />
+                        <div className="absolute top-2 right-2 px-2 py-0.5 bg-black/60 text-white text-[10px] font-bold rounded-md">
+                          Preview
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-[11px] font-bold text-[#1D493E] uppercase tracking-wider">Product Overview / Description</label>
+                    <textarea
+                      rows={4}
+                      value={editingProdData.description || ''}
+                      onChange={(e) => setEditingProdData({ ...editingProdData, description: e.target.value })}
+                      placeholder="Write rich overview text..."
+                      className="w-full p-3 bg-[#FAF9F6] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E] resize-none"
+                    />
+                  </div>
+
+                  <div className="flex items-center gap-2 pt-2">
+                    <input
+                      type="checkbox"
+                      id="inStockCheckDetails"
+                      checked={editingProdData.inStock !== false}
+                      onChange={(e) => setEditingProdData({ ...editingProdData, inStock: e.target.checked })}
+                      className="w-4 h-4 text-[#1D493E] accent-[#1D493E] rounded"
+                    />
+                    <label htmlFor="inStockCheckDetails" className="text-xs font-bold text-[#2B2B2B] cursor-pointer">In Stock & Ready to Buy</label>
+                  </div>
+                </div>
+              )}
+
+              {/* TAB 2: SPECIFICATIONS & HIGHLIGHTS */}
+              {activeEditorTab === 'specs' && (
+                <div className="space-y-6">
+                  {/* Part A: Specifications Grid */}
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <label className="text-xs font-bold text-[#1D493E] uppercase tracking-wider">Product Specifications Grid</label>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const cur = editingProdData.specs || getSpecs();
+                          setEditingProdData({
+                            ...editingProdData,
+                            specs: [...cur, { label: 'New Spec', value: 'Value' }]
+                          });
+                        }}
+                        className="px-3 py-1.5 bg-[#1D493E] text-white rounded-lg text-xs font-bold hover:bg-[#15342c] transition cursor-pointer"
+                      >
+                        + Add Specification
+                      </button>
+                    </div>
+
+                    <div className="space-y-2 max-h-[220px] overflow-y-auto pr-1">
+                      {(editingProdData.specs || getSpecs()).map((spec: any, idx: number) => (
+                        <div key={idx} className="flex gap-2 items-center bg-[#FAF9F6] p-2.5 border border-[#E5E0D5] rounded-xl">
+                          <input
+                            type="text"
+                            placeholder="Label (e.g. DIAMETER)"
+                            value={spec.label}
+                            onChange={(e) => {
+                              const updated = [...(editingProdData.specs || getSpecs())];
+                              updated[idx].label = e.target.value;
+                              setEditingProdData({ ...editingProdData, specs: updated });
+                            }}
+                            className="w-1/3 p-2 bg-white border border-[#E5E0D5] rounded-lg text-xs text-[#2B2B2B] font-bold focus:outline-none focus:border-[#1D493E]"
+                          />
+                          <input
+                            type="text"
+                            placeholder="Value (e.g. 1.25 Inches)"
+                            value={spec.value}
+                            onChange={(e) => {
+                              const updated = [...(editingProdData.specs || getSpecs())];
+                              updated[idx].value = e.target.value;
+                              setEditingProdData({ ...editingProdData, specs: updated });
+                            }}
+                            className="flex-1 p-2 bg-white border border-[#E5E0D5] rounded-lg text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const updated = (editingProdData.specs || getSpecs()).filter((_: any, i: number) => i !== idx);
+                              setEditingProdData({ ...editingProdData, specs: updated });
+                            }}
+                            className="p-2 text-rose-500 hover:bg-rose-50 rounded-lg text-xs font-bold cursor-pointer"
+                            title="Remove Spec"
+                          >
+                            ✕
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Part B: Product Highlights */}
+                  <div className="space-y-3 pt-4 border-t border-[#E5E0D5]">
+                    <div className="flex items-center justify-between">
+                      <label className="text-xs font-bold text-[#FF623E] uppercase tracking-wider">Product Highlights (Bullet Points)</label>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const cur = editingProdData.highlights || highlights;
+                          setEditingProdData({
+                            ...editingProdData,
+                            highlights: [...cur, 'New Highlight Feature']
+                          });
+                        }}
+                        className="px-3 py-1.5 bg-[#FF623E] text-white rounded-lg text-xs font-bold hover:bg-[#e05332] transition cursor-pointer"
+                      >
+                        + Add Highlight Point
+                      </button>
+                    </div>
+
+                    <div className="space-y-2 max-h-[220px] overflow-y-auto pr-1">
+                      {(editingProdData.highlights || highlights).map((hl: string, idx: number) => (
+                        <div key={idx} className="flex gap-2 items-center bg-[#FAF9F6] p-2.5 border border-[#E5E0D5] rounded-xl">
+                          <span className="text-[#1D493E] font-bold text-xs">✓</span>
+                          <input
+                            type="text"
+                            placeholder="Highlight feature text..."
+                            value={hl}
+                            onChange={(e) => {
+                              const list = [...(editingProdData.highlights || highlights)];
+                              list[idx] = e.target.value;
+                              setEditingProdData({ ...editingProdData, highlights: list });
+                            }}
+                            className="flex-1 p-2 bg-white border border-[#E5E0D5] rounded-lg text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const list = (editingProdData.highlights || highlights).filter((_: any, i: number) => i !== idx);
+                              setEditingProdData({ ...editingProdData, highlights: list });
+                            }}
+                            className="p-2 text-rose-500 hover:bg-rose-50 rounded-lg text-xs font-bold cursor-pointer"
+                            title="Remove Highlight"
+                          >
+                            ✕
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* TAB 3: CUSTOMER REVIEWS */}
+              {activeEditorTab === 'reviews' && (
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <label className="text-xs font-bold text-[#1D493E] uppercase tracking-wider">Customer Reviews</label>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const cur = editingProdData.reviewsList || [
+                          { id: "1", author: "Aditya Verma", date: "2 weeks ago", rating: 5, title: "Exceptional quality!", comment: "Great durability and finish." }
+                        ];
+                        setEditingProdData({
+                          ...editingProdData,
+                          reviewsList: [
+                            ...cur,
+                            { id: String(Date.now()), author: 'New Customer', date: 'Just now', rating: 5, title: 'Loved this product!', comment: 'Superb quality and packaging.' }
+                          ]
+                        });
+                      }}
+                      className="px-3 py-1.5 bg-[#1D493E] text-white rounded-lg text-xs font-bold hover:bg-[#15342c] transition cursor-pointer"
+                    >
+                      + Add Review
+                    </button>
+                  </div>
+
+                  <div className="space-y-3 max-h-[300px] overflow-y-auto pr-1">
+                    {(editingProdData.reviewsList || [
+                      { id: "1", author: "Aditya Verma", date: "2 weeks ago", rating: 5, title: "Exceptional quality and vibe!", comment: "Bought this for my last Spiti trip and it exceeded all expectations. Extremely high durability, looks super clean on my travel rucksack. Absolutely loved it!" },
+                      { id: "2", author: "Sneha Roy", date: "1 month ago", rating: 5, title: "Perfect gift for travel lovers", comment: "The finish and color vibrance are top notch. Delivery was fast too. Will definitely purchase more products from Go Banjara!" }
+                    ]).map((rev: any, idx: number) => (
+                      <div key={idx} className="bg-[#FAF9F6] p-3 border border-[#E5E0D5] rounded-xl space-y-2 relative">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const cur = editingProdData.reviewsList || [];
+                            const updated = cur.filter((_: any, i: number) => i !== idx);
+                            setEditingProdData({ ...editingProdData, reviewsList: updated });
+                          }}
+                          className="absolute top-2 right-2 text-rose-500 hover:bg-rose-50 p-1 rounded-md text-xs font-bold cursor-pointer"
+                        >
+                          ✕
+                        </button>
+                        <div className="grid grid-cols-3 gap-2">
+                          <input
+                            type="text"
+                            placeholder="Author Name"
+                            value={rev.author}
+                            onChange={(e) => {
+                              const list = [...(editingProdData.reviewsList || [])];
+                              list[idx] = { ...list[idx], author: e.target.value };
+                              setEditingProdData({ ...editingProdData, reviewsList: list });
+                            }}
+                            className="p-2 bg-white border border-[#E5E0D5] rounded-lg text-xs font-bold text-[#2B2B2B]"
+                          />
+                          <select
+                            value={rev.rating}
+                            onChange={(e) => {
+                              const list = [...(editingProdData.reviewsList || [])];
+                              list[idx] = { ...list[idx], rating: Number(e.target.value) };
+                              setEditingProdData({ ...editingProdData, reviewsList: list });
+                            }}
+                            className="p-2 bg-white border border-[#E5E0D5] rounded-lg text-xs font-bold text-[#2B2B2B]"
+                          >
+                            <option value={5}>5 Stars ⭐⭐⭐⭐⭐</option>
+                            <option value={4}>4 Stars ⭐⭐⭐⭐</option>
+                            <option value={3}>3 Stars ⭐⭐⭐</option>
+                            <option value={2}>2 Stars ⭐⭐</option>
+                            <option value={1}>1 Star ⭐</option>
+                          </select>
+                          <input
+                            type="text"
+                            placeholder="Date (e.g. 2 weeks ago)"
+                            value={rev.date}
+                            onChange={(e) => {
+                              const list = [...(editingProdData.reviewsList || [])];
+                              list[idx] = { ...list[idx], date: e.target.value };
+                              setEditingProdData({ ...editingProdData, reviewsList: list });
+                            }}
+                            className="p-2 bg-white border border-[#E5E0D5] rounded-lg text-xs text-[#2B2B2B]"
+                          />
+                        </div>
+                        <input
+                          type="text"
+                          placeholder="Review Title"
+                          value={rev.title}
+                          onChange={(e) => {
+                            const list = [...(editingProdData.reviewsList || [])];
+                            list[idx] = { ...list[idx], title: e.target.value };
+                            setEditingProdData({ ...editingProdData, reviewsList: list });
+                          }}
+                          className="w-full p-2 bg-white border border-[#E5E0D5] rounded-lg text-xs font-bold text-[#2B2B2B]"
+                        />
+                        <textarea
+                          rows={2}
+                          placeholder="Review comment text..."
+                          value={rev.comment || rev.content || ''}
+                          onChange={(e) => {
+                            const list = [...(editingProdData.reviewsList || [])];
+                            list[idx] = { ...list[idx], comment: e.target.value };
+                            setEditingProdData({ ...editingProdData, reviewsList: list });
+                          }}
+                          className="w-full p-2 bg-white border border-[#E5E0D5] rounded-lg text-xs text-[#2B2B2B] resize-none"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* TAB 4: PRODUCT FAQS */}
+              {activeEditorTab === 'faqs' && (
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <label className="text-xs font-bold text-[#1D493E] uppercase tracking-wider">Product FAQs</label>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const cur = editingProdData.faqsList || FAQ_ITEMS;
+                        setEditingProdData({
+                          ...editingProdData,
+                          faqsList: [
+                            ...cur,
+                            { question: 'New Question?', answer: 'Detailed answer goes here.' }
+                          ]
+                        });
+                      }}
+                      className="px-3 py-1.5 bg-[#1D493E] text-white rounded-lg text-xs font-bold hover:bg-[#15342c] transition cursor-pointer"
+                    >
+                      + Add FAQ
+                    </button>
+                  </div>
+
+                  <div className="space-y-3 max-h-[300px] overflow-y-auto pr-1">
+                    {(editingProdData.faqsList || FAQ_ITEMS).map((faq: any, idx: number) => (
+                      <div key={idx} className="bg-[#FAF9F6] p-3 border border-[#E5E0D5] rounded-xl space-y-2 relative">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const cur = editingProdData.faqsList || FAQ_ITEMS;
+                            const updated = cur.filter((_: any, i: number) => i !== idx);
+                            setEditingProdData({ ...editingProdData, faqsList: updated });
+                          }}
+                          className="absolute top-2 right-2 text-rose-500 hover:bg-rose-50 p-1 rounded-md text-xs font-bold cursor-pointer"
+                        >
+                          ✕
+                        </button>
+                        <input
+                          type="text"
+                          placeholder="Question"
+                          value={faq.question}
+                          onChange={(e) => {
+                            const list = [...(editingProdData.faqsList || FAQ_ITEMS)];
+                            list[idx] = { ...list[idx], question: e.target.value };
+                            setEditingProdData({ ...editingProdData, faqsList: list });
+                          }}
+                          className="w-full p-2 bg-white border border-[#E5E0D5] rounded-lg text-xs font-bold text-[#2B2B2B]"
+                        />
+                        <textarea
+                          rows={2}
+                          placeholder="Answer"
+                          value={faq.answer}
+                          onChange={(e) => {
+                            const list = [...(editingProdData.faqsList || FAQ_ITEMS)];
+                            list[idx] = { ...list[idx], answer: e.target.value };
+                            setEditingProdData({ ...editingProdData, faqsList: list });
+                          }}
+                          className="w-full p-2 bg-white border border-[#E5E0D5] rounded-lg text-xs text-[#2B2B2B] resize-none"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#E5E0D5]">
+                <button
+                  type="button"
+                  onClick={() => setIsEditingProd(false)}
+                  className="px-4 py-2.5 bg-gray-100 hover:bg-gray-200 text-[#2B2B2B] rounded-xl text-xs font-bold transition cursor-pointer"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="px-6 py-2.5 bg-[#1D493E] hover:bg-[#15342c] text-white rounded-xl text-xs font-bold transition flex items-center gap-2 cursor-pointer shadow-xs"
+                >
+                  <Save className="w-4 h-4" /> Save Changes
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       )}

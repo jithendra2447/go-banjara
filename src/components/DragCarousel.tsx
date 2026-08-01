@@ -57,6 +57,16 @@ export const DragCarousel: React.FC<DragCarouselProps> = ({
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
+    // Hide floating 'Drag' chip when hovering over CTA buttons, links, or interactive controls
+    const target = e.target as HTMLElement;
+    const isInteractiveCTA = Boolean(target.closest('button, a, input, select, [role="button"], .no-drag'));
+
+    if (isInteractiveCTA || isHoveringArrows) {
+      setShowTooltip(false);
+    } else {
+      setShowTooltip(true);
+    }
+
     // Track mouse position relative to container for the floating 'Drag' badge
     if (containerRef.current) {
       const rect = containerRef.current.getBoundingClientRect();
@@ -101,9 +111,11 @@ export const DragCarousel: React.FC<DragCarouselProps> = ({
             transform: 'translate(-50%, -50%)',
             pointerEvents: 'none',
             zIndex: 100,
+            fontFamily: "'Faktum', 'Outfit', sans-serif",
+            backgroundColor: "#1D493E",
           }}
-          className={`hidden md:flex items-center justify-center bg-black/85 text-white font-sans text-xs font-bold px-3.5 py-1.5 rounded-full shadow-lg transition-transform duration-150 select-none ${
-            isMouseDown ? 'scale-90 bg-[#1D493E]' : 'scale-100'
+          className={`hidden md:flex items-center justify-center text-white text-xs font-semibold px-4 py-1.5 rounded-full shadow-lg transition-transform duration-150 select-none tracking-wide ${
+            isMouseDown ? 'scale-95 bg-[#15342c]' : 'scale-100 bg-[#1D493E]'
           }`}
         >
           Drag

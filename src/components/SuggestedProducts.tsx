@@ -68,10 +68,25 @@ export const SuggestedProducts: React.FC<SuggestedProductsProps> = ({ title }) =
       <div className="flex justify-center mt-8">
         <Link 
           href="/shop"
-          className="inline-flex items-center justify-center gap-2 font-sans font-medium text-base text-[#1D493E] bg-transparent hover:bg-gray-200/80 rounded-[8px] px-6 py-3 transition-all duration-300 group cursor-pointer"
+          className="inline-flex items-center justify-center gap-2 rounded-[8px] bg-transparent hover:bg-[#1D493E]/[0.08] text-[#1D493E] px-6 py-3 transition-all duration-300 cursor-pointer group"
         >
-          <span>View all products</span>
-          <span className="text-xl group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300">↗</span>
+          <span className="font-sans font-medium text-[20px] leading-none text-[#1D493E]">
+            View all products
+          </span>
+          <svg 
+            style={{ width: '32px', height: '32px' }}
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="#1D493E" 
+            strokeWidth="2.25" 
+            strokeLinecap="round" 
+            strokeLinejoin="round"
+            className="shrink-0 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300"
+          >
+            <path d="M7 17l2.5-2.5" />
+            <path d="M12.5 11.5L17 7" />
+            <path d="M7 7h10v10" />
+          </svg>
         </Link>
       </div>
     </div>

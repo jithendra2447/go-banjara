@@ -227,3 +227,20 @@ a:focus, a:active, a:hover, a:focus-visible, a:focus-within {
   }
 }
 
+/* ─── Admin Page Isolation ─────────────────────────────────────────────────
+   Hides site Navbar and Footer on /admin using data attributes.
+   ──────────────────────────────────────────────────────────────────────── */
+body.admin-page [data-site-nav],
+body.admin-page [data-site-footer] {
+  display: none !important;
+}
+
+body.admin-page main.flex-1 {
+  padding-top: 0 !important;
+}
+
+body.admin-page {
+  background-color: #FAF9F6 !important;
+}
+
+

@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { ChevronRight, Trash2, Heart, X } from 'lucide-react';
+import { ChevronRight, Trash2, Heart, X, ArrowUpRight } from 'lucide-react';
 import { useCart } from '@/components/providers';
 import { SuggestedProducts } from '@/components/SuggestedProducts';
 import { RecentlyViewed } from '@/components/RecentlyViewed';
@@ -975,7 +975,7 @@ export default function CartPage() {
       </div>
 
       {/* Newsletter / Adventure Inbox Banner */}
-      <section className="w-full bg-white py-10 md:py-16 px-[20px] md:px-[80px] border-t border-gray-100 select-none">
+      <section className="w-full bg-white py-10 md:py-16 px-[20px] md:px-[80px] select-none">
         <div className="max-w-[430px] md:max-w-[1440px] mx-auto text-center flex flex-col items-center gap-4 md:gap-6">
           <h2 
             className="font-serif font-semibold text-2xl sm:text-3xl md:text-[36px] text-[#2B2B2B] leading-tight m-0"
@@ -1008,7 +1008,19 @@ export default function CartPage() {
             className="group hover:bg-[#15342c] active:scale-95 cursor-pointer shadow-sm mt-2 transition-all duration-300"
           >
             <span>Reserve your tour now</span>
-            <span className="text-lg group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300">↗</span>
+            <svg 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="2.25" 
+              strokeLinecap="round" 
+              strokeLinejoin="round"
+              className="w-5 h-5 shrink-0 transform transition-transform duration-300 ease-out group-hover:translate-x-1.5 group-hover:-translate-y-1.5"
+            >
+              <path d="M7 17l2.5-2.5" />
+              <path d="M12.5 11.5L17 7" />
+              <path d="M7 7h10v10" />
+            </svg>
           </Link>
         </div>
       </section>

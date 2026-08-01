@@ -8,11 +8,14 @@ import {
   Clock, 
   Calendar, 
   Share2, 
+  Copy,
+  Check,
   Bookmark, 
   CheckCircle2, 
   MapPin, 
   Compass, 
   ChevronRight,
+  ArrowUpRight,
   Sparkles,
   ExternalLink,
   ShieldCheck,
@@ -1096,46 +1099,51 @@ export default function BlogPostDetail() {
         }}
       />
       {/* ── BREADCRUMB BAR ── */}
-      <div className="w-full bg-white border-b border-gray-200 py-3 md:py-3.5 px-4 md:px-[80px]">
-        <div className="max-w-[1280px] mx-auto flex items-center justify-between gap-3 flex-wrap">
-          <nav className="flex items-center gap-1.5 md:gap-2 text-xs md:text-sm font-sans font-medium overflow-x-auto no-scrollbar scrollbar-none py-1">
+      <div className="w-full bg-white py-3 md:py-3.5">
+        <div className="w-full max-w-[430px] md:max-w-[1440px] mx-auto px-[20px] md:px-[80px] flex items-center justify-between gap-3 flex-nowrap">
+          <nav className="flex items-center gap-1.5 md:gap-2 text-xs md:text-sm font-sans font-medium overflow-x-auto no-scrollbar scrollbar-none py-1 min-w-0 flex-1">
             <Link 
               href="/" 
-              className="text-[#8D8D8D] hover:text-[#1D493E] transition-colors whitespace-nowrap"
+              className="text-[#8D8D8D] hover:text-[#1D493E] transition-colors whitespace-nowrap shrink-0"
             >
               Home
             </Link>
-            <span className="text-[#8D8D8D] text-xs">›</span>
+            <span className="text-[#8D8D8D] text-xs shrink-0">›</span>
             <Link 
               href="/blog" 
-              className="text-[#8D8D8D] hover:text-[#1D493E] transition-colors whitespace-nowrap"
+              className="text-[#8D8D8D] hover:text-[#1D493E] transition-colors whitespace-nowrap shrink-0"
             >
               Blogs
             </Link>
-            <span className="text-[#8D8D8D] text-xs">›</span>
-            <span className="text-[#8D8D8D] whitespace-nowrap">
+            <span className="text-[#8D8D8D] text-xs shrink-0">›</span>
+            <span className="text-[#8D8D8D] whitespace-nowrap shrink-0">
               {article.category}
             </span>
-            <span className="text-[#8D8D8D] text-xs">›</span>
-            <span className="text-[#1D493E] font-semibold line-clamp-1 max-w-[160px] sm:max-w-[280px] md:max-w-none">
+            <span className="text-[#8D8D8D] text-xs shrink-0">›</span>
+            <span className="text-[#1D493E] font-semibold truncate shrink">
               {article.title}
             </span>
           </nav>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 shrink-0">
             <button
               onClick={handleShare}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white text-[#1D493E] border border-[#E5E0D5] hover:bg-[#FAF9F6] text-xs font-semibold transition cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white text-[#1D493E] border border-[#E5E0D5] hover:bg-[#FAF9F6] text-xs font-semibold transition cursor-pointer shrink-0 shadow-xs"
+              title="Copy Blog Link"
             >
-              <Share2 className="w-3.5 h-3.5" />
-              <span>{copied ? 'Link Copied!' : 'Share'}</span>
+              {copied ? (
+                <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+              ) : (
+                <Copy className="w-3.5 h-3.5 shrink-0" />
+              )}
+              <span className="whitespace-nowrap">{copied ? 'Link Copied!' : 'Copy Blog Link'}</span>
             </button>
           </div>
         </div>
       </div>
 
       {/* ── ARTICLE HEADER ── */}
-      <header className="w-full max-w-[430px] md:max-w-4xl mx-auto px-[20px] md:px-6 pt-6 md:pt-10 pb-4 md:pb-6 text-left md:text-center">
+      <header className="w-full max-w-[430px] md:max-w-[1440px] mx-auto px-[20px] md:px-[80px] pt-6 md:pt-10 pb-4 md:pb-6 text-left md:text-center">
         {/* Category Pill */}
         <div className="inline-flex items-center justify-center h-[26px] bg-[#FFEBE5] rounded-[4px] px-3 mb-3 md:mb-4 md:mx-auto whitespace-nowrap">
           <span className="font-sans font-semibold text-[12px] md:text-[14px] leading-none tracking-[1.2px] text-[#FF623E] uppercase">
@@ -1149,7 +1157,7 @@ export default function BlogPostDetail() {
         </h1>
 
         {/* Author & Meta Row */}
-        <div className="flex flex-wrap items-center md:justify-center gap-2 md:gap-4 text-xs md:text-sm text-[#2B2B2B]/70 font-medium border-y border-gray-200 py-3">
+        <div className="flex flex-wrap items-center md:justify-center gap-2 md:gap-4 text-xs md:text-sm text-[#2B2B2B]/70 font-medium py-2">
           <div className="flex items-center gap-2">
             <img 
               src={article.author.avatar} 
@@ -1167,7 +1175,7 @@ export default function BlogPostDetail() {
       </header>
 
       {/* ── HERO COVER IMAGE WITH CAPTION ── */}
-      <div className="w-full max-w-[430px] md:max-w-5xl mx-auto px-[20px] md:px-6 mb-6 md:mb-12">
+      <div className="w-full max-w-[430px] md:max-w-[1440px] mx-auto px-[20px] md:px-[80px] mb-4 md:mb-6">
         <div className="w-full h-[220px] sm:h-[320px] md:h-[500px] rounded-[4px] overflow-hidden bg-gray-100">
           <img 
             src={article.heroImage} 
@@ -1182,12 +1190,12 @@ export default function BlogPostDetail() {
       </div>
 
       {/* ── ARTICLE CONTENT & SIDEBAR ── */}
-      <div className="w-full max-w-[430px] md:max-w-6xl mx-auto px-[20px] md:px-6 flex flex-col lg:flex-row gap-6 md:gap-12 items-start">
+      <div className="w-full max-w-[430px] md:max-w-[1440px] mx-auto px-[20px] md:px-[80px] flex flex-col lg:flex-row gap-6 lg:gap-[24px] items-start">
         
         {/* Table of Contents Sidebar */}
         {article.toc.length > 0 && (
           <aside className="w-full lg:w-80 p-4 md:p-6 bg-white border border-gray-300 rounded-[4px] lg:sticky lg:top-28 shrink-0 select-none mb-4 lg:mb-0">
-            <h4 className="font-serif font-semibold text-lg md:text-[20px] text-[#2B2B2B] border-b border-gray-300 pb-2 md:pb-3 mb-3 md:mb-4">
+            <h4 className="font-serif font-semibold text-lg md:text-[20px] text-[#2B2B2B] mb-3 md:mb-4">
               Table of Contents
             </h4>
             <nav className="space-y-2 text-xs sm:text-sm font-medium">
@@ -1205,23 +1213,23 @@ export default function BlogPostDetail() {
         )}
 
         {/* Main Article Body */}
-        <main className="flex-1 space-y-6 md:space-y-10 text-[#2B2B2B] leading-relaxed w-full">
+        <main className="flex-1 space-y-4 md:space-y-6 text-[#2B2B2B] leading-relaxed w-full">
           {/* Excerpt Lead */}
-          <p className="text-base sm:text-xl md:text-[22px] font-serif font-medium leading-relaxed italic border-l-4 border-[#1D493E] pl-3 md:pl-4 py-1 text-[#2B2B2B]">
+          <p className="text-base sm:text-xl md:text-[22px] font-serif font-medium leading-relaxed italic py-1 text-[#2B2B2B]">
             &ldquo;{article.excerpt}&rdquo;
           </p>
 
           {/* Sections */}
           {article.sections.map((section) => (
-            <section key={section.id} id={section.id} className="space-y-3 md:space-y-4 pt-2">
-              <h2 className="font-serif font-semibold text-lg sm:text-2xl md:text-3xl text-[#2B2B2B] border-b border-gray-200 pb-2 mt-6 md:mt-8 mb-3 md:mb-4">
+            <section key={section.id} id={section.id} className="space-y-4 pt-2 md:pt-4 w-full text-left">
+              <h2 className="font-serif font-semibold text-lg sm:text-2xl md:text-3xl text-[#2B2B2B] mb-2 md:mb-3 w-full text-left">
                 {section.title}
               </h2>
 
               {section.content.map((paragraph, pIdx) => (
                 <p 
                   key={pIdx} 
-                  className="font-sans text-xs sm:text-base md:text-lg leading-relaxed text-[#2B2B2B]/90 font-normal mb-3 md:mb-4"
+                  className="font-sans text-xs sm:text-base md:text-lg leading-[1.75] text-[#2B2B2B]/90 font-normal w-full text-left px-0 pl-0 pr-0 m-0"
                 >
                   {paragraph}
                 </p>
@@ -1229,7 +1237,7 @@ export default function BlogPostDetail() {
 
               {/* Highlight Callout Box */}
               {section.highlight && (
-                <div className="p-4 md:p-5 my-4 md:my-5 text-xs sm:text-sm font-semibold space-y-3 bg-[#FFEBE5]/50 border-l-4 border-[#FF623E] rounded-r-lg text-[#2B2B2B]">
+                <div className="p-4 md:p-5 my-3 md:my-4 text-xs sm:text-sm font-semibold space-y-2 bg-[#FFEBE5]/50 border-l-4 border-[#FF623E] rounded-r-lg text-[#2B2B2B]">
                   <p className="text-xs sm:text-base text-[#2B2B2B] font-medium leading-relaxed m-0">{section.highlight}</p>
                   {section.backlink && (
                     section.backlink.url.startsWith('http') ? (
@@ -1257,7 +1265,7 @@ export default function BlogPostDetail() {
 
               {/* Standalone Backlink */}
               {!section.highlight && section.backlink && (
-                <div className="my-4">
+                <div className="my-2 sm:my-3">
                   {section.backlink.url.startsWith('http') ? (
                     <a 
                       href={section.backlink.url}
@@ -1282,7 +1290,7 @@ export default function BlogPostDetail() {
 
               {/* Bullets List */}
               {section.bullets && section.bullets.length > 0 && (
-                <ul className="space-y-2 my-3 pl-0">
+                <ul className="space-y-1.5 my-2 pl-0">
                   {section.bullets.map((bullet, bIdx) => (
                     <li key={bIdx} className="flex items-start gap-2 text-xs sm:text-sm font-medium text-[#2B2B2B]">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#1D493E] shrink-0 mt-1.5" />
@@ -1294,7 +1302,7 @@ export default function BlogPostDetail() {
 
               {/* Inline Section Image */}
               {section.image && (
-                <div className="space-y-2 my-4 md:my-6">
+                <div className="space-y-1.5 my-3 md:my-4">
                   <div className="w-full h-56 sm:h-80 md:h-[420px] rounded-[4px] overflow-hidden bg-gray-100">
                     <img 
                       src={section.image} 
@@ -1390,7 +1398,7 @@ export default function BlogPostDetail() {
 
           {/* FAQs Section */}
           {article.faqs && article.faqs.length > 0 && (
-            <section id="faqs" className="w-full pt-6 md:pt-8 border-t border-gray-200">
+            <section id="faqs" className="w-full pt-6 md:pt-8">
               <div className="mb-4 md:mb-6">
                 <div className="inline-flex items-center justify-center h-[26px] bg-[#FFEBE5] rounded-[4px] px-3 mb-2">
                   <span className="font-sans font-semibold text-[12px] md:text-[14px] leading-none tracking-[1.2px] text-[#FF623E] uppercase">
@@ -1402,9 +1410,9 @@ export default function BlogPostDetail() {
                 </h2>
               </div>
 
-              <div className="w-full border-t border-gray-200 divide-y divide-gray-200">
+              <div className="w-full divide-y divide-gray-200">
                 {article.faqs.map((faq, fIdx) => (
-                  <div key={fIdx} className="py-3.5 md:py-5 text-left border-b border-gray-200 space-y-1.5">
+                  <div key={fIdx} className="py-3.5 md:py-5 text-left space-y-1.5">
                     <h4 className="font-sans font-medium text-sm sm:text-base md:text-[20px] text-[#2B2B2B]">
                       {faq.q}
                     </h4>
@@ -1418,7 +1426,7 @@ export default function BlogPostDetail() {
           )}
 
           {/* Author Signature Line */}
-          <div className="pt-6 md:pt-8 border-t border-gray-200 flex items-center gap-3 md:gap-4 mt-8 md:mt-12">
+          <div className="pt-6 md:pt-8 flex items-center gap-3 md:gap-4 mt-8 md:mt-12">
             <img 
               src={article.author.avatar} 
               alt={`${article.author.name} | Go Banjara Travel Author`}
@@ -1438,20 +1446,32 @@ export default function BlogPostDetail() {
       </div>
 
       {/* ── RELATED ARTICLES RECOMMENDATION ── */}
-      <section className="w-full max-w-[430px] md:max-w-6xl mx-auto px-[20px] md:px-6 mt-12 md:mt-20 pt-8 md:pt-12 border-t border-gray-200">
-        <div className="flex justify-between items-end mb-6 md:mb-8">
-          <div>
-            <h3 className="font-serif font-semibold text-lg sm:text-2xl md:text-3xl text-[#2B2B2B]">
-              Related Travel Guides
+      <section className="w-full max-w-[430px] md:max-w-[1440px] mx-auto px-[20px] md:px-[80px] mt-12 md:mt-20">
+        <div className="flex justify-between items-center mb-6 md:mb-8">
+          <div className="flex flex-col justify-center">
+            <h3 className="font-serif font-semibold text-lg sm:text-2xl md:text-3xl text-[#2B2B2B] m-0">
+              Related <span className="text-[#FF623E]">Travel Guides</span>
             </h3>
-            <p className="text-xs md:text-sm text-[#2B2B2B]/70 font-medium mt-0.5">Explore more curated stories &amp; itineraries</p>
+            <p className="text-xs md:text-sm text-[#2B2B2B]/70 font-medium mt-0.5 m-0">Explore more curated stories &amp; itineraries</p>
           </div>
           <Link 
             href="/blog"
-            className="inline-flex items-center gap-1 text-xs md:text-sm font-semibold text-[#1D493E] hover:text-[#FF5A36] transition cursor-pointer"
+            className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-[8px] text-sm sm:text-base md:text-[18px] font-sans font-medium text-[#1D493E] hover:bg-[#1D493E]/[0.08] transition-all duration-300 cursor-pointer group self-center no-underline"
           >
             <span>View All</span>
-            <ChevronRight className="w-3.5 h-3.5 md:w-4 md:h-4" />
+            <svg 
+              className="w-5 h-5 shrink-0 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300"
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="2.25" 
+              strokeLinecap="round" 
+              strokeLinejoin="round"
+            >
+              <path d="M7 17l2.5-2.5" />
+              <path d="M12.5 11.5L17 7" />
+              <path d="M7 7h10v10" />
+            </svg>
           </Link>
         </div>
 
@@ -1489,10 +1509,10 @@ export default function BlogPostDetail() {
                 />
               </div>
               <div className="flex flex-col gap-1">
-                <h3 className="font-serif font-semibold text-sm sm:text-base md:text-lg text-[#2B2B2B] leading-snug group-hover:text-[#FF623E] transition-colors">
+                <h3 className="font-serif font-semibold text-sm sm:text-base md:text-lg text-[#2B2B2B] group-hover:text-[#1D493E] transition-colors leading-snug">
                   {item.title}
                 </h3>
-                <p className="font-sans font-medium text-xs text-[#2B2B2B]/60">
+                <p className="font-sans font-medium text-xs text-[#2B2B2B]/60 m-0">
                   {item.date} • {item.readTime}
                 </p>
               </div>

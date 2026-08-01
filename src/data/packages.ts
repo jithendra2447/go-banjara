@@ -26,6 +26,8 @@ export interface HolidayPackage {
   nextDeparture?: string;
   startPoint?: string;
   isBestSeller?: boolean;
+  showOnHome?: boolean;
+  homeShowcaseSection?: 'hero' | 'featured' | 'deals' | 'none';
 
   // New detailed fields matching Srinagar-to-Leh design
   images?: string[];

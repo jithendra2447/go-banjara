@@ -9,6 +9,7 @@ import { Product } from '@/types';
 import ProductCard from '@/components/ProductCard';
 import { DragCarousel } from '@/components/DragCarousel';
 import { TrustBanner } from '@/components/TrustBanner';
+import { FAQSection } from '@/components/FAQSection';
 import { InteractiveProgressBar } from '@/components/InteractiveProgressBar';
 
 const TESTIMONIALS = [
@@ -108,6 +109,24 @@ export default function ShopPage() {
     } else {
       localStorage.setItem('gb_admin_products_v3', JSON.stringify(PRODUCTS));
     }
+
+    const handleUpdate = (evt?: any) => {
+      try {
+        const saved = evt?.detail ? evt.detail : JSON.parse(localStorage.getItem('gb_admin_products_v3') || '[]');
+        if (Array.isArray(saved) && saved.length > 0) {
+          setProductsList(saved);
+        }
+      } catch (e) {
+        console.error('Error in shop live update:', e);
+      }
+    };
+
+    window.addEventListener('gb_products_updated', handleUpdate);
+    window.addEventListener('storage', handleUpdate);
+    return () => {
+      window.removeEventListener('gb_products_updated', handleUpdate);
+      window.removeEventListener('storage', handleUpdate);
+    };
   }, []);
 
   // Filter products for the respective sections from local storage productsList
@@ -296,13 +315,28 @@ export default function ShopPage() {
           <div style={{ height: "62px" }} className="shrink-0" />
 
           {/* Centered View All Link */}
-          <div className="flex justify-center pt-0">
+          <div className="flex justify-center pt-2">
             <Link
               href="/shop/all"
-              className="inline-flex items-center gap-2 text-xs sm:text-sm font-extrabold uppercase tracking-widest text-[#1D493E] bg-transparent hover:bg-gray-100 rounded-[8px] px-6 py-3 transition-all duration-300 group"
+              className="inline-flex items-center justify-center gap-2 rounded-[8px] bg-transparent hover:bg-[#1D493E]/[0.08] text-[#1D493E] px-6 py-3 transition-all duration-300 cursor-pointer group"
             >
-              <span>View all products</span>
-              <span className="text-base font-semibold group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300">↗</span>
+              <span className="font-sans font-medium text-[20px] leading-none text-[#1D493E]">
+                View all products
+              </span>
+              <svg 
+                style={{ width: '32px', height: '32px' }}
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="#1D493E" 
+                strokeWidth="2.25" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+                className="shrink-0 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300"
+              >
+                <path d="M7 17l2.5-2.5" />
+                <path d="M12.5 11.5L17 7" />
+                <path d="M7 7h10v10" />
+              </svg>
             </Link>
           </div>
         </div>
@@ -408,10 +442,25 @@ export default function ShopPage() {
           <div className="flex justify-center pt-2">
             <Link
               href="/shop/discount-sale"
-              className="inline-flex items-center gap-2 text-xs sm:text-sm font-extrabold uppercase tracking-widest text-[#1D493E] bg-transparent hover:bg-gray-100 rounded-[8px] px-6 py-3 transition-all duration-300 group"
+              className="inline-flex items-center justify-center gap-2 rounded-[8px] bg-transparent hover:bg-[#1D493E]/[0.08] text-[#1D493E] px-6 py-3 transition-all duration-300 cursor-pointer group"
             >
-              <span>View all products</span>
-              <span className="text-base font-semibold group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300">↗</span>
+              <span className="font-sans font-medium text-[20px] leading-none text-[#1D493E]">
+                View all products
+              </span>
+              <svg 
+                style={{ width: '32px', height: '32px' }}
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="#1D493E" 
+                strokeWidth="2.25" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+                className="shrink-0 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300"
+              >
+                <path d="M7 17l2.5-2.5" />
+                <path d="M12.5 11.5L17 7" />
+                <path d="M7 7h10v10" />
+              </svg>
             </Link>
           </div>
         </div>
@@ -505,89 +554,10 @@ export default function ShopPage() {
           </div>
         </div>
 
-        {/* FAQ Section (Figma Specs: 1440x642px, pt:42px, pb:42px, gap:32px) */}
-        <section 
-          style={{
-            width: "100%",
-            maxWidth: "1440px",
-            background: "rgba(255, 255, 255, 1)",
-            boxSizing: "border-box",
-            margin: "0 auto",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "flex-start",
-            paddingTop: "42px",
-            paddingBottom: "42px",
-            gap: "32px"
-          }}
-          className="text-left w-full"
-        >
-          <div className="space-y-1.5 md:space-y-2.5">
-            <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
-              FAQ'S
-            </span>
-            <h2
-              style={{
-                fontFamily: "Fraunces, serif",
-                fontWeight: 600,
-                letterSpacing: "0px",
-                color: "#2B2B2B",
-                margin: 0
-              }}
-              className="text-xl sm:text-3xl md:text-[42px] leading-tight md:leading-[1.2]"
-            >
-              Frequently asked questions
-            </h2>
-          </div>
+        {/* Section 11: FAQ ACCORDION SECTION */}
+        <FAQSection items={FAQ_ITEMS} />
 
-          <div className="w-full flex flex-col border-t border-gray-200 mt-1 sm:mt-2">
-            {FAQ_ITEMS.map((item, idx) => {
-              const isOpen = openFaqIdx === idx;
-              return (
-                <div 
-                  key={idx} 
-                  className="w-full border-b border-gray-200 py-3 sm:py-5 flex flex-col text-left transition-colors duration-200"
-                >
-                  <button 
-                    onClick={() => setOpenFaqIdx(isOpen ? null : idx)}
-                    className="w-full flex justify-between items-center text-left focus:outline-none cursor-pointer gap-2"
-                  >
-                    <span 
-                      style={{
-                        fontFamily: "Faktum, Outfit, sans-serif",
-                        fontWeight: 600,
-                        color: "#2C2C2C"
-                      }}
-                      className="text-xs sm:text-base md:text-[18px] leading-snug md:leading-[26px]"
-                    >
-                      {item.question}
-                    </span>
-                    {isOpen ? (
-                      <Minus className="w-5 h-5 md:w-6 md:h-6 shrink-0 text-[#FF623E]" />
-                    ) : (
-                      <Plus className="w-5 h-5 md:w-6 md:h-6 shrink-0 text-[#1D493E]" />
-                    )}
-                  </button>
-                  {isOpen && (
-                    <p 
-                      style={{
-                        fontFamily: "Faktum, Outfit, sans-serif",
-                        fontWeight: 500,
-                        color: "#666666",
-                        margin: 0
-                      }}
-                      className="text-[11px] sm:text-sm leading-relaxed md:leading-[22px] pt-1.5 sm:pt-2 animate-fade-in-up"
-                    >
-                      {item.answer}
-                    </p>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        </section>
-
-{/* Section 12: Newsletter CTA Section (Figma Specs: 1440x342px, pt:42px, pb:42px, gap:32px) */}
+        {/* Section 12: Newsletter CTA Section (Figma Specs: 1440x342px, pt:42px, pb:42px, gap:32px) */}
         <section 
           style={{
             width: "100%",
@@ -654,7 +624,19 @@ export default function ShopPage() {
             className="inline-flex items-center justify-center gap-2 text-sm sm:text-base bg-[#1D493E] hover:bg-[#15372e] text-white rounded-[6px] px-6 py-3.5 transition-all duration-300 shadow-sm group"
           >
             <span>Reserve your tour now</span>
-            <span className="text-base font-semibold group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300">↗</span>
+            <svg 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="2.25" 
+              strokeLinecap="round" 
+              strokeLinejoin="round"
+              className="w-5 h-5 shrink-0 transform transition-transform duration-300 ease-out group-hover:translate-x-1.5 group-hover:-translate-y-1.5"
+            >
+              <path d="M7 17l2.5-2.5" />
+              <path d="M12.5 11.5L17 7" />
+              <path d="M7 7h10v10" />
+            </svg>
           </Link>
         </section>
 

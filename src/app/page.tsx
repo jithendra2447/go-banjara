@@ -13,6 +13,7 @@ import { BonjoMascot } from '@/components/BonjoMascot';
 import { CartIcon } from '@/components/CartIcon';
 import { InteractiveProgressBar } from '@/components/InteractiveProgressBar';
 import { DragCarousel } from '@/components/DragCarousel';
+import { FAQSection } from '@/components/FAQSection';
 import { getFutureDeliveryString, getFutureDateString } from '@/utils/dateUtils';
 
 // Static Blog/Diaries list
@@ -100,22 +101,52 @@ export default function Homepage() {
   const [activeImageIndices, setActiveImageIndices] = useState<Record<string, number>>({});
 
   const [pageContent, setPageContent] = useState({
-    heroTitleLine1: "Hey! Let’s",
+    heroTitleLine1: "Hey! Let's",
     heroTitleLine2: "Escape from",
     heroTitleLine3: "the Ordinary",
     heroSubtitle: "We bridge the gap between soulful Indian travel and high end gear. curated for those who find home in the dust of the road",
     heroShopBtn: "Shop Now",
     heroTravelBtn: "See Travel Packages",
     mascotText: "Hey wanderer! I'm Bonjo. Ready to hit the road?",
+
+    // Dual CTA Banners
+    ctaBanner1Title: "Shop Travel Gear for Nomads",
+    ctaBanner1Desc: "Explore our collection of hand-picked journals, weather-proof stickers and artisanal badges designed for the road",
+    ctaBanner1BtnText: "Explore Collections",
+    ctaBanner1BtnLink: "/shop",
+    ctaBanner2Title: "Book a Trip",
+    ctaBanner2Desc: "Explore our collection of hand-picked journals, weather-proof stickers and artisanal badges designed for the road",
+    ctaBanner2BtnText: "Find the Route",
+    ctaBanner2BtnLink: "/travel",
+
+    // Destinations
+    destinationsTag: "DESTINATIONS",
+    destinationsTitle: "Place worth the detour",
+    destinationsSub: "A hand-picked map of the corners of India our community keeps coming back to",
+
+    // Deals & Selling
     dealsTitle: "Today's best deals for you",
     dealsSub: "A hand-picked map of the corners of India our community keeps coming back to",
     sellingTitle: "Most Selling Products",
     sellingSub: "A hand-picked map of the corners of India our community keeps coming back to",
+
+    // Collections
+    collectionsTitle: "Top Categories",
+    collectionsSub: "Browse our curated collections of travel essentials and outdoor gear",
+
+    // Reviews
     reviewsTitle: "What people say about products",
+    reviewsSub: "Real reviews from our community of happy travelers",
+
+    // Blog
     blogTitle: "Travel Tales from the curious Explorer",
     blogSub: "Follow my voices to discover unique voices, breathtaking landscapes & unforgettable experiences",
+
+    // FAQ
     faqTitle: "Frequently Asked Questions",
     faqHelpDesk: "Help Desk",
+
+    // Values
     valuesTitle: "Built For Travelers, By Travelers",
     valuesSub: "We focus on safety, unique slow-travel routes, handcrafted durable products, and supporting remote communities"
   });
@@ -144,12 +175,8 @@ export default function Homepage() {
             const defaultPkg = HOLIDAY_PACKAGES.find(hp => hp.id === p.id);
             if (defaultPkg) {
               return { 
-                ...p, 
-                name: defaultPkg.name, 
-                description: defaultPkg.description,
-                category: defaultPkg.category,
-                durationDays: defaultPkg.durationDays,
-                duration: defaultPkg.duration
+                ...defaultPkg, 
+                ...p 
               };
             }
             return p;
@@ -176,10 +203,29 @@ export default function Homepage() {
             heroShopBtn: parsed.homeHeroShopBtn || prev.heroShopBtn,
             heroTravelBtn: parsed.homeHeroTravelBtn || prev.heroTravelBtn,
             mascotText: parsed.homeMascotText || prev.mascotText,
+            ctaBanner1Title: parsed.homeCtaBanner1Title || prev.ctaBanner1Title,
+            ctaBanner1Desc: parsed.homeCtaBanner1Desc || prev.ctaBanner1Desc,
+            ctaBanner1BtnText: parsed.homeCtaBanner1BtnText || prev.ctaBanner1BtnText,
+            ctaBanner1BtnLink: parsed.homeCtaBanner1BtnLink || prev.ctaBanner1BtnLink,
+            ctaBanner2Title: parsed.homeCtaBanner2Title || prev.ctaBanner2Title,
+            ctaBanner2Desc: parsed.homeCtaBanner2Desc || prev.ctaBanner2Desc,
+            ctaBanner2BtnText: parsed.homeCtaBanner2BtnText || prev.ctaBanner2BtnText,
+            ctaBanner2BtnLink: parsed.homeCtaBanner2BtnLink || prev.ctaBanner2BtnLink,
+            destinationsTag: parsed.homeDestinationsTag || prev.destinationsTag,
+            destinationsTitle: parsed.homeDestinationsTitle || prev.destinationsTitle,
+            destinationsSub: parsed.homeDestinationsSub || prev.destinationsSub,
             dealsTitle: parsed.homeDealsTitle || prev.dealsTitle,
             dealsSub: parsed.homeDealsSub || prev.dealsSub,
             sellingTitle: parsed.homeSellingTitle || prev.sellingTitle,
             sellingSub: parsed.homeSellingSub || prev.sellingSub,
+            collectionsTitle: parsed.homeCollectionsTitle || prev.collectionsTitle,
+            collectionsSub: parsed.homeCollectionsSub || prev.collectionsSub,
+            reviewsTitle: parsed.homeReviewsTitle || prev.reviewsTitle,
+            reviewsSub: parsed.homeReviewsSub || prev.reviewsSub,
+            blogTitle: parsed.homeBlogTitle || prev.blogTitle,
+            blogSub: parsed.homeBlogSub || prev.blogSub,
+            faqTitle: parsed.homeFaqTitle || prev.faqTitle,
+            faqHelpDesk: parsed.homeFaqHelpDesk || prev.faqHelpDesk,
             valuesTitle: parsed.homeValuesTitle || prev.valuesTitle,
             valuesSub: parsed.homeValuesSub || prev.valuesSub,
           }));
@@ -209,18 +255,63 @@ export default function Homepage() {
           heroShopBtn: e.detail.homeHeroShopBtn || prev.heroShopBtn,
           heroTravelBtn: e.detail.homeHeroTravelBtn || prev.heroTravelBtn,
           mascotText: e.detail.homeMascotText || prev.mascotText,
+          ctaBanner1Title: e.detail.homeCtaBanner1Title || prev.ctaBanner1Title,
+          ctaBanner1Desc: e.detail.homeCtaBanner1Desc || prev.ctaBanner1Desc,
+          ctaBanner1BtnText: e.detail.homeCtaBanner1BtnText || prev.ctaBanner1BtnText,
+          ctaBanner1BtnLink: e.detail.homeCtaBanner1BtnLink || prev.ctaBanner1BtnLink,
+          ctaBanner2Title: e.detail.homeCtaBanner2Title || prev.ctaBanner2Title,
+          ctaBanner2Desc: e.detail.homeCtaBanner2Desc || prev.ctaBanner2Desc,
+          ctaBanner2BtnText: e.detail.homeCtaBanner2BtnText || prev.ctaBanner2BtnText,
+          ctaBanner2BtnLink: e.detail.homeCtaBanner2BtnLink || prev.ctaBanner2BtnLink,
+          destinationsTag: e.detail.homeDestinationsTag || prev.destinationsTag,
+          destinationsTitle: e.detail.homeDestinationsTitle || prev.destinationsTitle,
+          destinationsSub: e.detail.homeDestinationsSub || prev.destinationsSub,
           dealsTitle: e.detail.homeDealsTitle || prev.dealsTitle,
           dealsSub: e.detail.homeDealsSub || prev.dealsSub,
           sellingTitle: e.detail.homeSellingTitle || prev.sellingTitle,
           sellingSub: e.detail.homeSellingSub || prev.sellingSub,
+          collectionsTitle: e.detail.homeCollectionsTitle || prev.collectionsTitle,
+          collectionsSub: e.detail.homeCollectionsSub || prev.collectionsSub,
+          reviewsTitle: e.detail.homeReviewsTitle || prev.reviewsTitle,
+          reviewsSub: e.detail.homeReviewsSub || prev.reviewsSub,
+          blogTitle: e.detail.homeBlogTitle || prev.blogTitle,
+          blogSub: e.detail.homeBlogSub || prev.blogSub,
+          faqTitle: e.detail.homeFaqTitle || prev.faqTitle,
+          faqHelpDesk: e.detail.homeFaqHelpDesk || prev.faqHelpDesk,
           valuesTitle: e.detail.homeValuesTitle || prev.valuesTitle,
           valuesSub: e.detail.homeValuesSub || prev.valuesSub,
         }));
       }
     };
 
+    const handleDataUpdate = () => {
+      try {
+        const savedProds = localStorage.getItem('gb_admin_products_v3') || localStorage.getItem('gb_admin_products');
+        if (savedProds) {
+          const parsed = JSON.parse(savedProds);
+          if (Array.isArray(parsed) && parsed.length > 0) setProductsList(parsed);
+        }
+        const savedPkgs = localStorage.getItem('gb_admin_packages');
+        if (savedPkgs) {
+          const parsed = JSON.parse(savedPkgs);
+          if (Array.isArray(parsed) && parsed.length > 0) setPackagesList(parsed);
+        }
+      } catch (e) {
+        console.error('Error in live data update:', e);
+      }
+    };
+
     window.addEventListener('gb_cms_updated', handleCmsUpdate);
-    return () => window.removeEventListener('gb_cms_updated', handleCmsUpdate);
+    window.addEventListener('gb_packages_updated', handleDataUpdate);
+    window.addEventListener('gb_products_updated', handleDataUpdate);
+    window.addEventListener('storage', handleDataUpdate);
+
+    return () => {
+      window.removeEventListener('gb_cms_updated', handleCmsUpdate);
+      window.removeEventListener('gb_packages_updated', handleDataUpdate);
+      window.removeEventListener('gb_products_updated', handleDataUpdate);
+      window.removeEventListener('storage', handleDataUpdate);
+    };
   }, []);
 
   const resolveProduct = (defaultId: string, fallbackName: string, fallbackCategory: string, fallbackImg: string, fallbackPrice: number, fallbackOrig: number) => {
@@ -387,8 +478,8 @@ export default function Homepage() {
           playsInline
           preload="auto"
           poster="/hero-poster.jpg"
-          className="absolute inset-0 w-full h-full object-cover scale-[1.08] brightness-[0.75] contrast-[1.05]"
-          style={{ transform: 'scale(1.08) translateZ(0)' }}
+          className="absolute inset-0 w-full h-full object-cover brightness-[0.75] contrast-[1.05]"
+          style={{ transform: 'scale(1.35) translate(-2%, -4%)', transformOrigin: 'top left' }}
         >
           <source src="/hero-video.mp4" type="video/mp4" />
         </video>
@@ -454,19 +545,19 @@ export default function Homepage() {
           <div className="bg-[#1D493E] text-white p-6 rounded-[4px] flex flex-col justify-between gap-8 relative overflow-hidden group shadow-md border border-white/5">
             <div className="space-y-4 text-left">
               <h2 className="text-2xl md:text-3xl font-black leading-tight font-sans">
-                Shop Travel Gear for Nomads
+                {pageContent.ctaBanner1Title}
               </h2>
               <p className="text-base md:text-[20px] leading-[32px] tracking-[0px] text-white/80 font-sans font-medium">
-                Explore our collection of hand-picked journals, weather-proof stickers and artisanal badges designed for the road
+                {pageContent.ctaBanner1Desc}
               </p>
             </div>
             <div className="relative z-10">
               <Link 
-                href="/shop" 
+                href={pageContent.ctaBanner1BtnLink} 
                 className="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-[4px] bg-white/10 hover:bg-white/15 transition-all duration-300 cursor-pointer text-center group"
                 style={{ color: "rgba(255,255,255,1)", fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "16px", lineHeight: "100%", letterSpacing: "0px", verticalAlign: "middle", textDecoration: "none" }}
               >
-                <span>Explore Collections</span>
+                <span>{pageContent.ctaBanner1BtnText}</span>
                 <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
               </Link>
             </div>
@@ -476,19 +567,19 @@ export default function Homepage() {
           <div className="bg-[#FF5A36] text-white p-6 rounded-[4px] flex flex-col justify-between gap-8 relative overflow-hidden group shadow-md border border-white/5">
             <div className="space-y-4 text-left">
               <h2 className="text-2xl md:text-3xl font-black leading-tight font-sans">
-                Book a Trip
+                {pageContent.ctaBanner2Title}
               </h2>
               <p className="text-base md:text-[20px] leading-[32px] tracking-[0px] text-white/90 font-sans font-medium">
-                Explore our collection of hand-picked journals, weather-proof stickers and artisanal badges designed for the road
+                {pageContent.ctaBanner2Desc}
               </p>
             </div>
             <div className="relative z-10">
               <Link 
-                href="/travel" 
+                href={pageContent.ctaBanner2BtnLink} 
                 className="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-[4px] bg-white/15 hover:bg-white/25 transition-all duration-300 cursor-pointer text-center group"
                 style={{ color: "rgba(255,255,255,1)", fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "16px", lineHeight: "100%", letterSpacing: "0px", verticalAlign: "middle", textDecoration: "none" }}
               >
-                <span>Find the Route</span>
+                <span>{pageContent.ctaBanner2BtnText}</span>
                 <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
               </Link>
             </div>
@@ -617,14 +708,14 @@ export default function Homepage() {
           <div className="space-y-3.5 max-w-4xl mx-auto">
             <div className="flex justify-center">
               <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
-                DESTINATIONS
+                {pageContent.destinationsTag}
               </span>
             </div>
             <h2 className="text-3xl md:text-[42px] font-serif font-semibold text-[#1D493E] leading-none text-center">
-              Place worth the&nbsp;<span className="text-[#FF5A36]">detour</span>
+              {pageContent.destinationsTitle}
             </h2>
             <p className="text-[#2B2B2B]/80 text-base md:text-[20px] leading-relaxed font-medium text-center max-w-[1280px] md:whitespace-nowrap mx-auto">
-              A hand-picked map of the corners of India our community keeps coming back to
+              {pageContent.destinationsSub}
             </p>
           </div>
 
@@ -636,14 +727,17 @@ export default function Homepage() {
               const pkg1 = displayPkgs[0];
               if (!pkg1) return null;
               return (
-                <div className="bg-[#F6F3EE] rounded-[4px] flex flex-col md:flex-row gap-0 w-full overflow-hidden md:h-[394px] text-left group cursor-pointer">
+                <div className="bg-[#F6F3EE] rounded-[4px] flex flex-col md:flex-row gap-0 w-full overflow-hidden md:h-[394px] text-left group cursor-pointer" style={{ borderRadius: '4px' }}>
                   {/* Image */}
-                  <div className="relative h-[280px] md:h-full w-full md:w-1/2 shrink-0 overflow-hidden rounded-[4px] md:rounded-none">
+                  <div 
+                    className="relative h-[280px] md:h-full w-full md:w-1/2 shrink-0 overflow-hidden rounded-[4px] md:rounded-l-[4px] md:rounded-r-none isolate"
+                    style={{ borderRadius: '4px', WebkitMaskImage: '-webkit-radial-gradient(white, black)' }}
+                  >
                     <img 
                       src={pkg1.image} 
                       alt={pkg1.name} 
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" 
-                      style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
+                      className="w-full h-full object-cover rounded-[4px] md:rounded-l-[4px] md:rounded-r-none group-hover:scale-105 transition-transform duration-500 ease-out" 
+                      style={{ borderRadius: '4px', imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
                     />
                     <button
                       type="button"
@@ -759,14 +853,17 @@ export default function Homepage() {
               {(() => {
                 const displayPkgs = packagesList && packagesList.length > 0 ? packagesList : HOLIDAY_PACKAGES;
                 return displayPkgs.slice(1, 3).map((pkg) => (
-                  <div key={pkg.id} className="bg-[#F6F3EE] rounded-[4px] flex flex-col text-left md:h-[778px] overflow-hidden group cursor-pointer">
+                  <div key={pkg.id} className="bg-[#F6F3EE] rounded-[4px] flex flex-col text-left md:h-[778px] overflow-hidden group cursor-pointer" style={{ borderRadius: '4px' }}>
                     {/* Image (Flushed with top, left, and right edges) */}
-                    <div className="relative w-full h-[200px] md:h-[384px] overflow-hidden shrink-0">
+                    <div 
+                      className="relative w-full h-[200px] md:h-[384px] overflow-hidden rounded-[4px] shrink-0 isolate"
+                      style={{ borderRadius: '4px', WebkitMaskImage: '-webkit-radial-gradient(white, black)' }}
+                    >
                       <img 
                         src={pkg.image} 
                         alt={pkg.name} 
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" 
-                        style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
+                        className="w-full h-full object-cover rounded-[4px] group-hover:scale-105 transition-transform duration-500 ease-out" 
+                        style={{ borderRadius: '4px', imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
                       />
                       <button
                         type="button"
@@ -934,15 +1031,15 @@ export default function Homepage() {
                   key={pkg.id} 
                   href={`/travel/package/${pkg.id}`}
                   className="snap-start shrink-0 w-[185px] sm:w-[200px] bg-[#F6F3EE] rounded-[4px] overflow-hidden flex flex-col justify-between text-left select-none group cursor-pointer border border-gray-100"
-                  style={{ boxSizing: 'border-box' }}
+                  style={{ boxSizing: 'border-box', borderRadius: '4px' }}
                 >
                   {/* Image Container with Wishlist Button */}
-                  <div className="relative w-full h-[190px] rounded-[4px] overflow-hidden shrink-0">
+                  <div className="relative w-full h-[190px] rounded-[4px] overflow-hidden shrink-0 isolate" style={{ borderRadius: '4px', WebkitMaskImage: '-webkit-radial-gradient(white, black)' }}>
                     <img 
                       src={pkg.image} 
                       alt={pkg.name} 
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                      style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
+                      className="w-full h-full object-cover rounded-[4px] group-hover:scale-105 transition-transform duration-500" 
+                      style={{ borderRadius: '4px', imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
                     />
                     <button
                       type="button"
@@ -1064,7 +1161,7 @@ export default function Homepage() {
             <div className="shrink-0 pb-1">
               <Link 
                 href="/shop" 
-                className="inline-flex items-center justify-center w-full max-w-[275px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[8px] bg-transparent hover:bg-gray-200/80 text-[#1D493E] transition-all duration-300 cursor-pointer group"
+                className="inline-flex items-center justify-center w-full max-w-[275px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[8px] bg-transparent hover:bg-[#1D493E]/[0.08] text-[#1D493E] transition-all duration-300 cursor-pointer group"
               >
                 <span className="h-[25px] flex items-center justify-center font-sans font-medium text-sm sm:text-base md:text-[20px] leading-none">
                   View all products
@@ -1098,13 +1195,14 @@ export default function Homepage() {
                 className="shrink-0 snap-start group mx-auto p-3 rounded-xl cursor-pointer"
               >
                 <div 
-                  style={{ height: "237.63px", width: "100%", borderRadius: "4px", overflow: "hidden", backgroundColor: "#FAF9F6" }}
+                  style={{ height: "237.63px", width: "100%", borderRadius: "4px", overflow: "hidden", backgroundColor: "#FAF9F6", WebkitMaskImage: '-webkit-radial-gradient(white, black)' }}
+                  className="isolate rounded-[4px]"
                 >
                   <img 
                     src={cat.image} 
                     alt={cat.name} 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                    style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
+                    className="w-full h-full object-cover rounded-[4px] group-hover:scale-105 transition-transform duration-500" 
+                    style={{ borderRadius: "4px", imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
                   />
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", gap: "12px", paddingTop: "24px", height: "91px", boxSizing: "border-box" }}>
@@ -1275,13 +1373,13 @@ export default function Homepage() {
                   className="w-[280px] sm:w-[300px] shrink-0 snap-start bg-white rounded-[12px] h-auto p-2 pb-4 flex flex-col justify-between gap-[16px] overflow-hidden group cursor-pointer"
                 >
                   {/* Image Container with Dots (Width: 339px, Height: 254px, Radius: 4px) */}
-                  <div className="relative w-full md:h-[254px] rounded-[4px] overflow-hidden shrink-0">
+                  <div className="relative w-full md:h-[254px] rounded-[4px] overflow-hidden shrink-0 isolate" style={{ borderRadius: '4px', WebkitMaskImage: '-webkit-radial-gradient(white, black)' }}>
                     <Link href={`/shop/product/${deal.id}`} className="w-full h-full block cursor-pointer">
                       <img 
                         src={deal.images[activeImageIndices[deal.id] || 0]} 
                         alt={deal.name} 
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-                        style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
+                        className="w-full h-full object-cover rounded-[4px] group-hover:scale-105 transition-transform duration-500 ease-out"
+                        style={{ borderRadius: '4px', imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
                       />
                     </Link>
                     {/* Wishlist Button (Top Right) */}
@@ -1382,7 +1480,7 @@ export default function Homepage() {
           <div className="text-center pt-4">
             <Link 
               href="/shop" 
-              className="inline-flex items-center justify-center w-[275px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[8px] bg-transparent hover:bg-gray-200/80 text-[#1D493E] transition-all duration-300 cursor-pointer group"
+              className="inline-flex items-center justify-center w-[275px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[8px] bg-transparent hover:bg-[#1D493E]/[0.08] text-[#1D493E] transition-all duration-300 cursor-pointer group"
             >
               <span className="w-[163px] h-[25px] flex items-center justify-center font-sans font-medium text-[20px] leading-none">
                 View all products
@@ -1469,7 +1567,7 @@ export default function Homepage() {
             <div className="shrink-0 pb-1">
               <Link 
                 href="/shop"
-                className="inline-flex items-center justify-center w-[275px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[8px] bg-transparent hover:bg-gray-200/80 text-[#1D493E] transition-all duration-300 cursor-pointer group"
+                className="inline-flex items-center justify-center w-[275px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[8px] bg-transparent hover:bg-[#1D493E]/[0.08] text-[#1D493E] transition-all duration-300 cursor-pointer group"
               >
                 <span className="w-[163px] h-[25px] flex items-center justify-center font-sans font-medium text-[20px] leading-none">
                   View all products
@@ -1493,39 +1591,48 @@ export default function Homepage() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[32px] w-full max-w-[1280px] mx-auto">
-            {[
-              { id: "naturally-nomad-badge-1", name: "Naturally Nomad", category: "Badges", image: "/naturally_nomad_badge.png", price: 139, originalPrice: 199, rating: 5, reviews: "120", boughtText: "200+ bought in past month" },
-              { id: "blue-mavin-slides-1", name: "Blue Mavin", category: "Slippers", image: "/blue_mavin_slides.jpg", price: 399, originalPrice: 599, rating: 5, reviews: "1k", boughtText: "500+ bought in past month" },
-              { id: "explore-more-keychain-1", name: "Explore more", category: "Key Chains", image: "/explore_more_keychain.png", price: 149, originalPrice: 193, rating: 5, reviews: "200", boughtText: "100+ bought in past month" },
-              { id: "blue-mavin-slides-2", name: "Blue Mavin", category: "Slippers", image: "/blue_mavin_slides.jpg", price: 399, originalPrice: 599, rating: 5, reviews: "1k", boughtText: "500+ bought in past month" },
-              { id: "wakefit-pillows-1", name: "Wakefit Pillows", category: "Travel Pillows", image: "/wakefit_pillow.jpg", price: 139, originalPrice: 199, rating: 5, reviews: "120", boughtText: "200+ bought in past month" },
-              { id: "fur-jaden-cw-1", name: "Fur Jaden C/W", category: "Backpacks", image: "/fur_jaden_backpack.jpg", price: 149, originalPrice: 193, rating: 5, reviews: "200", boughtText: "100+ bought in past month" },
-              { id: "go-passport-cover-1", name: "Go Passport Cover", category: "Passport Covers", image: "/go_passport_cover.jpg", price: 399, originalPrice: 599, rating: 5, reviews: "1k", boughtText: "500+ bought in past month" },
-              { id: "wakefit-pillows-2", name: "Wakefit Pillows", category: "Travel Pillows", image: "/wakefit_pillow.jpg", price: 139, originalPrice: 199, rating: 5, reviews: "120", boughtText: "200+ bought in past month" },
-            ].map((prod) => {
-              const mockProduct = {
-                id: prod.id,
-                name: prod.name,
-                price: prod.price,
-                image: prod.image,
-                category: prod.category,
-                rating: prod.rating,
-                reviewsCount: 120,
-                description: "Best selling product"
-              };
+            {(() => {
+              const defaultSelling = [
+                { id: "naturally-nomad-badge-1", name: "Naturally Nomad", category: "Badges", image: "/naturally_nomad_badge.png", price: 139, originalPrice: 199, rating: 5, reviews: "120", boughtText: "200+ bought in past month" },
+                { id: "blue-mavin-slides-1", name: "Blue Mavin", category: "Slippers", image: "/blue_mavin_slides.jpg", price: 399, originalPrice: 599, rating: 5, reviews: "1k", boughtText: "500+ bought in past month" },
+                { id: "explore-more-keychain-1", name: "Explore more", category: "Key Chains", image: "/explore_more_keychain.png", price: 149, originalPrice: 193, rating: 5, reviews: "200", boughtText: "100+ bought in past month" },
+                { id: "blue-mavin-slides-2", name: "Blue Mavin", category: "Slippers", image: "/blue_mavin_slides.jpg", price: 399, originalPrice: 599, rating: 5, reviews: "1k", boughtText: "500+ bought in past month" },
+                { id: "wakefit-pillows-1", name: "Wakefit Pillows", category: "Travel Pillows", image: "/wakefit_pillow.jpg", price: 139, originalPrice: 199, rating: 5, reviews: "120", boughtText: "200+ bought in past month" },
+                { id: "fur-jaden-cw-1", name: "Fur Jaden C/W", category: "Backpacks", image: "/fur_jaden_backpack.jpg", price: 149, originalPrice: 193, rating: 5, reviews: "200", boughtText: "100+ bought in past month" },
+                { id: "go-passport-cover-1", name: "Go Passport Cover", category: "Passport Covers", image: "/go_passport_cover.jpg", price: 399, originalPrice: 599, rating: 5, reviews: "1k", boughtText: "500+ bought in past month" },
+                { id: "wakefit-pillows-2", name: "Wakefit Pillows", category: "Travel Pillows", image: "/wakefit_pillow.jpg", price: 139, originalPrice: 199, rating: 5, reviews: "120", boughtText: "200+ bought in past month" },
+              ];
+
+              const filtered = (productsList && productsList.length > 0)
+                ? productsList.filter(p => p.section === 'most-selling' || p.isMostSelling !== false)
+                : [];
+              
+              const listToRender = filtered.length > 0 ? filtered : defaultSelling;
+
+              return listToRender.map((prod: any) => {
+                const mockProduct = {
+                  id: prod.id,
+                  name: prod.name,
+                  price: prod.price,
+                  image: prod.image,
+                  category: prod.category,
+                  rating: prod.rating || 5,
+                  reviewsCount: prod.reviewsCount || 120,
+                  description: prod.description || "Best selling product"
+                };
 
               return (
                 <div 
                   key={prod.id} 
                   className="bg-white rounded-[4px] w-full h-auto pb-4 flex flex-col justify-between gap-[16px] group cursor-pointer"
                 >
-                  <div className="relative w-full md:h-[254px] rounded-[4px] overflow-hidden shrink-0 bg-gray-50">
+                  <div className="relative w-full md:h-[254px] rounded-[4px] overflow-hidden shrink-0 bg-gray-50 isolate" style={{ borderRadius: '4px', WebkitMaskImage: '-webkit-radial-gradient(white, black)' }}>
                     <Link href={`/shop/product/${prod.id}`} className="w-full h-full block cursor-pointer">
                       <img 
                         src={prod.image} 
                         alt={prod.name} 
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-                        style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
+                        className="w-full h-full object-cover rounded-[4px] group-hover:scale-105 transition-transform duration-500 ease-out"
+                        style={{ borderRadius: '4px', imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
                       />
                     </Link>
                   </div>
@@ -1581,7 +1688,8 @@ export default function Homepage() {
                   </div>
                 </div>
               );
-            })}
+            });
+          })()}
           </div>
         </div>
 
@@ -2078,11 +2186,9 @@ export default function Homepage() {
           
           {/* Header Container */}
           <div className="w-full max-w-[1280px] h-auto flex flex-col justify-center items-center gap-[12px] text-center shrink-0">
-            <div className="hidden md:flex h-[26px] items-center justify-center">
-              <span style={{ fontFamily: "'Faktum', 'Outfit', sans-serif", fontWeight: 600, fontSize: "14px", lineHeight: "100%", letterSpacing: "1.2px", color: "rgba(255, 98, 62, 1)", background: "rgba(255, 98, 62, 0.1)", borderRadius: "2px", textTransform: "uppercase", width: "61px", height: "26px", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", padding: "4px" }}>
-                BLOGS
-              </span>
-            </div>
+            <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
+              BLOGS
+            </span>
             <h2 className="text-3xl md:text-[42px] font-serif font-semibold text-[#2B2B2B] leading-none h-auto flex items-center justify-center py-2">
               Follow Our&nbsp;<span className="text-[#FF5A36]">Journey</span>
             </h2>
@@ -2123,7 +2229,7 @@ export default function Homepage() {
           <div className="text-center h-[68px] flex items-center justify-center shrink-0">
             <Link 
               href="/blog" 
-              className="inline-flex items-center justify-center w-[185px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[8px] bg-transparent hover:bg-gray-200/80 text-[#1D493E] transition-all duration-300 cursor-pointer group"
+              className="inline-flex items-center justify-center w-[185px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[8px] bg-transparent hover:bg-[#1D493E]/[0.08] text-[#1D493E] transition-all duration-300 cursor-pointer group"
             >
               <span className="font-sans font-medium text-sm sm:text-base md:text-[20px] leading-none whitespace-nowrap">
                 View all
@@ -2195,98 +2301,9 @@ export default function Homepage() {
         </div>
       </section>
 
-      {/* 11. FAQ ACCORDION SECTION (Matching Shop page design) */}
+      {/* 11. FAQ ACCORDION SECTION */}
       <section className="bg-white text-left relative z-10 w-full">
-        {/* Desktop Container (hidden md:block) */}
-        <div className="hidden md:flex w-full max-w-[1440px] h-auto bg-white rounded-[4px] pt-[28px] pb-[28px] md:px-[80px] px-6 flex-col gap-[32px] mx-auto">
-          {/* Header */}
-          <div className="w-full max-w-[1280px] h-auto flex flex-col gap-[12px] justify-center text-left">
-            <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
-              FAQ'S
-            </span>
-            <h2 className="w-full h-auto flex items-center font-serif font-semibold text-3xl md:text-[42px] leading-tight tracking-[0px] text-[#2B2B2B] py-2">
-              Frequently asked questions
-            </h2>
-          </div>
-
-          {/* Accordion List */}
-          <div className="w-full border-t border-slate-200 divide-y divide-slate-200">
-            {FAQ_ITEMS.map((item, idx) => {
-              const isOpen = openFaqIndex === idx;
-              return (
-                <div key={idx} className="py-5 text-left border-b border-slate-200">
-                  <button
-                    onClick={() => toggleFaq(idx)}
-                    className="w-full flex justify-between items-center text-left gap-4 cursor-pointer group"
-                  >
-                    <span className="w-full h-auto py-2 flex items-center font-sans font-medium text-sm sm:text-base md:text-[20px] leading-normal tracking-[0px] text-[#2B2B2B]">
-                      {item.question}
-                    </span>
-                    <span className="text-xl font-medium text-[#1D493E] shrink-0 leading-none select-none">
-                      {isOpen ? '—' : '+'}
-                    </span>
-                  </button>
-                  {isOpen && (
-                    <p className="mt-3 w-full h-auto py-1 font-sans font-medium text-sm sm:text-base md:text-[20px] leading-normal tracking-[0px] text-[#8D8D8D] animate-fade-in">
-                      {item.answer}
-                    </p>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Mobile Figma Spec Container (block md:hidden) - w:430px max, gap:12px, padding:12px 20px */}
-        <div className="block md:hidden w-full max-w-[430px] mx-auto py-[12px] px-[20px] bg-white flex flex-col gap-[12px]">
-          <div className="flex flex-col gap-2 text-left">
-            <div className="w-[54px] h-[26px] flex items-center justify-center bg-[#FFEBE5] rounded-[4px]">
-              <span className="font-sans font-semibold text-[12px] leading-none tracking-[1.2px] text-[#FF623E] uppercase">
-                FAQ'S
-              </span>
-            </div>
-            <h2 className="text-[26px] sm:text-[32px] font-serif font-semibold text-[#2B2B2B] leading-tight text-left m-0">
-              Frequently asked questions
-            </h2>
-          </div>
-
-          <div className="w-full flex flex-col divide-y divide-gray-100">
-            {[
-              {
-                q: "What materials are the badges made from? Zinc alloy with glossy enamel fill.",
-                a: "Lightweight, durable, and safe to pin on bags, jackets, or backpacks without damaging fabric."
-              },
-              { q: "How big are the stickers?", a: "Our vinyl stickers range between 3 to 4 inches in size, ideal for laptops, water bottles, and helmets." },
-              { q: "Do you ship across India?", a: "Yes, we provide free express shipping all across India on orders above ₹499." },
-              { q: "Can I return a product if I don't like it?", a: "We offer a 7-day hassle-free return and exchange policy for all unused products." },
-              { q: "I have no reviews on this product. Is it safe to buy?", a: "All Go Banjara products undergo strict quality checks and come with 100% verified customer guarantee." }
-            ].map((faq, idx) => {
-              const isOpen = openFaqIndex === idx;
-              return (
-                <div key={idx} className="py-3 text-left">
-                  <button
-                    onClick={() => toggleFaq(idx)}
-                    className="w-full flex justify-between items-center text-left gap-3 cursor-pointer"
-                  >
-                    <span className="text-[14px] font-medium text-[#2B2B2B] leading-snug">
-                      {faq.q}
-                    </span>
-                    {isOpen ? (
-                      <Minus className="w-5 h-5 text-[#FF623E] shrink-0" />
-                    ) : (
-                      <Plus className="w-5 h-5 text-[#1D493E] shrink-0" />
-                    )}
-                  </button>
-                  {isOpen && (
-                    <p className="mt-2 text-[12px] font-medium text-gray-400 leading-relaxed m-0 animate-fade-in">
-                      {faq.a}
-                    </p>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        </div>
+        <FAQSection items={FAQ_ITEMS} />
       </section>
 
       {/* 12. SERVICES TO HELP YOU SHOP */}

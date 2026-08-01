@@ -208,10 +208,10 @@ export default function KashmirDetails() {
           merged.push(hp);
           needsSave = true;
         } else {
-          // If default package is missing critical fields, restore it
+          // If default package is missing critical fields, fill them in without replacing user edits
           const item = merged[foundIdx];
           if (item.price === undefined || !item.routeList || !item.itinerary) {
-            merged[foundIdx] = hp;
+            merged[foundIdx] = { ...hp, ...item };
             needsSave = true;
           }
         }

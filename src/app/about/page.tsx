@@ -102,10 +102,12 @@ export default function AboutPage() {
       <header 
         style={{
           width: "100%",
+          height: "252px",
           background: "rgba(255, 255, 255, 1)",
           boxSizing: "border-box",
+          opacity: 1,
         }}
-        className="mx-auto w-full max-w-[430px] md:max-w-[1440px] px-[20px] py-[12px] md:pt-[62px] md:pb-[24px] md:px-[80px] shrink-0 flex flex-col items-center justify-center gap-2 md:gap-[10px] min-h-[166px] md:min-h-[252px]"
+        className="mx-auto w-full max-w-[1440px] px-[20px] md:px-[80px] pt-[62px] pb-[24px] shrink-0 flex flex-col items-center justify-center gap-[10px]"
       >
         <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
           ABOUT GO BANJARA
@@ -122,7 +124,7 @@ export default function AboutPage() {
           }} 
           className="text-2xl sm:text-3xl md:text-[42px] leading-tight md:leading-[1.2] w-full max-w-[1280px]"
         >
-          We don't sell trips. We hand you back a country you forgot.
+          We don't sell trips. We hand you back a country you forgot
         </h1>
 
         {/* Subtitle */}
@@ -136,7 +138,7 @@ export default function AboutPage() {
           }} 
           className="text-xs sm:text-base md:text-[24px] leading-relaxed md:leading-[32px] w-full max-w-[1280px]"
         >
-          Go Banjara is a collective of travelers and local guides rebuilding the essence of travel in India.
+          Go Banjara is a small collective of travelers, writers, makers and local guides quietly rebuilding what travel across India was supposed to feel like
         </p>
       </header>
 
@@ -144,10 +146,12 @@ export default function AboutPage() {
       <section 
         style={{ 
           width: "100%", 
+          height: "774px",
           background: "rgba(255, 255, 255, 1)",
           boxSizing: "border-box",
+          opacity: 1,
         }}
-        className="mx-auto w-full max-w-[430px] md:max-w-[1440px] px-[20px] pt-[12px] pb-[24px] md:py-[62px] md:px-[80px] flex flex-col justify-center items-center min-h-auto md:min-h-[774px]"
+        className="mx-auto w-full max-w-[1440px] px-[20px] md:px-[80px] pt-[62px] pb-[62px] flex flex-col justify-center items-center shrink-0"
       >
         <div className="flex flex-col md:grid md:grid-cols-2 gap-6 md:gap-[32px] items-center w-full max-w-[1280px] mx-auto">
           
@@ -210,10 +214,12 @@ export default function AboutPage() {
       <section 
         style={{
           width: "100%",
+          height: "145px",
           background: "rgba(255, 255, 255, 1)",
           boxSizing: "border-box",
+          opacity: 1,
         }}
-        className="mx-auto w-full max-w-[430px] md:max-w-[1440px] px-[20px] py-[12px] md:py-[24px] md:px-[80px] shrink-0"
+        className="mx-auto w-full max-w-[1440px] px-[20px] md:px-[80px] py-[12px] md:py-[24px] shrink-0 flex items-center justify-center"
       >
         {/* Mobile 2x2 Grid Layout (Figma Spec 430x208) */}
         <div className="grid grid-cols-2 gap-y-3 gap-x-0 w-full md:hidden relative py-1">
@@ -314,23 +320,24 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 4. Overlapping Sticker Cards Section (Mobile 430x174 | Desktop 1440x440px spec) */}
+      {/* 5. Two Mission/Vision Cards Section (Mobile 430x436 | Desktop 1440x783px spec) */}
       <section 
         style={{ 
-          width: "100%", 
-          background: "rgba(255, 255, 255, 1)", 
-          position: "relative",
-          boxSizing: "border-box",
-          zIndex: 30,
+          marginTop: "0px", 
+          position: "relative", 
+          zIndex: 20,
+          width: "100%",
+          background: "rgba(255, 255, 255, 1)",
+          boxSizing: "border-box"
         }}
-        className="w-full shrink-0 overflow-visible min-h-[174px] md:min-h-[440px] h-[174px] md:h-[440px] flex items-center justify-center relative py-0 md:py-[30px]"
+        className="w-full px-0 pt-[42px] pb-[42px] shrink-0 flex flex-col items-center justify-center min-h-auto md:min-h-[783px] gap-[32px] overflow-x-clip"
       >
-        {/* Cards Container (Scaled to 174px height on Mobile, 418px on Desktop) */}
+        {/* Overlapping Sticker Cards nested inside Section 5 */}
         <div 
-          className="flex items-center justify-center relative select-none scale-[0.42] sm:scale-[0.55] md:scale-100 origin-center transition-transform duration-300 pointer-events-auto translate-y-[20px] md:translate-y-[90px]"
+          className="flex items-center justify-center relative select-none scale-[0.42] sm:scale-[0.55] md:scale-100 origin-center transition-transform duration-300 pointer-events-auto z-0 mb-[-40px] md:mb-[-105px]"
           style={{ 
-            width: "1709px", 
-            height: "418px", 
+            width: "1709.5738525390625px", 
+            height: "418.3321228027344px", 
             boxSizing: "border-box",
             opacity: 1
           }}
@@ -345,14 +352,13 @@ export default function AboutPage() {
               borderBottomLeftRadius: "4px",
               borderTopLeftRadius: "0px",
               position: "relative",
-              boxShadow: "0 10px 20px rgba(0,0,0,0.15)",
               transform: "rotate(-8deg)",
               opacity: 1,
               zIndex: 10,
               flexShrink: 0,
               overflow: "hidden"
             }}
-            className="cursor-pointer transition-all duration-300 ease-out hover:-translate-y-8 hover:z-50 hover:shadow-[0_25px_35px_rgba(0,0,0,0.25)]"
+            className="cursor-pointer transition-all duration-300 ease-out hover:-translate-y-8 hover:z-50"
           >
             <img 
               src="/card-1-full.png" 
@@ -371,7 +377,6 @@ export default function AboutPage() {
               borderBottomLeftRadius: "4px",
               borderTopLeftRadius: "0px",
               position: "relative",
-              boxShadow: "0 10px 20px rgba(0,0,0,0.15)",
               transform: "rotate(-3deg)",
               opacity: 1,
               zIndex: 11,
@@ -379,7 +384,7 @@ export default function AboutPage() {
               flexShrink: 0,
               overflow: "hidden"
             }}
-            className="cursor-pointer transition-all duration-300 ease-out hover:-translate-y-8 hover:z-50 hover:shadow-[0_25px_35px_rgba(0,0,0,0.25)]"
+            className="cursor-pointer transition-all duration-300 ease-out hover:-translate-y-8 hover:z-50"
           >
             <img 
               src="/card-2-full.png" 
@@ -398,7 +403,6 @@ export default function AboutPage() {
               borderBottomLeftRadius: "4px",
               borderTopLeftRadius: "0px",
               position: "relative",
-              boxShadow: "0 10px 20px rgba(0,0,0,0.15)",
               transform: "rotate(-4deg)",
               opacity: 1,
               zIndex: 12,
@@ -406,7 +410,7 @@ export default function AboutPage() {
               flexShrink: 0,
               overflow: "hidden"
             }}
-            className="cursor-pointer transition-all duration-300 ease-out hover:-translate-y-8 hover:z-50 hover:shadow-[0_25px_35px_rgba(0,0,0,0.25)]"
+            className="cursor-pointer transition-all duration-300 ease-out hover:-translate-y-8 hover:z-50"
           >
             <img 
               src="/card-3-full.png" 
@@ -425,7 +429,6 @@ export default function AboutPage() {
               borderBottomLeftRadius: "4px",
               borderTopLeftRadius: "0px",
               position: "relative",
-              boxShadow: "0 10px 20px rgba(0,0,0,0.15)",
               transform: "rotate(-3deg)",
               opacity: 1,
               zIndex: 13,
@@ -433,7 +436,7 @@ export default function AboutPage() {
               flexShrink: 0,
               overflow: "hidden"
             }}
-            className="cursor-pointer transition-all duration-300 ease-out hover:-translate-y-8 hover:z-50 hover:shadow-[0_25px_35px_rgba(0,0,0,0.25)]"
+            className="cursor-pointer transition-all duration-300 ease-out hover:-translate-y-8 hover:z-50"
           >
             <img 
               src="/card-4-full.png" 
@@ -452,7 +455,6 @@ export default function AboutPage() {
               borderBottomLeftRadius: "4px",
               borderTopLeftRadius: "0px",
               position: "relative",
-              boxShadow: "0 10px 20px rgba(0,0,0,0.15)",
               transform: "rotate(-4deg)",
               opacity: 1,
               zIndex: 14,
@@ -460,7 +462,7 @@ export default function AboutPage() {
               flexShrink: 0,
               overflow: "hidden"
             }}
-            className="cursor-pointer transition-all duration-300 ease-out hover:-translate-y-8 hover:z-50 hover:shadow-[0_25px_35px_rgba(0,0,0,0.25)]"
+            className="cursor-pointer transition-all duration-300 ease-out hover:-translate-y-8 hover:z-50"
           >
             <img 
               src="/card-5-full.png" 
@@ -479,7 +481,6 @@ export default function AboutPage() {
               borderBottomLeftRadius: "4px",
               borderTopLeftRadius: "0px",
               position: "relative",
-              boxShadow: "0 10px 20px rgba(0,0,0,0.15)",
               transform: "rotate(-3deg)",
               opacity: 1,
               zIndex: 15,
@@ -487,7 +488,7 @@ export default function AboutPage() {
               flexShrink: 0,
               overflow: "hidden"
             }}
-            className="cursor-pointer transition-all duration-300 ease-out hover:-translate-y-8 hover:z-50 hover:shadow-[0_25px_35px_rgba(0,0,0,0.25)]"
+            className="cursor-pointer transition-all duration-300 ease-out hover:-translate-y-8 hover:z-50"
           >
             <img 
               src="/card-6-full.png" 
@@ -506,7 +507,6 @@ export default function AboutPage() {
               borderBottomLeftRadius: "4px",
               borderTopLeftRadius: "0px",
               position: "relative",
-              boxShadow: "0 10px 20px rgba(0,0,0,0.15)",
               transform: "rotate(-4deg)",
               opacity: 1,
               zIndex: 16,
@@ -514,7 +514,7 @@ export default function AboutPage() {
               flexShrink: 0,
               overflow: "hidden"
             }}
-            className="cursor-pointer transition-all duration-300 ease-out hover:-translate-y-8 hover:z-50 hover:shadow-[0_25px_35px_rgba(0,0,0,0.25)]"
+            className="cursor-pointer transition-all duration-300 ease-out hover:-translate-y-8 hover:z-50"
           >
             <img 
               src="/card-7-full.png" 
@@ -533,7 +533,6 @@ export default function AboutPage() {
               borderBottomLeftRadius: "4px",
               borderTopLeftRadius: "0px",
               position: "relative",
-              boxShadow: "0 10px 20px rgba(0,0,0,0.15)",
               transform: "rotate(-3deg)",
               opacity: 1,
               zIndex: 17,
@@ -541,7 +540,7 @@ export default function AboutPage() {
               flexShrink: 0,
               overflow: "hidden"
             }}
-            className="cursor-pointer transition-all duration-300 ease-out hover:-translate-y-8 hover:z-50 hover:shadow-[0_25px_35px_rgba(0,0,0,0.25)]"
+            className="cursor-pointer transition-all duration-300 ease-out hover:-translate-y-8 hover:z-50"
           >
             <img 
               src="/card-8-full.png" 
@@ -550,100 +549,92 @@ export default function AboutPage() {
             />
           </div>
         </div>
-      </section>
 
-      {/* 5. Two Mission/Vision Cards Section (Mobile 430x436 | Desktop 1440x783px spec) */}
-      <section 
-        style={{ 
-          marginTop: "0px", 
-          position: "relative", 
-          zIndex: 20,
-          width: "100%",
-          background: "rgba(255, 255, 255, 1)",
-          boxSizing: "border-box"
-        }}
-        className="mx-auto w-full max-w-[430px] md:max-w-[1440px] px-[24px] py-[12px] md:py-[42px] md:px-[80px] shrink-0 flex items-center justify-center min-h-auto md:min-h-[783px]"
-      >
-        <div className="flex flex-col md:flex-row items-center justify-between gap-3 md:gap-[32px] w-full max-w-[1280px] h-auto md:h-[699px]">
-          
-          {/* Card 1: OUR MISSION */}
-          <div 
-            onClick={() => setActiveCard('mission')}
-            onMouseEnter={() => setActiveCard('mission')}
-            className={`relative overflow-hidden shadow-md shrink-0 w-full h-[200px] md:h-[699px] rounded-[4px] cursor-pointer transition-all duration-500 ease-in-out ${
-              activeCard === 'mission' ? 'md:w-[843px]' : 'md:w-[405px]'
-            }`}
-          >
-            <img 
-              src="/mission-vision-full.png" 
-              alt="Nomads on camels in snowy mountain valley" 
-              className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-            />
-
-            {/* Translucent Glass Text Box */}
+        {/* Full-width Solid rgba(255, 255, 255, 1) Background Layer behind Mountain Cards */}
+        <div 
+          style={{ background: "rgba(255, 255, 255, 1)", minWidth: "2200px" }}
+          className="w-full relative z-20 flex flex-col justify-center items-center pt-8 md:pt-12 pb-6 md:pb-8 px-4 md:px-8"
+        >
+          <div className="flex flex-col md:flex-row items-center justify-between gap-3 md:gap-[32px] w-full max-w-[1280px] h-auto md:h-[699px]">
+            
+            {/* Card 1: OUR MISSION */}
             <div 
-              className="absolute bottom-2 left-2 right-2 md:bottom-4 md:left-4 md:right-auto md:w-[811px] md:max-w-[calc(100%-32px)] bg-[#2B2B2B]/75 backdrop-blur-md border border-white/20 rounded-[4px] p-2.5 md:p-3 flex flex-col items-start gap-1.5 md:gap-3 transition-all duration-400 opacity-100 pointer-events-auto"
-              style={{
-                opacity: typeof window !== 'undefined' && window.innerWidth < 768 ? 1 : (activeCard === 'mission' ? 1 : 0),
-                transform: typeof window !== 'undefined' && window.innerWidth < 768 ? 'translateY(0)' : (activeCard === 'mission' ? 'translateY(0)' : 'translateY(12px)'),
-                pointerEvents: typeof window !== 'undefined' && window.innerWidth < 768 ? 'auto' : (activeCard === 'mission' ? 'auto' : 'none'),
-              }}
+              onClick={() => setActiveCard('mission')}
+              onMouseEnter={() => setActiveCard('mission')}
+              className={`relative overflow-hidden shadow-md shrink-0 w-full h-[200px] md:h-[699px] rounded-[4px] cursor-pointer transition-all duration-500 ease-in-out ${
+                activeCard === 'mission' ? 'md:w-[843px]' : 'md:w-[405px]'
+              }`}
             >
-              <span className="inline-flex items-center justify-center bg-[#FF623E] text-white font-sans font-semibold text-[10px] md:text-[14px] leading-none px-2 py-1 rounded-[4px] uppercase tracking-wider">
-                OUR MISSION
-              </span>
-              <p className="font-sans font-medium text-[11px] sm:text-xs md:text-[24px] leading-relaxed md:leading-[42px] text-white m-0">
-                We exist to bridge the gap between the life people are living and the adventures they are dreaming about. Every experience we curate, every product we build, and every story we tell is in service of one thing: helping people go further.
-              </p>
+              <img 
+                src="/mission-vision-full.png" 
+                alt="Nomads on camels in snowy mountain valley" 
+                className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+              />
+
+              {/* Translucent Glass Text Box */}
+              <div 
+                className="absolute bottom-2 left-2 right-2 md:bottom-4 md:left-4 md:right-auto md:w-[811px] md:max-w-[calc(100%-32px)] bg-[#2B2B2B]/90 backdrop-blur-md border border-white/20 rounded-[4px] p-2.5 md:p-3 flex flex-col items-start gap-1.5 md:gap-3 transition-all duration-400 opacity-100 pointer-events-auto"
+                style={{
+                  opacity: typeof window !== 'undefined' && window.innerWidth < 768 ? 1 : (activeCard === 'mission' ? 1 : 0),
+                  transform: typeof window !== 'undefined' && window.innerWidth < 768 ? 'translateY(0)' : (activeCard === 'mission' ? 'translateY(0)' : 'translateY(12px)'),
+                  pointerEvents: typeof window !== 'undefined' && window.innerWidth < 768 ? 'auto' : (activeCard === 'mission' ? 'auto' : 'none'),
+                }}
+              >
+                <span className="inline-flex items-center justify-center bg-[#FF623E] text-white font-sans font-semibold text-[10px] md:text-[14px] leading-none px-2 py-1 rounded-[4px] uppercase tracking-wider">
+                  OUR MISSION
+                </span>
+                <p className="font-sans font-medium text-[11px] sm:text-xs md:text-[24px] leading-relaxed md:leading-[42px] text-white m-0">
+                  We exist to bridge the gap between the life people are living and the adventures they are dreaming about. Every experience we curate, every product we build, and every story we tell is in service of one thing: helping people go further.
+                </p>
+              </div>
+
+              {/* Compact Badge (Desktop visible when inactive) */}
+              <div className={`hidden md:block absolute bottom-6 left-6 transition-opacity duration-400 ${activeCard === 'mission' ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+                <span className="inline-flex items-center justify-center bg-[#FF623E] text-white font-sans font-semibold text-[14px] leading-none px-3 py-1.5 rounded-[4px] uppercase tracking-wider">
+                  OUR MISSION
+                </span>
+              </div>
             </div>
 
-            {/* Compact Badge (Desktop visible when inactive) */}
-            <div className={`hidden md:block absolute bottom-6 left-6 transition-opacity duration-400 ${activeCard === 'mission' ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
-              <span className="inline-flex items-center justify-center bg-[#FF623E] text-white font-sans font-semibold text-[14px] leading-none px-3 py-1.5 rounded-[4px] uppercase tracking-wider">
-                OUR MISSION
-              </span>
+            {/* Card 2: OUR VISION */}
+            <div 
+              onClick={() => setActiveCard('vision')}
+              onMouseEnter={() => setActiveCard('vision')}
+              className={`relative overflow-hidden shadow-md shrink-0 w-full h-[200px] md:h-[699px] rounded-[4px] cursor-pointer transition-all duration-500 ease-in-out ${
+                activeCard === 'vision' ? 'md:w-[843px]' : 'md:w-[405px]'
+              }`}
+            >
+              <img 
+                src="/mission-vision-full.png" 
+                alt="Nomads on camels in snowy mountain valley" 
+                className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+              />
+
+              {/* Translucent Glass Text Box */}
+              <div 
+                className="absolute bottom-2 left-2 right-2 md:bottom-4 md:left-4 md:right-auto md:w-[811px] md:max-w-[calc(100%-32px)] bg-[#2B2B2B]/90 backdrop-blur-md border border-white/20 rounded-[4px] p-2.5 md:p-3 flex flex-col items-start gap-1.5 md:gap-3 transition-all duration-400 opacity-100 pointer-events-auto"
+                style={{
+                  opacity: typeof window !== 'undefined' && window.innerWidth < 768 ? 1 : (activeCard === 'vision' ? 1 : 0),
+                  transform: typeof window !== 'undefined' && window.innerWidth < 768 ? 'translateY(0)' : (activeCard === 'vision' ? 'translateY(0)' : 'translateY(12px)'),
+                  pointerEvents: typeof window !== 'undefined' && window.innerWidth < 768 ? 'auto' : (activeCard === 'vision' ? 'auto' : 'none'),
+                }}
+              >
+                <span className="inline-flex items-center justify-center bg-[#FF623E] text-white font-sans font-semibold text-[10px] md:text-[14px] leading-none px-2 py-1 rounded-[4px] uppercase tracking-wider">
+                  OUR VISION
+                </span>
+                <p className="font-sans font-medium text-[11px] sm:text-xs md:text-[24px] leading-relaxed md:leading-[42px] text-white m-0">
+                  We exist to bridge the gap between the life people are living and the adventures they are dreaming about. Every experience we curate, every product we build, and every story we tell is in service of one thing: helping people go further.
+                </p>
+              </div>
+
+              {/* Compact Badge (Desktop visible when inactive) */}
+              <div className={`hidden md:block absolute bottom-6 left-6 transition-opacity duration-400 ${activeCard === 'vision' ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+                <span className="inline-flex items-center justify-center bg-[#FF623E] text-white font-sans font-semibold text-[14px] leading-none px-3 py-1.5 rounded-[4px] uppercase tracking-wider">
+                  OUR VISION
+                </span>
+              </div>
             </div>
           </div>
-
-          {/* Card 2: OUR VISION */}
-          <div 
-            onClick={() => setActiveCard('vision')}
-            onMouseEnter={() => setActiveCard('vision')}
-            className={`relative overflow-hidden shadow-md shrink-0 w-full h-[200px] md:h-[699px] rounded-[4px] cursor-pointer transition-all duration-500 ease-in-out ${
-              activeCard === 'vision' ? 'md:w-[843px]' : 'md:w-[405px]'
-            }`}
-          >
-            <img 
-              src="/mission-vision-full.png" 
-              alt="Nomads on camels in snowy mountain valley" 
-              className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-            />
-
-            {/* Translucent Glass Text Box */}
-            <div 
-              className="absolute bottom-2 left-2 right-2 md:bottom-4 md:left-4 md:right-auto md:w-[811px] md:max-w-[calc(100%-32px)] bg-[#2B2B2B]/75 backdrop-blur-md border border-white/20 rounded-[4px] p-2.5 md:p-3 flex flex-col items-start gap-1.5 md:gap-3 transition-all duration-400 opacity-100 pointer-events-auto"
-              style={{
-                opacity: typeof window !== 'undefined' && window.innerWidth < 768 ? 1 : (activeCard === 'vision' ? 1 : 0),
-                transform: typeof window !== 'undefined' && window.innerWidth < 768 ? 'translateY(0)' : (activeCard === 'vision' ? 'translateY(0)' : 'translateY(12px)'),
-                pointerEvents: typeof window !== 'undefined' && window.innerWidth < 768 ? 'auto' : (activeCard === 'vision' ? 'auto' : 'none'),
-              }}
-            >
-              <span className="inline-flex items-center justify-center bg-[#FF623E] text-white font-sans font-semibold text-[10px] md:text-[14px] leading-none px-2 py-1 rounded-[4px] uppercase tracking-wider">
-                OUR VISION
-              </span>
-              <p className="font-sans font-medium text-[11px] sm:text-xs md:text-[24px] leading-relaxed md:leading-[42px] text-white m-0">
-                We exist to bridge the gap between the life people are living and the adventures they are dreaming about. Every experience we curate, every product we build, and every story we tell is in service of one thing: helping people go further.
-              </p>
-            </div>
-
-            {/* Compact Badge (Desktop visible when inactive) */}
-            <div className={`hidden md:block absolute bottom-6 left-6 transition-opacity duration-400 ${activeCard === 'vision' ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
-              <span className="inline-flex items-center justify-center bg-[#FF623E] text-white font-sans font-semibold text-[14px] leading-none px-3 py-1.5 rounded-[4px] uppercase tracking-wider">
-                OUR VISION
-              </span>
-            </div>
-          </div>
-
         </div>
       </section>
 
@@ -1598,10 +1589,22 @@ export default function AboutPage() {
 
           <Link
             href="/travel"
-            className="h-[44px] md:h-[55px] px-6 md:px-[36px] bg-[#1D493E] hover:bg-[#15342c] text-white font-sans font-medium text-xs sm:text-base rounded-[4px] inline-flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer"
+            className="h-[44px] md:h-[55px] px-6 md:px-[36px] bg-[#1D493E] hover:bg-[#15342c] text-white font-sans font-medium text-xs sm:text-base rounded-[4px] inline-flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer group"
           >
             <span>Reserve your tour now</span>
-            <span className="text-base md:text-lg font-sans">↗</span>
+            <svg 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="2.25" 
+              strokeLinecap="round" 
+              strokeLinejoin="round"
+              className="w-5 h-5 shrink-0 transform transition-transform duration-300 ease-out group-hover:translate-x-1.5 group-hover:-translate-y-1.5"
+            >
+              <path d="M7 17l2.5-2.5" />
+              <path d="M12.5 11.5L17 7" />
+              <path d="M7 7h10v10" />
+            </svg>
           </Link>
         </div>
       </section>

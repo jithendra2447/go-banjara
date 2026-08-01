@@ -206,10 +206,10 @@ export default function KeralaDetails() {
           merged.push(hp);
           needsSave = true;
         } else {
-          // If default package is missing critical fields, restore it
+          // If default package is missing critical fields, fill them in without replacing user edits
           const item = merged[foundIdx];
           if (item.price === undefined || !item.routeList || !item.itinerary) {
-            merged[foundIdx] = hp;
+            merged[foundIdx] = { ...hp, ...item };
             needsSave = true;
           }
         }
@@ -460,7 +460,7 @@ export default function KeralaDetails() {
       </section>
 
       {/* SECTION 2: Viator-Style Tours & Activities Packages Section */}
-      <section className="bg-[#FAF9F6] text-[#1D493E] py-16 relative z-10 border-t border-[#1D493E]/10">
+      <section className="bg-[#FAF9F6] text-[#1D493E] py-16 relative z-10">
         <div className="max-w-7xl mx-auto px-6 space-y-8">
           
           {/* Section Header */}

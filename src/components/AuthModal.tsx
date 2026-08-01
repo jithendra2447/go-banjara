@@ -5,7 +5,7 @@ import { X, AlertCircle, CheckCircle, Loader2, Check, Eye, EyeOff, ArrowLeft } f
 import { useCart } from '@/components/providers';
 import { BonjoMascot } from '@/components/BonjoMascot';
 import { auth } from '@/lib/firebase';
-import { sendPasswordResetEmail, RecaptchaVerifier, GoogleAuthProvider, signInWithPopup, signInWithPhoneNumber } from 'firebase/auth';
+import { sendPasswordResetEmail, RecaptchaVerifier, GoogleAuthProvider, FacebookAuthProvider, signInWithPopup, signInWithRedirect, getRedirectResult, signInWithPhoneNumber } from 'firebase/auth';
 
 type AuthView = 'login' | 'signup' | 'forgot' | 'mobile_otp' | 'email_login';
 
@@ -20,6 +20,7 @@ export const AuthModal: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [isPasswordFocused, setIsPasswordFocused] = useState(false);
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [otp, setOtp] = useState<string[]>(Array(6).fill('')); // 6 digits exactly to match figma
@@ -57,6 +58,52 @@ export const AuthModal: React.FC = () => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  // Auto-open Reset Password modal if landing from a reset URL link
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const params = new URLSearchParams(window.location.search);
+    const action = params.get('action');
+    const emailParam = params.get('email');
+
+    if (action === 'reset-password' && emailParam) {
+      setEmail(emailParam);
+      setForgotStep('reset_password');
+      setView('forgot');
+      setAuthOpen(true);
+
+      // Clean up the URL search params so the modal doesn't keep popping up on refresh
+      const cleanUrl = window.location.pathname;
+      window.history.replaceState({}, '', cleanUrl);
+    }
+  }, [setAuthOpen]);
+
+  // Handle Firebase redirect result (fallback when popups are blocked by browser)
+  useEffect(() => {
+    if (!auth) return;
+    getRedirectResult(auth)
+      .then(async (result) => {
+        if (result && result.user) {
+          const firebaseUser = result.user;
+          const dbRes = await fetch('/api/auth/google', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              email: firebaseUser.email,
+              name: firebaseUser.displayName,
+              avatar: firebaseUser.photoURL,
+            }),
+          });
+          const dbData = await dbRes.json();
+          if (dbData.success) {
+            login(dbData.user);
+          }
+        }
+      })
+      .catch((err) => {
+        console.warn('Redirect auth result check notice:', err);
+      });
+  }, [login]);
 
   // OTP Countdown timer
   useEffect(() => {
@@ -100,6 +147,7 @@ export const AuthModal: React.FC = () => {
   // Trigger inline OTP popup for mobile number verification
   const handleTriggerInlineOtp = async () => {
     setError('');
+    setSuccessMsg('');
     const cleanPhone = phone.replace(/\D/g, '');
 
     if (cleanPhone.length !== 10) {
@@ -127,10 +175,8 @@ export const AuthModal: React.FC = () => {
       setShowOtpModal(true);
     } catch (err: any) {
       console.error('Firebase SMS OTP request failed:', err);
-      // Fallback for dev mode
-      setOtpCountdown(30);
-      setSuccessMsg(`OTP sent to +91 ${cleanPhone}. (Use 123456 to verify)`);
-      setShowOtpModal(true);
+      setSuccessMsg('');
+      setError(err.message || 'Failed to send OTP. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -140,6 +186,7 @@ export const AuthModal: React.FC = () => {
   const handleInlineOtpVerify = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    setSuccessMsg('');
     const fullOtp = otp.join('');
     const cleanPhone = phone.replace(/\D/g, '');
 
@@ -212,6 +259,7 @@ export const AuthModal: React.FC = () => {
     } catch (err: any) {
       console.error('Inline OTP verify error:', err.message);
       setLoading(false);
+      setSuccessMsg('');
       setError(err.message || 'OTP verification failed. Please try again.');
     }
   };
@@ -220,6 +268,7 @@ export const AuthModal: React.FC = () => {
   const handleEmailLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    setSuccessMsg('');
     setPasswordError(false);
     setLoading(true);
 
@@ -251,6 +300,7 @@ export const AuthModal: React.FC = () => {
     } catch (err: any) {
       console.warn('Login authentication failed:', err.message);
       setPasswordError(true);
+      setSuccessMsg('');
       setError(err.message || 'Password is incorrect. Please check your credentials and try again.');
       setLoading(false);
     }
@@ -260,6 +310,7 @@ export const AuthModal: React.FC = () => {
   const handleEmailSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    setSuccessMsg('');
     setPasswordError(false);
 
     const cleanPhone = phone.replace(/\D/g, '');
@@ -315,6 +366,7 @@ export const AuthModal: React.FC = () => {
       if (regData.error) throw new Error(regData.error);
     } catch (err: any) {
       console.error('Registration error:', err.message);
+      setSuccessMsg('');
       setError(err.message || 'Registration failed. Please check your details and try again.');
       setLoading(false);
     }
@@ -323,6 +375,7 @@ export const AuthModal: React.FC = () => {
   // 3. Google OAuth Login Handler
   const handleGoogleLogin = async () => {
     setError('');
+    setSuccessMsg('');
     setLoading(true);
 
     try {
@@ -353,6 +406,17 @@ export const AuthModal: React.FC = () => {
       }
     } catch (err: any) {
       console.error('Google Sign-in Error:', err);
+      if (err?.code === 'auth/popup-blocked' || err?.message?.includes('popup-blocked') || err?.message?.includes('popup')) {
+        console.warn('Popup blocked by browser. Switching to redirect authentication...');
+        try {
+          const provider = new GoogleAuthProvider();
+          await signInWithRedirect(auth, provider);
+          return;
+        } catch (redirectErr: any) {
+          console.error('Google redirect error:', redirectErr);
+        }
+      }
+      setSuccessMsg('');
       setError(err.message || 'Google Sign-in failed.');
     } finally {
       setLoading(false);
@@ -362,16 +426,23 @@ export const AuthModal: React.FC = () => {
   // 4. Facebook OAuth Login Handler
   const handleFacebookLogin = async () => {
     setError('');
+    setSuccessMsg('');
     setLoading(true);
 
     try {
+      const provider = new FacebookAuthProvider();
+      const result = await signInWithPopup(auth, provider);
+      const firebaseUser = result.user;
+
       const res = await fetch('/api/auth/facebook', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          provider: 'facebook',
-          email: 'user@facebook.com',
-          name: 'Facebook User',
+          token: await firebaseUser.getIdToken(),
+          email: firebaseUser.email,
+          name: firebaseUser.displayName,
+          avatar: firebaseUser.photoURL,
+          uid: firebaseUser.uid,
         }),
       });
       const data = await res.json();
@@ -384,6 +455,17 @@ export const AuthModal: React.FC = () => {
       if (data.error) throw new Error(data.error);
     } catch (err: any) {
       console.error('Facebook authentication failed:', err.message);
+      if (err?.code === 'auth/popup-blocked' || err?.message?.includes('popup-blocked') || err?.message?.includes('popup')) {
+        console.warn('Popup blocked by browser. Switching to redirect authentication...');
+        try {
+          const provider = new FacebookAuthProvider();
+          await signInWithRedirect(auth, provider);
+          return;
+        } catch (redirectErr: any) {
+          console.error('Facebook redirect error:', redirectErr);
+        }
+      }
+      setSuccessMsg('');
       setError(err.message || 'Facebook authentication failed. Please try again.');
     } finally {
       setLoading(false);
@@ -426,6 +508,7 @@ export const AuthModal: React.FC = () => {
   const handleMobileRequest = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    setSuccessMsg('');
     const cleanPhone = phone.replace(/\D/g, '');
 
     if (cleanPhone.length !== 10) {
@@ -455,13 +538,10 @@ export const AuthModal: React.FC = () => {
       setSuccessMsg(`OTP sent to +91 ${cleanPhone}. Please check your phone.`);
       setView('mobile_otp');
     } catch (err: any) {
-      console.warn('Firebase SMS OTP request failed, fallback active:', err.message);
-      // Fallback for dev mode
+      console.error('Firebase SMS OTP request failed:', err);
       setLoading(false);
-      setOtpCountdown(30);
-      setOtpSent(true);
-      setSuccessMsg(`OTP sent to +91 ${cleanPhone}. (Use 123456 to verify)`);
-      setView('mobile_otp');
+      setSuccessMsg('');
+      setError(err.message || 'Failed to send OTP. Please try again.');
     }
   };
 
@@ -469,6 +549,7 @@ export const AuthModal: React.FC = () => {
   const handleOtpVerify = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    setSuccessMsg('');
     const fullOtp = otp.join('');
     const cleanPhone = phone.replace(/\D/g, '');
 
@@ -542,6 +623,7 @@ export const AuthModal: React.FC = () => {
       if (data.error) throw new Error(data.error);
     } catch (err: any) {
       console.error('OTP verification error:', err.message);
+      setSuccessMsg('');
       setError(err.message || 'OTP verification failed. Please try again.');
     } finally {
       setLoading(false);
@@ -574,18 +656,17 @@ export const AuthModal: React.FC = () => {
         throw new Error(data.error || 'No user account found matching this email/phone.');
       }
 
-      if (targetKey.includes('@')) {
-        try {
-          await sendPasswordResetEmail(auth, targetKey);
-        } catch (fbErr: any) {
-          console.warn('Firebase reset email notice:', fbErr.message);
-        }
+      setError('');
+      if (!targetKey.includes('@') && !data.email) {
+        setForgotStep('reset_password');
+        setSuccessMsg(`Mobile number verified for ${targetKey}! Please enter your new password below.`);
+      } else {
+        const destEmail = data.email || targetKey;
+        setSuccessMsg(`A password reset link has been sent to ${destEmail}. Please check your email inbox (and spam folder) to reset your password.`);
       }
-
-      setForgotStep('reset_password');
-      setSuccessMsg(`Account verified for ${targetKey}! Please enter your new password below.`);
     } catch (err: any) {
       console.error('Forgot password error:', err);
+      setSuccessMsg('');
       setError(err.message || 'Failed to process password reset request.');
     } finally {
       setLoading(false);
@@ -670,7 +751,7 @@ export const AuthModal: React.FC = () => {
         background: '#FFFFFF',
       }}
     >
-      <div id="recaptcha-container" className="hidden"></div>
+      <div id="recaptcha-container"></div>
       
       {/* Backdrop */}
       <div 
@@ -836,7 +917,7 @@ export const AuthModal: React.FC = () => {
           <div className="space-y-6 flex-1 flex flex-col justify-center mt-6">
             
             {/* Feedback Notifications */}
-            {error && !passwordError && (
+            {error && !passwordError && !successMsg && (
               <div className="p-3 bg-rose-50 border border-rose-100 rounded-xl text-rose-600 text-xs font-semibold flex items-center gap-2">
                 <AlertCircle className="w-4.5 h-4.5 shrink-0" />
                 <span>{error}</span>
@@ -1387,6 +1468,8 @@ export const AuthModal: React.FC = () => {
                           setPassword(e.target.value);
                           if (passwordError) setPasswordError(false);
                         }}
+                        onFocus={() => setIsPasswordFocused(true)}
+                        onBlur={() => setIsPasswordFocused(false)}
                         style={{
                           flex: 1,
                           height: '100%',
@@ -1427,24 +1510,26 @@ export const AuthModal: React.FC = () => {
                       </p>
                     )}
                     {/* Password Policy Realtime Indicators (Single Line) */}
-                    <div className="flex flex-wrap items-center gap-x-2.5 gap-y-0.5 pt-1" style={{ width: '100%', maxWidth: '492px' }}>
-                      <div className={`flex items-center gap-1 text-[11px] md:text-[12px] ${password.length >= 8 ? 'text-emerald-600 font-semibold' : 'text-slate-400'}`}>
-                        <Check className={`w-3 h-3 ${password.length >= 8 ? 'text-emerald-600' : 'text-slate-300'}`} />
-                        <span>At least 8 characters</span>
+                    {(isPasswordFocused || password.length > 0) && (
+                      <div className="flex flex-wrap items-center gap-x-2.5 gap-y-0.5 pt-1" style={{ width: '100%', maxWidth: '492px' }}>
+                        <div className={`flex items-center gap-1 text-[11px] md:text-[12px] ${password.length >= 8 ? 'text-emerald-600 font-semibold' : 'text-slate-400'}`}>
+                          <Check className={`w-3 h-3 ${password.length >= 8 ? 'text-emerald-600' : 'text-slate-300'}`} />
+                          <span>At least 8 characters</span>
+                        </div>
+                        <div className={`flex items-center gap-1 text-[11px] md:text-[12px] ${/[A-Z]/.test(password) ? 'text-emerald-600 font-semibold' : 'text-slate-400'}`}>
+                          <Check className={`w-3 h-3 ${/[A-Z]/.test(password) ? 'text-emerald-600' : 'text-slate-300'}`} />
+                          <span>1 capital letter (A-Z)</span>
+                        </div>
+                        <div className={`flex items-center gap-1 text-[11px] md:text-[12px] ${/[0-9]/.test(password) ? 'text-emerald-600 font-semibold' : 'text-slate-400'}`}>
+                          <Check className={`w-3 h-3 ${/[0-9]/.test(password) ? 'text-emerald-600' : 'text-slate-300'}`} />
+                          <span>1 number (0-9)</span>
+                        </div>
+                        <div className={`flex items-center gap-1 text-[11px] md:text-[12px] ${/[^A-Za-z0-9]/.test(password) ? 'text-emerald-600 font-semibold' : 'text-slate-400'}`}>
+                          <Check className={`w-3 h-3 ${/[^A-Za-z0-9]/.test(password) ? 'text-emerald-600' : 'text-slate-300'}`} />
+                          <span>1 special character (@#$!)</span>
+                        </div>
                       </div>
-                      <div className={`flex items-center gap-1 text-[11px] md:text-[12px] ${/[A-Z]/.test(password) ? 'text-emerald-600 font-semibold' : 'text-slate-400'}`}>
-                        <Check className={`w-3 h-3 ${/[A-Z]/.test(password) ? 'text-emerald-600' : 'text-slate-300'}`} />
-                        <span>1 capital letter (A-Z)</span>
-                      </div>
-                      <div className={`flex items-center gap-1 text-[11px] md:text-[12px] ${/[0-9]/.test(password) ? 'text-emerald-600 font-semibold' : 'text-slate-400'}`}>
-                        <Check className={`w-3 h-3 ${/[0-9]/.test(password) ? 'text-emerald-600' : 'text-slate-300'}`} />
-                        <span>1 number (0-9)</span>
-                      </div>
-                      <div className={`flex items-center gap-1 text-[11px] md:text-[12px] ${/[^A-Za-z0-9]/.test(password) ? 'text-emerald-600 font-semibold' : 'text-slate-400'}`}>
-                        <Check className={`w-3 h-3 ${/[^A-Za-z0-9]/.test(password) ? 'text-emerald-600' : 'text-slate-300'}`} />
-                        <span>1 special character (@#$!)</span>
-                      </div>
-                    </div>
+                    )}
                   </div>
 
                     {/* Action Block */}

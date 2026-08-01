@@ -14,7 +14,7 @@ export const Footer: React.FC = () => {
   }
 
   return (
-    <div style={{ width: "100%", background: "rgba(29, 73, 62, 1)" }}>
+    <div data-site-footer="true" style={{ width: "100%", background: "rgba(29, 73, 62, 1)" }}>
       {/* Desktop Footer (hidden md:flex) */}
       <footer
         style={{

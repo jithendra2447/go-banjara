@@ -51,12 +51,49 @@ export interface SiteCMSContent {
   homeHeroShopBtn: string;
   homeHeroTravelBtn: string;
   homeMascotText: string;
+
+  // Dual CTA Banners (Shop Gear + Book Trip cards)
+  homeCtaBanner1Title: string;
+  homeCtaBanner1Desc: string;
+  homeCtaBanner1BtnText: string;
+  homeCtaBanner1BtnLink: string;
+  homeCtaBanner2Title: string;
+  homeCtaBanner2Desc: string;
+  homeCtaBanner2BtnText: string;
+  homeCtaBanner2BtnLink: string;
+
+  // Destinations Section
+  homeDestinationsTag: string;
+  homeDestinationsTitle: string;
+  homeDestinationsSub: string;
+
+  // Deals & Selling
   homeDealsTitle: string;
   homeDealsSub: string;
   homeSellingTitle: string;
   homeSellingSub: string;
+
+  // Collections / Categories Section
+  homeCollectionsTitle: string;
+  homeCollectionsSub: string;
+
+  // Reviews Section
+  homeReviewsTitle: string;
+  homeReviewsSub: string;
+
+  // Blog / Travel Diaries Section
+  homeBlogTitle: string;
+  homeBlogSub: string;
+
+  // FAQ Section
+  homeFaqTitle: string;
+  homeFaqHelpDesk: string;
+
+  // Values Section
   homeValuesTitle: string;
   homeValuesSub: string;
+
+  // Bottom CTA Banner
   homeCtaTitle: string;
   homeCtaSub: string;
   homeCtaBtnText: string;
@@ -128,10 +165,45 @@ export const DEFAULT_CMS_CONTENT: SiteCMSContent = {
   homeHeroShopBtn: 'Explore Shop Merchandise',
   homeHeroTravelBtn: 'View Travel Packages',
   homeMascotText: 'Hey Nomad! Ready to explore Kashmir backwaters, Spiti valleys, or grab our signature nomad hoodie?',
+
+  // Dual CTA Banners
+  homeCtaBanner1Title: 'Shop Travel Gear for Nomads',
+  homeCtaBanner1Desc: 'Explore our collection of hand-picked journals, weather-proof stickers and artisanal badges designed for the road',
+  homeCtaBanner1BtnText: 'Explore Collections',
+  homeCtaBanner1BtnLink: '/shop',
+  homeCtaBanner2Title: 'Book a Trip',
+  homeCtaBanner2Desc: 'Explore our collection of hand-picked journals, weather-proof stickers and artisanal badges designed for the road',
+  homeCtaBanner2BtnText: 'Find the Route',
+  homeCtaBanner2BtnLink: '/travel',
+
+  // Destinations
+  homeDestinationsTag: 'DESTINATIONS',
+  homeDestinationsTitle: 'Place worth the detour',
+  homeDestinationsSub: 'A hand-picked map of the corners of India our community keeps coming back to',
+
+  // Deals & Selling
   homeDealsTitle: 'Trending Adventure Deals',
   homeDealsSub: 'Handpicked apparel & gear for your next mountain trek or beach getaway.',
   homeSellingTitle: 'Best Selling Banjara Essentials',
   homeSellingSub: 'Top rated gear loved by 10,000+ happy travelers across India.',
+
+  // Collections
+  homeCollectionsTitle: 'Top Categories',
+  homeCollectionsSub: 'Browse our curated collections of travel essentials and outdoor gear',
+
+  // Reviews
+  homeReviewsTitle: 'What people say about products',
+  homeReviewsSub: 'Real reviews from our community of happy travelers',
+
+  // Blog
+  homeBlogTitle: 'Travel Tales from the curious Explorer',
+  homeBlogSub: 'Follow my voices to discover unique voices, breathtaking landscapes & unforgettable experiences',
+
+  // FAQ
+  homeFaqTitle: 'Frequently Asked Questions',
+  homeFaqHelpDesk: 'Help Desk',
+
+  // Values
   homeValuesTitle: 'Why Choose Go Banjara?',
   homeValuesSub: 'We combine authentic local culture, eco-friendly travel practices, and premium gear.',
   homeCtaTitle: 'Ready for Your Next Big Journey?',

@@ -1,3 +1,22 @@
+export interface ProductSpec {
+  label: string;
+  value: string;
+}
+
+export interface ProductReview {
+  id?: string;
+  author: string;
+  rating: number;
+  date: string;
+  title: string;
+  comment: string;
+}
+
+export interface ProductFaq {
+  question: string;
+  answer: string;
+}
+
 export interface Product {
   id: string;
   name: string;
@@ -7,6 +26,12 @@ export interface Product {
   category: string;
   rating: number;
   inStock: boolean;
+  section?: string;
+  isBestDeal?: boolean;
+  isMostSelling?: boolean;
+  isFeatured?: boolean;
+  showOnHome?: boolean;
+  homeShowcaseSection?: 'hero' | 'deals' | 'most-selling' | 'featured' | 'none';
   gender?: 'men' | 'women' | 'unisex';
   subcategory?: 'topwear' | 'bottomwear' | 'accessories' | 'personal-care' | 'footwear' | 'lifestyle';
   itemType?: string;
@@ -16,6 +41,11 @@ export interface Product {
   color?: string;
   reviewsCount?: number;
   boughtCount?: string;
+  specs?: ProductSpec[];
+  reviewsList?: ProductReview[];
+  faqsList?: ProductFaq[];
+  galleryImages?: string[];
+  highlights?: string[];
 }
 
 export interface TravelPackage {
@@ -27,6 +57,9 @@ export interface TravelPackage {
   duration: string;
   highlights: string[];
   location: string;
+  showOnHome?: boolean;
+  isBestSeller?: boolean;
+  homeShowcaseSection?: 'hero' | 'featured' | 'deals' | 'none';
 }
 
 export interface CartItem {

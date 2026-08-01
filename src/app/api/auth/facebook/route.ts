@@ -4,9 +4,9 @@ import prisma from '@/lib/db';
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { token, name, email, avatar } = body;
+    const { token, name, email, avatar, uid } = body;
 
-    const userEmail = email || 'user@facebook.com';
+    const userEmail = (email || (uid ? `${uid}@facebook.gobanjara.com` : 'user@facebook.com')).toLowerCase();
     const userName = name || 'Facebook User';
     const userAvatar = avatar || 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=100&h=100&fit=crop';
 

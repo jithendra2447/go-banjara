@@ -9,9 +9,11 @@ import {
   AlertCircle, FileText, Search, CreditCard, ArrowRight, Ban,
   Eye, Calendar, Check, Landmark, RefreshCw, BookOpen, Star,
   Globe, Link as LinkIcon, Settings, ExternalLink, Sparkles, Layers,
-  CheckSquare, Sliders, Server, Save, Download, Upload, Cpu, Zap, Image as ImageIcon
+  CheckSquare, Sliders, Server, Save, Download, Upload, Cpu, Zap, Image as ImageIcon,
+  Mail, Key
 } from 'lucide-react';
 import { useCart } from '@/components/providers';
+import { PackageEditorModal } from '@/components/PackageEditorModal';
 import { DESTINATIONS as INITIAL_DESTINATIONS, Destination } from '@/data/destinations';
 import { PRODUCTS as INITIAL_PRODUCTS } from '@/data/products';
 import { HOLIDAY_PACKAGES as INITIAL_HOLIDAY_PACKAGES, HolidayPackage } from '@/data/packages';
@@ -21,6 +23,25 @@ import {
   getStoredCustomPages, saveStoredCustomPages, CustomPage, DEFAULT_CUSTOM_PAGES,
   getStoredPackageProductLinks, saveStoredPackageProductLinks, PackageProductLink, DEFAULT_PACKAGE_PRODUCT_LINKS
 } from '@/lib/cms';
+
+const DEFAULT_ADMIN_CREDS = {
+  email: 'gobanjara.trd@gmail.com',
+  password: 'GoBanjara123!'
+};
+
+const getStoredAdminCreds = () => {
+  if (typeof window === 'undefined') return DEFAULT_ADMIN_CREDS;
+  const saved = localStorage.getItem('gb_admin_credentials');
+  if (saved) {
+    try {
+      const parsed = JSON.parse(saved);
+      if (parsed && parsed.email && parsed.password) {
+        return parsed;
+      }
+    } catch (e) {}
+  }
+  return DEFAULT_ADMIN_CREDS;
+};
 
 type AdminTab =
   | 'overview'
@@ -35,6 +56,8 @@ type AdminTab =
   | 'bookings'
   | 'customers'
   | 'payments'
+  | 'newsletters'
+  | 'submissions'
   | 'global_settings';
 
 interface OrderItem {
@@ -119,6 +142,33 @@ export default function AdminPortal() {
   const [customers, setCustomers] = useState<CustomerItem[]>([]);
   const [blogs, setBlogs] = useState<BlogPost[]>([]);
 
+  // Live admin data from MongoDB
+  const [liveUsers, setLiveUsers] = useState<any[]>([]);
+  const [liveOrders, setLiveOrders] = useState<any[]>([]);
+  const [liveBookings, setLiveBookings] = useState<any[]>([]);
+  const [liveSubscribers, setLiveSubscribers] = useState<any[]>([]);
+  const [liveSubmissions, setLiveSubmissions] = useState<any[]>([]);
+  const [isLiveLoading, setIsLiveLoading] = useState(true);
+
+  const fetchLiveAdminData = async () => {
+    setIsLiveLoading(true);
+    try {
+      const res = await fetch('/api/admin');
+      const data = await res.json();
+      if (data.success) {
+        setLiveUsers(data.users || []);
+        setLiveOrders(data.orders || []);
+        setLiveBookings(data.bookings || []);
+        setLiveSubscribers(data.newsletterSubscribers || []);
+        setLiveSubmissions(data.contactSubmissions || []);
+      }
+    } catch (err) {
+      console.error('Failed to load live admin data:', err);
+    } finally {
+      setIsLiveLoading(false);
+    }
+  };
+
   // cPanel CMS & Custom Pages State
   const [cms, setCms] = useState<SiteCMSContent>(DEFAULT_CMS_CONTENT);
   const [cmsPageFilter, setCmsPageFilter] = useState<'home' | 'about' | 'shop' | 'travel' | 'blog' | 'contact' | 'global'>('home');
@@ -136,6 +186,7 @@ export default function AdminPortal() {
   // Editing States
   const [editingPkg, setEditingPkg] = useState<HolidayPackage | null>(null);
   const [editingProd, setEditingProd] = useState<Product | null>(null);
+  const [activeProdEditorTab, setActiveProdEditorTab] = useState<'basic' | 'specs' | 'reviews' | 'faqs'>('basic');
   const [editingBlog, setEditingBlog] = useState<BlogPost | null>(null);
   const [editingDest, setEditingDest] = useState<Destination | null>(null);
 
@@ -149,33 +200,113 @@ export default function AdminPortal() {
   };
 
   // Auth Protection & Login Form States
-  const [adminEmail, setAdminEmail] = useState('');
-  const [adminPassword, setAdminPassword] = useState('');
+  const [adminEmail, setAdminEmail] = useState('gobanjara.trd@gmail.com');
+  const [adminPassword, setAdminPassword] = useState('GoBanjara123!');
   const { login } = useCart();
+
+  // Change Admin Creds Modal State
+  const [isChangingCreds, setIsChangingCreds] = useState(false);
+  const [newAdminEmail, setNewAdminEmail] = useState('');
+  const [currentAdminPass, setCurrentAdminPass] = useState('');
+  const [newAdminPass, setNewAdminPass] = useState('');
+  const [confirmAdminPass, setConfirmAdminPass] = useState('');
+
+  const openChangeCredsModal = () => {
+    const current = getStoredAdminCreds();
+    setNewAdminEmail(current.email);
+    setCurrentAdminPass('');
+    setNewAdminPass('');
+    setConfirmAdminPass('');
+    setIsChangingCreds(true);
+  };
 
   const handleAdminLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    login({
-      id: 'admin-1',
-      name: 'Go Banjara Super Admin',
-      email: adminEmail || 'gobanjara.trd@gmail.com',
-      role: 'ADMIN',
-    });
-    showToast('Welcome to cPanel Control Center!');
+    const validCreds = getStoredAdminCreds();
+
+    const inputEmail = adminEmail.trim().toLowerCase();
+    const expectedEmail = validCreds.email.trim().toLowerCase();
+
+    if (inputEmail === expectedEmail && adminPassword === validCreds.password) {
+      login({
+        id: 'admin-1',
+        name: 'Go Banjara Super Admin',
+        email: validCreds.email,
+        role: 'ADMIN',
+      });
+      fetchLiveAdminData();
+      showToast(`Welcome Go Banjara Super Admin (${validCreds.email})!`, 'success');
+    } else {
+      showToast('Invalid Admin Email or Password. Please check your credentials!', 'error');
+    }
   };
 
   const handleQuickAdminLogin = () => {
+    const validCreds = getStoredAdminCreds();
+    setAdminEmail(validCreds.email);
+    setAdminPassword(validCreds.password);
     login({
       id: 'admin-1',
       name: 'Go Banjara Super Admin',
-      email: 'gobanjara.trd@gmail.com',
+      email: validCreds.email,
       role: 'ADMIN',
     });
-    showToast('⚡ Logged in as gobanjara.trd@gmail.com!');
+    fetchLiveAdminData();
+    showToast(`⚡ Instant Login as ${validCreds.email}!`, 'success');
+  };
+
+  const handleUpdateAdminCreds = (e: React.FormEvent) => {
+    e.preventDefault();
+    const currentCreds = getStoredAdminCreds();
+
+    if (currentAdminPass !== currentCreds.password) {
+      showToast('Current Admin Password is incorrect!', 'error');
+      return;
+    }
+
+    if (!newAdminEmail.trim() || !newAdminEmail.includes('@')) {
+      showToast('Please enter a valid Admin Email address!', 'error');
+      return;
+    }
+
+    if (newAdminPass) {
+      if (newAdminPass.length < 6) {
+        showToast('New password must be at least 6 characters long!', 'error');
+        return;
+      }
+      if (newAdminPass !== confirmAdminPass) {
+        showToast('New Password and Confirm Password do not match!', 'error');
+        return;
+      }
+    }
+
+    const updatedCreds = {
+      email: newAdminEmail.trim(),
+      password: newAdminPass ? newAdminPass : currentCreds.password,
+    };
+
+    localStorage.setItem('gb_admin_credentials', JSON.stringify(updatedCreds));
+
+    login({
+      id: 'admin-1',
+      name: 'Go Banjara Super Admin',
+      email: updatedCreds.email,
+      role: 'ADMIN',
+    });
+
+    setIsChangingCreds(false);
+    setCurrentAdminPass('');
+    setNewAdminPass('');
+    setConfirmAdminPass('');
+    showToast('Admin Email & Password updated successfully! Use your new credentials next time.', 'success');
   };
 
   // Load All Persisted Data on Mount
   useEffect(() => {
+    // Hide site Navbar & Footer on admin
+    document.body.classList.add('admin-page');
+    document.documentElement.style.setProperty('--admin-pt', '0px');
+
     // 1. Load CMS Content
     setCms(getStoredCMSContent());
 
@@ -211,12 +342,33 @@ export default function AdminPortal() {
     }
 
     // 6. Load Products
-    const savedProd = localStorage.getItem('gb_admin_products');
+    let mergedProds: Product[] = [...INITIAL_PRODUCTS];
+    const savedProd = localStorage.getItem('gb_admin_products_v3') || localStorage.getItem('gb_admin_products');
     if (savedProd) {
-      try { setProducts(JSON.parse(savedProd)); } catch (e) { setProducts(INITIAL_PRODUCTS); }
+      try {
+        const parsed = JSON.parse(savedProd);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          mergedProds = [...parsed];
+          let needsSave = false;
+          INITIAL_PRODUCTS.forEach(ip => {
+            if (!mergedProds.some(p => p.id === ip.id)) {
+              mergedProds.push(ip);
+              needsSave = true;
+            }
+          });
+          if (needsSave) {
+            localStorage.setItem('gb_admin_products_v3', JSON.stringify(mergedProds));
+            localStorage.setItem('gb_admin_products', JSON.stringify(mergedProds));
+          }
+        }
+      } catch (e) {
+        console.error('Error loading products from storage:', e);
+      }
     } else {
-      setProducts(INITIAL_PRODUCTS);
+      localStorage.setItem('gb_admin_products_v3', JSON.stringify(INITIAL_PRODUCTS));
+      localStorage.setItem('gb_admin_products', JSON.stringify(INITIAL_PRODUCTS));
     }
+    setProducts(mergedProds);
 
     // 7. Load Blogs
     const savedBlogs = localStorage.getItem('gb_admin_blogs');
@@ -249,6 +401,7 @@ export default function AdminPortal() {
         console.error('Error loading orders history', e);
       }
     }
+    fetchLiveAdminData();
   }, []);
 
   // Save Handlers
@@ -304,6 +457,35 @@ export default function AdminPortal() {
     setCustomPages(updated);
     saveStoredCustomPages(updated);
     showToast('Custom page deleted!');
+  };
+
+  const handleSaveEditedProduct = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!editingProd) return;
+    const exists = products.some(p => p.id === editingProd.id);
+    const updated = exists
+      ? products.map(p => p.id === editingProd.id ? editingProd : p)
+      : [editingProd, ...products];
+    setProducts(updated);
+    localStorage.setItem('gb_admin_products_v3', JSON.stringify(updated));
+    localStorage.setItem('gb_admin_products', JSON.stringify(updated));
+    setEditingProd(null);
+    showToast(exists ? 'Product updated successfully!' : '✨ New product added to inventory!');
+  };
+
+  const handleSaveEditedPackage = (savedPkg: HolidayPackage) => {
+    if (!savedPkg) return;
+    const exists = packages.some(p => p.id === savedPkg.id);
+    const updated = exists
+      ? packages.map(p => p.id === savedPkg.id ? savedPkg : p)
+      : [savedPkg, ...packages];
+    setPackages(updated);
+    localStorage.setItem('gb_admin_packages', JSON.stringify(updated));
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('gb_packages_updated', { detail: updated }));
+    }
+    setEditingPkg(null);
+    showToast(exists ? 'Tour package updated successfully!' : '✨ New tour package created and added!');
   };
 
   const handleAddPackageProductLink = () => {
@@ -390,86 +572,192 @@ export default function AdminPortal() {
 
   // Metrics Calculations
   const metrics = useMemo(() => {
-    const shopRevenue = orders.reduce((sum, o) => sum + (o.total || 0), 0);
-    const travelRevenue = bookings.reduce((sum, b) => sum + (b.total || 0), 0);
+    const shopRevenue = liveOrders.reduce((sum, o) => sum + (o.totalAmount || 0), 0);
+    const travelRevenue = liveBookings.reduce((sum, b) => sum + (b.totalPaid || 0), 0);
     const totalRevenue = shopRevenue + travelRevenue;
     return {
       totalRevenue,
       shopRevenue,
       travelRevenue,
-      ordersCount: orders.length,
-      bookingsCount: bookings.length,
+      ordersCount: liveOrders.length,
+      bookingsCount: liveBookings.length,
       packagesCount: packages.length,
       productsCount: products.length,
       customPagesCount: customPages.length,
-      customersCount: customers.length,
+      customersCount: liveUsers.length,
     };
-  }, [orders, bookings, packages, products, customPages, customers]);
+  }, [liveOrders, liveBookings, liveUsers, packages, products, customPages]);
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-[#0E1A17] text-slate-100 font-sans flex items-center justify-center p-4">
-        <div className="max-w-md w-full bg-[#11231E] border border-emerald-900/50 rounded-3xl p-8 shadow-2xl space-y-6 text-center">
+      <div
+        style={{ 
+          fontFamily: '"Outfit", "Faktum", sans-serif',
+          minHeight: "100vh",
+          backgroundColor: "#FAF9F6",
+          color: "#2B2B2B",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "16px",
+          boxSizing: "border-box"
+        }}
+        className="min-h-screen bg-[#FAF9F6] text-[#2B2B2B] flex items-center justify-center p-4"
+      >
+        <div 
+          style={{
+            width: "100%",
+            maxWidth: "448px",
+            backgroundColor: "#FFFFFF",
+            border: "1px solid #E5E0D5",
+            borderRadius: "16px",
+            padding: "32px",
+            boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)",
+            display: "flex",
+            flexDirection: "column",
+            gap: "24px",
+            textAlign: "center",
+            boxSizing: "border-box"
+          }}
+          className="max-w-md w-full bg-white border border-[#E5E0D5] rounded-2xl p-8 shadow-xl space-y-6 text-center"
+        >
           
-          <div className="w-16 h-16 rounded-3xl bg-gradient-to-tr from-[#FF5A36] to-amber-500 flex items-center justify-center font-black text-white text-3xl mx-auto shadow-xl">
+          <div 
+            style={{
+              width: "64px",
+              height: "64px",
+              borderRadius: "16px",
+              backgroundColor: "#1D493E",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontWeight: 700,
+              color: "#FFFFFF",
+              fontSize: "24px",
+              margin: "0 auto",
+              boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
+              letterSpacing: "-0.025em"
+            }}
+            className="w-16 h-16 rounded-2xl bg-[#1D493E] flex items-center justify-center font-bold text-white text-2xl mx-auto shadow-md tracking-tight"
+          >
             GB
           </div>
 
-          <div className="space-y-1">
-            <h1 className="text-xl font-black text-white tracking-tight">cPanel Control Center</h1>
-            <p className="text-xs text-emerald-300/70 font-medium">Authentication required to access site CMS & admin tools.</p>
+          <div style={{ display: "flex", flexDirection: "column", gap: "4px" }} className="space-y-1">
+            <h1 
+              style={{ fontFamily: '"Faktum", "Fraunces", sans-serif', fontSize: "24px", fontWeight: 700, color: "#1D493E", letterSpacing: "-0.025em", margin: 0 }}
+              className="text-2xl font-bold text-[#1D493E] tracking-tight"
+            >
+              Go Banjara Admin Panel
+            </h1>
+            <p style={{ fontSize: "12px", color: "#8D8D8D", fontWeight: 500, margin: 0 }} className="text-xs text-[#8D8D8D] font-medium">Authentication required to access site CMS & admin tools.</p>
           </div>
 
-          <form onSubmit={handleAdminLogin} className="space-y-4 text-left">
-            <div className="space-y-1">
-              <label className="text-[10px] font-bold text-slate-400 uppercase">Admin Email</label>
+          <form onSubmit={handleAdminLogin} style={{ display: "flex", flexDirection: "column", gap: "16px", textAlign: "left" }} className="space-y-4 text-left">
+            <div style={{ display: "flex", flexDirection: "column", gap: "6px" }} className="space-y-1.5">
+              <label style={{ fontSize: "11px", fontWeight: 700, color: "#1D493E", textTransform: "uppercase", letterSpacing: "0.05em", fontFamily: "sans-serif" }} className="text-[11px] font-bold text-[#1D493E] uppercase tracking-wider block font-sans">Admin Email</label>
               <input
                 type="email"
                 required
                 placeholder="gobanjara.trd@gmail.com"
                 value={adminEmail}
                 onChange={(e) => setAdminEmail(e.target.value)}
-                className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white placeholder-slate-600 focus:outline-none focus:border-emerald-500"
+                style={{
+                  width: "100%",
+                  padding: "14px",
+                  backgroundColor: "#FAF9F6",
+                  border: "1px solid #E5E0D5",
+                  borderRadius: "12px",
+                  fontSize: "12px",
+                  color: "#2B2B2B",
+                  outline: "none",
+                  boxSizing: "border-box"
+                }}
+                className="w-full p-3.5 bg-[#FAF9F6] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] placeholder-gray-400 focus:outline-none focus:border-[#1D493E] focus:ring-1 focus:ring-[#1D493E]"
               />
             </div>
 
-            <div className="space-y-1">
-              <label className="text-[10px] font-bold text-slate-400 uppercase">Password</label>
+            <div style={{ display: "flex", flexDirection: "column", gap: "6px" }} className="space-y-1.5">
+              <label style={{ fontSize: "11px", fontWeight: 700, color: "#1D493E", textTransform: "uppercase", letterSpacing: "0.05em", fontFamily: "sans-serif" }} className="text-[11px] font-bold text-[#1D493E] uppercase tracking-wider block font-sans">Password</label>
               <input
                 type="password"
                 required
                 placeholder="••••••••"
                 value={adminPassword}
                 onChange={(e) => setAdminPassword(e.target.value)}
-                className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white placeholder-slate-600 focus:outline-none focus:border-emerald-500"
+                style={{
+                  width: "100%",
+                  padding: "14px",
+                  backgroundColor: "#FAF9F6",
+                  border: "1px solid #E5E0D5",
+                  borderRadius: "12px",
+                  fontSize: "12px",
+                  color: "#2B2B2B",
+                  outline: "none",
+                  boxSizing: "border-box"
+                }}
+                className="w-full p-3.5 bg-[#FAF9F6] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] placeholder-gray-400 focus:outline-none focus:border-[#1D493E] focus:ring-1 focus:ring-[#1D493E]"
               />
             </div>
 
             <button
               type="submit"
-              className="w-full py-3.5 bg-[#FF5A36] hover:bg-[#e04a29] text-white rounded-xl text-xs font-black uppercase tracking-wider transition shadow-lg cursor-pointer"
+              style={{
+                width: "100%",
+                padding: "14px",
+                backgroundColor: "#1D493E",
+                color: "#FFFFFF",
+                borderRadius: "12px",
+                fontSize: "12px",
+                fontWeight: 700,
+                textTransform: "uppercase",
+                letterSpacing: "0.05em",
+                border: "none",
+                cursor: "pointer",
+                fontFamily: '"Faktum", "Outfit", sans-serif',
+                boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)"
+              }}
+              className="w-full py-3.5 bg-[#1D493E] hover:bg-[#15342c] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition shadow-md cursor-pointer"
             >
-              Sign In to cPanel
+              Sign In to Admin Panel
             </button>
           </form>
 
-          <div className="relative flex py-2 items-center">
-            <div className="flex-grow border-t border-emerald-900/40"></div>
-            <span className="flex-shrink mx-4 text-[10px] font-bold text-slate-500 uppercase">OR QUICK DEMO</span>
-            <div className="flex-grow border-t border-emerald-900/40"></div>
+          <div style={{ display: "flex", alignItems: "center", padding: "8px 0" }} className="relative flex py-2 items-center">
+            <div style={{ flexGrow: 1, borderTop: "1px solid #E5E0D5" }} className="flex-grow border-t border-gray-200"></div>
+            <span style={{ flexShrink: 0, margin: "0 16px", fontSize: "10px", fontWeight: 700, color: "#8D8D8D", textTransform: "uppercase", letterSpacing: "0.1em" }} className="flex-shrink mx-4 text-[10px] font-bold text-[#8D8D8D] uppercase tracking-widest">OR QUICK DEMO</span>
+            <div style={{ flexGrow: 1, borderTop: "1px solid #E5E0D5" }} className="flex-grow border-t border-gray-200"></div>
           </div>
 
           <button
             type="button"
             onClick={handleQuickAdminLogin}
-            className="w-full py-3.5 bg-emerald-900/40 hover:bg-emerald-900/80 text-emerald-300 border border-emerald-700/50 rounded-xl text-xs font-black uppercase tracking-wider transition cursor-pointer flex items-center justify-center gap-2 shadow-md"
+            style={{
+              width: "100%",
+              padding: "14px",
+              backgroundColor: "rgba(29, 73, 62, 0.08)",
+              color: "#1D493E",
+              border: "1px solid rgba(29, 73, 62, 0.3)",
+              borderRadius: "12px",
+              fontSize: "12px",
+              fontWeight: 700,
+              textTransform: "uppercase",
+              letterSpacing: "0.05em",
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "8px",
+              fontFamily: '"Faktum", "Outfit", sans-serif'
+            }}
+            className="w-full py-3.5 bg-[#1D493E]/[0.08] hover:bg-[#1D493E]/[0.15] text-[#1D493E] border border-[#1D493E]/30 rounded-xl text-xs font-bold uppercase tracking-wider transition cursor-pointer flex items-center justify-center gap-2 shadow-xs"
           >
-            <Zap className="w-4 h-4 text-emerald-400" />
-            <span>⚡ Instant One-Click Admin Access</span>
+            <Zap style={{ width: "16px", height: "16px", color: "#FF623E" }} />
+            <span>Instant One-Click Admin Access</span>
           </button>
 
-          <div className="pt-2">
-            <Link href="/" className="text-xs font-semibold text-slate-400 hover:text-white transition">
+          <div style={{ paddingTop: "8px" }} className="pt-2">
+            <Link href="/" style={{ fontSize: "12px", fontWeight: 600, color: "#8D8D8D", textDecoration: "none" }} className="text-xs font-semibold text-[#8D8D8D] hover:text-[#1D493E] transition">
               ← Return to Go Banjara Website
             </Link>
           </div>
@@ -480,91 +768,92 @@ export default function AdminPortal() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0E1A17] text-slate-100 font-sans flex flex-col">
+    <div style={{ fontFamily: '"Outfit", "Faktum", sans-serif' }} className="min-h-screen bg-[#FAF9F6] text-[#2B2B2B] flex flex-col">
       {/* Toast Notification */}
       {toast && (
         <div className={`fixed top-5 right-5 z-50 px-6 py-3.5 rounded-2xl shadow-2xl flex items-center gap-3 text-xs font-black uppercase tracking-wider animate-bounce ${
-          toast.type === 'success' ? 'bg-emerald-500 text-white' : 'bg-rose-500 text-white'
+          toast.type === 'success' ? 'bg-emerald-600 text-white' : 'bg-rose-600 text-white'
         }`}>
           {toast.type === 'success' ? <CheckCircle2 className="w-5 h-5" /> : <AlertCircle className="w-5 h-5" />}
           <span>{toast.message}</span>
         </div>
       )}
 
-      {/* cPanel Top Control Bar & Header */}
-      <header className="bg-[#142621] border-b border-emerald-900/40 px-6 py-4 sticky top-0 z-40 shadow-lg">
+      {/* Admin Top Control Bar & Header */}
+      <header className="bg-[#1D493E] border-b border-emerald-900/40 px-6 py-4 sticky top-0 z-40 shadow-md">
         <div className="max-w-[1600px] mx-auto flex flex-wrap items-center justify-between gap-4">
           
-          {/* Brand & cPanel Title */}
+          {/* Brand & Admin Title */}
           <div className="flex items-center gap-4">
-            <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-[#FF5A36] to-amber-500 flex items-center justify-center font-black text-white text-xl shadow-md">
+            <div className="w-10 h-10 rounded-2xl bg-[#15342c] border border-emerald-600/40 flex items-center justify-center font-bold text-white text-xl shadow-sm tracking-tight">
               GB
             </div>
             <div>
-              <div className="flex items-center gap-2">
-                <h1 className="text-lg font-black text-white tracking-tight">cPanel Control Center</h1>
-                <span className="px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[10px] font-mono font-bold uppercase">
-                  v2.0 Pro CMS
-                </span>
-              </div>
-              <p className="text-[11px] text-emerald-300/60 font-medium">
-                Live Site Content Management System & Infrastructure Engine
+              <h1 
+                style={{ fontFamily: '"Faktum", "Fraunces", sans-serif' }}
+                className="text-lg font-bold text-white tracking-tight"
+              >
+                Go Banjara Admin
+              </h1>
+              <p className="text-[11px] text-white/50 font-medium">
+                Content Management & E-Commerce Control
               </p>
             </div>
           </div>
 
-          {/* cPanel Server Metrics Bar */}
-          <div className="hidden lg:flex items-center gap-6 bg-[#0B1513] border border-emerald-900/30 px-4 py-2 rounded-2xl text-[11px]">
-            <div className="flex items-center gap-2">
-              <Cpu className="w-4 h-4 text-emerald-400" />
-              <span className="text-slate-400 font-medium">Engine Status:</span>
-              <span className="text-emerald-400 font-bold">Active (0.02s)</span>
+          {/* Admin Server Metrics Bar */}
+          <div className="hidden lg:flex items-center gap-3 text-[11px]">
+            <div className="flex items-center gap-2 px-3 py-1.5 bg-white/10 rounded-lg">
+              <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+              <span className="text-white/70">Live</span>
             </div>
-            <div className="h-4 w-px bg-emerald-900/40" />
-            <div className="flex items-center gap-2">
-              <Server className="w-4 h-4 text-amber-400" />
-              <span className="text-slate-400 font-medium">Pages Managed:</span>
-              <span className="text-amber-400 font-bold">{6 + customPages.length} Pages</span>
-            </div>
-            <div className="h-4 w-px bg-emerald-900/40" />
-            <div className="flex items-center gap-2">
-              <Zap className="w-4 h-4 text-sky-400" />
-              <span className="text-slate-400 font-medium">Live Sync:</span>
-              <span className="text-sky-400 font-bold">Enabled</span>
+            <div className="flex items-center gap-2 px-3 py-1.5 bg-white/10 rounded-lg">
+              <Server className="w-3.5 h-3.5 text-white/60" />
+              <span className="text-white/70">{6 + customPages.length} Pages</span>
             </div>
           </div>
 
           {/* Quick Actions & Live Preview Link */}
           <div className="flex items-center gap-3">
+            <button
+              onClick={openChangeCredsModal}
+              title="Change Admin Email & Password"
+              className="flex items-center gap-2 px-3.5 py-2 bg-[#15342c] hover:bg-[#0f2721] text-emerald-100 rounded-xl text-xs font-bold transition border border-emerald-600/40 cursor-pointer"
+            >
+              <Key className="w-4 h-4 text-emerald-300" />
+              <span className="hidden sm:inline">Admin Security</span>
+            </button>
+
             <Link
               href="/"
               target="_blank"
-              className="flex items-center gap-2 px-4 py-2 bg-emerald-900/40 hover:bg-emerald-900/80 text-emerald-200 rounded-xl text-xs font-bold transition border border-emerald-700/50"
+              className="flex items-center gap-2 px-4 py-2 bg-[#15342c] hover:bg-[#0f2721] text-emerald-100 rounded-xl text-xs font-bold transition border border-emerald-600/40"
             >
-              <Eye className="w-4 h-4 text-emerald-400" />
+              <Eye className="w-4 h-4 text-white/70" />
               <span>Preview Live Site</span>
-              <ExternalLink className="w-3 h-3 text-emerald-400" />
+              <ExternalLink className="w-3 h-3 text-white/70" />
             </Link>
 
             <button
               onClick={handleExportBackup}
-              title="Download cPanel Backup JSON"
-              className="p-2 bg-[#0B1513] hover:bg-emerald-950 text-slate-300 rounded-xl transition border border-emerald-900/40 cursor-pointer"
+              title="Download Admin Backup JSON"
+              className="p-2 bg-[#15342c] hover:bg-[#0f2721] text-white rounded-xl transition border border-emerald-600/40 cursor-pointer"
             >
-              <Download className="w-4 h-4 text-emerald-400" />
+              <Download className="w-4 h-4 text-white/70" />
             </button>
 
             <label
-              title="Restore cPanel Backup JSON"
-              className="p-2 bg-[#0B1513] hover:bg-emerald-950 text-slate-300 rounded-xl transition border border-emerald-900/40 cursor-pointer"
+              title="Restore Admin Backup JSON"
+              className="p-2 bg-[#15342c] hover:bg-[#0f2721] text-white rounded-xl transition border border-emerald-600/40 cursor-pointer"
             >
-              <Upload className="w-4 h-4 text-amber-400" />
+              <Upload className="w-4 h-4 text-white/70" />
               <input type="file" accept=".json" onChange={handleImportBackup} className="hidden" />
             </label>
 
             <button
               onClick={handleSaveCMS}
-              className="flex items-center gap-2 px-4 py-2 bg-[#FF5A36] hover:bg-[#e04a29] text-white rounded-xl text-xs font-black uppercase tracking-wider transition shadow-lg cursor-pointer"
+              style={{ fontFamily: '"Faktum", "Outfit", sans-serif' }}
+              className="flex items-center gap-2 px-4 py-2 bg-[#FF623E] hover:bg-[#e05331] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition shadow-md cursor-pointer"
             >
               <Save className="w-4 h-4" />
               <span>Save All</span>
@@ -573,72 +862,72 @@ export default function AdminPortal() {
         </div>
       </header>
 
-      {/* Main cPanel Layout */}
+      {/* Main Admin Layout */}
       <div className="flex-1 max-w-[1600px] w-full mx-auto flex flex-col md:flex-row">
         
-        {/* cPanel Sidebar Navigation */}
-        <aside className="w-full md:w-72 bg-[#101F1B] border-r border-emerald-900/40 p-4 space-y-6 shrink-0">
+        {/* Admin Sidebar Navigation */}
+        <aside className="w-full md:w-72 bg-white border-r border-[#E5E0D5] p-4 space-y-6 shrink-0 shadow-xs">
           
           {/* Quick Search Tool */}
           <div className="relative">
-            <Search className="w-4 h-4 text-slate-500 absolute left-3 top-3" />
+            <Search className="w-4 h-4 text-[#8D8D8D] absolute left-3 top-3" />
             <input
               type="text"
-              placeholder="Search cPanel tools..."
+              placeholder="Search admin tools..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-3 py-2 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500"
+              className="w-full pl-9 pr-3 py-2 bg-[#FAF9F6] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] placeholder-gray-400 focus:outline-none focus:border-[#1D493E]"
             />
           </div>
 
           {/* Navigation Groups */}
           <nav className="space-y-1 text-xs">
             
-            <div className="text-[10px] font-black uppercase tracking-wider text-emerald-400/60 px-3 py-1">
+            <div className="text-[10px] font-bold uppercase tracking-wider text-[#1D493E] px-3 py-1 font-sans">
               Core Engine & Overview
             </div>
 
             <button
               onClick={() => setActiveTab('overview')}
               className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl font-bold transition cursor-pointer ${
-                activeTab === 'overview' ? 'bg-[#FF5A36] text-white shadow-md' : 'text-slate-300 hover:bg-emerald-900/30'
+                activeTab === 'overview' ? 'bg-[#1D493E] text-white shadow-sm' : 'text-[#2B2B2B] hover:bg-[#1D493E]/[0.08] hover:text-[#1D493E]'
               }`}
             >
               <div className="flex items-center gap-3">
                 <LayoutDashboard className="w-4 h-4" />
-                <span>cPanel Dashboard</span>
+                <span>Admin Dashboard</span>
               </div>
               <span className="text-[10px] bg-black/20 px-2 py-0.5 rounded-full font-mono">Main</span>
             </button>
 
-            <div className="pt-3 text-[10px] font-black uppercase tracking-wider text-emerald-400/60 px-3 py-1">
+            <div className="pt-3 text-[10px] font-bold uppercase tracking-wider text-[#1D493E] px-3 py-1 font-sans">
               Website CMS & Page Builder
             </div>
 
             <button
               onClick={() => setActiveTab('cms_sections')}
               className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl font-bold transition cursor-pointer ${
-                activeTab === 'cms_sections' ? 'bg-[#FF5A36] text-white shadow-md' : 'text-slate-300 hover:bg-emerald-900/30'
+                activeTab === 'cms_sections' ? 'bg-[#1D493E] text-white shadow-sm' : 'text-[#2B2B2B] hover:bg-[#1D493E]/[0.08] hover:text-[#1D493E]'
               }`}
             >
               <div className="flex items-center gap-3">
-                <Globe className="w-4 h-4 text-emerald-400" />
+                <Globe className="w-4 h-4 text-[#1D493E]" />
                 <span>Edit Page & Sections</span>
               </div>
-              <span className="text-[10px] bg-emerald-950 text-emerald-300 px-2 py-0.5 rounded-full font-bold">CMS</span>
+              <span className="text-[10px] bg-[#1D493E]/10 text-[#1D493E] px-2 py-0.5 rounded-full font-bold">CMS</span>
             </button>
 
             <button
               onClick={() => setActiveTab('custom_pages')}
               className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl font-bold transition cursor-pointer ${
-                activeTab === 'custom_pages' ? 'bg-[#FF5A36] text-white shadow-md' : 'text-slate-300 hover:bg-emerald-900/30'
+                activeTab === 'custom_pages' ? 'bg-[#1D493E] text-white shadow-sm' : 'text-[#2B2B2B] hover:bg-[#1D493E]/[0.08] hover:text-[#1D493E]'
               }`}
             >
               <div className="flex items-center gap-3">
-                <FileText className="w-4 h-4 text-amber-400" />
+                <FileText className="w-4 h-4 text-amber-600" />
                 <span>Add & Manage Pages</span>
               </div>
-              <span className="text-[10px] bg-amber-950 text-amber-300 px-2 py-0.5 rounded-full font-bold">
+              <span className="text-[10px] bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full font-bold">
                 {customPages.length}
               </span>
             </button>
@@ -646,33 +935,33 @@ export default function AdminPortal() {
             <button
               onClick={() => setActiveTab('package_products')}
               className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl font-bold transition cursor-pointer ${
-                activeTab === 'package_products' ? 'bg-[#FF5A36] text-white shadow-md' : 'text-slate-300 hover:bg-emerald-900/30'
+                activeTab === 'package_products' ? 'bg-[#1D493E] text-white shadow-sm' : 'text-[#2B2B2B] hover:bg-[#1D493E]/[0.08] hover:text-[#1D493E]'
               }`}
             >
               <div className="flex items-center gap-3">
-                <LinkIcon className="w-4 h-4 text-sky-400" />
+                <LinkIcon className="w-4 h-4 text-sky-600" />
                 <span>Package-Product Linker</span>
               </div>
-              <span className="text-[10px] bg-sky-950 text-sky-300 px-2 py-0.5 rounded-full font-bold">
+              <span className="text-[10px] bg-sky-100 text-sky-800 px-2 py-0.5 rounded-full font-bold">
                 {packageProductLinks.length}
               </span>
             </button>
 
-            <div className="pt-3 text-[10px] font-black uppercase tracking-wider text-emerald-400/60 px-3 py-1">
+            <div className="pt-3 text-[10px] font-bold uppercase tracking-wider text-[#1D493E] px-3 py-1 font-sans">
               Store & Travel Catalog
             </div>
 
             <button
               onClick={() => setActiveTab('packages')}
               className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl font-bold transition cursor-pointer ${
-                activeTab === 'packages' ? 'bg-[#FF5A36] text-white shadow-md' : 'text-slate-300 hover:bg-emerald-900/30'
+                activeTab === 'packages' ? 'bg-[#1D493E] text-white shadow-sm' : 'text-[#2B2B2B] hover:bg-[#1D493E]/[0.08] hover:text-[#1D493E]'
               }`}
             >
               <div className="flex items-center gap-3">
                 <MapIcon className="w-4 h-4" />
                 <span>Travel Packages</span>
               </div>
-              <span className="text-[10px] bg-emerald-950 text-emerald-300 px-2 py-0.5 rounded-full font-mono">
+              <span className="text-[10px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-mono">
                 {packages.length}
               </span>
             </button>
@@ -680,14 +969,14 @@ export default function AdminPortal() {
             <button
               onClick={() => setActiveTab('products')}
               className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl font-bold transition cursor-pointer ${
-                activeTab === 'products' ? 'bg-[#FF5A36] text-white shadow-md' : 'text-slate-300 hover:bg-emerald-900/30'
+                activeTab === 'products' ? 'bg-[#1D493E] text-white shadow-sm' : 'text-[#2B2B2B] hover:bg-[#1D493E]/[0.08] hover:text-[#1D493E]'
               }`}
             >
               <div className="flex items-center gap-3">
                 <ShoppingBag className="w-4 h-4" />
                 <span>Shop Products</span>
               </div>
-              <span className="text-[10px] bg-emerald-950 text-emerald-300 px-2 py-0.5 rounded-full font-mono">
+              <span className="text-[10px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-mono">
                 {products.length}
               </span>
             </button>
@@ -695,71 +984,101 @@ export default function AdminPortal() {
             <button
               onClick={() => setActiveTab('blogs')}
               className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl font-bold transition cursor-pointer ${
-                activeTab === 'blogs' ? 'bg-[#FF5A36] text-white shadow-md' : 'text-slate-300 hover:bg-emerald-900/30'
+                activeTab === 'blogs' ? 'bg-[#1D493E] text-white shadow-sm' : 'text-[#2B2B2B] hover:bg-[#1D493E]/[0.08] hover:text-[#1D493E]'
               }`}
             >
               <div className="flex items-center gap-3">
                 <BookOpen className="w-4 h-4" />
                 <span>Blog Articles</span>
               </div>
-              <span className="text-[10px] bg-emerald-950 text-emerald-300 px-2 py-0.5 rounded-full font-mono">
+              <span className="text-[10px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-mono">
                 {blogs.length}
               </span>
             </button>
 
-            <div className="pt-3 text-[10px] font-black uppercase tracking-wider text-emerald-400/60 px-3 py-1">
+            <div className="pt-3 text-[10px] font-bold uppercase tracking-wider text-[#1D493E] px-3 py-1 font-sans">
               Fulfillment & Accounts
             </div>
 
-            <button
+             <button
               onClick={() => setActiveTab('orders')}
               className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl font-bold transition cursor-pointer ${
-                activeTab === 'orders' ? 'bg-[#FF5A36] text-white shadow-md' : 'text-slate-300 hover:bg-emerald-900/30'
+                activeTab === 'orders' ? 'bg-[#1D493E] text-white shadow-sm' : 'text-[#2B2B2B] hover:bg-[#1D493E]/[0.08] hover:text-[#1D493E]'
               }`}
             >
               <div className="flex items-center gap-3">
                 <ClipboardList className="w-4 h-4" />
                 <span>Shop Orders</span>
               </div>
-              <span className="text-[10px] bg-emerald-950 text-emerald-300 px-2 py-0.5 rounded-full font-mono">
-                {orders.length}
+              <span className="text-[10px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-mono">
+                {liveOrders.length}
               </span>
             </button>
 
             <button
               onClick={() => setActiveTab('bookings')}
               className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl font-bold transition cursor-pointer ${
-                activeTab === 'bookings' ? 'bg-[#FF5A36] text-white shadow-md' : 'text-slate-300 hover:bg-emerald-900/30'
+                activeTab === 'bookings' ? 'bg-[#1D493E] text-white shadow-sm' : 'text-[#2B2B2B] hover:bg-[#1D493E]/[0.08] hover:text-[#1D493E]'
               }`}
             >
               <div className="flex items-center gap-3">
                 <Calendar className="w-4 h-4" />
                 <span>Trip Bookings</span>
               </div>
-              <span className="text-[10px] bg-emerald-950 text-emerald-300 px-2 py-0.5 rounded-full font-mono">
-                {bookings.length}
+              <span className="text-[10px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-mono">
+                {liveBookings.length}
               </span>
             </button>
 
             <button
               onClick={() => setActiveTab('customers')}
               className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl font-bold transition cursor-pointer ${
-                activeTab === 'customers' ? 'bg-[#FF5A36] text-white shadow-md' : 'text-slate-300 hover:bg-emerald-900/30'
+                activeTab === 'customers' ? 'bg-[#1D493E] text-white shadow-sm' : 'text-[#2B2B2B] hover:bg-[#1D493E]/[0.08] hover:text-[#1D493E]'
               }`}
             >
               <div className="flex items-center gap-3">
                 <Users className="w-4 h-4" />
                 <span>Customers & Users</span>
               </div>
-              <span className="text-[10px] bg-emerald-950 text-emerald-300 px-2 py-0.5 rounded-full font-mono">
-                {customers.length}
+              <span className="text-[10px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-mono">
+                {liveUsers.length}
+              </span>
+            </button>
+
+            <button
+              onClick={() => setActiveTab('newsletters')}
+              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl font-bold transition cursor-pointer ${
+                activeTab === 'newsletters' ? 'bg-[#1D493E] text-white shadow-sm' : 'text-[#2B2B2B] hover:bg-[#1D493E]/[0.08] hover:text-[#1D493E]'
+              }`}
+            >
+              <div className="flex items-center gap-3">
+                <Mail className="w-4 h-4" />
+                <span>Newsletter Subs</span>
+              </div>
+              <span className="text-[10px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-mono">
+                {liveSubscribers.length}
+              </span>
+            </button>
+
+            <button
+              onClick={() => setActiveTab('submissions')}
+              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl font-bold transition cursor-pointer ${
+                activeTab === 'submissions' ? 'bg-[#1D493E] text-white shadow-sm' : 'text-[#2B2B2B] hover:bg-[#1D493E]/[0.08] hover:text-[#1D493E]'
+              }`}
+            >
+              <div className="flex items-center gap-3">
+                <FileText className="w-4 h-4" />
+                <span>Form Submissions</span>
+              </div>
+              <span className="text-[10px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-mono">
+                {liveSubmissions.length}
               </span>
             </button>
 
             <button
               onClick={() => setActiveTab('payments')}
               className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl font-bold transition cursor-pointer ${
-                activeTab === 'payments' ? 'bg-[#FF5A36] text-white shadow-md' : 'text-slate-300 hover:bg-emerald-900/30'
+                activeTab === 'payments' ? 'bg-[#1D493E] text-white shadow-sm' : 'text-[#2B2B2B] hover:bg-[#1D493E]/[0.08] hover:text-[#1D493E]'
               }`}
             >
               <div className="flex items-center gap-3">
@@ -768,26 +1087,26 @@ export default function AdminPortal() {
               </div>
             </button>
 
-            <div className="pt-3 text-[10px] font-black uppercase tracking-wider text-emerald-400/60 px-3 py-1">
+            <div className="pt-3 text-[10px] font-bold uppercase tracking-wider text-[#1D493E] px-3 py-1 font-sans">
               Site Configuration
             </div>
 
             <button
               onClick={() => setActiveTab('global_settings')}
               className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl font-bold transition cursor-pointer ${
-                activeTab === 'global_settings' ? 'bg-[#FF5A36] text-white shadow-md' : 'text-slate-300 hover:bg-emerald-900/30'
+                activeTab === 'global_settings' ? 'bg-[#1D493E] text-white shadow-sm' : 'text-[#2B2B2B] hover:bg-[#1D493E]/[0.08] hover:text-[#1D493E]'
               }`}
             >
               <div className="flex items-center gap-3">
-                <Settings className="w-4 h-4 text-emerald-400" />
+                <Settings className="w-4 h-4 text-[#1D493E]" />
                 <span>Global Site Settings</span>
               </div>
             </button>
           </nav>
         </aside>
 
-        {/* cPanel Main Content Area */}
-        <main className="flex-1 p-6 lg:p-8 bg-[#0A1412] overflow-y-auto">
+        {/* Admin Main Content Area */}
+        <main className="flex-1 p-6 lg:p-8 bg-[#FAF9F6] text-[#2B2B2B] overflow-y-auto">
           
           {/* TAB 1: OVERVIEW DASHBOARD */}
           {activeTab === 'overview' && (
@@ -795,127 +1114,130 @@ export default function AdminPortal() {
               
               {/* Quick Metrics Bar */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div className="bg-[#12241F] border border-emerald-900/40 p-6 rounded-3xl space-y-2">
-                  <div className="flex items-center justify-between text-slate-400 text-xs font-bold uppercase">
+                <div className="bg-white border border-[#E5E0D5] p-6 rounded-2xl shadow-xs space-y-2">
+                  <div className="flex items-center justify-between text-[#8D8D8D] text-xs font-bold uppercase tracking-wider font-sans">
                     <span>Total Revenue</span>
-                    <DollarSign className="w-4 h-4 text-emerald-400" />
+                    <DollarSign className="w-4 h-4 text-[#1D493E]" />
                   </div>
-                  <div className="text-2xl font-black text-white">₹{metrics.totalRevenue.toLocaleString()}</div>
-                  <p className="text-[11px] text-emerald-400 font-semibold">Shop & Travel Combined</p>
+                  <div className="text-2xl font-bold text-[#1D493E]">₹{metrics.totalRevenue.toLocaleString()}</div>
+                  <p className="text-[11px] text-[#1D493E] font-semibold">Shop & Travel Combined</p>
                 </div>
 
-                <div className="bg-[#12241F] border border-emerald-900/40 p-6 rounded-3xl space-y-2">
-                  <div className="flex items-center justify-between text-slate-400 text-xs font-bold uppercase">
+                <div className="bg-white border border-[#E5E0D5] p-6 rounded-2xl shadow-xs space-y-2">
+                  <div className="flex items-center justify-between text-[#8D8D8D] text-xs font-bold uppercase tracking-wider font-sans">
                     <span>Travel Packages</span>
-                    <MapIcon className="w-4 h-4 text-amber-400" />
+                    <MapIcon className="w-4 h-4 text-amber-600" />
                   </div>
-                  <div className="text-2xl font-black text-white">{metrics.packagesCount} Active</div>
-                  <p className="text-[11px] text-amber-400 font-semibold">{metrics.bookingsCount} Total Bookings</p>
+                  <div className="text-2xl font-bold text-[#2B2B2B]">{metrics.packagesCount} Active</div>
+                  <p className="text-[11px] text-amber-700 font-semibold">{metrics.bookingsCount} Total Bookings</p>
                 </div>
 
-                <div className="bg-[#12241F] border border-emerald-900/40 p-6 rounded-3xl space-y-2">
-                  <div className="flex items-center justify-between text-slate-400 text-xs font-bold uppercase">
+                <div className="bg-white border border-[#E5E0D5] p-6 rounded-2xl shadow-xs space-y-2">
+                  <div className="flex items-center justify-between text-[#8D8D8D] text-xs font-bold uppercase tracking-wider font-sans">
                     <span>Shop Products</span>
-                    <ShoppingBag className="w-4 h-4 text-sky-400" />
+                    <ShoppingBag className="w-4 h-4 text-sky-600" />
                   </div>
-                  <div className="text-2xl font-black text-white">{metrics.productsCount} Items</div>
-                  <p className="text-[11px] text-sky-400 font-semibold">{metrics.ordersCount} Total Orders</p>
+                  <div className="text-2xl font-bold text-[#2B2B2B]">{metrics.productsCount} Items</div>
+                  <p className="text-[11px] text-sky-700 font-semibold">{metrics.ordersCount} Total Orders</p>
                 </div>
 
-                <div className="bg-[#12241F] border border-emerald-900/40 p-6 rounded-3xl space-y-2">
-                  <div className="flex items-center justify-between text-slate-400 text-xs font-bold uppercase">
+                <div className="bg-white border border-[#E5E0D5] p-6 rounded-2xl shadow-xs space-y-2">
+                  <div className="flex items-center justify-between text-[#8D8D8D] text-xs font-bold uppercase tracking-wider font-sans">
                     <span>Managed Pages</span>
-                    <Globe className="w-4 h-4 text-emerald-400" />
+                    <Globe className="w-4 h-4 text-[#1D493E]" />
                   </div>
-                  <div className="text-2xl font-black text-white">{6 + metrics.customPagesCount} Pages</div>
-                  <p className="text-[11px] text-emerald-400 font-semibold">{metrics.customPagesCount} Custom Created</p>
+                  <div className="text-2xl font-bold text-[#1D493E]">{6 + metrics.customPagesCount} Pages</div>
+                  <p className="text-[11px] text-[#1D493E] font-semibold">{metrics.customPagesCount} Custom Created</p>
                 </div>
               </div>
 
-              {/* cPanel Quick Access Tools Grid */}
+              {/* Admin Quick Access Tools Grid */}
               <div className="space-y-4">
-                <h2 className="text-base font-black text-white flex items-center gap-2">
-                  <Sparkles className="w-5 h-5 text-[#FF5A36]" />
-                  <span>cPanel Control Center Quick Tools</span>
+                <h2 
+                  style={{ fontFamily: '"Faktum", "Fraunces", sans-serif' }}
+                  className="text-base font-bold text-[#1D493E] flex items-center gap-2"
+                >
+                  <Sparkles className="w-5 h-5 text-[#FF623E]" />
+                  <span>Go Banjara Admin Control Tools</span>
                 </h2>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                   
                   <button
                     onClick={() => setActiveTab('cms_sections')}
-                    className="p-6 bg-[#11231E] border border-emerald-900/40 hover:border-emerald-500 rounded-3xl text-left transition space-y-3 cursor-pointer group"
+                    className="p-6 bg-white border border-[#E5E0D5] hover:border-[#1D493E] rounded-2xl text-left transition space-y-3 cursor-pointer group shadow-xs"
                   >
-                    <div className="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-black group-hover:scale-110 transition">
+                    <div className="w-12 h-12 rounded-2xl bg-[#1D493E]/10 text-[#1D493E] flex items-center justify-center font-bold group-hover:scale-105 transition">
                       <Globe className="w-6 h-6" />
                     </div>
                     <div>
-                      <h3 className="text-sm font-bold text-white group-hover:text-[#FF5A36] transition">Website Page & Section CMS</h3>
-                      <p className="text-xs text-slate-400 mt-1">Change any copy, heading, subtitle, button text, or banner across Home, About, Shop, Travel & Contact pages.</p>
+                      <h3 className="text-sm font-bold text-[#2B2B2B] group-hover:text-[#1D493E] transition">Website Page & Section CMS</h3>
+                      <p className="text-xs text-[#8D8D8D] mt-1 font-medium">Change any copy, heading, subtitle, button text, or banner across Home, About, Shop, Travel & Contact pages.</p>
                     </div>
                   </button>
 
                   <button
                     onClick={() => setActiveTab('custom_pages')}
-                    className="p-6 bg-[#11231E] border border-emerald-900/40 hover:border-amber-500 rounded-3xl text-left transition space-y-3 cursor-pointer group"
+                    className="p-6 bg-white border border-[#E5E0D5] hover:border-amber-600 rounded-2xl text-left transition space-y-3 cursor-pointer group shadow-xs"
                   >
-                    <div className="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-black group-hover:scale-110 transition">
+                    <div className="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-700 flex items-center justify-center font-bold group-hover:scale-105 transition">
                       <FileText className="w-6 h-6" />
                     </div>
                     <div>
-                      <h3 className="text-sm font-bold text-white group-hover:text-amber-400 transition">Add & Manage Dynamic Pages</h3>
-                      <p className="text-xs text-slate-400 mt-1">Create dynamic custom pages like Privacy Policy, FAQ, Terms, or Special Offer landing pages with custom slugs.</p>
+                      <h3 className="text-sm font-bold text-[#2B2B2B] group-hover:text-amber-700 transition">Add & Manage Dynamic Pages</h3>
+                      <p className="text-xs text-[#8D8D8D] mt-1 font-medium">Create dynamic custom pages like Privacy Policy, FAQ, Terms, or Special Offer landing pages with custom slugs.</p>
                     </div>
                   </button>
 
                   <button
                     onClick={() => setActiveTab('package_products')}
-                    className="p-6 bg-[#11231E] border border-emerald-900/40 hover:border-sky-500 rounded-3xl text-left transition space-y-3 cursor-pointer group"
+                    className="p-6 bg-white border border-[#E5E0D5] hover:border-sky-600 rounded-2xl text-left transition space-y-3 cursor-pointer group shadow-xs"
                   >
-                    <div className="w-12 h-12 rounded-2xl bg-sky-500/20 text-sky-400 flex items-center justify-center font-black group-hover:scale-110 transition">
+                    <div className="w-12 h-12 rounded-2xl bg-sky-500/10 text-sky-700 flex items-center justify-center font-bold group-hover:scale-105 transition">
                       <LinkIcon className="w-6 h-6" />
                     </div>
                     <div>
-                      <h3 className="text-sm font-bold text-white group-hover:text-sky-400 transition">Package-Product Linker</h3>
-                      <p className="text-xs text-slate-400 mt-1">Attach merchandise products and gift perks directly to travel packages so travelers get recommended gear.</p>
+                      <h3 className="text-sm font-bold text-[#2B2B2B] group-hover:text-sky-700 transition">Package-Product Linker</h3>
+                      <p className="text-xs text-[#8D8D8D] mt-1 font-medium">Attach merchandise products and gift perks directly to travel packages so travelers get recommended gear.</p>
                     </div>
                   </button>
 
                   <button
                     onClick={() => setActiveTab('packages')}
-                    className="p-6 bg-[#11231E] border border-emerald-900/40 hover:border-emerald-500 rounded-3xl text-left transition space-y-3 cursor-pointer group"
+                    className="p-6 bg-white border border-[#E5E0D5] hover:border-[#1D493E] rounded-2xl text-left transition space-y-3 cursor-pointer group shadow-xs"
                   >
-                    <div className="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-black group-hover:scale-110 transition">
+                    <div className="w-12 h-12 rounded-2xl bg-[#1D493E]/10 text-[#1D493E] flex items-center justify-center font-bold group-hover:scale-105 transition">
                       <MapIcon className="w-6 h-6" />
                     </div>
                     <div>
-                      <h3 className="text-sm font-bold text-white group-hover:text-emerald-400 transition">Travel Packages Catalog</h3>
-                      <p className="text-xs text-slate-400 mt-1">Add, edit, or remove holiday packages, itineraries, hotel tiers, departure dates, and pricing.</p>
+                      <h3 className="text-sm font-bold text-[#2B2B2B] group-hover:text-[#1D493E] transition">Travel Packages Catalog</h3>
+                      <p className="text-xs text-[#8D8D8D] mt-1 font-medium">Add, edit, or remove holiday packages, itineraries, hotel tiers, departure dates, and pricing.</p>
                     </div>
                   </button>
 
                   <button
                     onClick={() => setActiveTab('products')}
-                    className="p-6 bg-[#11231E] border border-emerald-900/40 hover:border-amber-500 rounded-3xl text-left transition space-y-3 cursor-pointer group"
+                    className="p-6 bg-white border border-[#E5E0D5] hover:border-amber-600 rounded-2xl text-left transition space-y-3 cursor-pointer group shadow-xs"
                   >
-                    <div className="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-black group-hover:scale-110 transition">
+                    <div className="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-700 flex items-center justify-center font-bold group-hover:scale-105 transition">
                       <ShoppingBag className="w-6 h-6" />
                     </div>
                     <div>
-                      <h3 className="text-sm font-bold text-white group-hover:text-amber-400 transition">Shop E-Commerce Store</h3>
-                      <p className="text-xs text-slate-400 mt-1">Manage inventory, product descriptions, pricing, image URLs, categories, and stock status.</p>
+                      <h3 className="text-sm font-bold text-[#2B2B2B] group-hover:text-amber-700 transition">Shop E-Commerce Store</h3>
+                      <p className="text-xs text-[#8D8D8D] mt-1 font-medium">Manage inventory, product descriptions, pricing, image URLs, categories, and stock status.</p>
                     </div>
                   </button>
 
                   <button
                     onClick={() => setActiveTab('global_settings')}
-                    className="p-6 bg-[#11231E] border border-emerald-900/40 hover:border-emerald-500 rounded-3xl text-left transition space-y-3 cursor-pointer group"
+                    className="p-6 bg-white border border-[#E5E0D5] hover:border-[#1D493E] rounded-2xl text-left transition space-y-3 cursor-pointer group shadow-xs"
                   >
-                    <div className="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-black group-hover:scale-110 transition">
+                    <div className="w-12 h-12 rounded-2xl bg-[#1D493E]/10 text-[#1D493E] flex items-center justify-center font-bold group-hover:scale-105 transition">
                       <Settings className="w-6 h-6" />
                     </div>
                     <div>
-                      <h3 className="text-sm font-bold text-white group-hover:text-emerald-400 transition">Global Site Branding & Settings</h3>
-                      <p className="text-xs text-slate-400 mt-1">Configure site title, support phone/email, announcement banner, social media links, and footer info.</p>
+                      <h3 className="text-sm font-bold text-[#2B2B2B] group-hover:text-[#1D493E] transition">Global Site Branding & Settings</h3>
+                      <p className="text-xs text-[#8D8D8D] mt-1 font-medium">Configure site title, support phone/email, announcement banner, social media links, and footer info.</p>
                     </div>
                   </button>
 
@@ -930,23 +1252,23 @@ export default function AdminPortal() {
             <div className="space-y-6">
               
               {/* Page Filter Tabs */}
-              <div className="flex flex-wrap items-center gap-2 border-b border-emerald-900/40 pb-4">
+              <div className="flex flex-wrap items-center gap-2 border-b border-[#E5E0D5] pb-4">
                 {[
-                  { key: 'home', label: '🏠 Home Page' },
-                  { key: 'about', label: '📖 About Us' },
-                  { key: 'shop', label: '🛍️ Shop Store' },
-                  { key: 'travel', label: '✈️ Travel Packages' },
-                  { key: 'blog', label: '📰 Blog Journal' },
-                  { key: 'contact', label: '📞 Contact Us' },
-                  { key: 'global', label: '⚙️ Global & Footer' },
+                  { key: 'home', label: 'Home' },
+                  { key: 'about', label: 'About' },
+                  { key: 'shop', label: 'Shop' },
+                  { key: 'travel', label: 'Travel' },
+                  { key: 'blog', label: 'Blog' },
+                  { key: 'contact', label: 'Contact' },
+                  { key: 'global', label: 'Global & Footer' },
                 ].map(tab => (
                   <button
                     key={tab.key}
                     onClick={() => setCmsPageFilter(tab.key as any)}
-                    className={`px-4 py-2 rounded-xl text-xs font-bold transition cursor-pointer ${
+                    className={`px-4 py-2 rounded-lg text-xs font-semibold transition cursor-pointer ${
                       cmsPageFilter === tab.key
-                        ? 'bg-[#FF5A36] text-white shadow-md'
-                        : 'bg-[#11231E] text-slate-300 hover:bg-emerald-900/40'
+                        ? 'bg-[#1D493E] text-white'
+                        : 'bg-[#F0EDE8] text-[#6B7280] hover:text-[#1D493E]'
                     }`}
                   >
                     {tab.label}
@@ -954,184 +1276,313 @@ export default function AdminPortal() {
                 ))}
               </div>
 
-              <form onSubmit={handleSaveCMS} className="bg-[#11231E] border border-emerald-900/40 rounded-3xl p-6 sm:p-8 space-y-8">
+              <form onSubmit={handleSaveCMS} className="bg-white border border-[#E5E0D5] rounded-2xl p-6 sm:p-8 space-y-8 shadow-xs">
                 
                 {/* 1. HOME PAGE CMS */}
                 {cmsPageFilter === 'home' && (
                   <div className="space-y-8">
                     <div>
-                      <h3 className="text-base font-black text-white flex items-center gap-2">
-                        <Globe className="w-5 h-5 text-emerald-400" />
+                      <h3 className="text-base font-black text-[#1D493E] flex items-center gap-2">
+                        <Globe className="w-5 h-5 text-[#1D493E]" />
                         <span>Home Page Content & Sections Editor</span>
                       </h3>
-                      <p className="text-xs text-slate-400 mt-1">Edit copy for all sections on the main landing page.</p>
+                      <p className="text-xs text-[#6B7280] mt-1">Edit copy for all sections on the main landing page.</p>
                     </div>
 
                     {/* Section 1: Hero */}
-                    <div className="space-y-4 border-t border-emerald-900/30 pt-6">
+                    <div className="space-y-4 border-t border-[#E5E0D5] pt-6">
                       <h4 className="text-xs font-black text-[#FF5A36] uppercase tracking-wider">1. Hero Section Copy</h4>
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-slate-400 uppercase">Title Line 1</label>
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Title Line 1</label>
                           <input
                             type="text"
                             value={cms.homeHeroTitleLine1}
                             onChange={(e) => setCms(prev => ({ ...prev, homeHeroTitleLine1: e.target.value }))}
-                            className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                           />
                         </div>
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-slate-400 uppercase">Title Line 2</label>
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Title Line 2</label>
                           <input
                             type="text"
                             value={cms.homeHeroTitleLine2}
                             onChange={(e) => setCms(prev => ({ ...prev, homeHeroTitleLine2: e.target.value }))}
-                            className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                           />
                         </div>
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-slate-400 uppercase">Title Line 3</label>
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Title Line 3</label>
                           <input
                             type="text"
                             value={cms.homeHeroTitleLine3}
                             onChange={(e) => setCms(prev => ({ ...prev, homeHeroTitleLine3: e.target.value }))}
-                            className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                           />
                         </div>
                       </div>
 
                       <div className="space-y-1">
-                        <label className="text-[10px] font-bold text-slate-400 uppercase">Hero Subtitle</label>
+                        <label className="text-[10px] font-bold text-[#6B7280] uppercase">Hero Subtitle</label>
                         <textarea
                           rows={2}
                           value={cms.homeHeroSubtitle}
                           onChange={(e) => setCms(prev => ({ ...prev, homeHeroSubtitle: e.target.value }))}
-                          className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white resize-none"
+                          className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] resize-none"
                         />
                       </div>
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-slate-400 uppercase">Shop Button Text</label>
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Shop Button Text</label>
                           <input
                             type="text"
                             value={cms.homeHeroShopBtn}
                             onChange={(e) => setCms(prev => ({ ...prev, homeHeroShopBtn: e.target.value }))}
-                            className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                           />
                         </div>
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-slate-400 uppercase">Travel Button Text</label>
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Travel Button Text</label>
                           <input
                             type="text"
                             value={cms.homeHeroTravelBtn}
                             onChange={(e) => setCms(prev => ({ ...prev, homeHeroTravelBtn: e.target.value }))}
-                            className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                           />
                         </div>
                       </div>
                     </div>
 
                     {/* Section 2: Mascot */}
-                    <div className="space-y-4 border-t border-emerald-900/30 pt-6">
+                    <div className="space-y-4 border-t border-[#E5E0D5] pt-6">
                       <h4 className="text-xs font-black text-[#FF5A36] uppercase tracking-wider">2. Bonjo Mascot Speak Bubble</h4>
                       <div className="space-y-1">
-                        <label className="text-[10px] font-bold text-slate-400 uppercase">Mascot Speak Bubble Copy</label>
+                        <label className="text-[10px] font-bold text-[#6B7280] uppercase">Mascot Speak Bubble Copy</label>
                         <textarea
                           rows={2}
                           value={cms.homeMascotText}
                           onChange={(e) => setCms(prev => ({ ...prev, homeMascotText: e.target.value }))}
-                          className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white resize-none"
+                          className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] resize-none"
                         />
                       </div>
                     </div>
 
                     {/* Section 3: Deals & Selling */}
-                    <div className="space-y-4 border-t border-emerald-900/30 pt-6">
+                    <div className="space-y-4 border-t border-[#E5E0D5] pt-6">
                       <h4 className="text-xs font-black text-[#FF5A36] uppercase tracking-wider">3. Shop Deals & Best Sellers Headings</h4>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-slate-400 uppercase">Deals Section Title</label>
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Deals Section Title</label>
                           <input
                             type="text"
                             value={cms.homeDealsTitle}
                             onChange={(e) => setCms(prev => ({ ...prev, homeDealsTitle: e.target.value }))}
-                            className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                           />
                         </div>
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-slate-400 uppercase">Selling Section Title</label>
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Selling Section Title</label>
                           <input
                             type="text"
                             value={cms.homeSellingTitle}
                             onChange={(e) => setCms(prev => ({ ...prev, homeSellingTitle: e.target.value }))}
-                            className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                           />
                         </div>
                       </div>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-slate-400 uppercase">Deals Subtitle</label>
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Deals Subtitle</label>
                           <input
                             type="text"
                             value={cms.homeDealsSub}
                             onChange={(e) => setCms(prev => ({ ...prev, homeDealsSub: e.target.value }))}
-                            className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                           />
                         </div>
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-slate-400 uppercase">Selling Subtitle</label>
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Selling Subtitle</label>
                           <input
                             type="text"
                             value={cms.homeSellingSub}
                             onChange={(e) => setCms(prev => ({ ...prev, homeSellingSub: e.target.value }))}
-                            className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                           />
                         </div>
                       </div>
                     </div>
 
                     {/* Section 4: Call to Action Banner */}
-                    <div className="space-y-4 border-t border-emerald-900/30 pt-6">
+                    <div className="space-y-4 border-t border-[#E5E0D5] pt-6">
                       <h4 className="text-xs font-black text-[#FF5A36] uppercase tracking-wider">4. Home CTA Banner</h4>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-slate-400 uppercase">CTA Banner Title</label>
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">CTA Banner Title</label>
                           <input
                             type="text"
                             value={cms.homeCtaTitle}
                             onChange={(e) => setCms(prev => ({ ...prev, homeCtaTitle: e.target.value }))}
-                            className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                           />
                         </div>
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-slate-400 uppercase">CTA Subtitle</label>
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">CTA Subtitle</label>
                           <input
                             type="text"
                             value={cms.homeCtaSub}
                             onChange={(e) => setCms(prev => ({ ...prev, homeCtaSub: e.target.value }))}
-                            className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                           />
                         </div>
                       </div>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-slate-400 uppercase">CTA Button Text</label>
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">CTA Button Text</label>
                           <input
                             type="text"
                             value={cms.homeCtaBtnText}
                             onChange={(e) => setCms(prev => ({ ...prev, homeCtaBtnText: e.target.value }))}
-                            className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                           />
                         </div>
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-slate-400 uppercase">CTA Button Link</label>
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">CTA Button Link</label>
                           <input
                             type="text"
                             value={cms.homeCtaBtnLink}
                             onChange={(e) => setCms(prev => ({ ...prev, homeCtaBtnLink: e.target.value }))}
-                            className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                           />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Section 5: Dual CTA Banners (Shop Gear + Book Trip) */}
+                    <div className="space-y-4 border-t border-[#E5E0D5] pt-6">
+                      <h4 className="text-xs font-black text-[#FF5A36] uppercase tracking-wider">5. Dual CTA Banner Cards (Green + Orange)</h4>
+                      <p className="text-[10px] text-[#8D8D8D]">The two side-by-side cards: "Shop Travel Gear for Nomads" (green) and "Book a Trip" (orange)</p>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="space-y-3 p-4 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl">
+                          <span className="text-[10px] font-bold text-[#1D493E] uppercase">🟢 Green Card (Shop Gear)</span>
+                          <div className="space-y-1">
+                            <label className="text-[10px] font-bold text-[#6B7280] uppercase">Card Title</label>
+                            <input type="text" value={cms.homeCtaBanner1Title} onChange={(e) => setCms(prev => ({ ...prev, homeCtaBanner1Title: e.target.value }))} className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]" />
+                          </div>
+                          <div className="space-y-1">
+                            <label className="text-[10px] font-bold text-[#6B7280] uppercase">Description</label>
+                            <textarea rows={2} value={cms.homeCtaBanner1Desc} onChange={(e) => setCms(prev => ({ ...prev, homeCtaBanner1Desc: e.target.value }))} className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] resize-none" />
+                          </div>
+                          <div className="grid grid-cols-2 gap-2">
+                            <div className="space-y-1">
+                              <label className="text-[10px] font-bold text-[#6B7280] uppercase">Button Text</label>
+                              <input type="text" value={cms.homeCtaBanner1BtnText} onChange={(e) => setCms(prev => ({ ...prev, homeCtaBanner1BtnText: e.target.value }))} className="w-full p-2.5 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]" />
+                            </div>
+                            <div className="space-y-1">
+                              <label className="text-[10px] font-bold text-[#6B7280] uppercase">Button Link</label>
+                              <input type="text" value={cms.homeCtaBanner1BtnLink} onChange={(e) => setCms(prev => ({ ...prev, homeCtaBanner1BtnLink: e.target.value }))} className="w-full p-2.5 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]" />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="space-y-3 p-4 bg-[#FFF7F5] border border-[#FFD6CC] rounded-xl">
+                          <span className="text-[10px] font-bold text-orange-400 uppercase">🟠 Orange Card (Book Trip)</span>
+                          <div className="space-y-1">
+                            <label className="text-[10px] font-bold text-[#6B7280] uppercase">Card Title</label>
+                            <input type="text" value={cms.homeCtaBanner2Title} onChange={(e) => setCms(prev => ({ ...prev, homeCtaBanner2Title: e.target.value }))} className="w-full p-3 bg-[#FFF7F5] border border-[#FFD6CC] rounded-xl text-xs text-[#2B2B2B]" />
+                          </div>
+                          <div className="space-y-1">
+                            <label className="text-[10px] font-bold text-[#6B7280] uppercase">Description</label>
+                            <textarea rows={2} value={cms.homeCtaBanner2Desc} onChange={(e) => setCms(prev => ({ ...prev, homeCtaBanner2Desc: e.target.value }))} className="w-full p-3 bg-[#FFF7F5] border border-[#FFD6CC] rounded-xl text-xs text-[#2B2B2B] resize-none" />
+                          </div>
+                          <div className="grid grid-cols-2 gap-2">
+                            <div className="space-y-1">
+                              <label className="text-[10px] font-bold text-[#6B7280] uppercase">Button Text</label>
+                              <input type="text" value={cms.homeCtaBanner2BtnText} onChange={(e) => setCms(prev => ({ ...prev, homeCtaBanner2BtnText: e.target.value }))} className="w-full p-2.5 bg-[#FFF7F5] border border-[#FFD6CC] rounded-xl text-xs text-[#2B2B2B]" />
+                            </div>
+                            <div className="space-y-1">
+                              <label className="text-[10px] font-bold text-[#6B7280] uppercase">Button Link</label>
+                              <input type="text" value={cms.homeCtaBanner2BtnLink} onChange={(e) => setCms(prev => ({ ...prev, homeCtaBanner2BtnLink: e.target.value }))} className="w-full p-2.5 bg-[#FFF7F5] border border-[#FFD6CC] rounded-xl text-xs text-[#2B2B2B]" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Section 6: Destinations */}
+                    <div className="space-y-4 border-t border-[#E5E0D5] pt-6">
+                      <h4 className="text-xs font-black text-[#FF5A36] uppercase tracking-wider">6. Destinations Section</h4>
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div className="space-y-1">
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Section Tag</label>
+                          <input type="text" value={cms.homeDestinationsTag} onChange={(e) => setCms(prev => ({ ...prev, homeDestinationsTag: e.target.value }))} className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]" />
+                        </div>
+                        <div className="space-y-1">
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Title</label>
+                          <input type="text" value={cms.homeDestinationsTitle} onChange={(e) => setCms(prev => ({ ...prev, homeDestinationsTitle: e.target.value }))} className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]" />
+                        </div>
+                        <div className="space-y-1">
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Subtitle</label>
+                          <input type="text" value={cms.homeDestinationsSub} onChange={(e) => setCms(prev => ({ ...prev, homeDestinationsSub: e.target.value }))} className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]" />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Section 7: Collections / Categories */}
+                    <div className="space-y-4 border-t border-[#E5E0D5] pt-6">
+                      <h4 className="text-xs font-black text-[#FF5A36] uppercase tracking-wider">7. Collections / Top Categories</h4>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="space-y-1">
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Section Title</label>
+                          <input type="text" value={cms.homeCollectionsTitle} onChange={(e) => setCms(prev => ({ ...prev, homeCollectionsTitle: e.target.value }))} className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]" />
+                        </div>
+                        <div className="space-y-1">
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Section Subtitle</label>
+                          <input type="text" value={cms.homeCollectionsSub} onChange={(e) => setCms(prev => ({ ...prev, homeCollectionsSub: e.target.value }))} className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]" />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Section 8: Reviews */}
+                    <div className="space-y-4 border-t border-[#E5E0D5] pt-6">
+                      <h4 className="text-xs font-black text-[#FF5A36] uppercase tracking-wider">8. Reviews / Testimonials</h4>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="space-y-1">
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Section Title</label>
+                          <input type="text" value={cms.homeReviewsTitle} onChange={(e) => setCms(prev => ({ ...prev, homeReviewsTitle: e.target.value }))} className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]" />
+                        </div>
+                        <div className="space-y-1">
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Section Subtitle</label>
+                          <input type="text" value={cms.homeReviewsSub} onChange={(e) => setCms(prev => ({ ...prev, homeReviewsSub: e.target.value }))} className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]" />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Section 9: Blog / Travel Diaries */}
+                    <div className="space-y-4 border-t border-[#E5E0D5] pt-6">
+                      <h4 className="text-xs font-black text-[#FF5A36] uppercase tracking-wider">9. Blog / Travel Diaries</h4>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="space-y-1">
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Section Title</label>
+                          <input type="text" value={cms.homeBlogTitle} onChange={(e) => setCms(prev => ({ ...prev, homeBlogTitle: e.target.value }))} className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]" />
+                        </div>
+                        <div className="space-y-1">
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Section Subtitle</label>
+                          <input type="text" value={cms.homeBlogSub} onChange={(e) => setCms(prev => ({ ...prev, homeBlogSub: e.target.value }))} className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]" />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Section 10: FAQ */}
+                    <div className="space-y-4 border-t border-[#E5E0D5] pt-6">
+                      <h4 className="text-xs font-black text-[#FF5A36] uppercase tracking-wider">10. FAQ Section</h4>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="space-y-1">
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">FAQ Title</label>
+                          <input type="text" value={cms.homeFaqTitle} onChange={(e) => setCms(prev => ({ ...prev, homeFaqTitle: e.target.value }))} className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]" />
+                        </div>
+                        <div className="space-y-1">
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Help Desk Label</label>
+                          <input type="text" value={cms.homeFaqHelpDesk} onChange={(e) => setCms(prev => ({ ...prev, homeFaqHelpDesk: e.target.value }))} className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]" />
                         </div>
                       </div>
                     </div>
@@ -1143,72 +1594,72 @@ export default function AdminPortal() {
                 {cmsPageFilter === 'about' && (
                   <div className="space-y-8">
                     <div>
-                      <h3 className="text-base font-black text-white flex items-center gap-2">
-                        <BookOpen className="w-5 h-5 text-emerald-400" />
+                      <h3 className="text-base font-black text-[#1D493E] flex items-center gap-2">
+                        <BookOpen className="w-5 h-5 text-[#1D493E]" />
                         <span>About Us Page CMS</span>
                       </h3>
-                      <p className="text-xs text-slate-400 mt-1">Manage brand story, mission, and team headings.</p>
+                      <p className="text-xs text-[#6B7280] mt-1">Manage brand story, mission, and team headings.</p>
                     </div>
 
                     <div className="space-y-4">
                       <div className="space-y-1">
-                        <label className="text-[10px] font-bold text-slate-400 uppercase">Hero Title</label>
+                        <label className="text-[10px] font-bold text-[#6B7280] uppercase">Hero Title</label>
                         <input
                           type="text"
                           value={cms.aboutHeroTitle}
                           onChange={(e) => setCms(prev => ({ ...prev, aboutHeroTitle: e.target.value }))}
-                          className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                          className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                         />
                       </div>
 
                       <div className="space-y-1">
-                        <label className="text-[10px] font-bold text-slate-400 uppercase">Hero Subtitle</label>
+                        <label className="text-[10px] font-bold text-[#6B7280] uppercase">Hero Subtitle</label>
                         <input
                           type="text"
                           value={cms.aboutHeroSubtitle}
                           onChange={(e) => setCms(prev => ({ ...prev, aboutHeroSubtitle: e.target.value }))}
-                          className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                          className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                         />
                       </div>
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-slate-400 uppercase">Mission Title</label>
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Mission Title</label>
                           <input
                             type="text"
                             value={cms.aboutMissionTitle}
                             onChange={(e) => setCms(prev => ({ ...prev, aboutMissionTitle: e.target.value }))}
-                            className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                           />
                         </div>
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-slate-400 uppercase">Story Title</label>
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Story Title</label>
                           <input
                             type="text"
                             value={cms.aboutStoryTitle}
                             onChange={(e) => setCms(prev => ({ ...prev, aboutStoryTitle: e.target.value }))}
-                            className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                           />
                         </div>
                       </div>
 
                       <div className="space-y-1">
-                        <label className="text-[10px] font-bold text-slate-400 uppercase">Mission Statement Text</label>
+                        <label className="text-[10px] font-bold text-[#6B7280] uppercase">Mission Statement Text</label>
                         <textarea
                           rows={3}
                           value={cms.aboutMissionText}
                           onChange={(e) => setCms(prev => ({ ...prev, aboutMissionText: e.target.value }))}
-                          className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                          className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                         />
                       </div>
 
                       <div className="space-y-1">
-                        <label className="text-[10px] font-bold text-slate-400 uppercase">Brand Story Text</label>
+                        <label className="text-[10px] font-bold text-[#6B7280] uppercase">Brand Story Text</label>
                         <textarea
                           rows={3}
                           value={cms.aboutStoryText}
                           onChange={(e) => setCms(prev => ({ ...prev, aboutStoryText: e.target.value }))}
-                          className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                          className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                         />
                       </div>
                     </div>
@@ -1219,8 +1670,8 @@ export default function AdminPortal() {
                 {cmsPageFilter === 'shop' && (
                   <div className="space-y-8">
                     <div>
-                      <h3 className="text-base font-black text-white flex items-center gap-2">
-                        <ShoppingBag className="w-5 h-5 text-emerald-400" />
+                      <h3 className="text-base font-black text-[#1D493E] flex items-center gap-2">
+                        <ShoppingBag className="w-5 h-5 text-[#1D493E]" />
                         <span>Shop Page CMS</span>
                       </h3>
                     </div>
@@ -1228,42 +1679,42 @@ export default function AdminPortal() {
                     <div className="space-y-4">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-slate-400 uppercase">Shop Hero Title</label>
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Shop Hero Title</label>
                           <input
                             type="text"
                             value={cms.shopHeroTitle}
                             onChange={(e) => setCms(prev => ({ ...prev, shopHeroTitle: e.target.value }))}
-                            className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                           />
                         </div>
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-slate-400 uppercase">Shop Hero Subtitle</label>
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Shop Hero Subtitle</label>
                           <input
                             type="text"
                             value={cms.shopHeroSubtitle}
                             onChange={(e) => setCms(prev => ({ ...prev, shopHeroSubtitle: e.target.value }))}
-                            className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                           />
                         </div>
                       </div>
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-slate-400 uppercase">Promo Banner Text</label>
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Promo Banner Text</label>
                           <input
                             type="text"
                             value={cms.shopPromoBannerText}
                             onChange={(e) => setCms(prev => ({ ...prev, shopPromoBannerText: e.target.value }))}
-                            className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                           />
                         </div>
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-slate-400 uppercase">Promo Button Text</label>
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Promo Button Text</label>
                           <input
                             type="text"
                             value={cms.shopPromoBannerButton}
                             onChange={(e) => setCms(prev => ({ ...prev, shopPromoBannerButton: e.target.value }))}
-                            className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                           />
                         </div>
                       </div>
@@ -1275,8 +1726,8 @@ export default function AdminPortal() {
                 {cmsPageFilter === 'travel' && (
                   <div className="space-y-8">
                     <div>
-                      <h3 className="text-base font-black text-white flex items-center gap-2">
-                        <MapIcon className="w-5 h-5 text-emerald-400" />
+                      <h3 className="text-base font-black text-[#1D493E] flex items-center gap-2">
+                        <MapIcon className="w-5 h-5 text-[#1D493E]" />
                         <span>Travel Packages Page CMS</span>
                       </h3>
                     </div>
@@ -1284,42 +1735,42 @@ export default function AdminPortal() {
                     <div className="space-y-4">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-slate-400 uppercase">Travel Hero Title</label>
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Travel Hero Title</label>
                           <input
                             type="text"
                             value={cms.travelHeroTitle}
                             onChange={(e) => setCms(prev => ({ ...prev, travelHeroTitle: e.target.value }))}
-                            className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                           />
                         </div>
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-slate-400 uppercase">Travel Hero Subtitle</label>
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Travel Hero Subtitle</label>
                           <input
                             type="text"
                             value={cms.travelHeroSubtitle}
                             onChange={(e) => setCms(prev => ({ ...prev, travelHeroSubtitle: e.target.value }))}
-                            className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                           />
                         </div>
                       </div>
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-slate-400 uppercase">Support Banner Text</label>
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Support Banner Text</label>
                           <input
                             type="text"
                             value={cms.travelSupportBannerText}
                             onChange={(e) => setCms(prev => ({ ...prev, travelSupportBannerText: e.target.value }))}
-                            className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                           />
                         </div>
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-slate-400 uppercase">Support Phone</label>
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Support Phone</label>
                           <input
                             type="text"
                             value={cms.travelSupportPhone}
                             onChange={(e) => setCms(prev => ({ ...prev, travelSupportPhone: e.target.value }))}
-                            className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                           />
                         </div>
                       </div>
@@ -1331,8 +1782,8 @@ export default function AdminPortal() {
                 {cmsPageFilter === 'contact' && (
                   <div className="space-y-8">
                     <div>
-                      <h3 className="text-base font-black text-white flex items-center gap-2">
-                        <Users className="w-5 h-5 text-emerald-400" />
+                      <h3 className="text-base font-black text-[#1D493E] flex items-center gap-2">
+                        <Users className="w-5 h-5 text-[#1D493E]" />
                         <span>Contact Page CMS</span>
                       </h3>
                     </div>
@@ -1340,62 +1791,62 @@ export default function AdminPortal() {
                     <div className="space-y-4">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-slate-400 uppercase">Contact Title</label>
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Contact Title</label>
                           <input
                             type="text"
                             value={cms.contactHeroTitle}
                             onChange={(e) => setCms(prev => ({ ...prev, contactHeroTitle: e.target.value }))}
-                            className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                           />
                         </div>
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-slate-400 uppercase">Contact Subtitle</label>
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Contact Subtitle</label>
                           <input
                             type="text"
                             value={cms.contactHeroSubtitle}
                             onChange={(e) => setCms(prev => ({ ...prev, contactHeroSubtitle: e.target.value }))}
-                            className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                           />
                         </div>
                       </div>
 
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-slate-400 uppercase">Support Phone</label>
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Support Phone</label>
                           <input
                             type="text"
                             value={cms.contactPhone}
                             onChange={(e) => setCms(prev => ({ ...prev, contactPhone: e.target.value }))}
-                            className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                           />
                         </div>
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-slate-400 uppercase">Support Email</label>
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Support Email</label>
                           <input
                             type="text"
                             value={cms.contactEmail}
                             onChange={(e) => setCms(prev => ({ ...prev, contactEmail: e.target.value }))}
-                            className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                           />
                         </div>
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-slate-400 uppercase">Office Hours</label>
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Office Hours</label>
                           <input
                             type="text"
                             value={cms.contactHours}
                             onChange={(e) => setCms(prev => ({ ...prev, contactHours: e.target.value }))}
-                            className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                           />
                         </div>
                       </div>
 
                       <div className="space-y-1">
-                        <label className="text-[10px] font-bold text-slate-400 uppercase">Office Address</label>
+                        <label className="text-[10px] font-bold text-[#6B7280] uppercase">Office Address</label>
                         <input
                           type="text"
                           value={cms.contactAddress}
                           onChange={(e) => setCms(prev => ({ ...prev, contactAddress: e.target.value }))}
-                          className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                          className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                         />
                       </div>
                     </div>
@@ -1422,11 +1873,10 @@ export default function AdminPortal() {
               
               <div className="flex flex-wrap items-center justify-between gap-4">
                 <div>
-                  <h2 className="text-base font-black text-white flex items-center gap-2">
-                    <FileText className="w-5 h-5 text-amber-400" />
-                    <span>Dynamic Custom Pages Manager</span>
+                  <h2 className="text-base font-semibold text-[#1D493E]">
+                    Custom Pages
                   </h2>
-                  <p className="text-xs text-slate-400 mt-1">
+                  <p className="text-xs text-[#6B7280] mt-1">
                     Add custom pages (e.g. Privacy Policy, FAQ, Terms, Special Offers) accessible via clean URL slugs.
                   </p>
                 </div>
@@ -1446,18 +1896,18 @@ export default function AdminPortal() {
                     });
                     setIsPageModalOpen(true);
                   }}
-                  className="flex items-center gap-2 px-4 py-2.5 bg-[#FF5A36] hover:bg-[#e04a29] text-white rounded-xl text-xs font-black uppercase tracking-wider transition cursor-pointer shadow-lg"
+                  className="flex items-center gap-2 px-4 py-2.5 bg-[#1D493E] hover:bg-[#163d34] text-white rounded-lg text-xs font-semibold transition cursor-pointer"
                 >
                   <Plus className="w-4 h-4" />
-                  <span>Create Custom Page</span>
+                  <span>New Page</span>
                 </button>
               </div>
 
               {/* Custom Pages List */}
-              <div className="bg-[#11231E] border border-emerald-900/40 rounded-3xl overflow-hidden shadow-xl">
+              <div className="bg-white border border-[#E5E0D5] rounded-3xl overflow-hidden shadow-sm">
                 <div className="overflow-x-auto">
-                  <table className="w-full text-left text-xs text-slate-300">
-                    <thead className="bg-[#0B1513] text-[10px] uppercase font-black tracking-wider text-slate-400 border-b border-emerald-900/40">
+                  <table className="w-full text-left text-xs text-[#2B2B2B]">
+                    <thead className="bg-[#F0EDE8] text-[10px] uppercase font-black tracking-wider text-[#1D493E] border-b border-[#E5E0D5]">
                       <tr>
                         <th className="px-6 py-4">Page Title & Slug</th>
                         <th className="px-6 py-4">Status</th>
@@ -1466,34 +1916,34 @@ export default function AdminPortal() {
                         <th className="px-6 py-4 text-right">Actions</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-emerald-900/30 font-medium">
+                    <tbody className="divide-y divide-[#E5E0D5] font-medium">
                       {customPages.map(page => (
-                        <tr key={page.id} className="hover:bg-emerald-950/40 transition">
+                        <tr key={page.id} className="hover:bg-[#F6F3EE] transition">
                           <td className="px-6 py-4">
-                            <div className="font-bold text-white text-sm">{page.title}</div>
-                            <div className="text-[11px] font-mono text-emerald-400 mt-0.5">/pages/{page.slug}</div>
+                            <div className="font-bold text-[#2B2B2B] text-sm">{page.title}</div>
+                            <div className="text-[11px] font-mono text-[#1D493E]/60 mt-0.5">/pages/{page.slug}</div>
                           </td>
                           <td className="px-6 py-4">
                             <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase ${
-                              page.status === 'published' ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' : 'bg-slate-700 text-slate-300'
+                              page.status === 'published' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-[#F0EDE8] text-[#8D8D8D] border border-[#E5E0D5]'
                             }`}>
                               {page.status}
                             </span>
                           </td>
                           <td className="px-6 py-4">
                             <div className="flex gap-2">
-                              {page.showInHeader && <span className="px-2 py-0.5 rounded bg-sky-950 text-sky-300 text-[10px] font-bold">Header</span>}
-                              {page.showInFooter && <span className="px-2 py-0.5 rounded bg-amber-950 text-amber-300 text-[10px] font-bold">Footer</span>}
+                              {page.showInHeader && <span className="px-2 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200 text-[10px] font-bold">Header</span>}
+                              {page.showInFooter && <span className="px-2 py-0.5 rounded bg-amber-50 text-amber-700 border border-amber-200 text-[10px] font-bold">Footer</span>}
                             </div>
                           </td>
-                          <td className="px-6 py-4 text-slate-400 font-mono text-[11px]">
+                          <td className="px-6 py-4 text-[#8D8D8D] font-mono text-[11px]">
                             {new Date(page.updatedAt).toLocaleDateString()}
                           </td>
                           <td className="px-6 py-4 text-right space-x-2">
                             <Link
                               href={`/pages/${page.slug}`}
                               target="_blank"
-                              className="inline-flex p-2 bg-emerald-950 hover:bg-emerald-900 text-emerald-300 rounded-lg transition"
+                              className="inline-flex p-2 bg-[#F0EDE8] hover:bg-[#1D493E] hover:text-white text-[#1D493E] rounded-lg transition"
                               title="View Page"
                             >
                               <ExternalLink className="w-3.5 h-3.5" />
@@ -1504,7 +1954,7 @@ export default function AdminPortal() {
                                 setEditingCustomPage(page);
                                 setIsPageModalOpen(true);
                               }}
-                              className="p-2 bg-amber-950 hover:bg-amber-900 text-amber-300 rounded-lg transition cursor-pointer"
+                              className="p-2 bg-amber-50 hover:bg-amber-600 hover:text-white text-amber-700 rounded-lg transition cursor-pointer"
                               title="Edit Page"
                             >
                               <Edit3 className="w-3.5 h-3.5" />
@@ -1512,7 +1962,7 @@ export default function AdminPortal() {
 
                             <button
                               onClick={() => handleDeleteCustomPage(page.id)}
-                              className="p-2 bg-rose-950 hover:bg-rose-900 text-rose-300 rounded-lg transition cursor-pointer"
+                              className="p-2 bg-red-50 hover:bg-red-600 hover:text-white text-red-600 rounded-lg transition cursor-pointer"
                               title="Delete Page"
                             >
                               <Trash2 className="w-3.5 h-3.5" />
@@ -1533,27 +1983,27 @@ export default function AdminPortal() {
             <div className="space-y-6">
               
               <div>
-                <h2 className="text-base font-black text-white flex items-center gap-2">
-                  <LinkIcon className="w-5 h-5 text-sky-400" />
+                <h2 className="text-base font-black text-[#1D493E] flex items-center gap-2">
+                  <LinkIcon className="w-5 h-5 text-[#1D493E]" />
                   <span>Package-Product Association Linker</span>
                 </h2>
-                <p className="text-xs text-slate-400 mt-1">
+                <p className="text-xs text-[#6B7280] mt-1">
                   Attach merchandise products directly to travel packages as included perks or recommended gear add-ons.
                 </p>
               </div>
 
               {/* Link Controls Form */}
-              <div className="bg-[#11231E] border border-emerald-900/40 rounded-3xl p-6 space-y-6">
-                <h3 className="text-xs font-black text-sky-400 uppercase tracking-wider">Link Product to Package</h3>
+              <div className="bg-white border border-[#E5E0D5] rounded-3xl p-6 space-y-6">
+                <h3 className="text-xs font-bold text-[#6B7280] uppercase tracking-wider">Link Product to Package</h3>
                 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   
                   <div className="space-y-1">
-                    <label className="text-[10px] font-bold text-slate-400 uppercase">Select Travel Package</label>
+                    <label className="text-[10px] font-bold text-[#6B7280] uppercase">Select Travel Package</label>
                     <select
                       value={selectedPackageForLink}
                       onChange={(e) => setSelectedPackageForLink(e.target.value)}
-                      className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                      className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                     >
                       {packages.map(pkg => (
                         <option key={pkg.id} value={pkg.id}>{pkg.name}</option>
@@ -1562,11 +2012,11 @@ export default function AdminPortal() {
                   </div>
 
                   <div className="space-y-1">
-                    <label className="text-[10px] font-bold text-slate-400 uppercase">Select Shop Product</label>
+                    <label className="text-[10px] font-bold text-[#6B7280] uppercase">Select Shop Product</label>
                     <select
                       value={newLinkProductId}
                       onChange={(e) => setNewLinkProductId(e.target.value)}
-                      className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                      className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                     >
                       <option value="">-- Choose Product --</option>
                       {products.map(prod => (
@@ -1576,11 +2026,11 @@ export default function AdminPortal() {
                   </div>
 
                   <div className="space-y-1">
-                    <label className="text-[10px] font-bold text-slate-400 uppercase">Perk Type</label>
+                    <label className="text-[10px] font-bold text-[#6B7280] uppercase">Perk Type</label>
                     <select
                       value={newLinkPerkType}
                       onChange={(e) => setNewLinkPerkType(e.target.value as any)}
-                      className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                      className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                     >
                       <option value="included">🎁 Included Free Perk</option>
                       <option value="addon">🛍️ Recommended Gear Add-on</option>
@@ -1590,13 +2040,13 @@ export default function AdminPortal() {
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-[10px] font-bold text-slate-400 uppercase">Custom Perk Note</label>
+                  <label className="text-[10px] font-bold text-[#6B7280] uppercase">Custom Perk Note</label>
                   <input
                     type="text"
                     placeholder="e.g. Complimentary Saffron Pack or 20% Off Waterproof Jacket"
                     value={newLinkNote}
                     onChange={(e) => setNewLinkNote(e.target.value)}
-                    className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                    className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                   />
                 </div>
 
@@ -1610,13 +2060,13 @@ export default function AdminPortal() {
               </div>
 
               {/* Linked Associations Table */}
-              <div className="bg-[#11231E] border border-emerald-900/40 rounded-3xl overflow-hidden">
-                <div className="p-4 bg-[#0B1513] border-b border-emerald-900/40 text-xs font-bold text-white uppercase tracking-wider">
+              <div className="bg-white border border-[#E5E0D5] rounded-3xl overflow-hidden">
+                <div className="p-4 bg-[#F0EDE8] border-b border-[#E5E0D5] text-xs font-bold text-[#1D493E] uppercase tracking-wider">
                   Active Package & Product Links ({packageProductLinks.length})
                 </div>
 
-                <table className="w-full text-left text-xs text-slate-300">
-                  <thead className="bg-[#0B1513] text-[10px] uppercase font-black text-slate-400 border-b border-emerald-900/40">
+                <table className="w-full text-left text-xs text-[#2B2B2B]">
+                  <thead className="bg-[#F0EDE8] text-[10px] uppercase font-black text-[#1D493E] border-b border-[#E5E0D5]">
                     <tr>
                       <th className="px-6 py-4">Package</th>
                       <th className="px-6 py-4">Linked Product</th>
@@ -1625,30 +2075,30 @@ export default function AdminPortal() {
                       <th className="px-6 py-4 text-right">Action</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-emerald-900/30">
+                  <tbody className="divide-y divide-[#E5E0D5]">
                     {packageProductLinks.map((link, idx) => {
                       const pkg = packages.find(p => p.id === link.packageId);
                       const prod = products.find(p => p.id === link.productId);
                       return (
-                        <tr key={idx} className="hover:bg-emerald-950/40 transition">
-                          <td className="px-6 py-4 font-bold text-white">
+                        <tr key={idx} className="hover:bg-[#F6F3EE] transition">
+                          <td className="px-6 py-4 font-bold text-[#2B2B2B]">
                             {pkg?.name || link.packageId}
                           </td>
-                          <td className="px-6 py-4 text-emerald-300 font-semibold">
+                          <td className="px-6 py-4 text-[#1D493E] font-semibold">
                             {prod?.name || link.productId}
                           </td>
                           <td className="px-6 py-4">
                             <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold ${
-                              link.perkType === 'included' ? 'bg-emerald-500/20 text-emerald-300' : 'bg-sky-500/20 text-sky-300'
+                              link.perkType === 'included' ? 'bg-[#1D493E]/10 text-[#1D493E]' : 'bg-blue-50 text-blue-700'
                             }`}>
                               {link.perkType === 'included' ? 'Included Perk' : 'Gear Add-on'}
                             </span>
                           </td>
-                          <td className="px-6 py-4 text-slate-400">{link.note || '-'}</td>
+                          <td className="px-6 py-4 text-[#8D8D8D]">{link.note || '-'}</td>
                           <td className="px-6 py-4 text-right">
                             <button
                               onClick={() => handleRemovePackageProductLink(link.packageId, link.productId)}
-                              className="p-2 bg-rose-950 text-rose-300 rounded-lg hover:bg-rose-900 transition cursor-pointer"
+                              className="p-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-600 hover:text-white transition cursor-pointer"
                             >
                               <Trash2 className="w-3.5 h-3.5" />
                             </button>
@@ -1667,70 +2117,113 @@ export default function AdminPortal() {
           {activeTab === 'packages' && (
             <div className="space-y-6">
               <div className="flex items-center justify-between">
-                <h2 className="text-base font-black text-white">Travel Packages Catalog ({packages.length})</h2>
+                <h2 className="text-base font-bold text-[#1D493E]">Travel Packages Catalog ({packages.length})</h2>
                 <button
                   onClick={() => {
-                    const newPkg: HolidayPackage = {
+                    setEditingPkg({
                       id: `pkg-${Date.now()}`,
-                      name: 'New Adventure Tour',
-                      price: 14999,
-                      originalPrice: 19999,
-                      duration: '5 Days / 4 Nights',
-                      durationDays: 5,
+                      name: '',
+                      price: 12000,
+                      originalPrice: 15000,
+                      duration: '3 Days / 2 Nights',
+                      durationDays: 3,
                       rating: 5.0,
-                      ratingCount: 12,
-                      hotelStars: '4-Star',
-                      hotelClass: '4',
-                      route: 'Manali - Solang - Kasol',
-                      routeList: ['Manali', 'Solang Valley', 'Kasol'],
-                      description: 'Experience breathtaking mountain trails and pristine valleys.',
-                      inclusions: ['flights', 'hotel', 'meals'],
-                      highlights: ['Guided Trekking', 'Bonfire Night'],
+                      ratingCount: 1,
+                      hotelStars: '3-Star',
+                      hotelClass: '3',
+                      route: '',
+                      routeList: [],
+                      description: '',
+                      inclusions: ['hotel', 'meals'],
+                      highlights: [],
                       image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80',
-                      themes: ['Adventure', 'Mountain'],
-                      destination: 'Himachal',
+                      themes: ['Adventure'],
+                      destination: 'Kashmir' as any,
                       detailsAvailable: true,
                       link: '/travel',
-                    };
-                    const updated = [...packages, newPkg];
-                    setPackages(updated);
-                    localStorage.setItem('gb_admin_packages', JSON.stringify(updated));
-                    showToast('New tour package created!');
+                    });
                   }}
-                  className="flex items-center gap-2 px-4 py-2.5 bg-[#FF5A36] text-white rounded-xl text-xs font-black uppercase"
+                  className="flex items-center gap-2 px-4 py-2.5 bg-[#1D493E] hover:bg-[#15342c] text-white rounded-xl text-xs font-bold uppercase transition cursor-pointer shadow-xs"
                 >
                   <Plus className="w-4 h-4" /> Add Tour Package
                 </button>
               </div>
 
-              <div className="bg-[#11231E] border border-emerald-900/40 rounded-3xl overflow-hidden">
-                <table className="w-full text-left text-xs text-slate-300">
-                  <thead className="bg-[#0B1513] text-[10px] uppercase font-black text-slate-400">
+              <div className="bg-white border border-[#E5E0D5] rounded-2xl overflow-hidden shadow-xs">
+                <table className="w-full text-left text-xs text-[#2B2B2B]">
+                  <thead className="bg-[#FAF9F6] border-b border-[#E5E0D5] text-[11px] uppercase font-bold text-[#1D493E] tracking-wider font-sans">
                     <tr>
                       <th className="px-6 py-4">Package</th>
                       <th className="px-6 py-4">Price</th>
                       <th className="px-6 py-4">Duration</th>
+                      <th className="px-6 py-4">Destination</th>
+                      <th className="px-6 py-4">Home Showcase</th>
                       <th className="px-6 py-4 text-right">Actions</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-emerald-900/30">
+                  <tbody className="divide-y divide-gray-100">
                     {packages.map(pkg => (
-                      <tr key={pkg.id} className="hover:bg-emerald-950/40 transition">
-                        <td className="px-6 py-4 font-bold text-white">{pkg.name}</td>
-                        <td className="px-6 py-4 text-emerald-400 font-mono font-bold">₹{pkg.price.toLocaleString()}</td>
-                        <td className="px-6 py-4 text-slate-400">{pkg.duration}</td>
+                      <tr key={pkg.id} className="hover:bg-[#1D493E]/[0.02] transition">
+                        <td className="px-6 py-4 font-bold text-[#2B2B2B]">
+                          <div className="flex items-center gap-3">
+                            <div className="w-9 h-9 rounded-lg overflow-hidden bg-[#1D493E]/10 border border-[#E5E0D5] flex items-center justify-center shrink-0 text-[#1D493E] font-bold text-xs relative">
+                              <span>{pkg.name ? pkg.name.substring(0, 2).toUpperCase() : 'GB'}</span>
+                              {pkg.image && (
+                                <img
+                                  src={pkg.image}
+                                  alt={pkg.name}
+                                  className="absolute inset-0 w-full h-full object-cover"
+                                  onError={(e) => {
+                                    (e.target as HTMLElement).style.display = 'none';
+                                  }}
+                                />
+                              )}
+                            </div>
+                            <span>{pkg.name || 'Untitled Package'}</span>
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 text-[#1D493E] font-bold font-sans">₹{pkg.price.toLocaleString()}</td>
+                        <td className="px-6 py-4 text-[#8D8D8D] font-medium">{pkg.duration}</td>
+                        <td className="px-6 py-4 text-[#8D8D8D] capitalize font-medium">{pkg.destination || 'General'}</td>
+                        <td className="px-6 py-4">
+                          <label className="flex items-center gap-1.5 cursor-pointer">
+                            <input
+                              type="checkbox"
+                              checked={pkg.showOnHome !== false}
+                              onChange={(e) => {
+                                const show = e.target.checked;
+                                const updated = packages.map(p => p.id === pkg.id ? { ...p, showOnHome: show } : p);
+                                setPackages(updated);
+                                localStorage.setItem('gb_admin_packages', JSON.stringify(updated));
+                                showToast(`${show ? 'Showcasing' : 'Hidden from'} Homepage: "${pkg.name}"`);
+                              }}
+                              className="w-4 h-4 text-[#1D493E] accent-[#1D493E] rounded"
+                            />
+                            <span className="text-[11px] font-bold text-[#1D493E]">
+                              {pkg.showOnHome !== false ? 'Featured' : 'Off'}
+                            </span>
+                          </label>
+                        </td>
                         <td className="px-6 py-4 text-right">
-                          <button
-                            onClick={() => {
-                              const updated = packages.filter(p => p.id !== pkg.id);
-                              setPackages(updated);
-                              localStorage.setItem('gb_admin_packages', JSON.stringify(updated));
-                              showToast('Package removed!');
-                            }}
-                            className="p-2 bg-rose-950 text-rose-300 rounded-lg hover:bg-rose-900 transition"
-                          >
-                            <Trash2 className="w-3.5 h-3.5" />
-                          </button>
+                          <div className="flex items-center justify-end gap-2">
+                            <button
+                              onClick={() => setEditingPkg({ ...pkg })}
+                              className="px-3 py-1.5 bg-[#1D493E]/10 hover:bg-[#1D493E] text-[#1D493E] hover:text-white rounded-lg text-xs font-bold transition flex items-center gap-1.5 cursor-pointer"
+                            >
+                              <Edit3 className="w-3.5 h-3.5" /> Edit
+                            </button>
+                            <button
+                              onClick={() => {
+                                const updated = packages.filter(p => p.id !== pkg.id);
+                                setPackages(updated);
+                                localStorage.setItem('gb_admin_packages', JSON.stringify(updated));
+                                showToast('Package removed!');
+                              }}
+                              className="px-3 py-1.5 bg-rose-50 hover:bg-rose-600 text-rose-600 hover:text-white rounded-lg text-xs font-bold transition flex items-center gap-1.5 cursor-pointer"
+                            >
+                              <Trash2 className="w-3.5 h-3.5" /> Delete
+                            </button>
+                          </div>
                         </td>
                       </tr>
                     ))}
@@ -1744,59 +2237,138 @@ export default function AdminPortal() {
           {activeTab === 'products' && (
             <div className="space-y-6">
               <div className="flex items-center justify-between">
-                <h2 className="text-base font-black text-white">Shop Inventory Products ({products.length})</h2>
+                <h2 className="text-base font-bold text-[#1D493E]">Shop Inventory Products ({products.length})</h2>
                 <button
                   onClick={() => {
-                    const newProd: Product = {
+                    setEditingProd({
                       id: `prod-${Date.now()}`,
-                      name: 'Banjara Trekking Mug',
+                      name: '',
                       price: 499,
                       originalPrice: 799,
-                      description: 'Insulated stainless steel outdoor mug.',
+                      description: '',
                       image: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=500&q=80',
                       category: 'lifestyle',
                       rating: 4.9,
                       inStock: true,
-                    };
-                    const updated = [...products, newProd];
-                    setProducts(updated);
-                    localStorage.setItem('gb_admin_products', JSON.stringify(updated));
-                    showToast('New product added to inventory!');
+                    });
                   }}
-                  className="flex items-center gap-2 px-4 py-2.5 bg-[#FF5A36] text-white rounded-xl text-xs font-black uppercase"
+                  className="flex items-center gap-2 px-4 py-2.5 bg-[#FF623E] hover:bg-[#e04a29] text-white rounded-xl text-xs font-bold uppercase transition cursor-pointer shadow-xs"
                 >
                   <Plus className="w-4 h-4" /> Add Product
                 </button>
               </div>
 
-              <div className="bg-[#11231E] border border-emerald-900/40 rounded-3xl overflow-hidden">
-                <table className="w-full text-left text-xs text-slate-300">
-                  <thead className="bg-[#0B1513] text-[10px] uppercase font-black text-slate-400">
+              <div className="bg-white border border-[#E5E0D5] rounded-2xl overflow-hidden shadow-xs">
+                <table className="w-full text-left text-xs text-[#2B2B2B]">
+                  <thead className="bg-[#FAF9F6] border-b border-[#E5E0D5] text-[11px] uppercase font-bold text-[#1D493E] tracking-wider font-sans">
                     <tr>
                       <th className="px-6 py-4">Product Name</th>
                       <th className="px-6 py-4">Category</th>
+                      <th className="px-6 py-4">Placement Section</th>
                       <th className="px-6 py-4">Price</th>
+                      <th className="px-6 py-4">Status</th>
+                      <th className="px-6 py-4">Home Showcase</th>
                       <th className="px-6 py-4 text-right">Actions</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-emerald-900/30">
+                  <tbody className="divide-y divide-gray-100">
                     {products.map(prod => (
-                      <tr key={prod.id} className="hover:bg-emerald-950/40 transition">
-                        <td className="px-6 py-4 font-bold text-white">{prod.name}</td>
-                        <td className="px-6 py-4 text-slate-400 capitalize">{prod.category}</td>
-                        <td className="px-6 py-4 text-emerald-400 font-mono font-bold">₹{prod.price}</td>
-                        <td className="px-6 py-4 text-right">
-                          <button
-                            onClick={() => {
-                              const updated = products.filter(p => p.id !== prod.id);
+                      <tr key={prod.id} className="hover:bg-[#1D493E]/[0.02] transition">
+                        <td className="px-6 py-4 font-bold text-[#2B2B2B]">
+                          <div className="flex items-center gap-3">
+                            <div className="w-9 h-9 rounded-lg overflow-hidden bg-amber-50 border border-[#E5E0D5] flex items-center justify-center shrink-0 text-amber-800 font-bold text-xs relative">
+                              <span>{prod.name ? prod.name.substring(0, 2).toUpperCase() : 'GB'}</span>
+                              {prod.image && (
+                                <img
+                                  src={prod.image}
+                                  alt={prod.name}
+                                  className="absolute inset-0 w-full h-full object-cover"
+                                  onError={(e) => {
+                                    (e.target as HTMLElement).style.display = 'none';
+                                  }}
+                                />
+                              )}
+                            </div>
+                            <span>{prod.name || 'Untitled Product'}</span>
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 text-[#8D8D8D] capitalize font-medium">{prod.category}</td>
+                        <td className="px-6 py-4">
+                          <select
+                            value={prod.section || 'deals'}
+                            onChange={(e) => {
+                              const newSection = e.target.value;
+                              const updated = products.map(p => p.id === prod.id ? { 
+                                ...p, 
+                                section: newSection,
+                                isBestDeal: newSection === 'deals',
+                                isMostSelling: newSection === 'most-selling'
+                              } : p);
                               setProducts(updated);
-                              localStorage.setItem('gb_admin_products', JSON.stringify(updated));
-                              showToast('Product removed!');
+                              localStorage.setItem('gb_admin_products_v3', JSON.stringify(updated));
+                              showToast(`Moved "${prod.name}" to ${newSection.replace('-', ' ')}!`);
                             }}
-                            className="p-2 bg-rose-950 text-rose-300 rounded-lg hover:bg-rose-900 transition"
+                            className="p-1.5 bg-[#FAF9F6] border border-[#E5E0D5] rounded-lg text-xs text-[#1D493E] font-bold focus:outline-none focus:border-[#1D493E] cursor-pointer"
                           >
-                            <Trash2 className="w-3.5 h-3.5" />
-                          </button>
+                            <option value="deals">Today's Best Deals</option>
+                            <option value="most-selling">Most Selling Products</option>
+                            <option value="travel-essentials">Travel Essentials</option>
+                            <option value="featured">Featured Gear</option>
+                            <option value="badges">Badges & Pins</option>
+                            <option value="slippers">Slippers & Footwear</option>
+                            <option value="keychains">Key Chains</option>
+                            <option value="new-arrivals">New Arrivals</option>
+                          </select>
+                        </td>
+                        <td className="px-6 py-4 text-[#1D493E] font-bold font-sans">₹{prod.price}</td>
+                        <td className="px-6 py-4">
+                          <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold ${
+                            prod.inStock !== false ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'
+                          }`}>
+                            {prod.inStock !== false ? 'In Stock' : 'Out of Stock'}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4">
+                          <label className="flex items-center gap-1.5 cursor-pointer">
+                            <input
+                              type="checkbox"
+                              checked={prod.showOnHome !== false}
+                              onChange={(e) => {
+                                const show = e.target.checked;
+                                const updated = products.map(p => p.id === prod.id ? { ...p, showOnHome: show } : p);
+                                setProducts(updated);
+                                localStorage.setItem('gb_admin_products_v3', JSON.stringify(updated));
+                                localStorage.setItem('gb_admin_products', JSON.stringify(updated));
+                                showToast(`${show ? 'Showcasing' : 'Hidden from'} Homepage: "${prod.name}"`);
+                              }}
+                              className="w-4 h-4 text-[#1D493E] accent-[#1D493E] rounded"
+                            />
+                            <span className="text-[11px] font-bold text-[#1D493E]">
+                              {prod.showOnHome !== false ? 'Showcased' : 'Off'}
+                            </span>
+                          </label>
+                        </td>
+                        <td className="px-6 py-4 text-right">
+                          <div className="flex items-center justify-end gap-2">
+                            <button
+                              onClick={() => setEditingProd({ ...prod })}
+                              className="px-3 py-1.5 bg-[#1D493E]/10 hover:bg-[#1D493E] text-[#1D493E] hover:text-white rounded-lg text-xs font-bold transition flex items-center gap-1.5 cursor-pointer"
+                            >
+                              <Edit3 className="w-3.5 h-3.5" /> Edit
+                            </button>
+                            <button
+                              onClick={() => {
+                                const updated = products.filter(p => p.id !== prod.id);
+                                setProducts(updated);
+                                localStorage.setItem('gb_admin_products_v3', JSON.stringify(updated));
+                                localStorage.setItem('gb_admin_products', JSON.stringify(updated));
+                                showToast('Product removed!');
+                              }}
+                              className="px-3 py-1.5 bg-rose-50 hover:bg-rose-600 text-rose-600 hover:text-white rounded-lg text-xs font-bold transition flex items-center gap-1.5 cursor-pointer"
+                            >
+                              <Trash2 className="w-3.5 h-3.5" /> Delete
+                            </button>
+                          </div>
                         </td>
                       </tr>
                     ))}
@@ -1806,36 +2378,639 @@ export default function AdminPortal() {
             </div>
           )}
 
+          {/* EDIT PRODUCT MODAL */}
+          {editingProd && (
+            <div className="fixed inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center z-50 p-4 text-left">
+              <div className="bg-white border border-[#E5E0D5] rounded-2xl p-6 sm:p-8 max-w-2xl w-full shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto">
+                <div className="flex items-center justify-between border-b border-[#E5E0D5] pb-4">
+                  <div>
+                    <h3 className="text-lg font-bold text-[#1D493E]">Edit Product Details</h3>
+                    <p className="text-xs text-gray-500 font-medium">Update basic info, specifications grid, reviews, and FAQs</p>
+                  </div>
+                  <button
+                    onClick={() => setEditingProd(null)}
+                    className="text-[#8D8D8D] hover:text-[#2B2B2B] font-bold text-sm cursor-pointer p-1"
+                  >
+                    ✕
+                  </button>
+                </div>
+
+                {/* Modal Tabs Container */}
+                <div className="flex gap-2 p-1.5 bg-[#FAF9F6] border border-[#E5E0D5] rounded-xl overflow-x-auto">
+                  {[
+                    { id: 'basic', label: '1. Basic Info' },
+                    { id: 'specs', label: '2. Specifications' },
+                    { id: 'reviews', label: '3. Reviews' },
+                    { id: 'faqs', label: '4. FAQs' },
+                  ].map(tab => (
+                    <button
+                      key={tab.id}
+                      type="button"
+                      onClick={() => setActiveProdEditorTab(tab.id as any)}
+                      className={`flex-1 py-2 px-3 rounded-lg text-xs font-bold transition whitespace-nowrap cursor-pointer ${
+                        activeProdEditorTab === tab.id
+                          ? 'bg-[#1D493E] text-white shadow-xs'
+                          : 'text-[#2B2B2B] hover:bg-gray-200/60'
+                      }`}
+                    >
+                      {tab.label}
+                    </button>
+                  ))}
+                </div>
+
+                <form onSubmit={handleSaveEditedProduct} className="space-y-5">
+                  {/* TAB 1: BASIC INFO */}
+                  {activeProdEditorTab === 'basic' && (
+                    <div className="space-y-4">
+                      <div className="space-y-1">
+                        <label className="text-[11px] font-bold text-[#1D493E] uppercase font-sans tracking-wider">Product Name</label>
+                        <input
+                          type="text"
+                          required
+                          value={editingProd.name}
+                          onChange={(e) => setEditingProd({ ...editingProd, name: e.target.value })}
+                          className="w-full p-3 bg-[#FAF9F6] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
+                        />
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="space-y-1">
+                          <label className="text-[11px] font-bold text-[#1D493E] uppercase font-sans tracking-wider">Selling Price (₹)</label>
+                          <input
+                            type="number"
+                            required
+                            value={editingProd.price}
+                            onChange={(e) => setEditingProd({ ...editingProd, price: parseFloat(e.target.value) || 0 })}
+                            className="w-full p-3 bg-[#FAF9F6] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
+                          />
+                        </div>
+                        <div className="space-y-1">
+                          <label className="text-[11px] font-bold text-[#1D493E] uppercase font-sans tracking-wider">Original Price (₹)</label>
+                          <input
+                            type="number"
+                            value={editingProd.originalPrice || ''}
+                            onChange={(e) => setEditingProd({ ...editingProd, originalPrice: parseFloat(e.target.value) || 0 })}
+                            className="w-full p-3 bg-[#FAF9F6] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="space-y-1">
+                        <label className="text-[11px] font-bold text-[#1D493E] uppercase font-sans tracking-wider flex items-center justify-between">
+                          <span>Category</span>
+                          <span className="text-[10px] text-[#8D8D8D] font-normal">Select or type custom</span>
+                        </label>
+                        <div className="space-y-2">
+                          <select
+                            value={['Badges', 'Slippers', 'Key Chains', 'Travel Pillows', 'Backpacks', 'Passport Covers', 'Stickers', 'T-Shirts', 'Lifestyle'].includes(editingProd.category) ? editingProd.category : '__custom__'}
+                            onChange={(e) => {
+                              if (e.target.value !== '__custom__') {
+                                setEditingProd({ ...editingProd, category: e.target.value });
+                              }
+                            }}
+                            className="w-full p-3 bg-[#FAF9F6] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
+                          >
+                            <option value="Badges">Badges & Pins</option>
+                            <option value="Slippers">Slippers & Footwear</option>
+                            <option value="Key Chains">Key Chains & Accessories</option>
+                            <option value="Travel Pillows">Travel Pillows</option>
+                            <option value="Backpacks">Backpacks & Outdoor Bags</option>
+                            <option value="Passport Covers">Passport Covers</option>
+                            <option value="Stickers">Stickers</option>
+                            <option value="T-Shirts">T-Shirts & Apparel</option>
+                            <option value="Lifestyle">Lifestyle</option>
+                            <option value="__custom__">+ Add Custom Category Below...</option>
+                          </select>
+                          <input
+                            type="text"
+                            placeholder="Type Custom Product Category (e.g. Camping Gear)"
+                            value={editingProd.category}
+                            onChange={(e) => setEditingProd({ ...editingProd, category: e.target.value })}
+                            className="w-full p-3 bg-[#FAF9F6] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="space-y-1">
+                        <label className="text-[11px] font-bold text-[#1D493E] uppercase font-sans tracking-wider flex items-center justify-between">
+                          <span>Target Section / Placement</span>
+                          <span className="text-[10px] text-[#8D8D8D] font-normal">Website placement</span>
+                        </label>
+                        <select
+                          value={editingProd.section || 'deals'}
+                          onChange={(e) => setEditingProd({ ...editingProd, section: e.target.value })}
+                          className="w-full p-3 bg-[#FAF9F6] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
+                        >
+                          <option value="deals">Today's Best Deals for You</option>
+                          <option value="most-selling">Most Selling Products</option>
+                          <option value="travel-essentials">Travel Essentials</option>
+                          <option value="featured">Featured Gear & Trending</option>
+                          <option value="badges">Badges & Collectibles</option>
+                          <option value="slippers">Footwear & Slippers</option>
+                          <option value="keychains">Key Chains & Accessories</option>
+                          <option value="new-arrivals">New Arrivals</option>
+                        </select>
+                      </div>
+
+                      <div className="space-y-2 pt-1">
+                        <label className="text-[11px] font-bold text-[#1D493E] uppercase font-sans tracking-wider">Promotional Placement Badges</label>
+                        <div className="grid grid-cols-2 gap-2 text-xs text-[#2B2B2B]">
+                          <label className="flex items-center gap-2 p-2.5 bg-[#FAF9F6] border border-[#E5E0D5] rounded-xl cursor-pointer hover:border-[#1D493E]">
+                            <input
+                              type="checkbox"
+                              checked={editingProd.isBestDeal !== false}
+                              onChange={(e) => setEditingProd({ ...editingProd, isBestDeal: e.target.checked })}
+                              className="w-4 h-4 text-[#1D493E] accent-[#1D493E] rounded"
+                            />
+                            <span className="font-bold">Today's Best Deal</span>
+                          </label>
+                          <label className="flex items-center gap-2 p-2.5 bg-[#FAF9F6] border border-[#E5E0D5] rounded-xl cursor-pointer hover:border-[#1D493E]">
+                            <input
+                              type="checkbox"
+                              checked={editingProd.isMostSelling !== false}
+                              onChange={(e) => setEditingProd({ ...editingProd, isMostSelling: e.target.checked })}
+                              className="w-4 h-4 text-[#1D493E] accent-[#1D493E] rounded"
+                            />
+                            <span className="font-bold">Most Selling</span>
+                          </label>
+                        </div>
+                      </div>
+
+                      <div className="space-y-2">
+                        <label className="text-[11px] font-bold text-[#1D493E] uppercase font-sans tracking-wider flex items-center justify-between">
+                          <span>Cover Image</span>
+                          <span className="text-[10px] text-[#8D8D8D] font-normal">URL or Local Upload</span>
+                        </label>
+                        <div className="flex gap-2">
+                          <input
+                            type="text"
+                            placeholder="Paste image URL (https://...)"
+                            value={editingProd.image}
+                            onChange={(e) => setEditingProd({ ...editingProd, image: e.target.value })}
+                            className="flex-1 p-3 bg-[#FAF9F6] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
+                          />
+                          <label className="px-4 py-3 bg-[#1D493E]/10 hover:bg-[#1D493E] text-[#1D493E] hover:text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5 cursor-pointer shrink-0">
+                            <Upload className="w-4 h-4" />
+                            <span>Upload Photo</span>
+                            <input
+                              type="file"
+                              accept="image/*"
+                              className="hidden"
+                              onChange={(e) => {
+                                const file = e.target.files?.[0];
+                                if (file) {
+                                  const reader = new FileReader();
+                                  reader.onload = (uploadEvt) => {
+                                    const res = uploadEvt.target?.result as string;
+                                    if (res) setEditingProd({ ...editingProd, image: res });
+                                  };
+                                  reader.readAsDataURL(file);
+                                }
+                              }}
+                            />
+                          </label>
+                        </div>
+                        {editingProd.image && (
+                          <div className="relative w-full h-32 rounded-xl overflow-hidden border border-[#E5E0D5] bg-[#FAF9F6]">
+                            <img src={editingProd.image} alt="Product Preview" className="w-full h-full object-cover" />
+                            <div className="absolute top-2 right-2 px-2 py-0.5 bg-black/60 text-white text-[10px] font-bold rounded-md">
+                              Preview
+                            </div>
+                          </div>
+                        )}
+                      </div>
+
+                      <div className="space-y-1">
+                        <label className="text-[11px] font-bold text-[#1D493E] uppercase font-sans tracking-wider">Product Overview / Description</label>
+                        <textarea
+                          rows={4}
+                          value={editingProd.description}
+                          onChange={(e) => setEditingProd({ ...editingProd, description: e.target.value })}
+                          placeholder="Write rich overview description..."
+                          className="w-full p-3 bg-[#FAF9F6] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E] resize-none"
+                        />
+                      </div>
+
+                      <div className="flex items-center gap-2 pt-2">
+                        <input
+                          type="checkbox"
+                          id="inStockCheck"
+                          checked={editingProd.inStock !== false}
+                          onChange={(e) => setEditingProd({ ...editingProd, inStock: e.target.checked })}
+                          className="w-4 h-4 text-[#1D493E] accent-[#1D493E] rounded"
+                        />
+                        <label htmlFor="inStockCheck" className="text-xs font-bold text-[#2B2B2B] cursor-pointer">In Stock & Ready to Buy</label>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* TAB 2: SPECIFICATIONS & HIGHLIGHTS */}
+                  {activeProdEditorTab === 'specs' && (
+                    <div className="space-y-6">
+                      {/* Part A: Specifications Grid */}
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between">
+                          <label className="text-xs font-bold text-[#1D493E] uppercase tracking-wider">Product Specifications Grid</label>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const defaultSpecs = [
+                                { label: 'DIAMETER', value: '1.25 Inches' },
+                                { label: 'MATERIAL', value: 'Premium Zinc Alloy' },
+                                { label: 'CLASP', value: 'Butterfly Clutch' },
+                                { label: 'FINISH', value: 'Hard Enamel Gloss' }
+                              ];
+                              const cur = editingProd.specs || defaultSpecs;
+                              setEditingProd({
+                                ...editingProd,
+                                specs: [...cur, { label: 'FEATURE', value: 'Value' }]
+                              });
+                            }}
+                            className="px-3 py-1.5 bg-[#1D493E] text-white rounded-lg text-xs font-bold hover:bg-[#15342c] transition cursor-pointer"
+                          >
+                            + Add Specification
+                          </button>
+                        </div>
+
+                        <div className="space-y-2 max-h-[200px] overflow-y-auto pr-1">
+                          {(editingProd.specs || [
+                            { label: 'DIAMETER', value: '1.25 Inches' },
+                            { label: 'MATERIAL', value: 'Premium Zinc Alloy' },
+                            { label: 'CLASP', value: 'Butterfly Clutch' },
+                            { label: 'FINISH', value: 'Hard Enamel Gloss' }
+                          ]).map((spec: any, idx: number) => (
+                            <div key={idx} className="flex gap-2 items-center bg-[#FAF9F6] p-2.5 border border-[#E5E0D5] rounded-xl">
+                              <input
+                                type="text"
+                                placeholder="Label (e.g. DIAMETER)"
+                                value={spec.label}
+                                onChange={(e) => {
+                                  const cur = editingProd.specs || [
+                                    { label: 'DIAMETER', value: '1.25 Inches' },
+                                    { label: 'MATERIAL', value: 'Premium Zinc Alloy' },
+                                    { label: 'CLASP', value: 'Butterfly Clutch' },
+                                    { label: 'FINISH', value: 'Hard Enamel Gloss' }
+                                  ];
+                                  const updated = [...cur];
+                                  updated[idx].label = e.target.value;
+                                  setEditingProd({ ...editingProd, specs: updated });
+                                }}
+                                className="w-1/3 p-2 bg-white border border-[#E5E0D5] rounded-lg text-xs text-[#2B2B2B] font-bold focus:outline-none focus:border-[#1D493E]"
+                              />
+                              <input
+                                type="text"
+                                placeholder="Value (e.g. 1.25 Inches)"
+                                value={spec.value}
+                                onChange={(e) => {
+                                  const cur = editingProd.specs || [
+                                    { label: 'DIAMETER', value: '1.25 Inches' },
+                                    { label: 'MATERIAL', value: 'Premium Zinc Alloy' },
+                                    { label: 'CLASP', value: 'Butterfly Clutch' },
+                                    { label: 'FINISH', value: 'Hard Enamel Gloss' }
+                                  ];
+                                  const updated = [...cur];
+                                  updated[idx].value = e.target.value;
+                                  setEditingProd({ ...editingProd, specs: updated });
+                                }}
+                                className="flex-1 p-2 bg-white border border-[#E5E0D5] rounded-lg text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
+                              />
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  const cur = editingProd.specs || [
+                                    { label: 'DIAMETER', value: '1.25 Inches' },
+                                    { label: 'MATERIAL', value: 'Premium Zinc Alloy' },
+                                    { label: 'CLASP', value: 'Butterfly Clutch' },
+                                    { label: 'FINISH', value: 'Hard Enamel Gloss' }
+                                  ];
+                                  const updated = cur.filter((_: any, i: number) => i !== idx);
+                                  setEditingProd({ ...editingProd, specs: updated });
+                                }}
+                                className="p-2 text-rose-500 hover:bg-rose-50 rounded-lg text-xs font-bold cursor-pointer"
+                                title="Remove Spec"
+                              >
+                                ✕
+                              </button>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Part B: Product Highlights */}
+                      <div className="space-y-3 pt-4 border-t border-[#E5E0D5]">
+                        <div className="flex items-center justify-between">
+                          <label className="text-xs font-bold text-[#FF623E] uppercase tracking-wider">Product Highlights (Bullet Points)</label>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const defaultHighlights = [
+                                'Hand-crafted premium quality finish',
+                                'Weatherproof and ultra-durable materials',
+                                'Designed for digital nomads and explorers',
+                                '100% authentic Banjāra Originals gear'
+                              ];
+                              const cur = editingProd.highlights || defaultHighlights;
+                              setEditingProd({
+                                ...editingProd,
+                                highlights: [...cur, 'New Highlight Feature']
+                              });
+                            }}
+                            className="px-3 py-1.5 bg-[#FF623E] text-white rounded-lg text-xs font-bold hover:bg-[#e05332] transition cursor-pointer"
+                          >
+                            + Add Highlight Point
+                          </button>
+                        </div>
+
+                        <div className="space-y-2 max-h-[200px] overflow-y-auto pr-1">
+                          {(editingProd.highlights || [
+                            'Hand-crafted premium quality finish',
+                            'Weatherproof and ultra-durable materials',
+                            'Designed for digital nomads and explorers',
+                            '100% authentic Banjāra Originals gear'
+                          ]).map((hl: string, idx: number) => (
+                            <div key={idx} className="flex gap-2 items-center bg-[#FAF9F6] p-2.5 border border-[#E5E0D5] rounded-xl">
+                              <span className="text-[#1D493E] font-bold text-xs">✓</span>
+                              <input
+                                type="text"
+                                placeholder="Highlight feature text..."
+                                value={hl}
+                                onChange={(e) => {
+                                  const defaultHighlights = [
+                                    'Hand-crafted premium quality finish',
+                                    'Weatherproof and ultra-durable materials',
+                                    'Designed for digital nomads and explorers',
+                                    '100% authentic Banjāra Originals gear'
+                                  ];
+                                  const list = [...(editingProd.highlights || defaultHighlights)];
+                                  list[idx] = e.target.value;
+                                  setEditingProd({ ...editingProd, highlights: list });
+                                }}
+                                className="flex-1 p-2 bg-white border border-[#E5E0D5] rounded-lg text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
+                              />
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  const defaultHighlights = [
+                                    'Hand-crafted premium quality finish',
+                                    'Weatherproof and ultra-durable materials',
+                                    'Designed for digital nomads and explorers',
+                                    '100% authentic Banjāra Originals gear'
+                                  ];
+                                  const list = (editingProd.highlights || defaultHighlights).filter((_: any, i: number) => i !== idx);
+                                  setEditingProd({ ...editingProd, highlights: list });
+                                }}
+                                className="p-2 text-rose-500 hover:bg-rose-50 rounded-lg text-xs font-bold cursor-pointer"
+                                title="Remove Highlight"
+                              >
+                                ✕
+                              </button>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* TAB 3: CUSTOMER REVIEWS */}
+                  {activeProdEditorTab === 'reviews' && (
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between">
+                        <label className="text-xs font-bold text-[#1D493E] uppercase tracking-wider">Customer Reviews</label>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const cur = editingProd.reviewsList || [
+                              { id: "1", author: "Aditya Verma", date: "2 weeks ago", rating: 5, title: "Exceptional quality and vibe!", comment: "Bought this for my last Spiti trip and it exceeded all expectations. Extremely high durability, looks super clean on my travel rucksack. Absolutely loved it!" }
+                            ];
+                            setEditingProd({
+                              ...editingProd,
+                              reviewsList: [
+                                ...cur,
+                                { id: String(Date.now()), author: 'New Customer', date: 'Just now', rating: 5, title: 'Loved this product!', comment: 'Superb quality and packaging.' }
+                              ]
+                            });
+                          }}
+                          className="px-3 py-1.5 bg-[#1D493E] text-white rounded-lg text-xs font-bold hover:bg-[#15342c] transition cursor-pointer"
+                        >
+                          + Add Review
+                        </button>
+                      </div>
+
+                      <div className="space-y-3 max-h-[300px] overflow-y-auto pr-1">
+                        {(editingProd.reviewsList || [
+                          { id: "1", author: "Aditya Verma", date: "2 weeks ago", rating: 5, title: "Exceptional quality and vibe!", comment: "Bought this for my last Spiti trip and it exceeded all expectations. Extremely high durability, looks super clean on my travel rucksack. Absolutely loved it!" },
+                          { id: "2", author: "Sneha Roy", date: "1 month ago", rating: 5, title: "Perfect gift for travel lovers", comment: "The finish and color vibrance are top notch. Delivery was fast too. Will definitely purchase more products from Go Banjara!" }
+                        ]).map((rev: any, idx: number) => (
+                          <div key={idx} className="bg-[#FAF9F6] p-3 border border-[#E5E0D5] rounded-xl space-y-2 relative">
+                            <button
+                              type="button"
+                              onClick={() => {
+                                const cur = editingProd.reviewsList || [];
+                                const updated = cur.filter((_: any, i: number) => i !== idx);
+                                setEditingProd({ ...editingProd, reviewsList: updated });
+                              }}
+                              className="absolute top-2 right-2 text-rose-500 hover:bg-rose-50 p-1 rounded-md text-xs font-bold cursor-pointer"
+                            >
+                              ✕
+                            </button>
+                            <div className="grid grid-cols-3 gap-2">
+                              <input
+                                type="text"
+                                placeholder="Author Name"
+                                value={rev.author}
+                                onChange={(e) => {
+                                  const list = [...(editingProd.reviewsList || [])];
+                                  list[idx] = { ...list[idx], author: e.target.value };
+                                  setEditingProd({ ...editingProd, reviewsList: list });
+                                }}
+                                className="p-2 bg-white border border-[#E5E0D5] rounded-lg text-xs font-bold text-[#2B2B2B]"
+                              />
+                              <select
+                                value={rev.rating}
+                                onChange={(e) => {
+                                  const list = [...(editingProd.reviewsList || [])];
+                                  list[idx] = { ...list[idx], rating: Number(e.target.value) };
+                                  setEditingProd({ ...editingProd, reviewsList: list });
+                                }}
+                                className="p-2 bg-white border border-[#E5E0D5] rounded-lg text-xs font-bold text-[#2B2B2B]"
+                              >
+                                <option value={5}>5 Stars ⭐⭐⭐⭐⭐</option>
+                                <option value={4}>4 Stars ⭐⭐⭐⭐</option>
+                                <option value={3}>3 Stars ⭐⭐⭐</option>
+                                <option value={2}>2 Stars ⭐⭐</option>
+                                <option value={1}>1 Star ⭐</option>
+                              </select>
+                              <input
+                                type="text"
+                                placeholder="Date (e.g. 2 weeks ago)"
+                                value={rev.date}
+                                onChange={(e) => {
+                                  const list = [...(editingProd.reviewsList || [])];
+                                  list[idx] = { ...list[idx], date: e.target.value };
+                                  setEditingProd({ ...editingProd, reviewsList: list });
+                                }}
+                                className="p-2 bg-white border border-[#E5E0D5] rounded-lg text-xs text-[#2B2B2B]"
+                              />
+                            </div>
+                            <input
+                              type="text"
+                              placeholder="Review Title"
+                              value={rev.title}
+                              onChange={(e) => {
+                                const list = [...(editingProd.reviewsList || [])];
+                                list[idx] = { ...list[idx], title: e.target.value };
+                                setEditingProd({ ...editingProd, reviewsList: list });
+                              }}
+                              className="w-full p-2 bg-white border border-[#E5E0D5] rounded-lg text-xs font-bold text-[#2B2B2B]"
+                            />
+                            <textarea
+                              rows={2}
+                              placeholder="Review comment text..."
+                              value={rev.comment || rev.content || ''}
+                              onChange={(e) => {
+                                const list = [...(editingProd.reviewsList || [])];
+                                list[idx] = { ...list[idx], comment: e.target.value };
+                                setEditingProd({ ...editingProd, reviewsList: list });
+                              }}
+                              className="w-full p-2 bg-white border border-[#E5E0D5] rounded-lg text-xs text-[#2B2B2B] resize-none"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* TAB 4: PRODUCT FAQS */}
+                  {activeProdEditorTab === 'faqs' && (
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between">
+                        <label className="text-xs font-bold text-[#1D493E] uppercase tracking-wider">Product FAQs</label>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const defaultFaqs = [
+                              { question: "What materials are the products made from?", answer: "We source only premium-grade, durable materials. Badges are made of zinc-alloy with glossy enamel; apparel is 100% organic cotton; and bags/covers are made of rugged, weatherproof canvas and genuine leather." },
+                              { question: "Is cash on delivery (COD) available?", answer: "Yes, COD is available for all products across India. You can choose COD during checkout." }
+                            ];
+                            const cur = editingProd.faqsList || defaultFaqs;
+                            setEditingProd({
+                              ...editingProd,
+                              faqsList: [
+                                ...cur,
+                                { question: 'New Question?', answer: 'Detailed answer goes here.' }
+                              ]
+                            });
+                          }}
+                          className="px-3 py-1.5 bg-[#1D493E] text-white rounded-lg text-xs font-bold hover:bg-[#15342c] transition cursor-pointer"
+                        >
+                          + Add FAQ
+                        </button>
+                      </div>
+
+                      <div className="space-y-3 max-h-[300px] overflow-y-auto pr-1">
+                        {(editingProd.faqsList || [
+                          { question: "What materials are the products made from?", answer: "We source only premium-grade, durable materials. Badges are made of zinc-alloy with glossy enamel; apparel is 100% organic cotton; and bags/covers are made of rugged, weatherproof canvas and genuine leather." },
+                          { question: "Is cash on delivery (COD) available?", answer: "Yes, COD is available for all products across India. You can choose COD during checkout." },
+                          { question: "What is your return & exchange policy?", answer: "We offer a hassle-free 7-day return and exchange policy. Items must be unused, in their original packaging with tags intact." }
+                        ]).map((faq: any, idx: number) => (
+                          <div key={idx} className="bg-[#FAF9F6] p-3 border border-[#E5E0D5] rounded-xl space-y-2 relative">
+                            <button
+                              type="button"
+                              onClick={() => {
+                                const cur = editingProd.faqsList || [];
+                                const updated = cur.filter((_: any, i: number) => i !== idx);
+                                setEditingProd({ ...editingProd, faqsList: updated });
+                              }}
+                              className="absolute top-2 right-2 text-rose-500 hover:bg-rose-50 p-1 rounded-md text-xs font-bold cursor-pointer"
+                            >
+                              ✕
+                            </button>
+                            <input
+                              type="text"
+                              placeholder="Question"
+                              value={faq.question}
+                              onChange={(e) => {
+                                const list = [...(editingProd.faqsList || [])];
+                                list[idx] = { ...list[idx], question: e.target.value };
+                                setEditingProd({ ...editingProd, faqsList: list });
+                              }}
+                              className="w-full p-2 bg-white border border-[#E5E0D5] rounded-lg text-xs font-bold text-[#2B2B2B]"
+                            />
+                            <textarea
+                              rows={2}
+                              placeholder="Answer"
+                              value={faq.answer}
+                              onChange={(e) => {
+                                const list = [...(editingProd.faqsList || [])];
+                                list[idx] = { ...list[idx], answer: e.target.value };
+                                setEditingProd({ ...editingProd, faqsList: list });
+                              }}
+                              className="w-full p-2 bg-white border border-[#E5E0D5] rounded-lg text-xs text-[#2B2B2B] resize-none"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#E5E0D5]">
+                    <button
+                      type="button"
+                      onClick={() => setEditingProd(null)}
+                      className="px-4 py-2.5 bg-gray-100 hover:bg-gray-200 text-[#2B2B2B] rounded-xl text-xs font-bold transition cursor-pointer"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="submit"
+                      className="px-6 py-2.5 bg-[#1D493E] hover:bg-[#15342c] text-white rounded-xl text-xs font-bold transition flex items-center gap-2 cursor-pointer shadow-xs"
+                    >
+                      <Save className="w-4 h-4" /> {products.some(p => p.id === editingProd.id) ? 'Save Changes' : 'Add Product to Store'}
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          )}
+
+          {/* EDIT TOUR PACKAGE MODAL */}
+          <PackageEditorModal
+            isOpen={!!editingPkg}
+            onClose={() => setEditingPkg(null)}
+            packageData={editingPkg}
+            onSave={handleSaveEditedPackage}
+          />
+
           {/* TAB 7: GLOBAL SITE SETTINGS & BRANDING */}
           {activeTab === 'global_settings' && (
             <div className="space-y-6">
               <div>
-                <h2 className="text-base font-black text-white flex items-center gap-2">
-                  <Settings className="w-5 h-5 text-emerald-400" />
+                <h2 className="text-base font-black text-[#1D493E] flex items-center gap-2">
+                  <Settings className="w-5 h-5 text-[#1D493E]" />
                   <span>Global Site Branding & Settings</span>
                 </h2>
-                <p className="text-xs text-slate-400 mt-1">Configure global announcements, logos, support channels, and footer information.</p>
+                <p className="text-xs text-[#6B7280] mt-1">Configure global announcements, logos, support channels, and footer information.</p>
               </div>
 
-              <form onSubmit={handleSaveGlobalSettings} className="bg-[#11231E] border border-emerald-900/40 rounded-3xl p-6 sm:p-8 space-y-6">
+              <form onSubmit={handleSaveGlobalSettings} className="bg-white border border-[#E5E0D5] rounded-3xl p-6 sm:p-8 space-y-6">
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1">
-                    <label className="text-[10px] font-bold text-slate-400 uppercase">Website Brand Name</label>
+                    <label className="text-[10px] font-bold text-[#6B7280] uppercase">Website Brand Name</label>
                     <input
                       type="text"
                       value={cms.global.siteName}
                       onChange={(e) => setCms(prev => ({ ...prev, global: { ...prev.global, siteName: e.target.value } }))}
-                      className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                      className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                     />
                   </div>
                   <div className="space-y-1">
-                    <label className="text-[10px] font-bold text-slate-400 uppercase">Currency Symbol</label>
+                    <label className="text-[10px] font-bold text-[#6B7280] uppercase">Currency Symbol</label>
                     <input
                       type="text"
                       value={cms.global.currencySymbol}
                       onChange={(e) => setCms(prev => ({ ...prev, global: { ...prev.global, currencySymbol: e.target.value } }))}
-                      className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                      className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                     />
                   </div>
                 </div>
@@ -1843,7 +3018,7 @@ export default function AdminPortal() {
                 <div className="space-y-4 border-t border-emerald-900/30 pt-4">
                   <h4 className="text-xs font-black text-[#FF5A36] uppercase tracking-wider">Header Announcement Bar</h4>
                   <div className="flex items-center gap-4">
-                    <label className="flex items-center gap-2 text-xs font-bold text-slate-300 cursor-pointer">
+                    <label className="flex items-center gap-2 text-xs font-bold text-[#2B2B2B] cursor-pointer">
                       <input
                         type="checkbox"
                         checked={cms.global.announcementEnabled}
@@ -1854,12 +3029,12 @@ export default function AdminPortal() {
                     </label>
                   </div>
                   <div className="space-y-1">
-                    <label className="text-[10px] font-bold text-slate-400 uppercase">Announcement Text</label>
+                    <label className="text-[10px] font-bold text-[#6B7280] uppercase">Announcement Text</label>
                     <input
                       type="text"
                       value={cms.global.announcementText}
                       onChange={(e) => setCms(prev => ({ ...prev, global: { ...prev.global, announcementText: e.target.value } }))}
-                      className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                      className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                     />
                   </div>
                 </div>
@@ -1868,60 +3043,60 @@ export default function AdminPortal() {
                   <h4 className="text-xs font-black text-[#FF5A36] uppercase tracking-wider">Support & Social Links</h4>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div className="space-y-1">
-                      <label className="text-[10px] font-bold text-slate-400 uppercase">Support Phone</label>
+                      <label className="text-[10px] font-bold text-[#6B7280] uppercase">Support Phone</label>
                       <input
                         type="text"
                         value={cms.global.supportPhone}
                         onChange={(e) => setCms(prev => ({ ...prev, global: { ...prev.global, supportPhone: e.target.value } }))}
-                        className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                        className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                       />
                     </div>
                     <div className="space-y-1">
-                      <label className="text-[10px] font-bold text-slate-400 uppercase">Support Email</label>
+                      <label className="text-[10px] font-bold text-[#6B7280] uppercase">Support Email</label>
                       <input
                         type="text"
                         value={cms.global.supportEmail}
                         onChange={(e) => setCms(prev => ({ ...prev, global: { ...prev.global, supportEmail: e.target.value } }))}
-                        className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                        className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                       />
                     </div>
                     <div className="space-y-1">
-                      <label className="text-[10px] font-bold text-slate-400 uppercase">WhatsApp Number</label>
+                      <label className="text-[10px] font-bold text-[#6B7280] uppercase">WhatsApp Number</label>
                       <input
                         type="text"
                         value={cms.global.whatsappNumber}
                         onChange={(e) => setCms(prev => ({ ...prev, global: { ...prev.global, whatsappNumber: e.target.value } }))}
-                        className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                        className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div className="space-y-1">
-                      <label className="text-[10px] font-bold text-slate-400 uppercase">Instagram URL</label>
+                      <label className="text-[10px] font-bold text-[#6B7280] uppercase">Instagram URL</label>
                       <input
                         type="text"
                         value={cms.global.instagramUrl}
                         onChange={(e) => setCms(prev => ({ ...prev, global: { ...prev.global, instagramUrl: e.target.value } }))}
-                        className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                        className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                       />
                     </div>
                     <div className="space-y-1">
-                      <label className="text-[10px] font-bold text-slate-400 uppercase">Facebook URL</label>
+                      <label className="text-[10px] font-bold text-[#6B7280] uppercase">Facebook URL</label>
                       <input
                         type="text"
                         value={cms.global.facebookUrl}
                         onChange={(e) => setCms(prev => ({ ...prev, global: { ...prev.global, facebookUrl: e.target.value } }))}
-                        className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                        className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                       />
                     </div>
                     <div className="space-y-1">
-                      <label className="text-[10px] font-bold text-slate-400 uppercase">YouTube URL</label>
+                      <label className="text-[10px] font-bold text-[#6B7280] uppercase">YouTube URL</label>
                       <input
                         type="text"
                         value={cms.global.youtubeUrl}
                         onChange={(e) => setCms(prev => ({ ...prev, global: { ...prev.global, youtubeUrl: e.target.value } }))}
-                        className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                        className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                       />
                     </div>
                   </div>
@@ -1940,15 +3115,352 @@ export default function AdminPortal() {
             </div>
           )}
 
-          {/* OTHER TABS (ORDERS, BOOKINGS, CUSTOMERS, PAYMENTS, BLOGS, DESTINATIONS) */}
-          {(activeTab === 'orders' || activeTab === 'bookings' || activeTab === 'customers' || activeTab === 'payments' || activeTab === 'blogs' || activeTab === 'destinations') && (
-            <div className="bg-[#11231E] border border-emerald-900/40 rounded-3xl p-8 text-center space-y-4">
-              <h2 className="text-lg font-black text-white capitalize">{activeTab} Management</h2>
-              <p className="text-xs text-slate-400 max-w-md mx-auto">
+          {/* LIVE CUSTOMERS TAB */}
+          {activeTab === 'customers' && (
+            <div className="space-y-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h2 className="text-lg font-black text-[#1D493E]">Registered Users & Customers</h2>
+                  <p className="text-xs text-[#6B7280]">View and manage all user accounts signed up on the site.</p>
+                </div>
+                <button onClick={fetchLiveAdminData} className="p-2 bg-[#11231E] hover:bg-emerald-900 border border-emerald-900/40 rounded-xl transition cursor-pointer">
+                  <RefreshCw className="w-4 h-4 text-[#1D493E]" />
+                </button>
+              </div>
+
+              {isLiveLoading ? (
+                <div className="text-center py-12 text-[#8D8D8D] text-xs">Loading users...</div>
+              ) : liveUsers.length === 0 ? (
+                <div className="text-center py-12 text-[#8D8D8D] text-xs">No users registered yet.</div>
+              ) : (
+                <div className="bg-white border border-[#E5E0D5] rounded-3xl overflow-hidden shadow-sm">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left border-collapse text-xs">
+                      <thead>
+                        <tr className="bg-[#F0EDE8] text-[#1D493E] font-bold border-b border-[#E5E0D5]">
+                          <th className="p-4">Name</th>
+                          <th className="p-4">Email</th>
+                          <th className="p-4">Phone</th>
+                          <th className="p-4">Role</th>
+                          <th className="p-4">Registered Date</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-[#E5E0D5]">
+                        {liveUsers.map((u) => (
+                          <tr key={u.id} className="hover:bg-[#F6F3EE] transition">
+                            <td className="p-4 font-bold text-[#2B2B2B]">{u.name || 'N/A'}</td>
+                            <td className="p-4 text-[#6B7280] text-sm">{u.email}</td>
+                            <td className="p-4">{u.phone || 'N/A'}</td>
+                            <td className="p-4">
+                              <span className={`px-2 py-0.5 rounded-md text-[10px] font-bold ${u.role === 'ADMIN' ? 'bg-[#1D493E] text-white' : 'bg-[#F0EDE8] text-[#1D493E] border border-[#1D493E]/20'}`}>
+                                {u.role}
+                              </span>
+                            </td>
+                            <td className="p-4 text-[#8D8D8D] text-sm">{new Date(u.createdAt).toLocaleDateString()}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* LIVE ORDERS TAB */}
+          {activeTab === 'orders' && (
+            <div className="space-y-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h2 className="text-lg font-black text-[#1D493E]">Merchandise Shop Orders</h2>
+                  <p className="text-xs text-[#6B7280]">View and track all store purchases made by users.</p>
+                </div>
+                <button onClick={fetchLiveAdminData} className="p-2 bg-[#11231E] hover:bg-emerald-900 border border-emerald-900/40 rounded-xl transition cursor-pointer">
+                  <RefreshCw className="w-4 h-4 text-[#1D493E]" />
+                </button>
+              </div>
+
+              {isLiveLoading ? (
+                <div className="text-center py-12 text-[#8D8D8D] text-xs">Loading orders...</div>
+              ) : liveOrders.length === 0 ? (
+                <div className="text-center py-12 text-[#8D8D8D] text-xs">No shop orders found.</div>
+              ) : (
+                <div className="bg-white border border-[#E5E0D5] rounded-3xl overflow-hidden shadow-sm">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left border-collapse text-xs">
+                      <thead>
+                        <tr className="bg-[#F0EDE8] text-[#1D493E] font-bold border-b border-[#E5E0D5]">
+                          <th className="p-4">Order ID</th>
+                          <th className="p-4">Customer</th>
+                          <th className="p-4">Items</th>
+                          <th className="p-4">Total Amount</th>
+                          <th className="p-4">Status</th>
+                          <th className="p-4">Date</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-[#E5E0D5]">
+                        {liveOrders.map((o) => (
+                          <tr key={o.id} className="hover:bg-[#F6F3EE] transition">
+                            <td className="p-4 font-mono font-bold text-[#FF5A36]">#{o.id.slice(-6).toUpperCase()}</td>
+                            <td className="p-4">
+                              <div className="font-bold text-[#2B2B2B]">{o.user?.name || 'Guest User'}</div>
+                              <div className="text-[10px] text-[#8D8D8D]">{o.user?.email}</div>
+                            </td>
+                            <td className="p-4 max-w-[200px] truncate">
+                              {Array.isArray(o.items)
+                                ? o.items.map((it: any) => `${it.name} (x${it.quantity})`).join(', ')
+                                : 'No items'}
+                            </td>
+                            <td className="p-4 font-bold text-[#2B2B2B]">₹{(o.totalAmount || 0).toLocaleString()}</td>
+                            <td className="p-4">
+                              <span className={`px-2 py-0.5 rounded-md text-[10px] font-bold ${
+                                o.status === 'DELIVERED' ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' :
+                                o.status === 'SHIPPED' ? 'bg-sky-500/20 text-sky-400 border border-sky-500/30' :
+                                'bg-amber-500/20 text-amber-400 border border-amber-500/30'
+                              }`}>
+                                {o.status}
+                              </span>
+                            </td>
+                            <td className="p-4 text-[#8D8D8D] text-sm">{new Date(o.createdAt).toLocaleDateString()}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* LIVE BOOKINGS TAB */}
+          {activeTab === 'bookings' && (
+            <div className="space-y-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h2 className="text-lg font-black text-[#1D493E]">Travel Package Bookings</h2>
+                  <p className="text-xs text-[#6B7280]">View and manage all travel package booking transactions.</p>
+                </div>
+                <button onClick={fetchLiveAdminData} className="p-2 bg-[#11231E] hover:bg-emerald-900 border border-emerald-900/40 rounded-xl transition cursor-pointer">
+                  <RefreshCw className="w-4 h-4 text-[#1D493E]" />
+                </button>
+              </div>
+
+              {isLiveLoading ? (
+                <div className="text-center py-12 text-[#8D8D8D] text-xs">Loading bookings...</div>
+              ) : liveBookings.length === 0 ? (
+                <div className="text-center py-12 text-[#8D8D8D] text-xs">No bookings found.</div>
+              ) : (
+                <div className="bg-white border border-[#E5E0D5] rounded-3xl overflow-hidden shadow-sm">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left border-collapse text-xs">
+                      <thead>
+                        <tr className="bg-[#F0EDE8] text-[#1D493E] font-bold border-b border-[#E5E0D5]">
+                          <th className="p-4">Booking ID</th>
+                          <th className="p-4">Customer</th>
+                          <th className="p-4">Package</th>
+                          <th className="p-4">Departure Date</th>
+                          <th className="p-4">Travelers</th>
+                          <th className="p-4">Total Paid</th>
+                          <th className="p-4">Status</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-[#E5E0D5]">
+                        {liveBookings.map((b) => (
+                          <tr key={b.id} className="hover:bg-[#F6F3EE] transition">
+                            <td className="p-4 font-mono font-bold text-amber-500">#{b.id.slice(-6).toUpperCase()}</td>
+                            <td className="p-4">
+                              <div className="font-bold text-[#2B2B2B]">{b.user?.name || 'Guest User'}</div>
+                              <div className="text-[10px] text-[#8D8D8D]">{b.user?.email}</div>
+                            </td>
+                            <td className="p-4 font-bold text-[#2B2B2B]">{b.packageName}</td>
+                            <td className="p-4">{new Date(b.departureDate).toLocaleDateString()}</td>
+                            <td className="p-4 text-center font-bold">{b.travelersCount}</td>
+                            <td className="p-4 font-bold text-[#2B2B2B]">₹{(b.totalPaid || 0).toLocaleString()}</td>
+                            <td className="p-4">
+                              <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                                {b.status}
+                              </span>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* LIVE NEWSLETTER SUBSCRIBERS */}
+          {activeTab === 'newsletters' && (
+            <div className="space-y-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h2 className="text-lg font-black text-[#1D493E]">Newsletter Subscribers</h2>
+                  <p className="text-xs text-[#6B7280]">List of all users subscribed to your email updates.</p>
+                </div>
+                <button onClick={fetchLiveAdminData} className="p-2 bg-[#11231E] hover:bg-emerald-900 border border-emerald-900/40 rounded-xl transition cursor-pointer">
+                  <RefreshCw className="w-4 h-4 text-[#1D493E]" />
+                </button>
+              </div>
+
+              {isLiveLoading ? (
+                <div className="text-center py-12 text-[#8D8D8D] text-xs">Loading subscribers...</div>
+              ) : liveSubscribers.length === 0 ? (
+                <div className="text-center py-12 text-[#8D8D8D] text-xs">No newsletter subscribers yet.</div>
+              ) : (
+                <div className="bg-white border border-[#E5E0D5] rounded-3xl overflow-hidden max-w-2xl shadow-xl">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left border-collapse text-xs">
+                      <thead>
+                        <tr className="bg-[#F0EDE8] text-[#1D493E] font-bold border-b border-[#E5E0D5]">
+                          <th className="p-4">Subscriber Email</th>
+                          <th className="p-4">Subscribed At</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-[#E5E0D5]">
+                        {liveSubscribers.map((sub) => (
+                          <tr key={sub.id} className="hover:bg-[#F6F3EE] transition">
+                            <td className="p-4 font-mono font-bold text-[#2B2B2B]">{sub.email}</td>
+                            <td className="p-4 text-[#8D8D8D] text-sm">{new Date(sub.createdAt).toLocaleDateString()}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* LIVE FORM SUBMISSIONS */}
+          {activeTab === 'submissions' && (
+            <div className="space-y-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h2 className="text-lg font-black text-[#1D493E]">Contact Form Submissions</h2>
+                  <p className="text-xs text-[#6B7280]">View and respond to customer queries sent from the Contact page.</p>
+                </div>
+                <button onClick={fetchLiveAdminData} className="p-2 bg-[#11231E] hover:bg-emerald-900 border border-emerald-900/40 rounded-xl transition cursor-pointer">
+                  <RefreshCw className="w-4 h-4 text-[#1D493E]" />
+                </button>
+              </div>
+
+              {isLiveLoading ? (
+                <div className="text-center py-12 text-[#8D8D8D] text-xs">Loading form submissions...</div>
+              ) : liveSubmissions.length === 0 ? (
+                <div className="text-center py-12 text-[#8D8D8D] text-xs">No contact submissions found.</div>
+              ) : (
+                <div className="bg-white border border-[#E5E0D5] rounded-3xl overflow-hidden shadow-sm">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left border-collapse text-xs">
+                      <thead>
+                        <tr className="bg-[#F0EDE8] text-[#1D493E] font-bold border-b border-[#E5E0D5]">
+                          <th className="p-4">Name</th>
+                          <th className="p-4">Email</th>
+                          <th className="p-4">Mobile</th>
+                          <th className="p-4">Message</th>
+                          <th className="p-4">Status</th>
+                          <th className="p-4">Date</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-[#E5E0D5]">
+                        {liveSubmissions.map((sub) => (
+                          <tr key={sub.id} className="hover:bg-[#F6F3EE] transition">
+                            <td className="p-4 font-bold text-[#2B2B2B]">{sub.name}</td>
+                            <td className="p-4 text-[#6B7280] text-sm">{sub.email}</td>
+                            <td className="p-4">{sub.mobile || 'N/A'}</td>
+                            <td className="p-4 max-w-[250px] truncate" title={sub.message}>{sub.message}</td>
+                            <td className="p-4">
+                              <span className={`px-2 py-0.5 rounded-md text-[10px] font-bold ${
+                                sub.status === 'READ' ? 'bg-[#F0EDE8] text-[#8D8D8D] border border-[#E5E0D5]' : 'bg-red-50 text-red-600 border border-red-200'
+                              }`}>
+                                {sub.status}
+                              </span>
+                            </td>
+                            <td className="p-4 text-[#8D8D8D] text-sm">{new Date(sub.createdAt).toLocaleDateString()}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* LIVE PAYMENTS TAB */}
+          {activeTab === 'payments' && (
+            <div className="space-y-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h2 className="text-lg font-black text-[#1D493E]">Payment Logs & Transactions</h2>
+                  <p className="text-xs text-[#6B7280]">Audit logs for all Razorpay transactions processed through the gateway.</p>
+                </div>
+                <button onClick={fetchLiveAdminData} className="p-2 bg-[#11231E] hover:bg-emerald-900 border border-emerald-900/40 rounded-xl transition cursor-pointer">
+                  <RefreshCw className="w-4 h-4 text-[#1D493E]" />
+                </button>
+              </div>
+
+              {isLiveLoading ? (
+                <div className="text-center py-12 text-[#8D8D8D] text-xs">Loading payment records...</div>
+              ) : (liveOrders.length === 0 && liveBookings.length === 0) ? (
+                <div className="text-center py-12 text-[#8D8D8D] text-xs">No payment logs found.</div>
+              ) : (
+                <div className="bg-white border border-[#E5E0D5] rounded-3xl overflow-hidden shadow-sm">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left border-collapse text-xs">
+                      <thead>
+                        <tr className="bg-[#F0EDE8] text-[#1D493E] font-bold border-b border-[#E5E0D5]">
+                          <th className="p-4">Transaction ID</th>
+                          <th className="p-4">Type</th>
+                          <th className="p-4">Customer</th>
+                          <th className="p-4">Amount</th>
+                          <th className="p-4">Status</th>
+                          <th className="p-4">Date</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-[#E5E0D5]">
+                        {[
+                          ...liveOrders.map((o) => ({ id: `pay_${o.id.slice(-8)}`, type: 'Shop Purchase', name: o.user?.name, email: o.user?.email, amount: o.totalAmount, date: o.createdAt, status: 'PAID' })),
+                          ...liveBookings.map((b) => ({ id: `pay_${b.id.slice(-8)}`, type: 'Trip Booking', name: b.user?.name, email: b.user?.email, amount: b.totalPaid, date: b.createdAt, status: 'PAID' }))
+                        ]
+                          .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+                          .map((p, idx) => (
+                            <tr key={idx} className="hover:bg-[#F6F3EE] transition">
+                              <td className="p-4 font-mono font-bold text-[#6B7280]">{p.id}</td>
+                              <td className="p-4 font-bold">{p.type}</td>
+                              <td className="p-4">
+                                <div className="font-bold text-[#2B2B2B]">{p.name || 'Guest User'}</div>
+                                <div className="text-[10px] text-[#8D8D8D]">{p.email}</div>
+                              </td>
+                              <td className="p-4 font-bold text-[#2B2B2B]">₹{(p.amount || 0).toLocaleString()}</td>
+                              <td className="p-4">
+                                <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                                  {p.status}
+                                </span>
+                              </td>
+                              <td className="p-4 text-[#8D8D8D] text-sm">{new Date(p.date).toLocaleDateString()}</td>
+                            </tr>
+                          ))
+                        }
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* CMS OR DEFAULT PLACEHOLDERS */}
+          {(activeTab === 'blogs' || activeTab === 'destinations') && (
+            <div className="bg-white border border-[#E5E0D5] rounded-3xl p-8 text-center space-y-4 shadow-xl animate-fade-in">
+              <h2 className="text-lg font-black text-[#1D493E] capitalize">{activeTab} Management</h2>
+              <p className="text-xs text-[#6B7280] max-w-md mx-auto">
                 Track real-time transactions, manage entries, and export audit logs.
               </p>
-              <div className="p-4 bg-[#0B1513] rounded-2xl border border-emerald-900/40 inline-block text-xs font-mono text-emerald-400">
-                Total Records Loaded: {activeTab === 'orders' ? orders.length : activeTab === 'bookings' ? bookings.length : activeTab === 'customers' ? customers.length : activeTab === 'blogs' ? blogs.length : destinations.length}
+              <div className="p-4 bg-[#F0EDE8] rounded-2xl border border-[#E5E0D5] inline-block text-xs font-mono text-[#1D493E]">
+                Total Records Loaded: {activeTab === 'blogs' ? blogs.length : destinations.length}
               </div>
             </div>
           )}
@@ -1959,11 +3471,11 @@ export default function AdminPortal() {
       {/* CREATE / EDIT CUSTOM PAGE MODAL */}
       {isPageModalOpen && editingCustomPage && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-[#11231E] border border-emerald-900/50 rounded-3xl max-w-3xl w-full p-6 sm:p-8 space-y-6 text-slate-100 shadow-2xl">
+          <div className="bg-white border border-[#E5E0D5] rounded-3xl max-w-3xl w-full p-6 sm:p-8 space-y-6 text-[#2B2B2B] shadow-2xl">
             
             <div className="flex items-center justify-between border-b border-emerald-900/40 pb-4">
-              <h3 className="text-base font-black text-white flex items-center gap-2">
-                <FileText className="w-5 h-5 text-amber-400" />
+              <h3 className="text-base font-black text-[#1D493E] flex items-center gap-2">
+                <FileText className="w-5 h-5 text-[#1D493E]" />
                 <span>{editingCustomPage.id ? 'Edit Custom Page' : 'Create Custom Page'}</span>
               </h3>
               <button
@@ -1978,21 +3490,21 @@ export default function AdminPortal() {
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1">
-                  <label className="text-[10px] font-bold text-slate-400 uppercase">Page Title *</label>
+                  <label className="text-[10px] font-bold text-[#6B7280] uppercase">Page Title *</label>
                   <input
                     type="text"
                     required
                     placeholder="e.g. Privacy Policy"
                     value={editingCustomPage.title}
                     onChange={(e) => setEditingCustomPage(prev => prev ? { ...prev, title: e.target.value, slug: e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '-') } : null)}
-                    className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                    className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-[10px] font-bold text-slate-400 uppercase">URL Slug *</label>
-                  <div className="flex items-center bg-[#0B1513] border border-emerald-900/40 rounded-xl px-3 text-xs">
-                    <span className="text-slate-500 font-mono">/pages/</span>
+                  <label className="text-[10px] font-bold text-[#6B7280] uppercase">URL Slug *</label>
+                  <div className="flex items-center bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl px-3 text-xs">
+                    <span className="text-[#8D8D8D]">/pages/</span>
                     <input
                       type="text"
                       required
@@ -2007,11 +3519,11 @@ export default function AdminPortal() {
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div className="space-y-1">
-                  <label className="text-[10px] font-bold text-slate-400 uppercase">Publication Status</label>
+                  <label className="text-[10px] font-bold text-[#6B7280] uppercase">Publication Status</label>
                   <select
                     value={editingCustomPage.status}
                     onChange={(e) => setEditingCustomPage(prev => prev ? { ...prev, status: e.target.value as any } : null)}
-                    className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                    className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                   >
                     <option value="published">Published</option>
                     <option value="draft">Draft (Hidden)</option>
@@ -2019,11 +3531,11 @@ export default function AdminPortal() {
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-[10px] font-bold text-slate-400 uppercase">Header Nav Visibility</label>
+                  <label className="text-[10px] font-bold text-[#6B7280] uppercase">Header Nav Visibility</label>
                   <select
                     value={editingCustomPage.showInHeader ? 'yes' : 'no'}
                     onChange={(e) => setEditingCustomPage(prev => prev ? { ...prev, showInHeader: e.target.value === 'yes' } : null)}
-                    className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                    className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                   >
                     <option value="no">Hidden from Header</option>
                     <option value="yes">Show in Header</option>
@@ -2031,11 +3543,11 @@ export default function AdminPortal() {
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-[10px] font-bold text-slate-400 uppercase">Footer Nav Visibility</label>
+                  <label className="text-[10px] font-bold text-[#6B7280] uppercase">Footer Nav Visibility</label>
                   <select
                     value={editingCustomPage.showInFooter ? 'yes' : 'no'}
                     onChange={(e) => setEditingCustomPage(prev => prev ? { ...prev, showInFooter: e.target.value === 'yes' } : null)}
-                    className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                    className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                   >
                     <option value="yes">Show in Footer</option>
                     <option value="no">Hidden from Footer</option>
@@ -2044,35 +3556,65 @@ export default function AdminPortal() {
               </div>
 
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-slate-400 uppercase">Hero Banner Image URL (Optional)</label>
-                <input
-                  type="text"
-                  placeholder="https://images.unsplash.com/..."
-                  value={editingCustomPage.heroImage || ''}
-                  onChange={(e) => setEditingCustomPage(prev => prev ? { ...prev, heroImage: e.target.value } : null)}
-                  className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
-                />
+                <label className="text-[10px] font-bold text-[#6B7280] uppercase flex items-center justify-between">
+                  <span>Hero Banner Image (Optional)</span>
+                  <span className="text-[10px] text-[#8D8D8D] font-normal">URL or Upload</span>
+                </label>
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    placeholder="https://images.unsplash.com/..."
+                    value={editingCustomPage.heroImage || ''}
+                    onChange={(e) => setEditingCustomPage(prev => prev ? { ...prev, heroImage: e.target.value } : null)}
+                    className="flex-1 p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                  />
+                  <label className="px-4 py-3 bg-[#1D493E]/10 hover:bg-[#1D493E] text-[#1D493E] hover:text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5 cursor-pointer shrink-0">
+                    <Upload className="w-4 h-4" />
+                    <span>Upload Photo</span>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        if (file) {
+                          const reader = new FileReader();
+                          reader.onload = (evt) => {
+                            const res = evt.target?.result as string;
+                            if (res) setEditingCustomPage(prev => prev ? { ...prev, heroImage: res } : null);
+                          };
+                          reader.readAsDataURL(file);
+                        }
+                      }}
+                    />
+                  </label>
+                </div>
+                {editingCustomPage.heroImage && (
+                  <div className="relative w-full h-24 rounded-xl overflow-hidden border border-[#E5E0D5] bg-[#F6F3EE] mt-2">
+                    <img src={editingCustomPage.heroImage} alt="Banner Preview" className="w-full h-full object-cover" />
+                  </div>
+                )}
               </div>
 
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-slate-400 uppercase">Meta Description (SEO)</label>
+                <label className="text-[10px] font-bold text-[#6B7280] uppercase">Meta Description (SEO)</label>
                 <input
                   type="text"
                   placeholder="Brief summary of the page..."
                   value={editingCustomPage.metaDescription || ''}
                   onChange={(e) => setEditingCustomPage(prev => prev ? { ...prev, metaDescription: e.target.value } : null)}
-                  className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white"
+                  className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
                 />
               </div>
 
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-slate-400 uppercase">Page Body Content (Markdown Supported)</label>
+                <label className="text-[10px] font-bold text-[#6B7280] uppercase">Page Body Content (Markdown Supported)</label>
                 <textarea
                   rows={8}
                   placeholder="# Page Heading&#10;&#10;Write page body text..."
                   value={editingCustomPage.content}
                   onChange={(e) => setEditingCustomPage(prev => prev ? { ...prev, content: e.target.value } : null)}
-                  className="w-full p-3 bg-[#0B1513] border border-emerald-900/40 rounded-xl text-xs text-white font-mono"
+                  className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] font-mono"
                 />
               </div>
 
@@ -2080,7 +3622,7 @@ export default function AdminPortal() {
                 <button
                   type="button"
                   onClick={() => { setIsPageModalOpen(false); setEditingCustomPage(null); }}
-                  className="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-bold transition cursor-pointer"
+                  className="px-5 py-2.5 bg-slate-800 hover:bg-[#F0EDE8] text-[#8D8D8D] border border-[#E5E0D5] rounded-xl text-xs font-bold transition cursor-pointer"
                 >
                   Cancel
                 </button>
@@ -2094,6 +3636,102 @@ export default function AdminPortal() {
 
             </form>
 
+          </div>
+        </div>
+      )}
+
+      {/* CHANGE ADMIN CREDENTIALS MODAL */}
+      {isChangingCreds && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center z-[99999] p-4 text-left font-sans">
+          <div className="bg-white border border-[#E5E0D5] rounded-2xl p-6 sm:p-8 max-w-md w-full shadow-2xl space-y-5">
+            <div className="flex items-center justify-between border-b border-[#E5E0D5] pb-3">
+              <div className="flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-xl bg-[#1D493E] text-white flex items-center justify-center font-bold">
+                  <Key className="w-4 h-4 text-emerald-300" />
+                </div>
+                <div>
+                  <h3 className="text-base font-bold text-[#1D493E]">
+                    Admin Login Credentials
+                  </h3>
+                  <p className="text-xs text-gray-500 font-medium">Update your admin login email & password</p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsChangingCreds(false)}
+                className="text-[#8D8D8D] hover:text-[#2B2B2B] font-bold text-sm cursor-pointer p-1"
+              >
+                ✕
+              </button>
+            </div>
+
+            <form onSubmit={handleUpdateAdminCreds} className="space-y-4">
+              <div className="space-y-1">
+                <label className="text-[11px] font-bold text-[#1D493E] uppercase tracking-wider block">Admin Email Address</label>
+                <input
+                  type="email"
+                  required
+                  value={newAdminEmail}
+                  onChange={(e) => setNewAdminEmail(e.target.value)}
+                  placeholder="gobanjara.trd@gmail.com"
+                  className="w-full p-3 bg-[#FAF9F6] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-[11px] font-bold text-[#1D493E] uppercase tracking-wider block">Current Admin Password</label>
+                <input
+                  type="password"
+                  required
+                  value={currentAdminPass}
+                  onChange={(e) => setCurrentAdminPass(e.target.value)}
+                  placeholder="Enter current admin password"
+                  className="w-full p-3 bg-[#FAF9F6] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
+                />
+                <p className="text-[10px] text-gray-400">Default: GoBanjara123!</p>
+              </div>
+
+              <div className="space-y-1 pt-1 border-t border-[#E5E0D5]">
+                <label className="text-[11px] font-bold text-[#1D493E] uppercase tracking-wider block">New Admin Password (Optional)</label>
+                <input
+                  type="password"
+                  value={newAdminPass}
+                  onChange={(e) => setNewAdminPass(e.target.value)}
+                  placeholder="Leave blank to keep current password"
+                  className="w-full p-3 bg-[#FAF9F6] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
+                />
+              </div>
+
+              {newAdminPass && (
+                <div className="space-y-1">
+                  <label className="text-[11px] font-bold text-[#1D493E] uppercase tracking-wider block">Confirm New Admin Password</label>
+                  <input
+                    type="password"
+                    required={Boolean(newAdminPass)}
+                    value={confirmAdminPass}
+                    onChange={(e) => setConfirmAdminPass(e.target.value)}
+                    placeholder="Re-enter new admin password"
+                    className="w-full p-3 bg-[#FAF9F6] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
+                  />
+                </div>
+              )}
+
+              <div className="flex items-center justify-end gap-3 pt-3 border-t border-[#E5E0D5]">
+                <button
+                  type="button"
+                  onClick={() => setIsChangingCreds(false)}
+                  className="px-4 py-2.5 bg-gray-100 hover:bg-gray-200 text-[#2B2B2B] rounded-xl text-xs font-bold transition cursor-pointer"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="px-5 py-2.5 bg-[#1D493E] hover:bg-[#15342c] text-white rounded-xl text-xs font-bold transition flex items-center gap-2 cursor-pointer shadow-xs"
+                >
+                  <Save className="w-4 h-4" /> Save Credentials
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       )}

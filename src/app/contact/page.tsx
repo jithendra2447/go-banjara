@@ -979,7 +979,19 @@ export default function ContactPage() {
             className="group hover:bg-[#15342c] transition-all duration-300 inline-flex items-center justify-center gap-2 cursor-pointer h-[48px] md:h-[55px] px-6 md:px-[36px] text-sm md:text-[16px] mt-1 md:mt-0"
           >
             <span>Reserve your tour now</span>
-            <span className="text-lg font-sans group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300">↗</span>
+            <svg 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="2.25" 
+              strokeLinecap="round" 
+              strokeLinejoin="round"
+              className="w-5 h-5 shrink-0 transform transition-transform duration-300 ease-out group-hover:translate-x-1.5 group-hover:-translate-y-1.5"
+            >
+              <path d="M7 17l2.5-2.5" />
+              <path d="M12.5 11.5L17 7" />
+              <path d="M7 7h10v10" />
+            </svg>
           </Link>
         </section>
       </div>

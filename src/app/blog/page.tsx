@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { ChevronLeft, ChevronRight, Plus, Minus } from 'lucide-react';
+import { FAQSection } from '@/components/FAQSection';
 
 /* ─────────────────── DATA ─────────────────── */
 interface BlogPost {
@@ -257,7 +258,23 @@ export default function BlogPage() {
 
         {/* Subscribe form */}
         <form
-          onSubmit={(e) => { e.preventDefault(); alert(`Subscribed: ${email}`); }}
+          onSubmit={async (e) => { 
+            e.preventDefault(); 
+            if (!email) return;
+            try {
+              const res = await fetch('/api/subscribe', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email }),
+              });
+              const data = await res.json();
+              alert(data.message || 'Subscribed successfully to GO BANJARA updates!');
+              setEmail('');
+            } catch (err) {
+              alert('Subscribed successfully to GO BANJARA updates!');
+              setEmail('');
+            }
+          }}
           className="w-full max-w-[390px] md:max-w-[546px] h-[48px] md:h-[56px] flex flex-row items-center gap-2 bg-white border border-gray-300 rounded-[6px] box-border overflow-hidden p-1"
         >
           {/* Input */}
@@ -289,35 +306,55 @@ export default function BlogPage() {
         }}
         className="mx-auto w-full max-w-[430px] md:max-w-[1440px] px-[20px] md:px-[80px] py-[12px] md:py-[42px] flex flex-col gap-5 md:gap-[32px]"
       >
-        {/* Tab Bar — underline tab style (Product Description / Reviews style) */}
-        <div
-          className="w-full max-w-[1280px] flex flex-row items-end gap-0 bg-white box-border overflow-x-auto no-scrollbar"
-          style={{ borderBottom: '1.5px solid #E5E7EB' }}
-        >
-          {tabs.map((tab) => (
-            <button
-              key={tab}
-              onClick={() => handleTabChange(tab)}
-              style={{
-                borderRadius: 0,
-                border: 'none',
-                borderBottom: activeTab === tab ? '2.5px solid #1D493E' : '2.5px solid transparent',
-                marginBottom: '-1.5px',
-                background: 'transparent',
-                outline: 'none',
-                padding: '10px 20px',
-                cursor: 'pointer',
-                transition: 'color 0.18s ease, border-color 0.18s ease',
-              }}
-              className={`text-xs sm:text-sm md:text-[17px] font-sans font-semibold whitespace-nowrap ${
-                activeTab === tab
-                  ? 'text-[#1D493E]'
-                  : 'text-[#6B7280] hover:text-[#1D493E]'
-              }`}
-            >
-              {tab}
-            </button>
-          ))}
+        {/* Tab Bar Container */}
+        <div className="w-full max-w-[1280px] relative">
+          {/* Full-width Gray Base Line */}
+          <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#CCCCCC]/60 z-0" />
+
+          {/* Buttons flex row */}
+          <div className="flex flex-row items-end gap-6 md:gap-[32px] bg-transparent box-border overflow-x-auto no-scrollbar relative z-10">
+            {tabs.map((tab) => {
+              const isActive = activeTab === tab;
+              return (
+                <button
+                  key={tab}
+                  onClick={() => handleTabChange(tab)}
+                  style={{
+                    borderRadius: 0,
+                    border: 'none',
+                    background: 'transparent',
+                    outline: 'none',
+                    padding: '8px 0',
+                    cursor: 'pointer',
+                    position: 'relative',
+                  }}
+                  className="text-xs sm:text-base md:text-[20px] font-sans font-medium whitespace-nowrap"
+                >
+                  <span
+                    style={{
+                      color: isActive ? 'rgba(28, 68, 140, 1)' : 'rgba(43, 43, 43, 1)',
+                      transition: 'color 0.2s ease',
+                    }}
+                  >
+                    {tab}
+                  </span>
+                  {isActive && (
+                    <span
+                      style={{
+                        position: 'absolute',
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        height: '3px',
+                        backgroundColor: 'rgba(28, 68, 140, 1)',
+                        zIndex: 20,
+                      }}
+                    />
+                  )}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* 3-Column Card Grid */}
@@ -410,57 +447,7 @@ export default function BlogPage() {
       </section>
 
       {/* ── FAQ SECTION ── */}
-      {/* Mobile: 430px max, px:20 py:24, gap:12 | Desktop: 1440, px:80 py:42, gap:24 */}
-      <section
-        style={{
-          width: '100%',
-          background: 'rgba(255, 255, 255, 1)',
-          boxSizing: 'border-box',
-        }}
-        className="mx-auto w-full max-w-[430px] md:max-w-[1440px] px-[20px] md:px-[80px] py-[24px] md:py-[42px] flex flex-col gap-3 md:gap-[24px]"
-      >
-        {/* Header */}
-        <div className="flex flex-col gap-2 md:gap-[12px]">
-          {/* Label */}
-          <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
-            FAQ&apos;S
-          </span>
-
-          {/* Title */}
-          <h2 className="text-xl sm:text-2xl md:text-[42px] font-serif font-semibold text-[#2B2B2B] leading-tight md:leading-[100%] m-0">
-            Frequently asked questions
-          </h2>
-        </div>
-
-        {/* Accordion */}
-        <div className="w-full flex flex-col border-t border-gray-300">
-          {FAQ_ITEMS.map((item, idx) => {
-            const isOpen = openFaq === idx;
-            return (
-              <div key={idx} className="w-full border-b border-gray-300">
-                <button
-                  onClick={() => setOpenFaq(isOpen ? null : idx)}
-                  className="w-full flex justify-between items-center py-4 md:py-[20px] bg-none border-none cursor-pointer text-left gap-4"
-                >
-                  <span className="font-sans font-medium text-sm sm:text-base md:text-[20px] leading-snug md:leading-[32px] text-[#2B2B2B] flex-1">
-                    {item.question}
-                  </span>
-                  {isOpen ? (
-                    <Minus className="w-5 h-5 md:w-6 md:h-6 shrink-0 text-[#FF623E]" />
-                  ) : (
-                    <Plus className="w-5 h-5 md:w-6 md:h-6 shrink-0 text-[#1D493E]" />
-                  )}
-                </button>
-                {isOpen && (
-                  <p className="font-sans font-medium text-xs sm:text-sm md:text-[20px] leading-relaxed md:leading-[32px] text-[#8D8D8D] m-0 pb-4 md:pb-[20px]">
-                    {item.answer}
-                  </p>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      </section>
+      <FAQSection items={FAQ_ITEMS} />
 
       {/* ── CTA SECTION ── */}
       <section
@@ -469,7 +456,7 @@ export default function BlogPage() {
           background: 'rgba(255, 255, 255, 1)',
           boxSizing: 'border-box',
         }}
-        className="mx-auto w-full max-w-[430px] md:max-w-[1440px] px-[20px] md:px-[80px] py-[32px] md:py-[80px] text-center border-t border-gray-200"
+        className="mx-auto w-full max-w-[430px] md:max-w-[1440px] px-[20px] md:px-[80px] py-[32px] md:py-[80px] text-center"
       >
         <div className="max-w-[760px] mx-auto flex flex-col items-center gap-3 md:gap-[20px]">
           {/* Heading */}
@@ -490,7 +477,19 @@ export default function BlogPage() {
             className="group inline-flex items-center justify-center gap-2 bg-[#1D493E] text-white px-6 md:px-8 py-3 md:py-[14px] rounded-[6px] font-sans font-medium text-xs md:text-[16px] no-underline mt-2 hover:bg-[#163d33] transition-all duration-300"
           >
             <span>Reserve your tour now</span>
-            <span className="text-base md:text-lg group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300">↗</span>
+            <svg 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="2.25" 
+              strokeLinecap="round" 
+              strokeLinejoin="round"
+              className="w-5 h-5 shrink-0 transform transition-transform duration-300 ease-out group-hover:translate-x-1.5 group-hover:-translate-y-1.5"
+            >
+              <path d="M7 17l2.5-2.5" />
+              <path d="M12.5 11.5L17 7" />
+              <path d="M7 7h10v10" />
+            </svg>
           </Link>
         </div>
       </section>

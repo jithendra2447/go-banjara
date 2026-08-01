@@ -314,21 +314,20 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 5. Two Mission/Vision Cards Section (Mobile 430x436 | Desktop 1440x783px spec) */}
+      {/* 4. Overlapping Sticker Cards Section (Mobile 430x174 | Desktop 1440x440px spec) */}
       <section 
         style={{ 
-          marginTop: "0px", 
-          position: "relative", 
-          zIndex: 20,
-          width: "100%",
-          background: "rgba(255, 255, 255, 1)",
-          boxSizing: "border-box"
+          width: "100%", 
+          background: "rgba(255, 255, 255, 1)", 
+          position: "relative",
+          boxSizing: "border-box",
+          zIndex: 30,
         }}
-        className="mx-auto w-full max-w-[430px] md:max-w-[1440px] px-[24px] py-[12px] md:py-[42px] md:px-[80px] shrink-0 flex flex-col items-center justify-center min-h-auto md:min-h-[783px] overflow-visible"
+        className="w-full shrink-0 overflow-visible min-h-[174px] md:min-h-[440px] h-[174px] md:h-[440px] flex items-center justify-center relative py-0 md:py-[30px]"
       >
-        {/* Overlapping Sticker Cards nested inside Section 5 */}
+        {/* Cards Container (Scaled to 174px height on Mobile, 418px on Desktop) */}
         <div 
-          className="flex items-center justify-center relative select-none scale-[0.42] sm:scale-[0.55] md:scale-100 origin-center transition-transform duration-300 pointer-events-auto z-30 mb-[-90px] md:mb-[-220px]"
+          className="flex items-center justify-center relative select-none scale-[0.42] sm:scale-[0.55] md:scale-100 origin-center transition-transform duration-300 pointer-events-auto translate-y-[20px] md:translate-y-[90px]"
           style={{ 
             width: "1709px", 
             height: "418px", 
@@ -551,8 +550,21 @@ export default function AboutPage() {
             />
           </div>
         </div>
+      </section>
 
-        <div className="flex flex-col md:flex-row items-center justify-between gap-3 md:gap-[32px] w-full max-w-[1280px] h-auto md:h-[699px] relative z-10">
+      {/* 5. Two Mission/Vision Cards Section (Mobile 430x436 | Desktop 1440x783px spec) */}
+      <section 
+        style={{ 
+          marginTop: "0px", 
+          position: "relative", 
+          zIndex: 20,
+          width: "100%",
+          background: "rgba(255, 255, 255, 1)",
+          boxSizing: "border-box"
+        }}
+        className="mx-auto w-full max-w-[430px] md:max-w-[1440px] px-[24px] py-[12px] md:py-[42px] md:px-[80px] shrink-0 flex items-center justify-center min-h-auto md:min-h-[783px]"
+      >
+        <div className="flex flex-col md:flex-row items-center justify-between gap-3 md:gap-[32px] w-full max-w-[1280px] h-auto md:h-[699px]">
           
           {/* Card 1: OUR MISSION */}
           <div 

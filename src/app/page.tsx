@@ -719,6 +719,7 @@ export default function Homepage() {
       )}
 
       {/* 4. DESTINATIONS SECTION */}
+      {cms.showDestinationsSection !== false && (
       <section className="bg-white pt-[20px] pb-0 relative z-10">
         <div className="hidden md:flex max-w-[1440px] mx-auto px-6 md:px-[80px] flex-col gap-[62px] text-center">
           
@@ -1155,10 +1156,12 @@ export default function Homepage() {
           </div>
         </div>
       </section>
+      )}
 
 
       {/* 5. TOP PRODUCT CATEGORIES */}
-      <section className="bg-white relative z-10">
+      {cms.showCategoriesSection !== false && (
+        <section className="bg-white relative z-10">
         {/* Desktop View (100% untouched) */}
         <div className="hidden md:flex max-w-[1440px] mx-auto px-6 md:px-20 pt-2 pb-[32px] flex-col gap-[32px]">
           {/* Header Row */}
@@ -1308,6 +1311,7 @@ export default function Homepage() {
           })()}
         </div>
       </section>
+      )}
 
       {/* 6. MARQUEE BANNER (Figma specs: w:430, h:31px, padding 8px 20px, gap 10px) */}
       <div className="bg-[#FFFF80] text-[#1D493E] h-[31px] sm:h-[78px] flex items-center overflow-hidden select-none relative z-10 py-[8px] sm:py-[24px] px-[20px]">
@@ -1334,7 +1338,8 @@ export default function Homepage() {
       </div>
 
       {/* 7. TODAY'S BEST DEALS FOR YOU */}
-      <section className="bg-white text-left relative z-10 w-full">
+      {cms.showDealsSection !== false && (
+        <section className="bg-white text-left relative z-10 w-full">
         {/* Desktop Container (hidden md:flex) */}
         <div className="hidden md:flex max-w-[1440px] w-full mx-auto pt-[20px] pb-[20px] px-6 md:px-[80px] flex-col gap-[32px]">
           
@@ -1568,9 +1573,11 @@ export default function Homepage() {
           </div>
         </div>
       </section>
+      )}
 
       {/* 8. MOST SELLING PRODUCTS */}
-      <section className="bg-white text-left relative z-10 w-full">
+      {cms.showBestSellingSection !== false && (
+        <section className="bg-white text-left relative z-10 w-full">
         {/* Desktop Container (hidden md:flex) */}
         <div className="hidden md:flex max-w-[1440px] mx-auto pt-[20px] pb-[20px] px-6 md:px-[80px] flex-col gap-[32px]">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-2 text-left">
@@ -1795,6 +1802,7 @@ export default function Homepage() {
           </div>
         </div>
       </section>
+      )}
 
       {/* 8.5 ORANGE HIGHLIGHT MARQUEE BANNER */}
       <div className="bg-[#FF623E] text-white h-[39px] md:h-[78px] flex items-center overflow-hidden select-none relative z-10 w-full py-[12px] px-[20px] md:py-[24px] md:px-[80px]">
@@ -1901,7 +1909,8 @@ export default function Homepage() {
       </section>
 
       {/* 9.5 REVIEWS SECTION (3-column grid matching Figma design) */}
-      <section className="bg-white text-left relative z-10 w-full">
+      {cms.showReviewsSection !== false && (
+        <section className="bg-white text-left relative z-10 w-full">
         {/* Desktop Container (hidden md:block) */}
         <div className="hidden md:flex max-w-[1440px] w-full mx-auto pt-[28px] flex-col gap-[32px]">
           
@@ -2196,9 +2205,11 @@ export default function Homepage() {
           </div>
         </div>
       </section>
+      )}
 
       {/* 10. TRAVEL DIARIES / STORIES */}
-      <section className="bg-white text-left relative z-10 w-full">
+      {cms.showBlogSection !== false && (
+        <section className="bg-white text-left relative z-10 w-full">
         {/* Desktop Container (hidden md:block) */}
         <div className="hidden md:flex max-w-[1280px] mx-auto pt-[28px] pb-[16px] px-6 md:px-0 flex-col gap-[32px]">
           
@@ -2318,203 +2329,210 @@ export default function Homepage() {
           </div>
         </div>
       </section>
+      )}
 
       {/* 11. FAQ ACCORDION SECTION */}
-      <section className="bg-white text-left relative z-10 w-full">
-        <FAQSection items={FAQ_ITEMS} />
-      </section>
+      {cms.showFaqSection !== false && (
+        <section className="bg-white text-left relative z-10 w-full">
+          <FAQSection items={FAQ_ITEMS} />
+        </section>
+      )}
 
       {/* 12. SERVICES TO HELP YOU SHOP */}
-      <section className="bg-white text-left relative z-10 w-full">
-        {/* Desktop Container (hidden md:flex) */}
-        <div className="hidden md:flex w-full max-w-[1440px] bg-white pt-[28px] pb-[28px] md:px-[80px] px-6 flex-col gap-[32px] mx-auto">
-          {/* Header */}
-          <div className="w-full max-w-[1280px] h-auto flex flex-col gap-[12px] justify-center text-left mx-auto">
-            <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
-              THE BANJARA TRIBE
-            </span>
-            <h2 className="font-serif font-semibold text-3xl md:text-[42px] leading-[1] tracking-[0px] text-[#2B2B2B] py-2">
-              Join the&nbsp;<span className="text-[#FF5A36]">Banjara Tribe</span>
+      {cms.showValuesSection !== false && (
+        <section className="bg-white text-left relative z-10 w-full">
+          {/* Desktop Container (hidden md:flex) */}
+          <div className="hidden md:flex w-full max-w-[1440px] bg-white pt-[28px] pb-[28px] md:px-[80px] px-6 flex-col gap-[32px] mx-auto">
+            {/* Header */}
+            <div className="w-full max-w-[1280px] h-auto flex flex-col gap-[12px] justify-center text-left mx-auto">
+              <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
+                THE BANJARA TRIBE
+              </span>
+              <h2 className="font-serif font-semibold text-3xl md:text-[42px] leading-[1] tracking-[0px] text-[#2B2B2B] py-2">
+                Join the&nbsp;<span className="text-[#FF5A36]">Banjara Tribe</span>
+              </h2>
+            </div>
+
+            {/* Cards Grid */}
+            <div className="w-full max-w-[1280px] h-auto grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-row gap-[32px] mx-auto">
+              {/* Card 1: FAQ */}
+              <div className="w-full lg:w-[296px] h-auto flex flex-col gap-[24px] rounded-[4px] bg-white">
+                <div className="w-full h-[250px] rounded-[4px] overflow-hidden">
+                  <img src="/service-faq.png" alt="FAQ illustration" className="w-full h-full object-cover rounded-[4px]" />
+                </div>
+                <div className="w-full h-auto flex flex-col gap-[12px]">
+                  <h3 className="font-sans font-semibold text-lg sm:text-xl md:text-[28px] leading-snug tracking-[0px] text-[#2B2B2B]">Frequently Asked Questions (FAQ)</h3>
+                  <p className="w-full h-auto font-sans font-medium text-sm sm:text-base md:text-[20px] leading-normal tracking-[0px] text-[rgba(43,43,43,0.8)]">See what are the commonly asked questions by our customers</p>
+                </div>
+              </div>
+
+              {/* Card 2: Home Delivery */}
+              <div className="w-full lg:w-[296px] h-auto flex flex-col gap-[24px] rounded-[4px] bg-white">
+                <div className="w-full h-[250px] rounded-[4px] overflow-hidden">
+                  <img src="/service-delivery.png" alt="Home delivery illustration" className="w-full h-full object-cover rounded-[4px]" />
+                </div>
+                <div className="w-full h-auto flex flex-col gap-[12px]">
+                  <h3 className="font-sans font-semibold text-lg sm:text-xl md:text-[28px] leading-snug tracking-[0px] text-[#2B2B2B]">Home Delivery Options available</h3>
+                  <p className="w-full h-auto font-sans font-medium text-sm sm:text-base md:text-[20px] leading-normal tracking-[0px] text-[rgba(43,43,43,0.8)]">Pay with multiple cards seamlessly and without interruption</p>
+                </div>
+              </div>
+
+              {/* Card 3: Secure Payment */}
+              <div className="w-full lg:w-[296px] h-auto flex flex-col gap-[24px] rounded-[4px] bg-white">
+                <div className="w-full h-[250px] rounded-[4px] overflow-hidden">
+                  <img src="/service-payment.png" alt="Secure payment illustration" className="w-full h-full object-cover rounded-[4px]" />
+                </div>
+                <div className="w-full h-auto flex flex-col gap-[12px]">
+                  <h3 className="font-sans font-semibold text-lg sm:text-xl md:text-[28px] leading-snug tracking-[0px] text-[#2B2B2B]">Secure Online Payment Process</h3>
+                  <p className="w-full h-auto font-sans font-medium text-sm sm:text-base md:text-[20px] leading-normal tracking-[0px] text-[rgba(43,43,43,0.8)]">Pay with multiple cards seamlessly and without interruption</p>
+                </div>
+              </div>
+
+              {/* Card 4: Open Box Delivery */}
+              <div className="w-full lg:w-[296px] h-auto flex flex-col gap-[24px] rounded-[4px] bg-white">
+                <div className="w-full h-[250px] rounded-[4px] overflow-hidden">
+                  <img src="/service-openbox.png" alt="Open box delivery illustration" className="w-full h-full object-cover rounded-[4px]" />
+                </div>
+                <div className="w-full h-auto flex flex-col gap-[12px]">
+                  <h3 className="font-sans font-semibold text-lg sm:text-xl md:text-[28px] leading-snug tracking-[0px] text-[#2B2B2B]">Open Box Delivery</h3>
+                  <p className="w-full h-auto font-sans font-medium text-sm sm:text-base md:text-[20px] leading-normal tracking-[0px] text-[rgba(43,43,43,0.8)]">Pay with multiple cards seamlessly and without interruption</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Mobile Figma Spec Container (block md:hidden) - w:430px max, gap:12px, padding:12px 20px */}
+          <div className="block md:hidden w-full max-w-[430px] mx-auto py-[12px] px-[20px] bg-white flex flex-col gap-[12px]">
+            <h2 className="text-[32px] font-serif font-semibold text-[#1D493E] leading-none text-left m-0">
+              Services to help you <span className="text-[#FF5A36]">shop</span>
             </h2>
-          </div>
 
-          {/* Cards Grid */}
-          <div className="w-full max-w-[1280px] h-auto grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-row gap-[32px] mx-auto">
-            {/* Card 1: FAQ */}
-            <div className="w-full lg:w-[296px] h-auto flex flex-col gap-[24px] rounded-[4px] bg-white">
-              <div className="w-full h-[250px] rounded-[4px] overflow-hidden">
-                <img src="/service-faq.png" alt="FAQ illustration" className="w-full h-full object-cover rounded-[4px]" />
-              </div>
-              <div className="w-full h-auto flex flex-col gap-[12px]">
-                <h3 className="font-sans font-semibold text-lg sm:text-xl md:text-[28px] leading-snug tracking-[0px] text-[#2B2B2B]">Frequently Asked Questions (FAQ)</h3>
-                <p className="w-full h-auto font-sans font-medium text-sm sm:text-base md:text-[20px] leading-normal tracking-[0px] text-[rgba(43,43,43,0.8)]">See what are the commonly asked questions by our customers</p>
-              </div>
-            </div>
-
-            {/* Card 2: Home Delivery */}
-            <div className="w-full lg:w-[296px] h-auto flex flex-col gap-[24px] rounded-[4px] bg-white">
-              <div className="w-full h-[250px] rounded-[4px] overflow-hidden">
-                <img src="/service-delivery.png" alt="Home delivery illustration" className="w-full h-full object-cover rounded-[4px]" />
-              </div>
-              <div className="w-full h-auto flex flex-col gap-[12px]">
-                <h3 className="font-sans font-semibold text-lg sm:text-xl md:text-[28px] leading-snug tracking-[0px] text-[#2B2B2B]">Home Delivery Options available</h3>
-                <p className="w-full h-auto font-sans font-medium text-sm sm:text-base md:text-[20px] leading-normal tracking-[0px] text-[rgba(43,43,43,0.8)]">Pay with multiple cards seamlessly and without interruption</p>
-              </div>
-            </div>
-
-            {/* Card 3: Secure Payment */}
-            <div className="w-full lg:w-[296px] h-auto flex flex-col gap-[24px] rounded-[4px] bg-white">
-              <div className="w-full h-[250px] rounded-[4px] overflow-hidden">
-                <img src="/service-payment.png" alt="Secure payment illustration" className="w-full h-full object-cover rounded-[4px]" />
-              </div>
-              <div className="w-full h-auto flex flex-col gap-[12px]">
-                <h3 className="font-sans font-semibold text-lg sm:text-xl md:text-[28px] leading-snug tracking-[0px] text-[#2B2B2B]">Secure Online Payment Process</h3>
-                <p className="w-full h-auto font-sans font-medium text-sm sm:text-base md:text-[20px] leading-normal tracking-[0px] text-[rgba(43,43,43,0.8)]">Pay with multiple cards seamlessly and without interruption</p>
-              </div>
-            </div>
-
-            {/* Card 4: Open Box Delivery */}
-            <div className="w-full lg:w-[296px] h-auto flex flex-col gap-[24px] rounded-[4px] bg-white">
-              <div className="w-full h-[250px] rounded-[4px] overflow-hidden">
-                <img src="/service-openbox.png" alt="Open box delivery illustration" className="w-full h-full object-cover rounded-[4px]" />
-              </div>
-              <div className="w-full h-auto flex flex-col gap-[12px]">
-                <h3 className="font-sans font-semibold text-lg sm:text-xl md:text-[28px] leading-snug tracking-[0px] text-[#2B2B2B]">Open Box Delivery</h3>
-                <p className="w-full h-auto font-sans font-medium text-sm sm:text-base md:text-[20px] leading-normal tracking-[0px] text-[rgba(43,43,43,0.8)]">Pay with multiple cards seamlessly and without interruption</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Mobile Figma Spec Container (block md:hidden) - w:430px max, gap:12px, padding:12px 20px */}
-        <div className="block md:hidden w-full max-w-[430px] mx-auto py-[12px] px-[20px] bg-white flex flex-col gap-[12px]">
-          <h2 className="text-[32px] font-serif font-semibold text-[#1D493E] leading-none text-left m-0">
-            Services to help you <span className="text-[#FF5A36]">shop</span>
-          </h2>
-
-          <div className="grid grid-cols-2 gap-[12px] w-full">
-            {[
-              {
-                title: "Frequently Asked Questions (FAQ)",
-                desc: "See commonly asked questions",
-                img: "/service-faq.png"
-              },
-              {
-                title: "Home Delivery Options",
-                desc: "Multiple payment cards seamlessly",
-                img: "/service-delivery.png"
-              },
-              {
-                title: "Secure Online Payment",
-                desc: "100% encrypted checkout process",
-                img: "/service-payment.png"
-              },
-              {
-                title: "Open Box Delivery",
-                desc: "Verify before you receive",
-                img: "/service-openbox.png"
-              }
-            ].map((srv, idx) => (
-              <div 
-                key={idx}
-                className="w-full bg-white border border-gray-100 rounded-[8px] overflow-hidden flex flex-col gap-2 text-left shadow-2xs"
-              >
-                <div className="w-full aspect-[4/3] bg-gray-100 overflow-hidden">
-                  <img src={srv.img} alt={srv.title} className="w-full h-full object-cover" />
+            <div className="grid grid-cols-2 gap-[12px] w-full">
+              {[
+                {
+                  title: "Frequently Asked Questions (FAQ)",
+                  desc: "See commonly asked questions",
+                  img: "/service-faq.png"
+                },
+                {
+                  title: "Home Delivery Options",
+                  desc: "Multiple payment cards seamlessly",
+                  img: "/service-delivery.png"
+                },
+                {
+                  title: "Secure Online Payment",
+                  desc: "100% encrypted checkout process",
+                  img: "/service-payment.png"
+                },
+                {
+                  title: "Open Box Delivery",
+                  desc: "Verify before you receive",
+                  img: "/service-openbox.png"
+                }
+              ].map((srv, idx) => (
+                <div 
+                  key={idx}
+                  className="w-full bg-white border border-gray-100 rounded-[8px] overflow-hidden flex flex-col gap-2 text-left shadow-2xs"
+                >
+                  <div className="w-full aspect-[4/3] bg-gray-100 overflow-hidden">
+                    <img src={srv.img} alt={srv.title} className="w-full h-full object-cover" />
+                  </div>
+                  <div className="p-2.5 flex flex-col gap-1">
+                    <h4 className="text-[13px] font-sans font-bold text-[#2B2B2B] leading-tight m-0">
+                      {srv.title}
+                    </h4>
+                    <p className="text-[11px] font-sans font-medium text-gray-400 leading-snug m-0">
+                      {srv.desc}
+                    </p>
+                  </div>
                 </div>
-                <div className="p-2.5 flex flex-col gap-1">
-                  <h4 className="text-[13px] font-sans font-bold text-[#2B2B2B] leading-tight m-0">
-                    {srv.title}
-                  </h4>
-                  <p className="text-[11px] font-sans font-medium text-gray-400 leading-snug m-0">
-                    {srv.desc}
-                  </p>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* 13. NEWSLETTER / CTA SECTION */}
-      <section className="bg-white text-left relative z-10 w-full">
-        {/* Desktop Container (hidden md:block) */}
-        <div className="hidden md:flex w-full py-[42px] px-6 md:px-[80px] bg-white">
-          <div
-            style={{
-              maxWidth: "1440px",
-              margin: "0 auto",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: "32px",
-              textAlign: "center",
-            }}
-          >
-            <div className="flex flex-col items-center gap-[12px] w-full">
-              <h2
-                className="text-3xl md:text-[42px] font-serif font-semibold text-center text-[#2B2B2B] max-w-[1280px] m-0"
-                style={{
-                  lineHeight: "120%",
-                  letterSpacing: "0px",
-                }}
-              >
-                The{" "}
-                <span style={{ color: "#FF5A36" }}>best adventures</span>{" "}
-                find their way to your inbox.
-              </h2>
-              <p
-                className="text-base sm:text-lg md:text-[20px] font-sans font-medium text-center text-[rgba(43,43,43,0.8)] max-w-[1280px] m-0 md:whitespace-nowrap"
-                style={{
-                  lineHeight: "1.4",
-                  letterSpacing: "0px",
-                }}
-              >
-                Hidden places, exclusive trip drops, curated gear, and stories from the road delivered before anyone else hears about them.
-              </p>
-            </div>
+      {cms.showCtaBannerSection !== false && (
+        <section className="bg-white text-left relative z-10 w-full">
+          {/* Desktop Container (hidden md:block) */}
+          <div className="hidden md:flex w-full py-[42px] px-6 md:px-[80px] bg-white">
+            <div
+              style={{
+                maxWidth: "1440px",
+                margin: "0 auto",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "32px",
+                textAlign: "center",
+              }}
+            >
+              <div className="flex flex-col items-center gap-[12px] w-full">
+                <h2
+                  className="text-3xl md:text-[42px] font-serif font-semibold text-center text-[#2B2B2B] max-w-[1280px] m-0"
+                  style={{
+                    lineHeight: "120%",
+                    letterSpacing: "0px",
+                  }}
+                >
+                  The{" "}
+                  <span style={{ color: "#FF5A36" }}>best adventures</span>{" "}
+                  find their way to your inbox.
+                </h2>
+                <p
+                  className="text-base sm:text-lg md:text-[20px] font-sans font-medium text-center text-[rgba(43,43,43,0.8)] max-w-[1280px] m-0 md:whitespace-nowrap"
+                  style={{
+                    lineHeight: "1.4",
+                    letterSpacing: "0px",
+                  }}
+                >
+                  Hidden places, exclusive trip drops, curated gear, and stories from the road delivered before anyone else hears about them.
+                </p>
+              </div>
 
-            <div className="flex flex-col sm:flex-row gap-3 w-full max-w-[584px] justify-center items-center">
+              <div className="flex flex-col sm:flex-row gap-3 w-full max-w-[584px] justify-center items-center">
+                <Link
+                  href="/travel"
+                  className="w-full sm:w-fit px-8 h-[55px] flex items-center justify-center rounded-[4px] bg-[#1D493E] text-white border-2 border-[#1D493E] hover:bg-[#1D493E]/90 transition-all duration-300 font-sans font-medium text-[18px]"
+                >
+                  Book Now
+                </Link>
+                <Link
+                  href="/shop"
+                  style={{ width: "286px", height: "55px", paddingTop: "16px", paddingBottom: "16px", paddingLeft: "32px", paddingRight: "32px", gap: "8px", borderRadius: "4px", borderWidth: "2px", boxSizing: "border-box" }}
+                  className="hidden md:flex items-center justify-center border-2 border-[#1D493E] bg-white text-[#1D493E] font-sans font-medium text-[18px] text-center cursor-pointer"
+                >
+                  Explore collection
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          {/* Mobile Figma Spec Container (block md:hidden) - w:430px max, h:180px, gap:12px, padding:12px 20px 62px 20px */}
+          <div className="block md:hidden w-full max-w-[430px] mx-auto pt-[12px] px-[20px] pb-[62px] bg-white flex flex-col gap-[12px] items-center text-center">
+            <h2 className="text-[24px] font-serif font-bold text-[#1D493E] leading-snug m-0 max-w-[390px]">
+              The <span className="text-[#FF5A36]">best adventures</span> find their way to you inbox
+            </h2>
+
+            {/* Buttons Row */}
+            <div className="flex items-center justify-center gap-[12px] pt-1">
               <Link
                 href="/travel"
-                className="w-full sm:w-fit px-8 h-[55px] flex items-center justify-center rounded-[4px] bg-[#1D493E] text-white border-2 border-[#1D493E] hover:bg-[#1D493E]/90 transition-all duration-300 font-sans font-medium text-[18px]"
+                className="w-[125px] h-[40px] bg-[#1D493E] text-white font-sans font-bold text-[14px] rounded-[4px] flex items-center justify-center border border-[#1D493E] hover:opacity-90 transition"
               >
                 Book Now
               </Link>
               <Link
                 href="/shop"
-                style={{ width: "286px", height: "55px", paddingTop: "16px", paddingBottom: "16px", paddingLeft: "32px", paddingRight: "32px", gap: "8px", borderRadius: "4px", borderWidth: "2px", boxSizing: "border-box" }}
-                className="hidden md:flex items-center justify-center border-2 border-[#1D493E] bg-white text-[#1D493E] font-sans font-medium text-[18px] text-center cursor-pointer"
+                className="w-[160px] h-[40px] border border-[#1D493E] text-[#1D493E] font-sans font-medium text-[14px] rounded-[4px] flex items-center justify-center bg-transparent hover:opacity-80 transition"
               >
                 Explore collection
               </Link>
             </div>
           </div>
-        </div>
-
-        {/* Mobile Figma Spec Container (block md:hidden) - w:430px max, h:180px, gap:12px, padding:12px 20px 62px 20px */}
-        <div className="block md:hidden w-full max-w-[430px] mx-auto pt-[12px] px-[20px] pb-[62px] bg-white flex flex-col gap-[12px] items-center text-center">
-          <h2 className="text-[24px] font-serif font-bold text-[#1D493E] leading-snug m-0 max-w-[390px]">
-            The <span className="text-[#FF5A36]">best adventures</span> find their way to you inbox
-          </h2>
-
-          {/* Buttons Row */}
-          <div className="flex items-center justify-center gap-[12px] pt-1">
-            <Link
-              href="/travel"
-              className="w-[125px] h-[40px] bg-[#1D493E] text-white font-sans font-bold text-[14px] rounded-[4px] flex items-center justify-center border border-[#1D493E] hover:opacity-90 transition"
-            >
-              Book Now
-            </Link>
-            <Link
-              href="/shop"
-              className="w-[160px] h-[40px] border border-[#1D493E] text-[#1D493E] font-sans font-medium text-[14px] rounded-[4px] flex items-center justify-center bg-transparent hover:opacity-80 transition"
-            >
-              Explore collection
-            </Link>
-          </div>
-        </div>
-      </section>
+        </section>
+      )}
       {/* DYNAMIC CUSTOM HOMEPAGE SECTIONS (Ratio Locked & Content Safe) */}
       {Array.isArray(cms.homeCustomSections) && cms.homeCustomSections.map((sec) => {
         if (sec.visible === false) return null;

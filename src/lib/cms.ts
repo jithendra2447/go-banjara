@@ -221,12 +221,12 @@ export const DEFAULT_CMS_CONTENT: SiteCMSContent = {
   // Home Page Hero Section (Media & Copy)
   homeHeroVideoUrl: '/hero-video.mp4',
   homeHeroPosterUrl: '/hero-poster.jpg',
-  homeHeroTitleLine1: 'YOUR PASSPORT TO',
-  homeHeroTitleLine2: 'UNFORGETTABLE',
-  homeHeroTitleLine3: 'ADVENTURES.',
-  homeHeroSubtitle: 'Curated group trips, handcrafted gear, and authentic local experiences for modern wanderers.',
-  homeHeroShopBtn: 'Explore Shop Merchandise',
-  homeHeroTravelBtn: 'View Travel Packages',
+  homeHeroTitleLine1: "Hey! Let’s Escape from",
+  homeHeroTitleLine2: 'the Ordinary',
+  homeHeroTitleLine3: '',
+  homeHeroSubtitle: 'We bridge the gap between soulful Indian travel and high end gear. curated for those who find home in the dust of the road',
+  homeHeroShopBtn: 'Shop Now',
+  homeHeroTravelBtn: 'See Travel Packages',
   homeMascotText: 'Hey Nomad! Ready to explore Kashmir backwaters, Spiti valleys, or grab our signature nomad hoodie?',
 
   // Dual CTA Banners
@@ -445,6 +445,14 @@ export function getStoredCMSContent(): SiteCMSContent {
     const raw = localStorage.getItem(CMS_STORAGE_KEY);
     if (!raw) return DEFAULT_CMS_CONTENT;
     const parsed = JSON.parse(raw);
+    if (parsed.homeHeroTitleLine1 === 'YOUR PASSPORT TO') {
+      parsed.homeHeroTitleLine1 = DEFAULT_CMS_CONTENT.homeHeroTitleLine1;
+      parsed.homeHeroTitleLine2 = DEFAULT_CMS_CONTENT.homeHeroTitleLine2;
+      parsed.homeHeroTitleLine3 = DEFAULT_CMS_CONTENT.homeHeroTitleLine3;
+      parsed.homeHeroSubtitle = DEFAULT_CMS_CONTENT.homeHeroSubtitle;
+      parsed.homeHeroShopBtn = DEFAULT_CMS_CONTENT.homeHeroShopBtn;
+      parsed.homeHeroTravelBtn = DEFAULT_CMS_CONTENT.homeHeroTravelBtn;
+    }
     return {
       ...DEFAULT_CMS_CONTENT,
       ...parsed,

@@ -1477,7 +1477,7 @@ export default function Homepage() {
                     </div>
 
                     {/* Bought statistics */}
-                    <p className="font-sans font-medium text-xs md:text-sm leading-none text-[#8D8D8D] h-[25px] flex items-center shrink-0">{deal.boughtText}</p>
+                    <p className="font-sans font-medium text-xs md:text-sm leading-none text-[#8D8D8D] h-[25px] flex items-center shrink-0">{deal.boughtText || "200+ bought in past month"}</p>
 
                     {/* Delivery text */}
                     <p className="font-sans font-medium text-[11px] md:text-xs md:leading-[20px]">
@@ -1562,7 +1562,7 @@ export default function Homepage() {
                     </div>
                     <span className="text-gray-500 font-medium text-[9px]">({(deal.reviews || "200").replace(/ Reviews/gi, '')})</span>
                   </div>
-                  <p className="text-[9px] text-[#8D8D8D] font-medium m-0 truncate">{deal.boughtText}</p>
+                  <p className="text-[9px] text-[#8D8D8D] font-medium m-0 truncate">{deal.boughtText || "500+ bought in past month"}</p>
                   <p className="text-[9px] leading-tight m-0 truncate">
                     <span className="text-[#8D8D8D]">FREE delivery </span>
                     <span className="font-bold text-[#2B2B2B]">{getFutureDateString()}</span>
@@ -1660,6 +1660,20 @@ export default function Homepage() {
                         style={{ borderRadius: '4px', imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
                       />
                     </Link>
+                    {/* Wishlist Button (Top Right) */}
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        toggleWishlist(mockProduct);
+                      }}
+                      className="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-gray-700 hover:text-[#FF5A36] hover:bg-white shadow-sm transition z-20"
+                      aria-label="Add to Wishlist"
+                      title={Array.isArray(wishlist) && wishlist.some((w: any) => w.id === prod.id) ? "Remove from wishlist" : "Add to wishlist"}
+                    >
+                      <Heart className={`w-4 h-4 ${Array.isArray(wishlist) && wishlist.some((w: any) => w.id === prod.id) ? 'fill-[#FF5A36] text-[#FF5A36]' : ''}`} />
+                    </button>
                   </div>
 
                   <div className="w-full h-auto flex flex-col justify-between text-left gap-3 px-0">
@@ -1694,7 +1708,7 @@ export default function Homepage() {
                     </div>
 
                     {/* Bought statistics */}
-                    <p className="font-sans font-medium text-xs md:text-sm leading-none text-[#8D8D8D] h-[25px] flex items-center shrink-0">{prod.boughtText}</p>
+                    <p className="font-sans font-medium text-xs md:text-sm leading-none text-[#8D8D8D] h-[25px] flex items-center shrink-0">{prod.boughtText || "500+ bought in past month"}</p>
 
                     {/* Delivery text */}
                     <p className="font-sans font-medium text-[11px] md:text-xs md:leading-[20px]">

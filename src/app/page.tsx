@@ -1622,10 +1622,10 @@ export default function Homepage() {
               ];
 
               const filtered = (productsList && productsList.length > 0)
-                ? productsList.filter(p => p.section === 'most-selling' || p.isMostSelling !== false)
+                ? productsList.filter(p => p.isMostSelling === true || p.isBestSeller === true || p.section === 'most-selling')
                 : [];
               
-              const listToRender = filtered.length > 0 ? filtered : defaultSelling;
+              const listToRender = (filtered.length >= 4 ? filtered : defaultSelling).slice(0, 8);
 
               return listToRender.map((prod: any) => {
                 const mockProduct = {

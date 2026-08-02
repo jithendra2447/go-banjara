@@ -2515,6 +2515,75 @@ export default function Homepage() {
           </div>
         </div>
       </section>
+      {/* DYNAMIC CUSTOM HOMEPAGE SECTIONS (Ratio Locked & Content Safe) */}
+      {Array.isArray(cms.homeCustomSections) && cms.homeCustomSections.map((sec) => {
+        if (sec.visible === false) return null;
+        return (
+          <section key={sec.id} className="py-12 md:py-16 bg-[#FAF9F6] border-t border-b border-[#E5E0D5]/60 relative z-10 overflow-hidden">
+            <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-20">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                
+                {/* Media Column (Strict Ratio Protection: aspect-video / aspect-[4/3] object-cover) */}
+                {(sec.videoUrl || sec.image) && (
+                  <div className="w-full aspect-video sm:aspect-[16/9] lg:aspect-[4/3] max-h-[420px] rounded-2xl overflow-hidden shadow-lg border border-[#E5E0D5] relative bg-black/5">
+                    {sec.videoUrl ? (
+                      <video
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        src={sec.videoUrl}
+                        poster={sec.image || undefined}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : sec.image ? (
+                      <img
+                        src={sec.image}
+                        alt={sec.title || 'Custom Section Media'}
+                        className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                      />
+                    ) : null}
+                  </div>
+                )}
+
+                {/* Text Content Column (Strict Overflow & Truncation Protection) */}
+                <div className={`space-y-4 text-left ${!(sec.videoUrl || sec.image) ? 'lg:col-span-2 max-w-3xl mx-auto text-center' : ''}`}>
+                  {sec.tag && (
+                    <span className="inline-flex items-center justify-center h-[26px] text-[11px] font-bold uppercase tracking-widest text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
+                      {sec.tag}
+                    </span>
+                  )}
+
+                  {sec.title && (
+                    <h2 className="text-2xl sm:text-3xl md:text-[38px] font-serif font-bold text-[#1D493E] leading-tight break-words line-clamp-3">
+                      {sec.title}
+                    </h2>
+                  )}
+
+                  {sec.subtitle && (
+                    <p className="text-sm sm:text-base md:text-[18px] text-[#2B2B2B]/80 font-sans font-medium leading-relaxed break-words line-clamp-4">
+                      {sec.subtitle}
+                    </p>
+                  )}
+
+                  {sec.buttonText && (
+                    <div className="pt-2">
+                      <Link
+                        href={sec.buttonLink || '/shop'}
+                        className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-[#1D493E] hover:bg-[#15342c] text-white font-sans font-bold text-sm transition-all shadow-md group cursor-pointer"
+                      >
+                        <span>{sec.buttonText}</span>
+                        <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                      </Link>
+                    </div>
+                  )}
+                </div>
+
+              </div>
+            </div>
+          </section>
+        );
+      })}
     </div>
   );
 }

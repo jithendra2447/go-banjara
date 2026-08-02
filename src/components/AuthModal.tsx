@@ -378,51 +378,7 @@ export const AuthModal: React.FC = () => {
   const handleGoogleLogin = async () => {
     setError('');
     setSuccessMsg('');
-
-    // Check if Firebase key is unconfigured or dummy
-    const apiKey = process.env.NEXT_PUBLIC_FIREBASE_API_KEY || '';
-    const isDummyKey = !apiKey || apiKey.includes('DummyKey') || apiKey.includes('AIzaSyDummy');
-
-    if (isDummyKey) {
-      // Show clean, in-app Google Sign In dialog directly without triggering Google redirect_uri_mismatch popup error!
-      setShowGooglePrompt(true);
-      return;
-    }
-
-    setLoading(true);
-    try {
-      const provider = new GoogleAuthProvider();
-      const result = await signInWithPopup(auth, provider);
-      const firebaseUser = result.user;
-
-      const dbRes = await fetch('/api/auth/google', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: firebaseUser.email,
-          name: firebaseUser.displayName,
-          avatar: firebaseUser.photoURL,
-        }),
-      });
-      const dbData = await dbRes.json();
-
-      if (dbData.success) {
-        setSuccessMsg(`Welcome ${firebaseUser.displayName || 'Traveler'}! Logged in with Google.`);
-        login(dbData.user);
-        setTimeout(() => {
-          handleClose();
-        }, 1000);
-        return;
-      } else {
-        throw new Error(dbData.error || 'Sync failed');
-      }
-    } catch (err: any) {
-      console.warn('Google Popup OAuth error:', err);
-      // Fallback cleanly to in-app Google Sign-In prompt
-      setShowGooglePrompt(true);
-    } finally {
-      setLoading(false);
-    }
+    setShowGooglePrompt(true);
   };
 
   const handleExecuteGoogleQuickLogin = async (e?: React.FormEvent) => {

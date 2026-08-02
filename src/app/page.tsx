@@ -421,6 +421,7 @@ export default function Homepage() {
 
   // Product Add Alert state
   const [addedProductId, setAddedProductId] = useState<string | null>(null);
+  const [expandedCustomSections, setExpandedCustomSections] = useState<{ [key: string]: number }>({});
 
   const handleProductAdd = (prod: any) => {
     const cartItem = {
@@ -470,8 +471,434 @@ export default function Homepage() {
     setTouchStartX(null);
   };
 
-  const toggleFaq = (index: number) => {
-    setOpenFaqIndex(openFaqIndex === index ? null : index);
+  const renderTwoColorTitle = (rawTitle: string) => {
+    if (!rawTitle) return null;
+    
+    const banjaraMatch = rawTitle.match(/(Banjara Tribe|Banjara)/i);
+    if (banjaraMatch && banjaraMatch[0]) {
+      const matchedText = banjaraMatch[0];
+      const parts = rawTitle.split(new RegExp(matchedText, 'i'));
+      return (
+        <span className="inline">
+          {parts[0]}
+          <span className="text-[#FF5A36]">{matchedText}</span>
+          {parts[1]}
+        </span>
+      );
+    }
+
+    const adventuresMatch = rawTitle.match(/(best adventures)/i);
+    if (adventuresMatch && adventuresMatch[0]) {
+      const matchedText = adventuresMatch[0];
+      const parts = rawTitle.split(new RegExp(matchedText, 'i'));
+      return (
+        <span className="inline">
+          {parts[0]}
+          <span className="text-[#FF5A36]">{matchedText}</span>
+          {parts[1]}
+        </span>
+      );
+    }
+
+    const dealsMatch = rawTitle.match(/(best deals|deals)/i);
+    if (dealsMatch && dealsMatch[0]) {
+      const matchedText = dealsMatch[0];
+      const parts = rawTitle.split(new RegExp(matchedText, 'i'));
+      return (
+        <span className="inline">
+          {parts[0]}
+          <span className="text-[#FF5A36]">{matchedText}</span>
+          {parts[1]}
+        </span>
+      );
+    }
+
+    const words = rawTitle.trim().split(/\s+/);
+    if (words.length < 2) return rawTitle;
+    
+    const mainPart = words.slice(0, -1).join(' ');
+    const highlightPart = words[words.length - 1];
+
+    return (
+      <span className="inline">
+        {mainPart}&nbsp;<span className="text-[#FF5A36]">{highlightPart}</span>
+      </span>
+    );
+  };
+
+  const renderCustomSections = (posTarget: string) => {
+    if (!Array.isArray(cms.homeCustomSections) || cms.homeCustomSections.length === 0) return null;
+    const targetSections = cms.homeCustomSections.filter((sec) => {
+      if (sec.visible === false) return false;
+      const currentPos = sec.position || 'bottom';
+      return currentPos === posTarget;
+    });
+
+    if (targetSections.length === 0) return null;
+
+    return targetSections.map((sec) => {
+      if (sec.type === 'product-grid') {
+        const cat = sec.categoryFilter || 'all';
+        const defaultGridItems = [
+          { id: `prod_grid_1_${sec.id}`, name: "Go Banjara T-Shirt", category: "T-Shirts", image: "/go_banjara_tshirt.jpg", price: 399, originalPrice: 599, rating: 5, reviews: "1k", boughtText: "500+ bought in past month" },
+          { id: `prod_grid_2_${sec.id}`, name: "Naturally Nomad Badge", category: "Badges", image: "/naturally_nomad_badge.png", price: 139, originalPrice: 199, rating: 5, reviews: "120", boughtText: "200+ bought in past month" },
+          { id: `prod_grid_3_${sec.id}`, name: "Blue Mavin Slides", category: "Slippers", image: "/blue_mavin_slides.jpg", price: 399, originalPrice: 599, rating: 5, reviews: "1k", boughtText: "500+ bought in past month" },
+          { id: `prod_grid_4_${sec.id}`, name: "Explore More Keychain", category: "Key Chains", image: "/explore_more_keychain.png", price: 149, originalPrice: 193, rating: 5, reviews: "200", boughtText: "100+ bought in past month" },
+          { id: `prod_grid_5_${sec.id}`, name: "Wakefit Travel Pillow", category: "Travel Pillows", image: "/wakefit_pillow.jpg", price: 139, originalPrice: 199, rating: 5, reviews: "120", boughtText: "200+ bought in past month" },
+          { id: `prod_grid_6_${sec.id}`, name: "Fur Jaden Backpack", category: "Backpacks", image: "/fur_jaden_backpack.jpg", price: 149, originalPrice: 193, rating: 5, reviews: "200", boughtText: "100+ bought in past month" },
+          { id: `prod_grid_7_${sec.id}`, name: "Go Passport Cover", category: "Passport Covers", image: "/go_passport_cover.jpg", price: 399, originalPrice: 599, rating: 5, reviews: "1k", boughtText: "500+ bought in past month" },
+          { id: `prod_grid_8_${sec.id}`, name: "Around The World Sticker", category: "Badges", image: "/around_the_world_sticker.jpg", price: 139, originalPrice: 199, rating: 5, reviews: "120", boughtText: "200+ bought in past month" },
+        ];
+
+        const filtered = (productsList && productsList.length > 0)
+          ? (cat === 'all' 
+              ? productsList 
+              : productsList.filter(p => (p.category || '').toLowerCase().includes(cat.toLowerCase())))
+          : [];
+        
+        const currentLimit = expandedCustomSections[sec.id] || sec.limitCount || 8;
+        const pool = (filtered.length > 0 ? filtered : defaultGridItems);
+        const listToRender = pool.slice(0, currentLimit);
+        const bStyle = sec.buttonStyle || 'solid';
+
+        if (bStyle === 'drag_carousel') {
+          return (
+            <section key={sec.id} className="py-12 md:py-16 bg-white relative z-10 overflow-hidden">
+              <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-20 text-center space-y-8">
+                <div className="space-y-3.5 max-w-4xl mx-auto">
+                  {sec.tag && (
+                    <div className="flex justify-center">
+                      <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
+                        {sec.tag}
+                      </span>
+                    </div>
+                  )}
+                  <h2 className="text-3xl md:text-[42px] font-serif font-bold text-[#1D493E] leading-none text-center">
+                    {renderTwoColorTitle(sec.title || "Shop Products Sale")}
+                  </h2>
+                  {sec.subtitle && (
+                    <p className="text-[#2B2B2B]/80 text-base md:text-[20px] leading-relaxed font-medium text-center max-w-[1280px] mx-auto">
+                      {sec.subtitle}
+                    </p>
+                  )}
+                </div>
+
+                <DragCarousel totalItems={listToRender.length} itemWidth={300} className="w-full max-w-[1280px] mx-auto">
+                  {listToRender.map((prod: any) => {
+                    const mockProduct = {
+                      id: prod.id,
+                      name: prod.name,
+                      price: prod.price,
+                      image: prod.image,
+                      category: prod.category,
+                      rating: prod.rating || 5,
+                      reviewsCount: prod.reviewsCount || 120,
+                      description: prod.description || "Custom section product"
+                    };
+
+                    return (
+                      <div 
+                        key={prod.id} 
+                        className="w-[280px] sm:w-[300px] shrink-0 snap-start bg-white rounded-[12px] h-auto p-2 pb-4 flex flex-col justify-between gap-[16px] overflow-hidden group cursor-pointer text-left"
+                      >
+                        <div className="relative w-full md:h-[254px] rounded-[4px] overflow-hidden shrink-0 isolate" style={{ borderRadius: '4px', WebkitMaskImage: '-webkit-radial-gradient(white, black)' }}>
+                          <Link href={`/shop/product/${prod.id}`} className="w-full h-full block cursor-pointer">
+                            <img 
+                              src={prod.image} 
+                              alt={prod.name} 
+                              className="w-full h-full object-cover rounded-[4px] group-hover:scale-105 transition-transform duration-500 ease-out"
+                              style={{ borderRadius: '4px', imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
+                            />
+                          </Link>
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              toggleWishlist(mockProduct);
+                            }}
+                            className="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-gray-700 hover:text-[#FF5A36] hover:bg-white shadow-sm transition z-20"
+                            aria-label="Add to Wishlist"
+                          >
+                            <Heart className={`w-4 h-4 ${Array.isArray(wishlist) && wishlist.some((w: any) => w.id === prod.id) ? 'fill-[#FF5A36] text-[#FF5A36]' : ''}`} />
+                          </button>
+                        </div>
+
+                        <div className="w-full h-auto flex flex-col justify-between text-left gap-3 px-0">
+                          <div className="flex items-center justify-between gap-2 w-full">
+                            <span className="inline-flex items-center justify-center h-[28px] rounded-[4px] px-[10px] py-[4px] text-[13px] font-sans font-medium text-[#FF5A36] bg-[#FFEBE5]">
+                              {prod.category || "Shop"}
+                            </span>
+                            <div className="flex items-center gap-2 shrink-0">
+                              {prod.originalPrice && (
+                                <span className="text-gray-400 line-through text-sm font-medium">₹{prod.originalPrice}</span>
+                              )}
+                              <span className="text-[16px] md:text-[18px] font-sans font-bold text-[#2B2B2B]">₹{prod.price}</span>
+                            </div>
+                          </div>
+
+                          <Link href={`/shop/product/${prod.id}`} className="truncate hover:text-[#1D493E] transition" title={prod.name}>
+                            <h4 className="text-[16px] md:text-[18px] font-sans font-bold text-[#2B2B2B] truncate leading-tight m-0" title={prod.name}>{prod.name}</h4>
+                          </Link>
+
+                          <div className="flex items-center gap-[12px] h-[20px] shrink-0">
+                            <div className="flex text-amber-400 gap-0.5">
+                              {[...Array(5)].map((_, s) => <Star key={s} className="w-3.5 h-3.5 md:w-[18px] md:h-[18px] fill-current" />)}
+                            </div>
+                            <span className="text-xs md:text-sm font-sans font-medium text-[#2B2B2B] leading-none">({(prod.reviews || "200").replace(/ Reviews/gi, '')})</span>
+                          </div>
+
+                          <p className="font-sans font-medium text-xs md:text-sm leading-none text-[#8D8D8D] h-[25px] flex items-center shrink-0">{prod.boughtText || "500+ bought in past month"}</p>
+
+                          <p className="font-sans font-medium text-[11px] md:text-xs md:leading-[20px]">
+                            <span className="text-[#8D8D8D]">FREE delivery as soon as </span>
+                            <span className="text-[#2B2B2B] font-bold">{getFutureDateString()}</span>
+                          </p>
+
+                          <button
+                            onClick={() => handleProductAdd(mockProduct)}
+                            className="w-full h-[48px] py-[10px] px-[20px] gap-[8px] rounded-[4px] border-2 border-[#1D493E] hover:bg-[#1D493E] hover:text-white text-[#1D493E] text-xs md:text-sm font-bold transition flex items-center justify-center cursor-pointer group"
+                          >
+                            <span>{addedProductId === prod.id ? 'Added to Cart!' : 'Add to cart'}</span>
+                            <CartIcon size={20} className="shrink-0" />
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </DragCarousel>
+
+                {sec.buttonText && (
+                  <div className="text-center pt-4">
+                    <Link 
+                      href={sec.buttonLink || '/shop'} 
+                      className="inline-flex items-center justify-center w-[275px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[8px] bg-transparent hover:bg-[#1D493E]/[0.08] text-[#1D493E] transition-all duration-300 cursor-pointer group"
+                    >
+                      <span className="flex items-center justify-center font-sans font-medium text-[20px] leading-none">
+                        {sec.buttonText}
+                      </span>
+                      <ArrowUpRight className="w-6 h-6 shrink-0 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
+                    </Link>
+                  </div>
+                )}
+              </div>
+            </section>
+          );
+        }
+
+        return (
+          <section key={sec.id} className="py-12 md:py-16 bg-white relative z-10 overflow-hidden">
+            <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-20 text-center space-y-8">
+              
+              <div className="space-y-3.5 max-w-4xl mx-auto">
+                {sec.tag && (
+                  <div className="flex justify-center">
+                    <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
+                      {sec.tag}
+                    </span>
+                  </div>
+                )}
+                <h2 className="text-3xl md:text-[42px] font-serif font-bold text-[#1D493E] leading-none text-center">
+                  {renderTwoColorTitle(sec.title || "Shop Products Sale")}
+                </h2>
+                {sec.subtitle && (
+                  <p className="text-[#2B2B2B]/80 text-base md:text-[20px] leading-relaxed font-medium text-center max-w-[1280px] mx-auto">
+                    {sec.subtitle}
+                  </p>
+                )}
+              </div>
+
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-[20px] md:gap-[30px] pt-2">
+                {listToRender.map((prod: any) => {
+                  const mockProduct = {
+                    id: prod.id,
+                    name: prod.name,
+                    price: prod.price,
+                    image: prod.image,
+                    category: prod.category,
+                    rating: prod.rating || 5,
+                    reviewsCount: prod.reviewsCount || 120,
+                    description: prod.description || "Custom section product"
+                  };
+
+                  return (
+                    <div 
+                      key={prod.id} 
+                      className="bg-white rounded-[4px] w-full h-auto pb-4 flex flex-col justify-between gap-[16px] group cursor-pointer text-left"
+                    >
+                      <div className="relative w-full md:h-[254px] rounded-[4px] overflow-hidden shrink-0 bg-gray-50 isolate" style={{ borderRadius: '4px', WebkitMaskImage: '-webkit-radial-gradient(white, black)' }}>
+                        <Link href={`/shop/product/${prod.id}`} className="w-full h-full block cursor-pointer">
+                          <img 
+                            src={prod.image} 
+                            alt={prod.name} 
+                            className="w-full h-full object-cover rounded-[4px] group-hover:scale-105 transition-transform duration-500 ease-out"
+                            style={{ borderRadius: '4px', imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
+                          />
+                        </Link>
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            toggleWishlist(mockProduct);
+                          }}
+                          className="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-gray-700 hover:text-[#FF5A36] hover:bg-white shadow-sm transition z-20"
+                          aria-label="Add to Wishlist"
+                          title={Array.isArray(wishlist) && wishlist.some((w: any) => w.id === prod.id) ? "Remove from wishlist" : "Add to wishlist"}
+                        >
+                          <Heart className={`w-4 h-4 ${Array.isArray(wishlist) && wishlist.some((w: any) => w.id === prod.id) ? 'fill-[#FF5A36] text-[#FF5A36]' : ''}`} />
+                        </button>
+                      </div>
+
+                      <div className="w-full h-auto flex flex-col justify-between text-left gap-3 px-0">
+                        <div className="flex items-center justify-between gap-2 w-full">
+                          <span className="inline-flex items-center justify-center h-[28px] rounded-[4px] px-[10px] py-[4px] text-[13px] font-sans font-medium text-[#FF5A36] bg-[#FFEBE5]">
+                            {prod.category || "Shop"}
+                          </span>
+                          <div className="flex items-center gap-2 shrink-0">
+                            {prod.originalPrice && (
+                              <span className="text-gray-400 line-through text-sm font-medium">₹{prod.originalPrice}</span>
+                            )}
+                            <span className="text-[16px] md:text-[18px] font-sans font-bold text-[#2B2B2B]">₹{prod.price}</span>
+                          </div>
+                        </div>
+
+                        <Link href={`/shop/product/${prod.id}`} className="truncate hover:text-[#1D493E] transition" title={prod.name}>
+                          <h4 className="text-[16px] md:text-[18px] font-sans font-bold text-[#2B2B2B] truncate leading-tight m-0" title={prod.name}>{prod.name}</h4>
+                        </Link>
+
+                        <div className="flex items-center gap-[12px] h-[20px] shrink-0">
+                          <div className="flex text-amber-400 gap-0.5">
+                            {[...Array(5)].map((_, s) => <Star key={s} className="w-3.5 h-3.5 md:w-[18px] md:h-[18px] fill-current" />)}
+                          </div>
+                          <span className="text-xs md:text-sm font-sans font-medium text-[#2B2B2B] leading-none">({(prod.reviews || "200").replace(/ Reviews/gi, '')})</span>
+                        </div>
+
+                        <p className="font-sans font-medium text-xs md:text-sm leading-none text-[#8D8D8D] h-[25px] flex items-center shrink-0">{prod.boughtText || "500+ bought in past month"}</p>
+
+                        <p className="font-sans font-medium text-[11px] md:text-xs md:leading-[20px]">
+                          <span className="text-[#8D8D8D]">FREE delivery as soon as </span>
+                          <span className="text-[#2B2B2B] font-bold">{getFutureDateString()}</span>
+                        </p>
+
+                        <button
+                          onClick={() => handleProductAdd(mockProduct)}
+                          className="w-full h-[48px] py-[10px] px-[20px] gap-[8px] rounded-[4px] border-2 border-[#1D493E] hover:bg-[#1D493E] hover:text-white text-[#1D493E] text-xs md:text-sm font-bold transition flex items-center justify-center cursor-pointer group"
+                        >
+                          <span>{addedProductId === prod.id ? 'Added to Cart!' : 'Add to cart'}</span>
+                          <CartIcon size={20} className="shrink-0" />
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {bStyle === 'load_more' && currentLimit < pool.length && (
+                <div className="pt-4 flex justify-center">
+                  <button
+                    type="button"
+                    onClick={() => setExpandedCustomSections(prev => ({ ...prev, [sec.id]: currentLimit + 4 }))}
+                    className="inline-flex items-center gap-2 px-8 py-3.5 rounded-[8px] bg-[#1D493E] hover:bg-[#15342c] text-white font-sans font-bold text-sm md:text-base transition-all shadow-md cursor-pointer"
+                  >
+                    <span>Load More Products</span>
+                    <ChevronDown className="w-5 h-5" />
+                  </button>
+                </div>
+              )}
+
+              {bStyle === 'view_all' && (
+                <div className="text-center pt-4">
+                  <Link 
+                    href={sec.buttonLink || '/shop'} 
+                    className="inline-flex items-center justify-center w-[275px] h-[68px] pt-[18px] pr-[36px] pb-[18px] pl-[36px] gap-[8px] rounded-[8px] bg-transparent hover:bg-[#1D493E]/[0.08] text-[#1D493E] transition-all duration-300 cursor-pointer group"
+                  >
+                    <span className="w-[163px] h-[25px] flex items-center justify-center font-sans font-medium text-[20px] leading-none">
+                      {sec.buttonText || "View all products"}
+                    </span>
+                    <ArrowUpRight className="w-6 h-6 shrink-0 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
+                  </Link>
+                </div>
+              )}
+
+              {bStyle === 'solid' && sec.buttonText && (
+                <div className="pt-4 flex justify-center">
+                  <Link
+                    href={sec.buttonLink || '/shop'}
+                    className="inline-flex items-center gap-2 px-8 py-3.5 rounded-[4px] bg-[#1D493E] hover:bg-[#15342c] text-white font-sans font-bold text-sm md:text-base transition-all shadow-md group cursor-pointer"
+                  >
+                    <span>{sec.buttonText}</span>
+                    <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                  </Link>
+                </div>
+              )}
+            </div>
+          </section>
+        );
+      }
+
+      return (
+        <section key={sec.id} className="py-12 md:py-16 bg-[#FAF9F6] relative z-10 overflow-hidden">
+          <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-20">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+              {(sec.videoUrl || sec.image) && (
+                <div className="w-full aspect-video sm:aspect-[16/9] lg:aspect-[4/3] max-h-[420px] rounded-2xl overflow-hidden shadow-lg border border-[#E5E0D5] relative bg-black/5">
+                  {sec.videoUrl ? (
+                    <video
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      src={sec.videoUrl}
+                      poster={sec.image || undefined}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : sec.image ? (
+                    <img
+                      src={sec.image}
+                      alt={sec.title || 'Custom Section Media'}
+                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                    />
+                  ) : null}
+                </div>
+              )}
+
+              <div className={`space-y-4 text-left ${!(sec.videoUrl || sec.image) ? 'lg:col-span-2 max-w-3xl mx-auto text-center' : ''}`}>
+                {sec.tag && (
+                  <span className="inline-flex items-center justify-center h-[26px] text-[11px] font-bold uppercase tracking-widest text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
+                    {sec.tag}
+                  </span>
+                )}
+
+                {sec.title && (
+                  <h2 className="text-2xl sm:text-3xl md:text-[38px] font-serif font-bold text-[#1D493E] leading-tight break-words line-clamp-3">
+                    {renderTwoColorTitle(sec.title)}
+                  </h2>
+                )}
+
+                {sec.subtitle && (
+                  <p className="text-sm sm:text-base md:text-[18px] text-[#2B2B2B]/80 font-sans font-medium leading-relaxed break-words line-clamp-4">
+                    {sec.subtitle}
+                  </p>
+                )}
+
+                {sec.buttonText && (
+                  <div className="pt-2">
+                    <Link
+                      href={sec.buttonLink || '/shop'}
+                      className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-[#1D493E] hover:bg-[#15342c] text-white font-sans font-bold text-sm transition-all shadow-md group cursor-pointer"
+                    >
+                      <span>{sec.buttonText}</span>
+                      <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                    </Link>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    });
   };
 
   return (
@@ -718,6 +1145,8 @@ export default function Homepage() {
         </section>
       )}
 
+      {renderCustomSections('dual_cta')}
+
       {/* 4. DESTINATIONS SECTION */}
       {cms.showDestinationsSection !== false && (
       <section className="bg-white pt-[20px] pb-0 relative z-10">
@@ -754,8 +1183,10 @@ export default function Homepage() {
           <div className="flex flex-col gap-8 max-w-[1280px] w-full mx-auto">
             {/* Featured Destination Card (Top) */}
             {(() => {
-              const displayPkgs = packagesList && packagesList.length > 0 ? packagesList : HOLIDAY_PACKAGES;
-              const pkg1 = displayPkgs[0];
+              const rawPkgs = packagesList && packagesList.length > 0 ? packagesList : HOLIDAY_PACKAGES;
+              const displayPkgs = rawPkgs.filter(p => p.showOnHome !== false);
+              const activePkgs = displayPkgs.length > 0 ? displayPkgs : rawPkgs;
+              const pkg1 = activePkgs[0];
               if (!pkg1) return null;
               return (
                 <div className="bg-[#F6F3EE] rounded-[4px] flex flex-col md:flex-row gap-0 w-full overflow-hidden md:h-[394px] text-left group cursor-pointer" style={{ borderRadius: '4px' }}>
@@ -1170,6 +1601,7 @@ export default function Homepage() {
       </section>
       )}
 
+      {renderCustomSections('destinations')}
 
       {/* 5. TOP PRODUCT CATEGORIES */}
       {cms.showCategoriesSection !== false && (
@@ -1185,10 +1617,10 @@ export default function Homepage() {
                 </span>
               </div>
               <h2 className="text-3xl md:text-[42px] font-serif font-semibold text-[#1D493E] leading-none">
-                Shop from our&nbsp;<span className="text-[#FF5A36]">Top Product Categories</span>
+                {renderTwoColorTitle(pageContent.collectionsTitle)}
               </h2>
-              <p className="text-[#2B2B2B]/80 text-base md:text-[20px] leading-relaxed font-medium md:whitespace-nowrap">
-                A hand-picked map of the corners of India our community keeps coming back to
+              <p className="text-[#2B2B2B]/80 text-base md:text-[20px] leading-relaxed font-medium">
+                {pageContent.collectionsSub}
               </p>
             </div>
             <div className="shrink-0 pb-1">
@@ -1217,8 +1649,8 @@ export default function Homepage() {
             </div>
           </div>
 
-          <DragCarousel totalItems={HOME_CATEGORIES.length} itemWidth={340} className="w-full max-w-[1280px] mx-auto">
-            {HOME_CATEGORIES.map((cat, idx) => (
+          <DragCarousel totalItems={((cms.homeCategories && cms.homeCategories.length > 0) ? cms.homeCategories : HOME_CATEGORIES).length} itemWidth={340} className="w-full max-w-[1280px] mx-auto">
+            {((cms.homeCategories && cms.homeCategories.length > 0) ? cms.homeCategories : HOME_CATEGORIES).map((cat, idx) => (
               <Link 
                 key={cat.name}
                 href={cat.link} 
@@ -1325,27 +1757,23 @@ export default function Homepage() {
       </section>
       )}
 
+      {renderCustomSections('categories')}
+
       {/* 6. MARQUEE BANNER (Figma specs: w:430, h:31px, padding 8px 20px, gap 10px) */}
       <div className="bg-[#FFFF80] text-[#1D493E] h-[31px] sm:h-[78px] flex items-center overflow-hidden select-none relative z-10 py-[8px] sm:py-[24px] px-[20px]">
         <div className="flex items-center whitespace-nowrap gap-[10px] animate-marquee font-serif text-[12px] sm:text-[24px] font-semibold uppercase leading-none tracking-[0px]">
-          <span>✦</span><span>BOOK YOUR NEXT TRIP</span>
-          <span>✦</span><span>SHOP TRAVEL GEAR</span>
-          <span>✦</span><span>DARE TO TRAVEL</span>
-          <span>✦</span><span>STICKERS</span>
-          <span>✦</span><span>MODERN NOMAD</span>
-          <span>✦</span><span>BADGES</span>
-          <span>✦</span><span>BOOK YOUR NEXT TRIP</span>
-          <span>✦</span><span>SHOP TRAVEL GEAR</span>
-          <span>✦</span><span>DARE TO TRAVEL</span>
-          <span>✦</span><span>STICKERS</span>
-          <span>✦</span><span>MODERN NOMAD</span>
-          <span>✦</span><span>BADGES</span>
-          <span>✦</span><span>BOOK YOUR NEXT TRIP</span>
-          <span>✦</span><span>SHOP TRAVEL GEAR</span>
-          <span>✦</span><span>DARE TO TRAVEL</span>
-          <span>✦</span><span>STICKERS</span>
-          <span>✦</span><span>MODERN NOMAD</span>
-          <span>✦</span><span>BADGES</span>
+          {Array.from({ length: 3 }).map((_, repeatIdx) => (
+            <React.Fragment key={repeatIdx}>
+              {(cms.homeMarquee1Items && cms.homeMarquee1Items.length > 0
+                ? cms.homeMarquee1Items
+                : ['BOOK YOUR NEXT TRIP', 'SHOP TRAVEL GEAR', 'DARE TO TRAVEL', 'STICKERS', 'MODERN NOMAD', 'BADGES']
+              ).map((item, itemIdx) => (
+                <React.Fragment key={itemIdx}>
+                  <span>✦</span><span>{item}</span>
+                </React.Fragment>
+              ))}
+            </React.Fragment>
+          ))}
         </div>
       </div>
 
@@ -1365,12 +1793,8 @@ export default function Homepage() {
             </div>
             
             {/* Title */}
-            <h2 className="w-full max-w-[1280px] h-auto flex items-center justify-center text-[32px] md:text-[42px] font-serif font-semibold text-[#1D493E] leading-none text-center">
-              {pageContent.dealsTitle.includes("best deals") ? (
-                <>Today&apos;s&nbsp;<span className="text-[#FF5A36]">best deals</span>&nbsp;for you</>
-              ) : (
-                pageContent.dealsTitle
-              )}
+            <h2 className="w-full max-w-[1280px] text-[32px] md:text-[42px] font-serif font-semibold text-[#1D493E] leading-tight text-center">
+              {renderTwoColorTitle(pageContent.dealsTitle || "Today's best deals for you")}
             </h2>
             
             {/* Subtitle */}
@@ -1586,6 +2010,8 @@ export default function Homepage() {
         </div>
       </section>
       )}
+
+      {renderCustomSections('deals')}
 
       {/* 8. MOST SELLING PRODUCTS */}
       {cms.showBestSellingSection !== false && (
@@ -1830,10 +2256,21 @@ export default function Homepage() {
       </section>
       )}
 
+      {renderCustomSections('bestselling')}
+
       {/* 8.5 ORANGE HIGHLIGHT MARQUEE BANNER */}
       <div className="bg-[#FF623E] text-white h-[39px] md:h-[78px] flex items-center overflow-hidden select-none relative z-10 w-full py-[12px] px-[20px] md:py-[24px] md:px-[80px]">
         <div className="flex whitespace-nowrap gap-[10px] animate-marquee font-serif font-semibold text-[14px] md:text-[24px] leading-none uppercase text-white tracking-[0px]">
-          <span>✦ ESCAPE THE ORDINARY ✦ SHOP TRAVEL GEAR ✦ DARE TO TRAVEL ✦ ADVENTURE AWAITS ✦ MODERN NOMAD ✦ SHOP TRAVEL GEAR ✦ ESCAPE THE ORDINARY ✦ SHOP TRAVEL GEAR ✦ DARE TO TRAVEL ✦ ADVENTURE AWAITS ✦ MODERN NOMAD ✦ SHOP TRAVEL GEAR ✦ ESCAPE THE ORDINARY ✦ SHOP TRAVEL GEAR ✦ DARE TO TRAVEL ✦ ADVENTURE AWAITS ✦ MODERN NOMAD ✦ SHOP TRAVEL GEAR</span>
+          {Array.from({ length: 3 }).map((_, repeatIdx) => (
+            <React.Fragment key={repeatIdx}>
+              {(cms.homeMarquee2Items && cms.homeMarquee2Items.length > 0
+                ? cms.homeMarquee2Items
+                : ['ESCAPE THE ORDINARY', 'SHOP TRAVEL GEAR', 'DARE TO TRAVEL', 'ADVENTURE AWAITS', 'MODERN NOMAD', 'SHOP TRAVEL GEAR']
+              ).map((item, itemIdx) => (
+                <span key={itemIdx}>✦ {item}&nbsp;</span>
+              ))}
+            </React.Fragment>
+          ))}
         </div>
       </div>
 
@@ -1851,7 +2288,7 @@ export default function Homepage() {
             />
             <div className="relative hover:rotate-2 transition-transform duration-500 w-full max-w-[584px] aspect-square mx-auto md:mx-0 bg-transparent rounded-[12px] overflow-hidden">
               <img 
-                src="/llama_mascot.png" 
+                src={cms.homeBonjoImage || "/llama_mascot.png"} 
                 alt="Bonjo Mascot" 
                 className="w-full h-full object-cover filter drop-shadow-[0_25px_30px_rgba(0,0,0,0.18)] rounded-[12px]"
                 style={{ imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)', borderRadius: '12px' }}
@@ -1863,29 +2300,29 @@ export default function Homepage() {
           <div className="flex flex-col gap-[24px] md:gap-[32px] w-full max-w-[644px] h-auto text-left justify-center py-6 md:py-0">
             <div className="flex flex-col gap-[12px]">
               <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px] self-start">
-                The Banjara Soul
+                {cms.homeBonjoTag || "The Banjara Soul"}
               </span>
               <h2 className="text-4xl md:text-[62px] font-serif font-bold text-[#1D493E] leading-none w-full max-w-[644px] h-auto flex items-center py-2">
-                Meet Bonjo.
+                {cms.homeBonjoTitle || "Meet Bonjo."}
               </h2>
             </div>
             <div className="flex flex-col gap-[16px] md:gap-[32px] w-full max-w-[644px] h-auto text-[#2B2B2B]/80 text-base md:text-[20px] font-sans font-medium leading-relaxed md:leading-[32px]">
               <p>
-                Go Banjara was born from a frustration travel in India had become a checklist. Same cafés, same photo spots, same three-day Goa loop. We wanted something slower, closer to the ground, and honest about the places it visited.
+                {cms.homeBonjoText1 || "Go Banjara was born from a frustration travel in India had become a checklist. Same cafés, same photo spots, same three-day Goa loop. We wanted something slower, closer to the ground, and honest about the places it visited."}
               </p>
               <p>
-                So we built a hybrid platform: curated small-group journeys, a shop of honest gear made by artisans we know by name, and a community of travelers who share notes from the road instead of just photos.
+                {cms.homeBonjoText2 || "So we built a hybrid platform: curated small-group journeys, a shop of honest gear made by artisans we know by name, and a community of travelers who share notes from the road instead of just photos."}
               </p>
               <p>
-                Travel. Lifestyle. Community. Commerce. Under one roof because we don't think they were ever supposed to live apart.
+                {cms.homeBonjoText3 || "Travel. Lifestyle. Community. Commerce. Under one roof because we don't think they were ever supposed to live apart."}
               </p>
             </div>
             <div className="pt-2">
               <Link 
-                href="/about" 
+                href={cms.homeBonjoBtnLink || "/about"} 
                 className="inline-flex items-center justify-center h-[55px] px-6 md:px-8 gap-2 rounded-[4px] bg-[#1D493E] hover:bg-[#15342c] text-white font-sans font-medium text-base md:text-[18px] transition-all duration-300 shadow-sm cursor-pointer group w-fit"
               >
-                <span>Our Story</span>
+                <span>{cms.homeBonjoBtnText || "Our Story"}</span>
                 <ArrowUpRight className="w-5 h-5 text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
               </Link>
             </div>
@@ -1897,20 +2334,20 @@ export default function Homepage() {
           {/* Top Text Content */}
           <div className="flex flex-col gap-[12px] text-left">
             <span className="inline-flex items-center text-[#FF623E] bg-[#FF623E]/8 px-2 py-0.5 rounded-[4px] text-[10px] font-bold uppercase tracking-[1px] self-start leading-none">
-              THE BANJARA SOUL
+              {(cms.homeBonjoTag || "The Banjara Soul").toUpperCase()}
             </span>
             <h2 className="text-[32px] font-serif font-semibold text-[#1D493E] leading-none m-0">
-              Meet Bonjo.
+              {cms.homeBonjoTitle || "Meet Bonjo."}
             </h2>
             <p className="text-[13px] text-[#2B2B2B] leading-relaxed font-sans font-medium m-0">
-              Go Banjara was born from a frustration travel in India had become a checklist. Same cafés, same photo spots, same three-day Goa loop. We wanted something slower, closer to the ground, and honest about the places it visited.
+              {cms.homeBonjoText1 || "Go Banjara was born from a frustration travel in India had become a checklist. Same cafés, same photo spots, same three-day Goa loop. We wanted something slower, closer to the ground, and honest about the places it visited."}
             </p>
             <div className="pt-1">
               <Link 
-                href="/about" 
+                href={cms.homeBonjoBtnLink || "/about"} 
                 className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-[4px] bg-[#1D493E] hover:bg-[#15342c] text-white font-sans font-bold text-[14px] transition shrink-0 self-start group"
               >
-                <span>Our Story</span>
+                <span>{cms.homeBonjoBtnText || "Our Story"}</span>
                 <ArrowUpRight className="w-4 h-4 text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
               </Link>
             </div>
@@ -1925,7 +2362,7 @@ export default function Homepage() {
               }}
             />
             <img 
-              src="/llama_mascot.png" 
+              src={cms.homeBonjoImage || "/llama_mascot.png"} 
               alt="Bonjo Mascot" 
               className="relative z-10 w-full max-w-[320px] aspect-square object-cover rounded-[12px] shadow-lg hover:rotate-2 transition duration-500"
               style={{ imageRendering: '-webkit-optimize-contrast' }}
@@ -1957,7 +2394,11 @@ export default function Homepage() {
               </span>
             </div>
             <h2 className="text-3xl md:text-[42px] font-serif font-semibold text-[#1D493E] leading-none w-full max-w-[1280px] h-auto flex items-center py-2">
-              What&nbsp;<span className="text-[#FF623E]">people say</span>&nbsp;about products
+              {pageContent.reviewsTitle.includes("people say") ? (
+                <>What&nbsp;<span className="text-[#FF623E]">people say</span>&nbsp;about products</>
+              ) : (
+                pageContent.reviewsTitle
+              )}
             </h2>
           </div>
           
@@ -1977,156 +2418,81 @@ export default function Homepage() {
             <div className="flex flex-col gap-6 py-2">
               {/* Row 1 (Left Infinite Scrolling) */}
               <div className="flex gap-6 py-2 w-max animate-marquee hover:[animation-play-state:paused]">
-                {[
-                  {
-                    id: "rev-1",
-                    name: "Kiran Makwan",
-                    subtitle: "Verified Wanderer",
-                    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150&q=80",
-                    text: "Exploring Spiti Valley with Go Banjara was a life-changing journey. Flawless planning, cozy homestays, and a wonderful group of fellow travelers. Highly recommended!",
-                    stars: 5
-                  },
-                  {
-                    id: "rev-2",
-                    name: "Ananya Roy",
-                    subtitle: "Himalayan Backpacker",
-                    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&h=150&q=80",
-                    text: "I bought the waterproof stickers for my laptop and helmet. They've survived rain, dust, and countless rugged camping trips without peeling or fading!",
-                    stars: 5
-                  },
-                  {
-                    id: "rev-3",
-                    name: "Rohan Sharma",
-                    subtitle: "Motorcycle Nomad",
-                    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&h=150&q=80",
-                    text: "The Kashmir Road Trip package was pure magic. Extremely well-planned with authentic local homestays and off-the-beaten-path trails. Will book again!",
-                    stars: 5
-                  },
-                  {
-                    id: "rev-1-b",
-                    name: "Kiran Makwan",
-                    subtitle: "Verified Wanderer",
-                    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150&q=80",
-                    text: "Exploring Spiti Valley with Go Banjara was a life-changing journey. Flawless planning, cozy homestays, and a wonderful group of fellow travelers. Highly recommended!",
-                    stars: 5
-                  },
-                  {
-                    id: "rev-2-b",
-                    name: "Ananya Roy",
-                    subtitle: "Himalayan Backpacker",
-                    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&h=150&q=80",
-                    text: "I bought the waterproof stickers for my laptop and helmet. They've survived rain, dust, and countless rugged camping trips without peeling or fading!",
-                    stars: 5
-                  },
-                  {
-                    id: "rev-3-b",
-                    name: "Rohan Sharma",
-                    subtitle: "Motorcycle Nomad",
-                    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&h=150&q=80",
-                    text: "The Kashmir Road Trip package was pure magic. Extremely well-planned with authentic local homestays and off-the-beaten-path trails. Will book again!",
-                    stars: 5
-                  }
-                ].map((review, idx) => (
-                  <div 
-                    key={idx} 
-                    className="bg-white border border-gray-200 p-3.5 sm:p-6 rounded-[8px] flex flex-col justify-between space-y-2.5 sm:space-y-4 shadow-2xs hover:shadow-xl hover:border-[#FF623E] hover:scale-105 transition-all duration-300 w-[260px] sm:w-[380px] shrink-0 cursor-pointer text-left"
-                  >
-                    <div className="space-y-2 sm:space-y-3">
-                      <div className="flex text-amber-400 text-xs sm:text-sm gap-0.5 sm:gap-1">
-                        {Array.from({ length: review.stars }).map((_, s) => (
-                          <Star key={s} className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-amber-400 text-amber-400" />
-                        ))}
+                {(() => {
+                  const allRevs = (cms.homeReviews && cms.homeReviews.length > 0) ? cms.homeReviews : [
+                    { id: 'rev-1', name: 'Kiran Makwan', subtitle: 'Verified Wanderer', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150&q=80', text: 'Exploring Spiti Valley with Go Banjara was a life-changing journey. Flawless planning, cozy homestays, and a wonderful group of fellow travelers. Highly recommended!', stars: 5 },
+                    { id: 'rev-2', name: 'Ananya Roy', subtitle: 'Himalayan Backpacker', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&h=150&q=80', text: "I bought the waterproof stickers for my laptop and helmet. They've survived rain, dust, and countless rugged camping trips without peeling or fading!", stars: 5 },
+                    { id: 'rev-3', name: 'Rohan Sharma', subtitle: 'Motorcycle Nomad', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&h=150&q=80', text: 'The Kashmir Road Trip package was pure magic. Extremely well-planned with authentic local homestays and off-the-beaten-path trails. Will book again!', stars: 5 },
+                    { id: 'rev-4', name: 'Priyanka Sen', subtitle: 'Slow Traveler', avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&h=150&q=80', text: 'The double-walled thermal flask keeps my tea steaming hot even at 14,000 feet in Ladakh. Truly premium travel gear built for real mountain conditions.', stars: 5 },
+                    { id: 'rev-5', name: 'Arjun Mehta', subtitle: 'Weekend Explorer', avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&h=150&q=80', text: 'Super clean design on the T-shirts! The fit is perfect, the fabric is extremely soft and breathable, and the graphics represent the soul of adventure travel.', stars: 5 },
+                    { id: 'rev-6', name: 'Priya Nair', subtitle: 'Solo Backpacker', avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&h=150&q=80', text: 'The Kerala Backwaters & Munnar Hills trip was breathtaking. The coordination was flawless, and the local guides showed us hidden trails away from all the tourists!', stars: 5 },
+                  ];
+                  const row1 = allRevs.slice(0, Math.ceil(allRevs.length / 2));
+                  return [...row1, ...row1].map((review, idx) => (
+                    <div 
+                      key={idx} 
+                      className="bg-white border border-gray-200 p-3.5 sm:p-6 rounded-[8px] flex flex-col justify-between space-y-2.5 sm:space-y-4 shadow-2xs hover:shadow-xl hover:border-[#FF623E] hover:scale-105 transition-all duration-300 w-[260px] sm:w-[380px] shrink-0 cursor-pointer text-left"
+                    >
+                      <div className="space-y-2 sm:space-y-3">
+                        <div className="flex text-amber-400 text-xs sm:text-sm gap-0.5 sm:gap-1">
+                          {Array.from({ length: review.stars }).map((_, s) => (
+                            <Star key={s} className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-amber-400 text-amber-400" />
+                          ))}
+                        </div>
+                        <p className="text-gray-700 font-medium italic text-xs sm:text-[15px] leading-snug sm:leading-relaxed">
+                          &ldquo;{review.text}&rdquo;
+                        </p>
                       </div>
-                      <p className="text-gray-700 font-medium italic text-xs sm:text-[15px] leading-snug sm:leading-relaxed">
-                        "{review.text}"
-                      </p>
-                    </div>
-                    <div className="flex items-center gap-2.5 sm:gap-3 pt-2 sm:pt-3 border-t border-gray-100">
-                      <img src={review.avatar} alt={review.name} className="w-8 h-8 sm:w-10 sm:h-10 rounded-full object-cover shrink-0" />
-                      <div>
-                        <h4 className="text-xs sm:text-[15px] font-bold text-gray-800 leading-none">{review.name}</h4>
-                        <p className="text-[10px] sm:text-xs text-gray-400 font-medium mt-0.5">{review.subtitle}</p>
+                      <div className="flex items-center gap-2.5 sm:gap-3 pt-2 sm:pt-3 border-t border-gray-100">
+                        <img src={review.avatar} alt={review.name} className="w-8 h-8 sm:w-10 sm:h-10 rounded-full object-cover shrink-0" />
+                        <div>
+                          <h4 className="text-xs sm:text-[15px] font-bold text-gray-800 leading-none">{review.name}</h4>
+                          <p className="text-[10px] sm:text-xs text-gray-400 font-medium mt-0.5">{review.subtitle}</p>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ));
+                })()}
               </div>
 
               {/* Row 2 (Right Reverse Infinite Scrolling) */}
               <div className="flex gap-6 py-2 w-max animate-marquee-reverse hover:[animation-play-state:paused]">
-                {[
-                  {
-                    id: "rev-4",
-                    name: "Priyanka Sen",
-                    subtitle: "Slow Traveler",
-                    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&h=150&q=80",
-                    text: "The double-walled thermal flask keeps my tea steaming hot even at 14,000 feet in Ladakh. Truly premium travel gear built for real mountain conditions.",
-                    stars: 5
-                  },
-                  {
-                    id: "rev-5",
-                    name: "Arjun Mehta",
-                    subtitle: "Weekend Explorer",
-                    avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&h=150&q=80",
-                    text: "Super clean design on the T-shirts! The fit is perfect, the fabric is extremely soft and breathable, and the graphics represent the soul of adventure travel.",
-                    stars: 5
-                  },
-                  {
-                    id: "rev-6",
-                    name: "Priya Nair",
-                    subtitle: "Solo Backpacker",
-                    avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&h=150&q=80",
-                    text: "The Kerala Backwaters & Munnar Hills trip was breathtaking. The coordination was flawless, and the local guides showed us hidden trails away from all the tourists!",
-                    stars: 5
-                  },
-                  {
-                    id: "rev-4-b",
-                    name: "Priyanka Sen",
-                    subtitle: "Slow Traveler",
-                    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&h=150&q=80",
-                    text: "The double-walled thermal flask keeps my tea steaming hot even at 14,000 feet in Ladakh. Truly premium travel gear built for real mountain conditions.",
-                    stars: 5
-                  },
-                  {
-                    id: "rev-5-b",
-                    name: "Arjun Mehta",
-                    subtitle: "Weekend Explorer",
-                    avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&h=150&q=80",
-                    text: "Super clean design on the T-shirts! The fit is perfect, the fabric is extremely soft and breathable, and the graphics represent the soul of adventure travel.",
-                    stars: 5
-                  },
-                  {
-                    id: "rev-6-b",
-                    name: "Priya Nair",
-                    subtitle: "Solo Backpacker",
-                    avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&h=150&q=80",
-                    text: "The Kerala Backwaters & Munnar Hills trip was breathtaking. The coordination was flawless, and the local guides showed us hidden trails away from all the tourists!",
-                    stars: 5
-                  }
-                ].map((review, idx) => (
-                  <div 
-                    key={idx} 
-                    className="bg-white border border-gray-200 p-3.5 sm:p-6 rounded-[8px] flex flex-col justify-between space-y-2.5 sm:space-y-4 shadow-2xs hover:shadow-xl hover:border-[#FF623E] hover:scale-105 transition-all duration-300 w-[260px] sm:w-[380px] shrink-0 cursor-pointer text-left"
-                  >
-                    <div className="space-y-2 sm:space-y-3">
-                      <div className="flex text-amber-400 text-xs sm:text-sm gap-0.5 sm:gap-1">
-                        {Array.from({ length: review.stars }).map((_, s) => (
-                          <Star key={s} className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-amber-400 text-amber-400" />
-                        ))}
+                {(() => {
+                  const allRevs = (cms.homeReviews && cms.homeReviews.length > 0) ? cms.homeReviews : [
+                    { id: 'rev-1', name: 'Kiran Makwan', subtitle: 'Verified Wanderer', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150&q=80', text: 'Exploring Spiti Valley with Go Banjara was a life-changing journey. Flawless planning, cozy homestays, and a wonderful group of fellow travelers. Highly recommended!', stars: 5 },
+                    { id: 'rev-2', name: 'Ananya Roy', subtitle: 'Himalayan Backpacker', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&h=150&q=80', text: "I bought the waterproof stickers for my laptop and helmet. They've survived rain, dust, and countless rugged camping trips without peeling or fading!", stars: 5 },
+                    { id: 'rev-3', name: 'Rohan Sharma', subtitle: 'Motorcycle Nomad', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&h=150&q=80', text: 'The Kashmir Road Trip package was pure magic. Extremely well-planned with authentic local homestays and off-the-beaten-path trails. Will book again!', stars: 5 },
+                    { id: 'rev-4', name: 'Priyanka Sen', subtitle: 'Slow Traveler', avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&h=150&q=80', text: 'The double-walled thermal flask keeps my tea steaming hot even at 14,000 feet in Ladakh. Truly premium travel gear built for real mountain conditions.', stars: 5 },
+                    { id: 'rev-5', name: 'Arjun Mehta', subtitle: 'Weekend Explorer', avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&h=150&q=80', text: 'Super clean design on the T-shirts! The fit is perfect, the fabric is extremely soft and breathable, and the graphics represent the soul of adventure travel.', stars: 5 },
+                    { id: 'rev-6', name: 'Priya Nair', subtitle: 'Solo Backpacker', avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&h=150&q=80', text: 'The Kerala Backwaters & Munnar Hills trip was breathtaking. The coordination was flawless, and the local guides showed us hidden trails away from all the tourists!', stars: 5 },
+                  ];
+                  const row2 = allRevs.slice(Math.ceil(allRevs.length / 2));
+                  const displayRow2 = row2.length > 0 ? row2 : allRevs;
+                  return [...displayRow2, ...displayRow2].map((review, idx) => (
+                    <div 
+                      key={idx} 
+                      className="bg-white border border-gray-200 p-3.5 sm:p-6 rounded-[8px] flex flex-col justify-between space-y-2.5 sm:space-y-4 shadow-2xs hover:shadow-xl hover:border-[#FF623E] hover:scale-105 transition-all duration-300 w-[260px] sm:w-[380px] shrink-0 cursor-pointer text-left"
+                    >
+                      <div className="space-y-2 sm:space-y-3">
+                        <div className="flex text-amber-400 text-xs sm:text-sm gap-0.5 sm:gap-1">
+                          {Array.from({ length: review.stars }).map((_, s) => (
+                            <Star key={s} className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-amber-400 text-amber-400" />
+                          ))}
+                        </div>
+                        <p className="text-gray-700 font-medium italic text-xs sm:text-[15px] leading-snug sm:leading-relaxed">
+                          &ldquo;{review.text}&rdquo;
+                        </p>
                       </div>
-                      <p className="text-gray-700 font-medium italic text-xs sm:text-[15px] leading-snug sm:leading-relaxed">
-                        "{review.text}"
-                      </p>
-                    </div>
-                    <div className="flex items-center gap-2.5 sm:gap-3 pt-2 sm:pt-3 border-t border-gray-100">
-                      <img src={review.avatar} alt={review.name} className="w-8 h-8 sm:w-10 sm:h-10 rounded-full object-cover shrink-0" />
-                      <div>
-                        <h4 className="text-xs sm:text-[15px] font-bold text-gray-800 leading-none">{review.name}</h4>
-                        <p className="text-[10px] sm:text-xs text-gray-400 font-medium mt-0.5">{review.subtitle}</p>
+                      <div className="flex items-center gap-2.5 sm:gap-3 pt-2 sm:pt-3 border-t border-gray-100">
+                        <img src={review.avatar} alt={review.name} className="w-8 h-8 sm:w-10 sm:h-10 rounded-full object-cover shrink-0" />
+                        <div>
+                          <h4 className="text-xs sm:text-[15px] font-bold text-gray-800 leading-none">{review.name}</h4>
+                          <p className="text-[10px] sm:text-xs text-gray-400 font-medium mt-0.5">{review.subtitle}</p>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ));
+                })()}
               </div>
             </div>
           </div>
@@ -2233,6 +2599,8 @@ export default function Homepage() {
       </section>
       )}
 
+      {renderCustomSections('reviews')}
+
       {/* 10. TRAVEL DIARIES / STORIES */}
       {cms.showBlogSection !== false && (
         <section className="bg-white text-left relative z-10 w-full">
@@ -2244,17 +2612,17 @@ export default function Homepage() {
             <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
               BLOGS
             </span>
-            <h2 className="text-3xl md:text-[42px] font-serif font-semibold text-[#2B2B2B] leading-none h-auto flex items-center justify-center py-2">
-              Follow Our&nbsp;<span className="text-[#FF5A36]">Journey</span>
+            <h2 className="text-3xl md:text-[42px] font-serif font-semibold text-[#1D493E] leading-none h-auto flex items-center justify-center py-2">
+              {renderTwoColorTitle(pageContent.blogTitle)}
             </h2>
             <p className="text-[#2B2B2B]/80 text-sm sm:text-base md:text-[20px] font-medium leading-relaxed md:leading-[32px] h-auto flex items-center justify-center">
-              Follow my voices to discover unique voices, breathtaking landscapes & unforgettable experiences
+              {pageContent.blogSub}
             </p>
           </div>
 
           {/* Grid Container */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-10 md:gap-x-[32px] md:gap-y-[42px] shrink-0">
-            {BLOG_POSTS.slice(0, 4).map((post) => (
+            {(cms.homeBlogPosts && cms.homeBlogPosts.length > 0 ? cms.homeBlogPosts : BLOG_POSTS).slice(0, 4).map((post) => (
               <Link 
                 key={post.id} 
                 href={`/blog`}
@@ -2325,7 +2693,7 @@ export default function Homepage() {
 
           {/* 2 Horizontal Blog Cards */}
           <div className="flex flex-col gap-[12px] w-full">
-            {BLOG_POSTS.slice(0, 2).map((post) => (
+            {(cms.homeBlogPosts && cms.homeBlogPosts.length > 0 ? cms.homeBlogPosts : BLOG_POSTS).slice(0, 2).map((post) => (
               <Link 
                 key={post.id}
                 href="/blog"
@@ -2357,12 +2725,20 @@ export default function Homepage() {
       </section>
       )}
 
+      {renderCustomSections('blog')}
+
       {/* 11. FAQ ACCORDION SECTION */}
       {cms.showFaqSection !== false && (
         <section className="bg-white text-left relative z-10 w-full">
-          <FAQSection items={FAQ_ITEMS} />
+          <FAQSection 
+            items={(cms.homeFaqs && cms.homeFaqs.length > 0) ? cms.homeFaqs : FAQ_ITEMS} 
+            title={pageContent.faqTitle}
+            badgeText={cms.homeFaqTag || "FAQ'S"}
+          />
         </section>
       )}
+
+      {renderCustomSections('faq')}
 
       {/* 12. SERVICES TO HELP YOU SHOP */}
       {cms.showValuesSection !== false && (
@@ -2372,96 +2748,53 @@ export default function Homepage() {
             {/* Header */}
             <div className="w-full max-w-[1280px] h-auto flex flex-col gap-[12px] justify-center text-left mx-auto">
               <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
-                THE BANJARA TRIBE
+                {cms.homeValuesTag || "THE BANJARA TRIBE"}
               </span>
-              <h2 className="font-serif font-semibold text-3xl md:text-[42px] leading-[1] tracking-[0px] text-[#2B2B2B] py-2">
-                Join the&nbsp;<span className="text-[#FF5A36]">Banjara Tribe</span>
+              <h2 className="font-serif font-semibold text-3xl md:text-[42px] leading-[1] tracking-[0px] text-[#1D493E] py-2">
+                {renderTwoColorTitle(cms.homeValuesTitle || "Join the Banjara Tribe")}
               </h2>
             </div>
 
             {/* Cards Grid */}
             <div className="w-full max-w-[1280px] h-auto grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-row gap-[32px] mx-auto">
-              {/* Card 1: FAQ */}
-              <div className="w-full lg:w-[296px] h-auto flex flex-col gap-[24px] rounded-[4px] bg-white">
-                <div className="w-full h-[250px] rounded-[4px] overflow-hidden">
-                  <img src="/service-faq.png" alt="FAQ illustration" className="w-full h-full object-cover rounded-[4px]" />
+              {(cms.homeServicesCards || [
+                { image: '/service-faq.png', title: 'Frequently Asked Questions (FAQ)', desc: 'See what are the commonly asked questions by our customers' },
+                { image: '/service-delivery.png', title: 'Home Delivery Options available', desc: 'Pay with multiple cards seamlessly and without interruption' },
+                { image: '/service-payment.png', title: 'Secure Online Payment Process', desc: 'Pay with multiple cards seamlessly and without interruption' },
+                { image: '/service-openbox.png', title: 'Open Box Delivery', desc: 'Pay with multiple cards seamlessly and without interruption' }
+              ]).map((srv, idx) => (
+                <div key={idx} className="w-full lg:w-[296px] h-auto flex flex-col gap-[24px] rounded-[4px] bg-white">
+                  <div className="w-full h-[250px] rounded-[4px] overflow-hidden">
+                    <img src={srv.image} alt={srv.title} className="w-full h-full object-cover rounded-[4px]" />
+                  </div>
+                  <div className="w-full h-auto flex flex-col gap-[12px]">
+                    <h3 className="font-sans font-semibold text-lg sm:text-xl md:text-[28px] leading-snug tracking-[0px] text-[#2B2B2B]">{srv.title}</h3>
+                    <p className="w-full h-auto font-sans font-medium text-sm sm:text-base md:text-[20px] leading-normal tracking-[0px] text-[rgba(43,43,43,0.8)]">{srv.desc}</p>
+                  </div>
                 </div>
-                <div className="w-full h-auto flex flex-col gap-[12px]">
-                  <h3 className="font-sans font-semibold text-lg sm:text-xl md:text-[28px] leading-snug tracking-[0px] text-[#2B2B2B]">Frequently Asked Questions (FAQ)</h3>
-                  <p className="w-full h-auto font-sans font-medium text-sm sm:text-base md:text-[20px] leading-normal tracking-[0px] text-[rgba(43,43,43,0.8)]">See what are the commonly asked questions by our customers</p>
-                </div>
-              </div>
-
-              {/* Card 2: Home Delivery */}
-              <div className="w-full lg:w-[296px] h-auto flex flex-col gap-[24px] rounded-[4px] bg-white">
-                <div className="w-full h-[250px] rounded-[4px] overflow-hidden">
-                  <img src="/service-delivery.png" alt="Home delivery illustration" className="w-full h-full object-cover rounded-[4px]" />
-                </div>
-                <div className="w-full h-auto flex flex-col gap-[12px]">
-                  <h3 className="font-sans font-semibold text-lg sm:text-xl md:text-[28px] leading-snug tracking-[0px] text-[#2B2B2B]">Home Delivery Options available</h3>
-                  <p className="w-full h-auto font-sans font-medium text-sm sm:text-base md:text-[20px] leading-normal tracking-[0px] text-[rgba(43,43,43,0.8)]">Pay with multiple cards seamlessly and without interruption</p>
-                </div>
-              </div>
-
-              {/* Card 3: Secure Payment */}
-              <div className="w-full lg:w-[296px] h-auto flex flex-col gap-[24px] rounded-[4px] bg-white">
-                <div className="w-full h-[250px] rounded-[4px] overflow-hidden">
-                  <img src="/service-payment.png" alt="Secure payment illustration" className="w-full h-full object-cover rounded-[4px]" />
-                </div>
-                <div className="w-full h-auto flex flex-col gap-[12px]">
-                  <h3 className="font-sans font-semibold text-lg sm:text-xl md:text-[28px] leading-snug tracking-[0px] text-[#2B2B2B]">Secure Online Payment Process</h3>
-                  <p className="w-full h-auto font-sans font-medium text-sm sm:text-base md:text-[20px] leading-normal tracking-[0px] text-[rgba(43,43,43,0.8)]">Pay with multiple cards seamlessly and without interruption</p>
-                </div>
-              </div>
-
-              {/* Card 4: Open Box Delivery */}
-              <div className="w-full lg:w-[296px] h-auto flex flex-col gap-[24px] rounded-[4px] bg-white">
-                <div className="w-full h-[250px] rounded-[4px] overflow-hidden">
-                  <img src="/service-openbox.png" alt="Open box delivery illustration" className="w-full h-full object-cover rounded-[4px]" />
-                </div>
-                <div className="w-full h-auto flex flex-col gap-[12px]">
-                  <h3 className="font-sans font-semibold text-lg sm:text-xl md:text-[28px] leading-snug tracking-[0px] text-[#2B2B2B]">Open Box Delivery</h3>
-                  <p className="w-full h-auto font-sans font-medium text-sm sm:text-base md:text-[20px] leading-normal tracking-[0px] text-[rgba(43,43,43,0.8)]">Pay with multiple cards seamlessly and without interruption</p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
 
           {/* Mobile Figma Spec Container (block md:hidden) - w:430px max, gap:12px, padding:12px 20px */}
           <div className="block md:hidden w-full max-w-[430px] mx-auto py-[12px] px-[20px] bg-white flex flex-col gap-[12px]">
             <h2 className="text-[32px] font-serif font-semibold text-[#1D493E] leading-none text-left m-0">
-              Services to help you <span className="text-[#FF5A36]">shop</span>
+              {cms.homeValuesSub || "Services to help you shop"}
             </h2>
 
             <div className="grid grid-cols-2 gap-[12px] w-full">
-              {[
-                {
-                  title: "Frequently Asked Questions (FAQ)",
-                  desc: "See commonly asked questions",
-                  img: "/service-faq.png"
-                },
-                {
-                  title: "Home Delivery Options",
-                  desc: "Multiple payment cards seamlessly",
-                  img: "/service-delivery.png"
-                },
-                {
-                  title: "Secure Online Payment",
-                  desc: "100% encrypted checkout process",
-                  img: "/service-payment.png"
-                },
-                {
-                  title: "Open Box Delivery",
-                  desc: "Verify before you receive",
-                  img: "/service-openbox.png"
-                }
-              ].map((srv, idx) => (
+              {(cms.homeServicesCards || [
+                { image: '/service-faq.png', title: 'Frequently Asked Questions (FAQ)', desc: 'See commonly asked questions' },
+                { image: '/service-delivery.png', title: 'Home Delivery Options', desc: 'Multiple payment cards seamlessly' },
+                { image: '/service-payment.png', title: 'Secure Online Payment', desc: '100% encrypted checkout process' },
+                { image: '/service-openbox.png', title: 'Open Box Delivery', desc: 'Verify before you receive' }
+              ]).map((srv, idx) => (
                 <div 
                   key={idx}
                   className="w-full bg-white border border-gray-100 rounded-[8px] overflow-hidden flex flex-col gap-2 text-left shadow-2xs"
                 >
                   <div className="w-full aspect-[4/3] bg-gray-100 overflow-hidden">
-                    <img src={srv.img} alt={srv.title} className="w-full h-full object-cover" />
+                    <img src={srv.image} alt={srv.title} className="w-full h-full object-cover" />
                   </div>
                   <div className="p-2.5 flex flex-col gap-1">
                     <h4 className="text-[13px] font-sans font-bold text-[#2B2B2B] leading-tight m-0">
@@ -2496,18 +2829,16 @@ export default function Homepage() {
             >
               <div className="flex flex-col items-center gap-[12px] w-full">
                 <h2
-                  className="text-3xl md:text-[42px] font-serif font-semibold text-center text-[#2B2B2B] max-w-[1280px] m-0"
+                  className="text-3xl md:text-[42px] font-serif font-semibold text-center text-[#1D493E] max-w-[1280px] m-0"
                   style={{
                     lineHeight: "120%",
                     letterSpacing: "0px",
                   }}
                 >
-                  The{" "}
-                  <span style={{ color: "#FF5A36" }}>best adventures</span>{" "}
-                  find their way to your inbox.
+                  The <span className="text-[#FF5A36]">best adventures</span> find their way to your inbox.
                 </h2>
                 <p
-                  className="text-base sm:text-lg md:text-[20px] font-sans font-medium text-center text-[rgba(43,43,43,0.8)] max-w-[1280px] m-0 md:whitespace-nowrap"
+                  className="text-base sm:text-lg md:text-[20px] font-sans font-medium text-center text-[rgba(43,43,43,0.8)] max-w-[1280px] m-0"
                   style={{
                     lineHeight: "1.4",
                     letterSpacing: "0px",
@@ -2538,7 +2869,7 @@ export default function Homepage() {
           {/* Mobile Figma Spec Container (block md:hidden) - w:430px max, h:180px, gap:12px, padding:12px 20px 62px 20px */}
           <div className="block md:hidden w-full max-w-[430px] mx-auto pt-[12px] px-[20px] pb-[62px] bg-white flex flex-col gap-[12px] items-center text-center">
             <h2 className="text-[24px] font-serif font-bold text-[#1D493E] leading-snug m-0 max-w-[390px]">
-              The <span className="text-[#FF5A36]">best adventures</span> find their way to you inbox
+              The <span className="text-[#FF5A36]">best adventures</span> find their way to your inbox.
             </h2>
 
             {/* Buttons Row */}
@@ -2560,125 +2891,8 @@ export default function Homepage() {
         </section>
       )}
 
-      {/* 14. NOMAD MOMENTS INSTAGRAM GRID */}
-      {cms.showInstagramSection !== false && (
-        <section className="bg-white py-12 md:py-16 border-t border-[#E5E0D5]/50 relative z-10 w-full overflow-hidden">
-          <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-20 text-center space-y-8">
-            <div className="space-y-3 max-w-3xl mx-auto">
-              <span className="inline-flex items-center justify-center h-[26px] w-fit text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
-                {cms.homeInstagramTag || "NOMAD MOMENTS"}
-              </span>
-              <h2 className="text-3xl md:text-[42px] font-serif font-bold text-[#1D493E] leading-tight">
-                {cms.homeInstagramTitle || "Follow Our Journey on Instagram"}
-              </h2>
-              <p className="text-[#2B2B2B]/80 text-base md:text-[18px] font-sans font-medium">
-                {cms.homeInstagramSub || "Tag @gobanjara on your adventures to get featured on our official community grid"}
-              </p>
-            </div>
-
-            {/* 6-Photo Responsive Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 max-w-[1280px] mx-auto">
-              {[
-                { img: "/destination-kashmir.jpg", handle: "@gobanjara_kashmir" },
-                { img: "/destination-gulmarg.jpg", handle: "@nomad_diaries" },
-                { img: "/destination-kerala.jpg", handle: "@wanderlust_india" },
-                { img: "/fur_jaden_backpack.jpg", handle: "@road_stories" },
-                { img: "/go_banjara_tshirt.jpg", handle: "@banjara_tribe" },
-                { img: "/around_the_world_sticker.jpg", handle: "@nomad_life" },
-              ].map((item, idx) => (
-                <a
-                  key={idx}
-                  href={cms.global?.instagramUrl || "https://instagram.com/gobanjara"}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group relative aspect-square rounded-[8px] overflow-hidden shadow-sm border border-gray-100 block cursor-pointer"
-                >
-                  <img
-                    src={item.img}
-                    alt="Nomad Moment"
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-white p-2">
-                    <svg className="w-6 h-6 mb-1 text-white" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                    </svg>
-                    <span className="text-[11px] font-sans font-bold text-center truncate">{item.handle}</span>
-                  </div>
-                </a>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-      {/* DYNAMIC CUSTOM HOMEPAGE SECTIONS (Ratio Locked & Content Safe) */}
-      {Array.isArray(cms.homeCustomSections) && cms.homeCustomSections.map((sec) => {
-        if (sec.visible === false) return null;
-        return (
-          <section key={sec.id} className="py-12 md:py-16 bg-[#FAF9F6] border-t border-b border-[#E5E0D5]/60 relative z-10 overflow-hidden">
-            <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-20">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                
-                {/* Media Column (Strict Ratio Protection: aspect-video / aspect-[4/3] object-cover) */}
-                {(sec.videoUrl || sec.image) && (
-                  <div className="w-full aspect-video sm:aspect-[16/9] lg:aspect-[4/3] max-h-[420px] rounded-2xl overflow-hidden shadow-lg border border-[#E5E0D5] relative bg-black/5">
-                    {sec.videoUrl ? (
-                      <video
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        src={sec.videoUrl}
-                        poster={sec.image || undefined}
-                        className="w-full h-full object-cover"
-                      />
-                    ) : sec.image ? (
-                      <img
-                        src={sec.image}
-                        alt={sec.title || 'Custom Section Media'}
-                        className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                      />
-                    ) : null}
-                  </div>
-                )}
-
-                {/* Text Content Column (Strict Overflow & Truncation Protection) */}
-                <div className={`space-y-4 text-left ${!(sec.videoUrl || sec.image) ? 'lg:col-span-2 max-w-3xl mx-auto text-center' : ''}`}>
-                  {sec.tag && (
-                    <span className="inline-flex items-center justify-center h-[26px] text-[11px] font-bold uppercase tracking-widest text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
-                      {sec.tag}
-                    </span>
-                  )}
-
-                  {sec.title && (
-                    <h2 className="text-2xl sm:text-3xl md:text-[38px] font-serif font-bold text-[#1D493E] leading-tight break-words line-clamp-3">
-                      {sec.title}
-                    </h2>
-                  )}
-
-                  {sec.subtitle && (
-                    <p className="text-sm sm:text-base md:text-[18px] text-[#2B2B2B]/80 font-sans font-medium leading-relaxed break-words line-clamp-4">
-                      {sec.subtitle}
-                    </p>
-                  )}
-
-                  {sec.buttonText && (
-                    <div className="pt-2">
-                      <Link
-                        href={sec.buttonLink || '/shop'}
-                        className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-[#1D493E] hover:bg-[#15342c] text-white font-sans font-bold text-sm transition-all shadow-md group cursor-pointer"
-                      >
-                        <span>{sec.buttonText}</span>
-                        <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                      </Link>
-                    </div>
-                  )}
-                </div>
-
-              </div>
-            </div>
-          </section>
-        );
-      })}
+      {/* DYNAMIC CUSTOM HOMEPAGE SECTIONS POSITIONED AT BOTTOM */}
+      {renderCustomSections('bottom')}
     </div>
   );
 }

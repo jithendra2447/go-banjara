@@ -555,7 +555,7 @@ export default function ShopPage() {
         </div>
 
         {/* Section 11: FAQ ACCORDION SECTION */}
-        <FAQSection items={FAQ_ITEMS} />
+        <FAQSection items={FAQ_ITEMS} noPadding={true} />
 
         {/* Section 12: Newsletter CTA Section (Figma Specs: 1440x342px, pt:42px, pb:42px, gap:32px) */}
         <section 
@@ -585,7 +585,7 @@ export default function ShopPage() {
                 fontWeight: 600,
                 letterSpacing: "0px",
                 textAlign: "center",
-                color: "#2B2B2B",
+                color: "#1D493E",
                 maxWidth: "1280px",
                 margin: 0,
               }}

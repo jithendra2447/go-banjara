@@ -46,6 +46,7 @@ export interface Product {
   faqsList?: ProductFaq[];
   galleryImages?: string[];
   highlights?: string[];
+  hidden?: boolean;
 }
 
 export interface TravelPackage {

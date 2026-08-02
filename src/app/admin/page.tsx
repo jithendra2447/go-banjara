@@ -194,6 +194,18 @@ export default function AdminPortal() {
   const [searchQuery, setSearchQuery] = useState('');
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
 
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>, callback: (url: string) => void) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (evt) => {
+        const res = evt.target?.result as string;
+        if (res) callback(res);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const showToast = (message: string, type: 'success' | 'error' = 'success') => {
     setToast({ message, type });
     setTimeout(() => setToast(null), 3000);
@@ -1305,18 +1317,18 @@ export default function AdminPortal() {
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 pt-2">
                         {[
-                          { key: 'showHeroSection', label: '🎬 Hero Video Banner', desc: 'Main video & title' },
-                          { key: 'showDualCtaBanners', label: '⚡ Dual CTA Banners', desc: 'Shop & Book cards' },
-                          { key: 'showDestinationsSection', label: '🏔️ Places Worth Detour', desc: 'Top travel destinations' },
-                          { key: 'showDealsSection', label: '🔥 Trending Deals', desc: 'Discounted gear' },
-                          { key: 'showBestSellingSection', label: '🛍️ Best Selling Essentials', desc: 'Popular products' },
-                          { key: 'showCategoriesSection', label: '🗂️ Top Categories', desc: 'Category cards' },
-                          { key: 'showReviewsSection', label: '⭐ Community Reviews', desc: 'Customer testimonials' },
-                          { key: 'showBlogSection', label: '📖 Travel Tales (Blog)', desc: 'Featured blog posts' },
-                          { key: 'showFaqSection', label: '❓ FAQ Section', desc: 'Questions accordion' },
-                          { key: 'showValuesSection', label: '🛡️ Why Choose Us', desc: 'Brand values & trust' },
-                          { key: 'showCtaBannerSection', label: '📬 Bottom Newsletter Banner', desc: 'Subscription banner' },
-                          { key: 'showInstagramSection', label: '📸 Nomad Moments Grid', desc: 'Instagram gallery' },
+                          { key: 'showHeroSection', label: 'Hero Video Banner', desc: 'Main video & title' },
+                          { key: 'showDualCtaBanners', label: 'Dual CTA Banners', desc: 'Shop & Book cards' },
+                          { key: 'showDestinationsSection', label: 'Places Worth Detour', desc: 'Top travel destinations' },
+                          { key: 'showDealsSection', label: 'Trending Deals', desc: 'Discounted gear' },
+                          { key: 'showBestSellingSection', label: 'Best Selling Essentials', desc: 'Popular products' },
+                          { key: 'showCategoriesSection', label: 'Top Categories', desc: 'Category cards' },
+                          { key: 'showReviewsSection', label: 'Community Reviews', desc: 'Customer testimonials' },
+                          { key: 'showBlogSection', label: 'Travel Tales (Blog)', desc: 'Featured blog posts' },
+                          { key: 'showFaqSection', label: 'FAQ Section', desc: 'Questions accordion' },
+                          { key: 'showValuesSection', label: 'Why Choose Us', desc: 'Brand values & trust' },
+                          { key: 'showCtaBannerSection', label: 'Bottom Newsletter Banner', desc: 'Subscription banner' },
+                          { key: 'showInstagramSection', label: 'Nomad Moments Grid', desc: 'Instagram gallery' },
                         ].map((sec) => (
                           <div
                             key={sec.key}
@@ -1383,7 +1395,7 @@ export default function AdminPortal() {
                             type="text"
                             value={cms.homeHeroTitleLine1}
                             onChange={(e) => setCms(prev => ({ ...prev, homeHeroTitleLine1: e.target.value }))}
-                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                            className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
                           />
                         </div>
                         <div className="space-y-1">
@@ -1392,7 +1404,7 @@ export default function AdminPortal() {
                             type="text"
                             value={cms.homeHeroTitleLine2}
                             onChange={(e) => setCms(prev => ({ ...prev, homeHeroTitleLine2: e.target.value }))}
-                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                            className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
                           />
                         </div>
                         <div className="space-y-1">
@@ -1401,7 +1413,7 @@ export default function AdminPortal() {
                             type="text"
                             value={cms.homeHeroTitleLine3}
                             onChange={(e) => setCms(prev => ({ ...prev, homeHeroTitleLine3: e.target.value }))}
-                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                            className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
                           />
                         </div>
                       </div>
@@ -1412,7 +1424,7 @@ export default function AdminPortal() {
                           rows={2}
                           value={cms.homeHeroSubtitle}
                           onChange={(e) => setCms(prev => ({ ...prev, homeHeroSubtitle: e.target.value }))}
-                          className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] resize-none"
+                          className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] resize-none focus:outline-none focus:border-[#1D493E]"
                         />
                       </div>
 
@@ -1423,7 +1435,7 @@ export default function AdminPortal() {
                             type="text"
                             value={cms.homeHeroShopBtn}
                             onChange={(e) => setCms(prev => ({ ...prev, homeHeroShopBtn: e.target.value }))}
-                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                            className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
                           />
                         </div>
                         <div className="space-y-1">
@@ -1432,7 +1444,7 @@ export default function AdminPortal() {
                             type="text"
                             value={cms.homeHeroTravelBtn}
                             onChange={(e) => setCms(prev => ({ ...prev, homeHeroTravelBtn: e.target.value }))}
-                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                            className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
                           />
                         </div>
                       </div>
@@ -1509,7 +1521,7 @@ export default function AdminPortal() {
                             type="text"
                             value={cms.homeDestinationsTag}
                             onChange={(e) => setCms(prev => ({ ...prev, homeDestinationsTag: e.target.value }))}
-                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                            className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
                           />
                         </div>
                         <div className="space-y-1">
@@ -1518,7 +1530,7 @@ export default function AdminPortal() {
                             type="text"
                             value={cms.homeDestinationsTitle}
                             onChange={(e) => setCms(prev => ({ ...prev, homeDestinationsTitle: e.target.value }))}
-                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                            className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
                           />
                         </div>
                         <div className="space-y-1">
@@ -1527,7 +1539,7 @@ export default function AdminPortal() {
                             type="text"
                             value={cms.homeDestinationsSub}
                             onChange={(e) => setCms(prev => ({ ...prev, homeDestinationsSub: e.target.value }))}
-                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                            className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
                           />
                         </div>
                       </div>
@@ -1543,7 +1555,7 @@ export default function AdminPortal() {
                             type="text"
                             value={cms.homeDealsTitle}
                             onChange={(e) => setCms(prev => ({ ...prev, homeDealsTitle: e.target.value }))}
-                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                            className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
                           />
                         </div>
                         <div className="space-y-1">
@@ -1552,7 +1564,7 @@ export default function AdminPortal() {
                             type="text"
                             value={cms.homeSellingTitle}
                             onChange={(e) => setCms(prev => ({ ...prev, homeSellingTitle: e.target.value }))}
-                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                            className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
                           />
                         </div>
                       </div>
@@ -1563,7 +1575,7 @@ export default function AdminPortal() {
                             type="text"
                             value={cms.homeDealsSub}
                             onChange={(e) => setCms(prev => ({ ...prev, homeDealsSub: e.target.value }))}
-                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                            className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
                           />
                         </div>
                         <div className="space-y-1">
@@ -1572,7 +1584,7 @@ export default function AdminPortal() {
                             type="text"
                             value={cms.homeSellingSub}
                             onChange={(e) => setCms(prev => ({ ...prev, homeSellingSub: e.target.value }))}
-                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                            className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
                           />
                         </div>
                       </div>
@@ -1588,7 +1600,7 @@ export default function AdminPortal() {
                             type="text"
                             value={cms.homeCollectionsTitle}
                             onChange={(e) => setCms(prev => ({ ...prev, homeCollectionsTitle: e.target.value }))}
-                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                            className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
                           />
                         </div>
                         <div className="space-y-1">
@@ -1597,7 +1609,7 @@ export default function AdminPortal() {
                             type="text"
                             value={cms.homeReviewsTitle}
                             onChange={(e) => setCms(prev => ({ ...prev, homeReviewsTitle: e.target.value }))}
-                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                            className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
                           />
                         </div>
                       </div>
@@ -1609,7 +1621,7 @@ export default function AdminPortal() {
                             type="text"
                             value={cms.homeBlogTitle}
                             onChange={(e) => setCms(prev => ({ ...prev, homeBlogTitle: e.target.value }))}
-                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                            className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
                           />
                         </div>
                         <div className="space-y-1">
@@ -1618,13 +1630,190 @@ export default function AdminPortal() {
                             type="text"
                             value={cms.homeFaqTitle}
                             onChange={(e) => setCms(prev => ({ ...prev, homeFaqTitle: e.target.value }))}
-                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                            className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
                           />
+                        </div>
+                      </div>
+
+                      {/* Category Items Editor */}
+                      <div className="space-y-2 pt-4 border-t border-[#E5E0D5]">
+                        <span className="text-[10px] font-bold text-[#1D493E] uppercase tracking-wider block">Homepage Product Category Cards:</span>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                          {(cms.homeCategories || []).map((cat, cIdx) => (
+                            <div key={cIdx} className="bg-white p-3.5 rounded-xl border border-[#E5E0D5] space-y-2 shadow-2xs">
+                              <div className="flex gap-2">
+                                <img src={cat.image || '/around_the_world_sticker.jpg'} className="w-10 h-10 rounded object-cover border shrink-0 bg-gray-50" alt="Category Thumbnail" />
+                                <div className="flex-1 space-y-1 min-w-0">
+                                  <input
+                                    type="text"
+                                    value={cat.name}
+                                    onChange={(e) => {
+                                      const updated = [...(cms.homeCategories || [])];
+                                      updated[cIdx] = { ...updated[cIdx], name: e.target.value };
+                                      setCms(prev => ({ ...prev, homeCategories: updated }));
+                                    }}
+                                    className="font-bold text-xs text-[#2B2B2B] w-full border-b border-dashed border-gray-300 focus:outline-none"
+                                    placeholder="Category Name"
+                                  />
+                                  <input
+                                    type="text"
+                                    value={cat.price}
+                                    onChange={(e) => {
+                                      const updated = [...(cms.homeCategories || [])];
+                                      updated[cIdx] = { ...updated[cIdx], price: e.target.value };
+                                      setCms(prev => ({ ...prev, homeCategories: updated }));
+                                    }}
+                                    className="text-[10px] text-gray-500 w-full border-b border-dashed border-gray-300 focus:outline-none"
+                                    placeholder="Price description"
+                                  />
+                                </div>
+                              </div>
+                              <div className="space-y-1.5 text-left">
+                                <div className="space-y-0.5">
+                                  <span className="text-[9px] font-bold text-gray-400 uppercase tracking-wider block">Redirect Link</span>
+                                  <input
+                                    type="text"
+                                    value={cat.link}
+                                    onChange={(e) => {
+                                      const updated = [...(cms.homeCategories || [])];
+                                      updated[cIdx] = { ...updated[cIdx], link: e.target.value };
+                                      setCms(prev => ({ ...prev, homeCategories: updated }));
+                                    }}
+                                    className="text-[10px] text-gray-600 w-full p-1 bg-gray-50 border border-gray-200 rounded focus:outline-none"
+                                    placeholder="/shop?category=Patches"
+                                  />
+                                </div>
+                                <div className="space-y-0.5">
+                                  <span className="text-[9px] font-bold text-gray-400 uppercase tracking-wider block">Image URL</span>
+                                  <input
+                                    type="text"
+                                    value={cat.image || ''}
+                                    onChange={(e) => {
+                                      const updated = [...(cms.homeCategories || [])];
+                                      updated[cIdx] = { ...updated[cIdx], image: e.target.value };
+                                      setCms(prev => ({ ...prev, homeCategories: updated }));
+                                    }}
+                                    className="text-[10px] text-gray-600 w-full p-1 bg-gray-50 border border-gray-200 rounded focus:outline-none"
+                                    placeholder="/around_the_world_sticker.jpg"
+                                  />
+                                </div>
+                              </div>
+                              <div className="flex items-center gap-1.5 pt-1 border-t border-gray-100">
+                                <label className="flex-1 px-2 py-1 bg-[#1D493E] hover:bg-[#15342c] text-white rounded text-[9px] font-bold transition flex items-center justify-center gap-1 cursor-pointer">
+                                  <Upload className="w-2.5 h-2.5" />
+                                  <span>Picture</span>
+                                  <input
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={(e) => handleFileUpload(e, (url) => {
+                                      const updated = [...(cms.homeCategories || [])];
+                                      updated[cIdx] = { ...updated[cIdx], image: url };
+                                      setCms(prev => ({ ...prev, homeCategories: updated }));
+                                    })}
+                                    className="hidden"
+                                  />
+                                </label>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Reviews Items Editor */}
+                      <div className="space-y-2 pt-4 border-t border-[#E5E0D5]">
+                        <span className="text-[10px] font-bold text-[#1D493E] uppercase tracking-wider block">Homepage Reviews & Testimonials:</span>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                          {(cms.homeReviews || []).map((rev, rIdx) => (
+                            <div key={rIdx} className="bg-white p-3.5 rounded-xl border border-[#E5E0D5] space-y-2 shadow-2xs">
+                              <div className="flex gap-2">
+                                <img src={rev.avatar || '/avatar.jpg'} className="w-10 h-10 rounded-full object-cover border shrink-0 bg-gray-50" alt="Reviewer Avatar" />
+                                <div className="flex-1 space-y-1 min-w-0">
+                                  <input
+                                    type="text"
+                                    value={rev.name}
+                                    onChange={(e) => {
+                                      const updated = [...(cms.homeReviews || [])];
+                                      updated[rIdx] = { ...updated[rIdx], name: e.target.value };
+                                      setCms(prev => ({ ...prev, homeReviews: updated }));
+                                    }}
+                                    className="font-bold text-xs text-[#2B2B2B] w-full border-b border-dashed border-gray-300 focus:outline-none"
+                                    placeholder="Author Name"
+                                  />
+                                  <input
+                                    type="text"
+                                    value={rev.subtitle}
+                                    onChange={(e) => {
+                                      const updated = [...(cms.homeReviews || [])];
+                                      updated[rIdx] = { ...updated[rIdx], subtitle: e.target.value };
+                                      setCms(prev => ({ ...prev, homeReviews: updated }));
+                                    }}
+                                    className="text-[10px] text-gray-500 w-full border-b border-dashed border-gray-300 focus:outline-none"
+                                    placeholder="Role / Location"
+                                  />
+                                </div>
+                              </div>
+                              <textarea
+                                value={rev.text}
+                                onChange={(e) => {
+                                  const updated = [...(cms.homeReviews || [])];
+                                  updated[rIdx] = { ...updated[rIdx], text: e.target.value };
+                                  setCms(prev => ({ ...prev, homeReviews: updated }));
+                                }}
+                                className="text-[10px] text-gray-600 w-full p-2 bg-gray-50 border border-gray-200 rounded focus:outline-none h-16 resize-none"
+                                placeholder="Write review body here..."
+                              />
+                              <div className="space-y-0.5 text-left">
+                                <span className="text-[9px] font-bold text-gray-400 uppercase tracking-wider block">Avatar URL</span>
+                                <input
+                                  type="text"
+                                  value={rev.avatar || ''}
+                                  onChange={(e) => {
+                                    const updated = [...(cms.homeReviews || [])];
+                                    updated[rIdx] = { ...updated[rIdx], avatar: e.target.value };
+                                    setCms(prev => ({ ...prev, homeReviews: updated }));
+                                  }}
+                                  className="text-[10px] text-gray-600 w-full p-1 bg-gray-50 border border-gray-200 rounded focus:outline-none"
+                                  placeholder="e.g. /avatar.jpg"
+                                />
+                              </div>
+                              <div className="flex items-center justify-between gap-1.5 pt-1 border-t border-gray-100">
+                                <div className="flex items-center gap-1">
+                                  <span className="text-[9px] font-bold text-gray-400 uppercase">Stars:</span>
+                                  <input
+                                    type="number"
+                                    min={1}
+                                    max={5}
+                                    value={rev.stars}
+                                    onChange={(e) => {
+                                      const updated = [...(cms.homeReviews || [])];
+                                      updated[rIdx] = { ...updated[rIdx], stars: Number(e.target.value) };
+                                      setCms(prev => ({ ...prev, homeReviews: updated }));
+                                    }}
+                                    className="w-10 text-[10px] font-bold border-b border-dashed border-gray-300 focus:outline-none text-center"
+                                  />
+                                </div>
+                                <label className="px-3 py-1 bg-[#1D493E] hover:bg-[#15342c] text-white rounded text-[9px] font-bold transition flex items-center justify-center gap-1 cursor-pointer">
+                                  <Upload className="w-2.5 h-2.5" />
+                                  <span>Picture</span>
+                                  <input
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={(e) => handleFileUpload(e, (url) => {
+                                      const updated = [...(cms.homeReviews || [])];
+                                      updated[rIdx] = { ...updated[rIdx], avatar: url };
+                                      setCms(prev => ({ ...prev, homeReviews: updated }));
+                                    })}
+                                    className="hidden"
+                                  />
+                                </label>
+                              </div>
+                            </div>
+                          ))}
                         </div>
                       </div>
                     </div>
 
-                    {/* SECTION 6: BOTTOM CTA & INSTAGRAM */}
+                     {/* SECTION 6: BOTTOM CTA & INSTAGRAM */}
                     <div className="space-y-4 border-t border-[#E5E0D5] pt-6">
                       <h4 className="text-xs font-black text-[#FF5A36] uppercase tracking-wider">6. Bottom CTA Banner & Instagram Grid</h4>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -1634,7 +1823,7 @@ export default function AdminPortal() {
                             type="text"
                             value={cms.homeCtaTitle}
                             onChange={(e) => setCms(prev => ({ ...prev, homeCtaTitle: e.target.value }))}
-                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                            className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
                           />
                         </div>
                         <div className="space-y-1">
@@ -1643,7 +1832,7 @@ export default function AdminPortal() {
                             type="text"
                             value={cms.homeCtaSub}
                             onChange={(e) => setCms(prev => ({ ...prev, homeCtaSub: e.target.value }))}
-                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                            className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
                           />
                         </div>
                       </div>
@@ -1654,7 +1843,7 @@ export default function AdminPortal() {
                             type="text"
                             value={cms.homeCtaBtnText}
                             onChange={(e) => setCms(prev => ({ ...prev, homeCtaBtnText: e.target.value }))}
-                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                            className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
                           />
                         </div>
                         <div className="space-y-1">
@@ -1663,8 +1852,259 @@ export default function AdminPortal() {
                             type="text"
                             value={cms.homeCtaBtnLink}
                             onChange={(e) => setCms(prev => ({ ...prev, homeCtaBtnLink: e.target.value }))}
-                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                            className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
                           />
+                        </div>
+                      </div>
+                      <div className="space-y-1 bg-[#FAF9F6] p-4 rounded-xl border border-[#E5E0D5]">
+                        <label className="text-[10px] font-bold text-[#6B7280] uppercase block">CTA Background Image</label>
+                        <div className="flex flex-col sm:flex-row gap-3 items-center">
+                          <input
+                            type="text"
+                            value={cms.homeCtaBgImage || ''}
+                            onChange={(e) => setCms(prev => ({ ...prev, homeCtaBgImage: e.target.value }))}
+                            className="flex-1 p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                            placeholder="e.g. /newsletter_bg.jpg or copy external URL"
+                          />
+                          <label className="px-4 py-3 bg-[#1D493E] hover:bg-[#15342c] text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs">
+                            <Upload className="w-4 h-4" />
+                            <span>Upload Picture</span>
+                            <input
+                              type="file"
+                              accept="image/*"
+                              onChange={(e) => handleFileUpload(e, (url) => {
+                                setCms(prev => ({ ...prev, homeCtaBgImage: url }));
+                              })}
+                              className="hidden"
+                            />
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* SECTION 7: MEET BONJO (BRAND STORY) */}
+                    <div className="space-y-4 border-t border-[#E5E0D5] pt-6">
+                      <div className="flex items-center justify-between">
+                        <h4 className="text-xs font-black text-[#FF5A36] uppercase tracking-wider">7. Meet Bonjo (Brand Story Section)</h4>
+                        <span className="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded">About & Story</span>
+                      </div>
+
+                      <div className="p-4 bg-[#FAF9F6] rounded-xl border border-[#E5E0D5] space-y-3">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                          <div className="space-y-1">
+                            <label className="text-[10px] font-bold text-[#6B7280] uppercase">Mascot Tagline</label>
+                            <input
+                              type="text"
+                              value={cms.homeBonjoTag || ''}
+                              onChange={(e) => setCms(prev => ({ ...prev, homeBonjoTag: e.target.value }))}
+                              className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                              placeholder="e.g. The Banjara Soul"
+                            />
+                          </div>
+                          <div className="space-y-1">
+                            <label className="text-[10px] font-bold text-[#6B7280] uppercase">Mascot Heading</label>
+                            <input
+                              type="text"
+                              value={cms.homeBonjoTitle || ''}
+                              onChange={(e) => setCms(prev => ({ ...prev, homeBonjoTitle: e.target.value }))}
+                              className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                              placeholder="e.g. Meet Bonjo."
+                            />
+                          </div>
+                        </div>
+
+                        <div className="space-y-1">
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Paragraph 1</label>
+                          <textarea
+                            rows={2}
+                            value={cms.homeBonjoText1 || ''}
+                            onChange={(e) => setCms(prev => ({ ...prev, homeBonjoText1: e.target.value }))}
+                            className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] resize-none"
+                            placeholder="First paragraph text..."
+                          />
+                        </div>
+                        <div className="space-y-1">
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Paragraph 2</label>
+                          <textarea
+                            rows={2}
+                            value={cms.homeBonjoText2 || ''}
+                            onChange={(e) => setCms(prev => ({ ...prev, homeBonjoText2: e.target.value }))}
+                            className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] resize-none"
+                            placeholder="Second paragraph text..."
+                          />
+                        </div>
+                        <div className="space-y-1">
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Paragraph 3</label>
+                          <textarea
+                            rows={2}
+                            value={cms.homeBonjoText3 || ''}
+                            onChange={(e) => setCms(prev => ({ ...prev, homeBonjoText3: e.target.value }))}
+                            className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] resize-none"
+                            placeholder="Third paragraph text..."
+                          />
+                        </div>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                          <div className="space-y-1">
+                            <label className="text-[10px] font-bold text-[#6B7280] uppercase">Button Text</label>
+                            <input
+                              type="text"
+                              value={cms.homeBonjoBtnText || ''}
+                              onChange={(e) => setCms(prev => ({ ...prev, homeBonjoBtnText: e.target.value }))}
+                              className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                              placeholder="e.g. Our Story"
+                            />
+                          </div>
+                          <div className="space-y-1">
+                            <label className="text-[10px] font-bold text-[#6B7280] uppercase">Button Link</label>
+                            <input
+                              type="text"
+                              value={cms.homeBonjoBtnLink || ''}
+                              onChange={(e) => setCms(prev => ({ ...prev, homeBonjoBtnLink: e.target.value }))}
+                              className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                              placeholder="e.g. /about"
+                            />
+                          </div>
+                        </div>
+
+                        <div className="space-y-1">
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase block">Mascot Image</label>
+                          <div className="flex flex-col sm:flex-row gap-3 items-center">
+                            <input
+                              type="text"
+                              value={cms.homeBonjoImage || ''}
+                              onChange={(e) => setCms(prev => ({ ...prev, homeBonjoImage: e.target.value }))}
+                              className="flex-1 p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                              placeholder="e.g. /llama_mascot.png"
+                            />
+                            <label className="px-4 py-3 bg-[#1D493E] hover:bg-[#15342c] text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs">
+                              <Upload className="w-4 h-4" />
+                              <span>Upload Picture</span>
+                              <input
+                                type="file"
+                                accept="image/*"
+                                onChange={(e) => handleFileUpload(e, (url) => {
+                                  setCms(prev => ({ ...prev, homeBonjoImage: url }));
+                                })}
+                                className="hidden"
+                              />
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* SECTION 8: TRIBE VALUES / SERVICES */}
+                    <div className="space-y-4 border-t border-[#E5E0D5] pt-6">
+                      <div className="flex items-center justify-between">
+                        <h4 className="text-xs font-black text-[#FF5A36] uppercase tracking-wider">8. Tribe Values / Services Section</h4>
+                        <span className="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded">Values & Trust</span>
+                      </div>
+
+                      <div className="p-4 bg-[#FAF9F6] rounded-xl border border-[#E5E0D5] space-y-3">
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                          <div className="space-y-1">
+                            <label className="text-[10px] font-bold text-[#6B7280] uppercase">Tagline</label>
+                            <input
+                              type="text"
+                              value={cms.homeValuesTag || ''}
+                              onChange={(e) => setCms(prev => ({ ...prev, homeValuesTag: e.target.value }))}
+                              className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                              placeholder="e.g. THE BANJARA TRIBE"
+                            />
+                          </div>
+                          <div className="space-y-1">
+                            <label className="text-[10px] font-bold text-[#6B7280] uppercase">Main Heading</label>
+                            <input
+                              type="text"
+                              value={cms.homeValuesTitle || ''}
+                              onChange={(e) => setCms(prev => ({ ...prev, homeValuesTitle: e.target.value }))}
+                              className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                              placeholder="e.g. Join the Banjara Tribe"
+                            />
+                          </div>
+                          <div className="space-y-1">
+                            <label className="text-[10px] font-bold text-[#6B7280] uppercase">Mobile Title / Subtitle</label>
+                            <input
+                              type="text"
+                              value={cms.homeValuesSub || ''}
+                              onChange={(e) => setCms(prev => ({ ...prev, homeValuesSub: e.target.value }))}
+                              className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                              placeholder="e.g. Services to help you shop"
+                            />
+                          </div>
+                        </div>
+
+                        {/* 4 Cards list editor */}
+                        <div className="space-y-2 pt-2">
+                          <span className="text-[10px] font-bold text-[#1D493E] uppercase tracking-wider block">Service Cards (4 Cards Required):</span>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            {(cms.homeServicesCards || [
+                              { image: '/service-faq.png', title: 'Frequently Asked Questions (FAQ)', desc: 'See what are the commonly asked questions by our customers' },
+                              { image: '/service-delivery.png', title: 'Home Delivery Options available', desc: 'Pay with multiple cards seamlessly and without interruption' },
+                              { image: '/service-payment.png', title: 'Secure Online Payment Process', desc: 'Pay with multiple cards seamlessly and without interruption' },
+                              { image: '/service-openbox.png', title: 'Open Box Delivery', desc: 'Pay with multiple cards seamlessly and without interruption' }
+                            ]).map((srv, idx) => (
+                              <div key={idx} className="bg-white p-3 rounded-xl border border-[#E5E0D5] space-y-2 shadow-2xs">
+                                <span className="text-[10px] font-black text-[#FF5A36] uppercase tracking-wide">Card #{idx + 1}</span>
+                                <div className="flex gap-2">
+                                  <img src={srv.image} className="w-10 h-10 rounded object-cover border shrink-0" alt="Service Card Icon" />
+                                  <div className="flex-1 space-y-1 min-w-0">
+                                    <input
+                                      type="text"
+                                      value={srv.title}
+                                      onChange={(e) => {
+                                        const updated = [...(cms.homeServicesCards || [])];
+                                        updated[idx] = { ...updated[idx], title: e.target.value };
+                                        setCms(prev => ({ ...prev, homeServicesCards: updated }));
+                                      }}
+                                      className="font-bold text-xs text-[#2B2B2B] w-full border-b border-dashed border-gray-300 focus:outline-none"
+                                      placeholder="Card Title"
+                                    />
+                                    <input
+                                      type="text"
+                                      value={srv.desc}
+                                      onChange={(e) => {
+                                        const updated = [...(cms.homeServicesCards || [])];
+                                        updated[idx] = { ...updated[idx], desc: e.target.value };
+                                        setCms(prev => ({ ...prev, homeServicesCards: updated }));
+                                      }}
+                                      className="text-[10px] text-gray-500 w-full border-b border-dashed border-gray-300 focus:outline-none"
+                                      placeholder="Card Description"
+                                    />
+                                  </div>
+                                </div>
+                                <div className="space-y-0.5 text-left">
+                                  <span className="text-[9px] font-bold text-gray-400 uppercase tracking-wider block">Image/Icon URL</span>
+                                  <input
+                                    type="text"
+                                    value={srv.image}
+                                    onChange={(e) => {
+                                      const updated = [...(cms.homeServicesCards || [])];
+                                      updated[idx] = { ...updated[idx], image: e.target.value };
+                                      setCms(prev => ({ ...prev, homeServicesCards: updated }));
+                                    }}
+                                    className="text-[9px] text-gray-600 w-full p-1 bg-gray-50 border border-gray-200 rounded focus:outline-none"
+                                    placeholder="e.g. /icon.png"
+                                  />
+                                </div>
+                                <label className="w-full px-2 py-1 bg-[#1D493E] hover:bg-[#15342c] text-white rounded text-[9px] font-bold transition flex items-center justify-center gap-1 cursor-pointer">
+                                  <Upload className="w-2.5 h-2.5" />
+                                  <span>Picture</span>
+                                  <input
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={(e) => handleFileUpload(e, (url) => {
+                                      const updated = [...(cms.homeServicesCards || [])];
+                                      updated[idx] = { ...updated[idx], image: url };
+                                      setCms(prev => ({ ...prev, homeServicesCards: updated }));
+                                    })}
+                                    className="hidden"
+                                  />
+                                </label>
+                              </div>
+                            ))}
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -3244,7 +3684,7 @@ export default function AdminPortal() {
                       type="text"
                       value={cms.global.siteName}
                       onChange={(e) => setCms(prev => ({ ...prev, global: { ...prev.global, siteName: e.target.value } }))}
-                      className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                      className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
                     />
                   </div>
                   <div className="space-y-1">
@@ -3253,7 +3693,7 @@ export default function AdminPortal() {
                       type="text"
                       value={cms.global.currencySymbol}
                       onChange={(e) => setCms(prev => ({ ...prev, global: { ...prev.global, currencySymbol: e.target.value } }))}
-                      className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                      className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
                     />
                   </div>
                 </div>
@@ -3277,7 +3717,7 @@ export default function AdminPortal() {
                       type="text"
                       value={cms.global.announcementText}
                       onChange={(e) => setCms(prev => ({ ...prev, global: { ...prev.global, announcementText: e.target.value } }))}
-                      className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                      className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
                     />
                   </div>
                 </div>
@@ -3291,7 +3731,7 @@ export default function AdminPortal() {
                         type="text"
                         value={cms.global.supportPhone}
                         onChange={(e) => setCms(prev => ({ ...prev, global: { ...prev.global, supportPhone: e.target.value } }))}
-                        className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                        className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
                       />
                     </div>
                     <div className="space-y-1">
@@ -3300,7 +3740,7 @@ export default function AdminPortal() {
                         type="text"
                         value={cms.global.supportEmail}
                         onChange={(e) => setCms(prev => ({ ...prev, global: { ...prev.global, supportEmail: e.target.value } }))}
-                        className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                        className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
                       />
                     </div>
                     <div className="space-y-1">
@@ -3309,7 +3749,7 @@ export default function AdminPortal() {
                         type="text"
                         value={cms.global.whatsappNumber}
                         onChange={(e) => setCms(prev => ({ ...prev, global: { ...prev.global, whatsappNumber: e.target.value } }))}
-                        className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                        className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
                       />
                     </div>
                   </div>
@@ -3321,7 +3761,7 @@ export default function AdminPortal() {
                         type="text"
                         value={cms.global.instagramUrl}
                         onChange={(e) => setCms(prev => ({ ...prev, global: { ...prev.global, instagramUrl: e.target.value } }))}
-                        className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                        className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
                       />
                     </div>
                     <div className="space-y-1">
@@ -3330,7 +3770,7 @@ export default function AdminPortal() {
                         type="text"
                         value={cms.global.facebookUrl}
                         onChange={(e) => setCms(prev => ({ ...prev, global: { ...prev.global, facebookUrl: e.target.value } }))}
-                        className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                        className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
                       />
                     </div>
                     <div className="space-y-1">
@@ -3339,7 +3779,7 @@ export default function AdminPortal() {
                         type="text"
                         value={cms.global.youtubeUrl}
                         onChange={(e) => setCms(prev => ({ ...prev, global: { ...prev.global, youtubeUrl: e.target.value } }))}
-                        className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                        className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
                       />
                     </div>
                   </div>

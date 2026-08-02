@@ -460,9 +460,9 @@ export default function BlogPage() {
       >
         <div className="max-w-[760px] mx-auto flex flex-col items-center gap-3 md:gap-[20px]">
           {/* Heading */}
-          <h2 className="text-xl sm:text-2xl md:text-[42px] font-serif font-semibold text-[#2B2B2B] leading-tight md:leading-[100%] m-0 text-center">
+          <h2 className="text-xl sm:text-2xl md:text-[42px] font-serif font-semibold text-[#1D493E] leading-[1.2] m-0 text-center">
             The{' '}
-            <span className="text-[#FF623E] font-serif font-semibold italic">best adventures</span>{' '}
+            <span className="text-[#FF5A36] font-serif font-semibold italic">best adventures</span>{' '}
             find their way to your inbox.
           </h2>
 

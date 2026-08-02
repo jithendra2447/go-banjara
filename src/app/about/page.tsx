@@ -1579,7 +1579,7 @@ export default function AboutPage() {
       <section className="w-full bg-white mx-auto max-w-[430px] md:max-w-[1440px] px-[20px] pt-[12px] pb-[62px] md:py-[42px] md:px-[80px] shrink-0">
         <div className="w-full max-w-[1280px] mx-auto flex flex-col items-center gap-4 md:gap-[32px] text-center">
           <div className="flex flex-col items-center gap-2">
-            <h2 className="text-xl sm:text-2xl md:text-[42px] font-serif font-semibold text-[#2B2B2B] leading-tight m-0">
+            <h2 className="text-xl sm:text-2xl md:text-[42px] font-serif font-semibold text-[#1D493E] leading-tight m-0">
               The <span className="text-[#FF5A36]">best adventures</span> find their way to your inbox.
             </h2>
             <p className="hidden md:block font-sans font-medium text-base md:text-[24px] text-[#2B2B2B] m-0">

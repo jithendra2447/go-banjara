@@ -943,12 +943,12 @@ export default function ContactPage() {
                 fontFamily: "Fraunces, serif",
                 fontWeight: 600,
                 letterSpacing: "0px",
-                color: "#2B2B2B",
+                color: "#1D493E",
                 margin: 0,
               }}
               className="text-xl sm:text-2xl md:text-[42px] leading-tight"
             >
-              The <span style={{ color: "#FF623E" }}>best adventures</span> find their way to you inbox
+              The <span style={{ color: "#FF5A36" }}>best adventures</span> find their way to your inbox
             </h2>
             <p
               style={{

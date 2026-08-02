@@ -41,9 +41,15 @@ export interface GlobalSiteSettings {
 
 export interface CustomHomeSection {
   id: string;
+  type?: 'product-grid' | 'banner';
+  position?: 'bottom' | 'hero' | 'dual_cta' | 'destinations' | 'deals' | 'bestselling' | 'categories' | 'reviews' | 'blog' | 'faq' | 'values';
+  displayMode?: 'grid' | 'carousel';
+  buttonStyle?: 'view_all' | 'load_more' | 'drag_carousel' | 'solid';
   title: string;
   subtitle: string;
   tag?: string;
+  categoryFilter?: string;
+  limitCount?: number;
   image?: string;
   videoUrl?: string;
   content?: string;
@@ -68,7 +74,6 @@ export interface SiteCMSContent {
   showFaqSection?: boolean;
   showValuesSection?: boolean;
   showCtaBannerSection?: boolean;
-  showInstagramSection?: boolean;
 
   // Home Page Hero Section (Media & Copy)
   homeHeroVideoUrl?: string;
@@ -110,26 +115,45 @@ export interface SiteCMSContent {
   homeCollectionsTag?: string;
   homeCollectionsTitle: string;
   homeCollectionsSub: string;
+  homeCategories?: Array<{ name: string; price: string; image: string; link: string; }>;
 
   // Reviews Section
   homeReviewsTag?: string;
   homeReviewsTitle: string;
   homeReviewsSub: string;
+  homeReviews?: Array<{ id: string; name: string; subtitle: string; avatar: string; text: string; stars: number; }>;
 
   // Blog / Travel Diaries Section
   homeBlogTag?: string;
   homeBlogTitle: string;
   homeBlogSub: string;
+  homeBlogPosts?: Array<{ id: string; title: string; excerpt: string; image: string; readTime: string; date: string; author: string; }>;
 
   // FAQ Section
   homeFaqTag?: string;
   homeFaqTitle: string;
   homeFaqHelpDesk: string;
+  homeFaqs?: Array<{ question: string; answer: string; }>;
 
-  // Values Section
+  // Values / Services Section
   homeValuesTag?: string;
   homeValuesTitle: string;
   homeValuesSub: string;
+  homeServicesCards?: Array<{ image: string; title: string; desc: string; }>;
+
+  // Meet Bonjo Section
+  homeBonjoTag?: string;
+  homeBonjoTitle?: string;
+  homeBonjoText1?: string;
+  homeBonjoText2?: string;
+  homeBonjoText3?: string;
+  homeBonjoBtnText?: string;
+  homeBonjoBtnLink?: string;
+  homeBonjoImage?: string;
+
+  // Marquee Banners Section
+  homeMarquee1Items?: string[];
+  homeMarquee2Items?: string[];
 
   // Bottom CTA Banner
   homeCtaTitle: string;
@@ -138,10 +162,6 @@ export interface SiteCMSContent {
   homeCtaBtnLink: string;
   homeCtaBgImage?: string;
 
-  // Instagram Section
-  homeInstagramTag?: string;
-  homeInstagramTitle?: string;
-  homeInstagramSub?: string;
 
   // Dynamic Custom Sections
   homeCustomSections?: CustomHomeSection[];
@@ -216,7 +236,6 @@ export const DEFAULT_CMS_CONTENT: SiteCMSContent = {
   showFaqSection: true,
   showValuesSection: true,
   showCtaBannerSection: true,
-  showInstagramSection: true,
 
   // Home Page Hero Section (Media & Copy)
   homeHeroVideoUrl: '/hero-video.mp4',
@@ -258,38 +277,99 @@ export const DEFAULT_CMS_CONTENT: SiteCMSContent = {
   homeCollectionsTag: 'THE COLLECTION',
   homeCollectionsTitle: 'Top Product Categories',
   homeCollectionsSub: 'Browse our curated collections of travel essentials and outdoor gear',
+  homeCategories: [
+    { name: "Stickers", price: "Starts from ₹93", image: "/around_the_world_sticker.jpg", link: "/shop?category=Stickers" },
+    { name: "Badges", price: "Starts from ₹199", image: "/around_the_world_sticker.jpg", link: "/shop?category=Badges" },
+    { name: "Fridge Magnets", price: "Starts from ₹199", image: "/around_the_world_sticker.jpg", link: "/shop?category=Magnets" },
+    { name: "Journals", price: "Starts from ₹299", image: "/around_the_world_sticker.jpg", link: "/shop?category=Journals" },
+    { name: "Patches", price: "Starts from ₹120", image: "/around_the_world_sticker.jpg", link: "/shop?category=Patches" },
+    { name: "Pins", price: "Starts from ₹85", image: "/around_the_world_sticker.jpg", link: "/shop?category=Pins" },
+    { name: "Keychains", price: "Starts from ₹99", image: "/around_the_world_sticker.jpg", link: "/shop?category=Keychains" },
+    { name: "T-Shirts", price: "Starts from ₹499", image: "/around_the_world_sticker.jpg", link: "/shop?category=Apparel" },
+  ],
 
   // Reviews
   homeReviewsTag: 'COMMUNITY REVIEWS',
   homeReviewsTitle: 'What people say about products',
   homeReviewsSub: 'Real reviews from our community of happy travelers',
+  homeReviews: [
+    { id: 'rev-1', name: 'Kiran Makwan', subtitle: 'Verified Wanderer', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150&q=80', text: 'Exploring Spiti Valley with Go Banjara was a life-changing journey. Flawless planning, cozy homestays, and a wonderful group of fellow travelers. Highly recommended!', stars: 5 },
+    { id: 'rev-2', name: 'Ananya Roy', subtitle: 'Himalayan Backpacker', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&h=150&q=80', text: "I bought the waterproof stickers for my laptop and helmet. They've survived rain, dust, and countless rugged camping trips without peeling or fading!", stars: 5 },
+    { id: 'rev-3', name: 'Rohan Sharma', subtitle: 'Motorcycle Nomad', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&h=150&q=80', text: 'The Kashmir Road Trip package was pure magic. Extremely well-planned with authentic local homestays and off-the-beaten-path trails. Will book again!', stars: 5 },
+    { id: 'rev-4', name: 'Priyanka Sen', subtitle: 'Slow Traveler', avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&h=150&q=80', text: 'The double-walled thermal flask keeps my tea steaming hot even at 14,000 feet in Ladakh. Truly premium travel gear built for real mountain conditions.', stars: 5 },
+    { id: 'rev-5', name: 'Arjun Mehta', subtitle: 'Weekend Explorer', avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&h=150&q=80', text: 'Super clean design on the T-shirts! The fit is perfect, the fabric is extremely soft and breathable, and the graphics represent the soul of adventure travel.', stars: 5 },
+    { id: 'rev-6', name: 'Priya Nair', subtitle: 'Solo Backpacker', avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&h=150&q=80', text: 'The Kerala Backwaters & Munnar Hills trip was breathtaking. The coordination was flawless, and the local guides showed us hidden trails away from all the tourists!', stars: 5 },
+  ],
 
   // Blog
   homeBlogTag: 'THE JOURNAL',
   homeBlogTitle: 'Travel Tales from the curious Explorer',
   homeBlogSub: 'Follow my voices to discover unique voices, breathtaking landscapes & unforgettable experiences',
+  homeBlogPosts: [
+    { id: 'post-ladakh-guide-1', title: 'Ultimate Ladakh Travel Guide: Plan Your Perfect Himalayan Adventure', excerpt: 'Detailed packing list, fuel planning, and safety pointers for solo adventurers tackling the high passes alone.', image: '/travel-leh-1.jpg', readTime: '5 min read', date: 'Sunday, August 12, 2023', author: 'Kiran Makwan' },
+    { id: 'post-ladakh-guide-2', title: 'Leh Ladakh Travel Guide 2026: Best Time, Places & Complete Trip Planning', excerpt: 'Detailed packing list, fuel planning, and safety pointers for solo adventurers tackling the high passes alone.', image: '/travel-leh-2.jpg', readTime: '5 min read', date: 'Sunday, August 12, 2023', author: 'Kiran Makwan' },
+    { id: 'post-ladakh-guide-3', title: 'Ladakh Bike Trip Guide: Routes, Budget & Essential Tips for Riders', excerpt: 'Detailed packing list, fuel planning, and safety pointers for solo adventurers tackling the high passes alone.', image: '/travel-leh-3.jpg', readTime: '5 min read', date: 'Sunday, August 12, 2023', author: 'Kiran Makwan' },
+    { id: 'post-ladakh-guide-4', title: '7-Day Leh Ladakh Itinerary for First-Time Travelers', excerpt: 'Detailed packing list, fuel planning, and safety pointers for solo adventurers tackling the high passes alone.', image: '/travel-leh-4.jpg', readTime: '5 min read', date: 'Sunday, August 12, 2023', author: 'Kiran Makwan' },
+  ],
 
   // FAQ
   homeFaqTag: 'GOT QUESTIONS?',
   homeFaqTitle: 'Frequently Asked Questions',
   homeFaqHelpDesk: 'Help Desk',
+  homeFaqs: [
+    { question: 'What is Go Banjara?', answer: 'Go Banjara is a slow-travel community and premium outdoor boutique brand. We craft immersive road trips, treks, and beach escapes, alongside durable, highly styled travel gear like waterproof backpacks, passport covers, iron-on badges, and premium journals.' },
+    { question: 'How do I book a travel package?', answer: "Browse our curated packages under the Travel section. Choose your travel date and group size, then click 'Book Now' to submit an inquiry. Our community guides will reach out within 24 hours to confirm your details and add the package to your cart." },
+    { question: 'What is your gear return policy?', answer: 'We offer a 15-day hassle-free return window for all boutique gear and apparel in unused, original packaging. All products also carry a 6-month warranty against manufacturing defects.' },
+    { question: 'Do you support local communities?', answer: 'Yes, 85% of your travel package expenses go directly to supporting local homestays, native guides, remote monasteries, and local micro-economies. Our gear is also sourced responsibly from local artisans.' },
+    { question: 'What materials are the badges made from?', answer: 'Zinc alloy with glossy enamel fill. Lightweight, durable, and safe to pin on bags, jackets, or backpacks without damaging fabric.' },
+  ],
 
-  // Values
-  homeValuesTag: 'OUR PROMISE',
-  homeValuesTitle: 'Why Choose Go Banjara?',
-  homeValuesSub: 'We combine authentic local culture, eco-friendly travel practices, and premium gear.',
+  // Values / Services
+  homeValuesTag: 'THE BANJARA TRIBE',
+  homeValuesTitle: 'Join the Banjara Tribe',
+  homeValuesSub: 'Services to help you shop',
+  homeServicesCards: [
+    { image: '/service-faq.png', title: 'Frequently Asked Questions (FAQ)', desc: 'See what are the commonly asked questions by our customers' },
+    { image: '/service-delivery.png', title: 'Home Delivery Options available', desc: 'Pay with multiple cards seamlessly and without interruption' },
+    { image: '/service-payment.png', title: 'Secure Online Payment Process', desc: 'Pay with multiple cards seamlessly and without interruption' },
+    { image: '/service-openbox.png', title: 'Open Box Delivery', desc: 'Pay with multiple cards seamlessly and without interruption' }
+  ],
+
+  // Meet Bonjo
+  homeBonjoTag: 'The Banjara Soul',
+  homeBonjoTitle: 'Meet Bonjo.',
+  homeBonjoText1: "Go Banjara was born from a frustration travel in India had become a checklist. Same cafés, same photo spots, same three-day Goa loop. We wanted something slower, closer to the ground, and honest about the places it visited.",
+  homeBonjoText2: "So we built a hybrid platform: curated small-group journeys, a shop of honest gear made by artisans we know by name, and a community of travelers who share notes from the road instead of just photos.",
+  homeBonjoText3: "Travel. Lifestyle. Community. Commerce. Under one roof because we don't think they were ever supposed to live apart.",
+  homeBonjoBtnText: 'Our Story',
+  homeBonjoBtnLink: '/about',
+  homeBonjoImage: '/llama_mascot.png',
+
+  // Marquee Banners
+  homeMarquee1Items: [
+    'BOOK YOUR NEXT TRIP',
+    'SHOP TRAVEL GEAR',
+    'DARE TO TRAVEL',
+    'STICKERS',
+    'MODERN NOMAD',
+    'BADGES'
+  ],
+  homeMarquee2Items: [
+    'ESCAPE THE ORDINARY',
+    'SHOP TRAVEL GEAR',
+    'DARE TO TRAVEL',
+    'ADVENTURE AWAITS',
+    'MODERN NOMAD',
+    'SHOP TRAVEL GEAR'
+  ],
 
   // Bottom CTA Banner
-  homeCtaTitle: 'Ready for Your Next Big Journey?',
-  homeCtaSub: 'Join thousands of nomads exploring uncharted trails and creating lifelong memories.',
-  homeCtaBtnText: 'Browse All Packages',
+  homeCtaTitle: 'The best adventures find their way to your inbox.',
+  homeCtaSub: 'Hidden places, exclusive trip drops, curated gear, and stories from the road delivered before anyone else hears about them.',
+  homeCtaBtnText: 'Book Now',
   homeCtaBtnLink: '/travel',
   homeCtaBgImage: '/newsletter_bg.jpg',
 
-  // Instagram Section
-  homeInstagramTag: 'NOMAD MOMENTS',
-  homeInstagramTitle: 'Follow Our Journey on Instagram',
-  homeInstagramSub: 'Tag @gobanjara on your adventures to get featured on our official community grid',
 
   // Dynamic Custom Sections
   homeCustomSections: [],
@@ -452,6 +532,11 @@ export function getStoredCMSContent(): SiteCMSContent {
       parsed.homeHeroSubtitle = DEFAULT_CMS_CONTENT.homeHeroSubtitle;
       parsed.homeHeroShopBtn = DEFAULT_CMS_CONTENT.homeHeroShopBtn;
       parsed.homeHeroTravelBtn = DEFAULT_CMS_CONTENT.homeHeroTravelBtn;
+    }
+    if (!parsed.homeCtaTitle || parsed.homeCtaTitle === 'Ready for Your Next Big Journey?') {
+      parsed.homeCtaTitle = DEFAULT_CMS_CONTENT.homeCtaTitle;
+      parsed.homeCtaSub = DEFAULT_CMS_CONTENT.homeCtaSub;
+      parsed.homeCtaBtnText = DEFAULT_CMS_CONTENT.homeCtaBtnText;
     }
     return {
       ...DEFAULT_CMS_CONTENT,

@@ -1776,88 +1776,6 @@ export default function HolidaysPortal() {
         </div>
       </section>
 
-      {/* 3.4 WHY CHOOSE GO BANJARA TRUST SECTION */}
-      <section 
-        style={{
-          width: "100%",
-          maxWidth: "1440px",
-          backgroundColor: "#FAF9F6",
-          borderTop: "1px solid #E5E0D5",
-          borderBottom: "1px solid #E5E0D5",
-          boxSizing: "border-box",
-          margin: "0 auto",
-          position: "relative",
-          zIndex: 10
-        }}
-        className="py-12 sm:py-16 px-4 sm:px-8 md:px-[80px]"
-      >
-        <div className="max-w-[1280px] mx-auto space-y-10 text-center">
-          <div className="space-y-3">
-            <span className="inline-flex items-center justify-center h-[26px] text-[12px] font-bold uppercase tracking-[0.12em] text-[#FF5B37] bg-[#FFEBE5] px-3 rounded-[4px]">
-              WHY TRAVEL WITH US
-            </span>
-            <h2 
-              style={{ fontFamily: "'Fraunces', serif" }}
-              className="text-2xl sm:text-3xl md:text-[40px] font-semibold text-[#1D493E]"
-            >
-              Crafted for the <span className="text-[#FF623E]">Conscious Nomad</span>
-            </h2>
-            <p className="text-sm sm:text-base md:text-[18px] text-[#2B2B2B] max-w-2xl mx-auto font-medium">
-              We handle every detail—permits, stays, transfers, and guides—so you can immerse yourself fully in the journey.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
-            <div className="bg-white border border-[#E5E0D5] p-6 rounded-2xl space-y-3 shadow-xs hover:border-[#1D493E] transition">
-              <div className="w-12 h-12 rounded-xl bg-[#1D493E]/10 flex items-center justify-center text-[#1D493E]">
-                <ShieldCheck className="w-6 h-6" />
-              </div>
-              <h3 style={{ fontFamily: "'Fraunces', serif" }} className="text-lg font-bold text-[#1D493E]">
-                Certified Safety Standards
-              </h3>
-              <p className="text-xs sm:text-sm text-gray-600 leading-relaxed font-medium">
-                Wilderness first-responders, oxygen support, and 24/7 mountain assistance on all high-altitude routes.
-              </p>
-            </div>
-
-            <div className="bg-white border border-[#E5E0D5] p-6 rounded-2xl space-y-3 shadow-xs hover:border-[#1D493E] transition">
-              <div className="w-12 h-12 rounded-xl bg-[#FF623E]/10 flex items-center justify-center text-[#FF623E]">
-                <Compass className="w-6 h-6" />
-              </div>
-              <h3 style={{ fontFamily: "'Fraunces', serif" }} className="text-lg font-bold text-[#1D493E]">
-                Authentic Boutique Stays
-              </h3>
-              <p className="text-xs sm:text-sm text-gray-600 leading-relaxed font-medium">
-                Hand-picked family homestays, riverside eco-tents, and boutique heritage properties with authentic local cuisine.
-              </p>
-            </div>
-
-            <div className="bg-white border border-[#E5E0D5] p-6 rounded-2xl space-y-3 shadow-xs hover:border-[#1D493E] transition">
-              <div className="w-12 h-12 rounded-xl bg-[#1D493E]/10 flex items-center justify-center text-[#1D493E]">
-                <MapPin className="w-6 h-6" />
-              </div>
-              <h3 style={{ fontFamily: "'Fraunces', serif" }} className="text-lg font-bold text-[#1D493E]">
-                Hidden Offbeat Trails
-              </h3>
-              <p className="text-xs sm:text-sm text-gray-600 leading-relaxed font-medium">
-                Native mountain guides lead you to secluded lakes, secret viewpoints, and living root bridges away from tourist crowds.
-              </p>
-            </div>
-
-            <div className="bg-white border border-[#E5E0D5] p-6 rounded-2xl space-y-3 shadow-xs hover:border-[#1D493E] transition">
-              <div className="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-700">
-                <Globe className="w-6 h-6" />
-              </div>
-              <h3 style={{ fontFamily: "'Fraunces', serif" }} className="text-lg font-bold text-[#1D493E]">
-                Community Impact
-              </h3>
-              <p className="text-xs sm:text-sm text-gray-600 leading-relaxed font-medium">
-                15% of all package revenues go directly to supporting mountain families, indigenous artisans, and eco-conservation.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* 3.5 FAQ ACCORDION SECTION */}
       <section className="w-full bg-white text-left relative z-10">
@@ -1891,7 +1809,7 @@ export default function HolidaysPortal() {
                 fontFamily: "Fraunces, serif",
                 letterSpacing: "0px",
                 textAlign: "center",
-                color: "#2B2B2B",
+                color: "#1D493E",
                 maxWidth: "1280px",
                 margin: 0,
               }}

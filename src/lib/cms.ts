@@ -39,11 +39,40 @@ export interface GlobalSiteSettings {
   address: string;
 }
 
+export interface CustomHomeSection {
+  id: string;
+  title: string;
+  subtitle: string;
+  tag?: string;
+  image?: string;
+  videoUrl?: string;
+  content?: string;
+  buttonText?: string;
+  buttonLink?: string;
+  visible: boolean;
+}
+
 export interface SiteCMSContent {
   // Global Site Config
   global: GlobalSiteSettings;
 
-  // Home Page Sections
+  // Home Page Section Visibility Toggles (Keep / Hide)
+  showHeroSection?: boolean;
+  showDualCtaBanners?: boolean;
+  showDestinationsSection?: boolean;
+  showDealsSection?: boolean;
+  showBestSellingSection?: boolean;
+  showCategoriesSection?: boolean;
+  showReviewsSection?: boolean;
+  showBlogSection?: boolean;
+  showFaqSection?: boolean;
+  showValuesSection?: boolean;
+  showCtaBannerSection?: boolean;
+  showInstagramSection?: boolean;
+
+  // Home Page Hero Section (Media & Copy)
+  homeHeroVideoUrl?: string;
+  homeHeroPosterUrl?: string;
   homeHeroTitleLine1: string;
   homeHeroTitleLine2: string;
   homeHeroTitleLine3: string;
@@ -57,10 +86,12 @@ export interface SiteCMSContent {
   homeCtaBanner1Desc: string;
   homeCtaBanner1BtnText: string;
   homeCtaBanner1BtnLink: string;
+  homeCtaBanner1Image?: string;
   homeCtaBanner2Title: string;
   homeCtaBanner2Desc: string;
   homeCtaBanner2BtnText: string;
   homeCtaBanner2BtnLink: string;
+  homeCtaBanner2Image?: string;
 
   // Destinations Section
   homeDestinationsTag: string;
@@ -68,28 +99,35 @@ export interface SiteCMSContent {
   homeDestinationsSub: string;
 
   // Deals & Selling
+  homeDealsTag?: string;
   homeDealsTitle: string;
   homeDealsSub: string;
+  homeSellingTag?: string;
   homeSellingTitle: string;
   homeSellingSub: string;
 
   // Collections / Categories Section
+  homeCollectionsTag?: string;
   homeCollectionsTitle: string;
   homeCollectionsSub: string;
 
   // Reviews Section
+  homeReviewsTag?: string;
   homeReviewsTitle: string;
   homeReviewsSub: string;
 
   // Blog / Travel Diaries Section
+  homeBlogTag?: string;
   homeBlogTitle: string;
   homeBlogSub: string;
 
   // FAQ Section
+  homeFaqTag?: string;
   homeFaqTitle: string;
   homeFaqHelpDesk: string;
 
   // Values Section
+  homeValuesTag?: string;
   homeValuesTitle: string;
   homeValuesSub: string;
 
@@ -98,6 +136,15 @@ export interface SiteCMSContent {
   homeCtaSub: string;
   homeCtaBtnText: string;
   homeCtaBtnLink: string;
+  homeCtaBgImage?: string;
+
+  // Instagram Section
+  homeInstagramTag?: string;
+  homeInstagramTitle?: string;
+  homeInstagramSub?: string;
+
+  // Dynamic Custom Sections
+  homeCustomSections?: CustomHomeSection[];
 
   // About Us Page Sections
   aboutHeroTitle: string;
@@ -157,7 +204,23 @@ export const DEFAULT_CMS_CONTENT: SiteCMSContent = {
     address: 'Banjara Hills, Road No. 12, Hyderabad, Telangana, 500034',
   },
 
-  // Home Page
+  // Home Page Section Visibility Toggles (Keep / Hide)
+  showHeroSection: true,
+  showDualCtaBanners: true,
+  showDestinationsSection: true,
+  showDealsSection: true,
+  showBestSellingSection: true,
+  showCategoriesSection: true,
+  showReviewsSection: true,
+  showBlogSection: true,
+  showFaqSection: true,
+  showValuesSection: true,
+  showCtaBannerSection: true,
+  showInstagramSection: true,
+
+  // Home Page Hero Section (Media & Copy)
+  homeHeroVideoUrl: '/hero-video.mp4',
+  homeHeroPosterUrl: '/hero-poster.jpg',
   homeHeroTitleLine1: 'YOUR PASSPORT TO',
   homeHeroTitleLine2: 'UNFORGETTABLE',
   homeHeroTitleLine3: 'ADVENTURES.',
@@ -171,10 +234,12 @@ export const DEFAULT_CMS_CONTENT: SiteCMSContent = {
   homeCtaBanner1Desc: 'Explore our collection of hand-picked journals, weather-proof stickers and artisanal badges designed for the road',
   homeCtaBanner1BtnText: 'Explore Collections',
   homeCtaBanner1BtnLink: '/shop',
+  homeCtaBanner1Image: '/shop_gear_cta.jpg',
   homeCtaBanner2Title: 'Book a Trip',
   homeCtaBanner2Desc: 'Explore our collection of hand-picked journals, weather-proof stickers and artisanal badges designed for the road',
   homeCtaBanner2BtnText: 'Find the Route',
   homeCtaBanner2BtnLink: '/travel',
+  homeCtaBanner2Image: '/book_trip_cta.jpg',
 
   // Destinations
   homeDestinationsTag: 'DESTINATIONS',
@@ -182,34 +247,52 @@ export const DEFAULT_CMS_CONTENT: SiteCMSContent = {
   homeDestinationsSub: 'A hand-picked map of the corners of India our community keeps coming back to',
 
   // Deals & Selling
+  homeDealsTag: 'LIMITED TIME OFFERS',
   homeDealsTitle: 'Trending Adventure Deals',
   homeDealsSub: 'Handpicked apparel & gear for your next mountain trek or beach getaway.',
+  homeSellingTag: 'MOST POPULAR',
   homeSellingTitle: 'Best Selling Banjara Essentials',
   homeSellingSub: 'Top rated gear loved by 10,000+ happy travelers across India.',
 
   // Collections
-  homeCollectionsTitle: 'Top Categories',
+  homeCollectionsTag: 'THE COLLECTION',
+  homeCollectionsTitle: 'Top Product Categories',
   homeCollectionsSub: 'Browse our curated collections of travel essentials and outdoor gear',
 
   // Reviews
+  homeReviewsTag: 'COMMUNITY REVIEWS',
   homeReviewsTitle: 'What people say about products',
   homeReviewsSub: 'Real reviews from our community of happy travelers',
 
   // Blog
+  homeBlogTag: 'THE JOURNAL',
   homeBlogTitle: 'Travel Tales from the curious Explorer',
   homeBlogSub: 'Follow my voices to discover unique voices, breathtaking landscapes & unforgettable experiences',
 
   // FAQ
+  homeFaqTag: 'GOT QUESTIONS?',
   homeFaqTitle: 'Frequently Asked Questions',
   homeFaqHelpDesk: 'Help Desk',
 
   // Values
+  homeValuesTag: 'OUR PROMISE',
   homeValuesTitle: 'Why Choose Go Banjara?',
   homeValuesSub: 'We combine authentic local culture, eco-friendly travel practices, and premium gear.',
+
+  // Bottom CTA Banner
   homeCtaTitle: 'Ready for Your Next Big Journey?',
   homeCtaSub: 'Join thousands of nomads exploring uncharted trails and creating lifelong memories.',
   homeCtaBtnText: 'Browse All Packages',
   homeCtaBtnLink: '/travel',
+  homeCtaBgImage: '/newsletter_bg.jpg',
+
+  // Instagram Section
+  homeInstagramTag: 'NOMAD MOMENTS',
+  homeInstagramTitle: 'Follow Our Journey on Instagram',
+  homeInstagramSub: 'Tag @gobanjara on your adventures to get featured on our official community grid',
+
+  // Dynamic Custom Sections
+  homeCustomSections: [],
 
   // About Us
   aboutHeroTitle: 'We Are Go Banjara',

@@ -1284,14 +1284,98 @@ export default function AdminPortal() {
                     <div>
                       <h3 className="text-base font-black text-[#1D493E] flex items-center gap-2">
                         <Globe className="w-5 h-5 text-[#1D493E]" />
-                        <span>Home Page Content & Sections Editor</span>
+                        <span>Homepage Master Control Center & Section Manager</span>
                       </h3>
-                      <p className="text-xs text-[#6B7280] mt-1">Edit copy for all sections on the main landing page.</p>
+                      <p className="text-xs text-[#6B7280] mt-1">
+                        Turn homepage sections ON/OFF, edit headings, subheadings, background videos, hero posters, pictures, and button links for every section.
+                      </p>
                     </div>
 
-                    {/* Section 1: Hero */}
+                    {/* SECTION VISIBILITY MATRIX (KEEP / HIDE) */}
+                    <div className="bg-[#FAF9F6] border border-[#E5E0D5] rounded-2xl p-5 space-y-4">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <h4 className="text-xs font-black text-[#1D493E] uppercase tracking-wider flex items-center gap-2">
+                            <Layers className="w-4 h-4 text-[#1D493E]" />
+                            <span>Homepage Sections Visibility Matrix (Keep or Hide Any Section)</span>
+                          </h4>
+                          <p className="text-[11px] text-gray-500 font-medium">Toggle switches below to show or hide sections from the public homepage.</p>
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 pt-2">
+                        {[
+                          { key: 'showHeroSection', label: '🎬 Hero Video Banner', desc: 'Main video & title' },
+                          { key: 'showDualCtaBanners', label: '⚡ Dual CTA Banners', desc: 'Shop & Book cards' },
+                          { key: 'showDestinationsSection', label: '🏔️ Places Worth Detour', desc: 'Top travel destinations' },
+                          { key: 'showDealsSection', label: '🔥 Trending Deals', desc: 'Discounted gear' },
+                          { key: 'showBestSellingSection', label: '🛍️ Best Selling Essentials', desc: 'Popular products' },
+                          { key: 'showCategoriesSection', label: '🗂️ Top Categories', desc: 'Category cards' },
+                          { key: 'showReviewsSection', label: '⭐ Community Reviews', desc: 'Customer testimonials' },
+                          { key: 'showBlogSection', label: '📖 Travel Tales (Blog)', desc: 'Featured blog posts' },
+                          { key: 'showFaqSection', label: '❓ FAQ Section', desc: 'Questions accordion' },
+                          { key: 'showValuesSection', label: '🛡️ Why Choose Us', desc: 'Brand values & trust' },
+                          { key: 'showCtaBannerSection', label: '📬 Bottom Newsletter Banner', desc: 'Subscription banner' },
+                          { key: 'showInstagramSection', label: '📸 Nomad Moments Grid', desc: 'Instagram gallery' },
+                        ].map((sec) => (
+                          <div
+                            key={sec.key}
+                            className={`p-3.5 rounded-xl border transition flex items-center justify-between ${
+                              (cms as any)[sec.key] !== false
+                                ? 'bg-emerald-50/70 border-emerald-300'
+                                : 'bg-gray-50 border-gray-200 opacity-60'
+                            }`}
+                          >
+                            <div className="space-y-0.5">
+                              <span className="text-xs font-bold text-[#1D493E] block">{sec.label}</span>
+                              <span className="text-[10px] text-gray-500">{sec.desc}</span>
+                            </div>
+                            <label className="relative inline-flex items-center cursor-pointer">
+                              <input
+                                type="checkbox"
+                                checked={(cms as any)[sec.key] !== false}
+                                onChange={(e) => setCms(prev => ({ ...prev, [sec.key]: e.target.checked }))}
+                                className="sr-only peer"
+                              />
+                              <div className="w-9 h-5 bg-gray-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#1D493E]"></div>
+                            </label>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* SECTION 1: HERO MEDIA & COPY */}
                     <div className="space-y-4 border-t border-[#E5E0D5] pt-6">
-                      <h4 className="text-xs font-black text-[#FF5A36] uppercase tracking-wider">1. Hero Section Copy</h4>
+                      <div className="flex items-center justify-between">
+                        <h4 className="text-xs font-black text-[#FF5A36] uppercase tracking-wider">1. Hero Section (Background Video, Poster & Main Heading)</h4>
+                        <span className="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded">Media & Content</span>
+                      </div>
+                      
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-[#FAF9F6] p-4 rounded-xl border border-[#E5E0D5]">
+                        <div className="space-y-1">
+                          <label className="text-[10px] font-bold text-[#1D493E] uppercase">Background Video File/URL (.mp4)</label>
+                          <input
+                            type="text"
+                            placeholder="/hero-video.mp4 or https://..."
+                            value={cms.homeHeroVideoUrl || ''}
+                            onChange={(e) => setCms(prev => ({ ...prev, homeHeroVideoUrl: e.target.value }))}
+                            className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                          />
+                          <p className="text-[10px] text-gray-400">Default: /hero-video.mp4</p>
+                        </div>
+                        <div className="space-y-1">
+                          <label className="text-[10px] font-bold text-[#1D493E] uppercase">Hero Video Poster Image URL (.jpg)</label>
+                          <input
+                            type="text"
+                            placeholder="/hero-poster.jpg or https://..."
+                            value={cms.homeHeroPosterUrl || ''}
+                            onChange={(e) => setCms(prev => ({ ...prev, homeHeroPosterUrl: e.target.value }))}
+                            className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                          />
+                          <p className="text-[10px] text-gray-400">Instant load preview poster for smooth rendering</p>
+                        </div>
+                      </div>
+
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div className="space-y-1">
                           <label className="text-[10px] font-bold text-[#6B7280] uppercase">Title Line 1</label>
@@ -1323,7 +1407,7 @@ export default function AdminPortal() {
                       </div>
 
                       <div className="space-y-1">
-                        <label className="text-[10px] font-bold text-[#6B7280] uppercase">Hero Subtitle</label>
+                        <label className="text-[10px] font-bold text-[#6B7280] uppercase">Hero Subtitle Copy</label>
                         <textarea
                           rows={2}
                           value={cms.homeHeroSubtitle}
@@ -1334,7 +1418,7 @@ export default function AdminPortal() {
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Shop Button Text</label>
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Shop Button Label</label>
                           <input
                             type="text"
                             value={cms.homeHeroShopBtn}
@@ -1343,7 +1427,7 @@ export default function AdminPortal() {
                           />
                         </div>
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Travel Button Text</label>
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Travel Packages Button Label</label>
                           <input
                             type="text"
                             value={cms.homeHeroTravelBtn}
@@ -1354,23 +1438,104 @@ export default function AdminPortal() {
                       </div>
                     </div>
 
-                    {/* Section 2: Mascot */}
+                    {/* SECTION 2: DUAL CTA CARDS */}
                     <div className="space-y-4 border-t border-[#E5E0D5] pt-6">
-                      <h4 className="text-xs font-black text-[#FF5A36] uppercase tracking-wider">2. Bonjo Mascot Speak Bubble</h4>
-                      <div className="space-y-1">
-                        <label className="text-[10px] font-bold text-[#6B7280] uppercase">Mascot Speak Bubble Copy</label>
+                      <h4 className="text-xs font-black text-[#FF5A36] uppercase tracking-wider">2. Dual CTA Banner Cards (Shop Gear + Book Trip)</h4>
+                      
+                      {/* Card 1 */}
+                      <div className="p-4 bg-[#FAF9F6] rounded-xl border border-[#E5E0D5] space-y-3">
+                        <span className="text-[11px] font-bold text-[#1D493E]">Card 1: Shop Travel Gear</span>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                          <input
+                            type="text"
+                            placeholder="Title"
+                            value={cms.homeCtaBanner1Title}
+                            onChange={(e) => setCms(prev => ({ ...prev, homeCtaBanner1Title: e.target.value }))}
+                            className="p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs"
+                          />
+                          <input
+                            type="text"
+                            placeholder="Button Text"
+                            value={cms.homeCtaBanner1BtnText}
+                            onChange={(e) => setCms(prev => ({ ...prev, homeCtaBanner1BtnText: e.target.value }))}
+                            className="p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs"
+                          />
+                        </div>
                         <textarea
                           rows={2}
-                          value={cms.homeMascotText}
-                          onChange={(e) => setCms(prev => ({ ...prev, homeMascotText: e.target.value }))}
-                          className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] resize-none"
+                          placeholder="Description"
+                          value={cms.homeCtaBanner1Desc}
+                          onChange={(e) => setCms(prev => ({ ...prev, homeCtaBanner1Desc: e.target.value }))}
+                          className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs resize-none"
+                        />
+                      </div>
+
+                      {/* Card 2 */}
+                      <div className="p-4 bg-[#FAF9F6] rounded-xl border border-[#E5E0D5] space-y-3">
+                        <span className="text-[11px] font-bold text-[#FF5A36]">Card 2: Book a Trip</span>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                          <input
+                            type="text"
+                            placeholder="Title"
+                            value={cms.homeCtaBanner2Title}
+                            onChange={(e) => setCms(prev => ({ ...prev, homeCtaBanner2Title: e.target.value }))}
+                            className="p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs"
+                          />
+                          <input
+                            type="text"
+                            placeholder="Button Text"
+                            value={cms.homeCtaBanner2BtnText}
+                            onChange={(e) => setCms(prev => ({ ...prev, homeCtaBanner2BtnText: e.target.value }))}
+                            className="p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs"
+                          />
+                        </div>
+                        <textarea
+                          rows={2}
+                          placeholder="Description"
+                          value={cms.homeCtaBanner2Desc}
+                          onChange={(e) => setCms(prev => ({ ...prev, homeCtaBanner2Desc: e.target.value }))}
+                          className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs resize-none"
                         />
                       </div>
                     </div>
 
-                    {/* Section 3: Deals & Selling */}
+                    {/* SECTION 3: DESTINATIONS */}
                     <div className="space-y-4 border-t border-[#E5E0D5] pt-6">
-                      <h4 className="text-xs font-black text-[#FF5A36] uppercase tracking-wider">3. Shop Deals & Best Sellers Headings</h4>
+                      <h4 className="text-xs font-black text-[#FF5A36] uppercase tracking-wider">3. Places Worth the Detour (Destinations)</h4>
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div className="space-y-1">
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Tag Badge</label>
+                          <input
+                            type="text"
+                            value={cms.homeDestinationsTag}
+                            onChange={(e) => setCms(prev => ({ ...prev, homeDestinationsTag: e.target.value }))}
+                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                          />
+                        </div>
+                        <div className="space-y-1">
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Heading</label>
+                          <input
+                            type="text"
+                            value={cms.homeDestinationsTitle}
+                            onChange={(e) => setCms(prev => ({ ...prev, homeDestinationsTitle: e.target.value }))}
+                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                          />
+                        </div>
+                        <div className="space-y-1">
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Subheading</label>
+                          <input
+                            type="text"
+                            value={cms.homeDestinationsSub}
+                            onChange={(e) => setCms(prev => ({ ...prev, homeDestinationsSub: e.target.value }))}
+                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* SECTION 4: DEALS & BEST SELLERS */}
+                    <div className="space-y-4 border-t border-[#E5E0D5] pt-6">
+                      <h4 className="text-xs font-black text-[#FF5A36] uppercase tracking-wider">4. Trending Deals & Best Sellers Headings</h4>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="space-y-1">
                           <label className="text-[10px] font-bold text-[#6B7280] uppercase">Deals Section Title</label>
@@ -1382,7 +1547,7 @@ export default function AdminPortal() {
                           />
                         </div>
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Selling Section Title</label>
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Best Sellers Section Title</label>
                           <input
                             type="text"
                             value={cms.homeSellingTitle}
@@ -1402,7 +1567,7 @@ export default function AdminPortal() {
                           />
                         </div>
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Selling Subtitle</label>
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Best Sellers Subtitle</label>
                           <input
                             type="text"
                             value={cms.homeSellingSub}
@@ -1413,12 +1578,58 @@ export default function AdminPortal() {
                       </div>
                     </div>
 
-                    {/* Section 4: Call to Action Banner */}
+                    {/* SECTION 5: CATEGORIES, REVIEWS, BLOG, FAQ */}
                     <div className="space-y-4 border-t border-[#E5E0D5] pt-6">
-                      <h4 className="text-xs font-black text-[#FF5A36] uppercase tracking-wider">4. Home CTA Banner</h4>
+                      <h4 className="text-xs font-black text-[#FF5A36] uppercase tracking-wider">5. Product Categories, Reviews & Travel Tales (Blog)</h4>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">CTA Banner Title</label>
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Categories Section Title</label>
+                          <input
+                            type="text"
+                            value={cms.homeCollectionsTitle}
+                            onChange={(e) => setCms(prev => ({ ...prev, homeCollectionsTitle: e.target.value }))}
+                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                          />
+                        </div>
+                        <div className="space-y-1">
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Reviews Section Title</label>
+                          <input
+                            type="text"
+                            value={cms.homeReviewsTitle}
+                            onChange={(e) => setCms(prev => ({ ...prev, homeReviewsTitle: e.target.value }))}
+                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="space-y-1">
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Travel Tales (Blog) Title</label>
+                          <input
+                            type="text"
+                            value={cms.homeBlogTitle}
+                            onChange={(e) => setCms(prev => ({ ...prev, homeBlogTitle: e.target.value }))}
+                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                          />
+                        </div>
+                        <div className="space-y-1">
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">FAQ Section Title</label>
+                          <input
+                            type="text"
+                            value={cms.homeFaqTitle}
+                            onChange={(e) => setCms(prev => ({ ...prev, homeFaqTitle: e.target.value }))}
+                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* SECTION 6: BOTTOM CTA & INSTAGRAM */}
+                    <div className="space-y-4 border-t border-[#E5E0D5] pt-6">
+                      <h4 className="text-xs font-black text-[#FF5A36] uppercase tracking-wider">6. Bottom CTA Banner & Instagram Grid</h4>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="space-y-1">
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Bottom CTA Title</label>
                           <input
                             type="text"
                             value={cms.homeCtaTitle}
@@ -1427,7 +1638,7 @@ export default function AdminPortal() {
                           />
                         </div>
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">CTA Subtitle</label>
+                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Bottom CTA Subtitle</label>
                           <input
                             type="text"
                             value={cms.homeCtaSub}
@@ -1458,133 +1669,165 @@ export default function AdminPortal() {
                       </div>
                     </div>
 
-                    {/* Section 5: Dual CTA Banners (Shop Gear + Book Trip) */}
+                    {/* DYNAMIC CUSTOM HOMEPAGE SECTIONS */}
                     <div className="space-y-4 border-t border-[#E5E0D5] pt-6">
-                      <h4 className="text-xs font-black text-[#FF5A36] uppercase tracking-wider">5. Dual CTA Banner Cards (Green + Orange)</h4>
-                      <p className="text-[10px] text-[#8D8D8D]">The two side-by-side cards: "Shop Travel Gear for Nomads" (green) and "Book a Trip" (orange)</p>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div className="space-y-3 p-4 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl">
-                          <span className="text-[10px] font-bold text-[#1D493E] uppercase">🟢 Green Card (Shop Gear)</span>
-                          <div className="space-y-1">
-                            <label className="text-[10px] font-bold text-[#6B7280] uppercase">Card Title</label>
-                            <input type="text" value={cms.homeCtaBanner1Title} onChange={(e) => setCms(prev => ({ ...prev, homeCtaBanner1Title: e.target.value }))} className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]" />
-                          </div>
-                          <div className="space-y-1">
-                            <label className="text-[10px] font-bold text-[#6B7280] uppercase">Description</label>
-                            <textarea rows={2} value={cms.homeCtaBanner1Desc} onChange={(e) => setCms(prev => ({ ...prev, homeCtaBanner1Desc: e.target.value }))} className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] resize-none" />
-                          </div>
-                          <div className="grid grid-cols-2 gap-2">
-                            <div className="space-y-1">
-                              <label className="text-[10px] font-bold text-[#6B7280] uppercase">Button Text</label>
-                              <input type="text" value={cms.homeCtaBanner1BtnText} onChange={(e) => setCms(prev => ({ ...prev, homeCtaBanner1BtnText: e.target.value }))} className="w-full p-2.5 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]" />
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <h4 className="text-xs font-black text-[#1D493E] uppercase tracking-wider flex items-center gap-2">
+                            <Sparkles className="w-4 h-4 text-amber-500" />
+                            <span>Custom Homepage Sections ({cms.homeCustomSections?.length || 0})</span>
+                          </h4>
+                          <p className="text-[11px] text-gray-500">Create new custom sections with titles, images, videos, and custom links on the homepage.</p>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const newSec = {
+                              id: `custom_sec_${Date.now()}`,
+                              title: 'New Custom Section',
+                              subtitle: 'Add custom section subtitle here...',
+                              tag: 'FEATURED',
+                              image: '',
+                              videoUrl: '',
+                              content: '',
+                              buttonText: 'Explore Now',
+                              buttonLink: '/shop',
+                              visible: true,
+                            };
+                            setCms(prev => ({
+                              ...prev,
+                              homeCustomSections: [...(prev.homeCustomSections || []), newSec]
+                            }));
+                          }}
+                          className="px-3.5 py-2 bg-[#1D493E] hover:bg-[#15342c] text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5 cursor-pointer shadow-xs"
+                        >
+                          <Plus className="w-3.5 h-3.5" />
+                          <span>Add Custom Section</span>
+                        </button>
+                      </div>
+
+                      {cms.homeCustomSections && cms.homeCustomSections.length > 0 && (
+                        <div className="space-y-4 pt-2">
+                          {cms.homeCustomSections.map((sec, idx) => (
+                            <div key={sec.id} className="p-4 bg-[#FAF9F6] rounded-xl border border-[#E5E0D5] space-y-3">
+                              <div className="flex items-center justify-between">
+                                <span className="text-xs font-bold text-[#1D493E]">Custom Section #{idx + 1}</span>
+                                <div className="flex items-center gap-3">
+                                  <label className="flex items-center gap-1.5 text-xs text-gray-600 font-medium cursor-pointer">
+                                    <input
+                                      type="checkbox"
+                                      checked={sec.visible !== false}
+                                      onChange={(e) => {
+                                        const updated = [...(cms.homeCustomSections || [])];
+                                        updated[idx].visible = e.target.checked;
+                                        setCms(prev => ({ ...prev, homeCustomSections: updated }));
+                                      }}
+                                    />
+                                    <span>Visible</span>
+                                  </label>
+                                  <button
+                                    type="button"
+                                    onClick={() => {
+                                      const updated = (cms.homeCustomSections || []).filter(s => s.id !== sec.id);
+                                      setCms(prev => ({ ...prev, homeCustomSections: updated }));
+                                    }}
+                                    className="text-red-500 hover:text-red-700 text-xs font-bold cursor-pointer"
+                                  >
+                                    Remove
+                                  </button>
+                                </div>
+                              </div>
+
+                              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                <input
+                                  type="text"
+                                  placeholder="Tag Badge (e.g. FEATURED)"
+                                  value={sec.tag || ''}
+                                  onChange={(e) => {
+                                    const updated = [...(cms.homeCustomSections || [])];
+                                    updated[idx].tag = e.target.value;
+                                    setCms(prev => ({ ...prev, homeCustomSections: updated }));
+                                  }}
+                                  className="p-2.5 bg-white border border-[#E5E0D5] rounded-xl text-xs"
+                                />
+                                <input
+                                  type="text"
+                                  placeholder="Section Title"
+                                  value={sec.title}
+                                  onChange={(e) => {
+                                    const updated = [...(cms.homeCustomSections || [])];
+                                    updated[idx].title = e.target.value;
+                                    setCms(prev => ({ ...prev, homeCustomSections: updated }));
+                                  }}
+                                  className="p-2.5 bg-white border border-[#E5E0D5] rounded-xl text-xs sm:col-span-2 font-bold"
+                                />
+                              </div>
+
+                              <textarea
+                                rows={2}
+                                placeholder="Subtitle / Description"
+                                value={sec.subtitle}
+                                onChange={(e) => {
+                                  const updated = [...(cms.homeCustomSections || [])];
+                                  updated[idx].subtitle = e.target.value;
+                                  setCms(prev => ({ ...prev, homeCustomSections: updated }));
+                                }}
+                                className="w-full p-2.5 bg-white border border-[#E5E0D5] rounded-xl text-xs resize-none"
+                              />
+
+                              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <input
+                                  type="text"
+                                  placeholder="Image URL"
+                                  value={sec.image || ''}
+                                  onChange={(e) => {
+                                    const updated = [...(cms.homeCustomSections || [])];
+                                    updated[idx].image = e.target.value;
+                                    setCms(prev => ({ ...prev, homeCustomSections: updated }));
+                                  }}
+                                  className="p-2.5 bg-white border border-[#E5E0D5] rounded-xl text-xs"
+                                />
+                                <input
+                                  type="text"
+                                  placeholder="Video URL (.mp4)"
+                                  value={sec.videoUrl || ''}
+                                  onChange={(e) => {
+                                    const updated = [...(cms.homeCustomSections || [])];
+                                    updated[idx].videoUrl = e.target.value;
+                                    setCms(prev => ({ ...prev, homeCustomSections: updated }));
+                                  }}
+                                  className="p-2.5 bg-white border border-[#E5E0D5] rounded-xl text-xs"
+                                />
+                              </div>
+
+                              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <input
+                                  type="text"
+                                  placeholder="Button Text (e.g. Learn More)"
+                                  value={sec.buttonText || ''}
+                                  onChange={(e) => {
+                                    const updated = [...(cms.homeCustomSections || [])];
+                                    updated[idx].buttonText = e.target.value;
+                                    setCms(prev => ({ ...prev, homeCustomSections: updated }));
+                                  }}
+                                  className="p-2.5 bg-white border border-[#E5E0D5] rounded-xl text-xs"
+                                />
+                                <input
+                                  type="text"
+                                  placeholder="Button Link (e.g. /shop)"
+                                  value={sec.buttonLink || ''}
+                                  onChange={(e) => {
+                                    const updated = [...(cms.homeCustomSections || [])];
+                                    updated[idx].buttonLink = e.target.value;
+                                    setCms(prev => ({ ...prev, homeCustomSections: updated }));
+                                  }}
+                                  className="p-2.5 bg-white border border-[#E5E0D5] rounded-xl text-xs"
+                                />
+                              </div>
                             </div>
-                            <div className="space-y-1">
-                              <label className="text-[10px] font-bold text-[#6B7280] uppercase">Button Link</label>
-                              <input type="text" value={cms.homeCtaBanner1BtnLink} onChange={(e) => setCms(prev => ({ ...prev, homeCtaBanner1BtnLink: e.target.value }))} className="w-full p-2.5 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]" />
-                            </div>
-                          </div>
+                          ))}
                         </div>
-                        <div className="space-y-3 p-4 bg-[#FFF7F5] border border-[#FFD6CC] rounded-xl">
-                          <span className="text-[10px] font-bold text-orange-400 uppercase">🟠 Orange Card (Book Trip)</span>
-                          <div className="space-y-1">
-                            <label className="text-[10px] font-bold text-[#6B7280] uppercase">Card Title</label>
-                            <input type="text" value={cms.homeCtaBanner2Title} onChange={(e) => setCms(prev => ({ ...prev, homeCtaBanner2Title: e.target.value }))} className="w-full p-3 bg-[#FFF7F5] border border-[#FFD6CC] rounded-xl text-xs text-[#2B2B2B]" />
-                          </div>
-                          <div className="space-y-1">
-                            <label className="text-[10px] font-bold text-[#6B7280] uppercase">Description</label>
-                            <textarea rows={2} value={cms.homeCtaBanner2Desc} onChange={(e) => setCms(prev => ({ ...prev, homeCtaBanner2Desc: e.target.value }))} className="w-full p-3 bg-[#FFF7F5] border border-[#FFD6CC] rounded-xl text-xs text-[#2B2B2B] resize-none" />
-                          </div>
-                          <div className="grid grid-cols-2 gap-2">
-                            <div className="space-y-1">
-                              <label className="text-[10px] font-bold text-[#6B7280] uppercase">Button Text</label>
-                              <input type="text" value={cms.homeCtaBanner2BtnText} onChange={(e) => setCms(prev => ({ ...prev, homeCtaBanner2BtnText: e.target.value }))} className="w-full p-2.5 bg-[#FFF7F5] border border-[#FFD6CC] rounded-xl text-xs text-[#2B2B2B]" />
-                            </div>
-                            <div className="space-y-1">
-                              <label className="text-[10px] font-bold text-[#6B7280] uppercase">Button Link</label>
-                              <input type="text" value={cms.homeCtaBanner2BtnLink} onChange={(e) => setCms(prev => ({ ...prev, homeCtaBanner2BtnLink: e.target.value }))} className="w-full p-2.5 bg-[#FFF7F5] border border-[#FFD6CC] rounded-xl text-xs text-[#2B2B2B]" />
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Section 6: Destinations */}
-                    <div className="space-y-4 border-t border-[#E5E0D5] pt-6">
-                      <h4 className="text-xs font-black text-[#FF5A36] uppercase tracking-wider">6. Destinations Section</h4>
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                        <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Section Tag</label>
-                          <input type="text" value={cms.homeDestinationsTag} onChange={(e) => setCms(prev => ({ ...prev, homeDestinationsTag: e.target.value }))} className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]" />
-                        </div>
-                        <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Title</label>
-                          <input type="text" value={cms.homeDestinationsTitle} onChange={(e) => setCms(prev => ({ ...prev, homeDestinationsTitle: e.target.value }))} className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]" />
-                        </div>
-                        <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Subtitle</label>
-                          <input type="text" value={cms.homeDestinationsSub} onChange={(e) => setCms(prev => ({ ...prev, homeDestinationsSub: e.target.value }))} className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]" />
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Section 7: Collections / Categories */}
-                    <div className="space-y-4 border-t border-[#E5E0D5] pt-6">
-                      <h4 className="text-xs font-black text-[#FF5A36] uppercase tracking-wider">7. Collections / Top Categories</h4>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Section Title</label>
-                          <input type="text" value={cms.homeCollectionsTitle} onChange={(e) => setCms(prev => ({ ...prev, homeCollectionsTitle: e.target.value }))} className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]" />
-                        </div>
-                        <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Section Subtitle</label>
-                          <input type="text" value={cms.homeCollectionsSub} onChange={(e) => setCms(prev => ({ ...prev, homeCollectionsSub: e.target.value }))} className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]" />
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Section 8: Reviews */}
-                    <div className="space-y-4 border-t border-[#E5E0D5] pt-6">
-                      <h4 className="text-xs font-black text-[#FF5A36] uppercase tracking-wider">8. Reviews / Testimonials</h4>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Section Title</label>
-                          <input type="text" value={cms.homeReviewsTitle} onChange={(e) => setCms(prev => ({ ...prev, homeReviewsTitle: e.target.value }))} className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]" />
-                        </div>
-                        <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Section Subtitle</label>
-                          <input type="text" value={cms.homeReviewsSub} onChange={(e) => setCms(prev => ({ ...prev, homeReviewsSub: e.target.value }))} className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]" />
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Section 9: Blog / Travel Diaries */}
-                    <div className="space-y-4 border-t border-[#E5E0D5] pt-6">
-                      <h4 className="text-xs font-black text-[#FF5A36] uppercase tracking-wider">9. Blog / Travel Diaries</h4>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Section Title</label>
-                          <input type="text" value={cms.homeBlogTitle} onChange={(e) => setCms(prev => ({ ...prev, homeBlogTitle: e.target.value }))} className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]" />
-                        </div>
-                        <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Section Subtitle</label>
-                          <input type="text" value={cms.homeBlogSub} onChange={(e) => setCms(prev => ({ ...prev, homeBlogSub: e.target.value }))} className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]" />
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Section 10: FAQ */}
-                    <div className="space-y-4 border-t border-[#E5E0D5] pt-6">
-                      <h4 className="text-xs font-black text-[#FF5A36] uppercase tracking-wider">10. FAQ Section</h4>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">FAQ Title</label>
-                          <input type="text" value={cms.homeFaqTitle} onChange={(e) => setCms(prev => ({ ...prev, homeFaqTitle: e.target.value }))} className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]" />
-                        </div>
-                        <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Help Desk Label</label>
-                          <input type="text" value={cms.homeFaqHelpDesk} onChange={(e) => setCms(prev => ({ ...prev, homeFaqHelpDesk: e.target.value }))} className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]" />
-                        </div>
-                      </div>
+                      )}
                     </div>
 
                   </div>

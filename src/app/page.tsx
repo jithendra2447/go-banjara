@@ -15,6 +15,7 @@ import { InteractiveProgressBar } from '@/components/InteractiveProgressBar';
 import { DragCarousel } from '@/components/DragCarousel';
 import { FAQSection } from '@/components/FAQSection';
 import { getFutureDeliveryString, getFutureDateString } from '@/utils/dateUtils';
+import { getStoredCMSContent, SiteCMSContent, DEFAULT_CMS_CONTENT } from '@/lib/cms';
 
 // Static Blog/Diaries list
 const BLOG_POSTS = [
@@ -99,6 +100,8 @@ export default function Homepage() {
 
   // Active image index for each product card
   const [activeImageIndices, setActiveImageIndices] = useState<Record<string, number>>({});
+
+  const [cms, setCms] = useState<SiteCMSContent>(DEFAULT_CMS_CONTENT);
 
   const [pageContent, setPageContent] = useState({
     heroTitleLine1: "Hey! Let's",
@@ -191,6 +194,9 @@ export default function Homepage() {
     // 3. Load dynamic page content from cPanel CMS Engine
     const loadCms = () => {
       try {
+        const fullCms = getStoredCMSContent();
+        setCms(fullCms);
+
         const v2Cms = localStorage.getItem('gb_admin_page_content_v2');
         if (v2Cms) {
           const parsed = JSON.parse(v2Cms);
@@ -246,6 +252,7 @@ export default function Homepage() {
 
     const handleCmsUpdate = (e: any) => {
       if (e.detail) {
+        setCms(e.detail);
         setPageContent(prev => ({
           ...prev,
           heroTitleLine1: e.detail.homeHeroTitleLine1 || prev.heroTitleLine1,
@@ -281,6 +288,8 @@ export default function Homepage() {
           valuesTitle: e.detail.homeValuesTitle || prev.valuesTitle,
           valuesSub: e.detail.homeValuesSub || prev.valuesSub,
         }));
+      } else {
+        setCms(getStoredCMSContent());
       }
     };
 
@@ -469,236 +478,245 @@ export default function Homepage() {
     <div className="min-h-screen bg-white text-[#1D493E] font-sans antialiased relative -mt-[90px]">
       
       {/* 1. HERO VIDEO BACKGROUND LAYER (z-20, sits behind metrics bar z-35) */}
-      <div className="relative hero-banner-height w-full z-20 overflow-hidden">
-        {/* HTML5 Video Element with Instant Poster & Preload */}
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          poster="/hero-poster.jpg"
-          className="absolute inset-0 w-full h-full object-cover brightness-[0.75] contrast-[1.05]"
-          style={{ transform: 'scale(1.35) translate(-2%, -4%)', transformOrigin: 'top left' }}
-        >
-          <source src="/hero-video.mp4" type="video/mp4" />
-        </video>
+      {cms.showHeroSection !== false && (
+        <div className="relative hero-banner-height w-full z-20 overflow-hidden">
+          {/* HTML5 Video Element with Instant Poster & Preload */}
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            poster={cms.homeHeroPosterUrl || "/hero-poster.jpg"}
+            className="absolute inset-0 w-full h-full object-cover brightness-[0.75] contrast-[1.05]"
+            style={{ transform: 'scale(1.35) translate(-2%, -4%)', transformOrigin: 'top left' }}
+          >
+            <source src={cms.homeHeroVideoUrl || "/hero-video.mp4"} type="video/mp4" />
+          </video>
 
-        {/* Dark overlay to make white text highly readable */}
-        <div className="absolute inset-0 bg-black/20 pointer-events-none z-10" />
+          {/* Dark overlay to make white text highly readable */}
+          <div className="absolute inset-0 bg-black/20 pointer-events-none z-10" />
 
-        {/* 2. HERO CONTENT SECTION (Overlay on top of video, z-20) */}
-        <div className="absolute inset-0 flex flex-col justify-end pb-4 sm:pb-8 md:pb-16 lg:pb-20 z-20 bg-transparent animate-fade-in">
-          <div className="max-w-full sm:max-w-[390px] md:max-w-[1440px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 w-full flex flex-col md:flex-row md:items-end justify-between gap-3 sm:gap-[18px] md:gap-10 text-left">
-            
-            {/* Left side: Heading & Subtitle */}
-            <div className="flex flex-col gap-2 sm:gap-[18px] md:gap-6 max-w-full sm:max-w-[390px] md:max-w-[850px] text-left">
-              <h1 
-                style={{
-                  fontFamily: "'Faktum','Outfit',sans-serif",
-                  fontWeight: 600,
-                  letterSpacing: "-0.2px",
-                }}
-                className="text-[32px] md:text-[54px] xl:text-[62px] leading-[100%] text-white"
-              >
-                Hey! Let’s Escape from <br className="hidden md:inline" />
-                the Ordinary
-              </h1>
-              <p 
-                style={{
-                  fontFamily: "'Faktum','Outfit',sans-serif",
-                  fontWeight: 500,
-                  letterSpacing: "0px",
-                }}
-                className="text-[14px] md:text-[18px] lg:text-[20px] leading-[24px] md:leading-[28px] lg:leading-[32px] text-white/95 max-w-full sm:max-w-[650px]"
-              >
-                We bridge the gap between soulful Indian travel and high end gear. <br className="hidden md:inline" />
-                curated for those who find home in the dust of the road
-              </p>
+          {/* 2. HERO CONTENT SECTION (Overlay on top of video, z-20) */}
+          <div className="absolute inset-0 flex flex-col justify-end pb-4 sm:pb-8 md:pb-16 lg:pb-20 z-20 bg-transparent animate-fade-in">
+            <div className="max-w-full sm:max-w-[390px] md:max-w-[1440px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 w-full flex flex-col md:flex-row md:items-end justify-between gap-3 sm:gap-[18px] md:gap-10 text-left">
+              
+              {/* Left side: Heading & Subtitle */}
+              <div className="flex flex-col gap-2 sm:gap-[18px] md:gap-6 max-w-full sm:max-w-[390px] md:max-w-[850px] text-left">
+                <h1 
+                  style={{
+                    fontFamily: "'Faktum','Outfit',sans-serif",
+                    fontWeight: 600,
+                    letterSpacing: "-0.2px",
+                  }}
+                  className="text-[32px] md:text-[54px] xl:text-[62px] leading-[100%] text-white"
+                >
+                  {cms.homeHeroTitleLine1 || "Hey! Let’s Escape from"} <br className="hidden md:inline" />
+                  {cms.homeHeroTitleLine2 || "the Ordinary"}
+                  {cms.homeHeroTitleLine3 && (
+                    <>
+                      <br className="hidden md:inline" />
+                      {cms.homeHeroTitleLine3}
+                    </>
+                  )}
+                </h1>
+                <p 
+                  style={{
+                    fontFamily: "'Faktum','Outfit',sans-serif",
+                    fontWeight: 500,
+                    letterSpacing: "0px",
+                  }}
+                  className="text-[14px] md:text-[18px] lg:text-[20px] leading-[24px] md:leading-[28px] lg:leading-[32px] text-white/95 max-w-full sm:max-w-[650px]"
+                >
+                  {cms.homeHeroSubtitle || "We bridge the gap between soulful Indian travel and high end gear curated for those who find home in the dust of the road"}
+                </p>
+              </div>
+
+              {/* Right side: Two Buttons side-by-side (responsive equal height & clean alignment) */}
+              <div className="flex flex-row items-center gap-3 justify-start shrink-0 pb-1 w-full sm:w-auto">
+                <Link 
+                  href="/shop"
+                  className="hover:scale-[1.02] active:scale-[0.98] text-[#2B2B2B] bg-white transition-all duration-300 cursor-pointer flex items-center justify-center flex-1 sm:flex-initial sm:w-[150px] md:w-[177px] h-[44px] sm:h-[55px] shrink-0 rounded-[4px] border border-white font-sans font-semibold text-[14px] px-3 text-center"
+                >
+                  {cms.homeHeroShopBtn || "Shop Now"}
+                </Link>
+                <Link 
+                  href="/travel"
+                  className="hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 cursor-pointer flex items-center justify-center flex-1 sm:flex-initial sm:w-[190px] md:w-[215px] h-[44px] sm:h-[55px] border border-white/80 text-white bg-white/10 shrink-0 rounded-[4px] backdrop-blur-sm font-sans font-semibold text-[14px] px-3 text-center"
+                >
+                  {cms.homeHeroTravelBtn || "See Travel Packages"}
+                </Link>
+              </div>
+
             </div>
-
-            {/* Right side: Two Buttons side-by-side (responsive equal height & clean alignment) */}
-            <div className="flex flex-row items-center gap-3 justify-start shrink-0 pb-1 w-full sm:w-auto">
-              <Link 
-                href="/shop"
-                className="hover:scale-[1.02] active:scale-[0.98] text-[#2B2B2B] bg-white transition-all duration-300 cursor-pointer flex items-center justify-center flex-1 sm:flex-initial sm:w-[150px] md:w-[177px] h-[44px] sm:h-[55px] shrink-0 rounded-[4px] border border-white font-sans font-semibold text-[14px] px-3 text-center"
-              >
-                Shop Now
-              </Link>
-              <Link 
-                href="/travel"
-                className="hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 cursor-pointer flex items-center justify-center flex-1 sm:flex-initial sm:w-[190px] md:w-[215px] h-[44px] sm:h-[55px] border border-white/80 text-white bg-white/10 shrink-0 rounded-[4px] backdrop-blur-sm font-sans font-semibold text-[14px] px-3 text-center"
-              >
-                See Travel Packages
-              </Link>
-            </div>
-
           </div>
         </div>
-      </div>
+      )}
 
       {/* 3. DUAL CALL-TO-ACTIONS */}
-      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-20 pt-[20px] pb-[20px] bg-white relative z-35">
-        {/* Desktop View (Side-by-side 2 columns, unchanged) */}
-        <div className="hidden md:grid md:grid-cols-2 gap-8">
-          {/* Card 1 - Shop Gear (Left, Green) */}
-          <div className="bg-[#1D493E] text-white p-6 rounded-[4px] flex flex-col justify-between gap-8 relative overflow-hidden group shadow-md border border-white/5">
-            <div className="space-y-4 text-left">
-              <h2 className="text-2xl md:text-3xl font-black leading-tight font-sans">
-                {pageContent.ctaBanner1Title}
-              </h2>
-              <p className="text-base md:text-[20px] leading-[32px] tracking-[0px] text-white/80 font-sans font-medium">
-                {pageContent.ctaBanner1Desc}
-              </p>
-            </div>
-            <div className="relative z-10">
-              <Link 
-                href={pageContent.ctaBanner1BtnLink} 
-                className="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-[4px] bg-white/10 hover:bg-white/15 transition-all duration-300 cursor-pointer text-center group"
-                style={{ color: "rgba(255,255,255,1)", fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "16px", lineHeight: "100%", letterSpacing: "0px", verticalAlign: "middle", textDecoration: "none" }}
-              >
-                <span>{pageContent.ctaBanner1BtnText}</span>
-                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
-              </Link>
-            </div>
-          </div>
-
-          {/* Card 2 - Book a Trip (Right, Orange) */}
-          <div className="bg-[#FF5A36] text-white p-6 rounded-[4px] flex flex-col justify-between gap-8 relative overflow-hidden group shadow-md border border-white/5">
-            <div className="space-y-4 text-left">
-              <h2 className="text-2xl md:text-3xl font-black leading-tight font-sans">
-                {pageContent.ctaBanner2Title}
-              </h2>
-              <p className="text-base md:text-[20px] leading-[32px] tracking-[0px] text-white/90 font-sans font-medium">
-                {pageContent.ctaBanner2Desc}
-              </p>
-            </div>
-            <div className="relative z-10">
-              <Link 
-                href={pageContent.ctaBanner2BtnLink} 
-                className="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-[4px] bg-white/15 hover:bg-white/25 transition-all duration-300 cursor-pointer text-center group"
-                style={{ color: "rgba(255,255,255,1)", fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "16px", lineHeight: "100%", letterSpacing: "0px", verticalAlign: "middle", textDecoration: "none" }}
-              >
-                <span>{pageContent.ctaBanner2BtnText}</span>
-                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        {/* Mobile View (Figma specs: w-390, h-282, padding 20px, gap 18px, rounded 4px + 2 dots below) */}
-        <div className="block md:hidden w-full max-w-[390px] mx-auto px-[20px]">
-          {/* Card Frame with Touch Swipe Support */}
-          <div 
-            onTouchStart={handleTouchStart}
-            onTouchEnd={handleTouchEnd}
-            className={`w-full h-[282px] rounded-[4px] p-[20px] flex flex-col justify-between gap-[18px] text-left transition-all duration-300 shadow-md select-none touch-pan-y ${
-              activeOfferSlide === 0 ? 'bg-[#1D493E] text-white' : 'bg-[#FF5A36] text-white'
-            }`}
-            style={{ boxSizing: 'border-box' }}
-          >
-            {activeOfferSlide === 0 ? (
-              <>
-                <div className="flex flex-col gap-[18px] text-left w-full h-[180px]">
-                  <h2 
-                    style={{
-                      width: "100%",
-                      fontFamily: "'Faktum','Outfit',sans-serif",
-                      fontWeight: 600,
-                      fontSize: "22px",
-                      lineHeight: "120%",
-                      letterSpacing: "0px",
-                      color: "#FFFFFF",
-                      margin: 0,
-                    }}
-                  >
-                    Shop Travel Gear for Nomads
-                  </h2>
-                  <p 
-                    style={{
-                      fontFamily: "'Faktum','Outfit',sans-serif",
-                      fontWeight: 500,
-                      fontSize: "15px",
-                      lineHeight: "26px",
-                      letterSpacing: "0px",
-                      color: "rgba(255, 255, 255, 0.85)",
-                      margin: 0,
-                    }}
-                  >
-                    Explore our collection of hand-picked journals, weather-proof stickers and artisanal badges designed for the road
-                  </p>
-                </div>
+      {cms.showDualCtaBanners !== false && (
+        <section className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-20 pt-[20px] pb-[20px] bg-white relative z-35">
+          {/* Desktop View (Side-by-side 2 columns, unchanged) */}
+          <div className="hidden md:grid md:grid-cols-2 gap-8">
+            {/* Card 1 - Shop Gear (Left, Green) */}
+            <div className="bg-[#1D493E] text-white p-6 rounded-[4px] flex flex-col justify-between gap-8 relative overflow-hidden group shadow-md border border-white/5">
+              <div className="space-y-4 text-left">
+                <h2 className="text-2xl md:text-3xl font-black leading-tight font-sans">
+                  {cms.homeCtaBanner1Title || pageContent.ctaBanner1Title}
+                </h2>
+                <p className="text-base md:text-[20px] leading-[32px] tracking-[0px] text-white/80 font-sans font-medium">
+                  {cms.homeCtaBanner1Desc || pageContent.ctaBanner1Desc}
+                </p>
+              </div>
+              <div className="relative z-10">
                 <Link 
-                  href="/shop" 
-                  className="inline-flex items-center gap-2 text-white font-sans font-bold text-[16px] hover:opacity-80 transition cursor-pointer text-left mt-auto"
+                  href={cms.homeCtaBanner1BtnLink || pageContent.ctaBanner1BtnLink} 
+                  className="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-[4px] bg-white/10 hover:bg-white/15 transition-all duration-300 cursor-pointer text-center group"
+                  style={{ color: "rgba(255,255,255,1)", fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "16px", lineHeight: "100%", letterSpacing: "0px", verticalAlign: "middle", textDecoration: "none" }}
                 >
-                  <span>Shop Now</span>
-                  <ArrowRight className="w-5 h-5 text-white" />
+                  <span>{cms.homeCtaBanner1BtnText || pageContent.ctaBanner1BtnText}</span>
+                  <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
                 </Link>
-              </>
-            ) : (
-              <>
-                <div className="flex flex-col gap-[18px] text-left w-full h-[180px]">
-                  <h2 
-                    style={{
-                      width: "100%",
-                      fontFamily: "'Faktum','Outfit',sans-serif",
-                      fontWeight: 600,
-                      fontSize: "22px",
-                      lineHeight: "120%",
-                      letterSpacing: "0px",
-                      color: "#FFFFFF",
-                      margin: 0,
-                    }}
-                  >
-                    Book a Trip
-                  </h2>
-                  <p 
-                    style={{
-                      fontFamily: "'Faktum','Outfit',sans-serif",
-                      fontWeight: 500,
-                      fontSize: "15px",
-                      lineHeight: "26px",
-                      letterSpacing: "0px",
-                      color: "rgba(255, 255, 255, 0.90)",
-                      margin: 0,
-                    }}
-                  >
-                    Explore our collection of hand-picked journals, weather-proof stickers and artisanal badges designed for the road
-                  </p>
-                </div>
+              </div>
+            </div>
+
+            {/* Card 2 - Book a Trip (Right, Orange) */}
+            <div className="bg-[#FF5A36] text-white p-6 rounded-[4px] flex flex-col justify-between gap-8 relative overflow-hidden group shadow-md border border-white/5">
+              <div className="space-y-4 text-left">
+                <h2 className="text-2xl md:text-3xl font-black leading-tight font-sans">
+                  {cms.homeCtaBanner2Title || pageContent.ctaBanner2Title}
+                </h2>
+                <p className="text-base md:text-[20px] leading-[32px] tracking-[0px] text-white/90 font-sans font-medium">
+                  {cms.homeCtaBanner2Desc || pageContent.ctaBanner2Desc}
+                </p>
+              </div>
+              <div className="relative z-10">
                 <Link 
-                  href="/travel" 
-                  className="inline-flex items-center gap-2 text-white font-sans font-bold text-[16px] hover:opacity-80 transition cursor-pointer text-left mt-auto"
+                  href={cms.homeCtaBanner2BtnLink || pageContent.ctaBanner2BtnLink} 
+                  className="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-[4px] bg-white/15 hover:bg-white/25 transition-all duration-300 cursor-pointer text-center group"
+                  style={{ color: "rgba(255,255,255,1)", fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "16px", lineHeight: "100%", letterSpacing: "0px", verticalAlign: "middle", textDecoration: "none" }}
                 >
-                  <span>See Travel Packages</span>
-                  <ArrowRight className="w-5 h-5 text-white" />
+                  <span>{cms.homeCtaBanner2BtnText || pageContent.ctaBanner2BtnText}</span>
+                  <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
                 </Link>
-              </>
-            )}
+              </div>
+            </div>
           </div>
 
-          {/* Dots Pagination Below Card */}
-          <div className="flex items-center justify-center gap-3 mt-4">
-            <button
-              type="button"
-              onClick={() => setActiveOfferSlide(0)}
-              className={`transition-all duration-300 rounded-full cursor-pointer ${
-                activeOfferSlide === 0 ? 'w-6 h-2 bg-[#1D493E]' : 'w-2 h-2 bg-slate-300'
+          {/* Mobile View (Figma specs: w-390, h-282, padding 20px, gap 18px, rounded 4px + 2 dots below) */}
+          <div className="block md:hidden w-full max-w-[390px] mx-auto px-[20px]">
+            {/* Card Frame with Touch Swipe Support */}
+            <div 
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
+              className={`w-full h-[282px] rounded-[4px] p-[20px] flex flex-col justify-between gap-[18px] text-left transition-all duration-300 shadow-md select-none touch-pan-y ${
+                activeOfferSlide === 0 ? 'bg-[#1D493E] text-white' : 'bg-[#FF5A36] text-white'
               }`}
-              aria-label="Offer slide 1: Shop Travel Gear"
-            />
-            <button
-              type="button"
-              onClick={() => setActiveOfferSlide(1)}
-              className={`transition-all duration-300 rounded-full cursor-pointer ${
-                activeOfferSlide === 1 ? 'w-6 h-2 bg-[#FF5A36]' : 'w-2 h-2 bg-slate-300'
-              }`}
-              aria-label="Offer slide 2: Book a Trip"
-            />
+              style={{ boxSizing: 'border-box' }}
+            >
+              {activeOfferSlide === 0 ? (
+                <>
+                  <div className="flex flex-col gap-[18px] text-left w-full h-[180px]">
+                    <h2 
+                      style={{
+                        width: "100%",
+                        fontFamily: "'Faktum','Outfit',sans-serif",
+                        fontWeight: 600,
+                        fontSize: "22px",
+                        lineHeight: "120%",
+                        letterSpacing: "0px",
+                        color: "#FFFFFF",
+                        margin: 0,
+                      }}
+                    >
+                      {cms.homeCtaBanner1Title || "Shop Travel Gear for Nomads"}
+                    </h2>
+                    <p 
+                      style={{
+                        fontFamily: "'Faktum','Outfit',sans-serif",
+                        fontWeight: 500,
+                        fontSize: "15px",
+                        lineHeight: "26px",
+                        letterSpacing: "0px",
+                        color: "rgba(255, 255, 255, 0.85)",
+                        margin: 0,
+                      }}
+                    >
+                      {cms.homeCtaBanner1Desc || "Explore our collection of hand-picked journals, weather-proof stickers and artisanal badges designed for the road"}
+                    </p>
+                  </div>
+                  <Link 
+                    href={cms.homeCtaBanner1BtnLink || "/shop"} 
+                    className="inline-flex items-center gap-2 text-white font-sans font-bold text-[16px] hover:opacity-80 transition cursor-pointer text-left mt-auto"
+                  >
+                    <span>{cms.homeCtaBanner1BtnText || "Shop Now"}</span>
+                    <ArrowRight className="w-5 h-5 text-white" />
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <div className="flex flex-col gap-[18px] text-left w-full h-[180px]">
+                    <h2 
+                      style={{
+                        width: "100%",
+                        fontFamily: "'Faktum','Outfit',sans-serif",
+                        fontWeight: 600,
+                        fontSize: "22px",
+                        lineHeight: "120%",
+                        letterSpacing: "0px",
+                        color: "#FFFFFF",
+                        margin: 0,
+                      }}
+                    >
+                      {cms.homeCtaBanner2Title || "Book a Trip"}
+                    </h2>
+                    <p 
+                      style={{
+                        fontFamily: "'Faktum','Outfit',sans-serif",
+                        fontWeight: 500,
+                        fontSize: "15px",
+                        lineHeight: "26px",
+                        letterSpacing: "0px",
+                        color: "rgba(255, 255, 255, 0.85)",
+                        margin: 0,
+                      }}
+                    >
+                      {cms.homeCtaBanner2Desc || "Embark on handcrafted journeys into the wild heart of Kashmir, Himachal, Kerala and beyond"}
+                    </p>
+                  </div>
+                  <Link 
+                    href={cms.homeCtaBanner2BtnLink || "/travel"} 
+                    className="inline-flex items-center gap-2 text-white font-sans font-bold text-[16px] hover:opacity-80 transition cursor-pointer text-left mt-auto"
+                  >
+                    <span>{cms.homeCtaBanner2BtnText || "See Travel Packages"}</span>
+                    <ArrowRight className="w-5 h-5 text-white" />
+                  </Link>
+                </>
+              )}
+            </div>
+
+            {/* Dots Pagination Below Card */}
+            <div className="flex items-center justify-center gap-3 mt-4">
+              <button
+                type="button"
+                onClick={() => setActiveOfferSlide(0)}
+                className={`transition-all duration-300 rounded-full cursor-pointer ${
+                  activeOfferSlide === 0 ? 'w-6 h-2 bg-[#1D493E]' : 'w-2 h-2 bg-slate-300'
+                }`}
+                aria-label="Offer slide 1: Shop Travel Gear"
+              />
+              <button
+                type="button"
+                onClick={() => setActiveOfferSlide(1)}
+                className={`transition-all duration-300 rounded-full cursor-pointer ${
+                  activeOfferSlide === 1 ? 'w-6 h-2 bg-[#FF5A36]' : 'w-2 h-2 bg-slate-300'
+                }`}
+                aria-label="Offer slide 2: Book a Trip"
+              />
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* 4. DESTINATIONS SECTION */}
       <section className="bg-white pt-[20px] pb-0 relative z-10">

@@ -18,6 +18,7 @@ import { PackageEditorModal } from '@/components/PackageEditorModal';
 import { getFutureDeliveryString } from '@/utils/dateUtils';
 import ProductCard from '@/components/ProductCard';
 import { InteractiveProgressBar } from '@/components/InteractiveProgressBar';
+import { DragCarousel } from '@/components/DragCarousel';
 
 interface PackageDetailsProps {
   customId?: string;
@@ -2116,26 +2117,17 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
           </p>
         </div>
 
-        {/* 4 Product Cards Grid using ProductCard component */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full mt-2">
-          {recommendedGear.map((prod, idx) => (
-            <div key={prod.id} onMouseEnter={() => setActiveJourneySlide(idx)}>
+        {/* Product Cards Interactive Drag Carousel */}
+        <DragCarousel totalItems={recommendedGear.length} itemWidth={310} className="w-full mt-2">
+          {recommendedGear.map((prod) => (
+            <div key={prod.id} className="w-[280px] sm:w-[300px] shrink-0 snap-start">
               <ProductCard 
                 product={prod as any} 
                 onAddToCart={(item) => addToCart(item, 'shop', undefined, 1)} 
               />
             </div>
           ))}
-        </div>
-
-        {/* Interactive Full-Width Progress Bar */}
-        <InteractiveProgressBar
-          totalSlides={recommendedGear.length}
-          activeSlide={activeJourneySlide}
-          onSlideChange={(newIdx) => setActiveJourneySlide(newIdx)}
-          className="w-full mt-6 mb-2"
-          title="Click or drag to switch active product"
-        />
+        </DragCarousel>
 
         {/* View All Products Interaction Button (Exact homepage footer button) */}
         <div className="text-center pt-2">

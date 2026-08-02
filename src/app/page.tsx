@@ -731,7 +731,19 @@ export default function Homepage() {
               </span>
             </div>
             <h2 className="text-3xl md:text-[42px] font-serif font-semibold text-[#1D493E] leading-none text-center">
-              {pageContent.destinationsTitle}
+              {cms.homeDestinationsTitle ? (
+                cms.homeDestinationsTitle.includes("detour") ? (
+                  <>
+                    {cms.homeDestinationsTitle.split("detour")[0]}
+                    <span className="text-[#FF5A36]">detour</span>
+                    {cms.homeDestinationsTitle.split("detour")[1]}
+                  </>
+                ) : (
+                  cms.homeDestinationsTitle
+                )
+              ) : (
+                <>Place worth the&nbsp;<span className="text-[#FF5A36]">detour</span></>
+              )}
             </h2>
             <p className="text-[#2B2B2B]/80 text-base md:text-[20px] leading-relaxed font-medium text-center max-w-[1280px] md:whitespace-nowrap mx-auto">
               {pageContent.destinationsSub}

@@ -36,7 +36,6 @@ export default function RootLayout({
         className="antialiased min-h-screen bg-brand-beige text-primary-dark flex flex-col font-sans overflow-x-clip relative"
         suppressHydrationWarning
       >
-        <Script src="https://accounts.google.com/gsi/client" strategy="lazyOnload" />
         <CartProvider>
           <Navbar />
           <main className="flex-1 pt-[90px]">{children}</main>

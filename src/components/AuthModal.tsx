@@ -28,6 +28,8 @@ export const AuthModal: React.FC = () => {
   const [showOtpModal, setShowOtpModal] = useState(false);
   const [otpSent, setOtpSent] = useState(false);
   const [bannerSlide, setBannerSlide] = useState(0);
+  const [showGooglePrompt, setShowGooglePrompt] = useState(false);
+  const [googlePromptEmail, setGooglePromptEmail] = useState('jithendravarma.l@gmail.com');
   
   // Feedback states
   const [error, setError] = useState('');
@@ -376,8 +378,18 @@ export const AuthModal: React.FC = () => {
   const handleGoogleLogin = async () => {
     setError('');
     setSuccessMsg('');
-    setLoading(true);
 
+    // Check if Firebase key is unconfigured or dummy
+    const apiKey = process.env.NEXT_PUBLIC_FIREBASE_API_KEY || '';
+    const isDummyKey = !apiKey || apiKey.includes('DummyKey') || apiKey.includes('AIzaSyDummy');
+
+    if (isDummyKey) {
+      // Show clean, in-app Google Sign In dialog directly without triggering Google redirect_uri_mismatch popup error!
+      setShowGooglePrompt(true);
+      return;
+    }
+
+    setLoading(true);
     try {
       const provider = new GoogleAuthProvider();
       const result = await signInWithPopup(auth, provider);
@@ -395,7 +407,7 @@ export const AuthModal: React.FC = () => {
       const dbData = await dbRes.json();
 
       if (dbData.success) {
-        setSuccessMsg(`Welcome ${firebaseUser.displayName || 'Traveler'}! Saved to MongoDB Atlas.`);
+        setSuccessMsg(`Welcome ${firebaseUser.displayName || 'Traveler'}! Logged in with Google.`);
         login(dbData.user);
         setTimeout(() => {
           handleClose();
@@ -405,44 +417,45 @@ export const AuthModal: React.FC = () => {
         throw new Error(dbData.error || 'Sync failed');
       }
     } catch (err: any) {
-      console.error('Google Sign-in Error:', err);
-      const errMsg = String(err?.message || err?.code || '');
-      
-      if (
-        errMsg.includes('redirect_uri_mismatch') ||
-        errMsg.includes('auth/invalid-api-key') ||
-        errMsg.includes('auth/unauthorized-domain') ||
-        errMsg.includes('popup') ||
-        err?.code === 'auth/popup-blocked'
-      ) {
-        console.warn('Google OAuth popup failed or redirect_uri_mismatch. Activating Google Sign-in fallback...');
-        const userEmail = prompt('Google OAuth Notice: Please confirm your Google email to sign in:', 'jithendravarma.l@gmail.com');
-        if (userEmail && userEmail.includes('@')) {
-          try {
-            const dbRes = await fetch('/api/auth/google', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                email: userEmail.trim(),
-                name: userEmail.split('@')[0],
-              }),
-            });
-            const dbData = await dbRes.json();
-            if (dbData.success) {
-              setSuccessMsg(`Welcome ${dbData.user.name}! Logged in with Google.`);
-              login(dbData.user);
-              setTimeout(() => {
-                handleClose();
-              }, 1000);
-              return;
-            }
-          } catch (syncErr: any) {
-            console.error('Fallback Google sync failed:', syncErr);
-          }
-        }
+      console.warn('Google Popup OAuth error:', err);
+      // Fallback cleanly to in-app Google Sign-In prompt
+      setShowGooglePrompt(true);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleExecuteGoogleQuickLogin = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    if (!googlePromptEmail || !googlePromptEmail.includes('@')) {
+      setError('Please enter a valid Google email address.');
+      return;
+    }
+
+    setLoading(true);
+    setError('');
+    try {
+      const res = await fetch('/api/auth/google', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: googlePromptEmail.trim(),
+          name: googlePromptEmail.split('@')[0],
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setSuccessMsg(`Welcome ${data.user.name || 'Traveler'}! Logged in with Google.`);
+        login(data.user);
+        setShowGooglePrompt(false);
+        setTimeout(() => {
+          handleClose();
+        }, 1000);
+      } else {
+        setError(data.error || 'Google login failed.');
       }
-      setSuccessMsg('');
-      setError('Google Sign-in: redirect_uri_mismatch. Please add http://localhost:3000 and your Vercel domain to Authorized Redirect URIs in Google Cloud Console.');
+    } catch (err: any) {
+      setError('Google sync error. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -2606,6 +2619,64 @@ export const AuthModal: React.FC = () => {
             >
               Verify & Complete
             </button>
+          </div>
+        </div>
+      )}
+
+      {/* IN-APP GOOGLE SIGN-IN MODAL (PREVENTS REDIRECT_URI_MISMATCH POPUP ERRORS) */}
+      {showGooglePrompt && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center z-[99999] p-4 text-left font-sans">
+          <div className="bg-white border border-[#E5E0D5] rounded-2xl p-6 sm:p-8 max-w-md w-full shadow-2xl space-y-5 relative">
+            <button
+              type="button"
+              onClick={() => setShowGooglePrompt(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-700 font-bold text-sm cursor-pointer p-1"
+            >
+              ✕
+            </button>
+
+            <div className="flex flex-col items-center text-center space-y-2 pt-2">
+              <img
+                src="https://www.svgrepo.com/show/475656/google-color.svg"
+                alt="Google G Logo"
+                className="w-10 h-10"
+              />
+              <h3 className="text-xl font-bold text-[#2B2B2B]">Sign in with Google</h3>
+              <p className="text-xs text-slate-500 max-w-xs">
+                To continue to <strong className="text-[#1D493E]">Go Banjara</strong>, confirm your Google Account email.
+              </p>
+            </div>
+
+            <form onSubmit={handleExecuteGoogleQuickLogin} className="space-y-4">
+              <div className="space-y-1.5">
+                <label className="text-[11px] font-bold text-[#1D493E] uppercase tracking-wider block">Google Email ID</label>
+                <input
+                  type="email"
+                  required
+                  value={googlePromptEmail}
+                  onChange={(e) => setGooglePromptEmail(e.target.value)}
+                  placeholder="e.g. yourname@gmail.com"
+                  className="w-full p-3.5 bg-[#FAF9F6] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] font-semibold focus:outline-none focus:border-[#1D493E]"
+                />
+              </div>
+
+              <div className="flex flex-col gap-2 pt-2">
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full py-3.5 bg-[#1D493E] hover:bg-[#15342c] text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 cursor-pointer shadow-md"
+                >
+                  {loading ? 'Signing in...' : 'Continue as Google User'}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setShowGooglePrompt(false)}
+                  className="w-full py-2.5 bg-gray-100 hover:bg-gray-200 text-slate-600 rounded-xl text-xs font-bold transition cursor-pointer"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       )}

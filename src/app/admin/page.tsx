@@ -814,7 +814,7 @@ export default function AdminPortal() {
   }
 
   return (
-    <div style={{ fontFamily: '"Outfit", "Faktum", sans-serif' }} className="min-h-screen bg-[#FAF9F6] text-[#2B2B2B] flex flex-col">
+    <div style={{ fontFamily: '"Faktum", "Outfit", system-ui, -apple-system, sans-serif' }} className="min-h-screen bg-[#FAF9F6] text-[#2B2B2B] flex flex-col font-sans">
       {/* Toast Notification */}
       {toast && (
         <div className={`fixed top-6 left-1/2 -translate-x-1/2 z-[100] px-6 py-3.5 rounded-2xl shadow-2xl flex items-center gap-3 text-xs font-black uppercase tracking-wider transition-all duration-300 ${
@@ -1124,8 +1124,8 @@ export default function AdminPortal() {
               {/* Admin Quick Access Tools Grid */}
               <div className="space-y-4">
                 <h2 
-                  style={{ fontFamily: '"Faktum", "Fraunces", sans-serif' }}
-                  className="text-base font-bold text-[#1D493E] flex items-center gap-2"
+                  style={{ fontFamily: '"Fraunces", Georgia, serif' }}
+                  className="text-lg font-semibold text-[#1D493E] flex items-center gap-2"
                 >
                   <Sparkles className="w-5 h-5 text-[#FF623E]" />
                   <span>Go Banjara Admin Control Tools</span>

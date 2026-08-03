@@ -1196,7 +1196,7 @@ export default function Homepage() {
             {/* Featured Destination Card (Top) */}
             {(() => {
               const rawPkgs = packagesList && packagesList.length > 0 ? packagesList : HOLIDAY_PACKAGES;
-              const displayPkgs = rawPkgs.filter(p => p.showOnHome !== false && !p.hidden);
+              const displayPkgs = rawPkgs.filter(p => p.showOnHome === true && !p.hidden);
               const pkg1 = displayPkgs[0];
               if (!pkg1) return null;
               return (
@@ -1329,7 +1329,7 @@ export default function Homepage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
               {(() => {
                 const rawPkgs = packagesList && packagesList.length > 0 ? packagesList : HOLIDAY_PACKAGES;
-                const displayPkgs = rawPkgs.filter(p => p.showOnHome !== false && !p.hidden);
+                const displayPkgs = rawPkgs.filter(p => p.showOnHome === true && !p.hidden);
                 return displayPkgs.slice(1, 3).map((pkg) => (
                   <div 
                     key={pkg.id} 

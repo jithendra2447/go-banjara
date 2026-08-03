@@ -1460,7 +1460,7 @@ export default function AdminPortal() {
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                          {((packages && packages.length > 0 ? packages : []).filter(p => p.showOnHome !== false && !p.hidden).slice(0, 3)).map((pkg, idx) => (
+                          {((packages && packages.length > 0 ? packages : []).filter(p => p.showOnHome === true && !p.hidden).slice(0, 3)).map((pkg, idx) => (
                             <div key={pkg.id || idx} className="bg-white p-3 rounded-xl border border-[#E5E0D5] space-y-2 flex flex-col justify-between shadow-2xs">
                               <div className="space-y-2">
                                 <div className="relative aspect-video w-full rounded-lg overflow-hidden bg-gray-100">
@@ -2166,7 +2166,7 @@ export default function AdminPortal() {
                           <label className="flex items-center gap-1.5 cursor-pointer">
                             <input
                               type="checkbox"
-                              checked={pkg.showOnHome !== false}
+                              checked={pkg.showOnHome === true}
                               onChange={(e) => {
                                 const show = e.target.checked;
                                 const updated = packages.map(p => p.id === pkg.id ? { ...p, showOnHome: show } : p);
@@ -2179,8 +2179,8 @@ export default function AdminPortal() {
                               }}
                               className="w-4 h-4 text-[#1D493E] accent-[#1D493E] rounded"
                             />
-                            <span className="text-[11px] font-bold text-[#1D493E]">
-                              {pkg.showOnHome !== false ? 'Featured' : 'Off'}
+                            <span className={`text-[11px] font-bold ${pkg.showOnHome === true ? 'text-[#1D493E]' : 'text-gray-400'}`}>
+                              {pkg.showOnHome === true ? 'Featured' : 'Off'}
                             </span>
                           </label>
                         </td>

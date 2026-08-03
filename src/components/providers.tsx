@@ -51,14 +51,34 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const [initialLoaded, setInitialLoaded] = useState(false);
 
-  // Load cart, wishlist, and user from LocalStorage on mount
+  // Cookie helper utilities for 1-year session persistence
+  const getCookie = (name: string) => {
+    if (typeof document === 'undefined') return null;
+    const match = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+    return match ? decodeURIComponent(match[1]) : null;
+  };
+
+  const setCookie = (name: string, value: string, days = 365) => {
+    if (typeof document === 'undefined') return;
+    const expires = new Date(Date.now() + days * 86400000).toUTCString();
+    document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/; SameSite=Lax`;
+  };
+
+  const eraseCookie = (name: string) => {
+    if (typeof document === 'undefined') return;
+    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+  };
+
+  // Load cart, wishlist, and user from LocalStorage / Cookie on mount
   useEffect(() => {
-    const savedUserStr = localStorage.getItem('gb_user');
+    const savedUserStr = localStorage.getItem('gb_user') || getCookie('gb_user');
     let loadedUser = null;
     if (savedUserStr) {
       try {
         loadedUser = JSON.parse(savedUserStr);
         setUser(loadedUser);
+        localStorage.setItem('gb_user', JSON.stringify(loadedUser));
+        setCookie('gb_user', JSON.stringify(loadedUser));
       } catch (e) {
         console.error('Failed to parse user', e);
       }
@@ -115,7 +135,9 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const login = (userData: any) => {
     setUser(userData);
-    localStorage.setItem('gb_user', JSON.stringify(userData));
+    const userStr = JSON.stringify(userData);
+    localStorage.setItem('gb_user', userStr);
+    setCookie('gb_user', userStr);
 
     // Instantly load account-scoped cart and wishlist for this user
     if (userData?.email) {
@@ -142,6 +164,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setCart([]);
     setWishlist([]);
     localStorage.removeItem('gb_user');
+    eraseCookie('gb_user');
   };
 
   const addToCart = (item: any, type: 'shop' | 'travel', date?: string, guests?: number, size?: string, quantity: number = 1) => {

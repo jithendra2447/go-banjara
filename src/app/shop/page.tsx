@@ -541,29 +541,14 @@ export default function ShopPage() {
         </div>
 
         {/* Section 11: FAQ ACCORDION SECTION */}
-        <FAQSection items={FAQ_ITEMS} noPadding={true} />
+        <FAQSection items={FAQ_ITEMS} />
 
-        {/* Section 12: Newsletter CTA Section (Figma Specs: 1440x342px, pt:42px, pb:42px, gap:32px) */}
+        {/* Section 12: Newsletter CTA Section */}
         <section 
-          style={{
-            width: "100%",
-            maxWidth: "1440px",
-            minHeight: "342px",
-            background: "rgba(255, 255, 255, 1)",
-            boxSizing: "border-box",
-            margin: "0 auto",
-            paddingTop: "42px",
-            paddingBottom: "0",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "32px"
-          }}
-          className="w-full text-center"
+          className="w-full max-w-[1440px] mx-auto py-[42px] px-6 md:px-[80px] bg-white flex flex-col items-center justify-center gap-8 text-center"
         >
           {/* Text block */}
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }} className="gap-2 sm:gap-[12px]">
+          <div className="max-w-[1280px] w-full mx-auto flex flex-col items-center justify-center gap-3 sm:gap-[12px]">
             {/* Heading */}
             <h2
               style={{

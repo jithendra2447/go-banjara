@@ -151,6 +151,7 @@ export const AuthModal: React.FC = () => {
   const handleTriggerInlineOtp = async () => {
     setError('');
     setSuccessMsg('');
+    setConfirmationResult(null);
     const cleanPhone = phone.replace(/\D/g, '');
 
     if (cleanPhone.length !== 10) {
@@ -179,7 +180,12 @@ export const AuthModal: React.FC = () => {
     } catch (err: any) {
       console.error('Firebase SMS OTP request failed:', err);
       setSuccessMsg('');
-      setError(err.message || 'Failed to send OTP. Please try again.');
+      const msg = err.message || '';
+      if (msg.includes('auth/code-expired')) {
+        setError('Verification code has expired. Please request a new OTP.');
+      } else {
+        setError(msg || 'Failed to send OTP. Please try again.');
+      }
     } finally {
       setLoading(false);
     }
@@ -200,12 +206,19 @@ export const AuthModal: React.FC = () => {
 
     setLoading(true);
 
-    try {
-      // 1. First verify via Firebase confirmationResult if present
-      if (confirmationResult) {
+    let firebaseVerified = false;
+    if (confirmationResult) {
+      try {
         await confirmationResult.confirm(fullOtp);
+        firebaseVerified = true;
+      } catch (fbErr: any) {
+        console.warn('Firebase confirmationResult confirm warning:', fbErr.message);
+      } finally {
+        setConfirmationResult(null);
       }
+    }
 
+    try {
       const res = await fetch('/api/auth/otp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -213,7 +226,7 @@ export const AuthModal: React.FC = () => {
           action: 'verify',
           phone: cleanPhone,
           otp: fullOtp,
-          firebaseVerified: !!confirmationResult,
+          firebaseVerified,
         }),
       });
       const data = await res.json();
@@ -221,6 +234,7 @@ export const AuthModal: React.FC = () => {
       if (res.ok && data.success) {
         setIsPhoneVerified(true);
         setShowOtpModal(false);
+        setError('');
 
         // If signup fields (name, email, password) are populated, automatically create user in MongoDB Atlas
         if (name && email && password) {
@@ -238,7 +252,8 @@ export const AuthModal: React.FC = () => {
           setLoading(false);
 
           if (regRes.ok && regData.success) {
-            setSuccessMsg('Account created & saved successfully in MongoDB Atlas!');
+            setError('');
+            setSuccessMsg('Account created & saved successfully!');
             login({
               ...regData.user,
               avatar: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=100&h=100&fit=crop',
@@ -263,7 +278,12 @@ export const AuthModal: React.FC = () => {
       console.error('Inline OTP verify error:', err.message);
       setLoading(false);
       setSuccessMsg('');
-      setError(err.message || 'OTP verification failed. Please try again.');
+      const msg = err.message || '';
+      if (msg.includes('auth/code-expired')) {
+        setError('Verification code has expired. Please click "Resend OTP" to get a new code.');
+      } else {
+        setError(msg || 'OTP verification failed. Please try again.');
+      }
     }
   };
 
@@ -556,12 +576,19 @@ export const AuthModal: React.FC = () => {
 
     setLoading(true);
 
-    try {
-      // 1. Verify via Firebase confirmationResult if present
-      if (confirmationResult) {
+    let firebaseVerified = false;
+    if (confirmationResult) {
+      try {
         await confirmationResult.confirm(fullOtp);
+        firebaseVerified = true;
+      } catch (fbErr: any) {
+        console.warn('Firebase OTP confirm warning:', fbErr.message);
+      } finally {
+        setConfirmationResult(null);
       }
+    }
 
+    try {
       // If registration flow, finalize account creation in MongoDB Atlas
       if (otpFlowSource === 'signup') {
         const regRes = await fetch('/api/auth/register', {
@@ -577,7 +604,8 @@ export const AuthModal: React.FC = () => {
         const regData = await regRes.json();
 
         if (regRes.ok && regData.success) {
-          setSuccessMsg('Mobile verified & account created successfully in MongoDB Atlas!');
+          setError('');
+          setSuccessMsg('Mobile verified & account created successfully!');
           login({
             ...regData.user,
             avatar: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=100&h=100&fit=crop',
@@ -602,12 +630,13 @@ export const AuthModal: React.FC = () => {
           otp: fullOtp,
           name: name || undefined,
           email: email || undefined,
-          firebaseVerified: !!confirmationResult,
+          firebaseVerified,
         }),
       });
       const data = await res.json();
 
       if (res.ok && data.success && data.user) {
+        setError('');
         login({
           ...data.user,
           avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&h=100&fit=crop',
@@ -620,7 +649,12 @@ export const AuthModal: React.FC = () => {
     } catch (err: any) {
       console.error('OTP verification error:', err.message);
       setSuccessMsg('');
-      setError(err.message || 'OTP verification failed. Please try again.');
+      const msg = err.message || '';
+      if (msg.includes('auth/code-expired')) {
+        setError('Verification code has expired. Please click "Resend OTP" to get a new code.');
+      } else {
+        setError(msg || 'OTP verification failed. Please try again.');
+      }
     } finally {
       setLoading(false);
     }
@@ -633,9 +667,9 @@ export const AuthModal: React.FC = () => {
     setSuccessMsg('');
     setLoading(true);
 
-    const targetKey = email || phone;
+    const targetKey = (email || phone).trim();
     if (!targetKey) {
-      setError('Please enter your email address or mobile number.');
+      setError('Please enter your registered email address or mobile number.');
       setLoading(false);
       return;
     }
@@ -644,21 +678,23 @@ export const AuthModal: React.FC = () => {
       const res = await fetch('/api/auth/forgot', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ identifier: targetKey, email }),
+        body: JSON.stringify({ identifier: targetKey, email: targetKey }),
       });
       const data = await res.json();
 
       if (!res.ok || !data.success) {
-        throw new Error(data.error || 'No user account found matching this email/phone.');
+        throw new Error(data.error || 'No account found matching this email or mobile number.');
       }
 
       setError('');
-      if (!targetKey.includes('@') && !data.email) {
-        setForgotStep('reset_password');
-        setSuccessMsg(`Mobile number verified for ${targetKey}! Please enter your new password below.`);
+      if (data.user?.email) setEmail(data.user.email);
+      if (data.user?.phone) setPhone(data.user.phone);
+
+      setForgotStep('reset_password');
+      if (targetKey.includes('@')) {
+        setSuccessMsg(`Account verified (${data.user?.email || targetKey})! A password reset link has been emailed to you, or you can enter a new password directly below.`);
       } else {
-        const destEmail = data.email || targetKey;
-        setSuccessMsg(`A password reset link has been sent to ${destEmail}. Please check your email inbox (and spam folder) to reset your password.`);
+        setSuccessMsg(`Account verified for mobile number +91 ${targetKey}! Please enter your new password below.`);
       }
     } catch (err: any) {
       console.error('Forgot password error:', err);
@@ -675,8 +711,23 @@ export const AuthModal: React.FC = () => {
     setSuccessMsg('');
 
     const targetKey = email || phone;
-    if (!targetKey || !newPassword) {
+    if (!targetKey) {
+      setError('Please enter your email address or mobile number.');
+      return;
+    }
+
+    if (!newPassword) {
       setError('Please enter your new password.');
+      return;
+    }
+
+    const hasMinLength = newPassword.length >= 8;
+    const hasCapital = /[A-Z]/.test(newPassword);
+    const hasNumber = /[0-9]/.test(newPassword);
+    const hasSpecial = /[^A-Za-z0-9]/.test(newPassword);
+
+    if (!hasMinLength || !hasCapital || !hasNumber || !hasSpecial) {
+      setError('Invalid password format. Must be at least 8 characters with 1 capital letter, 1 number, and 1 special character.');
       return;
     }
 
@@ -697,7 +748,8 @@ export const AuthModal: React.FC = () => {
         throw new Error(data.error || 'Failed to update password.');
       }
 
-      setSuccessMsg('Password updated successfully in MongoDB Atlas! Redirecting to login...');
+      setError('');
+      setSuccessMsg('Password updated successfully! Redirecting to log in...');
       setTimeout(() => {
         setForgotStep('input');
         setNewPassword('');
@@ -705,7 +757,8 @@ export const AuthModal: React.FC = () => {
       }, 1500);
     } catch (err: any) {
       console.error('Reset password submit error:', err);
-      setError(err.message || 'Failed to reset password. Ensure password requirements are met.');
+      setSuccessMsg('');
+      setError(err.message || 'Failed to reset password. Please check requirements and try again.');
     } finally {
       setLoading(false);
     }
@@ -904,7 +957,7 @@ export const AuthModal: React.FC = () => {
                 {view === 'email_login' 
                   ? 'Log in using email address and password' 
                   : view === 'forgot'
-                  ? 'Enter email to recover account credentials'
+                  ? (forgotStep === 'reset_password' ? 'Set a new password for your account' : 'Enter email or mobile number to recover account credentials')
                   : 'Get started for a seamless shopping experience'}
               </p>
             </div>

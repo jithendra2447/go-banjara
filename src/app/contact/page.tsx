@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { 
   MapPin, Mail, Phone, Calendar, Clock, Star, ArrowUpRight, 
@@ -8,11 +8,22 @@ import {
   ChevronDown, ChevronUp, Users, Heart, Plus, Minus
 } from 'lucide-react';
 import { TrustBanner } from '@/components/TrustBanner';
+import { getStoredCMSContent, SiteCMSContent } from '@/lib/cms';
 
 export default function ContactPage() {
+  const [cms, setCms] = useState<SiteCMSContent>(getStoredCMSContent());
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+
+  useEffect(() => {
+    setCms(getStoredCMSContent());
+    const handleCmsUpdate = (e: CustomEvent) => {
+      if (e.detail) setCms(e.detail);
+    };
+    window.addEventListener('gb_cms_updated' as any, handleCmsUpdate);
+    return () => window.removeEventListener('gb_cms_updated' as any, handleCmsUpdate);
+  }, []);
 
   // Form State
   const [formData, setFormData] = useState({
@@ -159,7 +170,7 @@ export default function ContactPage() {
           >
             <span>Just reach out manually to</span>{" "}
             <a 
-              href="mailto:hello@gobanjara.com" 
+              href={`mailto:${cms.contactEmail || cms.global?.supportEmail || 'hello@gobanjara.com'}`} 
               style={{
                 fontFamily: "Faktum, sans-serif",
                 fontWeight: 500,
@@ -171,7 +182,7 @@ export default function ContactPage() {
               }}
               className="hover:opacity-80 text-xs sm:text-base md:text-[24px]"
             >
-              hello@gobanjara.com
+              {cms.contactEmail || cms.global?.supportEmail || 'hello@gobanjara.com'}
             </a>
           </p>
         </section>
@@ -749,7 +760,7 @@ export default function ContactPage() {
               </div>
               <div className="pt-2 md:pt-6">
                 <a 
-                  href="mailto:hello@gobanjara.com"
+                  href={`mailto:${cms.contactEmail || cms.global?.supportEmail || 'hello@gobanjara.com'}`}
                   style={{
                     fontFamily: "Faktum, Outfit, sans-serif",
                     color: "rgba(63, 136, 255, 1)",
@@ -758,7 +769,7 @@ export default function ContactPage() {
                   }}
                   className="hover:opacity-80 transition block truncate text-xs md:text-[14px]"
                 >
-                  hello@gobanjara.com
+                  {cms.contactEmail || cms.global?.supportEmail || 'hello@gobanjara.com'}
                 </a>
               </div>
             </div>
@@ -787,7 +798,7 @@ export default function ContactPage() {
               </div>
               <div className="pt-2 md:pt-6">
                 <a 
-                  href="https://maps.google.com/?q=1st+Floor,+DSR+Tranquil,+102,+Plot+%23+901,+Ayyappa+Society+Main+Rd,+SBH+Officers+Colony,+Mega+Hills,+Madhapur,+Hyderabad,+Telangana+500081"
+                  href={`https://maps.google.com/?q=${encodeURIComponent(cms.contactAddress || cms.global?.address || '')}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{
@@ -799,7 +810,7 @@ export default function ContactPage() {
                   }}
                   className="hover:opacity-80 transition block text-left text-xs md:text-[13px]"
                 >
-                  1st Floor, DSR Tranquil, 102, Plot # 901, Ayyappa Society Main Rd, SBH Officers Colony, Mega Hills, Madhapur, Hyderabad, Telangana 500081
+                  {cms.contactAddress || cms.global?.address || '1st Floor, DSR Tranquil, 102, Plot # 901, Ayyappa Society Main Rd, SBH Officers Colony, Mega Hills, Madhapur, Hyderabad, Telangana 500081'}
                 </a>
               </div>
             </div>
@@ -828,7 +839,7 @@ export default function ContactPage() {
               </div>
               <div className="pt-2 md:pt-6">
                 <a 
-                  href="tel:+919489094392"
+                  href={`tel:${cms.contactPhone || cms.global?.supportPhone || '+919489094392'}`}
                   style={{
                     fontFamily: "Faktum, Outfit, sans-serif",
                     color: "rgba(63, 136, 255, 1)",
@@ -837,7 +848,7 @@ export default function ContactPage() {
                   }}
                   className="hover:opacity-80 transition block text-xs md:text-[14px]"
                 >
-                  (+91) 9489094392
+                  {cms.contactPhone || cms.global?.supportPhone || '(+91) 9489094392'}
                 </a>
               </div>
             </div>

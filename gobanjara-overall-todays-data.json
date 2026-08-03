@@ -1,0 +1,3051 @@
+{
+  "version": "2.0",
+  "exportedAt": "2026-08-02T13:27:12.697Z",
+  "cms": {
+    "global": {
+      "siteName": "Go Banjara",
+      "logoUrl": "/logo.png",
+      "faviconUrl": "/favicon.ico",
+      "announcementText": "🎉 MONSOON TREK SALE: Get up to 40% OFF on Kashmir & Himachal Packages!",
+      "announcementEnabled": true,
+      "announcementLink": "/travel",
+      "supportPhone": "+91 98765 43210",
+      "supportEmail": "support@gobanjara.com",
+      "whatsappNumber": "+919876543210",
+      "currencySymbol": "₹",
+      "copyrightText": "© 2026 Go Banjara Experiences Pvt. Ltd. All rights reserved.",
+      "facebookUrl": "https://facebook.com/gobanjara",
+      "instagramUrl": "https://instagram.com/gobanjara",
+      "youtubeUrl": "https://youtube.com/gobanjara",
+      "twitterUrl": "https://twitter.com/gobanjara",
+      "address": "Banjara Hills, Road No. 12, Hyderabad, Telangana, 500034"
+    },
+    "showHeroSection": true,
+    "showDualCtaBanners": true,
+    "showDestinationsSection": true,
+    "showDealsSection": true,
+    "showBestSellingSection": true,
+    "showCategoriesSection": true,
+    "showReviewsSection": true,
+    "showBlogSection": true,
+    "showFaqSection": true,
+    "showValuesSection": true,
+    "showCtaBannerSection": true,
+    "showInstagramSection": true,
+    "homeHeroVideoUrl": "/hero-video.mp4",
+    "homeHeroPosterUrl": "/hero-poster.jpg",
+    "homeHeroTitleLine1": "Hey! Let’s Escape from",
+    "homeHeroTitleLine2": "the Ordinary",
+    "homeHeroTitleLine3": "",
+    "homeHeroSubtitle": "We bridge the gap between soulful Indian travel and high end gear. curated for those who find home in the dust of the road",
+    "homeHeroShopBtn": "Shop Now",
+    "homeHeroTravelBtn": "See Travel Packages",
+    "homeMascotText": "Hey Nomad! Ready to explore Kashmir backwaters, Spiti valleys, or grab our signature nomad hoodie?",
+    "homeCtaBanner1Title": "Shop Travel Gear for Nomads",
+    "homeCtaBanner1Desc": "Explore our collection of hand-picked journals, weather-proof stickers and artisanal badges designed for the road",
+    "homeCtaBanner1BtnText": "Explore Collections",
+    "homeCtaBanner1BtnLink": "/shop",
+    "homeCtaBanner1Image": "/shop_gear_cta.jpg",
+    "homeCtaBanner2Title": "Book a Trip",
+    "homeCtaBanner2Desc": "Explore our collection of hand-picked journals, weather-proof stickers and artisanal badges designed for the road",
+    "homeCtaBanner2BtnText": "Find the Route",
+    "homeCtaBanner2BtnLink": "/travel",
+    "homeCtaBanner2Image": "/book_trip_cta.jpg",
+    "homeDestinationsTag": "DESTINATIONS",
+    "homeDestinationsTitle": "Place worth the detour",
+    "homeDestinationsSub": "A hand-picked map of the corners of India our community keeps coming back to",
+    "homeDealsTag": "LIMITED TIME OFFERS",
+    "homeDealsTitle": "Trending Adventure Deals",
+    "homeDealsSub": "Handpicked apparel & gear for your next mountain trek or beach getaway.",
+    "homeSellingTag": "MOST POPULAR",
+    "homeSellingTitle": "Best Selling Banjara Essentials",
+    "homeSellingSub": "Top rated gear loved by 10,000+ happy travelers across India.",
+    "homeCollectionsTag": "THE COLLECTION",
+    "homeCollectionsTitle": "Top Product Categories",
+    "homeCollectionsSub": "Browse our curated collections of travel essentials and outdoor gear",
+    "homeCategories": [
+      {
+        "name": "Stickers",
+        "price": "Starts from ₹93",
+        "image": "/around_the_world_sticker.jpg",
+        "link": "/shop?category=Stickers"
+      },
+      {
+        "name": "Badges",
+        "price": "Starts from ₹199",
+        "image": "/around_the_world_sticker.jpg",
+        "link": "/shop?category=Badges"
+      },
+      {
+        "name": "Fridge Magnets",
+        "price": "Starts from ₹199",
+        "image": "/around_the_world_sticker.jpg",
+        "link": "/shop?category=Magnets"
+      },
+      {
+        "name": "Journals",
+        "price": "Starts from ₹299",
+        "image": "/around_the_world_sticker.jpg",
+        "link": "/shop?category=Journals"
+      },
+      {
+        "name": "Patches",
+        "price": "Starts from ₹120",
+        "image": "/around_the_world_sticker.jpg",
+        "link": "/shop?category=Patches"
+      },
+      {
+        "name": "Pins",
+        "price": "Starts from ₹85",
+        "image": "/around_the_world_sticker.jpg",
+        "link": "/shop?category=Pins"
+      },
+      {
+        "name": "Keychains",
+        "price": "Starts from ₹99",
+        "image": "/around_the_world_sticker.jpg",
+        "link": "/shop?category=Keychains"
+      },
+      {
+        "name": "T-Shirts",
+        "price": "Starts from ₹499",
+        "image": "/around_the_world_sticker.jpg",
+        "link": "/shop?category=Apparel"
+      }
+    ],
+    "homeReviewsTag": "COMMUNITY REVIEWS",
+    "homeReviewsTitle": "What people say about products",
+    "homeReviewsSub": "Real reviews from our community of happy travelers",
+    "homeReviews": [
+      {
+        "id": "rev-1",
+        "name": "Kiran Makwan",
+        "subtitle": "Verified Wanderer",
+        "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150&q=80",
+        "text": "Exploring Spiti Valley with Go Banjara was a life-changing journey. Flawless planning, cozy homestays, and a wonderful group of fellow travelers. Highly recommended!",
+        "stars": 5
+      },
+      {
+        "id": "rev-2",
+        "name": "Ananya Roy",
+        "subtitle": "Himalayan Backpacker",
+        "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&h=150&q=80",
+        "text": "I bought the waterproof stickers for my laptop and helmet. They've survived rain, dust, and countless rugged camping trips without peeling or fading!",
+        "stars": 5
+      },
+      {
+        "id": "rev-3",
+        "name": "Rohan Sharma",
+        "subtitle": "Motorcycle Nomad",
+        "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&h=150&q=80",
+        "text": "The Kashmir Road Trip package was pure magic. Extremely well-planned with authentic local homestays and off-the-beaten-path trails. Will book again!",
+        "stars": 5
+      },
+      {
+        "id": "rev-4",
+        "name": "Priyanka Sen",
+        "subtitle": "Slow Traveler",
+        "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&h=150&q=80",
+        "text": "The double-walled thermal flask keeps my tea steaming hot even at 14,000 feet in Ladakh. Truly premium travel gear built for real mountain conditions.",
+        "stars": 5
+      },
+      {
+        "id": "rev-5",
+        "name": "Arjun Mehta",
+        "subtitle": "Weekend Explorer",
+        "avatar": "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&h=150&q=80",
+        "text": "Super clean design on the T-shirts! The fit is perfect, the fabric is extremely soft and breathable, and the graphics represent the soul of adventure travel.",
+        "stars": 5
+      },
+      {
+        "id": "rev-6",
+        "name": "Priya Nair",
+        "subtitle": "Solo Backpacker",
+        "avatar": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&h=150&q=80",
+        "text": "The Kerala Backwaters & Munnar Hills trip was breathtaking. The coordination was flawless, and the local guides showed us hidden trails away from all the tourists!",
+        "stars": 5
+      }
+    ],
+    "homeBlogTag": "THE JOURNAL",
+    "homeBlogTitle": "Travel Tales from the curious Explorer",
+    "homeBlogSub": "Follow my voices to discover unique voices, breathtaking landscapes & unforgettable experiences",
+    "homeBlogPosts": [
+      {
+        "id": "post-ladakh-guide-1",
+        "title": "Ultimate Ladakh Travel Guide: Plan Your Perfect Himalayan Adventure",
+        "excerpt": "Detailed packing list, fuel planning, and safety pointers for solo adventurers tackling the high passes alone.",
+        "image": "/travel-leh-1.jpg",
+        "readTime": "5 min read",
+        "date": "Sunday, August 12, 2023",
+        "author": "Kiran Makwan"
+      },
+      {
+        "id": "post-ladakh-guide-2",
+        "title": "Leh Ladakh Travel Guide 2026: Best Time, Places & Complete Trip Planning",
+        "excerpt": "Detailed packing list, fuel planning, and safety pointers for solo adventurers tackling the high passes alone.",
+        "image": "/travel-leh-2.jpg",
+        "readTime": "5 min read",
+        "date": "Sunday, August 12, 2023",
+        "author": "Kiran Makwan"
+      },
+      {
+        "id": "post-ladakh-guide-3",
+        "title": "Ladakh Bike Trip Guide: Routes, Budget & Essential Tips for Riders",
+        "excerpt": "Detailed packing list, fuel planning, and safety pointers for solo adventurers tackling the high passes alone.",
+        "image": "/travel-leh-3.jpg",
+        "readTime": "5 min read",
+        "date": "Sunday, August 12, 2023",
+        "author": "Kiran Makwan"
+      },
+      {
+        "id": "post-ladakh-guide-4",
+        "title": "7-Day Leh Ladakh Itinerary for First-Time Travelers",
+        "excerpt": "Detailed packing list, fuel planning, and safety pointers for solo adventurers tackling the high passes alone.",
+        "image": "/travel-leh-4.jpg",
+        "readTime": "5 min read",
+        "date": "Sunday, August 12, 2023",
+        "author": "Kiran Makwan"
+      }
+    ],
+    "homeFaqTag": "GOT QUESTIONS?",
+    "homeFaqTitle": "Frequently Asked Questions",
+    "homeFaqHelpDesk": "Help Desk",
+    "homeFaqs": [
+      {
+        "question": "What is Go Banjara?",
+        "answer": "Go Banjara is a slow-travel community and premium outdoor boutique brand. We craft immersive road trips, treks, and beach escapes, alongside durable, highly styled travel gear like waterproof backpacks, passport covers, iron-on badges, and premium journals."
+      },
+      {
+        "question": "How do I book a travel package?",
+        "answer": "Browse our curated packages under the Travel section. Choose your travel date and group size, then click 'Book Now' to submit an inquiry. Our community guides will reach out within 24 hours to confirm your details and add the package to your cart."
+      },
+      {
+        "question": "What is your gear return policy?",
+        "answer": "We offer a 15-day hassle-free return window for all boutique gear and apparel in unused, original packaging. All products also carry a 6-month warranty against manufacturing defects."
+      },
+      {
+        "question": "Do you support local communities?",
+        "answer": "Yes, 85% of your travel package expenses go directly to supporting local homestays, native guides, remote monasteries, and local micro-economies. Our gear is also sourced responsibly from local artisans."
+      },
+      {
+        "question": "What materials are the badges made from?",
+        "answer": "Zinc alloy with glossy enamel fill. Lightweight, durable, and safe to pin on bags, jackets, or backpacks without damaging fabric."
+      }
+    ],
+    "homeValuesTag": "THE BANJARA TRIBE",
+    "homeValuesTitle": "Join the Banjara Tribe",
+    "homeValuesSub": "Services to help you shop",
+    "homeServicesCards": [
+      {
+        "image": "/service-faq.png",
+        "title": "Frequently Asked Questions (FAQ)",
+        "desc": "See what are the commonly asked questions by our customers"
+      },
+      {
+        "image": "/service-delivery.png",
+        "title": "Home Delivery Options available",
+        "desc": "Pay with multiple cards seamlessly and without interruption"
+      },
+      {
+        "image": "/service-payment.png",
+        "title": "Secure Online Payment Process",
+        "desc": "Pay with multiple cards seamlessly and without interruption"
+      },
+      {
+        "image": "/service-openbox.png",
+        "title": "Open Box Delivery",
+        "desc": "Pay with multiple cards seamlessly and without interruption"
+      }
+    ],
+    "homeBonjoTag": "The Banjara Soul",
+    "homeBonjoTitle": "Meet Bonjo.",
+    "homeBonjoText1": "Go Banjara was born from a frustration travel in India had become a checklist. Same cafés, same photo spots, same three-day Goa loop. We wanted something slower, closer to the ground, and honest about the places it visited.",
+    "homeBonjoText2": "So we built a hybrid platform: curated small-group journeys, a shop of honest gear made by artisans we know by name, and a community of travelers who share notes from the road instead of just photos.",
+    "homeBonjoText3": "Travel. Lifestyle. Community. Commerce. Under one roof because we don't think they were ever supposed to live apart.",
+    "homeBonjoBtnText": "Our Story",
+    "homeBonjoBtnLink": "/about",
+    "homeBonjoImage": "/llama_mascot.png",
+    "homeMarquee1Items": [
+      "BOOK YOUR NEXT TRIP",
+      "SHOP TRAVEL GEAR",
+      "DARE TO TRAVEL",
+      "STICKERS",
+      "MODERN NOMAD",
+      "BADGES"
+    ],
+    "homeMarquee2Items": [
+      "ESCAPE THE ORDINARY",
+      "SHOP TRAVEL GEAR",
+      "DARE TO TRAVEL",
+      "ADVENTURE AWAITS",
+      "MODERN NOMAD",
+      "SHOP TRAVEL GEAR"
+    ],
+    "homeCtaTitle": "Ready for Your Next Big Journey?",
+    "homeCtaSub": "Join thousands of nomads exploring uncharted trails and creating lifelong memories.",
+    "homeCtaBtnText": "Browse All Packages",
+    "homeCtaBtnLink": "/travel",
+    "homeCtaBgImage": "/newsletter_bg.jpg",
+    "homeInstagramTag": "NOMAD MOMENTS",
+    "homeInstagramTitle": "Follow Our Journey on Instagram",
+    "homeInstagramSub": "Tag @gobanjara on your adventures to get featured on our official community grid",
+    "homeCustomSections": [],
+    "aboutHeroTitle": "We Are Go Banjara",
+    "aboutHeroSubtitle": "A community of passionate storytellers, trekkers, and culture explorers.",
+    "aboutMissionTitle": "Our Sacred Mission",
+    "aboutMissionText": "To connect wanderers with authentic regional cultures, breathtaking wilderness, and eco-friendly travel gear that empowers every journey.",
+    "aboutStoryTitle": "How It All Started",
+    "aboutStoryText": "Founded in the heart of Hyderabad, Go Banjara began as a small group of friends organizing weekend treks. Today, we are India’s leading experiential travel and outdoor lifestyle brand.",
+    "aboutTeamTitle": "Meet the Nomads Behind the Magic",
+    "aboutTeamSubtitle": "Our experienced trek leaders, local guides, and gear designers.",
+    "contactHeroTitle": "Get in Touch with Bonjo & Team",
+    "contactHeroSubtitle": "Have a question about a trip booking, order status, or custom corporate package? We are here 24/7!",
+    "contactAddress": "Go Banjara HQ, Road No. 12, Banjara Hills, Hyderabad, TS 500034",
+    "contactPhone": "+91 98765 43210",
+    "contactEmail": "hello@gobanjara.com",
+    "contactHours": "Mon - Sat: 9:00 AM - 8:00 PM",
+    "contactMapUrl": "https://maps.google.com",
+    "shopHeroTitle": "Outdoor Gear & Banjara Store",
+    "shopHeroSubtitle": "Authentic merchandise, trekking apparel, organic spices, and travel accessories.",
+    "shopPromoBannerText": "Get a free Go Banjara Nomad Sticker Pack with orders above ₹1,499!",
+    "shopPromoBannerButton": "Claim Gift Now",
+    "travelHeroTitle": "Curated Travel Experiences",
+    "travelHeroSubtitle": "From Himalayan summits to Malabar backwaters, find your perfect trip.",
+    "travelSupportBannerText": "Need customized group bookings or private family itineraries?",
+    "travelSupportPhone": "+91 98765 43210",
+    "blogHeroTitle": "The Banjara Wanderer Journal",
+    "blogHeroSubtitle": "Trek guides, packing tips, cultural stories, and hidden gem recommendations.",
+    "blogNewsletterTitle": "Subscribe to Nomad Dispatch",
+    "blogNewsletterSub": "Get weekly travel secrets and exclusive member discounts delivered straight to your inbox."
+  },
+  "customPages": [
+    {
+      "id": "page-privacy",
+      "title": "Privacy Policy",
+      "slug": "privacy-policy",
+      "status": "published",
+      "showInHeader": false,
+      "showInFooter": true,
+      "heroImage": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80",
+      "metaDescription": "Read how Go Banjara protects and manages your personal information and trip data.",
+      "content": "\n# Privacy Policy\n\nWelcome to **Go Banjara Experiences Pvt. Ltd.** (\"Go Banjara\", \"we\", \"us\", or \"our\"). We respect your privacy and are committed to protecting your personal data.\n\n### 1. Information We Collect\nWe collect personal information that you voluntarily provide to us when registering an account, booking a travel package, or purchasing products from our store:\n- **Personal Identification Details**: Name, email address, mobile number, emergency contact details.\n- **Payment Information**: Processed securely via PCI-DSS compliant gateways like Razorpay. We do not store raw card numbers or CVVs on our servers.\n- **Trip Preferences**: Dietary restrictions, medical conditions disclosed for trekking safety, passport details for flight/permit bookings.\n\n### 2. How We Use Your Information\n- To fulfill and manage your travel bookings, hotel vouchers, and product deliveries.\n- To send instant WhatsApp/Email booking confirmations, invoice receipts, and trip itineraries.\n- To improve our website performance, customer support, and tailored travel recommendations.\n\n### 3. Data Protection & Security\nWe implement SSL encryption, role-based database access, and regular security audits to prevent unauthorized access, alteration, or disclosure of your data.\n\n### 4. Contact Us\nFor any privacy concerns or data access requests, please email us at **privacy@gobanjara.com**.\n",
+      "createdAt": "2026-08-02T13:27:12.689Z",
+      "updatedAt": "2026-08-02T13:27:12.689Z"
+    },
+    {
+      "id": "page-terms",
+      "title": "Terms & Conditions",
+      "slug": "terms-and-conditions",
+      "status": "published",
+      "showInHeader": false,
+      "showInFooter": true,
+      "heroImage": "https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=1200&q=80",
+      "metaDescription": "Terms of service, trip cancellation guidelines, and store policies for Go Banjara.",
+      "content": "\n# Terms & Conditions\n\nPlease read these Terms & Conditions carefully before booking any tour packages or purchasing merchandise on Go Banjara.\n\n### 1. Booking & Payments\n- A minimum 30% advance payment is required to confirm your seat on any group trip or package.\n- The remaining balance must be cleared 7 days prior to departure date.\n\n### 2. Cancellation & Refund Policy\n- **30+ days prior to departure**: 90% refund of total trip cost.\n- **15 to 29 days prior**: 50% refund.\n- **0 to 14 days prior**: No refund due to upfront hotel & transport reservations.\n- Store products can be returned or exchanged within 7 days of delivery in unused condition with tags intact.\n\n### 3. Code of Conduct on Trips\nGo Banjara promotes friendly, inclusive, and eco-responsible travel. Zero tolerance is maintained for harassment, illegal drug use, or damage to natural ecosystems.\n",
+      "createdAt": "2026-08-02T13:27:12.689Z",
+      "updatedAt": "2026-08-02T13:27:12.689Z"
+    },
+    {
+      "id": "page-faq",
+      "title": "Frequently Asked Questions",
+      "slug": "faq",
+      "status": "published",
+      "showInHeader": true,
+      "showInFooter": true,
+      "heroImage": "https://images.unsplash.com/photo-1516738901171-8eb4fc13bd20?auto=format&fit=crop&w=1200&q=80",
+      "metaDescription": "Find answers to popular questions about trip bookings, gear shipping, and cancellation rules.",
+      "content": "\n# Frequently Asked Questions (FAQ)\n\n### Q1: Are solo travelers welcome on group trips?\n**Yes!** Over 60% of Go Banjara wanderers travel solo. Our group trips are designed to foster warm friendships and memorable group bonding.\n\n### Q2: What is included in the travel package cost?\nEach package clearly lists inclusions such as accommodation, meals, internal transport, certified trip leads, and sightseeing passes. Check the specific package page for detailed lists.\n\n### Q3: How long does merchandise delivery take?\nOrders are dispatched within 24 hours. Standard shipping across India takes 3 to 5 business days.\n\n### Q4: How do I link merchandise perks to my trip?\nWhen booking select premium packages, complimentary gear (like our Nomad Keychain or Badge) will be automatically added to your booking confirmation!\n",
+      "createdAt": "2026-08-02T13:27:12.689Z",
+      "updatedAt": "2026-08-02T13:27:12.689Z"
+    }
+  ],
+  "packageProductLinks": [
+    {
+      "packageId": "pkg-kashmir-summer",
+      "productId": "prod-saffron",
+      "perkType": "included",
+      "note": "Complimentary Kashmiri Organic Saffron Sample Pack"
+    },
+    {
+      "packageId": "pkg-kashmir-summer",
+      "productId": "prod-jacket",
+      "perkType": "addon",
+      "discountPercent": 20,
+      "note": "Recommended Mountain Windcheater"
+    },
+    {
+      "packageId": "pkg-leh-expedition",
+      "productId": "prod-backpack",
+      "perkType": "addon",
+      "discountPercent": 15,
+      "note": "Trekker 45L Waterproof Backpack"
+    },
+    {
+      "packageId": "pkg-kerala-backwaters",
+      "productId": "prod-cardamom",
+      "perkType": "included",
+      "note": "Wayanad Fresh Cardamom Pouch"
+    },
+    {
+      "packageId": "pkg-goa-beach",
+      "productId": "prod-stickers",
+      "perkType": "included",
+      "note": "Go Banjara Nomad Sticker Set"
+    }
+  ],
+  "destinations": [
+    {
+      "id": "kerala",
+      "name": "Kerala",
+      "sub": "God’s Own Country",
+      "desc": "Glide through shimmering backwaters lined with coconut palms, relax on luxury houseboats, and taste spices fresh from the vine.",
+      "image": "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=800&q=80",
+      "color": "from-emerald-600 to-teal-800",
+      "season": "Winter & Monsoon (Oct - Mar)",
+      "attractions": [
+        "Alleppey Backwaters",
+        "Munnar Tea Estates",
+        "Wayanad Rain Forests"
+      ],
+      "recommendedProductIds": [
+        "prod-cardamom",
+        "prod-mundu",
+        "prod-pepper",
+        "prod-pillow"
+      ]
+    },
+    {
+      "id": "kashmir",
+      "name": "Kashmir",
+      "sub": "Paradise on Earth",
+      "desc": "Breathe in the alpine air of snow-dusted mountains, reside in wooden houseboats on Dal Lake, and walk through fields of purple saffron.",
+      "image": "https://images.unsplash.com/photo-1566837945700-30057527ade0?auto=format&fit=crop&w=800&q=80",
+      "color": "from-blue-600 to-indigo-900",
+      "season": "Spring & Winter (Sep - Apr)",
+      "attractions": [
+        "Gulmarg Gondola",
+        "Dal Lake Shikaras",
+        "Pahalgam Valleys"
+      ],
+      "recommendedProductIds": [
+        "prod-saffron",
+        "prod-jacket",
+        "prod-backpack",
+        "prod-tea"
+      ]
+    },
+    {
+      "id": "goa",
+      "name": "Goa",
+      "sub": "Sun, Sand & Spices",
+      "desc": "Bask under golden palms on sandy shores, explore Portuguese architecture, and visit tropical organic spice plantations.",
+      "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80",
+      "color": "from-yellow-500 to-orange-700",
+      "season": "Winter (Nov - Feb)",
+      "attractions": [
+        "Palolem Beach",
+        "Basilica of Bom Jesus",
+        "Sahakari Spice Farm"
+      ],
+      "recommendedProductIds": [
+        "prod-khadi",
+        "prod-stickers",
+        "prod-pillow",
+        "prod-coorg-coffee"
+      ]
+    },
+    {
+      "id": "hyderabad",
+      "name": "Hyderabad",
+      "sub": "City of Pearls",
+      "desc": "Unveil the grandeur of historical Nizam palaces, shop ancient pearl bazaars, and feast on the legendary slow-cooked Biryani.",
+      "image": "https://images.unsplash.com/photo-1605007493699-af65834f8a00?auto=format&fit=crop&w=800&q=80",
+      "color": "from-amber-600 to-red-800",
+      "season": "Winter (Oct - Mar)",
+      "attractions": [
+        "Charminar",
+        "Golconda Fort",
+        "Chowmahalla Palace"
+      ],
+      "recommendedProductIds": [
+        "prod-coorg-coffee",
+        "prod-khadi",
+        "prod-tea",
+        "prod-stickers"
+      ]
+    },
+    {
+      "id": "rajasthan",
+      "name": "Rajasthan",
+      "sub": "Land of Kings",
+      "desc": "Ride camels across shifting desert dunes, explore towering sandstone hill-forts, and immerse in colors of folk music.",
+      "image": "https://images.unsplash.com/photo-1477587458883-471a5ed94245?auto=format&fit=crop&w=800&q=80",
+      "color": "from-orange-500 to-amber-800",
+      "season": "Winter (Oct - Mar)",
+      "attractions": [
+        "Amer Fort Jaipur",
+        "Thar Desert Dunes",
+        "Lake Palace Udaipur"
+      ],
+      "recommendedProductIds": [
+        "prod-khadi",
+        "prod-backpack",
+        "prod-tea"
+      ]
+    }
+  ],
+  "packages": [
+    {
+      "id": "pkg-kashmir-classic",
+      "name": "Spiti Valley Traverse",
+      "price": 22900,
+      "originalPrice": 29500,
+      "duration": "6 Days / 5 Nights",
+      "durationDays": 6,
+      "rating": 5,
+      "ratingCount": 450,
+      "hotelStars": "4★ Premium Stays",
+      "hotelClass": "4",
+      "route": "Manali → Kaza → Chandratal → Manali",
+      "routeList": [
+        "Manali",
+        "Kaza",
+        "Chandratal"
+      ],
+      "description": "Explore high altitude Spiti villages, post cards from Hikkim, and camp under the stars at Chandratal.",
+      "inclusions": [
+        "flights",
+        "hotel",
+        "transfers",
+        "meals",
+        "sightseeing"
+      ],
+      "highlights": [
+        "Drive through Atal Tunnel & Kunzum Pass",
+        "Visit the ancient Key & Dhankar monasteries",
+        "Chandratal lake camping and stargazing",
+        "Explore Langza, Hikkim & Komik villages"
+      ],
+      "image": "/travel-leh-6.jpg",
+      "themes": [
+        "Mountain",
+        "Romantic",
+        "Adventure"
+      ],
+      "destination": "Kashmir",
+      "detailsAvailable": true,
+      "link": "/travel/srinagar-to-leh",
+      "category": "Road Trip",
+      "difficulty": "Moderate",
+      "groupType": "Curated group Trip",
+      "nextDeparture": "Aug, 2026",
+      "startPoint": "Manali",
+      "isBestSeller": true,
+      "showOnHome": true,
+      "images": [
+        "/travel-leh-6.jpg",
+        "/travel-leh-1.jpg",
+        "/travel-leh-2.jpg",
+        "/travel-leh-4.jpg",
+        "/travel-leh-5.jpg",
+        "/ladakh-hero.jpg"
+      ],
+      "exclusions": [
+        "Flights or travel expenses to Manali",
+        "Mandatory travel insurance (highly recommended)",
+        "Lunch meals, personal snacks, and bottled mineral water",
+        "Tips for guides, driver, hotel staff, and camel handlers",
+        "Any personal expenses, souvenir shopping, or laundry services"
+      ],
+      "packingList": [
+        "Heavy fleece jackets, windbreaker, and thermal base layers",
+        "Sturdy water-resistant hiking boots with good grip",
+        "Polarized sunglasses and high SPF sunscreen",
+        "Reusable thermos water bottle for hot water",
+        "Personal altitude medication (like Diamox)",
+        "High capacity power bank (extreme cold drains batteries)"
+      ],
+      "faqs": [
+        {
+          "q": "What standard are the accommodations? (Hotels, homestays, tents)",
+          "a": "We use premium boutique hotels in Kaza, and high-quality lakeside dome tents with attached bathrooms at Chandratal."
+        },
+        {
+          "q": "Is AMS (Altitude Mountain Sickness) a concern?",
+          "a": "Yes, because Spiti is at 3,800m. We include acclimatization rest on Day 1 and Day 2. Our vehicles carry medical oxygen cylinders."
+        }
+      ],
+      "reviews": [
+        {
+          "name": "Rohan Malhotra",
+          "date": "July, 02nd, 2026",
+          "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&h=100&q=80",
+          "comment": "“An absolute dream road trip! Driving through Kunzum Pass was thrilling, and the view of Chandratal at sunset is something I will never forget. Vikram Aditya was the perfect guide.”",
+          "rating": 5
+        }
+      ],
+      "guide": {
+        "name": "Vikram Aditya",
+        "role": "Lead Expedition Coordinator",
+        "image": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=120&h=120&fit=crop&q=60",
+        "rating": 5,
+        "trips": 143,
+        "bio": "Vikram is a native Himalayan guide with 12+ years of experience leading high-altitude road trips across Himachal and Ladakh."
+      },
+      "departures": [
+        {
+          "value": "2026-08-14",
+          "label": "14 Aug, 2026",
+          "seats": "4 Seats"
+        },
+        {
+          "value": "2026-08-21",
+          "label": "21 Aug, 2026",
+          "seats": "8 Seats"
+        }
+      ],
+      "itinerary": [
+        {
+          "day": "Day 01",
+          "title": "Manali → Kaza via Atal Tunnel",
+          "location": "Kaza",
+          "places": [
+            "Atal Tunnel",
+            "Lahaul Valley",
+            "Kunzum Pass",
+            "Kaza"
+          ],
+          "offering": "Drive through the Atal Tunnel at 3,000m and emerge into the cold desert. Afternoon arrival in Kaza. Acclimatization walk, orientation dinner.",
+          "activities": [
+            "Drive through Atal Tunnel",
+            "Cross Kunzum Pass",
+            "Acclimatization walk",
+            "Orientation dinner"
+          ],
+          "insiderTip": "Take it extremely slow today to help your body adapt to the sudden high altitude of Kaza.",
+          "image": "/travel-leh-day1.jpg"
+        },
+        {
+          "day": "Day 02",
+          "title": "Kaza → Key Monastery → Kibber",
+          "location": "Kaza",
+          "places": [
+            "Key Monastery",
+            "Kibber Village",
+            "Chicham Bridge"
+          ],
+          "offering": "Arrive at Srinagar airport. Meet our team and transfer to a traditional Houseboat on Dal Lake. Afternoon shikara ride and trip briefing in the evening.",
+          "activities": [
+            "Key Monastery guided tour",
+            "Kibber Village walk",
+            "Chicham Bridge photo stop"
+          ],
+          "insiderTip": "Try the local butter tea in Kibber; it is great for keeping warm in the high altitudes.",
+          "image": "https://images.unsplash.com/photo-1598324421714-235f4980c749?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 03",
+          "title": "Kibber → Hikkim → Komik → Langza",
+          "location": "Kaza",
+          "places": [
+            "Hikkim Post Office",
+            "Komik",
+            "Langza Buddha"
+          ],
+          "offering": "Arrive at Srinagar airport. Meet our team and transfer to a traditional Houseboat on Dal Lake. Afternoon shikara ride and trip briefing in the evening.",
+          "activities": [
+            "Send a letter from the highest post office",
+            "Visit Langza Buddha statue",
+            "Komik village walk"
+          ],
+          "insiderTip": "Look for marine fossils in Langza, but do not take them home as they are protected.",
+          "image": "https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 04",
+          "title": "Langza → Pin Valley National Park",
+          "location": "Pin Valley",
+          "places": [
+            "Mudh Village",
+            "Pin Valley National Park",
+            "Dhankar Monastery"
+          ],
+          "offering": "Drive to Pin Valley National Park, visiting Mudh village and the ancient cliffside Dhankar Monastery.",
+          "activities": [
+            "Pin Valley scenic drive",
+            "Mudh Village exploration",
+            "Dhankar Monastery tour"
+          ],
+          "insiderTip": "The views of the confluence of Spiti and Pin rivers near Dhankar are spectacular.",
+          "image": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 05",
+          "title": "Kaza to Chandratal Lake",
+          "location": "Chandratal",
+          "places": [
+            "Chandratal Lake",
+            "Lakeside Camp"
+          ],
+          "offering": "Drive to the breathtaking crescent-shaped Chandratal Lake. Stargaze under clear Himalayan skies at the lakeside campsite.",
+          "activities": [
+            "Chandratal lake trekking",
+            "Lakeside sunset walk",
+            "Stargazing session"
+          ],
+          "insiderTip": "Keep all warm layers handy as temperatures at Chandratal can drop below freezing even in summer.",
+          "image": "https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 06",
+          "title": "Chandratal Lake to Manali",
+          "location": "Manali",
+          "places": [
+            "Kunzum Pass",
+            "Atal Tunnel",
+            "Manali"
+          ],
+          "offering": "Drive back to Manali via Kunzum Pass and Atal Tunnel. Departure and trip ends by evening.",
+          "activities": [
+            "Kunzum Pass crossing",
+            "Atal Tunnel drive",
+            "Manali departure transfer"
+          ],
+          "insiderTip": "Leave early from Chandratal to avoid traffic near the Atal Tunnel.",
+          "image": "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=500&q=80"
+        }
+      ]
+    },
+    {
+      "id": "pkg-kashmir-gulmarg",
+      "name": "Gulmarg Skiing",
+      "price": 26900,
+      "originalPrice": 32000,
+      "duration": "7 Days / 6 Nights",
+      "durationDays": 7,
+      "rating": 4.9,
+      "ratingCount": 312,
+      "hotelStars": "5★ Luxury Chalet",
+      "hotelClass": "5",
+      "route": "Srinagar → Gulmarg → Srinagar",
+      "routeList": [
+        "Srinagar",
+        "Gulmarg Chalet",
+        "Srinagar Houseboat"
+      ],
+      "description": "Ascend Asia's highest cable car to ski Apharwat Peak with expert coaching and cozy chalets.",
+      "inclusions": [
+        "flights",
+        "hotel",
+        "transfers",
+        "meals",
+        "sightseeing"
+      ],
+      "highlights": [
+        "Certified ski instruction on pristine powder slopes",
+        "Phase 1 & 2 Gondola tickets to Apharwat Peak summit",
+        "Apres-ski steam therapy, sauna & traditional Wazwan feast"
+      ],
+      "image": "https://images.unsplash.com/photo-1615966650071-855b15f29ad1?auto=format&fit=crop&w=800&q=80",
+      "themes": [
+        "Mountain",
+        "Adventure"
+      ],
+      "destination": "Kashmir",
+      "detailsAvailable": true,
+      "link": "/travel/package/pkg-kashmir-gulmarg",
+      "category": "Camping",
+      "difficulty": "Challenging",
+      "groupType": "Curated group Trip",
+      "nextDeparture": "Aug, 2026",
+      "startPoint": "Srinagar",
+      "showOnHome": false,
+      "images": [
+        "https://images.unsplash.com/photo-1615966650071-855b15f29ad1?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1598324421714-235f4980c749?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1595815729819-abdec427f70b?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1566837945700-30057527ade0?auto=format&fit=crop&w=800&q=80"
+      ],
+      "exclusions": [
+        "Flights or travel expenses to Srinagar",
+        "Ski gear insurance against damage",
+        "Lunch meals and premium beverages",
+        "Tips for ski coaches, guides, and hotel staff",
+        "Personal shopping and laundry services"
+      ],
+      "packingList": [
+        "Fleece jackets, heavy winter coats, and thermal base layers",
+        "Waterproof ski trousers and snow gloves",
+        "UV sunglasses or ski goggles",
+        "High SPF sunscreen & lip balm",
+        "Woolen socks & thermal caps"
+      ],
+      "faqs": [
+        {
+          "q": "Is ski coaching included for beginners?",
+          "a": "Yes! We include 2 days of certified group ski instruction at the Gulmarg Ski slopes, which covers all basics and safety guidelines."
+        },
+        {
+          "q": "Are Gondola Phase 1 & 2 tickets pre-booked?",
+          "a": "Yes, tickets for both phases are included in your package. Please keep your physical ID cards ready at the ticket counters."
+        }
+      ],
+      "reviews": [
+        {
+          "name": "Aditya Vardhan",
+          "date": "June, 15th, 2026",
+          "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&h=100&q=80",
+          "comment": "“Go Banjāra nailed the itinerary. The blend of adventure skiing, Gondola tickets, and the traditional Wazwan feast made it unforgettable.”",
+          "rating": 5
+        }
+      ],
+      "guide": {
+        "name": "Vikram Aditya",
+        "role": "Lead Expedition Coordinator",
+        "image": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=120&h=120&fit=crop&q=60",
+        "rating": 5,
+        "trips": 143,
+        "bio": "Vikram coordinates high-altitude adventures and skiing excursions across Kashmir."
+      },
+      "departures": [
+        {
+          "value": "2026-08-15",
+          "label": "15 Aug, 2026",
+          "seats": "5 Seats"
+        },
+        {
+          "value": "2026-08-25",
+          "label": "25 Aug, 2026",
+          "seats": "8 Seats"
+        }
+      ],
+      "itinerary": [
+        {
+          "day": "Day 01",
+          "title": "Arrival & Snowy Gulmarg Pass Drive",
+          "location": "Srinagar to Gulmarg",
+          "places": [
+            "Srinagar Airport",
+            "Gulmarg Chalet"
+          ],
+          "offering": "Private transfer in a 4x4 SUV equipped with mountain snow chains, check-in to a heated alpine chalet, and local ski gear selection and fitting session.",
+          "activities": [
+            "4x4 SUV snow chain drive",
+            "Chalet check-in",
+            "Ski equipment fitting"
+          ],
+          "insiderTip": "Let the ski boots sit in the heated room overnight to make them easier to slip on tomorrow morning.",
+          "image": "https://images.unsplash.com/photo-1615966650071-855b15f29ad1?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 02",
+          "title": "First Skiing Lesson & Slope Training",
+          "location": "Gulmarg",
+          "places": [
+            "Gulmarg Ski Resort",
+            "Beginner Slope 1"
+          ],
+          "offering": "High-end ski equipment rental (skis, boots, poles), private certified ski instructor for 4 hours, and beginner drag-lift passes.",
+          "activities": [
+            "4-hour ski coaching session",
+            "Basic balancing and snow walking training"
+          ],
+          "insiderTip": "Do not lean backward when skiing downhill; lean forward over your shins to maintain control.",
+          "image": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 03",
+          "title": "Gondola Ride to Kongdori Valley (Phase 1)",
+          "location": "Gulmarg",
+          "places": [
+            "Kongdori Station (2,600m)",
+            "Pine Forest Runs"
+          ],
+          "offering": "Phase 1 Gondola ticket, intermediate ski guide, warm packed coffee thermos, and mountain slope safety briefing.",
+          "activities": [
+            "Gondola Phase 1 ride",
+            "Pine forest trail walking",
+            "Intermediate slopes ski run"
+          ],
+          "insiderTip": "Keep your ticket card safe in a sleeve; you need it scanned at multiple gates.",
+          "image": "https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 04",
+          "title": "Apharwat Peak Summit Gondola (Phase 2)",
+          "location": "Gulmarg",
+          "places": [
+            "Apharwat Peak (3,979m)",
+            "Summit Ridge"
+          ],
+          "offering": "Ride the second phase of the Gondola to Apharwat Peak at nearly 4,000 meters. Explore the majestic frozen ridge overlooking the line of control.",
+          "activities": [
+            "Phase 2 Gondola ascent",
+            "Guided ridge walk",
+            "Panoramic photography"
+          ],
+          "insiderTip": "Due to the thin air at Apharwat Peak, walk slowly and take small sips of water regularly.",
+          "image": "https://images.unsplash.com/photo-1598324421714-235f4980c749?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 05",
+          "title": "Free Exploration & Snowshoe Trek",
+          "location": "Gulmarg",
+          "places": [
+            "Strawberry Valley",
+            "Baba Reshi Shrine"
+          ],
+          "offering": "Spend the day at leisure. Join our optional guided snowshoe trek to Strawberry Valley or visit the local heritage shrine at Baba Reshi.",
+          "activities": [
+            "Guided snowshoe trek",
+            "Baba Reshi shrine visit"
+          ],
+          "insiderTip": "Try the traditional Kashmiri Harrisa dish for breakfast at a local cafe to stay warm all day.",
+          "image": "https://images.unsplash.com/photo-1595815729819-abdec427f70b?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 06",
+          "title": "Return to Srinagar & Houseboat Stays",
+          "location": "Gulmarg to Srinagar",
+          "places": [
+            "Tangmarg Pine Woods",
+            "Dal Lake Houseboat"
+          ],
+          "offering": "Drive back to Srinagar and check in to a traditional hand-carved cedar houseboat. Relax with evening Shikara rides and a traditional Wazwan feast.",
+          "activities": [
+            "Houseboat checking",
+            "Sunset Shikara ride",
+            "Traditional Wazwan banquet"
+          ],
+          "insiderTip": "The sunset colors reflecting off the waters of Dal Lake are a photographer's paradise.",
+          "image": "https://images.unsplash.com/photo-1566837945700-30057527ade0?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 07",
+          "title": "Airport Departure Transfer",
+          "location": "Srinagar Out",
+          "places": [
+            "Srinagar Airport"
+          ],
+          "offering": "After a cozy breakfast, transfer to Srinagar Airport for your return flight home, loaded with memories of snow-laden slopes.",
+          "activities": [
+            "Airport transfer",
+            "Souvenir shopping assistance"
+          ],
+          "insiderTip": "Security checks at Srinagar airport are rigorous. Make sure to arrive at least 3 hours before your flight.",
+          "image": "/travel-leh-day1.jpg"
+        }
+      ]
+    },
+    {
+      "id": "pkg-kerala-4in1",
+      "name": "Kerala Couple Spl",
+      "price": 24999,
+      "originalPrice": 39999,
+      "duration": "5 Days / 4 Nights",
+      "durationDays": 5,
+      "rating": 4.8,
+      "ratingCount": 142,
+      "hotelStars": "3★ / 4★ Premium",
+      "hotelClass": "4",
+      "route": "Kochi → Munnar → Thekkady → Alleppey → Kochi",
+      "routeList": [
+        "Kochi",
+        "Munnar",
+        "Thekkady",
+        "Alleppey"
+      ],
+      "description": "A curated couple & family getaway exploring Munnar hills, Periyar wildlife, and Alleppey backwaters.",
+      "inclusions": [
+        "hotel",
+        "transfers",
+        "meals",
+        "sightseeing"
+      ],
+      "highlights": [
+        "Private AC Sedan transport with friendly driver",
+        "Premium hotel stays in Munnar & Thekkady",
+        "Houseboat Stay with all meals in Alleppey backwaters",
+        "Spice plantation guided walk"
+      ],
+      "image": "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=800&q=80",
+      "themes": [
+        "Romantic",
+        "Beach",
+        "Heritage"
+      ],
+      "destination": "Kerala",
+      "detailsAvailable": true,
+      "link": "/travel/package/pkg-kerala-4in1",
+      "category": "Road Trip",
+      "difficulty": "Easy",
+      "groupType": "Private Tour",
+      "nextDeparture": "Aug, 2026",
+      "startPoint": "Kochi",
+      "isBestSeller": true,
+      "showOnHome": true,
+      "images": [
+        "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1517462964-21fdcec3f25b?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1593693411515-c202e97424b6?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80"
+      ],
+      "exclusions": [
+        "Flights or train tickets to Kochi",
+        "Entrance tickets to monuments or national parks",
+        "Lunch meals, personal water, and drinks",
+        "Tips for driver and hotel workers",
+        "Optional activities (boating, elephant rides)"
+      ],
+      "packingList": [
+        "Lightweight cotton and linen outfits",
+        "Comfortable walking shoes/sandals",
+        "Sun hat and UV sunglasses",
+        "High SPF sunscreen lotion",
+        "Umbrella or light raincoat (tropical rain)",
+        "Mosquito repellent spray"
+      ],
+      "faqs": [
+        {
+          "q": "Is the houseboat stay private or shared?",
+          "a": "The houseboat stay is 100% private for your family or couple booking, including a dedicated chef and captain."
+        },
+        {
+          "q": "What type of food is served on the houseboat?",
+          "a": "Traditional Kerala meals (breakfast, lunch, and dinner) are cooked fresh on-board by your private chef. Vegetarian options are available upon request."
+        }
+      ],
+      "reviews": [
+        {
+          "name": "Vipin Das",
+          "date": "July, 05th, 2026",
+          "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&h=100&q=80",
+          "comment": "“Unbelievable trip! Munnar was misty and cool, and the backwaters in Alleppey were serene. The private driver was extremely polite and drove safely.”",
+          "rating": 5
+        }
+      ],
+      "guide": {
+        "name": "Anand Nair",
+        "role": "Tropical Tour Director",
+        "image": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=120&h=120&fit=crop&q=60",
+        "rating": 4.8,
+        "trips": 186,
+        "bio": "Anand is a seasoned Kerala travel director who knows every scenic viewpoint, tea shop, and local story across Munnar, Alleppey, and Thekkady."
+      },
+      "departures": [
+        {
+          "value": "2026-08-10",
+          "label": "10 Aug, 2026",
+          "seats": "Private slots"
+        },
+        {
+          "value": "2026-08-20",
+          "label": "20 Aug, 2026",
+          "seats": "Private slots"
+        }
+      ],
+      "itinerary": [
+        {
+          "day": "Day 01",
+          "title": "Arrival in Kochi & Drive to Munnar Hills",
+          "location": "Kochi to Munnar",
+          "places": [
+            "Kochi Airport",
+            "Cheeyappara Waterfalls",
+            "Munnar Tea Hills"
+          ],
+          "offering": "Pick up from Kochi airport or station. Travel by private sedan up the winding Munnar hills, passing beautiful spice valleys and the spectacular Cheeyappara waterfalls.",
+          "activities": [
+            "Airport pickup",
+            "Mountain scenic drive",
+            "Cheeyappara waterfall photo stop"
+          ],
+          "insiderTip": "Keep a light jacket handy; temperature drops noticeably once you reach the altitude of Munnar.",
+          "image": "https://images.unsplash.com/photo-1517462964-21fdcec3f25b?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 02",
+          "title": "Munnar Tea Plantations & Eravikulam National Park",
+          "location": "Munnar",
+          "places": [
+            "Eravikulam National Park",
+            "Mattupetty Dam",
+            "Echo Point"
+          ],
+          "offering": "Spend the day sightseeing in Munnar. Spot the rare Nilgiri Tahr at Eravikulam, take beautiful photos at Mattupetty Dam, and enjoy the natural echo at Echo Point.",
+          "activities": [
+            "National Park safari",
+            "Munnar tea gardens walk",
+            "Lake boating excursion"
+          ],
+          "insiderTip": "Book Eravikulam tickets online to skip the long entry queues.",
+          "image": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 03",
+          "title": "Travel to Thekkady & Spice Gardens Guided Tour",
+          "location": "Munnar to Thekkady",
+          "places": [
+            "Periyar Wildlife Sanctuary",
+            "Spice Plantations"
+          ],
+          "offering": "Drive to Thekkady, the spice center of Kerala. Take a guided walk through lush plantations of green cardamom, black pepper, and cinnamon, followed by an evening wildlife boat safari.",
+          "activities": [
+            "Spice plantation guided tour",
+            "Periyar lake boat safari"
+          ],
+          "insiderTip": "Buy authentic vanilla and cardamom directly from the farming cooperative shops in Thekkady.",
+          "image": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 04",
+          "title": "Check-in to Private Alleppey Houseboat",
+          "location": "Thekkady to Alleppey",
+          "places": [
+            "Vembanad Lake backwaters",
+            "Alleppey Canal Grid"
+          ],
+          "offering": "Transfer to Alleppey. Board your luxury private wood-and-bamboo houseboat. Sail along palm-fringed lagoons while your personal chef prepares a classic lunch and dinner.",
+          "activities": [
+            "Houseboat cruise",
+            "Fresh toddy shop visit",
+            "Lagoon sunset cruise"
+          ],
+          "insiderTip": "Request the chef to cook local Pearl Spot fish (Karimeen Pollichathu) for dinner—it is prepared in banana leaves and is delicious.",
+          "image": "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 05",
+          "title": "Houseboat Check-out & Kochi Departure",
+          "location": "Alleppey to Kochi",
+          "places": [
+            "Fort Kochi Chinese Fishing Nets",
+            "Kochi Airport"
+          ],
+          "offering": "Enjoy breakfast on board the houseboat. Disembark and drive back to Kochi. Take a brief heritage tour of Fort Kochi before transferring to the airport.",
+          "activities": [
+            "Fort Kochi walk",
+            "Kochi airport drop-off"
+          ],
+          "insiderTip": "Arrive at the fishing nets around noon to watch the fishermen haul in their catch.",
+          "image": "https://images.unsplash.com/photo-1593693411515-c202e97424b6?auto=format&fit=crop&w=500&q=80"
+        }
+      ]
+    },
+    {
+      "id": "pkg-kerala-classic3",
+      "name": "Kerala Classic Tour",
+      "price": 19999,
+      "originalPrice": 29999,
+      "duration": "4 Days / 3 Nights",
+      "durationDays": 4,
+      "rating": 4.7,
+      "ratingCount": 98,
+      "hotelStars": "3★ Standard",
+      "hotelClass": "3",
+      "route": "Kochi → Munnar → Alleppey → Kochi",
+      "routeList": [
+        "Kochi",
+        "Munnar",
+        "Alleppey"
+      ],
+      "description": "Classic 3-night private getaway covering Munnar hills and Alleppey houseboats.",
+      "inclusions": [
+        "hotel",
+        "transfers",
+        "meals",
+        "sightseeing"
+      ],
+      "highlights": [
+        "Private transport in AC sedan with local driver",
+        "Munnar tea garden sightseeing and mist valleys",
+        "Alleppey private houseboat stay with onboard dining"
+      ],
+      "image": "https://images.unsplash.com/photo-1517462964-21fdcec3f25b?auto=format&fit=crop&w=800&q=80",
+      "themes": [
+        "Romantic",
+        "Beach"
+      ],
+      "destination": "Kerala",
+      "detailsAvailable": true,
+      "link": "/travel/package/pkg-kerala-classic3",
+      "category": "Weekend",
+      "difficulty": "Easy",
+      "groupType": "Private Tour",
+      "nextDeparture": "Aug, 2026",
+      "startPoint": "Kochi",
+      "images": [
+        "https://images.unsplash.com/photo-1517462964-21fdcec3f25b?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1593693411515-c202e97424b6?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80"
+      ],
+      "exclusions": [
+        "Flights or train tickets",
+        "National park entry and activity fees",
+        "Lunch meals and premium beverages",
+        "Tips for driver and hotel workers",
+        "Souvenirs and personal laundry"
+      ],
+      "packingList": [
+        "Light comfortable cotton wear",
+        "Flat walking shoes or sandals",
+        "Sun visor and sunglasses",
+        "Sunscreen lotion",
+        "Compact umbrella"
+      ],
+      "faqs": [
+        {
+          "q": "Is this tour suitable for senior citizens?",
+          "a": "Yes! It is a private, relaxed trip with minimal walking and direct door-to-door vehicle transfers, making it very comfortable for seniors."
+        }
+      ],
+      "reviews": [
+        {
+          "name": "Manoj Kumar",
+          "date": "June, 22nd, 2026",
+          "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&h=100&q=80",
+          "comment": "“Extremely cozy and pleasant. We had a great time in Munnar and the houseboat was very clean. Driver was friendly.”",
+          "rating": 4.7
+        }
+      ],
+      "guide": {
+        "name": "Anand Nair",
+        "role": "Tropical Tour Director",
+        "image": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=120&h=120&fit=crop&q=60",
+        "rating": 4.8,
+        "trips": 186,
+        "bio": "Anand coordinates family retreats and honeymoon getaways across Kerala."
+      },
+      "departures": [
+        {
+          "value": "2026-08-12",
+          "label": "12 Aug, 2026",
+          "seats": "Private slots"
+        }
+      ],
+      "itinerary": [
+        {
+          "day": "Day 01",
+          "title": "Kochi Arrival & Drive to Munnar Tea Country",
+          "location": "Kochi to Munnar",
+          "places": [
+            "Kochi Airport",
+            "Valara Waterfalls",
+            "Munnar Town"
+          ],
+          "offering": "Pick up from Kochi. Scenic climb to Munnar hill station through valleys and waterfalls.",
+          "activities": [
+            "Scenic valley drive",
+            "Waterfalls photography"
+          ],
+          "insiderTip": "Grab a hot cup of cardamom tea at the Valara falls viewpoint shop.",
+          "image": "https://images.unsplash.com/photo-1517462964-21fdcec3f25b?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 02",
+          "title": "Munnar Valleys & Tea Museum Heritage",
+          "location": "Munnar",
+          "places": [
+            "Tea Museum",
+            "Eravikulam National Park",
+            "Mattupetty Lake"
+          ],
+          "offering": "Tour the heritage tea museum, stroll through scenic tea rows, and explore the wildlife park.",
+          "activities": [
+            "Tea museum tour",
+            "Tea garden walk",
+            "Eravikulam safari"
+          ],
+          "insiderTip": "The Tea Museum sells rare green tea varieties. Perfect for buying gifts.",
+          "image": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 03",
+          "title": "Alleppey Private Backwaters Houseboat Stay",
+          "location": "Munnar to Alleppey",
+          "places": [
+            "Vembanad Lake canals",
+            "Houseboat Deck"
+          ],
+          "offering": "Transfer to Alleppey. Board your wood-crafted private houseboat. Enjoy tropical backwater sailing with all meals prepared on-board.",
+          "activities": [
+            "Houseboat cruise",
+            "Sunset viewing on deck",
+            "Traditional dining"
+          ],
+          "insiderTip": "Sit on the open front deck during sunset; the reflections on the canal are gorgeous.",
+          "image": "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 04",
+          "title": "Checkout & Kochi Transfer Out",
+          "location": "Alleppey to Kochi",
+          "places": [
+            "Lulu Mall Kochi",
+            "Kochi Airport"
+          ],
+          "offering": "Enjoy morning houseboat cruising, check out, and transfer to Kochi airport with shopping stops.",
+          "activities": [
+            "Souvenir shopping",
+            "Airport departure drop-off"
+          ],
+          "insiderTip": "Buy banana chips fried in coconut oil at local shops on the way to the airport.",
+          "image": "https://images.unsplash.com/photo-1593693411515-c202e97424b6?auto=format&fit=crop&w=500&q=80"
+        }
+      ]
+    },
+    {
+      "id": "pkg-kerala-highlights",
+      "name": "Kerala Highlights",
+      "price": 29999,
+      "originalPrice": 39999,
+      "duration": "6 Days / 5 Nights",
+      "durationDays": 6,
+      "rating": 4.9,
+      "ratingCount": 186,
+      "hotelStars": "4★ Premium",
+      "hotelClass": "4",
+      "route": "Kochi → Munnar → Thekkady → Alleppey → Kochi",
+      "routeList": [
+        "Kochi",
+        "Munnar",
+        "Thekkady",
+        "Alleppey"
+      ],
+      "description": "Comprehensive 6-day highlight tour of Kerala's tea estates and backwater houseboats.",
+      "inclusions": [
+        "hotel",
+        "transfers",
+        "meals",
+        "sightseeing"
+      ],
+      "highlights": [
+        "Premium accommodations with breakfast included",
+        "Private AC SUV for transfers and tours",
+        "Guided spice plantation walk in Thekkady",
+        "Heritage tour of colonial Fort Kochi"
+      ],
+      "image": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=800&q=80",
+      "themes": [
+        "Romantic",
+        "Adventure",
+        "Heritage"
+      ],
+      "destination": "Kerala",
+      "detailsAvailable": true,
+      "link": "/travel/package/pkg-kerala-highlights",
+      "category": "Road Trip",
+      "difficulty": "Easy",
+      "groupType": "Private Tour",
+      "nextDeparture": "Aug, 2026",
+      "startPoint": "Kochi",
+      "images": [
+        "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1517462964-21fdcec3f25b?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1593693411515-c202e97424b6?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80"
+      ],
+      "exclusions": [
+        "Flights or train tickets to Kochi",
+        "Entry tickets, safari tickets, and boating tickets",
+        "Lunch meals and dinner meals at hotels",
+        "Tips for driver and hotel workers",
+        "Personal shopping and laundry"
+      ],
+      "packingList": [
+        "Lightweight cotton shirts & trousers",
+        "Sturdy sneakers or sandals",
+        "Sunglasses, sunscreen, & sun hat",
+        "Umbrella or light windproof jacket",
+        "Mosquito repellent cream"
+      ],
+      "faqs": [
+        {
+          "q": "What is included in the Kochi heritage tour?",
+          "a": "We cover the Chinese Fishing Nets, Santa Cruz Cathedral Basilica, St. Francis Church, Jewish Town, and the Dutch Palace."
+        }
+      ],
+      "reviews": [
+        {
+          "name": "Pradeep Shenoy",
+          "date": "May, 18th, 2026",
+          "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&h=100&q=80",
+          "comment": "“The absolute best tour in Kerala. 6 days gave us enough time to relax and explore Munnar and the houseboats. Strongly recommend.”",
+          "rating": 5
+        }
+      ],
+      "guide": {
+        "name": "Anand Nair",
+        "role": "Tropical Tour Director",
+        "image": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=120&h=120&fit=crop&q=60",
+        "rating": 4.8,
+        "trips": 186,
+        "bio": "Anand knows all the hidden viewpoints and tea-stalls in Munnar."
+      },
+      "departures": [
+        {
+          "value": "2026-08-08",
+          "label": "8 Aug, 2026",
+          "seats": "Private slots"
+        }
+      ],
+      "itinerary": [
+        {
+          "day": "Day 01",
+          "title": "Arrive in Kochi & Historic Fort Kochi Tour",
+          "location": "Kochi",
+          "places": [
+            "Fort Kochi",
+            "Dutch Palace",
+            "Jewish Synagogue"
+          ],
+          "offering": "Pick up from Kochi airport. Explore colonial Fort Kochi, check out the Dutch Palace, Jewish Synagogue, and view Chinese Fishing nets.",
+          "activities": [
+            "Kochi heritage tour",
+            "Monuments walking walk"
+          ],
+          "insiderTip": "Visit the small spice shops in Jewish town for high-quality spices.",
+          "image": "https://images.unsplash.com/photo-1593693411515-c202e97424b6?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 02",
+          "title": "Drive to Munnar & Tea Estate Check-in",
+          "location": "Kochi to Munnar",
+          "places": [
+            "Cheeyappara Falls",
+            "Munnar Tea Estates"
+          ],
+          "offering": "Drive up the winding Western Ghats through pine valleys. Check in to a premium tea estate resort.",
+          "activities": [
+            "Scenic hill driving",
+            "Resort welcome dinner"
+          ],
+          "insiderTip": "Munnar gets chilly at night. Bring a light pullover or shawl.",
+          "image": "https://images.unsplash.com/photo-1517462964-21fdcec3f25b?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 03",
+          "title": "Munnar Sightseeing & Kundala Lake Boating",
+          "location": "Munnar",
+          "places": [
+            "Eravikulam National Park",
+            "Kundala Lake",
+            "Echo Point"
+          ],
+          "offering": "Visit Eravikulam to spot the Nilgiri Tahr. Enjoy pedal-boating on Kundala Lake and hear your voice echo at Echo Point.",
+          "activities": [
+            "National Park safari",
+            "Kundala lake boating"
+          ],
+          "insiderTip": "Row-boating at Kundala Lake during the afternoon is highly romantic.",
+          "image": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 04",
+          "title": "Travel to Thekkady & Wildlife Boat Cruise",
+          "location": "Munnar to Thekkady",
+          "places": [
+            "Periyar Sanctuary",
+            "Cardamom Plantations"
+          ],
+          "offering": "Travel to Thekkady. Take a wildlife boat cruise on Periyar Lake and watch elephants bathing in the river.",
+          "activities": [
+            "Periyar boat cruise",
+            "Spice garden tour"
+          ],
+          "insiderTip": "Stand on the upper deck of the Periyar boat for the best views of wild birds.",
+          "image": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 05",
+          "title": "Alleppey Private Backwaters Houseboat",
+          "location": "Thekkady to Alleppey",
+          "places": [
+            "Alleppey canals",
+            "Vembanad Lake"
+          ],
+          "offering": "Board your private luxury houseboat and cruise the tranquil backwaters of Vembanad Lake. Traditional Kerala lunch and dinner served on deck.",
+          "activities": [
+            "Houseboat cruising",
+            "Coconut water sipping",
+            "Traditional dinner"
+          ],
+          "insiderTip": "The sunset over Vembanad Lake is truly spectacular. Keep your camera ready.",
+          "image": "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 06",
+          "title": "Disembark & Transfer to Kochi Airport",
+          "location": "Alleppey to Kochi",
+          "places": [
+            "Kochi Airport"
+          ],
+          "offering": "Checkout from houseboat after breakfast and transfer to Kochi airport for departure flight.",
+          "activities": [
+            "Airport transfer drop-off"
+          ],
+          "insiderTip": "Get some fresh jackfruit chips packed to eat on the flight.",
+          "image": "https://images.unsplash.com/photo-1593693411515-c202e97424b6?auto=format&fit=crop&w=500&q=80"
+        }
+      ]
+    },
+    {
+      "id": "pkg-kerala-vibe",
+      "name": "Kerala Vibe Special",
+      "price": 24999,
+      "originalPrice": 39999,
+      "duration": "5 Days / 4 Nights",
+      "durationDays": 5,
+      "rating": 4.8,
+      "ratingCount": 112,
+      "hotelStars": "3★ / 4★ Premium",
+      "hotelClass": "4",
+      "route": "Thiruvananthapuram → Kovalam → Varkala → Alleppey",
+      "routeList": [
+        "Thiruvananthapuram",
+        "Kovalam",
+        "Varkala",
+        "Alleppey"
+      ],
+      "description": "Soak in southern vibes starting from Kovalam and Varkala beaches to the backwaters of Alleppey.",
+      "inclusions": [
+        "hotel",
+        "transfers",
+        "meals"
+      ],
+      "highlights": [
+        "Beachfront resort stays in Kovalam & Varkala",
+        "Trivandrum heritage sightseeing tour",
+        "Alleppey backwaters day cruise with lunch"
+      ],
+      "image": "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=800&q=80",
+      "themes": [
+        "Romantic",
+        "Beach"
+      ],
+      "destination": "Kerala",
+      "detailsAvailable": true,
+      "link": "/travel/package/pkg-kerala-vibe",
+      "category": "Weekend",
+      "difficulty": "Easy",
+      "groupType": "Private Tour",
+      "nextDeparture": "Aug, 2026",
+      "startPoint": "Trivandrum",
+      "images": [
+        "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1517462964-21fdcec3f25b?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1593693411515-c202e97424b6?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=800&q=80"
+      ],
+      "exclusions": [
+        "Flights or train tickets to Trivandrum",
+        "Activity charges (scuba, surfing, temple entry)",
+        "Lunch and dinner meals at hotels",
+        "Tips for driver and local helpers",
+        "Personal items and drinks"
+      ],
+      "packingList": [
+        "Comfortable beachwear and cotton shirts",
+        "Sandals or flip-flops",
+        "Sun hat and UV sunglasses",
+        "Sunscreen cream & mosquito spray"
+      ],
+      "faqs": [
+        {
+          "q": "Is temple entry included in Trivandrum?",
+          "a": "We cover the vehicle transfers. Entry dress codes must be followed (sari/dhoti) for Sree Padmanabhaswamy Temple."
+        }
+      ],
+      "reviews": [
+        {
+          "name": "Ramesh Krishnan",
+          "date": "July, 01st, 2026",
+          "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&h=100&q=80",
+          "comment": "“Amazing beaches! Varkala cliff resort views were beautiful and the Alleppey day cruise was peaceful. Great private sedan transfers.”",
+          "rating": 4.8
+        }
+      ],
+      "guide": {
+        "name": "Anand Nair",
+        "role": "Tropical Tour Director",
+        "image": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=120&h=120&fit=crop&q=60",
+        "rating": 4.8,
+        "trips": 186,
+        "bio": "Anand is a seasoned Kerala travel coordinator."
+      },
+      "departures": [
+        {
+          "value": "2026-08-18",
+          "label": "18 Aug, 2026",
+          "seats": "Private slots"
+        }
+      ],
+      "itinerary": [
+        {
+          "day": "Day 01",
+          "title": "Trivandrum Arrival & Kovalam Beach Resort",
+          "location": "Trivandrum to Kovalam",
+          "places": [
+            "Trivandrum Airport",
+            "Kovalam Beach Resort"
+          ],
+          "offering": "Pick up from Trivandrum. Drive to Kovalam and check in to your premium beachfront resort. Spend the evening walking on the sandy beach.",
+          "activities": [
+            "Beach resort check-in",
+            "Lighthouse beach walk"
+          ],
+          "insiderTip": "Walk to the red-and-white lighthouse at Kovalam beach for a stunning sunset view.",
+          "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 02",
+          "title": "Trivandrum Heritage Tour & Padmanabhaswamy Temple",
+          "location": "Kovalam",
+          "places": [
+            "Sree Padmanabhaswamy Temple",
+            "Napier Museum"
+          ],
+          "offering": "Take a heritage tour of Trivandrum, visiting the famous Padmanabhaswamy Temple and Napier Museum.",
+          "activities": [
+            "Temple architectural walk",
+            "Museum tour"
+          ],
+          "insiderTip": "Traditional attire (dhoti for men, sari/salwar for women) is mandatory inside the Padmanabhaswamy temple.",
+          "image": "https://images.unsplash.com/photo-1593693411515-c202e97424b6?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 03",
+          "title": "Drive to Varkala & Cliff Sunset Walks",
+          "location": "Kovalam to Varkala",
+          "places": [
+            "Varkala Cliff",
+            "Papanasam Beach"
+          ],
+          "offering": "Drive to Varkala. Check in to a resort on the edge of Varkala Cliff. Walk along the cliff overlooking the Arabian Sea and dine at local cafes.",
+          "activities": [
+            "Cliff walking",
+            "Cafe dining"
+          ],
+          "insiderTip": "Dine at the Clafouti cafe on Varkala cliff for amazing wood-fired pizzas.",
+          "image": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 04",
+          "title": "Alleppey Backwaters Day Cruise & Canal Sailing",
+          "location": "Varkala to Alleppey",
+          "places": [
+            "Alleppey canals",
+            "Day Houseboat"
+          ],
+          "offering": "Drive to Alleppey. Board a houseboat for a private 5-hour day cruise with on-board lunch, sailing through palm-lined backwaters.",
+          "activities": [
+            "5-hour private backwater cruise",
+            "Kerala lunch on deck"
+          ],
+          "insiderTip": "Grab a fresh coconut directly from a lakeside stall while sailing.",
+          "image": "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 05",
+          "title": "Departure drop at Trivandrum Airport",
+          "location": "Alleppey to Trivandrum",
+          "places": [
+            "Trivandrum Airport"
+          ],
+          "offering": "Checkout and drive back to Trivandrum airport/station for departure.",
+          "activities": [
+            "Airport departure drop-off"
+          ],
+          "insiderTip": "Leave Alleppey early to avoid highway traffic near Kollam.",
+          "image": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=500&q=80"
+        }
+      ]
+    },
+    {
+      "id": "pkg-goa-beach",
+      "name": "Goa Beach Escape",
+      "price": 12500,
+      "originalPrice": 17500,
+      "duration": "5 Days / 4 Nights",
+      "durationDays": 5,
+      "rating": 4.7,
+      "ratingCount": 220,
+      "hotelStars": "3★ Beachside Resort",
+      "hotelClass": "3",
+      "route": "Panaji → Candolim Beach (2N) → Palolem Beach (2N)",
+      "routeList": [
+        "Panaji Heritage Walk",
+        "Candolim Beach (2N)",
+        "Palolem Beach (2N)"
+      ],
+      "description": "A curated getaway exploring heritage churches and the beautiful beaches of Goa.",
+      "inclusions": [
+        "hotel",
+        "transfers",
+        "meals"
+      ],
+      "highlights": [
+        "Historical Latin Quarter (Fontainhas) guided walking tour",
+        "Scuba diving & snorkeling lesson at Grand Island",
+        "Lakeside sunset drinks & traditional Goan fish curry cooking class"
+      ],
+      "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80",
+      "themes": [
+        "Beach",
+        "Adventure"
+      ],
+      "destination": "Goa",
+      "detailsAvailable": true,
+      "link": "/travel/package/pkg-goa-beach",
+      "category": "Weekend",
+      "difficulty": "Easy",
+      "groupType": "Curated group Trip",
+      "nextDeparture": "Sep, 2026",
+      "startPoint": "Panaji",
+      "images": [
+        "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1614082242765-7c99bc0f3df8?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=800&q=80"
+      ],
+      "exclusions": [
+        "Flights or train tickets to Goa",
+        "Extra water sports charges not specified",
+        "Personal beverages and dinners",
+        "Tips for guides and boat operators",
+        "Laundry and camera entry fees"
+      ],
+      "packingList": [
+        "Light beachwear, shorts & swimwear",
+        "Sandals, flip-flops, & light sneakers",
+        "Sunglasses and high-factor sunscreen",
+        "Waterproof phone case",
+        "Mosquito repellent"
+      ],
+      "faqs": [
+        {
+          "q": "Is scuba diving safe for non-swimmers?",
+          "a": "Yes, our certified PADI divers guide you individually in shallow waters with life jackets, making it completely safe for non-swimmers."
+        }
+      ],
+      "reviews": [
+        {
+          "name": "Karan Sharma",
+          "date": "July, 08th, 2026",
+          "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&h=100&q=80",
+          "comment": "“Goa was beautiful! The Fontainhas walking tour felt like being in Portugal. Loved Grand Island scuba diving.”",
+          "rating": 4.7
+        }
+      ],
+      "guide": {
+        "name": "Anand Nair",
+        "role": "Tropical Tour Director",
+        "image": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=120&h=120&fit=crop&q=60",
+        "rating": 4.8,
+        "trips": 186,
+        "bio": "Anand knows all the beach side shacks and heritage spots across Goa."
+      },
+      "departures": [
+        {
+          "value": "2026-09-05",
+          "label": "5 Sep, 2026",
+          "seats": "10 Seats"
+        }
+      ],
+      "itinerary": [
+        {
+          "day": "Day 01",
+          "title": "Arrival in Panaji & Fontainhas Heritage Walk",
+          "location": "Panaji",
+          "places": [
+            "Mopa Airport",
+            "Fontainhas Latin Quarter"
+          ],
+          "offering": "Pick up from Goa Airport. Check in to your heritage stay in Panaji. Join our evening guided walk through the colorful Portuguese houses of Fontainhas.",
+          "activities": [
+            "Airport pickup",
+            "Guided heritage walk",
+            "Welcome Goan dinner"
+          ],
+          "insiderTip": "Dine at Viva Panjim in Fontainhas for the most authentic pork vindaloo or fish recheado.",
+          "image": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 02",
+          "title": "Grand Island Scuba & Snorkeling Excursion",
+          "location": "Grand Island",
+          "places": [
+            "Grand Island Reefs",
+            "Coco Beach boat base"
+          ],
+          "offering": "Early morning boat cruise to Grand Island. Enjoy underwater snorkeling, spotting dolphins, and a beginner-friendly guided scuba dive with certified coaches.",
+          "activities": [
+            "Grand Island boat cruise",
+            "Dolphin spotting",
+            "Scuba diving & beach BBQ"
+          ],
+          "insiderTip": "Eat a very light breakfast before the boat ride as seas can get slightly choppy.",
+          "image": "https://images.unsplash.com/photo-1614082242765-7c99bc0f3df8?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 03",
+          "title": "North Goa Beaches & Fort Aguada",
+          "location": "Panaji to Candolim",
+          "places": [
+            "Fort Aguada",
+            "Candolim Beach",
+            "Baga Beach"
+          ],
+          "offering": "Check out and drive to Candolim. Visit the 17th-century Portuguese Fort Aguada lighthouse, and relax on the sands of Candolim beach.",
+          "activities": [
+            "Fort Aguada entry",
+            "Beach lounging",
+            "Shack dinner"
+          ],
+          "insiderTip": "Walk to the lower fort walls of Aguada for direct, unobstructed views of the Arabian Sea.",
+          "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 04",
+          "title": "South Goa Escape & Palolem Beach Sunset",
+          "location": "Candolim to Palolem",
+          "places": [
+            "Palolem Beach crescent",
+            "Margao Town"
+          ],
+          "offering": "Drive down to South Goa's peaceful Palolem Beach. Stay in cozy beachfront wood cottages. Enjoy kayaking at sunset and a quiet beachside dinner.",
+          "activities": [
+            "Beach cottage check-in",
+            "Sunset kayaking",
+            "Quiet beachfront dining"
+          ],
+          "insiderTip": "Rent a kayak and paddle out to the small Monkey Island just off the Palolem shore.",
+          "image": "https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 05",
+          "title": "Dudhsagar Waterfall Hike & Departure",
+          "location": "Palolem to Airport",
+          "places": [
+            "Dudhsagar Waterfalls",
+            "Goa Airport"
+          ],
+          "offering": "Take a morning jungle jeep safari to the mighty Dudhsagar Waterfalls. Transfer to Goa Airport for your return flight.",
+          "activities": [
+            "Jungle jeep safari",
+            "Dudhsagar falls hike",
+            "Airport drop-off"
+          ],
+          "insiderTip": "Dudhsagar pools are filled with fish; carry some biscuits to feed them.",
+          "image": "https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=500&q=80"
+        }
+      ]
+    },
+    {
+      "id": "pkg-rajasthan-royal",
+      "name": "Rajasthan Royal Tour",
+      "price": 21500,
+      "originalPrice": 28000,
+      "duration": "8 Days / 7 Nights",
+      "durationDays": 8,
+      "rating": 4.9,
+      "ratingCount": 198,
+      "hotelStars": "5★ Royal Heritage Palace",
+      "hotelClass": "5",
+      "route": "Jaipur (2N) → Jodhpur (2N) → Jaisalmer Camp (3N)",
+      "routeList": [
+        "Jaipur Palace (2N)",
+        "Jodhpur Blue City (2N)",
+        "Jaisalmer Camp (3N)"
+      ],
+      "description": "Experience majestic forts in Jaipur and Udaipur, and enjoy sunset desert camel safaris.",
+      "inclusions": [
+        "hotel",
+        "transfers",
+        "meals",
+        "sightseeing"
+      ],
+      "highlights": [
+        "Private heritage palace stays & luxury desert glamping",
+        "Guided Amber Fort tour & camel sunset desert safari",
+        "Stargazing dinner over the Thar desert dunes with Rajasthani folk music"
+      ],
+      "image": "https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=800&q=80",
+      "themes": [
+        "Heritage",
+        "Romantic"
+      ],
+      "destination": "Rajasthan",
+      "detailsAvailable": true,
+      "link": "/travel/package/pkg-rajasthan-royal",
+      "category": "Road Trip",
+      "difficulty": "Easy",
+      "groupType": "Curated group Trip",
+      "nextDeparture": "Oct, 2026",
+      "startPoint": "Jaipur",
+      "showOnHome": false,
+      "images": [
+        "https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1603258843180-2a818318b76c?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1504609773096-104ff2c73ba4?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1590050752117-238cb0612b1b?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1566837945700-30057527ade0?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=800&q=80"
+      ],
+      "exclusions": [
+        "Flights or train tickets to Jaipur",
+        "Monument entry tickets and guide fees",
+        "Lunch meals and personal drinks",
+        "Tips for drivers, safari staff, and camel handlers",
+        "Shopping or laundry expenses"
+      ],
+      "packingList": [
+        "Light colored cotton outfits",
+        "Flat walking shoes for fort exploring",
+        "Sunglasses, sunscreen, & sun hat",
+        "Light jacket (desert nights get chilly)",
+        "Hydration bottle"
+      ],
+      "faqs": [
+        {
+          "q": "Are the desert tents air-conditioned?",
+          "a": "Yes, our luxury Jaisalmer glamping tents are equipped with modern air conditioning and attached concrete bathrooms."
+        }
+      ],
+      "reviews": [
+        {
+          "name": "Megha Singhal",
+          "date": "June, 12th, 2026",
+          "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&h=100&q=80",
+          "comment": "“Staying in real heritage palaces was amazing! The desert camp in Jaisalmer was the highlight—the stargazing dinner was magical.”",
+          "rating": 4.9
+        }
+      ],
+      "guide": {
+        "name": "Anand Nair",
+        "role": "Heritage Tour Director",
+        "image": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=120&h=120&fit=crop&q=60",
+        "rating": 4.8,
+        "trips": 186,
+        "bio": "Anand leads historical and royal heritage tours across Rajasthan."
+      },
+      "departures": [
+        {
+          "value": "2026-10-10",
+          "label": "10 Oct, 2026",
+          "seats": "6 Seats"
+        }
+      ],
+      "itinerary": [
+        {
+          "day": "Day 01",
+          "title": "Arrival in Jaipur & Chokhi Dhani Cultural Feast",
+          "location": "Jaipur",
+          "places": [
+            "Jaipur Airport",
+            "Heritage Hotel",
+            "Chokhi Dhani"
+          ],
+          "offering": "Pick up and check in to your royal heritage hotel. Join our evening excursion to Chokhi Dhani for traditional folk dance and an authentic Rajasthani thali feast.",
+          "activities": [
+            "Jaipur pickup",
+            "Chokhi Dhani heritage resort dinner"
+          ],
+          "insiderTip": "Sit cross-legged for the traditional dining experience; the hosts will lovingly serve you multiple helpings of Dal Baati Churma.",
+          "image": "https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 02",
+          "title": "Amer Fort & Hawa Mahal Sightseeing",
+          "location": "Jaipur",
+          "places": [
+            "Amer Fort",
+            "Hawa Mahal",
+            "City Palace"
+          ],
+          "offering": "Guided exploration of Amer Fort, exploring the beautiful Sheesh Mahal (mirror hall). Stroll past Hawa Mahal and tour the City Palace museum.",
+          "activities": [
+            "Amer Fort guided walk",
+            "City Palace tour",
+            "Hawa Mahal photography"
+          ],
+          "insiderTip": "Visit Amer Fort early in the morning to beat the midday sun and enjoy clean photography lighting.",
+          "image": "https://images.unsplash.com/photo-1590050752117-238cb0612b1b?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 03",
+          "title": "Drive to Jodhpur & Mehrangarh Fort Walk",
+          "location": "Jaipur to Jodhpur",
+          "places": [
+            "Mehrangarh Fort",
+            "Jaswant Thada"
+          ],
+          "offering": "Drive to the blue city of Jodhpur. Tour the massive Mehrangarh Fort, which sits on a cliff overlooking the blue painted houses below.",
+          "activities": [
+            "Mehrangarh Fort entry",
+            "Jaswant Thada cenotaph visit"
+          ],
+          "insiderTip": "Visit Mehrangarh Fort’s museum; it has an incredible collection of royal palanquins and armory.",
+          "image": "https://images.unsplash.com/photo-1603258843180-2a818318b76c?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 04",
+          "title": "Jodhpur Blue Streets & Bishnoi Village Safari",
+          "location": "Jodhpur",
+          "places": [
+            "Blue Streets of old Jodhpur",
+            "Bishnoi Village"
+          ],
+          "offering": "Walk through the blue alleys of old Jodhpur. Take a jeep safari to the Bishnoi villages to witness local wildlife and traditional clay pottery crafts.",
+          "activities": [
+            "Jeep safari",
+            "Clay pottery workshop",
+            "Blue street walk"
+          ],
+          "insiderTip": "Dine at a rooftop restaurant near the Clock Tower for a stunning view of Mehrangarh lit up at night.",
+          "image": "https://images.unsplash.com/photo-1566837945700-30057527ade0?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 05",
+          "title": "Drive to Jaisalmer & Thar Desert Camp Check-in",
+          "location": "Jodhpur to Jaisalmer",
+          "places": [
+            "Thar Desert dunes",
+            "Luxury Glamping Camp"
+          ],
+          "offering": "Drive across the desert to Jaisalmer. Check in to your luxury air-conditioned desert camp. Enjoy sunset camel rides on the sand dunes.",
+          "activities": [
+            "Desert camp check-in",
+            "Sunset camel safari"
+          ],
+          "insiderTip": "Hold on tight to the saddle when the camel rises; they stand up back-legs first.",
+          "image": "https://images.unsplash.com/photo-1504609773096-104ff2c73ba4?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 06",
+          "title": "Golden Fort & Havelis of Jaisalmer",
+          "location": "Jaisalmer",
+          "places": [
+            "Jaisalmer Golden Fort",
+            "Patwon ki Haveli"
+          ],
+          "offering": "Tour the living Jaisalmer Fort where local families still reside. Explore the intricate yellow-stone carvings at Patwon ki Haveli.",
+          "activities": [
+            "Living Golden Fort walk",
+            "Haveli guided tour"
+          ],
+          "insiderTip": "Buy authentic desert handloom blankets made from local camel wool inside the fort shops.",
+          "image": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 07",
+          "title": "Desert Dune Bashing & Stargazing Dinner",
+          "location": "Jaisalmer",
+          "places": [
+            "Sam Sand Dunes",
+            "Stargazing Camp"
+          ],
+          "offering": "Thrill yourself with 4x4 dune bashing over the sand dunes. Relish a traditional stargazing campfire dinner with live folk musicians.",
+          "activities": [
+            "4x4 Dune bashing",
+            "Live Rajasthani folk music",
+            "Stargazing campfire dinner"
+          ],
+          "insiderTip": "Desert skies are extremely clear; bring a tripod to capture long-exposure photos of the Milky Way.",
+          "image": "https://images.unsplash.com/photo-1504609773096-104ff2c73ba4?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 08",
+          "title": "Departure Drop at Jodhpur Airport",
+          "location": "Jaisalmer to Jodhpur Out",
+          "places": [
+            "Jodhpur Airport"
+          ],
+          "offering": "Drive back to Jodhpur airport/station for departure, loaded with golden memories of Rajasthan.",
+          "activities": [
+            "Airport departure drop-off"
+          ],
+          "insiderTip": "Stop at Pokhran on the highway for a quick tea and local clay craft display.",
+          "image": "https://images.unsplash.com/photo-1603258843180-2a818318b76c?auto=format&fit=crop&w=500&q=80"
+        }
+      ]
+    },
+    {
+      "id": "pkg-himachal-trek",
+      "name": "Manali Valley Trek",
+      "price": 15900,
+      "originalPrice": 21000,
+      "duration": "6 Days / 5 Nights",
+      "durationDays": 6,
+      "rating": 4.8,
+      "ratingCount": 184,
+      "hotelStars": "4★ Riverview Resort",
+      "hotelClass": "4",
+      "route": "Delhi → Shimla (2N) → Manali (3N) → Delhi",
+      "routeList": [
+        "Shimla Heritage (2N)",
+        "Manali River View (3N)"
+      ],
+      "description": "Escape to snowy peaks. Hike scenic mountain trails and enjoy paragliding in Solang Valley.",
+      "inclusions": [
+        "hotel",
+        "transfers",
+        "meals"
+      ],
+      "highlights": [
+        "Riverside cottage stays with snowy balcony views",
+        "Paragliding at Solang Valley & Rohtang Pass excursion",
+        "Guided cedar forest trek and hot sulfur spring bath in Vashisht"
+      ],
+      "image": "https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=800&q=80",
+      "themes": [
+        "Mountain",
+        "Adventure"
+      ],
+      "destination": "Himachal",
+      "detailsAvailable": true,
+      "link": "/travel/package/pkg-himachal-trek",
+      "category": "Trek",
+      "difficulty": "Moderate",
+      "groupType": "Curated group Trip",
+      "nextDeparture": "Aug, 2026",
+      "startPoint": "Manali",
+      "images": [
+        "https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1517462964-21fdcec3f25b?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1596176530529-78163a4f7af2?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=800&q=80"
+      ],
+      "exclusions": [
+        "Flights or train to Delhi/Chandigarh",
+        "Adventure sport gear hire or licenses",
+        "Dinner and lunch meals",
+        "Tips for mountain guides and drivers",
+        "Optional Rohtang Pass vehicle upgrades"
+      ],
+      "packingList": [
+        "Fleece jacket and warm windproof layer",
+        "Hiking shoes with thick rubber sole",
+        "Sunscreen & lip balm",
+        "Thermos flask",
+        "First-aid supplies"
+      ],
+      "faqs": [
+        {
+          "q": "Is Solang Valley paragliding included?",
+          "a": "We provide transport and safety coordinator. Paragliding flight cost is paid directly to certified local pilots."
+        }
+      ],
+      "reviews": [
+        {
+          "name": "Varun Joshi",
+          "date": "June, 26th, 2026",
+          "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&h=100&q=80",
+          "comment": "“Loved the Solang trek! Balcony view from our Manali resort was lovely. Perfect group trip layout.”",
+          "rating": 4.8
+        }
+      ],
+      "guide": {
+        "name": "Vikram Aditya",
+        "role": "Lead Expedition Coordinator",
+        "image": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=120&h=120&fit=crop&q=60",
+        "rating": 5,
+        "trips": 143,
+        "bio": "Vikram guides high-altitude Himalayan treks across Himachal and Kashmir."
+      },
+      "departures": [
+        {
+          "value": "2026-08-16",
+          "label": "16 Aug, 2026",
+          "seats": "6 Seats"
+        }
+      ],
+      "itinerary": [
+        {
+          "day": "Day 01",
+          "title": "Delhi to Shimla Volvo Drive",
+          "location": "Delhi to Shimla",
+          "places": [
+            "Delhi Volvo Stand",
+            "Shimla Mall Road"
+          ],
+          "offering": "Board your premium overnight Volvo bus from Delhi. Climb through beautiful pine forests and check in to your heritage hotel in Shimla.",
+          "activities": [
+            "Overnight AC Volvo ride",
+            "Hotel check-in"
+          ],
+          "insiderTip": "Pick a window seat on the left side of the Volvo for the best sunrise views as the bus enters the hills.",
+          "image": "https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 02",
+          "title": "Shimla Ridge & Kufri Snow View",
+          "location": "Shimla",
+          "places": [
+            "Kufri Adventure Park",
+            "Shimla Ridge",
+            "Jakhoo Temple"
+          ],
+          "offering": "Drive to Kufri for breathtaking snowy mountain views. Hike up to the historic Jakhoo temple and walk along Shimla Ridge mall road.",
+          "activities": [
+            "Kufri mountain walk",
+            "Jakhoo temple monkey forest walk",
+            "Mall road heritage walk"
+          ],
+          "insiderTip": "Keep all snacks and items zipped inside your bag; the monkeys at Jakhoo temple are very clever at grabbing things.",
+          "image": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 03",
+          "title": "Scenic Drive to Manali & River Valley Stay",
+          "location": "Shimla to Manali",
+          "places": [
+            "Kullu Valley",
+            "Beas River",
+            "Manali Resort"
+          ],
+          "offering": "Drive from Shimla to Manali, passing through Kullu valley alongside the Beas River. Check in to your riverview resort.",
+          "activities": [
+            "Scenic Beas river drive",
+            "Riverview check-in"
+          ],
+          "insiderTip": "Stop at the Kullu handloom cooperative to buy authentic wool shawls and caps.",
+          "image": "https://images.unsplash.com/photo-1517462964-21fdcec3f25b?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 04",
+          "title": "Solang Valley Paragliding & Adventure",
+          "location": "Manali",
+          "places": [
+            "Solang Valley slopes",
+            "Anjani Mahadev Temple"
+          ],
+          "offering": "Spend the day at Solang Valley. Enjoy thrilling adventure activities like paragliding, zorbing, and hike to the hidden Anjani Mahadev waterfall.",
+          "activities": [
+            "Paragliding and adventure sports",
+            "Waterfall hike"
+          ],
+          "insiderTip": "Opt for the long paragliding flight from the top cable car station for the ultimate thrill.",
+          "image": "https://images.unsplash.com/photo-1596176530529-78163a4f7af2?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 05",
+          "title": "Jogini Waterfall Trek & Vashisht Hot Springs",
+          "location": "Manali",
+          "places": [
+            "Jogini Waterfalls",
+            "Vashisht Temple Springs",
+            "Old Manali cafes"
+          ],
+          "offering": "Take a guided nature trek through cedar woods to the scenic Jogini Waterfalls. Soak in the therapeutic hot sulfur baths at Vashisht Temple.",
+          "activities": [
+            "Cedar forest trek",
+            "Hot sulfur bath",
+            "Old Manali cafe exploration"
+          ],
+          "insiderTip": "Dine at the Lazy Dog cafe in Old Manali; they have great live music and food.",
+          "image": "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 06",
+          "title": "Manali Mall Road & Volvo Return to Delhi",
+          "location": "Manali to Delhi Out",
+          "places": [
+            "Hadimba Temple",
+            "Delhi Airport"
+          ],
+          "offering": "Visit the historic Hadimba Temple. Do souvenir shopping at Mall Road, before boarding the overnight Volvo bus back to Delhi.",
+          "activities": [
+            "Hadimba temple walk",
+            "Souvenir shopping",
+            "Overnight Volvo ride"
+          ],
+          "insiderTip": "Arrive at the Volvo stand early; evening departures are busy.",
+          "image": "https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=500&q=80"
+        }
+      ]
+    },
+    {
+      "id": "pkg-andaman-island",
+      "name": "Andaman Island Getaway",
+      "price": 28900,
+      "originalPrice": 36500,
+      "duration": "6 Days / 5 Nights",
+      "durationDays": 6,
+      "rating": 4.9,
+      "ratingCount": 156,
+      "hotelStars": "5★ Beach Resort",
+      "hotelClass": "5",
+      "route": "Port Blair (1N) → Havelock Island (3N) → Neil Island (1N)",
+      "routeList": [
+        "Port Blair (1N)",
+        "Havelock Island (3N)",
+        "Neil Island (1N)"
+      ],
+      "description": "Swim in turquoise waters of Radhanagar Beach and snorkel at Elephant Beach.",
+      "inclusions": [
+        "hotel",
+        "transfers",
+        "meals",
+        "sightseeing"
+      ],
+      "highlights": [
+        "Premium beachfront villa stay with private deck access",
+        "Snorkeling at Elephant Beach & scuba dive lesson in Havelock",
+        "Private cruise ferry transfers between islands"
+      ],
+      "image": "https://images.unsplash.com/photo-1589308078059-be1415eab4c3?auto=format&fit=crop&w=800&q=80",
+      "themes": [
+        "Beach",
+        "Adventure",
+        "Romantic"
+      ],
+      "destination": "Andaman",
+      "detailsAvailable": true,
+      "link": "/travel/package/pkg-andaman-island",
+      "category": "Weekend",
+      "difficulty": "Easy",
+      "groupType": "Private Tour",
+      "nextDeparture": "Nov, 2026",
+      "startPoint": "Port Blair",
+      "images": [
+        "https://images.unsplash.com/photo-1589308078059-be1415eab4c3?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1614082242765-7c99bc0f3df8?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?auto=format&fit=crop&w=800&q=80"
+      ],
+      "exclusions": [
+        "Flights to and from Port Blair",
+        "Extra water sports and boat rentals",
+        "Lunch meals and personal drinks",
+        "Tips for boat crew and resort staff",
+        "Camera entry tickets at Cellular Jail"
+      ],
+      "packingList": [
+        "Light summer garments and swimwear",
+        "Water shoes/sandals",
+        "Sunglasses and waterproof sunscreen",
+        "Waterproof dry-bag",
+        "Mosquito repellent"
+      ],
+      "faqs": [
+        {
+          "q": "Are cruise transfers confirmed in advance?",
+          "a": "Yes, all inter-island transfers (Port Blair to Havelock and Neil) are pre-booked in luxury AC cruises like Makruzz or Nautika."
+        }
+      ],
+      "reviews": [
+        {
+          "name": "Sneha Reddy",
+          "date": "July, 03rd, 2026",
+          "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&h=100&q=80",
+          "comment": "“Incredible experience! The Radhanagar beach was so clean and the snorkeling was unforgettable. Cruise transfers were smooth.”",
+          "rating": 5
+        }
+      ],
+      "guide": {
+        "name": "Anand Nair",
+        "role": "Tropical Tour Director",
+        "image": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=120&h=120&fit=crop&q=60",
+        "rating": 4.8,
+        "trips": 186,
+        "bio": "Anand guides tropical and beach side getaways across Kerala and Andaman."
+      },
+      "departures": [
+        {
+          "value": "2026-11-10",
+          "label": "10 Nov, 2026",
+          "seats": "Private slots"
+        }
+      ],
+      "itinerary": [
+        {
+          "day": "Day 01",
+          "title": "Arrival in Port Blair & Cellular Jail Light Show",
+          "location": "Port Blair",
+          "places": [
+            "Port Blair Airport",
+            "Cellular Jail Museum"
+          ],
+          "offering": "Pick up from Port Blair airport. Check in to your premium hotel. Visit the historic Cellular Jail museum and watch the evening light and sound show.",
+          "activities": [
+            "Airport pickup",
+            "Cellular Jail entry tickets & light show"
+          ],
+          "insiderTip": "Sit in the center seats of the gallery for the best sound dispersion during the light show.",
+          "image": "https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 02",
+          "title": "Private Cruise to Havelock Island & Radhanagar Beach",
+          "location": "Port Blair to Havelock",
+          "places": [
+            "Luxury Cruise Ferry",
+            "Radhanagar Beach Beachfront Resort"
+          ],
+          "offering": "Board your private luxury AC cruise ferry to Havelock Island. Check in to your beachfront resort. Spend the afternoon lounging on the famous white sands of Radhanagar Beach.",
+          "activities": [
+            "Luxury cruise transfer",
+            "Radhanagar beach walk"
+          ],
+          "insiderTip": "Radhanagar beach is rated one of the cleanest in Asia. Keep food items sealed in bags; crabs are active.",
+          "image": "https://images.unsplash.com/photo-1589308078059-be1415eab4c3?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 03",
+          "title": "Elephant Beach Snorkeling & Water Sports",
+          "location": "Havelock Island",
+          "places": [
+            "Elephant Beach reef",
+            "Speedboat base"
+          ],
+          "offering": "Take a speedboat to Elephant Beach. Enjoy a complimentary snorkeling session, exploring vibrant shallow coral reefs and marine life with certified guides.",
+          "activities": [
+            "Speedboat ride",
+            "Complimentary snorkeling session",
+            "Jet-ski/Boating options"
+          ],
+          "insiderTip": "Wear water shoes or sandals; the entry reef can have sharp shells.",
+          "image": "https://images.unsplash.com/photo-1614082242765-7c99bc0f3df8?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 04",
+          "title": "Cruise to Neil Island & Natural Bridge sunset",
+          "location": "Havelock to Neil Island",
+          "places": [
+            "Neil Island Beach Resort",
+            "Howrah Natural Bridge"
+          ],
+          "offering": "Cruise to Neil Island, the quiet eco-haven. Check in to your beach resort. Tour the unique Natural Coral Bridge formations during low tide.",
+          "activities": [
+            "Neil Island cruise ferry",
+            "Natural bridge walk",
+            "Sunset stroll at Laxmanpur Beach"
+          ],
+          "insiderTip": "The bridge path is rocky; watch your footing and wear good grip shoes.",
+          "image": "https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 05",
+          "title": "Return Cruise to Port Blair",
+          "location": "Neil to Port Blair",
+          "places": [
+            "Port Blair Boutique Hotel",
+            "Samudrika Museum"
+          ],
+          "offering": "Cruise back to Port Blair. Enjoy local shopping at Sagarika emporium and visit the Samudrika Marine Museum.",
+          "activities": [
+            "Return cruise ferry",
+            "Museum visit",
+            "Souvenir shopping"
+          ],
+          "insiderTip": "Buy authentic coconut-shell items and pearl jewelry at Sagarika govt emporium.",
+          "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=500&q=80"
+        },
+        {
+          "day": "Day 06",
+          "title": "Airport Drop & Departure",
+          "location": "Port Blair Out",
+          "places": [
+            "Port Blair Airport"
+          ],
+          "offering": "Checkout and transfer to Port Blair airport for your flight back home, carrying tropical island vibes in your soul.",
+          "activities": [
+            "Airport departure drop-off"
+          ],
+          "insiderTip": "Pack shells in check-in bags; airport security confiscates shells found in cabin bags.",
+          "image": "https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?auto=format&fit=crop&w=500&q=80"
+        }
+      ]
+    }
+  ],
+  "products": [
+    {
+      "id": "naturally-nomad-badge-1",
+      "name": "Naturally Nomad",
+      "price": 139,
+      "originalPrice": 199,
+      "description": "Round pin badge with colorful concentric circles and mascot.",
+      "image": "/naturally_nomad_badge.png",
+      "category": "Badges",
+      "subcategory": "accessories",
+      "itemType": "Badge",
+      "gender": "unisex",
+      "rating": 5,
+      "reviewsCount": 120,
+      "boughtCount": "200+ bought in past month",
+      "inStock": true,
+      "sizes": [
+        "One Size"
+      ],
+      "brand": "Banjāra Originals",
+      "color": "Multicolor"
+    },
+    {
+      "id": "explore-more-keychain-1",
+      "name": "Explore more",
+      "price": 149,
+      "originalPrice": 193,
+      "description": "Durable key chain featuring local nomad prints.",
+      "image": "/explore_more_keychain.png",
+      "category": "Key Chains",
+      "subcategory": "accessories",
+      "itemType": "Keychain",
+      "gender": "unisex",
+      "rating": 5,
+      "reviewsCount": 200,
+      "boughtCount": "100+ bought in past month",
+      "inStock": true,
+      "sizes": [
+        "One Size"
+      ],
+      "brand": "Banjāra Originals",
+      "color": "Teal"
+    },
+    {
+      "id": "go-banjara-tshirt-1",
+      "name": "Go Banjara",
+      "price": 399,
+      "originalPrice": 599,
+      "description": "Cotton T-shirt featuring high-quality sunset and travel print.",
+      "image": "/go_banjara_tshirt.jpg",
+      "category": "T-Shirts",
+      "subcategory": "topwear",
+      "itemType": "T-Shirt",
+      "gender": "unisex",
+      "rating": 5,
+      "reviewsCount": 1000,
+      "boughtCount": "500+ bought in past month",
+      "inStock": true,
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "brand": "Banjāra Originals",
+      "color": "Grey"
+    },
+    {
+      "id": "go-banjara-tshirt-2",
+      "name": "Go Banjara",
+      "price": 399,
+      "originalPrice": 599,
+      "description": "Cotton T-shirt featuring high-quality sunset and travel print.",
+      "image": "/go_banjara_tshirt.jpg",
+      "category": "T-Shirts",
+      "subcategory": "topwear",
+      "itemType": "T-Shirt",
+      "gender": "unisex",
+      "rating": 5,
+      "reviewsCount": 1000,
+      "boughtCount": "500+ bought in past month",
+      "inStock": true,
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "brand": "Banjāra Originals",
+      "color": "Grey"
+    },
+    {
+      "id": "naturally-nomad-badge-2",
+      "name": "Naturally Nomad",
+      "price": 139,
+      "originalPrice": 199,
+      "description": "Round pin badge with colorful concentric circles and mascot.",
+      "image": "/naturally_nomad_badge.png",
+      "category": "Badges",
+      "subcategory": "accessories",
+      "itemType": "Badge",
+      "gender": "unisex",
+      "rating": 5,
+      "reviewsCount": 120,
+      "boughtCount": "200+ bought in past month",
+      "inStock": true,
+      "sizes": [
+        "One Size"
+      ],
+      "brand": "Banjāra Originals",
+      "color": "Multicolor"
+    },
+    {
+      "id": "explore-more-keychain-2",
+      "name": "Explore more",
+      "price": 149,
+      "originalPrice": 193,
+      "description": "Durable key chain featuring local nomad prints.",
+      "image": "/explore_more_keychain.png",
+      "category": "Key Chains",
+      "subcategory": "accessories",
+      "itemType": "Keychain",
+      "gender": "unisex",
+      "rating": 5,
+      "reviewsCount": 200,
+      "boughtCount": "100+ bought in past month",
+      "inStock": true,
+      "sizes": [
+        "One Size"
+      ],
+      "brand": "Banjāra Originals",
+      "color": "Teal"
+    },
+    {
+      "id": "go-banjara-tshirt-3",
+      "name": "Go Banjara",
+      "price": 399,
+      "originalPrice": 599,
+      "description": "Cotton T-shirt featuring high-quality sunset and travel print.",
+      "image": "/go_banjara_tshirt.jpg",
+      "category": "T-Shirts",
+      "subcategory": "topwear",
+      "itemType": "T-Shirt",
+      "gender": "unisex",
+      "rating": 5,
+      "reviewsCount": 1000,
+      "boughtCount": "500+ bought in past month",
+      "inStock": true,
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "brand": "Banjāra Originals",
+      "color": "Grey"
+    },
+    {
+      "id": "go-banjara-tshirt-4",
+      "name": "Go Banjara",
+      "price": 399,
+      "originalPrice": 599,
+      "description": "Cotton T-shirt featuring high-quality sunset and travel print.",
+      "image": "/go_banjara_tshirt.jpg",
+      "category": "T-Shirts",
+      "subcategory": "topwear",
+      "itemType": "T-Shirt",
+      "gender": "unisex",
+      "rating": 5,
+      "reviewsCount": 1000,
+      "boughtCount": "500+ bought in past month",
+      "inStock": true,
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "brand": "Banjāra Originals",
+      "color": "Grey"
+    },
+    {
+      "id": "banjara-slides-1",
+      "name": "Banjāra Slides",
+      "price": 299,
+      "originalPrice": 499,
+      "description": "Ultra-comfortable, waterproof slides for everyday adventure.",
+      "image": "/banjara_blue_slides.png",
+      "category": "Footwear",
+      "subcategory": "footwear",
+      "itemType": "Slides",
+      "gender": "unisex",
+      "rating": 5,
+      "reviewsCount": 150,
+      "boughtCount": "300+ bought in past month",
+      "inStock": true,
+      "sizes": [
+        "UK 6",
+        "UK 7",
+        "UK 8",
+        "UK 9",
+        "UK 10"
+      ],
+      "brand": "Banjāra Originals",
+      "color": "Blue"
+    },
+    {
+      "id": "banjara-slides-2",
+      "name": "Banjāra Slides",
+      "price": 299,
+      "originalPrice": 499,
+      "description": "Ultra-comfortable, waterproof slides for everyday adventure.",
+      "image": "/banjara_blue_slides.png",
+      "category": "Footwear",
+      "subcategory": "footwear",
+      "itemType": "Slides",
+      "gender": "unisex",
+      "rating": 5,
+      "reviewsCount": 150,
+      "boughtCount": "300+ bought in past month",
+      "inStock": true,
+      "sizes": [
+        "UK 6",
+        "UK 7",
+        "UK 8",
+        "UK 9",
+        "UK 10"
+      ],
+      "brand": "Banjāra Originals",
+      "color": "Blue"
+    },
+    {
+      "id": "blue-mavin-slides-1",
+      "name": "Blue Mavin",
+      "price": 399,
+      "originalPrice": 599,
+      "description": "Comfortable indoor and outdoor slippers.",
+      "image": "/blue_mavin_slides.jpg",
+      "category": "Slippers",
+      "subcategory": "footwear",
+      "itemType": "Slippers",
+      "gender": "unisex",
+      "rating": 5,
+      "reviewsCount": 1000,
+      "boughtCount": "500+ bought in past month",
+      "inStock": true,
+      "sizes": [
+        "UK 6",
+        "UK 7",
+        "UK 8",
+        "UK 9",
+        "UK 10"
+      ],
+      "brand": "Mavin",
+      "color": "Blue"
+    },
+    {
+      "id": "blue-mavin-slides-2",
+      "name": "Blue Mavin",
+      "price": 399,
+      "originalPrice": 599,
+      "description": "Comfortable indoor and outdoor slippers.",
+      "image": "/blue_mavin_slides.jpg",
+      "category": "Slippers",
+      "subcategory": "footwear",
+      "itemType": "Slippers",
+      "gender": "unisex",
+      "rating": 5,
+      "reviewsCount": 1000,
+      "boughtCount": "500+ bought in past month",
+      "inStock": true,
+      "sizes": [
+        "UK 6",
+        "UK 7",
+        "UK 8",
+        "UK 9",
+        "UK 10"
+      ],
+      "brand": "Mavin",
+      "color": "Blue"
+    },
+    {
+      "id": "wakefit-pillow-1",
+      "name": "Wakefit Pillows",
+      "price": 139,
+      "originalPrice": 199,
+      "description": "Ergonomic neck support memory foam pillow for travel.",
+      "image": "/wakefit_pillow.jpg",
+      "category": "Travel Pillows",
+      "subcategory": "accessories",
+      "itemType": "Pillow",
+      "gender": "unisex",
+      "rating": 5,
+      "reviewsCount": 120,
+      "boughtCount": "200+ bought in past month",
+      "inStock": true,
+      "sizes": [
+        "One Size"
+      ],
+      "brand": "Wakefit",
+      "color": "Grey"
+    },
+    {
+      "id": "wakefit-pillow-2",
+      "name": "Wakefit Pillows",
+      "price": 139,
+      "originalPrice": 199,
+      "description": "Ergonomic neck support memory foam pillow for travel.",
+      "image": "/wakefit_pillow.jpg",
+      "category": "Travel Pillows",
+      "subcategory": "accessories",
+      "itemType": "Pillow",
+      "gender": "unisex",
+      "rating": 5,
+      "reviewsCount": 120,
+      "boughtCount": "200+ bought in past month",
+      "inStock": true,
+      "sizes": [
+        "One Size"
+      ],
+      "brand": "Wakefit",
+      "color": "Grey"
+    },
+    {
+      "id": "fur-jaden-backpack-1",
+      "name": "Fur Jaden C/W",
+      "price": 149,
+      "originalPrice": 193,
+      "description": "Waterproof anti-theft laptop backpack with charging port.",
+      "image": "/fur_jaden_backpack.jpg",
+      "category": "Backpacks",
+      "subcategory": "accessories",
+      "itemType": "Backpack",
+      "gender": "unisex",
+      "rating": 5,
+      "reviewsCount": 200,
+      "boughtCount": "100+ bought in past month",
+      "inStock": true,
+      "sizes": [
+        "One Size"
+      ],
+      "brand": "Fur Jaden",
+      "color": "Black/Teal"
+    },
+    {
+      "id": "go-passport-cover-1",
+      "name": "Go Passport Cover",
+      "price": 399,
+      "originalPrice": 599,
+      "description": "Genuine leather passport cover case with card slots.",
+      "image": "/go_passport_cover.jpg",
+      "category": "Passport Covers",
+      "subcategory": "accessories",
+      "itemType": "Passport Cover",
+      "gender": "unisex",
+      "rating": 5,
+      "reviewsCount": 1000,
+      "boughtCount": "500+ bought in past month",
+      "inStock": true,
+      "sizes": [
+        "One Size"
+      ],
+      "brand": "Banjāra Originals",
+      "color": "Teal"
+    },
+    {
+      "id": "nomad-stickers-pack-1",
+      "name": "Nomad Stickers Pack",
+      "price": 99,
+      "originalPrice": 149,
+      "description": "Set of 5 waterproof vinyl stickers for laptops and water bottles.",
+      "image": "https://images.unsplash.com/photo-1572375995501-4b0894dbe0d1?w=500&auto=format&fit=crop&q=60",
+      "category": "Stickers",
+      "subcategory": "accessories",
+      "itemType": "Stickers",
+      "gender": "unisex",
+      "rating": 4.8,
+      "reviewsCount": 85,
+      "boughtCount": "300+ bought in past month",
+      "inStock": true,
+      "sizes": [
+        "One Size"
+      ],
+      "brand": "Banjāra Originals",
+      "color": "Multicolor"
+    },
+    {
+      "id": "wanderlust-metal-bookmark-1",
+      "name": "Wanderlust Metal Bookmark",
+      "price": 129,
+      "originalPrice": 199,
+      "description": "Premium brass-cut bookmark with travel quotes.",
+      "image": "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=500&auto=format&fit=crop&q=60",
+      "category": "Bookmarks",
+      "subcategory": "accessories",
+      "itemType": "Bookmark",
+      "gender": "unisex",
+      "rating": 4.9,
+      "reviewsCount": 64,
+      "boughtCount": "150+ bought in past month",
+      "inStock": true,
+      "sizes": [
+        "One Size"
+      ],
+      "brand": "Banjāra Originals",
+      "color": "Gold"
+    },
+    {
+      "id": "go-banjara-magnet-1",
+      "name": "Himalayan Expedition Magnet",
+      "price": 89,
+      "originalPrice": 129,
+      "description": "3D rubberized fridge magnet of Himalayan peaks.",
+      "image": "https://images.unsplash.com/photo-1536640712247-c57f66e5f5f4?w=500&auto=format&fit=crop&q=60",
+      "category": "Fridge Magnets",
+      "subcategory": "accessories",
+      "itemType": "Fridge Magnet",
+      "gender": "unisex",
+      "rating": 4.7,
+      "reviewsCount": 42,
+      "boughtCount": "80+ bought in past month",
+      "inStock": true,
+      "sizes": [
+        "One Size"
+      ],
+      "brand": "Banjāra Originals",
+      "color": "Multicolor"
+    },
+    {
+      "id": "banjara-luggage-tag-1",
+      "name": "Banjāra Leather Luggage Tag",
+      "price": 199,
+      "originalPrice": 299,
+      "description": "Durable PU leather luggage tag with contact details slot.",
+      "image": "https://images.unsplash.com/photo-1528154291023-a6525fabe5b4?w=500&auto=format&fit=crop&q=60",
+      "category": "Luggage Tags",
+      "subcategory": "accessories",
+      "itemType": "Luggage Tag",
+      "gender": "unisex",
+      "rating": 4.6,
+      "reviewsCount": 95,
+      "boughtCount": "200+ bought in past month",
+      "inStock": true,
+      "sizes": [
+        "One Size"
+      ],
+      "brand": "Banjāra Originals",
+      "color": "Brown"
+    },
+    {
+      "id": "nomad-leather-journal-1",
+      "name": "Nomad Classic Leather Journal",
+      "price": 499,
+      "originalPrice": 799,
+      "description": "Refillable leather journal with 200 pages of handmade paper.",
+      "image": "https://images.unsplash.com/photo-1531346878377-a5be20888e57?w=500&auto=format&fit=crop&q=60",
+      "category": "Journals",
+      "subcategory": "accessories",
+      "itemType": "Journal",
+      "gender": "unisex",
+      "rating": 4.9,
+      "reviewsCount": 310,
+      "boughtCount": "400+ bought in past month",
+      "inStock": true,
+      "sizes": [
+        "A5"
+      ],
+      "brand": "Banjāra Originals",
+      "color": "Dark Brown"
+    },
+    {
+      "id": "banjara-shot-glasses-1",
+      "name": "Banjāra Frosted Shot Glasses (Set of 2)",
+      "price": 249,
+      "originalPrice": 399,
+      "description": "High-quality frosted shot glasses with quirky local slangs.",
+      "image": "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=500&auto=format&fit=crop&q=60",
+      "category": "Shot Glasses",
+      "subcategory": "accessories",
+      "itemType": "Shot Glass",
+      "gender": "unisex",
+      "rating": 4.5,
+      "reviewsCount": 50,
+      "boughtCount": "90+ bought in past month",
+      "inStock": true,
+      "sizes": [
+        "60ml"
+      ],
+      "brand": "Banjāra Originals",
+      "color": "Frosted White"
+    },
+    {
+      "id": "minimalist-leather-wallet-1",
+      "name": "Minimalist Slim Leather Wallet",
+      "price": 349,
+      "originalPrice": 549,
+      "description": "RFID blocking slim leather wallet with 6 card slots.",
+      "image": "https://images.unsplash.com/photo-1627124765138-b6b774693a55?w=500&auto=format&fit=crop&q=60",
+      "category": "Wallets",
+      "subcategory": "accessories",
+      "itemType": "Wallet",
+      "gender": "unisex",
+      "rating": 4.8,
+      "reviewsCount": 180,
+      "boughtCount": "250+ bought in past month",
+      "inStock": true,
+      "sizes": [
+        "One Size"
+      ],
+      "brand": "Banjāra Originals",
+      "color": "Black"
+    },
+    {
+      "id": "banjara-tote-bag-1",
+      "name": "Banjāra Canvas Tote Bag",
+      "price": 299,
+      "originalPrice": 449,
+      "description": "Heavy-duty organic canvas tote bag with inner pocket and zipper.",
+      "image": "https://images.unsplash.com/photo-1544816155-12df9643f363?w=500&auto=format&fit=crop&q=60",
+      "category": "Tote Bags",
+      "subcategory": "accessories",
+      "itemType": "Tote Bag",
+      "gender": "unisex",
+      "rating": 4.7,
+      "reviewsCount": 140,
+      "boughtCount": "350+ bought in past month",
+      "inStock": true,
+      "sizes": [
+        "One Size"
+      ],
+      "brand": "Banjāra Originals",
+      "color": "Beige"
+    }
+  ],
+  "blogs": [
+    {
+      "id": "post-ladakh-guide-1",
+      "title": "Ultimate Ladakh Travel Guide: Plan Your Perfect Himalayan Adventure",
+      "excerpt": "Detailed packing list, fuel planning, and safety pointers for solo adventurers tackling the high passes alone.",
+      "image": "/travel-leh-1.jpg",
+      "readTime": "5 min read",
+      "date": "Sunday, August 12, 2023",
+      "author": "Kiran Makwan"
+    },
+    {
+      "id": "post-ladakh-guide-2",
+      "title": "Leh Ladakh Travel Guide 2026: Best Time, Places & Complete Trip Planning",
+      "excerpt": "Detailed packing list, fuel planning, and safety pointers for solo adventurers tackling the adventure alone.",
+      "image": "/travel-leh-2.jpg",
+      "readTime": "5 min read",
+      "date": "Sunday, August 12, 2023",
+      "author": "Kiran Makwan"
+    },
+    {
+      "id": "post-ladakh-guide-3",
+      "title": "Ladakh Bike Trip Guide: Routes, Budget & Essential Tips for Riders",
+      "excerpt": "Detailed packing list, fuel planning, and safety pointers for solo adventurers tackling the mountain pass.",
+      "image": "/travel-leh-3.jpg",
+      "readTime": "5 min read",
+      "date": "Sunday, August 12, 2023",
+      "author": "Kiran Makwan"
+    },
+    {
+      "id": "post-ladakh-guide-4",
+      "title": "7-Day Leh Ladakh Itinerary for First-Time Travelers",
+      "excerpt": "Detailed packing list, fuel planning, and safety pointers for solo adventurers.",
+      "image": "/travel-leh-4.jpg",
+      "readTime": "5 min read",
+      "date": "Sunday, August 12, 2023",
+      "author": "Kiran Makwan"
+    }
+  ]
+}

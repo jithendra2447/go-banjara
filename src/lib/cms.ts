@@ -44,7 +44,7 @@ export interface CustomHomeSection {
   type?: 'product-grid' | 'banner';
   position?: 'bottom' | 'hero' | 'dual_cta' | 'destinations' | 'deals' | 'bestselling' | 'categories' | 'reviews' | 'blog' | 'faq' | 'values';
   displayMode?: 'grid' | 'carousel';
-  buttonStyle?: 'view_all' | 'load_more' | 'drag_carousel' | 'solid';
+  buttonStyle?: 'view_all' | 'load_more' | 'drag_carousel' | 'drag' | 'solid';
   title: string;
   subtitle: string;
   tag?: string;

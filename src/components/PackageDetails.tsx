@@ -730,18 +730,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
                   >
                     {pkg.name}
                   </h1>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setEditingPkgData({ ...pkg });
-                      setIsEditingPkg(true);
-                    }}
-                    className="px-3 py-1.5 bg-[#1D493E]/10 hover:bg-[#1D493E] text-[#1D493E] hover:text-white rounded-lg text-xs font-bold transition flex items-center gap-1.5 cursor-pointer shrink-0"
-                    title="Edit Package Details"
-                  >
-                    <Edit3 className="w-3.5 h-3.5" />
-                    <span>Edit Package</span>
-                  </button>
+
                 </div>
                 <span 
                   style={{

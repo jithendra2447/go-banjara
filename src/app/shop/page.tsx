@@ -130,54 +130,40 @@ export default function ShopPage() {
   }, []);
 
   // Filter products for the respective sections from local storage productsList
-  const mainGridProducts = [
-    productsList.find(p => p.id === 'naturally-nomad-badge-1') || productsList[0] || PRODUCTS[0],
-    productsList.find(p => p.id === 'explore-more-keychain-1') || productsList[1] || PRODUCTS[1],
-    productsList.find(p => p.id === 'go-banjara-tshirt-1') || productsList[2] || PRODUCTS[2],
-    productsList.find(p => p.id === 'go-banjara-tshirt-2') || productsList[3] || productsList[3] || PRODUCTS[2],
-    productsList.find(p => p.id === 'naturally-nomad-badge-2') || productsList[4] || productsList[0] || PRODUCTS[0],
-    productsList.find(p => p.id === 'explore-more-keychain-2') || productsList[5] || productsList[1] || PRODUCTS[1],
-    productsList.find(p => p.id === 'go-banjara-tshirt-3') || productsList[6] || productsList[2] || PRODUCTS[2],
-    productsList.find(p => p.id === 'go-banjara-tshirt-4') || productsList[7] || productsList[3] || productsList[3] || PRODUCTS[2],
-  ];
+  const activeProducts = React.useMemo(() => {
+    return productsList.filter(p => !p.hidden);
+  }, [productsList]);
 
-  const newArrivals = [
-    productsList.find(p => p.id === 'naturally-nomad-badge-1') || productsList[0] || PRODUCTS[0],
-    productsList.find(p => p.id === 'explore-more-keychain-1') || productsList[1] || PRODUCTS[1],
-    productsList.find(p => p.id === 'go-banjara-tshirt-1') || productsList[2] || PRODUCTS[2],
-    productsList.find(p => p.id === 'naturally-nomad-badge-2') || productsList[4] || productsList[0] || PRODUCTS[0],
-    productsList.find(p => p.id === 'blue-mavin-slides-1') || productsList[10] || PRODUCTS[10],
-    productsList.find(p => p.id === 'wakefit-pillow-1') || productsList[12] || PRODUCTS[12],
-    productsList.find(p => p.id === 'fur-jaden-backpack-1') || productsList[14] || PRODUCTS[14],
-    productsList.find(p => p.id === 'go-passport-cover-1') || productsList[15] || PRODUCTS[15],
-  ];
+  // Main shop grid shows all active products
+  const mainGridProducts = React.useMemo(() => {
+    return activeProducts.length > 0 ? activeProducts : PRODUCTS;
+  }, [activeProducts]);
 
-  const travelsEssentials = [
-    productsList.find(p => p.id === 'naturally-nomad-badge-1') || productsList[0] || PRODUCTS[0],
-    productsList.find(p => p.id === 'blue-mavin-slides-1') || productsList[10] || PRODUCTS[10],
-    productsList.find(p => p.id === 'explore-more-keychain-1') || productsList[1] || PRODUCTS[1],
-    productsList.find(p => p.id === 'blue-mavin-slides-2') || productsList[11] || PRODUCTS[11],
-    productsList.find(p => p.id === 'wakefit-pillow-1') || productsList[12] || PRODUCTS[12],
-    productsList.find(p => p.id === 'fur-jaden-backpack-1') || productsList[14] || PRODUCTS[14],
-    productsList.find(p => p.id === 'go-passport-cover-1') || productsList[15] || PRODUCTS[15],
-    productsList.find(p => p.id === 'wakefit-pillow-2') || productsList[13] || PRODUCTS[13],
-  ];
+  const isProdInSection = (p: Product, secId: string) => {
+    if (p.section === secId) return true;
+    if (Array.isArray(p.sections) && p.sections.includes(secId)) return true;
+    return false;
+  };
 
-  const limitedEdition = [
-    productsList.find(p => p.id === 'naturally-nomad-badge-1') || productsList[0] || PRODUCTS[0],
-    productsList.find(p => p.id === 'explore-more-keychain-1') || productsList[1] || PRODUCTS[1],
-    productsList.find(p => p.id === 'go-banjara-tshirt-1') || productsList[2] || PRODUCTS[2],
-    productsList.find(p => p.id === 'naturally-nomad-badge-2') || productsList[4] || productsList[0] || PRODUCTS[0],
-    productsList.find(p => p.id === 'explore-more-keychain-2') || productsList[5] || productsList[1] || PRODUCTS[1],
-    productsList.find(p => p.id === 'go-banjara-tshirt-3') || productsList[6] || productsList[2] || PRODUCTS[2],
-    productsList.find(p => p.id === 'blue-mavin-slides-2') || productsList[11] || PRODUCTS[11],
-    productsList.find(p => p.id === 'wakefit-pillow-2') || productsList[13] || PRODUCTS[13],
-  ];
+  // New Arrivals section filters products assigned to 'new-arrivals'
+  const newArrivals = React.useMemo(() => {
+    return activeProducts.filter(p => isProdInSection(p, 'new-arrivals'));
+  }, [activeProducts]);
 
+  // Travel Essentials section filters products assigned to 'travel-essentials'
+  const travelsEssentials = React.useMemo(() => {
+    return activeProducts.filter(p => isProdInSection(p, 'travel-essentials'));
+  }, [activeProducts]);
+
+  // Limited Edition section filters products assigned to 'limited-edition'
+  const limitedEdition = React.useMemo(() => {
+    return activeProducts.filter(p => isProdInSection(p, 'limited-edition'));
+  }, [activeProducts]);
+
+  // Discount Sale section filters products assigned to 'discount-sale' or 'deals'
   const discountSaleProducts = React.useMemo(() => {
-    const discounted = productsList.filter(p => p.originalPrice && p.originalPrice > p.price);
-    return discounted.length >= 4 ? discounted : [...discounted, ...travelsEssentials].slice(0, 8);
-  }, [productsList, travelsEssentials]);
+    return activeProducts.filter(p => isProdInSection(p, 'discount-sale') || isProdInSection(p, 'deals'));
+  }, [activeProducts]);
 
   const renderProductCarousel = (
     items: Product[],

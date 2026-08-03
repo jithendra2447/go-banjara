@@ -562,18 +562,7 @@ export default function ProductDetailsPage() {
                   <h2 style={{ fontFamily: "Faktum, sans-serif", margin: 0 }} className="text-lg sm:text-xl md:text-[28px] font-semibold text-[#2B2B2B] leading-snug">
                     {product.name}
                   </h2>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setEditingProdData({ ...product });
-                      setIsEditingProd(true);
-                    }}
-                    className="px-3 py-1.5 bg-[#1D493E]/10 hover:bg-[#1D493E] text-[#1D493E] hover:text-white rounded-lg text-xs font-bold transition flex items-center gap-1.5 cursor-pointer shrink-0"
-                    title="Edit Product Details"
-                  >
-                    <Edit3 className="w-3.5 h-3.5" />
-                    <span>Edit Product</span>
-                  </button>
+
                 </div>
                 <span 
                   style={{

@@ -27,6 +27,7 @@ export interface HolidayPackage {
   startPoint?: string;
   isBestSeller?: boolean;
   showOnHome?: boolean;
+  hidden?: boolean;
   homeShowcaseSection?: 'hero' | 'featured' | 'deals' | 'none';
 
   // New detailed fields matching Srinagar-to-Leh design

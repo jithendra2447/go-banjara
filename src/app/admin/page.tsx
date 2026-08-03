@@ -7,10 +7,10 @@ import {
   LayoutDashboard, Map as MapIcon, ShoppingBag, ClipboardList, Users,
   ShieldCheck, DollarSign, Plus, Trash2, Edit3, CheckCircle2,
   AlertCircle, FileText, Search, CreditCard, ArrowRight, Ban,
-  Eye, Calendar, Check, Landmark, RefreshCw, BookOpen, Star,
+  Eye, EyeOff, Calendar, Check, Landmark, RefreshCw, BookOpen, Star,
   Globe, Link as LinkIcon, Settings, ExternalLink, Sparkles, Layers,
   CheckSquare, Sliders, Server, Save, Download, Upload, Cpu, Zap, Image as ImageIcon,
-  Mail, Key
+  Mail, Key, Compass, ChevronDown
 } from 'lucide-react';
 import { useCart } from '@/components/providers';
 import { PackageEditorModal } from '@/components/PackageEditorModal';
@@ -137,6 +137,10 @@ export default function AdminPortal() {
   const [destinations, setDestinations] = useState<Destination[]>([]);
   const [packages, setPackages] = useState<HolidayPackage[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
+  const [prodFilterCategory, setProdFilterCategory] = useState<string>('');
+  const [prodFilterSection, setProdFilterSection] = useState<string>('');
+  const [openMultiSectionProdId, setOpenMultiSectionProdId] = useState<string | null>(null);
+
   const [orders, setOrders] = useState<OrderHistoryItem[]>([]);
   const [bookings, setBookings] = useState<OrderHistoryItem[]>([]);
   const [customers, setCustomers] = useState<CustomerItem[]>([]);
@@ -346,12 +350,16 @@ export default function AdminPortal() {
         if (parsed.length > 0) setSelectedPackageForLink(parsed[0].id);
       } catch (e) {
         setPackages(INITIAL_HOLIDAY_PACKAGES);
+        localStorage.setItem('gb_admin_packages', JSON.stringify(INITIAL_HOLIDAY_PACKAGES));
         if (INITIAL_HOLIDAY_PACKAGES.length > 0) setSelectedPackageForLink(INITIAL_HOLIDAY_PACKAGES[0].id);
       }
     } else {
       setPackages(INITIAL_HOLIDAY_PACKAGES);
+      // Initialize localStorage so home/travel pages read admin-controlled data from start
+      localStorage.setItem('gb_admin_packages', JSON.stringify(INITIAL_HOLIDAY_PACKAGES));
       if (INITIAL_HOLIDAY_PACKAGES.length > 0) setSelectedPackageForLink(INITIAL_HOLIDAY_PACKAGES[0].id);
     }
+
 
     // 6. Load Products
     let mergedProds: Product[] = [...INITIAL_PRODUCTS];
@@ -483,6 +491,32 @@ export default function AdminPortal() {
     localStorage.setItem('gb_admin_products', JSON.stringify(updated));
     setEditingProd(null);
     showToast(exists ? 'Product updated successfully!' : '✨ New product added to inventory!');
+  };
+
+  const handleSaveBlog = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!editingBlog) return;
+    const exists = blogs.some(b => b.id === editingBlog.id);
+    const updated = exists
+      ? blogs.map(b => b.id === editingBlog.id ? editingBlog : b)
+      : [editingBlog, ...blogs];
+    setBlogs(updated);
+    localStorage.setItem('gb_admin_blogs', JSON.stringify(updated));
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('gb_blogs_updated', { detail: updated }));
+    }
+    setEditingBlog(null);
+    showToast(exists ? 'Blog article updated successfully!' : '✨ New blog article published!');
+  };
+
+  const handleDeleteBlog = (id: string) => {
+    const updated = blogs.filter(b => b.id !== id);
+    setBlogs(updated);
+    localStorage.setItem('gb_admin_blogs', JSON.stringify(updated));
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('gb_blogs_updated', { detail: updated }));
+    }
+    showToast('Blog article deleted!');
   };
 
   const handleSaveEditedPackage = (savedPkg: HolidayPackage) => {
@@ -783,10 +817,16 @@ export default function AdminPortal() {
     <div style={{ fontFamily: '"Outfit", "Faktum", sans-serif' }} className="min-h-screen bg-[#FAF9F6] text-[#2B2B2B] flex flex-col">
       {/* Toast Notification */}
       {toast && (
-        <div className={`fixed top-5 right-5 z-50 px-6 py-3.5 rounded-2xl shadow-2xl flex items-center gap-3 text-xs font-black uppercase tracking-wider animate-bounce ${
-          toast.type === 'success' ? 'bg-emerald-600 text-white' : 'bg-rose-600 text-white'
+        <div className={`fixed top-6 left-1/2 -translate-x-1/2 z-[100] px-6 py-3.5 rounded-2xl shadow-2xl flex items-center gap-3 text-xs font-black uppercase tracking-wider transition-all duration-300 ${
+          toast.type === 'error' || toast.message.includes('⚠️') || toast.message.includes('Maximum 8')
+            ? 'bg-red-600 text-white shadow-red-900/30 border border-red-400/40' 
+            : 'bg-[#1D493E] text-white shadow-emerald-900/30 border border-emerald-500/30'
         }`}>
-          {toast.type === 'success' ? <CheckCircle2 className="w-5 h-5" /> : <AlertCircle className="w-5 h-5" />}
+          {toast.type === 'error' || toast.message.includes('⚠️') || toast.message.includes('Maximum 8') ? (
+            <AlertCircle className="w-5 h-5 text-white shrink-0" />
+          ) : (
+            <CheckCircle2 className="w-5 h-5 text-white shrink-0" />
+          )}
           <span>{toast.message}</span>
         </div>
       )}
@@ -795,34 +835,15 @@ export default function AdminPortal() {
       <header className="bg-[#1D493E] border-b border-emerald-900/40 px-6 py-4 sticky top-0 z-40 shadow-md">
         <div className="max-w-[1600px] mx-auto flex flex-wrap items-center justify-between gap-4">
           
-          {/* Brand & Admin Title */}
+          {/* Brand Logo */}
           <div className="flex items-center gap-4">
-            <div className="w-10 h-10 rounded-2xl bg-[#15342c] border border-emerald-600/40 flex items-center justify-center font-bold text-white text-xl shadow-sm tracking-tight">
-              GB
-            </div>
-            <div>
-              <h1 
-                style={{ fontFamily: '"Faktum", "Fraunces", sans-serif' }}
-                className="text-lg font-bold text-white tracking-tight"
-              >
-                Go Banjara Admin
-              </h1>
-              <p className="text-[11px] text-white/50 font-medium">
-                Content Management & E-Commerce Control
-              </p>
-            </div>
-          </div>
-
-          {/* Admin Server Metrics Bar */}
-          <div className="hidden lg:flex items-center gap-3 text-[11px]">
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-white/10 rounded-lg">
-              <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-              <span className="text-white/70">Live</span>
-            </div>
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-white/10 rounded-lg">
-              <Server className="w-3.5 h-3.5 text-white/60" />
-              <span className="text-white/70">{6 + customPages.length} Pages</span>
-            </div>
+            <Link href="/" className="flex items-center group">
+              <img
+                src="/logo-footer.png"
+                alt="go banjāra logo"
+                className="h-9 w-auto object-contain transition-transform group-hover:scale-105"
+              />
+            </Link>
           </div>
 
           {/* Quick Actions & Live Preview Link */}
@@ -875,7 +896,7 @@ export default function AdminPortal() {
       </header>
 
       {/* Main Admin Layout */}
-      <div className="flex-1 max-w-[1600px] w-full mx-auto flex flex-col md:flex-row">
+      <div className="flex-1 max-w-[1600px] w-full mx-auto flex flex-col md:flex-row pt-8 pb-12 px-4 sm:px-6 md:px-8 gap-8">
         
         {/* Admin Sidebar Navigation */}
         <aside className="w-full md:w-72 bg-white border-r border-[#E5E0D5] p-4 space-y-6 shrink-0 shadow-xs">
@@ -905,10 +926,7 @@ export default function AdminPortal() {
                 activeTab === 'overview' ? 'bg-[#1D493E] text-white shadow-sm' : 'text-[#2B2B2B] hover:bg-[#1D493E]/[0.08] hover:text-[#1D493E]'
               }`}
             >
-              <div className="flex items-center gap-3">
-                <LayoutDashboard className="w-4 h-4" />
-                <span>Admin Dashboard</span>
-              </div>
+              <span>Admin Dashboard</span>
               <span className="text-[10px] bg-black/20 px-2 py-0.5 rounded-full font-mono">Main</span>
             </button>
 
@@ -922,10 +940,7 @@ export default function AdminPortal() {
                 activeTab === 'cms_sections' ? 'bg-[#1D493E] text-white shadow-sm' : 'text-[#2B2B2B] hover:bg-[#1D493E]/[0.08] hover:text-[#1D493E]'
               }`}
             >
-              <div className="flex items-center gap-3">
-                <Globe className="w-4 h-4 text-[#1D493E]" />
-                <span>Edit Page & Sections</span>
-              </div>
+              <span>Edit Page & Sections</span>
               <span className="text-[10px] bg-[#1D493E]/10 text-[#1D493E] px-2 py-0.5 rounded-full font-bold">CMS</span>
             </button>
 
@@ -935,29 +950,13 @@ export default function AdminPortal() {
                 activeTab === 'custom_pages' ? 'bg-[#1D493E] text-white shadow-sm' : 'text-[#2B2B2B] hover:bg-[#1D493E]/[0.08] hover:text-[#1D493E]'
               }`}
             >
-              <div className="flex items-center gap-3">
-                <FileText className="w-4 h-4 text-amber-600" />
-                <span>Add & Manage Pages</span>
-              </div>
+              <span>Add & Manage Pages</span>
               <span className="text-[10px] bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full font-bold">
                 {customPages.length}
               </span>
             </button>
 
-            <button
-              onClick={() => setActiveTab('package_products')}
-              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl font-bold transition cursor-pointer ${
-                activeTab === 'package_products' ? 'bg-[#1D493E] text-white shadow-sm' : 'text-[#2B2B2B] hover:bg-[#1D493E]/[0.08] hover:text-[#1D493E]'
-              }`}
-            >
-              <div className="flex items-center gap-3">
-                <LinkIcon className="w-4 h-4 text-sky-600" />
-                <span>Package-Product Linker</span>
-              </div>
-              <span className="text-[10px] bg-sky-100 text-sky-800 px-2 py-0.5 rounded-full font-bold">
-                {packageProductLinks.length}
-              </span>
-            </button>
+
 
             <div className="pt-3 text-[10px] font-bold uppercase tracking-wider text-[#1D493E] px-3 py-1 font-sans">
               Store & Travel Catalog
@@ -969,10 +968,7 @@ export default function AdminPortal() {
                 activeTab === 'packages' ? 'bg-[#1D493E] text-white shadow-sm' : 'text-[#2B2B2B] hover:bg-[#1D493E]/[0.08] hover:text-[#1D493E]'
               }`}
             >
-              <div className="flex items-center gap-3">
-                <MapIcon className="w-4 h-4" />
-                <span>Travel Packages</span>
-              </div>
+              <span>Travel Packages</span>
               <span className="text-[10px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-mono">
                 {packages.length}
               </span>
@@ -984,29 +980,12 @@ export default function AdminPortal() {
                 activeTab === 'products' ? 'bg-[#1D493E] text-white shadow-sm' : 'text-[#2B2B2B] hover:bg-[#1D493E]/[0.08] hover:text-[#1D493E]'
               }`}
             >
-              <div className="flex items-center gap-3">
-                <ShoppingBag className="w-4 h-4" />
-                <span>Shop Products</span>
-              </div>
+              <span>Shop Products</span>
               <span className="text-[10px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-mono">
                 {products.length}
               </span>
             </button>
 
-            <button
-              onClick={() => setActiveTab('blogs')}
-              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl font-bold transition cursor-pointer ${
-                activeTab === 'blogs' ? 'bg-[#1D493E] text-white shadow-sm' : 'text-[#2B2B2B] hover:bg-[#1D493E]/[0.08] hover:text-[#1D493E]'
-              }`}
-            >
-              <div className="flex items-center gap-3">
-                <BookOpen className="w-4 h-4" />
-                <span>Blog Articles</span>
-              </div>
-              <span className="text-[10px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-mono">
-                {blogs.length}
-              </span>
-            </button>
 
             <div className="pt-3 text-[10px] font-bold uppercase tracking-wider text-[#1D493E] px-3 py-1 font-sans">
               Fulfillment & Accounts
@@ -1018,10 +997,7 @@ export default function AdminPortal() {
                 activeTab === 'orders' ? 'bg-[#1D493E] text-white shadow-sm' : 'text-[#2B2B2B] hover:bg-[#1D493E]/[0.08] hover:text-[#1D493E]'
               }`}
             >
-              <div className="flex items-center gap-3">
-                <ClipboardList className="w-4 h-4" />
-                <span>Shop Orders</span>
-              </div>
+              <span>Shop Orders</span>
               <span className="text-[10px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-mono">
                 {liveOrders.length}
               </span>
@@ -1033,10 +1009,7 @@ export default function AdminPortal() {
                 activeTab === 'bookings' ? 'bg-[#1D493E] text-white shadow-sm' : 'text-[#2B2B2B] hover:bg-[#1D493E]/[0.08] hover:text-[#1D493E]'
               }`}
             >
-              <div className="flex items-center gap-3">
-                <Calendar className="w-4 h-4" />
-                <span>Trip Bookings</span>
-              </div>
+              <span>Trip Bookings</span>
               <span className="text-[10px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-mono">
                 {liveBookings.length}
               </span>
@@ -1048,10 +1021,7 @@ export default function AdminPortal() {
                 activeTab === 'customers' ? 'bg-[#1D493E] text-white shadow-sm' : 'text-[#2B2B2B] hover:bg-[#1D493E]/[0.08] hover:text-[#1D493E]'
               }`}
             >
-              <div className="flex items-center gap-3">
-                <Users className="w-4 h-4" />
-                <span>Customers & Users</span>
-              </div>
+              <span>Customers & Users</span>
               <span className="text-[10px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-mono">
                 {liveUsers.length}
               </span>
@@ -1063,10 +1033,7 @@ export default function AdminPortal() {
                 activeTab === 'newsletters' ? 'bg-[#1D493E] text-white shadow-sm' : 'text-[#2B2B2B] hover:bg-[#1D493E]/[0.08] hover:text-[#1D493E]'
               }`}
             >
-              <div className="flex items-center gap-3">
-                <Mail className="w-4 h-4" />
-                <span>Newsletter Subs</span>
-              </div>
+              <span>Newsletter Subs</span>
               <span className="text-[10px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-mono">
                 {liveSubscribers.length}
               </span>
@@ -1078,10 +1045,7 @@ export default function AdminPortal() {
                 activeTab === 'submissions' ? 'bg-[#1D493E] text-white shadow-sm' : 'text-[#2B2B2B] hover:bg-[#1D493E]/[0.08] hover:text-[#1D493E]'
               }`}
             >
-              <div className="flex items-center gap-3">
-                <FileText className="w-4 h-4" />
-                <span>Form Submissions</span>
-              </div>
+              <span>Contact Us Enquiries</span>
               <span className="text-[10px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-mono">
                 {liveSubmissions.length}
               </span>
@@ -1093,10 +1057,7 @@ export default function AdminPortal() {
                 activeTab === 'payments' ? 'bg-[#1D493E] text-white shadow-sm' : 'text-[#2B2B2B] hover:bg-[#1D493E]/[0.08] hover:text-[#1D493E]'
               }`}
             >
-              <div className="flex items-center gap-3">
-                <CreditCard className="w-4 h-4" />
-                <span>Payments & Gateway</span>
-              </div>
+              <span>Payments & Gateway</span>
             </button>
 
             <div className="pt-3 text-[10px] font-bold uppercase tracking-wider text-[#1D493E] px-3 py-1 font-sans">
@@ -1109,10 +1070,7 @@ export default function AdminPortal() {
                 activeTab === 'global_settings' ? 'bg-[#1D493E] text-white shadow-sm' : 'text-[#2B2B2B] hover:bg-[#1D493E]/[0.08] hover:text-[#1D493E]'
               }`}
             >
-              <div className="flex items-center gap-3">
-                <Settings className="w-4 h-4 text-[#1D493E]" />
-                <span>Global Site Settings</span>
-              </div>
+              <span>Global Site Settings</span>
             </button>
           </nav>
         </aside>
@@ -1202,17 +1160,19 @@ export default function AdminPortal() {
                   </button>
 
                   <button
-                    onClick={() => setActiveTab('package_products')}
-                    className="p-6 bg-white border border-[#E5E0D5] hover:border-sky-600 rounded-2xl text-left transition space-y-3 cursor-pointer group shadow-xs"
+                    onClick={() => setActiveTab('submissions')}
+                    className="p-6 bg-white border border-[#E5E0D5] hover:border-emerald-600 rounded-2xl text-left transition space-y-3 cursor-pointer group shadow-xs"
                   >
-                    <div className="w-12 h-12 rounded-2xl bg-sky-500/10 text-sky-700 flex items-center justify-center font-bold group-hover:scale-105 transition">
-                      <LinkIcon className="w-6 h-6" />
+                    <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-700 flex items-center justify-center font-bold group-hover:scale-105 transition">
+                      <Mail className="w-6 h-6" />
                     </div>
                     <div>
-                      <h3 className="text-sm font-bold text-[#2B2B2B] group-hover:text-sky-700 transition">Package-Product Linker</h3>
-                      <p className="text-xs text-[#8D8D8D] mt-1 font-medium">Attach merchandise products and gift perks directly to travel packages so travelers get recommended gear.</p>
+                      <h3 className="text-sm font-bold text-[#2B2B2B] group-hover:text-emerald-700 transition">Contact Us Enquiries</h3>
+                      <p className="text-xs text-[#8D8D8D] mt-1 font-medium">View and respond to customer messages, contact form submissions, and trip inquiries.</p>
                     </div>
                   </button>
+
+
 
                   <button
                     onClick={() => setActiveTab('packages')}
@@ -1266,13 +1226,8 @@ export default function AdminPortal() {
               {/* Page Filter Tabs */}
               <div className="flex flex-wrap items-center gap-2 border-b border-[#E5E0D5] pb-4">
                 {[
-                  { key: 'home', label: 'Home' },
-                  { key: 'about', label: 'About' },
-                  { key: 'shop', label: 'Shop' },
-                  { key: 'travel', label: 'Travel' },
-                  { key: 'blog', label: 'Blog' },
-                  { key: 'contact', label: 'Contact' },
-                  { key: 'global', label: 'Global & Footer' },
+                  { key: 'home', label: 'Home Page Editor' },
+                  { key: 'contact', label: 'Contact Info & Location' }
                 ].map(tab => (
                   <button
                     key={tab.key}
@@ -1294,12 +1249,11 @@ export default function AdminPortal() {
                 {cmsPageFilter === 'home' && (
                   <div className="space-y-8">
                     <div>
-                      <h3 className="text-base font-black text-[#1D493E] flex items-center gap-2">
-                        <Globe className="w-5 h-5 text-[#1D493E]" />
-                        <span>Homepage Master Control Center & Section Manager</span>
+                      <h3 className="text-base font-black text-[#1D493E]">
+                        Homepage Content & Section Manager
                       </h3>
                       <p className="text-xs text-[#6B7280] mt-1">
-                        Turn homepage sections ON/OFF, edit headings, subheadings, background videos, hero posters, pictures, and button links for every section.
+                        Turn homepage sections ON/OFF, edit headings, subheadings, background videos, hero posters, pictures, and button links.
                       </p>
                     </div>
 
@@ -1307,9 +1261,8 @@ export default function AdminPortal() {
                     <div className="bg-[#FAF9F6] border border-[#E5E0D5] rounded-2xl p-5 space-y-4">
                       <div className="flex items-center justify-between">
                         <div>
-                          <h4 className="text-xs font-black text-[#1D493E] uppercase tracking-wider flex items-center gap-2">
-                            <Layers className="w-4 h-4 text-[#1D493E]" />
-                            <span>Homepage Sections Visibility Matrix (Keep or Hide Any Section)</span>
+                          <h4 className="text-xs font-black text-[#1D493E] uppercase tracking-wider">
+                            Homepage Section Visibility (Keep or Hide Sections)
                           </h4>
                           <p className="text-[11px] text-gray-500 font-medium">Toggle switches below to show or hide sections from the public homepage.</p>
                         </div>
@@ -1320,15 +1273,14 @@ export default function AdminPortal() {
                           { key: 'showHeroSection', label: 'Hero Video Banner', desc: 'Main video & title' },
                           { key: 'showDualCtaBanners', label: 'Dual CTA Banners', desc: 'Shop & Book cards' },
                           { key: 'showDestinationsSection', label: 'Places Worth Detour', desc: 'Top travel destinations' },
-                          { key: 'showDealsSection', label: 'Trending Deals', desc: 'Discounted gear' },
-                          { key: 'showBestSellingSection', label: 'Best Selling Essentials', desc: 'Popular products' },
                           { key: 'showCategoriesSection', label: 'Top Categories', desc: 'Category cards' },
+                          { key: 'showDealsSection', label: 'Trending Adventure Deals', desc: 'Discounted gear' },
+                          { key: 'showBestSellingSection', label: 'Most Selling Products', desc: 'Popular products' },
                           { key: 'showReviewsSection', label: 'Community Reviews', desc: 'Customer testimonials' },
                           { key: 'showBlogSection', label: 'Travel Tales (Blog)', desc: 'Featured blog posts' },
                           { key: 'showFaqSection', label: 'FAQ Section', desc: 'Questions accordion' },
                           { key: 'showValuesSection', label: 'Why Choose Us', desc: 'Brand values & trust' },
                           { key: 'showCtaBannerSection', label: 'Bottom Newsletter Banner', desc: 'Subscription banner' },
-                          { key: 'showInstagramSection', label: 'Nomad Moments Grid', desc: 'Instagram gallery' },
                         ].map((sec) => (
                           <div
                             key={sec.key}
@@ -1364,156 +1316,103 @@ export default function AdminPortal() {
                       </div>
                       
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-[#FAF9F6] p-4 rounded-xl border border-[#E5E0D5]">
-                        <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#1D493E] uppercase">Background Video File/URL (.mp4)</label>
-                          <input
-                            type="text"
-                            placeholder="/hero-video.mp4 or https://..."
-                            value={cms.homeHeroVideoUrl || ''}
-                            onChange={(e) => setCms(prev => ({ ...prev, homeHeroVideoUrl: e.target.value }))}
-                            className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
-                          />
+                        <div className="space-y-2">
+                          <label className="text-[10px] font-bold text-[#1D493E] uppercase block">Background Video File / URL (.mp4)</label>
+                          <div className="flex flex-col sm:flex-row gap-2">
+                            <input
+                              type="text"
+                              placeholder="/hero-video.mp4 or https://..."
+                              value={cms.homeHeroVideoUrl || ''}
+                              onChange={(e) => setCms(prev => ({ ...prev, homeHeroVideoUrl: e.target.value }))}
+                              className="flex-1 p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                            />
+                            <label className="px-4 py-3 bg-[#1D493E] hover:bg-[#15342c] text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 cursor-pointer shrink-0">
+                              <Upload className="w-4 h-4" />
+                              <span>Upload Video</span>
+                              <input
+                                type="file"
+                                accept="video/*"
+                                onChange={(e) => handleFileUpload(e, (url) => {
+                                  setCms(prev => ({ ...prev, homeHeroVideoUrl: url }));
+                                })}
+                                className="hidden"
+                              />
+                            </label>
+                          </div>
                           <p className="text-[10px] text-gray-400">Default: /hero-video.mp4</p>
                         </div>
-                        <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#1D493E] uppercase">Hero Video Poster Image URL (.jpg)</label>
-                          <input
-                            type="text"
-                            placeholder="/hero-poster.jpg or https://..."
-                            value={cms.homeHeroPosterUrl || ''}
-                            onChange={(e) => setCms(prev => ({ ...prev, homeHeroPosterUrl: e.target.value }))}
-                            className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
-                          />
+
+                        <div className="space-y-2">
+                          <label className="text-[10px] font-bold text-[#1D493E] uppercase block">Hero Video Poster Image URL (.jpg)</label>
+                          <div className="flex flex-col sm:flex-row gap-2">
+                            <input
+                              type="text"
+                              placeholder="/hero-poster.jpg or https://..."
+                              value={cms.homeHeroPosterUrl || ''}
+                              onChange={(e) => setCms(prev => ({ ...prev, homeHeroPosterUrl: e.target.value }))}
+                              className="flex-1 p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                            />
+                            <label className="px-4 py-3 bg-[#1D493E] hover:bg-[#15342c] text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 cursor-pointer shrink-0">
+                              <Upload className="w-4 h-4" />
+                              <span>Upload Photo</span>
+                              <input
+                                type="file"
+                                accept="image/*"
+                                onChange={(e) => handleFileUpload(e, (url) => {
+                                  setCms(prev => ({ ...prev, homeHeroPosterUrl: url }));
+                                })}
+                                className="hidden"
+                              />
+                            </label>
+                          </div>
                           <p className="text-[10px] text-gray-400">Instant load preview poster for smooth rendering</p>
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                        <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Title Line 1</label>
-                          <input
-                            type="text"
-                            value={cms.homeHeroTitleLine1}
-                            onChange={(e) => setCms(prev => ({ ...prev, homeHeroTitleLine1: e.target.value }))}
-                            className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
-                          />
+                      {/* LIVE MEDIA PREVIEW PLAYER */}
+                      <div className="bg-[#111] p-3 rounded-2xl border border-gray-800 space-y-2 max-w-xs sm:max-w-sm">
+                        <div className="flex items-center justify-between">
+                          <span className="text-[10px] font-black text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
+                            Live Media Preview
+                          </span>
+                          <span className="text-[9px] text-gray-400 font-mono truncate max-w-[150px]">
+                            {cms.homeHeroVideoUrl || '/hero-video.mp4'}
+                          </span>
                         </div>
-                        <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Title Line 2</label>
-                          <input
-                            type="text"
-                            value={cms.homeHeroTitleLine2}
-                            onChange={(e) => setCms(prev => ({ ...prev, homeHeroTitleLine2: e.target.value }))}
-                            className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
-                          />
-                        </div>
-                        <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Title Line 3</label>
-                          <input
-                            type="text"
-                            value={cms.homeHeroTitleLine3}
-                            onChange={(e) => setCms(prev => ({ ...prev, homeHeroTitleLine3: e.target.value }))}
-                            className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
-                          />
-                        </div>
-                      </div>
-
-                      <div className="space-y-1">
-                        <label className="text-[10px] font-bold text-[#6B7280] uppercase">Hero Subtitle Copy</label>
-                        <textarea
-                          rows={2}
-                          value={cms.homeHeroSubtitle}
-                          onChange={(e) => setCms(prev => ({ ...prev, homeHeroSubtitle: e.target.value }))}
-                          className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] resize-none focus:outline-none focus:border-[#1D493E]"
-                        />
-                      </div>
-
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Shop Button Label</label>
-                          <input
-                            type="text"
-                            value={cms.homeHeroShopBtn}
-                            onChange={(e) => setCms(prev => ({ ...prev, homeHeroShopBtn: e.target.value }))}
-                            className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
-                          />
-                        </div>
-                        <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Travel Packages Button Label</label>
-                          <input
-                            type="text"
-                            value={cms.homeHeroTravelBtn}
-                            onChange={(e) => setCms(prev => ({ ...prev, homeHeroTravelBtn: e.target.value }))}
-                            className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
-                          />
+                        <div className="relative w-full aspect-video rounded-lg overflow-hidden bg-black border border-gray-800 shadow-md flex items-center justify-center">
+                          {cms.homeHeroVideoUrl ? (
+                            <video
+                              src={cms.homeHeroVideoUrl}
+                              poster={cms.homeHeroPosterUrl || '/hero-poster.jpg'}
+                              autoPlay
+                              loop
+                              muted
+                              playsInline
+                              className="w-full h-full object-cover"
+                            />
+                          ) : (
+                            <img
+                              src={cms.homeHeroPosterUrl || '/hero-poster.jpg'}
+                              alt="Hero Preview Poster"
+                              className="w-full h-full object-cover"
+                            />
+                          )}
                         </div>
                       </div>
                     </div>
 
-                    {/* SECTION 2: DUAL CTA CARDS */}
+
+
+                    {/* SECTION 2: DESTINATIONS & LIVE 3 TRAVEL PACKAGES */}
                     <div className="space-y-4 border-t border-[#E5E0D5] pt-6">
-                      <h4 className="text-xs font-black text-[#FF5A36] uppercase tracking-wider">2. Dual CTA Banner Cards (Shop Gear + Book Trip)</h4>
-                      
-                      {/* Card 1 */}
-                      <div className="p-4 bg-[#FAF9F6] rounded-xl border border-[#E5E0D5] space-y-3">
-                        <span className="text-[11px] font-bold text-[#1D493E]">Card 1: Shop Travel Gear</span>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                          <input
-                            type="text"
-                            placeholder="Title"
-                            value={cms.homeCtaBanner1Title}
-                            onChange={(e) => setCms(prev => ({ ...prev, homeCtaBanner1Title: e.target.value }))}
-                            className="p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs"
-                          />
-                          <input
-                            type="text"
-                            placeholder="Button Text"
-                            value={cms.homeCtaBanner1BtnText}
-                            onChange={(e) => setCms(prev => ({ ...prev, homeCtaBanner1BtnText: e.target.value }))}
-                            className="p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs"
-                          />
-                        </div>
-                        <textarea
-                          rows={2}
-                          placeholder="Description"
-                          value={cms.homeCtaBanner1Desc}
-                          onChange={(e) => setCms(prev => ({ ...prev, homeCtaBanner1Desc: e.target.value }))}
-                          className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs resize-none"
-                        />
+                      <div className="flex items-center justify-between">
+                        <h4 className="text-xs font-black text-[#FF5A36] uppercase tracking-wider">2. Places Worth the Detour (Destinations)</h4>
+                        <span className="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full">
+                          Live on Homepage
+                        </span>
                       </div>
 
-                      {/* Card 2 */}
-                      <div className="p-4 bg-[#FAF9F6] rounded-xl border border-[#E5E0D5] space-y-3">
-                        <span className="text-[11px] font-bold text-[#FF5A36]">Card 2: Book a Trip</span>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                          <input
-                            type="text"
-                            placeholder="Title"
-                            value={cms.homeCtaBanner2Title}
-                            onChange={(e) => setCms(prev => ({ ...prev, homeCtaBanner2Title: e.target.value }))}
-                            className="p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs"
-                          />
-                          <input
-                            type="text"
-                            placeholder="Button Text"
-                            value={cms.homeCtaBanner2BtnText}
-                            onChange={(e) => setCms(prev => ({ ...prev, homeCtaBanner2BtnText: e.target.value }))}
-                            className="p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs"
-                          />
-                        </div>
-                        <textarea
-                          rows={2}
-                          placeholder="Description"
-                          value={cms.homeCtaBanner2Desc}
-                          onChange={(e) => setCms(prev => ({ ...prev, homeCtaBanner2Desc: e.target.value }))}
-                          className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs resize-none"
-                        />
-                      </div>
-                    </div>
-
-                    {/* SECTION 3: DESTINATIONS */}
-                    <div className="space-y-4 border-t border-[#E5E0D5] pt-6">
-                      <h4 className="text-xs font-black text-[#FF5A36] uppercase tracking-wider">3. Places Worth the Detour (Destinations)</h4>
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div className="space-y-1">
                           <label className="text-[10px] font-bold text-[#6B7280] uppercase">Tag Badge</label>
@@ -1543,56 +1442,49 @@ export default function AdminPortal() {
                           />
                         </div>
                       </div>
-                    </div>
 
-                    {/* SECTION 4: DEALS & BEST SELLERS */}
-                    <div className="space-y-4 border-t border-[#E5E0D5] pt-6">
-                      <h4 className="text-xs font-black text-[#FF5A36] uppercase tracking-wider">4. Trending Deals & Best Sellers Headings</h4>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Deals Section Title</label>
-                          <input
-                            type="text"
-                            value={cms.homeDealsTitle}
-                            onChange={(e) => setCms(prev => ({ ...prev, homeDealsTitle: e.target.value }))}
-                            className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
-                          />
+                      {/* LIVE 3 TRAVEL PACKAGES SHOWCASE */}
+                      <div className="bg-[#FAF9F6] p-4 rounded-2xl border border-[#E5E0D5] space-y-3">
+                        <div className="flex items-center justify-between">
+                          <span className="text-[11px] font-bold text-[#1D493E] uppercase tracking-wider flex items-center gap-1.5">
+                            <Compass className="w-4 h-4 text-[#FF5A36]" />
+                            Live Featured 3 Travel Packages on Homepage
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() => setActiveTab('packages')}
+                            className="text-[10px] font-bold text-[#1D493E] hover:underline cursor-pointer"
+                          >
+                            Manage Packages &rarr;
+                          </button>
                         </div>
-                        <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Best Sellers Section Title</label>
-                          <input
-                            type="text"
-                            value={cms.homeSellingTitle}
-                            onChange={(e) => setCms(prev => ({ ...prev, homeSellingTitle: e.target.value }))}
-                            className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
-                          />
-                        </div>
-                      </div>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Deals Subtitle</label>
-                          <input
-                            type="text"
-                            value={cms.homeDealsSub}
-                            onChange={(e) => setCms(prev => ({ ...prev, homeDealsSub: e.target.value }))}
-                            className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
-                          />
-                        </div>
-                        <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Best Sellers Subtitle</label>
-                          <input
-                            type="text"
-                            value={cms.homeSellingSub}
-                            onChange={(e) => setCms(prev => ({ ...prev, homeSellingSub: e.target.value }))}
-                            className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
-                          />
+
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                          {((packages && packages.length > 0 ? packages : []).filter(p => p.showOnHome !== false && !p.hidden).slice(0, 3)).map((pkg, idx) => (
+                            <div key={pkg.id || idx} className="bg-white p-3 rounded-xl border border-[#E5E0D5] space-y-2 flex flex-col justify-between shadow-2xs">
+                              <div className="space-y-2">
+                                <div className="relative aspect-video w-full rounded-lg overflow-hidden bg-gray-100">
+                                  <img src={pkg.image} alt={pkg.name} className="w-full h-full object-cover" />
+                                  <span className="absolute top-1.5 left-1.5 text-[9px] font-bold bg-[#1D493E] text-white px-2 py-0.5 rounded">
+                                    Package #{idx + 1}
+                                  </span>
+                                </div>
+                                <div>
+                                  <h5 className="text-xs font-bold text-[#2B2B2B] line-clamp-1">{pkg.name}</h5>
+                                  <p className="text-[10px] text-[#6B7280]">{pkg.duration} &bull; {pkg.destination}</p>
+                                </div>
+                              </div>
+                              <div className="pt-1 border-t border-gray-100 flex items-center justify-between">
+                                <span className="text-xs font-black text-[#1D493E]">₹{pkg.price?.toLocaleString('en-IN')}</span>
+                                <span className="text-[9px] bg-emerald-50 text-emerald-700 font-bold px-1.5 py-0.5 rounded border border-emerald-200">Live</span>
+                              </div>
+                            </div>
+                          ))}
                         </div>
                       </div>
                     </div>
-
-                    {/* SECTION 5: CATEGORIES, REVIEWS, BLOG, FAQ */}
                     <div className="space-y-4 border-t border-[#E5E0D5] pt-6">
-                      <h4 className="text-xs font-black text-[#FF5A36] uppercase tracking-wider">5. Product Categories, Reviews & Travel Tales (Blog)</h4>
+                      <h4 className="text-xs font-black text-[#FF5A36] uppercase tracking-wider">3. Product Categories, Reviews & Travel Tales (Blog)</h4>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="space-y-1">
                           <label className="text-[10px] font-bold text-[#6B7280] uppercase">Categories Section Title</label>
@@ -1813,301 +1705,10 @@ export default function AdminPortal() {
                       </div>
                     </div>
 
-                     {/* SECTION 6: BOTTOM CTA & INSTAGRAM */}
-                    <div className="space-y-4 border-t border-[#E5E0D5] pt-6">
-                      <h4 className="text-xs font-black text-[#FF5A36] uppercase tracking-wider">6. Bottom CTA Banner & Instagram Grid</h4>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Bottom CTA Title</label>
-                          <input
-                            type="text"
-                            value={cms.homeCtaTitle}
-                            onChange={(e) => setCms(prev => ({ ...prev, homeCtaTitle: e.target.value }))}
-                            className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
-                          />
-                        </div>
-                        <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Bottom CTA Subtitle</label>
-                          <input
-                            type="text"
-                            value={cms.homeCtaSub}
-                            onChange={(e) => setCms(prev => ({ ...prev, homeCtaSub: e.target.value }))}
-                            className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
-                          />
-                        </div>
-                      </div>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">CTA Button Text</label>
-                          <input
-                            type="text"
-                            value={cms.homeCtaBtnText}
-                            onChange={(e) => setCms(prev => ({ ...prev, homeCtaBtnText: e.target.value }))}
-                            className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
-                          />
-                        </div>
-                        <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">CTA Button Link</label>
-                          <input
-                            type="text"
-                            value={cms.homeCtaBtnLink}
-                            onChange={(e) => setCms(prev => ({ ...prev, homeCtaBtnLink: e.target.value }))}
-                            className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
-                          />
-                        </div>
-                      </div>
-                      <div className="space-y-1 bg-[#FAF9F6] p-4 rounded-xl border border-[#E5E0D5]">
-                        <label className="text-[10px] font-bold text-[#6B7280] uppercase block">CTA Background Image</label>
-                        <div className="flex flex-col sm:flex-row gap-3 items-center">
-                          <input
-                            type="text"
-                            value={cms.homeCtaBgImage || ''}
-                            onChange={(e) => setCms(prev => ({ ...prev, homeCtaBgImage: e.target.value }))}
-                            className="flex-1 p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
-                            placeholder="e.g. /newsletter_bg.jpg or copy external URL"
-                          />
-                          <label className="px-4 py-3 bg-[#1D493E] hover:bg-[#15342c] text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs">
-                            <Upload className="w-4 h-4" />
-                            <span>Upload Picture</span>
-                            <input
-                              type="file"
-                              accept="image/*"
-                              onChange={(e) => handleFileUpload(e, (url) => {
-                                setCms(prev => ({ ...prev, homeCtaBgImage: url }));
-                              })}
-                              className="hidden"
-                            />
-                          </label>
-                        </div>
-                      </div>
-                    </div>
 
-                    {/* SECTION 7: MEET BONJO (BRAND STORY) */}
-                    <div className="space-y-4 border-t border-[#E5E0D5] pt-6">
-                      <div className="flex items-center justify-between">
-                        <h4 className="text-xs font-black text-[#FF5A36] uppercase tracking-wider">7. Meet Bonjo (Brand Story Section)</h4>
-                        <span className="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded">About & Story</span>
-                      </div>
 
-                      <div className="p-4 bg-[#FAF9F6] rounded-xl border border-[#E5E0D5] space-y-3">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                          <div className="space-y-1">
-                            <label className="text-[10px] font-bold text-[#6B7280] uppercase">Mascot Tagline</label>
-                            <input
-                              type="text"
-                              value={cms.homeBonjoTag || ''}
-                              onChange={(e) => setCms(prev => ({ ...prev, homeBonjoTag: e.target.value }))}
-                              className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
-                              placeholder="e.g. The Banjara Soul"
-                            />
-                          </div>
-                          <div className="space-y-1">
-                            <label className="text-[10px] font-bold text-[#6B7280] uppercase">Mascot Heading</label>
-                            <input
-                              type="text"
-                              value={cms.homeBonjoTitle || ''}
-                              onChange={(e) => setCms(prev => ({ ...prev, homeBonjoTitle: e.target.value }))}
-                              className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
-                              placeholder="e.g. Meet Bonjo."
-                            />
-                          </div>
-                        </div>
 
-                        <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Paragraph 1</label>
-                          <textarea
-                            rows={2}
-                            value={cms.homeBonjoText1 || ''}
-                            onChange={(e) => setCms(prev => ({ ...prev, homeBonjoText1: e.target.value }))}
-                            className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] resize-none"
-                            placeholder="First paragraph text..."
-                          />
-                        </div>
-                        <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Paragraph 2</label>
-                          <textarea
-                            rows={2}
-                            value={cms.homeBonjoText2 || ''}
-                            onChange={(e) => setCms(prev => ({ ...prev, homeBonjoText2: e.target.value }))}
-                            className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] resize-none"
-                            placeholder="Second paragraph text..."
-                          />
-                        </div>
-                        <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Paragraph 3</label>
-                          <textarea
-                            rows={2}
-                            value={cms.homeBonjoText3 || ''}
-                            onChange={(e) => setCms(prev => ({ ...prev, homeBonjoText3: e.target.value }))}
-                            className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] resize-none"
-                            placeholder="Third paragraph text..."
-                          />
-                        </div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                          <div className="space-y-1">
-                            <label className="text-[10px] font-bold text-[#6B7280] uppercase">Button Text</label>
-                            <input
-                              type="text"
-                              value={cms.homeBonjoBtnText || ''}
-                              onChange={(e) => setCms(prev => ({ ...prev, homeBonjoBtnText: e.target.value }))}
-                              className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
-                              placeholder="e.g. Our Story"
-                            />
-                          </div>
-                          <div className="space-y-1">
-                            <label className="text-[10px] font-bold text-[#6B7280] uppercase">Button Link</label>
-                            <input
-                              type="text"
-                              value={cms.homeBonjoBtnLink || ''}
-                              onChange={(e) => setCms(prev => ({ ...prev, homeBonjoBtnLink: e.target.value }))}
-                              className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
-                              placeholder="e.g. /about"
-                            />
-                          </div>
-                        </div>
-
-                        <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase block">Mascot Image</label>
-                          <div className="flex flex-col sm:flex-row gap-3 items-center">
-                            <input
-                              type="text"
-                              value={cms.homeBonjoImage || ''}
-                              onChange={(e) => setCms(prev => ({ ...prev, homeBonjoImage: e.target.value }))}
-                              className="flex-1 p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
-                              placeholder="e.g. /llama_mascot.png"
-                            />
-                            <label className="px-4 py-3 bg-[#1D493E] hover:bg-[#15342c] text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs">
-                              <Upload className="w-4 h-4" />
-                              <span>Upload Picture</span>
-                              <input
-                                type="file"
-                                accept="image/*"
-                                onChange={(e) => handleFileUpload(e, (url) => {
-                                  setCms(prev => ({ ...prev, homeBonjoImage: url }));
-                                })}
-                                className="hidden"
-                              />
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* SECTION 8: TRIBE VALUES / SERVICES */}
-                    <div className="space-y-4 border-t border-[#E5E0D5] pt-6">
-                      <div className="flex items-center justify-between">
-                        <h4 className="text-xs font-black text-[#FF5A36] uppercase tracking-wider">8. Tribe Values / Services Section</h4>
-                        <span className="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded">Values & Trust</span>
-                      </div>
-
-                      <div className="p-4 bg-[#FAF9F6] rounded-xl border border-[#E5E0D5] space-y-3">
-                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                          <div className="space-y-1">
-                            <label className="text-[10px] font-bold text-[#6B7280] uppercase">Tagline</label>
-                            <input
-                              type="text"
-                              value={cms.homeValuesTag || ''}
-                              onChange={(e) => setCms(prev => ({ ...prev, homeValuesTag: e.target.value }))}
-                              className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
-                              placeholder="e.g. THE BANJARA TRIBE"
-                            />
-                          </div>
-                          <div className="space-y-1">
-                            <label className="text-[10px] font-bold text-[#6B7280] uppercase">Main Heading</label>
-                            <input
-                              type="text"
-                              value={cms.homeValuesTitle || ''}
-                              onChange={(e) => setCms(prev => ({ ...prev, homeValuesTitle: e.target.value }))}
-                              className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
-                              placeholder="e.g. Join the Banjara Tribe"
-                            />
-                          </div>
-                          <div className="space-y-1">
-                            <label className="text-[10px] font-bold text-[#6B7280] uppercase">Mobile Title / Subtitle</label>
-                            <input
-                              type="text"
-                              value={cms.homeValuesSub || ''}
-                              onChange={(e) => setCms(prev => ({ ...prev, homeValuesSub: e.target.value }))}
-                              className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
-                              placeholder="e.g. Services to help you shop"
-                            />
-                          </div>
-                        </div>
-
-                        {/* 4 Cards list editor */}
-                        <div className="space-y-2 pt-2">
-                          <span className="text-[10px] font-bold text-[#1D493E] uppercase tracking-wider block">Service Cards (4 Cards Required):</span>
-                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            {(cms.homeServicesCards || [
-                              { image: '/service-faq.png', title: 'Frequently Asked Questions (FAQ)', desc: 'See what are the commonly asked questions by our customers' },
-                              { image: '/service-delivery.png', title: 'Home Delivery Options available', desc: 'Pay with multiple cards seamlessly and without interruption' },
-                              { image: '/service-payment.png', title: 'Secure Online Payment Process', desc: 'Pay with multiple cards seamlessly and without interruption' },
-                              { image: '/service-openbox.png', title: 'Open Box Delivery', desc: 'Pay with multiple cards seamlessly and without interruption' }
-                            ]).map((srv, idx) => (
-                              <div key={idx} className="bg-white p-3 rounded-xl border border-[#E5E0D5] space-y-2 shadow-2xs">
-                                <span className="text-[10px] font-black text-[#FF5A36] uppercase tracking-wide">Card #{idx + 1}</span>
-                                <div className="flex gap-2">
-                                  <img src={srv.image} className="w-10 h-10 rounded object-cover border shrink-0" alt="Service Card Icon" />
-                                  <div className="flex-1 space-y-1 min-w-0">
-                                    <input
-                                      type="text"
-                                      value={srv.title}
-                                      onChange={(e) => {
-                                        const updated = [...(cms.homeServicesCards || [])];
-                                        updated[idx] = { ...updated[idx], title: e.target.value };
-                                        setCms(prev => ({ ...prev, homeServicesCards: updated }));
-                                      }}
-                                      className="font-bold text-xs text-[#2B2B2B] w-full border-b border-dashed border-gray-300 focus:outline-none"
-                                      placeholder="Card Title"
-                                    />
-                                    <input
-                                      type="text"
-                                      value={srv.desc}
-                                      onChange={(e) => {
-                                        const updated = [...(cms.homeServicesCards || [])];
-                                        updated[idx] = { ...updated[idx], desc: e.target.value };
-                                        setCms(prev => ({ ...prev, homeServicesCards: updated }));
-                                      }}
-                                      className="text-[10px] text-gray-500 w-full border-b border-dashed border-gray-300 focus:outline-none"
-                                      placeholder="Card Description"
-                                    />
-                                  </div>
-                                </div>
-                                <div className="space-y-0.5 text-left">
-                                  <span className="text-[9px] font-bold text-gray-400 uppercase tracking-wider block">Image/Icon URL</span>
-                                  <input
-                                    type="text"
-                                    value={srv.image}
-                                    onChange={(e) => {
-                                      const updated = [...(cms.homeServicesCards || [])];
-                                      updated[idx] = { ...updated[idx], image: e.target.value };
-                                      setCms(prev => ({ ...prev, homeServicesCards: updated }));
-                                    }}
-                                    className="text-[9px] text-gray-600 w-full p-1 bg-gray-50 border border-gray-200 rounded focus:outline-none"
-                                    placeholder="e.g. /icon.png"
-                                  />
-                                </div>
-                                <label className="w-full px-2 py-1 bg-[#1D493E] hover:bg-[#15342c] text-white rounded text-[9px] font-bold transition flex items-center justify-center gap-1 cursor-pointer">
-                                  <Upload className="w-2.5 h-2.5" />
-                                  <span>Picture</span>
-                                  <input
-                                    type="file"
-                                    accept="image/*"
-                                    onChange={(e) => handleFileUpload(e, (url) => {
-                                      const updated = [...(cms.homeServicesCards || [])];
-                                      updated[idx] = { ...updated[idx], image: url };
-                                      setCms(prev => ({ ...prev, homeServicesCards: updated }));
-                                    })}
-                                    className="hidden"
-                                  />
-                                </label>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
 
                     {/* DYNAMIC CUSTOM HOMEPAGE SECTIONS */}
                     <div className="space-y-4 border-t border-[#E5E0D5] pt-6">
@@ -2178,6 +1779,30 @@ export default function AdminPortal() {
                                 </div>
                               </div>
 
+                              {/* LOCATION / PLACEMENT SELECTOR */}
+                              <div className="space-y-1 bg-white p-3 rounded-xl border border-[#E5E0D5]">
+                                <label className="text-[10px] font-bold text-[#1D493E] uppercase block">Homepage Placement Location</label>
+                                <select
+                                  value={sec.position || 'bottom'}
+                                  onChange={(e) => {
+                                    const updated = [...(cms.homeCustomSections || [])];
+                                    updated[idx].position = e.target.value as any;
+                                    setCms(prev => ({ ...prev, homeCustomSections: updated }));
+                                  }}
+                                  className="w-full p-2.5 bg-[#FAF9F6] border border-[#E5E0D5] rounded-xl text-xs font-bold text-[#1D493E]"
+                                >
+                                  <option value="hero">Below Hero Section</option>
+                                  <option value="dual_cta">Below Dual CTA Banners</option>
+                                  <option value="destinations">Below Destinations (Places Worth Detour)</option>
+                                  <option value="deals">Below Best Selling & Deals</option>
+                                  <option value="categories">Below Product Collections</option>
+                                  <option value="reviews">Below Community Reviews</option>
+                                  <option value="blog">Below Travel Journal (Blog)</option>
+                                  <option value="bottom">At Bottom of Home Page</option>
+                                </select>
+                              </div>
+
+                              {/* TAG & TITLE */}
                               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                                 <input
                                   type="text"
@@ -2188,7 +1813,7 @@ export default function AdminPortal() {
                                     updated[idx].tag = e.target.value;
                                     setCms(prev => ({ ...prev, homeCustomSections: updated }));
                                   }}
-                                  className="p-2.5 bg-white border border-[#E5E0D5] rounded-xl text-xs"
+                                  className="p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs"
                                 />
                                 <input
                                   type="text"
@@ -2199,58 +1824,53 @@ export default function AdminPortal() {
                                     updated[idx].title = e.target.value;
                                     setCms(prev => ({ ...prev, homeCustomSections: updated }));
                                   }}
-                                  className="p-2.5 bg-white border border-[#E5E0D5] rounded-xl text-xs sm:col-span-2 font-bold"
+                                  className="p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs sm:col-span-2 font-bold text-[#1D493E]"
                                 />
                               </div>
 
+                              {/* SUBTITLE */}
                               <textarea
                                 rows={2}
-                                placeholder="Subtitle / Description"
+                                placeholder="Subtitle / Description..."
                                 value={sec.subtitle}
                                 onChange={(e) => {
                                   const updated = [...(cms.homeCustomSections || [])];
                                   updated[idx].subtitle = e.target.value;
                                   setCms(prev => ({ ...prev, homeCustomSections: updated }));
                                 }}
-                                className="w-full p-2.5 bg-white border border-[#E5E0D5] rounded-xl text-xs resize-none"
+                                className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs resize-none"
                               />
 
-                              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                <input
-                                  type="text"
-                                  placeholder="Image URL"
-                                  value={sec.image || ''}
-                                  onChange={(e) => {
-                                    const updated = [...(cms.homeCustomSections || [])];
-                                    updated[idx].image = e.target.value;
-                                    setCms(prev => ({ ...prev, homeCustomSections: updated }));
-                                  }}
-                                  className="p-2.5 bg-white border border-[#E5E0D5] rounded-xl text-xs"
-                                />
-                                <input
-                                  type="text"
-                                  placeholder="Video URL (.mp4)"
-                                  value={sec.videoUrl || ''}
-                                  onChange={(e) => {
-                                    const updated = [...(cms.homeCustomSections || [])];
-                                    updated[idx].videoUrl = e.target.value;
-                                    setCms(prev => ({ ...prev, homeCustomSections: updated }));
-                                  }}
-                                  className="p-2.5 bg-white border border-[#E5E0D5] rounded-xl text-xs"
-                                />
-                              </div>
+                              {/* BUTTON OPTION, LABEL & LINK */}
+                              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                <div className="space-y-1">
+                                  <label className="text-[10px] font-bold text-[#1D493E] uppercase block">Button Option</label>
+                                  <select
+                                    value={sec.buttonStyle || 'solid'}
+                                    onChange={(e) => {
+                                      const updated = [...(cms.homeCustomSections || [])];
+                                      updated[idx].buttonStyle = e.target.value as any;
+                                      setCms(prev => ({ ...prev, homeCustomSections: updated }));
+                                    }}
+                                    className="w-full p-3 bg-[#FAF9F6] border border-[#E5E0D5] rounded-xl text-xs font-bold text-[#1D493E]"
+                                  >
+                                    <option value="solid">Solid Button</option>
+                                    <option value="view_all">View All</option>
+                                    <option value="drag">Drag Carousel</option>
+                                    <option value="load_more">Load More</option>
+                                  </select>
+                                </div>
 
-                              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 <input
                                   type="text"
-                                  placeholder="Button Text (e.g. Learn More)"
+                                  placeholder="Button Label (e.g. Explore Now)"
                                   value={sec.buttonText || ''}
                                   onChange={(e) => {
                                     const updated = [...(cms.homeCustomSections || [])];
                                     updated[idx].buttonText = e.target.value;
                                     setCms(prev => ({ ...prev, homeCustomSections: updated }));
                                   }}
-                                  className="p-2.5 bg-white border border-[#E5E0D5] rounded-xl text-xs"
+                                  className="p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs font-medium self-end"
                                 />
                                 <input
                                   type="text"
@@ -2261,7 +1881,7 @@ export default function AdminPortal() {
                                     updated[idx].buttonLink = e.target.value;
                                     setCms(prev => ({ ...prev, homeCustomSections: updated }));
                                   }}
-                                  className="p-2.5 bg-white border border-[#E5E0D5] rounded-xl text-xs"
+                                  className="p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs font-mono self-end"
                                 />
                               </div>
                             </div>
@@ -2273,268 +1893,68 @@ export default function AdminPortal() {
                   </div>
                 )}
 
-                {/* 2. ABOUT US PAGE CMS */}
-                {cmsPageFilter === 'about' && (
-                  <div className="space-y-8">
-                    <div>
-                      <h3 className="text-base font-black text-[#1D493E] flex items-center gap-2">
-                        <BookOpen className="w-5 h-5 text-[#1D493E]" />
-                        <span>About Us Page CMS</span>
-                      </h3>
-                      <p className="text-xs text-[#6B7280] mt-1">Manage brand story, mission, and team headings.</p>
-                    </div>
-
-                    <div className="space-y-4">
-                      <div className="space-y-1">
-                        <label className="text-[10px] font-bold text-[#6B7280] uppercase">Hero Title</label>
-                        <input
-                          type="text"
-                          value={cms.aboutHeroTitle}
-                          onChange={(e) => setCms(prev => ({ ...prev, aboutHeroTitle: e.target.value }))}
-                          className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
-                        />
-                      </div>
-
-                      <div className="space-y-1">
-                        <label className="text-[10px] font-bold text-[#6B7280] uppercase">Hero Subtitle</label>
-                        <input
-                          type="text"
-                          value={cms.aboutHeroSubtitle}
-                          onChange={(e) => setCms(prev => ({ ...prev, aboutHeroSubtitle: e.target.value }))}
-                          className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
-                        />
-                      </div>
-
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Mission Title</label>
-                          <input
-                            type="text"
-                            value={cms.aboutMissionTitle}
-                            onChange={(e) => setCms(prev => ({ ...prev, aboutMissionTitle: e.target.value }))}
-                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
-                          />
-                        </div>
-                        <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Story Title</label>
-                          <input
-                            type="text"
-                            value={cms.aboutStoryTitle}
-                            onChange={(e) => setCms(prev => ({ ...prev, aboutStoryTitle: e.target.value }))}
-                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
-                          />
-                        </div>
-                      </div>
-
-                      <div className="space-y-1">
-                        <label className="text-[10px] font-bold text-[#6B7280] uppercase">Mission Statement Text</label>
-                        <textarea
-                          rows={3}
-                          value={cms.aboutMissionText}
-                          onChange={(e) => setCms(prev => ({ ...prev, aboutMissionText: e.target.value }))}
-                          className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
-                        />
-                      </div>
-
-                      <div className="space-y-1">
-                        <label className="text-[10px] font-bold text-[#6B7280] uppercase">Brand Story Text</label>
-                        <textarea
-                          rows={3}
-                          value={cms.aboutStoryText}
-                          onChange={(e) => setCms(prev => ({ ...prev, aboutStoryText: e.target.value }))}
-                          className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* 3. SHOP PAGE CMS */}
-                {cmsPageFilter === 'shop' && (
-                  <div className="space-y-8">
-                    <div>
-                      <h3 className="text-base font-black text-[#1D493E] flex items-center gap-2">
-                        <ShoppingBag className="w-5 h-5 text-[#1D493E]" />
-                        <span>Shop Page CMS</span>
-                      </h3>
-                    </div>
-
-                    <div className="space-y-4">
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Shop Hero Title</label>
-                          <input
-                            type="text"
-                            value={cms.shopHeroTitle}
-                            onChange={(e) => setCms(prev => ({ ...prev, shopHeroTitle: e.target.value }))}
-                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
-                          />
-                        </div>
-                        <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Shop Hero Subtitle</label>
-                          <input
-                            type="text"
-                            value={cms.shopHeroSubtitle}
-                            onChange={(e) => setCms(prev => ({ ...prev, shopHeroSubtitle: e.target.value }))}
-                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
-                          />
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Promo Banner Text</label>
-                          <input
-                            type="text"
-                            value={cms.shopPromoBannerText}
-                            onChange={(e) => setCms(prev => ({ ...prev, shopPromoBannerText: e.target.value }))}
-                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
-                          />
-                        </div>
-                        <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Promo Button Text</label>
-                          <input
-                            type="text"
-                            value={cms.shopPromoBannerButton}
-                            onChange={(e) => setCms(prev => ({ ...prev, shopPromoBannerButton: e.target.value }))}
-                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* 4. TRAVEL PACKAGES CMS */}
-                {cmsPageFilter === 'travel' && (
-                  <div className="space-y-8">
-                    <div>
-                      <h3 className="text-base font-black text-[#1D493E] flex items-center gap-2">
-                        <MapIcon className="w-5 h-5 text-[#1D493E]" />
-                        <span>Travel Packages Page CMS</span>
-                      </h3>
-                    </div>
-
-                    <div className="space-y-4">
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Travel Hero Title</label>
-                          <input
-                            type="text"
-                            value={cms.travelHeroTitle}
-                            onChange={(e) => setCms(prev => ({ ...prev, travelHeroTitle: e.target.value }))}
-                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
-                          />
-                        </div>
-                        <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Travel Hero Subtitle</label>
-                          <input
-                            type="text"
-                            value={cms.travelHeroSubtitle}
-                            onChange={(e) => setCms(prev => ({ ...prev, travelHeroSubtitle: e.target.value }))}
-                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
-                          />
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Support Banner Text</label>
-                          <input
-                            type="text"
-                            value={cms.travelSupportBannerText}
-                            onChange={(e) => setCms(prev => ({ ...prev, travelSupportBannerText: e.target.value }))}
-                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
-                          />
-                        </div>
-                        <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Support Phone</label>
-                          <input
-                            type="text"
-                            value={cms.travelSupportPhone}
-                            onChange={(e) => setCms(prev => ({ ...prev, travelSupportPhone: e.target.value }))}
-                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* 5. CONTACT US CMS */}
+                {/* CONTACT US PAGE CMS */}
                 {cmsPageFilter === 'contact' && (
                   <div className="space-y-8">
                     <div>
                       <h3 className="text-base font-black text-[#1D493E] flex items-center gap-2">
-                        <Users className="w-5 h-5 text-[#1D493E]" />
-                        <span>Contact Page CMS</span>
+                        <Mail className="w-5 h-5 text-[#1D493E]" />
+                        <span>Contact Page Details & Office Location</span>
                       </h3>
+                      <p className="text-xs text-[#6B7280] mt-1">Update your live support email, phone number, and office location address shown on http://localhost:3000/contact.</p>
                     </div>
 
-                    <div className="space-y-4">
+                    <div className="space-y-4 bg-[#FAF9F6] p-6 rounded-2xl border border-[#E5E0D5]">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Contact Title</label>
+                          <label className="text-[10px] font-bold text-[#1D493E] uppercase">Support Email Address</label>
                           <input
-                            type="text"
-                            value={cms.contactHeroTitle}
-                            onChange={(e) => setCms(prev => ({ ...prev, contactHeroTitle: e.target.value }))}
-                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                            type="email"
+                            value={cms.contactEmail || cms.global?.supportEmail || ''}
+                            onChange={(e) => setCms(prev => ({
+                              ...prev,
+                              contactEmail: e.target.value,
+                              global: { ...prev.global, supportEmail: e.target.value }
+                            }))}
+                            placeholder="e.g. hello@gobanjara.com"
+                            className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] font-medium"
                           />
                         </div>
-                        <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Contact Subtitle</label>
-                          <input
-                            type="text"
-                            value={cms.contactHeroSubtitle}
-                            onChange={(e) => setCms(prev => ({ ...prev, contactHeroSubtitle: e.target.value }))}
-                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
-                          />
-                        </div>
-                      </div>
 
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Support Phone</label>
+                          <label className="text-[10px] font-bold text-[#1D493E] uppercase">Support Phone Number</label>
                           <input
                             type="text"
-                            value={cms.contactPhone}
-                            onChange={(e) => setCms(prev => ({ ...prev, contactPhone: e.target.value }))}
-                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
-                          />
-                        </div>
-                        <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Support Email</label>
-                          <input
-                            type="text"
-                            value={cms.contactEmail}
-                            onChange={(e) => setCms(prev => ({ ...prev, contactEmail: e.target.value }))}
-                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
-                          />
-                        </div>
-                        <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-[#6B7280] uppercase">Office Hours</label>
-                          <input
-                            type="text"
-                            value={cms.contactHours}
-                            onChange={(e) => setCms(prev => ({ ...prev, contactHours: e.target.value }))}
-                            className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                            value={cms.contactPhone || cms.global?.supportPhone || ''}
+                            onChange={(e) => setCms(prev => ({
+                              ...prev,
+                              contactPhone: e.target.value,
+                              global: { ...prev.global, supportPhone: e.target.value }
+                            }))}
+                            placeholder="e.g. (+91) 9489094392"
+                            className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] font-medium"
                           />
                         </div>
                       </div>
 
                       <div className="space-y-1">
-                        <label className="text-[10px] font-bold text-[#6B7280] uppercase">Office Address</label>
-                        <input
-                          type="text"
-                          value={cms.contactAddress}
-                          onChange={(e) => setCms(prev => ({ ...prev, contactAddress: e.target.value }))}
-                          className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
+                        <label className="text-[10px] font-bold text-[#1D493E] uppercase">Office Location Address</label>
+                        <textarea
+                          rows={3}
+                          value={cms.contactAddress || cms.global?.address || ''}
+                          onChange={(e) => setCms(prev => ({
+                            ...prev,
+                            contactAddress: e.target.value,
+                            global: { ...prev.global, address: e.target.value }
+                          }))}
+                          placeholder="e.g. 1st Floor, DSR Tranquil, 102, Plot # 901, Ayyappa Society Main Rd..."
+                          className="w-full p-3 bg-white border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] font-medium resize-none"
                         />
                       </div>
                     </div>
                   </div>
                 )}
+
 
                 {/* Submit Save Button */}
                 <button
@@ -2661,140 +2081,7 @@ export default function AdminPortal() {
             </div>
           )}
 
-          {/* TAB 4: PACKAGE-PRODUCT LINKER */}
-          {activeTab === 'package_products' && (
-            <div className="space-y-6">
-              
-              <div>
-                <h2 className="text-base font-black text-[#1D493E] flex items-center gap-2">
-                  <LinkIcon className="w-5 h-5 text-[#1D493E]" />
-                  <span>Package-Product Association Linker</span>
-                </h2>
-                <p className="text-xs text-[#6B7280] mt-1">
-                  Attach merchandise products directly to travel packages as included perks or recommended gear add-ons.
-                </p>
-              </div>
 
-              {/* Link Controls Form */}
-              <div className="bg-white border border-[#E5E0D5] rounded-3xl p-6 space-y-6">
-                <h3 className="text-xs font-bold text-[#6B7280] uppercase tracking-wider">Link Product to Package</h3>
-                
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  
-                  <div className="space-y-1">
-                    <label className="text-[10px] font-bold text-[#6B7280] uppercase">Select Travel Package</label>
-                    <select
-                      value={selectedPackageForLink}
-                      onChange={(e) => setSelectedPackageForLink(e.target.value)}
-                      className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
-                    >
-                      {packages.map(pkg => (
-                        <option key={pkg.id} value={pkg.id}>{pkg.name}</option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div className="space-y-1">
-                    <label className="text-[10px] font-bold text-[#6B7280] uppercase">Select Shop Product</label>
-                    <select
-                      value={newLinkProductId}
-                      onChange={(e) => setNewLinkProductId(e.target.value)}
-                      className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
-                    >
-                      <option value="">-- Choose Product --</option>
-                      {products.map(prod => (
-                        <option key={prod.id} value={prod.id}>{prod.name} (₹{prod.price})</option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div className="space-y-1">
-                    <label className="text-[10px] font-bold text-[#6B7280] uppercase">Perk Type</label>
-                    <select
-                      value={newLinkPerkType}
-                      onChange={(e) => setNewLinkPerkType(e.target.value as any)}
-                      className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
-                    >
-                      <option value="included">🎁 Included Free Perk</option>
-                      <option value="addon">🛍️ Recommended Gear Add-on</option>
-                    </select>
-                  </div>
-
-                </div>
-
-                <div className="space-y-1">
-                  <label className="text-[10px] font-bold text-[#6B7280] uppercase">Custom Perk Note</label>
-                  <input
-                    type="text"
-                    placeholder="e.g. Complimentary Saffron Pack or 20% Off Waterproof Jacket"
-                    value={newLinkNote}
-                    onChange={(e) => setNewLinkNote(e.target.value)}
-                    className="w-full p-3 bg-[#F6F3EE] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B]"
-                  />
-                </div>
-
-                <button
-                  type="button"
-                  onClick={handleAddPackageProductLink}
-                  className="px-6 py-3 bg-[#FF5A36] hover:bg-[#e04a29] text-white rounded-xl text-xs font-black uppercase tracking-wider transition shadow-lg cursor-pointer"
-                >
-                  Link Product to Package
-                </button>
-              </div>
-
-              {/* Linked Associations Table */}
-              <div className="bg-white border border-[#E5E0D5] rounded-3xl overflow-hidden">
-                <div className="p-4 bg-[#F0EDE8] border-b border-[#E5E0D5] text-xs font-bold text-[#1D493E] uppercase tracking-wider">
-                  Active Package & Product Links ({packageProductLinks.length})
-                </div>
-
-                <table className="w-full text-left text-xs text-[#2B2B2B]">
-                  <thead className="bg-[#F0EDE8] text-[10px] uppercase font-black text-[#1D493E] border-b border-[#E5E0D5]">
-                    <tr>
-                      <th className="px-6 py-4">Package</th>
-                      <th className="px-6 py-4">Linked Product</th>
-                      <th className="px-6 py-4">Perk Type</th>
-                      <th className="px-6 py-4">Note</th>
-                      <th className="px-6 py-4 text-right">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-[#E5E0D5]">
-                    {packageProductLinks.map((link, idx) => {
-                      const pkg = packages.find(p => p.id === link.packageId);
-                      const prod = products.find(p => p.id === link.productId);
-                      return (
-                        <tr key={idx} className="hover:bg-[#F6F3EE] transition">
-                          <td className="px-6 py-4 font-bold text-[#2B2B2B]">
-                            {pkg?.name || link.packageId}
-                          </td>
-                          <td className="px-6 py-4 text-[#1D493E] font-semibold">
-                            {prod?.name || link.productId}
-                          </td>
-                          <td className="px-6 py-4">
-                            <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold ${
-                              link.perkType === 'included' ? 'bg-[#1D493E]/10 text-[#1D493E]' : 'bg-blue-50 text-blue-700'
-                            }`}>
-                              {link.perkType === 'included' ? 'Included Perk' : 'Gear Add-on'}
-                            </span>
-                          </td>
-                          <td className="px-6 py-4 text-[#8D8D8D]">{link.note || '-'}</td>
-                          <td className="px-6 py-4 text-right">
-                            <button
-                              onClick={() => handleRemovePackageProductLink(link.packageId, link.productId)}
-                              className="p-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-600 hover:text-white transition cursor-pointer"
-                            >
-                              <Trash2 className="w-3.5 h-3.5" />
-                            </button>
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </div>
-
-            </div>
-          )}
 
           {/* TAB 5: TRAVEL PACKAGES CRUD */}
           {activeTab === 'packages' && (
@@ -2846,11 +2133,11 @@ export default function AdminPortal() {
                   </thead>
                   <tbody className="divide-y divide-gray-100">
                     {packages.map(pkg => (
-                      <tr key={pkg.id} className="hover:bg-[#1D493E]/[0.02] transition">
+                      <tr key={pkg.id} className={`hover:bg-[#1D493E]/[0.02] transition ${pkg.hidden ? 'opacity-60 bg-gray-50' : ''}`}>
                         <td className="px-6 py-4 font-bold text-[#2B2B2B]">
                           <div className="flex items-center gap-3">
-                            <div className="w-9 h-9 rounded-lg overflow-hidden bg-[#1D493E]/10 border border-[#E5E0D5] flex items-center justify-center shrink-0 text-[#1D493E] font-bold text-xs relative">
-                              <span>{pkg.name ? pkg.name.substring(0, 2).toUpperCase() : 'GB'}</span>
+                            <div className="w-9 h-9 rounded-xl overflow-hidden bg-[#12382F] border border-[#1D493E] flex items-center justify-center shrink-0 text-white font-extrabold text-xs tracking-wider shadow-xs relative">
+                              <span>GB</span>
                               {pkg.image && (
                                 <img
                                   src={pkg.image}
@@ -2862,7 +2149,14 @@ export default function AdminPortal() {
                                 />
                               )}
                             </div>
-                            <span>{pkg.name || 'Untitled Package'}</span>
+                            <div className="flex items-center gap-2">
+                              <span>{pkg.name || 'Untitled Package'}</span>
+                              {pkg.hidden && (
+                                <span className="px-2 py-0.5 bg-amber-100 text-amber-900 text-[10px] font-bold rounded-md uppercase tracking-wider">
+                                  Hidden
+                                </span>
+                              )}
+                            </div>
                           </div>
                         </td>
                         <td className="px-6 py-4 text-[#1D493E] font-bold font-sans">₹{pkg.price.toLocaleString()}</td>
@@ -2878,6 +2172,9 @@ export default function AdminPortal() {
                                 const updated = packages.map(p => p.id === pkg.id ? { ...p, showOnHome: show } : p);
                                 setPackages(updated);
                                 localStorage.setItem('gb_admin_packages', JSON.stringify(updated));
+                                if (typeof window !== 'undefined') {
+                                  window.dispatchEvent(new CustomEvent('gb_packages_updated', { detail: updated }));
+                                }
                                 showToast(`${show ? 'Showcasing' : 'Hidden from'} Homepage: "${pkg.name}"`);
                               }}
                               className="w-4 h-4 text-[#1D493E] accent-[#1D493E] rounded"
@@ -2889,6 +2186,33 @@ export default function AdminPortal() {
                         </td>
                         <td className="px-6 py-4 text-right">
                           <div className="flex items-center justify-end gap-2">
+                            <button
+                              onClick={() => {
+                                const isHiddenNow = !pkg.hidden;
+                                const updated = packages.map(p => p.id === pkg.id ? { ...p, hidden: isHiddenNow } : p);
+                                setPackages(updated);
+                                localStorage.setItem('gb_admin_packages', JSON.stringify(updated));
+                                if (typeof window !== 'undefined') {
+                                  window.dispatchEvent(new CustomEvent('gb_packages_updated', { detail: updated }));
+                                }
+                                showToast(isHiddenNow ? `🙈 Hidden "${pkg.name}" from public site` : `👁️ Unhidden "${pkg.name}" on public site`);
+                              }}
+                              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 cursor-pointer ${
+                                pkg.hidden
+                                  ? 'bg-amber-100 hover:bg-amber-600 text-amber-900 hover:text-white border border-amber-300'
+                                  : 'bg-slate-100 hover:bg-slate-700 text-slate-700 hover:text-white border border-slate-200'
+                              }`}
+                            >
+                              {pkg.hidden ? (
+                                <>
+                                  <Eye className="w-3.5 h-3.5" /> Unhide
+                                </>
+                              ) : (
+                                <>
+                                  <EyeOff className="w-3.5 h-3.5" /> Hide
+                                </>
+                              )}
+                            </button>
                             <button
                               onClick={() => setEditingPkg({ ...pkg })}
                               className="px-3 py-1.5 bg-[#1D493E]/10 hover:bg-[#1D493E] text-[#1D493E] hover:text-white rounded-lg text-xs font-bold transition flex items-center gap-1.5 cursor-pointer"
@@ -2941,98 +2265,261 @@ export default function AdminPortal() {
                 </button>
               </div>
 
+              {/* Filter Bar */}
+              <div className="flex flex-wrap items-center gap-3 p-4 bg-[#FAF9F6] border border-[#E5E0D5] rounded-2xl">
+                <span className="text-[11px] font-bold text-[#1D493E] uppercase tracking-wider shrink-0">Filter by:</span>
+
+                {/* Category Filter */}
+                <div className="flex flex-col gap-0.5">
+                  <label className="text-[10px] font-bold text-[#8D8D8D] uppercase tracking-wider">Category</label>
+                  <select
+                    value={prodFilterCategory}
+                    onChange={(e) => setProdFilterCategory(e.target.value)}
+                    className="p-2 pr-6 bg-white border border-[#E5E0D5] rounded-lg text-xs text-[#2B2B2B] font-bold focus:outline-none focus:border-[#1D493E] cursor-pointer min-w-[140px]"
+                  >
+                    <option value="">All Categories</option>
+                    {Array.from(new Set(products.map(p => p.category).filter(Boolean))).sort().map(cat => (
+                      <option key={cat} value={cat}>{cat}</option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Section Filter */}
+                <div className="flex flex-col gap-0.5">
+                  <label className="text-[10px] font-bold text-[#8D8D8D] uppercase tracking-wider">Placement Section</label>
+                  <select
+                    value={prodFilterSection}
+                    onChange={(e) => setProdFilterSection(e.target.value)}
+                    className="p-2 pr-6 bg-white border border-[#E5E0D5] rounded-lg text-xs text-[#2B2B2B] font-bold focus:outline-none focus:border-[#1D493E] cursor-pointer min-w-[180px]"
+                  >
+                    <option value="">All Sections</option>
+                    <option value="deals">Trending Adventure Deals</option>
+                    <option value="most-selling">Most Selling Products</option>
+                    <option value="new-arrivals">New Arrivals</option>
+                    <option value="travel-essentials">Travels Essentials</option>
+                    <option value="limited-edition">Limited Edition</option>
+                    <option value="discount-sale">25% to 50% Discount Sale</option>
+                    {(cms.homeCustomSections || []).map((sec, idx) => (
+                      <option key={sec.id || idx} value={sec.id}>
+                        Custom: {sec.title || sec.tag || `Section #${idx + 1}`}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+
+
+                {/* Clear Filters */}
+                {(prodFilterCategory || prodFilterSection) && (
+                  <button
+                    onClick={() => { setProdFilterCategory(''); setProdFilterSection(''); }}
+                    className="mt-4 px-3 py-2 bg-rose-50 hover:bg-rose-600 text-rose-600 hover:text-white rounded-lg text-xs font-bold transition cursor-pointer border border-rose-200"
+                  >
+                    Clear Filters
+                  </button>
+                )}
+
+                <span className="ml-auto text-[11px] text-[#8D8D8D] font-medium">
+                  Showing {products.filter(p =>
+                    (!prodFilterCategory || p.category === prodFilterCategory) &&
+                    (!prodFilterSection || (p.section || 'deals') === prodFilterSection)
+                  ).length} of {products.length} products
+                </span>
+              </div>
+
               <div className="bg-white border border-[#E5E0D5] rounded-2xl overflow-hidden shadow-xs">
                 <table className="w-full text-left text-xs text-[#2B2B2B]">
                   <thead className="bg-[#FAF9F6] border-b border-[#E5E0D5] text-[11px] uppercase font-bold text-[#1D493E] tracking-wider font-sans">
                     <tr>
                       <th className="px-6 py-4">Product Name</th>
                       <th className="px-6 py-4">Category</th>
-                      <th className="px-6 py-4">Placement Section</th>
+                      <th className="px-6 py-4">Section & Page</th>
                       <th className="px-6 py-4">Price</th>
-                      <th className="px-6 py-4">Status</th>
-                      <th className="px-6 py-4">Home Showcase</th>
                       <th className="px-6 py-4 text-right">Actions</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-100">
-                    {products.map(prod => (
-                      <tr key={prod.id} className="hover:bg-[#1D493E]/[0.02] transition">
-                        <td className="px-6 py-4 font-bold text-[#2B2B2B]">
-                          <div className="flex items-center gap-3">
-                            <div className="w-9 h-9 rounded-lg overflow-hidden bg-amber-50 border border-[#E5E0D5] flex items-center justify-center shrink-0 text-amber-800 font-bold text-xs relative">
-                              <span>{prod.name ? prod.name.substring(0, 2).toUpperCase() : 'GB'}</span>
-                              {prod.image && (
-                                <img
-                                  src={prod.image}
-                                  alt={prod.name}
-                                  className="absolute inset-0 w-full h-full object-cover"
-                                  onError={(e) => {
-                                    (e.target as HTMLElement).style.display = 'none';
-                                  }}
-                                />
-                              )}
-                            </div>
-                            <span>{prod.name || 'Untitled Product'}</span>
+                    {(() => {
+                      const filteredProds = products.filter(p =>
+                        (!prodFilterCategory || p.category === prodFilterCategory) &&
+                        (!prodFilterSection || (p.section || 'deals') === prodFilterSection)
+                      );
+                      return filteredProds.map((prod, idx) => {
+                        const isNearBottom = idx >= Math.max(0, filteredProds.length - 3);
+
+                        return (
+                          <tr key={prod.id} className={`hover:bg-[#1D493E]/[0.02] transition ${prod.hidden ? 'opacity-60 bg-gray-50' : ''}`}>
+                            <td className="px-6 py-4 font-bold text-[#2B2B2B]">
+                              <div className="flex items-center gap-3">
+                                <div className="w-9 h-9 rounded-xl overflow-hidden bg-[#12382F] border border-[#1D493E] flex items-center justify-center shrink-0 text-white font-extrabold text-xs tracking-wider shadow-xs relative">
+                                  <span>GB</span>
+                                  {prod.image && (
+                                    <img
+                                      src={prod.image}
+                                      alt={prod.name}
+                                      className="absolute inset-0 w-full h-full object-cover"
+                                      onError={(e) => {
+                                        (e.target as HTMLElement).style.display = 'none';
+                                      }}
+                                    />
+                                  )}
+                                </div>
+                                <div className="flex items-center gap-2">
+                                  <span>{prod.name || 'Untitled Product'}</span>
+                                  {prod.hidden && (
+                                    <span className="px-2 py-0.5 bg-amber-100 text-amber-900 text-[10px] font-bold rounded-md uppercase tracking-wider">
+                                      Hidden
+                                    </span>
+                                  )}
+                                </div>
+                              </div>
+                            </td>
+                            <td className="px-6 py-4 text-[#8D8D8D] capitalize font-medium">{prod.category}</td>
+                            <td className="px-6 py-4">
+                              {/* Multi-Tick Section Dropdown */}
+                              <div className="relative">
+                                <button
+                                  type="button"
+                                  onClick={() => setOpenMultiSectionProdId(openMultiSectionProdId === prod.id ? null : prod.id)}
+                                  className="p-2 bg-[#FAF9F6] border border-[#E5E0D5] hover:border-[#1D493E] rounded-xl text-xs text-[#1D493E] font-bold flex items-center justify-between gap-2 cursor-pointer min-w-[180px] max-w-[240px]"
+                                >
+                                  <span className="truncate">
+                                    {(() => {
+                                      const activeSecs = Array.from(new Set([prod.section || 'deals', ...(prod.sections || [])])).filter(Boolean);
+                                      const sectionLabels: Record<string, string> = {
+                                        'deals': 'Trending Adventure Deals',
+                                        'most-selling': 'Most Selling Products',
+                                        'new-arrivals': 'New Arrivals',
+                                        'travel-essentials': 'Travels Essentials',
+                                        'limited-edition': 'Limited Edition',
+                                        'discount-sale': '25% to 50% Discount Sale'
+                                      };
+                                      const firstLabel = sectionLabels[activeSecs[0]] || activeSecs[0];
+                                      if (activeSecs.length <= 1) return firstLabel;
+                                      return `✓ ${firstLabel} (+${activeSecs.length - 1})`;
+                                    })()}
+                                  </span>
+                                  <ChevronDown className="w-3.5 h-3.5 shrink-0 text-[#1D493E]" />
+                                </button>
+
+                                {/* Checkbox Popover */}
+                                {openMultiSectionProdId === prod.id && (
+                                  <div className={`absolute left-0 w-64 bg-white border border-[#E5E0D5] rounded-2xl shadow-2xl z-50 p-3 space-y-1 text-xs ${
+                                    isNearBottom ? 'bottom-full mb-1.5' : 'top-full mt-1.5'
+                                  }`}>
+                                <div className="text-[10px] font-bold text-[#8D8D8D] uppercase tracking-wider px-2 py-1 border-b border-gray-100 flex items-center justify-between">
+                                  <span>Select Sections (Multi-Tick)</span>
+                                  <button type="button" onClick={() => setOpenMultiSectionProdId(null)} className="text-gray-400 hover:text-gray-600 font-bold text-sm">✕</button>
+                                </div>
+
+                                <div className="max-h-56 overflow-y-auto space-y-1 pt-1 pr-1">
+                                  {[
+                                    { id: 'deals', label: 'Trending Adventure Deals' },
+                                    { id: 'most-selling', label: 'Most Selling Products' },
+                                    { id: 'new-arrivals', label: 'New Arrivals' },
+                                    { id: 'travel-essentials', label: 'Travels Essentials' },
+                                    { id: 'limited-edition', label: 'Limited Edition' },
+                                    { id: 'discount-sale', label: '25% to 50% Discount Sale' },
+                                    ...(cms.homeCustomSections || []).map((sec, idx) => ({
+                                      id: sec.id || `custom-${idx}`,
+                                      label: `Custom: ${sec.title || sec.tag || `Section #${idx + 1}`}`
+                                    }))
+                                  ].map((secItem) => {
+                                    const currentSecs = new Set([prod.section || 'deals', ...(prod.sections || [])]);
+                                    const isChecked = currentSecs.has(secItem.id);
+
+                                    return (
+                                      <label
+                                        key={secItem.id}
+                                        className="flex items-center gap-2.5 px-2.5 py-1.5 hover:bg-[#1D493E]/[0.06] rounded-lg cursor-pointer transition text-[#2B2B2B]"
+                                      >
+                                        <input
+                                          type="checkbox"
+                                          checked={isChecked}
+                                          onChange={(e) => {
+                                            if (e.target.checked && secItem.id === 'most-selling') {
+                                              const currentCount = products.filter(p => p.id !== prod.id && (p.section === 'most-selling' || (Array.isArray(p.sections) && p.sections.includes('most-selling')) || p.isMostSelling)).length;
+                                              if (currentCount >= 8) {
+                                                showToast("⚠️ Maximum 8 products allowed for Most Selling Products!", "error");
+                                                return;
+                                              }
+                                            }
+
+                                            const nextSecsSet = new Set(currentSecs);
+                                            if (e.target.checked) {
+                                              nextSecsSet.add(secItem.id);
+                                            } else {
+                                              if (nextSecsSet.size > 1) {
+                                                nextSecsSet.delete(secItem.id);
+                                              }
+                                            }
+                                            const nextSecsArr = Array.from(nextSecsSet);
+                                            const primarySec = nextSecsArr[0] || 'deals';
+
+                                            const updated = products.map(p => p.id === prod.id ? {
+                                              ...p,
+                                              section: primarySec,
+                                              sections: nextSecsArr,
+                                              isBestDeal: nextSecsSet.has('deals'),
+                                              isMostSelling: nextSecsSet.has('most-selling'),
+                                              isNewArrival: nextSecsSet.has('new-arrivals'),
+                                              isTravelEssential: nextSecsSet.has('travel-essentials'),
+                                              isLimitedEdition: nextSecsSet.has('limited-edition'),
+                                              isDiscountSale: nextSecsSet.has('discount-sale')
+                                            } : p);
+
+                                            setProducts(updated);
+                                            localStorage.setItem('gb_admin_products_v3', JSON.stringify(updated));
+                                            localStorage.setItem('gb_admin_products', JSON.stringify(updated));
+                                            if (typeof window !== 'undefined') {
+                                              window.dispatchEvent(new CustomEvent('gb_products_updated', { detail: updated }));
+                                            }
+                                          }}
+                                          className="w-4 h-4 rounded border-gray-300 accent-[#1D493E] cursor-pointer shrink-0"
+                                        />
+                                        <span className={`font-medium leading-tight ${isChecked ? 'font-bold text-[#1D493E]' : 'text-gray-700'}`}>
+                                          {secItem.label}
+                                        </span>
+                                      </label>
+                                    );
+                                  })}
+                                </div>
+                              </div>
+                            )}
                           </div>
                         </td>
-                        <td className="px-6 py-4 text-[#8D8D8D] capitalize font-medium">{prod.category}</td>
-                        <td className="px-6 py-4">
-                          <select
-                            value={prod.section || 'deals'}
-                            onChange={(e) => {
-                              const newSection = e.target.value;
-                              const updated = products.map(p => p.id === prod.id ? { 
-                                ...p, 
-                                section: newSection,
-                                isBestDeal: newSection === 'deals',
-                                isMostSelling: newSection === 'most-selling'
-                              } : p);
-                              setProducts(updated);
-                              localStorage.setItem('gb_admin_products_v3', JSON.stringify(updated));
-                              showToast(`Moved "${prod.name}" to ${newSection.replace('-', ' ')}!`);
-                            }}
-                            className="p-1.5 bg-[#FAF9F6] border border-[#E5E0D5] rounded-lg text-xs text-[#1D493E] font-bold focus:outline-none focus:border-[#1D493E] cursor-pointer"
-                          >
-                            <option value="deals">Today's Best Deals</option>
-                            <option value="most-selling">Most Selling Products</option>
-                            <option value="travel-essentials">Travel Essentials</option>
-                            <option value="featured">Featured Gear</option>
-                            <option value="badges">Badges & Pins</option>
-                            <option value="slippers">Slippers & Footwear</option>
-                            <option value="keychains">Key Chains</option>
-                            <option value="new-arrivals">New Arrivals</option>
-                          </select>
-                        </td>
+
                         <td className="px-6 py-4 text-[#1D493E] font-bold font-sans">₹{prod.price}</td>
-                        <td className="px-6 py-4">
-                          <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold ${
-                            prod.inStock !== false ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'
-                          }`}>
-                            {prod.inStock !== false ? 'In Stock' : 'Out of Stock'}
-                          </span>
-                        </td>
-                        <td className="px-6 py-4">
-                          <label className="flex items-center gap-1.5 cursor-pointer">
-                            <input
-                              type="checkbox"
-                              checked={prod.showOnHome !== false}
-                              onChange={(e) => {
-                                const show = e.target.checked;
-                                const updated = products.map(p => p.id === prod.id ? { ...p, showOnHome: show } : p);
+                        <td className="px-6 py-4 text-right">
+                          <div className="flex items-center justify-end gap-2">
+                            <button
+                              onClick={() => {
+                                const isHiddenNow = !prod.hidden;
+                                const updated = products.map(p => p.id === prod.id ? { ...p, hidden: isHiddenNow } : p);
                                 setProducts(updated);
                                 localStorage.setItem('gb_admin_products_v3', JSON.stringify(updated));
                                 localStorage.setItem('gb_admin_products', JSON.stringify(updated));
-                                showToast(`${show ? 'Showcasing' : 'Hidden from'} Homepage: "${prod.name}"`);
+                                if (typeof window !== 'undefined') {
+                                  window.dispatchEvent(new CustomEvent('gb_products_updated', { detail: updated }));
+                                }
+                                showToast(isHiddenNow ? `🙈 Hidden "${prod.name}" from store` : `👁️ Unhidden "${prod.name}" on store`);
                               }}
-                              className="w-4 h-4 text-[#1D493E] accent-[#1D493E] rounded"
-                            />
-                            <span className="text-[11px] font-bold text-[#1D493E]">
-                              {prod.showOnHome !== false ? 'Showcased' : 'Off'}
-                            </span>
-                          </label>
-                        </td>
-                        <td className="px-6 py-4 text-right">
-                          <div className="flex items-center justify-end gap-2">
+                              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 cursor-pointer ${
+                                prod.hidden
+                                  ? 'bg-amber-100 hover:bg-amber-600 text-amber-900 hover:text-white border border-amber-300'
+                                  : 'bg-slate-100 hover:bg-slate-700 text-slate-700 hover:text-white border border-slate-200'
+                              }`}
+                            >
+                              {prod.hidden ? (
+                                <>
+                                  <Eye className="w-3.5 h-3.5" /> Unhide
+                                </>
+                              ) : (
+                                <>
+                                  <EyeOff className="w-3.5 h-3.5" /> Hide
+                                </>
+                              )}
+                            </button>
                             <button
                               onClick={() => setEditingProd({ ...prod })}
                               className="px-3 py-1.5 bg-[#1D493E]/10 hover:bg-[#1D493E] text-[#1D493E] hover:text-white rounded-lg text-xs font-bold transition flex items-center gap-1.5 cursor-pointer"
@@ -3054,7 +2541,9 @@ export default function AdminPortal() {
                           </div>
                         </td>
                       </tr>
-                    ))}
+                    );
+                  });
+                })()}
                   </tbody>
                 </table>
               </div>
@@ -3176,23 +2665,55 @@ export default function AdminPortal() {
 
                       <div className="space-y-1">
                         <label className="text-[11px] font-bold text-[#1D493E] uppercase font-sans tracking-wider flex items-center justify-between">
-                          <span>Target Section / Placement</span>
-                          <span className="text-[10px] text-[#8D8D8D] font-normal">Website placement</span>
+                          <span>Target Section</span>
+                          <span className="text-[10px] text-[#8D8D8D] font-normal">Which section on website</span>
                         </label>
                         <select
                           value={editingProd.section || 'deals'}
-                          onChange={(e) => setEditingProd({ ...editingProd, section: e.target.value })}
+                          onChange={(e) => {
+                            const s = e.target.value;
+                            setEditingProd({
+                              ...editingProd,
+                              section: s,
+                              isBestDeal: s === 'deals',
+                              isMostSelling: s === 'most-selling',
+                              isNewArrival: s === 'new-arrivals',
+                              isTravelEssential: s === 'travel-essentials',
+                              isLimitedEdition: s === 'limited-edition',
+                              isDiscountSale: s === 'discount-sale'
+                            });
+                          }}
                           className="w-full p-3 bg-[#FAF9F6] border border-[#E5E0D5] rounded-xl text-xs text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
                         >
-                          <option value="deals">Today's Best Deals for You</option>
+                          <option value="deals">Trending Adventure Deals</option>
                           <option value="most-selling">Most Selling Products</option>
-                          <option value="travel-essentials">Travel Essentials</option>
-                          <option value="featured">Featured Gear & Trending</option>
-                          <option value="badges">Badges & Collectibles</option>
-                          <option value="slippers">Footwear & Slippers</option>
-                          <option value="keychains">Key Chains & Accessories</option>
                           <option value="new-arrivals">New Arrivals</option>
+                          <option value="travel-essentials">Travels Essentials</option>
+                          <option value="limited-edition">Limited Edition</option>
+                          <option value="discount-sale">25% to 50% Discount Sale</option>
+                          {(cms.homeCustomSections || []).map((sec, idx) => (
+                            <option key={sec.id || idx} value={sec.id}>
+                              Custom: {sec.title || sec.tag || `Section #${idx + 1}`}
+                            </option>
+                          ))}
                         </select>
+                      </div>
+
+                      <div className="space-y-1">
+                        <label className="text-[11px] font-bold text-[#1D493E] uppercase font-sans tracking-wider flex items-center justify-between">
+                          <span>Page Location</span>
+                          <span className="text-[10px] text-[#8D8D8D] font-normal">Home, Shop, or Both</span>
+                        </label>
+                        <select
+                          value={editingProd.pageLocation || 'both'}
+                          onChange={(e) => setEditingProd({ ...editingProd, pageLocation: e.target.value as 'home' | 'shop' | 'both' })}
+                          className="w-full p-3 bg-[#EEF7F4] border border-[#1D493E]/40 rounded-xl text-xs text-[#1D493E] font-bold focus:outline-none focus:border-[#1D493E]"
+                        >
+                          <option value="both">Home &amp; Shop (Both Pages)</option>
+                          <option value="home">Home Page Only</option>
+                          <option value="shop">Shop Page Only</option>
+                        </select>
+                        <p className="text-[10px] text-[#8D8D8D] mt-1">Controls where this product&apos;s section appears across the website.</p>
                       </div>
 
                       <div className="space-y-2 pt-1">
@@ -4135,15 +3656,16 @@ export default function AdminPortal() {
             </div>
           )}
 
-          {/* CMS OR DEFAULT PLACEHOLDERS */}
-          {(activeTab === 'blogs' || activeTab === 'destinations') && (
+
+          {/* TAB: DESTINATIONS PLACEHOLDER */}
+          {activeTab === 'destinations' && (
             <div className="bg-white border border-[#E5E0D5] rounded-3xl p-8 text-center space-y-4 shadow-xl animate-fade-in">
               <h2 className="text-lg font-black text-[#1D493E] capitalize">{activeTab} Management</h2>
               <p className="text-xs text-[#6B7280] max-w-md mx-auto">
                 Track real-time transactions, manage entries, and export audit logs.
               </p>
               <div className="p-4 bg-[#F0EDE8] rounded-2xl border border-[#E5E0D5] inline-block text-xs font-mono text-[#1D493E]">
-                Total Records Loaded: {activeTab === 'blogs' ? blogs.length : destinations.length}
+                Total Records Loaded: {destinations.length}
               </div>
             </div>
           )}
@@ -4322,6 +3844,7 @@ export default function AdminPortal() {
           </div>
         </div>
       )}
+
 
       {/* CHANGE ADMIN CREDENTIALS MODAL */}
       {isChangingCreds && (

@@ -55,3 +55,15 @@ export async function POST(request: Request) {
     );
   }
 }
+
+export async function GET() {
+  try {
+    const submissions = await prisma.contactSubmission.findMany({
+      orderBy: { createdAt: 'desc' },
+    });
+    return NextResponse.json({ success: true, submissions });
+  } catch (error: any) {
+    return NextResponse.json({ success: false, submissions: [] });
+  }
+}
+

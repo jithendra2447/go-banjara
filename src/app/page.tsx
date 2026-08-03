@@ -2,6 +2,7 @@
 
 import React, { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { 
   MapPin, Calendar, Users, Star, ArrowRight, ShieldCheck, Compass, Heart, Sparkles, 
   ChevronDown, ChevronUp, Check, ShoppingBag, ArrowUpRight, MessageSquare, Info, BookOpen, Plus, Minus
@@ -93,6 +94,7 @@ const HOME_CATEGORIES = [
 ];
 
 export default function Homepage() {
+  const router = useRouter();
   const { addToCart, setCartOpen, wishlist, toggleWishlist } = useCart();
 
   const [productsList, setProductsList] = useState<any[]>(PRODUCTS);
@@ -179,7 +181,10 @@ export default function Homepage() {
             if (defaultPkg) {
               return { 
                 ...defaultPkg, 
-                ...p 
+                ...p,
+                // Always preserve admin-controlled visibility from localStorage (p)
+                showOnHome: 'showOnHome' in p ? p.showOnHome : defaultPkg.showOnHome,
+                hidden: 'hidden' in p ? p.hidden : defaultPkg.hidden,
               };
             }
             return p;
@@ -551,17 +556,21 @@ export default function Homepage() {
         ];
 
         const filtered = (productsList && productsList.length > 0)
-          ? (cat === 'all' 
-              ? productsList 
-              : productsList.filter(p => (p.category || '').toLowerCase().includes(cat.toLowerCase())))
+          ? productsList.filter(p => !p.hidden && (
+              p.section === sec.id ||
+              (Array.isArray(p.sections) && p.sections.includes(sec.id)) ||
+              (cat !== 'all' && (p.category || '').toLowerCase().includes(cat.toLowerCase()))
+            ))
           : [];
         
+        if (filtered.length === 0) return null;
+        
         const currentLimit = expandedCustomSections[sec.id] || sec.limitCount || 8;
-        const pool = (filtered.length > 0 ? filtered : defaultGridItems);
+        const pool = filtered;
         const listToRender = pool.slice(0, currentLimit);
         const bStyle = sec.buttonStyle || 'solid';
 
-        if (bStyle === 'drag_carousel') {
+        if (bStyle === 'drag_carousel' || bStyle === 'drag') {
           return (
             <section key={sec.id} className="py-12 md:py-16 bg-white relative z-10 overflow-hidden">
               <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-20 text-center space-y-8">
@@ -980,6 +989,9 @@ export default function Homepage() {
         </div>
       )}
 
+      {/* CUSTOM SECTIONS BELOW HERO */}
+      {renderCustomSections('hero')}
+
       {/* 3. DUAL CALL-TO-ACTIONS */}
       {cms.showDualCtaBanners !== false && (
         <section className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-20 pt-[20px] pb-[20px] bg-white relative z-35">
@@ -1184,12 +1196,15 @@ export default function Homepage() {
             {/* Featured Destination Card (Top) */}
             {(() => {
               const rawPkgs = packagesList && packagesList.length > 0 ? packagesList : HOLIDAY_PACKAGES;
-              const displayPkgs = rawPkgs.filter(p => p.showOnHome !== false);
-              const activePkgs = displayPkgs.length > 0 ? displayPkgs : rawPkgs;
-              const pkg1 = activePkgs[0];
+              const displayPkgs = rawPkgs.filter(p => p.showOnHome !== false && !p.hidden);
+              const pkg1 = displayPkgs[0];
               if (!pkg1) return null;
               return (
-                <div className="bg-[#F6F3EE] rounded-[4px] flex flex-col md:flex-row gap-0 w-full overflow-hidden md:h-[394px] text-left group cursor-pointer" style={{ borderRadius: '4px' }}>
+                <div 
+                  onClick={() => router.push(`/travel/package/${pkg1.id}`)}
+                  className="bg-[#F6F3EE] rounded-[4px] flex flex-col md:flex-row gap-0 w-full overflow-hidden md:h-[394px] text-left group cursor-pointer" 
+                  style={{ borderRadius: '4px' }}
+                >
                   {/* Image */}
                   <div 
                     className="relative h-[280px] md:h-full w-full md:w-1/2 shrink-0 overflow-hidden rounded-[4px] md:rounded-l-[4px] md:rounded-r-none isolate"
@@ -1313,9 +1328,15 @@ export default function Homepage() {
             {/* Standard Grid Cards (Bottom Row) */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
               {(() => {
-                const displayPkgs = packagesList && packagesList.length > 0 ? packagesList : HOLIDAY_PACKAGES;
+                const rawPkgs = packagesList && packagesList.length > 0 ? packagesList : HOLIDAY_PACKAGES;
+                const displayPkgs = rawPkgs.filter(p => p.showOnHome !== false && !p.hidden);
                 return displayPkgs.slice(1, 3).map((pkg) => (
-                  <div key={pkg.id} className="bg-[#F6F3EE] rounded-[4px] flex flex-col text-left md:h-[778px] overflow-hidden group cursor-pointer" style={{ borderRadius: '4px' }}>
+                  <div 
+                    key={pkg.id} 
+                    onClick={() => router.push(`/travel/package/${pkg.id}`)}
+                    className="bg-[#F6F3EE] rounded-[4px] flex flex-col text-left md:h-[778px] overflow-hidden group cursor-pointer" 
+                    style={{ borderRadius: '4px' }}
+                  >
                     {/* Image (Flushed with top, left, and right edges) */}
                     <div 
                       className="relative w-full h-[200px] md:h-[384px] overflow-hidden rounded-[4px] shrink-0 isolate"
@@ -1487,7 +1508,8 @@ export default function Homepage() {
           {/* 2-Row Horizontal Scrollable Grid */}
           <div className="grid grid-rows-2 grid-flow-col gap-[12px] overflow-x-auto pb-2 scrollbar-none snap-x snap-mandatory">
             {(() => {
-              const displayPkgs = packagesList && packagesList.length > 0 ? packagesList : HOLIDAY_PACKAGES;
+              const rawPkgs = packagesList && packagesList.length > 0 ? packagesList : HOLIDAY_PACKAGES;
+              const displayPkgs = rawPkgs.filter(p => !p.hidden);
               return displayPkgs.map((pkg) => (
                 <Link 
                   key={pkg.id} 
@@ -1803,26 +1825,31 @@ export default function Homepage() {
             </p>
           </div>
 
-          <DragCarousel totalItems={6} itemWidth={300} className="w-full max-w-[1280px] mx-auto">
-            {[
+          {(() => {
+            const dealsToRender = productsList.filter(p => !p.hidden && (
+              p.section === 'deals' ||
+              (Array.isArray(p.sections) && p.sections.includes('deals')) ||
+              p.isBestDeal === true
+            ));
+            const listToRender = dealsToRender.length > 0 ? dealsToRender : [
               resolveProduct("naturally-nomad-badge-1", "Naturally Nomad", "Badges", "/naturally_nomad_badge.png", 139, 199),
               resolveProduct("explore-more-keychain-1", "Explore more", "Key Chains", "/explore_more_keychain.png", 149, 193),
-              resolveProduct("go-banjara-tshirt-1", "Go Banjara", "T-Shirts", "/go_banjara_tshirt.jpg", 399, 599),
-              resolveProduct("prod-badge-around", "Naturally Nomad", "Badges", "/around_the_world_sticker.jpg", 139, 199),
-              resolveProduct("blue-mavin-slides-1", "Blue Mavin", "Slippers", "/blue_mavin_slides.jpg", 399, 599),
-              resolveProduct("wakefit-pillow-1", "Wakefit Pillow", "Travel Pillows", "/wakefit_pillow.jpg", 139, 199),
-            ].map((deal, idx) => {
-              // Mock product object for cart action
-              const mockProduct = {
-                id: deal.id,
-                name: deal.name,
-                price: deal.price,
-                image: deal.image,
-                category: deal.category,
-                rating: deal.rating,
-                reviewsCount: 120,
-                description: "Deal of the day product"
-              };
+              resolveProduct("wakefit-pillow-1", "Wakefit Pillow", "Travel Pillows", "/wakefit_pillow.jpg", 139, 199)
+            ];
+
+            return (
+              <DragCarousel totalItems={listToRender.length} itemWidth={300} className="w-full max-w-[1280px] mx-auto">
+                {listToRender.map((deal: any, idx) => {
+                  const mockProduct = {
+                    id: deal.id,
+                    name: deal.name,
+                    price: deal.price,
+                    image: deal.image || deal.images?.[0],
+                    category: deal.category,
+                    rating: deal.rating || 5,
+                    reviewsCount: deal.reviewsCount || 120,
+                    description: deal.description || "Deal of the day product"
+                  };
 
               return (
                 <div 
@@ -1835,7 +1862,7 @@ export default function Homepage() {
                   <div className="relative w-full md:h-[254px] rounded-[4px] overflow-hidden shrink-0 isolate" style={{ borderRadius: '4px', WebkitMaskImage: '-webkit-radial-gradient(white, black)' }}>
                     <Link href={`/shop/product/${deal.id}`} className="w-full h-full block cursor-pointer">
                       <img 
-                        src={deal.images[activeImageIndices[deal.id] || 0]} 
+                        src={deal.image || (deal.images && deal.images[activeImageIndices[deal.id] || 0]) || '/placeholder.png'} 
                         alt={deal.name} 
                         className="w-full h-full object-cover rounded-[4px] group-hover:scale-105 transition-transform duration-500 ease-out"
                         style={{ borderRadius: '4px', imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
@@ -1934,6 +1961,8 @@ export default function Homepage() {
               );
             })}
           </DragCarousel>
+        );
+      })()}
 
           {/* View all products footer */}
           <div className="text-center pt-4">
@@ -1973,39 +2002,42 @@ export default function Homepage() {
             </Link>
           </div>
           <div className="grid grid-cols-2 gap-[12px] w-full">
-            {[
-              resolveProduct("naturally-nomad-badge-1", "Naturally Nomad", "Badges", "/naturally_nomad_badge.png", 139, 199),
-              resolveProduct("explore-more-keychain-1", "Explore more", "Key Chains", "/explore_more_keychain.png", 149, 193),
-              resolveProduct("go-banjara-tshirt-1", "Go Banjara", "T-Shirts", "/go_banjara_tshirt.jpg", 399, 599),
-              resolveProduct("prod-badge-around", "Naturally Nomad", "Badges", "/around_the_world_sticker.jpg", 139, 199)
-            ].map((deal, idx) => (
-              <Link key={`mob-deal-${deal.id}-${idx}`} href={`/shop/product/${deal.id}`} className="w-full bg-white rounded-[4px] flex flex-col gap-[6px] text-left overflow-hidden group">
-                <div className="relative w-full h-[130px] rounded-[4px] overflow-hidden bg-gray-50 shrink-0">
-                  <img src={deal.images[0] || deal.image} alt={deal.name} className="w-full h-full object-cover" />
-                </div>
-                <div className="flex flex-col gap-[4px] px-1 pb-1.5">
-                  <span className="bg-[#FF5A36] text-white px-1.5 py-0.5 rounded-[3px] text-[9px] font-bold self-start uppercase">
-                    {deal.category}
-                  </span>
-                  <h4 className="text-[12px] font-bold text-[#2B2B2B] leading-tight m-0 truncate">{deal.name}</h4>
-                  <div className="flex items-center gap-1 text-[11px]">
-                    <span className="text-gray-400 line-through text-[9px]">₹{deal.originalPrice}</span>
-                    <span className="font-bold text-[#2B2B2B]">₹{deal.price}</span>
+            {(() => {
+              const mobileDeals = productsList.filter(p => !p.hidden && (
+                p.section === 'deals' ||
+                (Array.isArray(p.sections) && p.sections.includes('deals')) ||
+                p.isBestDeal === true
+              )).slice(0, 4);
+
+              return mobileDeals.map((deal, idx) => (
+                <Link key={`mob-deal-${deal.id}-${idx}`} href={`/shop/product/${deal.id}`} className="w-full bg-white rounded-[4px] flex flex-col gap-[6px] text-left overflow-hidden group">
+                  <div className="relative w-full h-[130px] rounded-[4px] overflow-hidden bg-gray-50 shrink-0">
+                    <img src={deal.image || deal.images?.[0]} alt={deal.name} className="w-full h-full object-cover" />
                   </div>
-                  <div className="flex items-center gap-1 text-[10px]">
-                    <div className="flex text-amber-400 gap-0.5">
-                      {[...Array(5)].map((_, s) => <Star key={s} className="w-2.5 h-2.5 fill-current" />)}
+                  <div className="flex flex-col gap-[4px] px-1 pb-1.5">
+                    <span className="bg-[#FF5A36] text-white px-1.5 py-0.5 rounded-[3px] text-[9px] font-bold self-start uppercase">
+                      {deal.category}
+                    </span>
+                    <h4 className="text-[12px] font-bold text-[#2B2B2B] leading-tight m-0 truncate">{deal.name}</h4>
+                    <div className="flex items-center gap-1 text-[11px]">
+                      {deal.originalPrice && <span className="text-gray-400 line-through text-[9px]">₹{deal.originalPrice}</span>}
+                      <span className="font-bold text-[#2B2B2B]">₹{deal.price}</span>
                     </div>
-                    <span className="text-gray-500 font-medium text-[9px]">({(deal.reviews || "200").replace(/ Reviews/gi, '')})</span>
+                    <div className="flex items-center gap-1 text-[10px]">
+                      <div className="flex text-amber-400 gap-0.5">
+                        {[...Array(5)].map((_, s) => <Star key={s} className="w-2.5 h-2.5 fill-current" />)}
+                      </div>
+                      <span className="text-gray-500 font-medium text-[9px]">({(deal.reviews || "200").replace(/ Reviews/gi, '')})</span>
+                    </div>
+                    <p className="text-[9px] text-[#8D8D8D] font-medium m-0 truncate">{deal.boughtText || "500+ bought in past month"}</p>
+                    <p className="text-[9px] leading-tight m-0 truncate">
+                      <span className="text-[#8D8D8D]">FREE delivery </span>
+                      <span className="font-bold text-[#2B2B2B]">{getFutureDateString()}</span>
+                    </p>
                   </div>
-                  <p className="text-[9px] text-[#8D8D8D] font-medium m-0 truncate">{deal.boughtText || "500+ bought in past month"}</p>
-                  <p className="text-[9px] leading-tight m-0 truncate">
-                    <span className="text-[#8D8D8D]">FREE delivery </span>
-                    <span className="font-bold text-[#2B2B2B]">{getFutureDateString()}</span>
-                  </p>
-                </div>
-              </Link>
-            ))}
+                </Link>
+              ));
+            })()}
           </div>
         </div>
       </section>
@@ -2055,22 +2087,15 @@ export default function Homepage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[32px] w-full max-w-[1280px] mx-auto">
             {(() => {
-              const defaultSelling = [
-                { id: "naturally-nomad-badge-1", name: "Naturally Nomad", category: "Badges", image: "/naturally_nomad_badge.png", price: 139, originalPrice: 199, rating: 5, reviews: "120", boughtText: "200+ bought in past month" },
-                { id: "blue-mavin-slides-1", name: "Blue Mavin", category: "Slippers", image: "/blue_mavin_slides.jpg", price: 399, originalPrice: 599, rating: 5, reviews: "1k", boughtText: "500+ bought in past month" },
-                { id: "explore-more-keychain-1", name: "Explore more", category: "Key Chains", image: "/explore_more_keychain.png", price: 149, originalPrice: 193, rating: 5, reviews: "200", boughtText: "100+ bought in past month" },
-                { id: "blue-mavin-slides-2", name: "Blue Mavin", category: "Slippers", image: "/blue_mavin_slides.jpg", price: 399, originalPrice: 599, rating: 5, reviews: "1k", boughtText: "500+ bought in past month" },
-                { id: "wakefit-pillows-1", name: "Wakefit Pillows", category: "Travel Pillows", image: "/wakefit_pillow.jpg", price: 139, originalPrice: 199, rating: 5, reviews: "120", boughtText: "200+ bought in past month" },
-                { id: "fur-jaden-cw-1", name: "Fur Jaden C/W", category: "Backpacks", image: "/fur_jaden_backpack.jpg", price: 149, originalPrice: 193, rating: 5, reviews: "200", boughtText: "100+ bought in past month" },
-                { id: "go-passport-cover-1", name: "Go Passport Cover", category: "Passport Covers", image: "/go_passport_cover.jpg", price: 399, originalPrice: 599, rating: 5, reviews: "1k", boughtText: "500+ bought in past month" },
-                { id: "wakefit-pillows-2", name: "Wakefit Pillows", category: "Travel Pillows", image: "/wakefit_pillow.jpg", price: 139, originalPrice: 199, rating: 5, reviews: "120", boughtText: "200+ bought in past month" },
-              ];
-
               const filtered = (productsList && productsList.length > 0)
-                ? productsList.filter(p => p.isMostSelling === true || p.isBestSeller === true || p.section === 'most-selling')
+                ? productsList.filter(p => !p.hidden && (
+                    p.section === 'most-selling' ||
+                    (Array.isArray(p.sections) && p.sections.includes('most-selling')) ||
+                    p.isMostSelling === true
+                  ))
                 : [];
               
-              const listToRender = (filtered.length >= 4 ? filtered : defaultSelling).slice(0, 8);
+              const listToRender = filtered.slice(0, 8);
 
               return listToRender.map((prod: any) => {
                 const mockProduct = {

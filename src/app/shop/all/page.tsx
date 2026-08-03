@@ -48,6 +48,24 @@ function AllProductsContent() {
     } else {
       localStorage.setItem('gb_admin_products_v3', JSON.stringify(PRODUCTS));
     }
+
+    const handleUpdate = (evt?: any) => {
+      try {
+        const saved = evt?.detail ? evt.detail : JSON.parse(localStorage.getItem('gb_admin_products_v3') || '[]');
+        if (Array.isArray(saved) && saved.length > 0) {
+          setProductsList(saved);
+        }
+      } catch (e) {
+        console.error('Error in shop all live update:', e);
+      }
+    };
+
+    window.addEventListener('gb_products_updated', handleUpdate);
+    window.addEventListener('storage', handleUpdate);
+    return () => {
+      window.removeEventListener('gb_products_updated', handleUpdate);
+      window.removeEventListener('storage', handleUpdate);
+    };
   }, []);
 
   // Calculate Selected Count
@@ -72,7 +90,7 @@ function AllProductsContent() {
 
   // Filter Products
   const filteredProducts = React.useMemo(() => {
-    let list = productsList;
+    let list = productsList.filter(p => !p.hidden);
 
     // 0. Search Filter
     if (searchQuery) {

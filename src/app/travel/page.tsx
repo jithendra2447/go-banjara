@@ -159,7 +159,14 @@ export default function HolidaysPortal() {
           // Fill in any missing critical fields without overwriting user edits
           const item = merged[foundIdx];
           if (item.price === undefined || !item.routeList || !item.itinerary) {
-            merged[foundIdx] = { ...hp, ...item };
+            // Merge hardcoded base with user edits, but always keep admin-controlled fields from item
+            merged[foundIdx] = {
+              ...hp,
+              ...item,
+              // Explicitly preserve admin-controlled visibility fields
+              showOnHome: 'showOnHome' in item ? item.showOnHome : hp.showOnHome,
+              hidden: 'hidden' in item ? item.hidden : hp.hidden,
+            };
             needsSave = true;
           }
         }
@@ -196,7 +203,7 @@ export default function HolidaysPortal() {
 
   // Filter & Sort Logic
   const filteredAndSortedPackages = useMemo(() => {
-    let result = [...packages];
+    let result = packages.filter(p => !p.hidden);
 
     // 1. Destination Search Filter
     if (destinationSearch) {

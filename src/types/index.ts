@@ -27,8 +27,13 @@ export interface Product {
   rating: number;
   inStock: boolean;
   section?: string;
+  sections?: string[];
   isBestDeal?: boolean;
   isMostSelling?: boolean;
+  isNewArrival?: boolean;
+  isTravelEssential?: boolean;
+  isLimitedEdition?: boolean;
+  isDiscountSale?: boolean;
   isFeatured?: boolean;
   showOnHome?: boolean;
   homeShowcaseSection?: 'hero' | 'deals' | 'most-selling' | 'featured' | 'none';
@@ -47,6 +52,7 @@ export interface Product {
   galleryImages?: string[];
   highlights?: string[];
   hidden?: boolean;
+  pageLocation?: 'home' | 'shop' | 'both';
 }
 
 export interface TravelPackage {

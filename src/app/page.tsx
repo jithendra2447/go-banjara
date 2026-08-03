@@ -2839,19 +2839,9 @@ export default function Homepage() {
       {/* 13. NEWSLETTER / CTA SECTION */}
       {cms.showCtaBannerSection !== false && (
         <section className="bg-white text-left relative z-10 w-full">
-          {/* Desktop Container (hidden md:block) */}
-          <div className="hidden md:flex w-full py-[42px] px-6 md:px-[80px] bg-white">
-            <div
-              style={{
-                maxWidth: "1440px",
-                margin: "0 auto",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: "32px",
-                textAlign: "center",
-              }}
-            >
+          {/* Desktop Container (hidden md:flex) */}
+          <div className="hidden md:flex max-w-[1440px] w-full mx-auto py-[42px] px-6 md:px-[80px] bg-white">
+            <div className="max-w-[1280px] w-full mx-auto flex flex-col items-center gap-[32px] text-center">
               <div className="flex flex-col items-center gap-[12px] w-full">
                 <h2
                   className="text-3xl md:text-[42px] font-serif font-semibold text-center text-[#1D493E] max-w-[1280px] m-0"

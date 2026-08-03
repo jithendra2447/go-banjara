@@ -379,37 +379,6 @@ export const AuthModal: React.FC = () => {
   const handleGoogleLogin = async () => {
     setError('');
     setSuccessMsg('');
-    try {
-      if (auth) {
-        const provider = new GoogleAuthProvider();
-        provider.setCustomParameters({ prompt: 'select_account' });
-        const result = await signInWithPopup(auth, provider);
-        if (result && result.user && result.user.email) {
-          setLoading(true);
-          const res = await fetch('/api/auth/google', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              email: result.user.email,
-              name: result.user.displayName || result.user.email.split('@')[0],
-              avatar: result.user.photoURL,
-            }),
-          });
-          const data = await res.json();
-          setLoading(false);
-          if (data.success) {
-            setSuccessMsg(`Welcome ${data.user.name || 'Traveler'}! Logged in with Google.`);
-            login(data.user);
-            setTimeout(() => {
-              handleClose();
-            }, 1000);
-            return;
-          }
-        }
-      }
-    } catch (popupErr) {
-      console.log('Google Popup notice, opening custom Google account modal:', popupErr);
-    }
     setGooglePromptEmail('');
     setShowGooglePrompt(true);
   };

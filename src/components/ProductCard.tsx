@@ -14,7 +14,7 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product, onAddToCart }: ProductCardProps) {
-  const { wishlist, toggleWishlist } = useCart();
+  const { wishlist, toggleWishlist, addRecentlyViewed } = useCart();
   const [activeImgIdx, setActiveImgIdx] = useState(0);
   const [isAdded, setIsAdded] = useState(false);
   const deliveryDate = useDeliveryDate(6);
@@ -81,7 +81,7 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
     <>
       {/* 1. MOBILE COMPACT CARD VIEW (sm:hidden) - Exact Most Selling design from Homepage */}
       <div className="flex sm:hidden flex-col w-full bg-white rounded-[4px] border border-gray-100/80 shadow-2xs overflow-hidden text-left relative group">
-        <Link href={`/shop/product/${product.id}`} className="w-full block">
+        <Link href={`/shop/product/${product.id}`} onClick={() => addRecentlyViewed(mockProduct)} className="w-full block">
           <div className="relative w-full h-[130px] rounded-t-[4px] overflow-hidden bg-gray-50 shrink-0">
             <img 
               src={images[activeImgIdx]} 
@@ -191,6 +191,7 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
         >
           <Link 
             href={`/shop/product/${product.id}`}
+            onClick={() => addRecentlyViewed(mockProduct)}
             style={{ width: "100%", height: "100%", display: "block", overflow: "hidden" }}
           >
             <img 

@@ -27,6 +27,8 @@ interface CartContextType {
   logout: () => void;
   isAuthOpen: boolean;
   setAuthOpen: (open: boolean) => void;
+  recentlyViewed: any[];
+  addRecentlyViewed: (item: any) => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -35,6 +37,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const pathname = usePathname();
   const [cart, setCart] = useState<CartItem[]>([]);
   const [wishlist, setWishlist] = useState<any[]>([]);
+  const [recentlyViewed, setRecentlyViewed] = useState<any[]>([]);
   const [isCartOpen, setCartOpen] = useState(false);
   const [isWishlistOpen, setWishlistOpen] = useState(false);
   const [isCheckoutOpen, setCheckoutOpen] = useState(false);
@@ -105,6 +108,16 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
     }
 
+    const savedRecentlyViewed = localStorage.getItem(`gb_recently_viewed${storageSuffix}`);
+    if (savedRecentlyViewed) {
+      try {
+        const parsedRV = JSON.parse(savedRecentlyViewed);
+        if (Array.isArray(parsedRV)) setRecentlyViewed(parsedRV);
+      } catch (e) {
+        console.error('Failed to parse recently viewed', e);
+      }
+    }
+
     setMounted(true);
     setInitialLoaded(true);
   }, []);
@@ -133,13 +146,32 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   }, [wishlist, mounted, initialLoaded, user?.email]);
 
+  // Save recentlyViewed to LocalStorage when it changes
+  useEffect(() => {
+    if (mounted && initialLoaded) {
+      const key = user?.email ? `gb_recently_viewed_${user.email}` : 'gb_recently_viewed_guest';
+      localStorage.setItem(key, JSON.stringify(recentlyViewed));
+    }
+  }, [recentlyViewed, mounted, initialLoaded, user?.email]);
+
+  const addRecentlyViewed = (item: any) => {
+    if (!item) return;
+    const itemId = item.id || item.slug || item.title || item.name;
+    if (!itemId) return;
+
+    setRecentlyViewed((prev) => {
+      const filtered = prev.filter((i) => (i.id || i.slug || i.title || i.name) !== itemId);
+      return [item, ...filtered].slice(0, 12);
+    });
+  };
+
   const login = (userData: any) => {
     setUser(userData);
     const userStr = JSON.stringify(userData);
     localStorage.setItem('gb_user', userStr);
     setCookie('gb_user', userStr);
 
-    // Instantly load account-scoped cart and wishlist for this user
+    // Instantly load account-scoped cart, wishlist, and recently viewed for this user
     if (userData?.email) {
       try {
         const savedCart = localStorage.getItem(`gb_cart_${userData.email}`);
@@ -149,10 +181,12 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         if (savedWishlist) {
           setWishlist(JSON.parse(savedWishlist));
         } else {
-          // If no account wishlist exists yet, inherit current guest wishlist
           const guestWishlist = localStorage.getItem('gb_wishlist_guest');
           if (guestWishlist) setWishlist(JSON.parse(guestWishlist));
         }
+
+        const savedRV = localStorage.getItem(`gb_recently_viewed_${userData.email}`);
+        if (savedRV) setRecentlyViewed(JSON.parse(savedRV));
       } catch (e) {
         console.error('Error hydrating user cart/wishlist on login:', e);
       }
@@ -163,6 +197,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setUser(null);
     setCart([]);
     setWishlist([]);
+    setRecentlyViewed([]);
     localStorage.removeItem('gb_user');
     eraseCookie('gb_user');
   };
@@ -283,6 +318,8 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         logout,
         isAuthOpen,
         setAuthOpen,
+        recentlyViewed,
+        addRecentlyViewed,
       }}
     >
       {/* Global Go Banjāra Cart Toast Notification */}

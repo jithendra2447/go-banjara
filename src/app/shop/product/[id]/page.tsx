@@ -34,7 +34,7 @@ const FAQ_ITEMS = [
 export default function ProductDetailsPage() {
   const { id } = useParams() as { id: string };
   const router = useRouter();
-  const { addToCart } = useCart();
+  const { addToCart, addRecentlyViewed } = useCart();
 
   const [productsList, setProductsList] = useState<Product[]>(PRODUCTS);
   const [product, setProduct] = useState<Product | null>(null);
@@ -108,6 +108,7 @@ export default function ProductDetailsPage() {
     if (found) {
       setProduct(found);
       setActiveImg(found.image);
+      addRecentlyViewed(found);
       
       // Update recently viewed in localStorage
       const rvSaved = localStorage.getItem('gb_recently_viewed_products');
@@ -130,7 +131,7 @@ export default function ProductDetailsPage() {
         .filter(Boolean) as Product[];
       setRecentlyViewed(rvObjects.slice(0, 4));
     }
-  }, [id]);
+  }, [id, addRecentlyViewed]);
 
   // Similar Products
   const similarProducts = useMemo(() => {

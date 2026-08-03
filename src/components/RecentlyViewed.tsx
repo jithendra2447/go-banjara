@@ -7,12 +7,58 @@ import { useCart } from '@/components/providers';
 import { DragCarousel } from '@/components/DragCarousel';
 
 export const RecentlyViewed: React.FC = () => {
-  const { addToCart, wishlist } = useCart();
+  const { addToCart, wishlist, cart, recentlyViewed } = useCart();
   
-  // Dynamic items based on wishlist/clicked products, fallback to PRODUCTS
-  const displayItems = wishlist && wishlist.length > 0 
-    ? Array.from(new Set([...wishlist, ...PRODUCTS])).slice(0, 4) 
-    : PRODUCTS.slice(0, 4);
+  // Smart items based on real recentlyViewed + wishlist + category match, fallback to PRODUCTS
+  const displayItems = React.useMemo(() => {
+    const rv = recentlyViewed || [];
+    const wl = wishlist || [];
+    const ct = cart || [];
+
+    // Combined unique items from user activity
+    const activityList = [...rv, ...wl];
+    const seenIds = new Set<string>();
+    const items: any[] = [];
+
+    // 1. First add real recently viewed & wishlisted items
+    activityList.forEach((item) => {
+      const id = item.id || item.slug || item.title || item.name;
+      if (id && !seenIds.has(id)) {
+        seenIds.add(id);
+        const full = PRODUCTS.find((p) => p.id === id) || item;
+        items.push(full);
+      }
+    });
+
+    // 2. Look for category keywords in cart/wishlist (e.g. t-shirt, slides)
+    const activeKeywords = new Set<string>();
+    [...ct, ...wl, ...rv].forEach((item) => {
+      const name = (item.name || item.title || '').toLowerCase();
+      if (name.includes('t-shirt') || name.includes('tshirt') || name.includes('tee')) activeKeywords.add('t-shirt');
+      if (name.includes('slide') || name.includes('sandal')) activeKeywords.add('slides');
+    });
+
+    if (activeKeywords.has('t-shirt')) {
+      PRODUCTS.filter((p) => (p.name || '').toLowerCase().includes('t-shirt')).forEach((p) => {
+        if (!seenIds.has(p.id)) {
+          seenIds.add(p.id);
+          items.push(p);
+        }
+      });
+    }
+
+    // 3. Fallback to default PRODUCTS if fewer than 4 items
+    if (items.length < 4) {
+      PRODUCTS.forEach((p) => {
+        if (!seenIds.has(p.id)) {
+          seenIds.add(p.id);
+          items.push(p);
+        }
+      });
+    }
+
+    return items.slice(0, 6);
+  }, [recentlyViewed, wishlist, cart]);
 
   return (
     <div 

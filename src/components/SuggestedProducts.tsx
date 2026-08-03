@@ -12,8 +12,78 @@ interface SuggestedProductsProps {
 }
 
 export const SuggestedProducts: React.FC<SuggestedProductsProps> = ({ title }) => {
-  const { addToCart } = useCart();
-  const suggestedItems = PRODUCTS.slice(0, 4);
+  const { cart, wishlist, recentlyViewed, addToCart } = useCart();
+
+  // Smart Recommendation Algorithm
+  const suggestedItems = React.useMemo(() => {
+    const userCartItems = cart || [];
+    const userWishlistItems = wishlist || [];
+    const userRVItems = recentlyViewed || [];
+
+    // Extract all user activity items
+    const activityItems = [...userCartItems, ...userWishlistItems, ...userRVItems];
+
+    // Collect keywords and categories from active items
+    const activeCategories = new Set<string>();
+    const activeKeywords = new Set<string>();
+
+    activityItems.forEach((item: any) => {
+      const cat = (item.category || '').toLowerCase();
+      const name = (item.name || item.title || '').toLowerCase();
+      if (cat) activeCategories.add(cat);
+
+      if (name.includes('t-shirt') || name.includes('tshirt') || name.includes('tee')) {
+        activeKeywords.add('t-shirt');
+      }
+      if (name.includes('slide') || name.includes('flip flop') || name.includes('sandal')) {
+        activeKeywords.add('slides');
+      }
+      if (name.includes('badge') || name.includes('sticker') || name.includes('keychain')) {
+        activeKeywords.add('accessory');
+      }
+    });
+
+    const cartIds = new Set(userCartItems.map((i: any) => i.id));
+    const result: any[] = [];
+
+    // Priority 1: Matching category or product type (e.g., T-shirts for T-shirt lovers)
+    PRODUCTS.forEach((prod) => {
+      if (cartIds.has(prod.id)) return;
+      const cat = (prod.category || '').toLowerCase();
+      const name = (prod.name || '').toLowerCase();
+
+      let matched = activeCategories.has(cat);
+      if (activeKeywords.has('t-shirt') && (name.includes('t-shirt') || name.includes('tshirt') || name.includes('tee'))) {
+        matched = true;
+      }
+      if (activeKeywords.has('slides') && (name.includes('slide') || name.includes('sandal'))) {
+        matched = true;
+      }
+
+      if (matched && !result.some((r) => r.id === prod.id)) {
+        result.push(prod);
+      }
+    });
+
+    // Priority 2: Wishlisted items not in cart
+    userWishlistItems.forEach((wItem: any) => {
+      if (!cartIds.has(wItem.id) && !result.some((r) => r.id === wItem.id)) {
+        const fullProd = PRODUCTS.find((p) => p.id === wItem.id) || wItem;
+        result.push(fullProd);
+      }
+    });
+
+    // Priority 3: Fallback with popular/random products if less than 4 items
+    if (result.length < 4) {
+      PRODUCTS.forEach((p) => {
+        if (!cartIds.has(p.id) && !result.some((r) => r.id === p.id)) {
+          result.push(p);
+        }
+      });
+    }
+
+    return result.slice(0, 4);
+  }, [cart, wishlist, recentlyViewed]);
 
   return (
     <div className="w-full select-none py-8">

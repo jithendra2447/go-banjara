@@ -817,7 +817,7 @@ export default function AdminPortal() {
     <div style={{ fontFamily: '"Faktum", "Outfit", system-ui, -apple-system, sans-serif' }} className="min-h-screen bg-[#FAF9F6] text-[#2B2B2B] flex flex-col font-sans">
       {/* Toast Notification */}
       {toast && (
-        <div className={`fixed top-6 left-1/2 -translate-x-1/2 z-[100] px-6 py-3.5 rounded-2xl shadow-2xl flex items-center gap-3 text-xs font-black uppercase tracking-wider transition-all duration-300 ${
+        <div className={`fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[100] px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-3 text-xs font-black uppercase tracking-wider transition-all duration-300 ${
           toast.type === 'error' || toast.message.includes('⚠️') || toast.message.includes('Maximum 8')
             ? 'bg-red-600 text-white shadow-red-900/30 border border-red-400/40' 
             : 'bg-[#1D493E] text-white shadow-emerald-900/30 border border-emerald-500/30'

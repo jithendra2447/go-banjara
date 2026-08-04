@@ -552,7 +552,7 @@ export default function AdminPortal() {
       : [savedPkg, ...packages];
     setPackages(updated);
     localStorage.setItem('gb_admin_packages', JSON.stringify(updated));
-    syncCatalogToApi({ packages: updated });
+    syncCatalogToApi({ products, packages: updated, cms, blogs });
     if (typeof window !== 'undefined') {
       window.dispatchEvent(new CustomEvent('gb_packages_updated', { detail: updated }));
     }

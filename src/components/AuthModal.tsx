@@ -211,10 +211,10 @@ export const AuthModal: React.FC = () => {
       try {
         await confirmationResult.confirm(fullOtp);
         firebaseVerified = true;
+        setConfirmationResult(null);
       } catch (fbErr: any) {
         console.warn('Firebase confirmationResult confirm warning:', fbErr.message);
-      } finally {
-        setConfirmationResult(null);
+        // Retain confirmationResult so resend/retry can work properly if needed
       }
     }
 
@@ -581,10 +581,9 @@ export const AuthModal: React.FC = () => {
       try {
         await confirmationResult.confirm(fullOtp);
         firebaseVerified = true;
+        setConfirmationResult(null);
       } catch (fbErr: any) {
         console.warn('Firebase OTP confirm warning:', fbErr.message);
-      } finally {
-        setConfirmationResult(null);
       }
     }
 

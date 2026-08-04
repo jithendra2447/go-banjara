@@ -62,7 +62,7 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { products, packages, cms, blogs } = body;
 
-    if (products && Array.isArray(products)) {
+    if (products && Array.isArray(products) && products.length > 0) {
       catalogCache.products = products;
 
       // Upsert products to MongoDB Atlas asynchronously
@@ -95,7 +95,7 @@ export async function POST(req: Request) {
       }
     }
 
-    if (packages && Array.isArray(packages)) {
+    if (packages && Array.isArray(packages) && packages.length > 0) {
       catalogCache.packages = packages;
     }
 

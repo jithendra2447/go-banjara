@@ -2187,7 +2187,7 @@ export default function AdminPortal() {
                                 const updated = packages.map(p => p.id === pkg.id ? { ...p, showOnHome: show } : p);
                                 setPackages(updated);
                                 localStorage.setItem('gb_admin_packages', JSON.stringify(updated));
-                                syncCatalogToApi({ packages: updated });
+                                syncCatalogToApi({ products, packages: updated, cms, blogs });
                                 if (typeof window !== 'undefined') {
                                   window.dispatchEvent(new CustomEvent('gb_packages_updated', { detail: updated }));
                                 }
@@ -2208,7 +2208,7 @@ export default function AdminPortal() {
                                 const updated = packages.map(p => p.id === pkg.id ? { ...p, hidden: isHiddenNow } : p);
                                 setPackages(updated);
                                 localStorage.setItem('gb_admin_packages', JSON.stringify(updated));
-                                syncCatalogToApi({ packages: updated });
+                                syncCatalogToApi({ products, packages: updated, cms, blogs });
                                 if (typeof window !== 'undefined') {
                                   window.dispatchEvent(new CustomEvent('gb_packages_updated', { detail: updated }));
                                 }
@@ -2241,6 +2241,10 @@ export default function AdminPortal() {
                                 const updated = packages.filter(p => p.id !== pkg.id);
                                 setPackages(updated);
                                 localStorage.setItem('gb_admin_packages', JSON.stringify(updated));
+                                syncCatalogToApi({ products, packages: updated, cms, blogs });
+                                if (typeof window !== 'undefined') {
+                                  window.dispatchEvent(new CustomEvent('gb_packages_updated', { detail: updated }));
+                                }
                                 showToast('Package removed!');
                               }}
                               className="px-3 py-1.5 bg-rose-50 hover:bg-rose-600 text-rose-600 hover:text-white rounded-lg text-xs font-bold transition flex items-center gap-1.5 cursor-pointer"

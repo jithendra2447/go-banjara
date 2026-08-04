@@ -325,7 +325,14 @@ export default function Homepage() {
             }
             if (Array.isArray(data.packages) && data.packages.length > 0) {
               const completePackages = data.packages.map((p: any) => {
-                const base = HOLIDAY_PACKAGES.find(hp => hp.id === p.id) || HOLIDAY_PACKAGES[0];
+                const base = HOLIDAY_PACKAGES.find(hp => hp.id === p.id);
+                if (!base) {
+                  return {
+                    ...p,
+                    showOnHome: p.showOnHome !== false,
+                    hidden: p.hidden === true,
+                  };
+                }
                 return {
                   ...base,
                   ...p,

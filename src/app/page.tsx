@@ -313,6 +313,23 @@ export default function Homepage() {
       } catch (e) {
         console.error('Error in live data update:', e);
       }
+
+      // Fetch live cross-subdomain catalog from API
+      fetch('/api/admin/catalog')
+        .then(res => res.json())
+        .then(data => {
+          if (data?.success) {
+            if (Array.isArray(data.products) && data.products.length > 0) {
+              setProductsList(data.products);
+              localStorage.setItem('gb_admin_products_v3', JSON.stringify(data.products));
+            }
+            if (Array.isArray(data.packages) && data.packages.length > 0) {
+              setPackagesList(data.packages);
+              localStorage.setItem('gb_admin_packages', JSON.stringify(data.packages));
+            }
+          }
+        })
+        .catch(err => console.error('API catalog fetch error:', err));
     };
 
     window.addEventListener('gb_cms_updated', handleCmsUpdate);

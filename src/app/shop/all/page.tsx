@@ -45,9 +45,17 @@ function AllProductsContent() {
       } catch (e) {
         console.error('Error parsing admin products:', e);
       }
-    } else {
-      localStorage.setItem('gb_admin_products_v3', JSON.stringify(PRODUCTS));
     }
+
+    fetch('/api/admin/catalog')
+      .then(res => res.json())
+      .then(data => {
+        if (data?.success && Array.isArray(data.products) && data.products.length > 0) {
+          setProductsList(data.products);
+          localStorage.setItem('gb_admin_products_v3', JSON.stringify(data.products));
+        }
+      })
+      .catch(err => console.error('API catalog sync error:', err));
 
     const handleUpdate = (evt?: any) => {
       try {

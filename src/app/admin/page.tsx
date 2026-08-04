@@ -479,6 +479,18 @@ export default function AdminPortal() {
     showToast('Custom page deleted!');
   };
 
+  const syncCatalogToApi = async (data: { products?: any[]; packages?: any[]; cms?: any; blogs?: any[] }) => {
+    try {
+      await fetch('/api/admin/catalog', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+    } catch (err) {
+      console.error('Catalog sync error:', err);
+    }
+  };
+
   const handleSaveEditedProduct = (e: React.FormEvent) => {
     e.preventDefault();
     if (!editingProd) return;
@@ -489,6 +501,7 @@ export default function AdminPortal() {
     setProducts(updated);
     localStorage.setItem('gb_admin_products_v3', JSON.stringify(updated));
     localStorage.setItem('gb_admin_products', JSON.stringify(updated));
+    syncCatalogToApi({ products: updated });
     setEditingProd(null);
     showToast(exists ? 'Product updated successfully!' : '✨ New product added to inventory!');
   };
@@ -502,6 +515,7 @@ export default function AdminPortal() {
       : [editingBlog, ...blogs];
     setBlogs(updated);
     localStorage.setItem('gb_admin_blogs', JSON.stringify(updated));
+    syncCatalogToApi({ blogs: updated });
     if (typeof window !== 'undefined') {
       window.dispatchEvent(new CustomEvent('gb_blogs_updated', { detail: updated }));
     }
@@ -513,6 +527,7 @@ export default function AdminPortal() {
     const updated = blogs.filter(b => b.id !== id);
     setBlogs(updated);
     localStorage.setItem('gb_admin_blogs', JSON.stringify(updated));
+    syncCatalogToApi({ blogs: updated });
     if (typeof window !== 'undefined') {
       window.dispatchEvent(new CustomEvent('gb_blogs_updated', { detail: updated }));
     }
@@ -527,6 +542,7 @@ export default function AdminPortal() {
       : [savedPkg, ...packages];
     setPackages(updated);
     localStorage.setItem('gb_admin_packages', JSON.stringify(updated));
+    syncCatalogToApi({ packages: updated });
     if (typeof window !== 'undefined') {
       window.dispatchEvent(new CustomEvent('gb_packages_updated', { detail: updated }));
     }

@@ -2501,6 +2501,7 @@ export default function AdminPortal() {
                                             setProducts(updated);
                                             localStorage.setItem('gb_admin_products_v3', JSON.stringify(updated));
                                             localStorage.setItem('gb_admin_products', JSON.stringify(updated));
+                                            syncCatalogToApi({ products: updated });
                                             if (typeof window !== 'undefined') {
                                               window.dispatchEvent(new CustomEvent('gb_products_updated', { detail: updated }));
                                             }
@@ -2529,6 +2530,7 @@ export default function AdminPortal() {
                                 setProducts(updated);
                                 localStorage.setItem('gb_admin_products_v3', JSON.stringify(updated));
                                 localStorage.setItem('gb_admin_products', JSON.stringify(updated));
+                                syncCatalogToApi({ products: updated });
                                 if (typeof window !== 'undefined') {
                                   window.dispatchEvent(new CustomEvent('gb_products_updated', { detail: updated }));
                                 }
@@ -2562,6 +2564,7 @@ export default function AdminPortal() {
                                 setProducts(updated);
                                 localStorage.setItem('gb_admin_products_v3', JSON.stringify(updated));
                                 localStorage.setItem('gb_admin_products', JSON.stringify(updated));
+                                syncCatalogToApi({ products: updated });
                                 showToast('Product removed!');
                               }}
                               className="px-3 py-1.5 bg-rose-50 hover:bg-rose-600 text-rose-600 hover:text-white rounded-lg text-xs font-bold transition flex items-center gap-1.5 cursor-pointer"

@@ -10,7 +10,7 @@ import {
   Eye, EyeOff, Calendar, Check, Landmark, RefreshCw, BookOpen, Star,
   Globe, Link as LinkIcon, Settings, ExternalLink, Sparkles, Layers,
   CheckSquare, Sliders, Server, Save, Download, Upload, Cpu, Zap, Image as ImageIcon,
-  Mail, Key, Compass, ChevronDown
+  Mail, Key, Compass, ChevronDown, LogOut
 } from 'lucide-react';
 import { useCart } from '@/components/providers';
 import { PackageEditorModal } from '@/components/PackageEditorModal';
@@ -217,8 +217,8 @@ export default function AdminPortal() {
 
   // Auth Protection & Login Form States
   const [adminEmail, setAdminEmail] = useState('gobanjara.trd@gmail.com');
-  const [adminPassword, setAdminPassword] = useState('GoBanjara123!');
-  const { login } = useCart();
+  const [adminPassword, setAdminPassword] = useState('');
+  const { login, logout } = useCart();
 
   // Change Admin Creds Modal State
   const [isChangingCreds, setIsChangingCreds] = useState(false);
@@ -257,18 +257,10 @@ export default function AdminPortal() {
     }
   };
 
-  const handleQuickAdminLogin = () => {
-    const validCreds = getStoredAdminCreds();
-    setAdminEmail(validCreds.email);
-    setAdminPassword(validCreds.password);
-    login({
-      id: 'admin-1',
-      name: 'Go Banjara Super Admin',
-      email: validCreds.email,
-      role: 'ADMIN',
-    });
-    fetchLiveAdminData();
-    showToast(`⚡ Instant Login as ${validCreds.email}!`, 'success');
+  const handleAdminLogout = () => {
+    logout();
+    setAdminPassword('');
+    showToast('Logged out of Admin Panel successfully', 'success');
   };
 
   const handleUpdateAdminCreds = (e: React.FormEvent) => {
@@ -803,39 +795,6 @@ export default function AdminPortal() {
             </button>
           </form>
 
-          <div style={{ display: "flex", alignItems: "center", padding: "8px 0" }} className="relative flex py-2 items-center">
-            <div style={{ flexGrow: 1, borderTop: "1px solid #E5E0D5" }} className="flex-grow border-t border-gray-200"></div>
-            <span style={{ flexShrink: 0, margin: "0 16px", fontSize: "10px", fontWeight: 700, color: "#8D8D8D", textTransform: "uppercase", letterSpacing: "0.1em" }} className="flex-shrink mx-4 text-[10px] font-bold text-[#8D8D8D] uppercase tracking-widest">OR QUICK DEMO</span>
-            <div style={{ flexGrow: 1, borderTop: "1px solid #E5E0D5" }} className="flex-grow border-t border-gray-200"></div>
-          </div>
-
-          <button
-            type="button"
-            onClick={handleQuickAdminLogin}
-            style={{
-              width: "100%",
-              padding: "14px",
-              backgroundColor: "rgba(29, 73, 62, 0.08)",
-              color: "#1D493E",
-              border: "1px solid rgba(29, 73, 62, 0.3)",
-              borderRadius: "12px",
-              fontSize: "12px",
-              fontWeight: 700,
-              textTransform: "uppercase",
-              letterSpacing: "0.05em",
-              cursor: "pointer",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "8px",
-              fontFamily: '"Faktum", "Outfit", sans-serif'
-            }}
-            className="w-full py-3.5 bg-[#1D493E]/[0.08] hover:bg-[#1D493E]/[0.15] text-[#1D493E] border border-[#1D493E]/30 rounded-xl text-xs font-bold uppercase tracking-wider transition cursor-pointer flex items-center justify-center gap-2 shadow-xs"
-          >
-            <Zap style={{ width: "16px", height: "16px", color: "#FF623E" }} />
-            <span>Instant One-Click Admin Access</span>
-          </button>
-
           <div style={{ paddingTop: "8px" }} className="pt-2">
             <Link href="/" style={{ fontSize: "12px", fontWeight: 600, color: "#8D8D8D", textDecoration: "none" }} className="text-xs font-semibold text-[#8D8D8D] hover:text-[#1D493E] transition">
               ← Return to Go Banjara Website
@@ -930,6 +889,15 @@ export default function AdminPortal() {
             >
               <Save className="w-4 h-4" />
               <span>Save All</span>
+            </button>
+
+            <button
+              onClick={handleAdminLogout}
+              title="Logout of Admin Panel"
+              className="flex items-center gap-2 px-3.5 py-2 bg-red-600/20 hover:bg-red-600 text-red-100 hover:text-white rounded-xl text-xs font-bold transition border border-red-500/40 cursor-pointer shadow-xs"
+            >
+              <LogOut className="w-4 h-4" />
+              <span>Logout</span>
             </button>
           </div>
         </div>

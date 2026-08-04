@@ -12,6 +12,14 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Go Banjara — Lifestyle Fashion & Travel E-Commerce Store",
   description: "Immersive travel bookings and premium street fashion for outdoor seekers and city lifestylers.",
+  icons: {
+    icon: [
+      { url: '/icon.png', type: 'image/png' },
+      { url: '/favicon.ico', type: 'image/x-icon' },
+    ],
+    shortcut: '/icon.png',
+    apple: '/icon.png',
+  },
 };
 
 export default function RootLayout({
@@ -22,6 +30,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth overflow-x-clip" style={{ overflowX: 'clip' }} suppressHydrationWarning>
       <head>
+        {/* Favicon / Branding Icons */}
+        <link rel="icon" href="/icon.png" type="image/png" sizes="any" />
+        <link rel="apple-touch-icon" href="/icon.png" />
+
         {/* Preconnect to external image & font CDNs for high-speed page load */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

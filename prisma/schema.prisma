@@ -101,3 +101,12 @@ model NewsletterSubscriber {
   email     String   @unique
   createdAt DateTime @default(now())
 }
+
+model CatalogState {
+  id        String   @id @map("_id")
+  packages  Json?
+  products  Json?
+  cms       Json?
+  blogs     Json?
+  updatedAt DateTime @updatedAt
+}

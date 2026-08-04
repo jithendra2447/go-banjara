@@ -3,56 +3,48 @@ import prisma from '@/lib/db';
 import { PRODUCTS } from '@/data/products';
 import { HOLIDAY_PACKAGES } from '@/data/packages';
 
-// Global in-memory fallback cache for fast serverless sync across subdomains
-let catalogCache: {
-  products?: any[];
-  packages?: any[];
-  cms?: any;
-  blogs?: any[];
-} = {
-  products: PRODUCTS,
-  packages: HOLIDAY_PACKAGES,
-};
-
 export async function GET() {
   try {
-    // Attempt to fetch live products from MongoDB Atlas
-    const dbProducts = await prisma.product.findMany({
-      orderBy: { createdAt: 'desc' },
+    // 1. Fetch persisted catalog state from MongoDB Atlas database
+    const dbState = await prisma.catalogState.findUnique({
+      where: { id: 'global_catalog' },
     });
 
-    let products = catalogCache.products && catalogCache.products.length > 0 ? catalogCache.products : PRODUCTS;
-    
-    if (dbProducts && dbProducts.length > 0) {
-      // Map DB products to application shape
-      const mapped = dbProducts.map((p: any) => ({
-        id: p.id,
-        name: p.name,
-        description: p.description,
-        price: p.price,
-        image: p.image,
-        category: p.category,
-        rating: p.rating,
-        inStock: p.inStock,
-      }));
+    let packages = HOLIDAY_PACKAGES;
+    let products = PRODUCTS;
+    let cms = null;
+    let blogs = null;
 
-      // Merge with cache if custom fields exist in cache
-      products = mapped;
+    if (dbState) {
+      if (dbState.packages && Array.isArray(dbState.packages) && (dbState.packages as any[]).length > 0) {
+        packages = dbState.packages as any[];
+      }
+      if (dbState.products && Array.isArray(dbState.products) && (dbState.products as any[]).length > 0) {
+        products = dbState.products as any[];
+      }
+      if (dbState.cms) {
+        cms = dbState.cms;
+      }
+      if (dbState.blogs && Array.isArray(dbState.blogs)) {
+        blogs = dbState.blogs as any[];
+      }
     }
 
     return NextResponse.json({
       success: true,
-      products: catalogCache.products || products,
-      packages: catalogCache.packages || HOLIDAY_PACKAGES,
-      cms: catalogCache.cms || null,
-      blogs: catalogCache.blogs || null,
+      products,
+      packages,
+      cms,
+      blogs,
     });
   } catch (error: any) {
-    console.error('Failed to fetch catalog from API:', error);
+    console.error('Failed to fetch catalog from MongoDB Atlas:', error);
     return NextResponse.json({
       success: true,
-      products: catalogCache.products || PRODUCTS,
-      packages: catalogCache.packages || HOLIDAY_PACKAGES,
+      products: PRODUCTS,
+      packages: HOLIDAY_PACKAGES,
+      cms: null,
+      blogs: null,
     });
   }
 }
@@ -62,61 +54,51 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { products, packages, cms, blogs } = body;
 
-    if (products && Array.isArray(products) && products.length > 0) {
-      catalogCache.products = products;
+    // Fetch existing state from MongoDB Atlas
+    const existing = await prisma.catalogState.findUnique({
+      where: { id: 'global_catalog' },
+    });
 
-      // Upsert products to MongoDB Atlas asynchronously
-      try {
-        for (const p of products) {
-          if (p.name && p.price !== undefined) {
-            await prisma.product.upsert({
-              where: { id: p.id && p.id.length === 24 ? p.id : '000000000000000000000000' },
-              update: {
-                name: p.name,
-                description: p.description || '',
-                price: Number(p.price) || 0,
-                image: p.image || '',
-                category: p.category || 'General',
-                inStock: p.inStock !== false,
-              },
-              create: {
-                name: p.name,
-                description: p.description || '',
-                price: Number(p.price) || 0,
-                image: p.image || '',
-                category: p.category || 'General',
-                inStock: p.inStock !== false,
-              },
-            }).catch(() => {});
-          }
-        }
-      } catch (dbErr) {
-        console.error('MongoDB product upsert warning:', dbErr);
-      }
-    }
+    const updateData: any = {};
 
     if (packages && Array.isArray(packages) && packages.length > 0) {
-      catalogCache.packages = packages;
+      updateData.packages = packages;
     }
-
+    if (products && Array.isArray(products) && products.length > 0) {
+      updateData.products = products;
+    }
     if (cms) {
-      catalogCache.cms = cms;
+      updateData.cms = cms;
+    }
+    if (blogs && Array.isArray(blogs) && blogs.length > 0) {
+      updateData.blogs = blogs;
     }
 
-    if (blogs && Array.isArray(blogs)) {
-      catalogCache.blogs = blogs;
-    }
+    // Upsert into MongoDB Atlas CatalogState table
+    const savedState = await prisma.catalogState.upsert({
+      where: { id: 'global_catalog' },
+      update: updateData,
+      create: {
+        id: 'global_catalog',
+        packages: updateData.packages || existing?.packages || HOLIDAY_PACKAGES,
+        products: updateData.products || existing?.products || PRODUCTS,
+        cms: updateData.cms || existing?.cms || null,
+        blogs: updateData.blogs || existing?.blogs || null,
+      },
+    });
 
     return NextResponse.json({
       success: true,
-      message: 'Catalog updated successfully across all subdomains and devices.',
-      products: catalogCache.products,
-      packages: catalogCache.packages,
+      message: 'Catalog updated and permanently saved in MongoDB Atlas database.',
+      products: savedState.products,
+      packages: savedState.packages,
+      cms: savedState.cms,
+      blogs: savedState.blogs,
     });
   } catch (error: any) {
     console.error('Catalog POST error:', error);
     return NextResponse.json(
-      { success: false, error: error.message || 'Failed to update catalog.' },
+      { success: false, error: error.message || 'Failed to update catalog in MongoDB Atlas.' },
       { status: 500 }
     );
   }

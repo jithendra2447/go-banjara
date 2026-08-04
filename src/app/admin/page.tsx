@@ -428,6 +428,7 @@ export default function AdminPortal() {
   const handleSaveCMS = (e: React.FormEvent) => {
     e.preventDefault();
     saveStoredCMSContent(cms);
+    syncCatalogToApi({ products, packages, cms, blogs });
     showToast('⚡ Website Page & Section Content updated live across the entire website!');
   };
 
@@ -873,15 +874,16 @@ export default function AdminPortal() {
               <span className="hidden sm:inline">Admin Security</span>
             </button>
 
-            <Link
-              href="/"
+            <a
+              href="https://gobanjara.in"
               target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center gap-2 px-4 py-2 bg-[#15342c] hover:bg-[#0f2721] text-emerald-100 rounded-xl text-xs font-bold transition border border-emerald-600/40"
             >
               <Eye className="w-4 h-4 text-white/70" />
               <span>Preview Live Site</span>
               <ExternalLink className="w-3 h-3 text-white/70" />
-            </Link>
+            </a>
 
             <button
               onClick={handleExportBackup}
@@ -1480,8 +1482,15 @@ export default function AdminPortal() {
                             <div key={pkg.id || idx} className="bg-white p-3 rounded-xl border border-[#E5E0D5] space-y-2 flex flex-col justify-between shadow-2xs">
                               <div className="space-y-2">
                                 <div className="relative aspect-video w-full rounded-lg overflow-hidden bg-gray-100">
-                                  <img src={pkg.image} alt={pkg.name} className="w-full h-full object-cover" />
-                                  <span className="absolute top-1.5 left-1.5 text-[9px] font-bold bg-[#1D493E] text-white px-2 py-0.5 rounded">
+                                  <img 
+                                    src={pkg.image || '/travel-leh-6.jpg'} 
+                                    alt={pkg.name} 
+                                    className="w-full h-full object-cover" 
+                                    onError={(e) => {
+                                      (e.target as HTMLImageElement).src = '/travel-leh-6.jpg';
+                                    }}
+                                  />
+                                  <span className="absolute top-1.5 left-1.5 z-10 text-[9px] font-bold bg-[#1D493E] text-white px-2 py-0.5 rounded shadow-xs whitespace-nowrap">
                                     Package #{idx + 1}
                                   </span>
                                 </div>
@@ -2188,6 +2197,7 @@ export default function AdminPortal() {
                                 const updated = packages.map(p => p.id === pkg.id ? { ...p, showOnHome: show } : p);
                                 setPackages(updated);
                                 localStorage.setItem('gb_admin_packages', JSON.stringify(updated));
+                                syncCatalogToApi({ packages: updated });
                                 if (typeof window !== 'undefined') {
                                   window.dispatchEvent(new CustomEvent('gb_packages_updated', { detail: updated }));
                                 }
@@ -2208,6 +2218,7 @@ export default function AdminPortal() {
                                 const updated = packages.map(p => p.id === pkg.id ? { ...p, hidden: isHiddenNow } : p);
                                 setPackages(updated);
                                 localStorage.setItem('gb_admin_packages', JSON.stringify(updated));
+                                syncCatalogToApi({ packages: updated });
                                 if (typeof window !== 'undefined') {
                                   window.dispatchEvent(new CustomEvent('gb_packages_updated', { detail: updated }));
                                 }

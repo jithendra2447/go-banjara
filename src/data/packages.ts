@@ -535,6 +535,7 @@ export const HOLIDAY_PACKAGES: HolidayPackage[] = [
     groupType: 'Private Tour',
     nextDeparture: 'Aug, 2026',
     startPoint: 'Kochi',
+    showOnHome: true,
     
     // Detailed fields
     images: [

@@ -391,7 +391,7 @@ export default function AdminPortal() {
     }
 
     // 8. Fetch live catalog from API database to sync packages, products & blogs
-    fetch('/api/admin/catalog')
+    fetch(`/api/admin/catalog?t=${Date.now()}`, { cache: 'no-store' })
       .then((res) => res.json())
       .then((data) => {
         if (data?.success) {

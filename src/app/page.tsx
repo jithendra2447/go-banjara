@@ -301,8 +301,8 @@ export default function Homepage() {
         console.error('Error in live data update:', e);
       }
 
-      // Fetch live cross-subdomain catalog from API
-      fetch('/api/admin/catalog')
+      // Fetch live cross-subdomain catalog from API with zero caching
+      fetch(`/api/admin/catalog?t=${Date.now()}`, { cache: 'no-store' })
         .then(res => res.json())
         .then(data => {
           if (data?.success) {

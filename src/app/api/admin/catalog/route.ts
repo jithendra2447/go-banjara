@@ -3,6 +3,9 @@ import prisma from '@/lib/db';
 import { PRODUCTS } from '@/data/products';
 import { HOLIDAY_PACKAGES } from '@/data/packages';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export async function GET() {
   try {
     // 1. Fetch persisted catalog state from MongoDB Atlas database

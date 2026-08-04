@@ -3,8 +3,22 @@ import prisma from '@/lib/db';
 
 export async function GET() {
   try {
-    // 1. Fetch all users
+    // 1. Fetch all users (excluding sensitive password hashes)
     const users = await prisma.user.findMany({
+      select: {
+        id: true,
+        email: true,
+        phone: true,
+        name: true,
+        dob: true,
+        gender: true,
+        address: true,
+        pincode: true,
+        role: true,
+        lastLoginAt: true,
+        createdAt: true,
+        updatedAt: true,
+      },
       orderBy: { createdAt: 'desc' },
     });
 

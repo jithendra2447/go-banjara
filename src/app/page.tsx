@@ -337,6 +337,9 @@ export default function Homepage() {
     window.addEventListener('gb_products_updated', handleDataUpdate);
     window.addEventListener('storage', handleDataUpdate);
 
+    // Trigger API catalog fetch immediately on mount/refresh
+    handleDataUpdate();
+
     return () => {
       window.removeEventListener('gb_cms_updated', handleCmsUpdate);
       window.removeEventListener('gb_packages_updated', handleDataUpdate);

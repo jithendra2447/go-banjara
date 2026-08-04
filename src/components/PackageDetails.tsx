@@ -187,6 +187,30 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
 
         setLiveTemp({ temp: initialTemp, condition: cond, wind: windStr, uv: uvStr });
       }
+
+      // Fetch live catalog from API to ensure cross-subdomain & device sync on refresh
+      fetch('/api/admin/catalog')
+        .then((res) => res.json())
+        .then((data) => {
+          if (data?.success) {
+            if (Array.isArray(data.packages) && data.packages.length > 0) {
+              localStorage.setItem('gb_admin_packages', JSON.stringify(data.packages));
+              const freshMatch = data.packages.find((p: any) => 
+                p.id === id || 
+                p.id?.toLowerCase() === id?.toLowerCase() ||
+                p.name?.toLowerCase().replace(/\s+/g, '-') === id?.toLowerCase()
+              );
+              if (freshMatch) {
+                setPkg(freshMatch);
+              }
+            }
+            if (Array.isArray(data.products) && data.products.length > 0) {
+              setProductsList(data.products);
+              localStorage.setItem('gb_admin_products_v3', JSON.stringify(data.products));
+            }
+          }
+        })
+        .catch((err) => console.error('PackageDetails API catalog fetch error:', err));
     } catch (e) {
       console.error(e);
     }

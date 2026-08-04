@@ -178,9 +178,18 @@ export default function HolidaysPortal() {
       setPackages(merged);
     } catch (e) {
       console.error(e);
-      setPackages(HOLIDAY_PACKAGES);
-      localStorage.setItem('gb_admin_packages', JSON.stringify(HOLIDAY_PACKAGES));
     }
+
+    // Fetch live catalog from API database to sync across subdomains & devices
+    fetch('/api/admin/catalog')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.success && Array.isArray(data.packages) && data.packages.length > 0) {
+          setPackages(data.packages);
+          localStorage.setItem('gb_admin_packages', JSON.stringify(data.packages));
+        }
+      })
+      .catch((err) => console.error('Travel page catalog API fetch error:', err));
 
     const handleUpdate = (evt?: any) => {
       try {

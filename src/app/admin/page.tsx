@@ -398,6 +398,23 @@ export default function AdminPortal() {
       setBlogs(DEFAULT_BLOGS);
     }
 
+    // 8. Fetch live catalog from API database to sync packages, products & blogs
+    fetch('/api/admin/catalog')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.success) {
+          if (Array.isArray(data.products) && data.products.length > 0) {
+            setProducts(data.products);
+            localStorage.setItem('gb_admin_products_v3', JSON.stringify(data.products));
+          }
+          if (Array.isArray(data.packages) && data.packages.length > 0) {
+            setPackages(data.packages);
+            localStorage.setItem('gb_admin_packages', JSON.stringify(data.packages));
+          }
+        }
+      })
+      .catch((err) => console.error('Admin API sync error:', err));
+
     // 8. Load Orders & Bookings from localStorage history
     const allHistoryRaw = localStorage.getItem('gb_order_history');
     if (allHistoryRaw) {
@@ -854,12 +871,23 @@ export default function AdminPortal() {
           
           {/* Brand Logo */}
           <div className="flex items-center gap-4">
-            <Link href="/" className="flex items-center group">
+            <Link href="/" className="flex items-center gap-2.5 group shrink-0">
               <img
-                src="/logo-footer.png"
+                src="/icon.png"
                 alt="go banjāra logo"
-                className="h-9 w-auto object-contain transition-transform group-hover:scale-105"
+                className="h-8 w-8 rounded-full object-contain transition-transform group-hover:scale-105"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = '/logo.png';
+                }}
               />
+              <div className="flex items-center gap-2">
+                <span className="text-xl font-bold text-white tracking-tight leading-none font-sans">
+                  go banjāra
+                </span>
+                <span className="text-[9px] font-extrabold bg-[#FF5A36] text-white px-2 py-0.5 rounded-md uppercase tracking-widest shadow-xs">
+                  ADMIN
+                </span>
+              </div>
             </Link>
           </div>
 

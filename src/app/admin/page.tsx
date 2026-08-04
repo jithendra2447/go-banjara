@@ -400,18 +400,8 @@ export default function AdminPortal() {
             localStorage.setItem('gb_admin_products_v3', JSON.stringify(data.products));
           }
           if (Array.isArray(data.packages) && data.packages.length > 0) {
-            const mergedPkgs = data.packages.map((p: any) => {
-              const init = INITIAL_HOLIDAY_PACKAGES.find(hp => hp.id === p.id);
-              if (!init) return p;
-              return {
-                ...init,
-                ...p,
-                showOnHome: 'showOnHome' in p ? p.showOnHome : init.showOnHome,
-                hidden: 'hidden' in p ? p.hidden : init.hidden,
-              };
-            });
-            setPackages(mergedPkgs);
-            localStorage.setItem('gb_admin_packages', JSON.stringify(mergedPkgs));
+            setPackages(data.packages);
+            localStorage.setItem('gb_admin_packages', JSON.stringify(data.packages));
           }
           if (data.cms) {
             setCms(data.cms);

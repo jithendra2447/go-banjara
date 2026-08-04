@@ -324,35 +324,8 @@ export default function Homepage() {
               localStorage.setItem('gb_admin_products_v3', JSON.stringify(data.products));
             }
             if (Array.isArray(data.packages) && data.packages.length > 0) {
-              const completePackages = data.packages.map((p: any) => {
-                const base = HOLIDAY_PACKAGES.find(hp => hp.id === p.id);
-                if (!base) {
-                  return {
-                    ...p,
-                    showOnHome: p.showOnHome !== false,
-                    hidden: p.hidden === true,
-                  };
-                }
-                return {
-                  ...base,
-                  ...p,
-                  name: p.name || base.name,
-                  price: p.price ?? base.price,
-                  image: p.image || base.image,
-                  duration: p.duration || base.duration,
-                  durationDays: p.durationDays || base.durationDays || 6,
-                  category: p.category || base.category || 'Road Trip',
-                  startPoint: p.startPoint || base.startPoint || 'Srinagar',
-                  difficulty: p.difficulty || base.difficulty || 'Moderate',
-                  groupType: p.groupType || base.groupType || 'Curated group Trip',
-                  nextDeparture: p.nextDeparture || base.nextDeparture || 'Aug, 2026',
-                  description: p.description || base.description,
-                  showOnHome: 'showOnHome' in p ? p.showOnHome : base.showOnHome,
-                  hidden: 'hidden' in p ? p.hidden : base.hidden,
-                };
-              });
-              setPackagesList(completePackages);
-              localStorage.setItem('gb_admin_packages', JSON.stringify(completePackages));
+              setPackagesList(data.packages);
+              localStorage.setItem('gb_admin_packages', JSON.stringify(data.packages));
             }
           }
         })

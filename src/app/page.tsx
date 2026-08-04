@@ -286,22 +286,7 @@ export default function Homepage() {
     };
 
     const handleDataUpdate = () => {
-      try {
-        const savedProds = localStorage.getItem('gb_admin_products_v3') || localStorage.getItem('gb_admin_products');
-        if (savedProds) {
-          const parsed = JSON.parse(savedProds);
-          if (Array.isArray(parsed) && parsed.length > 0) setProductsList(parsed);
-        }
-        const savedPkgs = localStorage.getItem('gb_admin_packages');
-        if (savedPkgs) {
-          const parsed = JSON.parse(savedPkgs);
-          if (Array.isArray(parsed) && parsed.length > 0) setPackagesList(parsed);
-        }
-      } catch (e) {
-        console.error('Error in live data update:', e);
-      }
-
-      // Fetch live cross-subdomain catalog from API with zero caching
+      // Always fetch live cross-subdomain catalog from API with zero caching first
       fetch(`/api/admin/catalog?t=${Date.now()}`, { cache: 'no-store' })
         .then(res => res.json())
         .then(data => {
@@ -316,7 +301,21 @@ export default function Homepage() {
             }
           }
         })
-        .catch(err => console.error('API catalog fetch error:', err));
+        .catch(err => {
+          console.error('API catalog fetch error, using local storage fallback:', err);
+          try {
+            const savedProds = localStorage.getItem('gb_admin_products_v3') || localStorage.getItem('gb_admin_products');
+            if (savedProds) {
+              const parsed = JSON.parse(savedProds);
+              if (Array.isArray(parsed) && parsed.length > 0) setProductsList(parsed);
+            }
+            const savedPkgs = localStorage.getItem('gb_admin_packages');
+            if (savedPkgs) {
+              const parsed = JSON.parse(savedPkgs);
+              if (Array.isArray(parsed) && parsed.length > 0) setPackagesList(parsed);
+            }
+          } catch (e) {}
+        });
     };
 
     window.addEventListener('gb_cms_updated', handleCmsUpdate);

@@ -1377,7 +1377,7 @@ export default function Homepage() {
               {(() => {
                 const rawPkgs = packagesList && packagesList.length > 0 ? packagesList : HOLIDAY_PACKAGES;
                 const displayPkgs = rawPkgs.filter(p => p.showOnHome === true && !p.hidden);
-                return displayPkgs.slice(1, 3).map((pkg) => (
+                return displayPkgs.slice(1).map((pkg) => (
                   <div 
                     key={pkg.id} 
                     onClick={() => router.push(`/travel/package/${pkg.id}`)}

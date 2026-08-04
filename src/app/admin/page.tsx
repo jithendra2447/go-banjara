@@ -871,19 +871,13 @@ export default function AdminPortal() {
           
           {/* Brand Logo */}
           <div className="flex items-center gap-4">
-            <Link href="/" className="flex items-center gap-2.5 group shrink-0">
-              <img
-                src="/icon.png"
-                alt="go banjāra logo"
-                className="h-8 w-8 rounded-full object-contain transition-transform group-hover:scale-105"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).src = '/logo.png';
-                }}
-              />
-              <div className="flex items-center gap-2">
-                <span className="text-xl font-bold text-white tracking-tight leading-none font-sans">
-                  go banjāra
-                </span>
+            <Link href="/" className="flex items-center gap-2 group shrink-0">
+              <div className="bg-white px-3.5 py-1.5 rounded-xl shadow-xs flex items-center gap-2.5 border border-emerald-800/20">
+                <img
+                  src="/logo.png"
+                  alt="go banjāra logo"
+                  className="h-7 w-auto object-contain transition-transform group-hover:scale-102"
+                />
                 <span className="text-[9px] font-extrabold bg-[#FF5A36] text-white px-2 py-0.5 rounded-md uppercase tracking-widest shadow-xs">
                   ADMIN
                 </span>

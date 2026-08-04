@@ -403,6 +403,14 @@ export default function AdminPortal() {
             setPackages(data.packages);
             localStorage.setItem('gb_admin_packages', JSON.stringify(data.packages));
           }
+          if (data.cms) {
+            setCms(data.cms);
+            saveStoredCMSContent(data.cms);
+          }
+          if (Array.isArray(data.blogs) && data.blogs.length > 0) {
+            setBlogs(data.blogs);
+            localStorage.setItem('gb_admin_blogs', JSON.stringify(data.blogs));
+          }
         }
       })
       .catch((err) => console.error('Admin API sync error:', err));
@@ -444,6 +452,7 @@ export default function AdminPortal() {
   const handleSaveGlobalSettings = (e: React.FormEvent) => {
     e.preventDefault();
     saveStoredCMSContent(cms);
+    syncCatalogToApi({ products, packages, cms, blogs });
     showToast('⚙️ Global Website Settings & Branding saved successfully!');
   };
 

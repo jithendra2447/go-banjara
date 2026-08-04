@@ -1338,134 +1338,139 @@ export default function Homepage() {
                   {gridPkgs.length > 0 && (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
                       {gridPkgs.map((pkg) => (
-                  <div 
-                    key={pkg.id} 
-                    onClick={() => router.push(`/travel/package/${pkg.id}`)}
-                    className="bg-[#F6F3EE] rounded-[4px] flex flex-col text-left md:h-[778px] overflow-hidden group cursor-pointer" 
-                    style={{ borderRadius: '4px' }}
-                  >
-                    {/* Image (Flushed with top, left, and right edges) */}
-                    <div 
-                      className="relative w-full h-[200px] md:h-[384px] overflow-hidden rounded-[4px] shrink-0 isolate"
-                      style={{ borderRadius: '4px', WebkitMaskImage: '-webkit-radial-gradient(white, black)' }}
-                    >
-                      <img 
-                        src={pkg.image} 
-                        alt={pkg.name} 
-                        className="w-full h-full object-cover rounded-[4px] group-hover:scale-105 transition-transform duration-500 ease-out" 
-                        style={{ borderRadius: '4px', imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
-                      />
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          toggleWishlist({ id: pkg.id, name: pkg.name, price: pkg.price, image: pkg.image, type: 'travel' });
-                        }}
-                        style={{
-                          position: "absolute",
-                          top: "12px",
-                          right: "12px",
-                          width: "36px",
-                          height: "36px",
-                          borderRadius: "50%",
-                          backgroundColor: "rgba(255, 255, 255, 0.9)",
-                          backdropFilter: "blur(4px)",
-                          border: "none",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          cursor: "pointer",
-                          zIndex: 20,
-                          boxShadow: "0 2px 8px rgba(0, 0, 0, 0.12)",
-                        }}
-                        className="hover:scale-110 active:scale-95 group transition"
-                        title={Array.isArray(wishlist) && wishlist.some((w: any) => w.id === pkg.id) ? "Remove from wishlist" : "Add to wishlist"}
-                        aria-label="Wishlist package"
-                      >
-                        <Heart 
-                          className={`w-4 h-4 transition-colors ${
-                            Array.isArray(wishlist) && wishlist.some((w: any) => w.id === pkg.id)
-                              ? 'text-red-500 fill-red-500' 
-                              : 'text-slate-700 group-hover:text-red-500'
-                          }`} 
-                        />
-                      </button>
-                    </div>
-                    {/* Details block with left & right padding removed */}
-                    <div className="flex-1 flex flex-col justify-between py-5 sm:py-6 px-0 bg-white gap-5 md:gap-0">
-                      {/* Top Group (Width: 616px, Height: 151px, Gap: 12px) */}
-                      <div className="flex flex-col gap-[12px] min-h-[151px] shrink-0 w-full max-w-[616px]">
-                        {/* Tags Container (Width: Fill, Height: Hug 28px, Justify: space-between) */}
-                        <div className="flex justify-between items-center w-full h-[28px] shrink-0">
-                          <span className="text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-0.5 rounded-[4px] text-xs font-bold">{pkg.category || 'Road Trip'}</span>
-                          <span className="bg-[#EBF7ED] text-[#00A63F] px-2.5 py-0.5 rounded-[4px] text-xs font-bold">{pkg.durationDays} days</span>
-                        </div>
-                        <div className="flex justify-between items-baseline gap-4">
-                          <h3 className="text-xl md:text-[24px] font-sans font-bold text-[#1D493E] leading-tight truncate flex-1" title={pkg.name}>{pkg.name}</h3>
-                          <span className="text-xl md:text-[24px] font-sans font-bold text-[#1D493E] shrink-0">₹{(pkg.price ?? 0).toLocaleString('en-IN')}/Person</span>
-                        </div>
-                        <p className="font-sans font-medium text-sm sm:text-base md:text-[18px] md:leading-[28px] text-[#8D8D8D] w-full max-w-[616px] md:h-[64px] overflow-hidden line-clamp-2 shrink-0">
-                          {pkg.description}
-                        </p>
-                      </div>
-
-                      {/* Details Grid Block (Width: 616px, Height: 140px, Justify: space-between) */}
-                      <div className="w-full max-w-[616px] h-auto flex flex-col sm:flex-row justify-between border-t border-gray-200 pt-3 shrink-0 gap-4 sm:gap-6">
-                        {/* Column 1 (Width: 308px, Height: 140px, Gap: space-between) */}
-                        <div className="w-full sm:w-[48%] lg:w-[308px] flex flex-col gap-2 sm:gap-0 justify-between shrink-0">
-                          <div className="w-full sm:max-w-[308px] h-auto min-h-[50px] flex items-center gap-[8px] shrink-0 py-2">
-                            <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
-                              <MapPin className="w-4 h-4 text-[#1D493E]" />
-                            </div>
-                            <span className="font-sans font-medium text-xs sm:text-sm md:text-[20px] leading-normal text-[#2B2B2B] align-middle">Starts from {pkg.startPoint || 'Srinagar'}</span>
-                          </div>
-                          <div className="w-full sm:max-w-[308px] h-auto min-h-[50px] flex items-center gap-[8px] shrink-0 py-2">
-                            <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
-                              <ArrowUpRight className="w-4 h-4 text-[#1D493E]" />
-                            </div>
-                            <span className="font-sans font-medium text-xs sm:text-sm md:text-[20px] leading-normal text-[#2B2B2B] align-middle">{pkg.difficulty || 'Moderate'} Difficulty</span>
-                          </div>
-                        </div>
-                        {/* Column 2 (Width: 308px, Height: 140px, Gap: space-between) */}
-                        <div className="w-full sm:w-[48%] lg:w-[308px] flex flex-col gap-2 sm:gap-0 justify-between shrink-0">
-                          <div className="w-full sm:max-w-[308px] h-auto min-h-[50px] flex items-center gap-[8px] shrink-0 py-2">
-                            <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
-                              <Users className="w-4 h-4 text-[#1D493E]" />
-                            </div>
-                            <span className="font-sans font-medium text-xs sm:text-sm md:text-[20px] leading-normal text-[#2B2B2B] align-middle">{pkg.groupType || 'Curated group Trip'}</span>
-                          </div>
-                          <div className="w-full sm:max-w-[308px] h-auto min-h-[50px] flex items-center gap-[8px] shrink-0 py-2">
-                            <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
-                              <Calendar className="w-4 h-4 text-[#1D493E]" />
-                            </div>
-                            <span className="font-sans font-medium text-xs sm:text-sm md:text-[20px] leading-normal text-[#2B2B2B] align-middle">Next: {pkg.nextDeparture || 'Aug, 2026'}</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Buttons (Width: Fill 624px, Height: Hug 55px, Gap: 12px) */}
-                      <div className="flex gap-3 w-full h-[55px] shrink-0 mt-0">
-                        <Link 
-                          href={`/travel/package/${pkg.id}`} 
-                          className="flex-1 h-[55px] flex items-center justify-center rounded-[4px] bg-[#1D493E] hover:bg-[#15342c] transition-colors duration-300 cursor-pointer"
-                          style={{ color: "#FFFFFF", fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "100%", letterSpacing: "0px", textDecoration: "none", verticalAlign: "middle" }}
+                        <div 
+                          key={pkg.id} 
+                          onClick={() => router.push(`/travel/package/${pkg.id}`)}
+                          className="bg-[#F6F3EE] rounded-[4px] flex flex-col text-left md:h-[778px] overflow-hidden group cursor-pointer" 
+                          style={{ borderRadius: '4px' }}
                         >
-                          Book Now
-                        </Link>
-                        <Link 
-                          href={pkg.link || `/travel/package/${pkg.id}`} 
-                          className="flex-1 h-[55px] flex items-center justify-center rounded-[4px] border border-[#1D493E] text-center bg-white text-[#1D493E] hover:bg-[#EEF2F1] transition-colors duration-300"
-                          style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "100%", letterSpacing: "0px", textDecoration: "none" }}
-                        >
-                          Get details
-                        </Link>
-                      </div>
+                          {/* Image (Flushed with top, left, and right edges) */}
+                          <div 
+                            className="relative w-full h-[200px] md:h-[384px] overflow-hidden rounded-[4px] shrink-0 isolate"
+                            style={{ borderRadius: '4px', WebkitMaskImage: '-webkit-radial-gradient(white, black)' }}
+                          >
+                            <img 
+                              src={pkg.image} 
+                              alt={pkg.name} 
+                              className="w-full h-full object-cover rounded-[4px] group-hover:scale-105 transition-transform duration-500 ease-out" 
+                              style={{ borderRadius: '4px', imageRendering: '-webkit-optimize-contrast', transform: 'translateZ(0)' }}
+                            />
+                            <button
+                              type="button"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                toggleWishlist({ id: pkg.id, name: pkg.name, price: pkg.price, image: pkg.image, type: 'travel' });
+                              }}
+                              style={{
+                                position: "absolute",
+                                top: "12px",
+                                right: "12px",
+                                width: "36px",
+                                height: "36px",
+                                borderRadius: "50%",
+                                backgroundColor: "rgba(255, 255, 255, 0.9)",
+                                backdropFilter: "blur(4px)",
+                                border: "none",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                cursor: "pointer",
+                                zIndex: 20,
+                                boxShadow: "0 2px 8px rgba(0, 0, 0, 0.12)",
+                              }}
+                              className="hover:scale-110 active:scale-95 group transition"
+                              title={Array.isArray(wishlist) && wishlist.some((w: any) => w.id === pkg.id) ? "Remove from wishlist" : "Add to wishlist"}
+                              aria-label="Wishlist package"
+                            >
+                              <Heart 
+                                className={`w-4 h-4 transition-colors ${
+                                  Array.isArray(wishlist) && wishlist.some((w: any) => w.id === pkg.id)
+                                    ? 'text-red-500 fill-red-500' 
+                                    : 'text-slate-700 group-hover:text-red-500'
+                                }`} 
+                              />
+                            </button>
+                          </div>
+                          {/* Details block with left & right padding removed */}
+                          <div className="flex-1 flex flex-col justify-between py-5 sm:py-6 px-0 bg-white gap-5 md:gap-0">
+                            {/* Top Group (Width: 616px, Height: 151px, Gap: 12px) */}
+                            <div className="flex flex-col gap-[12px] min-h-[151px] shrink-0 w-full max-w-[616px]">
+                              {/* Tags Container (Width: Fill, Height: Hug 28px, Justify: space-between) */}
+                              <div className="flex justify-between items-center w-full h-[28px] shrink-0">
+                                <span className="text-[#FF5A36] bg-[#FF5A36]/10 px-2.5 py-0.5 rounded-[4px] text-xs font-bold">{pkg.category || 'Road Trip'}</span>
+                                <span className="bg-[#EBF7ED] text-[#00A63F] px-2.5 py-0.5 rounded-[4px] text-xs font-bold">{pkg.durationDays} days</span>
+                              </div>
+                              <div className="flex justify-between items-baseline gap-4">
+                                <h3 className="text-xl md:text-[24px] font-sans font-bold text-[#1D493E] leading-tight truncate flex-1" title={pkg.name}>{pkg.name}</h3>
+                                <span className="text-xl md:text-[24px] font-sans font-bold text-[#1D493E] shrink-0">₹{(pkg.price ?? 0).toLocaleString('en-IN')}/Person</span>
+                              </div>
+                              <p className="font-sans font-medium text-sm sm:text-base md:text-[18px] md:leading-[28px] text-[#8D8D8D] w-full max-w-[616px] md:h-[64px] overflow-hidden line-clamp-2 shrink-0">
+                                {pkg.description}
+                              </p>
+                            </div>
+
+                            {/* Details Grid Block (Width: 616px, Height: 140px, Justify: space-between) */}
+                            <div className="w-full max-w-[616px] h-auto flex flex-col sm:flex-row justify-between border-t border-gray-200 pt-3 shrink-0 gap-4 sm:gap-6">
+                              {/* Column 1 (Width: 308px, Height: 140px, Gap: space-between) */}
+                              <div className="w-full sm:w-[48%] lg:w-[308px] flex flex-col gap-2 sm:gap-0 justify-between shrink-0">
+                                <div className="w-full sm:max-w-[308px] h-auto min-h-[50px] flex items-center gap-[8px] shrink-0 py-2">
+                                  <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
+                                    <MapPin className="w-4 h-4 text-[#1D493E]" />
+                                  </div>
+                                  <span className="font-sans font-medium text-xs sm:text-sm md:text-[20px] leading-normal text-[#2B2B2B] align-middle">Starts from {pkg.startPoint || 'Srinagar'}</span>
+                                </div>
+                                <div className="w-full sm:max-w-[308px] h-auto min-h-[50px] flex items-center gap-[8px] shrink-0 py-2">
+                                  <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
+                                    <ArrowUpRight className="w-4 h-4 text-[#1D493E]" />
+                                  </div>
+                                  <span className="font-sans font-medium text-xs sm:text-sm md:text-[20px] leading-normal text-[#2B2B2B] align-middle">{pkg.difficulty || 'Moderate'} Difficulty</span>
+                                </div>
+                              </div>
+                              {/* Column 2 (Width: 308px, Height: 140px, Gap: space-between) */}
+                              <div className="w-full sm:w-[48%] lg:w-[308px] flex flex-col gap-2 sm:gap-0 justify-between shrink-0">
+                                <div className="w-full sm:max-w-[308px] h-auto min-h-[50px] flex items-center gap-[8px] shrink-0 py-2">
+                                  <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
+                                    <Users className="w-4 h-4 text-[#1D493E]" />
+                                  </div>
+                                  <span className="font-sans font-medium text-xs sm:text-sm md:text-[20px] leading-normal text-[#2B2B2B] align-middle">{pkg.groupType || 'Curated group Trip'}</span>
+                                </div>
+                                <div className="w-full sm:max-w-[308px] h-auto min-h-[50px] flex items-center gap-[8px] shrink-0 py-2">
+                                  <div className="w-10 h-10 bg-[#FAF9F6] border border-gray-200/60 rounded-[4px] flex items-center justify-center shrink-0">
+                                    <Calendar className="w-4 h-4 text-[#1D493E]" />
+                                  </div>
+                                  <span className="font-sans font-medium text-xs sm:text-sm md:text-[20px] leading-normal text-[#2B2B2B] align-middle">Next: {pkg.nextDeparture || 'Aug, 2026'}</span>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Buttons (Width: Fill 624px, Height: Hug 55px, Gap: 12px) */}
+                            <div className="flex gap-3 w-full h-[55px] shrink-0 mt-0">
+                              <Link 
+                                href={`/travel/package/${pkg.id}`} 
+                                className="flex-1 h-[55px] flex items-center justify-center rounded-[4px] bg-[#1D493E] hover:bg-[#15342c] transition-colors duration-300 cursor-pointer"
+                                style={{ color: "#FFFFFF", fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "100%", letterSpacing: "0px", textDecoration: "none", verticalAlign: "middle" }}
+                              >
+                                Book Now
+                              </Link>
+                              <Link 
+                                href={pkg.link || `/travel/package/${pkg.id}`} 
+                                className="flex-1 h-[55px] flex items-center justify-center rounded-[4px] border border-[#1D493E] text-center bg-white text-[#1D493E] hover:bg-[#EEF2F1] transition-colors duration-300"
+                                style={{ fontFamily: "'Faktum','Outfit',sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "100%", letterSpacing: "0px", textDecoration: "none" }}
+                              >
+                                Get details
+                              </Link>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
                     </div>
-                  </div>
-                ));
-              })()}
-            </div>
+                  )}
+                </>
+              );
+            })()}
+
+            {/* Centered Destinations Footer Link (Figma style: 331x68px, padding 18x36px, radius 4px, NO BORDER) */}
 
             {/* Centered Destinations Footer Link (Figma style: 331x68px, padding 18x36px, radius 4px, NO BORDER) */}
             <div className="flex justify-center mt-4 mb-0">

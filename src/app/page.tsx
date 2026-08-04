@@ -176,20 +176,7 @@ export default function Homepage() {
       try {
         const parsed = JSON.parse(savedPkgs);
         if (Array.isArray(parsed) && parsed.length > 0) {
-          const updated = parsed.map((p: any) => {
-            const defaultPkg = HOLIDAY_PACKAGES.find(hp => hp.id === p.id);
-            if (defaultPkg) {
-              return { 
-                ...defaultPkg, 
-                ...p,
-                // Always preserve admin-controlled visibility from localStorage (p)
-                showOnHome: 'showOnHome' in p ? p.showOnHome : defaultPkg.showOnHome,
-                hidden: 'hidden' in p ? p.hidden : defaultPkg.hidden,
-              };
-            }
-            return p;
-          });
-          setPackagesList(updated);
+          setPackagesList(parsed);
         }
       } catch (e) {
         console.error('Error loading packages:', e);

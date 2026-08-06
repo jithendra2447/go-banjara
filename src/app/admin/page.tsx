@@ -525,60 +525,68 @@ export default function AdminPortal() {
   const handleSaveEditedProduct = (e: React.FormEvent) => {
     e.preventDefault();
     if (!editingProd) return;
-    const exists = products.some(p => p.id === editingProd.id);
-    const updated = exists
-      ? products.map(p => p.id === editingProd.id ? editingProd : p)
-      : [editingProd, ...products];
-    setProducts(updated);
-    localStorage.setItem('gb_admin_products_v3', JSON.stringify(updated));
-    localStorage.setItem('gb_admin_products', JSON.stringify(updated));
-    syncCatalogToApi({ products: updated });
+    setProducts((prevProducts) => {
+      const exists = prevProducts.some(p => p.id === editingProd.id);
+      const updated = exists
+        ? prevProducts.map(p => p.id === editingProd.id ? editingProd : p)
+        : [editingProd, ...prevProducts];
+      localStorage.setItem('gb_admin_products_v3', JSON.stringify(updated));
+      localStorage.setItem('gb_admin_products', JSON.stringify(updated));
+      syncCatalogToApi({ products: updated });
+      return updated;
+    });
     setEditingProd(null);
-    showToast(exists ? 'Product updated successfully!' : '✨ New product added to inventory!');
+    showToast('Product updated successfully!');
   };
 
   const handleSaveBlog = (e: React.FormEvent) => {
     e.preventDefault();
     if (!editingBlog) return;
-    const exists = blogs.some(b => b.id === editingBlog.id);
-    const updated = exists
-      ? blogs.map(b => b.id === editingBlog.id ? editingBlog : b)
-      : [editingBlog, ...blogs];
-    setBlogs(updated);
-    localStorage.setItem('gb_admin_blogs', JSON.stringify(updated));
-    syncCatalogToApi({ blogs: updated });
-    if (typeof window !== 'undefined') {
-      window.dispatchEvent(new CustomEvent('gb_blogs_updated', { detail: updated }));
-    }
+    setBlogs((prevBlogs) => {
+      const exists = prevBlogs.some(b => b.id === editingBlog.id);
+      const updated = exists
+        ? prevBlogs.map(b => b.id === editingBlog.id ? editingBlog : b)
+        : [editingBlog, ...prevBlogs];
+      localStorage.setItem('gb_admin_blogs', JSON.stringify(updated));
+      syncCatalogToApi({ blogs: updated });
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('gb_blogs_updated', { detail: updated }));
+      }
+      return updated;
+    });
     setEditingBlog(null);
-    showToast(exists ? 'Blog article updated successfully!' : '✨ New blog article published!');
+    showToast('Blog article updated successfully!');
   };
 
   const handleDeleteBlog = (id: string) => {
-    const updated = blogs.filter(b => b.id !== id);
-    setBlogs(updated);
-    localStorage.setItem('gb_admin_blogs', JSON.stringify(updated));
-    syncCatalogToApi({ blogs: updated });
-    if (typeof window !== 'undefined') {
-      window.dispatchEvent(new CustomEvent('gb_blogs_updated', { detail: updated }));
-    }
+    setBlogs((prevBlogs) => {
+      const updated = prevBlogs.filter(b => b.id !== id);
+      localStorage.setItem('gb_admin_blogs', JSON.stringify(updated));
+      syncCatalogToApi({ blogs: updated });
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('gb_blogs_updated', { detail: updated }));
+      }
+      return updated;
+    });
     showToast('Blog article deleted!');
   };
 
   const handleSaveEditedPackage = (savedPkg: HolidayPackage) => {
     if (!savedPkg) return;
-    const exists = packages.some(p => p.id === savedPkg.id);
-    const updated = exists
-      ? packages.map(p => p.id === savedPkg.id ? savedPkg : p)
-      : [savedPkg, ...packages];
-    setPackages(updated);
-    localStorage.setItem('gb_admin_packages', JSON.stringify(updated));
-    syncCatalogToApi({ products, packages: updated, cms, blogs });
-    if (typeof window !== 'undefined') {
-      window.dispatchEvent(new CustomEvent('gb_packages_updated', { detail: updated }));
-    }
+    setPackages((prevPackages) => {
+      const exists = prevPackages.some(p => p.id === savedPkg.id);
+      const updated = exists
+        ? prevPackages.map(p => p.id === savedPkg.id ? savedPkg : p)
+        : [savedPkg, ...prevPackages];
+      localStorage.setItem('gb_admin_packages', JSON.stringify(updated));
+      syncCatalogToApi({ packages: updated });
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('gb_packages_updated', { detail: updated }));
+      }
+      return updated;
+    });
     setEditingPkg(null);
-    showToast(exists ? 'Tour package updated successfully!' : '✨ New tour package created and added!');
+    showToast('✨ Tour package updated and saved permanently!');
   };
 
   const handleAddPackageProductLink = () => {

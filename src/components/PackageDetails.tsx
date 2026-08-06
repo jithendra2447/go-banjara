@@ -189,7 +189,7 @@ export default function PackageDetails({ customId }: PackageDetailsProps) {
       }
 
       // Fetch live catalog from API to ensure cross-subdomain & device sync on refresh
-      fetch('/api/admin/catalog')
+      fetch(`/api/admin/catalog?t=${Date.now()}`, { cache: 'no-store' })
         .then((res) => res.json())
         .then((data) => {
           if (data?.success) {

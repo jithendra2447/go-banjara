@@ -2516,25 +2516,26 @@ export default function AdminPortal() {
                                             const nextSecsArr = Array.from(nextSecsSet);
                                             const primarySec = nextSecsArr[0] || 'deals';
 
-                                            const updated = products.map(p => p.id === prod.id ? {
-                                              ...p,
-                                              section: primarySec,
-                                              sections: nextSecsArr,
-                                              isBestDeal: nextSecsSet.has('deals'),
-                                              isMostSelling: nextSecsSet.has('most-selling'),
-                                              isNewArrival: nextSecsSet.has('new-arrivals'),
-                                              isTravelEssential: nextSecsSet.has('travel-essentials'),
-                                              isLimitedEdition: nextSecsSet.has('limited-edition'),
-                                              isDiscountSale: nextSecsSet.has('discount-sale')
-                                            } : p);
-
-                                            setProducts(updated);
-                                            localStorage.setItem('gb_admin_products_v3', JSON.stringify(updated));
-                                            localStorage.setItem('gb_admin_products', JSON.stringify(updated));
-                                            syncCatalogToApi({ products: updated });
-                                            if (typeof window !== 'undefined') {
-                                              window.dispatchEvent(new CustomEvent('gb_products_updated', { detail: updated }));
-                                            }
+                                            setProducts((prevProducts) => {
+                                               const updated = prevProducts.map(p => p.id === prod.id ? {
+                                                 ...p,
+                                                 section: primarySec,
+                                                 sections: nextSecsArr,
+                                                 isBestDeal: nextSecsSet.has('deals'),
+                                                 isMostSelling: nextSecsSet.has('most-selling'),
+                                                 isNewArrival: nextSecsSet.has('new-arrivals'),
+                                                 isTravelEssential: nextSecsSet.has('travel-essentials'),
+                                                 isLimitedEdition: nextSecsSet.has('limited-edition'),
+                                                 isDiscountSale: nextSecsSet.has('discount-sale')
+                                               } : p);
+                                               localStorage.setItem('gb_admin_products_v3', JSON.stringify(updated));
+                                               localStorage.setItem('gb_admin_products', JSON.stringify(updated));
+                                               syncCatalogToApi({ products: updated });
+                                               if (typeof window !== 'undefined') {
+                                                 window.dispatchEvent(new CustomEvent('gb_products_updated', { detail: updated }));
+                                               }
+                                               return updated;
+                                             });
                                           }}
                                           className="w-4 h-4 rounded border-gray-300 accent-[#1D493E] cursor-pointer shrink-0"
                                         />
@@ -2556,14 +2557,16 @@ export default function AdminPortal() {
                             <button
                               onClick={() => {
                                 const isHiddenNow = !prod.hidden;
-                                const updated = products.map(p => p.id === prod.id ? { ...p, hidden: isHiddenNow } : p);
-                                setProducts(updated);
-                                localStorage.setItem('gb_admin_products_v3', JSON.stringify(updated));
-                                localStorage.setItem('gb_admin_products', JSON.stringify(updated));
-                                syncCatalogToApi({ products: updated });
-                                if (typeof window !== 'undefined') {
-                                  window.dispatchEvent(new CustomEvent('gb_products_updated', { detail: updated }));
-                                }
+                                setProducts((prevProducts) => {
+                                  const updated = prevProducts.map(p => p.id === prod.id ? { ...p, hidden: isHiddenNow } : p);
+                                  localStorage.setItem('gb_admin_products_v3', JSON.stringify(updated));
+                                  localStorage.setItem('gb_admin_products', JSON.stringify(updated));
+                                  syncCatalogToApi({ products: updated });
+                                  if (typeof window !== 'undefined') {
+                                    window.dispatchEvent(new CustomEvent('gb_products_updated', { detail: updated }));
+                                  }
+                                  return updated;
+                                });
                                 showToast(isHiddenNow ? `🙈 Hidden "${prod.name}" from store` : `👁️ Unhidden "${prod.name}" on store`);
                               }}
                               className={`px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 cursor-pointer ${
@@ -2590,11 +2593,13 @@ export default function AdminPortal() {
                             </button>
                             <button
                               onClick={() => {
-                                const updated = products.filter(p => p.id !== prod.id);
-                                setProducts(updated);
-                                localStorage.setItem('gb_admin_products_v3', JSON.stringify(updated));
-                                localStorage.setItem('gb_admin_products', JSON.stringify(updated));
-                                syncCatalogToApi({ products: updated });
+                                setProducts((prevProducts) => {
+                                  const updated = prevProducts.filter(p => p.id !== prod.id);
+                                  localStorage.setItem('gb_admin_products_v3', JSON.stringify(updated));
+                                  localStorage.setItem('gb_admin_products', JSON.stringify(updated));
+                                  syncCatalogToApi({ products: updated });
+                                  return updated;
+                                });
                                 showToast('Product removed!');
                               }}
                               className="px-3 py-1.5 bg-rose-50 hover:bg-rose-600 text-rose-600 hover:text-white rounded-lg text-xs font-bold transition flex items-center gap-1.5 cursor-pointer"

@@ -2199,13 +2199,15 @@ export default function AdminPortal() {
                               checked={pkg.showOnHome === true}
                               onChange={(e) => {
                                 const show = e.target.checked;
-                                const updated = packages.map(p => p.id === pkg.id ? { ...p, showOnHome: show } : p);
-                                setPackages(updated);
-                                localStorage.setItem('gb_admin_packages', JSON.stringify(updated));
-                                syncCatalogToApi({ products, packages: updated, cms, blogs });
-                                if (typeof window !== 'undefined') {
-                                  window.dispatchEvent(new CustomEvent('gb_packages_updated', { detail: updated }));
-                                }
+                                setPackages((prevPackages) => {
+                                  const updated = prevPackages.map(p => p.id === pkg.id ? { ...p, showOnHome: show } : p);
+                                  localStorage.setItem('gb_admin_packages', JSON.stringify(updated));
+                                  syncCatalogToApi({ packages: updated });
+                                  if (typeof window !== 'undefined') {
+                                    window.dispatchEvent(new CustomEvent('gb_packages_updated', { detail: updated }));
+                                  }
+                                  return updated;
+                                });
                                 showToast(`${show ? 'Showcasing' : 'Hidden from'} Homepage: "${pkg.name}"`);
                               }}
                               className="w-4 h-4 text-[#1D493E] accent-[#1D493E] rounded"
@@ -2220,13 +2222,15 @@ export default function AdminPortal() {
                             <button
                               onClick={() => {
                                 const isHiddenNow = !pkg.hidden;
-                                const updated = packages.map(p => p.id === pkg.id ? { ...p, hidden: isHiddenNow } : p);
-                                setPackages(updated);
-                                localStorage.setItem('gb_admin_packages', JSON.stringify(updated));
-                                syncCatalogToApi({ products, packages: updated, cms, blogs });
-                                if (typeof window !== 'undefined') {
-                                  window.dispatchEvent(new CustomEvent('gb_packages_updated', { detail: updated }));
-                                }
+                                setPackages((prevPackages) => {
+                                  const updated = prevPackages.map(p => p.id === pkg.id ? { ...p, hidden: isHiddenNow } : p);
+                                  localStorage.setItem('gb_admin_packages', JSON.stringify(updated));
+                                  syncCatalogToApi({ packages: updated });
+                                  if (typeof window !== 'undefined') {
+                                    window.dispatchEvent(new CustomEvent('gb_packages_updated', { detail: updated }));
+                                  }
+                                  return updated;
+                                });
                                 showToast(isHiddenNow ? `🙈 Hidden "${pkg.name}" from public site` : `👁️ Unhidden "${pkg.name}" on public site`);
                               }}
                               className={`px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 cursor-pointer ${
@@ -2253,13 +2257,15 @@ export default function AdminPortal() {
                             </button>
                             <button
                               onClick={() => {
-                                const updated = packages.filter(p => p.id !== pkg.id);
-                                setPackages(updated);
-                                localStorage.setItem('gb_admin_packages', JSON.stringify(updated));
-                                syncCatalogToApi({ products, packages: updated, cms, blogs });
-                                if (typeof window !== 'undefined') {
-                                  window.dispatchEvent(new CustomEvent('gb_packages_updated', { detail: updated }));
-                                }
+                                setPackages((prevPackages) => {
+                                  const updated = prevPackages.filter(p => p.id !== pkg.id);
+                                  localStorage.setItem('gb_admin_packages', JSON.stringify(updated));
+                                  syncCatalogToApi({ packages: updated });
+                                  if (typeof window !== 'undefined') {
+                                    window.dispatchEvent(new CustomEvent('gb_packages_updated', { detail: updated }));
+                                  }
+                                  return updated;
+                                });
                                 showToast('Package removed!');
                               }}
                               className="px-3 py-1.5 bg-rose-50 hover:bg-rose-600 text-rose-600 hover:text-white rounded-lg text-xs font-bold transition flex items-center gap-1.5 cursor-pointer"

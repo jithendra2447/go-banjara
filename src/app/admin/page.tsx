@@ -442,11 +442,11 @@ export default function AdminPortal() {
   }, []);
 
   // Save Handlers
-  const handleSaveCMS = (e: React.FormEvent) => {
+  const handleSaveCMS = async (e: React.FormEvent) => {
     e.preventDefault();
     saveStoredCMSContent(cms);
-    syncCatalogToApi({ products, packages, cms, blogs });
-    showToast('⚡ Website Page & Section Content updated live across the entire website!');
+    await syncCatalogToApi({ products, packages, cms, blogs });
+    showToast('⚡ All changes & content updated live across the entire website!');
   };
 
   const handleSaveGlobalSettings = (e: React.FormEvent) => {
@@ -500,23 +500,27 @@ export default function AdminPortal() {
 
   const syncCatalogToApi = async (data: { products?: any[]; packages?: any[]; cms?: any; blogs?: any[] }) => {
     try {
-      setPackages((latestPackages) => {
-        setProducts((latestProducts) => {
-          const payload = {
-            products: data.products || latestProducts,
-            packages: data.packages || latestPackages,
-            cms: data.cms || cms,
-            blogs: data.blogs || blogs,
-          };
-          fetch('/api/admin/catalog', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload),
-          }).catch((err) => console.error('Catalog sync API error:', err));
-          return latestProducts;
-        });
-        return latestPackages;
+      const currentPackages = data.packages || packages;
+      const currentProducts = data.products || products;
+      const currentCms = data.cms || cms;
+      const currentBlogs = data.blogs || blogs;
+
+      const payload = {
+        products: currentProducts,
+        packages: currentPackages,
+        cms: currentCms,
+        blogs: currentBlogs,
+      };
+
+      const res = await fetch('/api/admin/catalog', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
       });
+
+      if (!res.ok) {
+        console.error('Catalog sync failed with status:', res.status);
+      }
     } catch (err) {
       console.error('Catalog sync error:', err);
     }

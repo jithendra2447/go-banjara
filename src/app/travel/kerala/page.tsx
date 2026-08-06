@@ -193,82 +193,94 @@ export default function KeralaDetails() {
   const [productAddedSuccess, setProductAddedSuccess] = useState<string | null>(null);
 
   useEffect(() => {
-    try {
-      const saved = localStorage.getItem('gb_admin_packages');
-      let parsed = saved ? JSON.parse(saved) : [];
-      
-      // Ensure all default packages exist in parsed
-      let merged = [...parsed];
-      let needsSave = false;
-      HOLIDAY_PACKAGES.forEach(hp => {
-        const foundIdx = merged.findIndex(p => p.id === hp.id);
-        if (foundIdx === -1) {
-          merged.push(hp);
-          needsSave = true;
-        } else {
-          // If default package is missing critical fields, fill them in without replacing user edits
-          const item = merged[foundIdx];
-          if (item.price === undefined || !item.routeList || !item.itinerary) {
-            merged[foundIdx] = { ...hp, ...item };
+    const loadCatalog = async () => {
+      try {
+        let parsed: any[] = [];
+        const res = await fetch('/api/admin/catalog?t=' + Date.now(), { cache: 'no-store' });
+        if (res.ok) {
+          const data = await res.json();
+          if (data.packages && Array.isArray(data.packages) && data.packages.length > 0) {
+            parsed = data.packages;
+            localStorage.setItem('gb_admin_packages', JSON.stringify(parsed));
+          }
+        }
+        if (parsed.length === 0) {
+          const saved = localStorage.getItem('gb_admin_packages');
+          parsed = saved ? JSON.parse(saved) : [];
+        }
+
+        let merged = [...parsed];
+        let needsSave = false;
+        HOLIDAY_PACKAGES.forEach(hp => {
+          const foundIdx = merged.findIndex(p => p.id === hp.id);
+          if (foundIdx === -1) {
+            merged.push(hp);
             needsSave = true;
+          } else {
+            const item = merged[foundIdx];
+            if (item.price === undefined || !item.routeList || !item.itinerary) {
+              merged[foundIdx] = { ...hp, ...item };
+              needsSave = true;
+            }
           }
-        }
-      });
-
-      if (!saved || needsSave) {
-        localStorage.setItem('gb_admin_packages', JSON.stringify(merged));
-      }
-      parsed = merged;
-
-      if (parsed) {
-        const filtered = parsed.filter((pkg: any) => {
-          const destLower = pkg.destination ? pkg.destination.toLowerCase() : '';
-          const nameLower = pkg.name ? pkg.name.toLowerCase() : '';
-          
-          return (
-            destLower.includes('kerala') || 
-            nameLower.includes('kerala') || 
-            nameLower.includes('munnar') || 
-            nameLower.includes('alleppey') ||
-            pkg.id.startsWith('pkg-kerala')
-          );
         });
 
-        const mapped = filtered.map((pkg: any) => {
-          if (!pkg.tabName) {
-            pkg.tabName = pkg.name.split(' ')[0] + ' ' + (pkg.durationDays ? `${pkg.durationDays}D` : 'Trip');
-          }
-          if (!pkg.duration) {
-            pkg.duration = `${pkg.durationDays || 5} Days / ${pkg.durationDays ? pkg.durationDays - 1 : 4} Nights`;
-          }
-          if (!pkg.hotelStars) {
-            pkg.hotelStars = pkg.hotelStars || '3★ / 4★ Premium';
-          }
-          if (!pkg.route) {
-            pkg.route = pkg.routePath || [];
-          }
-          if (!pkg.timeOfDay) {
-            pkg.timeOfDay = 'morning';
-          }
-          if (pkg.freeCancellation === undefined) {
-            pkg.freeCancellation = true;
-          }
-          if (!pkg.category) {
-            pkg.category = 'Houseboat';
-          }
-          if (!pkg.images) {
-            pkg.images = [pkg.image];
-          }
-          return pkg;
-        });
-
-        if (mapped.length > 0) {
-          setPackages(mapped);
+        if (needsSave) {
+          localStorage.setItem('gb_admin_packages', JSON.stringify(merged));
         }
+        parsed = merged;
+
+        if (parsed) {
+          const filtered = parsed.filter((pkg: any) => {
+            const destLower = pkg.destination ? pkg.destination.toLowerCase() : '';
+            const nameLower = pkg.name ? pkg.name.toLowerCase() : '';
+            
+            return (
+              destLower.includes('kerala') || 
+              nameLower.includes('kerala') || 
+              nameLower.includes('munnar') || 
+              nameLower.includes('alleppey') ||
+              pkg.id.startsWith('pkg-kerala')
+            );
+          });
+
+          const mapped = filtered.map((pkg: any) => {
+            if (!pkg.tabName) {
+              pkg.tabName = pkg.name.split(' ')[0] + ' ' + (pkg.durationDays ? `${pkg.durationDays}D` : 'Trip');
+            }
+            if (!pkg.duration) {
+              pkg.duration = `${pkg.durationDays || 5} Days / ${pkg.durationDays ? pkg.durationDays - 1 : 4} Nights`;
+            }
+            if (!pkg.hotelStars) {
+              pkg.hotelStars = pkg.hotelStars || '3★ / 4★ Premium';
+            }
+            if (!pkg.route) {
+              pkg.route = pkg.routePath || [];
+            }
+            if (!pkg.timeOfDay) {
+              pkg.timeOfDay = 'morning';
+            }
+            if (pkg.freeCancellation === undefined) {
+              pkg.freeCancellation = true;
+            }
+            if (!pkg.category) {
+              pkg.category = 'Houseboat';
+            }
+            if (!pkg.images) {
+              pkg.images = [pkg.image];
+            }
+            return pkg;
+          });
+
+          if (mapped.length > 0) {
+            setPackages(mapped);
+          }
+        }
+      } catch (e) {
+        console.error('Error loading admin packages:', e);
       }
-    } catch (e) {
-      console.error('Error loading admin packages:', e);
-    }
+    };
+    loadCatalog();
   }, []);
 
   // Live weather status state

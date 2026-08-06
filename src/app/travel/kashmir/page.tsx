@@ -195,32 +195,42 @@ export default function KashmirDetails() {
   const [expandedDayIdx, setExpandedDayIdx] = useState<number | null>(0);
 
   useEffect(() => {
-    try {
-      const saved = localStorage.getItem('gb_admin_packages');
-      let parsed = saved ? JSON.parse(saved) : [];
-      
-      // Ensure all default packages exist in parsed
-      let merged = [...parsed];
-      let needsSave = false;
-      HOLIDAY_PACKAGES.forEach(hp => {
-        const foundIdx = merged.findIndex(p => p.id === hp.id);
-        if (foundIdx === -1) {
-          merged.push(hp);
-          needsSave = true;
-        } else {
-          // If default package is missing critical fields, fill them in without replacing user edits
-          const item = merged[foundIdx];
-          if (item.price === undefined || !item.routeList || !item.itinerary) {
-            merged[foundIdx] = { ...hp, ...item };
-            needsSave = true;
+    const loadCatalog = async () => {
+      try {
+        let parsed: any[] = [];
+        const res = await fetch('/api/admin/catalog?t=' + Date.now(), { cache: 'no-store' });
+        if (res.ok) {
+          const data = await res.json();
+          if (data.packages && Array.isArray(data.packages) && data.packages.length > 0) {
+            parsed = data.packages;
+            localStorage.setItem('gb_admin_packages', JSON.stringify(parsed));
           }
         }
-      });
+        if (parsed.length === 0) {
+          const saved = localStorage.getItem('gb_admin_packages');
+          parsed = saved ? JSON.parse(saved) : [];
+        }
 
-      if (!saved || needsSave) {
-        localStorage.setItem('gb_admin_packages', JSON.stringify(merged));
-      }
-      parsed = merged;
+        let merged = [...parsed];
+        let needsSave = false;
+        HOLIDAY_PACKAGES.forEach(hp => {
+          const foundIdx = merged.findIndex(p => p.id === hp.id);
+          if (foundIdx === -1) {
+            merged.push(hp);
+            needsSave = true;
+          } else {
+            const item = merged[foundIdx];
+            if (item.price === undefined || !item.routeList || !item.itinerary) {
+              merged[foundIdx] = { ...hp, ...item };
+              needsSave = true;
+            }
+          }
+        });
+
+        if (needsSave) {
+          localStorage.setItem('gb_admin_packages', JSON.stringify(merged));
+        }
+        parsed = merged;
 
       if (parsed) {
         const filtered = parsed.filter((pkg: any) => {
@@ -302,6 +312,8 @@ export default function KashmirDetails() {
     } catch (e) {
       console.error('Error loading admin packages:', e);
     }
+    };
+    loadCatalog();
   }, []);
 
   // Live weather status state

@@ -500,10 +500,16 @@ export default function AdminPortal() {
 
   const syncCatalogToApi = async (data: { products?: any[]; packages?: any[]; cms?: any; blogs?: any[] }) => {
     try {
+      const payload = {
+        products: data.products || products,
+        packages: data.packages || packages,
+        cms: data.cms || cms,
+        blogs: data.blogs || blogs,
+      };
       await fetch('/api/admin/catalog', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify(payload),
       });
     } catch (err) {
       console.error('Catalog sync error:', err);

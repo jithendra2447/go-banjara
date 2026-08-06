@@ -422,6 +422,24 @@ export const PackageEditorModal: React.FC<PackageEditorModalProps> = ({
                   className="w-full p-4 bg-white border border-[#E5E0D5] rounded-2xl text-sm text-[#2B2B2B] focus:outline-none focus:border-[#1D493E]"
                 />
               </div>
+
+              <div className="p-4 bg-emerald-50/60 border border-emerald-200 rounded-2xl flex items-center justify-between">
+                <div>
+                  <h4 className="text-sm font-extrabold text-[#1D493E]">Homepage Showcase (Featured Card)</h4>
+                  <p className="text-xs text-emerald-800/80 font-medium mt-0.5">Showcase this tour package prominently on the main website homepage.</p>
+                </div>
+                <label className="flex items-center gap-2 cursor-pointer bg-white px-4 py-2 rounded-xl border border-emerald-300 shadow-xs">
+                  <input
+                    type="checkbox"
+                    checked={formData.showOnHome === true}
+                    onChange={(e) => setFormData({ ...formData, showOnHome: e.target.checked })}
+                    className="w-5 h-5 accent-[#1D493E] rounded cursor-pointer"
+                  />
+                  <span className="text-xs font-bold text-[#1D493E]">
+                    {formData.showOnHome === true ? 'Featured on Homepage' : 'Off'}
+                  </span>
+                </label>
+              </div>
             </div>
           )}
 

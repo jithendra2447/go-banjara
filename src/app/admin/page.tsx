@@ -395,13 +395,14 @@ export default function AdminPortal() {
       .then((res) => res.json())
       .then((data) => {
         if (data?.success) {
-          if (Array.isArray(data.products) && data.products.length > 0) {
-            setProducts(data.products);
-            localStorage.setItem('gb_admin_products_v3', JSON.stringify(data.products));
-          }
           if (Array.isArray(data.packages) && data.packages.length > 0) {
             setPackages(data.packages);
             localStorage.setItem('gb_admin_packages', JSON.stringify(data.packages));
+          }
+          if (Array.isArray(data.products) && data.products.length > 0) {
+            setProducts(data.products);
+            localStorage.setItem('gb_admin_products_v3', JSON.stringify(data.products));
+            localStorage.setItem('gb_admin_products', JSON.stringify(data.products));
           }
           if (data.cms) {
             setCms(data.cms);

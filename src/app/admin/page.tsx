@@ -442,7 +442,8 @@ export default function AdminPortal() {
     fetchLiveAdminData();
   }, []);
 
-  // Save Handler  const handleSaveCMS = async (e: React.FormEvent) => {
+  // Save Handlers
+  const handleSaveCMS = async (e: React.FormEvent) => {
     e.preventDefault();
     saveStoredCMSContent(cms);
     let latestPkgs = packages;

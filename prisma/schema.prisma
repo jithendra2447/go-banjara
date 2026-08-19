@@ -110,3 +110,45 @@ model CatalogState {
   blogs     Json?
   updatedAt DateTime @updatedAt
 }
+
+model TravelPackage {
+  id                  String   @id @map("_id")
+  name                String
+  price               Float
+  originalPrice       Float?
+  duration            String
+  durationDays        Int      @default(1)
+  rating              Float    @default(5.0)
+  ratingCount         Int      @default(0)
+  hotelStars          String?
+  hotelClass          String?
+  route               String?
+  routeList           String[]
+  description         String
+  inclusions          String[]
+  highlights          String[]
+  image               String
+  themes              String[]
+  destination         String
+  detailsAvailable    Boolean  @default(true)
+  link                String?
+  category            String?
+  difficulty          String?
+  groupType           String?
+  nextDeparture       String?
+  startPoint          String?
+  isBestSeller        Boolean  @default(false)
+  showOnHome          Boolean  @default(true)
+  hidden              Boolean  @default(false)
+  homeShowcaseSection String?
+  images              String[]
+  exclusions          String[]
+  packingList         String[]
+  faqs                Json?
+  reviews             Json?
+  guide               Json?
+  departures          Json?
+  itinerary           Json?
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+}

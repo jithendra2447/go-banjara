@@ -206,29 +206,8 @@ export default function KeralaDetails() {
         }
         if (parsed.length === 0) {
           const saved = localStorage.getItem('gb_admin_packages');
-          parsed = saved ? JSON.parse(saved) : [];
+          parsed = saved ? JSON.parse(saved) : HOLIDAY_PACKAGES;
         }
-
-        let merged = [...parsed];
-        let needsSave = false;
-        HOLIDAY_PACKAGES.forEach(hp => {
-          const foundIdx = merged.findIndex(p => p.id === hp.id);
-          if (foundIdx === -1) {
-            merged.push(hp);
-            needsSave = true;
-          } else {
-            const item = merged[foundIdx];
-            if (item.price === undefined || !item.routeList || !item.itinerary) {
-              merged[foundIdx] = { ...hp, ...item };
-              needsSave = true;
-            }
-          }
-        });
-
-        if (needsSave) {
-          localStorage.setItem('gb_admin_packages', JSON.stringify(merged));
-        }
-        parsed = merged;
 
         if (parsed) {
           const filtered = parsed.filter((pkg: any) => {

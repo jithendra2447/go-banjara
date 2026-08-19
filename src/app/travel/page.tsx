@@ -146,36 +146,11 @@ export default function HolidaysPortal() {
     try {
       const saved = localStorage.getItem('gb_admin_packages');
       let parsed = saved ? JSON.parse(saved) : [];
-      
-      // Ensure all default packages exist in parsed without overwriting admin edits
-      let merged = [...parsed];
-      let needsSave = false;
-      HOLIDAY_PACKAGES.forEach(hp => {
-        const foundIdx = merged.findIndex(p => p.id === hp.id);
-        if (foundIdx === -1) {
-          merged.push(hp);
-          needsSave = true;
-        } else {
-          // Fill in any missing critical fields without overwriting user edits
-          const item = merged[foundIdx];
-          if (item.price === undefined || !item.routeList || !item.itinerary) {
-            // Merge hardcoded base with user edits, but always keep admin-controlled fields from item
-            merged[foundIdx] = {
-              ...hp,
-              ...item,
-              // Explicitly preserve admin-controlled visibility fields
-              showOnHome: 'showOnHome' in item ? item.showOnHome : hp.showOnHome,
-              hidden: 'hidden' in item ? item.hidden : hp.hidden,
-            };
-            needsSave = true;
-          }
-        }
-      });
-
-      if (!saved || needsSave) {
-        localStorage.setItem('gb_admin_packages', JSON.stringify(merged));
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        setPackages(parsed);
+      } else {
+        setPackages(HOLIDAY_PACKAGES);
       }
-      setPackages(merged);
     } catch (e) {
       console.error(e);
     }

@@ -60,6 +60,11 @@ export async function GET() {
       orderBy: { createdAt: 'desc' },
     });
 
+    // 6. Fetch all travel packages
+    const travelPackages = await prisma.travelPackage.findMany({
+      orderBy: { createdAt: 'desc' },
+    });
+
     return NextResponse.json({
       success: true,
       users,
@@ -67,6 +72,7 @@ export async function GET() {
       bookings,
       newsletterSubscribers,
       contactSubmissions,
+      travelPackages,
     });
   } catch (error: any) {
     console.error('Failed to fetch admin data from MongoDB:', error);

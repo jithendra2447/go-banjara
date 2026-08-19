@@ -395,7 +395,7 @@ export const HOLIDAY_PACKAGES: HolidayPackage[] = [
     nextDeparture: 'Aug, 2026',
     startPoint: 'Kochi',
     isBestSeller: true,
-    showOnHome: true,
+    showOnHome: false,
     
     // Detailed fields
     images: [
@@ -1232,6 +1232,7 @@ export const HOLIDAY_PACKAGES: HolidayPackage[] = [
     groupType: 'Curated group Trip',
     nextDeparture: 'Aug, 2026',
     startPoint: 'Manali',
+    showOnHome: true,
     
     // Detailed fields
     images: [

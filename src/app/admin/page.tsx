@@ -442,11 +442,18 @@ export default function AdminPortal() {
     fetchLiveAdminData();
   }, []);
 
-  // Save Handlers
-  const handleSaveCMS = async (e: React.FormEvent) => {
+  // Save Handler  const handleSaveCMS = async (e: React.FormEvent) => {
     e.preventDefault();
     saveStoredCMSContent(cms);
-    await syncCatalogToApi({ products, packages, cms, blogs });
+    let latestPkgs = packages;
+    try {
+      const saved = localStorage.getItem('gb_admin_packages');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) latestPkgs = parsed;
+      }
+    } catch (err) {}
+    await syncCatalogToApi({ products, packages: latestPkgs, cms, blogs });
     showToast('⚡ All changes & content updated live across the entire website!');
   };
 
@@ -486,13 +493,11 @@ export default function AdminPortal() {
 
     setCustomPages(updatedPages);
     saveStoredCustomPages(updatedPages);
-    setIsPageModalOpen(false);
     setEditingCustomPage(null);
-    showToast(`📄 Custom page "${editingCustomPage.title}" saved!`);
+    showToast('Custom page saved!');
   };
 
   const handleDeleteCustomPage = (id: string) => {
-    if (!confirm('Are you sure you want to delete this custom page?')) return;
     const updated = customPages.filter(p => p.id !== id);
     setCustomPages(updated);
     saveStoredCustomPages(updated);
@@ -530,16 +535,14 @@ export default function AdminPortal() {
   const handleSaveEditedProduct = (e: React.FormEvent) => {
     e.preventDefault();
     if (!editingProd) return;
-    setProducts((prevProducts) => {
-      const exists = prevProducts.some(p => p.id === editingProd.id);
-      const updated = exists
-        ? prevProducts.map(p => p.id === editingProd.id ? editingProd : p)
-        : [editingProd, ...prevProducts];
-      localStorage.setItem('gb_admin_products_v3', JSON.stringify(updated));
-      localStorage.setItem('gb_admin_products', JSON.stringify(updated));
-      syncCatalogToApi({ products: updated });
-      return updated;
-    });
+    const exists = products.some(p => p.id === editingProd.id);
+    const updated = exists
+      ? products.map(p => p.id === editingProd.id ? editingProd : p)
+      : [editingProd, ...products];
+    setProducts(updated);
+    localStorage.setItem('gb_admin_products_v3', JSON.stringify(updated));
+    localStorage.setItem('gb_admin_products', JSON.stringify(updated));
+    syncCatalogToApi({ products: updated });
     setEditingProd(null);
     showToast('Product updated successfully!');
   };
@@ -547,51 +550,42 @@ export default function AdminPortal() {
   const handleSaveBlog = (e: React.FormEvent) => {
     e.preventDefault();
     if (!editingBlog) return;
-    setBlogs((prevBlogs) => {
-      const exists = prevBlogs.some(b => b.id === editingBlog.id);
-      const updated = exists
-        ? prevBlogs.map(b => b.id === editingBlog.id ? editingBlog : b)
-        : [editingBlog, ...prevBlogs];
-      localStorage.setItem('gb_admin_blogs', JSON.stringify(updated));
-      syncCatalogToApi({ blogs: updated });
-      if (typeof window !== 'undefined') {
-        window.dispatchEvent(new CustomEvent('gb_blogs_updated', { detail: updated }));
-      }
-      return updated;
-    });
+    const exists = blogs.some(b => b.id === editingBlog.id);
+    const updated = exists
+      ? blogs.map(b => b.id === editingBlog.id ? editingBlog : b)
+      : [editingBlog, ...blogs];
+    setBlogs(updated);
+    localStorage.setItem('gb_admin_blogs', JSON.stringify(updated));
+    syncCatalogToApi({ blogs: updated });
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('gb_blogs_updated', { detail: updated }));
+    }
     setEditingBlog(null);
     showToast('Blog article updated successfully!');
   };
 
   const handleDeleteBlog = (id: string) => {
-    setBlogs((prevBlogs) => {
-      const updated = prevBlogs.filter(b => b.id !== id);
-      localStorage.setItem('gb_admin_blogs', JSON.stringify(updated));
-      syncCatalogToApi({ blogs: updated });
-      if (typeof window !== 'undefined') {
-        window.dispatchEvent(new CustomEvent('gb_blogs_updated', { detail: updated }));
-      }
-      return updated;
-    });
+    const updated = blogs.filter(b => b.id !== id);
+    setBlogs(updated);
+    localStorage.setItem('gb_admin_blogs', JSON.stringify(updated));
+    syncCatalogToApi({ blogs: updated });
     showToast('Blog article deleted!');
   };
 
-  const handleSaveEditedPackage = (savedPkg: HolidayPackage) => {
+  const handleSaveEditedPackage = async (savedPkg: HolidayPackage) => {
     if (!savedPkg) return;
-    setPackages((prevPackages) => {
-      const exists = prevPackages.some(p => p.id === savedPkg.id);
-      const updated = exists
-        ? prevPackages.map(p => p.id === savedPkg.id ? savedPkg : p)
-        : [savedPkg, ...prevPackages];
-      localStorage.setItem('gb_admin_packages', JSON.stringify(updated));
-      syncCatalogToApi({ packages: updated });
-      if (typeof window !== 'undefined') {
-        window.dispatchEvent(new CustomEvent('gb_packages_updated', { detail: updated }));
-      }
-      return updated;
-    });
+    const exists = packages.some(p => p.id === savedPkg.id);
+    const updated = exists
+      ? packages.map(p => p.id === savedPkg.id ? savedPkg : p)
+      : [savedPkg, ...packages];
+    setPackages(updated);
+    localStorage.setItem('gb_admin_packages', JSON.stringify(updated));
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('gb_packages_updated', { detail: updated }));
+    }
     setEditingPkg(null);
     showToast('✨ Tour package updated and saved permanently!');
+    await syncCatalogToApi({ packages: updated });
   };
 
   const handleAddPackageProductLink = () => {
@@ -2216,18 +2210,16 @@ export default function AdminPortal() {
                             <input
                               type="checkbox"
                               checked={pkg.showOnHome === true}
-                              onChange={(e) => {
+                              onChange={async (e) => {
                                 const show = e.target.checked;
-                                setPackages((prevPackages) => {
-                                  const updated = prevPackages.map(p => p.id === pkg.id ? { ...p, showOnHome: show } : p);
-                                  localStorage.setItem('gb_admin_packages', JSON.stringify(updated));
-                                  syncCatalogToApi({ packages: updated });
-                                  if (typeof window !== 'undefined') {
-                                    window.dispatchEvent(new CustomEvent('gb_packages_updated', { detail: updated }));
-                                  }
-                                  return updated;
-                                });
+                                const updated = packages.map(p => p.id === pkg.id ? { ...p, showOnHome: show } : p);
+                                setPackages(updated);
+                                localStorage.setItem('gb_admin_packages', JSON.stringify(updated));
+                                if (typeof window !== 'undefined') {
+                                  window.dispatchEvent(new CustomEvent('gb_packages_updated', { detail: updated }));
+                                }
                                 showToast(`${show ? 'Showcasing' : 'Hidden from'} Homepage: "${pkg.name}"`);
+                                await syncCatalogToApi({ packages: updated });
                               }}
                               className="w-4 h-4 text-[#1D493E] accent-[#1D493E] rounded"
                             />
@@ -2239,18 +2231,16 @@ export default function AdminPortal() {
                         <td className="px-6 py-4 text-right">
                           <div className="flex items-center justify-end gap-2">
                             <button
-                              onClick={() => {
+                              onClick={async () => {
                                 const isHiddenNow = !pkg.hidden;
-                                setPackages((prevPackages) => {
-                                  const updated = prevPackages.map(p => p.id === pkg.id ? { ...p, hidden: isHiddenNow } : p);
-                                  localStorage.setItem('gb_admin_packages', JSON.stringify(updated));
-                                  syncCatalogToApi({ packages: updated });
-                                  if (typeof window !== 'undefined') {
-                                    window.dispatchEvent(new CustomEvent('gb_packages_updated', { detail: updated }));
-                                  }
-                                  return updated;
-                                });
+                                const updated = packages.map(p => p.id === pkg.id ? { ...p, hidden: isHiddenNow } : p);
+                                setPackages(updated);
+                                localStorage.setItem('gb_admin_packages', JSON.stringify(updated));
+                                if (typeof window !== 'undefined') {
+                                  window.dispatchEvent(new CustomEvent('gb_packages_updated', { detail: updated }));
+                                }
                                 showToast(isHiddenNow ? `🙈 Hidden "${pkg.name}" from public site` : `👁️ Unhidden "${pkg.name}" on public site`);
+                                await syncCatalogToApi({ packages: updated });
                               }}
                               className={`px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 cursor-pointer ${
                                 pkg.hidden
@@ -2275,17 +2265,15 @@ export default function AdminPortal() {
                               <Edit3 className="w-3.5 h-3.5" /> Edit
                             </button>
                             <button
-                              onClick={() => {
-                                setPackages((prevPackages) => {
-                                  const updated = prevPackages.filter(p => p.id !== pkg.id);
-                                  localStorage.setItem('gb_admin_packages', JSON.stringify(updated));
-                                  syncCatalogToApi({ packages: updated });
-                                  if (typeof window !== 'undefined') {
-                                    window.dispatchEvent(new CustomEvent('gb_packages_updated', { detail: updated }));
-                                  }
-                                  return updated;
-                                });
+                              onClick={async () => {
+                                const updated = packages.filter(p => p.id !== pkg.id);
+                                setPackages(updated);
+                                localStorage.setItem('gb_admin_packages', JSON.stringify(updated));
+                                if (typeof window !== 'undefined') {
+                                  window.dispatchEvent(new CustomEvent('gb_packages_updated', { detail: updated }));
+                                }
                                 showToast('Package removed!');
+                                await syncCatalogToApi({ packages: updated });
                               }}
                               className="px-3 py-1.5 bg-rose-50 hover:bg-rose-600 text-rose-600 hover:text-white rounded-lg text-xs font-bold transition flex items-center gap-1.5 cursor-pointer"
                             >
